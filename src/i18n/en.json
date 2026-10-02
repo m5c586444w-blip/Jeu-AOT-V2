@@ -1,0 +1,10 @@
+{
+  "app.title": "Walls and Blood",
+  "app.subtitle": "Working ledger — foundation phase",
+  "app.version": "version {version}",
+  "app.seed": "Seed",
+  "app.date": "Date",
+  "app.hash": "State fingerprint",
+  "app.console_hint": "F2: service console",
+  "date.format": "year {year}, day {day}"
+}

@@ -1,0 +1,15 @@
+{
+  "app.title": "Murs et Sang",
+  "app.subtitle": "Registre de travail — phase de fondation",
+  "app.version": "version {version}",
+  "app.seed": "Graine",
+  "app.date": "Date",
+  "app.hash": "Empreinte d'état",
+  "app.console_hint": "Touche F2 : console de service",
+  "app.notice": "Usage personnel et non commercial. Aucun élément de l'œuvre originale n'est reproduit.",
+  "date.format": "an {year}, jour {day}",
+  "season.hiver": "hiver",
+  "season.printemps": "printemps",
+  "season.ete": "été",
+  "season.automne": "automne"
+}
