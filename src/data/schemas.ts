@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { CollectionName } from "./collections";
 
 // Messages d'erreur de Zod en français (langue principale du projet).
 z.config(z.locales.fr());
@@ -107,13 +108,13 @@ export type EventDef = z.infer<typeof EventDefSchema>;
 export type Placement = z.infer<typeof PlacementSchema>;
 
 /** Sous-dossier de /data → schéma de ses entrées. */
-export const COLLECTIONS = {
+export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   provinces: ProvinceSchema,
   characters: CharacterSchema,
   techs: TechSchema,
   events: EventDefSchema,
   placements: PlacementSchema,
-} as const;
+};
 
-export type CollectionName = keyof typeof COLLECTIONS;
-export const COLLECTION_NAMES = Object.keys(COLLECTIONS) as CollectionName[];
+export { COLLECTION_NAMES } from "./collections";
+export type { CollectionName } from "./collections";

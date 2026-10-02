@@ -1,10 +1,13 @@
 {
   "app.title": "Walls and Blood",
   "app.subtitle": "Working ledger — foundation phase",
-  "app.version": "version {version}",
+  "app.version": "{version}",
   "app.seed": "Seed",
   "app.date": "Date",
   "app.hash": "State fingerprint",
-  "app.console_hint": "F2: service console",
-  "date.format": "year {year}, day {day}"
+  "app.console_hint": "opens the service console.",
+  "date.format": "year {year}, day {day}",
+  "app.stamp": "PHASE 0",
+  "app.version_label": "Version",
+  "app.notice": "Personal, non-commercial use. No material from the original work is reproduced."
 }

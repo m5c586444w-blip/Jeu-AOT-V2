@@ -1,0 +1,66 @@
+/* Console de service : feuille tapée à la machine, glissée sous le registre. */
+.debug-console {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: min(52rem, 100%);
+  max-height: 52vh;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  background-color: #efe6cf;
+  background-image: var(--grain-cadre), repeating-linear-gradient(transparent 0 1.55rem, rgba(79, 107, 90, 0.18) 1.55rem 1.6rem);
+  border: 1px solid var(--encre);
+  border-bottom: none;
+  font-family: var(--f-machine);
+  font-size: 1rem;
+  color: var(--encre);
+  z-index: 10;
+}
+
+.debug-console[hidden] { display: none; }
+
+.debug-console__title {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-family: var(--f-machine);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--encre);
+}
+
+.debug-console__log {
+  flex: 1;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  overflow: auto;
+  font: inherit;
+  white-space: pre-wrap;
+  line-height: 1.6rem;
+  min-height: 6rem;
+}
+
+.debug-console__line--in { color: #3a352d; }
+.debug-console__line--err { color: var(--brique); }
+
+.debug-console__form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.45rem 1rem 0.7rem;
+  border-top: 1px dashed var(--encre);
+}
+
+.debug-console__input {
+  flex: 1;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--encre);
+  padding: 0.15rem 0;
+}
+
+.debug-console__input:focus { outline: 2px solid var(--ocre); outline-offset: 2px; }

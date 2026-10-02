@@ -18,7 +18,8 @@
     "canon:check": "tsx src/tools/canon-check.ts",
     "sim:selftest": "tsx src/tools/sim-selftest.ts",
     "sim:balance": "tsx src/tools/sim-balance.ts",
-    "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build"
+    "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build",
+    "smoke:page": "tsx src/tools/smoke-page.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -26,6 +27,7 @@
     "eslint": "^10.12.0",
     "fake-indexeddb": "^6.2.5",
     "globals": "^17.13.0",
+    "playwright-core": "^1.63.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.0",
@@ -33,6 +35,9 @@
     "vitest": "^5.0.3"
   },
   "dependencies": {
+    "@fontsource/eb-garamond": "^5.3.0",
+    "@fontsource/im-fell-english": "^5.3.0",
+    "@fontsource/special-elite": "^5.3.0",
     "zod": "^4.6.5"
   }
 }

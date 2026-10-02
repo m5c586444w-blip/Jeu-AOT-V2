@@ -1,11 +1,11 @@
 {
   "app.title": "Murs et Sang",
   "app.subtitle": "Registre de travail — phase de fondation",
-  "app.version": "version {version}",
+  "app.version": "{version}",
   "app.seed": "Graine",
   "app.date": "Date",
   "app.hash": "Empreinte d'état",
-  "app.console_hint": "Touche F2 : console de service",
+  "app.console_hint": "ouvre la console de service.",
   "app.notice": "Usage personnel et non commercial. Aucun élément de l'œuvre originale n'est reproduit.",
   "date.format": "an {year}, jour {day}",
   "season.hiver": "hiver",
@@ -28,5 +28,9 @@
   "console.saved": "sauvegardé dans « {slot} »",
   "console.loaded": "« {slot} » rechargé (empreinte {hash})",
   "console.error.seed": "graine invalide : entier entre 0 et 4294967295 attendu",
-  "console.error.unknown": "commande inconnue : « {name} » (essayer help)"
+  "console.error.unknown": "commande inconnue : « {name} » (essayer help)",
+  "app.stamp": "PHASE 0",
+  "app.version_label": "Version",
+  "console.canon_ok": "canon:check : données conformes (R1–R6, {n} entrées).",
+  "console.canon_ko": "canon:check : {n} violation(s)."
 }

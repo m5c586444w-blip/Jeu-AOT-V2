@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
-import { COLLECTION_NAMES } from "./schemas";
-import type { CollectionName } from "./schemas";
+import { COLLECTION_NAMES } from "./collections";
+import type { CollectionName } from "./collections";
 import type { RawData, RawEntry } from "./canonRules";
 
 /**
