@@ -1,0 +1,23 @@
+[
+  {
+    "id": "char_erwin",
+    "name": "Erwin Smith",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_erwin_charge",
+    "faction": "survey_corps",
+    "roles": [
+      "commandant"
+    ],
+    "canon": "C"
+  },
+  {
+    "id": "char_test_inverse",
+    "name": "Fenêtre inversée",
+    "active_from": 850,
+    "active_until": 845,
+    "faction": "garrison",
+    "roles": [],
+    "canon": "A"
+  }
+]

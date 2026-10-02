@@ -1,0 +1,19 @@
+[
+  {
+    "id": "tech_odm_standard",
+    "code": "T-ODM-01",
+    "tree": "odm",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "C"
+  },
+  {
+    "id": "tech_thunder_spear_prototype",
+    "code": "T-ANT-08",
+    "tree": "anti_titan",
+    "cost": 260,
+    "min_year": 850,
+    "canon": "C"
+  }
+]

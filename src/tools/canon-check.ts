@@ -1,2 +1,15 @@
-// Ébauche T0.1 : remplacée par l'implémentation réelle dans une tâche ultérieure de P0.
-console.log("[canon-check] ébauche : pas encore implémenté (P0 en cours).");
+// npm run canon:check [dossier] — règles R1–R6 ; code de sortie 1 si une règle échoue.
+import { checkCanon, formatViolation } from "../data/canonRules";
+import { loadRawDir } from "../data/loadRaw";
+
+const dir = process.argv[2] ?? "data";
+const { raw, errors } = loadRawDir(dir);
+const violations = checkCanon(raw);
+for (const e of errors) console.error(`LECTURE ${e}`);
+for (const v of violations) console.error(formatViolation(v));
+if (errors.length > 0 || violations.length > 0) {
+  console.error(`canon:check : ${violations.length} violation(s), ${errors.length} erreur(s) de lecture dans « ${dir} ».`);
+  process.exit(1);
+}
+const total = raw.provinces.length + raw.characters.length + raw.techs.length + raw.events.length + raw.placements.length;
+console.log(`canon:check : « ${dir} » conforme (R1–R6, ${total} entrées).`);

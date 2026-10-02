@@ -1,0 +1,16 @@
+[
+  {
+    "id": "unit_garrison_trost",
+    "kind": "unit",
+    "location": "prov_trost",
+    "year": 851,
+    "canon": "A"
+  },
+  {
+    "id": "unit_survey_squad_utgard",
+    "kind": "unit",
+    "location": "prov_utgard",
+    "year": 851,
+    "canon": "A"
+  }
+]
