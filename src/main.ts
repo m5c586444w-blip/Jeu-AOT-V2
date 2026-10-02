@@ -5,13 +5,15 @@ import "@fontsource/special-elite/latin-400.css";
 import "./ui/styles/base.css";
 import "./ui/styles/console.css";
 import { SaveStore } from "./save/saveStore";
-import { applyCommand } from "./sim/core/commands";
 import { createInitialState } from "./sim/core/state";
+import type { GameState } from "./sim/core/state";
+import type { SimResponse } from "./sim/sim";
 import { canonReportFromBundle } from "./ui/canonBrowser";
 import { mountDebugOverlay } from "./ui/debugOverlay";
 import type { ConsoleHost } from "./ui/debugConsole";
 import { applyPaperTextures } from "./ui/paper";
 import { mountStartPage } from "./ui/startPage";
+import { SimClient } from "./workers/simClient";
 
 const DEFAULT_SEED = 42;
 
@@ -27,23 +29,30 @@ async function boot(): Promise<void> {
   applyPaperTextures(document.documentElement);
   const page = mountStartPage(app);
 
-  let state = createInitialState(seedFromUrl());
+  // La simulation tourne dans un Web Worker ; l'UI ne garde qu'une copie de l'état pour l'affichage.
+  const worker = new Worker(new URL("./workers/sim.worker.ts", import.meta.url), { type: "module" });
+  const sim = new SimClient({
+    post: (m) => worker.postMessage(m),
+    onMessage: (h) => worker.addEventListener("message", (ev: MessageEvent<SimResponse>) => h(ev.data)),
+  });
+  let state: GameState = createInitialState(seedFromUrl());
+  state = (await sim.reset(state.seed)).state;
   // Hors de src/sim : l'horloge réelle ne sert qu'à horodater les sauvegardes.
   const storePromise = SaveStore.open(indexedDB, () => Date.now());
 
   const host: ConsoleHost = {
     state: () => state,
     dispatch: async (cmd) => {
-      state = applyCommand(state, cmd);
+      state = (await sim.dispatch(cmd)).state;
     },
     reset: async (seed) => {
-      state = createInitialState(seed);
+      state = (await sim.reset(seed)).state;
     },
     save: async (slot) => {
       await (await storePromise).save(slot, state);
     },
     load: async (slot) => {
-      state = await (await storePromise).load(slot);
+      state = (await sim.load(await (await storePromise).load(slot))).state;
     },
     canonReport: canonReportFromBundle,
   };
