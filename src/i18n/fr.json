@@ -11,5 +11,22 @@
   "season.hiver": "hiver",
   "season.printemps": "printemps",
   "season.ete": "été",
-  "season.automne": "automne"
+  "season.automne": "automne",
+  "console.title": "Console de service",
+  "console.prompt": "Saisir une commande (help)",
+  "console.help.help": "liste des commandes",
+  "console.help.seed": "affiche la graine ; « seed N » recommence avec la graine N",
+  "console.help.date": "date de jeu",
+  "console.help.advance": "« advance N » avance de N jours (1 à 3650)",
+  "console.help.hash": "empreinte de l'état (8 caractères hexadécimaux)",
+  "console.help.save": "« save [créneau] » sauvegarde",
+  "console.help.load": "« load [créneau] » recharge",
+  "console.help.canon": "contrôle de cohérence canon (R1–R6) des données",
+  "console.seed": "graine {seed}",
+  "console.seed_reset": "nouvelle partie, graine {seed}",
+  "console.advanced": "+{n} jours → {date}",
+  "console.saved": "sauvegardé dans « {slot} »",
+  "console.loaded": "« {slot} » rechargé (empreinte {hash})",
+  "console.error.seed": "graine invalide : entier entre 0 et 4294967295 attendu",
+  "console.error.unknown": "commande inconnue : « {name} » (essayer help)"
 }
