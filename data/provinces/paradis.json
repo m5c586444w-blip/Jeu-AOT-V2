@@ -1,0 +1,54 @@
+[
+  {
+    "id": "prov_shiganshina",
+    "atlas_code": "R01",
+    "name_key": "prov.shiganshina",
+    "region": "anneau_maria",
+    "wall": "maria",
+    "terrain": "urbain",
+    "canon": "C",
+    "notes_canon": "District sud de Wall Maria (fichiers 01 §3.1, 06 §1.3, 11 §2)."
+  },
+  {
+    "id": "prov_maria_sud",
+    "atlas_code": "M05",
+    "name_key": "prov.maria_sud",
+    "region": "mur_maria",
+    "wall": "maria",
+    "terrain": "mur",
+    "canon": "A",
+    "notes_canon": "Découpage du mur en segments = adaptation (06 §1.2) ; la porte de Shiganshina et la brèche de 845 sont canon."
+  },
+  {
+    "id": "prov_trost",
+    "atlas_code": "S01",
+    "name_key": "prov.trost",
+    "region": "anneau_rose",
+    "wall": "rose",
+    "terrain": "urbain",
+    "canon": "C",
+    "notes_canon": "District sud de Wall Rose ; brèche de 850 (06 §1.5, 11 §2)."
+  },
+  {
+    "id": "prov_utgard",
+    "atlas_code": "S06",
+    "name_key": "prov.utgard",
+    "region": "anneau_rose",
+    "wall": "rose",
+    "terrain": "fort",
+    "destroyed_year": 850,
+    "destroyed_event": "evt_850_utgard_battle",
+    "canon": "C",
+    "notes_canon": "Château abandonné dans Wall Rose, près du périmètre intérieur ; détruit en 850 (11 §1, §2)."
+  },
+  {
+    "id": "prov_mitras",
+    "atlas_code": "I01",
+    "name_key": "prov.mitras",
+    "region": "interieur_sina",
+    "wall": "sina",
+    "terrain": "urbain",
+    "canon": "C",
+    "notes_canon": "Capitale, dans Wall Sina (01 §3.1)."
+  }
+]

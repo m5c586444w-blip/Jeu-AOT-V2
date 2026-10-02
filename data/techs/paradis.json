@@ -1,0 +1,45 @@
+[
+  {
+    "id": "tech_odm_standard",
+    "code": "T-ODM-01",
+    "tree": "odm",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "C"
+  },
+  {
+    "id": "tech_wall_artillery",
+    "code": "T-ANT-01",
+    "tree": "anti_titan",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "C"
+  },
+  {
+    "id": "tech_thunder_spear_prototype",
+    "code": "T-ANT-08",
+    "tree": "anti_titan",
+    "cost": 260,
+    "prereqs": [
+      "tech_wall_artillery",
+      "tech_odm_standard"
+    ],
+    "unlock_event": "evt_850_police_tech_seized",
+    "requires_character": "char_hange_zoe",
+    "min_year": 850,
+    "canon": "C",
+    "notes_canon": "Première apparition fin 850 (Retour à Shiganshina) ; développée par Hange à partir des technologies de la Police intérieure (11 §1). Condition « poudrière niv. 2 » à relier en P5."
+  },
+  {
+    "id": "tech_hardening_seal",
+    "code": "T-FOR-03",
+    "tree": "fortification",
+    "cost": 250,
+    "unlock_event": "evt_850_trost_plug",
+    "min_year": 850,
+    "canon": "C",
+    "notes_canon": "Exige Eren porteur et T-FOR-01 (13 §5) : personnage et prérequis à relier en P2/P5."
+  }
+]

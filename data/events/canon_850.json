@@ -1,0 +1,370 @@
+[
+  {
+    "id": "evt_850_104th_graduation",
+    "code": "E09",
+    "year_min": 850,
+    "window": {
+      "after": null
+    },
+    "text_key": "evt.850.104th_graduation",
+    "canon": "C",
+    "notes_canon": "Racine de la graine P0 : son prédécesseur E08 (≈ 847 [?]) n'est pas encore saisi."
+  },
+  {
+    "id": "evt_850_trost_breach",
+    "code": "E10",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_104th_graduation"
+    },
+    "location": "prov_trost",
+    "text_key": "evt.850.trost_breach",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_trost_defense",
+    "code": "E11",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_trost_breach"
+    },
+    "location": "prov_trost",
+    "text_key": "evt.850.trost_defense",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_eren_first_transformation",
+    "code": "E12",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_trost_defense"
+    },
+    "location": "prov_trost",
+    "text_key": "evt.850.eren_first_transformation",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_trost_plug",
+    "code": "E13",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_eren_first_transformation"
+    },
+    "location": "prov_trost",
+    "text_key": "evt.850.trost_plug",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_eren_trial",
+    "code": "E14",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_trost_plug"
+    },
+    "text_key": "evt.850.eren_trial",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_branch_choice",
+    "code": "E15",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_eren_trial"
+    },
+    "text_key": "evt.850.branch_choice",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_expedition57_preparation",
+    "code": "E16",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_branch_choice"
+    },
+    "text_key": "evt.850.expedition57_preparation",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_expedition57",
+    "code": "E17",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_expedition57_preparation"
+    },
+    "text_key": "evt.850.expedition57",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_giant_tree_forest",
+    "code": "E18",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_expedition57"
+    },
+    "text_key": "evt.850.giant_tree_forest",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_special_squad_loss",
+    "code": "E19",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_giant_tree_forest"
+    },
+    "text_key": "evt.850.special_squad_loss",
+    "canon": "?",
+    "notes_canon": "Moment exact « fin de E18 » [?] ; dates de mort des membres de l'escouade non recoupées (11 §9)."
+  },
+  {
+    "id": "evt_850_traitor_investigation",
+    "code": "E20",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_special_squad_loss"
+    },
+    "text_key": "evt.850.traitor_investigation",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_stohess_capture",
+    "code": "E21",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_traitor_investigation"
+    },
+    "text_key": "evt.850.stohess_capture",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_annie_crystallization",
+    "code": "E22",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_stohess_capture"
+    },
+    "text_key": "evt.850.annie_crystallization",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_wall_titan_discovery",
+    "code": "E23",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_annie_crystallization"
+    },
+    "text_key": "evt.850.wall_titan_discovery",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_wall_rose_invasion",
+    "code": "E24",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_wall_titan_discovery"
+    },
+    "text_key": "evt.850.wall_rose_invasion",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_ragako",
+    "code": "E25",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_wall_rose_invasion"
+    },
+    "text_key": "evt.850.ragako",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_utgard_battle",
+    "code": "E26",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_ragako"
+    },
+    "location": "prov_utgard",
+    "text_key": "evt.850.utgard_battle",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_ymir_historia_revelations",
+    "code": "E27",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_utgard_battle"
+    },
+    "text_key": "evt.850.ymir_historia_revelations",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_armored_colossal_fight",
+    "code": "E28",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_ymir_historia_revelations"
+    },
+    "text_key": "evt.850.armored_colossal_fight",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_sina_gates_closed",
+    "code": "E29",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_erwin_trial"
+    },
+    "text_key": "evt.850.sina_gates_closed",
+    "canon": "C",
+    "notes_canon": "Se déclenche pendant le procès d'Erwin (E32), à l'annonce de la brèche de Rose (12 §3)."
+  },
+  {
+    "id": "evt_850_survey_corps_hunted",
+    "code": "E30",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_armored_colossal_fight"
+    },
+    "text_key": "evt.850.survey_corps_hunted",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_levi_kenny_street_fight",
+    "code": "E31",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_survey_corps_hunted"
+    },
+    "location": "?",
+    "text_key": "evt.850.levi_kenny_street_fight",
+    "canon": "C",
+    "notes_canon": "Localisation du combat de rue = [?] (errata Q2)."
+  },
+  {
+    "id": "evt_850_erwin_trial",
+    "code": "E32",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_levi_kenny_street_fight"
+    },
+    "text_key": "evt.850.erwin_trial",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_coup",
+    "code": "E33",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_erwin_trial"
+    },
+    "text_key": "evt.850.coup",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_reiss_chapel",
+    "code": "E34",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_coup"
+    },
+    "text_key": "evt.850.reiss_chapel",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_rod_reiss_titan",
+    "code": "E35",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_reiss_chapel"
+    },
+    "text_key": "evt.850.rod_reiss_titan",
+    "canon": "C",
+    "notes_canon": "Titan de Rod Reiss ≈ 120 m ; Orvud ravagé (11 §2). Mort de Kenny rattachée ici (errata Q2)."
+  },
+  {
+    "id": "evt_850_historia_coronation",
+    "code": "E36",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_rod_reiss_titan"
+    },
+    "text_key": "evt.850.historia_coronation",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_police_tech_seized",
+    "code": "E37",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_historia_coronation"
+    },
+    "text_key": "evt.850.police_tech_seized",
+    "canon": "C",
+    "notes_canon": "unlock_event des Lances de foudre (11 §1, 13 §11)."
+  },
+  {
+    "id": "evt_850_shiganshina_preparations",
+    "code": "E38",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_police_tech_seized"
+    },
+    "text_key": "evt.850.shiganshina_preparations",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_shiganshina_battle",
+    "code": "E39",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_shiganshina_preparations"
+    },
+    "location": "prov_shiganshina",
+    "text_key": "evt.850.shiganshina_battle",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_thunder_spears_first_use",
+    "code": "E40",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_shiganshina_battle"
+    },
+    "location": "prov_shiganshina",
+    "text_key": "evt.850.thunder_spears_first_use",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_erwin_charge",
+    "code": "E41",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_thunder_spears_first_use"
+    },
+    "location": "prov_shiganshina",
+    "text_key": "evt.850.erwin_charge",
+    "canon": "C",
+    "notes_canon": "Mort d'Erwin en canon (11 §3)."
+  },
+  {
+    "id": "evt_850_serum_choice",
+    "code": "E42",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_erwin_charge"
+    },
+    "location": "prov_shiganshina",
+    "text_key": "evt.850.serum_choice",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_marley_antititan_rifle",
+    "year_min": 850,
+    "year_max": 854,
+    "window": {
+      "after": "evt_850_armored_colossal_fight"
+    },
+    "text_key": "evt.850.marley_antititan_rifle",
+    "canon": "?",
+    "notes_canon": "Événement paramétrable hors des 60 événements canon (errata Q1) : date de mise au point des fusils anti-Titan inconnue ; placé après E28 (premier affrontement Guerriers/Paradis)."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "tech_antititan_rifle",
+    "code": "T-MOD-05",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 220,
+    "unlock_event": "evt_850_marley_antititan_rifle",
+    "min_year": 850,
+    "canon": "C",
+    "notes_canon": "Fusils anti-Titan confirmés (emploi en 854, 11 §6) ; date de développement [?] : déblocage par un événement paramétrable (errata Q1). Prérequis T-MOD-01 à relier en P7."
+  }
+]
