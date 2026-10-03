@@ -4,6 +4,7 @@ import { t } from "../i18n";
 import { Explainer } from "../sim/core/explain";
 import type { GameState } from "../sim/core/state";
 import { capacity, planDay, provinceProduction } from "../sim/strategic/economy";
+import { provinceComposition } from "../sim/politics/society";
 import type { StrategicState } from "../sim/strategic/economy";
 import { RESOURCE_IDS } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
@@ -167,6 +168,22 @@ export class Dossier {
       title: t("dossier.stability"),
       sections: [{ text: t("dossier.approach_why", { rate: formatNumber(this.world.economy.stability.approach_per_day * 100) }) }, ...(stt ? [{ label: t("dossier.target"), explained: stt }] : [])],
     }));
+    // Strates sociales (F-POP-01) : effectif local et satisfaction nationale de chaque strate.
+    const pw = this.world.politics;
+    const pol = this.state?.politics;
+    if (pw && pol && ps.population > 0) {
+      body.append(el("h4", "dossier__intertitre", t("dossier.strata")));
+      const comp = provinceComposition(this.world, pw, p);
+      for (const s of pw.strata) {
+        const share = comp[s.id] ?? 0;
+        if (share <= 0) continue;
+        const sat = pol.strata[s.id]?.satisfaction ?? 50;
+        this.row(body, t(s.name_key), `${formatNumber(ps.population * share)} · ${formatNumber(sat)}`, () => ({
+          title: t(s.name_key),
+          sections: [{ text: t("dossier.strata_why", { share: formatNumber(share * 100), sat: formatNumber(sat) }) }],
+        }));
+      }
+    }
   }
 
   private economy(body: HTMLElement, p: Province, st: StrategicState): void {

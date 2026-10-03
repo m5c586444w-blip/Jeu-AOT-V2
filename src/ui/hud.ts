@@ -1,4 +1,4 @@
-import { t } from "../i18n";
+import { hasKey, t } from "../i18n";
 import { stateHash } from "../sim/core/canonical";
 import type { GameState } from "../sim/core/state";
 import { monthOf, seasonOf } from "../sim/core/time";
@@ -17,7 +17,11 @@ export const HUD_RESOURCES: readonly ResourceId[] = ["food", "gas", "steel", "ic
 export interface HudActions {
   setSpeed(speed: number): void;
   setRationing(level: RationingLevel): void;
+  /** Ouvre un registre (P2) ; absent si le scénario n'a pas de couche politique. */
+  openPanel?(id: string): void;
 }
+
+const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal"] as const;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: string): HTMLElementTagNameMap[K] {
   const e = document.createElement(tag);
@@ -47,9 +51,25 @@ export class Hud {
     nation.append(this.valueCell("population", t("hud.population"), () => this.populationWhy()));
     nation.append(this.valueCell("morale", t("hud.morale"), () => this.moraleWhy()));
     nation.append(this.rationingBlock());
+    if (world.politics) {
+      nation.append(this.valueCell("legitimacy", t("hud.legitimacy"), () => ({ title: t("hud.legitimacy"), sections: [{ text: t("hud.legitimacy_why") }] })));
+      nation.append(this.valueCell("capital", t("hud.capital"), () => ({ title: t("hud.capital"), sections: [{ text: t("hud.capital_why") }] })));
+    }
     const foot = el("div", "bandeau__pied");
     this.alert.setAttribute("aria-live", "polite");
     foot.append(this.alert, this.valueCell("seed", t("app.seed"), () => ({ title: t("app.seed"), sections: [{ text: t("hud.seed_why") }] })), this.valueCell("hash", t("app.hash"), () => ({ title: t("app.hash"), sections: [{ text: t("hud.hash_why") }] })));
+    if (world.politics && actions.openPanel) {
+      const nav = el("nav", "bandeau__registres");
+      nav.setAttribute("aria-label", t("hud.registers"));
+      for (const id of PANELS) {
+        const b = el("button", "bandeau__registre-bouton", t(`panel.${id}`));
+        b.type = "button";
+        b.dataset["panel"] = id;
+        b.addEventListener("click", () => actions.openPanel?.(id));
+        nav.append(b);
+      }
+      head.append(nav);
+    }
     this.el.append(head, ledger, nation, foot);
   }
 
@@ -152,8 +172,12 @@ export class Hud {
     this.set("population", formatNumber(population));
     this.set("morale", formatNumber(nationalMorale(st)));
     this.rationing.value = st.rationing;
+    if (state.politics) {
+      this.set("legitimacy", formatNumber(state.politics.legitimacy));
+      this.set("capital", formatNumber(state.politics.capital));
+    }
     const last = st.log.at(-1);
-    this.alert.textContent = last ? `${t("date.format", { year: last.date.year, day: last.date.day })} — ${t(last.key, { resource: t(`res.${String(last.params["resource"] ?? "")}`) })}` : t("hud.no_alert");
+    this.alert.textContent = last ? `${t("date.format", { year: last.date.year, day: last.date.day })} — ${alertText(last)}` : t("hud.no_alert");
     this.alert.dataset["pause"] = String(last?.pause ?? false);
   }
 
@@ -222,4 +246,15 @@ export function nationalMorale(st: StrategicState): number {
     acc += p.population * p.morale;
   }
   return pop > 0 ? acc / pop : 0;
+}
+
+/** Texte d'une alerte du journal : les paramètres qui sont des clés de texte sont traduits. */
+export function alertText(entry: { key: string; params: Record<string, string | number> }): string {
+  const params: Record<string, string | number> = {};
+  for (const [k, v] of Object.entries(entry.params)) {
+    if (typeof v !== "string") params[k] = v;
+    else if (k === "resource") params[k] = t(`res.${v}`);
+    else params[k] = hasKey(v) ? t(v) : v;
+  }
+  return t(entry.key, params);
 }

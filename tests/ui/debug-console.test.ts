@@ -59,7 +59,7 @@ describe("console de debug (AC-15)", () => {
     expect((await runConsoleLine(host, "load a")).text).toContain(before);
     expect((await runConsoleLine(host, "canon")).text).toContain("conforme");
     const help = (await runConsoleLine(host, "help")).text;
-    expect(help.split("\n")).toHaveLength(8);
+    expect(help.split("\n")).toHaveLength(10);
     expect(help).not.toContain("console.help");
     expect((await runConsoleLine(host, "advance 0")).ok).toBe(false);
     expect((await runConsoleLine(host, "load vide")).ok).toBe(false);

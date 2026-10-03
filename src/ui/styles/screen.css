@@ -288,3 +288,143 @@
 .options__touche { font-family: var(--f-machine); background: transparent; border: 1px solid var(--encre); padding: 0 0.4rem; min-width: 4.5rem; cursor: pointer; color: var(--encre); }
 .options__touche:focus-visible, .options__remise:focus-visible, .options__choix:focus-visible { outline: 2px solid var(--ocre); }
 .options__remise { margin-top: 0.6rem; font: inherit; background: transparent; border: none; border-bottom: 1px solid var(--encre); cursor: pointer; color: var(--encre); }
+
+/* ——— Registres de P2 : chemise cartonnée au centre, onglets, tableaux réglés ——— */
+.bandeau__registres { display: inline-flex; gap: 0.15rem; margin-left: auto; flex-wrap: wrap; }
+.bandeau__registre-bouton {
+  font: inherit;
+  font-size: 0.9rem;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--encre);
+  background: rgba(205, 191, 159, 0.55);
+  border: 1px solid var(--encre);
+  border-bottom-width: 2px;
+  padding: 0.05rem 0.5rem;
+  cursor: pointer;
+}
+.bandeau__registre-bouton:hover { background: var(--papier); }
+.bandeau__registre-bouton:focus-visible { outline: 2px solid var(--ocre); }
+
+.registre-panneau {
+  position: fixed;
+  z-index: 15;
+  top: 7.5rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.2deg);
+  width: min(58rem, 94vw);
+  max-height: calc(100vh - 8.5rem);
+  display: flex;
+  flex-direction: column;
+  background-color: #e9dcbf;
+  background-image: var(--fibres), var(--grain-cadre);
+  border: 1px solid var(--encre);
+  outline: 1px solid rgba(28, 26, 23, 0.45);
+  outline-offset: 5px;
+  box-shadow: 6px 6px 0 rgba(28, 26, 23, 0.25);
+}
+.registre-panneau[hidden] { display: none; }
+.registre-tete { display: flex; justify-content: space-between; align-items: baseline; padding: 0.5rem 1rem 0.2rem; border-bottom: 2px solid var(--encre); }
+.registre-titre { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.5rem; }
+.registre-corps { overflow: auto; padding: 0.4rem 1rem 1rem; }
+.registre-intertitre { font-family: var(--f-titre); font-weight: 400; font-size: 1.15rem; margin: 0.9rem 0 0.2rem; border-bottom: 1px solid var(--encre); }
+.registre-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.registre-table th { text-align: left; font-weight: 400; font-variant: small-caps; letter-spacing: 0.05em; border-bottom: 1px solid var(--encre); }
+.registre-table td { padding: 0.15rem 0.3rem; border-bottom: 1px dotted rgba(28, 26, 23, 0.45); vertical-align: baseline; }
+.registre-table caption { text-align: left; font-variant: small-caps; letter-spacing: 0.05em; }
+.registre-table .valeur { font-family: var(--f-machine); }
+.ligne-morte td { color: var(--inconnu); text-decoration: line-through; text-decoration-thickness: 1px; }
+.registre-poste { font-style: italic; font-size: 0.88rem; }
+.registre-filtres { display: flex; gap: 0.2rem; flex-wrap: wrap; border-bottom: 1px solid var(--encre); margin-bottom: 0.3rem; }
+.registre-onglet { font: inherit; font-size: 0.9rem; background: rgba(205, 191, 159, 0.6); border: 1px solid var(--encre); border-bottom: none; padding: 0.1rem 0.55rem; cursor: pointer; color: var(--encre); margin-bottom: -1px; }
+.registre-onglet[aria-pressed="true"] { background: #e9dcbf; font-weight: 600; }
+.registre-bouton { font: inherit; font-size: 0.92rem; color: var(--encre); background: transparent; border: 1px solid var(--encre); padding: 0.1rem 0.6rem; cursor: pointer; margin: 0.3rem 0.4rem 0 0; }
+.registre-bouton.principal { background: var(--encre); color: var(--papier); }
+.registre-bouton.petit { font-size: 0.82rem; padding: 0 0.4rem; margin: 0 0.15rem; }
+.registre-bouton:disabled { opacity: 0.45; cursor: not-allowed; }
+.registre-bouton:focus-visible, .registre-onglet:focus-visible, .lien-dossier:focus-visible { outline: 2px solid var(--ocre); outline-offset: 1px; }
+.registre-retour { font: inherit; background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; color: var(--encre); }
+.lien-dossier { font: inherit; background: none; border: none; padding: 0; color: var(--encre); cursor: pointer; border-bottom: 1px dotted var(--encre); text-align: left; }
+.registre-note { font-style: italic; font-size: 0.9rem; }
+.registre-champ { margin: 0.2rem 0; font-variant: small-caps; letter-spacing: 0.04em; }
+.registre-ferme { margin: 1rem 0; padding: 0.6rem; border: 2px double var(--brique); color: var(--brique); font-family: var(--f-machine); text-align: center; }
+.registre-choix { font: inherit; background: transparent; border: none; border-bottom: 1px solid var(--encre); color: var(--encre); max-width: 26rem; }
+
+.tampon-mini { font-family: var(--f-machine); font-size: 0.66rem; letter-spacing: 0.1em; border: 1px solid currentColor; padding: 0 0.25rem; transform: rotate(-3deg); display: inline-block; }
+.tampon-mini--C { color: var(--vert-de-gris); }
+.tampon-mini--A { color: var(--ocre); }
+.tampon-mini--incertain { color: var(--brique); }
+
+/* Fiche personnage */
+.fiche-tete { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; margin: 0.4rem 0; }
+.portrait { width: 8rem; height: auto; display: block; }
+.portrait--mort { filter: grayscale(0.6); }
+.fiche-nom { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.5rem; }
+.fiche-rang { margin: 0.1rem 0; font-variant: small-caps; letter-spacing: 0.04em; }
+.fiche-bio { font-style: italic; }
+.fiche-colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.fiche-traits { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.fiche-traits li { border: 1px solid var(--encre); padding: 0 0.4rem; font-size: 0.9rem; cursor: help; }
+.fiche-traits li.trait-acquis { border-style: dashed; color: var(--brique); }
+.fiche-ligne { display: flex; justify-content: space-between; border-bottom: 1px dotted rgba(28, 26, 23, 0.45); padding: 0.15rem 0; }
+.fiche-deces { border: 2px double var(--encre); padding: 0.4rem 0.8rem; margin: 0.5rem 0; background: rgba(28, 26, 23, 0.04); }
+.fiche-deces h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
+.tableau-enquete { width: 100%; max-width: 34rem; display: block; }
+.fiche-legende { columns: 2; font-size: 0.85rem; }
+
+/* Cabinet */
+.cabinet-motion { display: flex; gap: 1.5rem; align-items: baseline; flex-wrap: wrap; }
+.cabinet-plan { width: 100%; max-width: 40rem; display: block; margin: 0.4rem auto; }
+.cabinet-veto { color: var(--brique); font-weight: 600; }
+.cabinet-dernier { font-style: italic; border-top: 1px dashed var(--encre); padding-top: 0.3rem; }
+.cabinet-dernier.adopte { color: var(--vert-de-gris); }
+.cabinet-dernier.rejete { color: var(--brique); }
+.vote-pour { color: var(--vert-de-gris); }
+.vote-contre { color: var(--brique); }
+.vote-abstention { color: var(--inconnu); }
+
+/* Décrets */
+.decret { border: 1px solid var(--encre); padding: 0.35rem 0.7rem 0.4rem; margin: 0.5rem 0; background: rgba(239, 230, 207, 0.6); }
+.decret--en-vigueur { border-width: 2px; background: rgba(79, 107, 90, 0.08); }
+.decret-tete { display: flex; gap: 0.6rem; align-items: baseline; flex-wrap: wrap; }
+.decret-titre { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.1rem; }
+.decret-tampon { font-family: var(--f-machine); font-size: 0.72rem; color: var(--vert-de-gris); border: 2px double currentColor; padding: 0 0.3rem; transform: rotate(-3deg); }
+.decret-vote { font-size: 0.8rem; font-style: italic; }
+.decret-desc { margin: 0.1rem 0; font-style: italic; }
+.decret-effets { margin: 0.2rem 0; padding-left: 1.1rem; font-size: 0.92rem; }
+.effet-plus::marker { content: "+ "; }
+.effet-moins::marker { content: "− "; }
+.effet-differe { font-style: italic; color: #4a4339; }
+.effet-differe.declenche { color: var(--brique); }
+.decret-pied { display: flex; gap: 1rem; align-items: baseline; justify-content: space-between; font-size: 0.9rem; }
+
+/* Conseil, journal, organisations */
+.conseil-proposition, .conseil-nomination { border-left: 3px solid var(--ocre); padding: 0.2rem 0.6rem; margin: 0.4rem 0; }
+.avis-alarme td { background: rgba(138, 59, 42, 0.07); }
+.conseil-role { white-space: nowrap; font-variant: small-caps; }
+.journal-liste { padding-left: 1.4rem; font-size: 0.95rem; }
+.journal-liste li { border-bottom: 1px dotted rgba(28, 26, 23, 0.35); padding: 0.1rem 0; }
+.journal-grave { color: var(--brique); }
+.journal-date { font-family: var(--f-machine); font-size: 0.85rem; }
+.orgs-etat { display: flex; gap: 2rem; }
+.orgs-budget { white-space: nowrap; }
+.dossier__intertitre { margin: 0.6rem 0 0.1rem; font-variant: small-caps; letter-spacing: 0.05em; font-weight: 400; }
+
+/* Bordereau de confirmation et avis bref */
+.bordereau {
+  position: fixed;
+  z-index: 40;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0.6deg);
+  width: min(26rem, 90vw);
+  padding: 0.7rem 1rem 0.9rem;
+  background: #f1e8d2;
+  background-image: var(--grain-cadre), repeating-linear-gradient(transparent 0 1.4rem, rgba(79, 107, 90, 0.16) 1.4rem 1.45rem);
+  border: 1px solid var(--encre);
+  box-shadow: 5px 5px 0 rgba(28, 26, 23, 0.35);
+}
+.bordereau[hidden] { display: none; }
+.bordereau-titre { margin: 0; font-family: var(--f-machine); font-weight: 400; letter-spacing: 0.15em; font-size: 0.95rem; text-transform: uppercase; }
+.avis-bref { position: fixed; z-index: 45; bottom: 1.2rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.4rem 0.9rem; background: var(--encre); color: var(--papier); font-family: var(--f-machine); }
+.avis-bref[hidden] { display: none; }

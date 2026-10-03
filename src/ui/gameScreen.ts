@@ -23,11 +23,20 @@ import { buildLabels, buildMapProvinces, mapDynamic } from "./mapModel";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
+import { Registers } from "./registers";
+import type { PanelId } from "./panels/common";
+import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
 import { crossesAutosave, loadSettings, saveSettings } from "./settings";
 import { setLocale } from "../i18n";
 
-export const SCENARIO = "scn_sandbox_845";
+/** Scénario par défaut (P2 : bac à sable politique de 850) ; `?scenario=` pour en choisir un autre. */
+export const DEFAULT_SCENARIO = "scn_sandbox_850";
+
+function scenarioFromUrl(): string {
+  const raw = new URLSearchParams(window.location.search).get("scenario");
+  return raw && /^scn_[a-z0-9_]+$/.test(raw) ? raw : DEFAULT_SCENARIO;
+}
 const DEFAULT_SEED = 42;
 /** Au plus quelques jours par lot, pour que l'affichage suive même à la vitesse 5. */
 const MAX_DAYS_PER_BATCH = 3;
@@ -63,9 +72,10 @@ export async function bootGame(): Promise<void> {
     post: (m) => worker.postMessage(m),
     onMessage: (h) => worker.addEventListener("message", (ev: MessageEvent<SimResponse>) => h(ev.data)),
   });
-  const first = await sim.init(seedFromUrl(), SCENARIO);
+  const scenario = scenarioFromUrl();
+  const first = await sim.init(seedFromUrl(), scenario);
   if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
-  const world = buildWorld(first.source, SCENARIO);
+  const world = buildWorld(first.source, scenario);
   let state: GameState = first.state;
 
   const clock = new GameClock(world.time.ms_per_day);
@@ -86,12 +96,14 @@ export async function bootGame(): Promise<void> {
     }
     refresh();
   };
+  let registers: Registers | null = null;
   const hud = new Hud(world, state, why, {
     setSpeed: (s) => {
       clock.setSpeed(s);
       refresh();
     },
     setRationing: (level) => void dispatch({ type: "SetRationing", level }),
+    ...(world.politics ? { openPanel: (id: string) => registers?.toggle(id as PanelId) } : {}),
   });
   const host = document.createElement("div");
   host.className = "carte";
@@ -131,8 +143,20 @@ export async function bootGame(): Promise<void> {
     layers.showLegend(result);
   };
 
+  // Les commandes venues des registres passent par le même chemin ; une erreur (capital insuffisant…) est affichée.
+  const safeDispatch = async (cmd: Command): Promise<void> => {
+    try {
+      await dispatch(cmd);
+    } catch (e) {
+      notice.show((e as Error).message);
+    }
+  };
+  const notice = new Notice(document.body);
+  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch);
+
   const refresh = (): void => {
     hud.update(state, clock.speed);
+    registers?.refresh();
     map.setDynamic(mapDynamic(state));
     if (layers.active) applyOverlay();
     dossier.refresh(state);
@@ -167,9 +191,16 @@ export async function bootGame(): Promise<void> {
     overlay_next: () => layers.next(),
     overlay_off: () => layers.select(null),
     close: () => {
+      if (registers?.openId) return registers.close();
       dossier.close();
       map.setSelected(null);
     },
+    open_characters: () => registers?.toggle("personnages"),
+    open_cabinet: () => registers?.toggle("cabinet"),
+    open_laws: () => registers?.toggle("decrets"),
+    open_orgs: () => registers?.toggle("organisations"),
+    open_council: () => registers?.toggle("conseil"),
+    open_journal: () => registers?.toggle("journal"),
   };
   window.addEventListener("keydown", (ev) => {
     // Seule la saisie de texte (console) et les listes déroulantes gardent leurs touches ; une case cochée ne bloque rien.

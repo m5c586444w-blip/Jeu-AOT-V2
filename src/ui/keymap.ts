@@ -7,6 +7,7 @@ export const ACTIONS = [
   "zoom_in", "zoom_out", "pan_up", "pan_down", "pan_left", "pan_right",
   "lod_monde", "lod_region", "lod_province", "fit",
   "overlay_next", "overlay_off", "close", "console", "options",
+  "open_characters", "open_cabinet", "open_laws", "open_orgs", "open_council", "open_journal",
 ] as const;
 export type Action = (typeof ACTIONS)[number];
 
@@ -18,6 +19,7 @@ export const DEFAULT_BINDINGS: Readonly<Record<Action, string>> = {
   lod_monde: "KeyM", lod_region: "KeyR", lod_province: "KeyP", fit: "KeyF",
   overlay_next: "KeyO", overlay_off: "KeyX",
   close: "Escape", console: "F2", options: "F9",
+  open_characters: "KeyC", open_cabinet: "KeyK", open_laws: "KeyL", open_orgs: "KeyG", open_council: "KeyA", open_journal: "KeyJ",
 };
 
 const STORAGE_KEY = "murs-et-sang:raccourcis";

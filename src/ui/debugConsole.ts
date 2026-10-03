@@ -18,7 +18,7 @@ export interface ConsoleResult {
   text: string;
 }
 
-const COMMANDS = ["help", "seed", "date", "advance", "hash", "save", "load", "canon"] as const;
+const COMMANDS = ["help", "seed", "date", "advance", "hash", "save", "load", "canon", "mort", "decret"] as const;
 
 /** Interprète une ligne de la console de service (logique pure, testable sans DOM). */
 export async function runConsoleLine(host: ConsoleHost, line: string): Promise<ConsoleResult> {
@@ -62,6 +62,17 @@ export async function runConsoleLine(host: ConsoleHost, line: string): Promise<C
       }
       case "canon":
         return ok(await host.canonReport());
+      case "mort": {
+        // Commande de service (P2) : la mort sera déclenchée plus tard par les combats et les événements.
+        const character = args[0] ?? "";
+        const cause = (args[1] ?? "inconnue") as Extract<Command, { type: "CharacterDies" }>["cause"];
+        await host.dispatch({ type: "CharacterDies", character, cause });
+        return ok(t("console.died", { id: character }));
+      }
+      case "decret": {
+        await host.dispatch({ type: "EnactLaw", law: args[0] ?? "", override: args[1] === "force" });
+        return ok(t("console.decree", { id: args[0] ?? "" }));
+      }
       default:
         return fail(t("console.error.unknown", { name }));
     }
