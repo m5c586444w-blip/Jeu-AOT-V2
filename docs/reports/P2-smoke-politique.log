@@ -8,7 +8,9 @@
   OK  attribut : fiche « pourquoi ? » au survol
   OK  salle du Cabinet : 8 billes de vote prévues pour 8 membres
   OK  Cabinet : 12 valeurs, toutes expliquées ; aucune clé brute
-  KO  raisons d'un membre : 1 facteurs
+  OK  fiches « pourquoi ? » des 8 membres : lignes 1, 2, 1, 2, 2, 2, 2, 1 (chacune ≥ 1)
+  OK  au moins un membre a ≥ 2 facteurs (max 2)
+  OK  somme des facteurs = score affiché pour les 8 membres
   OK  bordereau : « Annuler » n'engage rien (F-UIX-12)
   OK  bordereau de confirmation avant le vote (F-UIX-13)
   OK  vote tenu : « Dernier vote — Exemptions de conscription, an 850, jour 41 : 6 pour, 1 contre, 1 abstention(s). Adopté. »
@@ -27,5 +29,5 @@
   OK  journal : 0 valeurs, toutes expliquées ; aucune clé brute
   OK  Échap ferme le registre
   OK  aucune erreur console
-smoke:politique : 1 échec(s).
-EXIT 1
+smoke:politique : OK (captures dans docs/screenshots/).
+EXIT 0

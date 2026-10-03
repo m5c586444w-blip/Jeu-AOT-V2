@@ -3,11 +3,12 @@
 | Champ | Valeur |
 |---|---|
 | Phase | P2 — Personnages, organisations, politique |
-| Tâche | T2.9 — `smoke:politique` (**ARRÊT OBLIGATOIRE**, voir ci-dessous) |
+| Tâche | T2.9 — `smoke:politique` corrigé (AC2-11 révisé, D-48) ; puis smoke:map complet et T2.10 |
 | Dernier `npm run verify` | 2026-10-03 (commit 8eb61b1) : code 0, 147 tests |
-| Prochaine étape | Attendre la décision de l'utilisateur sur l'arrêt ci-dessous, puis T2.10 (rapport P2) et P3 |
+| Prochaine étape | smoke:map complet (validation de P1), ville-usine (? / A), rapport P2, puis P3 |
 
-## ARRÊT OBLIGATOIRE (2026-10-03) — critère AC2-11 en échec deux fois
+## Arrêt levé (2026-10-03) — critère AC2-11 en échec deux fois
+- **Levé par l'utilisateur** : correction renforcée acceptée (D-48), appliquée et passée (`docs/reports/P2-smoke-politique.log`).
 - Contrôle concerné : `smoke:politique`, « raisons d'un membre » (fiche « pourquoi ? » d'un vote au Cabinet). Sortie réelle : `docs/reports/P2-smoke-politique.log` (27 contrôles OK, 1 KO).
 - 1er passage : 2 KO (≥ 10 billes attendues alors que le Cabinet compte 8 votants ; survol d'un total au lieu d'un score). Test corrigé (commit 8eb61b1).
 - 2e passage : 1 KO, « raisons d'un membre : 1 facteurs ».

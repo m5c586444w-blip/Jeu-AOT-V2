@@ -7,6 +7,7 @@ import { deserialize, serialize } from "../../src/sim/core/serialize";
 import { computeVote, foodDays, legitimacyTarget, nationalMoraleOf } from "../../src/sim/politics/politics";
 import { provinceProduction } from "../../src/sim/strategic/economy";
 import { economyMods } from "../../src/sim/politics/politics";
+import { displayedFactors } from "../../src/ui/why";
 import { pol, run, start, strat, world850 } from "./politics-helpers";
 
 const pw = world850.politics;
@@ -57,6 +58,33 @@ describe("chaîne d'un décret (AC2-05)", () => {
     expect(() => run(s, { type: "EnactLaw", law: "law_censure_presse" })).toThrow(/déjà en vigueur/);
     const repealed = run(s, { type: "RepealLaw", law: "law_censure_presse" });
     expect(pol(repealed).laws).toHaveLength(0);
+  });
+});
+
+describe("fiche « pourquoi ? » d'un vote (AC2-11 révisé, D-48)", () => {
+  it("pour chaque décret soumis au vote et chaque membre : facteurs affichés ≥ 1, somme = score ; sur la motion de smoke:politique, au moins un membre a ≥ 2 facteurs", () => {
+    const p = pol(start());
+    let laws = 0;
+    for (const law of pw.laws.values()) {
+      if (!law.requires_vote) continue;
+      laws++;
+      const v = computeVote(world850, p, law);
+      const counts: number[] = [];
+      for (const line of v.record.lines) {
+        const why = v.reasons[line.character];
+        if (!why) throw new Error(`raisons manquantes : ${line.character}`);
+        const shown = displayedFactors(why);
+        counts.push(shown.length);
+        expect(shown.length).toBeGreaterThanOrEqual(1);
+        expect(shown.every((f) => f.op !== "mul")).toBe(true);
+        expect(shown.reduce((a, f) => a + f.value, 0)).toBeCloseTo(line.score, 9);
+      }
+      if (law.id === "law_exemptions_conscription") {
+        expect(counts.length).toBe(8);
+        expect(Math.max(...counts)).toBeGreaterThanOrEqual(2);
+      }
+    }
+    expect(laws).toBe(22);
   });
 });
 

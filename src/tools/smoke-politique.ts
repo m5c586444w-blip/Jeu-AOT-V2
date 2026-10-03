@@ -19,6 +19,8 @@ const expect = (cond: boolean, label: string): void => {
     console.error(`  KO  ${label}`);
   }
 };
+/** Nombre affiché à la française (« −0,2 », « +0,6 », « 1 234 ») → nombre. */
+const parseFr = (text: string): number => Number(text.replace(/[\s\u00a0\u202f+]/g, "").replace("−", "-").replace(",", "."));
 const isDriverNoise = (text: string): boolean => /GL Driver Message|GPU stall due to ReadPixels/.test(text);
 
 // Décrets du parcours : un décret soumis au vote, un décret direct (moins coûteux que le capital de départ).
@@ -100,10 +102,28 @@ try {
   const voters = await page.locator(".cabinet-detail table tr").count();
   expect(balls >= 5 && balls === voters, `salle du Cabinet : ${balls} billes de vote prévues pour ${voters} membres`);
   await audit(page, "Cabinet");
-  await page.locator(".cabinet-detail table .valeur >> nth=0").focus();
-  await page.waitForTimeout(150);
-  const reasons = await page.locator(".pourquoi tr").count();
-  expect(reasons >= 2, `raisons d'un membre : ${reasons} facteurs`);
+  // AC2-11 (libellé révisé, D-48) : la fiche « pourquoi ? » de chaque membre a ≥ 1 ligne, au moins un membre en a ≥ 2,
+  // et la somme des facteurs affichés égale le score affiché (à l'arrondi d'affichage près).
+  const scores = page.locator(".cabinet-detail table .valeur");
+  const nScores = await scores.count();
+  const rowCounts: number[] = [];
+  const sumErrors: string[] = [];
+  for (let i = 0; i < nScores; i++) {
+    const score = scores.nth(i);
+    await score.focus();
+    await page.waitForTimeout(80);
+    const shown = parseFr(await score.innerText());
+    const factors = (await page.locator(".pourquoi tr .pourquoi__valeur").allInnerTexts()).map(parseFr);
+    rowCounts.push(factors.length);
+    const sum = factors.reduce((a, b) => a + b, 0);
+    // Chaque valeur affichée est arrondie à 0,005 près : tolérance = demi-unité × (lignes + 1).
+    if (Math.abs(sum - shown) > 0.005 * (factors.length + 1) + 1e-9) sumErrors.push(`membre ${i + 1} : somme ${sum.toFixed(3)} ≠ score ${shown}`);
+  }
+  expect(nScores === voters && rowCounts.every((n) => n >= 1), `fiches « pourquoi ? » des ${nScores} membres : lignes ${rowCounts.join(", ")} (chacune ≥ 1)`);
+  expect(rowCounts.some((n) => n >= 2), `au moins un membre a ≥ 2 facteurs (max ${Math.max(0, ...rowCounts)})`);
+  expect(sumErrors.length === 0, `somme des facteurs = score affiché pour les ${nScores} membres${sumErrors.length ? ` (${sumErrors.join(" ; ")})` : ""}`);
+  await scores.nth(rowCounts.indexOf(Math.max(...rowCounts))).focus();
+  await page.waitForTimeout(80);
   await page.screenshot({ path: `${OUT}/p2-cabinet.png` });
   await page.mouse.move(5, 300);
   // « Annuler » ne change rien.

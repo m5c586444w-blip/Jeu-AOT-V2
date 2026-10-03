@@ -31,6 +31,11 @@ function resolveParams(params: Factor["params"]): Record<string, string | number
   return out;
 }
 
+/** Facteurs montrés dans la fiche : une base nulle n'est pas affichée quand d'autres facteurs existent (elle n'apporte rien à la somme). */
+export function displayedFactors(x: Explained): Factor[] {
+  return x.factors.filter((f) => !(f.op === "base" && f.value === 0 && x.factors.length > 1));
+}
+
 function factorRow(f: Factor): HTMLTableRowElement {
   const tr = document.createElement("tr");
   const label = document.createElement("td");
@@ -108,7 +113,7 @@ export class WhyTooltip {
     }
     if (s.explained) {
       const table = document.createElement("table");
-      for (const f of s.explained.factors) if (!(f.op === "base" && f.value === 0 && s.explained.factors.length > 1)) table.append(factorRow(f));
+      for (const f of displayedFactors(s.explained)) table.append(factorRow(f));
       box.append(table);
     }
     if (s.text) {

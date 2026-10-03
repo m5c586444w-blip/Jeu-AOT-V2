@@ -178,3 +178,8 @@
 
 ## 2026-10-03 — D-47 Confirmation des décisions
 - Décision (F-UIX-12/13) : décréter, abroger, soumettre au vote, passer outre un veto, nommer, signer une proposition et arrêter un budget passent par un bordereau « Signer / Annuler ». Persuader et refuser une proposition sont immédiats : réversibles ou sans coût durable.
+
+## 2026-10-03 — D-48 Critère AC2-11 révisé (accord de l'utilisateur)
+- Ancien libellé du contrôle : « raisons d'un membre : la fiche « pourquoi ? » du premier membre affiche ≥ 2 facteurs ».
+- Nouveau libellé : pour chacun des membres votants, ≥ 1 facteur affiché ; au moins un membre en a ≥ 2 ; la somme des facteurs affichés égale le score affiché (à l'arrondi près). Contrôle de somme ajouté sans navigateur (`tests/sim/politics.test.ts`, 22 décrets × 8 membres).
+- Raison : deux échecs de l'ancien contrôle (arrêt obligatoire du 2026-10-03). Le premier membre, Dot Pixis, n'a qu'un facteur non nul et la fiche masque volontairement une base nulle (`displayedFactors`, désormais exportée et partagée par la fiche et le test). L'ancien seuil testait une particularité du membre ; le nouveau vérifie que l'explication reconstitue le score.
