@@ -27,11 +27,14 @@
 }
 
 .bandeau {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.4rem 1.6rem;
-  padding: 0.45rem 1.2rem 0.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "tete tete nation"
+    "registre registre registre"
+    "pied pied pied";
+  gap: 0.15rem 1.4rem;
+  padding: 0.4rem 1.1rem 0.3rem;
   background-color: var(--papier);
   background-image: var(--fibres), var(--grain-cadre);
   background-size: 420px 420px, 260px 260px;
@@ -41,16 +44,66 @@
   z-index: 2;
 }
 
-.bandeau__titre {
-  font-family: var(--f-titre);
-  font-size: 1.55rem;
-  font-weight: 400;
-  margin: 0;
-  letter-spacing: 0.02em;
+.bandeau__tete { grid-area: tete; display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; }
+.bandeau__titre { font-family: var(--f-titre); font-size: 1.55rem; font-weight: 400; margin: 0; letter-spacing: 0.02em; }
+.bandeau__jour { font-family: var(--f-machine); font-size: 1rem; }
+.bandeau__vitesses { display: inline-flex; border: 1px solid var(--encre); }
+.bandeau__vitesse {
+  font-family: var(--f-machine);
+  font-size: 1rem;
+  min-width: 2rem;
+  padding: 0.05rem 0.35rem;
+  background: transparent;
+  color: var(--encre);
+  border: none;
+  border-left: 1px solid var(--encre);
+  cursor: pointer;
+  letter-spacing: -0.05em;
 }
+.bandeau__vitesse:first-child { border-left: none; }
+.bandeau__vitesse[aria-pressed="true"] { background: var(--encre); color: var(--papier); }
+.bandeau__vitesse:focus-visible { outline: 2px solid var(--ocre); outline-offset: 1px; }
 
-.bandeau__champ { font-family: var(--f-machine); font-size: 0.95rem; }
+.bandeau__nation { grid-area: nation; display: flex; gap: 1.1rem; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; }
+.bandeau__champ { font-family: var(--f-machine); font-size: 0.95rem; white-space: nowrap; }
 .bandeau__libelle { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 0.35rem; font-family: var(--f-texte); }
+.bandeau__decret { font: inherit; font-family: var(--f-machine); background: transparent; border: none; border-bottom: 1px solid var(--encre); color: var(--encre); }
+
+/* Registre des ressources : colonnes tirées à l'encre, chiffres alignés. */
+.bandeau__registre {
+  grid-area: registre;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  border-top: 1px solid var(--encre);
+  border-bottom: 1px solid var(--encre);
+}
+.bandeau__ressource {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "icone libelle" "icone stock";
+  column-gap: 0.4rem;
+  padding: 0.15rem 0.45rem;
+  border-left: 1px dotted rgba(28, 26, 23, 0.6);
+  font-variant-numeric: tabular-nums;
+}
+.bandeau__ressource:first-child { border-left: none; }
+.bandeau__icone { grid-area: icone; align-self: center; }
+.bandeau__ressource .bandeau__libelle { grid-area: libelle; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bandeau__stock { grid-area: stock; font-family: var(--f-machine); font-size: 0.95rem; }
+.bandeau__delta { grid-column: 2; font-family: var(--f-machine); font-size: 0.8rem; justify-self: end; margin-top: -1.2rem; }
+.bandeau__delta[data-sign="baisse"] { color: var(--brique); }
+.bandeau__delta[data-sign="hausse"] { color: var(--vert-de-gris); }
+.bandeau__delta[data-sign="rupture"] { color: var(--papier); background: var(--brique); padding: 0 0.2rem; }
+
+.bandeau__pied { grid-area: pied; display: flex; gap: 1.2rem; align-items: baseline; font-size: 0.85rem; }
+.bandeau__alerte { margin: 0; flex: 1; font-style: italic; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bandeau__alerte[data-pause="true"] { color: var(--brique); font-style: normal; font-weight: 600; }
+.bandeau__pied .bandeau__champ { font-size: 0.8rem; opacity: 0.8; }
+
+@media (max-width: 1100px) {
+  .bandeau__registre { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .bandeau__ressource:nth-child(5) { border-left: none; }
+}
 
 /* Bulle de survol : fiche volante, pas de coins arrondis ni d'ombre douce. */
 .bulle {
@@ -135,3 +188,29 @@
 .calques__filtres input { appearance: none; width: 0.85rem; height: 0.85rem; border: 1px solid var(--encre); margin: 0 0.15rem 0 0; vertical-align: -0.1rem; background: transparent; }
 .calques__filtres input:checked { background: linear-gradient(45deg, transparent 44%, var(--encre) 45% 55%, transparent 56%), linear-gradient(-45deg, transparent 44%, var(--encre) 45% 55%, transparent 56%); }
 .calques__filtres input:focus-visible { outline: 2px solid var(--ocre); }
+
+/* Fiche « pourquoi ? » : bordereau de calcul tapé à la machine. */
+.pourquoi {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  max-width: 24rem;
+  padding: 0.45rem 0.7rem 0.5rem;
+  background: #f1e8d2;
+  background-image: var(--grain-cadre), repeating-linear-gradient(transparent 0 1.3rem, rgba(79, 107, 90, 0.16) 1.3rem 1.35rem);
+  border: 1px solid var(--encre);
+  box-shadow: 3px 3px 0 rgba(28, 26, 23, 0.3);
+  font-size: 0.88rem;
+}
+.pourquoi[hidden] { display: none; }
+.pourquoi__titre { display: block; font-family: var(--f-titre); font-weight: 400; font-size: 1.05rem; border-bottom: 1px solid var(--encre); margin-bottom: 0.25rem; }
+.pourquoi__section + .pourquoi__section { margin-top: 0.3rem; border-top: 1px dashed rgba(28, 26, 23, 0.5); padding-top: 0.2rem; }
+.pourquoi__libelle { font-variant: small-caps; letter-spacing: 0.04em; }
+.pourquoi table { width: 100%; border-collapse: collapse; }
+.pourquoi td { padding: 0 0.2rem; vertical-align: baseline; }
+.pourquoi__valeur { text-align: right; font-family: var(--f-machine); white-space: nowrap; }
+.pourquoi p { margin: 0.15rem 0 0; font-style: italic; }
+[data-why] { cursor: help; }
+[data-why]:focus-visible { outline: 2px solid var(--ocre); outline-offset: 2px; }
+
+.icone { width: 1.25rem; height: 1.25rem; vertical-align: -0.28rem; color: var(--encre); }
