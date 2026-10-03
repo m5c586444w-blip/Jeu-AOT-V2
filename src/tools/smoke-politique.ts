@@ -95,10 +95,12 @@ try {
   await openPanel(page, "cabinet");
   await page.selectOption("select[data-motion]", VOTE_LAW);
   await page.waitForSelector(".cabinet-detail");
+  // Une bille par membre votant (rôles siégeant au Cabinet + sièges invités, hors joueur).
   const balls = await page.locator(".cabinet-plan circle[r='8']").count();
-  expect(balls >= 10, `salle du Cabinet : ${balls} billes de vote prévues`);
+  const voters = await page.locator(".cabinet-detail table tr").count();
+  expect(balls >= 5 && balls === voters, `salle du Cabinet : ${balls} billes de vote prévues pour ${voters} membres`);
   await audit(page, "Cabinet");
-  await page.locator(".cabinet-detail .valeur >> nth=3").hover();
+  await page.locator(".cabinet-detail table .valeur >> nth=0").focus();
   await page.waitForTimeout(150);
   const reasons = await page.locator(".pourquoi tr").count();
   expect(reasons >= 2, `raisons d'un membre : ${reasons} facteurs`);
