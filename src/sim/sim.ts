@@ -3,6 +3,7 @@ import { applyCommand, CommandJournal } from "./core/commands";
 import type { Command } from "./core/commands";
 import { createInitialState } from "./core/state";
 import type { GameState } from "./core/state";
+import type { World } from "./strategic/world";
 
 /** Simulation autonome : seul point d'entrée pour faire évoluer l'état (direct ou dans un Worker). */
 export interface Sim {
@@ -14,18 +15,18 @@ export interface Sim {
   journal(): readonly Command[];
 }
 
-export function createSim(seed: number): Sim {
-  let state = createInitialState(seed);
+export function createSim(seed: number, world?: World): Sim {
+  let state = createInitialState(seed, world);
   let journal = new CommandJournal();
   return {
     state: () => state,
     dispatch(cmd) {
-      state = applyCommand(state, cmd);
+      state = applyCommand(state, cmd, undefined, world);
       journal.record(cmd);
       return state;
     },
     reset(newSeed) {
-      state = createInitialState(newSeed);
+      state = createInitialState(newSeed, world);
       journal = new CommandJournal();
       return state;
     },

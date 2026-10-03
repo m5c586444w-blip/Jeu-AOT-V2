@@ -29,6 +29,13 @@ export const MIGRATIONS: readonly Migration[] = [
       };
     },
   },
+  {
+    from: 1,
+    describe: "v1 → v2 : ajout de la couche stratégique (`strategic: null` pour une partie de fondation)",
+    migrate(raw) {
+      return { ...raw, schemaVersion: 2, strategic: raw["strategic"] ?? null };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {
@@ -82,5 +89,7 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   const world = raw["world"] as Record<string, unknown> | undefined;
   if (!world || typeof world["noise"] !== "number" || typeof world["flags"] !== "object" || world["flags"] === null) problems.push("world");
   if (!isInt(raw["commandIndex"])) problems.push("commandIndex");
+  const strat = raw["strategic"];
+  if (strat !== null && (typeof strat !== "object" || strat === undefined || !("stocks" in strat) || !("provinces" in strat))) problems.push("strategic");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

@@ -54,7 +54,7 @@ describe("IndexedDB (AC-10)", () => {
   it("données modifiées → hash incohérent détecté", async () => {
     const s = stateAt(10);
     const good = JSON.stringify({ ...s, commandIndex: 99 });
-    await store.putRaw({ slot: "triche", label: "x", savedAt: 1, schemaVersion: 1, hash: stateHash(s), data: good });
+    await store.putRaw({ slot: "triche", label: "x", savedAt: 1, schemaVersion: s.schemaVersion, hash: stateHash(s), data: good });
     await expect(store.load("triche")).rejects.toThrow(/hash/);
   });
 

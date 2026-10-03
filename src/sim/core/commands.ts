@@ -2,12 +2,16 @@ import type { EventBus } from "./bus";
 import { tickDay } from "./state";
 import type { GameState } from "./state";
 import type { GameDate } from "./time";
+import { RATIONING_LEVELS } from "../strategic/resources";
+import type { RationingLevel } from "../strategic/resources";
+import type { World } from "../strategic/world";
 
 export const MAX_ADVANCE_DAYS = 3650;
 
 export type Command =
   | { type: "AdvanceDays"; n: number }
   | { type: "SetFlag"; key: string; value: boolean }
+  | { type: "SetRationing"; level: RationingLevel }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -39,6 +43,11 @@ export function validateCommand(cmd: unknown): Validation {
       if (typeof c["value"] !== "boolean") return { ok: false, error: "SetFlag.value doit être un booléen" };
       return { ok: true };
     }
+    case "SetRationing":
+      if (typeof c["level"] !== "string" || !(RATIONING_LEVELS as readonly string[]).includes(c["level"])) {
+        return { ok: false, error: `SetRationing.level doit valoir ${RATIONING_LEVELS.join(", ")}` };
+      }
+      return { ok: true };
     case "Noop":
       return { ok: true };
     default:
@@ -47,7 +56,7 @@ export function validateCommand(cmd: unknown): Validation {
 }
 
 /** Applique une commande validée ; renvoie un nouvel état (l'état d'entrée n'est pas modifié). */
-export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimEvents>): GameState {
+export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimEvents>, world?: World): GameState {
   const v = validateCommand(cmd);
   if (!v.ok) {
     bus?.emit("commandRejected", { command: cmd, error: v.error });
@@ -57,13 +66,17 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
   switch (cmd.type) {
     case "AdvanceDays":
       for (let i = 0; i < cmd.n; i++) {
-        next = tickDay(next);
+        next = tickDay(next, world);
         bus?.emit("dayAdvanced", { date: next.date });
       }
       break;
     case "SetFlag":
       next = { ...next, world: { ...next.world, flags: { ...next.world.flags, [cmd.key]: cmd.value } } };
       bus?.emit("flagSet", { key: cmd.key, value: cmd.value });
+      break;
+    case "SetRationing":
+      if (!next.strategic) throw new Error("SetRationing : aucune partie stratégique chargée");
+      next = { ...next, strategic: { ...next.strategic, rationing: cmd.level } };
       break;
     case "Noop":
       break;
@@ -91,6 +104,6 @@ export class CommandJournal {
 }
 
 /** Rejoue un journal depuis un état initial : même état initial + mêmes commandes = même état final. */
-export function replay(initial: GameState, commands: readonly Command[]): GameState {
-  return commands.reduce<GameState>((s, c) => applyCommand(s, c), initial);
+export function replay(initial: GameState, commands: readonly Command[], world?: World): GameState {
+  return commands.reduce<GameState>((s, c) => applyCommand(s, c, undefined, world), initial);
 }

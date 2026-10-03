@@ -52,10 +52,11 @@ describe("sérialisation et migration (AC-09)", () => {
     const s = run1000(42);
     expect(stateHash(deserialize(serialize(s)))).toBe(stateHash(s));
   });
-  it("un état v0 est migré en v1", () => {
+  it("un état v0 est migré jusqu'à la version courante (v0 → v1 → v2)", () => {
     const v0 = { seed: 42, rng: { state: 42 }, turn: 365, world: { noise: 0, flags: {} } };
     const migrated = deserialize(JSON.stringify(v0));
-    expect(migrated.schemaVersion).toBe(1);
+    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.strategic).toBeNull();
     expect(migrated.date).toEqual({ year: 846, day: 6 });
     expect(migrated.commandIndex).toBe(0);
     expect("turn" in migrated).toBe(false);
