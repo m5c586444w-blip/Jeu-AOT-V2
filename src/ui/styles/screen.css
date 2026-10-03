@@ -51,3 +51,24 @@
 
 .bandeau__champ { font-family: var(--f-machine); font-size: 0.95rem; }
 .bandeau__libelle { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 0.35rem; font-family: var(--f-texte); }
+
+/* Bulle de survol : fiche volante, pas de coins arrondis ni d'ombre douce. */
+.bulle {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  max-width: 19rem;
+  padding: 0.35rem 0.6rem 0.4rem;
+  background: var(--papier);
+  background-image: var(--grain-cadre);
+  border: 1px solid var(--encre);
+  box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.35);
+  display: grid;
+  gap: 0.05rem;
+  font-size: 0.95rem;
+}
+
+.bulle[hidden] { display: none; }
+.bulle__nom { font-family: var(--f-titre); font-weight: 400; font-size: 1.1rem; }
+.bulle__meta { font-variant: small-caps; letter-spacing: 0.04em; }
+.bulle__aide { font-style: italic; font-size: 0.85rem; color: #4a4339; }

@@ -320,5 +320,19 @@
   "key.artisanat": "artisanat",
   "key.pierre_glace": "pierre à éclatement de glace",
   "key.logistique": "logistique",
-  "map.unexplored": "— inexploré —"
+  "map.unexplored": "— inexploré —",
+  "region.outre_murs": "Territoire des Titans",
+  "region.mur_maria": "Mur Maria",
+  "region.mur_rose": "Mur Rose",
+  "region.mur_sina": "Mur Sina",
+  "region.anneau_maria": "Anneau de Maria",
+  "region.anneau_rose": "Anneau de Rose",
+  "region.interieur_sina": "Intérieur de Sina",
+  "control.paradis": "tenue",
+  "control.titans": "aux Titans",
+  "control.perdu": "perdue",
+  "canon.C": "établi",
+  "canon.A": "interprété",
+  "canon.?": "non confirmé",
+  "map.click_hint": "Clic : ouvrir le dossier"
 }

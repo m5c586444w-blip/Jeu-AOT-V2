@@ -128,7 +128,7 @@ export class StrategicMap {
   }
 
   private setCamera(zoom: number, x: number, y: number): void {
-    this.zoom = Math.max(this.fitZoom * 0.8, Math.min(this.fitZoom * 12, zoom));
+    this.zoom = Math.max(this.fitZoom * 0.8, Math.min(this.fitZoom * 8, zoom));
     this.world.scale.set(this.zoom);
     this.world.position.set(x, y);
     this.redrawIfNeeded();
@@ -139,7 +139,7 @@ export class StrategicMap {
   /** Zoom autour d'un point de l'écran (molette). */
   zoomAt(screenX: number, screenY: number, factor: number): void {
     const before = this.toWorld(screenX, screenY);
-    const zoom = Math.max(this.fitZoom * 0.8, Math.min(this.fitZoom * 12, this.zoom * factor));
+    const zoom = Math.max(this.fitZoom * 0.8, Math.min(this.fitZoom * 8, this.zoom * factor));
     this.setCamera(zoom, screenX - before[0] * zoom, screenY - before[1] * zoom);
   }
 

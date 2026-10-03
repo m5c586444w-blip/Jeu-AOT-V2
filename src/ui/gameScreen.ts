@@ -12,6 +12,10 @@ import type { ConsoleHost } from "./debugConsole";
 import { mountDebugOverlay } from "./debugOverlay";
 import { buildLabels, buildMapProvinces, mapDynamic } from "./mapModel";
 import { applyPaperTextures } from "./paper";
+import { Bubble } from "./bubble";
+import { KeyMap } from "./keymap";
+import type { Action } from "./keymap";
+import { attachMapControls } from "./mapControls";
 import { SimClient } from "../workers/simClient";
 
 export const SCENARIO = "scn_sandbox_845";
@@ -67,6 +71,48 @@ export async function bootGame(): Promise<void> {
   const mapData = mapJson as unknown as MapData;
   const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces));
 
+  const byId = new Map(world.provinces.map((p) => [p.id, p]));
+  const bubble = new Bubble(document.body);
+  let selected: string | null = null;
+  attachMapControls(host, map, {
+    hover(id, x, y) {
+      const p = id ? byId.get(id) : undefined;
+      if (p) bubble.show(p, state, x, y);
+      else bubble.hide();
+    },
+    select(id) {
+      selected = id;
+    },
+  });
+
+  const keymap = new KeyMap(safeStorage());
+  const PAN = 80;
+  const actions: Partial<Record<Action, () => void>> = {
+    zoom_in: () => map.zoomAt(host.clientWidth / 2, host.clientHeight / 2, 1.25),
+    zoom_out: () => map.zoomAt(host.clientWidth / 2, host.clientHeight / 2, 0.8),
+    pan_up: () => map.panBy(0, PAN),
+    pan_down: () => map.panBy(0, -PAN),
+    pan_left: () => map.panBy(PAN, 0),
+    pan_right: () => map.panBy(-PAN, 0),
+    lod_monde: () => map.setLod("monde"),
+    lod_region: () => map.setLod("region"),
+    lod_province: () => map.setLod("province"),
+    fit: () => map.fit(),
+    close: () => {
+      selected = null;
+      map.setSelected(null);
+    },
+  };
+  window.addEventListener("keydown", (ev) => {
+    if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLSelectElement) return;
+    const action = keymap.actionFor(ev.code);
+    const run = action ? actions[action] : undefined;
+    if (!run) return;
+    ev.preventDefault();
+    run();
+  });
+  void selected;
+
   const refresh = (): void => {
     const d = state.date;
     if (fields["date"]) fields["date"].textContent = t("date.format", { year: d.year, day: d.day });
@@ -95,4 +141,13 @@ export async function bootGame(): Promise<void> {
   mountDebugOverlay(document.body, consoleHost, refresh);
   refresh();
   document.documentElement.dataset["ready"] = "true";
+}
+
+/** localStorage peut être indisponible (navigation privée, aperçus) : on renvoie null plutôt que d'échouer. */
+function safeStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
 }
