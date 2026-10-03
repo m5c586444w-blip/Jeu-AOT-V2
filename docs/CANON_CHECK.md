@@ -1,7 +1,7 @@
 # CONTRÔLE CANON — faits de lore utilisés
 
 > Format du fichier 05 §7 : `fait | statut | où utilisé | note`. Sources : fichiers `docs/spec/` (11 prime sur 01) et `docs/spec/ERRATA.md` (prime sur tout).
-> Contrôle automatique : `npm run canon:check` (R1–R6).
+> Contrôle automatique : `npm run canon:check` (R1–R7 ; R7 ajoutée en P2, D-49).
 
 ## Faits utilisés en P0
 
@@ -75,5 +75,7 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | 8 organisations : Corps d'exploration, Garnison, Brigade spéciale, Brigade d'entraînement, culte des Murs, Cabinet, cour, guildes | C (existence) / A (guildes, chiffres) | `data/organisations/paradis.json` | 11 §3 |
 | 43 décrets (6 catégories), effets différés | A | `data/laws/paradis.json` | 08 §4 ; aucun décret présenté comme canon |
 | 18 rôles du conseil, biais des conseillers | A | `data/roles/roles.json` | 08 §3 |
-| Ville-usine exploitée en 850 | ? (localisation) | scénario 850, `control` | D-41 ; 11 §9 |
+| Ville-usine : existence | C | `data/provinces/paradis.json` (`canon`) | 11 §6 |
+| Ville-usine : localisation sur la carte | ? | `location_canon` | 11 §9 ; D-49 |
+| Ville-usine : rattachement à Paradis en 850 | A (paramètre de scénario, jamais canon) | scénario 850, `control_canon` ; règle R7 | D-41, D-49 |
 | Population 780 000, réfugiés de Maria, culture de l'intérieur de Rose | A | scénario 850 | D-42 |

@@ -159,7 +159,7 @@
 
 ## 2026-10-03 — D-41 Ville-usine exploitée dans le scénario 850
 - Décision : dans `scn_sandbox_850`, la province `ville_usine` reste contrôlée par Paradis avec ses bâtiments (mine de pierre de glace, fabrique de gaz). Sans cela, le gaz s'épuise en quelques mois, alors que le canon montre l'ODM en usage en 850.
-- Lore : la localisation exacte de la ville-usine est `?` (11 §9) ; le contrôle est un paramètre du scénario (`control`), documenté dans `notes_canon`. **À trancher par l'utilisateur si une source plus précise existe.**
+- Statuts (précisés par l'utilisateur le 2026-10-03, voir D-49) : **localisation = `?`** (11 §9) ; **rattachement à Paradis en 850 = `A`**, paramètre de scénario, **jamais présenté comme canon**. Le canon montre seulement l'ODM en usage en 850.
 
 ## 2026-10-03 — D-42 Production agricole du scénario 850
 - Décision : `production_mult.food = 2.8` [A]. Il compense la perte de Maria par la mise en culture de l'intérieur de Rose et du Sina ; calibré par `sim:year` (aucune rupture de vivres la première année au rationnement normal).
@@ -183,3 +183,10 @@
 - Ancien libellé du contrôle : « raisons d'un membre : la fiche « pourquoi ? » du premier membre affiche ≥ 2 facteurs ».
 - Nouveau libellé : pour chacun des membres votants, ≥ 1 facteur affiché ; au moins un membre en a ≥ 2 ; la somme des facteurs affichés égale le score affiché (à l'arrondi près). Contrôle de somme ajouté sans navigateur (`tests/sim/politics.test.ts`, 22 décrets × 8 membres).
 - Raison : deux échecs de l'ancien contrôle (arrêt obligatoire du 2026-10-03). Le premier membre, Dot Pixis, n'a qu'un facteur non nul et la fiche masque volontairement une base nulle (`displayedFactors`, désormais exportée et partagée par la fiche et le test). L'ancien seuil testait une particularité du membre ; le nouveau vérifie que l'explication reconstitue le score.
+
+## 2026-10-03 — D-49 Statut de localisation et de rattachement (demande de l'utilisateur)
+- Décision : deux champs distincts du statut d'existence.
+  - `location_canon` (province) : statut de la position sur la carte. La ville-usine a `canon: C` pour son existence (11 §6) et `location_canon: ?` (11 §9).
+  - `control_canon` (scénario) : statut d'un rattachement donné dans `control`. Le scénario 850 donne `prov_ville_usine: A`.
+- Nouvelle règle **R7** de `canon:check` : le rattachement d'une province à localisation `?` doit porter un statut, et ce statut ne peut jamais être `C`. Fixture d'échec : `tests/fixtures/bad/r7_uncertain_location_as_canon`.
+- Le dossier de province affiche les deux tampons (« Localisation : ? », « Rattachement : A »), chacun avec sa fiche « pourquoi ? ».
