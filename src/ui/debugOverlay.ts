@@ -71,12 +71,5 @@ export function mountDebugOverlay(root: HTMLElement, host: ConsoleHost, onChange
     if (!panel.hidden) input.focus();
   };
 
-  window.addEventListener("keydown", (ev) => {
-    if (ev.key === "F2") {
-      ev.preventDefault();
-      toggle();
-    }
-  });
-
   return { toggle, isOpen: () => !panel.hidden };
 }

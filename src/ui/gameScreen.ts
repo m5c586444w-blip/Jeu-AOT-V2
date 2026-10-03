@@ -23,6 +23,9 @@ import { buildLabels, buildMapProvinces, mapDynamic } from "./mapModel";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
+import { OptionsPanel } from "./optionsPanel";
+import { crossesAutosave, loadSettings, saveSettings } from "./settings";
+import { setLocale } from "../i18n";
 
 export const SCENARIO = "scn_sandbox_845";
 const DEFAULT_SEED = 42;
@@ -49,6 +52,10 @@ export async function bootGame(): Promise<void> {
   const app = document.getElementById("app");
   if (!app) return;
   applyPaperTextures(document.documentElement);
+  const settings = loadSettings(safeStorage());
+  setLocale(settings.locale);
+  document.documentElement.lang = settings.locale;
+  document.documentElement.style.fontSize = `${settings.uiScale}%`;
   await document.fonts.ready;
 
   const worker = new Worker(new URL("../workers/sim.worker.ts", import.meta.url), { type: "module" });
@@ -66,11 +73,14 @@ export async function bootGame(): Promise<void> {
   const screen = document.createElement("div");
   screen.className = "ecran";
   let busy = false;
+  const storePromise = SaveStore.open(indexedDB, () => Date.now());
   const dispatch = async (cmd: Command): Promise<void> => {
     busy = true;
+    const before = state.date;
     try {
       state = (await sim.dispatch(cmd)).state;
       clock.observeAlerts(state.strategic?.log ?? []);
+      if (crossesAutosave(before, state.date, world.time.autosave_every_days)) void (await storePromise).autosave(state);
     } finally {
       busy = false;
     }
@@ -158,7 +168,8 @@ export async function bootGame(): Promise<void> {
     },
   };
   window.addEventListener("keydown", (ev) => {
-    if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLSelectElement) return;
+    const typing = ev.target instanceof HTMLInputElement || ev.target instanceof HTMLSelectElement;
+    if (typing && keymap.actionFor(ev.code) !== "console") return;
     const action = keymap.actionFor(ev.code);
     const run = action ? actions[action] : undefined;
     if (!run) return;
@@ -176,7 +187,6 @@ export async function bootGame(): Promise<void> {
   };
   requestAnimationFrame(loop);
 
-  const storePromise = SaveStore.open(indexedDB, () => Date.now());
   const consoleHost: ConsoleHost = {
     state: () => state,
     dispatch,
@@ -191,7 +201,14 @@ export async function bootGame(): Promise<void> {
     },
     canonReport: canonReportFromBundle,
   };
-  mountDebugOverlay(document.body, consoleHost, refresh);
+  const debug = mountDebugOverlay(document.body, consoleHost, refresh);
+  actions.console = () => debug.toggle();
+  const options = new OptionsPanel(document.body, keymap, settings, (s) => {
+    saveSettings(safeStorage(), s);
+    if (s.locale !== settings.locale) window.location.reload();
+    document.documentElement.style.fontSize = `${s.uiScale}%`;
+  });
+  actions.options = () => options.toggle();
   refresh();
   document.documentElement.dataset["ready"] = "true";
 }

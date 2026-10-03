@@ -5,7 +5,7 @@ import type { CollectionName } from "../data/collections";
 import { t } from "../i18n";
 
 // Les données ne sont chargées qu'à la demande (commande « canon ») : elles restent hors du paquet principal.
-const DATA_FILES = import.meta.glob<unknown>("/data/**/*.json", { import: "default" });
+const DATA_FILES = import.meta.glob<unknown>(["/data/**/*.json", "!/data/map/**", "!/data/balance/**"], { import: "default" });
 
 /** Rapport canon:check calculé dans le navigateur, avec les mêmes règles pures que le CLI. */
 export async function canonReportFromBundle(): Promise<string> {

@@ -259,3 +259,32 @@
 .dossier__coupe { margin: 0.6rem 0 0; }
 .dossier__coupe svg { width: 100%; max-width: 18rem; display: block; }
 .dossier__coupe figcaption { font-style: italic; font-size: 0.85rem; }
+
+/* Options : petit registre au centre, tableau des raccourcis tapé à la machine. */
+.options {
+  position: fixed;
+  z-index: 25;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0.3deg);
+  width: min(30rem, 92vw);
+  max-height: 86vh;
+  overflow: auto;
+  padding: 0.7rem 1rem 0.9rem;
+  background-color: #ece2c8;
+  background-image: var(--fibres), var(--grain-cadre);
+  border: 1px solid var(--encre);
+  outline: 1px solid rgba(28, 26, 23, 0.45);
+  outline-offset: 4px;
+}
+.options[hidden] { display: none; }
+.options__tete { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--encre); }
+.options__titre { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.4rem; }
+.options__ligne { display: flex; justify-content: space-between; align-items: baseline; padding: 0.3rem 0; border-bottom: 1px dotted var(--encre); }
+.options__choix { font: inherit; font-family: var(--f-machine); background: transparent; border: none; border-bottom: 1px solid var(--encre); color: var(--encre); }
+.options__touches { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.95rem; }
+.options__touches caption { text-align: left; font-variant: small-caps; letter-spacing: 0.05em; }
+.options__touches td { padding: 0.12rem 0; border-bottom: 1px dotted rgba(28, 26, 23, 0.4); }
+.options__touche { font-family: var(--f-machine); background: transparent; border: 1px solid var(--encre); padding: 0 0.4rem; min-width: 4.5rem; cursor: pointer; color: var(--encre); }
+.options__touche:focus-visible, .options__remise:focus-visible, .options__choix:focus-visible { outline: 2px solid var(--ocre); }
+.options__remise { margin-top: 0.6rem; font: inherit; background: transparent; border: none; border-bottom: 1px solid var(--encre); cursor: pointer; color: var(--encre); }
