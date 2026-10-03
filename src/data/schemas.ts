@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { CollectionName } from "./collections";
+import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
 
 // Messages d'erreur de Zod en français (langue principale du projet).
 z.config(z.locales.fr());
@@ -22,16 +23,66 @@ const canonFields = {
   notes_canon: z.string().optional(),
 };
 
+const unit = z.number().min(0).max(1);
+const resourceRecord = z.partialRecord(z.enum(RESOURCE_IDS), z.number());
+export const BuildingIdSchema = idOf("bld");
+export const ScenarioIdSchema = idOf("scn");
+
+export const PoiSchema = z.object({ id: idOf("poi"), name_key: z.string().min(1), ...{ canon: CanonSchema } }).strict();
+
 export const ProvinceSchema = z
   .object({
     id: ProvinceIdSchema,
     atlas_code: z.string().regex(/^[A-Z]{1,2}\d{2}$/).optional(),
     name_key: z.string().min(1),
+    desc_key: z.string().min(1).optional(),
+    /** outre = territoire des Titans ; segment = tronçon de mur ; province = terre habitée entre les murs. */
+    kind: z.enum(["outre", "segment", "province"]).default("province"),
     region: z.string().min(1),
     wall: z.enum(["maria", "rose", "sina"]).nullable().optional(),
     terrain: z.enum(["urbain", "rural", "foret", "mur", "cote", "plaine", "souterrain", "fort", "ruines", "fleuve", "marais", "plateau", "vallee", "collines", "montagne", "lac", "militaire"]),
+    pop_level: z.number().int().min(0).max(5).default(0),
+    key_resource: z.enum(KEY_RESOURCES).default("none"),
+    titan_density: unit.default(0),
+    visibility: z.enum(["connue", "partielle", "inexplore"]).default("connue"),
+    poi: z.array(PoiSchema).optional(),
     destroyed_year: year.optional(),
     destroyed_event: EventIdSchema.optional(),
+    ...canonFields,
+  })
+  .strict();
+
+export const BuildingSchema = z
+  .object({
+    id: BuildingIdSchema,
+    name_key: z.string().min(1),
+    /** Capacité de stockage ajoutée à la réserve nationale. */
+    storage: resourceRecord.default({}),
+    /** Bonus multiplicatif de production de la province (0.2 = +20 %). */
+    production_bonus: resourceRecord.default({}),
+    /** Transformation quotidienne (ex. fabrique de gaz : pierre à éclatement de glace → gaz). */
+    conversion: z.object({ from: z.enum(RESOURCE_IDS), to: z.enum(RESOURCE_IDS), per_day: z.number().positive(), ratio: z.number().positive() }).strict().optional(),
+    upkeep_gold_month: z.number().min(0).default(0),
+    ...canonFields,
+  })
+  .strict();
+
+const garrison = z.object({ org: z.enum(["garrison", "military_police", "survey_corps", "training_corps"]), soldiers: z.number().int().min(0) }).strict();
+
+export const ScenarioSchema = z
+  .object({
+    id: ScenarioIdSchema,
+    name_key: z.string().min(1),
+    faction: z.string().min(1),
+    start: z.object({ year, day: z.number().int().min(1).max(360) }).strict(),
+    default_control: z.enum(["paradis", "titans", "perdu"]),
+    control: z.record(ProvinceIdSchema, z.enum(["paradis", "titans", "perdu"])).default({}),
+    garrisons: z.record(ProvinceIdSchema, garrison).default({}),
+    buildings: z.record(ProvinceIdSchema, z.array(BuildingIdSchema)).default({}),
+    stocks: resourceRecord,
+    rationing: z.enum(RATIONING_LEVELS),
+    morale: z.number().min(0).max(100),
+    stability: z.number().min(0).max(100),
     ...canonFields,
   })
   .strict();
@@ -106,6 +157,8 @@ export type Character = z.infer<typeof CharacterSchema>;
 export type Tech = z.infer<typeof TechSchema>;
 export type EventDef = z.infer<typeof EventDefSchema>;
 export type Placement = z.infer<typeof PlacementSchema>;
+export type Building = z.infer<typeof BuildingSchema>;
+export type Scenario = z.infer<typeof ScenarioSchema>;
 
 /** Sous-dossier de /data → schéma de ses entrées. */
 export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
@@ -114,6 +167,8 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   techs: TechSchema,
   events: EventDefSchema,
   placements: PlacementSchema,
+  buildings: BuildingSchema,
+  scenarios: ScenarioSchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

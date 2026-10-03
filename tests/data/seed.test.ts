@@ -9,7 +9,7 @@ describe("graine de données P0 (T0.14)", () => {
     expect(issues).toEqual([]);
   });
   it("contenu minimal du fichier 14 §3.3", () => {
-    expect(data.provinces.map((p) => p.atlas_code).sort()).toEqual(["I01", "M05", "R01", "S01", "S06"]);
+    for (const code of ["I01", "M05", "R01", "S01", "S06"]) expect(data.provinces.map((p) => p.atlas_code)).toContain(code);
     expect(data.provinces.find((p) => p.atlas_code === "S06")?.destroyed_year).toBe(850);
     expect(data.characters).toHaveLength(6);
     expect(data.techs.find((t) => t.code === "T-ANT-08")?.unlock_event).toBe("evt_850_police_tech_seized");
@@ -28,7 +28,12 @@ describe("graine de données P0 (T0.14)", () => {
     expect(data.events.find((e) => e.code === "E31")?.location).toBe("?");
   });
   it("toutes les clés de texte des données existent dans fr.json", () => {
-    const keys = [...data.provinces.map((p) => p.name_key), ...data.events.map((e) => e.text_key)];
+    const keys = [
+      ...data.provinces.flatMap((p) => [p.name_key, p.desc_key ?? p.name_key, ...(p.poi ?? []).map((x) => x.name_key)]),
+      ...data.events.map((e) => e.text_key),
+      ...data.buildings.map((b) => b.name_key),
+      ...data.scenarios.map((s) => s.name_key),
+    ];
     expect(keys.filter((k) => !(k in fr))).toEqual([]);
   });
 });

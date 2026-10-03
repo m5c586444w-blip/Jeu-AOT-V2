@@ -1,0 +1,55 @@
+{
+  "canon": "A",
+  "notes_canon": "Valeurs de départ (02 §3.2, §15) à ajuster par simulation. Formule de production : base × (1 + bonus bâtiments + bonus techs) × moral × stabilité × saison.",
+  "population": { "total_start": 1000000, "level_weights": [0, 1, 2, 4, 7, 11] },
+  "output": {
+    "pop_level_mult": [0.6, 0.8, 1.0, 1.2, 1.4, 1.6],
+    "key_resource": {
+      "nourriture": { "food": 850 },
+      "peche": { "food": 300 },
+      "chasse": { "food": 200 },
+      "acier": { "steel": 45 },
+      "bois": { "gold": 15 },
+      "pierre": { "gold": 12 },
+      "chevaux": { "horses": 4 },
+      "commerce": { "gold": 40 },
+      "artisanat": { "gold": 25, "steel": 5 },
+      "equipement": { "steel": 5 },
+      "poudre": { "powder": 25 },
+      "pierre_glace": { "iceburst": 450 },
+      "main_oeuvre": { "gold": 10 },
+      "recrues": {},
+      "information": {},
+      "logistique": {},
+      "none": {}
+    },
+    "morale_factor": { "at_0": 0.8, "at_100": 1.2 },
+    "stability_factor": { "at_0": 0.85, "at_100": 1.15 },
+    "season": { "hiver": { "food": 0.65 } }
+  },
+  "consumption": {
+    "food_per_pop": 0.01,
+    "food_per_soldier": 0.02,
+    "gas_per_soldier": 0.008,
+    "gas_heating_per_pop_winter": 0.0002,
+    "steel_per_soldier": 0.0015,
+    "powder_per_soldier": 0.0004,
+    "horse_mortality": 0.0002
+  },
+  "storage": {
+    "per_pop_level": { "food": 20000, "gas": 1500, "steel": 600, "iceburst": 800, "powder": 300, "horses": 400, "gold": 10000 },
+    "per_segment": { "gas": 600, "powder": 300 },
+    "manpower_cap_per_pop": 0.03
+  },
+  "losses_per_day": { "food": 0.0005, "gas": 0.0002, "steel": 0.0001, "iceburst": 0.0001, "powder": 0.0002, "gold": 0.0003 },
+  "rationing": {
+    "normal": { "consumption": 0, "morale": 0, "productivity": 0 },
+    "reduit": { "consumption": -0.15, "morale": -3, "productivity": -0.05 },
+    "strict": { "consumption": -0.3, "morale": -8, "productivity": -0.12 }
+  },
+  "morale": { "base_target": 60, "approach_per_day": 0.05, "famine": -25, "winter": -2, "reserve_bonus": 3, "reserve_days": 30 },
+  "stability": { "base_target": 40, "per_morale": 0.4, "approach_per_day": 0.02 },
+  "famine": { "mortality_per_day": 0.0005 },
+  "monthly": { "tax_per_pop": 0.02, "tax_stability_floor": 0.5, "soldier_upkeep": 0.5, "manpower_growth_per_pop": 0.0004 },
+  "alerts": { "pause_on_shortage": ["food", "gas"] }
+}

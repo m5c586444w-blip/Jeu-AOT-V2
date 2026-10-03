@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { COLLECTION_NAMES } from "./collections";
 import type { CollectionName } from "./collections";
+import { emptyRaw } from "./canonRules";
 import type { RawData, RawEntry } from "./canonRules";
 
 /**
@@ -9,7 +10,7 @@ import type { RawData, RawEntry } from "./canonRules";
  * (ex. canon absent → R6) au lieu d'échouer avant d'appliquer ses règles.
  */
 export function loadRawDir(dir: string, cwd = process.cwd()): { raw: RawData; errors: string[] } {
-  const raw: RawData = { provinces: [], characters: [], techs: [], events: [], placements: [] };
+  const raw: RawData = emptyRaw();
   const errors: string[] = [];
   for (const collection of COLLECTION_NAMES) {
     const sub = join(dir, collection);

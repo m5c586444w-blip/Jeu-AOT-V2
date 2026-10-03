@@ -1,0 +1,13 @@
+[
+  { "id": "bld_ferme", "name_key": "bld.ferme", "production_bonus": { "food": 0.2 }, "upkeep_gold_month": 5, "canon": "A" },
+  { "id": "bld_grenier", "name_key": "bld.grenier", "storage": { "food": 150000 }, "upkeep_gold_month": 10, "canon": "A" },
+  { "id": "bld_mine_fer", "name_key": "bld.mine_fer", "production_bonus": { "steel": 0.3 }, "upkeep_gold_month": 15, "canon": "A" },
+  { "id": "bld_mine_glace", "name_key": "bld.mine_glace", "production_bonus": { "iceburst": 0.3 }, "upkeep_gold_month": 20, "canon": "A", "notes_canon": "L'extraction de la pierre à éclatement de glace dans des cavernes est canon (11 §6) ; le bâtiment et ses chiffres sont une adaptation." },
+  { "id": "bld_fabrique_gaz", "name_key": "bld.fabrique_gaz", "storage": { "gas": 20000 }, "conversion": { "from": "iceburst", "to": "gas", "per_day": 600, "ratio": 1 }, "upkeep_gold_month": 25, "canon": "A", "notes_canon": "Le gaz d'ODM est tiré de la pierre à éclatement de glace (11 §6) ; le procédé et ses chiffres sont une adaptation." },
+  { "id": "bld_depot_gaz", "name_key": "bld.depot_gaz", "storage": { "gas": 30000 }, "upkeep_gold_month": 8, "canon": "A" },
+  { "id": "bld_forge", "name_key": "bld.forge", "production_bonus": { "steel": 0.25 }, "storage": { "steel": 5000 }, "upkeep_gold_month": 12, "canon": "A" },
+  { "id": "bld_atelier_odm", "name_key": "bld.atelier_odm", "production_bonus": { "steel": 0.1 }, "storage": { "steel": 3000, "gas": 5000 }, "upkeep_gold_month": 15, "canon": "A" },
+  { "id": "bld_poudriere", "name_key": "bld.poudriere", "production_bonus": { "powder": 0.4 }, "storage": { "powder": 4000 }, "upkeep_gold_month": 12, "canon": "A" },
+  { "id": "bld_haras", "name_key": "bld.haras", "production_bonus": { "horses": 0.5 }, "storage": { "horses": 4000 }, "upkeep_gold_month": 10, "canon": "A" },
+  { "id": "bld_marche", "name_key": "bld.marche", "production_bonus": { "gold": 0.2 }, "upkeep_gold_month": 4, "canon": "A" }
+]

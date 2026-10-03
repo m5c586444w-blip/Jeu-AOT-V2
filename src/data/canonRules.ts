@@ -1,3 +1,6 @@
+import { COLLECTION_NAMES } from "./collections";
+import type { CollectionName } from "./collections";
+
 /**
  * Règles de cohérence canon R1–R6 (fichier 14 §3, fichier 11 §8). Fonctions pures sur des données brutes.
  * Les années incertaines se comparent par `year_min` (errata utilisateur).
@@ -8,12 +11,10 @@ export interface RawEntry {
   v: Record<string, unknown>;
 }
 
-export interface RawData {
-  provinces: RawEntry[];
-  characters: RawEntry[];
-  techs: RawEntry[];
-  events: RawEntry[];
-  placements: RawEntry[];
+export type RawData = Record<CollectionName, RawEntry[]>;
+
+export function emptyRaw(): RawData {
+  return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
 export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6";
@@ -110,7 +111,7 @@ export function checkCanon(data: RawData): Violation[] {
   }
 
   // R6 — statut canon
-  for (const list of [data.provinces, data.characters, data.techs, data.events, data.placements]) {
+  for (const list of COLLECTION_NAMES.map((c) => data[c])) {
     for (const e of list) {
       const c = e.v["canon"];
       if (c !== "C" && c !== "A" && c !== "?") push("R6", e, `statut canon absent ou invalide (${JSON.stringify(c) ?? "absent"})`);

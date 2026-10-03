@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
-import type { Character, CollectionName, EventDef, Placement, Province, Tech } from "./schemas";
+import type { Building, Character, CollectionName, EventDef, Placement, Province, Scenario, Tech } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
 export interface DataIssue {
@@ -19,12 +19,14 @@ export interface GameData {
   techs: Tech[];
   events: EventDef[];
   placements: Placement[];
+  buildings: Building[];
+  scenarios: Scenario[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -72,6 +74,10 @@ export function checkReferences(data: GameData): DataIssue[] {
   }
   for (const e of data.events) ref(e.id, "location", e.location);
   for (const pl of data.placements) ref(pl.id, "location", pl.location);
+  for (const sc of data.scenarios) {
+    for (const id of [...Object.keys(sc.control), ...Object.keys(sc.garrisons), ...Object.keys(sc.buildings)]) ref(sc.id, "province", id);
+    for (const ids of Object.values(sc.buildings)) for (const b of ids) ref(sc.id, "buildings", b);
+  }
   return issues;
 }
 

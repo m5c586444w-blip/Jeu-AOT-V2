@@ -1,4 +1,4 @@
-import { checkCanon, formatViolation } from "../data/canonRules";
+import { checkCanon, emptyRaw, formatViolation } from "../data/canonRules";
 import type { RawData, RawEntry } from "../data/canonRules";
 import { COLLECTION_NAMES } from "../data/collections";
 import type { CollectionName } from "../data/collections";
@@ -9,7 +9,7 @@ const DATA_FILES = import.meta.glob<unknown>("/data/**/*.json", { import: "defau
 
 /** Rapport canon:check calculé dans le navigateur, avec les mêmes règles pures que le CLI. */
 export async function canonReportFromBundle(): Promise<string> {
-  const raw: RawData = { provinces: [], characters: [], techs: [], events: [], placements: [] };
+  const raw: RawData = emptyRaw();
   for (const [path, load] of Object.entries(DATA_FILES)) {
     const collection = path.split("/")[2] as CollectionName;
     if (!COLLECTION_NAMES.includes(collection)) continue;

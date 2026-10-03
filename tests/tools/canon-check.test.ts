@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
-import { checkCanon } from "../../src/data/canonRules";
+import { checkCanon, emptyRaw } from "../../src/data/canonRules";
 import { loadDataDir } from "../../src/data/loadNode";
 import { loadRawDir } from "../../src/data/loadRaw";
 
@@ -43,7 +43,7 @@ describe("canon:check (AC-13)", () => {
 describe("règles : cas limites", () => {
   const ev = (id: string, year: number, after: string | null) => ({ file: "f", id, v: { id, year_min: year, window: { after }, canon: "C" } });
   it("R4 : prédécesseur inconnu et année antérieure", () => {
-    const v = checkCanon({ provinces: [], characters: [], techs: [], placements: [], events: [ev("evt_a", 851, null), ev("evt_b", 850, "evt_a"), ev("evt_c", 850, "evt_x")] });
+    const v = checkCanon({ ...emptyRaw(), events: [ev("evt_a", 851, null), ev("evt_b", 850, "evt_a"), ev("evt_c", 850, "evt_x")] });
     expect(v.map((x) => x.message)).toEqual([
       "année 850 antérieure à celle de son prédécesseur evt_a (851)",
       "prédécesseur inconnu : evt_x",
@@ -51,11 +51,11 @@ describe("règles : cas limites", () => {
   });
   it("R2 : unlock_event multiple → la plus ancienne année compte", () => {
     const tech = { file: "f", id: "tech_serum", v: { id: "tech_serum", min_year: 850, canon: "C", unlock_event: ["evt_a", "evt_b"] } };
-    expect(checkCanon({ provinces: [], characters: [], placements: [], techs: [tech], events: [ev("evt_a", 850, null), ev("evt_b", 851, null)] })).toEqual([]);
+    expect(checkCanon({ ...emptyRaw(), techs: [tech], events: [ev("evt_a", 850, null), ev("evt_b", 851, null)] })).toEqual([]);
   });
   it("R5 : l'année de destruction elle-même reste autorisée", () => {
     const prov = { file: "f", id: "prov_u", v: { id: "prov_u", destroyed_year: 850, canon: "C" } };
     const pl = { file: "f", id: "unit_x", v: { id: "unit_x", location: "prov_u", year: 850, canon: "A" } };
-    expect(checkCanon({ provinces: [prov], characters: [], techs: [], events: [], placements: [pl] })).toEqual([]);
+    expect(checkCanon({ ...emptyRaw(), provinces: [prov], placements: [pl] })).toEqual([]);
   });
 });

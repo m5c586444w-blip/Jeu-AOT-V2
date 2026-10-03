@@ -1,0 +1,6 @@
+{
+  "canon": "A",
+  "notes_canon": "Vitesse 1 ≈ 3 s par jour (02 §1) ; vitesses 2 à 5 = adaptation.",
+  "ms_per_day": [3000, 1500, 750, 350, 150],
+  "autosave_every_days": 30
+}
