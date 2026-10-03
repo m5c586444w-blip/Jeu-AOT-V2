@@ -214,3 +214,48 @@
 [data-why]:focus-visible { outline: 2px solid var(--ocre); outline-offset: 2px; }
 
 .icone { width: 1.25rem; height: 1.25rem; vertical-align: -0.28rem; color: var(--encre); }
+
+/* Dossier de province : feuille cadastrale glissée à droite de la carte, onglets de chemise. */
+.dossier {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 4;
+  width: min(25rem, 42vw);
+  overflow: auto;
+  padding: 0.7rem 1rem 0.8rem;
+  background-color: #ece2c8;
+  background-image: var(--fibres), var(--grain-cadre), repeating-linear-gradient(transparent 0 1.6rem, rgba(79, 107, 90, 0.12) 1.6rem 1.65rem);
+  border: 1px solid var(--encre);
+  outline: 1px solid rgba(28, 26, 23, 0.45);
+  outline-offset: 4px;
+  transform: rotate(-0.3deg);
+}
+.dossier[hidden] { display: none; }
+.dossier__tete { display: grid; grid-template-columns: auto 1fr auto auto; align-items: baseline; gap: 0.6rem; border-bottom: 2px solid var(--encre); padding-bottom: 0.25rem; }
+.dossier__cote { font-family: var(--f-machine); font-size: 0.9rem; border: 1px solid var(--encre); padding: 0 0.3rem; }
+.dossier__titre { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.45rem; line-height: 1.1; }
+.dossier__tampon { font-family: var(--f-machine); font-size: 0.72rem; letter-spacing: 0.12em; border: 2px double currentColor; padding: 0.05rem 0.35rem; transform: rotate(-5deg); opacity: 0.85; }
+.dossier__tampon--C { color: var(--vert-de-gris); }
+.dossier__tampon--A { color: var(--ocre); }
+.dossier__tampon--incertain { color: var(--brique); }
+.dossier__fermer { font: inherit; font-size: 1.4rem; line-height: 1; background: none; border: none; cursor: pointer; color: var(--encre); padding: 0 0.2rem; }
+.dossier__fermer:focus-visible { outline: 2px solid var(--ocre); }
+.dossier__sous-titre { margin: 0.3rem 0 0; font-variant: small-caps; letter-spacing: 0.05em; font-size: 0.95rem; }
+.dossier__description { margin: 0.2rem 0 0.5rem; font-style: italic; }
+.dossier__onglets { display: flex; gap: 0.2rem; border-bottom: 1px solid var(--encre); margin-bottom: 0.4rem; flex-wrap: wrap; }
+.dossier__onglet { font: inherit; font-size: 0.9rem; background: rgba(205, 191, 159, 0.6); border: 1px solid var(--encre); border-bottom: none; padding: 0.1rem 0.5rem; cursor: pointer; color: var(--encre); margin-bottom: -1px; }
+.dossier__onglet[aria-selected="true"] { background: #ece2c8; font-weight: 600; }
+.dossier__onglet:focus-visible { outline: 2px solid var(--ocre); }
+.dossier__ligne { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; padding: 0.18rem 0; border-bottom: 1px dotted rgba(28, 26, 23, 0.5); }
+.dossier__libelle { display: inline-flex; align-items: center; gap: 0.35rem; }
+.dossier__valeur { font-family: var(--f-machine); white-space: nowrap; }
+.dossier__note, .dossier__ferme { font-style: italic; }
+.dossier__ferme { margin: 1rem 0; padding: 0.6rem; border: 2px double var(--brique); color: var(--brique); font-family: var(--f-machine); font-style: normal; transform: rotate(-1.5deg); text-align: center; }
+.dossier__archives { margin-top: 0.8rem; padding-top: 0.3rem; border-top: 1px dashed var(--encre); font-size: 0.85rem; }
+.dossier__archives p { margin: 0.2rem 0; }
+.dossier__mini-tampon { font-family: var(--f-machine); font-size: 0.7rem; border: 1px solid currentColor; padding: 0 0.2rem; color: var(--brique); }
+.dossier__coupe { margin: 0.6rem 0 0; }
+.dossier__coupe svg { width: 100%; max-width: 18rem; display: block; }
+.dossier__coupe figcaption { font-style: italic; font-size: 0.85rem; }

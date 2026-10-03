@@ -13,6 +13,7 @@ import { canonReportFromBundle } from "./canonBrowser";
 import { GameClock } from "./clock";
 import type { ConsoleHost } from "./debugConsole";
 import { mountDebugOverlay } from "./debugOverlay";
+import { Dossier } from "./dossier";
 import { Hud } from "./hud";
 import { KeyMap } from "./keymap";
 import type { Action } from "./keymap";
@@ -90,6 +91,10 @@ export async function bootGame(): Promise<void> {
   const mapData = mapJson as unknown as MapData;
   const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces));
   const byId = new Map(world.provinces.map((p) => [p.id, p]));
+  const dossier = new Dossier(host, world, mapData.walls, why, () => {
+    dossier.close();
+    map.setSelected(null);
+  });
   const bubble = new Bubble(document.body);
   attachMapControls(host, map, {
     hover(id, x, y) {
@@ -97,8 +102,10 @@ export async function bootGame(): Promise<void> {
       if (p) bubble.show(p, state, x, y);
       else bubble.hide();
     },
-    select() {
+    select(id) {
       bubble.hide();
+      if (id) dossier.open(id, state);
+      else dossier.close();
     },
   });
 
@@ -114,6 +121,7 @@ export async function bootGame(): Promise<void> {
     hud.update(state, clock.speed);
     map.setDynamic(mapDynamic(state));
     if (layers.active) applyOverlay();
+    dossier.refresh(state);
   };
 
   const keymap = new KeyMap(safeStorage());
@@ -144,7 +152,10 @@ export async function bootGame(): Promise<void> {
     fit: () => map.fit(),
     overlay_next: () => layers.next(),
     overlay_off: () => layers.select(null),
-    close: () => map.setSelected(null),
+    close: () => {
+      dossier.close();
+      map.setSelected(null);
+    },
   };
   window.addEventListener("keydown", (ev) => {
     if (ev.target instanceof HTMLInputElement || ev.target instanceof HTMLSelectElement) return;

@@ -2,6 +2,7 @@ import { z } from "zod";
 import { CanonSchema, ProvinceIdSchema } from "./schemas";
 
 const point = z.tuple([z.number(), z.number()]);
+const measure = z.object({ value: z.number().positive(), canon: CanonSchema, note: z.string() }).strict();
 
 /** data/map/paradis.json — géométrie de la carte stratégique (km), générée puis éditable. */
 export const MapSchema = z
@@ -10,6 +11,7 @@ export const MapSchema = z
     notes_canon: z.string().optional(),
     units: z.literal("km"),
     bounds: z.tuple([z.number(), z.number(), z.number(), z.number()]),
+    walls: z.object({ height_m: measure, thickness_m: measure }).strict(),
     wall_rings: z.array(z.object({ wall: z.enum(["maria", "rose", "sina"]), r_inner: z.number().positive(), r_outer: z.number().positive() }).strict()),
     gates: z.array(z.object({ province: ProvinceIdSchema, bearing: z.number() }).strict()),
     coast: z.array(point).min(3),

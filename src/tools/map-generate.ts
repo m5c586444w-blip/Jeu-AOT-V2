@@ -6,6 +6,7 @@ import type { Point } from "../sim/strategic/geometry";
 import { Rng } from "../sim/core/rng";
 
 interface Layout {
+  walls: Record<"height_m" | "thickness_m", { value: number; canon: string; note: string }>;
   radii: Record<"sina" | "rose" | "maria" | "coast_mean", { value: number }>;
   wall_band_km: number;
   coast: { amplitude_km: number; min_km: number; seed: number };
@@ -87,6 +88,7 @@ const map = {
   notes_canon: "Fichier généré par `npm run map:generate` depuis paradis.layout.json ; éditable à la main (polygones, ancres).",
   units: "km",
   bounds: [-extent, -extent, extent, extent],
+  walls: layout.walls,
   wall_rings: (["sina", "rose", "maria"] as const).map((wall) => ({ wall, r_inner: layout.radii[wall].value, r_outer: layout.radii[wall].value + layout.wall_band_km })),
   gates: layout.gates.map((g) => ({ province: idByCode.get(g.segment), bearing: g.bearing })),
   coast,
