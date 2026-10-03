@@ -3,7 +3,8 @@ import { applyCommand, CommandJournal } from "./core/commands";
 import type { Command } from "./core/commands";
 import { createInitialState } from "./core/state";
 import type { GameState } from "./core/state";
-import type { World } from "./strategic/world";
+import { buildWorld } from "./strategic/world";
+import type { World, WorldSource } from "./strategic/world";
 
 /** Simulation autonome : seul point d'entrée pour faire évoluer l'état (direct ou dans un Worker). */
 export interface Sim {
@@ -42,33 +43,49 @@ export function createSim(seed: number, world?: World): Sim {
 
 /** Protocole de messages entre l'UI et une simulation distante (Worker navigateur ou worker_threads). */
 export type SimRequest =
+  | { id: number; op: "init"; seed: number; scenario: string | null }
   | { id: number; op: "dispatch"; cmd: Command }
   | { id: number; op: "reset"; seed: number }
   | { id: number; op: "load"; state: GameState }
   | { id: number; op: "state" };
 
 export type SimResponse =
-  | { id: number; ok: true; state: GameState; hash: string }
+  | { id: number; ok: true; state: GameState; hash: string; source?: WorldSource }
   | { id: number; ok: false; error: string };
 
-/** Traite une requête ; ne lève jamais : les erreurs reviennent dans la réponse. */
-export function handleSimRequest(sim: Sim, req: SimRequest): SimResponse {
-  try {
-    switch (req.op) {
-      case "dispatch":
-        sim.dispatch(req.cmd);
-        break;
-      case "reset":
-        sim.reset(req.seed);
-        break;
-      case "load":
-        sim.load(req.state);
-        break;
-      case "state":
-        break;
+/**
+ * Point d'accès d'une simulation distante. `loadSource` fournit le monde validé (lu une seule fois, à l'init) ;
+ * avec `scenario: null`, la simulation tourne sans monde (tests de fondation).
+ */
+export function createSimEndpoint(loadSource: () => WorldSource): (req: SimRequest) => SimResponse {
+  let sim = createSim(42);
+  return (req) => {
+    try {
+      let source: WorldSource | undefined;
+      switch (req.op) {
+        case "init": {
+          if (req.scenario === null) sim = createSim(req.seed);
+          else {
+            source = loadSource();
+            sim = createSim(req.seed, buildWorld(source, req.scenario));
+          }
+          break;
+        }
+        case "dispatch":
+          sim.dispatch(req.cmd);
+          break;
+        case "reset":
+          sim.reset(req.seed);
+          break;
+        case "load":
+          sim.load(req.state);
+          break;
+        case "state":
+          break;
+      }
+      return { id: req.id, ok: true, state: sim.state(), hash: sim.hash(), ...(source ? { source } : {}) };
+    } catch (e) {
+      return { id: req.id, ok: false, error: e instanceof Error ? e.message : String(e) };
     }
-    return { id: req.id, ok: true, state: sim.state(), hash: sim.hash() };
-  } catch (e) {
-    return { id: req.id, ok: false, error: e instanceof Error ? e.message : String(e) };
-  }
+  };
 }

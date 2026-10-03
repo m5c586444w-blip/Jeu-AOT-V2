@@ -1,6 +1,7 @@
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
 import type { SimRequest, SimResponse } from "../sim/sim";
+import type { WorldSource } from "../sim/strategic/world";
 
 /** Canal minimal commun au Worker navigateur et à worker_threads. */
 export interface SimPort {
@@ -8,7 +9,12 @@ export interface SimPort {
   onMessage(handler: (msg: SimResponse) => void): void;
 }
 
-type Pending = { resolve: (s: { state: GameState; hash: string }) => void; reject: (e: Error) => void };
+export interface SimReply {
+  state: GameState;
+  hash: string;
+  source?: WorldSource;
+}
+type Pending = { resolve: (s: SimReply) => void; reject: (e: Error) => void };
 type DistributiveOmit<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never;
 
 /** Client asynchrone : envoie des requêtes numérotées et résout les promesses à réception. */
@@ -21,12 +27,12 @@ export class SimClient {
       const p = this.pending.get(msg.id);
       if (!p) return;
       this.pending.delete(msg.id);
-      if (msg.ok) p.resolve({ state: msg.state, hash: msg.hash });
+      if (msg.ok) p.resolve({ state: msg.state, hash: msg.hash, ...(msg.source ? { source: msg.source } : {}) });
       else p.reject(new Error(msg.error));
     });
   }
 
-  private call(req: DistributiveOmit<SimRequest, "id">): Promise<{ state: GameState; hash: string }> {
+  private call(req: DistributiveOmit<SimRequest, "id">): Promise<SimReply> {
     const id = this.nextId++;
     return new Promise((resolve, reject) => {
       this.pending.set(id, { resolve, reject });
@@ -34,6 +40,10 @@ export class SimClient {
     });
   }
 
+  /** Démarre une partie : `scenario` null = simulation sans monde (fondations). */
+  init(seed: number, scenario: string | null) {
+    return this.call({ op: "init", seed, scenario });
+  }
   dispatch(cmd: Command) {
     return this.call({ op: "dispatch", cmd });
   }

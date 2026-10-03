@@ -64,3 +64,17 @@ export function loadDataDir(dir: string, cwd = process.cwd()): { data: GameData;
   if (issues.length === 0) issues.push(...checkReferences(data));
   return { data, issues };
 }
+
+/** Lit tous les JSON de `dir` en les indexant comme le fait import.meta.glob dans le navigateur (« /data/… »). */
+export function readDataFiles(dir: string, exclude: readonly string[] = ["map"]): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const folder of readdirSync(dir).sort()) {
+    if (exclude.includes(folder)) continue;
+    const sub = join(dir, folder);
+    if (!statSync(sub).isDirectory()) continue;
+    for (const f of readdirSync(sub).filter((x) => x.endsWith(".json")).sort()) {
+      out[`/data/${folder}/${f}`] = JSON.parse(readFileSync(join(sub, f), "utf8"));
+    }
+  }
+  return out;
+}
