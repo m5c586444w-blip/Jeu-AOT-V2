@@ -833,7 +833,7 @@
   "characters.stress_gain": "Sensibilité au stress de ce personnage : ×{k}.",
   "characters.back": "← Retour au registre",
   "characters.death_title": "Décédé — an {year}, jour {day}",
-  "characters.cause": "Cause :",
+  "characters.cause": "Cause",
   "characters.attributes": "Attributs",
   "characters.attr_note": "Échelle 0–100 [A] ; les traits modifient la valeur de base.",
   "characters.traits": "Traits",

@@ -33,3 +33,11 @@ Texte complet des licences : `node_modules/@fontsource/<police>/LICENSE` (instal
 ## Audio
 
 Aucun en P0.
+
+## Ajouts de P2
+
+| Élément | Source | Licence |
+|---|---|---|
+| Portraits des personnages | `src/ui/portrait.ts`, gravure procédurale en SVG (graine + archétype), sans ressemblance recherchée avec les dessins de l'œuvre | Création originale du projet |
+| Plan de table du Cabinet, billes de vote, tampons | `src/ui/panels/cabinetPanel.ts`, CSS `screen.css` | Création originale du projet |
+| Captures `docs/screenshots/p2-*` | Rendus du projet | Création originale du projet |

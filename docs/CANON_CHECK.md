@@ -59,3 +59,21 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Rationnement −15/−30 %, moral −3/−8, productivité −5/−12 % | A | idem | 02 §3.2 |
 | Charbon = dépendance de Marley (pas de production à Paradis) | A | HUD (masqué pour Paradis) | 02 §3.1 |
 | Brouillard « inexploré » sur 7 des 10 provinces outre-murs | A | `visibility` | 04 §3 ; choix de jeu |
+
+## Faits utilisés en P2
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| 52 personnages : 34 canon, 18 de remplissage (conseillers, officiers, notables) | C / A | `data/characters/paradis.json` | 01 §4, 11 §4 ; chaque personnage porte `canon` et `notes_canon` |
+| Chefs en 850 : Erwin Smith (Corps d'exploration), Dot Pixis (Garnison), Nile Dok (Brigade spéciale), Keith Shadis (instructeur), Darius Zackly (commandant suprême), Pasteur Nick (culte des Murs), Rod Reiss (noblesse) | C | scénario 850 (`org_leaders`) | 11 §4 |
+| Identité de Krista Lenz (Historia Reiss) | C, secrète | champ `hidden`, jamais affiché (D-44) | révélée à E27, événements en P5 |
+| Fenêtres de présence (`active_from` / `active_until`) ; années floues → règle `year_min` | C / ? | personnages | errata utilisateur ; dates de mort `?` de 11 §9 laissées paramétrables |
+| Mike Zacharias meurt à E24 (pas à Utgard) | errata | `active_until` / événement P5 | errata utilisateur |
+| Mort de Kenny = E35 | C | référence d'événement (P5) | réponse Q2 de l'utilisateur |
+| Attributs 0–100, 43 traits, stress et seuils | A | `data/traits/traits.json`, `data/balance/politics.json` | 02 §9 |
+| 8 strates (royauté, noblesse, bourgeoisie, militaires, clergé, paysans, bas-fonds, réfugiés) | A (découpage) | `data/strata/strata.json` | 02 §10 ; existence des groupes C (11 §5) |
+| 8 organisations : Corps d'exploration, Garnison, Brigade spéciale, Brigade d'entraînement, culte des Murs, Cabinet, cour, guildes | C (existence) / A (guildes, chiffres) | `data/organisations/paradis.json` | 11 §3 |
+| 43 décrets (6 catégories), effets différés | A | `data/laws/paradis.json` | 08 §4 ; aucun décret présenté comme canon |
+| 18 rôles du conseil, biais des conseillers | A | `data/roles/roles.json` | 08 §3 |
+| Ville-usine exploitée en 850 | ? (localisation) | scénario 850, `control` | D-41 ; 11 §9 |
+| Population 780 000, réfugiés de Maria, culture de l'intérieur de Rose | A | scénario 850 | D-42 |

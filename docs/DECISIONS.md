@@ -153,3 +153,28 @@
 | Paquet | Pourquoi |
 |---|---|
 | pixi.js 8 | Rendu WebGL de la carte (00 §4), utilisé uniquement dans `src/render` (règle ESLint) |
+
+## 2026-10-03 — D-40 Commits groupés en P2
+- Décision : T2.2–T2.5 (personnages, société, politique, conseillers) et T2.6–T2.8 (registres de l'interface) sont livrés chacun en un commit : ces tâches partagent l'état v3 et le contexte des registres ; un découpage aurait produit des commits intermédiaires qui ne compilent pas.
+
+## 2026-10-03 — D-41 Ville-usine exploitée dans le scénario 850
+- Décision : dans `scn_sandbox_850`, la province `ville_usine` reste contrôlée par Paradis avec ses bâtiments (mine de pierre de glace, fabrique de gaz). Sans cela, le gaz s'épuise en quelques mois, alors que le canon montre l'ODM en usage en 850.
+- Lore : la localisation exacte de la ville-usine est `?` (11 §9) ; le contrôle est un paramètre du scénario (`control`), documenté dans `notes_canon`. **À trancher par l'utilisateur si une source plus précise existe.**
+
+## 2026-10-03 — D-42 Production agricole du scénario 850
+- Décision : `production_mult.food = 2.8` [A]. Il compense la perte de Maria par la mise en culture de l'intérieur de Rose et du Sina ; calibré par `sim:year` (aucune rupture de vivres la première année au rationnement normal).
+
+## 2026-10-03 — D-43 Morts en P2
+- Décision : une mort passe uniquement par la commande `CharacterDies` (cause, circonstances). En P2, seules la console de service (`mort <id> [cause]`) et les tests l'emploient. Les combats (P3–P4) et les événements canon (P5) l'utiliseront ensuite. Aucune mort n'est déclenchée automatiquement en P2.
+
+## 2026-10-03 — D-44 Secrets jamais affichés
+- Décision : les champs `hidden` (identités et secrets, ex. Krista Lenz → Historia) sont chargés mais jamais affichés. L'interface montre `display_name`. La révélation est prévue en P5 (événements).
+
+## 2026-10-03 — D-45 Divergence assumée
+- Décision (F-LOR-09) : un personnage encore vivant après `active_until` déclenche une seule fois une alerte « divergence assumée » dans le journal. Rien d'autre ne change : le joueur est libre, la chronologie canon n'est pas forcée.
+
+## 2026-10-03 — D-46 Scénario par défaut
+- Décision : l'écran de jeu ouvre `scn_sandbox_850`, le premier scénario avec couche politique. `?scenario=scn_sandbox_845` reste disponible pour le bac à sable économique de P1.
+
+## 2026-10-03 — D-47 Confirmation des décisions
+- Décision (F-UIX-12/13) : décréter, abroger, soumettre au vote, passer outre un veto, nommer, signer une proposition et arrêter un budget passent par un bordereau « Signer / Annuler ». Persuader et refuser une proposition sont immédiats : réversibles ou sans coût durable.
