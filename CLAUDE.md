@@ -9,11 +9,12 @@
 - N'affirme jamais qu'un test est vert sans avoir collé sa sortie réelle.
 - Aucun CDN (polices auto-hébergées), aucun asset de l'œuvre originale ; licences dans `docs/ASSETS_LICENSES.md`.
 - Chaque phase Pn (n ≥ 1) commence par `docs/phases/Pn.md` (tâches, AC avec commandes, hors-périmètre).
-- Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
+- Fin de phase : rapport `docs/reports/Pn.md` (sorties réelles collées, captures dans `docs/screenshots/`), commit, `docs/PROGRESS.md` à jour, puis phase suivante si tous ses critères passent.
+- Pixi uniquement dans `src/render`. Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
 
 ## Arrêts obligatoires (écrire la raison dans docs/PROGRESS.md puis attendre l'utilisateur)
 1. Un critère d'acceptation échoue deux fois.
 2. Fait de lore ambigu qu'aucune valeur `?` paramétrable ne règle.
 3. Décision de design à impact majeur non couverte par les spécifications.
 4. Une commande ne peut pas s'exécuter (réseau, droits…).
-5. Fin de chaque phase : rapport du fichier 14 §7 avec sorties réelles collées.
+5. Fin de **P4** et de **P8** uniquement : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
