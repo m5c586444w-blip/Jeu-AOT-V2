@@ -7,7 +7,7 @@ import globals from "globals";
 const BROWSER_GLOBALS = ["window", "document", "navigator", "localStorage", "sessionStorage", "indexedDB", "location", "requestAnimationFrame", "performance"];
 
 export default tseslint.config(
-  { ignores: ["dist/**", "node_modules/**", "coverage/**", "tests/fixtures/**"] },
+  { ignores: ["dist/**", "node_modules/**", "coverage/**", "tests/fixtures/**", ".probe.*"] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {
@@ -15,6 +15,14 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/consistent-type-imports": "error",
+    },
+  },
+  {
+    // Pixi n'est autorisé que dans la couche de rendu (P1).
+    files: ["**/*.ts"],
+    ignores: ["src/render/**"],
+    rules: {
+      "no-restricted-imports": ["error", { patterns: [{ group: ["pixi.js", "pixi.js/*", "@pixi/*"], message: "Pixi uniquement dans src/render." }] }],
     },
   },
   {

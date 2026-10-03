@@ -319,5 +319,6 @@
   "key.poudre": "poudre",
   "key.artisanat": "artisanat",
   "key.pierre_glace": "pierre à éclatement de glace",
-  "key.logistique": "logistique"
+  "key.logistique": "logistique",
+  "map.unexplored": "— inexploré —"
 }

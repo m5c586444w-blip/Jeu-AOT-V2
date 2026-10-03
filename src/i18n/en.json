@@ -9,5 +9,6 @@
   "date.format": "year {year}, day {day}",
   "app.stamp": "PHASE 0",
   "app.version_label": "Version",
-  "app.notice": "Personal, non-commercial use. No material from the original work is reproduced."
+  "app.notice": "Personal, non-commercial use. No material from the original work is reproduced.",
+  "map.unexplored": "— unexplored —"
 }

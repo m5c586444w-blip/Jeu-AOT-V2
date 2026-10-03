@@ -1,0 +1,53 @@
+/* Écran de jeu : bandeau-registre en haut, carte en dessous (04 §5). */
+.ecran {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carte {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  border-top: 2px solid var(--encre);
+}
+
+.carte:active { cursor: grabbing; }
+
+.carte__toile { display: block; }
+
+/* Vignettage discret d'encre (04 §3 : shaders discrets — grain, vignettage). */
+.carte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(28, 26, 23, 0.28) 100%);
+}
+
+.bandeau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.6rem;
+  padding: 0.45rem 1.2rem 0.5rem;
+  background-color: var(--papier);
+  background-image: var(--fibres), var(--grain-cadre);
+  background-size: 420px 420px, 260px 260px;
+  border-bottom: 1px solid var(--encre);
+  box-shadow: 0 3px 0 -1px rgba(28, 26, 23, 0.25);
+  position: relative;
+  z-index: 2;
+}
+
+.bandeau__titre {
+  font-family: var(--f-titre);
+  font-size: 1.55rem;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.bandeau__champ { font-family: var(--f-machine); font-size: 0.95rem; }
+.bandeau__libelle { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 0.35rem; font-family: var(--f-texte); }

@@ -26,6 +26,12 @@ describe("pureté de src/sim", () => {
   it("interdit any partout", async () => {
     expect(await ruleIds("export const v: any = 1;\n", "src/ui/__probe__.ts")).toContain("@typescript-eslint/no-explicit-any");
   });
+  it("interdit Pixi hors de src/render (AC1-08)", async () => {
+    const code = 'import { Graphics } from "pixi.js";\nexport { Graphics };\n';
+    expect(await ruleIds(code, "src/ui/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds(code, "src/tools/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds(code, "src/render/__probe__.ts")).toEqual([]);
+  });
   it("autorise Math.random hors de src/sim (contrôle)", async () => {
     expect(await ruleIds("export const x = Math.random();\n", "src/ui/__probe__.ts")).toEqual([]);
   });
