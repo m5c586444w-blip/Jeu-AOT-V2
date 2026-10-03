@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P1 — **terminée** ; P2 (personnages, organisations, politique) à démarrer |
-| Tâche | T1.13 — rapport `docs/reports/P1.md` |
+| Phase | P2 — Personnages, organisations, politique |
+| Tâche | T2.0 — plan `docs/phases/P2.md` |
 | Dernier `npm run verify` | 2026-10-03 (fin de P1) : code 0, 121 tests — `docs/reports/P1-verify.log` |
-| Prochaine étape | Écrire `docs/phases/P2.md`, puis exécuter P2 |
+| Prochaine étape | T2.1 — données (personnages, traits, strates, organisations, décrets, rôles, scénario 850) |
 
 ## Règle d'arrêt (mise à jour 2026-10-03)
 - Arrêt pour revue utilisateur **uniquement après P4 et P8**.
