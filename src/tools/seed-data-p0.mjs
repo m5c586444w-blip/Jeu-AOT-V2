@@ -1,3 +1,4 @@
+// Script de génération P0 (traçabilité). Les personnages sont désormais produits par seed-characters-p2.mjs : ne pas relancer ce script sans retirer sa partie « personnages ».
 // Script de génération (conservé pour traçabilité) : node src/tools/seed-data-p0.mjs
 // Génère la graine de données P0 (fichier 14 §3.3) — exécuté une fois ; les JSON produits sont la source.
 import fs from "node:fs";

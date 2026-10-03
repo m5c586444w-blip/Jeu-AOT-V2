@@ -1,0 +1,74 @@
+[
+  {
+    "id": "org_survey_corps",
+    "key": "survey_corps",
+    "name_key": "org.name.survey_corps",
+    "kind": "militaire",
+    "budgeted": true,
+    "canon": "C",
+    "notes_canon": "01 §5.1 : expéditions hors murs ; budget faible (A)."
+  },
+  {
+    "id": "org_garrison",
+    "key": "garrison",
+    "name_key": "org.name.garrison",
+    "kind": "militaire",
+    "budgeted": true,
+    "canon": "C",
+    "notes_canon": "01 §5.1."
+  },
+  {
+    "id": "org_military_police",
+    "key": "military_police",
+    "name_key": "org.name.military_police",
+    "kind": "militaire",
+    "budgeted": true,
+    "canon": "C",
+    "notes_canon": "01 §5.1 ; corruption élevée (A)."
+  },
+  {
+    "id": "org_training_corps",
+    "key": "training_corps",
+    "name_key": "org.name.training_corps",
+    "kind": "militaire",
+    "budgeted": true,
+    "canon": "C",
+    "notes_canon": "01 §5.1."
+  },
+  {
+    "id": "org_culte",
+    "key": "culte",
+    "name_key": "org.name.culte",
+    "kind": "religieuse",
+    "budgeted": false,
+    "canon": "C",
+    "notes_canon": "01 §5.1 : religion d'État."
+  },
+  {
+    "id": "org_cabinet",
+    "key": "cabinet",
+    "name_key": "org.name.cabinet",
+    "kind": "civile",
+    "budgeted": false,
+    "canon": "C",
+    "notes_canon": "01 §5.1, 08 §4.1."
+  },
+  {
+    "id": "org_cour",
+    "key": "cour",
+    "name_key": "org.name.cour",
+    "kind": "cour",
+    "budgeted": false,
+    "canon": "C",
+    "notes_canon": "01 §5.1 : famille royale (Reiss), faux roi."
+  },
+  {
+    "id": "org_guildes",
+    "key": "guildes",
+    "name_key": "org.name.guildes",
+    "kind": "civile",
+    "budgeted": false,
+    "canon": "A",
+    "notes_canon": "08 §5.1 : approvisionnement, crédit."
+  }
+]

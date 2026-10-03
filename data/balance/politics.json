@@ -1,0 +1,36 @@
+{
+  "canon": "A",
+  "notes_canon": "Valeurs de départ de la couche politique (02 §4, §5, §9 ; 08 §3) à ajuster par simulation.",
+  "legitimacy": { "base": 50, "approach_per_day": 0.02, "morale_k": 0.3, "famine": -15, "reserve_bonus": 3, "culte_k": 0.1, "radicalisation_k": -0.2 },
+  "capital": { "monthly_base": 2, "per_legitimacy": 0.08, "cap": 100 },
+  "stability": { "legitimacy_k": 0.3, "radicalisation_k": -0.2 },
+  "morale": { "strata_k": 0.3 },
+  "orgs": { "loyalty_base": 55, "approach_per_day": 0.03, "budget_k": 20, "leader_relation_k": 0.1, "influence_approach_per_day": 0.02 },
+  "strata": {
+    "base": 50,
+    "approach_per_day": 0.03,
+    "famine": -20,
+    "rationing": {
+      "reduit": { "str_paysans": -2, "str_basfonds": -4, "str_refugies": -4, "str_militaires": -1 },
+      "strict": { "str_paysans": -5, "str_basfonds": -8, "str_refugies": -8, "str_bourgeoisie": -3, "str_militaires": -3 }
+    },
+    "tax_k": { "str_noblesse": -20, "str_bourgeoisie": -25, "str_paysans": -15 },
+    "legitimacy_k": { "str_royaute": 0.2, "str_noblesse": 0.15, "str_militaires": 0.1 },
+    "radicalisation_threshold": 40,
+    "radicalisation_k": 1.2,
+    "radicalisation_approach_per_day": 0.01
+  },
+  "votes": { "threshold": 0.15, "loyalty_k": 0.6, "relation_k": 0.4, "clique_k": 0.25, "clique_min_strength": 40, "persuasion_cost": 10, "persuasion_value": 0.35, "veto_influence": 60, "veto_affinity": -0.3, "veto_override_cost": 25 },
+  "agenda_affinity": {
+    "reformateur": { "reforme": 0.6, "transparence": 0.5, "liberte": 0.4, "social": 0.3, "science": 0.4, "exploration": 0.4, "tradition": -0.4, "repression": -0.4 },
+    "conservateur": { "tradition": 0.6, "ordre": 0.4, "religion": 0.3, "reforme": -0.5, "liberte": -0.3, "repression": 0.2 },
+    "opportuniste": { "commerce": 0.6, "economie": 0.2, "transparence": -0.4 },
+    "religieux": { "religion": 0.8, "tradition": 0.4, "exploration": -0.6, "liberte": -0.4, "science": -0.3 },
+    "militariste": { "militaire": 0.7, "ordre": 0.4, "repression": 0.2, "social": -0.2 },
+    "pragmatique": { "economie": 0.2, "ordre": 0.1, "social": 0.1 }
+  },
+  "stress": { "decay_per_day": 0.3, "famine_per_day": 0.15, "friend_death": 30, "proposal_rejected": 4, "vote_defeat": 5, "exhausted": 60, "trauma": 85, "breakdown": 95 },
+  "deaths": { "legitimacy_per_fame": 0.15, "mourning": { "value": 1, "days": 90 }, "org_leader": { "value": -15, "days": 120 }, "friend_loyalty": -5 },
+  "advisors": { "proposal_days": 30, "rejections_to_resign": 3, "accept_gain": 5, "reject_loss": 5, "expire_loss": 2, "bias_k": 0.004 },
+  "nominations": { "candidates": 3, "resentment": -10 }
+}

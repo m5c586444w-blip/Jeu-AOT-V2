@@ -1,0 +1,499 @@
+[
+  {
+    "id": "trait_obstine",
+    "name_key": "trait.obstine",
+    "canon": "A",
+    "attributes": {
+      "composure": 5
+    },
+    "vote": {
+      "reforme": 0.1
+    },
+    "opposes": [
+      "trait_pragmatique"
+    ]
+  },
+  {
+    "id": "trait_pragmatique",
+    "name_key": "trait.pragmatique",
+    "canon": "A",
+    "attributes": {
+      "tactics": 5
+    },
+    "vote": {
+      "economie": 0.1
+    },
+    "opposes": [
+      "trait_obstine",
+      "trait_idealiste"
+    ]
+  },
+  {
+    "id": "trait_charismatique",
+    "name_key": "trait.charismatique",
+    "canon": "A",
+    "attributes": {
+      "charisma": 15
+    }
+  },
+  {
+    "id": "trait_terrorise",
+    "name_key": "trait.terrorise",
+    "canon": "A",
+    "attributes": {
+      "composure": -20
+    },
+    "stress_gain": 1.5,
+    "advice_bias": "exagere",
+    "opposes": [
+      "trait_temeraire"
+    ]
+  },
+  {
+    "id": "trait_fanatique_mur",
+    "name_key": "trait.fanatique_mur",
+    "canon": "A",
+    "attributes": {
+      "faith": 25
+    },
+    "advice_bias": "ignore",
+    "vote": {
+      "religion": 0.6,
+      "exploration": -0.6,
+      "tradition": 0.3
+    },
+    "opposes": [
+      "trait_sceptique"
+    ]
+  },
+  {
+    "id": "trait_idealiste",
+    "name_key": "trait.idealiste",
+    "canon": "A",
+    "vote": {
+      "reforme": 0.3,
+      "liberte": 0.3,
+      "repression": -0.3
+    },
+    "opposes": [
+      "trait_cynique",
+      "trait_pragmatique"
+    ]
+  },
+  {
+    "id": "trait_opportuniste",
+    "name_key": "trait.opportuniste",
+    "canon": "A",
+    "attributes": {
+      "ambition": 15
+    },
+    "advice_bias": "gonfle",
+    "vote": {
+      "commerce": 0.2
+    },
+    "opposes": [
+      "trait_devoue"
+    ]
+  },
+  {
+    "id": "trait_veteran_breches",
+    "name_key": "trait.veteran_breches",
+    "canon": "A",
+    "attributes": {
+      "composure": 10,
+      "command": 5
+    },
+    "stress_gain": 0.8,
+    "notes_canon": "Ne peut concerner que des faits antérieurs à la date du scénario (845 : chute de Maria)."
+  },
+  {
+    "id": "trait_traumatise_trost",
+    "name_key": "trait.traumatise_trost",
+    "canon": "A",
+    "attributes": {
+      "composure": -15
+    },
+    "stress_gain": 1.3,
+    "acquired": true,
+    "notes_canon": "Acquis seulement après la bataille de Trost (E10–E11, 850) : jamais attribué au départ d'un scénario antérieur."
+  },
+  {
+    "id": "trait_meneur_ne",
+    "name_key": "trait.meneur_ne",
+    "canon": "A",
+    "attributes": {
+      "command": 15,
+      "charisma": 5
+    }
+  },
+  {
+    "id": "trait_froid",
+    "name_key": "trait.froid",
+    "canon": "A",
+    "attributes": {
+      "composure": 10,
+      "charisma": -5
+    },
+    "stress_gain": 0.8
+  },
+  {
+    "id": "trait_solitaire",
+    "name_key": "trait.solitaire",
+    "canon": "A",
+    "attributes": {
+      "charisma": -5
+    },
+    "opposes": [
+      "trait_charismatique"
+    ]
+  },
+  {
+    "id": "trait_devoue",
+    "name_key": "trait.devoue",
+    "canon": "A",
+    "vote": {
+      "militaire": 0.1
+    },
+    "opposes": [
+      "trait_opportuniste"
+    ]
+  },
+  {
+    "id": "trait_rancunier",
+    "name_key": "trait.rancunier",
+    "canon": "A",
+    "stress_gain": 1.1
+  },
+  {
+    "id": "trait_curieux",
+    "name_key": "trait.curieux",
+    "canon": "A",
+    "attributes": {
+      "intellect": 10
+    },
+    "vote": {
+      "exploration": 0.4,
+      "science": 0.5
+    }
+  },
+  {
+    "id": "trait_cynique",
+    "name_key": "trait.cynique",
+    "canon": "A",
+    "advice_bias": "exagere",
+    "vote": {
+      "liberte": -0.1
+    },
+    "opposes": [
+      "trait_idealiste"
+    ]
+  },
+  {
+    "id": "trait_ackerman",
+    "name_key": "trait.ackerman",
+    "canon": "A",
+    "attributes": {
+      "odm": 20,
+      "melee": 20,
+      "endurance": 15
+    },
+    "notes_canon": "Lignée aux capacités physiques exceptionnelles (01 §1) ; effets chiffrés [A]."
+  },
+  {
+    "id": "trait_hante",
+    "name_key": "trait.hante",
+    "canon": "A",
+    "stress_gain": 1.3,
+    "acquired": true,
+    "notes_canon": "Réservé aux porteurs, après révélation (P5–P6)."
+  },
+  {
+    "id": "trait_soupconneux",
+    "name_key": "trait.soupconneux",
+    "canon": "A",
+    "attributes": {
+      "intellect": 5
+    },
+    "vote": {
+      "ordre": 0.2,
+      "liberte": -0.2
+    }
+  },
+  {
+    "id": "trait_ambitieux",
+    "name_key": "trait.ambitieux",
+    "canon": "A",
+    "attributes": {
+      "ambition": 25
+    },
+    "advice_bias": "gonfle",
+    "opposes": [
+      "trait_modeste"
+    ]
+  },
+  {
+    "id": "trait_modeste",
+    "name_key": "trait.modeste",
+    "canon": "A",
+    "attributes": {
+      "ambition": -15
+    },
+    "opposes": [
+      "trait_ambitieux"
+    ]
+  },
+  {
+    "id": "trait_prudent",
+    "name_key": "trait.prudent",
+    "canon": "A",
+    "attributes": {
+      "tactics": 5
+    },
+    "advice_bias": "exagere",
+    "vote": {
+      "exploration": -0.3,
+      "militaire": -0.1
+    },
+    "opposes": [
+      "trait_temeraire"
+    ]
+  },
+  {
+    "id": "trait_temeraire",
+    "name_key": "trait.temeraire",
+    "canon": "A",
+    "attributes": {
+      "composure": 5
+    },
+    "vote": {
+      "exploration": 0.3
+    },
+    "opposes": [
+      "trait_prudent",
+      "trait_terrorise"
+    ]
+  },
+  {
+    "id": "trait_loyal",
+    "name_key": "trait.loyal",
+    "canon": "A",
+    "opposes": [
+      "trait_corrompu"
+    ]
+  },
+  {
+    "id": "trait_corrompu",
+    "name_key": "trait.corrompu",
+    "canon": "A",
+    "advice_bias": "gonfle",
+    "vote": {
+      "commerce": 0.3,
+      "transparence": -0.5
+    },
+    "opposes": [
+      "trait_integre",
+      "trait_loyal"
+    ]
+  },
+  {
+    "id": "trait_integre",
+    "name_key": "trait.integre",
+    "canon": "A",
+    "vote": {
+      "transparence": 0.5,
+      "repression": -0.1
+    },
+    "opposes": [
+      "trait_corrompu"
+    ]
+  },
+  {
+    "id": "trait_pieux",
+    "name_key": "trait.pieux",
+    "canon": "A",
+    "attributes": {
+      "faith": 15
+    },
+    "vote": {
+      "religion": 0.4
+    },
+    "opposes": [
+      "trait_sceptique"
+    ]
+  },
+  {
+    "id": "trait_sceptique",
+    "name_key": "trait.sceptique",
+    "canon": "A",
+    "attributes": {
+      "faith": -15
+    },
+    "vote": {
+      "religion": -0.3,
+      "science": 0.2
+    },
+    "opposes": [
+      "trait_pieux",
+      "trait_fanatique_mur"
+    ]
+  },
+  {
+    "id": "trait_erudit",
+    "name_key": "trait.erudit",
+    "canon": "A",
+    "attributes": {
+      "intellect": 15
+    },
+    "vote": {
+      "science": 0.3,
+      "reforme": 0.1
+    }
+  },
+  {
+    "id": "trait_brutal",
+    "name_key": "trait.brutal",
+    "canon": "A",
+    "attributes": {
+      "melee": 10,
+      "charisma": -5
+    },
+    "vote": {
+      "repression": 0.4
+    }
+  },
+  {
+    "id": "trait_compatissant",
+    "name_key": "trait.compatissant",
+    "canon": "A",
+    "vote": {
+      "social": 0.5,
+      "repression": -0.4
+    },
+    "opposes": [
+      "trait_brutal"
+    ]
+  },
+  {
+    "id": "trait_discret",
+    "name_key": "trait.discret",
+    "canon": "A",
+    "attributes": {
+      "charisma": -5
+    },
+    "stress_gain": 0.9
+  },
+  {
+    "id": "trait_methodique",
+    "name_key": "trait.methodique",
+    "canon": "A",
+    "attributes": {
+      "tactics": 5,
+      "intellect": 5
+    }
+  },
+  {
+    "id": "trait_impulsif",
+    "name_key": "trait.impulsif",
+    "canon": "A",
+    "attributes": {
+      "composure": -10
+    },
+    "stress_gain": 1.2,
+    "opposes": [
+      "trait_methodique"
+    ]
+  },
+  {
+    "id": "trait_stoique",
+    "name_key": "trait.stoique",
+    "canon": "A",
+    "attributes": {
+      "composure": 15
+    },
+    "stress_gain": 0.5,
+    "opposes": [
+      "trait_anxieux"
+    ]
+  },
+  {
+    "id": "trait_anxieux",
+    "name_key": "trait.anxieux",
+    "canon": "A",
+    "attributes": {
+      "composure": -10
+    },
+    "stress_gain": 1.5,
+    "advice_bias": "exagere",
+    "opposes": [
+      "trait_stoique"
+    ]
+  },
+  {
+    "id": "trait_joueur",
+    "name_key": "trait.joueur",
+    "canon": "A",
+    "attributes": {
+      "tactics": 5
+    },
+    "vote": {
+      "exploration": 0.2
+    }
+  },
+  {
+    "id": "trait_bureaucrate",
+    "name_key": "trait.bureaucrate",
+    "canon": "A",
+    "vote": {
+      "tradition": 0.2,
+      "reforme": -0.2
+    }
+  },
+  {
+    "id": "trait_bon_vivant",
+    "name_key": "trait.bon_vivant",
+    "canon": "A",
+    "stress_gain": 0.8,
+    "attributes": {
+      "charisma": 5
+    }
+  },
+  {
+    "id": "trait_rigide",
+    "name_key": "trait.rigide",
+    "canon": "A",
+    "vote": {
+      "tradition": 0.3,
+      "reforme": -0.3,
+      "ordre": 0.2
+    }
+  },
+  {
+    "id": "trait_diplomate",
+    "name_key": "trait.diplomate",
+    "canon": "A",
+    "attributes": {
+      "charisma": 10
+    }
+  },
+  {
+    "id": "trait_epuise",
+    "name_key": "trait.epuise",
+    "canon": "A",
+    "attributes": {
+      "intellect": -10,
+      "command": -10,
+      "composure": -10
+    },
+    "acquired": true
+  },
+  {
+    "id": "trait_blessure_psychique",
+    "name_key": "trait.blessure_psychique",
+    "canon": "A",
+    "attributes": {
+      "composure": -20
+    },
+    "stress_gain": 1.4,
+    "acquired": true
+  }
+]

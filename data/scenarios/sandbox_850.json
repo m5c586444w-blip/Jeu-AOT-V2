@@ -1,0 +1,242 @@
+[
+  {
+    "id": "scn_sandbox_850",
+    "name_key": "scn.sandbox_850",
+    "faction": "paradis",
+    "start": {
+      "year": 850,
+      "day": 1
+    },
+    "default_control": "paradis",
+    "control": {
+      "prov_plaines_meurtries": "titans",
+      "prov_ruines_premier_cordon": "titans",
+      "prov_riviere_des_cendres": "titans",
+      "prov_falaises_cote_sud": "titans",
+      "prov_marais_brumeux": "titans",
+      "prov_foret_morte": "titans",
+      "prov_steppe_orientale": "titans",
+      "prov_cote_est": "titans",
+      "prov_plateau_du_nord": "titans",
+      "prov_vallee_oubliee": "titans",
+      "prov_maria_nord": "perdu",
+      "prov_maria_nord_est": "perdu",
+      "prov_maria_est": "perdu",
+      "prov_maria_sud_est": "perdu",
+      "prov_maria_sud": "perdu",
+      "prov_maria_sud_ouest": "perdu",
+      "prov_maria_ouest": "perdu",
+      "prov_maria_nord_ouest": "perdu",
+      "prov_shiganshina": "perdu",
+      "prov_faubourgs_shiganshina": "perdu",
+      "prov_plaines_interieures_maria_sud": "perdu",
+      "prov_bourg_minier_maria": "perdu",
+      "prov_hameaux_ouest_maria": "perdu",
+      "prov_foret_arbres_geants": "perdu",
+      "prov_plaines_cerealieres_sud": "perdu",
+      "prov_plaines_du_nord": "perdu",
+      "prov_collines_minieres": "perdu",
+      "prov_ville_usine": "perdu",
+      "prov_haras_maria": "perdu",
+      "prov_vallee_du_moulin": "perdu",
+      "prov_carrefour_du_sud": "perdu",
+      "prov_lac_des_reflets": "perdu",
+      "prov_fort_avance_maria": "perdu",
+      "prov_hameaux_est": "perdu",
+      "prov_monts_brumeux": "perdu",
+      "prov_gorge_du_silence": "perdu",
+      "prov_vergers_ouest": "perdu",
+      "prov_relais_poste_maria": "perdu"
+    },
+    "garrisons": {
+      "prov_rose_nord": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_est": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_sud": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_ouest": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_sina_nord": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_est": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_est": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_sud": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_ouest": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1000
+      },
+      "prov_trost": {
+        "org": "garrison",
+        "soldiers": 2500
+      },
+      "prov_stohess": {
+        "org": "military_police",
+        "soldiers": 1500
+      },
+      "prov_mitras": {
+        "org": "military_police",
+        "soldiers": 1000
+      },
+      "prov_palais_royal": {
+        "org": "military_police",
+        "soldiers": 500
+      },
+      "prov_qg_corps": {
+        "org": "survey_corps",
+        "soldiers": 300
+      },
+      "prov_camp_entrainement": {
+        "org": "training_corps",
+        "soldiers": 400
+      }
+    },
+    "buildings": {
+      "prov_trost": [
+        "bld_grenier",
+        "bld_depot_gaz",
+        "bld_marche"
+      ],
+      "prov_karanes": [
+        "bld_marche"
+      ],
+      "prov_champs_du_centre": [
+        "bld_ferme",
+        "bld_grenier"
+      ],
+      "prov_forges_rose": [
+        "bld_forge",
+        "bld_atelier_odm"
+      ],
+      "prov_poudriere_rose": [
+        "bld_poudriere"
+      ],
+      "prov_mitras": [
+        "bld_grenier",
+        "bld_marche"
+      ],
+      "prov_stohess": [
+        "bld_marche"
+      ]
+    },
+    "stocks": {
+      "food": 450000,
+      "gas": 25000,
+      "steel": 5000,
+      "iceburst": 2000,
+      "powder": 2500,
+      "horses": 5000,
+      "manpower": 12000,
+      "coal": 0,
+      "gold": 40000
+    },
+    "rationing": "normal",
+    "morale": 50,
+    "stability": 55,
+    "population_total": 780000,
+    "production_mult": {
+      "food": 2.2
+    },
+    "production_note_key": "scn.sandbox_850.production",
+    "refugee_share": {
+      "anneau_rose": 0.2,
+      "interieur_sina": 0.05
+    },
+    "politics": {
+      "player": "char_darius_zackly",
+      "legitimacy": 52,
+      "political_capital": 30,
+      "roles": {
+        "role_stratege": "char_dot_pixis",
+        "role_intendant": "char_elise_brandt",
+        "role_renseignement": "char_kaspar_lind",
+        "role_tresorier": "char_conrad_vehl",
+        "role_ordre": "char_nile_dok",
+        "role_religieux": "char_pasteur_nick",
+        "role_scientifique": "char_hange_zoe",
+        "role_medecin": "char_ilse_kruger_moll",
+        "role_diplomate": null,
+        "role_presse": "char_ottilie_brandauer",
+        "role_juriste": "char_hartmut_kessel",
+        "role_instructeur": "char_keith_shadis",
+        "role_titans": "char_moblit_berner",
+        "role_murs": "char_wendel_sauer",
+        "role_transports": "char_maren_voss",
+        "role_archiviste": "char_ida_lorenz",
+        "role_confident": "char_theodor_brahm",
+        "role_chef_cabinet": "char_friedrich_amsel"
+      },
+      "org_leaders": {
+        "org_survey_corps": "char_erwin_smith",
+        "org_garrison": "char_dot_pixis",
+        "org_military_police": "char_nile_dok",
+        "org_training_corps": "char_keith_shadis",
+        "org_culte": "char_pasteur_nick",
+        "org_cabinet": "char_darius_zackly",
+        "org_cour": "char_rod_reiss",
+        "org_guildes": "char_conrad_vehl"
+      },
+      "budget": {
+        "org_survey_corps": 15,
+        "org_garrison": 55,
+        "org_military_police": 22,
+        "org_training_corps": 8
+      },
+      "laws": [],
+      "cabinet_extra": [
+        "char_margarethe_von_alt"
+      ],
+      "org_influence": {
+        "org_survey_corps": 35,
+        "org_garrison": 60,
+        "org_military_police": 65,
+        "org_training_corps": 30,
+        "org_culte": 60,
+        "org_cabinet": 70,
+        "org_cour": 65,
+        "org_guildes": 50
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]."
+  }
+]

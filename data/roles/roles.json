@@ -1,0 +1,200 @@
+[
+  {
+    "id": "role_stratege",
+    "number": 1,
+    "name_key": "role.stratege",
+    "cabinet": true,
+    "metric": "wall_structure",
+    "alarm": 75,
+    "proposal": "law_exercices_garnison",
+    "veto_category": "militaire",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_intendant",
+    "number": 2,
+    "name_key": "role.intendant",
+    "cabinet": false,
+    "metric": "food_days",
+    "alarm": 45,
+    "proposal": "law_requisition_greniers",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_renseignement",
+    "number": 3,
+    "name_key": "role.renseignement",
+    "cabinet": false,
+    "metric": "radicalisation",
+    "alarm": 35,
+    "proposal": "law_police_renforcee",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_tresorier",
+    "number": 4,
+    "name_key": "role.tresorier",
+    "cabinet": true,
+    "metric": "gold",
+    "alarm": 30000,
+    "proposal": "law_impot_foncier_hausse",
+    "veto_category": "economie",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_ordre",
+    "number": 5,
+    "name_key": "role.ordre",
+    "cabinet": true,
+    "metric": "stability",
+    "alarm": 45,
+    "proposal": "law_couvre_feu",
+    "veto_category": "ordre",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_religieux",
+    "number": 6,
+    "name_key": "role.religieux",
+    "cabinet": true,
+    "metric": "faith",
+    "alarm": 50,
+    "proposal": "law_privileges_culte",
+    "veto_category": "religion",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_scientifique",
+    "number": 7,
+    "name_key": "role.scientifique",
+    "cabinet": false,
+    "metric": "none",
+    "alarm": 0,
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_medecin",
+    "number": 8,
+    "name_key": "role.medecin",
+    "cabinet": false,
+    "metric": "morale",
+    "alarm": 45,
+    "proposal": "law_hopitaux_publics",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_diplomate",
+    "number": 9,
+    "name_key": "role.diplomate",
+    "cabinet": false,
+    "metric": "none",
+    "alarm": 0,
+    "canon": "A",
+    "notes_canon": "08 §2 ; aucun contact extérieur avant 851 (01 §2) : poste vacant en 850 [A]."
+  },
+  {
+    "id": "role_presse",
+    "number": 10,
+    "name_key": "role.presse",
+    "cabinet": false,
+    "metric": "legitimacy",
+    "alarm": 45,
+    "proposal": "law_gazette_officielle",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_juriste",
+    "number": 11,
+    "name_key": "role.juriste",
+    "cabinet": true,
+    "metric": "legitimacy",
+    "alarm": 40,
+    "proposal": "law_tribunaux_civils",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_instructeur",
+    "number": 12,
+    "name_key": "role.instructeur",
+    "cabinet": true,
+    "metric": "manpower",
+    "alarm": 8000,
+    "proposal": "law_conscription_etendue",
+    "veto_category": "militaire",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_titans",
+    "number": 13,
+    "name_key": "role.titans",
+    "cabinet": false,
+    "metric": "none",
+    "alarm": 0,
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_murs",
+    "number": 14,
+    "name_key": "role.murs",
+    "cabinet": false,
+    "metric": "wall_structure",
+    "alarm": 85,
+    "proposal": "law_travaux_murs",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_transports",
+    "number": 15,
+    "name_key": "role.transports",
+    "cabinet": false,
+    "metric": "horses",
+    "alarm": 6000,
+    "proposal": "law_requisition_chevaux",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_archiviste",
+    "number": 16,
+    "name_key": "role.archiviste",
+    "cabinet": false,
+    "metric": "none",
+    "alarm": 0,
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_confident",
+    "number": 17,
+    "name_key": "role.confident",
+    "cabinet": false,
+    "metric": "capital",
+    "alarm": 10,
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  },
+  {
+    "id": "role_chef_cabinet",
+    "number": 18,
+    "name_key": "role.chef_cabinet",
+    "cabinet": true,
+    "metric": "capital",
+    "alarm": 15,
+    "proposal": "law_gazette_officielle",
+    "canon": "A",
+    "notes_canon": "08 §2 (rôle), mécanique [A]."
+  }
+]

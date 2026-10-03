@@ -1,16 +1,405 @@
 [
   {
+    "id": "char_darius_zackly",
+    "name": "Darius Zackly",
+    "active_from": 845,
+    "active_until": 854,
+    "faction": "paradis",
+    "org": "org_cabinet",
+    "rank_key": "rank.commandant_en_chef",
+    "roles": [],
+    "attributes": {
+      "odm": 30,
+      "melee": 30,
+      "aim": 50,
+      "command": 90,
+      "tactics": 90,
+      "intellect": 85,
+      "charisma": 70,
+      "endurance": 65,
+      "composure": 85,
+      "ambition": 55,
+      "faith": 25,
+      "health": 80
+    },
+    "traits": [
+      "trait_pragmatique",
+      "trait_cynique",
+      "trait_methodique"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 55,
+    "fame": 70,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "tension",
+        "strength": -20,
+        "canon": "C"
+      }
+    ],
+    "portrait": {
+      "seed": 101,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.darius_zackly",
+    "canon": "C",
+    "notes_canon": "Commandant en chef ; assassiné en 854 (11 §3). Graphie « Dhalis » selon les versions [?]. Incarnation du joueur dans le bac à sable 850 [A]."
+  },
+  {
+    "id": "char_friedrich_amsel",
+    "name": "Friedrich Amsel",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cabinet",
+    "rank_key": "rank.secretaire",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 70,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_bureaucrate",
+      "trait_methodique",
+      "trait_discret"
+    ],
+    "agenda": "conservateur",
+    "honesty": 65,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 102,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.friedrich_amsel",
+    "canon": "A",
+    "notes_canon": "Secrétaire royal, chef de cabinet : personnage de remplissage (08 §4.1)."
+  },
+  {
+    "id": "char_albrecht_mohr",
+    "name": "Albrecht Mohr",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cabinet",
+    "rank_key": "rank.chancelier",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 50,
+      "tactics": 50,
+      "intellect": 65,
+      "charisma": 60,
+      "endurance": 45,
+      "composure": 60,
+      "ambition": 75,
+      "faith": 55,
+      "health": 65
+    },
+    "traits": [
+      "trait_rigide",
+      "trait_soupconneux"
+    ],
+    "agenda": "conservateur",
+    "honesty": 45,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 103,
+      "archetype": "noble"
+    },
+    "bio_key": "bio.albrecht_mohr",
+    "canon": "A",
+    "notes_canon": "Personnage de remplissage (08 §4.1 : chancelier)."
+  },
+  {
+    "id": "char_hartmut_kessel",
+    "name": "Hartmut Kessel",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cabinet",
+    "rank_key": "rank.magistrat",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 78,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_integre",
+      "trait_rigide"
+    ],
+    "agenda": "reformateur",
+    "honesty": 80,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 104,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.hartmut_kessel",
+    "canon": "A",
+    "notes_canon": "Magistrat en chef : personnage de remplissage (08 §4.1)."
+  },
+  {
+    "id": "char_theodor_brahm",
+    "name": "Theodor Brahm",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cabinet",
+    "rank_key": "rank.conseiller",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 70,
+      "charisma": 60,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_loyal",
+      "trait_bon_vivant"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 85,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_darius_zackly",
+        "type": "amitie",
+        "strength": 70,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 105,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.theodor_brahm",
+    "canon": "A",
+    "notes_canon": "Confident : personnage de remplissage (08 §2, rôle 17)."
+  },
+  {
     "id": "char_erwin_smith",
     "name": "Erwin Smith",
     "active_from": 845,
     "active_until": 850,
     "death_event": "evt_850_erwin_charge",
-    "faction": "survey_corps",
-    "roles": [
-      "commandant"
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.commandant",
+    "roles": [],
+    "attributes": {
+      "odm": 70,
+      "melee": 55,
+      "aim": 50,
+      "command": 90,
+      "tactics": 90,
+      "intellect": 85,
+      "charisma": 85,
+      "endurance": 65,
+      "composure": 85,
+      "ambition": 60,
+      "faith": 25,
+      "health": 80
+    },
+    "traits": [
+      "trait_meneur_ne",
+      "trait_joueur",
+      "trait_obstine"
     ],
+    "agenda": "reformateur",
+    "honesty": 55,
+    "fame": 75,
+    "relations": [
+      {
+        "to": "char_levi_ackerman",
+        "type": "loyaute",
+        "strength": 85,
+        "canon": "C"
+      },
+      {
+        "to": "char_hange_zoe",
+        "type": "respect",
+        "strength": 70,
+        "canon": "C"
+      },
+      {
+        "to": "char_dot_pixis",
+        "type": "respect",
+        "strength": 50,
+        "canon": "C"
+      },
+      {
+        "to": "char_darius_zackly",
+        "type": "tension",
+        "strength": -20,
+        "canon": "C"
+      },
+      {
+        "to": "char_nile_dok",
+        "type": "amitie",
+        "strength": 40,
+        "canon": "C"
+      }
+    ],
+    "portrait": {
+      "seed": 106,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.erwin_smith",
     "canon": "C",
-    "notes_canon": "Mort à Shiganshina en 850 (11 §3). active_from 845 = borne de jeu [A]."
+    "notes_canon": "Mort à Shiganshina (850, E41) (11 §3). Relations : 07 §10 (Nile : amis d'enfance)."
+  },
+  {
+    "id": "char_hange_zoe",
+    "name": "Hange Zoë",
+    "active_from": 845,
+    "active_until": 854,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.chef_section",
+    "roles": [],
+    "attributes": {
+      "odm": 70,
+      "melee": 40,
+      "aim": 45,
+      "command": 50,
+      "tactics": 55,
+      "intellect": 92,
+      "charisma": 55,
+      "endurance": 55,
+      "composure": 50,
+      "ambition": 45,
+      "faith": 20,
+      "health": 75
+    },
+    "traits": [
+      "trait_curieux",
+      "trait_impulsif",
+      "trait_erudit"
+    ],
+    "agenda": "reformateur",
+    "honesty": 75,
+    "fame": 50,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "respect",
+        "strength": 70,
+        "canon": "C"
+      },
+      {
+        "to": "char_moblit_berner",
+        "type": "amitie",
+        "strength": 60,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 107,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.hange_zoe",
+    "canon": "C",
+    "notes_canon": "14ᵉ commandante après Erwin ; meurt en 854 (11 §3). Graphie « Hanji » [?]. death_event (E60) à relier."
+  },
+  {
+    "id": "char_levi_ackerman",
+    "name": "Levi Ackerman",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 98,
+      "melee": 95,
+      "aim": 55,
+      "command": 70,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 85,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_froid",
+      "trait_ackerman",
+      "trait_stoique"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 80,
+    "fame": 65,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "loyaute",
+        "strength": 90,
+        "canon": "C"
+      },
+      {
+        "to": "char_petra",
+        "type": "loyaute",
+        "strength": 50,
+        "canon": "A"
+      },
+      {
+        "to": "char_oluo",
+        "type": "loyaute",
+        "strength": 45,
+        "canon": "A"
+      },
+      {
+        "to": "char_eld",
+        "type": "loyaute",
+        "strength": 45,
+        "canon": "A"
+      },
+      {
+        "to": "char_gunther",
+        "type": "loyaute",
+        "strength": 45,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 108,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.levi_ackerman",
+    "canon": "C",
+    "notes_canon": "Capitaine d'élite (07 P06) ; aucune date de sortie dans les spécifications."
   },
   {
     "id": "char_mike_zacharias",
@@ -18,12 +407,1763 @@
     "active_from": 845,
     "active_until": 850,
     "death_event": "evt_850_wall_rose_invasion",
-    "faction": "survey_corps",
-    "roles": [
-      "chef_escouade"
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.chef_escouade",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_solitaire",
+      "trait_loyal"
     ],
+    "agenda": "pragmatique",
+    "honesty": 70,
+    "fame": 35,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "loyaute",
+        "strength": 70,
+        "canon": "A"
+      },
+      {
+        "to": "char_nanaba",
+        "type": "respect",
+        "strength": 50,
+        "canon": "A"
+      },
+      {
+        "to": "char_gelgar",
+        "type": "respect",
+        "strength": 40,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 109,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.mike_zacharias",
     "canon": "C",
-    "notes_canon": "Meurt pendant l'invasion de Wall Rose (E24), pas à Utgard (11 §3 + errata). active_from 845 = borne de jeu [A]."
+    "notes_canon": "Meurt pendant l'invasion de Wall Rose (E24), pas à Utgard (11 §3 + errata)."
+  },
+  {
+    "id": "char_nanaba",
+    "name": "Nanaba",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_utgard_battle",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_devoue",
+      "trait_methodique"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 70,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_mike_zacharias",
+        "type": "respect",
+        "strength": 55,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 110,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.nanaba",
+    "canon": "C",
+    "notes_canon": "Meurt à Utgard (850) (11 §3)."
+  },
+  {
+    "id": "char_gelgar",
+    "name": "Gelgar",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_utgard_battle",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_bon_vivant",
+      "trait_temeraire"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_mike_zacharias",
+        "type": "respect",
+        "strength": 50,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 111,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.gelgar",
+    "canon": "C",
+    "notes_canon": "Meurt à Utgard (850) (11 §3)."
+  },
+  {
+    "id": "char_moblit_berner",
+    "name": "Moblit Berner",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 65,
+      "melee": 40,
+      "aim": 45,
+      "command": 50,
+      "tactics": 55,
+      "intellect": 75,
+      "charisma": 55,
+      "endurance": 55,
+      "composure": 50,
+      "ambition": 45,
+      "faith": 20,
+      "health": 75
+    },
+    "traits": [
+      "trait_devoue",
+      "trait_anxieux"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 80,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_hange_zoe",
+        "type": "loyaute",
+        "strength": 75,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 112,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.moblit_berner",
+    "canon": "C",
+    "notes_canon": "Adjoint de Hange (08 §4.1) ; date de sortie [?] (11 §9)."
+  },
+  {
+    "id": "char_petra",
+    "name": "Petra",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_special_squad_loss",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_devoue",
+      "trait_compatissant"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 80,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_levi_ackerman",
+        "type": "loyaute",
+        "strength": 80,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 113,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.petra",
+    "canon": "C",
+    "notes_canon": "Escouade spéciale ; mort en 850 (expédition 57) [?] (11 §3). Nom de famille non donné dans les spécifications."
+  },
+  {
+    "id": "char_oluo",
+    "name": "Oluo",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_special_squad_loss",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_ambitieux",
+      "trait_temeraire"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 55,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_levi_ackerman",
+        "type": "loyaute",
+        "strength": 75,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 114,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.oluo",
+    "canon": "C",
+    "notes_canon": "Escouade spéciale ; mort en 850 [?] (11 §3). Nom de famille non donné."
+  },
+  {
+    "id": "char_eld",
+    "name": "Eld",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_special_squad_loss",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 60,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_methodique",
+      "trait_loyal"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 75,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_levi_ackerman",
+        "type": "loyaute",
+        "strength": 75,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 115,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.eld",
+    "canon": "C",
+    "notes_canon": "Escouade spéciale ; mort en 850 [?] (11 §3). Nom de famille non donné."
+  },
+  {
+    "id": "char_gunther",
+    "name": "Gunther",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_special_squad_loss",
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.soldat_elite",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_discret",
+      "trait_devoue"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 75,
+    "fame": 20,
+    "relations": [
+      {
+        "to": "char_levi_ackerman",
+        "type": "loyaute",
+        "strength": 75,
+        "canon": "A"
+      }
+    ],
+    "portrait": {
+      "seed": 116,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.gunther",
+    "canon": "C",
+    "notes_canon": "Escouade spéciale ; mort en 850 [?] (11 §3). Nom de famille non donné."
+  },
+  {
+    "id": "char_elise_brandt",
+    "name": "Elise Brandt",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.major",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 65,
+      "intellect": 72,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_methodique",
+      "trait_prudent"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 75,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 117,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.elise_brandt",
+    "canon": "A",
+    "notes_canon": "Intendance (07 GP19, 08 §4.1) : personnage de remplissage."
+  },
+  {
+    "id": "char_ilse_kruger_moll",
+    "name": "Ilse Kruger-Moll",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.major",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 80,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_compatissant",
+      "trait_methodique"
+    ],
+    "agenda": "reformateur",
+    "honesty": 85,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 118,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.ilse_kruger_moll",
+    "canon": "A",
+    "notes_canon": "Médecin (07 GP21, 08 §4.1) : personnage de remplissage."
+  },
+  {
+    "id": "char_joris_haller",
+    "name": "Joris Haller",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_survey_corps",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 70,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 70,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_curieux",
+      "trait_temeraire"
+    ],
+    "agenda": "reformateur",
+    "honesty": 65,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 119,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.joris_haller",
+    "canon": "A",
+    "notes_canon": "Éclaireur en chef (07 GP22) : personnage de remplissage."
+  },
+  {
+    "id": "char_dot_pixis",
+    "name": "Dot Pixis",
+    "active_from": 845,
+    "active_until": 854,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.commandant_sud",
+    "roles": [],
+    "attributes": {
+      "odm": 40,
+      "melee": 55,
+      "aim": 50,
+      "command": 90,
+      "tactics": 90,
+      "intellect": 85,
+      "charisma": 85,
+      "endurance": 65,
+      "composure": 85,
+      "ambition": 35,
+      "faith": 25,
+      "health": 80
+    },
+    "traits": [
+      "trait_pragmatique",
+      "trait_bon_vivant",
+      "trait_veteran_breches"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 65,
+    "fame": 60,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "respect",
+        "strength": 50,
+        "canon": "C"
+      }
+    ],
+    "portrait": {
+      "seed": 120,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.dot_pixis",
+    "canon": "C",
+    "notes_canon": "Responsable de la Garnison du Sud ; meurt en 854 (11 §3). death_event (E58) à relier."
+  },
+  {
+    "id": "char_hannes",
+    "name": "Hannes",
+    "active_from": 845,
+    "active_until": 850,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.officier",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_bon_vivant",
+      "trait_veteran_breches",
+      "trait_devoue"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 70,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 121,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.hannes",
+    "canon": "C",
+    "notes_canon": "Officier de Garnison ; mort en 850, arc de l'invasion de Wall Rose (11 §3)."
+  },
+  {
+    "id": "char_kitz_weilman",
+    "name": "Kitz Weilman",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 35,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_anxieux",
+      "trait_rigide"
+    ],
+    "agenda": "conservateur",
+    "honesty": 55,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 122,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.kitz_weilman",
+    "canon": "C",
+    "notes_canon": "Officier de Garnison ; rôle exact [?] (07 GP12)."
+  },
+  {
+    "id": "char_ian_dietrich",
+    "name": "Ian Dietrich",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_methodique",
+      "trait_compatissant"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 75,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 123,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.ian_dietrich",
+    "canon": "C",
+    "notes_canon": "Officier de Garnison (07 GP13)."
+  },
+  {
+    "id": "char_rico_brzenska",
+    "name": "Rico Brzenska",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 70,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_froid",
+      "trait_methodique"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 75,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 124,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.rico_brzenska",
+    "canon": "C",
+    "notes_canon": "Officier de Garnison, artillerie (07 GP14)."
+  },
+  {
+    "id": "char_ruben_tauber",
+    "name": "Ruben Tauber",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 72,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_methodique"
+    ],
+    "agenda": "militariste",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 125,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.ruben_tauber",
+    "canon": "A",
+    "notes_canon": "Artillerie de Garnison (07 GP20) : personnage de remplissage."
+  },
+  {
+    "id": "char_brune_aldous",
+    "name": "Brune Aldous",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.commandant",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 70,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_prudent",
+      "trait_bureaucrate"
+    ],
+    "agenda": "conservateur",
+    "honesty": 55,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 126,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.brune_aldous",
+    "canon": "A",
+    "notes_canon": "Réserve de Rose (07 GP25) : personnage de remplissage."
+  },
+  {
+    "id": "char_maren_voss",
+    "name": "Maren Voss",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.colonel",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 68,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_temeraire",
+      "trait_loyal"
+    ],
+    "agenda": "militariste",
+    "honesty": 65,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 127,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.maren_voss",
+    "canon": "A",
+    "notes_canon": "Cavalerie (07 GP23) : personnage de remplissage."
+  },
+  {
+    "id": "char_wendel_sauer",
+    "name": "Wendel Sauer",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_garrison",
+    "rank_key": "rank.maitre_murs",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 74,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_methodique",
+      "trait_prudent"
+    ],
+    "agenda": "conservateur",
+    "honesty": 70,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 128,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.wendel_sauer",
+    "canon": "A",
+    "notes_canon": "Architecte des murs (08 §2, rôle 14) : personnage de remplissage."
+  },
+  {
+    "id": "char_nile_dok",
+    "name": "Nile Dok",
+    "active_from": 845,
+    "active_until": 854,
+    "faction": "paradis",
+    "org": "org_military_police",
+    "rank_key": "rank.commandant",
+    "roles": [],
+    "attributes": {
+      "odm": 50,
+      "melee": 55,
+      "aim": 50,
+      "command": 90,
+      "tactics": 90,
+      "intellect": 85,
+      "charisma": 60,
+      "endurance": 65,
+      "composure": 85,
+      "ambition": 60,
+      "faith": 25,
+      "health": 80
+    },
+    "traits": [
+      "trait_pragmatique",
+      "trait_prudent"
+    ],
+    "agenda": "conservateur",
+    "honesty": 55,
+    "fame": 45,
+    "relations": [
+      {
+        "to": "char_erwin_smith",
+        "type": "amitie",
+        "strength": 40,
+        "canon": "C"
+      }
+    ],
+    "portrait": {
+      "seed": 129,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.nile_dok",
+    "canon": "C",
+    "notes_canon": "Commandant de la Brigade ; meurt en 854 (11 §3). Amis d'enfance avec Erwin (07 §10)."
+  },
+  {
+    "id": "char_marlowe_freudenberg",
+    "name": "Marlowe Freudenberg",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_military_police",
+    "rank_key": "rank.soldat",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 40,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_idealiste",
+      "trait_integre"
+    ],
+    "agenda": "reformateur",
+    "honesty": 85,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 130,
+      "archetype": "soldat"
+    },
+    "bio_key": "bio.marlowe_freudenberg",
+    "canon": "C",
+    "notes_canon": "Officier de la Brigade (07 GP15)."
+  },
+  {
+    "id": "char_aldric_vane",
+    "name": "Aldric Vane",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_military_police",
+    "rank_key": "rank.colonel",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_ambitieux",
+      "trait_corrompu"
+    ],
+    "agenda": "opportuniste",
+    "honesty": 30,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 131,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.aldric_vane",
+    "canon": "A",
+    "notes_canon": "Chef de secteur Sina, garde royale (07 GP18) : personnage de remplissage."
+  },
+  {
+    "id": "char_kaspar_lind",
+    "name": "Kaspar Lind",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_military_police",
+    "rank_key": "rank.major",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 65,
+      "tactics": 60,
+      "intellect": 75,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 60,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_soupconneux",
+      "trait_discret"
+    ],
+    "agenda": "conservateur",
+    "honesty": 45,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 132,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.kaspar_lind",
+    "canon": "A",
+    "notes_canon": "Chef du renseignement (08 §2, rôle 3) : personnage de remplissage."
+  },
+  {
+    "id": "char_keith_shadis",
+    "name": "Keith Shadis",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.instructeur_chef",
+    "roles": [],
+    "attributes": {
+      "odm": 60,
+      "melee": 55,
+      "aim": 55,
+      "command": 70,
+      "tactics": 60,
+      "intellect": 60,
+      "charisma": 55,
+      "endurance": 65,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 40,
+      "health": 75
+    },
+    "traits": [
+      "trait_rigide",
+      "trait_veteran_breches"
+    ],
+    "agenda": "conservateur",
+    "honesty": 70,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 133,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.keith_shadis",
+    "canon": "C",
+    "notes_canon": "Instructeur en chef (07 P07) ; date de sortie [?] (11 §3)."
+  },
+  {
+    "id": "char_anselm_koch",
+    "name": "Anselm Koch",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.lieutenant",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 70,
+      "aim": 55,
+      "command": 55,
+      "tactics": 60,
+      "intellect": 55,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 70,
+      "ambition": 35,
+      "faith": 30,
+      "health": 85
+    },
+    "traits": [
+      "trait_methodique"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 70,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 134,
+      "archetype": "officier"
+    },
+    "bio_key": "bio.anselm_koch",
+    "canon": "A",
+    "notes_canon": "Instructeur ODM (07 GP24) : personnage de remplissage."
+  },
+  {
+    "id": "char_eren_yeager",
+    "name": "Eren Yeager",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 35,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_obstine",
+      "trait_impulsif",
+      "trait_idealiste"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "titan": "assaillant_fondateur"
+    },
+    "portrait": {
+      "seed": 135,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.eren_yeager",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Porteur de l'Assaillant et du Fondateur depuis 845 (11 §4), sans le savoir en 850 : secret."
+  },
+  {
+    "id": "char_mikasa_ackerman",
+    "name": "Mikasa Ackerman",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 75,
+      "melee": 70,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_ackerman",
+      "trait_stoique",
+      "trait_devoue"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 136,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.mikasa_ackerman",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Lignée Ackerman (01 §1)."
+  },
+  {
+    "id": "char_armin_arlert",
+    "name": "Armin Arlert",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 85,
+      "charisma": 45,
+      "endurance": 50,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_erudit",
+      "trait_curieux",
+      "trait_anxieux"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 137,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.armin_arlert",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Hérite du Colossal en 850 (E42) : hors de la fenêtre de départ."
+  },
+  {
+    "id": "char_jean_kirstein",
+    "name": "Jean Kirstein",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 45,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_pragmatique",
+      "trait_ambitieux"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 138,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.jean_kirstein",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09)."
+  },
+  {
+    "id": "char_connie_springer",
+    "name": "Connie Springer",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_bon_vivant",
+      "trait_loyal"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 139,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.connie_springer",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Originaire de Ragako (événement E25)."
+  },
+  {
+    "id": "char_sasha_blouse",
+    "name": "Sasha Blouse",
+    "active_from": 847,
+    "active_until": 854,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 75,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_impulsif",
+      "trait_devoue"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 140,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.sasha_blouse",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Sortie en 854 [?] (11 §3)."
+  },
+  {
+    "id": "char_historia_reiss",
+    "name": "Historia Reiss",
+    "display_name": "Krista Lenz",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_compatissant",
+      "trait_discret"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "true_name": "Historia Reiss"
+    },
+    "portrait": {
+      "seed": 141,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.historia_reiss",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Connue sous le nom de Krista Lenz en 850 ; identité révélée à E27 (12) : secret."
+  },
+  {
+    "id": "char_ymir",
+    "name": "Ymir",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_cynique",
+      "trait_solitaire"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "titan": "machoire"
+    },
+    "portrait": {
+      "seed": 142,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.ymir",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Porteuse de la Mâchoire (11 §4) : secret ; ne pas confondre avec Ymir Fritz. Sortie entre 850 et 854 [?]."
+  },
+  {
+    "id": "char_reiner_braun",
+    "name": "Reiner Braun",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 50,
+      "aim": 50,
+      "command": 50,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 80,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_meneur_ne",
+      "trait_loyal"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "faction": "marley",
+      "titan": "cuirasse"
+    },
+    "portrait": {
+      "seed": 143,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.reiner_braun",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Guerrier de Marley infiltré (01 §2) : secret."
+  },
+  {
+    "id": "char_bertholdt_hoover",
+    "name": "Bertholdt Hoover",
+    "active_from": 847,
+    "active_until": 850,
+    "death_event": "evt_850_serum_choice",
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 70,
+      "melee": 50,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_discret",
+      "trait_anxieux"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "faction": "marley",
+      "titan": "colossal"
+    },
+    "portrait": {
+      "seed": 144,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.bertholdt_hoover",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Guerrier de Marley infiltré : secret. Mort en 850 (E42, mangé par Armin) (11 §3, fiabilité moyenne)."
+  },
+  {
+    "id": "char_annie_leonhart",
+    "name": "Annie Leonhart",
+    "active_from": 847,
+    "faction": "paradis",
+    "org": "org_training_corps",
+    "rank_key": "rank.cadet",
+    "roles": [],
+    "attributes": {
+      "odm": 55,
+      "melee": 80,
+      "aim": 50,
+      "command": 30,
+      "tactics": 35,
+      "intellect": 50,
+      "charisma": 45,
+      "endurance": 70,
+      "composure": 45,
+      "ambition": 50,
+      "faith": 40,
+      "health": 90
+    },
+    "traits": [
+      "trait_froid",
+      "trait_solitaire"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 60,
+    "fame": 20,
+    "relations": [],
+    "hidden": {
+      "faction": "marley",
+      "titan": "feminin"
+    },
+    "portrait": {
+      "seed": 145,
+      "archetype": "cadet"
+    },
+    "bio_key": "bio.annie_leonhart",
+    "canon": "C",
+    "notes_canon": "Recrue de la 104ᵉ promotion (recrutement ≈ 847 [?], E08 ; remise des diplômes en 850, E09). Guerrière de Marley infiltrée : secret."
+  },
+  {
+    "id": "char_pasteur_nick",
+    "name": "Pasteur Nick",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_culte",
+    "rank_key": "rank.pasteur",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 10,
+      "aim": 10,
+      "command": 40,
+      "tactics": 30,
+      "intellect": 60,
+      "charisma": 70,
+      "endurance": 40,
+      "composure": 55,
+      "ambition": 55,
+      "faith": 95,
+      "health": 60
+    },
+    "traits": [
+      "trait_fanatique_mur",
+      "trait_discret"
+    ],
+    "agenda": "religieux",
+    "honesty": 40,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 146,
+      "archetype": "clerc"
+    },
+    "bio_key": "bio.pasteur_nick",
+    "canon": "C",
+    "notes_canon": "Culte des Murs (08 §4.1) ; date de sortie [?] (11 §9)."
+  },
+  {
+    "id": "char_rod_reiss",
+    "name": "Rod Reiss",
+    "active_from": 845,
+    "active_until": 850,
+    "death_event": "evt_850_rod_reiss_titan",
+    "faction": "paradis",
+    "org": "org_cour",
+    "rank_key": "rank.noble",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 50,
+      "tactics": 50,
+      "intellect": 65,
+      "charisma": 60,
+      "endurance": 45,
+      "composure": 60,
+      "ambition": 75,
+      "faith": 55,
+      "health": 65
+    },
+    "traits": [
+      "trait_ambitieux",
+      "trait_discret",
+      "trait_soupconneux"
+    ],
+    "agenda": "conservateur",
+    "honesty": 25,
+    "fame": 40,
+    "relations": [],
+    "portrait": {
+      "seed": 147,
+      "archetype": "noble"
+    },
+    "bio_key": "bio.rod_reiss",
+    "canon": "C",
+    "notes_canon": "Seul survivant de la famille royale en 845 (11 §1) ; mort en 850 (E35). Son rang réel est un secret de la cour."
+  },
+  {
+    "id": "char_margarethe_von_alt",
+    "name": "Margarethe von Alt",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cour",
+    "rank_key": "rank.noble",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 50,
+      "tactics": 50,
+      "intellect": 65,
+      "charisma": 60,
+      "endurance": 45,
+      "composure": 60,
+      "ambition": 75,
+      "faith": 55,
+      "health": 65
+    },
+    "traits": [
+      "trait_ambitieux",
+      "trait_diplomate"
+    ],
+    "agenda": "conservateur",
+    "honesty": 40,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 148,
+      "archetype": "noble"
+    },
+    "bio_key": "bio.margarethe_von_alt",
+    "canon": "A",
+    "notes_canon": "Représentante de la noblesse au Cabinet (08 §4.1) : personnage de remplissage."
+  },
+  {
+    "id": "char_ida_lorenz",
+    "name": "Ida Lorenz",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_cour",
+    "rank_key": "rank.archiviste",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 80,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_erudit",
+      "trait_discret"
+    ],
+    "agenda": "pragmatique",
+    "honesty": 70,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 149,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.ida_lorenz",
+    "canon": "A",
+    "notes_canon": "Archiviste royale (08 §2, rôle 16) : personnage de remplissage."
+  },
+  {
+    "id": "char_ottilie_brandauer",
+    "name": "Ottilie Brandauer",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_guildes",
+    "rank_key": "rank.redactrice",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 70,
+      "charisma": 72,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 50,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_opportuniste",
+      "trait_charismatique"
+    ],
+    "agenda": "opportuniste",
+    "honesty": 45,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 150,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.ottilie_brandauer",
+    "canon": "A",
+    "notes_canon": "Presse et gazette (08 §2, rôle 10) : personnage de remplissage."
+  },
+  {
+    "id": "char_conrad_vehl",
+    "name": "Conrad Vehl",
+    "active_from": 845,
+    "faction": "paradis",
+    "org": "org_guildes",
+    "rank_key": "rank.delegue",
+    "roles": [],
+    "attributes": {
+      "odm": 5,
+      "melee": 15,
+      "aim": 20,
+      "command": 45,
+      "tactics": 45,
+      "intellect": 75,
+      "charisma": 55,
+      "endurance": 45,
+      "composure": 55,
+      "ambition": 70,
+      "faith": 45,
+      "health": 70
+    },
+    "traits": [
+      "trait_ambitieux",
+      "trait_corrompu"
+    ],
+    "agenda": "opportuniste",
+    "honesty": 35,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 151,
+      "archetype": "civil"
+    },
+    "bio_key": "bio.conrad_vehl",
+    "canon": "A",
+    "notes_canon": "Délégué des guildes, trésorier (08 §4.1) : personnage de remplissage."
   },
   {
     "id": "char_kenny_ackerman",
@@ -31,48 +2171,38 @@
     "active_from": 845,
     "active_until": 850,
     "death_event": "evt_850_rod_reiss_titan",
-    "faction": "reseau_souterrain",
-    "roles": [
-      "chef_de_l_ombre"
+    "faction": "ville_souterraine",
+    "rank_key": "rank.inconnu",
+    "roles": [],
+    "attributes": {
+      "odm": 85,
+      "melee": 85,
+      "aim": 85,
+      "command": 60,
+      "tactics": 70,
+      "intellect": 65,
+      "charisma": 45,
+      "endurance": 75,
+      "composure": 75,
+      "ambition": 60,
+      "faith": 10,
+      "health": 75
+    },
+    "traits": [
+      "trait_brutal",
+      "trait_cynique",
+      "trait_ackerman"
     ],
+    "agenda": "opportuniste",
+    "honesty": 20,
+    "fame": 40,
+    "relations": [],
+    "portrait": {
+      "seed": 152,
+      "archetype": "ombre"
+    },
+    "bio_key": "bio.kenny_ackerman",
     "canon": "C",
-    "notes_canon": "Sortie en 850, arc du gouvernement royal (11 §3) ; death_event = E35 (errata Q2). Affiliation exacte non précisée dans les spécifications [?]. active_from 845 = borne de jeu [A]."
-  },
-  {
-    "id": "char_hange_zoe",
-    "name": "Hange Zoë",
-    "active_from": 845,
-    "active_until": 854,
-    "faction": "survey_corps",
-    "roles": [
-      "chef_de_section",
-      "scientifique"
-    ],
-    "canon": "C",
-    "notes_canon": "Meurt en 854 pendant le Grondement (11 §3) ; death_event (E60) à relier quand la chaîne 851–854 sera saisie. Graphie « Hanji » selon les éditions [?]."
-  },
-  {
-    "id": "char_dot_pixis",
-    "name": "Dot Pixis",
-    "active_from": 845,
-    "active_until": 854,
-    "faction": "garrison",
-    "roles": [
-      "commandant_garnison_sud"
-    ],
-    "canon": "C",
-    "notes_canon": "Meurt lors de la contre-attaque de Marley à Shiganshina en 854 (11 §3) ; death_event (E58) à relier plus tard."
-  },
-  {
-    "id": "char_darius_zackly",
-    "name": "Darius Zackly",
-    "active_from": 845,
-    "active_until": 854,
-    "faction": "commandement_supreme",
-    "roles": [
-      "commandant_en_chef"
-    ],
-    "canon": "C",
-    "notes_canon": "Assassiné en 854 (11 §3) ; death_event (E57) à relier plus tard. Graphie « Dhalis » selon les versions [?]."
+    "notes_canon": "Sortie en 850, arc du gouvernement royal ; death_event = E35 (errata Q2). Affiliation exacte [?]."
   }
 ]

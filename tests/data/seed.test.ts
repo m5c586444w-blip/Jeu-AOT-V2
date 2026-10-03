@@ -11,7 +11,9 @@ describe("graine de données P0 (T0.14)", () => {
   it("contenu minimal du fichier 14 §3.3", () => {
     for (const code of ["I01", "M05", "R01", "S01", "S06"]) expect(data.provinces.map((p) => p.atlas_code)).toContain(code);
     expect(data.provinces.find((p) => p.atlas_code === "S06")?.destroyed_year).toBe(850);
-    expect(data.characters).toHaveLength(6);
+    for (const id of ["char_erwin_smith", "char_mike_zacharias", "char_kenny_ackerman", "char_hange_zoe", "char_dot_pixis", "char_darius_zackly"]) {
+      expect(data.characters.map((c) => c.id)).toContain(id);
+    }
     expect(data.techs.find((t) => t.code === "T-ANT-08")?.unlock_event).toBe("evt_850_police_tech_seized");
     expect(data.techs.find((t) => t.code === "T-FOR-03")?.unlock_event).toBe("evt_850_trost_plug");
     const codes = data.events.map((e) => e.code).filter(Boolean);

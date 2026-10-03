@@ -1,0 +1,22 @@
+{
+  "canon": "A",
+  "notes_canon": "Composition sociale par gabarit de province (01 §4 : strates de Paradis) ; proportions [A].",
+  "profiles": {
+    "capitale": { "str_royaute": 0.01, "str_noblesse": 0.12, "str_bourgeoisie": 0.35, "str_militaires": 0.06, "str_clerge": 0.06, "str_paysans": 0.25, "str_basfonds": 0.1, "str_refugies": 0.05 },
+    "palais": { "str_royaute": 0.2, "str_noblesse": 0.4, "str_militaires": 0.3, "str_clerge": 0.1 },
+    "souterrain": { "str_basfonds": 0.85, "str_bourgeoisie": 0.05, "str_paysans": 0.1 },
+    "ville": { "str_noblesse": 0.04, "str_bourgeoisie": 0.3, "str_militaires": 0.06, "str_clerge": 0.04, "str_paysans": 0.46, "str_basfonds": 0.1 },
+    "campagne": { "str_noblesse": 0.02, "str_bourgeoisie": 0.05, "str_clerge": 0.03, "str_paysans": 0.9 },
+    "militaire": { "str_militaires": 0.85, "str_paysans": 0.15 },
+    "mur": { "str_militaires": 1 }
+  },
+  "rules": [
+    { "profile": "capitale", "atlas_codes": ["I01"] },
+    { "profile": "palais", "atlas_codes": ["I02", "I07"] },
+    { "profile": "souterrain", "terrains": ["souterrain"] },
+    { "profile": "mur", "kinds": ["segment"] },
+    { "profile": "militaire", "terrains": ["fort", "militaire"] },
+    { "profile": "ville", "terrains": ["urbain"] },
+    { "profile": "campagne" }
+  ]
+}

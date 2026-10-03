@@ -16,6 +16,12 @@ export const ProvinceIdSchema = idOf("prov");
 export const CharacterIdSchema = idOf("char");
 export const TechIdSchema = idOf("tech");
 export const EventIdSchema = idOf("evt");
+export const TraitIdSchema = idOf("trait");
+export const OrganisationIdSchema = idOf("org");
+export const LawIdSchema = idOf("law");
+export const RoleIdSchema = idOf("role");
+export const StratumIdSchema = idOf("str");
+
 
 /** Champs communs : statut canon et note facultative. */
 const canonFields = {
@@ -83,20 +89,149 @@ export const ScenarioSchema = z
     rationing: z.enum(RATIONING_LEVELS),
     morale: z.number().min(0).max(100),
     stability: z.number().min(0).max(100),
+    /** Population de départ (sinon : data/balance/economy.json). */
+    population_total: z.number().positive().optional(),
+    /** Conditions propres au scénario sur la production (ex. terres mises en culture) [A]. */
+    production_mult: z.partialRecord(z.enum(RESOURCE_IDS), z.number().positive()).default({}),
+    production_note_key: z.string().optional(),
+    /** Part de réfugiés dans la population, par région. */
+    refugee_share: z.record(z.string(), z.number().min(0).max(1)).default({}),
+    politics: z
+      .object({
+        player: CharacterIdSchema,
+        legitimacy: z.number().min(0).max(100),
+        political_capital: z.number().min(0),
+        roles: z.record(RoleIdSchema, CharacterIdSchema.nullable()),
+        org_leaders: z.record(OrganisationIdSchema, CharacterIdSchema),
+        budget: z.record(OrganisationIdSchema, z.number().min(0)),
+        laws: z.array(LawIdSchema).default([]),
+        /** Sièges du Cabinet sans rôle de conseiller (ex. représentant de la noblesse, 08 §4.1). */
+        cabinet_extra: z.array(CharacterIdSchema).default([]),
+        org_influence: z.record(OrganisationIdSchema, z.number().min(0).max(100)).default({}),
+      })
+      .strict()
+      .optional(),
     ...canonFields,
   })
   .strict();
+
+
+/** Attributs d'un personnage (02 §9.1), échelle 0–100 [A]. */
+export const ATTRIBUTES = ["odm", "melee", "aim", "command", "tactics", "intellect", "charisma", "endurance", "composure", "ambition", "faith", "health"] as const;
+export type AttributeId = (typeof ATTRIBUTES)[number];
+/** Programmes politiques (08 §3.1 : réformateur, conservateur, opportuniste…). */
+export const AGENDAS = ["reformateur", "conservateur", "opportuniste", "religieux", "militariste", "pragmatique"] as const;
+export const RELATION_TYPES = ["amitie", "loyaute", "respect", "rivalite", "amour", "dette", "haine", "tension", "mentor"] as const;
+
+const attributeRecord = z.partialRecord(z.enum(ATTRIBUTES), z.number().int().min(0).max(100));
+/** Écart d'attribut apporté par un trait (−50 à +50). */
+const attributeDelta = z.partialRecord(z.enum(ATTRIBUTES), z.number().int().min(-50).max(50));
 
 export const CharacterSchema = z
   .object({
     id: CharacterIdSchema,
     name: z.string().min(1),
+    /** Nom sous lequel le personnage est connu au départ (identité de couverture). */
+    display_name: z.string().min(1).optional(),
     birth_year: year.optional(),
     active_from: year,
     active_until: year.optional(),
     death_event: EventIdSchema.optional(),
     faction: z.string().min(1),
+    org: OrganisationIdSchema.optional(),
+    rank_key: z.string().optional(),
     roles: z.array(z.string()).default([]),
+    attributes: attributeRecord.default({}),
+    traits: z.array(TraitIdSchema).default([]),
+    agenda: z.enum(AGENDAS).default("pragmatique"),
+    honesty: z.number().int().min(0).max(100).default(50),
+    /** Notoriété (0–100) : poids d'une mort sur la légitimité et le moral [A]. */
+    fame: z.number().int().min(0).max(100).default(20),
+    relations: z.array(z.object({ to: CharacterIdSchema, type: z.enum(RELATION_TYPES), strength: z.number().min(-100).max(100), canon: CanonSchema }).strict()).default([]),
+    /** Secrets (porteurs infiltrés, identité cachée) : jamais affichés avant le système de révélation (P5). */
+    hidden: z.object({ faction: z.string().optional(), titan: z.string().optional(), true_name: z.string().optional() }).strict().optional(),
+    portrait: z.object({ seed: z.number().int(), archetype: z.enum(["officier", "soldat", "cadet", "civil", "clerc", "noble", "ombre"]) }).strict().optional(),
+    bio_key: z.string().optional(),
+    ...canonFields,
+  })
+  .strict();
+
+/** Modificateur générique appliqué par un décret ou un trait. */
+export const ModifierSchema = z
+  .object({
+    target: z.string().regex(/^(legitimacy|stability|morale|tax_mult|manpower_mult|capital_monthly|(production_mult|consumption_mult|losses_mult):[a-z]+|(satisfaction|radicalisation):str_[a-z_]+|(org_loyalty|org_influence):org_[a-z_]+)$/, "cible de modificateur inconnue"),
+    value: z.number(),
+  })
+  .strict();
+export type Modifier = z.infer<typeof ModifierSchema>;
+
+export const TraitSchema = z
+  .object({
+    id: TraitIdSchema,
+    name_key: z.string().min(1),
+    attributes: attributeDelta.default({}),
+    /** Multiplicateur du stress reçu (1 = neutre). */
+    stress_gain: z.number().positive().default(1),
+    /** Biais des avis (08 §3.2) : gonfle les succès, exagère les risques, ignore les contre-indices. */
+    advice_bias: z.enum(["gonfle", "exagere", "ignore"]).optional(),
+    /** Penchants de vote : étiquette de décret → affinité (−1 à 1). */
+    vote: z.record(z.string(), z.number().min(-1).max(1)).default({}),
+    opposes: z.array(TraitIdSchema).default([]),
+    /** Trait acquis en cours de partie (trauma, épuisement) plutôt que de naissance. */
+    acquired: z.boolean().default(false),
+    ...canonFields,
+  })
+  .strict();
+
+export const StratumSchema = z
+  .object({ id: StratumIdSchema, name_key: z.string().min(1), ...canonFields })
+  .strict();
+
+export const OrganisationSchema = z
+  .object({
+    id: OrganisationIdSchema,
+    /** Clé courte utilisée par les garnisons (`garrison`, `military_police`…). */
+    key: z.string().min(1),
+    name_key: z.string().min(1),
+    kind: z.enum(["militaire", "religieuse", "civile", "cour"]),
+    /** Reçoit une part du budget militaire (F-ECO-15). */
+    budgeted: z.boolean().default(false),
+    ...canonFields,
+  })
+  .strict();
+
+export const LawSchema = z
+  .object({
+    id: LawIdSchema,
+    name_key: z.string().min(1),
+    desc_key: z.string().min(1),
+    category: z.enum(["militaire", "economie", "ordre", "religion", "information", "societe"]),
+    requires_vote: z.boolean(),
+    cost: z.object({ capital: z.number().min(0), gold: z.number().min(0) }).strict(),
+    /** Étiquettes de programme : servent au vote (affinités des membres du Cabinet). */
+    tags: z.array(z.string()).min(1),
+    exclusive_group: z.string().optional(),
+    effects: z.array(ModifierSchema).min(1),
+    delayed: z.array(z.object({ after_days: z.number().int().positive(), effects: z.array(ModifierSchema).min(1), log_key: z.string().min(1) }).strict()).default([]),
+    ...canonFields,
+  })
+  .strict();
+
+export const RoleSchema = z
+  .object({
+    id: RoleIdSchema,
+    number: z.number().int().min(1).max(18),
+    name_key: z.string().min(1),
+    /** Siège au Cabinet (08 §4.1). */
+    cabinet: z.boolean(),
+    /** Grandeur surveillée par le conseiller pour ses avis. */
+    metric: z.enum(["food_days", "gas_days", "steel_days", "gold", "legitimacy", "morale", "stability", "radicalisation", "faith", "manpower", "wall_structure", "horses", "capital", "none"]),
+    /** Seuil sous lequel (ou au-dessus duquel, pour la radicalisation) le conseiller s'alarme. */
+    alarm: z.number(),
+    /** Décret proposé quand l'alarme est atteinte. */
+    proposal: LawIdSchema.optional(),
+    /** Domaine du veto (catégorie de décrets) quand le titulaire est influent (F-ADV-03). */
+    veto_category: z.string().optional(),
     ...canonFields,
   })
   .strict();
@@ -159,6 +294,11 @@ export type EventDef = z.infer<typeof EventDefSchema>;
 export type Placement = z.infer<typeof PlacementSchema>;
 export type Building = z.infer<typeof BuildingSchema>;
 export type Scenario = z.infer<typeof ScenarioSchema>;
+export type Trait = z.infer<typeof TraitSchema>;
+export type Stratum = z.infer<typeof StratumSchema>;
+export type Organisation = z.infer<typeof OrganisationSchema>;
+export type Law = z.infer<typeof LawSchema>;
+export type Role = z.infer<typeof RoleSchema>;
 
 /** Sous-dossier de /data → schéma de ses entrées. */
 export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
@@ -169,6 +309,11 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   placements: PlacementSchema,
   buildings: BuildingSchema,
   scenarios: ScenarioSchema,
+  traits: TraitSchema,
+  strata: StratumSchema,
+  organisations: OrganisationSchema,
+  laws: LawSchema,
+  roles: RoleSchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

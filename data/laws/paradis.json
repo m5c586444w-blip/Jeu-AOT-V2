@@ -1,0 +1,1712 @@
+[
+  {
+    "id": "law_conscription_etendue",
+    "name_key": "law.conscription_etendue",
+    "desc_key": "law.conscription_etendue.desc",
+    "category": "militaire",
+    "requires_vote": true,
+    "cost": {
+      "capital": 20,
+      "gold": 0
+    },
+    "tags": [
+      "militaire",
+      "ordre"
+    ],
+    "exclusive_group": "conscription",
+    "effects": [
+      {
+        "target": "manpower_mult",
+        "value": 0.5
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -8
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -4
+      },
+      {
+        "target": "org_loyalty:org_garrison",
+        "value": 5
+      },
+      {
+        "target": "legitimacy",
+        "value": -2
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 60,
+        "effects": [
+          {
+            "target": "radicalisation:str_paysans",
+            "value": 6
+          }
+        ],
+        "log_key": "law.conscription_etendue.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_exemptions_conscription",
+    "name_key": "law.exemptions_conscription",
+    "desc_key": "law.exemptions_conscription.desc",
+    "category": "militaire",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "commerce",
+      "tradition"
+    ],
+    "exclusive_group": "conscription",
+    "effects": [
+      {
+        "target": "manpower_mult",
+        "value": -0.3
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": 4
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -4
+      },
+      {
+        "target": "org_loyalty:org_garrison",
+        "value": -4
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_soutien_corps",
+    "name_key": "law.soutien_corps",
+    "desc_key": "law.soutien_corps.desc",
+    "category": "militaire",
+    "requires_vote": true,
+    "cost": {
+      "capital": 20,
+      "gold": 3000
+    },
+    "tags": [
+      "exploration",
+      "militaire",
+      "reforme"
+    ],
+    "exclusive_group": "expeditions",
+    "effects": [
+      {
+        "target": "org_loyalty:org_survey_corps",
+        "value": 12
+      },
+      {
+        "target": "org_influence:org_survey_corps",
+        "value": 5
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": -5
+      },
+      {
+        "target": "consumption_mult:gas",
+        "value": 0.05
+      },
+      {
+        "target": "legitimacy",
+        "value": -1
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 30,
+        "effects": [
+          {
+            "target": "radicalisation:str_clerge",
+            "value": 4
+          }
+        ],
+        "log_key": "law.soutien_corps.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_moratoire_expeditions",
+    "name_key": "law.moratoire_expeditions",
+    "desc_key": "law.moratoire_expeditions.desc",
+    "category": "militaire",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "religion",
+      "tradition"
+    ],
+    "exclusive_group": "expeditions",
+    "effects": [
+      {
+        "target": "org_loyalty:org_survey_corps",
+        "value": -15
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 2
+      },
+      {
+        "target": "legitimacy",
+        "value": 1
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 90,
+        "effects": [
+          {
+            "target": "org_influence:org_survey_corps",
+            "value": -6
+          },
+          {
+            "target": "morale",
+            "value": -1
+          }
+        ],
+        "log_key": "law.moratoire_expeditions.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_exercices_garnison",
+    "name_key": "law.exercices_garnison",
+    "desc_key": "law.exercices_garnison.desc",
+    "category": "militaire",
+    "requires_vote": false,
+    "cost": {
+      "capital": 8,
+      "gold": 1500
+    },
+    "tags": [
+      "militaire"
+    ],
+    "effects": [
+      {
+        "target": "consumption_mult:gas",
+        "value": 0.1
+      },
+      {
+        "target": "consumption_mult:powder",
+        "value": 0.2
+      },
+      {
+        "target": "org_loyalty:org_garrison",
+        "value": 4
+      },
+      {
+        "target": "stability",
+        "value": 2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_requisition_chevaux",
+    "name_key": "law.requisition_chevaux",
+    "desc_key": "law.requisition_chevaux.desc",
+    "category": "militaire",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 0
+    },
+    "tags": [
+      "militaire"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -6
+      },
+      {
+        "target": "org_loyalty:org_survey_corps",
+        "value": 5
+      },
+      {
+        "target": "production_mult:food",
+        "value": -0.03
+      },
+      {
+        "target": "production_mult:horses",
+        "value": -0.2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_mobilisation_civils",
+    "name_key": "law.mobilisation_civils",
+    "desc_key": "law.mobilisation_civils.desc",
+    "category": "militaire",
+    "requires_vote": true,
+    "cost": {
+      "capital": 25,
+      "gold": 0
+    },
+    "tags": [
+      "militaire",
+      "repression"
+    ],
+    "effects": [
+      {
+        "target": "manpower_mult",
+        "value": 0.3
+      },
+      {
+        "target": "production_mult:food",
+        "value": -0.05
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -5
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -3
+      },
+      {
+        "target": "legitimacy",
+        "value": -2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_milices_civiles",
+    "name_key": "law.milices_civiles",
+    "desc_key": "law.milices_civiles.desc",
+    "category": "militaire",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 500
+    },
+    "tags": [
+      "ordre"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 2
+      },
+      {
+        "target": "org_influence:org_garrison",
+        "value": -3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_impot_foncier_hausse",
+    "name_key": "law.impot_foncier_hausse",
+    "desc_key": "law.impot_foncier_hausse.desc",
+    "category": "economie",
+    "requires_vote": true,
+    "cost": {
+      "capital": 20,
+      "gold": 0
+    },
+    "tags": [
+      "economie",
+      "repression"
+    ],
+    "exclusive_group": "impot_foncier",
+    "effects": [
+      {
+        "target": "tax_mult",
+        "value": 0.25
+      },
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": -8
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -4
+      },
+      {
+        "target": "legitimacy",
+        "value": -2
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 45,
+        "effects": [
+          {
+            "target": "radicalisation:str_paysans",
+            "value": 4
+          }
+        ],
+        "log_key": "law.impot_foncier_hausse.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_impot_commerce_hausse",
+    "name_key": "law.impot_commerce_hausse",
+    "desc_key": "law.impot_commerce_hausse.desc",
+    "category": "economie",
+    "requires_vote": true,
+    "cost": {
+      "capital": 20,
+      "gold": 0
+    },
+    "tags": [
+      "economie"
+    ],
+    "exclusive_group": "impot_commerce",
+    "effects": [
+      {
+        "target": "tax_mult",
+        "value": 0.15
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -10
+      },
+      {
+        "target": "org_loyalty:org_guildes",
+        "value": -10
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_allegement_fiscal",
+    "name_key": "law.allegement_fiscal",
+    "desc_key": "law.allegement_fiscal.desc",
+    "category": "economie",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "social",
+      "commerce"
+    ],
+    "exclusive_group": "impot_foncier",
+    "effects": [
+      {
+        "target": "tax_mult",
+        "value": -0.2
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 4
+      },
+      {
+        "target": "legitimacy",
+        "value": 2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_prix_plafonnes_grain",
+    "name_key": "law.prix_plafonnes_grain",
+    "desc_key": "law.prix_plafonnes_grain.desc",
+    "category": "economie",
+    "requires_vote": false,
+    "cost": {
+      "capital": 12,
+      "gold": 0
+    },
+    "tags": [
+      "social"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -6
+      },
+      {
+        "target": "production_mult:food",
+        "value": -0.05
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 60,
+        "effects": [
+          {
+            "target": "losses_mult:food",
+            "value": 0.3
+          }
+        ],
+        "log_key": "law.prix_plafonnes_grain.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_requisition_greniers",
+    "name_key": "law.requisition_greniers",
+    "desc_key": "law.requisition_greniers.desc",
+    "category": "economie",
+    "requires_vote": false,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "ordre",
+      "social"
+    ],
+    "effects": [
+      {
+        "target": "consumption_mult:food",
+        "value": -0.05
+      },
+      {
+        "target": "losses_mult:food",
+        "value": -0.2
+      },
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": -5
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -6
+      },
+      {
+        "target": "legitimacy",
+        "value": -1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_monopole_gaz",
+    "name_key": "law.monopole_gaz",
+    "desc_key": "law.monopole_gaz.desc",
+    "category": "economie",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "ordre",
+      "militaire"
+    ],
+    "effects": [
+      {
+        "target": "losses_mult:gas",
+        "value": -0.4
+      },
+      {
+        "target": "org_loyalty:org_guildes",
+        "value": -6
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -4
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_soutien_forges",
+    "name_key": "law.soutien_forges",
+    "desc_key": "law.soutien_forges.desc",
+    "category": "economie",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 2000
+    },
+    "tags": [
+      "commerce",
+      "militaire"
+    ],
+    "effects": [
+      {
+        "target": "production_mult:steel",
+        "value": 0.15
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.05
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_greniers_publics",
+    "name_key": "law.greniers_publics",
+    "desc_key": "law.greniers_publics.desc",
+    "category": "economie",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 2500
+    },
+    "tags": [
+      "social"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 2
+      },
+      {
+        "target": "losses_mult:food",
+        "value": -0.15
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.05
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_lutte_corruption",
+    "name_key": "law.lutte_corruption",
+    "desc_key": "law.lutte_corruption.desc",
+    "category": "economie",
+    "requires_vote": true,
+    "cost": {
+      "capital": 25,
+      "gold": 0
+    },
+    "tags": [
+      "transparence",
+      "reforme"
+    ],
+    "effects": [
+      {
+        "target": "losses_mult:food",
+        "value": -0.3
+      },
+      {
+        "target": "losses_mult:gas",
+        "value": -0.3
+      },
+      {
+        "target": "losses_mult:steel",
+        "value": -0.3
+      },
+      {
+        "target": "losses_mult:gold",
+        "value": -0.3
+      },
+      {
+        "target": "org_loyalty:org_military_police",
+        "value": -6
+      },
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": -4
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 30,
+        "effects": [
+          {
+            "target": "legitimacy",
+            "value": 3
+          }
+        ],
+        "log_key": "law.lutte_corruption.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_travaux_murs",
+    "name_key": "law.travaux_murs",
+    "desc_key": "law.travaux_murs.desc",
+    "category": "economie",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 3000
+    },
+    "tags": [
+      "militaire",
+      "tradition"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 2
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.05
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -3
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": 2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_couvre_feu",
+    "name_key": "law.couvre_feu",
+    "desc_key": "law.couvre_feu.desc",
+    "category": "ordre",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 0
+    },
+    "tags": [
+      "ordre",
+      "repression"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 4
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -5
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -6
+      },
+      {
+        "target": "org_influence:org_military_police",
+        "value": 5
+      },
+      {
+        "target": "legitimacy",
+        "value": -1
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 30,
+        "effects": [
+          {
+            "target": "radicalisation:str_basfonds",
+            "value": 6
+          }
+        ],
+        "log_key": "law.couvre_feu.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_loi_martiale",
+    "name_key": "law.loi_martiale",
+    "desc_key": "law.loi_martiale.desc",
+    "category": "ordre",
+    "requires_vote": true,
+    "cost": {
+      "capital": 35,
+      "gold": 0
+    },
+    "tags": [
+      "ordre",
+      "repression",
+      "militaire"
+    ],
+    "exclusive_group": "exception",
+    "effects": [
+      {
+        "target": "stability",
+        "value": 8
+      },
+      {
+        "target": "legitimacy",
+        "value": -8
+      },
+      {
+        "target": "org_influence:org_garrison",
+        "value": 8
+      },
+      {
+        "target": "org_influence:org_military_police",
+        "value": 5
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -6
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -5
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -5
+      },
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": -4
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 45,
+        "effects": [
+          {
+            "target": "radicalisation:str_bourgeoisie",
+            "value": 5
+          },
+          {
+            "target": "radicalisation:str_basfonds",
+            "value": 5
+          }
+        ],
+        "log_key": "law.loi_martiale.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_police_renforcee",
+    "name_key": "law.police_renforcee",
+    "desc_key": "law.police_renforcee.desc",
+    "category": "ordre",
+    "requires_vote": false,
+    "cost": {
+      "capital": 12,
+      "gold": 2000
+    },
+    "tags": [
+      "ordre",
+      "repression"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 3
+      },
+      {
+        "target": "org_influence:org_military_police",
+        "value": 6
+      },
+      {
+        "target": "org_loyalty:org_military_police",
+        "value": 4
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -5
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_amnistie",
+    "name_key": "law.amnistie",
+    "desc_key": "law.amnistie.desc",
+    "category": "ordre",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "liberte",
+      "social"
+    ],
+    "effects": [
+      {
+        "target": "legitimacy",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": 6
+      },
+      {
+        "target": "stability",
+        "value": -2
+      },
+      {
+        "target": "org_loyalty:org_military_police",
+        "value": -5
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_controle_ville_souterraine",
+    "name_key": "law.controle_ville_souterraine",
+    "desc_key": "law.controle_ville_souterraine.desc",
+    "category": "ordre",
+    "requires_vote": false,
+    "cost": {
+      "capital": 15,
+      "gold": 1000
+    },
+    "tags": [
+      "ordre",
+      "repression"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -10
+      },
+      {
+        "target": "radicalisation:str_basfonds",
+        "value": 5
+      },
+      {
+        "target": "losses_mult:gold",
+        "value": -0.1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_tribunaux_civils",
+    "name_key": "law.tribunaux_civils",
+    "desc_key": "law.tribunaux_civils.desc",
+    "category": "ordre",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 1000
+    },
+    "tags": [
+      "reforme",
+      "transparence"
+    ],
+    "effects": [
+      {
+        "target": "legitimacy",
+        "value": 2
+      },
+      {
+        "target": "org_influence:org_military_police",
+        "value": -4
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_privileges_culte",
+    "name_key": "law.privileges_culte",
+    "desc_key": "law.privileges_culte.desc",
+    "category": "religion",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "religion",
+      "tradition"
+    ],
+    "exclusive_group": "culte",
+    "effects": [
+      {
+        "target": "satisfaction:str_clerge",
+        "value": 10
+      },
+      {
+        "target": "org_loyalty:org_culte",
+        "value": 10
+      },
+      {
+        "target": "legitimacy",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -2
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 90,
+        "effects": [
+          {
+            "target": "org_influence:org_culte",
+            "value": 5
+          }
+        ],
+        "log_key": "law.privileges_culte.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_taxe_culte",
+    "name_key": "law.taxe_culte",
+    "desc_key": "law.taxe_culte.desc",
+    "category": "religion",
+    "requires_vote": true,
+    "cost": {
+      "capital": 20,
+      "gold": 0
+    },
+    "tags": [
+      "economie",
+      "reforme"
+    ],
+    "exclusive_group": "culte",
+    "effects": [
+      {
+        "target": "tax_mult",
+        "value": 0.08
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": -10
+      },
+      {
+        "target": "org_loyalty:org_culte",
+        "value": -12
+      },
+      {
+        "target": "legitimacy",
+        "value": -3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_tolerance_heterodoxe",
+    "name_key": "law.tolerance_heterodoxe",
+    "desc_key": "law.tolerance_heterodoxe.desc",
+    "category": "religion",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "liberte",
+      "reforme"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_clerge",
+        "value": -6
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 3
+      },
+      {
+        "target": "legitimacy",
+        "value": -2
+      },
+      {
+        "target": "org_loyalty:org_culte",
+        "value": -6
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_censure_religieuse",
+    "name_key": "law.censure_religieuse",
+    "desc_key": "law.censure_religieuse.desc",
+    "category": "religion",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 0
+    },
+    "tags": [
+      "religion",
+      "repression"
+    ],
+    "effects": [
+      {
+        "target": "org_influence:org_culte",
+        "value": 5
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": 4
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -4
+      },
+      {
+        "target": "stability",
+        "value": 1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_censure_presse",
+    "name_key": "law.censure_presse",
+    "desc_key": "law.censure_presse.desc",
+    "category": "information",
+    "requires_vote": false,
+    "cost": {
+      "capital": 12,
+      "gold": 0
+    },
+    "tags": [
+      "ordre",
+      "repression"
+    ],
+    "exclusive_group": "presse",
+    "effects": [
+      {
+        "target": "stability",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": -5
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 60,
+        "effects": [
+          {
+            "target": "legitimacy",
+            "value": -3
+          }
+        ],
+        "log_key": "law.censure_presse.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_liberte_presse",
+    "name_key": "law.liberte_presse",
+    "desc_key": "law.liberte_presse.desc",
+    "category": "information",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "liberte",
+      "transparence"
+    ],
+    "exclusive_group": "presse",
+    "effects": [
+      {
+        "target": "legitimacy",
+        "value": 2
+      },
+      {
+        "target": "stability",
+        "value": -2
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 5
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_gazette_officielle",
+    "name_key": "law.gazette_officielle",
+    "desc_key": "law.gazette_officielle.desc",
+    "category": "information",
+    "requires_vote": false,
+    "cost": {
+      "capital": 8,
+      "gold": 1500
+    },
+    "tags": [
+      "tradition"
+    ],
+    "effects": [
+      {
+        "target": "morale",
+        "value": 2
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.03
+      },
+      {
+        "target": "legitimacy",
+        "value": 1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_politique_memoire",
+    "name_key": "law.politique_memoire",
+    "desc_key": "law.politique_memoire.desc",
+    "category": "information",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 2000
+    },
+    "tags": [
+      "social",
+      "tradition"
+    ],
+    "effects": [
+      {
+        "target": "morale",
+        "value": 2
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": 5
+      },
+      {
+        "target": "legitimacy",
+        "value": 2
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.03
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_recensement",
+    "name_key": "law.recensement",
+    "desc_key": "law.recensement.desc",
+    "category": "information",
+    "requires_vote": false,
+    "cost": {
+      "capital": 8,
+      "gold": 1000
+    },
+    "tags": [
+      "ordre"
+    ],
+    "effects": [
+      {
+        "target": "stability",
+        "value": 2
+      },
+      {
+        "target": "manpower_mult",
+        "value": 0.1
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_aide_refugies",
+    "name_key": "law.aide_refugies",
+    "desc_key": "law.aide_refugies.desc",
+    "category": "societe",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 3000
+    },
+    "tags": [
+      "social"
+    ],
+    "exclusive_group": "refugies",
+    "effects": [
+      {
+        "target": "satisfaction:str_refugies",
+        "value": 12
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.08
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -3
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 60,
+        "effects": [
+          {
+            "target": "stability",
+            "value": 2
+          }
+        ],
+        "log_key": "law.aide_refugies.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_travail_refugies",
+    "name_key": "law.travail_refugies",
+    "desc_key": "law.travail_refugies.desc",
+    "category": "societe",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "repression",
+      "economie"
+    ],
+    "exclusive_group": "refugies",
+    "effects": [
+      {
+        "target": "production_mult:food",
+        "value": 0.05
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": -10
+      },
+      {
+        "target": "radicalisation:str_refugies",
+        "value": 6
+      },
+      {
+        "target": "legitimacy",
+        "value": -2
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_hopitaux_publics",
+    "name_key": "law.hopitaux_publics",
+    "desc_key": "law.hopitaux_publics.desc",
+    "category": "societe",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 3000
+    },
+    "tags": [
+      "social"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_paysans",
+        "value": 3
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": 4
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": 4
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.05
+      },
+      {
+        "target": "stability",
+        "value": 1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_ecoles",
+    "name_key": "law.ecoles",
+    "desc_key": "law.ecoles.desc",
+    "category": "societe",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 2500
+    },
+    "tags": [
+      "reforme",
+      "science"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 3
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.04
+      },
+      {
+        "target": "legitimacy",
+        "value": 1
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 120,
+        "effects": [
+          {
+            "target": "production_mult:steel",
+            "value": 0.05
+          }
+        ],
+        "log_key": "law.ecoles.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_privileges_noblesse",
+    "name_key": "law.privileges_noblesse",
+    "desc_key": "law.privileges_noblesse.desc",
+    "category": "societe",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "tradition"
+    ],
+    "exclusive_group": "noblesse",
+    "effects": [
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": 10
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": -5
+      },
+      {
+        "target": "legitimacy",
+        "value": 1
+      },
+      {
+        "target": "org_loyalty:org_cour",
+        "value": 8
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_expropriation",
+    "name_key": "law.expropriation",
+    "desc_key": "law.expropriation.desc",
+    "category": "societe",
+    "requires_vote": true,
+    "cost": {
+      "capital": 30,
+      "gold": 0
+    },
+    "tags": [
+      "reforme",
+      "social",
+      "repression"
+    ],
+    "exclusive_group": "noblesse",
+    "effects": [
+      {
+        "target": "satisfaction:str_noblesse",
+        "value": -15
+      },
+      {
+        "target": "satisfaction:str_paysans",
+        "value": 6
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": 8
+      },
+      {
+        "target": "production_mult:food",
+        "value": 0.05
+      },
+      {
+        "target": "legitimacy",
+        "value": -4
+      },
+      {
+        "target": "org_loyalty:org_cour",
+        "value": -15
+      }
+    ],
+    "delayed": [
+      {
+        "after_days": 30,
+        "effects": [
+          {
+            "target": "radicalisation:str_noblesse",
+            "value": 10
+          }
+        ],
+        "log_key": "law.expropriation.later0"
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_rations_militaires",
+    "name_key": "law.rations_militaires",
+    "desc_key": "law.rations_militaires.desc",
+    "category": "societe",
+    "requires_vote": false,
+    "cost": {
+      "capital": 10,
+      "gold": 0
+    },
+    "tags": [
+      "militaire"
+    ],
+    "effects": [
+      {
+        "target": "org_loyalty:org_garrison",
+        "value": 5
+      },
+      {
+        "target": "org_loyalty:org_survey_corps",
+        "value": 5
+      },
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": -4
+      },
+      {
+        "target": "satisfaction:str_refugies",
+        "value": -4
+      },
+      {
+        "target": "morale",
+        "value": -1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_fetes_murs",
+    "name_key": "law.fetes_murs",
+    "desc_key": "law.fetes_murs.desc",
+    "category": "societe",
+    "requires_vote": false,
+    "cost": {
+      "capital": 8,
+      "gold": 2000
+    },
+    "tags": [
+      "religion",
+      "tradition"
+    ],
+    "effects": [
+      {
+        "target": "morale",
+        "value": 3
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.04
+      },
+      {
+        "target": "satisfaction:str_clerge",
+        "value": 3
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_assemblee_guildes",
+    "name_key": "law.assemblee_guildes",
+    "desc_key": "law.assemblee_guildes.desc",
+    "category": "societe",
+    "requires_vote": true,
+    "cost": {
+      "capital": 15,
+      "gold": 0
+    },
+    "tags": [
+      "commerce",
+      "reforme"
+    ],
+    "effects": [
+      {
+        "target": "org_influence:org_guildes",
+        "value": 6
+      },
+      {
+        "target": "org_loyalty:org_guildes",
+        "value": 8
+      },
+      {
+        "target": "satisfaction:str_bourgeoisie",
+        "value": 4
+      },
+      {
+        "target": "legitimacy",
+        "value": 1
+      },
+      {
+        "target": "stability",
+        "value": -1
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  },
+  {
+    "id": "law_charite_basfonds",
+    "name_key": "law.charite_basfonds",
+    "desc_key": "law.charite_basfonds.desc",
+    "category": "societe",
+    "requires_vote": false,
+    "cost": {
+      "capital": 8,
+      "gold": 1500
+    },
+    "tags": [
+      "social",
+      "religion"
+    ],
+    "effects": [
+      {
+        "target": "satisfaction:str_basfonds",
+        "value": 8
+      },
+      {
+        "target": "tax_mult",
+        "value": -0.04
+      }
+    ],
+    "delayed": [],
+    "canon": "A",
+    "notes_canon": "Décret de jeu (02 §4) : effets chiffrés [A]."
+  }
+]

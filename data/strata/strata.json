@@ -1,0 +1,50 @@
+[
+  {
+    "id": "str_royaute",
+    "name_key": "stratum.royaute",
+    "canon": "A",
+    "notes_canon": "Strates de Paradis (01 §4, A) : famille royale/Reiss."
+  },
+  {
+    "id": "str_noblesse",
+    "name_key": "stratum.noblesse",
+    "canon": "A",
+    "notes_canon": "01 §4 (A)."
+  },
+  {
+    "id": "str_bourgeoisie",
+    "name_key": "stratum.bourgeoisie",
+    "canon": "A",
+    "notes_canon": "01 §4 (A)."
+  },
+  {
+    "id": "str_militaires",
+    "name_key": "stratum.militaires",
+    "canon": "A",
+    "notes_canon": "01 §4 (A)."
+  },
+  {
+    "id": "str_clerge",
+    "name_key": "stratum.clerge",
+    "canon": "A",
+    "notes_canon": "01 §4 (A)."
+  },
+  {
+    "id": "str_paysans",
+    "name_key": "stratum.paysans",
+    "canon": "A",
+    "notes_canon": "01 §4 (A)."
+  },
+  {
+    "id": "str_basfonds",
+    "name_key": "stratum.basfonds",
+    "canon": "A",
+    "notes_canon": "01 §4 (A) : ville souterraine."
+  },
+  {
+    "id": "str_refugies",
+    "name_key": "stratum.refugies",
+    "canon": "A",
+    "notes_canon": "01 §4 (A) ; afflux après la chute de Maria (02 §4)."
+  }
+]
