@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { BALANCE_FILES } from "./balance";
-import type { BalanceName, EconomyBalance, TimeBalance } from "./balance";
+import type { BalanceName, EconomyBalance, PoliticsBalance, SocietyBalance, TimeBalance } from "./balance";
 import { COLLECTION_NAMES } from "./schemas";
 import { checkReferences, emptyData, jsonPath, validateCollectionFile } from "./validate";
 import type { DataIssue, GameData } from "./validate";
@@ -9,6 +9,8 @@ import type { DataIssue, GameData } from "./validate";
 export interface Balance {
   economy: EconomyBalance;
   time: TimeBalance;
+  politics: PoliticsBalance;
+  society: SocietyBalance;
 }
 
 /** Charge et valide data/balance/*.json (un schéma par fichier). Fichier absent = tolérée (fixtures). */

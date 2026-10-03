@@ -44,6 +44,28 @@ export interface StrategicState {
 }
 
 const LOG_LIMIT = 60;
+
+/** Contribution nommée à une grandeur (décret, strates, légitimité…), pour l'explication « pourquoi ? ». */
+export interface ModEntry {
+  key: string;
+  value: number;
+  params?: Record<string, string | number>;
+}
+
+/**
+ * Modificateurs venus de la couche politique (P2). Cibles : `production_mult:<r>`, `consumption_mult:<r>`,
+ * `losses_mult:<r>`, `morale`, `stability`, `tax_mult`, `manpower_mult` ; `provinceMorale` : par province.
+ */
+export interface EconomyMods {
+  byTarget: Readonly<Record<string, readonly ModEntry[]>>;
+  provinceMorale: Readonly<Record<string, readonly ModEntry[]>>;
+}
+
+export const NO_MODS: EconomyMods = { byTarget: {}, provinceMorale: {} };
+
+function mods(m: EconomyMods, target: string): readonly ModEntry[] {
+  return m.byTarget[target] ?? [];
+}
 const EPSILON = 1e-6;
 
 export function createStrategicState(world: World): StrategicState {
@@ -59,7 +81,7 @@ export function createStrategicState(world: World): StrategicState {
     const share = control === "paradis" && totalWeight > 0 ? weightOf(p.pop_level) / totalWeight : 0;
     provinces[p.id] = {
       control,
-      population: Math.round(eco.population.total_start * share),
+      population: Math.round((sc.population_total ?? eco.population.total_start) * share),
       morale: sc.morale,
       stability: sc.stability,
       garrison: sc.garrisons[p.id] ? { ...sc.garrisons[p.id] } as ProvinceState["garrison"] : null,
@@ -88,7 +110,7 @@ export function totals(state: StrategicState): { population: number; soldiers: n
 }
 
 /** Production quotidienne d'une ressource par une province (formule 02 §3.2), avec ses facteurs. */
-export function provinceProduction(world: World, state: StrategicState, date: GameDate, provinceId: string, r: ResourceId): Explained {
+export function provinceProduction(world: World, state: StrategicState, date: GameDate, provinceId: string, r: ResourceId, m: EconomyMods = NO_MODS): Explained {
   const def = world.provinceById.get(provinceId);
   const ps = state.provinces[provinceId];
   const e = new Explainer();
@@ -109,6 +131,9 @@ export function provinceProduction(world: World, state: StrategicState, date: Ga
   const seasonal = eco.output.season[season]?.[r];
   if (seasonal !== undefined) e.mul("why.season", seasonal, { season });
   e.mul("why.rationing_productivity", 1 + (eco.rationing[state.rationing]?.productivity ?? 0), { level: state.rationing });
+  const scenarioMult = world.scenario.production_mult[r];
+  if (scenarioMult !== undefined) e.mul("why.scenario_conditions", scenarioMult, { note: world.scenario.production_note_key ?? "" });
+  for (const x of mods(m, `production_mult:${r}`)) e.mul(x.key, 1 + x.value, x.params);
   return e.done();
 }
 
@@ -154,7 +179,7 @@ export interface DayPlan {
 }
 
 /** Consommation quotidienne nationale d'une ressource. */
-function consumption(world: World, state: StrategicState, date: GameDate, r: ResourceId): Explainer {
+function consumption(world: World, state: StrategicState, date: GameDate, r: ResourceId, m: EconomyMods): Explainer {
   const c = world.economy.consumption;
   const { population, soldiers } = totals(state);
   const rationing = 1 + (world.economy.rationing[state.rationing]?.consumption ?? 0);
@@ -180,28 +205,31 @@ function consumption(world: World, state: StrategicState, date: GameDate, r: Res
     default:
       break;
   }
+  for (const x of mods(m, `consumption_mult:${r}`)) e.mul(x.key, 1 + x.value, x.params);
   return e;
 }
 
 /** Plan d'une journée : ce que le tick va appliquer, et sa justification complète. */
-export function planDay(world: World, state: StrategicState, date: GameDate): DayPlan {
+export function planDay(world: World, state: StrategicState, date: GameDate, m: EconomyMods = NO_MODS): DayPlan {
   const eco = world.economy;
   const prod: Record<string, Explainer> = {};
   const cons: Record<string, Explainer> = {};
   for (const r of RESOURCE_IDS) {
     prod[r] = new Explainer().base("why.production_base", 0);
-    cons[r] = consumption(world, state, date, r);
+    cons[r] = consumption(world, state, date, r, m);
   }
   for (const def of world.provinces) {
     for (const r of RESOURCE_IDS) {
-      const v = provinceProduction(world, state, date, def.id, r).value;
+      const v = provinceProduction(world, state, date, def.id, r, m).value;
       if (v !== 0) prod[r]?.add("why.from_province", v, { province: def.name_key });
     }
   }
   // Pertes (avaries, vols) calculées sur le stock du matin, avant les transformations.
   const lossX: Record<string, Explained> = {};
   for (const r of RESOURCE_IDS) {
-    lossX[r] = new Explainer().base("why.losses_base", 0).add("why.losses", state.stocks[r] * (eco.losses_per_day[r] ?? 0), { rate: eco.losses_per_day[r] ?? 0 }).done();
+    const lx = new Explainer().base("why.losses_base", 0).add("why.losses", state.stocks[r] * (eco.losses_per_day[r] ?? 0), { rate: eco.losses_per_day[r] ?? 0 });
+    for (const x of mods(m, `losses_mult:${r}`)) lx.mul(x.key, 1 + x.value, x.params);
+    lossX[r] = lx.done();
   }
   // Transformations (fabriques) : elles prennent dans le stock + la production du jour, sans créer de rupture.
   for (const def of world.provinces) {
@@ -245,23 +273,24 @@ export function planDay(world: World, state: StrategicState, date: GameDate): Da
   for (const def of world.provinces) {
     const ps = state.provinces[def.id];
     if (!ps || ps.control !== "paradis") continue;
-    const m = new Explainer().base("why.morale_base", eco.morale.base_target);
-    m.add("why.morale_rationing", eco.rationing[state.rationing]?.morale ?? 0, { level: state.rationing });
-    if (famine > 0) m.add("why.morale_famine", eco.morale.famine);
-    if (seasonOf(date) === "hiver") m.add("why.morale_winter", eco.morale.winter);
-    if (reserveDays >= eco.morale.reserve_days) m.add("why.morale_reserve", eco.morale.reserve_bonus, { days: eco.morale.reserve_days });
-    moraleTarget[def.id] = m.done();
-    stabilityTarget[def.id] = new Explainer()
-      .base("why.stability_base", eco.stability.base_target)
-      .add("why.stability_morale", eco.stability.per_morale * ps.morale, { morale: Math.round(ps.morale) })
-      .done();
+    const mt = new Explainer().base("why.morale_base", eco.morale.base_target);
+    mt.add("why.morale_rationing", eco.rationing[state.rationing]?.morale ?? 0, { level: state.rationing });
+    if (famine > 0) mt.add("why.morale_famine", eco.morale.famine);
+    if (seasonOf(date) === "hiver") mt.add("why.morale_winter", eco.morale.winter);
+    if (reserveDays >= eco.morale.reserve_days) mt.add("why.morale_reserve", eco.morale.reserve_bonus, { days: eco.morale.reserve_days });
+    for (const x of mods(m, "morale")) mt.add(x.key, x.value, x.params);
+    for (const x of m.provinceMorale[def.id] ?? []) mt.add(x.key, x.value, x.params);
+    moraleTarget[def.id] = mt.done();
+    const stx = new Explainer().base("why.stability_base", eco.stability.base_target).add("why.stability_morale", eco.stability.per_morale * ps.morale, { morale: Math.round(ps.morale) });
+    for (const x of mods(m, "stability")) stx.add(x.key, x.value, x.params);
+    stabilityTarget[def.id] = stx.done();
   }
   return { date, resources, famine, moraleTarget, stabilityTarget };
 }
 
 const clamp100 = (v: number): number => Math.max(0, Math.min(100, v));
 
-function pushLog(s: StrategicState, date: GameDate, key: string, params: Record<string, string | number>, pause: boolean): void {
+export function pushLog(s: StrategicState, date: GameDate, key: string, params: Record<string, string | number>, pause: boolean): void {
   s.alertSeq += 1;
   s.log.push({ seq: s.alertSeq, date: { ...date }, key, params, pause });
   if (s.log.length > LOG_LIMIT) s.log.splice(0, s.log.length - LOG_LIMIT);
@@ -297,23 +326,26 @@ export interface MonthPlan {
 }
 
 /** Flux mensuels (02 §1 : économie, budgets, recrutement). */
-export function planMonth(world: World, state: StrategicState): MonthPlan {
+export function planMonth(world: World, state: StrategicState, mm: EconomyMods = NO_MODS): MonthPlan {
   const m = world.economy.monthly;
   let weightedStability = 0;
   const { population, soldiers } = totals(state);
   for (const ps of Object.values(state.provinces)) if (ps.control === "paradis") weightedStability += ps.population * ps.stability;
   const stability = population > 0 ? weightedStability / population : 0;
-  const taxes = new Explainer()
+  const tx = new Explainer()
     .base("why.taxes_population", population * m.tax_per_pop, { population })
-    .mul("why.taxes_stability", m.tax_stability_floor + ((1 - m.tax_stability_floor) * stability) / 100, { stability: Math.round(stability) })
-    .done();
+    .mul("why.taxes_stability", m.tax_stability_floor + ((1 - m.tax_stability_floor) * stability) / 100, { stability: Math.round(stability) });
+  for (const x of mods(mm, "tax_mult")) tx.mul(x.key, 1 + x.value, x.params);
+  const taxes = tx.done();
   let buildingUpkeep = 0;
   for (const ps of Object.values(state.provinces)) {
     if (ps.control !== "paradis") continue;
     for (const b of ps.buildings) buildingUpkeep += world.buildings.get(b)?.upkeep_gold_month ?? 0;
   }
   const upkeep = new Explainer().base("why.upkeep_soldiers", soldiers * m.soldier_upkeep, { soldiers }).add("why.upkeep_buildings", buildingUpkeep).done();
-  const manpower = new Explainer().base("why.manpower_growth", population * m.manpower_growth_per_pop, { population }).done();
+  const mp = new Explainer().base("why.manpower_growth", population * m.manpower_growth_per_pop, { population });
+  for (const x of mods(mm, "manpower_mult")) mp.mul(x.key, 1 + x.value, x.params);
+  const manpower = mp.done();
   return { taxes, upkeep, manpower };
 }
 

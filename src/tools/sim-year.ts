@@ -48,18 +48,29 @@ function stats(times: number[]): { mean: number; p95: number; max: number } {
 }
 
 const fr = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
-const world = loadWorld("data", DEFAULT_SCENARIO);
-const year = runYear(world);
-const st = year.state.strategic;
-if (!st) throw new Error("pas d'état stratégique");
-const tot = totals(st);
-console.log(`sim:year : ${DEFAULT_SCENARIO}, graine 42, 360 jours → an ${year.state.date.year}, jour ${year.state.date.day}`);
-console.log(`  population ${fr.format(tot.population)} · soldats ${fr.format(tot.soldiers)} · alertes ${st.log.length}`);
-console.log(`  stocks : ${RESOURCE_IDS.map((r) => `${r} ${fr.format(st.stocks[r])}`).join(" · ")}`);
-let failed = year.problems.length > 0;
-for (const p of year.problems.slice(0, 20)) console.error(`  INVARIANT ${p}`);
-const s74 = stats(year.times);
-console.log(`  tick (74 provinces) : moyenne ${s74.mean.toFixed(3)} ms · p95 ${s74.p95.toFixed(3)} ms · max ${s74.max.toFixed(3)} ms`);
+let failed = false;
+let world = loadWorld("data", DEFAULT_SCENARIO);
+for (const scenarioId of [DEFAULT_SCENARIO, "scn_sandbox_850"]) {
+  const w = loadWorld("data", scenarioId);
+  world = w;
+  const year = runYear(w);
+  const st = year.state.strategic;
+  if (!st) throw new Error("pas d'état stratégique");
+  const tot = totals(st);
+  console.log(`sim:year : ${scenarioId}, graine 42, 360 jours → an ${year.state.date.year}, jour ${year.state.date.day}`);
+  console.log(`  population ${fr.format(tot.population)} · soldats ${fr.format(tot.soldiers)} · alertes ${st.log.length}`);
+  console.log(`  stocks : ${RESOURCE_IDS.map((r) => `${r} ${fr.format(st.stocks[r])}`).join(" · ")}`);
+  const pol = year.state.politics;
+  if (pol) {
+    console.log(`  politique : légitimité ${pol.legitimacy.toFixed(1)} · capital ${fr.format(pol.capital)} · décrets ${pol.laws.length} · propositions ${pol.proposals.length} · vivants ${Object.values(pol.characters).filter((c) => c.alive).length}/${Object.keys(pol.characters).length}`);
+    for (const [id, s] of Object.entries(pol.strata)) if (!(s.satisfaction >= 0 && s.satisfaction <= 100 && s.radicalisation >= 0 && s.radicalisation <= 100)) year.problems.push(`strate ${id} hors bornes`);
+    if (!(pol.legitimacy >= 0 && pol.legitimacy <= 100)) year.problems.push("légitimité hors bornes");
+  }
+  if (year.problems.length > 0) failed = true;
+  for (const p of year.problems.slice(0, 20)) console.error(`  INVARIANT ${p}`);
+  const s74 = stats(year.times);
+  console.log(`  tick (74 provinces) : moyenne ${s74.mean.toFixed(3)} ms · p95 ${s74.p95.toFixed(3)} ms · max ${s74.max.toFixed(3)} ms`);
+}
 
 if (bench) {
   const pool = world.provinces;
@@ -72,10 +83,14 @@ if (bench) {
     const b = world.scenario.buildings[base];
     if (b) scenario.buildings[p.id] = b;
   }
-  const big = buildWorld({ provinces: [...world.provinces, ...extra], buildings: [...world.buildings.values()], scenarios: [scenario], economy: world.economy, time: world.time }, scenario.id);
+  const pw = world.politics;
+  const politicsSource = pw
+    ? { characters: [...pw.characters.values()], traits: [...pw.traits.values()], strata: pw.strata, organisations: [...pw.organisations.values()], laws: [...pw.laws.values()], roles: pw.roles, politics: pw.balance, society: pw.society }
+    : {};
+  const big = buildWorld({ provinces: [...world.provinces, ...extra], buildings: [...world.buildings.values()], scenarios: [scenario], economy: world.economy, time: world.time, ...politicsSource }, scenario.id);
   const run = runYear(big);
   const s150 = stats(run.times);
-  console.log(`  tick (${big.provinces.length} provinces) : moyenne ${s150.mean.toFixed(3)} ms · p95 ${s150.p95.toFixed(3)} ms · max ${s150.max.toFixed(3)} ms (budget ${BUDGET_MS} ms, 00 §6.8)`);
+  console.log(`  tick (${big.provinces.length} provinces, ${world.scenario.id}${pw ? ", politique comprise" : ""}) : moyenne ${s150.mean.toFixed(3)} ms · p95 ${s150.p95.toFixed(3)} ms · max ${s150.max.toFixed(3)} ms (budget ${BUDGET_MS} ms, 00 §6.8)`);
   if (s150.p95 > BUDGET_MS) {
     console.error(`  ÉCHEC : p95 du tick au-dessus de ${BUDGET_MS} ms.`);
     failed = true;

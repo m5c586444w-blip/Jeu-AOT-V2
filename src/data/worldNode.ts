@@ -12,5 +12,22 @@ export function loadWorld(dir = "data", scenarioId = DEFAULT_SCENARIO): World {
   const all = [...issues, ...bIssues];
   if (all.length > 0) throw new Error(`Données invalides :\n${all.map(formatIssue).join("\n")}`);
   if (!balance.economy || !balance.time) throw new Error(`Équilibrage incomplet dans ${dir}/balance (economy.json et time.json requis)`);
-  return buildWorld({ provinces: data.provinces, buildings: data.buildings, scenarios: data.scenarios, economy: balance.economy, time: balance.time }, scenarioId);
+  return buildWorld(
+    {
+      provinces: data.provinces,
+      buildings: data.buildings,
+      scenarios: data.scenarios,
+      economy: balance.economy,
+      time: balance.time,
+      characters: data.characters,
+      traits: data.traits,
+      strata: data.strata,
+      organisations: data.organisations,
+      laws: data.laws,
+      roles: data.roles,
+      ...(balance.politics ? { politics: balance.politics } : {}),
+      ...(balance.society ? { society: balance.society } : {}),
+    },
+    scenarioId,
+  );
 }

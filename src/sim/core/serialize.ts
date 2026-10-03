@@ -36,6 +36,13 @@ export const MIGRATIONS: readonly Migration[] = [
       return { ...raw, schemaVersion: 2, strategic: raw["strategic"] ?? null };
     },
   },
+  {
+    from: 2,
+    describe: "v2 → v3 : ajout de la couche politique (`politics: null` pour une partie sans politique)",
+    migrate(raw) {
+      return { ...raw, schemaVersion: 3, politics: raw["politics"] ?? null };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {
@@ -91,5 +98,7 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (!isInt(raw["commandIndex"])) problems.push("commandIndex");
   const strat = raw["strategic"];
   if (strat !== null && (typeof strat !== "object" || strat === undefined || !("stocks" in strat) || !("provinces" in strat))) problems.push("strategic");
+  const pol = raw["politics"];
+  if (pol !== null && (typeof pol !== "object" || pol === undefined || !("legitimacy" in pol) || !("characters" in pol))) problems.push("politics");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

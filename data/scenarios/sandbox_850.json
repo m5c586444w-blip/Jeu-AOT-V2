@@ -36,7 +36,7 @@
       "prov_plaines_cerealieres_sud": "perdu",
       "prov_plaines_du_nord": "perdu",
       "prov_collines_minieres": "perdu",
-      "prov_ville_usine": "perdu",
+      "prov_ville_usine": "paradis",
       "prov_haras_maria": "perdu",
       "prov_vallee_du_moulin": "perdu",
       "prov_carrefour_du_sud": "perdu",
@@ -156,6 +156,10 @@
       ],
       "prov_stohess": [
         "bld_marche"
+      ],
+      "prov_ville_usine": [
+        "bld_mine_glace",
+        "bld_fabrique_gaz"
       ]
     },
     "stocks": {
@@ -174,7 +178,7 @@
     "stability": 55,
     "population_total": 780000,
     "production_mult": {
-      "food": 2.2
+      "food": 2.8
     },
     "production_note_key": "scn.sandbox_850.production",
     "refugee_share": {
@@ -237,6 +241,6 @@
       }
     },
     "canon": "A",
-    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]."
+    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]. La ville-usine (R10, source du gaz d'ODM) reste exploitée : sa localisation exacte est [?] (11 §9) et le canon montre l'ODM en usage en 850 ; valeur paramétrable (control)."
   }
 ]

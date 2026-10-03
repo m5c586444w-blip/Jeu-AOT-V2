@@ -116,12 +116,8 @@ export const ScenarioSchema = z
   .strict();
 
 
-/** Attributs d'un personnage (02 §9.1), échelle 0–100 [A]. */
-export const ATTRIBUTES = ["odm", "melee", "aim", "command", "tactics", "intellect", "charisma", "endurance", "composure", "ambition", "faith", "health"] as const;
-export type AttributeId = (typeof ATTRIBUTES)[number];
-/** Programmes politiques (08 §3.1 : réformateur, conservateur, opportuniste…). */
-export const AGENDAS = ["reformateur", "conservateur", "opportuniste", "religieux", "militariste", "pragmatique"] as const;
-export const RELATION_TYPES = ["amitie", "loyaute", "respect", "rivalite", "amour", "dette", "haine", "tension", "mentor"] as const;
+import { AGENDAS, ATTRIBUTES, RELATION_TYPES } from "../sim/politics/vocabulary";
+export type { AttributeId } from "../sim/politics/vocabulary";
 
 const attributeRecord = z.partialRecord(z.enum(ATTRIBUTES), z.number().int().min(0).max(100));
 /** Écart d'attribut apporté par un trait (−50 à +50). */
