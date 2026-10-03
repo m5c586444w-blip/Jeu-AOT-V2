@@ -69,6 +69,7 @@ export function mountDebugOverlay(root: HTMLElement, host: ConsoleHost, onChange
   const toggle = (): void => {
     panel.hidden = !panel.hidden;
     if (!panel.hidden) input.focus();
+    else input.blur();
   };
 
   return { toggle, isOpen: () => !panel.hidden };

@@ -22,7 +22,8 @@
     "smoke:page": "npm run smoke:map",
     "map:generate": "tsx src/tools/map-generate.ts",
     "sim:year": "tsx src/tools/sim-year.ts",
-    "smoke:map": "tsx src/tools/smoke-map.ts"
+    "smoke:map": "tsx src/tools/smoke-map.ts",
+    "smoke:politique": "tsx src/tools/smoke-politique.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
