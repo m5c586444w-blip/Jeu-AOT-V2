@@ -101,6 +101,10 @@ export async function bootGame(): Promise<void> {
   const mapData = mapJson as unknown as MapData;
   const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces));
   const byId = new Map(world.provinces.map((p) => [p.id, p]));
+  map.onCamera = () => {
+    host.dataset["lod"] = map.lod;
+  };
+  host.dataset["lod"] = map.lod;
   const dossier = new Dossier(host, world, mapData.walls, why, () => {
     dossier.close();
     map.setSelected(null);
@@ -168,7 +172,8 @@ export async function bootGame(): Promise<void> {
     },
   };
   window.addEventListener("keydown", (ev) => {
-    const typing = ev.target instanceof HTMLInputElement || ev.target instanceof HTMLSelectElement;
+    // Seule la saisie de texte (console) et les listes déroulantes gardent leurs touches ; une case cochée ne bloque rien.
+    const typing = (ev.target instanceof HTMLInputElement && ev.target.type === "text") || ev.target instanceof HTMLSelectElement;
     if (typing && keymap.actionFor(ev.code) !== "console") return;
     const action = keymap.actionFor(ev.code);
     const run = action ? actions[action] : undefined;

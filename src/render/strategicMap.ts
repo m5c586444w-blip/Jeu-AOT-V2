@@ -65,6 +65,8 @@ export class StrategicMap {
   private hovered: string | null = null;
   private selected: string | null = null;
   private readonly byId: Map<string, MapProvince>;
+  /** Appelé après chaque mouvement de caméra (affichage du niveau de détail, tests). */
+  onCamera: (() => void) | null = null;
 
   private constructor(
     private readonly app: Application,
@@ -134,6 +136,7 @@ export class StrategicMap {
     this.redrawIfNeeded();
     this.labels.update(this.zoom, this.lod, this.filters.labels);
     if (this.grain) this.grain.tilePosition.set(x, y);
+    this.onCamera?.();
   }
 
   /** Zoom autour d'un point de l'écran (molette). */

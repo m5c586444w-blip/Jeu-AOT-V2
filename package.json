@@ -19,8 +19,10 @@
     "sim:selftest": "tsx src/tools/sim-selftest.ts",
     "sim:balance": "tsx src/tools/sim-balance.ts",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build",
-    "smoke:page": "tsx src/tools/smoke-page.ts",
-    "map:generate": "tsx src/tools/map-generate.ts"
+    "smoke:page": "npm run smoke:map",
+    "map:generate": "tsx src/tools/map-generate.ts",
+    "sim:year": "tsx src/tools/sim-year.ts",
+    "smoke:map": "tsx src/tools/smoke-map.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
