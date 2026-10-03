@@ -16,6 +16,8 @@ import { Bubble } from "./bubble";
 import { KeyMap } from "./keymap";
 import type { Action } from "./keymap";
 import { attachMapControls } from "./mapControls";
+import { LayersPanel } from "./layersPanel";
+import { computeOverlay } from "./overlays";
 import { SimClient } from "../workers/simClient";
 
 export const SCENARIO = "scn_sandbox_845";
@@ -85,6 +87,20 @@ export async function bootGame(): Promise<void> {
     },
   });
 
+  const fmt = (n: number): string => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: n < 10 ? 2 : 0 }).format(n);
+  const layers = new LayersPanel(
+    host,
+    () => applyOverlay(),
+    { pawns: true, labels: true, walls: true, fog: true },
+    (f) => map.setFilters(f),
+  );
+  const applyOverlay = (): void => {
+    const id = layers.active;
+    const result = id ? computeOverlay(id, world, state, fmt, t) : null;
+    map.setOverlay(result?.colors ?? null);
+    layers.showLegend(result);
+  };
+
   const keymap = new KeyMap(safeStorage());
   const PAN = 80;
   const actions: Partial<Record<Action, () => void>> = {
@@ -98,6 +114,8 @@ export async function bootGame(): Promise<void> {
     lod_region: () => map.setLod("region"),
     lod_province: () => map.setLod("province"),
     fit: () => map.fit(),
+    overlay_next: () => layers.next(),
+    overlay_off: () => layers.select(null),
     close: () => {
       selected = null;
       map.setSelected(null);
@@ -119,6 +137,7 @@ export async function bootGame(): Promise<void> {
     if (fields["seed"]) fields["seed"].textContent = String(state.seed);
     if (fields["hash"]) fields["hash"].textContent = stateHash(state);
     map.setDynamic(mapDynamic(state));
+    if (layers.active) applyOverlay();
   };
 
   const storePromise = SaveStore.open(indexedDB, () => Date.now());

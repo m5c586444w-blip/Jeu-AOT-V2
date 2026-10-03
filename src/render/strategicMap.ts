@@ -6,7 +6,7 @@ import { drawBorder, drawFog, drawLand, drawPawn, drawSea, drawTerrain, drawWall
 import type { ProvinceShape } from "./atlasLayers";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
-import { BRICK, INK, REGION_WASH } from "./palette";
+import { BRICK, INK, REGION_WASH, UNKNOWN } from "./palette";
 import { paperTexture } from "./paperTexture";
 
 export type { Lod } from "./labels";
@@ -253,8 +253,13 @@ export class StrategicMap {
     this.gWash.clear();
     for (const p of this.provinces) {
       if (p.kind === "segment") continue;
-      const color = this.overlay?.get(p.id) ?? REGION_WASH[p.region] ?? INK;
-      drawWash(this.gWash, p, color, this.overlay ? 0.62 : 0.3, px);
+      if (this.overlay) {
+        // Calque actif : les provinces sans valeur restent neutres (aucune donnée inventée).
+        const value = this.overlay.get(p.id);
+        drawWash(this.gWash, p, value ?? UNKNOWN, value === undefined ? 0.12 : 0.62, px);
+      } else {
+        drawWash(this.gWash, p, REGION_WASH[p.region] ?? INK, 0.3, px);
+      }
     }
   }
 
