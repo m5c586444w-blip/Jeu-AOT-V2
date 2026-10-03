@@ -1,0 +1,36 @@
+{
+  "canon": "A",
+  "notes_canon": "Disposition de jeu : anneaux concentriques découpés en secteurs (06 §0 : le découpage est une abstraction [A]). Orientations des districts : 11 §2. Toutes les distances sont paramétrables.",
+  "units": "km",
+  "walls": {
+    "height_m": { "value": 50, "canon": "C", "note": "Murs ≈ 50 m (11 §2)." },
+    "thickness_m": { "value": 10, "canon": "?", "note": "Épaisseur ≈ 10 m [?] (01 §3.1)." }
+  },
+  "radii": {
+    "sina": { "value": 250, "canon": "?", "note": "Rayon de Sina non donné dans les spécifications (11 §9) : valeur de travail." },
+    "rose": { "value": 380, "canon": "?", "note": "≈ 130 km au-delà de Sina (01 §3.1, 11 §9)." },
+    "maria": { "value": 480, "canon": "?", "note": "≈ 100 km au-delà de Rose (01 §3.1, 11 §9)." },
+    "coast_mean": { "value": 640, "canon": "A", "note": "Côte de l'île : tracé de jeu." }
+  },
+  "wall_band_km": 12,
+  "coast": { "amplitude_km": 55, "min_km": 560, "seed": 845 },
+  "gates": [
+    { "segment": "M05", "bearing": 180 },
+    { "segment": "W03", "bearing": 90 },
+    { "segment": "W05", "bearing": 180 },
+    { "segment": "N03", "bearing": 100 },
+    { "segment": "N04", "bearing": 180 }
+  ],
+  "rings": [
+    { "name": "sina_coeur", "r_from": 0, "r_to": 95, "sectors": [["I01", -135, 135], ["I06", 135, 180], ["I02", 180, 225]] },
+    { "name": "sina_anneau", "r_from": 95, "r_to": "sina", "sectors": [["I04", -35, 45], ["I03", 45, 135], ["I08", 135, 225], ["I05", 225, 295], ["I07", 295, 325]] },
+    { "name": "mur_sina", "r_from": "sina", "r_to": "sina+wall", "sectors": [["N01", -30, 30], ["N02", 30, 75], ["N03", 75, 135], ["N04", 135, 225], ["N05", 225, 300], ["N06", 300, 330]] },
+    { "name": "rose_interieur", "r_from": "sina+wall", "r_to": 320, "sectors": [["S07", -30, 30], ["S09", 30, 90], ["S11", 90, 150], ["S13", 150, 210], ["S12", 210, 270], ["S14", 270, 330]] },
+    { "name": "rose_exterieur", "r_from": 320, "r_to": "rose", "sectors": [["S03", -22.5, 22.5], ["S06", 22.5, 67.5], ["S02", 67.5, 112.5], ["S10", 112.5, 157.5], ["S01", 157.5, 202.5], ["S05", 202.5, 247.5], ["S04", 247.5, 292.5], ["S08", 292.5, 337.5]] },
+    { "name": "mur_rose", "r_from": "rose", "r_to": "rose+wall", "sectors": [["W01", -22.5, 22.5], ["W02", 22.5, 67.5], ["W03", 67.5, 112.5], ["W04", 112.5, 157.5], ["W05", 157.5, 202.5], ["W06", 202.5, 247.5], ["W07", 247.5, 292.5], ["W08", 292.5, 337.5]] },
+    { "name": "maria_interieur", "r_from": "rose+wall", "r_to": 436, "sectors": [["R11", -18, 18], ["R14", 18, 54], ["R20", 54, 90], ["R06", 90, 126], ["R03", 126, 162], ["R02", 162, 198], ["R13", 198, 234], ["R09", 234, 270], ["R12", 270, 306], ["R18", 306, 342]] },
+    { "name": "maria_exterieur", "r_from": 436, "r_to": "maria", "sectors": [["R08", -18, 18], ["R10", 18, 54], ["R16", 54, 90], ["R15", 90, 126], ["R07", 126, 162], ["R01", 162, 198], ["R04", 198, 234], ["R05", 234, 270], ["R19", 270, 306], ["R17", 306, 342]] },
+    { "name": "mur_maria", "r_from": "maria", "r_to": "maria+wall", "sectors": [["M01", -22.5, 22.5], ["M02", 22.5, 67.5], ["M03", 67.5, 112.5], ["M04", 112.5, 157.5], ["M05", 157.5, 202.5], ["M06", 202.5, 247.5], ["M07", 247.5, 292.5], ["M08", 292.5, 337.5]] },
+    { "name": "outre_murs", "r_from": "maria+wall", "r_to": "coast", "sectors": [["O09", -18, 18], ["O10", 18, 54], ["O07", 54, 90], ["O08", 90, 126], ["O02", 126, 162], ["O01", 162, 198], ["O04", 198, 234], ["O03", 234, 270], ["O05", 270, 306], ["O06", 306, 342]] }
+  ]
+}
