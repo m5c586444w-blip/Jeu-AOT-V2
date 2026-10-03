@@ -12,7 +12,7 @@ Prérequis : Node.js ≥ 22.
 
 ```bash
 npm ci
-npm run dev        # page de démarrage ; F2 ouvre la console de service
+npm run dev        # écran de jeu : carte de Paradis, bandeau-registre ; F2 console, F9 options
 npm run verify     # typecheck + lint + tests + data:validate + canon:check + sim:selftest + build
 ```
 
@@ -28,7 +28,9 @@ npm run verify     # typecheck + lint + tests + data:validate + canon:check + si
 | `canon:check [dossier]` | Règles de cohérence canon R1–R6 (fichier 14 §3) ; code 1 en cas d'échec |
 | `sim:selftest` | Même hash après 1000 ticks en direct et via un worker |
 | `sim:balance` | Ébauche (l'équilibrage arrive en P9) |
-| `smoke:page` | Ouvre la page dans Chromium (serveur de dev), vérifie le contenu et F2, capture à 100 % et 125 % |
+| `sim:year [-- --bench]` | Un an de jeu headless, invariants vérifiés ; `--bench` mesure le tick sur 150 provinces |
+| `map:generate` | Régénère `data/map/paradis.json` depuis la disposition `paradis.layout.json` |
+| `smoke:map` | Parcours navigateur (Chromium) : carte, bulle, dossier, « pourquoi ? », temps, calques, options ; captures `docs/screenshots/p1-*` |
 | `verify` | Enchaîne tous les contrôles ci-dessus sauf `smoke:page` |
 
 ## Architecture
@@ -38,10 +40,11 @@ src/sim/      logique pure et déterministe (core : RNG, temps, bus, commandes, 
 src/data/     schémas Zod, chargeurs, règles canon R1–R6
 src/save/     IndexedDB (créneaux + 3 sauvegardes automatiques), export/import fichier
 src/workers/  Web Worker navigateur, worker Node, client asynchrone
-src/ui/       page de démarrage, console de debug, textures procédurales
+src/render/   carte d'atlas Pixi (seul endroit où Pixi est autorisé)
+src/ui/       écran de jeu : bandeau, dossier, calques, options, fiches « pourquoi ? », console
 src/i18n/     fr.json (référence), en.json
 src/tools/    outils CLI
-data/         données de jeu (provinces, characters, techs, events, placements)
+data/         données (provinces, characters, techs, events, placements, buildings, scenarios, balance, map)
 tests/        tests Vitest et fixtures
 ```
 

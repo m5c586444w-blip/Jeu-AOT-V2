@@ -40,3 +40,22 @@
 ## Points restant `?` (paramétrables dans `data/`)
 
 Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Pasteur Nick, Sasha, Magath, Keith Shadis ; localisation de la ville-usine, de la forêt des Arbres Géants, du camp d'entraînement, du QG du Corps, de la chapelle Reiss ; année des Murs (743) ; distances entre murs ; blindés, sous-marins, gaz de combat ; composition de l'alliance anti-Eldia ; durée du Grondement ; rôle des Tybur dans la Grande Guerre.
+
+## Faits utilisés en P1
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| 74 provinces de Paradis (10 outre-murs, 22 segments, 42 provinces) | A (découpage) | `data/provinces/paradis.json` | 06 §1 ; toponymes `A` = noms de remplissage |
+| Districts : Shiganshina (sud, Maria) ; Utopia N, Karanes E, Trost S, Krolva O (Rose) ; Orvud N, Stohess E, Ehrmich S, Yarckel O (Sina) | C | carte, `tests/data/map.test.ts` | 11 §2 |
+| Ragako, Dauper, Jinae au sud de l'intérieur de Rose | C | carte | 11 §2 |
+| W07 proche de Krolva | errata | `data/provinces/paradis.json`, carte | errata utilisateur (corrige 06 §1.4) |
+| Raiberg retiré, remplacé par « Bourg minier de Maria » | A | R04 | 11 §2 |
+| Murs ≈ 50 m | C | `data/map/paradis.layout.json` | 11 §2 |
+| Épaisseur ≈ 10 m ; rayons et distances entre murs | ? | idem | 01 §3.1, 11 §9 |
+| Localisation : forêt des Arbres Géants, ville-usine, QG du Corps, camp d'entraînement, chapelle Reiss, Utgard | ? | positions de carte | 11 §9 (existence C) |
+| Pierre à éclatement de glace = source du gaz d'ODM | C | fabrique de gaz (conversion) | 11 §6 ; procédé et chiffres A |
+| Population ≈ 1 000 000 ; Garnison 20 000–40 000 ; Brigade 2 000–5 000 ; Corps 200–500 | A | scénario bac à sable | 02 §15 (33 200 soldats au départ) |
+| Hiver −35 % de nourriture, chauffage | A | `data/balance/economy.json` | 02 §1 |
+| Rationnement −15/−30 %, moral −3/−8, productivité −5/−12 % | A | idem | 02 §3.2 |
+| Charbon = dépendance de Marley (pas de production à Paradis) | A | HUD (masqué pour Paradis) | 02 §3.1 |
+| Brouillard « inexploré » sur 7 des 10 provinces outre-murs | A | `visibility` | 04 §3 ; choix de jeu |

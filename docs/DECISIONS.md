@@ -97,3 +97,59 @@
 
 ## 2026-10-02 — D-23 Événement E19
 - Décision : E19 (perte de l'escouade d'élite d'origine) marqué `?` : moment « fin de E18 ? » et morts non recoupées (11 §3, §9).
+
+# Phase P1
+
+## 2026-10-03 — D-24 Réserve nationale unique
+- Contexte : 02 §3 décrit stocks, capacités et logistique ; le transport entre provinces arrive en P3.
+- Décision : en P1, une réserve nationale par ressource (capacité = somme des provinces tenues) ; production et consommation y passent directement. La « famine locale » devient nationale tant que la logistique n'existe pas.
+- Impact : `src/sim/strategic/economy.ts`. Statut : A.
+
+## 2026-10-03 — D-25 Géométrie en anneaux concentriques
+- Décision : carte générée depuis `data/map/paradis.layout.json` : anneaux concentriques découpés en secteurs ; chaque district est un secteur adossé à la porte de son mur, du côté indiqué par le fichier 06 (« anneau Maria » / « anneau Rose »). Rayons de Sina/Rose/Maria = `?` (valeurs de travail), hauteur des murs 50 m = C, épaisseur 10 m = `?`.
+- Justification : le découpage en provinces est une abstraction (06 §0) ; tout reste éditable (polygones dans `data/map/paradis.json`, éditeur reporté).
+- Statut : A (orientations des districts : 11 §2).
+
+## 2026-10-03 — D-26 Répartition de la population
+- Décision : 1 000 000 d'habitants (02 §15, A) répartis selon le niveau de population de l'atlas (poids 0/1/2/4/7/11). Statut : A.
+
+## 2026-10-03 — D-27 Catalogue des bâtiments
+- Décision : `data/buildings/` (même mécanique de collections que le reste) plutôt que `data/catalogs/` (10 §11) ; ses champs chiffrés comptent comme données d'équilibrage. 11 bâtiments en P1 (ceux qui ont un effet économique) ; les 60 du 10 §3 arrivent avec la construction (P3).
+
+## 2026-10-03 — D-28 Données validées dans le Worker
+- Décision : le Worker embarque et valide les JSON (Zod) puis renvoie la source validée au fil principal à l'initialisation. Zod reste hors du paquet principal ; les mêmes fonctions servent sous Node (`readDataFiles`).
+
+## 2026-10-03 — D-29 Rendu : traits en pixels, texte à taille constante
+- Décision : les épaisseurs de trait sont exprimées en pixels écran ; les couches sont redessinées à chaque palier de zoom (×√2). Les toponymes gardent une taille constante (échelle inverse du zoom) ; les noms de murs sont posés lettre à lettre sur l'anneau.
+
+## 2026-10-03 — D-30 Overlays sans données
+- Décision : religion et légitimité (P2), ravitaillement (P3), renseignement (P5) sont déclarés mais « non encore ouverts » : aucune valeur inventée ; quand un calque est actif, les provinces sans valeur restent neutres.
+
+## 2026-10-03 — D-31 Overlay « Gaz »
+- Décision : en l'absence de stocks provinciaux (D-24), le calque montre la capacité de stockage de gaz par province (dépôts, fabriques, magasins des murs). Statut : A.
+
+## 2026-10-03 — D-32 Saisons
+- Décision : seul l'hiver modifie la production (−35 % de nourriture, 02 §1) ; il ajoute un chauffage au gaz et −2 à la cible de moral. Les autres saisons sont neutres. Statut : A.
+
+## 2026-10-03 — D-33 Tolérance d'arrondi
+- Décision : une rupture n'est déclarée qu'au-delà de 10⁻⁶ unité manquante (une fabrique qui vide exactement son stock ne déclenche pas d'alerte).
+
+## 2026-10-03 — D-34 Bruit du pilote WebGL en test
+- Décision : `smoke:map` ignore les messages « GL Driver Message … GPU stall due to ReadPixels » émis par le rendu logiciel de Chromium headless ; toute autre erreur ou alerte de console fait échouer le test.
+
+## 2026-10-03 — D-35 Raccourcis
+- Décision : codes physiques (`KeyboardEvent.code`) ; en cas de conflit, échange des touches ; seuls les champs de saisie de texte et les listes déroulantes conservent leurs touches (défaut trouvé par `smoke:map` : une case cochée bloquait les raccourcis).
+
+## 2026-10-03 — D-36 Écran de jeu
+- Décision : la page de démarrage de P0 devient l'écran de jeu ; graine et empreinte d'état restent visibles en pied de bandeau. `smoke:page` renvoie désormais à `smoke:map`.
+
+## 2026-10-03 — D-37 Anglais partiel
+- Décision : le sélecteur de langue existe ; les textes non traduits retombent sur le français (aucune clé brute affichée). La traduction complète est prévue en P10.
+
+## 2026-10-03 — D-38 Équilibrage initial ajusté
+- Décision : après simulation d'un an (`sim:year`), rendements ramenés à nourriture 760, pierre de glace 330, acier 25, commerce 20 : l'hiver creuse la réserve (≈ −3 200/jour), le reste de l'année la reconstitue ; aucune rupture la première année au rationnement normal.
+
+## 2026-10-03 — D-39 Dépendance ajoutée
+| Paquet | Pourquoi |
+|---|---|
+| pixi.js 8 | Rendu WebGL de la carte (00 §4), utilisé uniquement dans `src/render` (règle ESLint) |

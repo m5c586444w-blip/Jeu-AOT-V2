@@ -18,7 +18,17 @@ Texte complet des licences : `node_modules/@fontsource/<police>/LICENSE` (instal
 |---|---|---|
 | Grain de papier, fibres, taches, masque de tampon | Générés à l'exécution (SVG `feTurbulence`, `src/ui/paper.ts`) | Création originale du projet |
 | Favicon (trois anneaux) | `public/favicon.svg`, dessiné pour le projet | Création originale du projet |
+| Icônes des 9 ressources | `src/ui/icons.ts`, tracés SVG dessinés pour le projet (double trait irrégulier) | Création originale du projet |
+| Texture de papier de la carte | `src/render/paperTexture.ts`, bruit de valeur généré sur canvas | Création originale du projet |
+| Symboles de carte (relief, arbres, roseaux, ruines, champs, pions de garnison, portes, fissures) | `src/render/atlasLayers.ts`, dessinés par code | Création originale du projet ; marques des pions géométriques, sans reprise d'emblèmes de l'œuvre |
 | Captures `docs/screenshots/` | Rendus du projet | Création originale du projet |
+
+## Bibliothèques
+
+| Bibliothèque | Licence |
+|---|---|
+| pixi.js 8 | MIT |
+| zod 4 | MIT |
 
 ## Audio
 
