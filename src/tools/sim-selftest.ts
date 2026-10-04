@@ -19,7 +19,7 @@ const client = new SimClient({
 
 let failed = false;
 try {
-  for (const scenario of [null, DEFAULT_SCENARIO, "scn_sandbox_850"]) {
+  for (const scenario of [null, DEFAULT_SCENARIO, "scn_sandbox_850", "scn_854"]) {
     const direct = createSim(SEED, scenario ? loadWorld("data", scenario) : undefined);
     for (const c of script) direct.dispatch(c);
     let last = await client.init(SEED, scenario);
@@ -33,6 +33,25 @@ try {
     console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}${p5}${p6}`);
     if (last.hash !== direct.hash() || last.state.commandIndex !== script.length) failed = true;
   }
+  // AC7-08 : 854 mené par Marley (choix de la nation, levée, projection d'un Titan), direct = worker.
+  {
+    const w854 = loadWorld("data", "scn_854");
+    const script854: Command[] = [
+      { type: "SetPlayerFaction", faction: "fac_marley" },
+      { type: "BuildFormation", formation: "form_artillerie", province: "wprov_liberio", count: 1 },
+      { type: "MoveFormation", formation: "form_infanterie_ligne", from: "wprov_fort_slava", to: "wprov_forteresse_passage", count: 4 },
+      { type: "ProjectTitan", shifter: "shifter_bestial", province: "wprov_forteresse_passage" },
+      { type: "AdvanceDays", n: 180 },
+    ];
+    const d854 = createSim(SEED, w854);
+    for (const c of script854) d854.dispatch(c);
+    let l854 = await client.init(SEED, "scn_854");
+    for (const c of script854) l854 = await client.dispatch(c);
+    const ns = d854.state().nations;
+    console.log(`[scn_854, Marley] direct : ${d854.hash()} | worker : ${l854.hash} | date an ${l854.state.date.year}, jour ${l854.state.date.day} | guerres : ${ns?.wars.join(", ")} | Marteau → ${d854.state().shifters?.titans["shifter_marteau"]?.holder ?? "—"}`);
+    if (l854.hash !== d854.hash() || ns?.player !== "fac_marley") failed = true;
+  }
+
   // AC3-10 : une expédition lancée en 850 (plan calculé sur l'état direct, puis rejoué tel quel des deux côtés).
   const w850 = loadWorld("data", "scn_sandbox_850");
   const direct = createSim(SEED, w850);
@@ -79,5 +98,5 @@ if (failed) {
   console.error("sim:selftest : ÉCHEC (hash différent entre direct et worker).");
   process.exitCode = 1;
 } else {
-  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 850 avec une expédition, 850 avec une bataille jouée).");
+  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 854, 854 mené par Marley, 850 avec une expédition, 850 avec une bataille jouée).");
 }

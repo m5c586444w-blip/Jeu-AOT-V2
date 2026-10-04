@@ -31,7 +31,8 @@
     "smoke:p5": "tsx src/tools/smoke-p5.ts",
     "smoke:p6": "tsx src/tools/smoke-p6.ts",
     "sim:events": "tsx src/tools/sim-events.ts",
-    "sim:shifters": "tsx src/tools/sim-shifters.ts"
+    "sim:shifters": "tsx src/tools/sim-shifters.ts",
+    "sim:world": "tsx src/tools/sim-world.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
