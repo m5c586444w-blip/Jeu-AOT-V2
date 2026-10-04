@@ -359,3 +359,55 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - Le Marteau de guerre a une nuque qui encaisse trois fois mieux : le porteur n'y est pas (03 §8.2 « corps à distance »).
   - La Charrette ravitaille les soldats alliés en gaz et en lames.
 - Les lances de foudre (dotation de 2 par soldat, T-ANT-08) ignorent l'armure et le durcissement. Résultat : le Cuirassé est vaincu dans 6 batailles sur 6 avec lances, et dans 0 sur 6 aux lames seules.
+
+## 2026-10-04 — D-70 Échelle du monde : des nations, pas un second Paradis (P7)
+- Contexte : 05 §5 (P7) demande provinces du monde, guerre moderne simplifiée, diplomatie, IA et une partie jouable côté Marley. Les spécifications ne fixent pas l'échelle de simulation de Marley.
+- Décision :
+  - le monde se joue à l'échelle des **nations** ;
+  - économies de guerre agrégées : industrie, hommes, soutien à la guerre, stabilité ;
+  - **formations** de 10 §1.2–1.3 posées sur les 60 provinces de 06 §3 et l'île Paradis ;
+  - Paradis y est résumé à partir de son état détaillé (part de l'acier et de la main-d'œuvre) ; ses 74 provinces restent simulées par P1–P6.
+- Justification : 05 §11 (« profond mais jouable »), 02 §11 (« front, artillerie, aviation, marine » simplifiés). Un second moteur province par province pour Marley doublerait le coût sans rien apporter de lisible.
+- Atlas : positions et voisinages schématiques `[A]` ; un seul atlas d'encre en P7, esthétiques de Marley et d'Hizuru en P8.
+- Personnages étrangers (`faction` marley, hizuru, allies, volontaires) : hors des registres et des tirages de Paradis (`isDomestic`). Les porteurs de Marley ont une identité secrète pour Paradis (champ `hidden`), percée au départ de 854 pour Zeke.
+
+## 2026-10-04 — D-71 Guerre moderne et Titans stratégiques (P7)
+- **Front** : une résolution par semaine, par province disputée.
+  - Puissance = Σ formations × état × attaque (ou défense).
+  - Multiplicateurs : appui d'artillerie (part des batteries), supériorité aérienne, reconnaissance, terrain et fortification en défense.
+  - Pertes en racine du rapport de force, bruit de ±15 %.
+  - Prise à partir d'un rapport de 1,3, ou face à un défenseur sans troupes ; le défenseur se replie.
+  - Toutes les valeurs sont `[A]`, dans `data/balance/world.json`.
+- **Mer** : la zone appartient à la flotte la plus forte, avec une marge de 1,2. Le blocus coupe 40 % de l'industrie côtière. Embarquer exige des transports, débarquer exige la mer. Deux flottes en guerre dans une même zone se battent.
+- **Titans** (F-WAR-08) : un porteur projeté vaut 12 à 80 points de puissance au front selon sa classe (`[A]`).
+  - Premier passage : la Forteresse du Passage ne tombait jamais. La puissance a été doublée et le seuil de prise abaissé à 1,3, pour qu'une projection décide d'une bataille que l'infanterie seule ne gagne pas.
+  - Usure : 8 de stress par semaine, 2 % de risque de mort par semaine de combat (le Titan est alors perdu, P6), repos de 4 semaines après un rappel.
+  - Coût politique : +6 de peur chez toutes les autres nations, +3 de soutien chez soi, −2 de légitimité à Paradis.
+- Les porteurs du combat tactique (P6) restent hors des batailles de la campagne. La guerre moderne ne passe pas par la scène tactique (hors plan).
+
+## 2026-10-04 — D-72 Diplomatie, Hizuru, IA (P7)
+- **Acceptation** d'une proposition : utilité expliquée, comptée au-delà de 10.
+  - Facteurs : confiance × 0,4 + intérêt × 0,4 + idéologie × 0,2 ; peur × 0,3 pour la paix et la non-agression.
+  - Biais par traité ; impossible en guerre.
+  - La coalition alliée **vote** (trois voix, majorité, F-DIP-09).
+- **Hizuru** (07 H01) : penchant de −100 (Marley) à +100 (Paradis). Au-delà de ±60, alliance avec ce camp ; retour à la neutralité si le penchant retombe. Moteurs mensuels :
+  - commerce : 1 par mois ;
+  - peur relative de chaque camp : 2 par mois au plus ;
+  - garanties payées en industrie : ±15 chacune.
+  - Premier réglage (3 et 4 par mois) : Hizuru basculait seul en un an. Il a été ramené pour qu'une bascule demande des décisions du joueur (AC7-03).
+- **IA** (02 §14) : utilité et règles, avec une personnalité par nation (poids d'attaque, de levée, de diplomatie, de prudence).
+  - Attracteur canon de Marley (le Fondateur) : guerre à Paradis quand ses autres guerres ne l'occupent plus.
+  - Levées seulement si le revenu peut les entretenir. Premier réglage : pénuries en chaîne ; corrigé.
+  - Attaques au-delà d'un rapport de force, projections de Titans sur les fronts actifs.
+  - Chaque décision est consignée avec ses raisons (chancellerie, débogage).
+  - Limite assumée : l'IA ne monte pas d'invasion amphibie de Paradis (P9).
+
+## 2026-10-04 — D-73 Événements de 854 (P7)
+- E53 à E58 sont jouables. Leurs effets passent par le monde (`world_war`, `world_relation`, `world_losses`, `world_support`, `world_hizuru`) :
+  - E55 : Eren dévore Lara Tybur (`capture_shifter` puis `inherit`) ;
+  - E56 : Zeke passe à Paradis ;
+  - morts canon de 854 (11 §3) : Willy Tybur (E55), Zackly (E57), Pixis et Nile (E58).
+  - Sasha (854 `[?]`, non vérifié) n'est pas tuée.
+- E59 (Grondement) et E60 restent scénarisés, sans mécanique (P9).
+- Règle : un squelette sans mécanique commencé avant l'année du scénario compte comme « passé ». Sans elle, la guerre du Moyen-Orient (E50, 851–854), ni passée ni jouable, bloquait E53.
+- E43–E52 restent des squelettes. Une partie de 850 s'arrête à E42 ; le scénario 854 part de leur issue canonique.

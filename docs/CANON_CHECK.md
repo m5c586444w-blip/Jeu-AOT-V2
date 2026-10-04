@@ -161,3 +161,26 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Hauteurs, vitesses, points de vie, endurance, valeurs des capacités | A | `data/shifters/nine.json` | aucune valeur chiffrée canonique |
 | Lances de foudre efficaces contre l'armure du Cuirassé | C | `pierce` ; `sim:shifters` | 12 E40 ; 13 T-ANT-08 |
 | Visions (mémoires des porteurs) sous forme de rapports peu fiables | A | `monthlyVisions` | F-TIT-06 ; forme ludique |
+
+## Faits utilisés en P7
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Liberio, zone d'internement, Fort Slava, domaine Azumabito, académie des Guerriers, domaine Tybur (concepts) | C | `data/world_provinces/world.json` | 06 §3 |
+| Les 60 provinces du monde, leurs noms fictifs, positions et productions | A | idem | 06 §3 (toponymes A) |
+| Guerre du Moyen-Orient Marley–Forces Alliées en cours en 854 ; flotte alliée détruite à Fort Slava par le Bestial | C | scénario 854, E53 | 11 §5, 12 E50, E53 |
+| Hizuru neutre intéressé, en difficulté économique, convoite la pierre à éclatement de glace, peut changer de camp | C | `data/factions/nations.json`, D-72 | 02 §11, 11 §5 |
+| Marley veut le Fondateur (attracteur) | C | IA de Marley | 02 §14 |
+| Personnalités, relations chiffrées, IA | A | `data/factions`, `data/balance/world.json` | 02 §14 |
+| Formations de Marley, d'Hizuru et des Alliés ; blindés à confirmer | A (existence : 10 §1.2) ; ? (blindés) | `data/formations/modern.json` | 10 §1.2–1.3 |
+| Zeke (Bestial, 842), Pieck (Charrette), Lara Tybur (Marteau), Porco puis Falco (Mâchoire) | C (dates « ? » sauf 842) | `data/characters/world.json`, `data/shifters/nine.json` | 11 §4, 07 §3.2 |
+| Généraux de Marley, d'Hizuru et des Alliés nommés en 07 §5 (A) | A | `data/characters/world.json` | 07 §5.2–5.4 |
+| Kiyomi Azumabito, Yelena, Onyankopon (affiliations corrigées) | C | idem | 11 §5 |
+| Morts de 850 au départ de 854 ; Ymir dévorée par Porco avant 854 | C (date d'Ymir « ? ») | `deceased` du scénario 854 | 11 §3, §4 |
+| Hange commande le Corps ; Historia reine | C | scénario 854 | 12 E36 |
+| Wall Maria reprise ; Titans de l'île presque éliminés | C ; ? | scénario 854 | 12 E44 |
+| Opération Paradis soutenue par les Tybur ; Willy Tybur tué à Liberio ; Eren hérite du Marteau de guerre | C | E54, E55 | 12 E54–E55, 11 §4 |
+| Zeke assigné à résidence côté Paradis | C | E56 | 12 E56 |
+| Zackly assassiné (Yeageristes) ; Pixis et Nile morts à Shiganshina | C | E57, E58 | 11 §3, 12 E57–E58 |
+| Mort de Sasha en 854 | ? (non portée) | — | 11 §3 « non vérifié » |
+| Alliance mondiale anti-Eldia après Liberio | ? | peur et idéologie (E55) | 11 §5 |
