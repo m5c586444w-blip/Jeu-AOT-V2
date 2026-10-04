@@ -1,0 +1,12 @@
+[
+  {
+    "id": "scn_r7",
+    "control": {
+      "prov_ville_usine": "paradis"
+    },
+    "control_canon": {
+      "prov_ville_usine": "C"
+    },
+    "canon": "A"
+  }
+]

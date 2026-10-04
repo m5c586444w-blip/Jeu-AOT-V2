@@ -48,6 +48,9 @@
       "prov_vergers_ouest": "perdu",
       "prov_relais_poste_maria": "perdu"
     },
+    "control_canon": {
+      "prov_ville_usine": "A"
+    },
     "garrisons": {
       "prov_rose_nord": {
         "org": "garrison",
@@ -241,6 +244,6 @@
       }
     },
     "canon": "A",
-    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]. La ville-usine (R10, source du gaz d'ODM) reste exploitée : sa localisation exacte est [?] (11 §9) et le canon montre l'ODM en usage en 850 ; valeur paramétrable (control)."
+    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]. Ville-usine (R10, source du gaz d'ODM) : localisation « ? » (11 §9) ; son rattachement à Paradis en 850 est une adaptation « A » (paramètre de scénario, D-41), jamais présentée comme canon — le canon montre seulement l'ODM en usage en 850."
   }
 ]

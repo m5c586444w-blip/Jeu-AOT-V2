@@ -1,0 +1,32 @@
+[
+  {
+    "id": "prov_trost",
+    "atlas_code": "S01",
+    "name_key": "prov.trost",
+    "region": "rose",
+    "wall": "rose",
+    "terrain": "urbain",
+    "canon": "C"
+  },
+  {
+    "id": "prov_utgard",
+    "atlas_code": "S06",
+    "name_key": "prov.utgard",
+    "region": "rose",
+    "wall": "rose",
+    "terrain": "fort",
+    "destroyed_year": 850,
+    "destroyed_event": "evt_850_utgard_battle",
+    "canon": "C"
+  },
+  {
+    "id": "prov_ville_usine",
+    "atlas_code": "R10",
+    "name_key": "prov.ville_usine",
+    "region": "anneau_maria",
+    "wall": "maria",
+    "terrain": "urbain",
+    "location_canon": "?",
+    "canon": "C"
+  }
+]

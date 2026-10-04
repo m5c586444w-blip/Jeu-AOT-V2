@@ -21,7 +21,7 @@
   "console.help.hash": "empreinte de l'état (8 caractères hexadécimaux)",
   "console.help.save": "« save [créneau] » sauvegarde",
   "console.help.load": "« load [créneau] » recharge",
-  "console.help.canon": "contrôle de cohérence canon (R1–R6) des données",
+  "console.help.canon": "contrôle de cohérence canon (R1–R7) des données",
   "console.seed": "graine {seed}",
   "console.seed_reset": "nouvelle partie, graine {seed}",
   "console.advanced": "+{n} jours → {date}",
@@ -31,7 +31,7 @@
   "console.error.unknown": "commande inconnue : « {name} » (essayer help)",
   "app.stamp": "PHASE 0",
   "app.version_label": "Version",
-  "console.canon_ok": "canon:check : données conformes (R1–R6, {n} entrées).",
+  "console.canon_ok": "canon:check : données conformes (R1–R7, {n} entrées).",
   "console.canon_ko": "canon:check : {n} violation(s).",
   "prov.shiganshina": "Shiganshina",
   "prov.maria_sud": "Maria-Sud — porte de Shiganshina",
@@ -991,5 +991,9 @@
   "console.died": "{id} est mort.",
   "console.decree": "Décret promulgué : {id}.",
   "dossier.strata": "Strates",
-  "dossier.strata_why": "Part de la strate dans la province : {share} %. Satisfaction nationale : {sat}."
+  "dossier.strata_why": "Part de la strate dans la province : {share} %. Satisfaction nationale : {sat}.",
+  "dossier.location_status": "Localisation : {status}",
+  "dossier.location_why": "Statut de la position sur la carte : {status}. L'existence du lieu est établie, son emplacement exact ne l'est pas ; la position est un paramètre des données.",
+  "dossier.control_status": "Rattachement : {status}",
+  "dossier.control_why": "Statut du rattachement de cette province dans le scénario : {status}. C'est un paramètre de scénario, pas un fait de l'œuvre."
 }

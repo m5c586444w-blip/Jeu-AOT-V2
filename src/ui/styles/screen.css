@@ -428,3 +428,4 @@
 .bordereau-titre { margin: 0; font-family: var(--f-machine); font-weight: 400; letter-spacing: 0.15em; font-size: 0.95rem; text-transform: uppercase; }
 .avis-bref { position: fixed; z-index: 45; bottom: 1.2rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.4rem 0.9rem; background: var(--encre); color: var(--papier); font-family: var(--f-machine); }
 .avis-bref[hidden] { display: none; }
+.dossier__statuts { margin: 0.3rem 0 0; display: flex; gap: 0.4rem; flex-wrap: wrap; }

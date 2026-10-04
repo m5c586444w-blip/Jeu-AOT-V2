@@ -457,7 +457,8 @@
         "canon": "C"
       }
     ],
-    "notes_canon": "Existence canon (11 §6) ; localisation exacte [?] (11 §9)."
+    "notes_canon": "Existence canon (11 §6) ; localisation exacte « ? » (11 §9) : la position sur la carte est un paramètre (location_canon).",
+    "location_canon": "?"
   },
   {
     "id": "prov_haras_maria",

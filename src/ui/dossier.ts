@@ -88,6 +88,19 @@ export class Dossier {
     close.addEventListener("click", () => this.onClose());
     head.append(code, title, stamp, close);
     const sub = el("p", "dossier__sous-titre", [t(`region.${p.region}`), t(`terrain.${p.terrain}`), t(`control.${st.provinces[p.id]?.control ?? "titans"}`)].join(" · "));
+    // Statuts distincts de l'existence : position sur la carte et rattachement propre au scénario (D-41, D-49).
+    const statuses = el("p", "dossier__statuts");
+    if (p.location_canon) {
+      const loc = el("span", `tampon-mini tampon-mini--${p.location_canon === "?" ? "incertain" : p.location_canon}`, t("dossier.location_status", { status: t(`canon.stamp.${p.location_canon}`) }));
+      loc.dataset["why"] = t("dossier.location_why", { status: t(`canon.${p.location_canon}`) });
+      statuses.append(loc);
+    }
+    const controlCanon = this.world.scenario.control_canon[p.id];
+    if (controlCanon) {
+      const ctl = el("span", `tampon-mini tampon-mini--${controlCanon === "?" ? "incertain" : controlCanon}`, t("dossier.control_status", { status: t(`canon.stamp.${controlCanon}`) }));
+      ctl.dataset["why"] = t("dossier.control_why", { status: t(`canon.${controlCanon}`) });
+      statuses.append(" ", ctl);
+    }
     const desc = el("p", "dossier__description", p.desc_key ? t(p.desc_key) : "");
 
     const tabs = el("nav", "dossier__onglets");
@@ -134,7 +147,7 @@ export class Dossier {
       line.append(el("span", "dossier__mini-tampon", t(`canon.${poi.canon}`)));
       foot.append(line);
     }
-    this.el.append(head, sub, desc, tabs, body, foot);
+    this.el.append(head, sub, ...(statuses.childElementCount > 0 ? [statuses] : []), desc, tabs, body, foot);
   }
 
   /** Ligne « libellé : valeur » dont la valeur porte sa fiche « pourquoi ? ». */

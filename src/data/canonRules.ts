@@ -2,7 +2,7 @@ import { COLLECTION_NAMES } from "./collections";
 import type { CollectionName } from "./collections";
 
 /**
- * Règles de cohérence canon R1–R6 (fichier 14 §3, fichier 11 §8). Fonctions pures sur des données brutes.
+ * Règles de cohérence canon R1–R7 (fichier 14 §3, fichier 11 §8 ; R7 : D-49). Fonctions pures sur des données brutes.
  * Les années incertaines se comparent par `year_min` (errata utilisateur).
  */
 export interface RawEntry {
@@ -17,7 +17,7 @@ export function emptyRaw(): RawData {
   return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
-export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6";
+export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7";
 
 export interface Violation {
   rule: RuleId;
@@ -115,6 +115,19 @@ export function checkCanon(data: RawData): Violation[] {
     for (const e of list) {
       const c = e.v["canon"];
       if (c !== "C" && c !== "A" && c !== "?") push("R6", e, `statut canon absent ou invalide (${JSON.stringify(c) ?? "absent"})`);
+    }
+  }
+
+  // R7 — rattachement d'une province à localisation incertaine : statut obligatoire, jamais « C » (D-49)
+  const uncertain = new Set(data.provinces.filter((p) => p.v["location_canon"] === "?").map((p) => p.id));
+  for (const s of data.scenarios) {
+    const control = (s.v["control"] ?? {}) as Record<string, unknown>;
+    const status = (s.v["control_canon"] ?? {}) as Record<string, unknown>;
+    for (const id of Object.keys(control)) {
+      if (!uncertain.has(id)) continue;
+      const c = status[id];
+      if (c === undefined) push("R7", s, `rattachement de ${id} (localisation « ? ») sans statut dans control_canon`);
+      else if (c === "C") push("R7", s, `rattachement de ${id} (localisation « ? ») présenté comme canon`);
     }
   }
   return out;

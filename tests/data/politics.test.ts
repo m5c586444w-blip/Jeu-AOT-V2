@@ -10,6 +10,16 @@ const activeIn = (id: string, year: number): boolean => {
   return !!c && c.active_from <= year && (c.active_until ?? Infinity) >= year;
 };
 
+describe("ville-usine (D-41, D-49)", () => {
+  it("localisation « ? », rattachement à Paradis en 850 « A », jamais « C »", () => {
+    const p = data.provinces.find((x) => x.id === "prov_ville_usine");
+    expect(p?.canon).toBe("C");
+    expect(p?.location_canon).toBe("?");
+    expect(scenario?.control["prov_ville_usine"]).toBe("paradis");
+    expect(scenario?.control_canon["prov_ville_usine"]).toBe("A");
+  });
+});
+
 describe("données de P2 (AC2-01)", () => {
   it("valides ; ≥ 40 personnages, ≥ 40 traits, 8 strates, ≥ 40 décrets, 18 rôles", () => {
     expect(issues).toEqual([]);

@@ -54,6 +54,8 @@ export const ProvinceSchema = z
     poi: z.array(PoiSchema).optional(),
     destroyed_year: year.optional(),
     destroyed_event: EventIdSchema.optional(),
+    /** Statut de la position sur la carte quand il diffère de celui de l'existence (ex. ville-usine : existence C, localisation ?). */
+    location_canon: CanonSchema.optional(),
     ...canonFields,
   })
   .strict();
@@ -83,6 +85,8 @@ export const ScenarioSchema = z
     start: z.object({ year, day: z.number().int().min(1).max(360) }).strict(),
     default_control: z.enum(["paradis", "titans", "perdu"]),
     control: z.record(ProvinceIdSchema, z.enum(["paradis", "titans", "perdu"])).default({}),
+    /** Statut du rattachement indiqué dans `control` (règle R7 : jamais « C » pour une province à localisation « ? »). */
+    control_canon: z.record(ProvinceIdSchema, CanonSchema).default({}),
     garrisons: z.record(ProvinceIdSchema, garrison).default({}),
     buildings: z.record(ProvinceIdSchema, z.array(BuildingIdSchema)).default({}),
     stocks: resourceRecord,

@@ -1,5 +1,6 @@
-// npm run canon:check [dossier] — règles R1–R6 ; code de sortie 1 si une règle échoue.
+// npm run canon:check [dossier] — règles R1–R7 ; code de sortie 1 si une règle échoue.
 import { checkCanon, formatViolation } from "../data/canonRules";
+import { COLLECTION_NAMES } from "../data/collections";
 import { loadRawDir } from "../data/loadRaw";
 
 const dir = process.argv[2] ?? "data";
@@ -11,5 +12,5 @@ if (errors.length > 0 || violations.length > 0) {
   console.error(`canon:check : ${violations.length} violation(s), ${errors.length} erreur(s) de lecture dans « ${dir} ».`);
   process.exit(1);
 }
-const total = raw.provinces.length + raw.characters.length + raw.techs.length + raw.events.length + raw.placements.length;
-console.log(`canon:check : « ${dir} » conforme (R1–R6, ${total} entrées).`);
+const total = COLLECTION_NAMES.reduce((n, c) => n + raw[c].length, 0);
+console.log(`canon:check : « ${dir} » conforme (R1–R7, ${total} entrées).`);
