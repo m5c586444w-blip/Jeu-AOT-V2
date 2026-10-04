@@ -1,0 +1,95 @@
+
+> murs-et-sang@0.0.1 verify
+> npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build
+
+
+> murs-et-sang@0.0.1 typecheck
+> tsc --noEmit
+
+
+> murs-et-sang@0.0.1 lint
+> eslint . --max-warnings 0
+
+
+> murs-et-sang@0.0.1 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+
+ Test Files  25 passed (25)
+      Tests  150 passed (150)
+   Start at  00:05:09
+   Duration  5.46s (tests 72%, import 17%, transform 11%, worker 1%)
+
+    Isolate  25 workers spawned · ~125ms startup each (spawn + environment, per file)
+             at least ~920ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+> murs-et-sang@0.0.1 data:validate
+> tsx src/tools/data-validate.ts
+
+data:validate : « data » valide (74 provinces, 52 personnages, 5 technologies, 35 événements, 0 positionnements, 11 bâtiments, 2 scénarios ; équilibrage : economy, time, politics, society).
+
+> murs-et-sang@0.0.1 canon:check
+> tsx src/tools/canon-check.ts
+
+canon:check : « data » conforme (R1–R7, 299 entrées).
+
+> murs-et-sang@0.0.1 sim:selftest
+> tsx src/tools/sim-selftest.ts
+
+[sans monde] direct : 7b57dc34 | worker : 7b57dc34 | date an 847, jour 281
+[scn_sandbox_845] direct : 9b68aeca | worker : 9b68aeca | date an 847, jour 281
+[scn_sandbox_850] direct : 0c8471ca | worker : 0c8471ca | date an 852, jour 281
+sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850).
+
+> murs-et-sang@0.0.1 build
+> tsc --noEmit && vite build
+
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 797 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                0.90 kB │ gzip:   0.41 kB
+dist/assets/eb-garamond-latin-400-normal-BCNrxLz_.woff2       23.82 kB
+dist/assets/eb-garamond-latin-400-italic-DSEbMgZu.woff2       25.38 kB
+dist/assets/eb-garamond-latin-400-normal-maQnHeKB.woff        28.60 kB
+dist/assets/eb-garamond-latin-400-italic-CDFyLPXJ.woff        30.86 kB
+dist/assets/special-elite-latin-400-normal-YjDd9tmf.woff2     53.29 kB
+dist/assets/im-fell-english-latin-400-normal-BhowGHCQ.woff2   59.88 kB
+dist/assets/special-elite-latin-400-normal-BtSRmyJ6.woff      63.41 kB
+dist/assets/im-fell-english-latin-400-normal-CxhBQSzl.woff    69.68 kB
+dist/assets/sim.worker-BddVt2BJ.js                           265.90 kB
+dist/assets/index-D161-Ctb.css                                24.24 kB │ gzip:   5.25 kB
+dist/assets/webworkerAll-DempGQSh.js                           0.05 kB │ gzip:   0.06 kB
+dist/assets/getTextureBatchBindGroup-B7fcsu1p.js               0.34 kB │ gzip:   0.27 kB
+dist/assets/marley-Ds-djo_H.js                                 0.38 kB │ gzip:   0.30 kB
+dist/assets/strata-npNEBvhE.js                                 0.80 kB │ gzip:   0.28 kB
+dist/assets/paradis-OMroZNd2.js                                0.89 kB │ gzip:   0.49 kB
+dist/assets/paradis-Crip5FYw.js                                1.22 kB │ gzip:   0.40 kB
+dist/assets/paradis-DCIsDpsT.js                                1.56 kB │ gzip:   0.53 kB
+dist/assets/sandbox_845-DLvtx4Ok.js                            3.04 kB │ gzip:   0.99 kB
+dist/assets/roles-Bw86WKOT.js                                  3.33 kB │ gzip:   0.77 kB
+dist/assets/sandbox_850-DVUoab-k.js                            4.66 kB │ gzip:   1.75 kB
+dist/assets/traits-DkeYJPZ9.js                                 5.59 kB │ gzip:   1.40 kB
+dist/assets/canvasUtils-XYxewFj2.js                            6.05 kB │ gzip:   2.05 kB
+dist/assets/canon_850-DDcmCizi.js                              6.15 kB │ gzip:   1.40 kB
+dist/assets/getTexelRangeRects-DemSBSsJ.js                    11.31 kB │ gzip:   2.98 kB
+dist/assets/init-DhEvJuvo.js                                  14.86 kB │ gzip:   4.62 kB
+dist/assets/paradis-UPtl3Ka_.js                               23.01 kB │ gzip:   2.61 kB
+dist/assets/paradis-BnsdlLLG.js                               23.75 kB │ gzip:   3.00 kB
+dist/assets/paradis-C3-oamlN.js                               34.75 kB │ gzip:   5.07 kB
+dist/assets/browserAll-B7BPb6Ke.js                            43.48 kB │ gzip:  11.29 kB
+dist/assets/RenderTargetSystem-D6eF_o2J.js                    78.15 kB │ gzip:  22.10 kB
+dist/assets/CanvasPool-ADgchDYy.js                           113.07 kB │ gzip:  34.46 kB
+dist/assets/index-DqkM3G2I.js                                514.33 kB │ gzip: 154.90 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 886ms
