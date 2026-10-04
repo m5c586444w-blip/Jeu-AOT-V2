@@ -43,6 +43,13 @@ export const MIGRATIONS: readonly Migration[] = [
       return { ...raw, schemaVersion: 3, politics: raw["politics"] ?? null };
     },
   },
+  {
+    from: 3,
+    describe: "v3 → v4 : ajout de la couche militaire (`military: null` ; le Corps est généré au premier jour simulé si le monde en a une)",
+    migrate(raw) {
+      return { ...raw, schemaVersion: 4, military: raw["military"] ?? null };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {
@@ -100,5 +107,7 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (strat !== null && (typeof strat !== "object" || strat === undefined || !("stocks" in strat) || !("provinces" in strat))) problems.push("strategic");
   const pol = raw["politics"];
   if (pol !== null && (typeof pol !== "object" || pol === undefined || !("legitimacy" in pol) || !("characters" in pol))) problems.push("politics");
+  const mil = raw["military"];
+  if (mil !== null && (typeof mil !== "object" || mil === undefined || !("soldiers" in mil) || !("expeditions" in mil))) problems.push("military");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

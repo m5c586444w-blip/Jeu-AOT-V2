@@ -8,8 +8,10 @@ import { createPoliticalState } from "../politics/state";
 import type { PoliticalState } from "../politics/state";
 import { dailyPolitics, monthlyPolitics } from "../politics/tick";
 import type { World } from "../strategic/world";
+import { createMilitaryState } from "../military/state";
+import type { MilitaryState } from "../military/state";
 
-export const CURRENT_SCHEMA_VERSION = 3 as const;
+export const CURRENT_SCHEMA_VERSION = 4 as const;
 
 /** État complet et sérialisable de la partie (P0 + couche stratégique de P1). */
 export interface GameState {
@@ -23,6 +25,8 @@ export interface GameState {
   strategic: StrategicState | null;
   /** Couche politique (P2) ; null pour un scénario sans politique. */
   politics: PoliticalState | null;
+  /** Expéditions et logistique (P3) ; null sans couche militaire, ou juste après migration d'une sauvegarde v3. */
+  military: MilitaryState | null;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -36,6 +40,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     commandIndex: 0,
     strategic: world ? createStrategicState(world) : null,
     politics: world ? createPoliticalState(world) : null,
+    military: world?.military ? createMilitaryState(world, s) : null,
   };
 }
 
@@ -48,6 +53,8 @@ export function tickDay(state: GameState, world?: World): GameState {
   const noise = rng.next();
   let strategic = state.strategic;
   let politics = state.politics;
+  // Sauvegarde v3 migrée : le Corps est généré ici, de façon déterministe (même graine → mêmes soldats).
+  const military = state.military ?? (world?.military ? createMilitaryState(world, state.seed) : null);
   const date = advance(state.date, 1);
   if (world && strategic) {
     const mods = politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS;
@@ -61,5 +68,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military };
 }
