@@ -36,7 +36,10 @@ export class Registers {
   onDraft: (() => void) | null = null;
   private readonly dialog = el("div", "bordereau");
 
+  private readonly stateOf: () => GameState;
+
   constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
+    this.stateOf = state;
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");
     const close = button("×", () => this.close(), "dossier__fermer");
@@ -115,6 +118,9 @@ export class Registers {
     const panel = this.panels.get(this.current.id);
     panel?.render(this.body, this.current.arg);
     this.frame.classList.toggle("registre-panneau--lateral", panel?.lateral?.() ?? false);
+    // Esthétique du bloc (04 §1.1) : les registres du monde prennent celle de la nation jouée.
+    const world = this.current.id === "monde" || this.current.id === "diplomatie";
+    this.frame.dataset["bloc"] = world && this.stateOf().nations?.player === "fac_marley" ? "marley" : "paradis";
     this.body.scrollTop = scroll;
   }
 

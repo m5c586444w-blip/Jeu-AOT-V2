@@ -1,13 +1,13 @@
 import { hasKey, t } from "../i18n";
 import { stateHash } from "../sim/core/canonical";
 import type { GameState } from "../sim/core/state";
-import { monthOf, seasonOf } from "../sim/core/time";
+import { fromAbsoluteDay, monthOf, seasonOf } from "../sim/core/time";
 import { planDay, planMonth, totals } from "../sim/strategic/economy";
 import type { DayPlan, StrategicState } from "../sim/strategic/economy";
 import { RATIONING_LEVELS } from "../sim/strategic/resources";
 import type { RationingLevel, ResourceId } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
-import { resourceIcon } from "./icons";
+import { registerIcon, resourceIcon } from "./icons";
 import { paramLabel } from "./panels/common";
 import { formatNumber, formatSigned } from "./why";
 import type { WhyContent, WhyTooltip } from "./why";
@@ -66,7 +66,11 @@ export class Hud {
       nav.setAttribute("aria-label", t("hud.registers"));
       const present = { expeditions: !!world.military, chronique: !!world.chronicle, renseignement: !!world.intel, recherche: !!world.research, porteurs: !!world.shifters, monde: !!world.nations, diplomatie: !!world.nations } as Record<string, boolean>;
       for (const id of PANELS.filter((p) => present[p] ?? true)) {
-        const b = el("button", "bandeau__registre-bouton", t(`panel.${id}`));
+        // Icône dessinée ; le libellé reste lisible par les lecteurs d'écran et en bulle (bandeau sur une ligne, P8).
+        const b = el("button", "bandeau__registre-bouton");
+        b.innerHTML = registerIcon(id);
+        b.append(el("span", "lecteur-seul", t(`panel.${id}`)));
+        b.title = t(`panel.${id}`);
         b.type = "button";
         b.dataset["panel"] = id;
         if (PARADIS_ONLY.has(id)) b.dataset["paradis"] = "1";
@@ -182,6 +186,15 @@ export class Hud {
     if (state.politics) {
       this.set("legitimacy", formatNumber(state.politics.legitimacy));
       this.set("capital", formatNumber(state.politics.capital));
+    }
+    // Nation jouée autre que Paradis (P7) : la ligne d'alerte suit le journal du monde.
+    const ns = state.nations;
+    if (ns && ns.player !== "fac_paradis") {
+      const w = ns.log.at(-1);
+      const wd = w ? fromAbsoluteDay(w.day) : null;
+      this.alert.textContent = w && wd ? `${t("date.format", { year: wd.year, day: wd.day })} — ${t(w.key, Object.fromEntries(Object.entries(w.params).map(([k, v]) => [k, typeof v === "string" && hasKey(v) ? t(v) : v])))}` : t("hud.no_alert");
+      this.alert.dataset["pause"] = "false";
+      return;
     }
     const last = st.log.at(-1);
     this.alert.textContent = last ? `${t("date.format", { year: last.date.year, day: last.date.day })} — ${alertText(last, this.world)}` : t("hud.no_alert");

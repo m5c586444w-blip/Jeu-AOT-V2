@@ -662,3 +662,22 @@
 .choix-nation__dossier--fac_marley { border-left: 6px solid #7a1f1f; }
 .choix-nation__dossier--fac_paradis { border-left: 6px solid #b5873a; }
 .bandeau[data-joueur="fac_marley"] .bandeau__nation { display: none; }
+/* P8 : bandeau sur une ligne — registres en icônes dessinées, libellé pour les lecteurs d'écran et en bulle */
+.lecteur-seul { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.bandeau__registres { flex-wrap: nowrap; }
+.bandeau__registre-bouton { position: relative; padding: 0.1rem 0.3rem; line-height: 0; }
+.bandeau__registre-bouton .icone--registre { width: 1.35rem; height: 1.35rem; }
+.bandeau__registre-bouton[aria-pressed="true"] { background: var(--papier); border-bottom-color: var(--brique); }
+.blason { width: 3rem; height: 3rem; }
+/* P8 — esthétique de Marley (04 §1.1–1.3) : acier, rouge sombre, papier journal ; gothique pour les bannières seulement */
+.registre-panneau[data-bloc="marley"] { background-color: #d9d2c0; border-color: #2d3e50; }
+.registre-panneau[data-bloc="marley"] .registre-tete { background: #2d3e50; color: #d9d2c0; border-bottom: 3px solid #7a1f1f; }
+.registre-panneau[data-bloc="marley"] .registre-titre { font-family: var(--f-marley); letter-spacing: 0.02em; }
+.registre-panneau[data-bloc="marley"] .registre-intertitre { color: #7a1f1f; border-bottom-color: #2d3e50; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; }
+.registre-panneau[data-bloc="marley"] .registre-bouton.principal { background: #7a1f1f; border-color: #222426; }
+.registre-panneau[data-bloc="marley"] .atlas-monde { border-color: #2d3e50; border-width: 2px; }
+/* Hizuru (04 §1.1) : washi, indigo, vermillon, sobriété */
+.fiche-nation--fac_hizuru { background-color: #efe6d2; background-image: repeating-linear-gradient(0deg, rgba(42, 58, 92, 0.04) 0 1px, transparent 1px 6px); border-color: #2a3a5c; }
+.fiche-nation--fac_hizuru h4 { color: #b8321f; letter-spacing: 0.06em; }
+/* P8 — vignettage discret de la carte (04 §3 : grain et vignettage), au-dessus du rendu, sans capter les clics */
+.carte::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 58%, rgba(28, 26, 23, 0.26) 100%); }

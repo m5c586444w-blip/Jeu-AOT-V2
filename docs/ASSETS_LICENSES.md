@@ -68,3 +68,9 @@ Aucun en P0.
 | Chronique, salle de renseignement (fiches d'agents, mur des secrets), bureau d'études (planches) | `src/ui/panels/*.ts`, CSS | Création originale du projet |
 | Textes des événements, des technologies et du renseignement | `src/i18n/fr.json` | Textes écrits pour le projet (faits canon résumés, sans citation de l'œuvre) |
 | Captures `docs/screenshots/p5-*` | Rendus du projet | Création originale du projet |
+
+## Ajouts de P8
+| Élément | Source | Licence | Usage |
+|---|---|---|---|
+| UnifrakturMaguntia (police) | paquet npm `@fontsource/unifrakturmaguntia` 5.3 (auto-hébergée, aucun CDN) | SIL Open Font License 1.1 | bannières de Marley uniquement (04 §1.3) |
+| Icônes des registres, blasons des nations | dessinés par code pour le projet (`src/ui/icons.ts`) | création du projet | aucun emblème de l'œuvre n'est repris (04 §8.5) |
