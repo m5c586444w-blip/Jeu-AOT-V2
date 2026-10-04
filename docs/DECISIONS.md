@@ -253,3 +253,15 @@
 - Auto-résolution : le modèle d'engagement de P3 reste la référence. La simulation tactique est calibrée pour s'en approcher à ±15 % en pertes moyennes ; le calibrage de P3 (AC3-07) est inchangé.
 - 60 FPS (05 §5) : non mesurable dans l'environnement (Chromium headless sans GPU). On mesure ce qui dépend du code : pas de simulation et temps JS par image. Le débit réel sur GPU reste à confirmer par l'utilisateur à la revue de fin de P4.
 - 8 types de Titans purs (F-TIT-01) : 4 classes de 03 §5.2 × variantes de comportement `[A]`, aucune présentée comme canon.
+
+## 2026-10-04 — D-60 Calibrage du combat tactique et taille d'échantillon d'AC4-08
+- Défauts de conception trouvés par le diagnostic et corrigés, avant tout calibrage chiffré :
+  - un Titan ne frappait que sa cible : il frappe désormais le soldat le plus proche à sa portée ;
+  - aucune réserve de gaz : les soldats chutaient réservoir vide. Il existe maintenant une réserve de 12 u, et le rail est lâché à mi-réserve ;
+  - en forêt, les soldats zigzaguaient d'arbre en arbre près de la nuque. Règle explicite : Titan à portée → crochet dans son corps (passe d'attaque).
+- La menace de classe (données de P3 : 1 ; 2 ; 3,5) règle :
+  - la cadence d'attaque, × menace^1,5 ;
+  - la difficulté de coupe, ÷ menace^1,3 (nuque plus épaisse des grandes classes) `[A]`.
+- Valeurs `[A]` : coupe de base 0,15 ; esquive 0,25 ; cadence d'attaque 0,48–0,88 s ; frappe mortelle 0,72.
+- **Taille d'échantillon** : une bataille contre un petit Titan tue 0, 1 ou 2 hommes. Sur 100 batailles, le bruit de la moyenne atteint ±16 % ; le critère de ±15 % ne serait donc pas mesurable. AC4-08 passe à **1 000 batailles par type**, ce qui donne un bruit d'environ 5 %. La référence d'auto-résolution est calculée sur les mêmes configurations (4 tirages par graine). Révision faite **avant** toute mesure officielle ; le critère est plus exigeant, pas plus lâche.
+- Exploration (hors commande officielle) : écart maximal de 5 % sur les graines 1–1 000 et de 9 % sur les graines 1 001–2 000.

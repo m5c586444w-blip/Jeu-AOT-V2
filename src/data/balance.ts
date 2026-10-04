@@ -187,8 +187,8 @@ export const TacticalBalanceSchema = z
         panic_hook_delay_mult: pos,
       })
       .strict(),
-    cut: z.object({ reach_m: pos, window_s: pos, base: prob, speed_ref: pos, speed_k: num, angle_k: num, skill_k: num, wear_per_cut: range, change_blades_s: pos, limb_share: prob, cooldown_s: pos }).strict(),
-    titans: z.object({ vision_day_m: pos, vision_night_m: pos, hearing_m: pos, night_activity: prob, group_attraction_k: num, attack_cooldown_s: range, grab_hold_s: pos, limb_regen_s: pos, nape_height_ratio: prob, reach_ratio: pos }).strict(),
+    cut: z.object({ reach_m: pos, window_s: pos, base: prob, speed_ref: pos, speed_k: num, angle_k: num, skill_k: num, wear_per_cut: range, change_blades_s: pos, limb_share: prob, cooldown_s: pos, threat_exponent: z.number().min(0) }).strict(),
+    titans: z.object({ vision_day_m: pos, vision_night_m: pos, hearing_m: pos, night_activity: prob, group_attraction_k: num, attack_cooldown_s: range, threat_attack_exponent: z.number().min(0), grab_hold_s: pos, limb_regen_s: pos, nape_height_ratio: prob, reach_ratio: pos }).strict(),
     soldiers: z
       .object({
         dodge_base: prob,
@@ -206,6 +206,7 @@ export const TacticalBalanceSchema = z
         panic_threshold: num,
         panic_gas_waste: pos,
         stress_decay_per_s: num,
+        gas_reserve: z.number().min(0),
       })
       .strict(),
     squads: z.object({ spacing_m: pos, flee_speed: pos, retreat_losses_share: prob }).strict(),

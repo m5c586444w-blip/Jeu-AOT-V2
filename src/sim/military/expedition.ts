@@ -7,6 +7,7 @@ import { effectiveAttributes } from "../politics/state";
 import { pushLog } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
 import type { MilitaryWorld, World } from "../strategic/world";
+import type { ExpeditionsBalance } from "../../data/balance";
 import { gasFromStock, planCapitalCost, planProblem, planSoldiers } from "./plan";
 import { clamp, lognormal, poisson, uniform, weighted } from "./random";
 import { edgeKm, supplyAt, titanDensity } from "./routes";
@@ -182,6 +183,28 @@ function killOfficer(ctx: MilCtx, e: Expedition, id: string, cause: FieldDeathCa
 
 const ROLE_EXPOSURE: Record<string, number> = { tueur: 1.5, eclaireur: 1.2, cavalier: 1, soutien: 0.7, medecin: 0.5 };
 
+export interface EngagementFactors {
+  threat: number;
+  group: number;
+  skill: number;
+  /** Facteur des vétérans (1 = aucun). */
+  veteran: number;
+  gasMult: number;
+  bladeMult: number;
+  morale: number;
+  exposure: number;
+  misread: boolean;
+}
+
+/**
+ * Médiane des morts d'un engagement (auto-résolution, 03 §12) : menace × taille du groupe × compétence × vétérans
+ * × gaz × lames × moral × exposition de la formation. Partagée avec la comparaison au combat joué (AC4-08).
+ */
+export function engagementMedian(x: ExpeditionsBalance, f: EngagementFactors): number {
+  const g = x.engagement;
+  return g.deaths_base * f.threat * f.group * Math.exp(-g.skill_k * (f.skill - 50)) * f.veteran * f.gasMult * f.bladeMult * Math.exp(-g.morale_k * (f.morale - 50)) * f.exposure * (f.misread ? x.signals.misread_engage_mult : 1);
+}
+
 /** Un engagement (03 §12) : pertes à queue épaisse (log-normale + catastrophe rare), blessés, Titans abattus, gaz. */
 function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId: string, group: number, misread: boolean, weather: Weather): void {
   const x = ctx.m.exp;
@@ -210,17 +233,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   const gasNeed = engaged.length * g.gas_per_engaged[0];
   const gasMult = e.gasOdm < gasNeed ? g.no_gas_mult : 1;
   const bladeMult = e.bladePairs < engaged.length * 0.5 ? g.no_blades_mult : 1;
-  const median =
-    g.deaths_base *
-    cls.threat *
-    group *
-    Math.exp(-g.skill_k * (skill - 50)) *
-    veteran *
-    gasMult *
-    bladeMult *
-    Math.exp(-g.morale_k * (e.morale - 50)) *
-    f.exposure *
-    (misread ? x.signals.misread_engage_mult : 1);
+  const median = engagementMedian(x, { threat: cls.threat, group, skill, veteran, gasMult, bladeMult, morale: e.morale, exposure: f.exposure, misread });
   let deaths = Math.min(engaged.length, Math.floor(lognormal(rng, median, g.sigma)));
   const catP = g.catastrophe.p_base * (cls.abnormal ? g.catastrophe.abnormal_mult : 1) * (e.plan.formation === "colonnes" ? g.catastrophe.column_mult : 1);
   let catastrophe = false;
