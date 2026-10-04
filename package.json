@@ -25,7 +25,9 @@
     "sim:expeditions": "tsx src/tools/sim-expeditions.ts",
     "smoke:map": "tsx src/tools/smoke-map.ts",
     "smoke:politique": "tsx src/tools/smoke-politique.ts",
-    "smoke:expedition": "tsx src/tools/smoke-expedition.ts"
+    "smoke:expedition": "tsx src/tools/smoke-expedition.ts",
+    "sim:tactical": "tsx src/tools/sim-tactical.ts",
+    "smoke:tactique": "tsx src/tools/smoke-tactique.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,4 +1,4 @@
-import type { Graphics } from "pixi.js";
+import type { GraphicsContext } from "pixi.js";
 import { BRICK, INK, OCHRE, PAPER, STONE, VERDIGRIS } from "../palette";
 
 /**
@@ -23,7 +23,7 @@ const SILHOUETTES = [
 const FLESH = 0xc89a7c;
 const FLESH_DARK = 0x9c6f56;
 
-export function drawTitan(g: Graphics, sx: number, sy: number, heightPx: number, silhouette: number, facing: number, alive: boolean, crawl: boolean, cut: { armL: boolean; armR: boolean; legs: boolean }): void {
+export function drawTitan(g: GraphicsContext, sx: number, sy: number, heightPx: number, silhouette: number, facing: number, alive: boolean, crawl: boolean, cut: { armL: boolean; armR: boolean; legs: boolean }): void {
   const p = SILHOUETTES[silhouette % SILHOUETTES.length] ?? SILHOUETTES[0];
   const h = crawl ? heightPx * 0.45 : heightPx;
   const color = alive ? FLESH : STONE;
@@ -38,12 +38,13 @@ export function drawTitan(g: Graphics, sx: number, sy: number, heightPx: number,
     return;
   }
   const legH = h * p.legs;
+  // Jambes coupées : moignons, le corps s'affaisse au sol.
+  const legLen = cut.legs ? legH * 0.35 : legH;
   const torsoH = h * (1 - p.legs - p.head);
-  const hipY = sy - legH;
+  const hipY = sy - legLen;
   const shoulderY = hipY - torsoH;
   const hunch = p.hunch * h * dir;
-  // Jambes (coupées : moignons).
-  const legLen = cut.legs ? legH * 0.35 : legH;
+  // Jambes.
   g.moveTo(sx - h * 0.07, hipY).lineTo(sx - h * 0.09, hipY + legLen).moveTo(sx + h * 0.07, hipY).lineTo(sx + h * 0.09, hipY + legLen).stroke({ width: h * 0.08, color: FLESH_DARK, cap: "round" });
   // Torse et ventre.
   g.poly([sx - h * p.shoulders * 0.5 + hunch, shoulderY, sx + h * p.shoulders * 0.5 + hunch, shoulderY, sx + h * p.belly * 0.5, hipY, sx - h * p.belly * 0.5, hipY]).fill({ color }).stroke({ width: lw, color: INK, alpha: 0.85 });
@@ -67,7 +68,7 @@ export function drawTitan(g: Graphics, sx: number, sy: number, heightPx: number,
 /** 8 types de soldats : éclaireur, tueur, soutien, cavalier, médecin, chef, officier nommé, Ackerman. */
 export type SoldierLook = "eclaireur" | "tueur" | "soutien" | "cavalier" | "medecin" | "chef" | "officier" | "ackerman";
 
-export function drawSoldier(g: Graphics, sx: number, sy: number, k: number, look: SoldierLook, onGround: boolean, selected: boolean, wounded: boolean): void {
+export function drawSoldier(g: GraphicsContext, sx: number, sy: number, k: number, look: SoldierLook, onGround: boolean, selected: boolean, wounded: boolean): void {
   const s = k;
   if (selected) g.circle(sx, sy - s, s * 1.9).stroke({ width: s * 0.3, color: OCHRE });
   if (onGround && look === "cavalier") {
@@ -105,7 +106,7 @@ export function drawSoldier(g: Graphics, sx: number, sy: number, k: number, look
 }
 
 /** Fusée de signal (03 §7) : traînée et bouffée colorée. */
-export function drawFlare(g: Graphics, sx: number, sy: number, k: number, color: "rouge" | "noir" | "vert", age: number): void {
+export function drawFlare(g: GraphicsContext, sx: number, sy: number, k: number, color: "rouge" | "noir" | "vert", age: number): void {
   const c = color === "rouge" ? BRICK : color === "vert" ? VERDIGRIS : INK;
   const rise = Math.min(1, age / 2) * 60 * k;
   const a = Math.max(0, 1 - age / 8);

@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, TilingSprite } from "pixi.js";
+import { Application, Container, Graphics, GraphicsContext, TilingSprite } from "pixi.js";
 import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
 import { INK, OCHRE, PAPER, PAPER_DARK, STONE, VERDIGRIS } from "../palette";
@@ -25,6 +25,13 @@ export class TacticalScene {
   private readonly gGround = new Graphics();
   private readonly gStatic = new Graphics();
   private readonly gDynamic = new Graphics();
+  /** Figures construites une fois par apparence (GraphicsContext partagé), puis seulement déplacées et mises à l'échelle. */
+  private readonly titanLayer = new Container({ sortableChildren: true });
+  private readonly soldierLayer = new Container();
+  private readonly gOverlay = new Graphics();
+  private readonly contexts = new Map<string, GraphicsContext>();
+  private readonly titanFigs: Graphics[] = [];
+  private readonly soldierFigs: Graphics[] = [];
   private map: TacticalWorldMap | null = null;
   private zoom = 1;
   private fitZoom = 1;
@@ -33,13 +40,13 @@ export class TacticalScene {
   selected: Set<number> = new Set();
 
   private constructor(private readonly app: Application) {
-    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic);
+    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay);
     app.stage.addChild(this.worldLayer);
   }
 
   static async create(host: HTMLElement): Promise<TacticalScene> {
     const app = new Application();
-    await app.init({ resizeTo: host, background: PAPER, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl" });
+    await app.init({ autoStart: false, resizeTo: host, background: PAPER, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl" });
     app.canvas.classList.add("tactique__toile");
     host.append(app.canvas);
     const scene = new TacticalScene(app);
@@ -53,6 +60,16 @@ export class TacticalScene {
       scene.framing?.();
     });
     return scene;
+  }
+
+  /** Rendu d'une image : appelé par la boucle de l'écran de bataille (pas de ticker propre), pour mesurer tout le temps JS. */
+  render(): void {
+    this.app.render();
+  }
+
+  /** Pixels par mètre. */
+  get zoomLevel(): number {
+    return this.zoom;
   }
 
   get canvas(): HTMLCanvasElement {
@@ -168,16 +185,29 @@ export class TacticalScene {
       const age = t - f.t;
       if (age < 0 || age > 8) continue;
       const [x, y] = this.project(f.x, f.y, 6);
-      drawFlare(g, x, y, k, f.color, age);
+      drawFlare(g.context, x, y, 1, f.color, age);
     }
-    // Titans : du fond vers l'avant.
-    const titans = [...st.titans].sort((a, b) => a.y - b.y);
-    for (const tt of titans) {
+    // Titans : figure de hauteur 100 mise à l'échelle, du fond vers l'avant (zIndex = profondeur).
+    st.titans.forEach((tt, i) => {
+      const f = this.fig(this.titanFigs, this.titanLayer, i);
+      const facing = Math.cos(tt.heading) >= 0 ? 1 : -1;
+      const crawl = tt.behavior === "rampant";
+      const key = `t:${tt.silhouette}:${facing}:${tt.alive}:${crawl}:${tt.armL > 0}:${tt.armR > 0}:${tt.legs > 0}`;
+      const ctx = this.context(key, (c) => drawTitan(c, 0, 0, 100, tt.silhouette, facing, tt.alive, crawl, { armL: tt.armL > 0, armR: tt.armR > 0, legs: tt.legs > 0 }));
+      // Réassigner le même contexte reconstruirait la figure : seulement s'il change.
+      if (f.context !== ctx) f.context = ctx;
       const [x, y] = this.project(tt.x, tt.y, 0);
-      drawTitan(g, x, y, Math.max(tt.height, MIN_TITAN_PX / this.zoom), tt.silhouette, Math.cos(tt.heading), tt.alive, tt.behavior === "rampant", { armL: tt.armL > 0, armR: tt.armR > 0, legs: tt.legs > 0 });
-    }
+      f.position.set(x, y);
+      f.scale.set(Math.max(tt.height, MIN_TITAN_PX / this.zoom) / 100);
+      f.zIndex = tt.y;
+    });
+    const o = this.gOverlay;
+    o.clear();
     st.soldiers.forEach((s, i) => {
-      if (s.mode === "mort" || s.mode === "fui") return;
+      const f = this.fig(this.soldierFigs, this.soldierLayer, i);
+      const shown = s.mode !== "mort" && s.mode !== "fui";
+      if (f.visible !== shown) f.visible = shown;
+      if (!shown) return;
       const p = prev?.[i];
       const ix = p ? p.x + (s.x - p.x) * alpha : s.x;
       const iy = p ? p.y + (s.y - p.y) * alpha : s.y;
@@ -196,11 +226,18 @@ export class TacticalScene {
           g.moveTo(px, py - 2).lineTo(x, y - 2).stroke({ width: 1.6, color: PAPER, alpha: 0.6 });
         }
       }
-      drawSoldier(g, x, y, k, look(s), s.mode === "sol", this.selected.has(i), s.wound !== "aucune");
+      const lk = look(s);
+      const ground = s.mode === "sol";
+      const sel = this.selected.has(i);
+      const hurt = s.wound !== "aucune";
+      const ctx = this.context(`s:${lk}:${ground}:${sel}:${hurt}`, (c) => drawSoldier(c, 0, 0, 1, lk, ground, sel, hurt));
+      if (f.context !== ctx) f.context = ctx;
+      f.position.set(x, y);
+      f.scale.set(k);
     });
     if (st.wagon) {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
-      g.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
+      o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
     }
   }
 
@@ -209,7 +246,10 @@ export class TacticalScene {
     let best: { kind: "soldat" | "titan"; index: number } | null = null;
     let bestD = 14;
     st.soldiers.forEach((s, i) => {
-      if (s.mode === "mort" || s.mode === "fui") return;
+      const f = this.fig(this.soldierFigs, this.soldierLayer, i);
+      const shown = s.mode !== "mort" && s.mode !== "fui";
+      if (f.visible !== shown) f.visible = shown;
+      if (!shown) return;
       const [x, y] = this.toScreen(s.x, s.y, s.z + 2);
       const d = Math.hypot(x - sx, y - sy);
       if (d < bestD) {
@@ -230,7 +270,28 @@ export class TacticalScene {
     return best;
   }
 
+  private context(key: string, draw: (g: GraphicsContext) => void): GraphicsContext {
+    let c = this.contexts.get(key);
+    if (!c) {
+      c = new GraphicsContext();
+      draw(c);
+      this.contexts.set(key, c);
+    }
+    return c;
+  }
+
+  private fig(pool: Graphics[], layer: Container, i: number): Graphics {
+    let g = pool[i];
+    if (!g) {
+      g = new Graphics();
+      pool[i] = g;
+      layer.addChild(g);
+    }
+    return g;
+  }
+
   destroy(): void {
+    for (const c of this.contexts.values()) c.destroy();
     this.app.destroy(true, { children: true });
   }
 }

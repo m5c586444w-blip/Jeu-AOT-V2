@@ -131,6 +131,12 @@ export class StrategicMap {
   }
 
   /** Cadre toute l'île dans la vue. */
+  /** Suspend (true) ou reprend le rendu de la carte, masquée par l'écran de bataille (P4). */
+  setSuspended(on: boolean): void {
+    if (on) this.app.stop();
+    else this.app.start();
+  }
+
   fit(): void {
     const [x0, y0, x1, y1] = this.map.bounds;
     const { width, height } = this.app.screen;

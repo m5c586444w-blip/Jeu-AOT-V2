@@ -162,10 +162,13 @@ export async function bootGame(): Promise<void> {
   const playBattle = async (setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null> => {
     inBattle = true;
     bubble.hide();
+    // La carte stratégique est masquée : son rendu est suspendu pour laisser l'image à la bataille.
+    map.setSuspended(true);
     try {
       return await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
+      map.setSuspended(false);
       last = performance.now();
       refresh();
     }

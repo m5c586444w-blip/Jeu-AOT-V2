@@ -554,3 +554,6 @@
 @media (max-width: 700px) {
   .bataille { grid-template: "tete" auto "scene" 1fr "carnet" 8rem "escouades" auto / 1fr; }
 }
+.planche { position: fixed; inset: 0; z-index: 22; overflow: auto; padding: 0.6rem 1rem; background: var(--papier); }
+.planche-toile canvas { display: block; border: 1px solid var(--encre); }
+.planche-legendes { display: grid; font-size: 0.8rem; text-align: center; margin-top: 0.2rem; }

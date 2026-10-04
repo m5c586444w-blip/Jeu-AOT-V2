@@ -24,6 +24,12 @@ function lookOf(s: SoldierUnit): SoldierLook {
   return (["tueur", "eclaireur", "soutien", "cavalier", "medecin", "tueur"] as const)[id % 6] ?? "tueur";
 }
 
+/** Sonde de contrôle (smoke:tactique) : position à l'écran d'un soldat de la bataille ouverte, relative à la scène. */
+export const battleProbe: { soldierOnScreen: ((i: number) => [number, number] | null) | null } = { soldierOnScreen: null };
+
+/** Nom affiché d'une escouade (jamais l'identifiant brut). */
+const squadName = (id: string): string => (id === "officiers" ? t("tac.officers") : id.replace("esc_", t("tac.squad_n")));
+
 export interface BattleScreenOptions {
   world: World;
   why: WhyTooltip;
@@ -63,11 +69,14 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   scene.setMap(bt.map);
   scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0 })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height }))]);
   const orders: TimedOrder[] = [];
+  battleProbe.soldierOnScreen = (i) => {
+    const s = bt.state.soldiers[i];
+    return s && s.mode !== "mort" && s.mode !== "fui" ? scene.toScreen(s.x, s.y, s.z + 2) : null;
+  };
   let speed: number = 0;
   let prev: UnitPose[] | null = null;
   let acc = 0;
   let last = performance.now();
-  const frameTimes: number[] = [];
   let following: { kind: "squad"; id: string } | { kind: "soldat"; index: number } | null = null;
   let done = false;
 
@@ -91,56 +100,99 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     renderCards();
   };
 
-  // Cartes d'escouade (fiches papier, 04 §5.11).
-  const renderCards = (): void => {
-    bar.replaceChildren();
-    for (const sq of bt.state.squads) {
-      const members = bt.state.soldiers.filter((s) => s.squad === sq.id);
-      const up = members.filter((s) => s.mode !== "mort" && s.mode !== "fui");
-      const card = el("article", "carte-escouade");
-      card.dataset["squad"] = sq.id;
-      const name = sq.id === "officiers" ? t("tac.officers") : sq.id.replace("esc_", t("tac.squad_n"));
-      card.append(el("h4", "", name));
-      const line = el("p", "carte-escouade-ligne");
-      const gas = up.length ? up.reduce((a, s) => a + s.gas, 0) / up.length : 0;
-      const blades = up.length ? up.reduce((a, s) => a + s.pairs, 0) / up.length : 0;
-      const stress = up.length ? up.reduce((a, s) => a + s.stress, 0) / up.length : 0;
-      const val = (text: string, why: string): HTMLSpanElement => {
-        const v = el("span", "valeur", text);
-        o.why.bind(v, () => ({ title: name, sections: [{ text: why }] }));
-        return v;
-      };
-      line.append(val(`${up.length}/${members.length}`, t("tac.men_why")), ` ${t("tac.gas")} `, val(formatNumber(gas), t("tac.gas_why")), ` ${t("tac.blades")} `, val(formatNumber(blades), t("tac.blades_why")), ` ${t("tac.stress")} `, val(formatNumber(stress), t("tac.stress_why", { panic: bt.world.balance.soldiers.panic_threshold })));
-      card.append(line, el("p", "carte-escouade-ordre", t(`order.${sq.order}`)));
-      const btns = el("div", "carte-escouade-ordres");
-      for (const ord of TACTICAL_ORDERS) {
-        const b = el("button", "registre-bouton petit", t(`order.${ord}`));
-        b.type = "button";
-        b.dataset["order"] = ord;
-        b.setAttribute("aria-pressed", String(sq.order === ord));
-        b.addEventListener("click", () => give(sq.id, ord));
-        btns.append(b);
-      }
-      const follow = el("button", "registre-bouton petit", t("tac.follow"));
-      follow.type = "button";
-      follow.addEventListener("click", () => {
-        following = following?.kind === "squad" && following.id === sq.id ? null : { kind: "squad", id: sq.id };
-      });
-      btns.append(follow);
-      card.append(btns);
-      bar.append(card);
+  // Cartes d'escouade (fiches papier, 04 §5.11) : construites une fois, puis mises à jour en place (300 unités = 47 cartes).
+  interface CardRefs {
+    men: HTMLSpanElement;
+    gas: HTMLSpanElement;
+    blades: HTMLSpanElement;
+    stress: HTMLSpanElement;
+    order: HTMLParagraphElement;
+    buttons: HTMLButtonElement[];
+    follow: HTMLButtonElement;
+  }
+  const cards = new Map<string, CardRefs>();
+  const membersOf = new Map<string, SoldierUnit[]>();
+  for (const s of bt.state.soldiers) membersOf.set(s.squad, [...(membersOf.get(s.squad) ?? []), s]);
+  for (const sq of bt.state.squads) {
+    const card = el("article", "carte-escouade");
+    card.dataset["squad"] = sq.id;
+    const name = squadName(sq.id);
+    card.append(el("h4", "", name));
+    const line = el("p", "carte-escouade-ligne");
+    const val = (why: string): HTMLSpanElement => {
+      const v = el("span", "valeur");
+      o.why.bind(v, () => ({ title: name, sections: [{ text: why }] }));
+      return v;
+    };
+    const refs: CardRefs = { men: val(t("tac.men_why")), gas: val(t("tac.gas_why")), blades: val(t("tac.blades_why")), stress: val(t("tac.stress_why", { panic: bt.world.balance.soldiers.panic_threshold })), order: el("p", "carte-escouade-ordre"), buttons: [], follow: el("button", "registre-bouton petit", t("tac.follow")) };
+    line.append(refs.men, ` ${t("tac.gas")} `, refs.gas, ` ${t("tac.blades")} `, refs.blades, ` ${t("tac.stress")} `, refs.stress);
+    card.append(line, refs.order);
+    const btns = el("div", "carte-escouade-ordres");
+    for (const ord of TACTICAL_ORDERS) {
+      const b = el("button", "registre-bouton petit", t(`order.${ord}`));
+      b.type = "button";
+      b.dataset["order"] = ord;
+      b.addEventListener("click", () => give(sq.id, ord));
+      refs.buttons.push(b);
+      btns.append(b);
     }
+    refs.follow.type = "button";
+    refs.follow.addEventListener("click", () => {
+      following = following?.kind === "squad" && following.id === sq.id ? null : { kind: "squad", id: sq.id };
+      root.dataset["follow"] = following ? `escouade:${sq.id}` : "";
+      renderCards();
+    });
+    btns.append(refs.follow);
+    card.append(btns);
+    bar.append(card);
+    cards.set(sq.id, refs);
+  }
+  const setText = (e: HTMLElement, text: string): void => {
+    if (e.textContent !== text) e.textContent = text;
+  };
+  const setPressed = (e: HTMLElement, on: boolean): void => {
+    const v = String(on);
+    if (e.getAttribute("aria-pressed") !== v) e.setAttribute("aria-pressed", v);
+  };
+  // Mise à jour étalée : `n` cartes par appel (tour à tour), toutes si n est omis (ordre, suivi, fin de bataille).
+  let cardCursor = 0;
+  const renderCards = (n = bt.state.squads.length): void => {
+    const squads = bt.state.squads;
+    for (let k = 0; k < Math.min(n, squads.length); k++) {
+      const sq = squads[(cardCursor + k) % squads.length];
+      if (!sq) continue;
+      const refs = cards.get(sq.id);
+      if (!refs) continue;
+      const members = membersOf.get(sq.id) ?? [];
+      const up = members.filter((s) => s.mode !== "mort" && s.mode !== "fui");
+      const avg = (f: (s: SoldierUnit) => number): number => (up.length ? up.reduce((a, s) => a + f(s), 0) / up.length : 0);
+      setText(refs.men, `${up.length}/${members.length}`);
+      setText(refs.gas, formatNumber(avg((s) => s.gas)));
+      setText(refs.blades, formatNumber(avg((s) => s.pairs)));
+      setText(refs.stress, formatNumber(avg((s) => s.stress)));
+      // Un ordre donné en pause s'affiche tout de suite (il s'applique au prochain pas).
+      const current = orders.filter((x) => x.squad === sq.id && x.tick >= bt.state.tick).at(-1)?.order ?? sq.order;
+      setText(refs.order, t(`order.${current}`));
+      refs.buttons.forEach((b, i) => setPressed(b, TACTICAL_ORDERS[i] === current));
+      setPressed(refs.follow, following?.kind === "squad" && following.id === sq.id);
+    }
+    cardCursor = (cardCursor + n) % Math.max(1, squads.length);
   };
   renderCards();
 
+  // Carnet : seules les nouvelles lignes sont ajoutées (40 au plus, la plus récente en tête).
   const label = (v: string | number): string | number => (typeof v === "string" && v.includes(".") ? t(v) : v);
+  let logged = 0;
   const renderLog = (): void => {
-    logList.replaceChildren();
-    for (const l of bt.state.log.slice(-40).reverse()) {
+    const log = bt.state.log;
+    for (; logged < log.length; logged++) {
+      const l = log[logged];
+      if (!l) continue;
       const params: Record<string, string | number> = {};
-      for (const [k, v] of Object.entries(l.params)) params[k] = label(v);
-      logList.append(el("li", l.key.startsWith("battle.death") ? "carnet-mort" : "", `${clock(l.t)} — ${t(l.key, params)}`));
+      for (const [k, v] of Object.entries(l.params)) params[k] = k === "squad" && typeof v === "string" ? squadName(v) : label(v);
+      logList.prepend(el("li", l.key.startsWith("battle.death") ? "carnet-mort" : "", `${clock(l.t)} — ${t(l.key, params)}`));
     }
+    while (logList.childElementCount > 40) logList.lastElementChild?.remove();
   };
 
   // Caméra : molette, glisser, clic pour sélectionner (et suivre un individu).
@@ -148,10 +200,11 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     ev.preventDefault();
     const r = host.getBoundingClientRect();
     scene.zoomAt(ev.clientX - r.left, ev.clientY - r.top, ev.deltaY < 0 ? 1.15 : 0.87);
+    root.dataset["zoom"] = scene.zoomLevel.toFixed(2);
   }, { passive: false });
   let drag: { x: number; y: number; moved: boolean } | null = null;
   host.addEventListener("pointerdown", (ev) => (drag = { x: ev.clientX, y: ev.clientY, moved: false }));
-  window.addEventListener("pointermove", (ev) => {
+  const onMove = (ev: PointerEvent): void => {
     if (!drag) return;
     const dx = ev.clientX - drag.x;
     const dy = ev.clientY - drag.y;
@@ -159,19 +212,24 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     if (drag.moved) {
       scene.panBy(dx, dy);
       following = null;
+      root.dataset["follow"] = "";
       drag.x = ev.clientX;
       drag.y = ev.clientY;
     }
-  });
-  window.addEventListener("pointerup", (ev) => {
+  };
+  const onUp = (ev: PointerEvent): void => {
     if (drag && !drag.moved) {
       const r = host.getBoundingClientRect();
       const hit = scene.pick(bt.state, ev.clientX - r.left, ev.clientY - r.top);
       scene.selected = new Set(hit?.kind === "soldat" ? [hit.index] : []);
       if (hit?.kind === "soldat") following = { kind: "soldat", index: hit.index };
+      root.dataset["selection"] = hit ? `${hit.kind}:${hit.index}` : "";
+      root.dataset["follow"] = following?.kind === "soldat" ? `soldat:${following.index}` : (root.dataset["follow"] ?? "");
     }
     drag = null;
-  });
+  };
+  window.addEventListener("pointermove", onMove);
+  window.addEventListener("pointerup", onUp);
   const onKey = (ev: KeyboardEvent): void => {
     if (ev.code === "Space") {
       ev.preventDefault();
@@ -183,7 +241,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   return new Promise<TimedOrder[] | null>((resolve) => {
     const finish = (value: TimedOrder[] | null): void => {
       done = true;
+      battleProbe.soldierOnScreen = null;
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
       delete document.body.dataset["tactique"];
       scene.destroy();
       root.remove();
@@ -234,7 +295,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
         const ul = el("ul", "bilan-morts");
         for (const s of dead) {
           const titan = s.death?.titan !== null && s.death?.titan !== undefined ? st.titans[s.death.titan] : undefined;
-          ul.append(el("li", "", t("tac.sum.dossier", { name: s.name, squad: s.squad, cause: t(`tac.cause.${s.death?.cause ?? "frappe"}`), titan: titan ? t(bt.world.titanTypes.get(titan.type)?.name_key ?? "") : "—", t: clock(s.death?.t ?? 0), x: s.death?.x ?? 0, y: s.death?.y ?? 0 })));
+          ul.append(el("li", "", t("tac.sum.dossier", { name: s.name, squad: squadName(s.squad), cause: t(`tac.cause.${s.death?.cause ?? "frappe"}`), titan: titan ? t(bt.world.titanTypes.get(titan.type)?.name_key ?? "") : "—", t: clock(s.death?.t ?? 0), x: Math.round(s.death?.x ?? 0), y: Math.round(s.death?.y ?? 0) })));
         }
         box.append(ul);
       }
@@ -246,6 +307,15 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       root.append(box);
     };
 
+    // Temps JS par image (AC4-09) : simulation, préparation des figures, rendu Pixi, interface ; p95 sur 240 images.
+    const parts = { sim: [] as number[], draw: [] as number[], render: [] as number[], ui: [] as number[], total: [] as number[] };
+    const p95 = (xs: number[]): number => [...xs].sort((a, b) => a - b)[Math.floor(xs.length * 0.95)] ?? 0;
+    const push = (xs: number[], v: number): void => {
+      xs.push(v);
+      if (xs.length > 240) xs.shift();
+    };
+    let uiTick = -10;
+    let ended = false;
     const frame = (now: number): void => {
       if (done) return;
       const t0 = performance.now();
@@ -253,40 +323,56 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       last = now;
       const tick = 1 / bt.world.balance.tick_hz;
       acc += dt * speed;
-      let stepped = false;
       while (acc >= tick && !bt.state.ended) {
-        prev = bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: s.z }));
+        // Positions avant le pas (interpolation), dans un tableau réutilisé.
+        const ps = (prev ??= bt.state.soldiers.map(() => ({ x: 0, y: 0, z: 0 })));
+        bt.state.soldiers.forEach((s, i) => {
+          const p = ps[i];
+          if (p) {
+            p.x = s.x;
+            p.y = s.y;
+            p.z = s.z;
+          }
+        });
         stepBattle(bt, orders.filter((x) => x.tick === bt.state.tick));
         acc -= tick;
-        stepped = true;
       }
+      const t1 = performance.now();
       if (following?.kind === "squad") {
         const sqId = following.id;
-        const m = bt.state.soldiers.filter((s) => s.squad === sqId && s.mode !== "mort" && s.mode !== "fui");
+        const m = (membersOf.get(sqId) ?? []).filter((s) => s.mode !== "mort" && s.mode !== "fui");
         if (m.length) scene.follow(m.reduce((a, s) => a + s.x, 0) / m.length, m.reduce((a, s) => a + s.y, 0) / m.length, 0);
       } else if (following?.kind === "soldat") {
         const s = bt.state.soldiers[following.index];
         if (s && s.mode !== "mort") scene.follow(s.x, s.y, s.z);
       }
       scene.draw(bt.state, prev, Math.min(1, acc / tick), lookOf);
-      timer.textContent = clock(bt.state.tick / bt.world.balance.tick_hz);
-      if (stepped && bt.state.tick % 10 === 0) {
-        renderCards();
+      const t2 = performance.now();
+      scene.render();
+      const t3 = performance.now();
+      setText(timer, clock(bt.state.tick / bt.world.balance.tick_hz));
+      if (bt.state.ended && !ended) renderCards();
+      else renderCards(8);
+      if (bt.state.tick - uiTick >= 10 || (bt.state.ended && !ended)) {
+        uiTick = bt.state.tick;
         renderLog();
       }
-      if (bt.state.ended) {
-        renderCards();
-        renderLog();
+      if (bt.state.ended && !ended) {
+        ended = true;
         showSummary();
       }
-      const spent = performance.now() - t0;
-      frameTimes.push(spent);
-      if (frameTimes.length > 240) frameTimes.shift();
-      const sorted = [...frameTimes].sort((a, b) => a - b);
-      const p95 = sorted[Math.floor(sorted.length * 0.95)] ?? 0;
-      root.dataset["jsP95"] = p95.toFixed(2);
+      const t4 = performance.now();
+      push(parts.sim, t1 - t0);
+      push(parts.draw, t2 - t1);
+      push(parts.render, t3 - t2);
+      push(parts.ui, t4 - t3);
+      push(parts.total, t4 - t0);
+      const total = p95(parts.total);
+      root.dataset["jsP95"] = total.toFixed(2);
+      root.dataset["jsParts"] = `sim ${p95(parts.sim).toFixed(2)} · figures ${p95(parts.draw).toFixed(2)} · rendu ${p95(parts.render).toFixed(2)} · interface ${p95(parts.ui).toFixed(2)}`;
+      root.dataset["frames"] = String(Number(root.dataset["frames"] ?? "0") + 1);
       root.dataset["tick"] = String(bt.state.tick);
-      perf.textContent = t("tac.perf", { ms: formatNumber(p95), n: bt.state.soldiers.length + bt.state.titans.length });
+      setText(perf, t("tac.perf", { ms: formatNumber(total), n: bt.state.soldiers.length + bt.state.titans.length }));
       requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
