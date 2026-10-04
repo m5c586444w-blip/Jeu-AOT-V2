@@ -1,0 +1,46 @@
+{
+  "canon": "A",
+  "notes_canon": "Renseignement (02 §6). Bruit des rapports ±20 % : 02 §6. Influence du Culte par anneau, agents, fausseté, preuves : A.",
+  "estimate_noise": 0.2,
+  "report_delay_days": [2, 8],
+  "agents": {
+    "start": 2,
+    "max": 3,
+    "recruit_capital": 6,
+    "cover": [40, 85],
+    "loyalty": [50, 90],
+    "skill": [35, 80],
+    "burn_per_operation": 0.04
+  },
+  "operation_days": {
+    "surveiller": 10,
+    "enqueter": 15,
+    "contre": 20
+  },
+  "falsehood": {
+    "base": 0.08,
+    "unreliable": 0.3,
+    "unreliable_below": 50,
+    "mole": 0.5
+  },
+  "evidence": {
+    "indice": 2,
+    "preuve": 4
+  },
+  "mole_detection": 0.2,
+  "cult_by_region": {
+    "interieur_sina": 70,
+    "mur_sina": 65,
+    "anneau_rose": 55,
+    "mur_rose": 55,
+    "anneau_maria": 40,
+    "mur_maria": 40,
+    "outre_murs": 0
+  },
+  "cult_drift": 0.05,
+  "legitimacy_local": {
+    "morale_k": 0.4,
+    "stability_k": 0.2,
+    "cult_k": 0.1
+  }
+}

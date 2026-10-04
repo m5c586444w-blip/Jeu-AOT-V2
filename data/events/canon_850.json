@@ -4,357 +4,2677 @@
     "code": "E09",
     "year_min": 850,
     "window": {
-      "after": null
+      "after": "evt_847_104th_recruitment",
+      "within_days": [
+        3,
+        10
+      ]
     },
+    "divergence_weight": 0.2,
+    "effects": [
+      {
+        "op": "org_influence",
+        "org": "org_training_corps",
+        "delta": 2
+      }
+    ],
+    "choices": [
+      {
+        "id": "corps",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 4
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_militaires",
+            "satisfaction": 2,
+            "radicalisation": 0
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "brigade",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 4
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -2
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "garnison",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 4
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.104th_graduation",
     "canon": "C",
-    "notes_canon": "Racine de la graine P0 : son prédécesseur E08 (≈ 847 [?]) n'est pas encore saisi."
+    "notes_canon": "Existence et contexte : C (12 E09). Choix et effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_trost_breach",
     "code": "E10",
     "year_min": 850,
     "window": {
-      "after": "evt_850_104th_graduation"
+      "after": "evt_850_104th_graduation",
+      "within_days": [
+        1,
+        3
+      ]
     },
     "location": "prov_trost",
+    "divergence_weight": 0.9,
+    "conditions": [
+      {
+        "control": "prov_trost",
+        "eq": "paradis"
+      }
+    ],
+    "effects": [
+      {
+        "op": "wall",
+        "province": "prov_rose_sud",
+        "value": 15
+      },
+      {
+        "op": "titans",
+        "province": "prov_trost",
+        "delta": 0.6
+      },
+      {
+        "op": "population",
+        "province": "prov_trost",
+        "share": -0.05
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -6
+      },
+      {
+        "op": "morale",
+        "province": "prov_trost",
+        "delta": -20
+      },
+      {
+        "op": "flag",
+        "key": "trost_breached",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "evacuer",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_trost",
+            "share": 0.03
+          },
+          {
+            "op": "garrison",
+            "province": "prov_trost",
+            "share": -0.1
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "tenir_porte",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_trost",
+            "share": -0.3
+          },
+          {
+            "op": "population",
+            "province": "prov_trost",
+            "share": -0.06
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "mobiliser",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_trost",
+            "share": -0.15
+          },
+          {
+            "op": "org_influence",
+            "org": "org_training_corps",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.1
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.trost_breach",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Brèche par le Colossal : C. Ampleur des pertes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_trost_defense",
     "code": "E11",
     "year_min": 850,
     "window": {
-      "after": "evt_850_trost_breach"
+      "after": "evt_850_trost_breach",
+      "within_days": [
+        0,
+        0
+      ]
     },
     "location": "prov_trost",
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_trost",
+        "share": -0.15
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_militaires",
+        "satisfaction": -3,
+        "radicalisation": 0
+      },
+      {
+        "op": "flag",
+        "key": "titans_captured_trost",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "evacuation",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_trost",
+            "share": 0.02
+          },
+          {
+            "op": "morale",
+            "province": "prov_trost",
+            "delta": 3
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "toits",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_trost",
+            "share": -0.1
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "secteur",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_trost",
+            "share": -0.08
+          },
+          {
+            "op": "stability",
+            "province": "prov_trost",
+            "delta": -10
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.trost_defense",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Défense de Trost et capture de Titans pour l'étude (Hange) : C (12 E11, §4). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_eren_first_transformation",
     "code": "E12",
     "year_min": 850,
     "window": {
-      "after": "evt_850_trost_defense"
+      "after": "evt_850_trost_defense",
+      "within_days": [
+        0,
+        1
+      ]
     },
     "location": "prov_trost",
+    "divergence_weight": 1.0,
+    "bifurcation": "B2",
+    "effects": [
+      {
+        "op": "reveal",
+        "secret": "secret_eren_yeager"
+      },
+      {
+        "op": "stress",
+        "character": "char_eren_yeager",
+        "delta": 15
+      },
+      {
+        "op": "flag",
+        "key": "eren_titan_known",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "laisser_agir",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "retenir",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "eren_restrained",
+            "value": true
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 3
+          }
+        ],
+        "divergence": 1.0
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.eren_first_transformation",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Transformation d'Eren : C (pilier narratif). « Retenir » : divergence maximale (12 B2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_trost_plug",
     "code": "E13",
     "year_min": 850,
     "window": {
-      "after": "evt_850_eren_first_transformation"
+      "after": "evt_850_eren_first_transformation",
+      "within_days": [
+        0,
+        2
+      ]
     },
     "location": "prov_trost",
+    "divergence_weight": 1.0,
+    "conditions": [
+      {
+        "flag": "eren_restrained",
+        "eq": false
+      }
+    ],
+    "choices": [
+      {
+        "id": "eren",
+        "effects": [
+          {
+            "op": "wall",
+            "province": "prov_rose_sud",
+            "value": 90
+          },
+          {
+            "op": "titans",
+            "province": "prov_trost",
+            "delta": -0.6
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 8
+          },
+          {
+            "op": "legitimacy",
+            "delta": 4
+          },
+          {
+            "op": "flag",
+            "key": "trost_sealed",
+            "value": true
+          },
+          {
+            "op": "flag",
+            "key": "titans_captured_trost",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "sans_eren",
+        "effects": [
+          {
+            "op": "wall",
+            "province": "prov_rose_sud",
+            "value": 40
+          },
+          {
+            "op": "garrison",
+            "province": "prov_trost",
+            "share": -0.4
+          },
+          {
+            "op": "titans",
+            "province": "prov_trost",
+            "delta": -0.3
+          },
+          {
+            "op": "flag",
+            "key": "trost_sealed",
+            "value": true
+          }
+        ],
+        "divergence": 0.6
+      },
+      {
+        "id": "abandonner",
+        "effects": [
+          {
+            "op": "control",
+            "province": "prov_trost",
+            "value": "titans"
+          },
+          {
+            "op": "population",
+            "province": "prov_trost",
+            "share": -0.6
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -10
+          },
+          {
+            "op": "legitimacy",
+            "delta": -8
+          },
+          {
+            "op": "flag",
+            "key": "trost_lost",
+            "value": true
+          }
+        ],
+        "divergence": 1.0
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.trost_plug",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Bouchage par Eren et le rocher : C. Débloque le scellement par durcissement (13 T-FOR-03). Branches non historiques : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_eren_trial",
     "code": "E14",
     "year_min": 850,
     "window": {
-      "after": "evt_850_trost_plug"
+      "after": "evt_850_trost_plug",
+      "within_days": [
+        3,
+        10
+      ]
     },
+    "divergence_weight": 0.8,
+    "bifurcation": "B3",
+    "conditions": [
+      {
+        "alive": "char_eren_yeager"
+      },
+      {
+        "fired": "evt_850_trost_plug"
+      }
+    ],
+    "effects": [
+      {
+        "op": "org_influence",
+        "org": "org_military_police",
+        "delta": 2
+      }
+    ],
+    "choices": [
+      {
+        "id": "corps",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 5
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -4
+          },
+          {
+            "op": "flag",
+            "key": "eren_custody_corps",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "brigade",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 6
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -6
+          },
+          {
+            "op": "flag",
+            "key": "eren_custody_brigade",
+            "value": true
+          }
+        ],
+        "divergence": 0.8
+      },
+      {
+        "id": "garnison",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 5
+          },
+          {
+            "op": "flag",
+            "key": "eren_custody_garnison",
+            "value": true
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.eren_trial",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Procès : C. Gardes alternatives : A (12 B3). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_branch_choice",
     "code": "E15",
     "year_min": 850,
     "window": {
-      "after": "evt_850_eren_trial"
+      "after": "evt_850_eren_trial",
+      "within_days": [
+        5,
+        15
+      ]
     },
+    "divergence_weight": 0.3,
+    "effects": [
+      {
+        "op": "org_influence",
+        "org": "org_survey_corps",
+        "delta": 2
+      }
+    ],
+    "choices": [
+      {
+        "id": "libre",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 3
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_militaires",
+            "satisfaction": 2,
+            "radicalisation": 0
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "quotas",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 3
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -2
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_militaires",
+            "satisfaction": -2,
+            "radicalisation": 0
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.branch_choice",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Choix des branches : C. Quotas : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_expedition57_preparation",
     "code": "E16",
     "year_min": 850,
     "window": {
-      "after": "evt_850_branch_choice"
+      "after": "evt_850_branch_choice",
+      "within_days": [
+        10,
+        25
+      ]
     },
+    "location": "prov_karanes",
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gas",
+        "delta": -20
+      },
+      {
+        "op": "capital",
+        "delta": -6
+      }
+    ],
+    "choices": [
+      {
+        "id": "eventail",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "colonnes",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -40
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "escorte",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gas",
+            "delta": -15
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -2
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.expedition57_preparation",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Préparation, arme de contention, formation : C (12 E16, 13 T-ANT-04/05). Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_expedition57",
     "code": "E17",
     "year_min": 850,
     "window": {
-      "after": "evt_850_expedition57_preparation"
+      "after": "evt_850_expedition57_preparation",
+      "within_days": [
+        5,
+        15
+      ]
     },
+    "divergence_weight": 0.6,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_plaines_du_nord"
+      },
+      {
+        "op": "observe",
+        "province": "prov_foret_arbres_geants"
+      },
+      {
+        "op": "stress",
+        "character": "char_erwin_smith",
+        "delta": 10
+      },
+      {
+        "op": "garrison",
+        "province": "prov_karanes",
+        "share": -0.05
+      }
+    ],
+    "choices": [
+      {
+        "id": "suivre",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "demi_tour",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -3
+          },
+          {
+            "op": "flag",
+            "key": "exp57_aborted",
+            "value": true
+          }
+        ],
+        "divergence": 0.9
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.expedition57",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Attaque du Titan féminin : C. Demi-tour : A (divergence forte). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_giant_tree_forest",
     "code": "E18",
     "year_min": 850,
     "window": {
-      "after": "evt_850_expedition57"
+      "after": "evt_850_expedition57",
+      "within_days": [
+        0,
+        1
+      ]
     },
+    "location": "prov_foret_arbres_geants",
+    "divergence_weight": 0.6,
+    "conditions": [
+      {
+        "flag": "exp57_aborted",
+        "eq": false
+      }
+    ],
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_foret_arbres_geants"
+      }
+    ],
+    "choices": [
+      {
+        "id": "piege",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          },
+          {
+            "op": "stress",
+            "character": "char_erwin_smith",
+            "delta": 5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "retraite",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "exp57_aborted",
+            "value": true
+          }
+        ],
+        "divergence": 0.8
+      },
+      {
+        "id": "arriere_garde",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_karanes",
+            "share": -0.05
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.giant_tree_forest",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Piège de la forêt : C. Localisation de la forêt : ? (P1). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_special_squad_loss",
     "code": "E19",
     "year_min": 850,
     "window": {
-      "after": "evt_850_giant_tree_forest"
+      "after": "evt_850_giant_tree_forest",
+      "within_days": [
+        0,
+        1
+      ]
     },
+    "divergence_weight": 0.6,
+    "conditions": [
+      {
+        "flag": "exp57_aborted",
+        "eq": false
+      }
+    ],
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_petra",
+        "cause": "titan"
+      },
+      {
+        "op": "kill",
+        "character": "char_oluo",
+        "cause": "titan"
+      },
+      {
+        "op": "kill",
+        "character": "char_eld",
+        "cause": "titan"
+      },
+      {
+        "op": "kill",
+        "character": "char_gunther",
+        "cause": "titan"
+      },
+      {
+        "op": "stress",
+        "character": "char_levi_ackerman",
+        "delta": 20
+      },
+      {
+        "op": "stress",
+        "character": "char_eren_yeager",
+        "delta": 25
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -3
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.special_squad_loss",
-    "canon": "?",
-    "notes_canon": "Moment exact « fin de E18 » [?] ; dates de mort des membres de l'escouade non recoupées (11 §9)."
+    "canon": "C",
+    "notes_canon": "Morts de l'escouade spéciale : 850, expédition 57, fiabilité « à vérifier » (11 §3 : [?]). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_traitor_investigation",
     "code": "E20",
     "year_min": 850,
     "window": {
-      "after": "evt_850_special_squad_loss"
+      "after": "evt_850_special_squad_loss",
+      "within_days": [
+        3,
+        10
+      ]
     },
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -3
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": -3
+      }
+    ],
+    "choices": [
+      {
+        "id": "recouper",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 1
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "interroger",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_training_corps",
+            "delta": -3
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_militaires",
+            "satisfaction": -2,
+            "radicalisation": 0
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "laisser",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": 2
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.traitor_investigation",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Enquête sur les traîtres : C. Méthodes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_stohess_capture",
     "code": "E21",
     "year_min": 850,
     "window": {
-      "after": "evt_850_traitor_investigation"
+      "after": "evt_850_traitor_investigation",
+      "within_days": [
+        3,
+        10
+      ]
     },
+    "location": "prov_stohess",
+    "divergence_weight": 0.7,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_stohess"
+      }
+    ],
+    "choices": [
+      {
+        "id": "piege_urbain",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_stohess",
+            "share": -0.02
+          },
+          {
+            "op": "stability",
+            "province": "prov_stohess",
+            "delta": -15
+          },
+          {
+            "op": "morale",
+            "province": "prov_stohess",
+            "delta": -12
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "evacuer",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_stohess",
+            "share": -0.005
+          },
+          {
+            "op": "stability",
+            "province": "prov_stohess",
+            "delta": -5
+          },
+          {
+            "op": "capital",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.4
+      },
+      {
+        "id": "arrestation_discrete",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -2
+          },
+          {
+            "op": "flag",
+            "key": "annie_arrested_quietly",
+            "value": true
+          }
+        ],
+        "divergence": 0.8,
+        "requires": [
+          {
+            "secret": "secret_annie_leonhart",
+            "at_least": "preuve"
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.stohess_capture",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Capture à Stohess : C. L'arrestation discrète n'est possible qu'avec une preuve obtenue par le renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_annie_crystallization",
     "code": "E22",
     "year_min": 850,
     "window": {
-      "after": "evt_850_stohess_capture"
+      "after": "evt_850_stohess_capture",
+      "within_days": [
+        0,
+        0
+      ]
     },
+    "location": "prov_stohess",
+    "divergence_weight": 0.8,
+    "effects": [
+      {
+        "op": "reveal",
+        "secret": "secret_annie_leonhart"
+      },
+      {
+        "op": "flag",
+        "key": "annie_crystallized",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "sous_sol",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "brigade",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 3
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.annie_crystallization",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Cristallisation : C. Garde : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_wall_titan_discovery",
     "code": "E23",
     "year_min": 850,
     "window": {
-      "after": "evt_850_annie_crystallization"
+      "after": "evt_850_annie_crystallization",
+      "within_days": [
+        0,
+        0
+      ]
     },
+    "location": "prov_stohess",
+    "divergence_weight": 0.7,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "wall_titans_known",
+        "value": true
+      },
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": -4
+      }
+    ],
+    "choices": [
+      {
+        "id": "censurer",
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": 3
+          },
+          {
+            "op": "cult",
+            "province": "all",
+            "delta": 2
+          },
+          {
+            "op": "legitimacy",
+            "delta": 1
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "publier",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -6
+          },
+          {
+            "op": "cult",
+            "province": "all",
+            "delta": -10
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_clerge",
+            "satisfaction": -10,
+            "radicalisation": 5
+          },
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": -8
+          }
+        ],
+        "divergence": 0.6
+      },
+      {
+        "id": "etudier",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 15
+          },
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": -2
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.wall_titan_discovery",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Titan dans le mur Sina : C. Réaction publique : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_wall_rose_invasion",
     "code": "E24",
     "year_min": 850,
     "window": {
-      "after": "evt_850_wall_titan_discovery"
+      "after": "evt_850_wall_titan_discovery",
+      "within_days": [
+        0,
+        3
+      ]
     },
+    "divergence_weight": 0.6,
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_mike_zacharias",
+        "cause": "titan"
+      },
+      {
+        "op": "titans",
+        "province": "prov_ragako",
+        "delta": 0.4
+      },
+      {
+        "op": "titans",
+        "province": "prov_utgard",
+        "delta": 0.4
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -8
+      },
+      {
+        "op": "population",
+        "province": "prov_ragako",
+        "share": -0.3
+      }
+    ],
+    "choices": [
+      {
+        "id": "recherche_breche",
+        "effects": [
+          {
+            "op": "observe",
+            "province": "prov_rose_sud_est"
+          },
+          {
+            "op": "observe",
+            "province": "prov_rose_est"
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "evacuation",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_utgard",
+            "share": -0.1
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -60
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "redeploiement",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_karanes",
+            "share": -0.1
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.wall_rose_invasion",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Invasion de Wall Rose, mort de Mike à E24 (errata) : C. Bestial : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_ragako",
     "code": "E25",
     "year_min": 850,
     "window": {
-      "after": "evt_850_wall_rose_invasion"
+      "after": "evt_850_wall_rose_invasion",
+      "within_days": [
+        0,
+        1
+      ]
     },
+    "location": "prov_ragako",
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_ragako"
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -3
+      },
+      {
+        "op": "stress",
+        "character": "char_connie_springer",
+        "delta": 25
+      }
+    ],
+    "choices": [
+      {
+        "id": "enqueter",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "evacuer_voisins",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -30
+          },
+          {
+            "op": "population",
+            "province": "prov_ragako",
+            "share": -0.1
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "detruire",
+        "effects": [
+          {
+            "op": "cult",
+            "province": "prov_ragako",
+            "delta": -5
+          },
+          {
+            "op": "legitimacy",
+            "delta": -2
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.ragako",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Ragako : C. Conséquences : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_utgard_battle",
     "code": "E26",
     "year_min": 850,
     "window": {
-      "after": "evt_850_ragako"
+      "after": "evt_850_ragako",
+      "within_days": [
+        0,
+        1
+      ]
     },
     "location": "prov_utgard",
+    "divergence_weight": 0.6,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_utgard"
+      }
+    ],
+    "choices": [
+      {
+        "id": "tenir",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_nanaba",
+            "cause": "titan"
+          },
+          {
+            "op": "kill",
+            "character": "char_gelgar",
+            "cause": "titan"
+          },
+          {
+            "op": "garrison",
+            "province": "prov_utgard",
+            "share": -0.3
+          },
+          {
+            "op": "flag",
+            "key": "utgard_destroyed",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "sortir",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_utgard",
+            "share": -0.4
+          },
+          {
+            "op": "flag",
+            "key": "utgard_destroyed",
+            "value": true
+          }
+        ],
+        "divergence": 0.5
+      },
+      {
+        "id": "diversion",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_utgard",
+            "share": -0.2
+          },
+          {
+            "op": "stress",
+            "character": "char_ymir",
+            "delta": 20
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.utgard_battle",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Utgard (nuit), morts de Nanaba et Gelgar : C (11 §3). Destruction du château : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_ymir_historia_revelations",
     "code": "E27",
     "year_min": 850,
     "window": {
-      "after": "evt_850_utgard_battle"
+      "after": "evt_850_utgard_battle",
+      "within_days": [
+        0,
+        1
+      ]
     },
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "reveal",
+        "secret": "secret_ymir"
+      },
+      {
+        "op": "reveal",
+        "secret": "secret_historia_reiss"
+      },
+      {
+        "op": "reveal",
+        "secret": "secret_reiner_braun"
+      },
+      {
+        "op": "reveal",
+        "secret": "secret_bertholdt_hoover"
+      },
+      {
+        "op": "flag",
+        "key": "infiltrators_exposed",
+        "value": true
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.ymir_historia_revelations",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Révélations : C (12 E27). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_armored_colossal_fight",
     "code": "E28",
     "year_min": 850,
     "window": {
-      "after": "evt_850_ymir_historia_revelations"
+      "after": "evt_850_ymir_historia_revelations",
+      "within_days": [
+        0,
+        2
+      ]
     },
+    "divergence_weight": 0.7,
+    "effects": [
+      {
+        "op": "wall",
+        "province": "prov_rose_sud_est",
+        "value": 70
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -5
+      }
+    ],
+    "choices": [
+      {
+        "id": "poursuivre",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_hannes",
+            "cause": "titan"
+          },
+          {
+            "op": "garrison",
+            "province": "prov_rose_sud_est",
+            "share": -0.2
+          },
+          {
+            "op": "stress",
+            "character": "char_eren_yeager",
+            "delta": 25
+          },
+          {
+            "op": "stress",
+            "character": "char_mikasa_ackerman",
+            "delta": 15
+          },
+          {
+            "op": "flag",
+            "key": "ymir_left",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "proteger",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "eren_kidnapped",
+            "value": true
+          },
+          {
+            "op": "flag",
+            "key": "ymir_left",
+            "value": true
+          },
+          {
+            "op": "legitimacy",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.6
+      },
+      {
+        "id": "replier",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "eren_kidnapped",
+            "value": true
+          },
+          {
+            "op": "flag",
+            "key": "ymir_left",
+            "value": true
+          },
+          {
+            "op": "legitimacy",
+            "delta": -6
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.8
+      },
+      {
+        "id": "arrestation",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "warriors_arrested",
+            "value": true
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 4
+          }
+        ],
+        "divergence": 1.0,
+        "requires": [
+          {
+            "secret": "secret_reiner_braun",
+            "at_least": "preuve"
+          }
+        ]
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.armored_colossal_fight",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Combat et enlèvement : C. Mort de Hannes : arc de l'invasion de Wall Rose (11 §3), rattachée à E28 (A). L'arrestation préventive exige une preuve du renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_sina_gates_closed",
     "code": "E29",
     "year_min": 850,
     "window": {
-      "after": "evt_850_erwin_trial"
+      "after": "evt_850_erwin_trial",
+      "within_days": [
+        0,
+        0
+      ]
     },
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_refugies",
+        "satisfaction": -8,
+        "radicalisation": 6
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": -4,
+        "radicalisation": 3
+      }
+    ],
+    "choices": [
+      {
+        "id": "garder",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -3
+          },
+          {
+            "op": "stability",
+            "province": "prov_mitras",
+            "delta": 5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "ouvrir",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 3
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -120
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -4
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": -6,
+            "radicalisation": 0
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "article",
     "text_key": "evt.850.sina_gates_closed",
     "canon": "C",
-    "notes_canon": "Se déclenche pendant le procès d'Erwin (E32), à l'annonce de la brèche de Rose (12 §3)."
+    "notes_canon": "Fermeture des portes pendant le procès d'Erwin : C (12 E29). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_survey_corps_hunted",
     "code": "E30",
     "year_min": 850,
     "window": {
-      "after": "evt_850_armored_colossal_fight"
+      "after": "evt_850_armored_colossal_fight",
+      "within_days": [
+        5,
+        20
+      ]
     },
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": -5
+      },
+      {
+        "op": "org_influence",
+        "org": "org_military_police",
+        "delta": 4
+      },
+      {
+        "op": "legitimacy",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "se_cacher",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "se_rendre",
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_survey_corps",
+            "delta": -10
+          },
+          {
+            "op": "flag",
+            "key": "survey_corps_disbanded",
+            "value": true
+          }
+        ],
+        "divergence": 0.8
+      },
+      {
+        "id": "riposter",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -4
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -6
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_bourgeoisie",
+            "satisfaction": -3,
+            "radicalisation": 0
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.survey_corps_hunted",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Traque du Corps : C. Accusation de meurtre : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_levi_kenny_street_fight",
     "code": "E31",
     "year_min": 850,
     "window": {
-      "after": "evt_850_survey_corps_hunted"
+      "after": "evt_850_survey_corps_hunted",
+      "within_days": [
+        3,
+        10
+      ]
     },
     "location": "?",
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "antipersonnel_odm_seen",
+        "value": true
+      },
+      {
+        "op": "stress",
+        "character": "char_levi_ackerman",
+        "delta": 10
+      }
+    ],
+    "choices": [
+      {
+        "id": "fuir",
+        "effects": [],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "combattre",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_levi_ackerman",
+            "delta": 10
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "negocier",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.levi_kenny_street_fight",
     "canon": "C",
-    "notes_canon": "Localisation du combat de rue = [?] (errata Q2)."
+    "notes_canon": "Combat de rue : C ; localisation : ? (errata Q2). ODM anti-personnel découvert : C (13 T-ODM-06). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_erwin_trial",
     "code": "E32",
     "year_min": 850,
     "window": {
-      "after": "evt_850_levi_kenny_street_fight"
+      "after": "evt_850_levi_kenny_street_fight",
+      "within_days": [
+        3,
+        10
+      ]
     },
+    "divergence_weight": 0.8,
+    "conditions": [
+      {
+        "alive": "char_erwin_smith"
+      }
+    ],
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_erwin_smith",
+        "delta": 10
+      }
+    ],
+    "choices": [
+      {
+        "id": "defense_publique",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 2
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 3
+          },
+          {
+            "op": "flag",
+            "key": "erwin_acquitted",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "negociation",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -6
+          },
+          {
+            "op": "flag",
+            "key": "erwin_acquitted",
+            "value": true
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "evasion",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -5
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -5
+          },
+          {
+            "op": "flag",
+            "key": "erwin_fugitive",
+            "value": true
+          }
+        ],
+        "divergence": 0.7
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.erwin_trial",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Procès d'Erwin : C. Divergence forte s'il est exécuté (12 E32). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_coup",
     "code": "E33",
     "year_min": 850,
     "window": {
-      "after": "evt_850_erwin_trial"
+      "after": "evt_850_erwin_trial",
+      "within_days": [
+        0,
+        3
+      ]
     },
+    "location": "prov_mitras",
+    "divergence_weight": 0.9,
+    "bifurcation": "B4",
+    "effects": [
+      {
+        "op": "org_influence",
+        "org": "org_cour",
+        "delta": -20
+      },
+      {
+        "op": "flag",
+        "key": "coup_done",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "sans_violence",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 5
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 3
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 3
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": -8,
+            "radicalisation": 0
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "avec_violence",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -6
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": -10
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": -15,
+            "radicalisation": 10
+          },
+          {
+            "op": "stability",
+            "province": "prov_mitras",
+            "delta": -20
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.coup",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Coup d'État sans violence : C. Version violente : A (12 B4). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_reiss_chapel",
     "code": "E34",
     "year_min": 850,
     "window": {
-      "after": "evt_850_coup"
+      "after": "evt_850_coup",
+      "within_days": [
+        1,
+        5
+      ]
     },
+    "location": "prov_domaine_reiss",
+    "divergence_weight": 0.8,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "founder_secret_known",
+        "value": true
+      },
+      {
+        "op": "research",
+        "delta": 5
+      }
+    ],
+    "choices": [
+      {
+        "id": "affronter",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_historia_reiss",
+            "delta": 20
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "fuir",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -3
+          },
+          {
+            "op": "flag",
+            "key": "historia_lost",
+            "value": true
+          }
+        ],
+        "divergence": 0.7
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.reiss_chapel",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Chapelle Reiss, secret du Fondateur : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_rod_reiss_titan",
     "code": "E35",
     "year_min": 850,
     "window": {
-      "after": "evt_850_reiss_chapel"
+      "after": "evt_850_reiss_chapel",
+      "within_days": [
+        0,
+        1
+      ]
     },
+    "location": "prov_orvud",
+    "divergence_weight": 0.7,
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_kenny_ackerman",
+        "cause": "blessures"
+      },
+      {
+        "op": "titans",
+        "province": "prov_orvud",
+        "delta": 0.2
+      }
+    ],
+    "choices": [
+      {
+        "id": "combattre",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_rod_reiss",
+            "cause": "titan"
+          },
+          {
+            "op": "titans",
+            "province": "prov_orvud",
+            "delta": -0.2
+          },
+          {
+            "op": "population",
+            "province": "prov_orvud",
+            "share": -0.01
+          },
+          {
+            "op": "legitimacy",
+            "delta": 4
+          },
+          {
+            "op": "research",
+            "delta": 10
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "evacuer",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_rod_reiss",
+            "cause": "titan"
+          },
+          {
+            "op": "population",
+            "province": "prov_orvud",
+            "share": -0.15
+          },
+          {
+            "op": "stability",
+            "province": "prov_orvud",
+            "delta": -30
+          },
+          {
+            "op": "legitimacy",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.rod_reiss_titan",
     "canon": "C",
-    "notes_canon": "Titan de Rod Reiss ≈ 120 m ; Orvud ravagé (11 §2). Mort de Kenny rattachée ici (errata Q2)."
+    "notes_canon": "Titan de Rod Reiss, morts de Rod et Kenny à E35 (errata Q2) : C. Sérum de Kenny : C (débloque T-MED-05, errata Q2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_historia_coronation",
     "code": "E36",
     "year_min": 850,
     "window": {
-      "after": "evt_850_rod_reiss_titan"
+      "after": "evt_850_rod_reiss_titan",
+      "within_days": [
+        5,
+        20
+      ]
     },
+    "location": "prov_mitras",
+    "divergence_weight": 0.6,
+    "conditions": [
+      {
+        "alive": "char_historia_reiss"
+      },
+      {
+        "flag": "historia_lost",
+        "eq": false
+      }
+    ],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 6
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": 4,
+        "radicalisation": 0
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_refugies",
+        "satisfaction": 3,
+        "radicalisation": 0
+      },
+      {
+        "op": "flag",
+        "key": "historia_queen",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "conseil_corps",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 4
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "conseil_pixis",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 4
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "regence",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": 5
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": 4,
+            "radicalisation": 0
+          },
+          {
+            "op": "legitimacy",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "article",
     "text_key": "evt.850.historia_coronation",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Couronnement : C. Orphelinats : C. Conseillers : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_police_tech_seized",
     "code": "E37",
     "year_min": 850,
     "window": {
-      "after": "evt_850_historia_coronation"
+      "after": "evt_850_historia_coronation",
+      "within_days": [
+        5,
+        20
+      ]
     },
+    "divergence_weight": 0.5,
+    "conditions": [
+      {
+        "alive": "char_hange_zoe"
+      }
+    ],
+    "effects": [
+      {
+        "op": "research",
+        "delta": 10
+      },
+      {
+        "op": "flag",
+        "key": "police_archives_seized",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "etudier",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 10
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "detruire",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 2
+          },
+          {
+            "op": "flag",
+            "key": "police_tech_destroyed",
+            "value": true
+          }
+        ],
+        "divergence": 0.6
+      },
+      {
+        "id": "partager",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 3
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 3
+          }
+        ],
+        "divergence": 0.2
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.police_tech_seized",
     "canon": "C",
-    "notes_canon": "unlock_event des Lances de foudre (11 §1, 13 §11)."
+    "notes_canon": "Saisie : C. Lances de foudre (13 T-ANT-08) : Hange vivante requise (C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_shiganshina_preparations",
     "code": "E38",
     "year_min": 850,
     "window": {
-      "after": "evt_850_police_tech_seized"
+      "after": "evt_850_police_tech_seized",
+      "within_days": [
+        30,
+        60
+      ]
     },
+    "location": "prov_karanes",
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gas",
+        "delta": -40
+      },
+      {
+        "op": "resource",
+        "resource": "horses",
+        "delta": -200
+      },
+      {
+        "op": "capital",
+        "delta": -8
+      }
+    ],
+    "choices": [
+      {
+        "id": "plan_erwin",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "effectifs",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gas",
+            "delta": -40
+          },
+          {
+            "op": "garrison",
+            "province": "prov_karanes",
+            "share": -0.1
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "discretion",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -3
+          },
+          {
+            "op": "flag",
+            "key": "shiganshina_secret",
+            "value": true
+          }
+        ],
+        "divergence": 0.2
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.shiganshina_preparations",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Préparatifs : C. Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_shiganshina_battle",
     "code": "E39",
     "year_min": 850,
     "window": {
-      "after": "evt_850_shiganshina_preparations"
+      "after": "evt_850_shiganshina_preparations",
+      "within_days": [
+        5,
+        15
+      ]
     },
     "location": "prov_shiganshina",
+    "divergence_weight": 0.7,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_shiganshina"
+      },
+      {
+        "op": "observe",
+        "province": "prov_maria_sud"
+      },
+      {
+        "op": "wall",
+        "province": "prov_maria_sud",
+        "value": 60
+      },
+      {
+        "op": "garrison",
+        "province": "prov_karanes",
+        "share": -0.15
+      }
+    ],
+    "choices": [
+      {
+        "id": "plan_standard",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_erwin_smith",
+            "delta": 15
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "alternatif",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_karanes",
+            "share": -0.1
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "retrait",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "shiganshina_aborted",
+            "value": true
+          },
+          {
+            "op": "legitimacy",
+            "delta": -6
+          }
+        ],
+        "divergence": 0.9
+      }
+    ],
+    "form": "telegramme",
     "text_key": "evt.850.shiganshina_battle",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Bataille de Shiganshina : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_thunder_spears_first_use",
     "code": "E40",
     "year_min": 850,
     "window": {
-      "after": "evt_850_shiganshina_battle"
+      "after": "evt_850_shiganshina_battle",
+      "within_days": [
+        0,
+        0
+      ]
     },
     "location": "prov_shiganshina",
+    "divergence_weight": 0.5,
+    "conditions": [
+      {
+        "flag": "shiganshina_aborted",
+        "eq": false
+      }
+    ],
+    "effects": [
+      {
+        "op": "flag",
+        "key": "thunder_spears_used",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "cuirasse",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "colossal",
+        "effects": [],
+        "divergence": 0.3
+      },
+      {
+        "id": "bestial",
+        "effects": [],
+        "divergence": 0.3
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.thunder_spears_first_use",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Premier emploi des lances de foudre contre le Cuirassé : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_erwin_charge",
     "code": "E41",
     "year_min": 850,
     "window": {
-      "after": "evt_850_thunder_spears_first_use"
+      "after": "evt_850_thunder_spears_first_use",
+      "within_days": [
+        0,
+        0
+      ]
     },
     "location": "prov_shiganshina",
+    "divergence_weight": 1.0,
+    "bifurcation": "B5",
+    "conditions": [
+      {
+        "alive": "char_erwin_smith"
+      }
+    ],
+    "choices": [
+      {
+        "id": "charge",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "erwin_mortally_wounded",
+            "value": true
+          },
+          {
+            "op": "garrison",
+            "province": "prov_karanes",
+            "share": -0.1
+          },
+          {
+            "op": "stress",
+            "character": "char_levi_ackerman",
+            "delta": 15
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "replier",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -4
+          },
+          {
+            "op": "flag",
+            "key": "beast_unchecked",
+            "value": true
+          }
+        ],
+        "divergence": 1.0
+      }
+    ],
+    "form": "rapport",
     "text_key": "evt.850.erwin_charge",
     "canon": "C",
-    "notes_canon": "Mort d'Erwin en canon (11 §3)."
+    "notes_canon": "Charge d'Erwin : C. Sa mort est portée par E42 (A, D-65) : le sérum est disputé entre Erwin mourant et Armin. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_serum_choice",
     "code": "E42",
     "year_min": 850,
     "window": {
-      "after": "evt_850_erwin_charge"
+      "after": "evt_850_erwin_charge",
+      "within_days": [
+        0,
+        0
+      ]
     },
     "location": "prov_shiganshina",
+    "divergence_weight": 1.0,
+    "bifurcation": "B5",
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_bertholdt_hoover",
+        "cause": "titan"
+      },
+      {
+        "op": "flag",
+        "key": "colossal_inherited",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "armin",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_erwin_smith",
+            "cause": "blessures"
+          },
+          {
+            "op": "flag",
+            "key": "armin_colossal",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "erwin",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_armin_arlert",
+            "cause": "blessures"
+          },
+          {
+            "op": "flag",
+            "key": "erwin_colossal",
+            "value": true
+          }
+        ],
+        "divergence": 1.0,
+        "requires": [
+          {
+            "flag": "erwin_mortally_wounded",
+            "eq": true
+          }
+        ]
+      }
+    ],
+    "form": "proces_verbal",
     "text_key": "evt.850.serum_choice",
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Choix du sérum : C (Armin). Bertholdt dévoré : C (fiabilité moyenne, 11 §3). L'héritage effectif arrive en P6 (drapeaux). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_marley_antititan_rifle",
@@ -365,6 +2685,7 @@
     },
     "text_key": "evt.850.marley_antititan_rifle",
     "canon": "?",
-    "notes_canon": "Événement paramétrable hors des 60 événements canon (errata Q1) : date de mise au point des fusils anti-Titan inconnue ; placé après E28 (premier affrontement Guerriers/Paradis)."
+    "notes_canon": "Événement paramétrable hors des 60 événements canon (errata Q1) : date de mise au point des fusils anti-Titan inconnue ; placé après E28 (premier affrontement Guerriers/Paradis). Non jouable en P5 : côté Marley, mécanique en P7.",
+    "playable": false
   }
 ]

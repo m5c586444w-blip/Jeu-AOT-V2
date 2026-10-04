@@ -1,0 +1,1601 @@
+[
+  {
+    "id": "evt_gen_disette_locale",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.1,
+    "cooldown_days": 120,
+    "subject": "province",
+    "conditions": [
+      {
+        "stock_below": "food",
+        "value": 4000
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -4
+      }
+    ],
+    "choices": [
+      {
+        "id": "distribuer",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -40
+          },
+          {
+            "op": "morale",
+            "province": "prov_subject",
+            "delta": 6
+          }
+        ]
+      },
+      {
+        "id": "rationner",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": -6
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": -2,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "laisser",
+        "effects": [
+          {
+            "op": "population",
+            "province": "prov_subject",
+            "share": -0.01
+          },
+          {
+            "op": "morale",
+            "province": "prov_subject",
+            "delta": -4
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.disette_locale",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_rumeur_mur",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.08,
+    "cooldown_days": 150,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -3
+      }
+    ],
+    "choices": [
+      {
+        "id": "dementir",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -2
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "id": "pretres",
+        "effects": [
+          {
+            "op": "cult",
+            "province": "prov_subject",
+            "delta": 3
+          },
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "ignorer",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "prov_subject",
+            "delta": -3
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.rumeur_mur",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_greve_mines",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.06,
+    "cooldown_days": 180,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "coal",
+        "delta": -20
+      }
+    ],
+    "choices": [
+      {
+        "id": "salaires",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -60
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": 3,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "garnison",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -2
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": -4,
+            "radicalisation": 4
+          }
+        ]
+      },
+      {
+        "id": "negocier",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -3
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": 1,
+            "radicalisation": 0
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.greve_mines",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_epidemie",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.05,
+    "cooldown_days": 240,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "population",
+        "province": "prov_subject",
+        "share": -0.01
+      },
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -5
+      }
+    ],
+    "choices": [
+      {
+        "id": "quarantaine",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": -4
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -30
+          }
+        ]
+      },
+      {
+        "id": "medecins",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -50
+          },
+          {
+            "op": "population",
+            "province": "prov_subject",
+            "share": 0.005
+          }
+        ]
+      },
+      {
+        "id": "cacher",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -2
+          },
+          {
+            "op": "population",
+            "province": "prov_subject",
+            "share": -0.01
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.epidemie",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_mariage_notable",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.06,
+    "cooldown_days": 200,
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_bourgeoisie",
+        "satisfaction": 2,
+        "radicalisation": 0
+      }
+    ],
+    "choices": [
+      {
+        "id": "assister",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": 2
+          },
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -10
+          }
+        ]
+      },
+      {
+        "id": "ignorer",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": -1,
+            "radicalisation": 0
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.mariage_notable",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_fete_moisson",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.08,
+    "cooldown_days": 300,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "automne"
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 4
+      }
+    ],
+    "choices": [
+      {
+        "id": "financer",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -25
+          },
+          {
+            "op": "morale",
+            "province": "prov_subject",
+            "delta": 4
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": 2,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "sobre",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": 10
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.fete_moisson",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_incendie",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.05,
+    "cooldown_days": 200,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "population",
+        "province": "prov_subject",
+        "share": -0.003
+      },
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -4
+      }
+    ],
+    "choices": [
+      {
+        "id": "reconstruire",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "steel",
+            "delta": -10
+          },
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -30
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 4
+          }
+        ]
+      },
+      {
+        "id": "enquete",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 1
+          }
+        ]
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.gen.incendie",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_refugies_tensions",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "chance": 0.07,
+    "cooldown_days": 150,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -5
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_refugies",
+        "satisfaction": -2,
+        "radicalisation": 2
+      }
+    ],
+    "choices": [
+      {
+        "id": "terres",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -30
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_refugies",
+            "satisfaction": 4,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "separer",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_refugies",
+            "satisfaction": -3,
+            "radicalisation": 4
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "id": "travaux",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_refugies",
+            "satisfaction": 1,
+            "radicalisation": 0
+          },
+          {
+            "op": "resource",
+            "resource": "manpower",
+            "delta": 40
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.refugies_tensions",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_desertion",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.08,
+    "cooldown_days": 120,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_garrison",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "pardon",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "id": "exemple",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -1
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_militaires",
+            "satisfaction": -3,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "primes",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -40
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 3
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.desertion",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_accident_odm",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.1,
+    "cooldown_days": 90,
+    "subject": "personnage",
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_subject",
+        "delta": 10
+      }
+    ],
+    "choices": [
+      {
+        "id": "enquete",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          },
+          {
+            "op": "research",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "id": "ateliers",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -20
+          },
+          {
+            "op": "resource",
+            "resource": "steel",
+            "delta": -5
+          }
+        ]
+      }
+    ],
+    "form": "proces_verbal",
+    "text_key": "evt.gen.accident_odm",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_vol_gaz",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.07,
+    "cooldown_days": 150,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gas",
+        "delta": -15
+      }
+    ],
+    "choices": [
+      {
+        "id": "fouille",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -2
+          },
+          {
+            "op": "resource",
+            "resource": "gas",
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "id": "brigade",
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_military_police",
+            "delta": 2
+          },
+          {
+            "op": "resource",
+            "resource": "gas",
+            "delta": 5
+          }
+        ]
+      },
+      {
+        "id": "taire",
+        "effects": []
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.vol_gaz",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_duel_officiers",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.04,
+    "cooldown_days": 240,
+    "subject": "personnage",
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_subject",
+        "delta": 8
+      }
+    ],
+    "choices": [
+      {
+        "id": "sanctionner",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_survey_corps",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "reconcilier",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          }
+        ]
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.gen.duel_officiers",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_mutinerie_poste",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.03,
+    "cooldown_days": 360,
+    "subject": "province_frontiere",
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_subject",
+        "share": -0.05
+      },
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -5
+      }
+    ],
+    "choices": [
+      {
+        "id": "negocier",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -3
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -20
+          }
+        ]
+      },
+      {
+        "id": "reprendre",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_subject",
+            "share": -0.05
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -3
+          }
+        ]
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.gen.mutinerie_poste",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_recrues_volontaires",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0.06,
+    "cooldown_days": 200,
+    "choices": [
+      {
+        "id": "accepter",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -20
+          },
+          {
+            "op": "org_influence",
+            "org": "org_training_corps",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "id": "refuser",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": -1,
+            "radicalisation": 0
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.recrues_volontaires",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_scandale_noble",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0.06,
+    "cooldown_days": 180,
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_noblesse",
+        "satisfaction": -2,
+        "radicalisation": 0
+      }
+    ],
+    "choices": [
+      {
+        "id": "publier",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 2
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_noblesse",
+            "satisfaction": -4,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "etouffer",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": 3
+          },
+          {
+            "op": "legitimacy",
+            "delta": -1
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.scandale_noble",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_petition",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0.07,
+    "cooldown_days": 150,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "recevoir",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -2
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 4
+          },
+          {
+            "op": "legitimacy",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "rejeter",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": -3
+          }
+        ]
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.gen.petition",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_proces_local",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0.05,
+    "cooldown_days": 200,
+    "subject": "province",
+    "choices": [
+      {
+        "id": "clemence",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_basfonds",
+            "satisfaction": 2,
+            "radicalisation": 0
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_bourgeoisie",
+            "satisfaction": -1,
+            "radicalisation": 0
+          }
+        ]
+      },
+      {
+        "id": "severite",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 2
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_basfonds",
+            "satisfaction": -2,
+            "radicalisation": 2
+          }
+        ]
+      }
+    ],
+    "form": "proces_verbal",
+    "text_key": "evt.gen.proces_local",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_lettre_anonyme",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0.05,
+    "cooldown_days": 200,
+    "subject": "personnage",
+    "choices": [
+      {
+        "id": "enqueter",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "bruler",
+        "effects": []
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.gen.lettre_anonyme",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_sermon_culte",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0.06,
+    "cooldown_days": 180,
+    "subject": "province",
+    "effects": [
+      {
+        "op": "cult",
+        "province": "prov_subject",
+        "delta": 3
+      }
+    ],
+    "choices": [
+      {
+        "id": "tolerer",
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "id": "interdire",
+        "effects": [
+          {
+            "op": "cult",
+            "province": "prov_subject",
+            "delta": -4
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_clerge",
+            "satisfaction": -3,
+            "radicalisation": 2
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.sermon_culte",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_deuil",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "personnage",
+    "chance": 0.06,
+    "cooldown_days": 200,
+    "subject": "personnage",
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_subject",
+        "delta": 15
+      }
+    ],
+    "choices": [
+      {
+        "id": "conge",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          },
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": -10
+          }
+        ]
+      },
+      {
+        "id": "devoir",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": 5
+          }
+        ]
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.gen.deuil",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_promotion",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "personnage",
+    "chance": 0.05,
+    "cooldown_days": 250,
+    "subject": "personnage",
+    "choices": [
+      {
+        "id": "promouvoir",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": -5
+          },
+          {
+            "op": "capital",
+            "delta": -2
+          }
+        ]
+      },
+      {
+        "id": "attendre",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": 5
+          }
+        ]
+      }
+    ],
+    "form": "proces_verbal",
+    "text_key": "evt.gen.promotion",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_confession",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "personnage",
+    "chance": 0.04,
+    "cooldown_days": 300,
+    "subject": "personnage",
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_subject",
+        "delta": 8
+      }
+    ],
+    "choices": [
+      {
+        "id": "ecouter",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": -10
+          }
+        ]
+      },
+      {
+        "id": "ecarter",
+        "effects": []
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.gen.confession",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_epuisement",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "personnage",
+    "chance": 0.06,
+    "cooldown_days": 150,
+    "subject": "personnage",
+    "effects": [
+      {
+        "op": "stress",
+        "character": "char_subject",
+        "delta": 12
+      }
+    ],
+    "choices": [
+      {
+        "id": "repos",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": -15
+          },
+          {
+            "op": "capital",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "continuer",
+        "effects": [
+          {
+            "op": "stress",
+            "character": "char_subject",
+            "delta": 6
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.epuisement",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_anormal_signale",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "chance": 0.08,
+    "cooldown_days": 120,
+    "subject": "province_frontiere",
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -3
+      }
+    ],
+    "choices": [
+      {
+        "id": "reconnaissance",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gas",
+            "delta": -10
+          },
+          {
+            "op": "observe",
+            "province": "prov_subject"
+          }
+        ]
+      },
+      {
+        "id": "renforcer",
+        "effects": [
+          {
+            "op": "garrison",
+            "province": "prov_subject",
+            "share": 0.05
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": -20
+          }
+        ]
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.gen.anormal_signale",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_attaque_nocturne",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "chance": 0.04,
+    "cooldown_days": 200,
+    "subject": "province_frontiere",
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_subject",
+        "share": -0.02
+      }
+    ],
+    "choices": [
+      {
+        "id": "canons",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "powder",
+            "delta": -20
+          }
+        ]
+      },
+      {
+        "id": "feux",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "coal",
+            "delta": -15
+          },
+          {
+            "op": "morale",
+            "province": "prov_subject",
+            "delta": 2
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.attaque_nocturne",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_ruines_decouvertes",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "chance": 0.04,
+    "cooldown_days": 300,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 3
+      }
+    ],
+    "choices": [
+      {
+        "id": "archiver",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 4
+          }
+        ]
+      },
+      {
+        "id": "culte",
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": 2
+          },
+          {
+            "op": "cult",
+            "province": "all",
+            "delta": 1
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.ruines_decouvertes",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_tempete",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "chance": 0.05,
+    "cooldown_days": 300,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "ete"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": -25
+      },
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "aider",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -30
+          },
+          {
+            "op": "stability",
+            "province": "prov_subject",
+            "delta": 4
+          }
+        ]
+      },
+      {
+        "id": "attendre",
+        "effects": []
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.tempete",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_hiver_rude",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "chance": 0.1,
+    "cooldown_days": 330,
+    "conditions": [
+      {
+        "season": "hiver"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "coal",
+        "delta": -40
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "bois",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -40
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "id": "rationner",
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_paysans",
+            "satisfaction": -2,
+            "radicalisation": 0
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.hiver_rude",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_rumeur_exterieur",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "etranger",
+    "chance": 0.03,
+    "cooldown_days": 360,
+    "effects": [
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": -1
+      }
+    ],
+    "choices": [
+      {
+        "id": "ignorer",
+        "effects": []
+      },
+      {
+        "id": "censurer",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          },
+          {
+            "op": "cult",
+            "province": "all",
+            "delta": 1
+          }
+        ]
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.gen.rumeur_exterieur",
+    "canon": "A"
+  },
+  {
+    "id": "evt_gen_espion_suppose",
+    "kind": "generic",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "etranger",
+    "chance": 0.03,
+    "cooldown_days": 360,
+    "choices": [
+      {
+        "id": "surveiller",
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -1
+          }
+        ]
+      },
+      {
+        "id": "arreter",
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_military_police",
+            "delta": 1
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_bourgeoisie",
+            "satisfaction": -1,
+            "radicalisation": 0
+          }
+        ]
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.gen.espion_suppose",
+    "canon": "A"
+  }
+]

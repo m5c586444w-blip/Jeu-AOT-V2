@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { CollectionName } from "./collections";
 import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
+import { ChoiceSchema, ConditionSchema, EffectSchema, TechEffectSchema } from "./effects";
 
 // Messages d'erreur de Zod en français (langue principale du projet).
 z.config(z.locales.fr());
@@ -95,6 +96,8 @@ export const ScenarioSchema = z
     titan_density: z.record(ProvinceIdSchema, unit).default({}),
     /** Province de départ des expéditions (850 : Karanes, 06 S02 [C]). */
     expedition_base: ProvinceIdSchema.optional(),
+    /** P5 : « canon_fidele » fait tourner le moteur d'événements canon (02 §12) ; « aucun » pour un bac à sable sans chronologie. */
+    events_mode: z.enum(["canon_fidele", "aucun"]).default("aucun"),
     garrisons: z.record(ProvinceIdSchema, garrison).default({}),
     buildings: z.record(ProvinceIdSchema, z.array(BuildingIdSchema)).default({}),
     stocks: resourceRecord,
@@ -260,14 +263,29 @@ export const TechSchema = z
     min_year: year,
     risk: z.number().min(0).max(1).optional(),
     exclusive_with: z.array(TechIdSchema).optional(),
+    /** P5 : effets lus par les systèmes (13, valeurs `A`). */
+    effects: z.array(TechEffectSchema).default([]),
+    /** Exige un Titan capturé vivant (13 §0, « Capture / expérience »). */
+    requires_capture: z.boolean().default(false),
+    /** Doctrine (13 §10) : choix exclusif. */
+    doctrine: z.boolean().default(false),
+    /** Phase où sa mécanique arrive quand elle n'existe pas encore (affiché, aucune valeur inventée). */
+    mechanic_phase: z.enum(["P6", "P7", "P8", "P9"]).optional(),
     ...canonFields,
   })
   .strict();
+
+export const EVENT_FAMILIES = ["civil", "militaire", "politique", "personnage", "titans", "monde", "etranger"] as const;
+export const EVENT_FORMS = ["rapport", "lettre", "telegramme", "article", "proces_verbal"] as const;
 
 export const EventDefSchema = z
   .object({
     id: EventIdSchema,
     code: z.string().regex(/^E\d{2}$/).optional(),
+    /** Canon (12 §1, graphe) ou générique (12 §5). */
+    kind: z.enum(["canon", "generic"]).default("canon"),
+    /** Faux pour un squelette sans mécanique (événement d'une phase ultérieure, référencé par une technologie). */
+    playable: z.boolean().default(true),
     year_min: year,
     year_max: year.optional(),
     window: z
@@ -278,11 +296,29 @@ export const EventDefSchema = z
       .strict(),
     location: z.union([ProvinceIdSchema, z.literal("?")]).optional(),
     divergence_weight: z.number().min(0).max(1).optional(),
+    bifurcation: z.string().regex(/^B\d$/).optional(),
+    /** Conditions de contexte ; si l'une ne tient plus au jour dit, l'événement canon est évité. */
+    conditions: z.array(ConditionSchema).default([]),
+    /** Effets appliqués au déclenchement (avant tout choix). */
+    effects: z.array(EffectSchema).default([]),
+    choices: z.array(ChoiceSchema).default([]),
+    /** Jours laissés au joueur avant que le choix historique (ou le premier) ne s'applique. */
+    deadline_days: z.number().int().min(0).optional(),
+    form: z.enum(EVENT_FORMS).default("rapport"),
+    family: z.enum(EVENT_FAMILIES).optional(),
+    /** Générique : sujet tiré au sort, désigné dans les effets par char_subject ou prov_subject. */
+    subject: z.enum(["personnage", "province", "province_frontiere"]).optional(),
+    /** Générique : probabilité par mois quand les conditions tiennent ; délai minimal entre deux occurrences. */
+    chance: z.number().min(0).max(1).optional(),
+    cooldown_days: z.number().int().min(0).optional(),
     text_key: z.string().min(1),
     ...canonFields,
   })
   .strict()
-  .refine((e) => e.year_max === undefined || e.year_max >= e.year_min, { message: "year_max doit être ≥ year_min", path: ["year_max"] });
+  .refine((e) => e.year_max === undefined || e.year_max >= e.year_min, { message: "year_max doit être ≥ year_min", path: ["year_max"] })
+  .refine((e) => e.kind === "canon" || (e.family !== undefined && e.chance !== undefined), { message: "un événement générique exige family et chance", path: ["family"] })
+  .refine((e) => new Set(e.choices.map((c) => c.id)).size === e.choices.length, { message: "identifiants de choix en double", path: ["choices"] })
+  .refine((e) => e.kind !== "canon" || !e.playable || e.choices.length === 0 || e.choices.filter((c) => c.historical).length === 1, { message: "un événement canon à choix a exactement un choix historique", path: ["choices"] });
 
 /** Positionnement d'une entité (unité…) dans un lieu à une année donnée : sert à la règle R5. */
 export const PlacementSchema = z

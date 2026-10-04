@@ -1,0 +1,202 @@
+[
+  {
+    "id": "tech_doctrine_agile",
+    "code": "T-DOC-01",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_fortification"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_fortification",
+    "code": "T-DOC-02",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_agile"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_long_range",
+    "code": "T-DOC-03",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_heavy_columns"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_heavy_columns",
+    "code": "T-DOC-04",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_long_range"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_capture",
+    "code": "T-DOC-05",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_elimination"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "research_points_mult",
+        "value": 1.2
+      },
+      {
+        "hook": "exp_loss_mult",
+        "value": 1.05
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_elimination",
+    "code": "T-DOC-06",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_capture"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_transparency",
+    "code": "T-DOC-07",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_censorship"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "legitimacy_month",
+        "value": 0.3
+      },
+      {
+        "hook": "cult_month",
+        "value": -0.5
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_censorship",
+    "code": "T-DOC-08",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_transparency"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "legitimacy_month",
+        "value": -0.1
+      },
+      {
+        "hook": "cult_month",
+        "value": 0.3
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_openness",
+    "code": "T-DOC-09",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_isolation"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_isolation",
+    "code": "T-DOC-10",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_openness"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_mass_spears",
+    "code": "T-DOC-11",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_elite_odm"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  },
+  {
+    "id": "tech_doctrine_elite_odm",
+    "code": "T-DOC-12",
+    "tree": "doctrine",
+    "cost": 60,
+    "doctrine": true,
+    "exclusive_with": [
+      "tech_doctrine_mass_spears"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Doctrine mutuellement exclusive (13 §10) ; coût et effets A."
+  }
+]

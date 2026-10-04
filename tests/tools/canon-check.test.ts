@@ -18,6 +18,9 @@ const BAD: [string, string][] = [
   ["r5_unit_at_destroyed_place", "R5"],
   ["r6_missing_canon_tag", "R6"],
   ["r7_uncertain_location_as_canon", "R7"],
+  ["r8_death_off_canon_event", "R8"],
+  ["r9_unknown_reference", "R9"],
+  ["r10_tech_anachronism", "R10"],
 ];
 
 describe("canon:check (AC-13)", () => {

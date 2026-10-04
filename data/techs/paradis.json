@@ -6,7 +6,130 @@
     "cost": null,
     "start": true,
     "min_year": 845,
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Mobilité 3D de base (fichier 03) ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Mobilité 3D de base (fichier 03) ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Mobilité 3D de base (fichier 03) ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Mobilité 3D de base (fichier 03) ; date min 845 ; canon C."
+  },
+  {
+    "id": "tech_ultrahard_blades",
+    "code": "T-ODM-02",
+    "tree": "odm",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Coupe de nuque ; usure rapide ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Coupe de nuque ; usure rapide ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Coupe de nuque ; usure rapide ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Coupe de nuque ; usure rapide ; date min 845 ; canon C."
+  },
+  {
+    "id": "tech_iceburst_extraction",
+    "code": "T-ODM-03",
+    "tree": "odm",
+    "cost": 120,
+    "start": true,
+    "min_year": 845,
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis — ; déblocage Départ ; exige une mine (R10) ; effets Produit le gaz ; production limitée ; date min 845 ; canon C. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ ; exige une mine (R10) ; effets Produit le gaz ; production limitée ; date min 845 ; canon C. Possédée au départ (D-64) : la production de gaz existe dès 845 dans l'économie. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ ; exige une mine (R10) ; effets Produit le gaz ; production limitée ; date min 845 ; canon C. Possédée au départ (D-64) : la production de gaz existe dès 845 dans l'économie. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ ; exige une mine (R10) ; effets Produit le gaz ; production limitée ; date min 845 ; canon C. Possédée au départ (D-64) : la production de gaz existe dès 845 dans l'économie."
+  },
+  {
+    "id": "tech_odm_maintenance",
+    "code": "T-ODM-04",
+    "tree": "odm",
+    "cost": 80,
+    "prereqs": [
+      "tech_odm_standard"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 80 ; prérequis T-ODM-01 ; déblocage — ; effets Pannes −20 % ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis T-ODM-01 ; déblocage — ; effets Pannes −20 % ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis T-ODM-01 ; déblocage — ; effets Pannes −20 % ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis T-ODM-01 ; déblocage — ; effets Pannes −20 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_odm_elite_tuning",
+    "code": "T-ODM-05",
+    "tree": "odm",
+    "cost": 150,
+    "prereqs": [
+      "tech_odm_maintenance"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis T-ODM-04 ; déblocage Atelier d'ODM niv. 2 ; effets +15 % vitesse pour soldats d'élite ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ODM-04 ; déblocage Atelier d'ODM niv. 2 ; effets +15 % vitesse pour soldats d'élite ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ODM-04 ; déblocage Atelier d'ODM niv. 2 ; effets +15 % vitesse pour soldats d'élite ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ODM-04 ; déblocage Atelier d'ODM niv. 2 ; effets +15 % vitesse pour soldats d'élite ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_odm_antipersonnel",
+    "code": "T-ODM-06",
+    "tree": "odm",
+    "cost": 200,
+    "prereqs": [
+      "tech_odm_standard"
+    ],
+    "unlock_event": "evt_850_levi_kenny_street_fight",
+    "min_year": 850,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis T-ODM-01 ; déblocage **E31** (capture/étude) ou saisie à la Brigade ; effets Armes à feu intégrées ; usage contre humains ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ODM-01 ; déblocage **E31** (capture/étude) ou saisie à la Brigade ; effets Armes à feu intégrées ; usage contre humains ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ODM-01 ; déblocage **E31** (capture/étude) ou saisie à la Brigade ; effets Armes à feu intégrées ; usage contre humains ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ODM-01 ; déblocage **E31** (capture/étude) ou saisie à la Brigade ; effets Armes à feu intégrées ; usage contre humains ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_reinforced_blades",
+    "code": "T-ODM-07",
+    "tree": "odm",
+    "cost": 160,
+    "prereqs": [
+      "tech_ultrahard_blades"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 160 ; prérequis T-ODM-02 ; déblocage Acier de qualité (R09/R04) ; effets Durée +20 % ; coût ×2 ; date min 845 ; canon A. Fichier 13 : coût 160 ; prérequis T-ODM-02 ; déblocage Acier de qualité (R09/R04) ; effets Durée +20 % ; coût ×2 ; date min 845 ; canon A. Fichier 13 : coût 160 ; prérequis T-ODM-02 ; déblocage Acier de qualité (R09/R04) ; effets Durée +20 % ; coût ×2 ; date min 845 ; canon A. Fichier 13 : coût 160 ; prérequis T-ODM-02 ; déblocage Acier de qualité (R09/R04) ; effets Durée +20 % ; coût ×2 ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_compact_gas",
+    "code": "T-ODM-08",
+    "tree": "odm",
+    "cost": 140,
+    "prereqs": [
+      "tech_iceburst_extraction"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "exp_gas_odm_mult",
+        "value": 0.87
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 140 ; prérequis T-ODM-03 ; déblocage — ; effets Autonomie +15 % ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-ODM-03 ; déblocage — ; effets Autonomie +15 % ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-ODM-03 ; déblocage — ; effets Autonomie +15 % ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-ODM-03 ; déblocage — ; effets Autonomie +15 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_ergonomic_harness",
+    "code": "T-ODM-09",
+    "tree": "odm",
+    "cost": 90,
+    "prereqs": [
+      "tech_odm_standard"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 90 ; prérequis T-ODM-01 ; déblocage — ; effets Stress de vol −10 % ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-ODM-01 ; déblocage — ; effets Stress de vol −10 % ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-ODM-01 ; déblocage — ; effets Stress de vol −10 % ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-ODM-01 ; déblocage — ; effets Stress de vol −10 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_night_equipment",
+    "code": "T-ODM-10",
+    "tree": "odm",
+    "cost": 100,
+    "prereqs": [
+      "tech_odm_standard"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "exp_night_loss_mult",
+        "value": 0.7
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 100 ; prérequis T-ODM-01 ; déblocage — ; effets Malus de nuit −30 % ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-ODM-01 ; déblocage — ; effets Malus de nuit −30 % ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-ODM-01 ; déblocage — ; effets Malus de nuit −30 % ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-ODM-01 ; déblocage — ; effets Malus de nuit −30 % ; date min 845 ; canon A."
   },
   {
     "id": "tech_wall_artillery",
@@ -15,7 +138,86 @@
     "cost": null,
     "start": true,
     "min_year": 845,
-    "canon": "C"
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Canons fixes sur les murs ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Canons fixes sur les murs ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Canons fixes sur les murs ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Canons fixes sur les murs ; date min 845 ; canon C."
+  },
+  {
+    "id": "tech_mobile_cannon",
+    "code": "T-ANT-02",
+    "tree": "anti_titan",
+    "cost": 180,
+    "prereqs": [
+      "tech_wall_artillery",
+      "tech_wagon_convoys"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis T-ANT-01, T-LOG-03 ; déblocage — ; effets Artillerie déployable ; lent ; date min 845 ; canon ?. Fichier 13 : coût 180 ; prérequis T-ANT-01, T-LOG-03 ; déblocage — ; effets Artillerie déployable ; lent ; date min 845 ; canon ?. Fichier 13 : coût 180 ; prérequis T-ANT-01, T-LOG-03 ; déblocage — ; effets Artillerie déployable ; lent ; date min 845 ; canon ?. Fichier 13 : coût 180 ; prérequis T-ANT-01, T-LOG-03 ; déblocage — ; effets Artillerie déployable ; lent ; date min 845 ; canon ?."
+  },
+  {
+    "id": "tech_signal_flares",
+    "code": "T-ANT-03",
+    "tree": "anti_titan",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Rouge/vert/noir ; communication d'expédition ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Rouge/vert/noir ; communication d'expédition ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Rouge/vert/noir ; communication d'expédition ; date min 845 ; canon C. Fichier 13 : coût — ; prérequis — ; déblocage Départ ; effets Rouge/vert/noir ; communication d'expédition ; date min 845 ; canon C."
+  },
+  {
+    "id": "tech_long_range_formation",
+    "code": "T-ANT-04",
+    "tree": "anti_titan",
+    "cost": 200,
+    "prereqs": [
+      "tech_signal_flares"
+    ],
+    "unlock_event": "evt_850_expedition57_preparation",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis T-ANT-03 ; déblocage Corps d'Erwin ; **E16/E17** ; effets Éventail avec relais de signaux ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ANT-03 ; déblocage Corps d'Erwin ; **E16/E17** ; effets Éventail avec relais de signaux ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ANT-03 ; déblocage Corps d'Erwin ; **E16/E17** ; effets Éventail avec relais de signaux ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-ANT-03 ; déblocage Corps d'Erwin ; **E16/E17** ; effets Éventail avec relais de signaux ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_restraint_weapon",
+    "code": "T-ANT-05",
+    "tree": "anti_titan",
+    "cost": 220,
+    "prereqs": [
+      "tech_wall_artillery"
+    ],
+    "unlock_event": "evt_850_expedition57_preparation",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 220 ; prérequis T-ANT-01 ; déblocage **E16** (préparation de l'expédition 57) ; effets Capture de porteurs ; usage unique ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-ANT-01 ; déblocage **E16** (préparation de l'expédition 57) ; effets Capture de porteurs ; usage unique ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-ANT-01 ; déblocage **E16** (préparation de l'expédition 57) ; effets Capture de porteurs ; usage unique ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-ANT-01 ; déblocage **E16** (préparation de l'expédition 57) ; effets Capture de porteurs ; usage unique ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_titan_capture",
+    "code": "T-ANT-06",
+    "tree": "anti_titan",
+    "cost": 160,
+    "unlock_event": "evt_850_trost_defense",
+    "min_year": 850,
+    "effects": [
+      {
+        "hook": "exp_capture",
+        "value": 1
+      }
+    ],
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 160 ; prérequis — ; déblocage **E11** ; exige un Titan vivant ; effets Permet les expériences (arbre MED) ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis — ; déblocage **E11** ; exige un Titan vivant ; effets Permet les expériences (arbre MED) ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis — ; déblocage **E11** ; exige un Titan vivant ; effets Permet les expériences (arbre MED) ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis — ; déblocage **E11** ; exige un Titan vivant ; effets Permet les expériences (arbre MED) ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_titan_traps",
+    "code": "T-ANT-07",
+    "tree": "anti_titan",
+    "cost": 130,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 130 ; prérequis — ; déblocage — ; effets Piège à Titans ; réduit pertes ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage — ; effets Piège à Titans ; réduit pertes ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage — ; effets Piège à Titans ; réduit pertes ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage — ; effets Piège à Titans ; réduit pertes ; date min 845 ; canon A."
   },
   {
     "id": "tech_thunder_spear_prototype",
@@ -29,17 +231,563 @@
     "unlock_event": "evt_850_police_tech_seized",
     "requires_character": "char_hange_zoe",
     "min_year": 850,
+    "mechanic_phase": "P6",
     "canon": "C",
-    "notes_canon": "Première apparition fin 850 (Retour à Shiganshina) ; développée par Hange à partir des technologies de la Police intérieure (11 §1). Condition « poudrière niv. 2 » à relier en P5."
+    "notes_canon": "Première apparition fin 850 (Retour à Shiganshina) ; développée par Hange à partir des technologies de la Police intérieure (11 §1). Condition « poudrière niv. 2 » à relier en P5. Fichier 13 : coût 260 ; prérequis T-ANT-01, T-ODM-01 ; déblocage **E37** ; **Hange vivante** ; poudrière niv. 2 ; effets Explosion de zone ; perce l'armure durcie ; date min **850 (fin)** ; canon C. Fichier 13 : coût 260 ; prérequis T-ANT-01, T-ODM-01 ; déblocage **E37** ; **Hange vivante** ; poudrière niv. 2 ; effets Explosion de zone ; perce l'armure durcie ; date min **850 (fin)** ; canon C. Fichier 13 : coût 260 ; prérequis T-ANT-01, T-ODM-01 ; déblocage **E37** ; **Hange vivante** ; poudrière niv. 2 ; effets Explosion de zone ; perce l'armure durcie ; date min **850 (fin)** ; canon C. Fichier 13 : coût 260 ; prérequis T-ANT-01, T-ODM-01 ; déblocage **E37** ; **Hange vivante** ; poudrière niv. 2 ; effets Explosion de zone ; perce l'armure durcie ; date min **850 (fin)** ; canon C."
+  },
+  {
+    "id": "tech_thunder_spear_mass",
+    "code": "T-ANT-09",
+    "tree": "anti_titan",
+    "cost": 180,
+    "prereqs": [
+      "tech_thunder_spear_prototype"
+    ],
+    "unlock_event": "evt_850_thunder_spears_first_use",
+    "min_year": 850,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis T-ANT-08 ; déblocage **E40** ; effets Disponible en nombre ; moins chère ; date min 850 (fin) ; canon A. Fichier 13 : coût 180 ; prérequis T-ANT-08 ; déblocage **E40** ; effets Disponible en nombre ; moins chère ; date min 850 (fin) ; canon A. Fichier 13 : coût 180 ; prérequis T-ANT-08 ; déblocage **E40** ; effets Disponible en nombre ; moins chère ; date min 850 (fin) ; canon A. Fichier 13 : coût 180 ; prérequis T-ANT-08 ; déblocage **E40** ; effets Disponible en nombre ; moins chère ; date min 850 (fin) ; canon A."
+  },
+  {
+    "id": "tech_thunder_spear_improved",
+    "code": "T-ANT-10",
+    "tree": "anti_titan",
+    "cost": 240,
+    "prereqs": [
+      "tech_thunder_spear_mass"
+    ],
+    "unlock_event": "evt_850_thunder_spears_first_use",
+    "min_year": 851,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 240 ; prérequis T-ANT-09 ; déblocage Après E40 ; après nouvelles expériences ; effets Portée accrue ; risque de fratricide réduit ; date min 851 ; canon A. Fichier 13 : coût 240 ; prérequis T-ANT-09 ; déblocage Après E40 ; après nouvelles expériences ; effets Portée accrue ; risque de fratricide réduit ; date min 851 ; canon A. Fichier 13 : coût 240 ; prérequis T-ANT-09 ; déblocage Après E40 ; après nouvelles expériences ; effets Portée accrue ; risque de fratricide réduit ; date min 851 ; canon A. Fichier 13 : coût 240 ; prérequis T-ANT-09 ; déblocage Après E40 ; après nouvelles expériences ; effets Portée accrue ; risque de fratricide réduit ; date min 851 ; canon A."
+  },
+  {
+    "id": "tech_antihardening_doctrine",
+    "code": "T-ANT-11",
+    "tree": "anti_titan",
+    "cost": 190,
+    "prereqs": [
+      "tech_thunder_spear_prototype"
+    ],
+    "unlock_event": "evt_850_shiganshina_battle",
+    "min_year": 850,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 190 ; prérequis T-ANT-08 ; déblocage **E39** ; effets Bonus contre Cuirassé et Féminin ; date min 850 (fin) ; canon A. Fichier 13 : coût 190 ; prérequis T-ANT-08 ; déblocage **E39** ; effets Bonus contre Cuirassé et Féminin ; date min 850 (fin) ; canon A. Fichier 13 : coût 190 ; prérequis T-ANT-08 ; déblocage **E39** ; effets Bonus contre Cuirassé et Féminin ; date min 850 (fin) ; canon A. Fichier 13 : coût 190 ; prérequis T-ANT-08 ; déblocage **E39** ; effets Bonus contre Cuirassé et Féminin ; date min 850 (fin) ; canon A."
+  },
+  {
+    "id": "tech_bait_ambush",
+    "code": "T-ANT-12",
+    "tree": "anti_titan",
+    "cost": 150,
+    "prereqs": [
+      "tech_titan_traps"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis T-ANT-07 ; déblocage — ; effets Bonus de capture et de piège ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ANT-07 ; déblocage — ; effets Bonus de capture et de piège ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ANT-07 ; déblocage — ; effets Bonus de capture et de piège ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-ANT-07 ; déblocage — ; effets Bonus de capture et de piège ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_allied_countermeasures",
+    "code": "T-ANT-13",
+    "tree": "anti_titan",
+    "cost": 280,
+    "prereqs": [
+      "tech_thunder_spear_improved"
+    ],
+    "unlock_event": "evt_854_fort_slava",
+    "min_year": 854,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 280 ; prérequis T-ANT-10 ; déblocage **E53** (observation) ; effets Armes anti-Titan plus avancées ; date min 854 ; canon C. Fichier 13 : coût 280 ; prérequis T-ANT-10 ; déblocage **E53** (observation) ; effets Armes anti-Titan plus avancées ; date min 854 ; canon C. Fichier 13 : coût 280 ; prérequis T-ANT-10 ; déblocage **E53** (observation) ; effets Armes anti-Titan plus avancées ; date min 854 ; canon C. Fichier 13 : coût 280 ; prérequis T-ANT-10 ; déblocage **E53** (observation) ; effets Armes anti-Titan plus avancées ; date min 854 ; canon C."
+  },
+  {
+    "id": "tech_field_medicine",
+    "code": "T-MED-01",
+    "tree": "medecine",
+    "cost": 70,
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "exp_wound_death_mult",
+        "value": 0.9
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 70 ; prérequis — ; déblocage Départ ; effets Mortalité des blessés −10 % ; date min 845 ; canon A. Fichier 13 : coût 70 ; prérequis — ; déblocage Départ ; effets Mortalité des blessés −10 % ; date min 845 ; canon A. Fichier 13 : coût 70 ; prérequis — ; déblocage Départ ; effets Mortalité des blessés −10 % ; date min 845 ; canon A. Fichier 13 : coût 70 ; prérequis — ; déblocage Départ ; effets Mortalité des blessés −10 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_hospital_network",
+    "code": "T-MED-02",
+    "tree": "medecine",
+    "cost": 130,
+    "prereqs": [
+      "tech_field_medicine"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 130 ; prérequis T-MED-01 ; déblocage — ; effets Soins ; épidémies −20 % ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-MED-01 ; déblocage — ; effets Soins ; épidémies −20 % ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-MED-01 ; déblocage — ; effets Soins ; épidémies −20 % ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-MED-01 ; déblocage — ; effets Soins ; épidémies −20 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_epidemic_control",
+    "code": "T-MED-03",
+    "tree": "medecine",
+    "cost": 150,
+    "prereqs": [
+      "tech_hospital_network"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis T-MED-02 ; déblocage — ; effets Quarantaines ; propagation −30 % ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-MED-02 ; déblocage — ; effets Quarantaines ; propagation −30 % ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-MED-02 ; déblocage — ; effets Quarantaines ; propagation −30 % ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-MED-02 ; déblocage — ; effets Quarantaines ; propagation −30 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_titan_biology",
+    "code": "T-MED-04",
+    "tree": "medecine",
+    "cost": 140,
+    "prereqs": [
+      "tech_titan_capture"
+    ],
+    "unlock_event": "evt_850_trost_defense",
+    "requires_capture": true,
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 140 ; prérequis T-ANT-06 ; déblocage **E11** ; effets Connaissance du comportement des purs ; date min 850 ; canon A. Fichier 13 : coût 140 ; prérequis T-ANT-06 ; déblocage **E11** ; effets Connaissance du comportement des purs ; date min 850 ; canon A. Fichier 13 : coût 140 ; prérequis T-ANT-06 ; déblocage **E11** ; effets Connaissance du comportement des purs ; date min 850 ; canon A. Fichier 13 : coût 140 ; prérequis T-ANT-06 ; déblocage **E11** ; effets Connaissance du comportement des purs ; date min 850 ; canon A."
+  },
+  {
+    "id": "tech_serum_study",
+    "code": "T-MED-05",
+    "tree": "medecine",
+    "cost": 200,
+    "prereqs": [
+      "tech_titan_biology"
+    ],
+    "unlock_event": [
+      "evt_850_rod_reiss_titan",
+      "evt_851_volunteers"
+    ],
+    "min_year": 850,
+    "mechanic_phase": "P6",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis T-MED-04 ; déblocage **E31** (sérum obtenu) ou **E47** ; effets Comprendre la transformation ; prérequis à l'héritage ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-MED-04 ; déblocage **E31** (sérum obtenu) ou **E47** ; effets Comprendre la transformation ; prérequis à l'héritage ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-MED-04 ; déblocage **E31** (sérum obtenu) ou **E47** ; effets Comprendre la transformation ; prérequis à l'héritage ; date min 850 ; canon C. Fichier 13 : coût 200 ; prérequis T-MED-04 ; déblocage **E31** (sérum obtenu) ou **E47** ; effets Comprendre la transformation ; prérequis à l'héritage ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_inheritance_protocol",
+    "code": "T-MED-06",
+    "tree": "medecine",
+    "cost": 220,
+    "prereqs": [
+      "tech_serum_study"
+    ],
+    "unlock_event": "evt_850_serum_choice",
+    "min_year": 850,
+    "mechanic_phase": "P6",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 220 ; prérequis T-MED-05 ; déblocage **E42** ; effets Prépare transferts de pouvoir ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MED-05 ; déblocage **E42** ; effets Prépare transferts de pouvoir ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MED-05 ; déblocage **E42** ; effets Prépare transferts de pouvoir ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MED-05 ; déblocage **E42** ; effets Prépare transferts de pouvoir ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_thirteen_years",
+    "code": "T-MED-07",
+    "tree": "medecine",
+    "cost": 120,
+    "prereqs": [
+      "tech_inheritance_protocol"
+    ],
+    "min_year": 850,
+    "mechanic_phase": "P6",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis T-MED-06 ; déblocage Porteur actif ; effets Horloge visible et projections ; date min 850 ; canon A. Fichier 13 : coût 120 ; prérequis T-MED-06 ; déblocage Porteur actif ; effets Horloge visible et projections ; date min 850 ; canon A. Fichier 13 : coût 120 ; prérequis T-MED-06 ; déblocage Porteur actif ; effets Horloge visible et projections ; date min 850 ; canon A. Fichier 13 : coût 120 ; prérequis T-MED-06 ; déblocage Porteur actif ; effets Horloge visible et projections ; date min 850 ; canon A."
+  },
+  {
+    "id": "tech_psychological_care",
+    "code": "T-MED-08",
+    "tree": "medecine",
+    "cost": 110,
+    "prereqs": [
+      "tech_field_medicine"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 110 ; prérequis T-MED-01 ; déblocage — ; effets Stress −15 % ; traumatismes ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis T-MED-01 ; déblocage — ; effets Stress −15 % ; traumatismes ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis T-MED-01 ; déblocage — ; effets Stress −15 % ; traumatismes ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis T-MED-01 ; déblocage — ; effets Stress −15 % ; traumatismes ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_supply_depots",
+    "code": "T-LOG-01",
+    "tree": "logistique",
+    "cost": 80,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rayon d'approvisionnement ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rayon d'approvisionnement ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rayon d'approvisionnement ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rayon d'approvisionnement ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_horse_breeding",
+    "code": "T-LOG-02",
+    "tree": "logistique",
+    "cost": 100,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 100 ; prérequis — ; déblocage Haras ; effets Chevaux endurants ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Haras ; effets Chevaux endurants ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Haras ; effets Chevaux endurants ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Haras ; effets Chevaux endurants ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_wagon_convoys",
+    "code": "T-LOG-03",
+    "tree": "logistique",
+    "cost": 90,
+    "prereqs": [
+      "tech_supply_depots"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 90 ; prérequis T-LOG-01 ; déblocage — ; effets Convois ; vulnérables ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-LOG-01 ; déblocage — ; effets Convois ; vulnérables ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-LOG-01 ; déblocage — ; effets Convois ; vulnérables ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis T-LOG-01 ; déblocage — ; effets Convois ; vulnérables ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_forward_bases",
+    "code": "T-LOG-04",
+    "tree": "logistique",
+    "cost": 140,
+    "prereqs": [
+      "tech_supply_depots"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "log_attrition_mult",
+        "value": 0.8
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 140 ; prérequis T-LOG-01 ; déblocage — ; effets Attrition réduite hors zone ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-LOG-01 ; déblocage — ; effets Attrition réduite hors zone ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-LOG-01 ; déblocage — ; effets Attrition réduite hors zone ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis T-LOG-01 ; déblocage — ; effets Attrition réduite hors zone ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_paradis_railway",
+    "code": "T-LOG-05",
+    "tree": "logistique",
+    "cost": 300,
+    "prereqs": [
+      "tech_wagon_convoys"
+    ],
+    "unlock_event": "evt_851_hizuru_visit",
+    "min_year": 851,
+    "mechanic_phase": "P9",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 300 ; prérequis T-LOG-03 ; déblocage **E48** (contact Hizuru) ; ressources en acier ; effets Logistique ×2 sur lignes construites ; date min 851 ; canon C ?. Fichier 13 : coût 300 ; prérequis T-LOG-03 ; déblocage **E48** (contact Hizuru) ; ressources en acier ; effets Logistique ×2 sur lignes construites ; date min 851 ; canon C ?. Fichier 13 : coût 300 ; prérequis T-LOG-03 ; déblocage **E48** (contact Hizuru) ; ressources en acier ; effets Logistique ×2 sur lignes construites ; date min 851 ; canon C ?. Fichier 13 : coût 300 ; prérequis T-LOG-03 ; déblocage **E48** (contact Hizuru) ; ressources en acier ; effets Logistique ×2 sur lignes construites ; date min 851 ; canon C ?."
+  },
+  {
+    "id": "tech_telegraph",
+    "code": "T-LOG-06",
+    "tree": "logistique",
+    "cost": 200,
+    "prereqs": [
+      "tech_paradis_railway"
+    ],
+    "unlock_event": "evt_851_hizuru_visit",
+    "min_year": 851,
+    "mechanic_phase": "P9",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis T-LOG-05 ; déblocage E48 ; effets Rapports plus rapides ; date min 851 ; canon ?. Fichier 13 : coût 200 ; prérequis T-LOG-05 ; déblocage E48 ; effets Rapports plus rapides ; date min 851 ; canon ?. Fichier 13 : coût 200 ; prérequis T-LOG-05 ; déblocage E48 ; effets Rapports plus rapides ; date min 851 ; canon ?. Fichier 13 : coût 200 ; prérequis T-LOG-05 ; déblocage E48 ; effets Rapports plus rapides ; date min 851 ; canon ?."
+  },
+  {
+    "id": "tech_ports_navy",
+    "code": "T-LOG-07",
+    "tree": "logistique",
+    "cost": 180,
+    "unlock_event": "evt_850_ocean",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?."
+  },
+  {
+    "id": "tech_convoy_optimisation",
+    "code": "T-LOG-08",
+    "tree": "logistique",
+    "cost": 120,
+    "prereqs": [
+      "tech_wagon_convoys"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.85
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis T-LOG-03 ; déblocage Conseiller logistique ; effets Pertes −15 % ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-LOG-03 ; déblocage Conseiller logistique ; effets Pertes −15 % ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-LOG-03 ; déblocage Conseiller logistique ; effets Pertes −15 % ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-LOG-03 ; déblocage Conseiller logistique ; effets Pertes −15 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_repair_masonry",
+    "code": "T-FOR-01",
+    "tree": "fortification",
+    "cost": 90,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 90 ; prérequis — ; déblocage Départ ; effets Répare les murs et portes ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis — ; déblocage Départ ; effets Répare les murs et portes ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis — ; déblocage Départ ; effets Répare les murs et portes ; date min 845 ; canon A. Fichier 13 : coût 90 ; prérequis — ; déblocage Départ ; effets Répare les murs et portes ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_gate_reinforcement",
+    "code": "T-FOR-02",
+    "tree": "fortification",
+    "cost": 130,
+    "prereqs": [
+      "tech_repair_masonry"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 130 ; prérequis T-FOR-01 ; déblocage — ; effets Portes résistent plus longtemps ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-FOR-01 ; déblocage — ; effets Portes résistent plus longtemps ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-FOR-01 ; déblocage — ; effets Portes résistent plus longtemps ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis T-FOR-01 ; déblocage — ; effets Portes résistent plus longtemps ; date min 845 ; canon A."
   },
   {
     "id": "tech_hardening_seal",
     "code": "T-FOR-03",
     "tree": "fortification",
     "cost": 250,
+    "prereqs": [
+      "tech_repair_masonry"
+    ],
     "unlock_event": "evt_850_trost_plug",
+    "requires_character": "char_eren_yeager",
     "min_year": 850,
+    "mechanic_phase": "P6",
     "canon": "C",
-    "notes_canon": "Exige Eren porteur et T-FOR-01 (13 §5) : personnage et prérequis à relier en P2/P5."
+    "notes_canon": "Exige Eren porteur et T-FOR-01 (13 §5) : personnage et prérequis à relier en P2/P5. Fichier 13 : coût 250 ; prérequis T-FOR-01 ; déblocage **E13** ; exige **Eren** porteur ; effets Bouche une brèche (cristal) ; date min 850 ; canon C. Fichier 13 : coût 250 ; prérequis T-FOR-01 ; déblocage **E13** ; exige **Eren** porteur ; effets Bouche une brèche (cristal) ; date min 850 ; canon C. Fichier 13 : coût 250 ; prérequis T-FOR-01 ; déblocage **E13** ; exige **Eren** porteur ; effets Bouche une brèche (cristal) ; date min 850 ; canon C. Fichier 13 : coût 250 ; prérequis T-FOR-01 ; déblocage **E13** ; exige **Eren** porteur ; effets Bouche une brèche (cristal) ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_titan_bunkers",
+    "code": "T-FOR-04",
+    "tree": "fortification",
+    "cost": 150,
+    "prereqs": [
+      "tech_repair_masonry"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis T-FOR-01 ; déblocage — ; effets Abri ; réduit pertes civiles ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-FOR-01 ; déblocage — ; effets Abri ; réduit pertes civiles ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-FOR-01 ; déblocage — ; effets Abri ; réduit pertes civiles ; date min 845 ; canon A. Fichier 13 : coût 150 ; prérequis T-FOR-01 ; déblocage — ; effets Abri ; réduit pertes civiles ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_wall_artillery_network",
+    "code": "T-FOR-05",
+    "tree": "fortification",
+    "cost": 170,
+    "prereqs": [
+      "tech_wall_artillery"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 170 ; prérequis T-ANT-01 ; déblocage — ; effets Couverture croisée ; date min 845 ; canon A. Fichier 13 : coût 170 ; prérequis T-ANT-01 ; déblocage — ; effets Couverture croisée ; date min 845 ; canon A. Fichier 13 : coût 170 ; prérequis T-ANT-01 ; déblocage — ; effets Couverture croisée ; date min 845 ; canon A. Fichier 13 : coût 170 ; prérequis T-ANT-01 ; déblocage — ; effets Couverture croisée ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_evacuation_corridors",
+    "code": "T-FOR-06",
+    "tree": "fortification",
+    "cost": 100,
+    "prereqs": [
+      "tech_repair_masonry"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 100 ; prérequis T-FOR-01 ; déblocage — ; effets Évacuation plus rapide ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-FOR-01 ; déblocage — ; effets Évacuation plus rapide ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-FOR-01 ; déblocage — ; effets Évacuation plus rapide ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis T-FOR-01 ; déblocage — ; effets Évacuation plus rapide ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_watchtowers",
+    "code": "T-FOR-07",
+    "tree": "fortification",
+    "cost": 110,
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "intel_watchtowers",
+        "value": 1
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 110 ; prérequis — ; déblocage — ; effets Détection précoce ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage — ; effets Détection précoce ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage — ; effets Détection précoce ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage — ; effets Détection précoce ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_informants",
+    "code": "T-INT-01",
+    "tree": "renseignement",
+    "cost": 80,
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "intel_agent_slots",
+        "value": 1
+      },
+      {
+        "hook": "intel_noise_mult",
+        "value": 0.8
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rapports locaux ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rapports locaux ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rapports locaux ; date min 845 ; canon A. Fichier 13 : coût 80 ; prérequis — ; déblocage Départ ; effets Rapports locaux ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_counterintelligence",
+    "code": "T-INT-02",
+    "tree": "renseignement",
+    "cost": 120,
+    "prereqs": [
+      "tech_informants"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "intel_counter",
+        "value": 0.15
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage — ; effets Détecte taupes ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage — ; effets Détecte taupes ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage — ; effets Détecte taupes ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage — ; effets Détecte taupes ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_police_archives",
+    "code": "T-INT-03",
+    "tree": "renseignement",
+    "cost": 160,
+    "prereqs": [
+      "tech_informants"
+    ],
+    "unlock_event": "evt_850_police_tech_seized",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 160 ; prérequis T-INT-01 ; déblocage **E37** ; exige saisie ; effets Accès aux dossiers de la Brigade ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis T-INT-01 ; déblocage **E37** ; exige saisie ; effets Accès aux dossiers de la Brigade ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis T-INT-01 ; déblocage **E37** ; exige saisie ; effets Accès aux dossiers de la Brigade ; date min 850 ; canon C. Fichier 13 : coût 160 ; prérequis T-INT-01 ; déblocage **E37** ; exige saisie ; effets Accès aux dossiers de la Brigade ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_cryptography",
+    "code": "T-INT-04",
+    "tree": "renseignement",
+    "cost": 180,
+    "prereqs": [
+      "tech_counterintelligence"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis T-INT-02 ; déblocage — ; effets Messages chiffrés ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis T-INT-02 ; déblocage — ; effets Messages chiffrés ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis T-INT-02 ; déblocage — ; effets Messages chiffrés ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis T-INT-02 ; déblocage — ; effets Messages chiffrés ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_press_propaganda",
+    "code": "T-INT-05",
+    "tree": "renseignement",
+    "cost": 100,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 100 ; prérequis — ; déblocage Imprimerie ; effets Opinion ± ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Imprimerie ; effets Opinion ± ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Imprimerie ; effets Opinion ± ; date min 845 ; canon A. Fichier 13 : coût 100 ; prérequis — ; déblocage Imprimerie ; effets Opinion ± ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_volunteers_liaison",
+    "code": "T-INT-06",
+    "tree": "renseignement",
+    "cost": 120,
+    "prereqs": [
+      "tech_informants"
+    ],
+    "unlock_event": "evt_851_volunteers",
+    "min_year": 851,
+    "mechanic_phase": "P9",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage **E47** ; effets Informations marleyennes ; date min 851 ; canon C. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage **E47** ; effets Informations marleyennes ; date min 851 ; canon C. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage **E47** ; effets Informations marleyennes ; date min 851 ; canon C. Fichier 13 : coût 120 ; prérequis T-INT-01 ; déblocage **E47** ; effets Informations marleyennes ; date min 851 ; canon C."
+  },
+  {
+    "id": "tech_marley_infiltration",
+    "code": "T-INT-07",
+    "tree": "renseignement",
+    "cost": 220,
+    "prereqs": [
+      "tech_volunteers_liaison"
+    ],
+    "unlock_event": "evt_851_eren_departure",
+    "min_year": 851,
+    "mechanic_phase": "P9",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 220 ; prérequis T-INT-06 ; déblocage **E49** `?` ; effets Agent à Marley ; risque élevé ; date min 851 ; canon ?. Fichier 13 : coût 220 ; prérequis T-INT-06 ; déblocage **E49** `?` ; effets Agent à Marley ; risque élevé ; date min 851 ; canon ?. Fichier 13 : coût 220 ; prérequis T-INT-06 ; déblocage **E49** `?` ; effets Agent à Marley ; risque élevé ; date min 851 ; canon ?. Fichier 13 : coût 220 ; prérequis T-INT-06 ; déblocage **E49** `?` ; effets Agent à Marley ; risque élevé ; date min 851 ; canon ?."
+  },
+  {
+    "id": "tech_conscription_reform",
+    "code": "T-ADM-01",
+    "tree": "administration",
+    "cost": 120,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis — ; déblocage Cabinet ; effets Recrues ± ; légitimité ± ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Cabinet ; effets Recrues ± ; légitimité ± ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Cabinet ; effets Recrues ± ; légitimité ± ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Cabinet ; effets Recrues ± ; légitimité ± ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_granary_reform",
+    "code": "T-ADM-02",
+    "tree": "administration",
+    "cost": 110,
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 110 ; prérequis — ; déblocage Greniers ; effets Pertes de stock −20 % ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage Greniers ; effets Pertes de stock −20 % ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage Greniers ; effets Pertes de stock −20 % ; date min 845 ; canon A. Fichier 13 : coût 110 ; prérequis — ; déblocage Greniers ; effets Pertes de stock −20 % ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_refugee_integration",
+    "code": "T-ADM-03",
+    "tree": "administration",
+    "cost": 130,
+    "unlock_event": "evt_845_refugee_crisis",
+    "min_year": 845,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 130 ; prérequis — ; déblocage **E05** ; effets Stabilité ± ; main-d'œuvre ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage **E05** ; effets Stabilité ± ; main-d'œuvre ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage **E05** ; effets Stabilité ± ; main-d'œuvre ; date min 845 ; canon A. Fichier 13 : coût 130 ; prérequis — ; déblocage **E05** ; effets Stabilité ± ; main-d'œuvre ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_school_extension",
+    "code": "T-ADM-04",
+    "tree": "administration",
+    "cost": 140,
+    "min_year": 845,
+    "effects": [
+      {
+        "hook": "research_points",
+        "value": 2
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 140 ; prérequis — ; déblocage — ; effets Alphabétisation ; recherche + ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis — ; déblocage — ; effets Alphabétisation ; recherche + ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis — ; déblocage — ; effets Alphabétisation ; recherche + ; date min 845 ; canon A. Fichier 13 : coût 140 ; prérequis — ; déblocage — ; effets Alphabétisation ; recherche + ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_civil_justice_reform",
+    "code": "T-ADM-05",
+    "tree": "administration",
+    "cost": 150,
+    "unlock_event": "evt_850_coup",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis — ; déblocage **E33** ; effets Légitimité juridique ; date min 850 ; canon A. Fichier 13 : coût 150 ; prérequis — ; déblocage **E33** ; effets Légitimité juridique ; date min 850 ; canon A. Fichier 13 : coût 150 ; prérequis — ; déblocage **E33** ; effets Légitimité juridique ; date min 850 ; canon A. Fichier 13 : coût 150 ; prérequis — ; déblocage **E33** ; effets Légitimité juridique ; date min 850 ; canon A."
+  },
+  {
+    "id": "tech_institutional_reform",
+    "code": "T-ADM-06",
+    "tree": "administration",
+    "cost": 220,
+    "prereqs": [
+      "tech_civil_justice_reform"
+    ],
+    "unlock_event": "evt_850_historia_coronation",
+    "min_year": 850,
+    "mechanic_phase": "P9",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 220 ; prérequis T-ADM-05 ; déblocage **E36** ; effets Cadre politique renouvelé ; date min 850 ; canon A. Fichier 13 : coût 220 ; prérequis T-ADM-05 ; déblocage **E36** ; effets Cadre politique renouvelé ; date min 850 ; canon A. Fichier 13 : coût 220 ; prérequis T-ADM-05 ; déblocage **E36** ; effets Cadre politique renouvelé ; date min 850 ; canon A. Fichier 13 : coût 220 ; prérequis T-ADM-05 ; déblocage **E36** ; effets Cadre politique renouvelé ; date min 850 ; canon A."
   }
 ]

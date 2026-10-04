@@ -82,6 +82,7 @@
       "prov_ville_usine": 0.5
     },
     "expedition_base": "prov_karanes",
+    "events_mode": "canon_fidele",
     "garrisons": {
       "prov_rose_nord": {
         "org": "garrison",

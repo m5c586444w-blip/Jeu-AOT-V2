@@ -218,6 +218,52 @@ export const TacticalBalanceSchema = z
   })
   .strict();
 
+/** P5 : moteur d'événements (02 §12, 12 §0–§3). Valeurs `A`. */
+export const EventsBalanceSchema = z
+  .object({
+    canon: z.enum(["C", "A", "?"]),
+    notes_canon: z.string().optional(),
+    divergence_threshold: pos,
+    deadline_days: z.number().int().min(0),
+    generic: z.object({ checks_per_month: z.number().int().min(0), min_gap_days: z.number().int().min(0), max_pending: z.number().int().min(1) }).strict(),
+  })
+  .strict();
+
+/** P5 : recherche (02 §7, 13 §12). Valeurs `A`. */
+export const ResearchBalanceSchema = z
+  .object({
+    canon: z.enum(["C", "A", "?"]),
+    notes_canon: z.string().optional(),
+    base_points: num,
+    org_points: z.record(z.string().regex(/^org_[a-z0-9_]+$/), num),
+    character_points: z.record(z.string().regex(/^char_[a-z0-9_]+$/), num),
+    capture_points: num,
+    risk_default: prob,
+    accident: z.object({ progress_loss: prob, stress: num }).strict(),
+  })
+  .strict();
+
+/** P5 : renseignement (02 §6). Valeurs `A`, sauf le bruit de ±20 % (02 §6). */
+export const IntelBalanceSchema = z
+  .object({
+    canon: z.enum(["C", "A", "?"]),
+    notes_canon: z.string().optional(),
+    estimate_noise: prob,
+    report_delay_days: range,
+    agents: z.object({ start: z.number().int().min(0), max: z.number().int().min(1), recruit_capital: num, cover: range, loyalty: range, skill: range, burn_per_operation: prob }).strict(),
+    operation_days: z.object({ surveiller: z.number().int().min(1), enqueter: z.number().int().min(1), contre: z.number().int().min(1) }).strict(),
+    falsehood: z.object({ base: prob, unreliable: prob, unreliable_below: num, mole: prob }).strict(),
+    evidence: z.object({ indice: num, preuve: num }).strict(),
+    mole_detection: prob,
+    cult_by_region: z.record(z.string(), z.number().min(0).max(100)),
+    cult_drift: prob,
+    legitimacy_local: z.object({ morale_k: num, stability_k: num, cult_k: num }).strict(),
+  })
+  .strict();
+
+export type EventsBalance = z.infer<typeof EventsBalanceSchema>;
+export type ResearchBalance = z.infer<typeof ResearchBalanceSchema>;
+export type IntelBalance = z.infer<typeof IntelBalanceSchema>;
 export type TacticalBalance = z.infer<typeof TacticalBalanceSchema>;
 export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
@@ -235,5 +281,8 @@ export const BALANCE_FILES = {
   expeditions: ExpeditionsBalanceSchema,
   logistics: LogisticsBalanceSchema,
   tactical: TacticalBalanceSchema,
+  events: EventsBalanceSchema,
+  research: ResearchBalanceSchema,
+  intel: IntelBalanceSchema,
 } as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

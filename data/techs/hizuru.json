@@ -1,0 +1,65 @@
+[
+  {
+    "id": "tech_flying_boat",
+    "code": "T-HIZ-01",
+    "tree": "hizuru_allies",
+    "faction": "hizuru",
+    "cost": 320,
+    "unlock_event": "evt_851_hizuru_visit",
+    "min_year": 852,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 320 ; prérequis — ; déblocage Hizuru ; **pierre à éclatement de glace** obtenue ; effets Transport aérien ; carburant ; date min 852–854 ; canon C. Déblocage rattaché à E48 [A] : la pierre à éclatement de glace est obtenue après le contact avec Paradis (13 §11). Fichier 13 : coût 320 ; prérequis — ; déblocage Hizuru ; **pierre à éclatement de glace** obtenue ; effets Transport aérien ; carburant ; date min 852–854 ; canon C. Déblocage rattaché à E48 [A] : la pierre à éclatement de glace est obtenue après le contact avec Paradis (13 §11)."
+  },
+  {
+    "id": "tech_iceburst_refining",
+    "code": "T-HIZ-02",
+    "tree": "hizuru_allies",
+    "faction": "hizuru",
+    "cost": 260,
+    "prereqs": [
+      "tech_flying_boat"
+    ],
+    "min_year": 852,
+    "mechanic_phase": "P7",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 260 ; prérequis T-HIZ-01 ; déblocage Traité de commerce avec Paradis ; effets Carburant et gaz de haute qualité ; date min 852 ; canon ?. Fichier 13 : coût 260 ; prérequis T-HIZ-01 ; déblocage Traité de commerce avec Paradis ; effets Carburant et gaz de haute qualité ; date min 852 ; canon ?."
+  },
+  {
+    "id": "tech_hizuru_naval",
+    "code": "T-HIZ-03",
+    "tree": "hizuru_allies",
+    "faction": "hizuru",
+    "cost": 200,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Hizuru) ; effets Navires, ports ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Hizuru) ; effets Navires, ports ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_allied_antititan",
+    "code": "T-ALL-01",
+    "tree": "hizuru_allies",
+    "faction": "allies",
+    "cost": 280,
+    "prereqs": [
+      "tech_allied_countermeasures"
+    ],
+    "unlock_event": "evt_851_middle_east_war",
+    "min_year": 851,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 280 ; prérequis T-ANT-13 ; déblocage Après **E50** ; effets Armes améliorées ; coalition ; date min 851–854 ; canon C. Fichier 13 : coût 280 ; prérequis T-ANT-13 ; déblocage Après **E50** ; effets Armes améliorées ; coalition ; date min 851–854 ; canon C."
+  },
+  {
+    "id": "tech_coalition_logistics",
+    "code": "T-ALL-02",
+    "tree": "hizuru_allies",
+    "faction": "allies",
+    "cost": 150,
+    "min_year": 851,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 150 ; prérequis — ; déblocage Traité d'alliance ; effets Convois mixtes ; date min 851 ; canon A. Fichier 13 : coût 150 ; prérequis — ; déblocage Traité d'alliance ; effets Convois mixtes ; date min 851 ; canon A."
+  }
+]

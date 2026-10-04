@@ -1,6 +1,6 @@
-import type { EconomyBalance, ExpeditionsBalance, LogisticsBalance, PoliticsBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
-import type { Building, Character, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TacticalMap, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
+import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TacticalMap, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -16,6 +16,44 @@ export interface World {
   military: MilitaryWorld | null;
   /** Combat tactique (P4) : absent sans équilibrage tactique, types de Titans ou cartes. */
   tactical: TacticalWorld | null;
+  /** Événements canon et génériques (P5) : absents sans équilibrage ou hors scénario politique. */
+  chronicle: ChronicleWorld | null;
+  /** Recherche (P5). */
+  research: ResearchWorld | null;
+  /** Renseignement (P5). */
+  intel: IntelWorld | null;
+}
+
+export interface ChronicleWorld {
+  balance: EventsBalance;
+  /** Mode du scénario : « aucun » = seuls les génériques tournent. */
+  mode: "canon_fidele" | "aucun";
+  events: ReadonlyMap<string, EventDef>;
+  /** Événements canon jouables, dans l'ordre de leur code (E09, E10…). */
+  canon: readonly EventDef[];
+  generic: readonly EventDef[];
+  /** Successeurs directs dans le graphe (12 §3). */
+  successors: ReadonlyMap<string, readonly string[]>;
+}
+
+export interface ResearchWorld {
+  balance: ResearchBalance;
+  techs: ReadonlyMap<string, Tech>;
+  /** Ordre d'affichage : arbre puis code. */
+  order: readonly Tech[];
+}
+
+export interface SecretDef {
+  id: string;
+  character: string;
+  /** Ce que cache le secret (clés des champs `hidden` du personnage). */
+  fields: readonly string[];
+}
+
+export interface IntelWorld {
+  balance: IntelBalance;
+  /** Secrets tirés des champs `hidden` des personnages (identités, porteurs, allégeances). */
+  secrets: readonly SecretDef[];
 }
 
 export interface TacticalWorld {
@@ -75,6 +113,11 @@ export interface WorldSource {
   tactical?: TacticalBalance;
   titanTypes?: readonly TitanType[];
   tacticalMaps?: readonly TacticalMap[];
+  events?: readonly EventDef[];
+  techs?: readonly Tech[];
+  eventsBalance?: EventsBalance;
+  research?: ResearchBalance;
+  intel?: IntelBalance;
 }
 
 export function buildGeo(g: GeoData): GeoGraph {
@@ -119,5 +162,27 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
       src.tactical && src.titanTypes?.length && src.tacticalMaps?.length
         ? { balance: src.tactical, titanTypes: new Map(src.titanTypes.map((t) => [t.id, t])), titanClasses: new Map((src.titans ?? []).map((t) => [t.id, t])), maps: new Map(src.tacticalMaps.map((m) => [m.id, m])) }
         : null,
+    chronicle: politics && src.eventsBalance ? buildChronicle(src.events ?? [], src.eventsBalance, scenario.events_mode) : null,
+    research: politics && src.research && src.techs?.length ? { balance: src.research, techs: new Map(src.techs.map((t) => [t.id, t])), order: [...src.techs].sort((a, b) => a.tree.localeCompare(b.tree) || (a.code ?? a.id).localeCompare(b.code ?? b.id)) } : null,
+    intel: politics && src.intel ? { balance: src.intel, secrets: secretsOf(src.characters ?? []) } : null,
   };
+}
+
+const preds = (e: EventDef): string[] => (e.window.after === null ? [] : Array.isArray(e.window.after) ? e.window.after : [e.window.after]);
+
+export function buildChronicle(events: readonly EventDef[], balance: EventsBalance, mode: "canon_fidele" | "aucun"): ChronicleWorld {
+  const playable = events.filter((e) => e.playable);
+  const canon = playable.filter((e) => e.kind === "canon").sort((a, b) => (a.code ?? a.id).localeCompare(b.code ?? b.id));
+  const successors = new Map<string, string[]>();
+  for (const e of canon) for (const p of preds(e)) successors.set(p, [...(successors.get(p) ?? []), e.id]);
+  return { balance, mode, events: new Map(events.map((e) => [e.id, e])), canon, generic: playable.filter((e) => e.kind === "generic"), successors };
+}
+
+/** Un secret par personnage portant des champs `hidden` (D-36 : chargés en P2, jamais affichés avant révélation). */
+export function secretsOf(characters: readonly Character[]): SecretDef[] {
+  return characters.filter((c) => c.hidden && Object.keys(c.hidden).length > 0).map((c) => ({ id: `secret_${c.id.replace(/^char_/, "")}`, character: c.id, fields: Object.keys(c.hidden ?? {}).sort() }));
+}
+
+export function predecessorsOf(e: EventDef): string[] {
+  return preds(e);
 }

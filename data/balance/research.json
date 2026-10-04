@@ -1,0 +1,21 @@
+{
+  "canon": "A",
+  "notes_canon": "Points de recherche (02 §7, 13 §12) : organisations, Hange (nommée en 02 §7), Titans capturés. Valeurs A.",
+  "base_points": 4,
+  "org_points": {
+    "org_survey_corps": 4,
+    "org_garrison": 2,
+    "org_military_police": 1,
+    "org_training_corps": 1
+  },
+  "character_points": {
+    "char_hange_zoe": 6,
+    "char_moblit_berner": 1
+  },
+  "capture_points": 3,
+  "risk_default": 0.02,
+  "accident": {
+    "progress_loss": 0.4,
+    "stress": 20
+  }
+}

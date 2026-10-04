@@ -1,13 +1,154 @@
 [
   {
+    "id": "tech_aerial_reconnaissance",
+    "code": "T-INT-08",
+    "tree": "renseignement",
+    "faction": "marley",
+    "cost": 260,
+    "prereqs": [
+      "tech_airships"
+    ],
+    "unlock_event": "evt_851_middle_east_war",
+    "min_year": 854,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 260 ; prérequis T-MOD-03 ; déblocage Aéronefs ; effets Cartes datées ; brouillard de guerre réduit ; date min 854 ; canon C. Fichier 13 : coût 260 ; prérequis T-MOD-03 ; déblocage Aéronefs ; effets Cartes datées ; brouillard de guerre réduit ; date min 854 ; canon C. Technologie de Marley ; déblocage rattaché à E50 [A] (aviation employée pendant la guerre du Moyen-Orient), faute d'événement dans le fichier 13. Fichier 13 : coût 260 ; prérequis T-MOD-03 ; déblocage Aéronefs ; effets Cartes datées ; brouillard de guerre réduit ; date min 854 ; canon C. Technologie de Marley ; déblocage rattaché à E50 [A] (aviation employée pendant la guerre du Moyen-Orient), faute d'événement dans le fichier 13. Fichier 13 : coût 260 ; prérequis T-MOD-03 ; déblocage Aéronefs ; effets Cartes datées ; brouillard de guerre réduit ; date min 854 ; canon C. Technologie de Marley ; déblocage rattaché à E50 [A] (aviation employée pendant la guerre du Moyen-Orient), faute d'événement dans le fichier 13."
+  },
+  {
+    "id": "tech_repeating_rifle",
+    "code": "T-MOD-01",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": null,
+    "start": true,
+    "min_year": 845,
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût — ; prérequis — ; déblocage Départ (Marley) ; effets Infanterie moderne ; date min 845 ; canon A. Fichier 13 : coût — ; prérequis — ; déblocage Départ (Marley) ; effets Infanterie moderne ; date min 845 ; canon A. Fichier 13 : coût — ; prérequis — ; déblocage Départ (Marley) ; effets Infanterie moderne ; date min 845 ; canon A. Fichier 13 : coût — ; prérequis — ; déblocage Départ (Marley) ; effets Infanterie moderne ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_heavy_artillery",
+    "code": "T-MOD-02",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 200,
+    "prereqs": [
+      "tech_repeating_rifle"
+    ],
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis T-MOD-01 ; déblocage Départ (Marley) ; effets Appui, contre-batterie ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis T-MOD-01 ; déblocage Départ (Marley) ; effets Appui, contre-batterie ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis T-MOD-01 ; déblocage Départ (Marley) ; effets Appui, contre-batterie ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis T-MOD-01 ; déblocage Départ (Marley) ; effets Appui, contre-batterie ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_airships",
+    "code": "T-MOD-03",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 260,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "C",
+    "notes_canon": "Fichier 13 : coût 260 ; prérequis — ; déblocage Départ (Marley) ; effets Reconnaissance, appui ; date min 845 ; canon C. Fichier 13 : coût 260 ; prérequis — ; déblocage Départ (Marley) ; effets Reconnaissance, appui ; date min 845 ; canon C. Fichier 13 : coût 260 ; prérequis — ; déblocage Départ (Marley) ; effets Reconnaissance, appui ; date min 845 ; canon C. Fichier 13 : coût 260 ; prérequis — ; déblocage Départ (Marley) ; effets Reconnaissance, appui ; date min 845 ; canon C."
+  },
+  {
+    "id": "tech_battleship_fleet",
+    "code": "T-MOD-04",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 280,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 280 ; prérequis — ; déblocage Départ (Marley) ; effets Domination navale ; date min 845 ; canon C ?. Fichier 13 : coût 280 ; prérequis — ; déblocage Départ (Marley) ; effets Domination navale ; date min 845 ; canon C ?. Fichier 13 : coût 280 ; prérequis — ; déblocage Départ (Marley) ; effets Domination navale ; date min 845 ; canon C ?. Fichier 13 : coût 280 ; prérequis — ; déblocage Départ (Marley) ; effets Domination navale ; date min 845 ; canon C ?."
+  },
+  {
     "id": "tech_antititan_rifle",
     "code": "T-MOD-05",
     "tree": "armes_modernes",
     "faction": "marley",
     "cost": 220,
+    "prereqs": [
+      "tech_repeating_rifle"
+    ],
     "unlock_event": "evt_850_marley_antititan_rifle",
     "min_year": 850,
+    "mechanic_phase": "P7",
     "canon": "C",
-    "notes_canon": "Fusils anti-Titan confirmés (emploi en 854, 11 §6) ; date de développement [?] : déblocage par un événement paramétrable (errata Q1). Prérequis T-MOD-01 à relier en P7."
+    "notes_canon": "Fusils anti-Titan confirmés (emploi en 854, 11 §6) ; date de développement [?] : déblocage par un événement paramétrable (errata Q1). Prérequis T-MOD-01 à relier en P7. Fichier 13 : coût 220 ; prérequis T-MOD-01 ; déblocage Marley, après les Guerriers vs Paradis ; effets Dégâts accrus sur Titans (purs, porteurs) ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MOD-01 ; déblocage Marley, après les Guerriers vs Paradis ; effets Dégâts accrus sur Titans (purs, porteurs) ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MOD-01 ; déblocage Marley, après les Guerriers vs Paradis ; effets Dégâts accrus sur Titans (purs, porteurs) ; date min 850 ; canon C. Fichier 13 : coût 220 ; prérequis T-MOD-01 ; déblocage Marley, après les Guerriers vs Paradis ; effets Dégâts accrus sur Titans (purs, porteurs) ; date min 850 ; canon C."
+  },
+  {
+    "id": "tech_military_railway",
+    "code": "T-MOD-06",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 180,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis — ; déblocage Départ (Marley) ; effets Mobilité lourde ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis — ; déblocage Départ (Marley) ; effets Mobilité lourde ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis — ; déblocage Départ (Marley) ; effets Mobilité lourde ; date min 845 ; canon A. Fichier 13 : coût 180 ; prérequis — ; déblocage Départ (Marley) ; effets Mobilité lourde ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_armoured_vehicles",
+    "code": "T-MOD-07",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 300,
+    "prereqs": [
+      "tech_heavy_artillery"
+    ],
+    "min_year": 850,
+    "mechanic_phase": "P7",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 300 ; prérequis T-MOD-02 ; déblocage — ; effets Percée ; existence non confirmée ; date min 850 ; canon ?. Fichier 13 : coût 300 ; prérequis T-MOD-02 ; déblocage — ; effets Percée ; existence non confirmée ; date min 850 ; canon ?. Fichier 13 : coût 300 ; prérequis T-MOD-02 ; déblocage — ; effets Percée ; existence non confirmée ; date min 850 ; canon ?. Fichier 13 : coût 300 ; prérequis T-MOD-02 ; déblocage — ; effets Percée ; existence non confirmée ; date min 850 ; canon ?."
+  },
+  {
+    "id": "tech_chemical_weapons",
+    "code": "T-MOD-08",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 260,
+    "prereqs": [
+      "tech_heavy_artillery"
+    ],
+    "min_year": 850,
+    "mechanic_phase": "P7",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 260 ; prérequis T-MOD-02 ; déblocage — ; effets Existence non confirmée ; coût moral ; date min 850 ; canon ?. Fichier 13 : coût 260 ; prérequis T-MOD-02 ; déblocage — ; effets Existence non confirmée ; coût moral ; date min 850 ; canon ?. Fichier 13 : coût 260 ; prérequis T-MOD-02 ; déblocage — ; effets Existence non confirmée ; coût moral ; date min 850 ; canon ?. Fichier 13 : coût 260 ; prérequis T-MOD-02 ; déblocage — ; effets Existence non confirmée ; coût moral ; date min 850 ; canon ?."
+  },
+  {
+    "id": "tech_internment_police",
+    "code": "T-MOD-09",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 120,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 120 ; prérequis — ; déblocage Départ (Marley) ; effets Contrôle des quartiers eldiens ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ (Marley) ; effets Contrôle des quartiers eldiens ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ (Marley) ; effets Contrôle des quartiers eldiens ; date min 845 ; canon A. Fichier 13 : coût 120 ; prérequis — ; déblocage Départ (Marley) ; effets Contrôle des quartiers eldiens ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_titan_projection",
+    "code": "T-MOD-10",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 200,
+    "min_year": 845,
+    "mechanic_phase": "P7",
+    "canon": "A",
+    "notes_canon": "Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Marley) ; effets Porteur comme arme stratégique ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Marley) ; effets Porteur comme arme stratégique ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Marley) ; effets Porteur comme arme stratégique ; date min 845 ; canon A. Fichier 13 : coût 200 ; prérequis — ; déblocage Départ (Marley) ; effets Porteur comme arme stratégique ; date min 845 ; canon A."
+  },
+  {
+    "id": "tech_antiholder_ammunition",
+    "code": "T-MOD-11",
+    "tree": "armes_modernes",
+    "faction": "marley",
+    "cost": 240,
+    "prereqs": [
+      "tech_antititan_rifle"
+    ],
+    "min_year": 850,
+    "mechanic_phase": "P7",
+    "canon": "?",
+    "notes_canon": "Fichier 13 : coût 240 ; prérequis T-MOD-05 ; déblocage — ; effets Dégâts accrus sur porteurs durcis ; date min 850 ; canon ?. Fichier 13 : coût 240 ; prérequis T-MOD-05 ; déblocage — ; effets Dégâts accrus sur porteurs durcis ; date min 850 ; canon ?. Fichier 13 : coût 240 ; prérequis T-MOD-05 ; déblocage — ; effets Dégâts accrus sur porteurs durcis ; date min 850 ; canon ?. Fichier 13 : coût 240 ; prérequis T-MOD-05 ; déblocage — ; effets Dégâts accrus sur porteurs durcis ; date min 850 ; canon ?."
   }
 ]

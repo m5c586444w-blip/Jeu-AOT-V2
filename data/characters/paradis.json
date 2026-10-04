@@ -211,7 +211,7 @@
     "name": "Erwin Smith",
     "active_from": 845,
     "active_until": 850,
-    "death_event": "evt_850_erwin_charge",
+    "death_event": "evt_850_serum_choice",
     "faction": "paradis",
     "org": "org_survey_corps",
     "rank_key": "rank.commandant",
@@ -276,7 +276,7 @@
     },
     "bio_key": "bio.erwin_smith",
     "canon": "C",
-    "notes_canon": "Mort à Shiganshina (850, E41) (11 §3). Relations : 07 §10 (Nile : amis d'enfance)."
+    "notes_canon": "Mort à Shiganshina (850) (11 §3) : blessé à mort pendant la charge (E41), il meurt quand le sérum est donné à Armin (E42) ; death_event = E42 [A] (D-65). Relations : 07 §10 (Nile : amis d'enfance)."
   },
   {
     "id": "char_hange_zoe",
@@ -953,6 +953,7 @@
     "name": "Hannes",
     "active_from": 845,
     "active_until": 850,
+    "death_event": "evt_850_armored_colossal_fight",
     "faction": "paradis",
     "org": "org_garrison",
     "rank_key": "rank.officier",

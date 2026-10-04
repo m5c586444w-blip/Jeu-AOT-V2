@@ -21,7 +21,8 @@ describe("graine de données P0 (T0.14)", () => {
   });
   it("errata appliqués", () => {
     const ch = (id: string) => data.characters.find((c) => c.id === id);
-    expect(ch("char_erwin_smith")?.death_event).toBe("evt_850_erwin_charge");
+    // D-65 (P5) : blessé à mort à E41, Erwin meurt au choix du sérum (E42), qui oppose Erwin mourant et Armin.
+    expect(ch("char_erwin_smith")?.death_event).toBe("evt_850_serum_choice");
     expect(ch("char_mike_zacharias")?.death_event).toBe("evt_850_wall_rose_invasion");
     expect(ch("char_kenny_ackerman")?.death_event).toBe("evt_850_rod_reiss_titan");
     const rifle = data.events.find((e) => e.id === "evt_850_marley_antititan_rifle");
