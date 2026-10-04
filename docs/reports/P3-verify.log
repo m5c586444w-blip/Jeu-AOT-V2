@@ -20,11 +20,11 @@
 
  Test Files  30 passed (30)
       Tests  175 passed (175)
-   Start at  00:58:00
-   Duration  19.63s (tests 85%, import 10%, transform 5%)
+   Start at  01:17:47
+   Duration  20.05s (tests 85%, import 10%, transform 5%)
 
-    Isolate  30 workers spawned · ~120ms startup each (spawn + environment, per file)
-             at least ~1.08s faster with isolate: false — reuses workers across files instead of one per file
+    Isolate  30 workers spawned · ~127ms startup each (spawn + environment, per file)
+             at least ~1.14s faster with isolate: false — reuses workers across files instead of one per file
 
 
 > murs-et-sang@0.0.1 data:validate
@@ -92,9 +92,9 @@ dist/assets/RenderTargetSystem-D6eF_o2J.js                    78.15 kB │ gzip:
 dist/assets/CanvasPool-ADgchDYy.js                           113.07 kB │ gzip:  34.46 kB
 dist/assets/index-BOHG9ngQ.js                                565.86 kB │ gzip: 170.55 kB
 
-✓ built in 886ms
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 829ms

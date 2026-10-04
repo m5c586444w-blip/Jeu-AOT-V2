@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P3 — Expéditions et logistique |
-| Tâche | T3.0 — plan `docs/phases/P3.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P2) : code 0, 150 tests — `docs/reports/P2-verify.log` |
-| Prochaine étape | T3.1 — données (équilibrage des expéditions et de la logistique, unités, classes de Titans, noms, scénarios) |
+| Phase | P4 — Combat tactique v1 (à démarrer ; P3 terminée) |
+| Tâche | T4.0 — plan `docs/phases/P4.md` |
+| Dernier `npm run verify` | 2026-10-04 (fin de P3) : code 0, 175 tests — `docs/reports/P3-verify.log` |
+| Prochaine étape | Écrire `docs/phases/P4.md` (05 §5, 03), puis exécuter P4 ; **arrêt de revue utilisateur à la fin de P4** |
 
 ## Arrêt levé (2026-10-03) — critère AC2-11 en échec deux fois
 - **Levé par l'utilisateur** : correction renforcée acceptée (D-48), appliquée et passée (`docs/reports/P2-smoke-politique.log`).
@@ -30,3 +30,4 @@
 - 2026-10-04 — smoke:map : 1 échec (rapport canon du navigateur > 10 s), corrigé à la source ; passage complet OK → P1 validée.
 - 2026-10-04 — P2 terminée : tous les critères AC2-01 à AC2-14 passent ; rapport `docs/reports/P2.md`.
 - 2026-10-04 — P3 démarrée : plan `docs/phases/P3.md`.
+- 2026-10-04 — P3 terminée : AC3-01 à AC3-15 passent (AC3-07, AC3-11 et AC3-15 au 2e passage) ; rapport `docs/reports/P3.md`.
