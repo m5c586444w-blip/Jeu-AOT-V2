@@ -1,0 +1,17 @@
+
+> murs-et-sang@0.0.1 sim:year
+> tsx src/tools/sim-year.ts --bench
+
+sim:year : scn_sandbox_845, graine 42, 360 jours → an 846, jour 1
+  population 1 000 006 · soldats 33 200 · alertes 0
+  stocks : food 667 330 · gas 86 478 · steel 34 994 · iceburst 0 · powder 8 822 · horses 9 269 · manpower 19 800 · coal 0 · gold 154 321
+  tick (74 provinces) : moyenne 0.521 ms · p95 0.913 ms · max 2.982 ms
+sim:year : scn_sandbox_850, graine 42, 360 jours → an 851, jour 1
+  population 780 000 · soldats 25 200 · alertes 19
+  stocks : food 643 294 · gas 104 998 · steel 10 707 · iceburst 0 · powder 9 469 · horses 4 653 · manpower 15 744 · coal 0 · gold 135 494
+  politique : légitimité 57.4 · capital 100 · décrets 0 · propositions 3 · vivants 52/52
+  tick (74 provinces) : moyenne 0.798 ms · p95 1.196 ms · max 3.268 ms
+  tick (150 provinces, scn_sandbox_850, politique comprise) : moyenne 1.463 ms · p95 2.098 ms · max 2.908 ms (budget 8 ms, 00 §6.8)
+  banc militaire : 3 expéditions, 5 convois au départ (graine 1)
+  tick (150 provinces, 3 expéditions et 5 convois en route) : moyenne 3.077 ms · p95 4.005 ms · max 4.528 ms (budget 8 ms)
+sim:year : OK.

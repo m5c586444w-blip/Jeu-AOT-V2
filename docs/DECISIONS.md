@@ -265,3 +265,16 @@
 - Valeurs `[A]` : coupe de base 0,15 ; esquive 0,25 ; cadence d'attaque 0,48–0,88 s ; frappe mortelle 0,72.
 - **Taille d'échantillon** : une bataille contre un petit Titan tue 0, 1 ou 2 hommes. Sur 100 batailles, le bruit de la moyenne atteint ±16 % ; le critère de ±15 % ne serait donc pas mesurable. AC4-08 passe à **1 000 batailles par type**, ce qui donne un bruit d'environ 5 %. La référence d'auto-résolution est calculée sur les mêmes configurations (4 tirages par graine). Révision faite **avant** toute mesure officielle ; le critère est plus exigeant, pas plus lâche.
 - Exploration (hors commande officielle) : écart maximal de 5 % sur les graines 1–1 000 et de 9 % sur les graines 1 001–2 000.
+
+## 2026-10-04 — D-61 Interface tactique et mesure de performance
+- **Échelle** : les figures suivent l'échelle réelle (homme 1,8 m ; Titan 3–15 m), avec une taille minimale à l'écran (soldat 9 px, Titan 22 px). Sinon, en vue large, un homme ferait moins d'un pixel. La caméra s'ouvre cadrée sur les unités, à 3 px/m au plus.
+- **Projection** : oblique « gravure » (y × 0,62, la hauteur monte à l'écran), sans perspective, pour garder la lisibilité des volumes et la stabilité des positions.
+- **Performance** :
+  - Figures : une figure de Titan ou de soldat est construite **une fois par apparence** (GraphicsContext partagé), puis seulement déplacée et mise à l'échelle.
+  - Cartes d'escouade : mises à jour en place, 8 par image à tour de rôle.
+  - Carte stratégique : rendu suspendu pendant la bataille.
+  - Mesure : le rendu Pixi est appelé dans la boucle de l'écran de bataille (pas de ticker propre). Le « temps JS par image » d'AC4-09 inclut donc simulation, préparation des figures, rendu et interface. La décomposition par poste est publiée (`data-js-parts`).
+- **Premier passage de `smoke:tactique` : KO** (p95 17,8 ms avec 300 unités). Diagnostic : la carte stratégique continuait d'être rendue sous l'écran de bataille, en WebGL logiciel, ce qui donnait 3,5 images/s ; la simulation rattrapait donc 6 pas par image. Les figures étaient aussi reconstruites à chaque image. Le second passage, après correctifs, est OK (p95 4,4 ms, 157 images). Les deux journaux sont conservés.
+- **Bataille d'essai** (registre des expéditions) : escarmouche hors campagne, sans aucun effet sur l'état. Elle sert à essayer les cartes et les Titans, et aux contrôles.
+- **Planche des figures** (`src/ui/tactical/specimenSheet.ts`) : outil de revue (AC4-13) chargé par `smoke:tactique` ; absente du jeu et du paquet de production.
+- Touches : pendant une bataille, les raccourcis de la carte sont neutralisés ; Espace = pause active.

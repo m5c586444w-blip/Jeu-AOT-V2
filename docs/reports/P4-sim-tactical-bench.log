@@ -1,0 +1,8 @@
+
+> murs-et-sang@0.0.1 sim:tactical
+> tsx src/tools/sim-tactical.ts --bench
+
+Banc : 300 unités (280 soldats, 20 Titans), carte Ville, 1200 pas de 50 ms
+  pas de simulation : médiane 0.37 ms · p95 1.34 ms · max 8.93 ms (68 morts, Titans abattus 13)
+  OK  AC4-09 : p95 < 5 ms avec 300 unités
+sim:tactical : tout est conforme.

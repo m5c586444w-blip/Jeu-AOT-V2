@@ -50,3 +50,12 @@ Aucun en P0.
 | Télégramme, lettre aux familles (mise en page) | CSS `screen.css` | Création originale du projet |
 | Modèles de lettres aux familles et noms de soldats | `src/i18n/fr.json`, `data/names/paradis.json` | Textes et listes créés pour le projet |
 | Captures `docs/screenshots/p3-*` | Rendus du projet | Création originale du projet |
+
+## Ajouts de P4
+
+| Élément | Source | Licence |
+|---|---|---|
+| 10 silhouettes de Titans, 8 figures de soldats, fusées, câbles | `src/render/tactical/figures.ts`, dessinés par code | Création originale du projet |
+| Décors tactiques (ville, forêt, plaine, mur) | `src/render/tactical/scene.ts`, générés depuis `data/tactical_maps/maps.json` | Création originale du projet |
+| Écran de bataille, cartes d'escouade, bilan | CSS `screen.css` | Création originale du projet |
+| Captures `docs/screenshots/p4-*` | Rendus du projet | Création originale du projet |

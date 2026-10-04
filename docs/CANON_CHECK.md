@@ -98,3 +98,21 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Soldats générés et leurs noms | A | générateur, `data/names/paradis.json` | aucun nom de famille de l'œuvre |
 | Les murs ne se franchissent qu'aux portes | A | règle de routage | D-52, D-58 |
 | Arme de contention, expédition 57, Titan féminin | hors P3 | — | événements E16–E19 en P5 |
+
+## Faits utilisés en P4
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Seule une coupe de la nuque tue un Titan ; les membres repoussent | C | `src/sim/tactical/battle.ts` | 03 §4.2, 11 |
+| Manœuvre tridimensionnelle : crochets, gaz, lames de rechange | C (existence) / A (valeurs) | `data/balance/tactical.json` | 03 §3.2, §4.1 |
+| Portée des crochets 40–60 m | ? | `odm.hook_range_m`, `hook_range_canon: "?"` | 03 §3.2 |
+| Réservoir ≈ 100 u ; poussée 1–2,5 u/s ; changement de lames 1,5 s | A | équilibrage | 03 §3.2, §4.1, §4.2 |
+| Réserve de gaz pour freiner la descente | A | `soldiers.gas_reserve` | D-60 |
+| Titans moins actifs et voyant moins la nuit | A | `titans.vision_*` | 03 §5.1 |
+| Titans attirés par les humains | C | IA des Titans | 03 §5.1 |
+| 8 types de Titans purs (errant, meute, coureur, sauteur, ignorant, rampant…) | A | `data/titan_types/purs.json` | aucun présenté comme canon (D-59) |
+| Forêt des Arbres Géants : troncs ≈ 80 m | C (hauteur) / A (disposition) | `data/tactical_maps/maps.json` | 03 §2 ; localisation `?` (P1) |
+| Mur : hauteur 50 m | C | carte « Mur » | 11 §2 ; épaisseur 10 m `?` |
+| Fusées rouge, noire, verte | C | signaux tactiques | 03 §7 |
+| Ackerman plus rapides et plus sûrs | C (fait) / A (multiplicateurs) | ODM | 03 §3.1 |
+| Silhouettes des Titans et figures des soldats | A | dessinées par code | aucun personnage ni design de l'œuvre |

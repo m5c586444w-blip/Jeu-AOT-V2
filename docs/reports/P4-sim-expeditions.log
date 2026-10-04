@@ -1,0 +1,22 @@
+
+> murs-et-sang@0.0.1 sim:expeditions
+> tsx src/tools/sim-expeditions.ts
+
+[eventail] 100 expéditions vers prov_maria_est (20 escouades)
+  mortalité : moyenne 30.3 % · médiane 25.7 % · p10 15.0 % · p90 52.4 % · min 7.0 % · max 83.8 %
+  histogramme (tranches de 10 %) : 0–10 : 4 · 10–20 : 24 · 20–30 : 33 · 30–40 : 17 · 40–50 : 10 · 50–60 : 4 · 60–70 : 5 · 70–80 : 1 · 80–90 : 2 · 90–100 : 0
+  objectif atteint 92/100 · retraits 8 · durée moyenne 14.3 j · engagements moyens 14.1
+  causes : titan 2090 · anormal 762 · hemorragie 137 · infection 98 · epuisement 58
+[colonnes] 100 expéditions vers prov_maria_est (20 escouades)
+  mortalité : moyenne 64.7 % · médiane 66.0 % · p10 39.8 % · p90 87.1 % · min 14.5 % · max 98.1 %
+  histogramme (tranches de 10 %) : 0–10 : 0 · 10–20 : 1 · 20–30 : 3 · 30–40 : 8 · 40–50 : 10 · 50–60 : 17 · 60–70 : 20 · 70–80 : 15 · 80–90 : 16 · 90–100 : 10
+  objectif atteint 77/100 · retraits 23 · durée moyenne 24.3 j · engagements moyens 32.4
+  causes : titan 4262 · anormal 1653 · hemorragie 352 · infection 232 · epuisement 195
+Critères AC3-07 (expédition type : éventail) :
+  OK  100 expéditions sans crash (et 100 en colonnes)
+  OK  mortalité moyenne dans [25 %, 40 %] (02 §15) : 30.3 %
+  OK  distribution large : p90 − p10 = 37.4 points (≥ 20)
+  OK  queue épaisse : max 83.8 % ≥ 1,5 × médiane (38.5 %)
+Contrôle de cohérence (AC3-06) :
+  OK  l'éventail perd moins que les colonnes (30.3 % < 64.7 %)
+sim:expeditions : OK.
