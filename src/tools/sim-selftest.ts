@@ -1,5 +1,5 @@
 // npm run sim:selftest — AC-16 / AC1-06 : même hash après 1000 ticks en direct et via un worker (worker_threads),
-// sans monde (fondations P0), avec l'économie (845), avec la couche politique et les événements (850, P5), puis avec une expédition (P3) et une bataille jouée (P4).
+// sans monde (fondations P0), avec l'économie (845), avec la couche politique, les événements (850, P5) et les porteurs (P6), puis avec une expédition (P3) et une bataille jouée (P4).
 import { Worker } from "node:worker_threads";
 import { DEFAULT_SCENARIO, loadWorld } from "../data/worldNode";
 import type { Command } from "../sim/core/commands";
@@ -28,7 +28,9 @@ try {
     const label = scenario ?? "sans monde";
     const ev = last.state.events;
     const p5 = ev ? ` | événements : ${Object.values(ev.history).filter((r) => r.status === "survenu").length} canon survenus, divergence ${ev.divergence}, ${last.state.research?.done.length ?? 0} technologies` : "";
-    console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}${p5}`);
+    const sh = last.state.shifters;
+    const p6 = sh ? ` | porteurs (P6) : Colossal → ${sh.titans["shifter_colossal"]?.holder ?? "—"}, ${sh.history.length} héritage(s), sérum ${sh.serum}` : "";
+    console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}${p5}${p6}`);
     if (last.hash !== direct.hash() || last.state.commandIndex !== script.length) failed = true;
   }
   // AC3-10 : une expédition lancée en 850 (plan calculé sur l'état direct, puis rejoué tel quel des deux côtés).

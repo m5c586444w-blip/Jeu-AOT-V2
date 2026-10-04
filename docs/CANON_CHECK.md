@@ -142,3 +142,22 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Bruit des rapports ±20 % | A (02 §6) | `data/balance/intel.json` | 02 §6 |
 | Infiltrés de 850 (taupes) : Reiner, Bertholdt, Annie | C | champs `hidden` des personnages | 12 E27 |
 | 30 événements génériques | A | `data/events/generic.json` | 12 §5 ; aucun objet ni lieu avant sa date (R10) |
+
+## Faits utilisés en P6
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Les Neuf Titans et leur capacité signature | C | `data/shifters/nine.json` | 03 §8.2 |
+| Chaînes de porteurs (Assaillant, Fondateur, Bestial, Mâchoire, Colossal, Cuirassé, Féminin, Charrette, Marteau de guerre) | C | `chain` ; canon:check R11 | 11 §4 (chaînes corrigées) |
+| Dates de transfert hors de celles que donne 11 §4 (Reiner, Bertholdt, Annie, Pieck en 843 ; Marteau en 845) | ? | `holder_850.since_canon` | 11 §4 : « dates exactes `[?]` » |
+| Porteurs en 850 : Eren (Assaillant, Fondateur), Ymir (Mâchoire), Reiner, Bertholdt, Annie ; Marley tient Bestial, Charrette, Marteau | C | `holder_850` | 11 §4 ; aucun nom de porteur de Marley hors des données (P7) |
+| Malédiction d'Ymir : 13 ans | C | `data/balance/shifters.json` | 02 §10 |
+| Mort sans ingestion → pouvoir à un nouveau-né eldien | C | `dailyShifters` | 02 §10 |
+| Héritage par ingestion d'un porteur après injection de sérum | C | `InheritTitan`, effet `inherit` | 02 §10 ; 12 E42 |
+| Sérum de Kenny transmis à Levi (E35), donné à Armin (E42) | C | E35 `serum`, E42 `inherit` | errata Q2 ; 12 E42 |
+| Ymir part avec Reiner et Bertholdt (E28) | C | E28 `shifter_faction` | 12 E28 |
+| Contrôle des purs du Fondateur lié au sang royal | C | `requires_flag: royal_contact` | 02 §10 |
+| Délai de transformation 1–3 s | A (03 §8.1) | `transform_delay_s` | 03 §8.1 |
+| Hauteurs, vitesses, points de vie, endurance, valeurs des capacités | A | `data/shifters/nine.json` | aucune valeur chiffrée canonique |
+| Lances de foudre efficaces contre l'armure du Cuirassé | C | `pierce` ; `sim:shifters` | 12 E40 ; 13 T-ANT-08 |
+| Visions (mémoires des porteurs) sous forme de rapports peu fiables | A | `monthlyVisions` | F-TIT-06 ; forme ludique |

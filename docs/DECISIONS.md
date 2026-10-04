@@ -333,3 +333,29 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - Décision : maxima resserrés (E09, E14–E17, E20, E21, E30–E32, E36–E39 ; E38 : 20–40 jours au lieu de 30–60). Les fenêtres restent `?` et paramétrables. Le pire cas tombe à 342 jours, garanti par un test de données (≤ 355).
 - Les successeurs restent programmés depuis la **décision** et non depuis le déclenchement, car E13 dépend du choix fait à E12.
 - Second passage : OK (20/20 graines ; dernier événement au plus tard le jour 313).
+
+## 2026-10-04 — D-68 Titans-porteurs : état, héritage, horloge (P6)
+- **Couche v7 `shifters`** : pour chaque Titan, le porteur (personnage ou `null`), le camp (`paradis`, `marley`, `inconnu`, `perdu`), l'année d'héritage et son statut, capturé, retiré, visions ; doses de sérum ; dossiers d'héritage. Les porteurs de 850 viennent des données (`holder_850`).
+- **Porteurs de Marley sans fiche** (Zeke, Pieck, Lara Tybur, plus tard Porco) : le Titan est « tenu par Marley » sans nom. À l'échéance de ses 13 ans, Marley le transmet à un nouvel héritier sans nom (`relais_marley`, `[A]`), car Marley transmet ses Titans avant la mort de leur porteur (11 §4 : chaînes de transmission). Aucun nom n'est inventé.
+- **Horloge** : années restantes = 13 − (année − année d'héritage), valeur expliquée. La mort tombe au 1er jour de l'année d'échéance (cause « malédiction d'Ymir »). Le jour précis est `[A]` : les spécifications ne donnent que l'année.
+- **Mort sans ingestion** : le pouvoir passe à un nouveau-né eldien inconnu (02 §10, `[C]`) et sort du jeu pour tous les camps (`perdu`).
+- **Héritage préparé** (`InheritTitan`) : il exige un porteur vivant, au service de Paradis ou capturé, une dose de sérum et un héritier vivant. Ses coûts sont prévus avant la décision puis appliqués à l'identique : porteur dévoré, dose consommée, 13 ans pour l'héritier, stress de l'héritier et de ses proches, loyauté de son organisation, légitimité. Les valeurs sont `[A]`, dans `data/balance/shifters.json`.
+- **Effets d'événement** : `inherit`, `serum`, `capture_shifter` et `shifter_faction`.
+  - E35 apporte la dose de Kenny.
+  - E42 : Bertholdt est capturé, puis l'élu (Armin, historique ; Erwin, divergence) le dévore.
+  - E28 : Ymir part avec les guerriers ; la Mâchoire passe à Marley.
+  - E28 « arrestation » : Reiner et Bertholdt sont capturés, donc héritables.
+  - R8 compte un `inherit` comme la mort du porteur de 850 ; R9 vérifie `heir` et `shifter`.
+- **Visions** (F-TIT-06) : chaque mois, un tirage par porteur de Paradis. Une vision est un rapport de renseignement « rumeur » sur la densité de Titans d'une province hors des Murs ; il est faux dans 40 % des cas (`[A]`) et une observation le confirme ou le dément. Les visions ne vont pas au journal, pour ne pas évincer les alertes.
+- **Fondation** : la Coordonnée exige le drapeau `royal_contact` (02 §10) ; sinon la raison du verrou est affichée. Aucun événement de 850 ne le pose, et le Grondement reste en P7.
+
+## 2026-10-04 — D-69 Porteurs en bataille tactique (P6)
+- Le corps transformé est une entrée de `titans`, liée à son porteur (`shifter`), pour partager le rendu, le ciblage et l'ancrage ODM. Les corps alliés (`ally`) ne sont jamais visés par les soldats. La victoire exige qu'aucun Titan hostile ne soit debout, porteur ennemi pas encore transformé compris.
+- Points de vie par zones (nuque, bras, jambes). Une coupe réussie entame la nuque, une coupe partielle un membre. Les lames font 10 et les lances de foudre 30 (`[A]`). La nuque à zéro donne « vaincu » : le porteur est arraché au corps, ce qui compte comme un Titan abattu au bilan.
+- Endurance : la transformation coûte 20 et le corps s'use de 0,4 par seconde (la Charrette deux fois moins). La régénération coûte 0,5 point d'endurance par point de vie, et le durcissement 3 par seconde. À zéro, le porteur est « épuisé » et se détransforme, avec une recharge de 30 s avant de se retransformer. Délai de transformation : 1 à 3 s (03 §8.1).
+- Perte de contrôle (F-TIT-14) : au-delà d'un stress de 80 ou de la moitié des points de vie perdus, une crise survient avec une chance de 2 % par seconde. Pendant 8 s, le porteur frappe le plus proche, alliés compris.
+- Les 16 capacités sont des effets fermés (`SHIFTER_EFFECTS`), chacun mesuré (`stats.abilities`) : `sim:shifters` en exerce chacune en bataille.
+  - Interprétations `[A]` : l'onde de chaleur brûle et rend la nuque intouchable ; le cri d'appel attire les purs, qui dévorent le porteur le plus proche (E20) ; la Coordonnée du Bestial accélère les purs ennemis.
+  - Le Marteau de guerre a une nuque qui encaisse trois fois mieux : le porteur n'y est pas (03 §8.2 « corps à distance »).
+  - La Charrette ravitaille les soldats alliés en gaz et en lames.
+- Les lances de foudre (dotation de 2 par soldat, T-ANT-08) ignorent l'armure et le durcissement. Résultat : le Cuirassé est vaincu dans 6 batailles sur 6 avec lances, et dans 0 sur 6 aux lames seules.
