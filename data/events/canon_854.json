@@ -1,0 +1,479 @@
+[
+  {
+    "id": "evt_854_fort_slava",
+    "code": "E53",
+    "year_min": 854,
+    "window": {
+      "after": "evt_851_middle_east_war",
+      "within_days": [
+        10,
+        30
+      ]
+    },
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "world_losses",
+        "province": "wprov_cote_voiliers",
+        "faction": "fac_allies",
+        "share": 0.6
+      },
+      {
+        "op": "world_losses",
+        "province": "wprov_forteresse_passage",
+        "faction": "fac_allies",
+        "share": 0.3
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_allies",
+        "to": "fac_marley",
+        "axis": "fear",
+        "delta": 15
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_hizuru",
+        "to": "fac_marley",
+        "axis": "fear",
+        "delta": 10
+      }
+    ],
+    "choices": [
+      {
+        "id": "victoire_marley",
+        "effects": [
+          {
+            "op": "world_war",
+            "a": "fac_marley",
+            "b": "fac_allies",
+            "on": false
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_marley",
+            "delta": 10
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_allies",
+            "delta": -20
+          },
+          {
+            "op": "flag",
+            "key": "fort_slava_won",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "resistance_alliee",
+        "effects": [
+          {
+            "op": "world_losses",
+            "province": "wprov_fort_slava",
+            "faction": "fac_marley",
+            "share": 0.4
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_marley",
+            "delta": -10
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_allies",
+            "delta": 10
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.854.fort_slava",
+    "canon": "C",
+    "notes_canon": "Flotte alliée détruite par le Bestial, victoire de Marley, fin de la guerre du Moyen-Orient : C (12 E53, 11 §5). Effets chiffrés : A. Fenêtre en jours : ? (12 : mois inconnus)."
+  },
+  {
+    "id": "evt_854_operation_paradis",
+    "code": "E54",
+    "year_min": 854,
+    "window": {
+      "after": "evt_854_fort_slava",
+      "within_days": [
+        5,
+        20
+      ]
+    },
+    "divergence_weight": 0.6,
+    "effects": [
+      {
+        "op": "world_relation",
+        "from": "fac_marley",
+        "to": "fac_paradis",
+        "axis": "interest",
+        "delta": 10
+      }
+    ],
+    "choices": [
+      {
+        "id": "soutenir",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "operation_paradis",
+            "value": true
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_marley",
+            "delta": 5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "refuser",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "operation_paradis",
+            "value": false
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_marley",
+            "delta": -5
+          }
+        ],
+        "divergence": 1.0
+      }
+    ],
+    "form": "proces_verbal",
+    "text_key": "evt.854.operation_paradis",
+    "canon": "C",
+    "notes_canon": "Zeke propose de reprendre le Fondateur ; les Tybur soutiennent : C (12 E54). Effets : A. Fenêtre en jours : ? (12 : mois inconnus)."
+  },
+  {
+    "id": "evt_854_liberio_raid",
+    "code": "E55",
+    "year_min": 854,
+    "window": {
+      "after": "evt_854_operation_paradis",
+      "within_days": [
+        10,
+        30
+      ]
+    },
+    "divergence_weight": 1.0,
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_willy_tybur",
+        "cause": "combat"
+      },
+      {
+        "op": "capture_shifter",
+        "shifter": "shifter_marteau",
+        "value": true
+      },
+      {
+        "op": "inherit",
+        "shifter": "shifter_marteau",
+        "heir": "char_eren_yeager"
+      },
+      {
+        "op": "world_war",
+        "a": "fac_marley",
+        "b": "fac_paradis",
+        "on": true
+      },
+      {
+        "op": "world_losses",
+        "province": "wprov_liberio",
+        "faction": "fac_marley",
+        "share": 0.3
+      },
+      {
+        "op": "world_losses",
+        "province": "wprov_port_liberio",
+        "faction": "fac_marley",
+        "share": 0.3
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_allies",
+        "to": "fac_paradis",
+        "axis": "fear",
+        "delta": 20
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_allies",
+        "to": "fac_paradis",
+        "axis": "ideology",
+        "delta": -20
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_hizuru",
+        "to": "fac_paradis",
+        "axis": "fear",
+        "delta": 10
+      },
+      {
+        "op": "flag",
+        "key": "liberio_raid",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "laisser_faire",
+        "effects": [
+          {
+            "op": "world_support",
+            "faction": "fac_marley",
+            "delta": 15
+          },
+          {
+            "op": "legitimacy",
+            "delta": -3
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "se_preparer",
+        "effects": [
+          {
+            "op": "world_losses",
+            "province": "wprov_liberio",
+            "faction": "fac_marley",
+            "share": 0.2
+          },
+          {
+            "op": "legitimacy",
+            "delta": -5
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.854.liberio_raid",
+    "canon": "C",
+    "notes_canon": "Mort de Willy Tybur ; Eren hérite du Marteau de guerre (11 §4 : Lara Tybur → Eren, 854) ; déclaration de guerre : C (12 E55). Alliance anti-Eldia : ? (11 §5), traduite par la peur et l'idéologie (A). Fenêtre en jours : ? (12 : mois inconnus)."
+  },
+  {
+    "id": "evt_854_liberio_escape",
+    "code": "E56",
+    "year_min": 854,
+    "window": {
+      "after": "evt_854_liberio_raid",
+      "within_days": [
+        0,
+        3
+      ]
+    },
+    "divergence_weight": 0.6,
+    "effects": [
+      {
+        "op": "shifter_faction",
+        "shifter": "shifter_bestial",
+        "faction": "paradis"
+      },
+      {
+        "op": "flag",
+        "key": "zeke_custody",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "fuite_mer",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -3
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "negociation",
+        "effects": [
+          {
+            "op": "world_relation",
+            "from": "fac_marley",
+            "to": "fac_paradis",
+            "axis": "trust",
+            "delta": 5
+          },
+          {
+            "op": "legitimacy",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.854.liberio_escape",
+    "canon": "C",
+    "notes_canon": "Zeke assigné à résidence côté Paradis : C (12 E56). Mort de Sasha : non vérifiée (11 §3, ?), non portée ici. Fenêtre en jours : ? (12 : mois inconnus)."
+  },
+  {
+    "id": "evt_854_yeagerist_coup",
+    "code": "E57",
+    "year_min": 854,
+    "window": {
+      "after": "evt_854_liberio_escape",
+      "within_days": [
+        10,
+        40
+      ]
+    },
+    "divergence_weight": 0.8,
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_darius_zackly",
+        "cause": "assassinat"
+      },
+      {
+        "op": "legitimacy",
+        "delta": -10
+      },
+      {
+        "op": "flag",
+        "key": "yeagerist_coup",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "laisser",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -5
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "reprimer",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -10
+          },
+          {
+            "op": "legitimacy",
+            "delta": -5
+          }
+        ],
+        "divergence": 0.6
+      },
+      {
+        "id": "negocier",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": -3
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.854.yeagerist_coup",
+    "canon": "C",
+    "notes_canon": "Zackly assassiné ; Pixis prend brièvement le commandement : C (12 E57, 11 §3). Fenêtre en jours : ? (12 : mois inconnus)."
+  },
+  {
+    "id": "evt_854_marley_counterattack",
+    "code": "E58",
+    "year_min": 854,
+    "window": {
+      "after": "evt_854_yeagerist_coup",
+      "within_days": [
+        2,
+        10
+      ]
+    },
+    "divergence_weight": 0.8,
+    "location": "prov_shiganshina",
+    "effects": [
+      {
+        "op": "kill",
+        "character": "char_dot_pixis",
+        "cause": "combat"
+      },
+      {
+        "op": "kill",
+        "character": "char_nile_dok",
+        "cause": "combat"
+      },
+      {
+        "op": "world_losses",
+        "province": "wprov_paradis",
+        "faction": "fac_paradis",
+        "share": 0.2
+      },
+      {
+        "op": "world_support",
+        "faction": "fac_paradis",
+        "delta": -5
+      },
+      {
+        "op": "flag",
+        "key": "marley_counterattack",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "defendre",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "prov_shiganshina",
+            "delta": -10
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "evacuer",
+        "effects": [
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -8
+          },
+          {
+            "op": "legitimacy",
+            "delta": -4
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.854.marley_counterattack",
+    "canon": "C",
+    "notes_canon": "Mort de Pixis et Nile lors de la contre-attaque : C (12 E58, 11 §3). Fenêtre en jours : ? (12 : mois inconnus)."
+  }
+]

@@ -44,7 +44,8 @@
     },
     "bio_key": "bio.darius_zackly",
     "canon": "C",
-    "notes_canon": "Commandant en chef ; assassiné en 854 (11 §3). Graphie « Dhalis » selon les versions [?]. Incarnation du joueur dans le bac à sable 850 [A]."
+    "notes_canon": "Commandant en chef ; assassiné en 854 (11 §3). Graphie « Dhalis » selon les versions [?]. Incarnation du joueur dans le bac à sable 850 [A].",
+    "death_event": "evt_854_yeagerist_coup"
   },
   {
     "id": "char_friedrich_amsel",
@@ -946,7 +947,8 @@
     },
     "bio_key": "bio.dot_pixis",
     "canon": "C",
-    "notes_canon": "Responsable de la Garnison du Sud ; meurt en 854 (11 §3). death_event (E58) à relier."
+    "notes_canon": "Responsable de la Garnison du Sud ; meurt en 854 (11 §3). death_event (E58) à relier.",
+    "death_event": "evt_854_marley_counterattack"
   },
   {
     "id": "char_hannes",
@@ -1298,7 +1300,8 @@
     },
     "bio_key": "bio.nile_dok",
     "canon": "C",
-    "notes_canon": "Commandant de la Brigade ; meurt en 854 (11 §3). Amis d'enfance avec Erwin (07 §10)."
+    "notes_canon": "Commandant de la Brigade ; meurt en 854 (11 §3). Amis d'enfance avec Erwin (07 §10).",
+    "death_event": "evt_854_marley_counterattack"
   },
   {
     "id": "char_marlowe_freudenberg",

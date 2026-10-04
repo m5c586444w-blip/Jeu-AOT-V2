@@ -117,7 +117,7 @@ export function tickDay(state: GameState, world?: World): GameState {
     }
     // Événements (P5) : effets sur les couches stratégique, politique, recherche et renseignement.
     if (events) {
-      const ctx = { world, seed: state.seed, date: state.date, st: strategic, pol: politics, mil: military, rs: research ? structuredClone(research) : null, intel: intel ? structuredClone(intel) : null, ev: structuredClone(events), sh: shifters };
+      const ctx = { world, seed: state.seed, date: state.date, st: strategic, pol: politics, mil: military, rs: research ? structuredClone(research) : null, intel: intel ? structuredClone(intel) : null, ev: structuredClone(events), sh: shifters, na: nations };
       dailyEvents(ctx);
       strategic = ctx.st;
       politics = ctx.pol;

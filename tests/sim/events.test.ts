@@ -29,7 +29,7 @@ const canonYear = run(createInitialState(42, world), { type: "AdvanceDays", n: 3
 describe("moteur d'événements : Canon fidèle (AC5-02)", () => {
   it("E09 → E42 surviennent en 850, chacun après son prédécesseur et dans sa fenêtre ; aucune divergence", () => {
     const h = ev(canonYear).history;
-    for (const e of cw?.canon ?? []) {
+    for (const e of (cw?.canon ?? []).filter((e) => e.year_min === 850)) {
       const r = h[e.id];
       expect(r?.status, e.id).toBe("survenu");
       for (const p of predecessorsOf(e)) {
@@ -44,7 +44,7 @@ describe("moteur d'événements : Canon fidèle (AC5-02)", () => {
     }
     expect(ev(canonYear).divergence).toBe(0);
     expect(ev(canonYear).branch).toBe("canon");
-    for (const e of cw?.canon ?? []) expect(fromAbsoluteDay(h[e.id]?.day ?? 0).year, e.id).toBe(850);
+    for (const e of (cw?.canon ?? []).filter((e) => e.year_min === 850)) expect(fromAbsoluteDay(h[e.id]?.day ?? 0).year, e.id).toBe(850);
   });
 
   it("chaque mort canon a lieu le jour de son événement, et personne d'autre ne meurt par un événement", () => {

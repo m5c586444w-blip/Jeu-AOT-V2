@@ -11,6 +11,9 @@ import type { DeathCause } from "../politics/characters";
 import type { PoliticalState } from "../politics/state";
 import type { ResearchState } from "../research/research";
 import { isDomestic } from "../politics/vocabulary";
+import { declareWar } from "../world/diplomacy";
+import { nationsWorld, warKey } from "../world/nations";
+import type { NationsState } from "../world/nations";
 import { inherit } from "../shifters/shifters";
 import type { ShiftersState } from "../shifters/shifters";
 import { pushLog } from "../strategic/economy";
@@ -76,6 +79,8 @@ export interface EventCtx {
   ev: EventsState;
   /** Titans-porteurs (P6) ; absent avant P6 ou sans données des Neuf. */
   sh?: ShiftersState | null;
+  /** Monde des nations (P7). */
+  na?: NationsState | null;
 }
 
 const CHRONICLE_CAP = 200;
@@ -89,7 +94,9 @@ export function createEventsState(world: World, seed: number, date: GameDate): E
   // Événements antérieurs au scénario : « passés » (histoire déjà écrite).
   for (const e of cw.events.values()) {
     if (e.kind !== "canon") continue;
-    if ((e.year_max ?? e.year_min) < date.year) s.history[e.id] = { status: "passe", day: today, choice: null, auto: false, divergence: 0 };
+    // Un squelette sans mécanique commencé avant l'année du scénario est passé (854 : E46–E52, guerre du Moyen-Orient comprise).
+    const past = e.playable ? (e.year_max ?? e.year_min) < date.year : e.year_min < date.year;
+    if (past) s.history[e.id] = { status: "passe", day: today, choice: null, auto: false, divergence: 0 };
   }
   if (cw.mode === "canon_fidele") for (const e of cw.canon) if (ready(s, e)) schedule(s, e, seed, today);
   return s;
@@ -260,6 +267,37 @@ export function applyEffect(ctx: EventCtx, f: Effect, subject: PendingEvent["sub
       if (slot && slot.faction !== "perdu") slot.faction = f.faction;
       return;
     }
+    case "world_war": {
+      const na = ctx.na;
+      if (!na || !ctx.world.nations) return;
+      if (f.on) declareWar(ctx.world, na, f.a, f.b, ctx.date);
+      else na.wars = na.wars.filter((x) => x !== warKey(f.a, f.b));
+      return;
+    }
+    case "world_relation": {
+      const r = ctx.na?.relations[f.from]?.[f.to];
+      if (r) r[f.axis] = clamp(r[f.axis] + f.delta, f.axis === "fear" ? 0 : -100, 100);
+      return;
+    }
+    case "world_losses": {
+      const na = ctx.na;
+      if (!na || !ctx.world.nations) return;
+      const nw = nationsWorld(ctx.world);
+      for (const [id, s] of Object.entries(na.forces[f.province] ?? {})) {
+        if (nw.formations.get(id)?.faction !== f.faction) continue;
+        s.count = Math.max(0, Math.round(s.count * (1 - f.share)));
+      }
+      na.forces[f.province] = Object.fromEntries(Object.entries(na.forces[f.province] ?? {}).filter(([, s]) => s.count > 0));
+      return;
+    }
+    case "world_support": {
+      const n = ctx.na?.nations[f.faction];
+      if (n) n.warSupport = clamp(n.warSupport + f.delta, 0, 100);
+      return;
+    }
+    case "world_hizuru":
+      if (ctx.na) ctx.na.hizuruLean = clamp(ctx.na.hizuruLean + f.delta, -100, 100);
+      return;
   }
 }
 

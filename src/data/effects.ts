@@ -70,6 +70,12 @@ export const EffectSchema = z.discriminatedUnion("op", [
   z.object({ op: z.literal("capture_shifter"), shifter: id("shifter"), value: z.boolean() }).strict(),
   /** Camp du porteur (un porteur qui change de camp, comme Ymir à E28). */
   z.object({ op: z.literal("shifter_faction"), shifter: id("shifter"), faction: z.enum(["paradis", "marley", "inconnu"]) }).strict(),
+  /** P7 — monde des nations : guerre ou paix, relation, pertes d'une nation sur une province du monde, soutien, penchant d'Hizuru. */
+  z.object({ op: z.literal("world_war"), a: id("fac"), b: id("fac"), on: z.boolean() }).strict(),
+  z.object({ op: z.literal("world_relation"), from: id("fac"), to: id("fac"), axis: z.enum(["trust", "interest", "fear", "ideology"]), delta: z.number() }).strict(),
+  z.object({ op: z.literal("world_losses"), province: id("wprov"), faction: id("fac"), share: z.number().min(0).max(1) }).strict(),
+  z.object({ op: z.literal("world_support"), faction: id("fac"), delta: z.number() }).strict(),
+  z.object({ op: z.literal("world_hizuru"), delta: z.number() }).strict(),
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 

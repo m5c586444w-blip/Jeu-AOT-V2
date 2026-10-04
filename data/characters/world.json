@@ -84,7 +84,9 @@
     "hidden": {
       "titan": "marteau"
     },
-    "bio_key": "bio.lara_tybur"
+    "bio_key": "bio.lara_tybur",
+    "death_event": "evt_854_liberio_raid",
+    "active_until": 854
   },
   {
     "id": "char_porco_galliard",
@@ -182,7 +184,9 @@
     },
     "canon": "C",
     "notes_canon": "Chef de la famille Tybur (07 M02) ; tué à Liberio (12 E55, C).",
-    "bio_key": "bio.willy_tybur"
+    "bio_key": "bio.willy_tybur",
+    "death_event": "evt_854_liberio_raid",
+    "active_until": 854
   },
   {
     "id": "char_theo_magath",

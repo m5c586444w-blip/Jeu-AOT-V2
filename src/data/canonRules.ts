@@ -229,7 +229,8 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
   const chars = new Map(data.characters.map((c) => [c.id, c]));
   const ids = {
     char: new Set(chars.keys()),
-    prov: new Set(data.provinces.map((p) => p.id)),
+    prov: new Set([...data.provinces.map((p) => p.id), ...data.world_provinces.map((p) => p.id)]),
+    fac: new Set(data.factions.map((f) => f.id)),
     org: new Set(data.organisations.map((o) => o.id)),
     str: new Set(data.strata.map((x) => x.id)),
     evt: new Set(data.events.map((e) => e.id)),
@@ -248,9 +249,11 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
     if (!ids[kind].has(s)) push("R9", e, `${where} : référence inconnue ${s}`);
   };
   const refs = (e: RawEntry, x: Obj, where: string): void => {
-    for (const [k, kind] of [["character", "char"], ["alive", "char"], ["dead", "char"], ["province", "prov"], ["control", "prov"], ["org", "org"], ["stratum", "str"], ["event", "evt"], ["fired", "evt"], ["not_fired", "evt"], ["choice", "evt"], ["secret", "secret"], ["tech", "tech"], ["heir", "char"], ["shifter", "shifter"]] as const) {
+    for (const [k, kind] of [["character", "char"], ["alive", "char"], ["dead", "char"], ["province", "prov"], ["control", "prov"], ["org", "org"], ["stratum", "str"], ["event", "evt"], ["fired", "evt"], ["not_fired", "evt"], ["choice", "evt"], ["secret", "secret"], ["tech", "tech"], ["heir", "char"], ["shifter", "shifter"], ["a", "fac"], ["b", "fac"], ["from", "fac"], ["to", "fac"]] as const) {
       if (k in x) check(e, kind, x[k], where);
     }
+    // `faction` désigne une nation (fac_…) dans les effets du monde, un camp de porteurs ailleurs (shifter_faction).
+    if (str(x["faction"])?.startsWith("fac_")) check(e, "fac", x["faction"], where);
     const t = str(x["tech"]);
     const y = num(e.v["year_min"]);
     const ty = t ? techYear.get(t) : undefined;

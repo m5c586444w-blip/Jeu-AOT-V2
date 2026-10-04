@@ -17,6 +17,8 @@ const DAYS = Number(arg("days", "360"));
 const world = loadWorld("data", "scn_sandbox_850");
 const cw = world.chronicle;
 if (!cw) throw new Error("chronologie absente");
+// Chronique de 850 (E09–E42) ; les événements de 854 (P7) se vérifient dans le scénario 854 (tests/sim/world-events.test.ts).
+const canon850 = cw.canon.filter((e) => e.year_min === 850);
 const failures: string[] = [];
 const check = (cond: boolean, label: string): void => {
   console.log(`${cond ? "  OK " : "  KO "} ${label}`);
@@ -39,7 +41,7 @@ for (let seed = 1; seed <= SEEDS; seed++) {
   const ev = s.events;
   if (!ev) throw new Error("événements absents");
   let ok = ev.divergence === 0 && ev.branch === "canon";
-  for (const e of cw.canon) {
+  for (const e of canon850) {
     const r = ev.history[e.id];
     if (r?.status !== "survenu" || fromAbsoluteDay(r.day).year !== 850 || r.choice !== (e.choices.find((c) => c.historical)?.id ?? null)) ok = false;
     for (const p of predecessorsOf(e)) {
@@ -80,7 +82,7 @@ for (let i = 0; i < DAYS && !s.events?.pending.some((p) => p.id === "evt_850_ere
 s = applyCommand(s, { type: "ChooseEventOption", event: "evt_850_eren_first_transformation", choice: "retenir" }, undefined, world);
 s = applyCommand(s, { type: "AdvanceDays", n: DAYS - (s.date.day - 1) }, undefined, world);
 const h = s.events?.history ?? {};
-const avoided = cw.canon.filter((e) => h[e.id]?.status === "evite").map((e) => e.code);
+const avoided = canon850.filter((e) => h[e.id]?.status === "evite").map((e) => e.code);
 console.log(`  évités : ${avoided.length} (${avoided[0]} → ${avoided.at(-1)}) ; divergence ${s.events?.divergence.toFixed(2)} ; branche ${s.events?.branch}`);
 check(h["evt_850_trost_plug"]?.status === "evite" && avoided.length >= 30 && s.events?.branch === "divergente", "le bouchage de Trost (E13) et toute la suite sont évités ; bascule en branche divergente");
 const wallC = canon.strategic?.provinces["prov_rose_sud"]?.wall_structure ?? 0;

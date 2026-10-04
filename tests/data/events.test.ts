@@ -10,7 +10,7 @@ const chronicle = world.chronicle;
 describe("événements de P5 (AC5-01)", () => {
   it("34 événements canon jouables E09 → E42, dans l'ordre du graphe ; textes et choix en français", () => {
     expect(chronicle).not.toBeNull();
-    const canon = chronicle?.canon ?? [];
+    const canon = (chronicle?.canon ?? []).filter((e) => e.year_min === 850);
     expect(canon.map((e) => e.code)).toEqual(Array.from({ length: 34 }, (_, i) => `E${String(i + 9).padStart(2, "0")}`));
     for (const e of canon) {
       expect(dict[e.text_key], e.id).toBeTruthy();
@@ -23,7 +23,7 @@ describe("événements de P5 (AC5-01)", () => {
   });
 
   it("la chronique de 850 tient dans l'année même au pire : délais maximaux et décisions prises à l'échéance (D-67)", () => {
-    const by = new Map((chronicle?.canon ?? []).map((e) => [e.id, e]));
+    const by = new Map(((chronicle?.canon ?? []).filter((e) => e.year_min === 850)).map((e) => [e.id, e]));
     const worst = (id: string): number => {
       const e = by.get(id);
       if (!e) return 0;
@@ -34,7 +34,7 @@ describe("événements de P5 (AC5-01)", () => {
   });
 
   it("bifurcations B2–B5 portées par leurs événements (12 §2)", () => {
-    const bif = new Map((chronicle?.canon ?? []).filter((e) => e.bifurcation).map((e) => [e.code, e.bifurcation]));
+    const bif = new Map(((chronicle?.canon ?? []).filter((e) => e.year_min === 850)).filter((e) => e.bifurcation).map((e) => [e.code, e.bifurcation]));
     expect(bif.get("E12")).toBe("B2");
     expect(bif.get("E14")).toBe("B3");
     expect(bif.get("E33")).toBe("B4");
@@ -43,7 +43,7 @@ describe("événements de P5 (AC5-01)", () => {
 
   it("morts canon : 12 personnages, chacun à son death_event, sur le chemin historique (11 §3, errata)", () => {
     const kills = new Map<string, string>();
-    for (const e of chronicle?.canon ?? []) {
+    for (const e of (chronicle?.canon ?? []).filter((e) => e.year_min === 850)) {
       const hist = [...e.effects, ...e.choices.filter((c) => c.historical).flatMap((c) => c.effects)];
       // Un héritage préparé (P6) fait dévorer le porteur de 850 du Titan.
       for (const f of hist) if (f.op === "kill") kills.set(f.character, e.id);

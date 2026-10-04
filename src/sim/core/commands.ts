@@ -354,9 +354,9 @@ function applyP5(state: GameState, cmd: P5Command, world?: World): GameState {
   switch (cmd.type) {
     case "ChooseEventOption": {
       if (!state.events) throw new Error("ChooseEventOption : aucun moteur d'événements");
-      const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, mil: state.military, rs: state.research ? structuredClone(state.research) : null, intel: state.intel ? structuredClone(state.intel) : null, ev: structuredClone(state.events), sh: state.shifters ? structuredClone(state.shifters) : null };
+      const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, mil: state.military, rs: state.research ? structuredClone(state.research) : null, intel: state.intel ? structuredClone(state.intel) : null, ev: structuredClone(state.events), sh: state.shifters ? structuredClone(state.shifters) : null, na: state.nations ? structuredClone(state.nations) : null };
       chooseOption(ctx, cmd.event, cmd.choice);
-      return { ...state, strategic: ctx.st, politics: ctx.pol, research: ctx.rs, intel: ctx.intel, events: ctx.ev, shifters: ctx.sh };
+      return { ...state, strategic: ctx.st, politics: ctx.pol, research: ctx.rs, intel: ctx.intel, events: ctx.ev, shifters: ctx.sh, nations: ctx.na };
     }
     case "SetResearch": {
       const rs = state.research;
