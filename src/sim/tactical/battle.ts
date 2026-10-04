@@ -1,10 +1,12 @@
 import type { TacticalBalance } from "../../data/balance";
 import { fnv1a } from "../core/hash";
 import { Rng } from "../core/rng";
-import type { TacticalWorld, World } from "../strategic/world";
+import type { ShifterWorld, TacticalWorld, World } from "../strategic/world";
 import { generateMap } from "./map";
 import type { TacticalWorldMap } from "./map";
 import { hookDelay, napeOf, pickAnchor, stepOdm } from "./odm";
+import { bodyName, cutShifter, deployShifters, enemyShifterStanding, stepLuredTitan, stepShifter, throwSpear } from "./shifters";
+import type { ShifterHooks } from "./shifters";
 import type { BattleDeathCause, BattleSetup, BattleState, SoldierUnit, SquadState, TimedOrder, TitanUnit } from "./types";
 
 /**
@@ -17,6 +19,8 @@ export interface Battle {
   setup: BattleSetup;
   map: TacticalWorldMap;
   state: BattleState;
+  /** Titans-porteurs (P6) ; null sans données des Neuf. */
+  shiftersWorld: ShifterWorld | null;
 }
 
 export function tacticalWorld(world: World): TacticalWorld {
@@ -29,6 +33,11 @@ const LOG_CAP = 400;
 function log(st: BattleState, b: TacticalBalance, key: string, params: Record<string, string | number>): void {
   st.log.push({ t: Math.round((st.tick / b.tick_hz) * 10) / 10, key, params });
   if (st.log.length > LOG_CAP) st.log.splice(0, st.log.length - LOG_CAP);
+}
+
+/** Crochets donnés au module des porteurs (journal, mort d'un soldat). */
+function hooks(bt: Battle, rng: Rng): ShifterHooks {
+  return { log: (key, params) => log(bt.state, bt.world.balance, key, params), killSoldier: (s, titan) => kill(bt, s, "frappe", titan, rng) };
 }
 
 function rngOf(st: BattleState, seed: number): Rng {
@@ -71,6 +80,7 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
       apex: 0,
       kills: 0,
       death: null,
+      ...(setup.thunderSpears && world.shifters ? { spears: world.shifters.balance.soldiers.spears_per_soldier } : {}),
     };
   });
   const titans: TitanUnit[] = [];
@@ -107,6 +117,8 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
     }
   }
   const wagon = setup.wagon ? { x: map.width / 2, y: map.height - 8 } : null;
+  // Porteurs (P6) : tirés après le reste, pour que les batailles sans porteur restent identiques.
+  const shifters = deployShifters({ world: tw, setup, map, state: null as unknown as BattleState, shiftersWorld: world.shifters ?? null }, rng);
   const state: BattleState = {
     setupHash: fnv1a(JSON.stringify(setup)),
     tick: 0,
@@ -115,13 +127,14 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
     titans,
     squads,
     wagon,
+    ...(shifters.length > 0 ? { shifters } : {}),
     log: [],
     signals: [],
     stats: { cuts: 0, napes: 0, limbs: 0, misses: 0, bladesBroken: 0, gasUsed: 0, dodges: 0, grabs: 0, rescues: 0, falls: 0, deathsByCause: {}, titansKilled: {} },
     ended: null,
   };
   log(state, b, "battle.start", { map: def.name_key, soldiers: soldiers.length, titans: titans.length, light: setup.night ? "battle.night" : "battle.day" });
-  return { world: tw, setup, map, state };
+  return { world: tw, setup, map, state, shiftersWorld: world.shifters ?? null };
 }
 
 const alive = (s: SoldierUnit): boolean => s.mode !== "mort" && s.mode !== "fui";
@@ -134,7 +147,7 @@ function kill(bt: Battle, s: SoldierUnit, cause: BattleDeathCause, titan: TitanU
   s.anchor = null;
   s.death = { t: Math.round((st.tick / b.tick_hz) * 10) / 10, cause, titan: titan?.id ?? null, x: Math.round(s.x), y: Math.round(s.y) };
   st.stats.deathsByCause[cause] = (st.stats.deathsByCause[cause] ?? 0) + 1;
-  log(st, b, `battle.death.${cause}`, { name: s.name, squad: s.squad, titan: titan ? bt.world.titanTypes.get(titan.type)?.name_key ?? titan.type : "", n: titan ? titan.id + 1 : 0 });
+  log(st, b, `battle.death.${cause}`, { name: s.name, squad: s.squad, titan: titan ? bodyName(bt, titan) : "", n: titan ? titan.id + 1 : 0 });
   // Stress des témoins (03 §10) : mort d'un camarade, plus encore d'un chef.
   for (const o of st.soldiers) {
     if (!alive(o) || o.squad !== s.squad) continue;
@@ -197,7 +210,14 @@ function stepTitan(bt: Battle, t: TitanUnit, rng: Rng, dt: number): void {
   const st = bt.state;
   const night = bt.setup.night;
   const activity = night ? b.titans.night_activity : 1;
+  // Corps de porteur : mû par stepShifter. Pur rallié par le Fondateur : immobile. Pur attiré par un cri : vers l'appel.
+  if (t.shifter !== undefined) return;
+  if ((t.commanded ?? 0) > 0) {
+    t.commanded = Math.max(0, (t.commanded ?? 0) - dt);
+    return;
+  }
   for (const k of ["armL", "armR", "legs"] as const) if (t[k] > 0) t[k] = Math.max(0, t[k] - dt);
+  if (t.lure && t.grabbing === null && stepLuredTitan(bt, t, dt, rng, hooks(bt, rng))) return;
   if (t.grabbing !== null) {
     const v = st.soldiers[t.grabbing];
     t.grabTimer -= dt;
@@ -256,7 +276,7 @@ function stepTitan(bt: Battle, t: TitanUnit, rng: Rng, dt: number): void {
     t.grabbing = st.soldiers.indexOf(victim);
     t.grabTimer = b.titans.grab_hold_s;
     st.stats.grabs += 1;
-    log(st, b, "battle.grabbed", { name: victim.name, titan: bt.world.titanTypes.get(t.type)?.name_key ?? t.type, n: t.id + 1 });
+    log(st, b, "battle.grabbed", { name: victim.name, titan: bodyName(bt, t), n: t.id + 1 });
   } else if (rng.next() < sb.swat_lethal) {
     kill(bt, victim, "frappe", t, rng);
   } else if (victim.wound !== "grave") {
@@ -278,7 +298,7 @@ function updateSquads(bt: Battle, rng: Rng): void {
     if (!leader) continue;
     const sight = night ? b.titans.vision_night_m * 2 : b.signals.visibility_m;
     for (const t of st.titans) {
-      if (!t.alive || sq.known.includes(t.id)) continue;
+      if (!t.alive || t.ally || sq.known.includes(t.id)) continue;
       if (members.some((s) => dist2(s.x, s.y, t.x, t.y) <= sight * sight)) {
         sq.known.push(t.id);
         const misread = rng.next() < (night ? b.signals.error_night : b.signals.error_day);
@@ -301,12 +321,12 @@ function updateSquads(bt: Battle, rng: Rng): void {
 function chooseTarget(bt: Battle, s: SoldierUnit, sq: SquadState): TitanUnit | null {
   const st = bt.state;
   const current = s.target !== null ? st.titans[s.target] : undefined;
-  if (current?.alive && sq.order !== "couvrir") return current;
+  if (current?.alive && !current.ally && sq.order !== "couvrir") return current;
   let best: TitanUnit | null = null;
   let bestD = Infinity;
   for (const id of sq.known) {
     const t = st.titans[id];
-    if (!t?.alive) continue;
+    if (!t?.alive || t.ally) continue;
     // Couvrir : le Titan qui menace (vise) un camarade ; sinon le plus proche.
     const threat = sq.order === "couvrir" && t.target !== null && st.soldiers[t.target]?.squad === sq.id ? 0.3 : 1;
     const d = Math.sqrt(dist2(s.x, s.y, t.x, t.y)) * threat;
@@ -335,7 +355,10 @@ export function tryCut(bt: Battle, s: SoldierUnit, t: TitanUnit, rng: Rng): void
   const [w0, w1] = c.wear_per_cut;
   s.wear += w0 + (w1 - w0) * rng.next();
   s.cutCooldown = c.cooldown_s;
-  if (roll < p) {
+  if (t.shifter !== undefined) {
+    // Porteur (P6) : la coupe entame une zone (armure, durcissement, onde de chaleur) au lieu de tuer d'un coup.
+    cutShifter(bt, s, t, roll < p ? "nape" : roll < p + c.limb_share * (1 - p) ? "limb" : "miss", rng, hooks(bt, rng));
+  } else if (roll < p) {
     t.alive = false;
     t.grabbing = null;
     t.killedBy = st.soldiers.indexOf(s);
@@ -346,7 +369,7 @@ export function tryCut(bt: Battle, s: SoldierUnit, t: TitanUnit, rng: Rng): void
       v.mode = "vol";
       v.grabbedBy = null;
     }
-    log(st, b, "battle.nape", { name: s.name, titan: bt.world.titanTypes.get(t.type)?.name_key ?? t.type, n: t.id + 1 });
+    log(st, b, "battle.nape", { name: s.name, titan: bodyName(bt, t), n: t.id + 1 });
   } else if (roll < p + c.limb_share * (1 - p)) {
     st.stats.limbs += 1;
     const limb = t.legs === 0 && rng.next() < 0.4 ? "legs" : t.armL === 0 ? "armL" : "armR";
@@ -409,6 +432,8 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
     }
   }
   const t = sq.order === "repli" ? null : chooseTarget(bt, s, sq);
+  // Lance de foudre (T-ANT-08) : tirée à portée sur un porteur, avant toute coupe.
+  if (t?.shifter !== undefined && (s.spears ?? 0) > 0 && s.cutCooldown <= 0 && s.changeTimer <= 0) throwSpear(bt, s, t, rng, hooks(bt, rng));
   if (s.mode === "sol" || s.mode === "vol") {
     if (t && !lowGas && s.pairs >= 1) {
       const nape = napeOf(t, b);
@@ -459,12 +484,17 @@ export function stepBattle(bt: Battle, orders: readonly TimedOrder[] = []): void
   const rng = rngOf(st, bt.setup.seed);
   if (st.tick % 4 === 0) updateSquads(bt, rng);
   for (const t of st.titans) if (t.alive) stepTitan(bt, t, rng, dt);
+  if (st.shifters) {
+    const h = hooks(bt, rng);
+    for (const u of st.shifters) stepShifter(bt, u, rng, dt, h);
+  }
   for (const s of st.soldiers) if (alive(s)) stepSoldier(bt, s, rng, dt);
   st.tick += 1;
   st.rng = rng.serialize().state;
   const t = st.tick / b.tick_hz;
   const standing = st.soldiers.filter(alive).length;
-  if (st.titans.every((x) => !x.alive)) st.ended = { reason: "victoire", t };
+  // Victoire : plus aucun Titan hostile debout (un porteur ennemi pas encore transformé compte).
+  if (st.titans.every((x) => !x.alive || x.ally) && !enemyShifterStanding(bt)) st.ended = { reason: "victoire", t };
   else if (standing === 0) st.ended = { reason: st.soldiers.some((s) => s.mode === "fui") ? "repli" : "defaite", t };
   else if (t >= b.battle.time_limit_s) st.ended = { reason: "temps", t };
   if (st.ended) log(st, b, `battle.end.${st.ended.reason}`, { dead: st.soldiers.filter((s) => s.mode === "mort").length, total: st.soldiers.length });

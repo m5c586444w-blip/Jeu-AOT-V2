@@ -31,6 +31,62 @@ export interface BattleSetup {
   titans: { type: string; count: number }[];
   /** Chariot de soutien (F-CMB-14). */
   wagon: boolean;
+  /** Titans-porteurs engagés (P6), d'un côté ou de l'autre. */
+  shifters?: ShifterSpec[];
+  /** Lances de foudre (T-ANT-08) : dotation de chaque soldat. */
+  thunderSpears?: boolean;
+  /** Drapeaux de partie utiles au combat (contact royal pour le Fondateur, 02 §10). */
+  flags?: string[];
+}
+
+/** Porteur engagé dans une bataille (P6). « allie » : au service de Paradis ; « ennemi » : contre lui. */
+export interface ShifterSpec {
+  shifter: string;
+  side: "allie" | "ennemi";
+  /** Nom du porteur (affiché) ; personnage le cas échéant. */
+  name: string;
+  character: string | null;
+  /** Stress de départ (0–100) : nourrit la perte de contrôle. */
+  stress: number;
+}
+
+export type ShifterPhase = "humain" | "transformation" | "titan" | "epuise" | "vaincu";
+
+/** Porteur en bataille : l'humain, puis le corps de Titan (une entrée de `titans` liée par `body`). */
+export interface ShifterUnit {
+  id: number;
+  shifter: string;
+  side: "allie" | "ennemi";
+  name: string;
+  character: string | null;
+  phase: ShifterPhase;
+  x: number;
+  y: number;
+  /** Index du corps dans `titans` (null tant que non transformé). */
+  body: number | null;
+  /** Compte à rebours de la transformation, puis recharge avant une nouvelle (s). */
+  timer: number;
+  cooldown: number;
+  endurance: number;
+  maxEndurance: number;
+  hp: { nape: number; armL: number; armR: number; legs: number };
+  maxHp: { nape: number; arm: number; leg: number };
+  /** Durcissement (armure locale) restant (s). */
+  hardened: number;
+  /** Recharge et durée restante de chaque capacité. */
+  cd: Record<string, number>;
+  active: Record<string, number>;
+  stress: number;
+  /** Perte de contrôle restante (s) (F-TIT-14). */
+  rampage: number;
+  attackCooldown: number;
+  kills: number;
+}
+
+/** Mesure de chaque capacité : emplois et effet produit (unités propres à l'effet ; voir sim:shifters). */
+export interface AbilityStat {
+  uses: number;
+  effect: number;
 }
 
 export interface SoldierUnit extends SoldierSpec {
@@ -58,6 +114,8 @@ export interface SoldierUnit extends SoldierSpec {
   apex: number;
   kills: number;
   death: { t: number; cause: BattleDeathCause; titan: number | null; x: number; y: number } | null;
+  /** Lances de foudre restantes (P6, T-ANT-08). */
+  spears?: number;
 }
 
 export interface TitanUnit {
@@ -84,6 +142,14 @@ export interface TitanUnit {
   grabTimer: number;
   silhouette: number;
   killedBy: number | null;
+  /** Corps d'un porteur (P6) : index dans `shifters` ; ses points de vie y vivent. */
+  shifter?: number;
+  /** Corps d'un porteur allié : jamais visé par les soldats. */
+  ally?: boolean;
+  /** Attiré par un cri d'appel (03 §8.2) : point de ralliement et durée restante. */
+  lure?: { x: number; y: number; t: number };
+  /** Rallié par la Coordonnée du Fondateur : ne frappe plus les soldats (s restantes). */
+  commanded?: number;
 }
 
 export interface SquadState {
@@ -123,6 +189,12 @@ export interface BattleStats {
   falls: number;
   deathsByCause: Partial<Record<BattleDeathCause, number>>;
   titansKilled: Record<string, number>;
+  /** P6 : capacités des porteurs, lances de foudre, lames sur un porteur, pertes de contrôle, transformations. */
+  abilities?: Record<string, AbilityStat>;
+  spears?: { thrown: number; hits: number; damage: number };
+  bladeDamage?: number;
+  rampages?: number;
+  transformations?: number;
 }
 
 /** Ordre horodaté (en pas de simulation) : la bataille se rejoue exactement avec la graine et la liste d'ordres (F-CMB-30). */
@@ -141,6 +213,8 @@ export interface BattleState {
   titans: TitanUnit[];
   squads: SquadState[];
   wagon: { x: number; y: number } | null;
+  /** Porteurs (P6). */
+  shifters?: ShifterUnit[];
   log: BattleLogEntry[];
   signals: BattleSignal[];
   stats: BattleStats;

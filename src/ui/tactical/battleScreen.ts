@@ -5,6 +5,7 @@ import type { SoldierLook } from "../../render/tactical/figures";
 import type { World } from "../../sim/strategic/world";
 import { createBattle, stepBattle } from "../../sim/tactical/battle";
 import type { Battle } from "../../sim/tactical/battle";
+import { bodyName } from "../../sim/tactical/shifters";
 import type { BattleSetup, SoldierUnit, TacticalOrder, TimedOrder } from "../../sim/tactical/types";
 import { TACTICAL_ORDERS } from "../../sim/tactical/types";
 import { el } from "../panels/common";
@@ -303,7 +304,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
         const ul = el("ul", "bilan-morts");
         for (const s of dead) {
           const titan = s.death?.titan !== null && s.death?.titan !== undefined ? st.titans[s.death.titan] : undefined;
-          ul.append(el("li", "", t("tac.sum.dossier", { name: s.name, squad: squadName(s.squad), cause: t(`tac.cause.${s.death?.cause ?? "frappe"}`), titan: titan ? t(bt.world.titanTypes.get(titan.type)?.name_key ?? "") : "—", t: clock(s.death?.t ?? 0), x: Math.round(s.death?.x ?? 0), y: Math.round(s.death?.y ?? 0) })));
+          ul.append(el("li", "", t("tac.sum.dossier", { name: s.name, squad: squadName(s.squad), cause: t(`tac.cause.${s.death?.cause ?? "frappe"}`), titan: titan ? t(bodyName(bt, titan)) : "—", t: clock(s.death?.t ?? 0), x: Math.round(s.death?.x ?? 0), y: Math.round(s.death?.y ?? 0) })));
         }
         box.append(ul);
       }

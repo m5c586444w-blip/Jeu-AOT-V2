@@ -2042,5 +2042,11 @@
   "shifter.err.heir_dead": "L'héritier désigné n'est pas en vie.",
   "shifter.err.same": "Le porteur ne peut pas hériter de lui-même.",
   "shifter.err.not_ours": "Ce Titan n'a pas de porteur vivant au service de Paradis.",
-  "shifter.lock.royal": "Verrouillé : le contrôle des purs exige un porteur de sang royal ou le contact d'un descendant royal (02 §10)."
+  "shifter.lock.royal": "Verrouillé : le contrôle des purs exige un porteur de sang royal ou le contact d'un descendant royal (02 §10).",
+  "battle.shifter.transformed": "{name} se transforme : {titan}.",
+  "battle.shifter.defeated": "{titan} abattu : la nuque est tranchée, {name} est arraché(e) au corps.",
+  "battle.shifter.exhausted": "{titan} à bout de forces : {name} sort du corps qui se désagrège.",
+  "battle.shifter.kills_titan": "{name} abat un {titan}.",
+  "battle.shifter.rampage": "{name} perd le contrôle du {titan} : il frappe sans distinction.",
+  "battle.shifter.founder": "{name} use de la Coordonnée : {n} Titans purs cessent le combat."
 }

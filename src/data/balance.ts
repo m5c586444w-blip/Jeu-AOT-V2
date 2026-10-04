@@ -273,8 +273,15 @@ export const ShiftersBalanceSchema = z
     regen_endurance_per_hp: num,
     hardening: z.object({ cost_per_s: num, duration_s: num }).strict(),
     control: z.object({ stress_threshold: num, wound_share: prob, chance_per_s: prob, rampage_s: num }).strict(),
-    attack: z.object({ reach_ratio: prob, cooldown_s: range, kill_prob: prob }).strict(),
-    soldiers: z.object({ cut_damage: num, spear_damage: num, spears_per_soldier: z.number().int().min(0), spear_range_m: num }).strict(),
+    /** Dégâts d'un coup de porteur sur un autre porteur, et d'un pur sur un porteur (points de vie de zone). */
+    attack: z.object({ reach_ratio: prob, cooldown_s: range, kill_prob: prob, shifter_damage: num, titan_damage: num }).strict(),
+    /** Vitesse des purs attirés par un cri d'appel (multiplicateur). */
+    call_speed_mult: num,
+    /** Stress du porteur par point de vie perdu (perte de contrôle). */
+    wound_stress_per_hp: num,
+    /** Usure du corps transformé (endurance par seconde). */
+    endurance_drain_per_s: num,
+    soldiers: z.object({ cut_damage: num, spear_damage: num, spears_per_soldier: z.number().int().min(0), spear_range_m: num, spear_hit: prob }).strict(),
     inheritance: z.object({ heir_stress: num, org_loyalty: num, legitimacy: num, relation_stress: num }).strict(),
     vision: z.object({ chance_per_month: prob, falsehood: prob }).strict(),
   })

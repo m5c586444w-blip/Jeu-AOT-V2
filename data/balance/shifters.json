@@ -25,13 +25,16 @@
       1.2,
       2.0
     ],
-    "kill_prob": 0.6
+    "kill_prob": 0.6,
+    "shifter_damage": 12,
+    "titan_damage": 3
   },
   "soldiers": {
     "cut_damage": 10,
     "spear_damage": 30,
     "spears_per_soldier": 2,
-    "spear_range_m": 25
+    "spear_range_m": 25,
+    "spear_hit": 0.75
   },
   "inheritance": {
     "heir_stress": 30,
@@ -42,5 +45,8 @@
   "vision": {
     "chance_per_month": 0.25,
     "falsehood": 0.4
-  }
+  },
+  "call_speed_mult": 1.5,
+  "wound_stress_per_hp": 0.6,
+  "endurance_drain_per_s": 0.4
 }

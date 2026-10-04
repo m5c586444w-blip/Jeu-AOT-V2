@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **P5 terminée** → P6 — Titans-porteurs et héritage (mode autonome borné jusqu'à P8) |
-| Tâche | T6.0 — plan `docs/phases/P6.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P5) : code 0, 228 tests — `docs/reports/P5-verify.log` |
-| Prochaine étape | T6.1 — données des Neuf Titans ; **arrêt de revue après P8** |
+| Tâche | T6.1 (données, R11) et T6.2 (état v7, horloge, héritage, visions) faites → T6.3 combat des porteurs |
+| Dernier `npm run verify` | 2026-10-04 (T6.2, commit 208d533) : code 0, 245 tests |
+| Prochaine étape | T6.3 — unité porteur en bataille, 9 capacités, lances de foudre ; **arrêt de revue après P8** |
 
 ## Arrêt levé (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
 - **Levé** : l'utilisateur a fixé l'objectif « P5 à P8 terminées » juste après la proposition de correction ; correction appliquée (dossier fermé avant l'envoi de la commande).
