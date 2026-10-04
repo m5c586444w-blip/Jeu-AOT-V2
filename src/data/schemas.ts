@@ -367,6 +367,47 @@ export const NameListSchema = z
   })
   .strict();
 
+/** Effets des capacités des Neuf (03 §8.2), interprétés par la simulation tactique (P6). */
+export const SHIFTER_EFFECTS = ["heat_wave", "armor", "charge", "hardening", "call", "projectiles", "command_pures", "speed", "bite", "endurance", "transport", "spikes", "remote_body", "melee_titans", "regeneration", "founder_command"] as const;
+
+export const ShifterAbilitySchema = z
+  .object({
+    id: z.string().regex(/^[a-z_]+$/),
+    effect: z.enum(SHIFTER_EFFECTS),
+    /** Capacité passive : toujours active quand le porteur est transformé ; `power` en est la grandeur et la limite. */
+    passive: z.boolean().default(false),
+    /** Coût d'endurance par emploi (ou par seconde pour un effet continu). */
+    cost: z.number().min(0),
+    range_m: z.number().min(0),
+    radius_m: z.number().min(0).default(0),
+    delay_s: z.number().min(0),
+    cooldown_s: z.number().min(0),
+    duration_s: z.number().min(0).default(0),
+    /** Grandeur principale (probabilité de tuer, multiplicateur…), selon l'effet. */
+    power: z.number(),
+    /** Exige un drapeau de partie (Fondation : contact royal, 02 §10). */
+    requires_flag: z.string().optional(),
+    canon: z.enum(["C", "A", "?"]),
+  })
+  .strict();
+
+/** data/shifters — les Neuf Titans (03 §8, 11 §4) : capacités, chaîne de porteurs, porteur en 850. */
+export const ShifterSchema = z
+  .object({
+    id: z.string().regex(/^shifter_[a-z_]+$/),
+    name_key: z.string().min(1),
+    height_m: z.tuple([z.number().positive(), z.number().positive()]),
+    speed_m_s: z.number().positive(),
+    hp: z.object({ nape: z.number().positive(), arm: z.number().positive(), leg: z.number().positive() }).strict(),
+    endurance: z.number().positive(),
+    regen_per_s: z.number().min(0),
+    abilities: z.array(ShifterAbilitySchema).min(1),
+    chain: z.array(z.object({ holder: CharacterIdSchema.nullable(), name: z.string().min(1), from: year.nullable(), to: year.nullable(), canon: z.enum(["C", "A", "?"]) }).strict()).min(1),
+    holder_850: z.object({ character: CharacterIdSchema.nullable(), faction: z.enum(["paradis", "marley", "inconnu"]), since: year, since_canon: z.enum(["C", "A", "?"]) }).strict(),
+    ...canonFields,
+  })
+  .strict();
+
 /** data/titan_types — types de Titans purs du combat tactique (F-TIT-01) : classe (03 §5.2) × comportement [A]. */
 export const TitanTypeSchema = z
   .object({
@@ -405,6 +446,8 @@ export const TacticalMapSchema = z
 
 export type Province = z.infer<typeof ProvinceSchema>;
 export type TitanType = z.infer<typeof TitanTypeSchema>;
+export type Shifter = z.infer<typeof ShifterSchema>;
+export type ShifterAbility = z.infer<typeof ShifterAbilitySchema>;
 export type TacticalMap = z.infer<typeof TacticalMapSchema>;
 export type MapBrick = z.infer<typeof brick>;
 export type Unit = z.infer<typeof UnitSchema>;
@@ -440,6 +483,7 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   titans: TitanClassSchema,
   names: NameListSchema,
   titan_types: TitanTypeSchema,
+  shifters: ShifterSchema,
   tactical_maps: TacticalMapSchema,
 };
 

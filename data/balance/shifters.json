@@ -1,0 +1,46 @@
+{
+  "canon": "A",
+  "notes_canon": "Porteurs (02 §10, 03 §8). Horloge de 13 ans : C (malédiction d'Ymir) ; délai de transformation 1–3 s : 03 §8.1 ; le reste : A.",
+  "curse_years": 13,
+  "transform_delay_s": [
+    1,
+    3
+  ],
+  "transform_cost": 20,
+  "transform_cooldown_s": 30,
+  "regen_endurance_per_hp": 0.5,
+  "hardening": {
+    "cost_per_s": 3,
+    "duration_s": 4
+  },
+  "control": {
+    "stress_threshold": 80,
+    "wound_share": 0.5,
+    "chance_per_s": 0.02,
+    "rampage_s": 8
+  },
+  "attack": {
+    "reach_ratio": 0.6,
+    "cooldown_s": [
+      1.2,
+      2.0
+    ],
+    "kill_prob": 0.6
+  },
+  "soldiers": {
+    "cut_damage": 10,
+    "spear_damage": 30,
+    "spears_per_soldier": 2,
+    "spear_range_m": 25
+  },
+  "inheritance": {
+    "heir_stress": 30,
+    "org_loyalty": -4,
+    "legitimacy": -2,
+    "relation_stress": 20
+  },
+  "vision": {
+    "chance_per_month": 0.25,
+    "falsehood": 0.4
+  }
+}

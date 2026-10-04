@@ -1,0 +1,586 @@
+[
+  {
+    "id": "shifter_colossal",
+    "name_key": "shifter.colossal",
+    "height_m": [
+      55,
+      60
+    ],
+    "speed_m_s": 2.5,
+    "hp": {
+      "nape": 60,
+      "arm": 40,
+      "leg": 60
+    },
+    "endurance": 120,
+    "regen_per_s": 1.0,
+    "abilities": [
+      {
+        "id": "onde_chaleur",
+        "effect": "heat_wave",
+        "cost": 25,
+        "range_m": 0,
+        "radius_m": 50,
+        "delay_s": 1,
+        "cooldown_s": 25,
+        "duration_s": 8,
+        "power": 0.06,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": "char_bertholdt_hoover",
+        "name": "Bertholdt Hoover",
+        "from": null,
+        "to": 850,
+        "canon": "C"
+      },
+      {
+        "holder": "char_armin_arlert",
+        "name": "Armin Arlert",
+        "from": 850,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_bertholdt_hoover",
+      "faction": "marley",
+      "since": 843,
+      "since_canon": "?"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_cuirasse",
+    "name_key": "shifter.cuirasse",
+    "height_m": [
+      15,
+      15
+    ],
+    "speed_m_s": 4.0,
+    "hp": {
+      "nape": 30,
+      "arm": 20,
+      "leg": 25
+    },
+    "endurance": 100,
+    "regen_per_s": 0.8,
+    "abilities": [
+      {
+        "id": "armure",
+        "effect": "armor",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 0.08,
+        "canon": "A"
+      },
+      {
+        "id": "charge",
+        "effect": "charge",
+        "cost": 15,
+        "range_m": 120,
+        "radius_m": 6,
+        "delay_s": 1,
+        "cooldown_s": 15,
+        "duration_s": 4,
+        "power": 0.5,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": "char_reiner_braun",
+        "name": "Reiner Braun",
+        "from": null,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_reiner_braun",
+      "faction": "marley",
+      "since": 843,
+      "since_canon": "?"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_feminin",
+    "name_key": "shifter.feminin",
+    "height_m": [
+      14,
+      14
+    ],
+    "speed_m_s": 6.0,
+    "hp": {
+      "nape": 25,
+      "arm": 15,
+      "leg": 20
+    },
+    "endurance": 100,
+    "regen_per_s": 1.0,
+    "abilities": [
+      {
+        "id": "durcissement_local",
+        "effect": "hardening",
+        "cost": 15,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 10,
+        "duration_s": 4,
+        "power": 1.0,
+        "canon": "A"
+      },
+      {
+        "id": "cri_appel",
+        "effect": "call",
+        "cost": 30,
+        "range_m": 0,
+        "radius_m": 600,
+        "delay_s": 0,
+        "cooldown_s": 120,
+        "duration_s": 0,
+        "power": 1.0,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": "char_annie_leonhart",
+        "name": "Annie Leonhart",
+        "from": null,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_annie_leonhart",
+      "faction": "marley",
+      "since": 843,
+      "since_canon": "?"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_bestial",
+    "name_key": "shifter.bestial",
+    "height_m": [
+      17,
+      17
+    ],
+    "speed_m_s": 3.0,
+    "hp": {
+      "nape": 30,
+      "arm": 20,
+      "leg": 25
+    },
+    "endurance": 110,
+    "regen_per_s": 0.8,
+    "abilities": [
+      {
+        "id": "projectiles",
+        "effect": "projectiles",
+        "cost": 8,
+        "range_m": 250,
+        "radius_m": 10,
+        "delay_s": 1.5,
+        "cooldown_s": 6,
+        "duration_s": 0,
+        "power": 0.55,
+        "canon": "A"
+      },
+      {
+        "id": "controle_purs",
+        "effect": "command_pures",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 1.3,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Tom Ksaver",
+        "from": 829,
+        "to": 842,
+        "canon": "C"
+      },
+      {
+        "holder": null,
+        "name": "Zeke",
+        "from": 842,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": null,
+      "faction": "marley",
+      "since": 842,
+      "since_canon": "C"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_machoire",
+    "name_key": "shifter.machoire",
+    "height_m": [
+      5,
+      5
+    ],
+    "speed_m_s": 12.0,
+    "hp": {
+      "nape": 15,
+      "arm": 10,
+      "leg": 12
+    },
+    "endurance": 90,
+    "regen_per_s": 1.2,
+    "abilities": [
+      {
+        "id": "vitesse",
+        "effect": "speed",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 2.0,
+        "canon": "A"
+      },
+      {
+        "id": "morsure",
+        "effect": "bite",
+        "cost": 6,
+        "range_m": 4,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 3,
+        "duration_s": 0,
+        "power": 0.9,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Marcel Galliard",
+        "from": 843,
+        "to": 845,
+        "canon": "C"
+      },
+      {
+        "holder": "char_ymir",
+        "name": "Ymir",
+        "from": 845,
+        "to": null,
+        "canon": "C"
+      },
+      {
+        "holder": null,
+        "name": "Porco Galliard",
+        "from": null,
+        "to": null,
+        "canon": "C"
+      },
+      {
+        "holder": null,
+        "name": "Falco Grice",
+        "from": 854,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_ymir",
+      "faction": "paradis",
+      "since": 845,
+      "since_canon": "C"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_charrette",
+    "name_key": "shifter.charrette",
+    "height_m": [
+      4,
+      4
+    ],
+    "speed_m_s": 7.0,
+    "hp": {
+      "nape": 15,
+      "arm": 10,
+      "leg": 12
+    },
+    "endurance": 200,
+    "regen_per_s": 0.8,
+    "abilities": [
+      {
+        "id": "endurance",
+        "effect": "endurance",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 0.5,
+        "canon": "A"
+      },
+      {
+        "id": "transport",
+        "effect": "transport",
+        "cost": 5,
+        "range_m": 10,
+        "radius_m": 15,
+        "delay_s": 0,
+        "cooldown_s": 20,
+        "duration_s": 0,
+        "power": 40,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Pieck",
+        "from": null,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": null,
+      "faction": "marley",
+      "since": 843,
+      "since_canon": "?"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_marteau",
+    "name_key": "shifter.marteau",
+    "height_m": [
+      15,
+      15
+    ],
+    "speed_m_s": 3.5,
+    "hp": {
+      "nape": 30,
+      "arm": 20,
+      "leg": 25
+    },
+    "endurance": 120,
+    "regen_per_s": 0.8,
+    "abilities": [
+      {
+        "id": "pieux_cristal",
+        "effect": "spikes",
+        "cost": 20,
+        "range_m": 80,
+        "radius_m": 10,
+        "delay_s": 1,
+        "cooldown_s": 12,
+        "duration_s": 0,
+        "power": 0.65,
+        "canon": "A"
+      },
+      {
+        "id": "corps_distant",
+        "effect": "remote_body",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 3.0,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Lara Tybur",
+        "from": null,
+        "to": 854,
+        "canon": "C"
+      },
+      {
+        "holder": "char_eren_yeager",
+        "name": "Eren Yeager",
+        "from": 854,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": null,
+      "faction": "marley",
+      "since": 845,
+      "since_canon": "?"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_assaillant",
+    "name_key": "shifter.assaillant",
+    "height_m": [
+      15,
+      15
+    ],
+    "speed_m_s": 5.0,
+    "hp": {
+      "nape": 25,
+      "arm": 15,
+      "leg": 20
+    },
+    "endurance": 100,
+    "regen_per_s": 1.5,
+    "abilities": [
+      {
+        "id": "combat_rapproche",
+        "effect": "melee_titans",
+        "cost": 3,
+        "range_m": 6,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 2.5,
+        "duration_s": 0,
+        "power": 0.7,
+        "canon": "A"
+      },
+      {
+        "id": "regeneration",
+        "effect": "regeneration",
+        "passive": true,
+        "cost": 0,
+        "range_m": 0,
+        "radius_m": 0,
+        "delay_s": 0,
+        "cooldown_s": 0,
+        "duration_s": 0,
+        "power": 1.5,
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Eren Kruger",
+        "from": 819,
+        "to": 832,
+        "canon": "C"
+      },
+      {
+        "holder": null,
+        "name": "Grisha Yeager",
+        "from": 832,
+        "to": 845,
+        "canon": "C"
+      },
+      {
+        "holder": "char_eren_yeager",
+        "name": "Eren Yeager",
+        "from": 845,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_eren_yeager",
+      "faction": "paradis",
+      "since": 845,
+      "since_canon": "C"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  },
+  {
+    "id": "shifter_fondateur",
+    "name_key": "shifter.fondateur",
+    "height_m": [
+      15,
+      15
+    ],
+    "speed_m_s": 5.0,
+    "hp": {
+      "nape": 25,
+      "arm": 15,
+      "leg": 20
+    },
+    "endurance": 100,
+    "regen_per_s": 1.0,
+    "abilities": [
+      {
+        "id": "controle_purs_fondateur",
+        "effect": "founder_command",
+        "cost": 50,
+        "range_m": 0,
+        "radius_m": 2000,
+        "delay_s": 0,
+        "cooldown_s": 60,
+        "duration_s": 30,
+        "power": 1.0,
+        "requires_flag": "royal_contact",
+        "canon": "A"
+      }
+    ],
+    "chain": [
+      {
+        "holder": null,
+        "name": "Frieda Reiss",
+        "from": 842,
+        "to": 845,
+        "canon": "C"
+      },
+      {
+        "holder": null,
+        "name": "Grisha Yeager",
+        "from": 845,
+        "to": 845,
+        "canon": "C"
+      },
+      {
+        "holder": "char_eren_yeager",
+        "name": "Eren Yeager",
+        "from": 845,
+        "to": null,
+        "canon": "C"
+      }
+    ],
+    "holder_850": {
+      "character": "char_eren_yeager",
+      "faction": "paradis",
+      "since": 845,
+      "since_canon": "C"
+    },
+    "canon": "C",
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+  }
+]

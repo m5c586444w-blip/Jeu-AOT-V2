@@ -20,5 +20,5 @@ if (issues.length > 0) {
   console.error(`data:validate : ${issues.length} erreur(s) dans « ${dir} ».`);
   process.exit(1);
 }
-const counts = `${data.provinces.length} provinces, ${data.characters.length} personnages, ${data.techs.length} technologies, ${data.events.length} événements, ${data.placements.length} positionnements, ${data.buildings.length} bâtiments, ${data.scenarios.length} scénarios ; équilibrage : ${Object.keys(balance).join(", ") || "aucun"}`;
+const counts = `${data.provinces.length} provinces, ${data.characters.length} personnages, ${data.techs.length} technologies, ${data.events.length} événements, ${data.shifters.length} Titans-porteurs, ${data.placements.length} positionnements, ${data.buildings.length} bâtiments, ${data.scenarios.length} scénarios ; équilibrage : ${Object.keys(balance).join(", ") || "aucun"}`;
 console.log(`data:validate : « ${dir} » valide (${counts}).`);

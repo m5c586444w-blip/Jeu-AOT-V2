@@ -1,6 +1,6 @@
-import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
-import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TacticalMap, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
+import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Scenario, Shifter, Stratum, TacticalMap, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -22,6 +22,15 @@ export interface World {
   research: ResearchWorld | null;
   /** Renseignement (P5). */
   intel: IntelWorld | null;
+  /** Titans-porteurs (P6) : absents sans données des Neuf ou hors scénario politique. */
+  shifters: ShifterWorld | null;
+}
+
+export interface ShifterWorld {
+  balance: ShiftersBalance;
+  defs: ReadonlyMap<string, Shifter>;
+  /** Ordre d'affichage et d'itération (ordre des données). */
+  order: readonly Shifter[];
 }
 
 export interface ChronicleWorld {
@@ -118,6 +127,8 @@ export interface WorldSource {
   eventsBalance?: EventsBalance;
   research?: ResearchBalance;
   intel?: IntelBalance;
+  shifters?: readonly Shifter[];
+  shiftersBalance?: ShiftersBalance;
 }
 
 export function buildGeo(g: GeoData): GeoGraph {
@@ -165,6 +176,7 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     chronicle: politics && src.eventsBalance ? buildChronicle(src.events ?? [], src.eventsBalance, scenario.events_mode) : null,
     research: politics && src.research && src.techs?.length ? { balance: src.research, techs: new Map(src.techs.map((t) => [t.id, t])), order: [...src.techs].sort((a, b) => a.tree.localeCompare(b.tree) || (a.code ?? a.id).localeCompare(b.code ?? b.id)) } : null,
     intel: politics && src.intel ? { balance: src.intel, secrets: secretsOf(src.characters ?? []) } : null,
+    shifters: politics && src.shiftersBalance && src.shifters?.length ? { balance: src.shiftersBalance, defs: new Map(src.shifters.map((d) => [d.id, d])), order: src.shifters } : null,
   };
 }
 

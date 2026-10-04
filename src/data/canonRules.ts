@@ -2,7 +2,7 @@ import { COLLECTION_NAMES } from "./collections";
 import type { CollectionName } from "./collections";
 
 /**
- * Règles de cohérence canon R1–R10 (fichier 14 §3, fichier 11 §8 ; R7 : D-49 ; R8–R10 : P5, D-64). Fonctions pures sur des données brutes.
+ * Règles de cohérence canon R1–R11 (fichier 14 §3, fichier 11 §8 ; R7 : D-49 ; R8–R10 : P5, D-64 ; R11 : P6, 11 §4). Fonctions pures sur des données brutes.
  * Les années incertaines se comparent par `year_min` (errata utilisateur).
  */
 export interface RawEntry {
@@ -17,7 +17,7 @@ export function emptyRaw(): RawData {
   return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
-export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10";
+export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11";
 
 export interface Violation {
   rule: RuleId;
@@ -132,7 +132,59 @@ export function checkCanon(data: RawData): Violation[] {
   }
 
   checkEventEffects(data, push);
+  checkShifterChains(data, push);
   return out;
+}
+
+/**
+ * Chaînes de porteurs corrigées (11 §4) : noms dans l'ordre, et années quand 11 les donne (null = non donnée, non vérifiée).
+ * Les dates exactes des transferts restent « ? » ailleurs (11 §4, note).
+ */
+export const CANON_CHAINS: Readonly<Record<string, readonly (readonly [string, number | null, number | null])[]>> = {
+  shifter_assaillant: [["Eren Kruger", 819, 832], ["Grisha Yeager", 832, 845], ["Eren Yeager", 845, null]],
+  shifter_fondateur: [["Frieda Reiss", 842, 845], ["Grisha Yeager", 845, 845], ["Eren Yeager", 845, null]],
+  shifter_bestial: [["Tom Ksaver", 829, 842], ["Zeke", 842, null]],
+  shifter_machoire: [["Marcel Galliard", 843, 845], ["Ymir", null, null], ["Porco Galliard", null, null], ["Falco Grice", 854, null]],
+  shifter_colossal: [["Bertholdt Hoover", null, null], ["Armin Arlert", 850, null]],
+  shifter_cuirasse: [["Reiner Braun", null, null]],
+  shifter_feminin: [["Annie Leonhart", null, null]],
+  shifter_charrette: [["Pieck", null, null]],
+  shifter_marteau: [["Lara Tybur", null, null], ["Eren Yeager", 854, null]],
+};
+
+/**
+ * R11 — porteurs (P6) : chaque chaîne suit 11 §4 (noms, ordre, années données) ; un personnage marqué d'un Titan caché
+ * (`hidden.titan`) est le porteur de ce Titan en 850, et réciproquement ; le porteur de 850 figure dans la chaîne.
+ */
+function checkShifterChains(data: RawData, push: (rule: RuleId, e: RawEntry, message: string) => void): void {
+  const holders = new Map<string, Set<string>>();
+  for (const sh of data.shifters) {
+    const chain = objList(sh.v["chain"]);
+    const expected = CANON_CHAINS[sh.id];
+    if (!expected) push("R11", sh, "Titan absent des chaînes de 11 §4");
+    else {
+      const names = chain.map((c) => str(c["name"]) ?? "?");
+      if (names.join(" → ") !== expected.map((x) => x[0]).join(" → ")) push("R11", sh, `chaîne ${names.join(" → ")} ≠ 11 §4 : ${expected.map((x) => x[0]).join(" → ")}`);
+      else
+        expected.forEach(([name, from, to], i) => {
+          const c = chain[i] ?? {};
+          if (from !== null && c["from"] !== from) push("R11", sh, `${name} : début ${String(c["from"])} ≠ ${from} (11 §4)`);
+          if (to !== null && c["to"] !== to) push("R11", sh, `${name} : fin ${String(c["to"])} ≠ ${to} (11 §4)`);
+        });
+    }
+    const key = sh.id.replace(/^shifter_/, "");
+    const h850 = str((sh.v["holder_850"] as Obj | undefined)?.["character"]);
+    if (h850) holders.set(h850, new Set([...(holders.get(h850) ?? []), key]));
+    if (h850 && !chain.some((c) => c["holder"] === h850)) push("R11", sh, `porteur de 850 ${h850} absent de la chaîne`);
+  }
+  if (data.shifters.length === 0) return;
+  for (const c of data.characters) {
+    const hidden = c.v["hidden"] as Obj | undefined;
+    const declared = new Set((str(hidden?.["titan"]) ?? "").split("_").filter(Boolean));
+    const in850 = holders.get(c.id) ?? new Set<string>();
+    for (const t of declared) if (!in850.has(t)) push("R11", c, `Titan caché « ${t} » alors qu'il ne porte pas shifter_${t} en 850`);
+    for (const t of in850) if (!declared.has(t)) push("R11", c, `porteur de shifter_${t} en 850 sans hidden.titan correspondant`);
+  }
 }
 
 type Obj = Record<string, unknown>;

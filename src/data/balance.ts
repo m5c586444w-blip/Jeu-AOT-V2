@@ -261,6 +261,26 @@ export const IntelBalanceSchema = z
   })
   .strict();
 
+/** P6 : porteurs (02 §10, 03 §8). Horloge de 13 ans : C ; le reste : A. */
+export const ShiftersBalanceSchema = z
+  .object({
+    canon: z.enum(["C", "A", "?"]),
+    notes_canon: z.string().optional(),
+    curse_years: z.number().int().positive(),
+    transform_delay_s: range,
+    transform_cost: num,
+    transform_cooldown_s: num,
+    regen_endurance_per_hp: num,
+    hardening: z.object({ cost_per_s: num, duration_s: num }).strict(),
+    control: z.object({ stress_threshold: num, wound_share: prob, chance_per_s: prob, rampage_s: num }).strict(),
+    attack: z.object({ reach_ratio: prob, cooldown_s: range, kill_prob: prob }).strict(),
+    soldiers: z.object({ cut_damage: num, spear_damage: num, spears_per_soldier: z.number().int().min(0), spear_range_m: num }).strict(),
+    inheritance: z.object({ heir_stress: num, org_loyalty: num, legitimacy: num, relation_stress: num }).strict(),
+    vision: z.object({ chance_per_month: prob, falsehood: prob }).strict(),
+  })
+  .strict();
+
+export type ShiftersBalance = z.infer<typeof ShiftersBalanceSchema>;
 export type EventsBalance = z.infer<typeof EventsBalanceSchema>;
 export type ResearchBalance = z.infer<typeof ResearchBalanceSchema>;
 export type IntelBalance = z.infer<typeof IntelBalanceSchema>;
@@ -284,5 +304,6 @@ export const BALANCE_FILES = {
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,
   intel: IntelBalanceSchema,
+  shifters: ShiftersBalanceSchema,
 } as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

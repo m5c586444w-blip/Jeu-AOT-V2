@@ -1,0 +1,12 @@
+[
+  {
+    "id": "shifter_machoire",
+    "name_key": "shifter.machoire",
+    "chain": [
+      { "holder": null, "name": "Marcel Galliard", "from": 843, "to": 845, "canon": "C" },
+      { "holder": null, "name": "Porco Galliard", "from": 845, "to": null, "canon": "C" }
+    ],
+    "holder_850": { "character": null, "faction": "marley", "since": 845, "since_canon": "C" },
+    "canon": "C"
+  }
+]
