@@ -1,0 +1,56 @@
+{
+  "canon": "A",
+  "notes_canon": "Valeurs de départ [A] (02 §15, 03 §3.2, §5, §12), calibrées par `npm run sim:expeditions` (mortalité moyenne 25–40 % d'une expédition type en début de partie). Réservoir d'ODM ≈ 100 u (03 §3.2), gaz par engagement 3–8 u (02 §15), lames : 2 paires de 4–8 coupes (03 §3.2).",
+  "odm_units_per_stock_unit": 10,
+  "odm_tank": 100,
+  "gas_spare_tanks_per_soldier": 1,
+  "blades": { "pairs_per_soldier": 2, "cuts_per_pair": [4, 8], "steel_per_pair": 0.5, "spare_pairs_per_soldier": 2 },
+  "pace_km_per_day": { "eventail": 70, "colonnes": 40 },
+  "formations": {
+    "eventail": { "detection": 0.75, "evasion": 0.7, "engaged_share": 0.12, "signal_quality": 1, "exposure": 1 },
+    "colonnes": { "detection": 0.35, "evasion": 0.35, "engaged_share": 0.25, "signal_quality": 0.6, "exposure": 1.3 }
+  },
+  "encounters": { "per_day_at_density_1": 4, "size_ref": 100, "size_exponent": 0.5, "night_share": 0.15, "season": { "hiver": 0.7, "printemps": 1, "ete": 1.15, "automne": 1 }, "abnormal_evasion_mult": 0.4, "commander_k": 0.003 },
+  "engagement": {
+    "min_engaged": 4,
+    "max_engaged": 24,
+    "deaths_base": 1.2,
+    "sigma": 0.8,
+    "catastrophe": { "p_base": 0.02, "abnormal_mult": 3, "column_mult": 1.5, "share": [0.3, 0.7] },
+    "kill_prob": 0.6,
+    "skill_k": 0.02,
+    "wounded_per_death": 1.2,
+    "serious_share": 0.35,
+    "gas_per_engaged": [3, 8],
+    "horses_per_death": 0.8,
+    "no_gas_mult": 3,
+    "no_blades_mult": 2,
+    "morale_k": 0.01,
+    "veteran_k": 0.15
+  },
+  "attrition": { "food_per_soldier": 0.02, "fodder_per_horse": 0.05, "outside_morale_per_day": 1.5, "horse_fatigue_per_day": 6, "horse_rest_per_day": 10, "horse_mortality_at_fatigue_100": 0.04, "hunger_death_rate": 0.01 },
+  "medical": { "serious_death_without": 0.55, "serious_death_with": 0.25, "infection_share": 0.4 },
+  "weather": {
+    "by_season": {
+      "hiver": { "clair": 0.3, "nuageux": 0.3, "pluie": 0.1, "brouillard": 0.1, "neige": 0.2 },
+      "printemps": { "clair": 0.4, "nuageux": 0.3, "pluie": 0.2, "brouillard": 0.1, "neige": 0 },
+      "ete": { "clair": 0.6, "nuageux": 0.25, "pluie": 0.1, "brouillard": 0.05, "neige": 0 },
+      "automne": { "clair": 0.3, "nuageux": 0.3, "pluie": 0.25, "brouillard": 0.15, "neige": 0 }
+    },
+    "effects": {
+      "clair": { "encounters": 1.1, "detection": 1, "pace": 1, "signal_error": 0.02 },
+      "nuageux": { "encounters": 1, "detection": 0.95, "pace": 1, "signal_error": 0.04 },
+      "pluie": { "encounters": 0.9, "detection": 0.8, "pace": 0.8, "signal_error": 0.12 },
+      "brouillard": { "encounters": 1, "detection": 0.55, "pace": 0.85, "signal_error": 0.3 },
+      "neige": { "encounters": 0.7, "detection": 0.85, "pace": 0.6, "signal_error": 0.08 }
+    }
+  },
+  "signals": { "error_base": 0.03, "misread_engage_mult": 1.5 },
+  "retreat_defaults": { "losses_pct": 35, "gas_pct": 25, "abnormal": 3, "max_days": 20 },
+  "objective_days": { "reconnaissance": 0, "exploration": 2, "recuperation": 1, "depot": 1 },
+  "politics": { "capital_base": 8, "capital_per_100": 4, "legitimacy_success": 2, "legitimacy_failure": -2, "legitimacy_per_loss_pct": -0.08, "corps_loyalty_success": 4, "corps_loyalty_per_loss_pct": -0.15, "mourning_days": 60 },
+  "experience": { "survival_per_expedition": 0.1, "max_bonus": 0.4 },
+  "named": { "exposure_mult": 0.6, "ackerman_mult": 0.2 },
+  "wounds": { "recovery_days": 30 },
+  "roster": { "squad_size": [4, 6], "roles": { "eclaireur": 0.25, "tueur": 0.35, "soutien": 0.15, "cavalier": 0.15, "medecin": 0.1 }, "attribute_mean": 55, "attribute_sd": 12, "age": [16, 38], "female_share": 0.3 }
+}

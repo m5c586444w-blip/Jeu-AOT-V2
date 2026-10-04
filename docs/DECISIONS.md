@@ -202,3 +202,11 @@
 
 ## 2026-10-04 — D-51 Densité de Titans propre au scénario
 - Décision : le fichier des provinces décrit les lieux et garde sa densité de départ. La densité de Titans d'un scénario (ex. Maria perdue en 850) est un paramètre de scénario `titan_density` `[A]`. Le fait que Maria soit tombée est `[C]` ; les valeurs sont `[A]`.
+
+## 2026-10-04 — D-52 Graphe de routage et franchissement des murs
+- Décision : la simulation ne lit pas les polygones de la carte. `npm run map:generate` en dérive `data/geo/paradis.json` : ancres, zones, arêtes en km, portes. Un test vérifie qu'il est à jour.
+- Règle `[A]` : chevaux et chariots ne franchissent un mur (passage d'une zone à une autre par un segment) que par une porte listée dans la carte (Rose-Est = porte de Karanes `[C]`). Longer un mur reste possible.
+- `loadWorld` (Node) emprunte désormais le même chemin que le Worker (`readDataFiles` + `worldSourceFromFiles`).
+
+## 2026-10-04 — D-53 Unités de gaz
+- Décision : une unité du stock national de gaz vaut 10 unités d'ODM `[A]`. Le réservoir d'un soldat fait 100 u d'ODM (03 §3.2) ; un engagement en consomme 3 à 8 par soldat engagé (02 §15). Ainsi, une expédition de 100 soldats emporte environ 2 000 unités de stock (réservoirs + recharges), sur 25 000 en 850.

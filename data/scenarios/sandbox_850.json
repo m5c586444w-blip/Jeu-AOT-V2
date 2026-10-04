@@ -51,6 +51,37 @@
     "control_canon": {
       "prov_ville_usine": "A"
     },
+    "titan_density": {
+      "prov_bourg_minier_maria": 0.5,
+      "prov_carrefour_du_sud": 0.5,
+      "prov_collines_minieres": 0.5,
+      "prov_faubourgs_shiganshina": 0.8,
+      "prov_foret_arbres_geants": 0.65,
+      "prov_fort_avance_maria": 0.5,
+      "prov_gorge_du_silence": 0.6,
+      "prov_hameaux_est": 0.5,
+      "prov_hameaux_ouest_maria": 0.5,
+      "prov_haras_maria": 0.5,
+      "prov_lac_des_reflets": 0.5,
+      "prov_maria_est": 0.35,
+      "prov_maria_nord": 0.35,
+      "prov_maria_nord_est": 0.35,
+      "prov_maria_nord_ouest": 0.35,
+      "prov_maria_ouest": 0.35,
+      "prov_maria_sud": 0.8,
+      "prov_maria_sud_est": 0.35,
+      "prov_maria_sud_ouest": 0.35,
+      "prov_monts_brumeux": 0.5,
+      "prov_plaines_cerealieres_sud": 0.5,
+      "prov_plaines_du_nord": 0.5,
+      "prov_plaines_interieures_maria_sud": 0.7,
+      "prov_relais_poste_maria": 0.5,
+      "prov_shiganshina": 0.85,
+      "prov_vallee_du_moulin": 0.5,
+      "prov_vergers_ouest": 0.5,
+      "prov_ville_usine": 0.5
+    },
+    "expedition_base": "prov_karanes",
     "garrisons": {
       "prov_rose_nord": {
         "org": "garrison",
@@ -244,6 +275,6 @@
       }
     },
     "canon": "A",
-    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]. Ville-usine (R10, source du gaz d'ODM) : localisation « ? » (11 §9) ; son rattachement à Paradis en 850 est une adaptation « A » (paramètre de scénario, D-41), jamais présentée comme canon — le canon montre seulement l'ODM en usage en 850."
+    "notes_canon": "Bac à sable de P2 : an 850, avant Trost. Wall Maria perdu depuis 845 (C, 06 §1.3). Population, stocks, réfugiés et mise en culture de l'intérieur de Rose : valeurs de travail [A]. Ville-usine (R10, source du gaz d'ODM) : localisation « ? » (11 §9) ; son rattachement à Paradis en 850 est une adaptation « A » (paramètre de scénario, D-41), jamais présentée comme canon — le canon montre seulement l'ODM en usage en 850. Titans dans Maria perdue : fait C (06 §1.3) ; densités par province [A] (D-51), plus fortes vers Shiganshina et la brèche. Départ des expéditions : Karanes (06 S02, C)."
   }
 ]

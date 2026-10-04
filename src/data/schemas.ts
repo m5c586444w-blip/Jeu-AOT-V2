@@ -20,6 +20,8 @@ export const TraitIdSchema = idOf("trait");
 export const OrganisationIdSchema = idOf("org");
 export const LawIdSchema = idOf("law");
 export const RoleIdSchema = idOf("role");
+export const UnitIdSchema = idOf("unit");
+export const TitanClassIdSchema = idOf("titan");
 export const StratumIdSchema = idOf("str");
 
 
@@ -87,6 +89,10 @@ export const ScenarioSchema = z
     control: z.record(ProvinceIdSchema, z.enum(["paradis", "titans", "perdu"])).default({}),
     /** Statut du rattachement indiqué dans `control` (règle R7 : jamais « C » pour une province à localisation « ? »). */
     control_canon: z.record(ProvinceIdSchema, CanonSchema).default({}),
+    /** Densité de Titans propre au scénario (D-51), par province ; sinon celle du fichier des provinces. */
+    titan_density: z.record(ProvinceIdSchema, unit).default({}),
+    /** Province de départ des expéditions (850 : Karanes, 06 S02 [C]). */
+    expedition_base: ProvinceIdSchema.optional(),
     garrisons: z.record(ProvinceIdSchema, garrison).default({}),
     buildings: z.record(ProvinceIdSchema, z.array(BuildingIdSchema)).default({}),
     stocks: resourceRecord,
@@ -287,7 +293,46 @@ export const PlacementSchema = z
   })
   .strict();
 
+/** data/units — types d'unités (10 §1.1). */
+export const UnitSchema = z
+  .object({
+    id: UnitIdSchema,
+    code: z.string().regex(/^U-[A-Z]\d{2}$/),
+    name_key: z.string().min(1),
+    size: z.tuple([z.number().int().min(1), z.number().int().min(1)]),
+    role: z.enum(["eclaireur", "tueur", "soutien", "cavalier", "medecin", "convoi"]),
+    ...canonFields,
+  })
+  .strict();
+
+/** data/titans — classes de Titans purs (03 §5.2, valeurs [A]). */
+export const TitanClassSchema = z
+  .object({
+    id: TitanClassIdSchema,
+    name_key: z.string().min(1),
+    size_m: z.tuple([z.number().positive(), z.number().positive()]),
+    threat: z.number().positive(),
+    weight: unit,
+    abnormal: z.boolean(),
+    ...canonFields,
+  })
+  .strict();
+
+/** data/names — listes de noms pour le générateur de soldats (F-CHR-17), créations du projet [A]. */
+export const NameListSchema = z
+  .object({
+    id: z.string().regex(/^names_[a-z0-9_]+$/),
+    given_m: z.array(z.string().min(1)).min(20),
+    given_f: z.array(z.string().min(1)).min(20),
+    family: z.array(z.string().min(1)).min(40),
+    ...canonFields,
+  })
+  .strict();
+
 export type Province = z.infer<typeof ProvinceSchema>;
+export type Unit = z.infer<typeof UnitSchema>;
+export type TitanClass = z.infer<typeof TitanClassSchema>;
+export type NameList = z.infer<typeof NameListSchema>;
 export type Character = z.infer<typeof CharacterSchema>;
 export type Tech = z.infer<typeof TechSchema>;
 export type EventDef = z.infer<typeof EventDefSchema>;
@@ -314,6 +359,9 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   organisations: OrganisationSchema,
   laws: LawSchema,
   roles: RoleSchema,
+  units: UnitSchema,
+  titans: TitanClassSchema,
+  names: NameListSchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

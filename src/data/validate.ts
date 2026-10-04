@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
-import type { Building, Character, CollectionName, EventDef, Law, Organisation, Placement, Province, Role, Scenario, Stratum, Tech, Trait } from "./schemas";
+import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, Tech, TitanClass, Trait, Unit } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
 export interface DataIssue {
@@ -26,12 +26,15 @@ export interface GameData {
   organisations: Organisation[];
   laws: Law[];
   roles: Role[];
+  units: Unit[];
+  titans: TitanClass[];
+  names: NameList[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -107,7 +110,8 @@ export function checkReferences(data: GameData): DataIssue[] {
       for (const law of pol.laws) ref(sc.id, "politics.laws", law);
       for (const who of pol.cabinet_extra) ref(sc.id, "politics.cabinet_extra", who);
     }
-    for (const id of [...Object.keys(sc.control), ...Object.keys(sc.garrisons), ...Object.keys(sc.buildings)]) ref(sc.id, "province", id);
+    for (const id of [...Object.keys(sc.control), ...Object.keys(sc.control_canon), ...Object.keys(sc.garrisons), ...Object.keys(sc.buildings), ...Object.keys(sc.titan_density)]) ref(sc.id, "province", id);
+    ref(sc.id, "expedition_base", sc.expedition_base);
     for (const ids of Object.values(sc.buildings)) for (const b of ids) ref(sc.id, "buildings", b);
   }
   return issues;

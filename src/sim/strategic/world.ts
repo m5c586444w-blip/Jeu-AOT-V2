@@ -1,5 +1,6 @@
-import type { EconomyBalance, PoliticsBalance, SocietyBalance, TimeBalance } from "../../data/balance";
-import type { Building, Character, Law, Organisation, Province, Role, Scenario, Stratum, Trait } from "../../data/schemas";
+import type { EconomyBalance, ExpeditionsBalance, LogisticsBalance, PoliticsBalance, SocietyBalance, TimeBalance } from "../../data/balance";
+import type { GeoData, GeoZone } from "../../data/geo";
+import type { Building, Character, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TitanClass, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -11,6 +12,24 @@ export interface World {
   scenario: Scenario;
   /** Couche politique (P2) : absente pour un scénario sans `politics`. */
   politics: PoliticsWorld | null;
+  /** Expéditions et logistique (P3) : absentes sans graphe, équilibrage ou listes de noms. */
+  military: MilitaryWorld | null;
+}
+
+/** Graphe de routage (dérivé de la carte) : ancres en km, zones, voisins avec distances, portes. */
+export interface GeoGraph {
+  nodes: ReadonlyMap<string, { x: number; y: number; zone: GeoZone }>;
+  adj: ReadonlyMap<string, readonly { to: string; km: number }[]>;
+  gates: ReadonlySet<string>;
+}
+
+export interface MilitaryWorld {
+  geo: GeoGraph;
+  units: ReadonlyMap<string, Unit>;
+  titans: readonly TitanClass[];
+  names: NameList;
+  exp: ExpeditionsBalance;
+  log: LogisticsBalance;
 }
 
 export interface PoliticsWorld {
@@ -38,6 +57,21 @@ export interface WorldSource {
   roles?: readonly Role[];
   politics?: PoliticsBalance;
   society?: SocietyBalance;
+  geo?: GeoData;
+  units?: readonly Unit[];
+  titans?: readonly TitanClass[];
+  names?: readonly NameList[];
+  expeditions?: ExpeditionsBalance;
+  logistics?: LogisticsBalance;
+}
+
+export function buildGeo(g: GeoData): GeoGraph {
+  const adj = new Map<string, { to: string; km: number }[]>();
+  for (const [a, b, km] of g.edges) {
+    adj.set(a, [...(adj.get(a) ?? []), { to: b, km }]);
+    adj.set(b, [...(adj.get(b) ?? []), { to: a, km }]);
+  }
+  return { nodes: new Map(Object.entries(g.provinces)), adj, gates: new Set(g.gates) };
 }
 
 export function buildWorld(src: WorldSource, scenarioId: string): World {
@@ -65,5 +99,9 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     time: src.time,
     scenario,
     politics,
+    military:
+      src.geo && src.expeditions && src.logistics && src.names?.[0] && src.titans?.length
+        ? { geo: buildGeo(src.geo), units: new Map((src.units ?? []).map((u) => [u.id, u])), titans: src.titans, names: src.names[0], exp: src.expeditions, log: src.logistics }
+        : null,
   };
 }

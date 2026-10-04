@@ -1,0 +1,1311 @@
+{
+ "canon": "A",
+ "notes_canon": "Généré par `npm run map:generate` à partir de data/map/paradis.json : ne pas éditer à la main.",
+ "units": "km",
+ "provinces": {
+  "prov_bourg_minier_maria": {
+   "x": -269.2,
+   "y": 370.5,
+   "zone": "maria"
+  },
+  "prov_camp_entrainement": {
+   "x": -247.5,
+   "y": -247.5,
+   "zone": "rose"
+  },
+  "prov_carrefour_du_sud": {
+   "x": -243.3,
+   "y": 334.9,
+   "zone": "maria"
+  },
+  "prov_champs_du_centre": {
+   "x": 252,
+   "y": -145.5,
+   "zone": "rose"
+  },
+  "prov_collines_minieres": {
+   "x": -393.7,
+   "y": 127.9,
+   "zone": "maria"
+  },
+  "prov_cote_est": {
+   "x": 526.5,
+   "y": 171.1,
+   "zone": "outre"
+  },
+  "prov_dauper": {
+   "x": 247.5,
+   "y": 247.5,
+   "zone": "rose"
+  },
+  "prov_domaine_reiss": {
+   "x": -132.1,
+   "y": -110.9,
+   "zone": "sina"
+  },
+  "prov_ehrmich": {
+   "x": 0,
+   "y": 172.5,
+   "zone": "sina"
+  },
+  "prov_falaises_cote_sud": {
+   "x": -338.7,
+   "y": 466.1,
+   "zone": "outre"
+  },
+  "prov_faubourgs_shiganshina": {
+   "x": 0,
+   "y": 414,
+   "zone": "maria"
+  },
+  "prov_foret_arbres_geants": {
+   "x": 393.7,
+   "y": 127.9,
+   "zone": "maria"
+  },
+  "prov_foret_morte": {
+   "x": -331.7,
+   "y": -456.5,
+   "zone": "outre"
+  },
+  "prov_forges_rose": {
+   "x": 252,
+   "y": 145.5,
+   "zone": "rose"
+  },
+  "prov_fort_avance_maria": {
+   "x": 435.6,
+   "y": 141.5,
+   "zone": "maria"
+  },
+  "prov_gorge_du_silence": {
+   "x": -243.3,
+   "y": -334.9,
+   "zone": "maria"
+  },
+  "prov_hameaux_est": {
+   "x": 435.6,
+   "y": -141.5,
+   "zone": "maria"
+  },
+  "prov_hameaux_ouest_maria": {
+   "x": -435.6,
+   "y": 141.5,
+   "zone": "maria"
+  },
+  "prov_haras_maria": {
+   "x": 0,
+   "y": -414,
+   "zone": "maria"
+  },
+  "prov_jinae": {
+   "x": 0,
+   "y": 291,
+   "zone": "rose"
+  },
+  "prov_karanes": {
+   "x": 350,
+   "y": 0,
+   "zone": "rose"
+  },
+  "prov_krolva": {
+   "x": -350,
+   "y": 0,
+   "zone": "rose"
+  },
+  "prov_lac_des_reflets": {
+   "x": 243.3,
+   "y": -334.9,
+   "zone": "maria"
+  },
+  "prov_marais_brumeux": {
+   "x": -541.5,
+   "y": -176,
+   "zone": "outre"
+  },
+  "prov_maria_est": {
+   "x": 486,
+   "y": 0,
+   "zone": "mur_maria"
+  },
+  "prov_maria_nord": {
+   "x": 0,
+   "y": -486,
+   "zone": "mur_maria"
+  },
+  "prov_maria_nord_est": {
+   "x": 343.7,
+   "y": -343.7,
+   "zone": "mur_maria"
+  },
+  "prov_maria_nord_ouest": {
+   "x": -343.7,
+   "y": -343.7,
+   "zone": "mur_maria"
+  },
+  "prov_maria_ouest": {
+   "x": -486,
+   "y": 0,
+   "zone": "mur_maria"
+  },
+  "prov_maria_sud": {
+   "x": 0,
+   "y": 486,
+   "zone": "mur_maria"
+  },
+  "prov_maria_sud_est": {
+   "x": 343.7,
+   "y": 343.7,
+   "zone": "mur_maria"
+  },
+  "prov_maria_sud_ouest": {
+   "x": -343.7,
+   "y": 343.7,
+   "zone": "mur_maria"
+  },
+  "prov_mitras": {
+   "x": 0,
+   "y": 0,
+   "zone": "sina"
+  },
+  "prov_monts_brumeux": {
+   "x": -269.2,
+   "y": -370.5,
+   "zone": "maria"
+  },
+  "prov_orvud": {
+   "x": 15,
+   "y": -171.8,
+   "zone": "sina"
+  },
+  "prov_palais_royal": {
+   "x": -18.2,
+   "y": 43.9,
+   "zone": "sina"
+  },
+  "prov_plaines_cerealieres_sud": {
+   "x": 269.2,
+   "y": 370.5,
+   "zone": "maria"
+  },
+  "prov_plaines_du_nord": {
+   "x": 0,
+   "y": -458,
+   "zone": "maria"
+  },
+  "prov_plaines_interieures_maria_sud": {
+   "x": 243.3,
+   "y": 334.9,
+   "zone": "maria"
+  },
+  "prov_plaines_meurtries": {
+   "x": 0,
+   "y": 567.4,
+   "zone": "outre"
+  },
+  "prov_plateau_du_nord": {
+   "x": 0,
+   "y": -577.1,
+   "zone": "outre"
+  },
+  "prov_poudriere_rose": {
+   "x": -252,
+   "y": 145.5,
+   "zone": "rose"
+  },
+  "prov_qg_corps": {
+   "x": 0,
+   "y": -291,
+   "zone": "rose"
+  },
+  "prov_ragako": {
+   "x": -247.5,
+   "y": 247.5,
+   "zone": "rose"
+  },
+  "prov_relais_ferroviaire": {
+   "x": -252,
+   "y": -145.5,
+   "zone": "rose"
+  },
+  "prov_relais_poste_maria": {
+   "x": 393.7,
+   "y": -127.9,
+   "zone": "maria"
+  },
+  "prov_riviere_des_cendres": {
+   "x": -529.4,
+   "y": 172,
+   "zone": "outre"
+  },
+  "prov_rose_est": {
+   "x": 386,
+   "y": 0,
+   "zone": "mur_rose"
+  },
+  "prov_rose_nord": {
+   "x": 0,
+   "y": -386,
+   "zone": "mur_rose"
+  },
+  "prov_rose_nord_est": {
+   "x": 272.9,
+   "y": -272.9,
+   "zone": "mur_rose"
+  },
+  "prov_rose_nord_ouest": {
+   "x": -272.9,
+   "y": -272.9,
+   "zone": "mur_rose"
+  },
+  "prov_rose_ouest": {
+   "x": -386,
+   "y": 0,
+   "zone": "mur_rose"
+  },
+  "prov_rose_sud": {
+   "x": 0,
+   "y": 386,
+   "zone": "mur_rose"
+  },
+  "prov_rose_sud_est": {
+   "x": 272.9,
+   "y": 272.9,
+   "zone": "mur_rose"
+  },
+  "prov_rose_sud_ouest": {
+   "x": -272.9,
+   "y": 272.9,
+   "zone": "mur_rose"
+  },
+  "prov_ruines_premier_cordon": {
+   "x": 337.1,
+   "y": 464,
+   "zone": "outre"
+  },
+  "prov_shiganshina": {
+   "x": 0,
+   "y": 458,
+   "zone": "maria"
+  },
+  "prov_sina_est": {
+   "x": 247.3,
+   "y": 66.3,
+   "zone": "mur_sina"
+  },
+  "prov_sina_nord": {
+   "x": 0,
+   "y": -256,
+   "zone": "mur_sina"
+  },
+  "prov_sina_nord_est": {
+   "x": 203.1,
+   "y": -155.8,
+   "zone": "mur_sina"
+  },
+  "prov_sina_nord_ouest": {
+   "x": -181,
+   "y": -181,
+   "zone": "mur_sina"
+  },
+  "prov_sina_ouest": {
+   "x": -253.8,
+   "y": 33.4,
+   "zone": "mur_sina"
+  },
+  "prov_sina_sud": {
+   "x": 0,
+   "y": 256,
+   "zone": "mur_sina"
+  },
+  "prov_steppe_orientale": {
+   "x": 536.4,
+   "y": -174.3,
+   "zone": "outre"
+  },
+  "prov_stohess": {
+   "x": 172.5,
+   "y": 0,
+   "zone": "sina"
+  },
+  "prov_trost": {
+   "x": 0,
+   "y": 350,
+   "zone": "rose"
+  },
+  "prov_utgard": {
+   "x": 247.5,
+   "y": -247.5,
+   "zone": "rose"
+  },
+  "prov_utopia": {
+   "x": 0,
+   "y": -350,
+   "zone": "rose"
+  },
+  "prov_vallee_du_moulin": {
+   "x": -393.7,
+   "y": -127.9,
+   "zone": "maria"
+  },
+  "prov_vallee_oubliee": {
+   "x": 327.8,
+   "y": -451.2,
+   "zone": "outre"
+  },
+  "prov_vergers_ouest": {
+   "x": -435.6,
+   "y": -141.5,
+   "zone": "maria"
+  },
+  "prov_ville_souterraine": {
+   "x": 18.2,
+   "y": 43.9,
+   "zone": "sina"
+  },
+  "prov_ville_usine": {
+   "x": 269.2,
+   "y": -370.5,
+   "zone": "maria"
+  },
+  "prov_yarckel": {
+   "x": -169.9,
+   "y": 30,
+   "zone": "sina"
+  }
+ },
+ "edges": [
+  [
+   "prov_bourg_minier_maria",
+   "prov_carrefour_du_sud",
+   44
+  ],
+  [
+   "prov_bourg_minier_maria",
+   "prov_hameaux_ouest_maria",
+   283.1
+  ],
+  [
+   "prov_bourg_minier_maria",
+   "prov_maria_sud",
+   292.9
+  ],
+  [
+   "prov_bourg_minier_maria",
+   "prov_maria_sud_ouest",
+   79.2
+  ],
+  [
+   "prov_bourg_minier_maria",
+   "prov_shiganshina",
+   283.1
+  ],
+  [
+   "prov_camp_entrainement",
+   "prov_krolva",
+   267.9
+  ],
+  [
+   "prov_camp_entrainement",
+   "prov_qg_corps",
+   251.3
+  ],
+  [
+   "prov_camp_entrainement",
+   "prov_relais_ferroviaire",
+   102.1
+  ],
+  [
+   "prov_camp_entrainement",
+   "prov_rose_nord_ouest",
+   35.9
+  ],
+  [
+   "prov_camp_entrainement",
+   "prov_utopia",
+   267.9
+  ],
+  [
+   "prov_carrefour_du_sud",
+   "prov_collines_minieres",
+   255.9
+  ],
+  [
+   "prov_carrefour_du_sud",
+   "prov_faubourgs_shiganshina",
+   255.8
+  ],
+  [
+   "prov_carrefour_du_sud",
+   "prov_rose_sud",
+   248.6
+  ],
+  [
+   "prov_carrefour_du_sud",
+   "prov_rose_sud_ouest",
+   68.7
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_forges_rose",
+   291
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_karanes",
+   175.4
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_qg_corps",
+   291
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_sina_est",
+   211.9
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_sina_nord_est",
+   50
+  ],
+  [
+   "prov_champs_du_centre",
+   "prov_utgard",
+   102.1
+  ],
+  [
+   "prov_collines_minieres",
+   "prov_hameaux_ouest_maria",
+   44.1
+  ],
+  [
+   "prov_collines_minieres",
+   "prov_rose_ouest",
+   128.1
+  ],
+  [
+   "prov_collines_minieres",
+   "prov_rose_sud_ouest",
+   188.7
+  ],
+  [
+   "prov_collines_minieres",
+   "prov_vallee_du_moulin",
+   255.8
+  ],
+  [
+   "prov_cote_est",
+   "prov_maria_est",
+   175.8
+  ],
+  [
+   "prov_cote_est",
+   "prov_maria_sud_est",
+   251.4
+  ],
+  [
+   "prov_cote_est",
+   "prov_ruines_premier_cordon",
+   348.8
+  ],
+  [
+   "prov_cote_est",
+   "prov_steppe_orientale",
+   345.5
+  ],
+  [
+   "prov_dauper",
+   "prov_forges_rose",
+   102.1
+  ],
+  [
+   "prov_dauper",
+   "prov_jinae",
+   251.3
+  ],
+  [
+   "prov_dauper",
+   "prov_karanes",
+   267.9
+  ],
+  [
+   "prov_dauper",
+   "prov_rose_sud_est",
+   35.9
+  ],
+  [
+   "prov_dauper",
+   "prov_trost",
+   267.9
+  ],
+  [
+   "prov_domaine_reiss",
+   "prov_mitras",
+   172.5
+  ],
+  [
+   "prov_domaine_reiss",
+   "prov_orvud",
+   159.2
+  ],
+  [
+   "prov_domaine_reiss",
+   "prov_sina_nord_ouest",
+   85.5
+  ],
+  [
+   "prov_domaine_reiss",
+   "prov_sina_ouest",
+   188.8
+  ],
+  [
+   "prov_domaine_reiss",
+   "prov_yarckel",
+   145.9
+  ],
+  [
+   "prov_ehrmich",
+   "prov_palais_royal",
+   129.9
+  ],
+  [
+   "prov_ehrmich",
+   "prov_sina_sud",
+   83.5
+  ],
+  [
+   "prov_ehrmich",
+   "prov_stohess",
+   244
+  ],
+  [
+   "prov_ehrmich",
+   "prov_ville_souterraine",
+   129.9
+  ],
+  [
+   "prov_ehrmich",
+   "prov_yarckel",
+   221.7
+  ],
+  [
+   "prov_falaises_cote_sud",
+   "prov_maria_sud",
+   339.3
+  ],
+  [
+   "prov_falaises_cote_sud",
+   "prov_maria_sud_ouest",
+   122.5
+  ],
+  [
+   "prov_falaises_cote_sud",
+   "prov_plaines_meurtries",
+   353.5
+  ],
+  [
+   "prov_falaises_cote_sud",
+   "prov_riviere_des_cendres",
+   350.5
+  ],
+  [
+   "prov_faubourgs_shiganshina",
+   "prov_plaines_interieures_maria_sud",
+   255.8
+  ],
+  [
+   "prov_faubourgs_shiganshina",
+   "prov_rose_sud",
+   28
+  ],
+  [
+   "prov_faubourgs_shiganshina",
+   "prov_shiganshina",
+   44
+  ],
+  [
+   "prov_foret_arbres_geants",
+   "prov_fort_avance_maria",
+   44.1
+  ],
+  [
+   "prov_foret_arbres_geants",
+   "prov_plaines_interieures_maria_sud",
+   255.9
+  ],
+  [
+   "prov_foret_arbres_geants",
+   "prov_relais_poste_maria",
+   255.8
+  ],
+  [
+   "prov_foret_arbres_geants",
+   "prov_rose_est",
+   128.1
+  ],
+  [
+   "prov_foret_arbres_geants",
+   "prov_rose_sud_est",
+   188.7
+  ],
+  [
+   "prov_foret_morte",
+   "prov_marais_brumeux",
+   350.3
+  ],
+  [
+   "prov_foret_morte",
+   "prov_maria_nord",
+   333
+  ],
+  [
+   "prov_foret_morte",
+   "prov_maria_nord_ouest",
+   113.4
+  ],
+  [
+   "prov_foret_morte",
+   "prov_plateau_du_nord",
+   352.9
+  ],
+  [
+   "prov_forges_rose",
+   "prov_jinae",
+   291
+  ],
+  [
+   "prov_forges_rose",
+   "prov_karanes",
+   175.4
+  ],
+  [
+   "prov_forges_rose",
+   "prov_sina_est",
+   79.3
+  ],
+  [
+   "prov_forges_rose",
+   "prov_sina_sud",
+   275.2
+  ],
+  [
+   "prov_fort_avance_maria",
+   "prov_hameaux_est",
+   283
+  ],
+  [
+   "prov_fort_avance_maria",
+   "prov_maria_est",
+   150.2
+  ],
+  [
+   "prov_fort_avance_maria",
+   "prov_maria_sud_est",
+   222.1
+  ],
+  [
+   "prov_fort_avance_maria",
+   "prov_plaines_cerealieres_sud",
+   283.1
+  ],
+  [
+   "prov_gorge_du_silence",
+   "prov_haras_maria",
+   255.8
+  ],
+  [
+   "prov_gorge_du_silence",
+   "prov_monts_brumeux",
+   44
+  ],
+  [
+   "prov_gorge_du_silence",
+   "prov_rose_nord",
+   248.6
+  ],
+  [
+   "prov_gorge_du_silence",
+   "prov_rose_nord_ouest",
+   68.7
+  ],
+  [
+   "prov_gorge_du_silence",
+   "prov_vallee_du_moulin",
+   255.9
+  ],
+  [
+   "prov_hameaux_est",
+   "prov_maria_est",
+   150.2
+  ],
+  [
+   "prov_hameaux_est",
+   "prov_maria_nord_est",
+   222.1
+  ],
+  [
+   "prov_hameaux_est",
+   "prov_relais_poste_maria",
+   44.1
+  ],
+  [
+   "prov_hameaux_est",
+   "prov_ville_usine",
+   283.1
+  ],
+  [
+   "prov_hameaux_ouest_maria",
+   "prov_maria_ouest",
+   150.2
+  ],
+  [
+   "prov_hameaux_ouest_maria",
+   "prov_maria_sud_ouest",
+   222.1
+  ],
+  [
+   "prov_hameaux_ouest_maria",
+   "prov_vergers_ouest",
+   283
+  ],
+  [
+   "prov_haras_maria",
+   "prov_lac_des_reflets",
+   255.8
+  ],
+  [
+   "prov_haras_maria",
+   "prov_plaines_du_nord",
+   44
+  ],
+  [
+   "prov_haras_maria",
+   "prov_rose_nord",
+   28
+  ],
+  [
+   "prov_jinae",
+   "prov_poudriere_rose",
+   291
+  ],
+  [
+   "prov_jinae",
+   "prov_ragako",
+   251.3
+  ],
+  [
+   "prov_jinae",
+   "prov_sina_sud",
+   35
+  ],
+  [
+   "prov_jinae",
+   "prov_trost",
+   59
+  ],
+  [
+   "prov_karanes",
+   "prov_rose_est",
+   36
+  ],
+  [
+   "prov_karanes",
+   "prov_utgard",
+   267.9
+  ],
+  [
+   "prov_krolva",
+   "prov_poudriere_rose",
+   175.4
+  ],
+  [
+   "prov_krolva",
+   "prov_ragako",
+   267.9
+  ],
+  [
+   "prov_krolva",
+   "prov_relais_ferroviaire",
+   175.4
+  ],
+  [
+   "prov_krolva",
+   "prov_rose_ouest",
+   36
+  ],
+  [
+   "prov_lac_des_reflets",
+   "prov_relais_poste_maria",
+   255.9
+  ],
+  [
+   "prov_lac_des_reflets",
+   "prov_rose_nord",
+   248.6
+  ],
+  [
+   "prov_lac_des_reflets",
+   "prov_rose_nord_est",
+   68.7
+  ],
+  [
+   "prov_lac_des_reflets",
+   "prov_ville_usine",
+   44
+  ],
+  [
+   "prov_marais_brumeux",
+   "prov_maria_nord_ouest",
+   259.3
+  ],
+  [
+   "prov_marais_brumeux",
+   "prov_maria_ouest",
+   184.5
+  ],
+  [
+   "prov_marais_brumeux",
+   "prov_riviere_des_cendres",
+   348.2
+  ],
+  [
+   "prov_maria_est",
+   "prov_maria_nord_est",
+   372
+  ],
+  [
+   "prov_maria_est",
+   "prov_maria_sud_est",
+   372
+  ],
+  [
+   "prov_maria_est",
+   "prov_steppe_orientale",
+   181.4
+  ],
+  [
+   "prov_maria_nord",
+   "prov_maria_nord_est",
+   372
+  ],
+  [
+   "prov_maria_nord",
+   "prov_maria_nord_ouest",
+   372
+  ],
+  [
+   "prov_maria_nord",
+   "prov_monts_brumeux",
+   292.9
+  ],
+  [
+   "prov_maria_nord",
+   "prov_plaines_du_nord",
+   28
+  ],
+  [
+   "prov_maria_nord",
+   "prov_plateau_du_nord",
+   91.1
+  ],
+  [
+   "prov_maria_nord",
+   "prov_vallee_oubliee",
+   329.6
+  ],
+  [
+   "prov_maria_nord",
+   "prov_ville_usine",
+   292.9
+  ],
+  [
+   "prov_maria_nord_est",
+   "prov_steppe_orientale",
+   256.6
+  ],
+  [
+   "prov_maria_nord_est",
+   "prov_vallee_oubliee",
+   108.7
+  ],
+  [
+   "prov_maria_nord_est",
+   "prov_ville_usine",
+   79.2
+  ],
+  [
+   "prov_maria_nord_ouest",
+   "prov_maria_ouest",
+   372
+  ],
+  [
+   "prov_maria_nord_ouest",
+   "prov_monts_brumeux",
+   79.2
+  ],
+  [
+   "prov_maria_nord_ouest",
+   "prov_vergers_ouest",
+   222.1
+  ],
+  [
+   "prov_maria_ouest",
+   "prov_maria_sud_ouest",
+   372
+  ],
+  [
+   "prov_maria_ouest",
+   "prov_riviere_des_cendres",
+   177.4
+  ],
+  [
+   "prov_maria_ouest",
+   "prov_vergers_ouest",
+   150.2
+  ],
+  [
+   "prov_maria_sud",
+   "prov_maria_sud_est",
+   372
+  ],
+  [
+   "prov_maria_sud",
+   "prov_maria_sud_ouest",
+   372
+  ],
+  [
+   "prov_maria_sud",
+   "prov_plaines_cerealieres_sud",
+   292.9
+  ],
+  [
+   "prov_maria_sud",
+   "prov_plaines_meurtries",
+   81.4
+  ],
+  [
+   "prov_maria_sud",
+   "prov_ruines_premier_cordon",
+   337.8
+  ],
+  [
+   "prov_maria_sud",
+   "prov_shiganshina",
+   28
+  ],
+  [
+   "prov_maria_sud_est",
+   "prov_plaines_cerealieres_sud",
+   79.2
+  ],
+  [
+   "prov_maria_sud_est",
+   "prov_ruines_premier_cordon",
+   120.5
+  ],
+  [
+   "prov_maria_sud_ouest",
+   "prov_riviere_des_cendres",
+   252.9
+  ],
+  [
+   "prov_mitras",
+   "prov_orvud",
+   172.5
+  ],
+  [
+   "prov_mitras",
+   "prov_palais_royal",
+   47.5
+  ],
+  [
+   "prov_mitras",
+   "prov_stohess",
+   172.5
+  ],
+  [
+   "prov_mitras",
+   "prov_ville_souterraine",
+   47.5
+  ],
+  [
+   "prov_mitras",
+   "prov_yarckel",
+   172.5
+  ],
+  [
+   "prov_monts_brumeux",
+   "prov_plaines_du_nord",
+   283.1
+  ],
+  [
+   "prov_monts_brumeux",
+   "prov_vergers_ouest",
+   283.1
+  ],
+  [
+   "prov_orvud",
+   "prov_sina_nord",
+   85.5
+  ],
+  [
+   "prov_orvud",
+   "prov_sina_nord_est",
+   188.8
+  ],
+  [
+   "prov_orvud",
+   "prov_sina_nord_ouest",
+   196.2
+  ],
+  [
+   "prov_orvud",
+   "prov_stohess",
+   233.1
+  ],
+  [
+   "prov_palais_royal",
+   "prov_ville_souterraine",
+   36.4
+  ],
+  [
+   "prov_plaines_cerealieres_sud",
+   "prov_plaines_interieures_maria_sud",
+   44
+  ],
+  [
+   "prov_plaines_cerealieres_sud",
+   "prov_shiganshina",
+   283.1
+  ],
+  [
+   "prov_plaines_du_nord",
+   "prov_ville_usine",
+   283.1
+  ],
+  [
+   "prov_plaines_interieures_maria_sud",
+   "prov_rose_sud",
+   248.6
+  ],
+  [
+   "prov_plaines_interieures_maria_sud",
+   "prov_rose_sud_est",
+   68.7
+  ],
+  [
+   "prov_plaines_meurtries",
+   "prov_ruines_premier_cordon",
+   352.6
+  ],
+  [
+   "prov_plateau_du_nord",
+   "prov_vallee_oubliee",
+   351.1
+  ],
+  [
+   "prov_poudriere_rose",
+   "prov_ragako",
+   102.1
+  ],
+  [
+   "prov_poudriere_rose",
+   "prov_relais_ferroviaire",
+   291
+  ],
+  [
+   "prov_poudriere_rose",
+   "prov_sina_ouest",
+   112.1
+  ],
+  [
+   "prov_poudriere_rose",
+   "prov_sina_sud",
+   275.2
+  ],
+  [
+   "prov_qg_corps",
+   "prov_relais_ferroviaire",
+   291
+  ],
+  [
+   "prov_qg_corps",
+   "prov_sina_nord",
+   35
+  ],
+  [
+   "prov_qg_corps",
+   "prov_utgard",
+   251.3
+  ],
+  [
+   "prov_qg_corps",
+   "prov_utopia",
+   59
+  ],
+  [
+   "prov_ragako",
+   "prov_rose_sud_ouest",
+   35.9
+  ],
+  [
+   "prov_ragako",
+   "prov_trost",
+   267.9
+  ],
+  [
+   "prov_relais_ferroviaire",
+   "prov_sina_nord_ouest",
+   79.4
+  ],
+  [
+   "prov_relais_ferroviaire",
+   "prov_sina_ouest",
+   178.9
+  ],
+  [
+   "prov_relais_poste_maria",
+   "prov_rose_est",
+   128.1
+  ],
+  [
+   "prov_relais_poste_maria",
+   "prov_rose_nord_est",
+   188.7
+  ],
+  [
+   "prov_rose_est",
+   "prov_rose_nord_est",
+   295.4
+  ],
+  [
+   "prov_rose_est",
+   "prov_rose_sud_est",
+   295.4
+  ],
+  [
+   "prov_rose_nord",
+   "prov_rose_nord_est",
+   295.4
+  ],
+  [
+   "prov_rose_nord",
+   "prov_rose_nord_ouest",
+   295.4
+  ],
+  [
+   "prov_rose_nord",
+   "prov_utopia",
+   36
+  ],
+  [
+   "prov_rose_nord_est",
+   "prov_utgard",
+   35.9
+  ],
+  [
+   "prov_rose_nord_ouest",
+   "prov_rose_ouest",
+   295.4
+  ],
+  [
+   "prov_rose_nord_ouest",
+   "prov_vallee_du_moulin",
+   188.7
+  ],
+  [
+   "prov_rose_ouest",
+   "prov_rose_sud_ouest",
+   295.4
+  ],
+  [
+   "prov_rose_ouest",
+   "prov_vallee_du_moulin",
+   128.1
+  ],
+  [
+   "prov_rose_sud",
+   "prov_rose_sud_est",
+   295.4
+  ],
+  [
+   "prov_rose_sud",
+   "prov_rose_sud_ouest",
+   295.4
+  ],
+  [
+   "prov_rose_sud",
+   "prov_trost",
+   36
+  ],
+  [
+   "prov_sina_est",
+   "prov_sina_nord_est",
+   226.5
+  ],
+  [
+   "prov_sina_est",
+   "prov_sina_sud",
+   311.7
+  ],
+  [
+   "prov_sina_est",
+   "prov_stohess",
+   100
+  ],
+  [
+   "prov_sina_nord",
+   "prov_sina_nord_est",
+   226.5
+  ],
+  [
+   "prov_sina_nord",
+   "prov_sina_nord_ouest",
+   195.9
+  ],
+  [
+   "prov_sina_nord_est",
+   "prov_stohess",
+   158.8
+  ],
+  [
+   "prov_sina_nord_ouest",
+   "prov_sina_ouest",
+   226.4
+  ],
+  [
+   "prov_sina_ouest",
+   "prov_sina_sud",
+   337.6
+  ],
+  [
+   "prov_sina_ouest",
+   "prov_yarckel",
+   84
+  ],
+  [
+   "prov_steppe_orientale",
+   "prov_vallee_oubliee",
+   346.7
+  ],
+  [
+   "prov_utgard",
+   "prov_utopia",
+   267.9
+  ],
+  [
+   "prov_vallee_du_moulin",
+   "prov_vergers_ouest",
+   44.1
+  ]
+ ],
+ "gates": [
+  "prov_maria_sud",
+  "prov_rose_est",
+  "prov_rose_sud",
+  "prov_sina_est",
+  "prov_sina_sud"
+ ]
+}

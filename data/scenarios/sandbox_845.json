@@ -5,6 +5,7 @@
     "faction": "paradis",
     "start": { "year": 845, "day": 1 },
     "default_control": "paradis",
+    "expedition_base": "prov_karanes",
     "control": {
       "prov_plaines_meurtries": "titans", "prov_ruines_premier_cordon": "titans", "prov_riviere_des_cendres": "titans",
       "prov_falaises_cote_sud": "titans", "prov_marais_brumeux": "titans", "prov_foret_morte": "titans",

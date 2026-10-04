@@ -1,4 +1,6 @@
 import { BALANCE_FILES } from "./balance";
+import { GeoSchema } from "./geo";
+import type { GeoData } from "./geo";
 import type { BalanceName } from "./balance";
 import { COLLECTION_NAMES } from "./schemas";
 import type { CollectionName } from "./schemas";
@@ -14,6 +16,7 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
   const data = emptyData();
   const issues: DataIssue[] = [];
   const balance: Partial<Record<BalanceName, unknown>> = {};
+  let geo: GeoData | undefined;
   for (const path of Object.keys(files).sort()) {
     const parts = path.split("/");
     const folder = parts[2] ?? "";
@@ -21,6 +24,10 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
     const json = files[path];
     if ((COLLECTION_NAMES as readonly string[]).includes(folder)) {
       issues.push(...validateCollectionFile(folder as CollectionName, file, json, data));
+    } else if (folder === "geo") {
+      const res = GeoSchema.safeParse(json);
+      if (res.success) geo = res.data;
+      else for (const i of res.error.issues) issues.push({ file, jsonPath: jsonPath(i.path), message: i.message });
     } else if (folder === "balance") {
       const name = (parts[3] ?? "").replace(/\.json$/, "") as BalanceName;
       const schema = BALANCE_FILES[name];
@@ -48,6 +55,12 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
       roles: data.roles,
       ...(balance.politics ? { politics: balance.politics as WorldSource["politics"] } : {}),
       ...(balance.society ? { society: balance.society as WorldSource["society"] } : {}),
+      ...(balance.expeditions ? { expeditions: balance.expeditions as WorldSource["expeditions"] } : {}),
+      ...(balance.logistics ? { logistics: balance.logistics as WorldSource["logistics"] } : {}),
+      ...(geo ? { geo } : {}),
+      units: data.units,
+      titans: data.titans,
+      names: data.names,
     },
     issues,
   };

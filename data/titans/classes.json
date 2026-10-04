@@ -1,0 +1,6 @@
+[
+  { "id": "titan_petit", "name_key": "titan.petit", "size_m": [3, 5], "threat": 1, "weight": 0.3, "abnormal": false, "canon": "A", "notes_canon": "03 §5.2 : classe et taille [A] ; fréquence [A]." },
+  { "id": "titan_moyen", "name_key": "titan.moyen", "size_m": [6, 9], "threat": 2, "weight": 0.38, "abnormal": false, "canon": "A", "notes_canon": "03 §5.2 [A]." },
+  { "id": "titan_grand", "name_key": "titan.grand", "size_m": [10, 15], "threat": 3.5, "weight": 0.22, "abnormal": false, "canon": "A", "notes_canon": "03 §5.2 [A] ; dangereux en nombre." },
+  { "id": "titan_anormal", "name_key": "titan.anormal", "size_m": [5, 15], "threat": 5, "weight": 0.1, "abnormal": true, "canon": "C", "notes_canon": "Existence des Titans anormaux C (03 §5.1, fusée noire du Corps, 03 §7) ; taille, menace et fréquence [A]." }
+]

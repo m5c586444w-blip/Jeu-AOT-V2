@@ -1,0 +1,8 @@
+{
+  "canon": "A",
+  "notes_canon": "Valeurs de départ [A] (02 §3.3) : rayon de ravitaillement depuis un mur tenu ou un dépôt ; convois lents et interceptables.",
+  "radius_km": { "source": 30, "depot": 25 },
+  "depot": { "gold_cost": 1500, "capacity": { "food": 400, "gas": 300, "steel": 60 } },
+  "convoy": { "pace_km_per_day": 35, "wagon_capacity": 40, "horses_per_wagon": 2, "interception_per_day_at_density_1": 0.35, "escort_k": 0.03, "cargo_loss": [0.2, 0.6], "escort_loss_share": 0.15 },
+  "alerts": { "expedition_gas_pct": 30, "expedition_food_days": 2, "depot_food_days": 5 }
+}

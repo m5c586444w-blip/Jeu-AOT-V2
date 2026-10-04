@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
+import { FORMATIONS, WEATHERS } from "../sim/military/vocabulary";
 import { CanonSchema } from "./schemas";
 
 const res = z.partialRecord(z.enum(RESOURCE_IDS), z.number());
@@ -99,10 +100,84 @@ export const SocietyBalanceSchema = z
   })
   .strict();
 
+
+const pos = z.number().positive();
+const prob = z.number().min(0).max(1);
+const range = z.tuple([z.number().min(0), z.number().min(0)]).refine(([a, b]) => a <= b, "intervalle [min, max] attendu");
+const seasons = z.object({ hiver: num, printemps: num, ete: num, automne: num }).strict();
+
+/** data/balance/expeditions.json — marche, rencontres, auto-résolution, retrait, politique des expéditions (P3, valeurs [A]). */
+export const ExpeditionsBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    /** Une unité du stock national de gaz = N unités d'ODM (03 §3.2 : réservoir ≈ 100 u). */
+    odm_units_per_stock_unit: pos,
+    odm_tank: pos,
+    gas_spare_tanks_per_soldier: z.number().min(0),
+    blades: z.object({ pairs_per_soldier: z.number().int().min(1), cuts_per_pair: range, steel_per_pair: pos, spare_pairs_per_soldier: z.number().min(0) }).strict(),
+    pace_km_per_day: z.record(z.enum(FORMATIONS), pos),
+    formations: z.record(z.enum(FORMATIONS), z.object({ detection: prob, evasion: prob, engaged_share: prob, signal_quality: prob, exposure: pos }).strict()),
+    encounters: z.object({ per_day_at_density_1: pos, size_ref: pos, size_exponent: z.number().min(0).max(1), night_share: prob, season: seasons, abnormal_evasion_mult: prob, commander_k: num }).strict(),
+    engagement: z
+      .object({
+        min_engaged: z.number().int().min(1),
+        max_engaged: z.number().int().min(1),
+        deaths_base: pos,
+        sigma: pos,
+        catastrophe: z.object({ p_base: prob, abnormal_mult: pos, column_mult: pos, share: range }).strict(),
+        kill_prob: prob,
+        skill_k: num,
+        wounded_per_death: z.number().min(0),
+        serious_share: prob,
+        gas_per_engaged: range,
+        horses_per_death: z.number().min(0),
+        no_gas_mult: pos,
+        no_blades_mult: pos,
+        morale_k: num,
+        veteran_k: num,
+      })
+      .strict(),
+    attrition: z.object({ food_per_soldier: pos, fodder_per_horse: pos, outside_morale_per_day: num, horse_fatigue_per_day: num, horse_rest_per_day: num, horse_mortality_at_fatigue_100: prob, hunger_death_rate: prob }).strict(),
+    medical: z.object({ serious_death_without: prob, serious_death_with: prob, infection_share: prob }).strict(),
+    weather: z.object({ by_season: z.record(z.enum(["hiver", "printemps", "ete", "automne"]), z.record(z.enum(WEATHERS), prob)), effects: z.record(z.enum(WEATHERS), z.object({ encounters: pos, detection: pos, pace: pos, signal_error: prob }).strict()) }).strict(),
+    signals: z.object({ error_base: prob, misread_engage_mult: pos }).strict(),
+    retreat_defaults: z.object({ losses_pct: z.number().min(0).max(100), gas_pct: z.number().min(0).max(100), abnormal: z.number().int().min(0), max_days: z.number().int().min(1) }).strict(),
+    objective_days: z.record(z.string(), z.number().int().min(0)),
+    politics: z.object({ capital_base: z.number().min(0), capital_per_100: z.number().min(0), legitimacy_success: num, legitimacy_failure: num, legitimacy_per_loss_pct: num, corps_loyalty_success: num, corps_loyalty_per_loss_pct: num, mourning_days: z.number().int().positive() }).strict(),
+    experience: z.object({ survival_per_expedition: num, max_bonus: num }).strict(),
+    named: z.object({ exposure_mult: pos, ackerman_mult: pos }).strict(),
+    wounds: z.object({ recovery_days: z.number().int().positive() }).strict(),
+    roster: z.object({ squad_size: range, roles: z.record(z.string(), prob), attribute_mean: num, attribute_sd: pos, age: range, female_share: prob }).strict(),
+  })
+  .strict();
+
+/** data/balance/logistics.json — rayons de ravitaillement, dépôts, convois, alertes (P3, valeurs [A]). */
+export const LogisticsBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    radius_km: z.object({ source: pos, depot: pos }).strict(),
+    depot: z.object({ gold_cost: z.number().min(0), capacity: z.record(z.string(), pos) }).strict(),
+    convoy: z.object({ pace_km_per_day: pos, wagon_capacity: pos, horses_per_wagon: pos, interception_per_day_at_density_1: prob, escort_k: pos, cargo_loss: range, escort_loss_share: prob }).strict(),
+    alerts: z.object({ expedition_gas_pct: z.number().min(0).max(100), expedition_food_days: z.number().min(0), depot_food_days: z.number().min(0) }).strict(),
+  })
+  .strict();
+
+export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
+export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
+
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
 export type SocietyBalance = z.infer<typeof SocietyBalanceSchema>;
 export type EconomyBalance = z.infer<typeof EconomyBalanceSchema>;
 export type TimeBalance = z.infer<typeof TimeBalanceSchema>;
 
-export const BALANCE_FILES = { economy: EconomyBalanceSchema, time: TimeBalanceSchema, politics: PoliticsBalanceSchema, society: SocietyBalanceSchema } as const;
+export const BALANCE_FILES = {
+  economy: EconomyBalanceSchema,
+  time: TimeBalanceSchema,
+  politics: PoliticsBalanceSchema,
+  society: SocietyBalanceSchema,
+  expeditions: ExpeditionsBalanceSchema,
+  logistics: LogisticsBalanceSchema,
+} as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

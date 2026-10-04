@@ -1,6 +1,8 @@
-// npm run map:generate — produit data/map/paradis.json à partir de data/map/paradis.layout.json.
+// npm run map:generate — produit data/map/paradis.json (et le graphe data/geo/paradis.json) à partir de data/map/paradis.layout.json.
 // Déterministe : même disposition = même fichier. Le résultat est une donnée éditable (05 §1, 06 §8).
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { geoFromMap } from "../data/geo";
+import { MapSchema } from "../data/map";
 import { polar } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
 import { Rng } from "../sim/core/rng";
@@ -96,4 +98,7 @@ const map = {
   neighbors,
 };
 writeFileSync("data/map/paradis.json", JSON.stringify(map) + "\n");
+// Graphe de routage de la simulation (P3) : dérivé de la carte validée, sans les polygones.
+mkdirSync("data/geo", { recursive: true });
+writeFileSync("data/geo/paradis.json", JSON.stringify(geoFromMap(MapSchema.parse(map)), null, 1) + "\n");
 console.log(`map:generate : ${Object.keys(out).length} polygones, côte de ${coast.length} points, emprise ±${extent} km.`);

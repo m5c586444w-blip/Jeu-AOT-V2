@@ -1,33 +1,17 @@
 import { buildWorld } from "../sim/strategic/world";
 import type { World } from "../sim/strategic/world";
-import { loadBalanceDir, loadDataDir } from "./loadNode";
+import { readDataFiles } from "./loadNode";
 import { formatIssue } from "./validate";
+import { worldSourceFromFiles } from "./worldSource";
 
 export const DEFAULT_SCENARIO = "scn_sandbox_845";
 
-/** Monde validé depuis le disque (outils CLI, tests). Lève une erreur lisible si les données sont invalides. */
+/**
+ * Monde validé depuis le disque (outils CLI, tests). Même chemin que le Worker (`worldSourceFromFiles`),
+ * pour qu'une collection ou un fichier d'équilibrage ajouté soit chargé partout de la même façon.
+ */
 export function loadWorld(dir = "data", scenarioId = DEFAULT_SCENARIO): World {
-  const { data, issues } = loadDataDir(dir);
-  const { balance, issues: bIssues } = loadBalanceDir(dir);
-  const all = [...issues, ...bIssues];
-  if (all.length > 0) throw new Error(`Données invalides :\n${all.map(formatIssue).join("\n")}`);
-  if (!balance.economy || !balance.time) throw new Error(`Équilibrage incomplet dans ${dir}/balance (economy.json et time.json requis)`);
-  return buildWorld(
-    {
-      provinces: data.provinces,
-      buildings: data.buildings,
-      scenarios: data.scenarios,
-      economy: balance.economy,
-      time: balance.time,
-      characters: data.characters,
-      traits: data.traits,
-      strata: data.strata,
-      organisations: data.organisations,
-      laws: data.laws,
-      roles: data.roles,
-      ...(balance.politics ? { politics: balance.politics } : {}),
-      ...(balance.society ? { society: balance.society } : {}),
-    },
-    scenarioId,
-  );
+  const { source, issues } = worldSourceFromFiles(readDataFiles(dir));
+  if (!source) throw new Error(`Données invalides :\n${issues.map(formatIssue).join("\n")}`);
+  return buildWorld(source, scenarioId);
 }

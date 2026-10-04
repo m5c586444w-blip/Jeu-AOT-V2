@@ -995,5 +995,15 @@
   "dossier.location_status": "Localisation : {status}",
   "dossier.location_why": "Statut de la position sur la carte : {status}. L'existence du lieu est établie, son emplacement exact ne l'est pas ; la position est un paramètre des données.",
   "dossier.control_status": "Rattachement : {status}",
-  "dossier.control_why": "Statut du rattachement de cette province dans le scénario : {status}. C'est un paramètre de scénario, pas un fait de l'œuvre."
+  "dossier.control_why": "Statut du rattachement de cette province dans le scénario : {status}. C'est un paramètre de scénario, pas un fait de l'œuvre.",
+  "unit.p01": "Escouade ODM de reconnaissance",
+  "unit.p02": "Escouade ODM de combat",
+  "unit.p03": "Escouade de soutien",
+  "unit.p04": "Section de cavalerie",
+  "unit.p12": "Convoi de ravitaillement",
+  "unit.p13": "Équipe médicale",
+  "titan.petit": "Petit Titan (3–5 m)",
+  "titan.moyen": "Titan moyen (6–9 m)",
+  "titan.grand": "Grand Titan (10–15 m)",
+  "titan.anormal": "Titan anormal"
 }

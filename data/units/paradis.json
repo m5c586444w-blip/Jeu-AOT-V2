@@ -1,0 +1,8 @@
+[
+  { "id": "unit_p01", "code": "U-P01", "name_key": "unit.p01", "size": [4, 6], "role": "eclaireur", "canon": "C", "notes_canon": "10 §1.1 : escouade ODM de reconnaissance (existence C ; effectif A)." },
+  { "id": "unit_p02", "code": "U-P02", "name_key": "unit.p02", "size": [4, 6], "role": "tueur", "canon": "C", "notes_canon": "10 §1.1 : escouade ODM de combat (existence C ; effectif A)." },
+  { "id": "unit_p03", "code": "U-P03", "name_key": "unit.p03", "size": [4, 8], "role": "soutien", "canon": "A", "notes_canon": "10 §1.1 : escouade de soutien (gaz, lames, soins)." },
+  { "id": "unit_p04", "code": "U-P04", "name_key": "unit.p04", "size": [10, 20], "role": "cavalier", "canon": "A", "notes_canon": "10 §1.1 : section de cavalerie." },
+  { "id": "unit_p12", "code": "U-P12", "name_key": "unit.p12", "size": [6, 20], "role": "convoi", "canon": "A", "notes_canon": "10 §1.1 : convoi de ravitaillement, vulnérable." },
+  { "id": "unit_p13", "code": "U-P13", "name_key": "unit.p13", "size": [4, 8], "role": "medecin", "canon": "A", "notes_canon": "10 §1.1 : équipe médicale, réduit la mortalité (F-LOG-07)." }
+]
