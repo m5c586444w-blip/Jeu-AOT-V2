@@ -128,8 +128,9 @@ export class IntelPanel implements Panel {
     const li = el("li", `rapport statut-${r.status}`);
     li.dataset["report"] = r.id;
     const d = fromAbsoluteDay(r.day);
-    const agent = intel.agents.find((a) => a.id === r.agent)?.name ?? "—";
-    li.append(el("span", "journal-date", t("date.format", { year: d.year, day: d.day })), " ", t("intel.report_line", { agent, op: t(`intel.op.${r.op}`), target: this.targetName(r.op, r.target), age: Math.max(0, today - r.about) }), " ");
+    // Vision (P6) : l'« agent » est le porteur ; la cible est une province.
+    const agent = r.op === "vision" ? displayName(this.ctx.world.politics?.characters.get(r.agent)) : (intel.agents.find((a) => a.id === r.agent)?.name ?? "—");
+    li.append(el("span", "journal-date", t("date.format", { year: d.year, day: d.day })), " ", t("intel.report_line", { agent, op: t(`intel.op.${r.op}`), target: this.targetName(r.op === "vision" ? "surveiller" : r.op, r.target), age: Math.max(0, today - r.about) }), " ");
     let claim: string;
     if (typeof r.claim === "number") claim = t("intel.claim.titans", { v: formatNumber(r.claim) });
     else if (r.claim === "taupe") claim = t("intel.claim.taupe", { name: displayName(this.ctx.world.politics?.characters.get(r.named ?? "")) });

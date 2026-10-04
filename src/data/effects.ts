@@ -62,6 +62,14 @@ export const EffectSchema = z.discriminatedUnion("op", [
   z.object({ op: z.literal("observe"), province: id("prov") }).strict(),
   /** Titans capturés vivants pour l'étude (F-TEC-02 ; E11 : deux Titans capturés à Trost). */
   z.object({ op: z.literal("captured"), delta: z.number().int() }).strict(),
+  /** Héritage préparé (P6, E42) : l'héritier dévore le porteur actuel du Titan ; coûts de F-TIT-05. */
+  z.object({ op: z.literal("inherit"), shifter: id("shifter"), heir: id("char") }).strict(),
+  /** Doses de sérum de Titan (E35 : la boîte de Kenny). */
+  z.object({ op: z.literal("serum"), delta: z.number().int() }).strict(),
+  /** Porteur aux mains de Paradis (capturé), ou relâché. */
+  z.object({ op: z.literal("capture_shifter"), shifter: id("shifter"), value: z.boolean() }).strict(),
+  /** Camp du porteur (un porteur qui change de camp, comme Ymir à E28). */
+  z.object({ op: z.literal("shifter_faction"), shifter: id("shifter"), faction: z.enum(["paradis", "marley", "inconnu"]) }).strict(),
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 

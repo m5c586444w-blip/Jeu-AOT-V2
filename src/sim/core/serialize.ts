@@ -66,6 +66,13 @@ export const MIGRATIONS: readonly Migration[] = [
       return { ...raw, schemaVersion: 6, events: raw["events"] ?? null, research: raw["research"] ?? null, intel: raw["intel"] ?? null };
     },
   },
+  {
+    from: 6,
+    describe: "v6 → v7 : Titans-porteurs (`shifters` : null ; porteurs de 850 repris des données au premier jour simulé), P6",
+    migrate(raw) {
+      return { ...raw, schemaVersion: 7, shifters: raw["shifters"] ?? null };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {
@@ -131,5 +138,7 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (rs !== null && (typeof rs !== "object" || rs === undefined || !("done" in rs))) problems.push("research");
   const intel = raw["intel"];
   if (intel !== null && (typeof intel !== "object" || intel === undefined || !("agents" in intel) || !("seen" in intel))) problems.push("intel");
+  const sh = raw["shifters"];
+  if (sh !== null && (typeof sh !== "object" || sh === undefined || !("titans" in sh) || !("serum" in sh))) problems.push("shifters");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

@@ -22,6 +22,7 @@ import { chooseOption } from "../events/engine";
 import { assignAgent, assignProblem, INTEL_OPS, recallAgent, recruitAgent, recruitProblem } from "../intel/intel";
 import type { IntelOp } from "../intel/intel";
 import { lockOf, techMods } from "../research/research";
+import { inherit, retireProblem } from "../shifters/shifters";
 import { toAbsoluteDay } from "./time";
 
 export const MAX_ADVANCE_DAYS = 3650;
@@ -47,6 +48,8 @@ export type Command =
   | { type: "RecruitAgent" }
   | { type: "AssignAgent"; agent: string; op: IntelOp; target: string }
   | { type: "RecallAgent"; agent: string }
+  | { type: "InheritTitan"; shifter: string; heir: string }
+  | { type: "RetireShifter"; shifter: string; retired: boolean }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -129,6 +132,10 @@ export function validateCommand(cmd: unknown): Validation {
       return typeof c["agent"] === "string" && typeof c["target"] === "string" && (INTEL_OPS as readonly string[]).includes(String(c["op"])) ? { ok: true } : { ok: false, error: "AssignAgent invalide" };
     case "RecallAgent":
       return typeof c["agent"] === "string" ? { ok: true } : { ok: false, error: "RecallAgent invalide" };
+    case "InheritTitan":
+      return typeof c["shifter"] === "string" && typeof c["heir"] === "string" ? { ok: true } : { ok: false, error: "InheritTitan invalide" };
+    case "RetireShifter":
+      return typeof c["shifter"] === "string" && typeof c["retired"] === "boolean" ? { ok: true } : { ok: false, error: "RetireShifter invalide" };
     case "Noop":
       return { ok: true };
     default:
@@ -212,6 +219,10 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "RecallAgent":
       next = applyP5(next, cmd, world);
       break;
+    case "InheritTitan":
+    case "RetireShifter":
+      next = applyP6(next, cmd, world);
+      break;
     case "Noop":
       break;
   }
@@ -293,9 +304,9 @@ function applyP5(state: GameState, cmd: P5Command, world?: World): GameState {
   switch (cmd.type) {
     case "ChooseEventOption": {
       if (!state.events) throw new Error("ChooseEventOption : aucun moteur d'événements");
-      const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, mil: state.military, rs: state.research ? structuredClone(state.research) : null, intel: state.intel ? structuredClone(state.intel) : null, ev: structuredClone(state.events) };
+      const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, mil: state.military, rs: state.research ? structuredClone(state.research) : null, intel: state.intel ? structuredClone(state.intel) : null, ev: structuredClone(state.events), sh: state.shifters ? structuredClone(state.shifters) : null };
       chooseOption(ctx, cmd.event, cmd.choice);
-      return { ...state, strategic: ctx.st, politics: ctx.pol, research: ctx.rs, intel: ctx.intel, events: ctx.ev };
+      return { ...state, strategic: ctx.st, politics: ctx.pol, research: ctx.rs, intel: ctx.intel, events: ctx.ev, shifters: ctx.sh };
     }
     case "SetResearch": {
       const rs = state.research;
@@ -334,6 +345,25 @@ function applyP5(state: GameState, cmd: P5Command, world?: World): GameState {
       return { ...state, intel };
     }
   }
+}
+
+type P6Command = Extract<Command, { type: "InheritTitan" | "RetireShifter" }>;
+
+/** Commandes de P6 : héritage préparé (F-TIT-05) et retrait du service (F-TIT-20). */
+function applyP6(state: GameState, cmd: P6Command, world?: World): GameState {
+  if (!world?.shifters || !state.shifters || !state.strategic) throw new Error(`${cmd.type} : aucun Titan-porteur`);
+  const sh = structuredClone(state.shifters);
+  if (cmd.type === "RetireShifter") {
+    const problem = retireProblem(sh, state.politics, cmd.shifter);
+    if (problem) throw new Error(problem);
+    const slot = sh.titans[cmd.shifter];
+    if (slot) slot.retired = cmd.retired;
+    return { ...state, shifters: sh };
+  }
+  const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, intel: state.intel, sh, flags: state.events?.flags ?? {} };
+  const problem = inherit(ctx, cmd.shifter, cmd.heir, "shifter.inherit_command", "A");
+  if (problem) throw new Error(problem);
+  return { ...state, strategic: ctx.st, politics: ctx.pol, shifters: ctx.sh };
 }
 
 /** Journal des commandes appliquées : source des replays et des sauvegardes rejouables. */

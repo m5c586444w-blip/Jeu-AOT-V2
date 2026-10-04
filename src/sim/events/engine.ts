@@ -10,6 +10,8 @@ import { characterDies, DEATH_CAUSES, stressCharacter } from "../politics/charac
 import type { DeathCause } from "../politics/characters";
 import type { PoliticalState } from "../politics/state";
 import type { ResearchState } from "../research/research";
+import { inherit } from "../shifters/shifters";
+import type { ShiftersState } from "../shifters/shifters";
 import { pushLog } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
 import type { World } from "../strategic/world";
@@ -71,6 +73,8 @@ export interface EventCtx {
   rs: ResearchState | null;
   intel: IntelState | null;
   ev: EventsState;
+  /** Titans-porteurs (P6) ; absent avant P6 ou sans données des Neuf. */
+  sh?: ShiftersState | null;
 }
 
 const CHRONICLE_CAP = 200;
@@ -232,6 +236,29 @@ export function applyEffect(ctx: EventCtx, f: Effect, subject: PendingEvent["sub
     case "captured":
       if (ctx.rs) ctx.rs.captured = Math.max(0, ctx.rs.captured + f.delta);
       return;
+    case "inherit": {
+      if (!ctx.sh) return;
+      const sctx = { world: ctx.world, seed: ctx.seed, date: ctx.date, st: ctx.st, pol: ctx.pol, intel: ctx.intel, sh: ctx.sh, flags: ctx.ev.flags };
+      // Un événement apporte sa dose (E42 : le sérum de Kenny) ; il la consomme si Paradis en détient une.
+      const problem = inherit(sctx, f.shifter, subst(f.heir, subject), source, [...(ctx.world.chronicle?.events.values() ?? [])].find((e) => e.text_key === source)?.canon ?? "A", false);
+      ctx.st = sctx.st;
+      ctx.pol = sctx.pol;
+      if (problem) pushLog(ctx.st, ctx.date, "log.shifter.inherit_failed", { titan: ctx.world.shifters?.defs.get(f.shifter)?.name_key ?? f.shifter, why: problem }, false);
+      return;
+    }
+    case "serum":
+      if (ctx.sh) ctx.sh.serum = Math.max(0, ctx.sh.serum + f.delta);
+      return;
+    case "capture_shifter": {
+      const slot = ctx.sh?.titans[f.shifter];
+      if (slot) slot.captured = f.value;
+      return;
+    }
+    case "shifter_faction": {
+      const slot = ctx.sh?.titans[f.shifter];
+      if (slot && slot.faction !== "perdu") slot.faction = f.faction;
+      return;
+    }
   }
 }
 

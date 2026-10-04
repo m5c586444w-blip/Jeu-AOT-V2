@@ -192,7 +192,7 @@ const objList = (x: unknown): Obj[] => (Array.isArray(x) ? x.filter((o): o is Ob
 
 /**
  * R8 — morts canon : sur le chemin historique d'un événement (effets et choix historique), un personnage ne meurt que si
- * son `death_event` est cet événement ; et tout personnage dont le `death_event` est un événement jouable y meurt.
+ * son `death_event` est cet événement (un `inherit` tue le porteur de 850 du Titan) ; et tout personnage dont le `death_event` est un événement jouable y meurt.
  * R9 — références des effets et conditions (personnages, provinces, organisations, strates, événements, secrets, technologies).
  * R10 — anachronismes (13 §11, 11 §8) : un événement ne peut exiger ni débloquer une technologie postérieure à son année.
  */
@@ -205,9 +205,13 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
     str: new Set(data.strata.map((x) => x.id)),
     evt: new Set(data.events.map((e) => e.id)),
     tech: new Set(data.techs.map((t) => t.id)),
+    shifter: new Set(data.shifters.map((x) => x.id)),
     secret: new Set(data.characters.filter((c) => c.v["hidden"] && Object.keys(c.v["hidden"] as Obj).length > 0).map((c) => `secret_${c.id.replace(/^char_/, "")}`)),
   };
   const techYear = new Map(data.techs.map((t) => [t.id, num(t.v["min_year"])]));
+  // Un héritage préparé (`inherit`, P6) fait dévorer le porteur de 850 du Titan : c'est une mort.
+  const holder850 = new Map(data.shifters.map((sh) => [sh.id, str((sh.v["holder_850"] as Obj | undefined)?.["character"])]));
+  const killed = (f: Obj): string | undefined => (f["op"] === "kill" ? str(f["character"]) : f["op"] === "inherit" ? holder850.get(str(f["shifter"]) ?? "") : undefined);
   const placeholders = new Set(["char_subject", "prov_subject"]);
   const check = (e: RawEntry, kind: keyof typeof ids, id: unknown, where: string): void => {
     const s = str(id);
@@ -215,7 +219,7 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
     if (!ids[kind].has(s)) push("R9", e, `${where} : référence inconnue ${s}`);
   };
   const refs = (e: RawEntry, x: Obj, where: string): void => {
-    for (const [k, kind] of [["character", "char"], ["alive", "char"], ["dead", "char"], ["province", "prov"], ["control", "prov"], ["org", "org"], ["stratum", "str"], ["event", "evt"], ["fired", "evt"], ["not_fired", "evt"], ["choice", "evt"], ["secret", "secret"], ["tech", "tech"]] as const) {
+    for (const [k, kind] of [["character", "char"], ["alive", "char"], ["dead", "char"], ["province", "prov"], ["control", "prov"], ["org", "org"], ["stratum", "str"], ["event", "evt"], ["fired", "evt"], ["not_fired", "evt"], ["choice", "evt"], ["secret", "secret"], ["tech", "tech"], ["heir", "char"], ["shifter", "shifter"]] as const) {
       if (k in x) check(e, kind, x[k], where);
     }
     const t = str(x["tech"]);
@@ -234,8 +238,8 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
     }
     if (e.v["playable"] === false || e.v["kind"] === "generic") continue;
     const historical = [...effects, ...choices.filter((c) => c["historical"] === true).flatMap((c) => objList(c["effects"]))];
-    for (const k of historical.filter((f) => f["op"] === "kill")) {
-      const who = str(k["character"]) ?? "";
+    for (const k of historical.filter((f) => killed(f) !== undefined)) {
+      const who = killed(k) ?? "";
       const death = str(chars.get(who)?.v["death_event"]);
       if (death !== e.id) push("R8", e, `mort de ${who} sur le chemin historique alors que son death_event est ${death ?? "absent"}`);
     }
@@ -247,7 +251,7 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
     // Un squelette sans mécanique (ni effets ni choix) ne porte pas encore de mort.
     if (!ev || (objList(ev.v["effects"]).length === 0 && objList(ev.v["choices"]).length === 0)) continue;
     const historical = [...objList(ev.v["effects"]), ...objList(ev.v["choices"]).filter((x) => x["historical"] === true).flatMap((x) => objList(x["effects"]))];
-    if (!historical.some((f) => f["op"] === "kill" && f["character"] === c.id)) push("R8", c, `death_event ${death} : l'événement ne le fait pas mourir sur son chemin historique`);
+    if (!historical.some((f) => killed(f) === c.id)) push("R8", c, `death_event ${death} : l'événement ne le fait pas mourir sur son chemin historique`);
   }
 }
 

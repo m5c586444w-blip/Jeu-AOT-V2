@@ -45,8 +45,10 @@ export interface IntelReport {
   /** Jour de réception (le rapport n'est visible qu'à partir de ce jour) et jour de l'observation. */
   day: number;
   about: number;
+  /** Agent, ou porteur pour une vision (P6). */
   agent: string;
-  op: IntelOp;
+  /** « vision » : mémoire d'un Titan-porteur (F-TIT-06), fiabilité « rumeur ». */
+  op: IntelOp | "vision";
   target: string;
   /** Personnage désigné (taupe présumée). */
   named: string | null;
@@ -134,7 +136,7 @@ export function observe(world: World, s: IntelState, st: StrategicState, provinc
   // Le bruit est relatif (±20 %, 02 §6) : un rapport est confirmé s'il reste dans 1,5 fois ce bruit (au moins 0,05).
   const tol = Math.max(0.05, truth * (world.intel?.balance.estimate_noise ?? 0.2) * 1.5);
   for (const r of s.reports) {
-    if (r.op !== "surveiller" || r.target !== province || r.status !== "non_verifie" || typeof r.claim !== "number") continue;
+    if ((r.op !== "surveiller" && r.op !== "vision") || r.target !== province || r.status !== "non_verifie" || typeof r.claim !== "number") continue;
     r.status = Math.abs(r.claim - truth) <= tol ? "confirme" : "dementi";
   }
 }

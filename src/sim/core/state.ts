@@ -18,9 +18,11 @@ import { createIntelState, dailyIntel, monthlyCult } from "../intel/intel";
 import type { IntelState } from "../intel/intel";
 import { createResearchState, monthlyResearch, techHook, techMods } from "../research/research";
 import type { ResearchState } from "../research/research";
+import { createShiftersState, dailyShifters } from "../shifters/shifters";
+import type { ShiftersState } from "../shifters/shifters";
 import { pushLog } from "../strategic/economy";
 
-export const CURRENT_SCHEMA_VERSION = 6 as const;
+export const CURRENT_SCHEMA_VERSION = 7 as const;
 
 /** État complet et sérialisable de la partie (P0 + couche stratégique de P1). */
 export interface GameState {
@@ -42,6 +44,8 @@ export interface GameState {
   research: ResearchState | null;
   /** Renseignement (P5). */
   intel: IntelState | null;
+  /** Titans-porteurs (P6) ; null sans données des Neuf, ou juste après migration d'une sauvegarde v6. */
+  shifters: ShiftersState | null;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -60,6 +64,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     events: null,
     research: null,
     intel: null,
+    shifters: world ? createShiftersState(world) : null,
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
   });
 }
@@ -83,12 +88,16 @@ export function tickDay(state: GameState, world?: World): GameState {
   let events = state.events;
   let research = state.research;
   let intel = state.intel;
+  let shifters = state.shifters;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
     if (!events && world.chronicle) events = createEventsState(world, state.seed, state.date);
     if (!research && world.research) research = createResearchState(world);
     if (!intel && world.intel) intel = createIntelState(world, state.seed, strategic, state.date);
+    // Sauvegarde migrée (v6) : porteurs de 850 repris des données.
+    if (!shifters && world.shifters) shifters = createShiftersState(world);
+    if (shifters) shifters = structuredClone(shifters);
     const mods = politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS;
     strategic = applyDay(world, strategic, planDay(world, strategic, state.date, mods));
     if (politics && world.politics) {
@@ -97,7 +106,7 @@ export function tickDay(state: GameState, world?: World): GameState {
     }
     // Événements (P5) : effets sur les couches stratégique, politique, recherche et renseignement.
     if (events) {
-      const ctx = { world, seed: state.seed, date: state.date, st: strategic, pol: politics, mil: military, rs: research ? structuredClone(research) : null, intel: intel ? structuredClone(intel) : null, ev: structuredClone(events) };
+      const ctx = { world, seed: state.seed, date: state.date, st: strategic, pol: politics, mil: military, rs: research ? structuredClone(research) : null, intel: intel ? structuredClone(intel) : null, ev: structuredClone(events), sh: shifters };
       dailyEvents(ctx);
       strategic = ctx.st;
       politics = ctx.pol;
@@ -119,6 +128,13 @@ export function tickDay(state: GameState, world?: World): GameState {
       intel = structuredClone(intel);
       dailyIntel({ world, seed: state.seed, date: state.date, st: strategic, pol: politics, mil: military, rs: research }, intel);
     }
+    // Porteurs (P6) : morts du jour sans ingestion, horloge des 13 ans, visions.
+    if (shifters) {
+      const sctx = { world, seed: state.seed, date, st: strategic, pol: politics, intel, sh: shifters, flags: events?.flags ?? {} };
+      dailyShifters(sctx);
+      strategic = sctx.st;
+      politics = sctx.pol;
+    }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -131,5 +147,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters };
 }

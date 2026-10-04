@@ -1523,6 +1523,11 @@
             "op": "flag",
             "key": "ymir_left",
             "value": true
+          },
+          {
+            "op": "shifter_faction",
+            "shifter": "shifter_machoire",
+            "faction": "marley"
           }
         ],
         "historical": true,
@@ -1540,6 +1545,11 @@
             "op": "flag",
             "key": "ymir_left",
             "value": true
+          },
+          {
+            "op": "shifter_faction",
+            "shifter": "shifter_machoire",
+            "faction": "marley"
           },
           {
             "op": "legitimacy",
@@ -1562,6 +1572,11 @@
             "value": true
           },
           {
+            "op": "shifter_faction",
+            "shifter": "shifter_machoire",
+            "faction": "marley"
+          },
+          {
             "op": "legitimacy",
             "delta": -6
           },
@@ -1579,6 +1594,16 @@
           {
             "op": "flag",
             "key": "warriors_arrested",
+            "value": true
+          },
+          {
+            "op": "capture_shifter",
+            "shifter": "shifter_cuirasse",
+            "value": true
+          },
+          {
+            "op": "capture_shifter",
+            "shifter": "shifter_colossal",
             "value": true
           },
           {
@@ -2082,6 +2107,10 @@
         "op": "titans",
         "province": "prov_orvud",
         "delta": 0.2
+      },
+      {
+        "op": "serum",
+        "delta": 1
       }
     ],
     "choices": [
@@ -2614,9 +2643,9 @@
     "bifurcation": "B5",
     "effects": [
       {
-        "op": "kill",
-        "character": "char_bertholdt_hoover",
-        "cause": "titan"
+        "op": "capture_shifter",
+        "shifter": "shifter_colossal",
+        "value": true
       },
       {
         "op": "flag",
@@ -2628,6 +2657,11 @@
       {
         "id": "armin",
         "effects": [
+          {
+            "op": "inherit",
+            "shifter": "shifter_colossal",
+            "heir": "char_armin_arlert"
+          },
           {
             "op": "kill",
             "character": "char_erwin_smith",
@@ -2645,6 +2679,11 @@
       {
         "id": "erwin",
         "effects": [
+          {
+            "op": "inherit",
+            "shifter": "shifter_colossal",
+            "heir": "char_erwin_smith"
+          },
           {
             "op": "kill",
             "character": "char_armin_arlert",
@@ -2668,7 +2707,7 @@
     "form": "proces_verbal",
     "text_key": "evt.850.serum_choice",
     "canon": "C",
-    "notes_canon": "Choix du sérum : C (Armin). Bertholdt dévoré : C (fiabilité moyenne, 11 §3). L'héritage effectif arrive en P6 (drapeaux). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Choix du sérum : C (Armin). Bertholdt dévoré : C (fiabilité moyenne, 11 §3). Héritage effectif (P6) : l'élu dévore Bertholdt capturé, consomme la dose et reçoit 13 ans (02 §10, C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
   },
   {
     "id": "evt_850_marley_antititan_rifle",

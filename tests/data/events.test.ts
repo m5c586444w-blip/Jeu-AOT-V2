@@ -45,7 +45,9 @@ describe("événements de P5 (AC5-01)", () => {
     const kills = new Map<string, string>();
     for (const e of chronicle?.canon ?? []) {
       const hist = [...e.effects, ...e.choices.filter((c) => c.historical).flatMap((c) => c.effects)];
+      // Un héritage préparé (P6) fait dévorer le porteur de 850 du Titan.
       for (const f of hist) if (f.op === "kill") kills.set(f.character, e.id);
+      else if (f.op === "inherit") kills.set(world.shifters?.defs.get(f.shifter)?.holder_850.character ?? "?", e.id);
     }
     const pw = world.politics;
     for (const [who, ev] of kills) expect(pw?.characters.get(who)?.death_event, who).toBe(ev);

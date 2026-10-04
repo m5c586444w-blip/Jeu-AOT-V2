@@ -7,7 +7,7 @@ import { absDay, allTraits, clamp, effectiveAttributes, isPresent, politicsWorld
 import type { CharacterState, Consequence, DeathRecord, PoliticalState } from "./state";
 import { WARM_RELATIONS } from "./vocabulary";
 
-export const DEATH_CAUSES = ["combat", "maladie", "assassinat", "accident", "execution", "suicide", "inconnue"] as const;
+export const DEATH_CAUSES = ["combat", "maladie", "assassinat", "accident", "execution", "suicide", "inconnue", "devore", "malediction"] as const;
 export type DeathCause = (typeof DEATH_CAUSES)[number];
 
 const TRAIT_EXHAUSTED = "trait_epuise";
