@@ -13,7 +13,7 @@
   OK  les chiffres saisis dans le planificateur ne déclenchent pas de raccourci (vitesse 0 inchangée)
   OK  bordereau de confirmation avant le départ (F-UIX-13)
   OK  expédition en campagne dans le registre
-  KO  expédition en campagne : 4 valeurs, toutes expliquées ; aucune clé ni identifiant brut (prov_maria_est)
+  OK  expédition en campagne : 4 valeurs, toutes expliquées ; aucune clé ni identifiant brut
   OK  rapport : liste des morts (72)
   OK  rapport : fusées et leçons
   OK  rapport : télégramme
@@ -22,5 +22,5 @@
   OK  lettre : 0 valeurs, toutes expliquées ; aucune clé ni identifiant brut
   OK  calque Ravitaillement : légende (dans le rayon, 50, 125, 250 km)
   OK  aucune erreur console
-smoke:expedition : 1 échec(s).
-EXIT 1
+smoke:expedition : OK (captures dans docs/screenshots/).
+EXIT 0

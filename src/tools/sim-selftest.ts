@@ -1,11 +1,12 @@
 // npm run sim:selftest — AC-16 / AC1-06 : même hash après 1000 ticks en direct et via un worker (worker_threads),
-// sans monde (fondations P0), avec l'économie (845), puis avec la couche politique (850).
+// sans monde (fondations P0), avec l'économie (845), avec la couche politique (850), puis avec une expédition (P3).
 import { Worker } from "node:worker_threads";
 import { DEFAULT_SCENARIO, loadWorld } from "../data/worldNode";
 import type { Command } from "../sim/core/commands";
 import { createSim } from "../sim/sim";
 import type { SimResponse } from "../sim/sim";
 import { SimClient } from "../workers/simClient";
+import { standardPlan } from "../sim/military/plan";
 
 const SEED = 42;
 const script: Command[] = [{ type: "SetFlag", key: "selftest", value: true }, ...Array.from({ length: 10 }, (): Command => ({ type: "AdvanceDays", n: 100 }))];
@@ -28,6 +29,21 @@ try {
     console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}`);
     if (last.hash !== direct.hash() || last.state.commandIndex !== script.length) failed = true;
   }
+  // AC3-10 : une expédition lancée en 850 (plan calculé sur l'état direct, puis rejoué tel quel des deux côtés).
+  const w850 = loadWorld("data", "scn_sandbox_850");
+  const direct = createSim(SEED, w850);
+  direct.dispatch({ type: "AdvanceDays", n: 120 });
+  const mil = direct.state().military;
+  const plan = mil ? standardPlan(w850, mil, "prov_maria_est", "eventail", 20) : null;
+  if (!plan) throw new Error("plan d'expédition introuvable");
+  const expScript: Command[] = [{ type: "AdvanceDays", n: 120 }, { type: "LaunchExpedition", plan }, { type: "AdvanceDays", n: 7 }, { type: "AdvanceDays", n: 40 }];
+  for (const c of expScript.slice(1)) direct.dispatch(c);
+  let last = await client.init(SEED, "scn_sandbox_850");
+  for (const c of expScript) last = await client.dispatch(c);
+  const report = direct.state().military?.reports.at(-1);
+  const d = last.state.date;
+  console.log(`[scn_sandbox_850 + expédition] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day} | rapport : ${report ? `${report.dead.length} morts / ${report.stats.departed}` : "aucun"}`);
+  if (last.hash !== direct.hash() || !report) failed = true;
 } finally {
   await worker.terminate();
 }
@@ -35,5 +51,5 @@ if (failed) {
   console.error("sim:selftest : ÉCHEC (hash différent entre direct et worker).");
   process.exitCode = 1;
 } else {
-  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850).");
+  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 850 avec une expédition).");
 }

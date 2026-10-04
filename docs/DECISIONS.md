@@ -234,7 +234,7 @@
 - Exploration hors commande (60 tirages par réglage), puis second passage de la commande officielle : **OK**. Éventail : moyenne 30,3 %, p10 15 %, p90 52,4 %, max 83,8 %. Colonnes : 64,7 %. Sortie : `docs/reports/P3-sim-expeditions.log`.
 
 ## 2026-10-04 — D-57 Interface des expéditions (T3.8–T3.9)
-- Registre « Expéditions » (touche E) : expéditions en campagne (rappel), dépôts et convois, rapports. Le planificateur s'ouvre sur le côté pour laisser la carte visible. Tant qu'il est ouvert, un clic sur la carte prolonge l'itinéraire (plus court chemin depuis la dernière étape, règle des portes) au lieu d'ouvrir le dossier de province.
+- Registre « Expéditions » (touche E) : expéditions en campagne (rappel), dépôts et convois, rapports. Le planificateur s'ouvre sur le côté gauche pour laisser visible la moitié est de la carte, où partent les itinéraires de Karanes. Tant qu'il est ouvert, un clic sur la carte prolonge l'itinéraire (plus court chemin depuis la dernière étape, règle des portes) au lieu d'ouvrir le dossier de province.
 - Champs numériques : ils gardent leurs chiffres (« 1 » ne change plus la vitesse quand on saisit une provision).
 - Lettres aux familles : trois modèles sobres, choisis de façon stable par défunt. Ils sont rédigés sans accord de genre, car les personnages nommés n'ont pas de genre dans les données et on n'en invente pas.
 - Calques :

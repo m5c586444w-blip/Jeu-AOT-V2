@@ -431,10 +431,11 @@
 .dossier__statuts { margin: 0.3rem 0 0; display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
 /* ——— P3 : registre des expéditions, planificateur, rapport, lettres ——— */
+/* Planificateur posé à gauche : les itinéraires partent de Karanes vers l'est, la moitié est de la carte reste visible. */
 .registre-panneau--lateral {
-  left: auto;
-  right: 0.8rem;
-  transform: rotate(0.15deg);
+  left: 0.8rem;
+  right: auto;
+  transform: rotate(-0.15deg);
   width: min(30rem, 46vw);
 }
 .exp-carte, .exp-depot {

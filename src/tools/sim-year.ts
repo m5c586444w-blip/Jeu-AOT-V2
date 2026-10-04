@@ -1,6 +1,11 @@
 // npm run sim:year [-- --bench] — AC1-03 / AC1-09 : un an de jeu headless, invariants vérifiés chaque jour ;
-// avec --bench, mesure du tick stratégique sur 150 provinces (74 réelles + 76 copies synthétiques).
+// avec --bench, mesure du tick stratégique sur 150 provinces (74 réelles + 76 copies synthétiques),
+// puis avec 3 expéditions et 5 convois en route (AC3-12).
+import { readFileSync } from "node:fs";
 import { performance } from "node:perf_hooks";
+import { GeoSchema } from "../data/geo";
+import { applyCommand } from "../sim/core/commands";
+import { standardPlan } from "../sim/military/plan";
 import { DEFAULT_SCENARIO, loadWorld } from "../data/worldNode";
 import { createInitialState, tickDay } from "../sim/core/state";
 import type { GameState } from "../sim/core/state";
@@ -87,13 +92,46 @@ if (bench) {
   const politicsSource = pw
     ? { characters: [...pw.characters.values()], traits: [...pw.traits.values()], strata: pw.strata, organisations: [...pw.organisations.values()], laws: [...pw.laws.values()], roles: pw.roles, politics: pw.balance, society: pw.society }
     : {};
-  const big = buildWorld({ provinces: [...world.provinces, ...extra], buildings: [...world.buildings.values()], scenarios: [scenario], economy: world.economy, time: world.time, ...politicsSource }, scenario.id);
+  const mw = world.military;
+  const militarySource = mw
+    ? { geo: GeoSchema.parse(JSON.parse(readFileSync("data/geo/paradis.json", "utf8"))), units: [...mw.units.values()], titans: mw.titans, names: [mw.names], expeditions: mw.exp, logistics: mw.log }
+    : {};
+  const big = buildWorld({ provinces: [...world.provinces, ...extra], buildings: [...world.buildings.values()], scenarios: [scenario], economy: world.economy, time: world.time, ...politicsSource, ...militarySource }, scenario.id);
   const run = runYear(big);
   const s150 = stats(run.times);
   console.log(`  tick (${big.provinces.length} provinces, ${world.scenario.id}${pw ? ", politique comprise" : ""}) : moyenne ${s150.mean.toFixed(3)} ms · p95 ${s150.p95.toFixed(3)} ms · max ${s150.max.toFixed(3)} ms (budget ${BUDGET_MS} ms, 00 §6.8)`);
   if (s150.p95 > BUDGET_MS) {
     console.error(`  ÉCHEC : p95 du tick au-dessus de ${BUDGET_MS} ms.`);
     failed = true;
+  }
+  // AC3-12 : même monde, avec 3 expéditions et 5 convois en route (10 graines × 10 jours mesurés).
+  if (big.military) {
+    const busy: number[] = [];
+    for (let seed = 1; seed <= 10; seed++) {
+      let x = applyCommand(createInitialState(seed, big), { type: "AdvanceDays", n: 120 }, undefined, big);
+      const mil = x.military;
+      if (!mil) break;
+      mil.depots.push({ id: "dep_bench", province: "prov_foret_arbres_geants", stocks: { food: 50, gas: 50, steel: 0 }, built: { ...x.date }, lowAlerted: false });
+      for (const target of ["prov_maria_est", "prov_hameaux_est", "prov_lac_des_reflets"]) {
+        const m = x.military;
+        const plan = m ? standardPlan(big, m, target, "eventail", 10) : null;
+        if (plan) x = applyCommand(x, { type: "LaunchExpedition", plan }, undefined, big);
+      }
+      for (let k = 0; k < 5; k++) x = applyCommand(x, { type: "SendConvoy", order: { depot: "dep_bench", cargo: { food: 20, gas: 10, steel: 0 }, wagons: 1, escort: 20 } }, undefined, big);
+      const active = `${x.military?.expeditions.length ?? 0} expéditions, ${x.military?.convoys.length ?? 0} convois`;
+      if (seed === 1) console.log(`  banc militaire : ${active} au départ (graine 1)`);
+      for (let d = 0; d < 10; d++) {
+        const t0 = performance.now();
+        x = tickDay(x, big);
+        busy.push(performance.now() - t0);
+      }
+    }
+    const sm = stats(busy);
+    console.log(`  tick (${big.provinces.length} provinces, 3 expéditions et 5 convois en route) : moyenne ${sm.mean.toFixed(3)} ms · p95 ${sm.p95.toFixed(3)} ms · max ${sm.max.toFixed(3)} ms (budget ${BUDGET_MS} ms)`);
+    if (sm.p95 > BUDGET_MS) {
+      console.error(`  ÉCHEC : p95 du tick militaire au-dessus de ${BUDGET_MS} ms.`);
+      failed = true;
+    }
   }
 }
 if (failed) process.exit(1);

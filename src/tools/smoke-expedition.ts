@@ -82,7 +82,7 @@ try {
   await page.locator("button[data-action='planifier']").click();
   await page.waitForSelector(".registre-panneau--lateral select[data-plan='cible']");
   expect(await page.locator(".registre-panneau--lateral").isVisible(), "planificateur posé sur le côté (carte visible)");
-  // Lac des Reflets : à l'est, hors du planificateur latéral ; son chemin franchit le mur Rose à la porte de Karanes.
+  // Lac des Reflets : à l'est, hors du planificateur posé à gauche ; son chemin franchit le mur Rose à la porte de Karanes.
   const [fx, fy] = await screenOf(page, "prov_lac_des_reflets");
   await page.mouse.click(fx, fy);
   await page.waitForTimeout(250);
