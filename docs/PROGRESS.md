@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P5 — Renseignement, recherche, événements (reprise après l'arrêt levé) |
-| Tâche | T5.6–T5.8 — interfaces faites ; contrôle navigateur `smoke:p5` (AC5-03, AC5-10) en échec deux fois |
-| Dernier `npm run verify` | voir le commit « T5.6–T5.8 » (code 0 exigé par le script de commit) |
-| Prochaine étape | Repasser `smoke:p5`, puis T5.9 (`sim:events`) et T5.10 (rapport) ; enchaîner P6 → P8 |
+| Phase | **P5 terminée** → P6 — Titans-porteurs et héritage (mode autonome borné jusqu'à P8) |
+| Tâche | T6.0 — plan `docs/phases/P6.md` (fait) |
+| Dernier `npm run verify` | 2026-10-04 (fin de P5) : code 0, 228 tests — `docs/reports/P5-verify.log` |
+| Prochaine étape | T6.1 — données des Neuf Titans ; **arrêt de revue après P8** |
 
 ## Arrêt levé (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
 - **Levé** : l'utilisateur a fixé l'objectif « P5 à P8 terminées » juste après la proposition de correction ; correction appliquée (dossier fermé avant l'envoi de la commande).
@@ -68,3 +68,5 @@
 - 2026-10-04 — Revue de P4 : validée par l'utilisateur ; correctifs D-62 et D-63 ; réalisme R-gaz KO (décision ouverte) ; R-nuit OK après correction du déploiement de nuit.
 - 2026-10-04 — P5 démarrée : plan `docs/phases/P5.md`.
 - 2026-10-04 — P5 : T5.0 → T5.8 livrées (données, état v6, moteurs, interfaces) ; **arrêt obligatoire** : `smoke:p5` en échec deux fois (1 : test ; 2 : défaut réel de fermeture du dossier suivant) ; correction proposée.
+- 2026-10-04 — P5 terminée : AC5-01 à AC5-14 passent (AC5-02, AC5-14 au 2e passage ; AC5-03/AC5-10 après l'arrêt levé) ; rapport `docs/reports/P5.md`.
+- 2026-10-04 — P6 démarrée : plan `docs/phases/P6.md`.

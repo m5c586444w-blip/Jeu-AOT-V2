@@ -1,0 +1,107 @@
+
+> murs-et-sang@0.0.1 verify
+> npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build
+
+
+> murs-et-sang@0.0.1 typecheck
+> tsc --noEmit
+
+
+> murs-et-sang@0.0.1 lint
+> eslint . --max-warnings 0
+
+
+> murs-et-sang@0.0.1 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+
+ Test Files  41 passed (41)
+      Tests  228 passed (228)
+   Start at  11:55:04
+   Duration  22.80s (tests 80%, import 15%, transform 5%)
+
+    Isolate  41 workers spawned · ~112ms startup each (spawn + environment, per file)
+             at least ~1.42s faster with isolate: false — reuses workers across files instead of one per file
+
+
+> murs-et-sang@0.0.1 data:validate
+> tsx src/tools/data-validate.ts
+
+data:validate : « data » valide (74 provinces, 52 personnages, 88 technologies, 91 événements, 0 positionnements, 11 bâtiments, 2 scénarios ; équilibrage : economy, time, politics, society, expeditions, logistics, tactical, events, research, intel).
+
+> murs-et-sang@0.0.1 canon:check
+> tsx src/tools/canon-check.ts
+
+canon:check : « data » conforme (R1–R10, 461 entrées).
+
+> murs-et-sang@0.0.1 sim:selftest
+> tsx src/tools/sim-selftest.ts
+
+[sans monde] direct : 81cf57f6 | worker : 81cf57f6 | date an 847, jour 281
+[scn_sandbox_845] direct : 7d35e571 | worker : 7d35e571 | date an 847, jour 281
+[scn_sandbox_850] direct : 99fb0863 | worker : 99fb0863 | date an 852, jour 281 | événements : 34 canon survenus, divergence 0, 5 technologies
+[scn_sandbox_850 + expédition] direct : ffdf860f | worker : ffdf860f | date an 850, jour 168 | rapport : 72 morts / 103
+[scn_sandbox_850 + bataille jouée] direct : e8906bda | worker : e8906bda | date an 850, jour 129 | 7 commandes | bataille reportée
+sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 850 avec une expédition, 850 avec une bataille jouée).
+
+> murs-et-sang@0.0.1 build
+> tsc --noEmit && vite build
+
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 929 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                0.90 kB │ gzip:   0.41 kB
+dist/assets/eb-garamond-latin-400-normal-BCNrxLz_.woff2       23.82 kB
+dist/assets/eb-garamond-latin-400-italic-DSEbMgZu.woff2       25.38 kB
+dist/assets/eb-garamond-latin-400-normal-maQnHeKB.woff        28.60 kB
+dist/assets/eb-garamond-latin-400-italic-CDFyLPXJ.woff        30.86 kB
+dist/assets/special-elite-latin-400-normal-YjDd9tmf.woff2     53.29 kB
+dist/assets/im-fell-english-latin-400-normal-BhowGHCQ.woff2   59.88 kB
+dist/assets/special-elite-latin-400-normal-BtSRmyJ6.woff      63.41 kB
+dist/assets/im-fell-english-latin-400-normal-CxhBQSzl.woff    69.68 kB
+dist/assets/sim.worker-CLemwWZA.js                           490.19 kB
+dist/assets/index-B4-2f5mA.css                                35.25 kB │ gzip:   7.34 kB
+dist/assets/webworkerAll-D9pGWM13.js                           0.05 kB │ gzip:   0.06 kB
+dist/assets/getTextureBatchBindGroup-B7fcsu1p.js               0.34 kB │ gzip:   0.27 kB
+dist/assets/classes-DEhXJjxY.js                                0.69 kB │ gzip:   0.32 kB
+dist/assets/strata-npNEBvhE.js                                 0.80 kB │ gzip:   0.28 kB
+dist/assets/paradis-kamvYMDT.js                                0.95 kB │ gzip:   0.38 kB
+dist/assets/paradis-DamVGU7J.js                                1.16 kB │ gzip:   0.75 kB
+dist/assets/paradis-Crip5FYw.js                                1.22 kB │ gzip:   0.40 kB
+dist/assets/maps-Cim3wVhH.js                                   1.50 kB │ gzip:   0.67 kB
+dist/assets/paradis-DCIsDpsT.js                                1.56 kB │ gzip:   0.53 kB
+dist/assets/purs-CwrAwN9k.js                                   1.97 kB │ gzip:   0.62 kB
+dist/assets/hizuru-DQp4pwcr.js                                 2.60 kB │ gzip:   0.72 kB
+dist/assets/sandbox_845-DwBxihrf.js                            3.08 kB │ gzip:   1.01 kB
+dist/assets/doctrines-DrORN3bC.js                              3.19 kB │ gzip:   0.50 kB
+dist/assets/roles-Bw86WKOT.js                                  3.33 kB │ gzip:   0.77 kB
+dist/assets/traits-DkeYJPZ9.js                                 5.59 kB │ gzip:   1.40 kB
+dist/assets/sandbox_850-BGioyvzc.js                            5.60 kB │ gzip:   2.01 kB
+dist/assets/canvasUtils-XYxewFj2.js                            6.05 kB │ gzip:   2.05 kB
+dist/assets/canon_skeletons-CamEurb1.js                        7.66 kB │ gzip:   0.87 kB
+dist/assets/marley-BO3wrdz1.js                                 9.50 kB │ gzip:   1.25 kB
+dist/assets/getTexelRangeRects-DemSBSsJ.js                    11.31 kB │ gzip:   2.98 kB
+dist/assets/paradis-BZO7jAA3.js                               12.80 kB │ gzip:   2.46 kB
+dist/assets/init-CgJ9NaKA.js                                  14.86 kB │ gzip:   4.62 kB
+dist/assets/generic-Cvy5m8dR.js                               16.72 kB │ gzip:   2.23 kB
+dist/assets/paradis-UPtl3Ka_.js                               23.01 kB │ gzip:   2.61 kB
+dist/assets/paradis-BnsdlLLG.js                               23.75 kB │ gzip:   3.00 kB
+dist/assets/canon_850-Omrhn1ft.js                             34.69 kB │ gzip:   5.66 kB
+dist/assets/paradis-NBnT19R5.js                               34.92 kB │ gzip:   5.15 kB
+dist/assets/browserAll-UXqEJiA9.js                            43.48 kB │ gzip:  11.28 kB
+dist/assets/paradis-CKrauoQ1.js                               43.72 kB │ gzip:   4.58 kB
+dist/assets/RenderTargetSystem-D6eF_o2J.js                    78.15 kB │ gzip:  22.10 kB
+dist/assets/CanvasPool-ADgchDYy.js                           113.07 kB │ gzip:  34.46 kB
+dist/assets/index-CLeoA-Ik.js                                779.88 kB │ gzip: 235.80 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.07s

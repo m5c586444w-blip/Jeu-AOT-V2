@@ -59,3 +59,12 @@ Aucun en P0.
 | Décors tactiques (ville, forêt, plaine, mur) | `src/render/tactical/scene.ts`, générés depuis `data/tactical_maps/maps.json` | Création originale du projet |
 | Écran de bataille, cartes d'escouade, bilan | CSS `screen.css` | Création originale du projet |
 | Captures `docs/screenshots/p4-*` | Rendus du projet | Création originale du projet |
+
+## Ajouts de P5
+
+| Élément | Source | Licence |
+|---|---|---|
+| Dossiers d'événements (rapport, lettre, télégramme, gazette, procès-verbal), tampons | CSS `screen.css` | Création originale du projet |
+| Chronique, salle de renseignement (fiches d'agents, mur des secrets), bureau d'études (planches) | `src/ui/panels/*.ts`, CSS | Création originale du projet |
+| Textes des événements, des technologies et du renseignement | `src/i18n/fr.json` | Textes écrits pour le projet (faits canon résumés, sans citation de l'œuvre) |
+| Captures `docs/screenshots/p5-*` | Rendus du projet | Création originale du projet |

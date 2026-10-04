@@ -116,3 +116,29 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Fusées rouge, noire, verte | C | signaux tactiques | 03 §7 |
 | Ackerman plus rapides et plus sûrs | C (fait) / A (multiplicateurs) | ODM | 03 §3.1 |
 | Silhouettes des Titans et figures des soldats | A | dessinées par code | aucun personnage ni design de l'œuvre |
+
+## Faits utilisés en P5
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Existence, ordre et contexte des événements E09 → E42 de 850 | C | `data/events/canon_850.json` | 12 §1, §3 ; délais en jours : `?` (12 : mois inconnus) ; D-67 |
+| Choix proposés, coûts, effets chiffrés, règles de divergence | A | idem | 12 (en-tête) |
+| Choix « historique » de chaque événement | A (interprétation) | champ `historical` | Le choix qui reproduit le récit de 12 |
+| Morts de Mike (E24), Nanaba et Gelgar (E26), Kenny et Rod (E35) | C | effets des événements | 11 §3, errata (Mike E24, Kenny E35) |
+| Morts d'Eld, Gunther, Oluo, Petra (E19) | ? | E19 | 11 §3 : « à vérifier » |
+| Mort de Hannes rattachée à E28 | A | E28 | 11 §3 : arc de l'invasion de Wall Rose (Titan souriant) |
+| Mort d'Erwin à E42 (blessé à mort à E41) | A | E41, E42 | D-65 |
+| Bertholdt dévoré au choix du sérum (E42) | C (fiabilité moyenne) | E42 | 11 §3 |
+| Révélations : Eren (E12), Annie (E22), Ymir, Historia, Reiner, Bertholdt (E27) | C | effets `reveal` | 12 E12, E22, E27 |
+| Deux Titans capturés vivants à Trost pour l'étude | C | E11 (`captured`) | 12 E11, §4 |
+| Lances de foudre après E37, Hange vivante requise | C | T-ANT-08 | 13 §2, §11 ; 11 §1 |
+| Scellement par durcissement après E13 | C | T-FOR-03 | 13 §5 |
+| ODM anti-personnel après E31 | C | T-ODM-06 | 13 §1 |
+| Sérum : E35 ou E47 | C | T-MED-05 | errata Q2 |
+| Les 76 technologies, leurs coûts et effets | C / A / ? selon 13 | `data/techs/*.json` | effets et coûts : A (13) |
+| Rattachements T-HIZ-01 → E48, T-INT-08 → E50 ; T-ODM-03 possédée au départ | A | `data/techs` | D-64 |
+| Doctrines exclusives | A | `data/techs/doctrines.json` | 13 §10 |
+| Influence du Culte des Murs par anneau | A | `data/balance/intel.json` | 02 §5 (existence du Culte : C) |
+| Bruit des rapports ±20 % | A (02 §6) | `data/balance/intel.json` | 02 §6 |
+| Infiltrés de 850 (taupes) : Reiner, Bertholdt, Annie | C | champs `hidden` des personnages | 12 E27 |
+| 30 événements génériques | A | `data/events/generic.json` | 12 §5 ; aucun objet ni lieu avant sa date (R10) |
