@@ -41,3 +41,12 @@ Aucun en P0.
 | Portraits des personnages | `src/ui/portrait.ts`, gravure procédurale en SVG (graine + archétype), sans ressemblance recherchée avec les dessins de l'œuvre | Création originale du projet |
 | Plan de table du Cabinet, billes de vote, tampons | `src/ui/panels/cabinetPanel.ts`, CSS `screen.css` | Création originale du projet |
 | Captures `docs/screenshots/p2-*` | Rendus du projet | Création originale du projet |
+
+## Ajouts de P3
+
+| Élément | Source | Licence |
+|---|---|---|
+| Tracés d'itinéraires, fanions d'expédition, chariots de convoi, dépôts | `src/render/atlasLayers.ts`, dessinés par code | Création originale du projet |
+| Télégramme, lettre aux familles (mise en page) | CSS `screen.css` | Création originale du projet |
+| Modèles de lettres aux familles et noms de soldats | `src/i18n/fr.json`, `data/names/paradis.json` | Textes et listes créés pour le projet |
+| Captures `docs/screenshots/p3-*` | Rendus du projet | Création originale du projet |

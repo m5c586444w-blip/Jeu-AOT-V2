@@ -24,7 +24,8 @@
     "sim:year": "tsx src/tools/sim-year.ts",
     "sim:expeditions": "tsx src/tools/sim-expeditions.ts",
     "smoke:map": "tsx src/tools/smoke-map.ts",
-    "smoke:politique": "tsx src/tools/smoke-politique.ts"
+    "smoke:politique": "tsx src/tools/smoke-politique.ts",
+    "smoke:expedition": "tsx src/tools/smoke-expedition.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

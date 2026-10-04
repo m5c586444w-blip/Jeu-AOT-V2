@@ -8,6 +8,7 @@ import { RATIONING_LEVELS } from "../sim/strategic/resources";
 import type { RationingLevel, ResourceId } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
 import { resourceIcon } from "./icons";
+import { paramLabel } from "./panels/common";
 import { formatNumber, formatSigned } from "./why";
 import type { WhyContent, WhyTooltip } from "./why";
 
@@ -177,7 +178,7 @@ export class Hud {
       this.set("capital", formatNumber(state.politics.capital));
     }
     const last = st.log.at(-1);
-    this.alert.textContent = last ? `${t("date.format", { year: last.date.year, day: last.date.day })} — ${alertText(last)}` : t("hud.no_alert");
+    this.alert.textContent = last ? `${t("date.format", { year: last.date.year, day: last.date.day })} — ${alertText(last, this.world)}` : t("hud.no_alert");
     this.alert.dataset["pause"] = String(last?.pause ?? false);
   }
 
@@ -249,12 +250,13 @@ export function nationalMorale(st: StrategicState): number {
 }
 
 /** Texte d'une alerte du journal : les paramètres qui sont des clés de texte sont traduits. */
-export function alertText(entry: { key: string; params: Record<string, string | number> }): string {
+/** Texte d'une alerte : ressources, clés i18n, provinces et personnages traduits (aucun identifiant brut). */
+export function alertText(entry: { key: string; params: Record<string, string | number> }, world?: World): string {
   const params: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(entry.params)) {
     if (typeof v !== "string") params[k] = v;
     else if (k === "resource") params[k] = t(`res.${v}`);
-    else params[k] = hasKey(v) ? t(v) : v;
+    else params[k] = world ? paramLabel(world, v) : hasKey(v) ? t(v) : v;
   }
   return t(entry.key, params);
 }

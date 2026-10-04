@@ -79,3 +79,22 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Ville-usine : localisation sur la carte | ? | `location_canon` | 11 §9 ; D-49 |
 | Ville-usine : rattachement à Paradis en 850 | A (paramètre de scénario, jamais canon) | scénario 850, `control_canon` ; règle R7 | D-41, D-49 |
 | Population 780 000, réfugiés de Maria, culture de l'intérieur de Rose | A | scénario 850 | D-42 |
+
+## Faits utilisés en P3
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Départ des expéditions de Karanes, porte de Rose-Est | C | scénarios (`expedition_base`), carte (porte) | 06 S02, W03 |
+| Maria perdue et peuplée de Titans en 850 | C (fait) / A (densités) | scénario 850, `titan_density` | 06 §1.3 ; D-51 |
+| Formation de reconnaissance longue portée ; colonnes lourdes | C (existence) / A (chiffres) | `data/balance/expeditions.json` | 03 §6, 12 E17 |
+| Fusées du Corps : rouge = Titan repéré, noire = anormal, verte = changement de direction | C | auto-résolution, rapport | 03 §7, 11 |
+| Titans anormaux | C (existence) / A (fréquence, menace) | `data/titans/classes.json` | 03 §5 |
+| Titans moins actifs la nuit et en hiver | A (03 §5.2) | `encounters.night_share`, saison | 03 §5.2 |
+| Réservoir d'ODM ≈ 100 u ; lames : 2 paires de 4–8 coupes | A | équilibrage | 03 §3.2 |
+| Gaz : 3–8 u par engagement ; mortalité 25–40 % en début de partie ; Corps de 200–500 hommes | A | équilibrage, calibrage | 02 §15 ; D-56 |
+| Ackerman : multiplicateurs spéciaux | C (fait) / A (valeur) | exposition des officiers | 03 §3.1 |
+| Hémorragie et infection simulées ; équipe médicale | A | auto-résolution | 03 §9, 10 U-P13 |
+| Types d'unités U-P01, U-P02 (C) ; U-P03, U-P04, U-P12, U-P13 (A) | C / A | `data/units/paradis.json` | 10 §1.1 |
+| Soldats générés et leurs noms | A | générateur, `data/names/paradis.json` | aucun nom de famille de l'œuvre |
+| Les murs ne se franchissent qu'aux portes | A | règle de routage | D-52, D-58 |
+| Arme de contention, expédition 57, Titan féminin | hors P3 | — | événements E16–E19 en P5 |
