@@ -22,6 +22,17 @@ describe("événements de P5 (AC5-01)", () => {
     }
   });
 
+  it("la chronique de 850 tient dans l'année même au pire : délais maximaux et décisions prises à l'échéance (D-67)", () => {
+    const by = new Map((chronicle?.canon ?? []).map((e) => [e.id, e]));
+    const worst = (id: string): number => {
+      const e = by.get(id);
+      if (!e) return 0;
+      const pred = predecessorsOf(e).filter((p) => by.has(p));
+      return Math.max(0, ...pred.map(worst)) + (e.window.within_days?.[1] ?? 0) + (e.choices.length > 0 ? (chronicle?.balance.deadline_days ?? 0) : 0);
+    };
+    expect(worst("evt_850_serum_choice")).toBeLessThanOrEqual(355);
+  });
+
   it("bifurcations B2–B5 portées par leurs événements (12 §2)", () => {
     const bif = new Map((chronicle?.canon ?? []).filter((e) => e.bifurcation).map((e) => [e.code, e.bifurcation]));
     expect(bif.get("E12")).toBe("B2");

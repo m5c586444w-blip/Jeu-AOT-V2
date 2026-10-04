@@ -28,7 +28,8 @@
     "smoke:expedition": "tsx src/tools/smoke-expedition.ts",
     "sim:tactical": "tsx src/tools/sim-tactical.ts",
     "smoke:tactique": "tsx src/tools/smoke-tactique.ts",
-    "smoke:p5": "tsx src/tools/smoke-p5.ts"
+    "smoke:p5": "tsx src/tools/smoke-p5.ts",
+    "sim:events": "tsx src/tools/sim-events.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

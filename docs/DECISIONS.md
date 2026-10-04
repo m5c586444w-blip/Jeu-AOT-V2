@@ -327,3 +327,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - Défaut latent révélé par P5 : un état relu d'une sauvegarde a ses clés triées, un état vivant non. Les sommes flottantes qui parcourent ces objets (provinces, stocks) diffèrent alors au dernier chiffre, et une partie rechargée diverge de la partie vivante. Le test d'aller-retour de P2 l'a montré dès que les événements ont fait varier le moral.
 - Correctif : l'état initial et l'état après chaque commande sont mis en forme canonique (clés triées), exactement comme une sauvegarde relue. Coût : une copie par commande ; le tick quotidien n'est pas touché.
 - **Isolation des outils de P3** : `sim:expeditions` et les tests d'expédition et de P2 qui supposent qu'aucun événement ne tue utilisent le monde 850 **sans chronologie**. Sinon, E19 tuerait par exemple les officiers que le plan type engage. Résultat de `sim:expeditions` : inchangé (30,3 %).
+
+## 2026-10-04 — D-67 Fenêtres des événements de 850 resserrées
+- Premier passage de `sim:events` : **KO**. Sur 3 graines sur 20, la chronique E09 → E42 débordait sur 851. En mode automatique, chaque décision attend son échéance (5 jours) avant de programmer la suite. Au pire, avec les délais maximaux et toutes les décisions à l'échéance, la chaîne durait 430 jours. 12 situe E09–E42 en 850.
+- Décision : maxima resserrés (E09, E14–E17, E20, E21, E30–E32, E36–E39 ; E38 : 20–40 jours au lieu de 30–60). Les fenêtres restent `?` et paramétrables. Le pire cas tombe à 342 jours, garanti par un test de données (≤ 355).
+- Les successeurs restent programmés depuis la **décision** et non depuis le déclenchement, car E13 dépend du choix fait à E12.
+- Second passage : OK (20/20 graines ; dernier événement au plus tard le jour 313).

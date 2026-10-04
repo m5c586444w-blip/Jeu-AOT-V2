@@ -7,7 +7,7 @@
       "after": "evt_847_104th_recruitment",
       "within_days": [
         3,
-        10
+        6
       ]
     },
     "divergence_weight": 0.2,
@@ -444,7 +444,7 @@
       "after": "evt_850_trost_plug",
       "within_days": [
         3,
-        10
+        7
       ]
     },
     "divergence_weight": 0.8,
@@ -538,7 +538,7 @@
       "after": "evt_850_eren_trial",
       "within_days": [
         5,
-        15
+        10
       ]
     },
     "divergence_weight": 0.3,
@@ -604,7 +604,7 @@
       "after": "evt_850_branch_choice",
       "within_days": [
         10,
-        25
+        15
       ]
     },
     "location": "prov_karanes",
@@ -674,7 +674,7 @@
       "after": "evt_850_expedition57_preparation",
       "within_days": [
         5,
-        15
+        10
       ]
     },
     "divergence_weight": 0.6,
@@ -871,7 +871,7 @@
       "after": "evt_850_special_squad_loss",
       "within_days": [
         3,
-        10
+        7
       ]
     },
     "divergence_weight": 0.4,
@@ -940,7 +940,7 @@
       "after": "evt_850_traitor_investigation",
       "within_days": [
         3,
-        10
+        7
       ]
     },
     "location": "prov_stohess",
@@ -1684,7 +1684,7 @@
       "after": "evt_850_armored_colossal_fight",
       "within_days": [
         5,
-        20
+        12
       ]
     },
     "divergence_weight": 0.5,
@@ -1767,7 +1767,7 @@
       "after": "evt_850_survey_corps_hunted",
       "within_days": [
         3,
-        10
+        7
       ]
     },
     "location": "?",
@@ -1831,7 +1831,7 @@
       "after": "evt_850_levi_kenny_street_fight",
       "within_days": [
         3,
-        10
+        7
       ]
     },
     "divergence_weight": 0.8,
@@ -2154,7 +2154,7 @@
       "after": "evt_850_rod_reiss_titan",
       "within_days": [
         5,
-        20
+        12
       ]
     },
     "location": "prov_mitras",
@@ -2249,7 +2249,7 @@
       "after": "evt_850_historia_coronation",
       "within_days": [
         5,
-        20
+        12
       ]
     },
     "divergence_weight": 0.5,
@@ -2330,8 +2330,8 @@
     "window": {
       "after": "evt_850_police_tech_seized",
       "within_days": [
-        30,
-        60
+        20,
+        40
       ]
     },
     "location": "prov_karanes",
@@ -2410,7 +2410,7 @@
       "after": "evt_850_shiganshina_preparations",
       "within_days": [
         5,
-        15
+        10
       ]
     },
     "location": "prov_shiganshina",

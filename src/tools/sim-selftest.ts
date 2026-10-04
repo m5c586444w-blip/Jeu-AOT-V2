@@ -1,5 +1,5 @@
 // npm run sim:selftest — AC-16 / AC1-06 : même hash après 1000 ticks en direct et via un worker (worker_threads),
-// sans monde (fondations P0), avec l'économie (845), avec la couche politique (850), puis avec une expédition (P3) et une bataille jouée (P4).
+// sans monde (fondations P0), avec l'économie (845), avec la couche politique et les événements (850, P5), puis avec une expédition (P3) et une bataille jouée (P4).
 import { Worker } from "node:worker_threads";
 import { DEFAULT_SCENARIO, loadWorld } from "../data/worldNode";
 import type { Command } from "../sim/core/commands";
@@ -26,7 +26,9 @@ try {
     for (const c of script) last = await client.dispatch(c);
     const d = last.state.date;
     const label = scenario ?? "sans monde";
-    console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}`);
+    const ev = last.state.events;
+    const p5 = ev ? ` | événements : ${Object.values(ev.history).filter((r) => r.status === "survenu").length} canon survenus, divergence ${ev.divergence}, ${last.state.research?.done.length ?? 0} technologies` : "";
+    console.log(`[${label}] direct : ${direct.hash()} | worker : ${last.hash} | date an ${d.year}, jour ${d.day}${p5}`);
     if (last.hash !== direct.hash() || last.state.commandIndex !== script.length) failed = true;
   }
   // AC3-10 : une expédition lancée en 850 (plan calculé sur l'état direct, puis rejoué tel quel des deux côtés).
