@@ -246,3 +246,10 @@
 - Défaut trouvé en préparant `smoke:expedition` : le contrôle ne portait que sur un pas « province → segment → province ». Un chemin longeant plusieurs segments franchissait donc le mur sans porte (Karanes → Utgard → Rose-Nord-Est → Rose-Nord → Gorge du Silence).
 - Correction : une suite de segments reliant deux zones différentes doit contenir une porte. Le plus court chemin porte dans son état la zone d'entrée et la porte rencontrée. Test ajouté : tout plus court chemin de Karanes vers Maria passe une porte, et l'ancien chemin est refusé (`route.no_gate`).
 - Lecture `[A]` : franchir la porte puis longer le pied du mur avant de s'en écarter est permis.
+
+## 2026-10-04 — D-59 Architecture de P4
+- Simulation tactique pure à 20 Hz (`src/sim/tactical`). Une bataille se définit par sa graine, son scénario et son journal d'ordres (rejeu exact).
+- « Jouer » un engagement d'expédition : la campagne se met en pause ; la bataille jouée se conclut par la commande `ResolveBattle { ordres }`, qui rejoue la bataille dans la simulation. Le résultat reste déterministe et rejouable, comme toute commande.
+- Auto-résolution : le modèle d'engagement de P3 reste la référence. La simulation tactique est calibrée pour s'en approcher à ±15 % en pertes moyennes ; le calibrage de P3 (AC3-07) est inchangé.
+- 60 FPS (05 §5) : non mesurable dans l'environnement (Chromium headless sans GPU). On mesure ce qui dépend du code : pas de simulation et temps JS par image. Le débit réel sur GPU reste à confirmer par l'utilisateur à la revue de fin de P4.
+- 8 types de Titans purs (F-TIT-01) : 4 classes de 03 §5.2 × variantes de comportement `[A]`, aucune présentée comme canon.

@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | P4 — Combat tactique v1 (à démarrer ; P3 terminée) |
-| Tâche | T4.0 — plan `docs/phases/P4.md` |
+| Tâche | T4.0 — plan `docs/phases/P4.md` (fait) |
 | Dernier `npm run verify` | 2026-10-04 (fin de P3) : code 0, 175 tests — `docs/reports/P3-verify.log` |
-| Prochaine étape | Écrire `docs/phases/P4.md` (05 §5, 03), puis exécuter P4 ; **arrêt de revue utilisateur à la fin de P4** |
+| Prochaine étape | T4.1 — données tactiques (équilibrage, 8 types de Titans, 4 cartes) ; **arrêt de revue à la fin de P4** |
 
 ## Arrêt levé (2026-10-03) — critère AC2-11 en échec deux fois
 - **Levé par l'utilisateur** : correction renforcée acceptée (D-48), appliquée et passée (`docs/reports/P2-smoke-politique.log`).
@@ -31,3 +31,4 @@
 - 2026-10-04 — P2 terminée : tous les critères AC2-01 à AC2-14 passent ; rapport `docs/reports/P2.md`.
 - 2026-10-04 — P3 démarrée : plan `docs/phases/P3.md`.
 - 2026-10-04 — P3 terminée : AC3-01 à AC3-15 passent (AC3-07, AC3-11 et AC3-15 au 2e passage) ; rapport `docs/reports/P3.md`.
+- 2026-10-04 — P4 démarrée : plan `docs/phases/P4.md`.
