@@ -23,6 +23,8 @@ import type { ShiftersState } from "../shifters/shifters";
 import { createNationsState, dailyBuilds, monthlyNations, weeklyMoves } from "../world/nations";
 import type { NationsState } from "../world/nations";
 import { weeklyWar } from "../world/war";
+import { monthlyAi, weeklyAi } from "../world/ai";
+import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
@@ -153,8 +155,13 @@ export function tickDay(state: GameState, world?: World): GameState {
         politics = wctx.pol;
         if (wctx.st) strategic = wctx.st;
         weeklyMoves(world, nations);
+        weeklyAi({ world, date, ns: nations, sh: shifters, pol: politics, st: strategic });
       }
-      if (date.day % DAYS_PER_MONTH === 1) monthlyNations(world, nations, strategic, date);
+      if (date.day % DAYS_PER_MONTH === 1) {
+        monthlyNations(world, nations, strategic, date);
+        monthlyDiplomacy(world, nations, date);
+        monthlyAi({ world, date, ns: nations, sh: shifters, pol: politics, st: strategic });
+      }
     }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);

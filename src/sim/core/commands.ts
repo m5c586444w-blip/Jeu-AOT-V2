@@ -25,6 +25,9 @@ import { lockOf, techMods } from "../research/research";
 import { inherit, retireProblem } from "../shifters/shifters";
 import { buildProblem, moveForces, moveProblem, orderBuild } from "../world/nations";
 import { projectProblem, projectTitan, recallTitan } from "../world/war";
+import { declareWar, embargo, guaranteeHizuru, guaranteeProblem, makePeace, proposeTreaty, TREATY_KINDS, ultimatum } from "../world/diplomacy";
+import type { TreatyKind } from "../world/diplomacy";
+import { atWar } from "../world/nations";
 import { toAbsoluteDay } from "./time";
 
 export const MAX_ADVANCE_DAYS = 3650;
@@ -57,6 +60,12 @@ export type Command =
   | { type: "MoveFormation"; formation: string; from: string; to: string; count: number }
   | { type: "ProjectTitan"; shifter: string; province: string }
   | { type: "RecallTitan"; shifter: string }
+  | { type: "ProposeTreaty"; to: string; kind: TreatyKind }
+  | { type: "DeclareWar"; to: string }
+  | { type: "MakePeace"; to: string }
+  | { type: "Ultimatum"; to: string; province: string }
+  | { type: "Embargo"; to: string; on: boolean }
+  | { type: "GuaranteeHizuru" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -153,6 +162,17 @@ export function validateCommand(cmd: unknown): Validation {
       return typeof c["shifter"] === "string" && typeof c["province"] === "string" ? { ok: true } : { ok: false, error: "ProjectTitan invalide" };
     case "RecallTitan":
       return typeof c["shifter"] === "string" ? { ok: true } : { ok: false, error: "RecallTitan invalide" };
+    case "ProposeTreaty":
+      return typeof c["to"] === "string" && (TREATY_KINDS as readonly string[]).includes(String(c["kind"])) ? { ok: true } : { ok: false, error: "ProposeTreaty invalide" };
+    case "DeclareWar":
+    case "MakePeace":
+      return typeof c["to"] === "string" ? { ok: true } : { ok: false, error: `${String(c["type"])} invalide` };
+    case "Ultimatum":
+      return typeof c["to"] === "string" && typeof c["province"] === "string" ? { ok: true } : { ok: false, error: "Ultimatum invalide" };
+    case "Embargo":
+      return typeof c["to"] === "string" && typeof c["on"] === "boolean" ? { ok: true } : { ok: false, error: "Embargo invalide" };
+    case "GuaranteeHizuru":
+      return { ok: true };
     case "Noop":
       return { ok: true };
     default:
@@ -245,6 +265,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "MoveFormation":
     case "ProjectTitan":
     case "RecallTitan":
+    case "ProposeTreaty":
+    case "DeclareWar":
+    case "MakePeace":
+    case "Ultimatum":
+    case "Embargo":
+    case "GuaranteeHizuru":
       next = applyP7(next, cmd, world);
       break;
     case "Noop":
@@ -390,7 +416,7 @@ function applyP6(state: GameState, cmd: P6Command, world?: World): GameState {
   return { ...state, strategic: ctx.st, politics: ctx.pol, shifters: ctx.sh };
 }
 
-type P7Command = Extract<Command, { type: "SetPlayerFaction" | "BuildFormation" | "MoveFormation" | "ProjectTitan" | "RecallTitan" }>;
+type P7Command = Extract<Command, { type: "SetPlayerFaction" | "BuildFormation" | "MoveFormation" | "ProjectTitan" | "RecallTitan" | "ProposeTreaty" | "DeclareWar" | "MakePeace" | "Ultimatum" | "Embargo" | "GuaranteeHizuru" }>;
 
 /** Commandes de P7 : choix de la nation jouée (au départ seulement), levées et mouvements de formations. */
 function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
@@ -414,6 +440,37 @@ function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
     const pol = state.politics ? structuredClone(state.politics) : null;
     projectTitan(world, ns, pol, ns.player, cmd.shifter, cmd.province, state.date);
     return { ...state, nations: ns, politics: pol };
+  }
+  const diplomatic = cmd.type === "ProposeTreaty" || cmd.type === "DeclareWar" || cmd.type === "MakePeace" || cmd.type === "Ultimatum" || cmd.type === "Embargo";
+  const other = diplomatic ? cmd.to : null;
+  if (other !== null && (other === ns.player || !world.nations.factions.has(other))) throw new Error("world.err.bad_target");
+  switch (cmd.type) {
+    case "ProposeTreaty":
+      proposeTreaty(world, ns, ns.player, cmd.to, cmd.kind, state.date);
+      return { ...state, nations: ns };
+    case "DeclareWar":
+      if (atWar(ns, ns.player, cmd.to)) throw new Error("world.err.already_at_war");
+      declareWar(world, ns, ns.player, cmd.to, state.date);
+      return { ...state, nations: ns };
+    case "MakePeace":
+      if (!atWar(ns, ns.player, cmd.to)) throw new Error("world.err.not_at_war");
+      makePeace(world, ns, ns.player, cmd.to, state.date);
+      return { ...state, nations: ns };
+    case "Ultimatum":
+      if (ns.control[cmd.province] !== cmd.to) throw new Error("world.err.not_theirs");
+      ultimatum(world, ns, ns.player, cmd.to, cmd.province, state.date);
+      return { ...state, nations: ns };
+    case "Embargo":
+      embargo(world, ns, ns.player, cmd.to, cmd.on, state.date);
+      return { ...state, nations: ns };
+    case "GuaranteeHizuru": {
+      const problem = guaranteeProblem(world, ns, ns.player);
+      if (problem) throw new Error(problem);
+      guaranteeHizuru(world, ns, ns.player, state.date);
+      return { ...state, nations: ns };
+    }
+    default:
+      break;
   }
   if (cmd.type === "RecallTitan") {
     if (!recallTitan(ns, cmd.shifter, state.date)) throw new Error("world.err.titan_not_engaged");

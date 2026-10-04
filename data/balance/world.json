@@ -75,8 +75,8 @@
     "relation_drift": 1,
     "hizuru": {
       "threshold": 60,
-      "trade_per_month": 3,
-      "war_fear_per_month": 4,
+      "trade_per_month": 1,
+      "war_fear_per_month": 2,
       "guarantee": 15
     },
     "coalition_vote_threshold": 0.5
