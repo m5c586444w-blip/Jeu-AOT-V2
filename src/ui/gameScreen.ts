@@ -32,7 +32,8 @@ import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
-import { crossesAutosave, loadSettings, saveSettings } from "./settings";
+import { crossesAutosave, loadSettings, saveSettings, volumesOf } from "./settings";
+import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { setLocale } from "../i18n";
 
 /** Scénario par défaut (P2 : bac à sable politique de 850) ; `?scenario=` pour en choisir un autre. */
@@ -154,6 +155,7 @@ export async function bootGame(): Promise<void> {
   const safeDispatch = async (cmd: Command): Promise<void> => {
     try {
       await dispatch(cmd);
+      audio.play("tampon");
     } catch (e) {
       notice.show((e as Error).message);
     }
@@ -184,7 +186,28 @@ export async function bootGame(): Promise<void> {
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;
 
+  // Audio (04 §7) : humeur tirée de l'état, cloche et ducking sur les alertes, silence sur la mort d'un personnage nommé.
+  const audio = sharedAudio(volumesOf(settings));
+  let heardSeq = Math.max(0, ...(state.strategic?.log ?? []).map((l) => l.seq));
+  const listen = (): void => {
+    audio.setAccent(accentOf(state.nations?.player));
+    audio.setMood(moodOf(moodInput(state, inBattle)));
+    const fresh = (state.strategic?.log ?? []).filter((l) => l.seq > heardSeq && l.pause);
+    heardSeq = Math.max(heardSeq, ...(state.strategic?.log ?? []).map((l) => l.seq));
+    if (fresh.some((l) => l.key === "alert.character_died" || l.key === "alert.divergence_death")) {
+      audio.silence(3);
+      audio.play("cloche");
+    } else if (fresh.length) {
+      audio.duck(3);
+      audio.play("cloche");
+    }
+  };
+  document.addEventListener("click", (ev) => {
+    if ((ev.target as HTMLElement | null)?.closest?.("button, [role=button], select, summary")) audio.play("papier", 0.7);
+  });
+
   const refresh = (): void => {
+    listen();
     hud.update(state, clock.speed);
     registers?.refresh();
     map.setDynamic(mapDynamic(state));
@@ -287,6 +310,7 @@ export async function bootGame(): Promise<void> {
   actions.console = () => debug.toggle();
   const options = new OptionsPanel(document.body, keymap, settings, (s) => {
     saveSettings(safeStorage(), s);
+    audio.setVolumes(volumesOf(s));
     if (s.locale !== settings.locale) window.location.reload();
     document.documentElement.style.fontSize = `${s.uiScale}%`;
   });

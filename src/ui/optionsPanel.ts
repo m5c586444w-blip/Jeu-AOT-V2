@@ -11,7 +11,7 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: s
   return e;
 }
 
-/** Dossier « Options » : langue, échelle, raccourcis (F-UIX-03, F-UIX-17, F-UIX-18). */
+/** Dossier « Options » : langue, échelle, son, raccourcis (F-UIX-03, F-UIX-17, F-UIX-18). */
 export class OptionsPanel {
   readonly el = el("aside", "options");
   private capturing: Action | null = null;
@@ -84,6 +84,36 @@ export class OptionsPanel {
     sc.addEventListener("change", () => this.change({ ...this.settings, uiScale: Number(sc.value) }));
     scale.append(sc);
 
+    // Son (04 §7) : volumes maître, musique, effets ; sous-titres des sons importants.
+    const sound = el("fieldset", "options__son");
+    sound.append(el("legend", "", t("options.sound")));
+    for (const k of ["volMaster", "volMusic", "volSfx"] as const) {
+      const row = el("label", "options__ligne");
+      row.append(el("span", "", t(`options.${k}`)));
+      const r = el("input", "options__curseur");
+      r.type = "range";
+      r.min = "0";
+      r.max = "100";
+      r.step = "5";
+      r.value = String(this.settings[k]);
+      r.dataset["setting"] = k;
+      const out = el("output", "options__valeur", `${this.settings[k]} %`);
+      r.addEventListener("input", () => {
+        out.textContent = `${r.value} %`;
+        this.change({ ...this.settings, [k]: Number(r.value) });
+      });
+      row.append(r, out);
+      sound.append(row);
+    }
+    const sub = el("label", "options__ligne");
+    const cb = el("input", "options__case");
+    cb.type = "checkbox";
+    cb.checked = this.settings.subtitles;
+    cb.dataset["setting"] = "subtitles";
+    cb.addEventListener("change", () => this.change({ ...this.settings, subtitles: cb.checked }));
+    sub.append(el("span", "", t("options.subtitles")), cb);
+    sound.append(sub);
+
     const keys = el("table", "options__touches");
     const caption = el("caption", "", t("options.keys"));
     keys.append(caption);
@@ -107,7 +137,7 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, keys, reset);
+    this.el.append(head, lang, scale, sound, keys, reset);
   }
 
   private change(s: Settings): void {

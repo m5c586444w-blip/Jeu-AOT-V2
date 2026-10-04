@@ -7,6 +7,8 @@ import { createBattle, stepBattle } from "../../sim/tactical/battle";
 import type { Battle } from "../../sim/tactical/battle";
 import { bodyName } from "../../sim/tactical/shifters";
 import { letterFor } from "../narrative";
+import { battleCues, cueSnapshot, sharedAudio } from "../audio";
+import { loadSettings, volumesOf } from "../settings";
 import type { BattleSetup, SoldierUnit, TacticalOrder, TimedOrder } from "../../sim/tactical/types";
 import { TACTICAL_ORDERS } from "../../sim/tactical/types";
 import { el } from "../panels/common";
@@ -14,6 +16,14 @@ import { formatNumber } from "../why";
 import type { WhyTooltip } from "../why";
 
 const SPEEDS = [0, 0.25, 0.5, 1, 2] as const;
+
+function storage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
 
 const clock = (s: number): string => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
 
@@ -81,6 +91,9 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   let prev: UnitPose[] | null = null;
   let acc = 0;
   let last = performance.now();
+  const audio = sharedAudio(volumesOf(loadSettings(storage())));
+  audio.setMood("combat");
+  let lastCues = cueSnapshot(bt.state);
   let following: { kind: "squad"; id: string } | { kind: "soldat"; index: number } | null = null;
   let done = false;
 
@@ -389,6 +402,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       root.dataset["jsParts"] = `sim ${p95(parts.sim).toFixed(2)} · figures ${p95(parts.draw).toFixed(2)} · rendu ${p95(parts.render).toFixed(2)} · interface ${p95(parts.ui).toFixed(2)}`;
       root.dataset["frames"] = String(Number(root.dataset["frames"] ?? "0") + 1);
       root.dataset["tick"] = String(bt.state.tick);
+      // Effets sonores de la bataille, hors mesure du temps de rendu (04 §7).
+      const cues = cueSnapshot(bt.state);
+      for (const c of battleCues(lastCues, cues)) audio.play(c);
+      lastCues = cues;
       root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded}`;
       root.dataset["vue"] = scene.view;
       root.dataset["pastilles"] = String(scene.markers);

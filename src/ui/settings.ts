@@ -7,11 +7,21 @@ export interface Settings {
   locale: Locale;
   /** Échelle de l'interface DOM en pourcentage (100 à 200). */
   uiScale: number;
+  /** Volumes (0 à 100) et sous-titres des sons importants (04 §7, P8). */
+  volMaster: number;
+  volMusic: number;
+  volSfx: number;
+  subtitles: boolean;
 }
 
 const KEY = "murs-et-sang:preferences";
-export const DEFAULT_SETTINGS: Settings = { locale: "fr", uiScale: 100 };
+export const DEFAULT_SETTINGS: Settings = { locale: "fr", uiScale: 100, volMaster: 70, volMusic: 60, volSfx: 80, subtitles: true };
 export const UI_SCALES = [100, 125, 150, 175, 200] as const;
+
+const vol = (v: unknown, d: number): number => (typeof v === "number" && v >= 0 && v <= 100 ? Math.round(v) : d);
+
+/** Volumes du moteur audio tirés des préférences. */
+export const volumesOf = (s: Settings): { master: number; music: number; sfx: number; subtitles: boolean } => ({ master: s.volMaster, music: s.volMusic, sfx: s.volSfx, subtitles: s.subtitles });
 
 export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings {
   try {
@@ -21,6 +31,10 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
     return {
       locale: s.locale === "en" ? "en" : "fr",
       uiScale: typeof s.uiScale === "number" && s.uiScale >= 100 && s.uiScale <= 200 ? s.uiScale : DEFAULT_SETTINGS.uiScale,
+      volMaster: vol(s.volMaster, DEFAULT_SETTINGS.volMaster),
+      volMusic: vol(s.volMusic, DEFAULT_SETTINGS.volMusic),
+      volSfx: vol(s.volSfx, DEFAULT_SETTINGS.volSfx),
+      subtitles: typeof s.subtitles === "boolean" ? s.subtitles : DEFAULT_SETTINGS.subtitles,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };

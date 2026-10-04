@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { crossesAutosave, loadSettings, saveSettings } from "../../src/ui/settings";
+import { DEFAULT_SETTINGS, crossesAutosave, loadSettings, saveSettings } from "../../src/ui/settings";
 
 function memory() {
   const m = new Map<string, string>();
@@ -9,12 +9,12 @@ function memory() {
 describe("préférences (AC1-14)", () => {
   it("échelle 100–200 % et langue, persistées ; valeurs invalides ignorées", () => {
     const s = memory();
-    expect(loadSettings(s)).toEqual({ locale: "fr", uiScale: 100 });
-    saveSettings(s, { locale: "en", uiScale: 175 });
-    expect(loadSettings(s)).toEqual({ locale: "en", uiScale: 175 });
-    s.setItem("murs-et-sang:preferences", JSON.stringify({ locale: "de", uiScale: 400 }));
-    expect(loadSettings(s)).toEqual({ locale: "fr", uiScale: 100 });
-    expect(loadSettings(null)).toEqual({ locale: "fr", uiScale: 100 });
+    expect(loadSettings(s)).toEqual(DEFAULT_SETTINGS);
+    saveSettings(s, { ...DEFAULT_SETTINGS, locale: "en", uiScale: 175, volMusic: 20, subtitles: false });
+    expect(loadSettings(s)).toEqual({ ...DEFAULT_SETTINGS, locale: "en", uiScale: 175, volMusic: 20, subtitles: false });
+    s.setItem("murs-et-sang:preferences", JSON.stringify({ locale: "de", uiScale: 400, volSfx: 300, subtitles: "oui" }));
+    expect(loadSettings(s)).toEqual(DEFAULT_SETTINGS);
+    expect(loadSettings(null)).toEqual(DEFAULT_SETTINGS);
   });
 });
 

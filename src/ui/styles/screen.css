@@ -288,6 +288,17 @@
 .options__touche { font-family: var(--f-machine); background: transparent; border: 1px solid var(--encre); padding: 0 0.4rem; min-width: 4.5rem; cursor: pointer; color: var(--encre); }
 .options__touche:focus-visible, .options__remise:focus-visible, .options__choix:focus-visible { outline: 2px solid var(--ocre); }
 .options__remise { margin-top: 0.6rem; font: inherit; background: transparent; border: none; border-bottom: 1px solid var(--encre); cursor: pointer; color: var(--encre); }
+.options__son { border: none; border-top: 1px solid var(--encre); margin: 0.5rem 0 0; padding: 0.2rem 0 0; }
+.options__son legend { font-variant: small-caps; letter-spacing: 0.05em; padding: 0 0.3rem 0 0; }
+.options__son .options__ligne > span:first-child { min-width: 9.5rem; }
+.options__curseur { flex: 1; margin: 0 0.5rem; accent-color: var(--ocre); }
+.options__valeur { font-family: var(--f-machine); min-width: 3.2rem; text-align: right; }
+.options__case { accent-color: var(--ocre); }
+.options__curseur:focus-visible, .options__case:focus-visible { outline: 2px solid var(--ocre); }
+
+/* ——— Sous-titres des sons importants (04 §7, accessibilité) : bande de télégramme en bas de l'écran ——— */
+.sous-titres { position: fixed; left: 50%; bottom: 3.2rem; transform: translateX(-50%); z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 0.15rem; pointer-events: none; }
+.sous-titres__ligne { margin: 0; padding: 0.1rem 0.6rem; font-family: var(--f-machine); font-size: 0.95rem; color: var(--papier); background: rgba(28, 26, 23, 0.82); border-left: 3px solid var(--ocre); }
 
 /* ——— Registres de P2 : chemise cartonnée au centre, onglets, tableaux réglés ——— */
 .bandeau__registres { display: inline-flex; gap: 0.15rem; margin-left: auto; flex-wrap: wrap; }
