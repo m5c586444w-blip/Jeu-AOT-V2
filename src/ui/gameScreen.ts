@@ -25,6 +25,8 @@ import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
 import { Registers } from "./registers";
+import { openBattleScreen } from "./tactical/battleScreen";
+import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
@@ -155,7 +157,20 @@ export async function bootGame(): Promise<void> {
     }
   };
   const notice = new Notice(document.body);
-  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch);
+  // Écran de bataille (P4) : le temps stratégique est suspendu tant qu'il est ouvert.
+  let inBattle = false;
+  const playBattle = async (setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null> => {
+    inBattle = true;
+    bubble.hide();
+    try {
+      return await openBattleScreen({ world, why, setup, title, linked });
+    } finally {
+      inBattle = false;
+      last = performance.now();
+      refresh();
+    }
+  };
+  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle);
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;
 
@@ -210,6 +225,8 @@ export async function bootGame(): Promise<void> {
     open_expeditions: () => (world.military ? registers?.toggle("expeditions") : undefined),
   };
   window.addEventListener("keydown", (ev) => {
+    // Pendant une bataille, l'écran tactique a ses propres touches.
+    if (document.body.dataset["tactique"]) return;
     // Seule la saisie de texte (console) et les listes déroulantes gardent leurs touches ; une case cochée ne bloque rien.
     // Les champs numériques (planificateur) gardent aussi leurs chiffres : « 1 » ne doit pas changer la vitesse.
     const typing = (ev.target instanceof HTMLInputElement && (ev.target.type === "text" || ev.target.type === "number")) || ev.target instanceof HTMLSelectElement;
@@ -224,7 +241,7 @@ export async function bootGame(): Promise<void> {
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
   let last = performance.now();
   const loop = (now: number): void => {
-    const days = busy ? 0 : clock.consume(now - last, MAX_DAYS_PER_BATCH);
+    const days = busy || inBattle ? 0 : clock.consume(now - last, MAX_DAYS_PER_BATCH);
     last = now;
     if (days > 0) void dispatch({ type: "AdvanceDays", n: days });
     requestAnimationFrame(loop);

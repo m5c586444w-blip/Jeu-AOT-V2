@@ -1,6 +1,7 @@
 import { t } from "../i18n";
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
+import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { World } from "../sim/strategic/world";
 import { CabinetPanel } from "./panels/cabinetPanel";
 import { CharactersPanel } from "./panels/charactersPanel";
@@ -29,7 +30,7 @@ export class Registers {
   onDraft: (() => void) | null = null;
   private readonly dialog = el("div", "bordereau");
 
-  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>) {
+  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean) => Promise<TimedOrder[] | null>) {
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");
     const close = button("×", () => this.close(), "dossier__fermer");
@@ -40,7 +41,7 @@ export class Registers {
     this.dialog.hidden = true;
     this.dialog.setAttribute("role", "alertdialog");
     parent.append(this.frame, this.dialog);
-    const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m) };
+    const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle };
     const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx)];
     if (world.military)
       list.push(

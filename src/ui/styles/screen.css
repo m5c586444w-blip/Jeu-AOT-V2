@@ -499,3 +499,58 @@
 .lettre-date { text-align: right; margin: 0 0 0.6rem; font-style: italic; }
 .lettre-corps { white-space: pre-line; margin: 0; }
 .lettre-signature { text-align: right; margin: 1rem 0 0; font-style: italic; }
+
+/* ——— P4 : écran de bataille (03 §13, 04 §5.11) ——— */
+.exp-bataille { margin: 0.3rem 0; padding: 0.25rem 0.5rem; border-left: 3px solid var(--brique); }
+.registre-alerte { margin: 0 0 0.25rem; font-style: italic; color: var(--brique); }
+.exp-essai .plan-ligne { margin: 0.15rem 0; }
+.plan-choix { font: inherit; font-size: 0.9rem; background: rgba(244, 236, 216, 0.8); border: 1px solid var(--encre); }
+.plan-case { display: inline-flex; gap: 0.3rem; align-items: baseline; }
+.bataille {
+  position: fixed;
+  inset: 0;
+  z-index: 22;
+  display: grid;
+  grid-template: "tete tete" auto "scene carnet" 1fr "escouades escouades" auto / 1fr minmax(14rem, 22rem);
+  background: var(--papier-sombre);
+  background-image: var(--grain-fond);
+}
+.bataille-tete { grid-area: tete; display: flex; gap: 1rem; align-items: center; padding: 0.3rem 0.8rem; border-bottom: 2px solid var(--encre); background: var(--papier); }
+.bataille-titre { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.25rem; flex: 1; }
+.bataille-horloge { font-family: var(--f-machine); font-size: 1.1rem; }
+.bataille-vitesses { display: flex; gap: 0.15rem; }
+.bataille-vitesse { font-family: var(--f-machine); background: transparent; border: 1px solid var(--encre); padding: 0 0.45rem; cursor: pointer; }
+.bataille-vitesse[aria-pressed="true"] { background: var(--encre); color: var(--papier); }
+.bataille-perf { font-family: var(--f-machine); font-size: 0.75rem; color: var(--inconnu); }
+.bataille-scene { grid-area: scene; position: relative; overflow: hidden; min-height: 0; border-right: 1px solid var(--encre); cursor: crosshair; }
+.tactique__toile { display: block; width: 100%; height: 100%; }
+.bataille-carnet { grid-area: carnet; overflow-y: auto; min-height: 0; padding: 0.3rem 0.7rem; background: rgba(244, 236, 216, 0.75); }
+.carnet-lignes { list-style: none; margin: 0; padding: 0; font-size: 0.85rem; }
+.carnet-lignes li { border-bottom: 1px dotted rgba(28, 26, 23, 0.3); padding: 0.1rem 0; }
+.carnet-mort { color: var(--brique); }
+.bataille-escouades { grid-area: escouades; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.4rem 0.6rem; border-top: 2px solid var(--encre); background: var(--papier); }
+.carte-escouade { flex: 0 0 auto; min-width: 13rem; border: 1px solid var(--encre); padding: 0.2rem 0.45rem 0.35rem; background: #f1e8d2; box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.25); font-size: 0.85rem; }
+.carte-escouade h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
+.carte-escouade-ligne, .carte-escouade-ordre { margin: 0.1rem 0; }
+.carte-escouade-ordre { font-variant: small-caps; color: var(--vert-de-gris); }
+.carte-escouade-ordres .registre-bouton[aria-pressed="true"] { background: var(--encre); color: var(--papier); }
+.bilan {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-0.4deg);
+  width: min(32rem, 92vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 0.7rem 1rem 0.9rem;
+  background: #f1e8d2;
+  background-image: var(--grain-cadre);
+  border: 1px solid var(--encre);
+  box-shadow: 5px 5px 0 rgba(28, 26, 23, 0.35);
+}
+.bilan h3 { margin: 0 0 0.3rem; font-family: var(--f-machine); font-weight: 400; letter-spacing: 0.15em; }
+.bilan-morts { font-size: 0.85rem; padding-left: 1.1rem; }
+@media (max-width: 700px) {
+  .bataille { grid-template: "tete" auto "scene" 1fr "carnet" 8rem "escouades" auto / 1fr; }
+}

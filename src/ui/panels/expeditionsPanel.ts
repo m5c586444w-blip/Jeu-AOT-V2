@@ -7,6 +7,7 @@ import { defaultSupplies, estimatePlan, planCapitalCost, planHeadcount, planProb
 import { routeKm, routeProblem, shortestRoute, supplyAt } from "../../sim/military/routes";
 import type { DeadRecord, Expedition, ExpeditionPlan, ExpeditionReport, MilitaryState } from "../../sim/military/state";
 import { readyMembers, soldierName } from "../../sim/military/state";
+import { skirmishSetup } from "../../sim/tactical/setup";
 import { FORMATIONS, OBJECTIVES, RETREAT_CONDITIONS } from "../../sim/military/vocabulary";
 import type { Formation, Objective } from "../../sim/military/vocabulary";
 import { formatNumber, formatSigned } from "../why";
@@ -25,6 +26,7 @@ export class ExpeditionsPanel implements Panel {
   readonly id = "expeditions" as const;
   private view: "registre" | "plan" | "rapport" | "lettre" = "registre";
   private draft: Draft | null = null;
+  private trials = 0;
 
   constructor(
     private readonly ctx: PanelContext,
@@ -131,6 +133,81 @@ export class ExpeditionsPanel implements Panel {
       table.append(tr);
     }
     root.append(table);
+    if (this.ctx.world.tactical) root.append(...this.trialBattle());
+  }
+
+  /** Bataille en attente (F-EXP-18) : la jouer sur l'écran tactique, ou l'auto-résoudre comme en P3. */
+  private pendingBattle(e: Expedition): HTMLElement {
+    const p = e.pending;
+    const box = el("div", "exp-bataille");
+    if (!p) return box;
+    box.dataset["pending"] = e.id;
+    const cls = this.ctx.world.military?.titans.find((x) => x.id === p.titan);
+    box.append(el("p", "registre-alerte", t("exp.battle_pending", { province: provinceName(this.ctx.world, p.province), titan: cls ? t(cls.name_key) : p.titan, n: p.setup.soldiers.length, group: p.group })));
+    const title = t("exp.battle_title", { n: e.number, province: provinceName(this.ctx.world, p.province) });
+    const play = button(t("exp.battle_play"), () => {
+      void this.ctx.playBattle(p.setup, title, true).then((orders) => {
+        if (orders) void this.ctx.dispatch({ type: "ResolveBattle", expedition: e.id, mode: "jouer", orders }).then(() => this.redraw());
+      });
+    }, "registre-bouton principal petit");
+    play.dataset["action"] = "jouer";
+    const auto = button(t("exp.battle_auto"), () => {
+      void this.ctx.dispatch({ type: "ResolveBattle", expedition: e.id, mode: "auto", orders: [] }).then(() => this.redraw());
+    }, "registre-bouton petit");
+    auto.dataset["action"] = "auto";
+    box.append(play, " ", auto);
+    return box;
+  }
+
+  /** Bataille d'essai (hors campagne, sans effet sur l'état) : carte, type de Titan, nombre, effectif. */
+  private trialBattle(): HTMLElement[] {
+    const tw = this.ctx.world.tactical;
+    if (!tw) return [];
+    const head = el("h3", "registre-intertitre", t("exp.trial"));
+    const form = el("div", "exp-essai");
+    const select = (name: string, opts: [string, string][]): HTMLSelectElement => {
+      const sel = el("select", "plan-choix");
+      sel.dataset["trial"] = name;
+      for (const [v, label] of opts) {
+        const o = el("option", "", label);
+        o.value = v;
+        sel.append(o);
+      }
+      return sel;
+    };
+    const num = (name: string, v: number, min: number, max: number): HTMLInputElement => {
+      const i = el("input", "plan-nombre");
+      i.type = "number";
+      i.min = String(min);
+      i.max = String(max);
+      i.value = String(v);
+      i.dataset["trial"] = name;
+      return i;
+    };
+    const map = select("map", [...tw.maps.values()].map((m) => [m.id, t(m.name_key)]));
+    const type = select("type", [...tw.titanTypes.values()].map((x) => [x.id, t(x.name_key)]));
+    const count = num("count", 1, 1, 30);
+    const men = num("men", 12, 1, 300);
+    const night = el("input");
+    night.type = "checkbox";
+    night.dataset["trial"] = "night";
+    const nightLab = el("label", "plan-case");
+    nightLab.append(night, ` ${t("exp.trial_night")}`);
+    const go = button(t("exp.trial_go"), () => {
+      const n = Math.max(1, Math.min(300, Math.round(Number(men.value) || 12)));
+      const c = Math.max(1, Math.min(30, Math.round(Number(count.value) || 1)));
+      const seed = (fnv1a(`essai:${this.ctx.state().seed}:${this.trials++}`) % 2 ** 30) + 1;
+      const setup = skirmishSetup(this.ctx.world, map.value, [{ type: type.value, count: c }], n, seed, night.checked);
+      void this.ctx.playBattle(setup, t("exp.trial_title", { map: map.selectedOptions[0]?.textContent ?? map.value }), false);
+    }, "registre-bouton");
+    go.dataset["action"] = "essai";
+    const l = (key: string, input: HTMLElement): HTMLLabelElement => {
+      const lab = el("label", "plan-ligne");
+      lab.append(`${t(key)} `, input);
+      return lab;
+    };
+    form.append(el("p", "registre-note", t("exp.trial_note")), l("exp.trial_map", map), l("exp.trial_type", type), l("exp.trial_count", count), l("exp.trial_men", men), nightLab, go);
+    return [head, form];
   }
 
   private activeCard(e: Expedition): HTMLElement {
@@ -156,7 +233,8 @@ export class ExpeditionsPanel implements Panel {
     const log = el("ul", "exp-journal");
     for (const l of e.log.slice(-4)) log.append(el("li", "", `${t("exp.day", { n: l.day })} — ${t(l.key, this.params(l.params))}`));
     box.append(log);
-    if (e.phase !== "retour") {
+    if (e.pending) box.append(this.pendingBattle(e));
+    if (e.phase !== "retour" && !e.pending) {
       const recall = button(t("exp.recall"), () => {
         void this.ctx.confirm(t("exp.confirm_recall", { n: e.number })).then((ok) => {
           if (ok) void this.ctx.dispatch({ type: "RecallExpedition", expedition: e.id }).then(() => this.redraw());
@@ -446,11 +524,21 @@ export class ExpeditionsPanel implements Panel {
 
     // Pré-brief (F-EXP-15).
     if (est) root.append(this.brief(est));
-    // Choix de résolution (F-EXP-18) : jouer arrive en P4.
+    // Choix de résolution (F-EXP-18) : auto-résolution, ou chaque engagement joué sur l'écran tactique (P4).
     const res = el("p", "registre-note");
-    const play = el("span", "registre-ferme-inline", t("exp.play_closed"));
-    play.dataset["why"] = t("exp.play_closed_why");
-    res.append(t("exp.resolution"), " ", el("strong", "", t("exp.auto")), " · ", play);
+    const cb = el("input");
+    cb.type = "checkbox";
+    cb.checked = !!d.play;
+    cb.disabled = !this.ctx.world.tactical;
+    cb.dataset["plan"] = "jouer";
+    cb.addEventListener("change", () => {
+      d.play = cb.checked;
+      this.redraw();
+    });
+    const lab = el("label", "plan-case");
+    lab.append(cb, ` ${t("exp.play")}`);
+    lab.dataset["why"] = t("exp.play_why");
+    res.append(t("exp.resolution"), " ", el("strong", "", t(d.play ? "exp.played" : "exp.auto")), " · ", lab);
     root.append(res);
 
     // Coût et départ.

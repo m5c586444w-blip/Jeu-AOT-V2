@@ -2,6 +2,7 @@ import type { Character } from "../../data/schemas";
 import { hasKey, t } from "../../i18n";
 import type { Command } from "../../sim/core/commands";
 import type { GameState } from "../../sim/core/state";
+import type { BattleSetup, TimedOrder } from "../../sim/tactical/types";
 import type { World } from "../../sim/strategic/world";
 import type { WhyContent, WhyTooltip } from "../why";
 
@@ -14,6 +15,8 @@ export interface PanelContext {
   /** Ouvre un autre registre (ex. Décrets → Cabinet avec une motion). */
   open(panel: PanelId, arg?: string): void;
   confirm(message: string): Promise<boolean>;
+  /** Ouvre l'écran de bataille (P4) ; renvoie les ordres d'une bataille liée validée, sinon null. */
+  playBattle(setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null>;
 }
 
 export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions";
