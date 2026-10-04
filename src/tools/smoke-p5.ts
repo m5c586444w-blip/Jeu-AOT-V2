@@ -124,11 +124,11 @@ try {
   const first = page.locator(".fiche-agent").first();
   await first.locator("select[data-agent-op]").selectOption("surveiller");
   await page.waitForTimeout(200);
-  await page.locator(".fiche-agent").first().locator("select[data-agent-target]").selectOption("prov_maria_est");
+  await page.locator(".fiche-agent").first().locator("select[data-agent-target]").selectOption("prov_shiganshina");
   await page.locator(".fiche-agent").first().locator("[data-action='envoyer-agent']").click();
   await page.waitForTimeout(300);
   await panel(page, "KeyI", "renseignement");
-  expect((await page.locator(".fiche-agent").first().innerText()).includes("En mission"), "agent envoyé surveiller Maria-Est");
+  expect((await page.locator(".fiche-agent").first().innerText()).includes("En mission"), "agent envoyé surveiller Shiganshina");
   await page.keyboard.press("Escape");
   await console_(page, "advance 25", "25");
   await panel(page, "KeyI", "renseignement");

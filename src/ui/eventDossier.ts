@@ -80,7 +80,9 @@ export class EventDossier {
         box.append(stamp);
       }
       const sign = button(t("evt.sign"), () => {
-        void this.dispatch({ type: "ChooseEventOption", event: e.id, choice: c.id }).then(() => this.close());
+        // Fermer avant d'envoyer : le rafraîchissement qui suit la commande ouvre le dossier suivant, qui doit rester ouvert.
+        this.close();
+        void this.dispatch({ type: "ChooseEventOption", event: e.id, choice: c.id });
       }, "registre-bouton principal");
       sign.dataset["action"] = "signer";
       box.append(sign);

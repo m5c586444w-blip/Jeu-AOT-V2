@@ -2,12 +2,13 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P5 — Renseignement, recherche, événements : **ARRÊT OBLIGATOIRE** (critère en échec deux fois) |
+| Phase | P5 — Renseignement, recherche, événements (reprise après l'arrêt levé) |
 | Tâche | T5.6–T5.8 — interfaces faites ; contrôle navigateur `smoke:p5` (AC5-03, AC5-10) en échec deux fois |
 | Dernier `npm run verify` | voir le commit « T5.6–T5.8 » (code 0 exigé par le script de commit) |
-| Prochaine étape | **Attendre l'accord de l'utilisateur** sur la correction proposée ci-dessous, puis repasser `smoke:p5` et finir P5 (T5.9, T5.10) |
+| Prochaine étape | Repasser `smoke:p5`, puis T5.9 (`sim:events`) et T5.10 (rapport) ; enchaîner P6 → P8 |
 
-## ARRÊT EN COURS (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
+## Arrêt levé (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
+- **Levé** : l'utilisateur a fixé l'objectif « P5 à P8 terminées » juste après la proposition de correction ; correction appliquée (dossier fermé avant l'envoi de la commande).
 - **1er passage** (`docs/reports/P5-smoke-p5-essai1-KO.log`) : erreur du test. Un événement générique (« Mariage de notables », survenu le 1er jour) précède E09 : le test lisait ce dossier-là (3 lignes de coûts au lieu de ≥ 4), puis rouvrait la mauvaise ligne de la chronique.
 - **2e passage** (`docs/reports/P5-smoke-p5-essai2-KO.log`, après correction du test) : le test attend en vain le dossier E09. **Défaut réel du jeu**, diagnostiqué hors commande officielle :
   - signer un dossier exécute la commande, et la commande rafraîchit l'écran, ce qui **ouvre déjà le dossier suivant** (E09) ;
