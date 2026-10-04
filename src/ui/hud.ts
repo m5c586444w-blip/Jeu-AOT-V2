@@ -77,7 +77,19 @@ export class Hud {
         b.addEventListener("click", () => actions.openPanel?.(id));
         nav.append(b);
       }
-      head.append(nav);
+      // Retour au menu principal (P8, 04 §5.1) : la partie est sauvegardée automatiquement à intervalles.
+      const menu = el("button", "bandeau__menu");
+      menu.type = "button";
+      menu.innerHTML = registerIcon("menu");
+      menu.append(el("span", "lecteur-seul", t("menu.open")));
+      menu.title = t("menu.open");
+      menu.dataset["action"] = "menu";
+      menu.addEventListener("click", () => {
+        window.location.search = "?menu=1";
+      });
+      nav.append(menu);
+      // Registres sur la ligne du pied, entre l'alerte et la graine : le bandeau ne prend plus de ligne de plus (P8).
+      foot.insertBefore(nav, foot.children[1] ?? null);
     }
     this.el.append(head, ledger, nation, foot);
   }

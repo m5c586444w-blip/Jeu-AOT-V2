@@ -2469,5 +2469,16 @@
   "dip.ai_action.commerce": "commerce",
   "dip.ai_action.lever": "levée",
   "dip.ai_action.attaquer": "attaque",
-  "dip.ai_action.titan": "projection d'un Titan"
+  "dip.ai_action.titan": "projection d'un Titan",
+  "menu.table": "Table des archives",
+  "menu.confidential": "Confidentiel",
+  "menu.note": "Archives militaires de l'île de Paradis et des nations du continent. Tirez un dossier du tiroir pour ouvrir une partie.",
+  "menu.scenarios": "Scénarios",
+  "menu.year": "an {year}",
+  "menu.summary.scn_sandbox_845": "Shiganshina vient de tomber. Réfugiés, famine, reconquête : tenir derrière Rose.",
+  "menu.summary.scn_sandbox_850": "Cinq ans après la chute de Maria, la 104ᵉ promotion sort du camp. Trost est à la veille de sa brèche.",
+  "menu.summary.scn_854": "Le monde extérieur est connu. Marley se tourne vers Paradis ; Hizuru hésite ; les Alliés comptent leurs morts.",
+  "menu.nation.fac_paradis": "Gouverner l'île : armée, cabinet, porteurs, et désormais le monde.",
+  "menu.nation.fac_marley": "Mener l'empire : fronts, flottes, guerriers, et le Fondateur à reprendre.",
+  "menu.open": "Menu principal et archives"
 }

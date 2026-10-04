@@ -411,3 +411,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - E59 (Grondement) et E60 restent scénarisés, sans mécanique (P9).
 - Règle : un squelette sans mécanique commencé avant l'année du scénario compte comme « passé ». Sans elle, la guerre du Moyen-Orient (E50, 851–854), ni passée ni jouable, bloquait E53.
 - E43–E52 restent des squelettes. Une partie de 850 s'arrête à E42 ; le scénario 854 part de leur issue canonique.
+
+## 2026-10-04 — D-74 Menu principal et bandeau (P8)
+- Le menu principal (04 §5.1–5.2 : table d'archives, tiroir des scénarios, chemises à couverture, blasons) s'ouvre par `?menu=1` ou par le bouton du bandeau. Sans paramètre, la partie s'ouvre directement : les contrôles de non-régression de P1–P7 chargent l'adresse nue et attendent la carte. C'est aussi plus commode en développement.
+- Le bandeau ne passe plus sur deux lignes (revue de P5) : les registres sont des icônes dessinées (libellé en bulle et pour les lecteurs d'écran), placées sur la ligne du pied, entre l'alerte et la graine.
+- Blasons : emblèmes originaux (enceintes de Paradis, tour étoilée de Marley, soleil et vagues d'Hizuru, sabres et étoile des Alliés), aucun emblème de l'œuvre (04 §8.5).

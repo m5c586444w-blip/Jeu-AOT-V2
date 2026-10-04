@@ -681,3 +681,35 @@
 .fiche-nation--fac_hizuru h4 { color: #b8321f; letter-spacing: 0.06em; }
 /* P8 — vignettage discret de la carte (04 §3 : grain et vignettage), au-dessus du rendu, sans capter les clics */
 .carte::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 58%, rgba(28, 26, 23, 0.26) 100%); }
+/* P8 — menu principal : table d'archives sous la lampe (04 §5.1) */
+.table-archives { position: relative; min-height: 100vh; box-sizing: border-box; padding: 3rem clamp(1rem, 5vw, 5rem); display: grid; grid-template-columns: minmax(18rem, 2fr) minmax(18rem, 3fr); gap: 2rem; align-content: start;
+  background-color: #4a3424; background-image: repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.08) 0 2px, transparent 2px 9px), repeating-linear-gradient(88deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 23px), var(--grain-cadre, none); }
+.table-archives__lampe { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 18% 12%, rgba(255, 220, 150, 0.35), transparent 45%), radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.45) 100%); }
+.dossier-maitre { position: relative; background: var(--papier); background-image: var(--grain-fond), var(--fibres); border: 1px solid var(--encre); padding: 2rem 1.6rem 1.4rem; transform: rotate(-1.2deg); box-shadow: 7px 8px 0 rgba(0, 0, 0, 0.35); }
+.dossier-maitre__tampon { position: absolute; top: 1rem; right: 1rem; transform: rotate(8deg); }
+.dossier-maitre__titre { font-family: var(--f-titre); font-size: 2.6rem; margin: 0.4rem 0 0.2rem; font-weight: 400; }
+.dossier-maitre__sous-titre { font-style: italic; margin: 0 0 1rem; }
+.tiroir-scenarios, .choix-nation-menu { position: relative; background: #6b4a2f; border: 2px solid #2a1d13; padding: 0.8rem; box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.35); }
+.choix-nation-menu { grid-column: 1 / -1; }
+.tiroir-scenarios__etiquette { display: inline-block; margin: 0 0 0.6rem; padding: 0.1rem 0.8rem; background: #d9c9a0; border: 1px solid #2a1d13; font-family: var(--f-machine); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
+.tiroir-scenarios__chemises { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.chemise { flex: 1 1 13rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; text-align: left; font: inherit; color: var(--encre); background: #d8c49a; background-image: var(--grain-fond), var(--fibres); border: 1px solid #2a1d13; border-top: 10px solid #b89a6a; padding: 0.6rem 0.7rem 0.8rem; cursor: pointer; box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.3); }
+.chemise:nth-child(2n) { transform: rotate(0.8deg); }
+.chemise:nth-child(3n) { transform: rotate(-0.6deg); }
+.chemise:hover, .chemise:focus-visible { transform: translateY(-4px); outline: 2px solid var(--ocre); }
+.chemise__couverture { color: var(--encre); }
+.chemise__couverture .blason { width: 3.4rem; height: 3.4rem; }
+.chemise__annee { font-family: var(--f-machine); font-size: 0.8rem; }
+.chemise__titre { font-family: var(--f-titre); font-weight: 400; font-size: 1.15rem; }
+.chemise__resume { font-size: 0.9rem; }
+.chemise--fac_marley { border-top-color: #7a1f1f; }
+.chemise--fac_marley .chemise__titre { font-family: var(--f-marley); }
+.chemise--fac_paradis { border-top-color: #b5873a; }
+.bandeau__menu { font: inherit; line-height: 0; padding: 0.1rem 0.3rem; margin-left: 0.4rem; background: transparent; border: 1px dashed var(--encre); cursor: pointer; color: var(--encre); }
+.bandeau__menu .icone--registre { width: 1.35rem; height: 1.35rem; }
+@media (max-width: 900px) { .table-archives { grid-template-columns: 1fr; } }
+.bandeau__pied { align-items: center; }
+.bandeau__pied .bandeau__alerte { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bandeau__pied .bandeau__registres { margin-left: 0; flex: 0 0 auto; }
+.choix-nation-menu { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: stretch; }
+.choix-nation-menu .tiroir-scenarios__etiquette { flex: 1 1 100%; }

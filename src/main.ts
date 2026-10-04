@@ -7,5 +7,9 @@ import "./ui/styles/base.css";
 import "./ui/styles/console.css";
 import "./ui/styles/screen.css";
 import { bootGame } from "./ui/gameScreen";
+import { mountMainMenu } from "./ui/mainMenu";
 
-void bootGame();
+// Menu principal (P8) : `?menu=1`, ou le bouton du bandeau ; sans paramètre, la partie s'ouvre directement (D-74).
+const app = document.getElementById("app");
+if (new URLSearchParams(window.location.search).get("menu") === "1" && app) mountMainMenu(app);
+else void bootGame();
