@@ -22,6 +22,8 @@ export const LawIdSchema = idOf("law");
 export const RoleIdSchema = idOf("role");
 export const UnitIdSchema = idOf("unit");
 export const TitanClassIdSchema = idOf("titan");
+export const TitanTypeIdSchema = idOf("ttype");
+export const TacticalMapIdSchema = idOf("tmap");
 export const StratumIdSchema = idOf("str");
 
 
@@ -329,7 +331,46 @@ export const NameListSchema = z
   })
   .strict();
 
+/** data/titan_types — types de Titans purs du combat tactique (F-TIT-01) : classe (03 §5.2) × comportement [A]. */
+export const TitanTypeSchema = z
+  .object({
+    id: TitanTypeIdSchema,
+    class: TitanClassIdSchema,
+    behavior: z.enum(["errant", "meute", "coureur", "sauteur", "ignorant", "rampant"]),
+    name_key: z.string().min(1),
+    height_m: z.tuple([z.number().positive(), z.number().positive()]),
+    speed_m_s: z.number().positive(),
+    silhouettes: z.array(z.number().int().min(0).max(9)).min(1),
+    weight: unit,
+    ...canonFields,
+  })
+  .strict();
+
+const range = z.tuple([z.number().min(0), z.number().min(0)]);
+const brick = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("batiment"), grid: z.object({ cell_m: z.number().positive(), street_m: z.number().min(0), fill: unit }).strict(), height_m: range, anchors_per_face: z.number().int().min(0), band_m: range.optional() }).strict(),
+  z.object({ kind: z.literal("arbre_geant"), count: z.number().int().min(0), radius_m: range, height_m: range, anchors_per_tree: z.number().int().min(0) }).strict(),
+  z.object({ kind: z.literal("arbre"), count: z.number().int().min(0), radius_m: range, height_m: range, anchors_per_tree: z.number().int().min(0) }).strict(),
+  z.object({ kind: z.literal("rocher"), count: z.number().int().min(0), size_m: range, height_m: range, anchors_per_face: z.number().int().min(0) }).strict(),
+  z.object({ kind: z.literal("mur"), height_m: range, thickness_m: z.number().positive(), anchors_per_face: z.number().int().min(0) }).strict(),
+]);
+
+/** data/tactical_maps — cartes tactiques en briques de terrain (03 §2, F-CMB-40), générées par graine. */
+export const TacticalMapSchema = z
+  .object({
+    id: TacticalMapIdSchema,
+    name_key: z.string().min(1),
+    terrain: z.enum(["ville", "foret", "plaine", "mur"]),
+    size_m: z.tuple([z.number().positive(), z.number().positive()]),
+    bricks: z.array(brick).min(1),
+    ...canonFields,
+  })
+  .strict();
+
 export type Province = z.infer<typeof ProvinceSchema>;
+export type TitanType = z.infer<typeof TitanTypeSchema>;
+export type TacticalMap = z.infer<typeof TacticalMapSchema>;
+export type MapBrick = z.infer<typeof brick>;
 export type Unit = z.infer<typeof UnitSchema>;
 export type TitanClass = z.infer<typeof TitanClassSchema>;
 export type NameList = z.infer<typeof NameListSchema>;
@@ -362,6 +403,8 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   units: UnitSchema,
   titans: TitanClassSchema,
   names: NameListSchema,
+  titan_types: TitanTypeSchema,
+  tactical_maps: TacticalMapSchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

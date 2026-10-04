@@ -164,6 +164,60 @@ export const LogisticsBalanceSchema = z
   })
   .strict();
 
+/** data/balance/tactical.json — combat tactique (03 : « tout est dans /data/balance/tactical.json »). */
+export const TacticalBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    tick_hz: z.number().int().min(5).max(60),
+    odm: z
+      .object({
+        hook_range_m: pos,
+        hook_range_canon: CanonSchema,
+        hook_delay_s: range,
+        rail_accel: pos,
+        max_speed: pos,
+        gas_thrust_per_s: range,
+        tank: pos,
+        gravity: pos,
+        drag: z.number().min(0),
+        release_dist_m: pos,
+        safe_fall_m: pos,
+        lethal_fall_m: pos,
+        panic_hook_delay_mult: pos,
+      })
+      .strict(),
+    cut: z.object({ reach_m: pos, window_s: pos, base: prob, speed_ref: pos, speed_k: num, angle_k: num, skill_k: num, wear_per_cut: range, change_blades_s: pos, limb_share: prob, cooldown_s: pos }).strict(),
+    titans: z.object({ vision_day_m: pos, vision_night_m: pos, hearing_m: pos, night_activity: prob, group_attraction_k: num, attack_cooldown_s: range, grab_hold_s: pos, limb_regen_s: pos, nape_height_ratio: prob, reach_ratio: pos }).strict(),
+    soldiers: z
+      .object({
+        dodge_base: prob,
+        dodge_reaction_k: num,
+        dodge_air_bonus: num,
+        swat_lethal: prob,
+        rescue_reach_m: pos,
+        rescue_base: prob,
+        bleed_death_s: range,
+        serious_share: prob,
+        stress_per_death_seen: num,
+        stress_leader_death: num,
+        stress_abnormal_seen: num,
+        stress_gas_empty: num,
+        panic_threshold: num,
+        panic_gas_waste: pos,
+        stress_decay_per_s: num,
+      })
+      .strict(),
+    squads: z.object({ spacing_m: pos, flee_speed: pos, retreat_losses_share: prob }).strict(),
+    signals: z.object({ error_day: prob, error_night: prob, visibility_m: pos }).strict(),
+    resupply: z.object({ radius_m: pos, gas_per_s: pos, blades_per_s: pos }).strict(),
+    battle: z.object({ time_limit_s: pos, deploy_margin_m: pos }).strict(),
+    coherence: z.array(z.object({ id: z.string(), map: z.string(), titan: z.string(), count: z.number().int().min(1), soldiers: z.number().int().min(1) }).strict()).min(1),
+    terrain_mult: z.record(z.enum(["plaine", "foret", "ville", "mur"]), pos),
+  })
+  .strict();
+
+export type TacticalBalance = z.infer<typeof TacticalBalanceSchema>;
 export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
 
@@ -179,5 +233,6 @@ export const BALANCE_FILES = {
   society: SocietyBalanceSchema,
   expeditions: ExpeditionsBalanceSchema,
   logistics: LogisticsBalanceSchema,
+  tactical: TacticalBalanceSchema,
 } as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

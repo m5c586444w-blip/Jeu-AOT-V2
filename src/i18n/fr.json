@@ -1243,5 +1243,17 @@
   "letter.cause.hemorragie": "Les blessures reçues au combat ont été fatales.",
   "letter.cause.infection": "Malgré les soins, l'infection d'une blessure reçue au combat a été fatale.",
   "letter.cause.epuisement": "L'épuisement a eu raison de votre proche, loin de tout ravitaillement.",
-  "letter.cause.convoi": "Le convoi de ravitaillement qu'escortait votre proche a été attaqué."
+  "letter.cause.convoi": "Le convoi de ravitaillement qu'escortait votre proche a été attaqué.",
+  "ttype.petit_errant": "Petit Titan errant",
+  "ttype.moyen_errant": "Titan moyen errant",
+  "ttype.moyen_meute": "Titan moyen de meute",
+  "ttype.grand_errant": "Grand Titan errant",
+  "ttype.anormal_coureur": "Anormal coureur",
+  "ttype.anormal_sauteur": "Anormal sauteur",
+  "ttype.anormal_ignorant": "Anormal qui ignore l'appât",
+  "ttype.anormal_rampant": "Anormal rampant",
+  "tmap.ville": "Ville des Murs",
+  "tmap.foret": "Forêt des Arbres Géants",
+  "tmap.plaine": "Plaine hors-murs",
+  "tmap.mur": "Mur (sommet et face)"
 }

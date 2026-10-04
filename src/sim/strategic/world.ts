@@ -1,6 +1,6 @@
-import type { EconomyBalance, ExpeditionsBalance, LogisticsBalance, PoliticsBalance, SocietyBalance, TimeBalance } from "../../data/balance";
+import type { EconomyBalance, ExpeditionsBalance, LogisticsBalance, PoliticsBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
-import type { Building, Character, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TitanClass, Trait, Unit } from "../../data/schemas";
+import type { Building, Character, Law, NameList, Organisation, Province, Role, Scenario, Stratum, TacticalMap, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -14,6 +14,15 @@ export interface World {
   politics: PoliticsWorld | null;
   /** Expéditions et logistique (P3) : absentes sans graphe, équilibrage ou listes de noms. */
   military: MilitaryWorld | null;
+  /** Combat tactique (P4) : absent sans équilibrage tactique, types de Titans ou cartes. */
+  tactical: TacticalWorld | null;
+}
+
+export interface TacticalWorld {
+  balance: TacticalBalance;
+  titanTypes: ReadonlyMap<string, TitanType>;
+  titanClasses: ReadonlyMap<string, TitanClass>;
+  maps: ReadonlyMap<string, TacticalMap>;
 }
 
 /** Graphe de routage (dérivé de la carte) : ancres en km, zones, voisins avec distances, portes. */
@@ -63,6 +72,9 @@ export interface WorldSource {
   names?: readonly NameList[];
   expeditions?: ExpeditionsBalance;
   logistics?: LogisticsBalance;
+  tactical?: TacticalBalance;
+  titanTypes?: readonly TitanType[];
+  tacticalMaps?: readonly TacticalMap[];
 }
 
 export function buildGeo(g: GeoData): GeoGraph {
@@ -102,6 +114,10 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     military:
       src.geo && src.expeditions && src.logistics && src.names?.[0] && src.titans?.length
         ? { geo: buildGeo(src.geo), units: new Map((src.units ?? []).map((u) => [u.id, u])), titans: src.titans, names: src.names[0], exp: src.expeditions, log: src.logistics }
+        : null,
+    tactical:
+      src.tactical && src.titanTypes?.length && src.tacticalMaps?.length
+        ? { balance: src.tactical, titanTypes: new Map(src.titanTypes.map((t) => [t.id, t])), titanClasses: new Map((src.titans ?? []).map((t) => [t.id, t])), maps: new Map(src.tacticalMaps.map((m) => [m.id, m])) }
         : null,
   };
 }

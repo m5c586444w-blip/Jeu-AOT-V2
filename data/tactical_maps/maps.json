@@ -1,0 +1,33 @@
+[
+  {
+    "id": "tmap_ville", "name_key": "tmap.ville", "terrain": "ville", "size_m": [400, 300], "canon": "A",
+    "notes_canon": "Ville des Murs générique (03 §2) : toits, rues étroites, ancrages nombreux. Les tracés canon (Trost, Shiganshina) viendront avec leurs événements.",
+    "bricks": [
+      { "kind": "batiment", "grid": { "cell_m": 32, "street_m": 8, "fill": 0.85 }, "height_m": [8, 20], "anchors_per_face": 2 }
+    ]
+  },
+  {
+    "id": "tmap_foret", "name_key": "tmap.foret", "terrain": "foret", "size_m": [400, 300], "canon": "A",
+    "notes_canon": "Forêt des Arbres Géants : troncs ≈ 80 m (C, 03 §2), ancrages abondants, visibilité faible. Disposition [A].",
+    "bricks": [
+      { "kind": "arbre_geant", "count": 28, "radius_m": [4, 8], "height_m": [70, 90], "anchors_per_tree": 6 },
+      { "kind": "arbre", "count": 30, "radius_m": [0.6, 1.2], "height_m": [10, 18], "anchors_per_tree": 1 }
+    ]
+  },
+  {
+    "id": "tmap_plaine", "name_key": "tmap.plaine", "terrain": "plaine", "size_m": [400, 300], "canon": "A",
+    "notes_canon": "Plaine hors-murs : peu d'ancrages, forte exposition (03 §2). Disposition [A].",
+    "bricks": [
+      { "kind": "arbre", "count": 9, "radius_m": [0.6, 1.2], "height_m": [10, 16], "anchors_per_tree": 1 },
+      { "kind": "rocher", "count": 5, "size_m": [6, 14], "height_m": [3, 8], "anchors_per_face": 1 }
+    ]
+  },
+  {
+    "id": "tmap_mur", "name_key": "tmap.mur", "terrain": "mur", "size_m": [400, 300], "canon": "A",
+    "notes_canon": "Sommet et face d'un mur : hauteur 50 m (C, 11 §2), épaisseur 10 m (?), ancrages limités, vent (03 §2). Quartier au pied du mur [A].",
+    "bricks": [
+      { "kind": "mur", "height_m": [50, 50], "thickness_m": 10, "anchors_per_face": 12 },
+      { "kind": "batiment", "grid": { "cell_m": 34, "street_m": 10, "fill": 0.5 }, "height_m": [6, 14], "anchors_per_face": 1, "band_m": [70, 170] }
+    ]
+  }
+]

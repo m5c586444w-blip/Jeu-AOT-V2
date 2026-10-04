@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
-import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, Tech, TitanClass, Trait, Unit } from "./schemas";
+import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, TacticalMap, Tech, TitanClass, TitanType, Trait, Unit } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
 export interface DataIssue {
@@ -29,12 +29,14 @@ export interface GameData {
   units: Unit[];
   titans: TitanClass[];
   names: NameList[];
+  titan_types: TitanType[];
+  tactical_maps: TacticalMap[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -88,6 +90,7 @@ export function checkReferences(data: GameData): DataIssue[] {
     for (const r of c.relations) ref(c.id, "relations", r.to);
   }
   for (const tr of data.traits) for (const o of tr.opposes) ref(tr.id, "opposes", o);
+  for (const tt of data.titan_types) ref(tt.id, "class", tt.class);
   for (const r of data.roles) ref(r.id, "proposal", r.proposal);
   const modifierRefs = (owner: string, target: string): void => {
     const m = /:(str_[a-z_]+|org_[a-z_]+)$/.exec(target);
