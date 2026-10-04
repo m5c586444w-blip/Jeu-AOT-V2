@@ -1,0 +1,27 @@
+Capacités des Neuf (AC6-05) : 6 batailles par capacité
+  OK  shifter_colossal / onde_chaleur (heat_wave) : 10 emplois, effet 36.0 ennemis brûlés ou coupes empêchées (ennemi, tmap_ville)
+  OK  shifter_cuirasse / armure (armor) : passive, effet 1876.8 points de dégâts de lame absorbés (ennemi, tmap_foret)
+  OK  shifter_cuirasse / charge (charge) : 14 emplois, effet 15.0 ennemis renversés (ennemi, tmap_plaine)
+  OK  shifter_feminin / durcissement_local (hardening) : 6 emplois, effet 40.0 points de dégâts sur la nuque bloqués (ennemi, tmap_foret)
+  OK  shifter_feminin / cri_appel (call) : 6 emplois, effet 7.0 Titans purs attirés (ennemi, tmap_foret)
+  OK  shifter_bestial / projectiles (projectiles) : 47 emplois, effet 44.0 ennemis tués (ennemi, tmap_plaine)
+  OK  shifter_bestial / controle_purs (command_pures) : passive, effet 43.1 secondes d'attaque gagnées par les purs (ennemi, tmap_plaine)
+  OK  shifter_machoire / vitesse (speed) : passive, effet 1841.4 mètres gagnés (allie, tmap_plaine)
+  OK  shifter_machoire / morsure (bite) : 26 emplois, effet 21.0 victimes ou points de dégâts (allie, tmap_plaine)
+  OK  shifter_charrette / endurance (endurance) : passive, effet 58.6 points d'endurance épargnés (allie, tmap_foret)
+  OK  shifter_charrette / transport (transport) : 3 emplois, effet 160.0 unités de gaz livrées (allie, tmap_foret)
+  OK  shifter_marteau / pieux_cristal (spikes) : 16 emplois, effet 28.0 ennemis tués (ennemi, tmap_foret)
+  OK  shifter_marteau / corps_distant (remote_body) : passive, effet 73.3 points de dégâts sur la nuque absorbés (ennemi, tmap_foret)
+  OK  shifter_assaillant / combat_rapproche (melee_titans) : 11 emplois, effet 8.0 Titans purs abattus (allie, tmap_plaine)
+  OK  shifter_assaillant / regeneration (regeneration) : passive, effet 262.9 points de vie rendus en plus (ennemi, tmap_foret)
+  OK  shifter_fondateur / controle_purs_fondateur (founder_command) : 6 emplois, effet 36.0 Titans purs ralliés (allie, tmap_plaine)
+  OK  16 capacités dans les données, toutes mesurées
+  OK  Fondateur sans contact royal : 0 emploi de la Coordonnée
+Lances de foudre contre l'armure durcie (T-ANT-08)
+  OK  coup de lame 0.8 (armure : ×0.08), lance 30.0 (perce)
+  OK  Cuirassé vaincu : 6/6 avec lances, 0/6 aux lames seules
+Transformation et perte de contrôle (AC6-06)
+  OK  délai de transformation dans [1, 3] s (1.4, 2.6, 1.4, 1.4, 1.4, 3.0) et coût d'endurance 20, 6/6
+  OK  perte de contrôle : 1 crises à stress 95, 0 à stress 0 ; soldats alliés frappés par le porteur en crise : 0
+  OK  épuisé (endurance à zéro) : détransformation, retour après 43.1 s ≥ recharge 30 s
+sim:shifters : tout est conforme.

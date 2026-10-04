@@ -51,7 +51,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_cuirasse",
@@ -111,7 +111,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_feminin",
@@ -170,7 +170,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_bestial",
@@ -237,14 +237,14 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_machoire",
     "name_key": "shifter.machoire",
     "height_m": [
-      5,
-      5
+      4,
+      4
     ],
     "speed_m_s": 12.0,
     "hp": {
@@ -318,7 +318,7 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_charrette",
@@ -378,7 +378,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_marteau",
@@ -445,7 +445,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_assaillant",
@@ -519,7 +519,7 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   },
   {
     "id": "shifter_fondateur",
@@ -581,6 +581,6 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs ? (non données par les spécifications). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
   }
 ]

@@ -2,10 +2,14 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P5 terminée** → P6 — Titans-porteurs et héritage (mode autonome borné jusqu'à P8) |
-| Tâche | T6.1 (données, R11) et T6.2 (état v7, horloge, héritage, visions) faites → T6.3 combat des porteurs |
-| Dernier `npm run verify` | 2026-10-04 (T6.2, commit 208d533) : code 0, 245 tests |
-| Prochaine étape | T6.3 — unité porteur en bataille, 9 capacités, lances de foudre ; **arrêt de revue après P8** |
+| Phase | **P6 terminée** → P7 — Marley, Hizuru, Alliés (mode autonome borné jusqu'à P8) |
+| Tâche | T7.0 — plan `docs/phases/P7.md` (fait) |
+| Dernier `npm run verify` | 2026-10-04 (fin de P6) : code 0, 255 tests — `docs/reports/P6-verify.log` |
+| Prochaine étape | T7.1 — données du monde (60 provinces, factions, formations, personnages de Marley et d'Hizuru, scénario 854) ; **arrêt de revue après P8** |
+
+## P6 terminée (2026-10-04)
+- Rapport : `docs/reports/P6.md` ; AC6-01 à AC6-10 OK. Deux critères ont échoué une fois chacun par erreur de test (smoke:p6, smoke:politique), puis passé : aucun arrêt.
+- Reporté à P8 : transformation animée (éclair, vapeur) et figure dédiée des porteurs en bataille.
 
 ## Arrêt levé (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
 - **Levé** : l'utilisateur a fixé l'objectif « P5 à P8 terminées » juste après la proposition de correction ; correction appliquée (dossier fermé avant l'envoi de la commande).

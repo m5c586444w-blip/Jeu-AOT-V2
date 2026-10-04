@@ -1,0 +1,59 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > good → code 0, et valide aussi pour data:validate 290ms
+ ✓ tests/sim/shifter-combat.test.ts > transformation (AC6-06, F-TIT-04) > délai de 1 à 3 s, coût d'endurance, corps de Titan ajouté au champ de bataille 16ms
+ ✓ tests/sim/shifter-combat.test.ts > transformation (AC6-06, F-TIT-04) > endurance à zéro : détransformation (épuisé), pas de nouvelle transformation avant la recharge 35ms
+ ✓ tests/sim/shifter-combat.test.ts > transformation (AC6-06, F-TIT-04) > un porteur ennemi pas encore transformé empêche la victoire, même sans Titan pur 1ms
+ ✓ tests/sim/shifter-combat.test.ts > points de vie par zones, armure, lances (AC6-05) > lame contre l'armure durcie : ×0,08 ; lance de foudre : dégâts pleins (perce) 1ms
+ ✓ tests/sim/shifter-combat.test.ts > points de vie par zones, armure, lances (AC6-05) > un soldat équipé tire ses lances sur un porteur à portée ; la nuque à zéro abat le porteur (vaincu) 3ms
+ ✓ tests/sim/shifter-combat.test.ts > points de vie par zones, armure, lances (AC6-05) > durcissement local : la nuque durcie bloque la lame ; onde de chaleur : aucune coupe possible 5ms
+ ✓ tests/sim/shifter-combat.test.ts > points de vie par zones, armure, lances (AC6-05) > régénération : les points de vie reviennent en consommant l'endurance 4ms
+ ✓ tests/sim/shifter-combat.test.ts > perte de contrôle (AC6-06, F-TIT-14) > sous stress extrême, le porteur finit par perdre le contrôle (crise journalisée) ; jamais à stress nul et sans blessure 169ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r1_thunder_spear_no_unlock → code 1 avec la règle R1 (et seulement elle) 303ms
+ ✓ tests/sim/shifter-combat.test.ts > déterminisme et textes > même configuration avec porteur et lances → même bataille 23ms
+ ✓ tests/sim/shifter-combat.test.ts > déterminisme et textes > toutes les clés du journal produites par les porteurs existent en français 150ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r2_thunder_spear_too_early → code 1 avec la règle R2 (et seulement elle) 266ms
+ ✓ tests/sim/core/state.test.ts > JSON canonique et hash > indépendant de l'ordre des clés 2ms
+ ✓ tests/sim/core/state.test.ts > JSON canonique et hash > format hexadécimal sur 8 caractères 0ms
+ ✓ tests/sim/core/state.test.ts > déterminisme (AC-07) > 1000 ticks, graine 42, deux fois → même hash ; graine 43 → hash différent 5ms
+ ✓ tests/sim/core/state.test.ts > déterminisme (AC-07) > le nombre de ticks change le hash 0ms
+ ✓ tests/sim/core/state.test.ts > rejeu (AC-08) > replay a le même hash que l'état vivant 8ms
+ ✓ tests/sim/core/state.test.ts > sérialisation et migration (AC-09) > deserialize(serialize(s)) garde le même hash 1ms
+ ✓ tests/sim/core/state.test.ts > sérialisation et migration (AC-09) > un état v0 est migré jusqu'à la version courante (v0 → v1 → … → v6 → v7) 1ms
+ ✓ tests/sim/core/state.test.ts > sérialisation et migration (AC-09) > erreurs explicites 1ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r3_character_window_inverted → code 1 avec la règle R3 (et seulement elle) 231ms
+ ✓ tests/sim/shifters.test.ts > horloge des 13 ans (AC6-02, F-TIT-03) > années restantes des porteurs de 850, expliquées (13 − années écoulées) 2ms
+ ✓ tests/sim/shifters.test.ts > horloge des 13 ans (AC6-02, F-TIT-03) > à l'échéance, le porteur meurt de la malédiction et le pouvoir sort du jeu 440ms
+ ✓ tests/data/shifters.test.ts > les Neuf Titans (AC6-01, 03 §8, 11 §4) > 9 Titans, nommés, chacun avec au moins une capacité et un statut canon 3ms
+ ✓ tests/data/shifters.test.ts > les Neuf Titans (AC6-01, 03 §8, 11 §4) > chaque capacité a coût, portée, délai, recharge, effet, limites et statut ; toutes nommées ; les passives ont une grandeur 1ms
+ ✓ tests/data/shifters.test.ts > les Neuf Titans (AC6-01, 03 §8, 11 §4) > chaînes de porteurs conformes à 11 §4 (noms, ordre, années données) 1ms
+ ✓ tests/data/shifters.test.ts > les Neuf Titans (AC6-01, 03 §8, 11 §4) > porteurs en 850 : Eren (Assaillant, Fondateur), Ymir (Mâchoire), Reiner, Bertholdt et Annie ; Marley tient le reste sans nom inventé 1ms
+ ✓ tests/data/shifters.test.ts > les Neuf Titans (AC6-01, 03 §8, 11 §4) > le contrôle des purs du Fondateur exige le contact royal (02 §10) 0ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r4_event_cycle → code 1 avec la règle R4 (et seulement elle) 217ms
+ ✓ tests/sim/shifters.test.ts > horloge des 13 ans (AC6-02, F-TIT-03) > un Titan de Marley sans porteur nommé est relayé à l'échéance (nouvel héritier, horloge à 13 ans) 358ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r5_unit_at_destroyed_place → code 1 avec la règle R5 (et seulement elle) 231ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r6_missing_canon_tag → code 1 avec la règle R6 (et seulement elle) 249ms
+ ✓ tests/sim/shifters.test.ts > mourir ou transmettre (AC6-03, F-TIT-05) > mort sans ingestion : le pouvoir passe à un nouveau-né eldien au hasard, hors du jeu 6ms
+ ✓ tests/sim/shifters.test.ts > mourir ou transmettre (AC6-03, F-TIT-05) > héritage préparé : porteur capturé + sérum + héritier vivant → l'héritier dévore le porteur et reçoit 13 ans 3ms
+ ✓ tests/sim/shifters.test.ts > mourir ou transmettre (AC6-03, F-TIT-05) > refus expliqués : sans sérum, porteur hors de portée, héritier mort ; RetireShifter réservé aux porteurs de Paradis 5ms
+ ✓ tests/sim/shifters.test.ts > mourir ou transmettre (AC6-03, F-TIT-05) > E42 (Canon fidèle) : Armin hérite du Colossal en dévorant Bertholdt ; le sérum de Kenny (E35) est consommé 502ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r7_uncertain_location_as_canon → code 1 avec la règle R7 (et seulement elle) 239ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r8_death_off_canon_event → code 1 avec la règle R8 (et seulement elle) 237ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r9_unknown_reference → code 1 avec la règle R9 (et seulement elle) 212ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r10_tech_anachronism → code 1 avec la règle R10 (et seulement elle) 219ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > bad/r11_shifter_chain → code 1 avec la règle R11 (et seulement elle) 214ms
+ ✓ tests/tools/canon-check.test.ts > canon:check (AC-13) > dossier /data → code 0 239ms
+ ✓ tests/tools/canon-check.test.ts > règles : cas limites > R4 : prédécesseur inconnu et année antérieure 0ms
+ ✓ tests/tools/canon-check.test.ts > règles : cas limites > R2 : unlock_event multiple → la plus ancienne année compte 0ms
+ ✓ tests/tools/canon-check.test.ts > règles : cas limites > R5 : l'année de destruction elle-même reste autorisée 0ms
+ ✓ tests/sim/shifters.test.ts > coût systémique de l'héritage (AC6-04) > sérum, porteur dévoré, horloge, stress de l'héritier et des proches, loyauté de son corps, légitimité : prévus puis appliqués 7ms
+ ✓ tests/sim/shifters.test.ts > visions et Fondation (AC6-07, F-TIT-06, F-TIT-07) > visions : rapports de renseignement « rumeur », parfois faux, recoupables 1636ms
+ ✓ tests/sim/shifters.test.ts > visions et Fondation (AC6-07, F-TIT-06, F-TIT-07) > le contrôle des purs du Fondateur est verrouillé sans contact royal, raison affichée 0ms
+ ✓ tests/sim/shifters.test.ts > sauvegarde (AC6-08) > v6 → v7 : la couche est recréée depuis les données au premier jour simulé ; aller-retour sans perte 31ms
+
+ Test Files  5 passed (5)
+      Tests  50 passed (50)
+   Start at  15:33:16
+   Duration  4.23s (tests 72%, transform 16%, import 11%)
+

@@ -1,0 +1,36 @@
+
+> murs-et-sang@0.0.1 smoke:politique
+> tsx src/tools/smoke-politique.ts
+
+[scénario 850] 1366×768
+  OK  bandeau : 11 registres (P2 + Expéditions + P5 + Porteurs)
+  OK  registre des personnages (touche C) : 52 personnages vivants
+  OK  personnages : 52 valeurs, toutes expliquées ; aucune clé brute
+  OK  fiche d'Erwin Smith avec portrait procédural
+  OK  fiche : 12 attributs
+  OK  fiche personnage : 14 valeurs, toutes expliquées ; aucune clé brute
+  OK  attribut : fiche « pourquoi ? » au survol
+  OK  salle du Cabinet : 8 billes de vote prévues pour 8 membres
+  OK  Cabinet : 12 valeurs, toutes expliquées ; aucune clé brute
+  OK  fiches « pourquoi ? » des 8 membres : lignes 1, 2, 1, 2, 2, 2, 2, 1 (chacune ≥ 1)
+  OK  au moins un membre a ≥ 2 facteurs (max 2)
+  OK  somme des facteurs = score affiché pour les 8 membres
+  OK  bordereau : « Annuler » n'engage rien (F-UIX-12)
+  OK  bordereau de confirmation avant le vote (F-UIX-13)
+  OK  vote tenu : « Dernier vote — Exemptions de conscription, an 850, jour 41 : 6 pour, 1 contre, 1 abstention(s). Adopté. »
+  OK  décret direct signé : tampon « en vigueur »
+  OK  décrets : 0 valeurs, toutes expliquées ; aucune clé brute
+  OK  8 organisations
+  OK  budget modifié : brouillon à arrêter
+  OK  organisations et strates : 46 valeurs, toutes expliquées ; aucune clé brute
+  OK  dossier de décès : 3 conséquences
+  OK  conseil : 18 rôles
+  OK  poste vacant : nomination proposée
+  OK  nomination : 3 candidats
+  OK  conseil : 23 valeurs, toutes expliquées ; aucune clé brute
+  OK  nomination signée
+  OK  journal : 26 entrées
+  OK  journal : 0 valeurs, toutes expliquées ; aucune clé brute
+  OK  Échap ferme le registre
+  OK  aucune erreur console
+smoke:politique : OK (captures dans docs/screenshots/).
