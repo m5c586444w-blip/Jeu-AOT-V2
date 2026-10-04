@@ -1,3 +1,4 @@
+import { emblem } from "../icons";
 import { t } from "../../i18n";
 import { acceptance, hizuruDrift, TREATY_KINDS } from "../../sim/world/diplomacy";
 import type { TreatyKind } from "../../sim/world/diplomacy";
@@ -46,7 +47,10 @@ export class DiplomacyPanel implements Panel {
       const card = el("article", `fiche-nation fiche-nation--${f.id}`);
       card.dataset["nation"] = f.id;
       const head = el("header", "planche__tete");
-      head.append(el("h4", "", t(f.name_key)), el("span", "registre-note", t(`dip.personality.${f.personality}`)));
+      const blason = el("span", "fiche-nation__blason");
+      blason.innerHTML = emblem(f.id);
+      blason.setAttribute("aria-hidden", "true");
+      head.append(blason, el("h4", "", t(f.name_key)), el("span", "registre-note", t(`dip.personality.${f.personality}`)));
       card.append(head);
       const r = ns.relations[f.id]?.[me];
       if (r) {

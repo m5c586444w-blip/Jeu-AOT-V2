@@ -690,6 +690,13 @@
 /* Hizuru (04 §1.1) : washi, indigo, vermillon, sobriété */
 .fiche-nation--fac_hizuru { background-color: #efe6d2; background-image: repeating-linear-gradient(0deg, rgba(42, 58, 92, 0.04) 0 1px, transparent 1px 6px); border-color: #2a3a5c; }
 .fiche-nation--fac_hizuru h4 { color: #b8321f; letter-spacing: 0.06em; }
+/* Marley (04 §1.1) : acier, rouge sang, gothique de propagande ; Alliés : cuir et papier kraft */
+.fiche-nation--fac_marley { background-color: #dcd6c8; border-color: #2d3e50; }
+.fiche-nation--fac_marley h4 { font-family: var(--f-marley); color: #7a1f1f; font-size: 1.15rem; }
+.fiche-nation--fac_allies { background-color: #e6d9bd; }
+.fiche-nation__blason { display: inline-block; width: 1.7rem; height: 1.7rem; margin-right: 0.35rem; vertical-align: middle; }
+.fiche-nation__blason svg { width: 100%; height: 100%; }
+.fiche-nation .planche__tete { display: flex; align-items: center; gap: 0.25rem; }
 /* P8 — vignettage discret de la carte (04 §3 : grain et vignettage), au-dessus du rendu, sans capter les clics */
 .carte::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 58%, rgba(28, 26, 23, 0.26) 100%); }
 /* P8 — menu principal : table d'archives sous la lampe (04 §5.1) */
