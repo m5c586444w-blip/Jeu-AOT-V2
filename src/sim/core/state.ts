@@ -10,6 +10,7 @@ import { dailyPolitics, monthlyPolitics } from "../politics/tick";
 import type { World } from "../strategic/world";
 import { createMilitaryState } from "../military/state";
 import type { MilitaryState } from "../military/state";
+import { dailyMilitary } from "../military/tick";
 
 export const CURRENT_SCHEMA_VERSION = 4 as const;
 
@@ -54,7 +55,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let strategic = state.strategic;
   let politics = state.politics;
   // Sauvegarde v3 migrée : le Corps est généré ici, de façon déterministe (même graine → mêmes soldats).
-  const military = state.military ?? (world?.military ? createMilitaryState(world, state.seed) : null);
+  let military = state.military ?? (world?.military ? createMilitaryState(world, state.seed) : null);
   const date = advance(state.date, 1);
   if (world && strategic) {
     const mods = politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS;
@@ -62,6 +63,12 @@ export function tickDay(state: GameState, world?: World): GameState {
     if (politics && world.politics) {
       politics = structuredClone(politics);
       dailyPolitics(world, politics, strategic, state.date);
+    }
+    if (military) {
+      const r = dailyMilitary(world, state.seed, state.date, military, strategic, politics);
+      military = r.mil;
+      strategic = r.st;
+      politics = r.pol;
     }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);

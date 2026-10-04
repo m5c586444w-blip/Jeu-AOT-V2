@@ -210,3 +210,17 @@
 
 ## 2026-10-04 — D-53 Unités de gaz
 - Décision : une unité du stock national de gaz vaut 10 unités d'ODM `[A]`. Le réservoir d'un soldat fait 100 u d'ODM (03 §3.2) ; un engagement en consomme 3 à 8 par soldat engagé (02 §15). Ainsi, une expédition de 100 soldats emporte environ 2 000 unités de stock (réservoirs + recharges), sur 25 000 en 850.
+
+## 2026-10-04 — D-54 Logistique : escortes, retours, commit groupé
+- Commit groupé : T3.3 à T3.6 (logistique, planification, auto-résolution, rapport) partagent le contexte d'un jour militaire (`MilCtx`) et l'état v4 ; un découpage aurait produit des commits qui ne compilent pas (comme D-40).
+- Escorte d'un convoi : prise sur la première garnison de la Garnison du chemin, en pratique la porte franchie (Rose-Est pour Karanes). Elle y revient quand le convoi arrive ou est perdu.
+- Retour des chariots `[A]` : trajet abstrait ; chevaux et chariots sont rendus dès la livraison.
+- Effets politiques du retour : modificateurs décroissants de la légitimité et de la loyauté du Corps (mécanisme des deuils de P2). Ils apparaissent donc d'eux-mêmes dans le « pourquoi ? » de ces cibles.
+- Le pré-brief applique au stratège et à l'intendant la même « lentille » que les avis du conseil (`advisorLens`, extraite de `adviceFor`).
+
+## 2026-10-04 — D-55 Modèle d'auto-résolution v1
+- Chaque jour : contacts tirés suivant une loi de Poisson, dont le taux dépend de la densité, de la taille de la colonne, de la saison et du temps ; la nuit compte pour une fraction (`night_share`).
+- Chaque contact : détection (formation, temps, tactique du commandant), puis fusée rouge ou noire (03 §7). Une erreur de lecture est possible. Ensuite, soit une réorientation (fusée verte), soit un engagement.
+- Engagement : morts tirés selon une loi log-normale (queue droite épaisse), plus une rupture de formation rare, plus probable face à un anormal ou en colonnes. Puis blessés graves, mort par hémorragie ou infection sauf présence de médecin (03 §9), gaz de 3 à 8 u par homme engagé (02 §15).
+- Officiers nommés : moins exposés, un Ackerman encore moins (03 §3.1). Leur mort passe par `CharacterDies` (dossier, deuils de P2).
+- Tous les chiffres sont dans `data/balance/expeditions.json` et calibrés par `sim:expeditions` (T3.7).

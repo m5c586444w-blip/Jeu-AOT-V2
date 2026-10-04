@@ -9,6 +9,12 @@ import { acceptProposal, rejectProposal } from "../politics/advisors";
 import { characterDies, DEATH_CAUSES, nominate } from "../politics/characters";
 import type { DeathCause } from "../politics/characters";
 import { enactLaw, persuade, repealLaw, setBudget } from "../politics/politics";
+import { launchExpedition, recallExpedition } from "../military/expedition";
+import type { MilCtx } from "../military/expedition";
+import { sendConvoy } from "../military/logistics";
+import type { ConvoyOrder } from "../military/logistics";
+import type { ExpeditionPlan } from "../military/state";
+import { FORMATIONS, OBJECTIVES } from "../military/vocabulary";
 
 export const MAX_ADVANCE_DAYS = 3650;
 
@@ -24,6 +30,9 @@ export type Command =
   | { type: "Nominate"; nomination: number; candidate: string }
   | { type: "AcceptProposal"; proposal: number }
   | { type: "RejectProposal"; proposal: number }
+  | { type: "LaunchExpedition"; plan: ExpeditionPlan }
+  | { type: "RecallExpedition"; expedition: string }
+  | { type: "SendConvoy"; order: ConvoyOrder }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -79,11 +88,49 @@ export function validateCommand(cmd: unknown): Validation {
     case "AcceptProposal":
     case "RejectProposal":
       return Number.isInteger(c["proposal"]) ? { ok: true } : { ok: false, error: `${String(c["type"])}.proposal invalide` };
+    case "LaunchExpedition":
+      return validPlanShape(c["plan"]) ? { ok: true } : { ok: false, error: "LaunchExpedition.plan invalide" };
+    case "RecallExpedition":
+      return typeof c["expedition"] === "string" && /^exp_\d+$/.test(c["expedition"]) ? { ok: true } : { ok: false, error: "RecallExpedition.expedition invalide" };
+    case "SendConvoy": {
+      const o = c["order"] as Record<string, unknown> | undefined;
+      const ok = !!o && typeof o["depot"] === "string" && validSupplies(o["cargo"]) && Number.isInteger(o["wagons"]) && Number.isInteger(o["escort"]);
+      return ok ? { ok: true } : { ok: false, error: "SendConvoy.order invalide" };
+    }
     case "Noop":
       return { ok: true };
     default:
       return { ok: false, error: `type de commande inconnu : ${String(c["type"])}` };
   }
+}
+
+function validSupplies(x: unknown): boolean {
+  if (typeof x !== "object" || x === null) return false;
+  const s = x as Record<string, unknown>;
+  return ["food", "gas", "steel"].every((k) => typeof s[k] === "number" && Number.isFinite(s[k]) && (s[k] as number) >= 0);
+}
+
+/** Forme d'un plan (le fond — itinéraire, effectifs, stocks — est vérifié par planProblem à l'application). */
+function validPlanShape(x: unknown): boolean {
+  if (typeof x !== "object" || x === null) return false;
+  const p = x as Record<string, unknown>;
+  const strList = (v: unknown): boolean => Array.isArray(v) && v.every((s) => typeof s === "string");
+  const r = p["retreat"] as Record<string, unknown> | undefined;
+  return (
+    typeof p["objective"] === "string" &&
+    (OBJECTIVES as readonly string[]).includes(p["objective"]) &&
+    typeof p["formation"] === "string" &&
+    (FORMATIONS as readonly string[]).includes(p["formation"]) &&
+    strList(p["route"]) &&
+    strList(p["squads"]) &&
+    strList(p["officers"]) &&
+    Number.isInteger(p["horses"]) &&
+    Number.isInteger(p["wagons"]) &&
+    validSupplies(p["supplies"]) &&
+    validSupplies(p["depotCargo"]) &&
+    !!r &&
+    ["losses_pct", "gas_pct", "abnormal", "max_days"].every((k) => typeof r[k] === "number")
+  );
 }
 
 /** Applique une commande validée ; renvoie un nouvel état (l'état d'entrée n'est pas modifié). */
@@ -118,6 +165,11 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "AcceptProposal":
     case "RejectProposal":
       next = applyPolitical(next, cmd, world);
+      break;
+    case "LaunchExpedition":
+    case "RecallExpedition":
+    case "SendConvoy":
+      next = applyMilitary(next, cmd, world);
       break;
     case "Noop":
       break;
@@ -165,6 +217,26 @@ function applyPolitical(state: GameState, cmd: PoliticalCommand, world?: World):
       return { ...state, politics: r.state, strategic: r.strategic };
     }
   }
+}
+
+type MilitaryCommand = Extract<Command, { type: "LaunchExpedition" | "RecallExpedition" | "SendConvoy" }>;
+
+/** Commandes de la couche militaire (P3) : copies de travail, puis nouvel état. */
+function applyMilitary(state: GameState, cmd: MilitaryCommand, world?: World): GameState {
+  if (!world?.military || !state.military || !state.strategic) throw new Error(`${cmd.type} : aucune couche militaire chargée`);
+  const ctx: MilCtx = {
+    world,
+    m: world.military,
+    seed: state.seed,
+    date: state.date,
+    st: structuredClone(state.strategic),
+    pol: state.politics ? structuredClone(state.politics) : null,
+    mil: structuredClone(state.military),
+  };
+  if (cmd.type === "LaunchExpedition") launchExpedition(ctx, cmd.plan);
+  else if (cmd.type === "RecallExpedition") recallExpedition(ctx, cmd.expedition);
+  else sendConvoy(ctx, cmd.order);
+  return { ...state, strategic: ctx.st, politics: ctx.pol, military: ctx.mil };
 }
 
 /** Journal des commandes appliquées : source des replays et des sauvegardes rejouables. */

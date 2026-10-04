@@ -98,16 +98,15 @@ export function biasOf(pw: PoliticsWorld, pol: PoliticalState, id: string): Bias
   return c.agenda === "opportuniste" ? "gonfle" : null;
 }
 
-/** Avis d'un rôle à une date (déterministe : le « bruit » d'un avis dépend du conseiller et du mois). */
-export function adviceFor(world: World, pol: PoliticalState, st: StrategicState, date: GameDate, roleId: string): Advice | null {
+/**
+ * Ce qu'un conseiller annonce d'une grandeur réelle (08 §3) : erreur selon sa fiabilité, déformation selon son biais.
+ * `highIsBad` : une valeur haute est mauvaise (pertes, radicalisation) ; un biais optimiste la minimise alors.
+ */
+export function advisorLens(world: World, pol: PoliticalState, who: string, date: GameDate, real: number | null, highIsBad: boolean): { shown: number | null; reliability: number; estimatedReliability: number; bias: "gonfle" | "exagere" | "ignore" | null } {
   const pw = politicsWorld(world);
-  const role = pw.roles.find((r) => r.id === roleId);
-  if (!role) return null;
-  const who = pol.roles[roleId] ?? null;
-  const cs = who ? pol.characters[who] : undefined;
-  const c = who ? pw.characters.get(who) : undefined;
-  const real = metricValue(world, pol, st, role.metric);
-  if (!who || !c || !cs?.alive) return { role: roleId, advisor: null, metric: role.metric, real, shown: null, reliability: 0, estimatedReliability: 0, bias: null, alarm: false, recommendation: null, interest: 0 };
+  const c = pw.characters.get(who);
+  const cs = pol.characters[who];
+  if (!c || !cs) return { shown: real, reliability: 0, estimatedReliability: 0, bias: null };
   const a = effectiveAttributes(pw, c, cs);
   const competence = (a.intellect + Math.max(a.tactics, a.command, a.charisma, a.faith)) / 2;
   const reliability = clamp(0.6 * competence + 0.4 * c.honesty);
@@ -118,10 +117,24 @@ export function adviceFor(world: World, pol: PoliticalState, st: StrategicState,
     const wobble = new Rng(fnv1a(`${who}:${date.year}:${Math.ceil(date.day / 30)}`)).next() * 2 - 1;
     const error = (1 - reliability / 100) * 0.25 * wobble;
     const k = (100 - c.honesty) * pw.balance.advisors.bias_k + 0.1;
-    const optimistic = HIGH_IS_BAD.has(role.metric) ? -1 : 1;
+    const optimistic = highIsBad ? -1 : 1;
     const biasFactor = bias === "gonfle" || bias === "ignore" ? optimistic * k : bias === "exagere" ? -optimistic * k : 0;
     shown = real * (1 + error + biasFactor);
   }
+  return { shown, reliability, estimatedReliability, bias };
+}
+
+/** Avis d'un rôle à une date (déterministe : le « bruit » d'un avis dépend du conseiller et du mois). */
+export function adviceFor(world: World, pol: PoliticalState, st: StrategicState, date: GameDate, roleId: string): Advice | null {
+  const pw = politicsWorld(world);
+  const role = pw.roles.find((r) => r.id === roleId);
+  if (!role) return null;
+  const who = pol.roles[roleId] ?? null;
+  const cs = who ? pol.characters[who] : undefined;
+  const c = who ? pw.characters.get(who) : undefined;
+  const real = metricValue(world, pol, st, role.metric);
+  if (!who || !c || !cs?.alive) return { role: roleId, advisor: null, metric: role.metric, real, shown: null, reliability: 0, estimatedReliability: 0, bias: null, alarm: false, recommendation: null, interest: 0 };
+  const { shown, reliability, estimatedReliability, bias } = advisorLens(world, pol, who, date, real, HIGH_IS_BAD.has(role.metric));
   const lowIsBad = !HIGH_IS_BAD.has(role.metric);
   const alarm = bias !== "ignore" && shown !== null && Number.isFinite(shown) && (lowIsBad ? shown < role.alarm : shown > role.alarm);
   const law = role.proposal ? pw.laws.get(role.proposal) : undefined;

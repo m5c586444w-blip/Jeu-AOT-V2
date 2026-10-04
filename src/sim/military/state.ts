@@ -66,6 +66,8 @@ export interface ExpeditionPlan {
   wagons: number;
   /** Provisions emportées en unités de stock (gaz : recharges en plus des réservoirs pleins). */
   supplies: Supplies;
+  /** Objectif « dépôt » : chargement déposé à l'arrivée (F-LOG-04). */
+  depotCargo: Supplies;
   retreat: RetreatPlan;
 }
 
@@ -110,6 +112,8 @@ export interface Expedition {
   day: number;
   /** Chemin restant à parcourir (première case = province actuelle). */
   path: string[];
+  /** Provinces parcourues depuis la base (dernière case = province actuelle) : chemin du retour. */
+  trail: string[];
   progressKm: number;
   objectiveDaysLeft: number;
   objectiveReached: boolean;
@@ -123,7 +127,10 @@ export interface Expedition {
   gasOdmStart: number;
   bladePairs: number;
   food: number;
+  foodStart: number;
   seriousWounded: string[];
+  /** Alertes de seuil déjà émises (F-LOG-13), pour ne les signaler qu'une fois. */
+  alerted: string[];
   stats: ExpeditionStats;
   signals: SignalEntry[];
   log: FieldLogEntry[];
@@ -139,6 +146,8 @@ export interface Depot {
   province: string;
   stocks: Supplies;
   built: GameDate;
+  /** Alerte « vivres bas » déjà émise (réarmée quand le dépôt est réapprovisionné). */
+  lowAlerted: boolean;
 }
 
 export interface Convoy {
@@ -151,6 +160,8 @@ export interface Convoy {
   cargo: Supplies;
   wagons: number;
   escort: number;
+  /** Garnison qui fournit l'escorte (première garnison de la Garnison sur le chemin, en général la porte). */
+  escortFrom: string | null;
   status: "en_route" | "livre" | "perdu";
   launched: GameDate;
   log: FieldLogEntry[];
