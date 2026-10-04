@@ -389,6 +389,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       root.dataset["jsParts"] = `sim ${p95(parts.sim).toFixed(2)} · figures ${p95(parts.draw).toFixed(2)} · rendu ${p95(parts.render).toFixed(2)} · interface ${p95(parts.ui).toFixed(2)}`;
       root.dataset["frames"] = String(Number(root.dataset["frames"] ?? "0") + 1);
       root.dataset["tick"] = String(bt.state.tick);
+      root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded}`;
       root.dataset["vue"] = scene.view;
       root.dataset["pastilles"] = String(scene.markers);
       root.dataset["zoom"] = scene.zoomLevel.toFixed(2);

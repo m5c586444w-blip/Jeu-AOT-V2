@@ -19,6 +19,8 @@ const OVERVIEW_DOT_PX = 3;
 const PASTILLE_PX = 11;
 /** Zoom maximal du cadrage initial (la bataille remplit l'écran, sans plan trop serré). */
 const FRAME_MAX_ZOOM = 6;
+/** Teintes de toits (tuile, ardoise, chaume) : villes moins régulières (revue de P4, reporté à P8). */
+const ROOF_TINTS = [0x8a3b2a, 0x6b4a2f, 0x5a5f66, 0x9b6a3c, 0x7a4a3a];
 
 export interface UnitPose {
   x: number;
@@ -45,6 +47,10 @@ export class TacticalScene {
   view: "ensemble" | "detail" = "detail";
   markers = 0;
   private map: TacticalWorldMap | null = null;
+  /** Effets dessinés (P8) : contrôles de l'écran de bataille et de smoke:p8. */
+  readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0 };
+  /** Volumes des bâtiments par colonne de 20 m (occlusion des unités qui passent derrière). */
+  private occluders = new Map<number, { x0: number; x1: number; y0: number; y1: number; front: number }[]>();
   private zoom = 1;
   private fitZoom = 1;
   /** Cadrage initial à refaire au redimensionnement tant que le joueur n'a pas bougé la caméra. */
@@ -202,10 +208,20 @@ export class TacticalScene {
         const [, yt] = this.project(st.x, st.y + st.d, st.h);
         const [, ybk] = this.project(st.x, st.y, st.h);
         const fill = st.kind === "mur" ? STONE : st.kind === "rocher" ? 0x9b927e : PAPER_DARK;
-        // Façade avant, puis toit (plan écrasé), traits d'encre.
+        // Façade avant, puis toit (plan écrasé), traits d'encre. Bâtiments variés (revue de P4) : teinte de toit,
+        // faîtage ou toit plat, cheminée, rangées de fenêtres, tirés de la position (même emprise, même simulation).
+        const v = ((Math.imul(Math.round(st.x * 7 + st.y * 13), 2654435761) >>> 0) % 1000) / 1000;
         s.rect(x0, yt, st.w, yb - yt).fill({ color: fill }).stroke({ width: 0.6, color: INK, alpha: 0.9 });
-        s.rect(x0, ybk, st.w, yt - ybk).fill({ color: st.kind === "batiment" ? 0x8a3b2a : fill, alpha: st.kind === "batiment" ? 0.55 : 0.8 }).stroke({ width: 0.6, color: INK, alpha: 0.9 });
-        for (let hx = x0 + 3; hx < x0 + st.w; hx += 4) s.moveTo(hx, yt + 1).lineTo(hx - 2, yb).stroke({ width: 0.25, color: INK, alpha: 0.25 });
+        const roof = st.kind === "batiment" ? ROOF_TINTS[Math.floor(v * ROOF_TINTS.length)] ?? 0x8a3b2a : fill;
+        s.rect(x0, ybk, st.w, yt - ybk).fill({ color: roof, alpha: st.kind === "batiment" ? 0.55 + v * 0.25 : 0.8 }).stroke({ width: 0.6, color: INK, alpha: 0.9 });
+        if (st.kind === "batiment") {
+          this.fx.roofs.add(Math.floor(v * ROOF_TINTS.length) * 3 + Math.floor(v * 7) % 3);
+          const style = Math.floor(v * 7) % 3;
+          if (style === 0) s.moveTo(x0 + 1, (ybk + yt) / 2).lineTo(x0 + st.w - 1, (ybk + yt) / 2).stroke({ width: 0.6, color: INK, alpha: 0.8 });
+          else if (style === 1) s.moveTo(x0, yt).lineTo(x0 + st.w / 2, ybk).lineTo(x0 + st.w, yt).stroke({ width: 0.5, color: INK, alpha: 0.7 });
+          if (v > 0.35) s.rect(x0 + st.w * (0.2 + v * 0.5), ybk - 2.5, 1.4, 3).fill({ color: STONE }).stroke({ width: 0.3, color: INK });
+          for (let wy = yt + 2.2; wy < yb - 1.5; wy += 3.4) for (let wx = x0 + 1.6 + (v * 2) % 1.4; wx < x0 + st.w - 1.6; wx += 3.1) s.rect(wx, wy, 1, 1.4).fill({ color: INK, alpha: 0.45 });
+        } else for (let hx = x0 + 3; hx < x0 + st.w; hx += 4) s.moveTo(hx, yt + 1).lineTo(hx - 2, yb).stroke({ width: 0.25, color: INK, alpha: 0.25 });
       } else {
         const [x, yb] = this.project(st.x, st.y, 0);
         const [, yt] = this.project(st.x, st.y, st.h);
@@ -213,6 +229,13 @@ export class TacticalScene {
         const crown = st.kind === "arbre_geant" ? st.r * 4 : st.r * 5 + 3;
         s.ellipse(x, yt, crown, crown * 0.6).fill({ color: VERDIGRIS, alpha: 0.75 }).stroke({ width: 0.5, color: INK, alpha: 0.7 });
       }
+    }
+    // Index d'occlusion : emprise à l'écran de chaque volume de bâtiment ou de mur, par colonne de 20 m.
+    this.occluders = new Map();
+    for (const st of m.structures) {
+      if (st.shape !== "box" || st.kind === "rocher") continue;
+      const box = { x0: st.x, x1: st.x + st.w, y0: st.y * TILT - st.h, y1: (st.y + st.d) * TILT, front: st.y + st.d };
+      for (let c = Math.floor(st.x / 20); c <= Math.floor((st.x + st.w) / 20); c++) this.occluders.set(c, [...(this.occluders.get(c) ?? []), box]);
     }
     for (const a of m.anchors) {
       const [x, y] = this.project(a.x, a.y, a.z);
@@ -252,6 +275,37 @@ export class TacticalScene {
     });
     const o = this.gOverlay;
     o.clear();
+    let occluded = 0;
+    // Vapeur des Titans abattus (revue de P4) : bouffées qui montent et se défont, en boucle.
+    let steam = 0;
+    st.titans.forEach((tt, i) => {
+      if (tt.alive) return;
+      const [x, y] = this.project(tt.x, tt.y, 0);
+      const h = Math.max(tt.height, MIN_TITAN_PX / this.zoom);
+      for (let k2 = 0; k2 < 4; k2++) {
+        const ph = (t * 0.35 + k2 / 4 + i * 0.37) % 1;
+        o.circle(x + Math.sin((ph + k2) * 5) * h * 0.12, y - h * 0.15 - ph * h * 0.6, h * (0.06 + ph * 0.12)).fill({ color: 0xf2ece0, alpha: 0.5 * (1 - ph) });
+        steam++;
+      }
+    });
+    // Porteurs (P6) : éclair de transformation, cercle de camp au pied du corps.
+    let flashes = 0;
+    for (const u of st.shifters ?? []) {
+      const [x, y] = this.project(u.x, u.y, 0);
+      if (u.phase === "transformation") {
+        o.circle(x, y - 6, 9 + (t * 40) % 6).fill({ color: 0xfff1b8, alpha: 0.55 });
+        o.moveTo(x, y - 40).lineTo(x - 3, y - 26).lineTo(x + 2, y - 22).lineTo(x - 2, y - 6).stroke({ width: 1.4, color: 0xc58a2b });
+        flashes++;
+      } else if (u.phase === "titan" && u.body !== null) {
+        const b = st.titans[u.body];
+        if (b?.alive) {
+          const [bx, by] = this.project(b.x, b.y, 0);
+          o.ellipse(bx, by, b.height * 0.35, b.height * 0.12).stroke({ width: 0.8, color: u.side === "allie" ? VERDIGRIS : 0x9e2b25, alpha: 0.9 });
+        }
+      }
+    }
+    this.fx.steam = steam;
+    this.fx.flashes += flashes;
     const centroids = new Map<string, { x: number; y: number; n: number; top: number }>();
     st.soldiers.forEach((s, i) => {
       const f = this.fig(this.soldierFigs, this.soldierLayer, i);
@@ -287,6 +341,11 @@ export class TacticalScene {
       if (f.context !== ctx) f.context = ctx;
       f.position.set(x, y);
       f.scale.set(overview ? OVERVIEW_DOT_PX / 2 / this.zoom : k);
+      // Occlusion (revue de P4) : un homme derrière un bâtiment est estompé, comme vu à travers le décor.
+      const hidden = !overview && (this.occluders.get(Math.floor(ix / 20)) ?? []).some((b) => iy < b.front && ix > b.x0 && ix < b.x1 && y > b.y0 && y < b.y1);
+      const a = hidden ? 0.35 : 1;
+      if (f.alpha !== a) f.alpha = a;
+      if (hidden) occluded++;
       if (overview) {
         const c = centroids.get(s.squad) ?? { x: 0, y: 0, n: 0, top: Infinity };
         c.x += x;
@@ -296,6 +355,7 @@ export class TacticalScene {
         centroids.set(s.squad, c);
       }
     });
+    this.fx.occluded = occluded;
     if (st.wagon) {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
       o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
