@@ -224,3 +224,11 @@
 - Engagement : morts tirés selon une loi log-normale (queue droite épaisse), plus une rupture de formation rare, plus probable face à un anormal ou en colonnes. Puis blessés graves, mort par hémorragie ou infection sauf présence de médecin (03 §9), gaz de 3 à 8 u par homme engagé (02 §15).
 - Officiers nommés : moins exposés, un Ackerman encore moins (03 §3.1). Leur mort passe par `CharacterDies` (dossier, deuils de P2).
 - Tous les chiffres sont dans `data/balance/expeditions.json` et calibrés par `sim:expeditions` (T3.7).
+
+## 2026-10-04 — D-56 Calibrage des expéditions (T3.7)
+- Premier passage de `sim:expeditions` (AC3-07), avant calibrage : **KO**, mortalité moyenne 44,9 % pour l'éventail ; colonnes à 92,9 %. **Échec n° 1 d'AC3-07.**
+- Corrections :
+  - `deaths_base` passe de 1,2 à 0,8 `[A]`.
+  - L'ampleur d'une rupture de formation est bornée par `max_engaged`, identique pour toutes les formations. Elle croissait avec l'effectif engagé, donc doublait pour les colonnes.
+  - Colonnes lourdes conformes à 03 §6 (« sécurité accrue, vitesse réduite ») : exposition par engagement 0,8 au lieu de 1,3 ; détection 0,45 ; esquive 0,35 ; allure 45 km/j.
+- Exploration hors commande (60 tirages par réglage), puis second passage de la commande officielle : **OK**. Éventail : moyenne 30,3 %, p10 15 %, p90 52,4 %, max 83,8 %. Colonnes : 64,7 %. Sortie : `docs/reports/P3-sim-expeditions.log`.

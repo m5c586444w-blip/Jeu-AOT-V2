@@ -234,7 +234,8 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   if (rng.next() < catP) {
     // Rupture de formation : la catastrophe déborde sur le reste de la colonne (ex. un anormal au cœur de la formation).
     catastrophe = true;
-    const extra = Math.round(uniform(rng, g.catastrophe.share[0], g.catastrophe.share[1]) * Math.min(rest.length + engaged.length, engagedN * 3));
+    // Taille bornée par `max_engaged`, identique pour toutes les formations : la colonne paie par la fréquence, pas par l'ampleur.
+    const extra = Math.round(uniform(rng, g.catastrophe.share[0], g.catastrophe.share[1]) * Math.min(rest.length + engaged.length, g.max_engaged));
     for (let k = 0; k < extra; k++) pickVictim(rng.next() < 0.5 && engaged.length > 0 ? engaged : rest.length > 0 ? rest : engaged);
     deaths = victims.length;
   }

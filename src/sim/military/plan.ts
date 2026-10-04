@@ -157,7 +157,7 @@ export function estimatePlan(world: World, st: StrategicState, mil: MilitaryStat
   const engaged = clamp(Math.round(n * f.engaged_share), e.engagement.min_engaged, e.engagement.max_engaged);
   const cat = e.engagement.catastrophe;
   const catP = cat.p_base * (1 + (cat.abnormal_mult - 1) * (m.titans.find((t) => t.abnormal)?.weight ?? 0)) * (plan.formation === "colonnes" ? cat.column_mult : 1);
-  const catDeaths = catP * ((cat.share[0] + cat.share[1]) / 2) * Math.min(n, engaged * 3);
+  const catDeaths = catP * ((cat.share[0] + cat.share[1]) / 2) * Math.min(n, e.engagement.max_engaged);
   const deaths = new Explainer()
     .base("why.exp_deaths_engagements", engagements.value)
     .mul("why.exp_deaths_per_engagement", e.engagement.deaths_base * meanThreat * lnMean * f.exposure)

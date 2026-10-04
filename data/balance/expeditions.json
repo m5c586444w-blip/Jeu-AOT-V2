@@ -1,22 +1,22 @@
 {
   "canon": "A",
-  "notes_canon": "Valeurs de départ [A] (02 §15, 03 §3.2, §5, §12), calibrées par `npm run sim:expeditions` (mortalité moyenne 25–40 % d'une expédition type en début de partie). Réservoir d'ODM ≈ 100 u (03 §3.2), gaz par engagement 3–8 u (02 §15), lames : 2 paires de 4–8 coupes (03 §3.2).",
+  "notes_canon": "Valeurs de départ [A] (02 §15, 03 §3.2, §5, §12), calibrées par `npm run sim:expeditions` (mortalité moyenne 25–40 % d'une expédition type en début de partie). Colonnes lourdes (03 §6 : « sécurité accrue, vitesse réduite ») : moins exposées par engagement, mais plus lentes et moins aptes à repérer et éviter (D-56). Réservoir d'ODM ≈ 100 u (03 §3.2), gaz par engagement 3–8 u (02 §15), lames : 2 paires de 4–8 coupes (03 §3.2).",
   "odm_units_per_stock_unit": 10,
   "odm_tank": 100,
   "gas_spare_tanks_per_soldier": 1,
   "blades": { "pairs_per_soldier": 2, "cuts_per_pair": [4, 8], "steel_per_pair": 0.5, "spare_pairs_per_soldier": 2 },
-  "pace_km_per_day": { "eventail": 70, "colonnes": 40 },
+  "pace_km_per_day": { "eventail": 70, "colonnes": 45 },
   "formations": {
     "eventail": { "detection": 0.75, "evasion": 0.7, "engaged_share": 0.12, "signal_quality": 1, "exposure": 1 },
-    "colonnes": { "detection": 0.35, "evasion": 0.35, "engaged_share": 0.25, "signal_quality": 0.6, "exposure": 1.3 }
+    "colonnes": { "detection": 0.45, "evasion": 0.35, "engaged_share": 0.25, "signal_quality": 0.6, "exposure": 0.8 }
   },
   "encounters": { "per_day_at_density_1": 4, "size_ref": 100, "size_exponent": 0.5, "night_share": 0.15, "season": { "hiver": 0.7, "printemps": 1, "ete": 1.15, "automne": 1 }, "abnormal_evasion_mult": 0.4, "commander_k": 0.003 },
   "engagement": {
     "min_engaged": 4,
     "max_engaged": 24,
-    "deaths_base": 1.2,
+    "deaths_base": 0.8,
     "sigma": 0.8,
-    "catastrophe": { "p_base": 0.02, "abnormal_mult": 3, "column_mult": 1.5, "share": [0.3, 0.7] },
+    "catastrophe": { "p_base": 0.02, "abnormal_mult": 3, "column_mult": 1, "share": [0.3, 0.7] },
     "kill_prob": 0.6,
     "skill_k": 0.02,
     "wounded_per_death": 1.2,

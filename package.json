@@ -22,6 +22,7 @@
     "smoke:page": "npm run smoke:map",
     "map:generate": "tsx src/tools/map-generate.ts",
     "sim:year": "tsx src/tools/sim-year.ts",
+    "sim:expeditions": "tsx src/tools/sim-expeditions.ts",
     "smoke:map": "tsx src/tools/smoke-map.ts",
     "smoke:politique": "tsx src/tools/smoke-politique.ts"
   },
