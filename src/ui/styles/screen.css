@@ -625,3 +625,15 @@
 .planche__phase { margin: 0.1rem 0; font-family: var(--f-machine); font-size: 0.72rem; color: var(--inconnu); }
 .planche__etat { margin: 0.1rem 0; font-variant: small-caps; color: var(--vert-de-gris); }
 .registre-onglets { display: flex; flex-wrap: wrap; gap: 0.2rem; margin: 0.3rem 0; }
+/* Registre des porteurs (P6) */
+.porteur { background-color: #efe9de; }
+.porteur--paradis { border-color: var(--vert-de-gris); border-width: 2px; }
+.porteur--marley, .porteur--inconnu { border-style: dashed; }
+.porteur--perdu { opacity: 0.6; }
+.porteur__horloge .valeur { font-family: var(--f-machine); }
+.porteur__capacites { list-style: none; padding: 0; margin: 0.2rem 0; font-size: 0.88rem; }
+.porteur__capacite { border-bottom: 1px dotted rgba(28, 26, 23, 0.35); padding: 0.12rem 0; }
+.porteur__fiche { font-family: var(--f-machine); font-size: 0.72rem; color: var(--vert-de-gris); }
+.porteur__heritage { border-top: 1px solid rgba(28, 26, 23, 0.4); margin-top: 0.3rem; padding-top: 0.2rem; }
+.porteur__heritage h5 { margin: 0 0 0.2rem; font-variant: small-caps; font-weight: 400; }
+.porteur__couts { margin: 0.2rem 0; padding-left: 1rem; font-size: 0.85rem; color: var(--brique); }

@@ -21,7 +21,7 @@ export interface PanelContext {
   openEvent?(id: string): void;
 }
 
-export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions" | "chronique" | "renseignement" | "recherche";
+export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions" | "chronique" | "renseignement" | "recherche" | "porteurs";
 
 export interface Panel {
   readonly id: PanelId;

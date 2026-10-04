@@ -132,6 +132,11 @@ function endBody(bt: Battle, u: ShifterUnit, phase: "vaincu" | "epuise", h: Shif
   }
   u.phase = phase;
   u.cooldown = shiftersBalance(bt)?.transform_cooldown_s ?? 30;
+  // Un porteur dont la nuque est tranchée compte comme un Titan abattu (bilan).
+  if (phase === "vaincu") {
+    bt.state.stats.titansKilled[u.shifter] = (bt.state.stats.titansKilled[u.shifter] ?? 0) + 1;
+    bt.state.stats.napes += 1;
+  }
   h.log(phase === "vaincu" ? "battle.shifter.defeated" : "battle.shifter.exhausted", { name: u.name, titan: defOf(bt, u)?.name_key ?? u.shifter });
 }
 
