@@ -24,6 +24,7 @@ import type { IntelOp } from "../intel/intel";
 import { lockOf, techMods } from "../research/research";
 import { inherit, retireProblem } from "../shifters/shifters";
 import { buildProblem, moveForces, moveProblem, orderBuild } from "../world/nations";
+import { projectProblem, projectTitan, recallTitan } from "../world/war";
 import { toAbsoluteDay } from "./time";
 
 export const MAX_ADVANCE_DAYS = 3650;
@@ -54,6 +55,8 @@ export type Command =
   | { type: "SetPlayerFaction"; faction: string }
   | { type: "BuildFormation"; formation: string; province: string; count: number }
   | { type: "MoveFormation"; formation: string; from: string; to: string; count: number }
+  | { type: "ProjectTitan"; shifter: string; province: string }
+  | { type: "RecallTitan"; shifter: string }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -146,6 +149,10 @@ export function validateCommand(cmd: unknown): Validation {
       return typeof c["formation"] === "string" && typeof c["province"] === "string" && Number.isInteger(c["count"]) ? { ok: true } : { ok: false, error: "BuildFormation invalide" };
     case "MoveFormation":
       return typeof c["formation"] === "string" && typeof c["from"] === "string" && typeof c["to"] === "string" && Number.isInteger(c["count"]) ? { ok: true } : { ok: false, error: "MoveFormation invalide" };
+    case "ProjectTitan":
+      return typeof c["shifter"] === "string" && typeof c["province"] === "string" ? { ok: true } : { ok: false, error: "ProjectTitan invalide" };
+    case "RecallTitan":
+      return typeof c["shifter"] === "string" ? { ok: true } : { ok: false, error: "RecallTitan invalide" };
     case "Noop":
       return { ok: true };
     default:
@@ -236,6 +243,8 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "SetPlayerFaction":
     case "BuildFormation":
     case "MoveFormation":
+    case "ProjectTitan":
+    case "RecallTitan":
       next = applyP7(next, cmd, world);
       break;
     case "Noop":
@@ -381,7 +390,7 @@ function applyP6(state: GameState, cmd: P6Command, world?: World): GameState {
   return { ...state, strategic: ctx.st, politics: ctx.pol, shifters: ctx.sh };
 }
 
-type P7Command = Extract<Command, { type: "SetPlayerFaction" | "BuildFormation" | "MoveFormation" }>;
+type P7Command = Extract<Command, { type: "SetPlayerFaction" | "BuildFormation" | "MoveFormation" | "ProjectTitan" | "RecallTitan" }>;
 
 /** Commandes de P7 : choix de la nation jouée (au départ seulement), levées et mouvements de formations. */
 function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
@@ -397,6 +406,17 @@ function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
     const problem = buildProblem(world, ns, ns.player, cmd.formation, cmd.province, cmd.count);
     if (problem) throw new Error(problem);
     orderBuild(world, ns, ns.player, cmd.formation, cmd.province, cmd.count, state.date);
+    return { ...state, nations: ns };
+  }
+  if (cmd.type === "ProjectTitan") {
+    const problem = projectProblem(world, ns, state.shifters, state.politics, ns.player, cmd.shifter, cmd.province, state.date);
+    if (problem) throw new Error(problem);
+    const pol = state.politics ? structuredClone(state.politics) : null;
+    projectTitan(world, ns, pol, ns.player, cmd.shifter, cmd.province, state.date);
+    return { ...state, nations: ns, politics: pol };
+  }
+  if (cmd.type === "RecallTitan") {
+    if (!recallTitan(ns, cmd.shifter, state.date)) throw new Error("world.err.titan_not_engaged");
     return { ...state, nations: ns };
   }
   const problem = moveProblem(world, ns, ns.player, cmd.formation, cmd.from, cmd.to, cmd.count);

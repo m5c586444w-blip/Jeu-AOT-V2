@@ -22,6 +22,7 @@ import { createShiftersState, dailyShifters } from "../shifters/shifters";
 import type { ShiftersState } from "../shifters/shifters";
 import { createNationsState, dailyBuilds, monthlyNations, weeklyMoves } from "../world/nations";
 import type { NationsState } from "../world/nations";
+import { weeklyWar } from "../world/war";
 import { pushLog } from "../strategic/economy";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
@@ -146,7 +147,13 @@ export function tickDay(state: GameState, world?: World): GameState {
     // Monde des nations (P7) : levées du jour, mouvements à chaque semaine, économie de guerre au 1er du mois.
     if (nations && world.nations) {
       dailyBuilds(world, nations, date);
-      if (toAbsoluteDay(date) % 7 === 0) weeklyMoves(world, nations);
+      if (toAbsoluteDay(date) % 7 === 0) {
+        const wctx = { world, seed: state.seed, date, ns: nations, sh: shifters, pol: politics, st: strategic };
+        weeklyWar(wctx);
+        politics = wctx.pol;
+        if (wctx.st) strategic = wctx.st;
+        weeklyMoves(world, nations);
+      }
       if (date.day % DAYS_PER_MONTH === 1) monthlyNations(world, nations, strategic, date);
     }
     if (date.day % DAYS_PER_MONTH === 1) {
