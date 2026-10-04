@@ -16,9 +16,11 @@ import { ChroniclePanel } from "./panels/chroniclePanel";
 import { IntelPanel } from "./panels/intelPanel";
 import { ResearchPanel } from "./panels/researchPanel";
 import { ShiftersPanel } from "./panels/shiftersPanel";
+import { WorldPanel } from "./panels/worldPanel";
+import { DiplomacyPanel } from "./panels/diplomacyPanel";
 import type { WhyTooltip } from "./why";
 
-export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs"];
+export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie"];
 
 /**
  * Registres de P2 : un seul dossier ouvert à la fois au-dessus de la carte, rafraîchi quand l'état change
@@ -58,6 +60,7 @@ export class Registers {
     if (world.intel) list.push(new IntelPanel(ctx));
     if (world.research) list.push(new ResearchPanel(ctx));
     if (world.shifters) list.push(new ShiftersPanel(ctx));
+    if (world.nations) list.push(new WorldPanel(ctx), new DiplomacyPanel(ctx));
     this.panels = new Map(list.map((p) => [p.id, p]));
   }
 

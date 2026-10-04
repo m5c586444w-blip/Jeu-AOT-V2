@@ -7,6 +7,7 @@ import { founderLock, inheritCosts, inheritProblem, retireProblem, yearsLeft } f
 import type { ShifterSlot, ShiftersState } from "../../sim/shifters/shifters";
 import { skirmishSetup } from "../../sim/tactical/setup";
 import { isDomestic } from "../../sim/politics/vocabulary";
+import { SIDE_TO_FACTION } from "../../sim/world/war";
 import type { GameState } from "../../sim/core/state";
 import { button, displayName, el, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
@@ -49,6 +50,8 @@ export class ShiftersPanel implements Panel {
   /** Le porteur est-il connu de Paradis ? (secret percé, ou porteur sans secret) */
   private known(s: GameState, slot: ShifterSlot): boolean {
     if (!slot.holder) return true;
+    // La nation jouée connaît ses propres porteurs (P7 : Marley connaît ses guerriers).
+    if (s.nations && SIDE_TO_FACTION[slot.faction] === s.nations.player) return true;
     const secret = secretOf(this.ctx.world, slot.holder);
     return !secret || (s.intel?.secrets[secret]?.revealed ?? false);
   }

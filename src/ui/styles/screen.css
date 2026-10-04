@@ -637,3 +637,28 @@
 .porteur__heritage { border-top: 1px solid rgba(28, 26, 23, 0.4); margin-top: 0.3rem; padding-top: 0.2rem; }
 .porteur__heritage h5 { margin: 0 0 0.2rem; font-variant: small-caps; font-weight: 400; }
 .porteur__couts { margin: 0.2rem 0; padding-left: 1rem; font-size: 0.85rem; color: var(--brique); }
+/* Monde des nations (P7) — habillage final des esthétiques de Marley et d'Hizuru en P8 */
+.table-guerre { display: grid; grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr); gap: 0.6rem; align-items: start; }
+.atlas-monde { width: 100%; height: 30rem; border: 1px solid var(--encre); background: #e8dcc0; cursor: crosshair; }
+.table-guerre__dossier { max-height: 30rem; overflow-y: auto; font-size: 0.9rem; }
+.table-guerre__comptes .valeur { font-family: var(--f-machine); }
+.force--fac_marley { border-left: 3px solid #7a1f1f; padding-left: 0.3rem; }
+.force--fac_paradis { border-left: 3px solid #b5873a; padding-left: 0.3rem; }
+.force--fac_hizuru { border-left: 3px solid #2a3a5c; padding-left: 0.3rem; }
+.force--fac_allies { border-left: 3px solid #6b4a2f; padding-left: 0.3rem; }
+.front--pris { font-weight: 600; }
+.chancellerie { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0.6rem; }
+.fiche-nation { border: 1px solid var(--encre); padding: 0.4rem 0.5rem; background-color: #efe6d2; }
+.fiche-nation--fac_marley { border-top: 4px solid #7a1f1f; }
+.fiche-nation--fac_hizuru { border-top: 4px solid #2a3a5c; }
+.fiche-nation--fac_allies { border-top: 4px solid #6b4a2f; }
+.fiche-nation--fac_paradis { border-top: 4px solid #b5873a; }
+.chancellerie__ia { margin-top: 0.5rem; font-size: 0.85rem; }
+.bandeau[data-joueur="fac_marley"] .bandeau__registre, .bandeau[data-joueur="fac_marley"] .bandeau__decret { display: none; }
+.bandeau[data-joueur="fac_marley"] [data-paradis="1"] { display: none; }
+.choix-nation { position: fixed; inset: 20% 25% auto 25%; z-index: 60; background: #e8dcc0; border: 2px solid var(--encre); padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.choix-nation__dossier { text-align: left; border: 1px solid var(--encre); background: #efe6d2; padding: 0.5rem; font: inherit; cursor: pointer; display: flex; flex-direction: column; }
+.choix-nation__dossier strong { font-family: var(--f-titre); font-size: 1.2rem; }
+.choix-nation__dossier--fac_marley { border-left: 6px solid #7a1f1f; }
+.choix-nation__dossier--fac_paradis { border-left: 6px solid #b5873a; }
+.bandeau[data-joueur="fac_marley"] .bandeau__nation { display: none; }

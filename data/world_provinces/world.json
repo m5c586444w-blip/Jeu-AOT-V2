@@ -761,8 +761,8 @@
     "rail": false,
     "fort": 0.3,
     "at": [
-      900,
-      150
+      870,
+      135
     ],
     "adjacent": [
       "wprov_chantiers_hizuru",
@@ -787,8 +787,8 @@
     "rail": false,
     "fort": 0.4,
     "at": [
-      935,
-      110
+      930,
+      135
     ],
     "adjacent": [
       "wprov_capitale_hizuru",
@@ -835,8 +835,8 @@
     "rail": false,
     "fort": 0.0,
     "at": [
-      930,
-      210
+      940,
+      205
     ],
     "adjacent": [
       "wprov_capitale_hizuru",
@@ -859,8 +859,8 @@
     "rail": false,
     "fort": 0.0,
     "at": [
-      980,
-      170
+      990,
+      140
     ],
     "adjacent": [
       "wprov_routes_marchandes"
@@ -881,8 +881,8 @@
     "rail": false,
     "fort": 0.0,
     "at": [
-      960,
-      80
+      985,
+      70
     ],
     "adjacent": [
       "wprov_domaine_azumabito",
@@ -904,7 +904,7 @@
     "rail": false,
     "fort": 0.3,
     "at": [
-      890,
+      870,
       70
     ],
     "adjacent": [
@@ -927,8 +927,8 @@
     "rail": false,
     "fort": 0.0,
     "at": [
-      900,
-      110
+      930,
+      70
     ],
     "adjacent": [
       "wprov_capitale_hizuru",

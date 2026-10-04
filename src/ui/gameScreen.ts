@@ -6,6 +6,7 @@ import { SaveStore } from "../save/saveStore";
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
 import type { SimResponse } from "../sim/sim";
+import type { World } from "../sim/strategic/world";
 import { buildWorld } from "../sim/strategic/world";
 import { SimClient } from "../workers/simClient";
 import { Bubble } from "./bubble";
@@ -238,6 +239,8 @@ export async function bootGame(): Promise<void> {
     open_intel: () => (world.intel ? registers?.toggle("renseignement") : undefined),
     open_research: () => (world.research ? registers?.toggle("recherche") : undefined),
     open_shifters: () => (world.shifters ? registers?.toggle("porteurs") : undefined),
+    open_world: () => (world.nations ? registers?.toggle("monde") : undefined),
+    open_diplomacy: () => (world.nations ? registers?.toggle("diplomatie") : undefined),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.
@@ -285,6 +288,44 @@ export async function bootGame(): Promise<void> {
     document.documentElement.style.fontSize = `${s.uiScale}%`;
   });
   actions.options = () => options.toggle();
+  // Choix de la nation jouée (P7, scénario 854) : `?faction=fac_marley`, sinon un dossier de choix au départ.
+  const playable = world.scenario.world?.playable ?? [];
+  if (playable.length > 1) {
+    const wanted = new URLSearchParams(window.location.search).get("faction");
+    const faction = wanted && playable.includes(wanted) ? wanted : await chooseFaction(world, playable);
+    if (faction !== state.nations?.player) await safeDispatch({ type: "SetPlayerFaction", faction });
+    if (faction !== "fac_paradis") registers?.open("monde");
+  }
   refresh();
   document.documentElement.dataset["ready"] = "true";
+}
+
+/** Dossier de choix de la nation (04 §5.2 ; habillage final en P8). */
+function chooseFaction(world: World, playable: readonly string[]): Promise<string> {
+  return new Promise((resolve) => {
+    const box = document.createElement("div");
+    box.className = "choix-nation";
+    box.setAttribute("role", "dialog");
+    const h = document.createElement("h2");
+    h.className = "bordereau-titre";
+    h.textContent = t("world.choose_nation");
+    box.append(h);
+    for (const f of playable) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = `choix-nation__dossier choix-nation__dossier--${f}`;
+      b.dataset["nation"] = f;
+      const title = document.createElement("strong");
+      title.textContent = t(world.nations?.factions.get(f)?.name_key ?? f);
+      const goals = document.createElement("span");
+      goals.textContent = (world.nations?.factions.get(f)?.objectives ?? []).map((o) => t(o)).join(" · ");
+      b.append(title, goals);
+      b.addEventListener("click", () => {
+        box.remove();
+        resolve(f);
+      });
+      box.append(b);
+    }
+    document.body.append(box);
+  });
 }

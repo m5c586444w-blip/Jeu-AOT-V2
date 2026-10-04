@@ -22,7 +22,9 @@ export interface HudActions {
   openPanel?(id: string): void;
 }
 
-const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs"] as const;
+const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie"] as const;
+/** Registres propres aux institutions de Paradis : masqués quand le joueur mène une autre nation (P7). */
+const PARADIS_ONLY = new Set(["personnages", "cabinet", "decrets", "organisations", "conseil", "expeditions", "renseignement", "recherche"]);
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: string): HTMLElementTagNameMap[K] {
   const e = document.createElement(tag);
@@ -62,11 +64,12 @@ export class Hud {
     if (world.politics && actions.openPanel) {
       const nav = el("nav", "bandeau__registres");
       nav.setAttribute("aria-label", t("hud.registers"));
-      const present = { expeditions: !!world.military, chronique: !!world.chronicle, renseignement: !!world.intel, recherche: !!world.research, porteurs: !!world.shifters } as Record<string, boolean>;
+      const present = { expeditions: !!world.military, chronique: !!world.chronicle, renseignement: !!world.intel, recherche: !!world.research, porteurs: !!world.shifters, monde: !!world.nations, diplomatie: !!world.nations } as Record<string, boolean>;
       for (const id of PANELS.filter((p) => present[p] ?? true)) {
         const b = el("button", "bandeau__registre-bouton", t(`panel.${id}`));
         b.type = "button";
         b.dataset["panel"] = id;
+        if (PARADIS_ONLY.has(id)) b.dataset["paradis"] = "1";
         b.addEventListener("click", () => actions.openPanel?.(id));
         nav.append(b);
       }
@@ -153,6 +156,8 @@ export class Hud {
 
   update(state: GameState, speed: number): void {
     this.state = state;
+    // Nation jouée (P7) : les comptes et registres propres à Paradis s'effacent quand on mène Marley.
+    this.el.dataset["joueur"] = state.nations?.player ?? "fac_paradis";
     const st = this.strat();
     this.plan = st ? planDay(this.world, st, state.date) : null;
     const d = state.date;
