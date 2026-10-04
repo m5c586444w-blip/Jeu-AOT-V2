@@ -287,6 +287,80 @@ export const ShiftersBalanceSchema = z
   })
   .strict();
 
+
+/** P7 : monde, guerre moderne, diplomatie, IA (02 §11, §14 ; 09 WAR, DIP). Tout : A. */
+export const WorldBalanceSchema = z
+  .object({
+    canon: z.enum(["C", "A", "?"]),
+    notes_canon: z.string().optional(),
+    economy: z
+      .object({
+        /** Part de la production d'une province selon la stabilité (0–100) : mult = floor + (1 − floor) × stabilité/100. */
+        stability_floor: prob,
+        upkeep_mult: num,
+        /** Paradis au monde : industrie et hommes mensuels tirés de ses stocks (acier, poudre, main-d'œuvre). */
+        paradis_industry_per_steel: num,
+        paradis_manpower_share: prob,
+        /** Dérive mensuelle du soutien à la guerre et de la stabilité. */
+        war_support_drift: num,
+        stability_drift: num,
+        war_weariness_per_loss: num,
+        stability_low_support: num,
+        blockade_industry_mult: prob,
+      })
+      .strict(),
+    war: z
+      .object({
+        /** Pertes hebdomadaires (part de la force) pour l'attaquant et le défenseur, à rapport de force égal. */
+        base_losses: prob,
+        artillery_mult: num,
+        air_superiority_mult: num,
+        recon_bonus: num,
+        fort_mult: num,
+        terrain: z.record(z.string(), num),
+        /** Rapport de force au-delà duquel la province change de mains. */
+        capture_ratio: num,
+        rail_speed_mult: num,
+        naval_control_ratio: num,
+        landing_penalty: prob,
+        strength_regen_per_week: prob,
+      })
+      .strict(),
+    titans: z
+      .object({
+        /** Puissance d'un porteur projeté (équivalent en formations), selon sa classe ; usure. */
+        power: z.record(z.string(), num),
+        stress_per_week: num,
+        rest_weeks: z.number().int().min(0),
+        death_chance_per_week: prob,
+        fear_others: num,
+        war_support_self: num,
+        legitimacy_cost: num,
+      })
+      .strict(),
+    diplomacy: z
+      .object({
+        accept_threshold: num,
+        weights: z.object({ trust: num, interest: num, fear: num, ideology: num }).strict(),
+        treaty_bias: z.record(z.string(), num),
+        ultimatum_fear_needed: num,
+        embargo_industry_mult: prob,
+        relation_drift: num,
+        hizuru: z.object({ threshold: num, trade_per_month: num, war_fear_per_month: num, guarantee: num }).strict(),
+        coalition_vote_threshold: prob,
+      })
+      .strict(),
+    ai: z
+      .object({
+        personality: z.record(z.string(), z.object({ attack: num, build: num, diplomacy: num, caution: num }).strict()),
+        attractor_bonus: num,
+        min_reserve_industry: num,
+      })
+      .strict(),
+  })
+  .strict();
+export type WorldBalance = z.infer<typeof WorldBalanceSchema>;
+
 export type ShiftersBalance = z.infer<typeof ShiftersBalanceSchema>;
 export type EventsBalance = z.infer<typeof EventsBalanceSchema>;
 export type ResearchBalance = z.infer<typeof ResearchBalanceSchema>;
@@ -312,5 +386,6 @@ export const BALANCE_FILES = {
   research: ResearchBalanceSchema,
   intel: IntelBalanceSchema,
   shifters: ShiftersBalanceSchema,
+  world: WorldBalanceSchema,
 } as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

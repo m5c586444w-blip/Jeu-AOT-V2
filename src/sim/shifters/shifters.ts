@@ -74,7 +74,9 @@ export function createShiftersState(world: World): ShiftersState | null {
   const titans: Record<string, ShifterSlot> = {};
   for (const d of sw.order) {
     const h = d.holder_850;
-    titans[d.id] = { holder: h.character, faction: h.faction, since: h.since, sinceCanon: h.since_canon, captured: false, retired: false, visions: 0 };
+    // Porteurs propres au scénario (854) à la place de ceux de 850.
+    const sc = world.scenario.shifter_holders[d.id];
+    titans[d.id] = sc ? { holder: sc.character, faction: sc.faction, since: sc.since, sinceCanon: sc.since_canon, captured: false, retired: false, visions: 0 } : { holder: h.character, faction: h.faction, since: h.since, sinceCanon: h.since_canon, captured: false, retired: false, visions: 0 };
   }
   return { titans, serum: 0, history: [] };
 }

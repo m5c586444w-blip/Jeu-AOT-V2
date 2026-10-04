@@ -23,6 +23,7 @@ import { assignAgent, assignProblem, INTEL_OPS, recallAgent, recruitAgent, recru
 import type { IntelOp } from "../intel/intel";
 import { lockOf, techMods } from "../research/research";
 import { inherit, retireProblem } from "../shifters/shifters";
+import { buildProblem, moveForces, moveProblem, orderBuild } from "../world/nations";
 import { toAbsoluteDay } from "./time";
 
 export const MAX_ADVANCE_DAYS = 3650;
@@ -50,6 +51,9 @@ export type Command =
   | { type: "RecallAgent"; agent: string }
   | { type: "InheritTitan"; shifter: string; heir: string }
   | { type: "RetireShifter"; shifter: string; retired: boolean }
+  | { type: "SetPlayerFaction"; faction: string }
+  | { type: "BuildFormation"; formation: string; province: string; count: number }
+  | { type: "MoveFormation"; formation: string; from: string; to: string; count: number }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -136,6 +140,12 @@ export function validateCommand(cmd: unknown): Validation {
       return typeof c["shifter"] === "string" && typeof c["heir"] === "string" ? { ok: true } : { ok: false, error: "InheritTitan invalide" };
     case "RetireShifter":
       return typeof c["shifter"] === "string" && typeof c["retired"] === "boolean" ? { ok: true } : { ok: false, error: "RetireShifter invalide" };
+    case "SetPlayerFaction":
+      return typeof c["faction"] === "string" ? { ok: true } : { ok: false, error: "SetPlayerFaction invalide" };
+    case "BuildFormation":
+      return typeof c["formation"] === "string" && typeof c["province"] === "string" && Number.isInteger(c["count"]) ? { ok: true } : { ok: false, error: "BuildFormation invalide" };
+    case "MoveFormation":
+      return typeof c["formation"] === "string" && typeof c["from"] === "string" && typeof c["to"] === "string" && Number.isInteger(c["count"]) ? { ok: true } : { ok: false, error: "MoveFormation invalide" };
     case "Noop":
       return { ok: true };
     default:
@@ -222,6 +232,11 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "InheritTitan":
     case "RetireShifter":
       next = applyP6(next, cmd, world);
+      break;
+    case "SetPlayerFaction":
+    case "BuildFormation":
+    case "MoveFormation":
+      next = applyP7(next, cmd, world);
       break;
     case "Noop":
       break;
@@ -364,6 +379,30 @@ function applyP6(state: GameState, cmd: P6Command, world?: World): GameState {
   const problem = inherit(ctx, cmd.shifter, cmd.heir, "shifter.inherit_command", "A");
   if (problem) throw new Error(problem);
   return { ...state, strategic: ctx.st, politics: ctx.pol, shifters: ctx.sh };
+}
+
+type P7Command = Extract<Command, { type: "SetPlayerFaction" | "BuildFormation" | "MoveFormation" }>;
+
+/** Commandes de P7 : choix de la nation jouée (au départ seulement), levées et mouvements de formations. */
+function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
+  if (!world?.nations || !state.nations) throw new Error(`${cmd.type} : aucun monde des nations`);
+  const ns = structuredClone(state.nations);
+  if (cmd.type === "SetPlayerFaction") {
+    if (!(world.scenario.world?.playable ?? []).includes(cmd.faction)) throw new Error("world.err.not_playable");
+    if (state.date.year !== world.scenario.start.year || state.date.day !== world.scenario.start.day) throw new Error("world.err.too_late");
+    ns.player = cmd.faction;
+    return { ...state, nations: ns };
+  }
+  if (cmd.type === "BuildFormation") {
+    const problem = buildProblem(world, ns, ns.player, cmd.formation, cmd.province, cmd.count);
+    if (problem) throw new Error(problem);
+    orderBuild(world, ns, ns.player, cmd.formation, cmd.province, cmd.count, state.date);
+    return { ...state, nations: ns };
+  }
+  const problem = moveProblem(world, ns, ns.player, cmd.formation, cmd.from, cmd.to, cmd.count);
+  if (problem) throw new Error(problem);
+  moveForces(world, ns, cmd.formation, cmd.from, cmd.to, cmd.count);
+  return { ...state, nations: ns };
 }
 
 /** Journal des commandes appliquées : source des replays et des sauvegardes rejouables. */

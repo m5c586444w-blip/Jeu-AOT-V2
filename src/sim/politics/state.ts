@@ -137,6 +137,11 @@ export function createPoliticalState(world: World): PoliticalState | null {
   const strata: Record<string, StratumState> = {};
   for (const s of pw.strata) strata[s.id] = { satisfaction: pw.balance.strata.base, radicalisation: 0 };
   const start = absDay(world.scenario.start);
+  // Morts avant le départ du scénario (854 : morts de 850, Ymir).
+  for (const id of world.scenario.deceased) {
+    const cs = characters[id];
+    if (cs) Object.assign(cs, { alive: false, death: { date: { ...world.scenario.start }, cause: "inconnue", circumstances: "death.before_scenario", consequences: [], divergence: false } });
+  }
   return {
     player: pol.player,
     legitimacy: pol.legitimacy,

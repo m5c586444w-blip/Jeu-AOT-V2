@@ -84,7 +84,7 @@ const clamp = (v: number, lo: number, hi: number): number => Math.max(lo, Math.m
 export function createEventsState(world: World, seed: number, date: GameDate): EventsState | null {
   const cw = world.chronicle;
   if (!cw) return null;
-  const s: EventsState = { history: {}, scheduled: [], pending: [], divergence: 0, branch: "canon", flags: {}, chronicle: [], genericLast: {}, lastGeneric: -999 };
+  const s: EventsState = { history: {}, scheduled: [], pending: [], divergence: 0, branch: "canon", flags: { ...world.scenario.flags }, chronicle: [], genericLast: {}, lastGeneric: -999 };
   const today = toAbsoluteDay(date);
   // Événements antérieurs au scénario : « passés » (histoire déjà écrite).
   for (const e of cw.events.values()) {

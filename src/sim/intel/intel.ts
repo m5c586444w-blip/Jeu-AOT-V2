@@ -116,6 +116,13 @@ export function createIntelState(world: World, seed: number, st: StrategicState,
     const faction = c?.hidden?.["faction"];
     if (c && typeof faction === "string" && faction !== "paradis" && c.org) s.moles.push({ character: c.id, org: c.org, exposed: false });
   }
+  // Secrets déjà percés au départ du scénario (854 : infiltrés démasqués, Eren, Zeke…).
+  for (const id of world.scenario.revealed_secrets) {
+    const sec = s.secrets[id];
+    if (sec) Object.assign(sec, { evidence: 99, certainty: "preuve", revealed: true, day });
+    const mole = s.moles.find((m) => `secret_${m.character.replace(/^char_/, "")}` === id);
+    if (mole) mole.exposed = true;
+  }
   for (const p of world.provinces) s.cult[p.id] = iw.balance.cult_by_region[p.region] ?? 0;
   observeOwn(world, s, st, day);
   return s;

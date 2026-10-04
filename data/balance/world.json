@@ -1,0 +1,120 @@
+{
+  "canon": "A",
+  "notes_canon": "Monde de P7 (02 §11, §14 ; 09 WAR, DIP) : toutes les valeurs sont des adaptations de jeu [A], ajustables (P9).",
+  "economy": {
+    "stability_floor": 0.5,
+    "upkeep_mult": 1.0,
+    "paradis_industry_per_steel": 0.005,
+    "paradis_manpower_share": 0.005,
+    "war_support_drift": 1,
+    "stability_drift": 1,
+    "war_weariness_per_loss": 0.4,
+    "stability_low_support": 2,
+    "blockade_industry_mult": 0.6
+  },
+  "war": {
+    "base_losses": 0.06,
+    "artillery_mult": 0.5,
+    "air_superiority_mult": 0.3,
+    "recon_bonus": 0.1,
+    "fort_mult": 1.0,
+    "terrain": {
+      "urbain": 1.2,
+      "fort": 1.4,
+      "foret": 1.2,
+      "rural": 1.0,
+      "industriel": 1.1,
+      "militaire": 1.1,
+      "port": 1.1,
+      "colonie": 1.0,
+      "special": 1.0,
+      "ile": 1.3,
+      "mer": 1.0
+    },
+    "capture_ratio": 1.5,
+    "rail_speed_mult": 2,
+    "naval_control_ratio": 1.2,
+    "landing_penalty": 0.5,
+    "strength_regen_per_week": 0.05
+  },
+  "titans": {
+    "power": {
+      "shifter_colossal": 40,
+      "shifter_cuirasse": 18,
+      "shifter_feminin": 12,
+      "shifter_bestial": 30,
+      "shifter_machoire": 8,
+      "shifter_charrette": 6,
+      "shifter_marteau": 25,
+      "shifter_assaillant": 20,
+      "shifter_fondateur": 20
+    },
+    "stress_per_week": 8,
+    "rest_weeks": 4,
+    "death_chance_per_week": 0.02,
+    "fear_others": 6,
+    "war_support_self": 3,
+    "legitimacy_cost": 2
+  },
+  "diplomacy": {
+    "accept_threshold": 10,
+    "weights": {
+      "trust": 0.4,
+      "interest": 0.4,
+      "fear": 0.3,
+      "ideology": 0.2
+    },
+    "treaty_bias": {
+      "alliance": -30,
+      "non_agression": 5,
+      "commerce": 10,
+      "renseignement": -10
+    },
+    "ultimatum_fear_needed": 60,
+    "embargo_industry_mult": 0.8,
+    "relation_drift": 1,
+    "hizuru": {
+      "threshold": 60,
+      "trade_per_month": 3,
+      "war_fear_per_month": 4,
+      "guarantee": 15
+    },
+    "coalition_vote_threshold": 0.5
+  },
+  "ai": {
+    "personality": {
+      "prudent": {
+        "attack": 0.6,
+        "build": 1.0,
+        "diplomacy": 1.2,
+        "caution": 1.4
+      },
+      "agressif": {
+        "attack": 1.5,
+        "build": 1.2,
+        "diplomacy": 0.6,
+        "caution": 0.7
+      },
+      "ideologue": {
+        "attack": 1.2,
+        "build": 1.0,
+        "diplomacy": 0.5,
+        "caution": 1.0
+      },
+      "pragmatique": {
+        "attack": 0.9,
+        "build": 1.0,
+        "diplomacy": 1.3,
+        "caution": 1.1
+      },
+      "opportuniste": {
+        "attack": 1.1,
+        "build": 1.0,
+        "diplomacy": 1.0,
+        "caution": 0.9
+      }
+    },
+    "attractor_bonus": 20,
+    "min_reserve_industry": 50
+  }
+}

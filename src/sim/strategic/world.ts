@@ -1,6 +1,6 @@
-import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
-import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Scenario, Shifter, Stratum, TacticalMap, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
+import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Faction, Formation, Scenario, Shifter, Stratum, TacticalMap, WorldProvince, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -24,6 +24,16 @@ export interface World {
   intel: IntelWorld | null;
   /** Titans-porteurs (P6) : absents sans données des Neuf ou hors scénario politique. */
   shifters: ShifterWorld | null;
+  /** Monde des nations (P7) : absent hors d'un scénario à couche `world`. */
+  nations: NationsWorld | null;
+}
+
+export interface NationsWorld {
+  balance: WorldBalance;
+  provinces: ReadonlyMap<string, WorldProvince>;
+  order: readonly WorldProvince[];
+  factions: ReadonlyMap<string, Faction>;
+  formations: ReadonlyMap<string, Formation>;
 }
 
 export interface ShifterWorld {
@@ -129,6 +139,10 @@ export interface WorldSource {
   intel?: IntelBalance;
   shifters?: readonly Shifter[];
   shiftersBalance?: ShiftersBalance;
+  worldProvinces?: readonly WorldProvince[];
+  factions?: readonly Faction[];
+  formations?: readonly Formation[];
+  worldBalance?: WorldBalance;
 }
 
 export function buildGeo(g: GeoData): GeoGraph {
@@ -177,6 +191,10 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     research: politics && src.research && src.techs?.length ? { balance: src.research, techs: new Map(src.techs.map((t) => [t.id, t])), order: [...src.techs].sort((a, b) => a.tree.localeCompare(b.tree) || (a.code ?? a.id).localeCompare(b.code ?? b.id)) } : null,
     intel: politics && src.intel ? { balance: src.intel, secrets: secretsOf(src.characters ?? []) } : null,
     shifters: politics && src.shiftersBalance && src.shifters?.length ? { balance: src.shiftersBalance, defs: new Map(src.shifters.map((d) => [d.id, d])), order: src.shifters } : null,
+    nations:
+      scenario.world && src.worldBalance && src.worldProvinces?.length && src.factions?.length
+        ? { balance: src.worldBalance, provinces: new Map(src.worldProvinces.map((p) => [p.id, p])), order: src.worldProvinces, factions: new Map(src.factions.map((f) => [f.id, f])), formations: new Map((src.formations ?? []).map((f) => [f.id, f])) }
+        : null,
   };
 }
 

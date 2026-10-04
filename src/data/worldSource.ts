@@ -63,6 +63,7 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
       ...(balance.research ? { research: balance.research as WorldSource["research"] } : {}),
       ...(balance.intel ? { intel: balance.intel as WorldSource["intel"] } : {}),
       ...(balance.shifters ? { shiftersBalance: balance.shifters as WorldSource["shiftersBalance"] } : {}),
+      ...(balance.world ? { worldBalance: balance.world as WorldSource["worldBalance"] } : {}),
       events: data.events,
       techs: data.techs,
       titanTypes: data.titan_types,
@@ -71,6 +72,9 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
       titans: data.titans,
       names: data.names,
       shifters: data.shifters,
+      worldProvinces: data.world_provinces,
+      factions: data.factions,
+      formations: data.formations,
     },
     issues,
   };

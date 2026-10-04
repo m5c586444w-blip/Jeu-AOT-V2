@@ -1,6 +1,6 @@
 import { Rng } from "./rng";
 import { canonicalClone } from "./canonical";
-import { advance, DAYS_PER_MONTH, START_DATE } from "./time";
+import { advance, DAYS_PER_MONTH, START_DATE, toAbsoluteDay } from "./time";
 import type { GameDate } from "./time";
 import { applyDay, applyMonth, createStrategicState, NO_MODS, planDay, planMonth } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
@@ -20,9 +20,11 @@ import { createResearchState, monthlyResearch, techHook, techMods } from "../res
 import type { ResearchState } from "../research/research";
 import { createShiftersState, dailyShifters } from "../shifters/shifters";
 import type { ShiftersState } from "../shifters/shifters";
+import { createNationsState, dailyBuilds, monthlyNations, weeklyMoves } from "../world/nations";
+import type { NationsState } from "../world/nations";
 import { pushLog } from "../strategic/economy";
 
-export const CURRENT_SCHEMA_VERSION = 7 as const;
+export const CURRENT_SCHEMA_VERSION = 8 as const;
 
 /** État complet et sérialisable de la partie (P0 + couche stratégique de P1). */
 export interface GameState {
@@ -46,6 +48,8 @@ export interface GameState {
   intel: IntelState | null;
   /** Titans-porteurs (P6) ; null sans données des Neuf, ou juste après migration d'une sauvegarde v6. */
   shifters: ShiftersState | null;
+  /** Monde des nations (P7) ; null hors d'un scénario à couche `world`, ou juste après migration d'une sauvegarde v7. */
+  nations: NationsState | null;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -65,6 +69,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     research: null,
     intel: null,
     shifters: world ? createShiftersState(world) : null,
+    nations: world ? createNationsState(world, world.scenario.start) : null,
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
   });
 }
@@ -89,6 +94,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let research = state.research;
   let intel = state.intel;
   let shifters = state.shifters;
+  let nations = state.nations;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
@@ -98,6 +104,8 @@ export function tickDay(state: GameState, world?: World): GameState {
     // Sauvegarde migrée (v6) : porteurs de 850 repris des données.
     if (!shifters && world.shifters) shifters = createShiftersState(world);
     if (shifters) shifters = structuredClone(shifters);
+    if (!nations && world.nations) nations = createNationsState(world, state.date);
+    if (nations) nations = structuredClone(nations);
     const mods = politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS;
     strategic = applyDay(world, strategic, planDay(world, strategic, state.date, mods));
     if (politics && world.politics) {
@@ -135,6 +143,12 @@ export function tickDay(state: GameState, world?: World): GameState {
       strategic = sctx.st;
       politics = sctx.pol;
     }
+    // Monde des nations (P7) : levées du jour, mouvements à chaque semaine, économie de guerre au 1er du mois.
+    if (nations && world.nations) {
+      dailyBuilds(world, nations, date);
+      if (toAbsoluteDay(date) % 7 === 0) weeklyMoves(world, nations);
+      if (date.day % DAYS_PER_MONTH === 1) monthlyNations(world, nations, strategic, date);
+    }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -147,5 +161,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations };
 }
