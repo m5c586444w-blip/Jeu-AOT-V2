@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+
+ Test Files  2 passed (2)
+      Tests  12 passed (12)
+   Start at  21:21:03
+   Duration  1.39s (transform 45%, import 39%, tests 16%, worker 1%)
+

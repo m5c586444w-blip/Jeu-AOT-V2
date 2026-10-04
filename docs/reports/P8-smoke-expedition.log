@@ -1,0 +1,29 @@
+
+> murs-et-sang@0.0.1 smoke:expedition
+> tsx src/tools/smoke-expedition.ts
+
+[scénario 850] 1366×768
+  OK  bandeau : registre « Expéditions » ; touche E
+  OK  registre des expéditions : 1 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  planificateur posé sur le côté (carte visible)
+  OK  clic sur la carte → itinéraire Karanes → Rose-Est — porte de Karanes → Rose-Nord-Est → Lac des Reflets (sans ouvrir de dossier)
+  OK  le mur Rose se franchit à la porte de Karanes (Rose-Est)
+  OK  itinéraire vers Maria-Est : 5 étapes, 3 hors du rayon de ravitaillement
+  OK  plan recevable : « Plan recevable. »
+  OK  table de logistique (emporté / besoin estimé) et pré-brief chiffré
+  OK  pré-brief : avis du stratège avec sa fiabilité
+  OK  planificateur : 72 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  pertes estimées : fiche « pourquoi ? » détaillée
+  OK  les chiffres saisis dans le planificateur ne déclenchent pas de raccourci (vitesse 0 inchangée)
+  OK  bordereau de confirmation avant le départ (F-UIX-13)
+  OK  expédition en campagne dans le registre
+  OK  expédition en campagne : 4 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  rapport : liste des morts (72)
+  OK  rapport : fusées et leçons
+  OK  rapport : télégramme
+  OK  rapport : 13 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  lettre à la famille (F-CHR-09)
+  OK  lettre : 0 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  calque Ravitaillement : légende (dans le rayon, 50, 125, 250 km)
+  OK  aucune erreur console
+smoke:expedition : OK (captures dans docs/screenshots/).

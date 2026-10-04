@@ -2,10 +2,16 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P7 terminée** → P8 — DA, interfaces finales, audio (mode autonome borné ; **arrêt de revue à la fin de P8**) |
-| Tâche | T8.0 — plan `docs/phases/P8.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P7) : code 0, 288 tests — `docs/reports/P7-verify.log` |
-| Prochaine étape | T8.1 — identité (icônes dessinées, textures, shader) ; **arrêt de revue après P8** |
+| Phase | **P8 terminée** — **ARRÊT DE REVUE OBLIGATOIRE** (CLAUDE.md, arrêt 5) : en attente de l'utilisateur |
+| Tâche | T8.8 — rapport `docs/reports/P8.md` (fait) |
+| Dernier `npm run verify` | 2026-10-04 (fin de P8) : code 0, 300 tests — `docs/reports/P8-verify.log` |
+| Prochaine étape | Revue de P8 par l'utilisateur (captures `docs/screenshots/p8-*`, décision R-gaz), puis P9 |
+
+## P8 terminée (2026-10-04) — arrêt de revue
+- Rapport : `docs/reports/P8.md` ; AC8-01 à AC8-08 OK ; AC8-09 (60 FPS) **non vérifié : GPU réel requis**.
+- Raison de l'arrêt : CLAUDE.md, arrêt 5, revue de l'utilisateur à la fin de P8. Elle demande une revue visuelle humaine (« sans template look ») et une écoute de la musique de synthèse.
+- À trancher : R-gaz (D-62, ci-dessous).
+- Mise au point de `smoke:p8` : trois lancements de l'outil neuf avant la batterie, détaillés au rapport § e. La batterie officielle est passée au premier essai.
 
 ## P7 terminée (2026-10-04)
 - Rapport : `docs/reports/P7.md` ; AC7-01 à AC7-10 OK, aucun échec de critère.

@@ -1,0 +1,15 @@
+
+> murs-et-sang@0.0.1 sim:tactical
+> tsx src/tools/sim-tactical.ts
+
+Cohérence (AC4-08) : 6 engagements types × 1000 batailles (graines 1–1000), auto-résolution : 4 tirages par graine
+  type             jouée   auto    écart   victoires  durée moy.  morts/bataille (min–max)
+  petit_plaine      0.46    0.44   +3.8 %    100 %       24 s      0–8  OK
+  moyen_plaine      1.11    1.12   -1.0 %     99 %       26 s      0–10  OK
+  grand_plaine      2.25    2.22   +1.0 %     91 %       33 s      0–12  OK
+  petit_foret       0.44    0.44   -0.5 %    100 %       23 s      0–6  OK
+  moyen_foret       1.08    1.12   -3.6 %     99 %       26 s      0–10  OK
+  grand_foret       2.25    2.22   +1.5 %     91 %       33 s      0–12  OK
+  6000 batailles en 11 s
+  OK  AC4-07 : 7577/7577 morts avec ligne de journal et dossier (heure, nom, escouade, cause, Titan, lieu)
+sim:tactical : tout est conforme.

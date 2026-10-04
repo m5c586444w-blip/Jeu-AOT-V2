@@ -1,0 +1,14 @@
+
+> murs-et-sang@0.0.1 sim:events
+> tsx src/tools/sim-events.ts
+
+Canon fidèle : 20 graines × 360 jours (scénario 850 ; choix historiques appliqués à l'échéance)
+  OK  E09 → E42 en 850, dans l'ordre du graphe et dans les fenêtres, choix historiques, divergence 0 : 20/20 graines (dernier événement au plus tard le jour 313)
+  OK  morts canon : chacune à son événement et aucune autre, 20/20 graines
+  OK  événements génériques : 261 en 20 ans (politique 49, militaire 68, personnage 35, civil 58, etranger 8, titans 39, monde 4)
+  7200 jours simulés en 10.4 s
+Divergence (AC5-04) : Eren retenu à E12, graine 42, comparée à la partie canon
+  évités : 30 (E13 → E42) ; divergence 19.90 ; branche divergente
+  OK  le bouchage de Trost (E13) et toute la suite sont évités ; bascule en branche divergente
+  OK  l'état diffère du canon : mur de Trost 15 contre 90 ; en vie alors que morts en canon : 4/4
+sim:events : tout est conforme.
