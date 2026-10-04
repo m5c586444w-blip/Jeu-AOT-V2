@@ -74,3 +74,5 @@ Aucun en P0.
 |---|---|---|---|
 | UnifrakturMaguntia (police) | paquet npm `@fontsource/unifrakturmaguntia` 5.3 (auto-hébergée, aucun CDN) | SIL Open Font License 1.1 | bannières de Marley uniquement (04 §1.3) |
 | Icônes des registres, blasons des nations | dessinés par code pour le projet (`src/ui/icons.ts`) | création du projet | aucun emblème de l'œuvre n'est repris (04 §8.5) |
+| Musique et effets sonores | synthèse WebAudio écrite pour le projet (`src/ui/audio.ts`) : oscillateurs, filtres, bruit pseudo-aléatoire calculé | création du projet | aucun échantillon, aucune banque de sons, aucune musique de l'œuvre (04 §7) ; `tests/ui/audio.test.ts` vérifie l'absence de fichier son et de chargement audio |
+| Scène tactique : toits, cheminées, vapeur, éclair | dessinés par code (`src/render/tactical/scene.ts`) | création du projet | — |

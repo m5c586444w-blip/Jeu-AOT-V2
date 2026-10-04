@@ -574,7 +574,12 @@ export function sharedAudio(volumes: Volumes): AudioEngine {
   window.addEventListener("keydown", begin, { capture: true });
   window.setInterval(() => {
     engine.tick();
-    document.documentElement.dataset["audio"] = engine.stats.mood;
+    const d = document.documentElement.dataset;
+    d["audio"] = engine.started ? engine.stats.mood : "muet";
+    d["audioSfx"] = String(Object.values(engine.stats.sfx).reduce((a, b) => a + b, 0));
+    d["audioNotes"] = String(engine.stats.notes.calme + engine.stats.notes.tension + engine.stats.notes.combat);
+    d["audioMusic"] = engine.stats.music.toFixed(2);
+    d["audioCaptions"] = String(engine.stats.captions);
   }, 250);
   return engine;
 }

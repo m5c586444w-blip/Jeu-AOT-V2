@@ -92,6 +92,9 @@ export class Hud {
       foot.insertBefore(nav, foot.children[1] ?? null);
     }
     this.el.append(head, ledger, nation, foot);
+    // Hauteur réelle du bandeau (variable selon l'échelle et la définition) : les registres s'ouvrent dessous (P8).
+    if (typeof ResizeObserver === "function")
+      new ResizeObserver(() => document.documentElement.style.setProperty("--bandeau-h", `${Math.ceil(this.el.getBoundingClientRect().bottom)}px`)).observe(this.el);
   }
 
   private dateBlock(): HTMLElement {

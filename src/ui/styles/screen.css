@@ -320,11 +320,11 @@
 .registre-panneau {
   position: fixed;
   z-index: 15;
-  top: 7.5rem;
+  top: calc(var(--bandeau-h, 7.5rem) + 0.5rem);
   left: 50%;
   transform: translateX(-50%) rotate(-0.2deg);
   width: min(58rem, 94vw);
-  max-height: calc(100vh - 8.5rem);
+  max-height: calc(100vh - var(--bandeau-h, 7.5rem) - 1.2rem);
   display: flex;
   flex-direction: column;
   background-color: #e9dcbf;
@@ -753,3 +753,6 @@
 .bilan-lettres { margin: 0.5rem 0; }
 .lettre { font-family: var(--f-machine); font-size: 0.82rem; background: #f4ecd8; border: 1px solid rgba(28, 26, 23, 0.4); padding: 0.4rem 0.6rem; margin: 0.35rem 0; }
 @media (max-width: 1100px) { .gazette__colonnes { column-count: 2; } }
+.choix-nation-menu[hidden] { display: none; }
+/* En bataille, les sous-titres passent au-dessus de la barre des cartes d'escouade. */
+body[data-tactique] .sous-titres { bottom: auto; top: 3.4rem; }

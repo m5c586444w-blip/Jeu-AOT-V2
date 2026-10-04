@@ -416,3 +416,26 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - Le menu principal (04 §5.1–5.2 : table d'archives, tiroir des scénarios, chemises à couverture, blasons) s'ouvre par `?menu=1` ou par le bouton du bandeau. Sans paramètre, la partie s'ouvre directement : les contrôles de non-régression de P1–P7 chargent l'adresse nue et attendent la carte. C'est aussi plus commode en développement.
 - Le bandeau ne passe plus sur deux lignes (revue de P5) : les registres sont des icônes dessinées (libellé en bulle et pour les lecteurs d'écran), placées sur la ligne du pied, entre l'alerte et la graine.
 - Blasons : emblèmes originaux (enceintes de Paradis, tour étoilée de Marley, soleil et vagues d'Hizuru, sabres et étoile des Alliés), aucun emblème de l'œuvre (04 §8.5).
+
+## 2026-10-04 — D-75 Audio par synthèse (P8)
+- 04 §7 autorise « synthèse (WebAudio) + banques libres de droits ». Seule la synthèse est retenue : aucun fichier à licencier, aucun poids ajouté au paquet, et l'absence d'échantillon de l'œuvre se vérifie mécaniquement.
+- Trois couches (calme, tension, combat) jouent en permanence sous trois gains croisés. L'humeur vient de l'état :
+  - combat : une scène tactique est ouverte ;
+  - tension : une bataille attend, une expédition est dehors, la nation jouée est en guerre, ou une alerte date de moins de 10 jours ;
+  - calme : sinon.
+- Accents : Marley (caisse claire, fanfare de quintes), Hizuru (cordes pincées en gamme in sur ré).
+- Mixage : ducking de 3 s sur une alerte majeure ; silence de 3 s puis cloche sur la mort d'un personnage nommé ; effets d'interface (papier au clic, tampon sur un ordre accepté).
+- Le contexte audio démarre au premier geste (politique de lecture automatique des navigateurs). Sans WebAudio, le jeu reste muet, sans erreur.
+- Sous-titres des sons importants : pas de Titan, cri, canon, cloche, transformation. Ils sont actifs par défaut et se désactivent dans les options.
+
+## 2026-10-04 — D-76 Revue automatique par écran (P8)
+- `smoke:p8` traduit la checklist de 04 §2 en contrôles mesurés dans la page :
+  - police : la première famille calculée de tout texte visible appartient au projet, et cette police est chargée ;
+  - icône générique : aucune classe de bibliothèque d'icônes, aucun emoji ;
+  - « card + shadow + rounded » : aucun élément à coins arrondis (≥ 6 px) et ombre floue (> 1 px) ;
+  - texture : au moins deux éléments à image de fond ou canvas sur la chaîne de l'écran ;
+  - valeurs : toute `.valeur` porte un « pourquoi ? » ;
+  - texte factice : aucun « lorem », « TODO », `undefined`, `NaN`, gabarit `{x}`, clé ou identifiant brut ;
+  - lisibilité : aucun débordement horizontal ni texte coupé ; corps minimal ≥ 11 px × échelle (− 0,6 px de tolérance d'arrondi).
+- Quatre passes : 1366×768 et 3840×2160, à 100 % et 125 %.
+- La revue visuelle « sans template look » reste humaine. C'est l'objet de l'arrêt de revue de fin de P8.

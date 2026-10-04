@@ -32,8 +32,9 @@ function go(params: Record<string, string>): void {
   window.location.search = `?${q.toString()}`;
 }
 
-export function mountMainMenu(app: HTMLElement): void {
+export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   applyPaperTextures(document.documentElement);
+  document.documentElement.style.fontSize = `${uiScale}%`;
   const table = el("main", "table-archives");
   table.setAttribute("aria-label", t("menu.table"));
   const lamp = el("div", "table-archives__lampe");
