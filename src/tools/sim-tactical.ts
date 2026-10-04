@@ -2,6 +2,7 @@
 // Pour chacun des 6 engagements types (`coherence` de data/balance/tactical.json : 3 classes × 2 terrains, 12 contre 1),
 // N batailles laissées à l'IA (graines 1…N) contre l'auto-résolution de P3 sur les mêmes configurations (4 tirages par graine).
 // Critère : |pertes moyennes jouées − auto| ≤ 15 % de l'auto (D-60 : N = 1 000).
+// --realisme : contrôle de réalisme indépendant (D-62) : gaz par homme engagé (02 §15) et nuit moins meurtrière (03 §5.2), graines 1001–2000.
 // --bench : AC4-09, pas de simulation avec 300 unités (sans rendu), p95 < 5 ms.
 // Options : --n 1000, --from 1 (première graine), --bench, --steps 1200.
 import { loadWorld } from "../data/worldNode";
@@ -108,7 +109,50 @@ function coherence(): void {
   console.log(`${logged === deaths ? "  OK " : "  KO "} AC4-07 : ${logged}/${deaths} morts avec ligne de journal et dossier (heure, nom, escouade, cause, Titan, lieu)`);
 }
 
+/**
+ * Contrôle de réalisme indépendant (D-62, critères fixés avant mesure) : grandeurs émergentes de la simulation tactique,
+ * jamais utilisées pour caler, sur des graines tenues à l'écart du calibrage (1001–2000).
+ */
+function realism(): void {
+  const from = 1001;
+  const n = Math.min(N, 1000);
+  const gasRange = world.military?.exp.engagement.gas_per_engaged ?? [3, 8];
+  console.log(`Réalisme indépendant (D-62) : ${tw.balance.coherence.length} engagements types × ${n} batailles de jour et ${n} de nuit (graines ${from}–${from + n - 1})`);
+  console.log("  type             gaz/homme (jour)  morts jour  morts nuit  nuit : Titans abattus / fin au temps limite");
+  let dayDeaths = 0;
+  let nightDeaths = 0;
+  for (const c of tw.balance.coherence) {
+    let gas = 0;
+    let day = 0;
+    let night = 0;
+    let nightKills = 0;
+    let nightTimeout = 0;
+    for (let seed = from; seed < from + n; seed++) {
+      const setup = skirmishSetup(world, c.map, [{ type: c.titan, count: c.count }], c.soldiers, seed);
+      const r = runBattle(world, setup);
+      gas += r.state.stats.gasUsed / c.soldiers;
+      day += r.dead.length;
+      const rn = runBattle(world, skirmishSetup(world, c.map, [{ type: c.titan, count: c.count }], c.soldiers, seed, true));
+      night += rn.dead.length;
+      nightKills += rn.state.stats.napes;
+      nightTimeout += rn.state.ended?.reason === "temps" ? 1 : 0;
+    }
+    const g = gas / n;
+    const ok = g >= gasRange[0] && g <= gasRange[1];
+    if (!ok) failures.push(`R-gaz ${c.id} : ${f2(g)} u hors de [${gasRange[0]}, ${gasRange[1]}]`);
+    dayDeaths += day;
+    nightDeaths += night;
+    console.log(`  ${c.id.padEnd(16)} ${`${f2(g)} u`.padStart(10)}  ${ok ? "OK" : "KO"}     ${f2(day / n).padStart(5)}       ${f2(night / n).padStart(5)}       ${f2(nightKills / n)} / ${((100 * nightTimeout) / n).toFixed(0)} %`);
+  }
+  const m = tw.balance.coherence.length * n;
+  const nightOk = nightDeaths < dayDeaths;
+  if (!nightOk) failures.push(`R-nuit : ${f2(nightDeaths / m)} morts la nuit ≥ ${f2(dayDeaths / m)} le jour`);
+  console.log(`${nightOk ? "  OK " : "  KO "} R-nuit : morts moyennes de nuit ${f2(nightDeaths / m)} < de jour ${f2(dayDeaths / m)} (03 §5.2)`);
+  console.log(`${failures.some((f) => f.startsWith("R-gaz")) ? "  KO " : "  OK "} R-gaz : gaz par homme engagé dans [${gasRange[0]}, ${gasRange[1]}] u pour les ${tw.balance.coherence.length} types (02 §15)`);
+}
+
 if (process.argv.includes("--bench")) bench();
+else if (process.argv.includes("--realisme")) realism();
 else coherence();
 if (failures.length) {
   console.error(`ÉCHEC (${failures.length}) :\n  ${failures.slice(0, 20).join("\n  ")}`);

@@ -58,7 +58,9 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   const logList = el("ol", "carnet-lignes");
   side.append(logList);
   const bar = el("footer", "bataille-escouades");
+  // Mesure de performance : affichée seulement en mode debug (F2), comme la console de service.
   const perf = el("span", "bataille-perf");
+  perf.hidden = !document.querySelector(".debug-console:not([hidden])");
   head.append(title, timer, speeds, perf);
   root.append(head, host, side, bar);
   document.body.append(root);
@@ -231,6 +233,12 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   window.addEventListener("pointermove", onMove);
   window.addEventListener("pointerup", onUp);
   const onKey = (ev: KeyboardEvent): void => {
+    if (ev.code === "F2") {
+      ev.preventDefault();
+      perf.hidden = !perf.hidden;
+      root.dataset["debug"] = String(!perf.hidden);
+      return;
+    }
     if (ev.code === "Space") {
       ev.preventDefault();
       setSpeed(speed === 0 ? 1 : 0);
@@ -372,6 +380,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       root.dataset["jsParts"] = `sim ${p95(parts.sim).toFixed(2)} · figures ${p95(parts.draw).toFixed(2)} · rendu ${p95(parts.render).toFixed(2)} · interface ${p95(parts.ui).toFixed(2)}`;
       root.dataset["frames"] = String(Number(root.dataset["frames"] ?? "0") + 1);
       root.dataset["tick"] = String(bt.state.tick);
+      root.dataset["vue"] = scene.view;
+      root.dataset["pastilles"] = String(scene.markers);
+      root.dataset["zoom"] = scene.zoomLevel.toFixed(2);
+      root.dataset["couverture"] = scene.coverage().toFixed(2);
       setText(perf, t("tac.perf", { ms: formatNumber(total), n: bt.state.soldiers.length + bt.state.titans.length }));
       requestAnimationFrame(frame);
     };

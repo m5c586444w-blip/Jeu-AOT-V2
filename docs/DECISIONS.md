@@ -278,3 +278,28 @@
 - **Bataille d'essai** (registre des expéditions) : escarmouche hors campagne, sans aucun effet sur l'état. Elle sert à essayer les cartes et les Titans, et aux contrôles.
 - **Planche des figures** (`src/ui/tactical/specimenSheet.ts`) : outil de revue (AC4-13) chargé par `smoke:tactique` ; absente du jeu et du paquet de production.
 - Touches : pendant une bataille, les raccourcis de la carte sont neutralisés ; Espace = pause active.
+
+## 2026-10-04 — D-62 Revue de P4 : sens du calibrage et contrôle de réalisme indépendant
+L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batailles jouées. Son modèle d'engagement (`engagementMedian`, log-normale à queue épaisse et rupture rare, 03 §12) a été calibré en P3 sur la seule mortalité par expédition de 02 §15 (25–40 % `[A]`, D-56). En P4, il a été extrait en fonction partagée sans changement de formule ni de valeur : `data/balance/expeditions.json` est inchangé depuis T3.7, et les facteurs de terrain de l'auto-résolution valent tous 1, jamais réglés. Le calibrage s'est fait **dans l'autre sens** : c'est le combat tactique qui a été réglé pour s'approcher de l'auto-résolution (D-60). AC4-08 vérifie donc une concordance obtenue par construction, pas le réalisme de l'un ou de l'autre ; c'est une limite, et je la signale. Pour la compenser, `sim:tactical` ajoute un contrôle de réalisme indépendant. Il porte sur des grandeurs **émergentes** de la simulation tactique, qui n'ont servi à aucun calibrage, et sur des graines tenues à l'écart du calibrage (1001–2000). Ses critères sont fixés ici, **avant toute mesure** :
+- **R-gaz** : pour chacun des 6 engagements types, le gaz consommé par homme engagé et par bataille reste dans **[3, 8] u** (02 §15 `[A]`). Ce chiffre ne règle que l'auto-résolution ; en tactique, le gaz résulte de la physique de l'ODM.
+- **R-nuit** : sur l'ensemble des 6 engagements types, les pertes moyennes **de nuit** sont **inférieures** à celles **de jour** (03 §5.2 : Titans moins actifs la nuit). Aucun paramètre n'a été réglé sur cette comparaison.
+- Exclu : l'usure des lames, car le nombre de coupes par paire est une donnée d'entrée (`wear_per_cut`). Le vérifier serait circulaire.
+- **Résultats** (`docs/reports/P4-revue-realisme*.log`) :
+  - **R-gaz : KO** — 2,4 u (petit Titan), 5,7 u (moyen), 10,6 u (grand).
+    - Cause : le gaz suit le nombre de passes d'attaque (11, 19 et 33 par bataille), et ce nombre suit la difficulté de coupe ÷ menace^1,3 calibrée en D-60 pour s'accorder aux morts de l'auto-résolution. Ramener le gaz dans [3, 8] u défait ce calibrage : c'est un **choix de conception ouvert**, renvoyé à la revue de P8 (options dans `docs/PROGRESS.md`). Je ne l'ai pas tranché seul.
+    - Conséquence connue : contre un grand Titan, jouer coûte environ deux fois plus de gaz qu'auto-résoudre.
+  - **R-nuit, 1re mesure** : 0,00 mort de nuit, mais en trompe-l'œil : **100 %** des batailles de nuit finissaient au temps limite, sans contact. Les Titans étaient déployés à environ 240 m, et la vue de nuit porte à 40–80 m. Défaut corrigé : de nuit, la bataille naît d'un contact à courte portée, donc les Titans sont déployés à portée de vue nocturne des escouades. Le déploiement de jour est inchangé : mêmes tirages, AC4-08 identique au centième.
+  - **R-nuit, 2e mesure : OK** — 0,34 mort de nuit contre 1,17 de jour ; 54 % des batailles de nuit au temps limite.
+
+## 2026-10-04 — D-63 Revue de P4 : lisibilité de l'écran de bataille
+- **Cartes d'escouade** : quatre tiennent dans la largeur (largeur = (barre − 3 espaces) / 4, 12 rem au moins, boutons repliés sur deux lignes). Au-delà, la barre défile horizontalement, avec une barre de défilement visible.
+- **Vue d'ensemble** : sous **4 px/m**, chaque escouade porte une pastille numérotée de taille constante, posée au-dessus de ses hommes (liseré brique en repli, pastille ocre pour les officiers). Les soldats deviennent des points de 3 px, et les Titans sont agrandis à 42 px au moins. Au-delà du seuil : figures complètes, sans pastilles.
+- **Cadrage** : la vue s'ouvre en **couvrant** la zone des unités, à 30 % au plus au-delà du cadrage « tout voir » et 6 px/m au plus. La caméra est bornée à la carte, sans bande vide inutile ; contrôle : le sol couvre au moins 90 % de la scène. Ceci remplace le plafond de 3 px/m de D-61.
+- **Inclinaison de la vue** : passée de 0,62 à **0,8**. La carte de 400 × 300 m projetée (400 × 240) a alors le rapport d'aspect de la scène, et le sol remplit l'écran sans rognage excessif.
+- Contrôles de la revue, **1er passage KO** (`docs/reports/P4-revue-smoke-tactique-essai1-KO.log`) :
+  - le sol ne couvrait que 82 % de la scène : carte trop large pour l'inclinaison 0,62, et cadrage tiré vers le ciel par la hauteur des Titans ;
+  - la sélection au clic visait un soldat sorti du champ, désormais possible avec le cadrage « couvrir ». Le test vise maintenant le premier soldat visible.
+  - Correctifs : inclinaison 0,8, cadrage sur l'emprise au sol rognée à la carte.
+  - **2e passage OK** : couverture 100 %, 47 pastilles, sélection, p95 4,7 ms avec 300 unités.
+- **Mesure « ms/image · unités »** : masquée, affichée par **F2** (mode debug) pendant la bataille. La console de la carte ne s'ouvre pas sous la bataille.
+- **60 FPS** : **non vérifié, GPU réel requis** (l'utilisateur n'a pas de poste local). Ne bloque pas.

@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, GraphicsContext, TilingSprite } from "pixi.js";
+import { Application, Container, Graphics, GraphicsContext, Text, TilingSprite } from "pixi.js";
 import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
 import { INK, OCHRE, PAPER, PAPER_DARK, STONE, VERDIGRIS } from "../palette";
@@ -6,12 +6,19 @@ import { paperTexture } from "../paperTexture";
 import { drawFlare, drawSoldier, drawTitan } from "./figures";
 import type { SoldierLook } from "./figures";
 
-/** Facteur de projection oblique (vue de gravure, 04 §4) : y écrasé, la hauteur z monte à l'écran. */
-const TILT = 0.62;
-/** Échelle de lecture par défaut (pixels par mètre) et taille minimale à l'écran des figures. */
-const READ_ZOOM = 3;
+/** Facteur de projection oblique (vue de gravure, 04 §4 ; 0,8 depuis la revue de P4 : la carte de 400 × 300 m remplit une scène 16:10, D-63) : y écrasé, la hauteur z monte à l'écran. */
+const TILT = 0.8;
+/** Taille minimale à l'écran des figures (pixels). */
 const MIN_SOLDIER_PX = 9;
 const MIN_TITAN_PX = 22;
+/** Sous ce zoom (px/m), vue d'ensemble : pastilles d'escouade, soldats en points, Titans agrandis (revue de P4). */
+export const OVERVIEW_ZOOM = 4;
+const BRICK_TINT = 0xd98a76;
+const OVERVIEW_TITAN_PX = 42;
+const OVERVIEW_DOT_PX = 3;
+const PASTILLE_PX = 11;
+/** Zoom maximal du cadrage initial (la bataille remplit l'écran, sans plan trop serré). */
+const FRAME_MAX_ZOOM = 6;
 
 export interface UnitPose {
   x: number;
@@ -32,6 +39,11 @@ export class TacticalScene {
   private readonly contexts = new Map<string, GraphicsContext>();
   private readonly titanFigs: Graphics[] = [];
   private readonly soldierFigs: Graphics[] = [];
+  private readonly markerLayer = new Container();
+  private readonly pastilles = new Map<string, { ring: Graphics; label: Text }>();
+  /** Vue courante et nombre de pastilles affichées (lus par l'interface et les contrôles). */
+  view: "ensemble" | "detail" = "detail";
+  markers = 0;
   private map: TacticalWorldMap | null = null;
   private zoom = 1;
   private fitZoom = 1;
@@ -40,7 +52,7 @@ export class TacticalScene {
   selected: Set<number> = new Set();
 
   private constructor(private readonly app: Application) {
-    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay);
+    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.markerLayer);
     app.stage.addChild(this.worldLayer);
   }
 
@@ -65,6 +77,16 @@ export class TacticalScene {
   /** Rendu d'une image : appelé par la boucle de l'écran de bataille (pas de ticker propre), pour mesurer tout le temps JS. */
   render(): void {
     this.app.render();
+  }
+
+  /** Part de la scène couverte par le sol de la carte (0–1) : contrôle du cadrage « la bataille remplit l'écran ». */
+  coverage(): number {
+    if (!this.map) return 0;
+    const { width, height } = this.app.screen;
+    const { x, y } = this.worldLayer.position;
+    const w = Math.max(0, Math.min(width, x + this.map.width * this.zoom) - Math.max(0, x));
+    const h = Math.max(0, Math.min(height, y + this.map.height * TILT * this.zoom) - Math.max(0, y));
+    return (w * h) / (width * height);
   }
 
   /** Pixels par mètre. */
@@ -104,16 +126,39 @@ export class TacticalScene {
       if (!this.map || points.length === 0) return;
       const { width, height } = this.app.screen;
       this.fit();
-      const proj = points.map((p) => this.project(p.x, p.y, p.z));
+      // Emprise au sol des unités (les hauteurs feraient remonter la vue vers le ciel).
+      const proj = points.map((p) => this.project(p.x, p.y, 0));
       const xs = proj.map((p) => p[0]);
       const ys = proj.map((p) => p[1]);
-      const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys) - 20, Math.max(...ys)];
-      const z = Math.max(this.fitZoom, Math.min(READ_ZOOM, width / (x1 - x0 + 60), height / (y1 - y0 + 60)));
+      // Marges, puis emprise rognée à la carte : « couvrir » remplit alors l'écran de sol, pas de vide.
+      const mapW = this.map.width;
+      const mapH = this.map.height * TILT;
+      const [x0, x1, y0, y1] = [Math.max(0, Math.min(...xs) - 12), Math.min(mapW, Math.max(...xs) + 12), Math.max(0, Math.min(...ys) - 25), Math.min(mapH, Math.max(...ys) + 12)];
+      // La bataille remplit l'écran : on couvre la zone des unités (au plus 30 % au-delà du cadrage « tout voir »).
+      const contain = Math.min(width / (x1 - x0), height / (y1 - y0));
+      const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
+      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM, cover, contain * 1.3));
       this.zoom = z;
       this.worldLayer.scale.set(z);
       this.worldLayer.position.set(width / 2 - ((x0 + x1) / 2) * z, height / 2 - ((y0 + y1) / 2) * z);
+      this.clampToMap();
     };
     this.framing();
+  }
+
+  /** Garde la carte sous la vue quand elle est plus grande que l'écran (pas de bande vide inutile). */
+  private clampToMap(): void {
+    if (!this.map) return;
+    const { width, height } = this.app.screen;
+    const z = this.zoom;
+    const left = 0;
+    const right = this.map.width * z;
+    const top = -15 * z;
+    const bottom = this.map.height * TILT * z;
+    const pos = this.worldLayer.position;
+    const cx = right - left > width ? Math.min(-left, Math.max(width - right, pos.x)) : pos.x;
+    const cy = bottom - top > height ? Math.min(-top, Math.max(height - bottom, pos.y)) : pos.y;
+    pos.set(cx, cy);
   }
 
   zoomAt(sx: number, sy: number, factor: number): void {
@@ -124,11 +169,13 @@ export class TacticalScene {
     this.zoom = z;
     this.worldLayer.scale.set(z);
     this.worldLayer.position.set(sx - wx * z, sy - wy * z);
+    this.clampToMap();
   }
 
   panBy(dx: number, dy: number): void {
     this.framing = null;
     this.worldLayer.position.set(this.worldLayer.position.x + dx, this.worldLayer.position.y + dy);
+    this.clampToMap();
   }
 
   /** Caméra qui suit une position (escouade ou individu, 03 §13). */
@@ -180,6 +227,8 @@ export class TacticalScene {
     g.clear();
     // Figures à l'échelle réelle, avec une taille minimale à l'écran (sinon un homme fait moins d'un pixel en vue large).
     const k = Math.max(1.8, MIN_SOLDIER_PX / this.zoom) / 2.85;
+    const overview = this.zoom < OVERVIEW_ZOOM;
+    this.view = overview ? "ensemble" : "detail";
     const t = st.tick / 20;
     for (const f of st.signals) {
       const age = t - f.t;
@@ -198,11 +247,12 @@ export class TacticalScene {
       if (f.context !== ctx) f.context = ctx;
       const [x, y] = this.project(tt.x, tt.y, 0);
       f.position.set(x, y);
-      f.scale.set(Math.max(tt.height, MIN_TITAN_PX / this.zoom) / 100);
+      f.scale.set(Math.max(tt.height, (overview ? OVERVIEW_TITAN_PX : MIN_TITAN_PX) / this.zoom) / 100);
       f.zIndex = tt.y;
     });
     const o = this.gOverlay;
     o.clear();
+    const centroids = new Map<string, { x: number; y: number; n: number; top: number }>();
     st.soldiers.forEach((s, i) => {
       const f = this.fig(this.soldierFigs, this.soldierLayer, i);
       const shown = s.mode !== "mort" && s.mode !== "fui";
@@ -230,14 +280,57 @@ export class TacticalScene {
       const ground = s.mode === "sol";
       const sel = this.selected.has(i);
       const hurt = s.wound !== "aucune";
-      const ctx = this.context(`s:${lk}:${ground}:${sel}:${hurt}`, (c) => drawSoldier(c, 0, 0, 1, lk, ground, sel, hurt));
+      // Vue d'ensemble : un point par homme (la pastille d'escouade porte la lecture) ; sinon la figure complète.
+      const ctx = overview
+        ? this.context(`d:${sel}`, (c) => c.circle(0, -1, 1).fill({ color: sel ? OCHRE : VERDIGRIS }).stroke({ width: 0.3, color: INK }))
+        : this.context(`s:${lk}:${ground}:${sel}:${hurt}`, (c) => drawSoldier(c, 0, 0, 1, lk, ground, sel, hurt));
       if (f.context !== ctx) f.context = ctx;
       f.position.set(x, y);
-      f.scale.set(k);
+      f.scale.set(overview ? OVERVIEW_DOT_PX / 2 / this.zoom : k);
+      if (overview) {
+        const c = centroids.get(s.squad) ?? { x: 0, y: 0, n: 0, top: Infinity };
+        c.x += x;
+        c.y += y;
+        c.n += 1;
+        c.top = Math.min(c.top, y);
+        centroids.set(s.squad, c);
+      }
     });
     if (st.wagon) {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
       o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
+    }
+    this.drawPastilles(st, centroids);
+  }
+
+  /** Pastilles d'escouade (vue d'ensemble) : numéro au centre des hommes debout, taille constante à l'écran. */
+  private drawPastilles(st: BattleState, centroids: ReadonlyMap<string, { x: number; y: number; n: number; top: number }>): void {
+    this.markers = 0;
+    for (const [id, p] of this.pastilles) {
+      const c = centroids.get(id);
+      p.ring.visible = p.label.visible = !!c;
+    }
+    for (const sq of st.squads) {
+      const c = centroids.get(sq.id);
+      if (!c) continue;
+      let p = this.pastilles.get(sq.id);
+      if (!p) {
+        const ring = new Graphics(this.context(`pastille:${sq.id === "officiers" ? "o" : "e"}`, (g) => g.circle(0, 0, PASTILLE_PX).fill({ color: sq.id === "officiers" ? OCHRE : PAPER }).stroke({ width: 2, color: INK })));
+        const label = new Text({ text: sq.id === "officiers" ? "O" : String(Number(sq.id.replace(/\D/g, "")) || ""), style: { fontFamily: "Special Elite, serif", fontSize: 12, fill: INK } });
+        label.anchor.set(0.5);
+        this.markerLayer.addChild(ring, label);
+        p = { ring, label };
+        this.pastilles.set(sq.id, p);
+      }
+      const x = c.x / c.n;
+      const y = c.top - (PASTILLE_PX + 6) / this.zoom;
+      p.ring.position.set(x, y);
+      p.label.position.set(x, y);
+      p.ring.scale.set(1 / this.zoom);
+      p.label.scale.set(1 / this.zoom);
+      // Escouade qui se replie : liseré brique.
+      p.ring.tint = sq.order === "repli" ? BRICK_TINT : 0xffffff;
+      this.markers += 1;
     }
   }
 

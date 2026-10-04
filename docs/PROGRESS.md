@@ -2,19 +2,32 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P4 — Combat tactique v1 : **terminée** ; **ARRÊT OBLIGATOIRE de revue** |
-| Tâche | T4.11 — rapport `docs/reports/P4.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P4) : code 0, 195 tests — `docs/reports/P4-verify.log` |
-| Prochaine étape | **Attendre la revue de l'utilisateur** (rapport P4, captures `docs/screenshots/p4-*`, points en fin de rapport). Ne pas démarrer P5 sans son accord. |
+| Phase | P4 validée par l'utilisateur (avec correctifs, faits) → P5 en mode autonome borné, jusqu'à P8 |
+| Tâche | Correctifs de revue de P4 (D-62, D-63) |
+| Dernier `npm run verify` | voir le commit des correctifs de revue |
+| Prochaine étape | P5 — plan `docs/phases/P5.md` ; enchaîner P5 → P8 ; **arrêt de revue après P8** |
 
-## ARRÊT EN COURS (2026-10-04) — revue de fin de P4 (règle : arrêts de revue après P4 et P8)
-- Raison : fin de P4, revue obligatoire de l'utilisateur (fichier 14 §7).
-- État : AC4-01 à AC4-14 passent. AC4-09 (partie navigateur) est passé au 2e passage ; 1er passage KO à 17,8 ms, conservé dans `docs/reports/P4-smoke-tactique-essai1-KO.log` (D-61).
-- Non vérifiable ici : 60 FPS réels sur GPU (D-59), à confirmer par l'utilisateur.
-- Questions posées en fin de `docs/reports/P4.md` :
-  - performance sur son GPU ;
-  - ressenti et échelle du combat ;
-  - faiblesses visuelles à corriger maintenant ou plus tard.
+## Revue de P4 (2026-10-04) — validée, correctifs appliqués
+- Cartes d'escouade coupées : fait (D-63).
+- Vue d'ensemble : pastilles d'escouade et Titans agrandis sous 4 px/m, cadrage qui remplit l'écran : fait (D-63).
+- « ms/image · unités » visible seulement en debug (F2) : fait (D-63).
+- Sens du calibrage de l'auto-résolution et contrôle de réalisme indépendant : D-62 et `npm run sim:tactical -- --realisme`.
+- **60 FPS : non vérifié, GPU réel requis** (pas de poste local chez l'utilisateur). Ne bloque pas.
+
+## Reporté à P8 (décision de l'utilisateur, revue de P4)
+- Grille de bâtiments trop régulière (ville en caisses alignées).
+- Occlusion décor/unités : les unités sont toujours dessinées par-dessus bâtiments et arbres.
+- Vapeur des Titans abattus : aujourd'hui une ellipse et des bouffées fixes, sans animation.
+
+## Décision ouverte, pour la revue de P8 — R-gaz (D-62)
+- Constat (`docs/reports/P4-revue-realisme.log`) :
+  - gaz par homme et par bataille : 2,4 u contre un petit Titan, 5,7 u contre un moyen, 10,6 u contre un grand, pour une plage de [3, 8] u (02 §15) ;
+  - jouer contre un grand Titan coûte environ deux fois le gaz de l'auto-résolution.
+- Options :
+  - (a) accepter la dépendance à la classe et lire [3, 8] u comme un combat type, contre un Titan moyen ;
+  - (b) recalibrer le combat tactique : moins de passes contre les grands Titans, létalité compensée ; il faut alors refaire AC4-08 ;
+  - (c) faire suivre la menace au gaz de l'auto-résolution, pour supprimer l'écart entre jouer et auto-résoudre.
+- Recommandation : (c), éventuellement avec (a). Rien n'est appliqué sans l'accord de l'utilisateur.
 
 ## Arrêt levé (2026-10-03) — critère AC2-11 en échec deux fois
 - **Levé par l'utilisateur** : correction renforcée acceptée (D-48), appliquée et passée (`docs/reports/P2-smoke-politique.log`).
@@ -43,3 +56,4 @@
 - 2026-10-04 — P4 démarrée : plan `docs/phases/P4.md`.
 - 2026-10-04 — P4 : T4.1 → T4.11 livrées ; erreur de procédure en T4.8 (commit 1d617bd poussé avec verify en échec, corrigé par 78276db ; garde-fou ajouté).
 - 2026-10-04 — P4 terminée : AC4-01 à AC4-14 passent (AC4-09 navigateur au 2e passage) ; rapport `docs/reports/P4.md` ; **arrêt pour revue**.
+- 2026-10-04 — Revue de P4 : validée par l'utilisateur ; correctifs D-62 et D-63 ; réalisme R-gaz KO (décision ouverte) ; R-nuit OK après correction du déploiement de nuit.

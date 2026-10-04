@@ -528,8 +528,11 @@
 .carnet-lignes { list-style: none; margin: 0; padding: 0; font-size: 0.85rem; }
 .carnet-lignes li { border-bottom: 1px dotted rgba(28, 26, 23, 0.3); padding: 0.1rem 0; }
 .carnet-mort { color: var(--brique); }
-.bataille-escouades { grid-area: escouades; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.4rem 0.6rem; border-top: 2px solid var(--encre); background: var(--papier); }
-.carte-escouade { flex: 0 0 auto; min-width: 13rem; border: 1px solid var(--encre); padding: 0.2rem 0.45rem 0.35rem; background: #f1e8d2; box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.25); font-size: 0.85rem; }
+.bataille-escouades { grid-area: escouades; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.4rem 0.6rem 0.5rem; border-top: 2px solid var(--encre); background: var(--papier); scrollbar-width: thin; scrollbar-color: var(--encre) var(--papier-sombre); }
+/* Quatre cartes tiennent dans la largeur ; au-delà, la barre défile (barre visible), aucune carte n'est coupée sans repère. */
+.carte-escouade { flex: 0 0 calc((100% - 1.5rem) / 4); min-width: 12rem; box-sizing: border-box; border: 1px solid var(--encre); padding: 0.2rem 0.45rem 0.35rem; background: #f1e8d2; box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.25); font-size: 0.82rem; }
+.carte-escouade-ordres { display: flex; flex-wrap: wrap; gap: 0.15rem; }
+.carte-escouade-ordres .registre-bouton { margin: 0; }
 .carte-escouade h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
 .carte-escouade-ligne, .carte-escouade-ordre { margin: 0.1rem 0; }
 .carte-escouade-ordre { font-variant: small-caps; color: var(--vert-de-gris); }

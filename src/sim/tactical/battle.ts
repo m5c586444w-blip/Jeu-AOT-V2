@@ -89,7 +89,9 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
         height: tt.height_m[0] + (tt.height_m[1] - tt.height_m[0]) * rng.next(),
         speed: tt.speed_m_s,
         x: 20 + rng.next() * (map.width - 40),
-        y: 4 + rng.next() * b.battle.deploy_margin_m,
+        // De nuit, la bataille naît d'un contact à courte portée (D-62) : Titans déployés à portée de vue nocturne
+        // des escouades (sinon personne ne se rencontre en 240 s). De jour, déploiement au bord opposé.
+        y: setup.night ? map.height - b.battle.deploy_margin_m - b.titans.vision_night_m * (1 + rng.next()) : 4 + rng.next() * b.battle.deploy_margin_m,
         heading: Math.PI / 2,
         target: null,
         alive: true,

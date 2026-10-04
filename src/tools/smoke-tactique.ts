@@ -116,6 +116,20 @@ try {
     await page.waitForTimeout(200);
     const title = await page.locator(".bataille-titre").innerText();
     expect((await page.locator(".carte-escouade").count()) === 4 && (await page.locator(".carnet-lignes li").count()) >= 1, `carte ${title} : 4 cartes d'escouade, carnet tenu (${await tick(page)} pas)`);
+    if (short === "ville") {
+      // Revue de P4 (1) : les 4 cartes tiennent entières dans la barre, aucune n'est coupée au bord.
+      const cut = await page.$$eval(".carte-escouade", (els) => {
+        const bar = els[0]?.parentElement?.getBoundingClientRect();
+        return bar ? els.filter((e) => e.getBoundingClientRect().right > bar.right + 0.5 || e.getBoundingClientRect().left < bar.left - 0.5).length : -1;
+      });
+      expect(cut === 0, `revue P4 : 4 cartes d'escouade entières dans la largeur (${cut} coupée(s))`);
+      // Revue de P4 (3) : mesure de performance masquée hors mode debug, affichée par F2.
+      const hiddenByDefault = await page.locator(".bataille-perf").isHidden();
+      await page.keyboard.press("F2");
+      const shownByF2 = await page.locator(".bataille-perf").isVisible();
+      await page.keyboard.press("F2");
+      expect(hiddenByDefault && shownByF2 && (await page.locator(".bataille-perf").isHidden()) && !(await page.locator(".debug-console:not([hidden])").count()), "revue P4 : « ms/image · unités » masqué hors debug ; F2 l'affiche puis le masque (sans ouvrir la console de la carte)");
+    }
     await page.screenshot({ path: `${OUT}/p4-carte-${short}.png` });
     await close(page);
   }
@@ -154,9 +168,11 @@ try {
   const pos = await page.evaluate(async () => {
     const path = "/src/ui/tactical/battleScreen.ts";
     const m = (await import(path)) as { battleProbe: { soldierOnScreen: ((i: number) => [number, number] | null) | null } };
+    // Premier soldat visible dans la scène (le cadrage « remplir l'écran » peut laisser des hommes hors champ).
+    const scene = document.querySelector(".bataille-scene")?.getBoundingClientRect();
     for (let i = 0; i < 18; i++) {
       const p = m.battleProbe.soldierOnScreen?.(i);
-      if (p) return { i, p };
+      if (p && scene && p[0] > 20 && p[1] > 20 && p[0] < scene.width - 20 && p[1] < scene.height - 20) return { i, p };
     }
     return null;
   });
@@ -201,6 +217,24 @@ try {
 
   // ——— 300 unités : temps JS par image (AC4-09) ———
   await trial(page, "tmap_ville", "ttype_moyen_errant", 20, 280);
+  // Revue de P4 (2) : vue d'ensemble lisible et cadrage qui remplit l'écran.
+  await page.waitForFunction(() => document.querySelector<HTMLElement>(".bataille")?.dataset["vue"] !== undefined);
+  const vue0 = await page.getAttribute(".bataille", "data-vue");
+  const past0 = Number(await page.getAttribute(".bataille", "data-pastilles"));
+  const cover0 = Number(await page.getAttribute(".bataille", "data-couverture"));
+  expect(vue0 === "ensemble" && past0 >= 40 && cover0 >= 0.9, `revue P4 : vue d'ensemble (${vue0}) avec ${past0} pastilles d'escouade et Titans agrandis ; le sol couvre ${Math.round(100 * cover0)} % de la scène (≥ 90 %)`);
+  const scene = await page.locator(".bataille-scene").boundingBox();
+  await page.screenshot({ path: `${OUT}/p4-vue-ensemble.png` });
+  if (scene) await page.mouse.move(scene.x + scene.width / 2, scene.y + scene.height / 2);
+  for (let i = 0; i < 6; i++) await page.mouse.wheel(0, -200);
+  await page.waitForTimeout(200);
+  const vue1 = await page.getAttribute(".bataille", "data-vue");
+  const zoom1 = await page.getAttribute(".bataille", "data-zoom");
+  expect(vue1 === "detail" && (await page.getAttribute(".bataille", "data-pastilles")) === "0", `revue P4 : au-delà du seuil (${zoom1} px/m ≥ 4), figures détaillées, plus de pastilles`);
+  await page.screenshot({ path: `${OUT}/p4-vue-detail.png` });
+  await page.keyboard.press("F2");
+  const scrollable = await page.$eval(".bataille-escouades", (e) => e.scrollWidth > e.clientWidth && getComputedStyle(e).overflowX === "auto");
+  expect(scrollable, `revue P4 : ${await page.locator(".carte-escouade").count()} cartes d'escouade, barre à défilement horizontal`);
   await speed(page, "1");
   await page.waitForTimeout(12000);
   const p95 = Number(await page.getAttribute(".bataille", "data-js-p95"));
