@@ -51,7 +51,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_cuirasse",
@@ -111,7 +111,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_feminin",
@@ -170,7 +170,7 @@
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_bestial",
@@ -223,7 +223,7 @@
         "canon": "C"
       },
       {
-        "holder": null,
+        "holder": "char_zeke_yeager",
         "name": "Zeke",
         "from": 842,
         "to": null,
@@ -231,13 +231,13 @@
       }
     ],
     "holder_850": {
-      "character": null,
+      "character": "char_zeke_yeager",
       "faction": "marley",
       "since": 842,
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_machoire",
@@ -297,14 +297,14 @@
         "canon": "C"
       },
       {
-        "holder": null,
+        "holder": "char_porco_galliard",
         "name": "Porco Galliard",
         "from": null,
         "to": null,
         "canon": "C"
       },
       {
-        "holder": null,
+        "holder": "char_falco_grice",
         "name": "Falco Grice",
         "from": 854,
         "to": null,
@@ -318,7 +318,7 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_charrette",
@@ -364,7 +364,7 @@
     ],
     "chain": [
       {
-        "holder": null,
+        "holder": "char_pieck_finger",
         "name": "Pieck",
         "from": null,
         "to": null,
@@ -372,13 +372,13 @@
       }
     ],
     "holder_850": {
-      "character": null,
+      "character": "char_pieck_finger",
       "faction": "marley",
       "since": 843,
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_marteau",
@@ -424,7 +424,7 @@
     ],
     "chain": [
       {
-        "holder": null,
+        "holder": "char_lara_tybur",
         "name": "Lara Tybur",
         "from": null,
         "to": 854,
@@ -439,13 +439,13 @@
       }
     ],
     "holder_850": {
-      "character": null,
+      "character": "char_lara_tybur",
       "faction": "marley",
       "since": 845,
       "since_canon": "?"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_assaillant",
@@ -519,7 +519,7 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   },
   {
     "id": "shifter_fondateur",
@@ -581,6 +581,6 @@
       "since_canon": "C"
     },
     "canon": "C",
-    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley sans personnage dans les données jusqu'en P7."
+    "notes_canon": "Existence, capacité signature et contre-mesures : 03 §8.2 (C). Chaîne de porteurs : 11 §4 (dates de transfert ? quand 11 le dit). Hauteur, vitesse, points de vie, endurance et valeurs des capacités : A ; hauteurs : 10 §5 (≈ ; « variable » pour le Fondateur et le Marteau de guerre, fixée ici). Porteurs de Marley : personnages de P7 (07 §3.2), identité secrète pour Paradis."
   }
 ]

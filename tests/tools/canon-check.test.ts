@@ -22,6 +22,7 @@ const BAD: [string, string][] = [
   ["r9_unknown_reference", "R9"],
   ["r10_tech_anachronism", "R10"],
   ["r11_shifter_chain", "R11"],
+  ["r12_scenario_start", "R12"],
 ];
 
 describe("canon:check (AC-13)", () => {

@@ -49,7 +49,7 @@ describe("les Neuf Titans (AC6-01, 03 §8, 11 §4)", () => {
     }
   });
 
-  it("porteurs en 850 : Eren (Assaillant, Fondateur), Ymir (Mâchoire), Reiner, Bertholdt et Annie ; Marley tient le reste sans nom inventé", () => {
+  it("porteurs en 850 : Eren (Assaillant, Fondateur), Ymir (Mâchoire), Reiner, Bertholdt et Annie ; Zeke, Pieck et Lara Tybur pour Marley (P7), identité secrète", () => {
     const holder = (id: string): string | null | undefined => sw?.defs.get(id)?.holder_850.character;
     expect(holder("shifter_assaillant")).toBe("char_eren_yeager");
     expect(holder("shifter_fondateur")).toBe("char_eren_yeager");
@@ -57,9 +57,13 @@ describe("les Neuf Titans (AC6-01, 03 §8, 11 §4)", () => {
     expect(holder("shifter_cuirasse")).toBe("char_reiner_braun");
     expect(holder("shifter_colossal")).toBe("char_bertholdt_hoover");
     expect(holder("shifter_feminin")).toBe("char_annie_leonhart");
+    expect(holder("shifter_bestial")).toBe("char_zeke_yeager");
+    expect(holder("shifter_charrette")).toBe("char_pieck_finger");
+    expect(holder("shifter_marteau")).toBe("char_lara_tybur");
     for (const id of ["shifter_bestial", "shifter_charrette", "shifter_marteau"]) {
-      expect(holder(id), id).toBeNull();
       expect(sw?.defs.get(id)?.holder_850.faction, id).toBe("marley");
+      // Paradis ignore leur identité en 850 : un secret à percer (champ `hidden`).
+      expect(world.politics?.characters.get(holder(id) ?? "")?.hidden?.titan, id).toBeTruthy();
     }
     // Les dates d'héritage incertaines restent « ? » (11 §4 : dates de transfert de seconde main).
     expect(sw?.defs.get("shifter_cuirasse")?.holder_850.since_canon).toBe("?");

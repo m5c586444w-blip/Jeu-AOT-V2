@@ -1,0 +1,517 @@
+[
+  {
+    "id": "scn_854",
+    "name_key": "scn.854",
+    "faction": "paradis",
+    "start": {
+      "year": 854,
+      "day": 1
+    },
+    "default_control": "paradis",
+    "control": {
+      "prov_plaines_meurtries": "paradis",
+      "prov_ruines_premier_cordon": "paradis",
+      "prov_riviere_des_cendres": "paradis",
+      "prov_falaises_cote_sud": "paradis",
+      "prov_marais_brumeux": "paradis",
+      "prov_foret_morte": "paradis",
+      "prov_steppe_orientale": "paradis",
+      "prov_cote_est": "paradis",
+      "prov_plateau_du_nord": "paradis",
+      "prov_vallee_oubliee": "paradis"
+    },
+    "control_canon": {
+      "prov_ville_usine": "A"
+    },
+    "titan_density": {
+      "prov_plaines_meurtries": 0.02,
+      "prov_ruines_premier_cordon": 0.02,
+      "prov_riviere_des_cendres": 0.02,
+      "prov_falaises_cote_sud": 0.02,
+      "prov_marais_brumeux": 0.02,
+      "prov_foret_morte": 0.02,
+      "prov_steppe_orientale": 0.02,
+      "prov_cote_est": 0.02,
+      "prov_plateau_du_nord": 0.02,
+      "prov_vallee_oubliee": 0.02,
+      "prov_maria_nord": 0.02,
+      "prov_maria_nord_est": 0.02,
+      "prov_maria_est": 0.02,
+      "prov_maria_sud_est": 0.02,
+      "prov_maria_sud": 0.02,
+      "prov_maria_sud_ouest": 0.02,
+      "prov_maria_ouest": 0.02,
+      "prov_maria_nord_ouest": 0.02,
+      "prov_shiganshina": 0.02,
+      "prov_faubourgs_shiganshina": 0.02,
+      "prov_plaines_interieures_maria_sud": 0.02,
+      "prov_bourg_minier_maria": 0.02,
+      "prov_hameaux_ouest_maria": 0.02,
+      "prov_foret_arbres_geants": 0.02,
+      "prov_plaines_cerealieres_sud": 0.02,
+      "prov_plaines_du_nord": 0.02,
+      "prov_collines_minieres": 0.02,
+      "prov_haras_maria": 0.02,
+      "prov_vallee_du_moulin": 0.02,
+      "prov_carrefour_du_sud": 0.02,
+      "prov_lac_des_reflets": 0.02,
+      "prov_fort_avance_maria": 0.02,
+      "prov_hameaux_est": 0.02,
+      "prov_monts_brumeux": 0.02,
+      "prov_gorge_du_silence": 0.02,
+      "prov_vergers_ouest": 0.02,
+      "prov_relais_poste_maria": 0.02
+    },
+    "expedition_base": "prov_shiganshina",
+    "events_mode": "canon_fidele",
+    "garrisons": {
+      "prov_rose_nord": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_est": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_sud": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_ouest": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_sina_nord": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_est": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_est": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_sud": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_ouest": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1000
+      },
+      "prov_trost": {
+        "org": "garrison",
+        "soldiers": 2500
+      },
+      "prov_stohess": {
+        "org": "military_police",
+        "soldiers": 1500
+      },
+      "prov_mitras": {
+        "org": "military_police",
+        "soldiers": 1000
+      },
+      "prov_palais_royal": {
+        "org": "military_police",
+        "soldiers": 500
+      },
+      "prov_qg_corps": {
+        "org": "survey_corps",
+        "soldiers": 300
+      },
+      "prov_camp_entrainement": {
+        "org": "training_corps",
+        "soldiers": 400
+      }
+    },
+    "buildings": {
+      "prov_trost": [
+        "bld_grenier",
+        "bld_depot_gaz",
+        "bld_marche"
+      ],
+      "prov_karanes": [
+        "bld_marche"
+      ],
+      "prov_champs_du_centre": [
+        "bld_ferme",
+        "bld_grenier"
+      ],
+      "prov_forges_rose": [
+        "bld_forge",
+        "bld_atelier_odm"
+      ],
+      "prov_poudriere_rose": [
+        "bld_poudriere"
+      ],
+      "prov_mitras": [
+        "bld_grenier",
+        "bld_marche"
+      ],
+      "prov_stohess": [
+        "bld_marche"
+      ],
+      "prov_ville_usine": [
+        "bld_mine_glace",
+        "bld_fabrique_gaz"
+      ]
+    },
+    "stocks": {
+      "food": 600000,
+      "gas": 40000,
+      "steel": 15000,
+      "iceburst": 4000,
+      "powder": 6000,
+      "horses": 6000,
+      "manpower": 16000,
+      "coal": 3000,
+      "gold": 60000
+    },
+    "rationing": "normal",
+    "morale": 55,
+    "stability": 55,
+    "population_total": 900000,
+    "production_mult": {
+      "food": 3.2
+    },
+    "production_note_key": "scn.854.production",
+    "refugee_share": {},
+    "deceased": [
+      "char_bertholdt_hoover",
+      "char_eld",
+      "char_erwin_smith",
+      "char_gelgar",
+      "char_gunther",
+      "char_hannes",
+      "char_kenny_ackerman",
+      "char_mike_zacharias",
+      "char_nanaba",
+      "char_oluo",
+      "char_petra",
+      "char_rod_reiss",
+      "char_ymir"
+    ],
+    "shifter_holders": {
+      "shifter_assaillant": {
+        "character": "char_eren_yeager",
+        "faction": "paradis",
+        "since": 845,
+        "since_canon": "C"
+      },
+      "shifter_fondateur": {
+        "character": "char_eren_yeager",
+        "faction": "paradis",
+        "since": 845,
+        "since_canon": "C"
+      },
+      "shifter_colossal": {
+        "character": "char_armin_arlert",
+        "faction": "paradis",
+        "since": 850,
+        "since_canon": "C"
+      },
+      "shifter_cuirasse": {
+        "character": "char_reiner_braun",
+        "faction": "marley",
+        "since": 843,
+        "since_canon": "?"
+      },
+      "shifter_feminin": {
+        "character": "char_annie_leonhart",
+        "faction": "inconnu",
+        "since": 843,
+        "since_canon": "?"
+      },
+      "shifter_bestial": {
+        "character": "char_zeke_yeager",
+        "faction": "marley",
+        "since": 842,
+        "since_canon": "C"
+      },
+      "shifter_machoire": {
+        "character": "char_porco_galliard",
+        "faction": "marley",
+        "since": 850,
+        "since_canon": "?"
+      },
+      "shifter_charrette": {
+        "character": "char_pieck_finger",
+        "faction": "marley",
+        "since": 843,
+        "since_canon": "?"
+      },
+      "shifter_marteau": {
+        "character": "char_lara_tybur",
+        "faction": "marley",
+        "since": 845,
+        "since_canon": "?"
+      }
+    },
+    "revealed_secrets": [
+      "secret_eren_yeager",
+      "secret_annie_leonhart",
+      "secret_ymir",
+      "secret_historia_reiss",
+      "secret_reiner_braun",
+      "secret_bertholdt_hoover",
+      "secret_zeke_yeager"
+    ],
+    "flags": {
+      "eren_titan_known": true,
+      "annie_crystallized": true,
+      "infiltrators_exposed": true,
+      "ymir_left": true,
+      "colossal_inherited": true,
+      "armin_colossal": true,
+      "historia_queen": true
+    },
+    "world": {
+      "playable": [
+        "fac_paradis",
+        "fac_marley"
+      ],
+      "control": {},
+      "formations": {
+        "wprov_paradis": [
+          {
+            "formation": "form_corps_paradis",
+            "count": 6
+          },
+          {
+            "formation": "form_canons_mur",
+            "count": 4
+          }
+        ],
+        "wprov_fort_slava": [
+          {
+            "formation": "form_infanterie_ligne",
+            "count": 6
+          },
+          {
+            "formation": "form_artillerie",
+            "count": 3
+          },
+          {
+            "formation": "form_mitrailleurs",
+            "count": 2
+          },
+          {
+            "formation": "form_section_guerriers",
+            "count": 1
+          }
+        ],
+        "wprov_raffineries_sud": [
+          {
+            "formation": "form_infanterie_ligne",
+            "count": 3
+          },
+          {
+            "formation": "form_artillerie",
+            "count": 1
+          }
+        ],
+        "wprov_liberio": [
+          {
+            "formation": "form_infanterie_ligne",
+            "count": 2
+          },
+          {
+            "formation": "form_police_internement",
+            "count": 2
+          }
+        ],
+        "wprov_port_liberio": [
+          {
+            "formation": "form_cuirasses",
+            "count": 2
+          },
+          {
+            "formation": "form_croiseurs",
+            "count": 3
+          },
+          {
+            "formation": "form_transports",
+            "count": 2
+          }
+        ],
+        "wprov_aerodrome_central": [
+          {
+            "formation": "form_chasse",
+            "count": 3
+          },
+          {
+            "formation": "form_bombardement",
+            "count": 2
+          },
+          {
+            "formation": "form_dirigeable",
+            "count": 1
+          }
+        ],
+        "wprov_capitale_marley": [
+          {
+            "formation": "form_infanterie_ligne",
+            "count": 3
+          },
+          {
+            "formation": "form_antiaerien",
+            "count": 1
+          },
+          {
+            "formation": "form_services_secrets",
+            "count": 1
+          }
+        ],
+        "wprov_colonies_sud": [
+          {
+            "formation": "form_troupes_coloniales",
+            "count": 3
+          }
+        ],
+        "wprov_colonies_nord": [
+          {
+            "formation": "form_troupes_coloniales",
+            "count": 2
+          }
+        ],
+        "wprov_forteresse_passage": [
+          {
+            "formation": "form_infanterie_alliee",
+            "count": 6
+          },
+          {
+            "formation": "form_cavalerie_alliee",
+            "count": 2
+          }
+        ],
+        "wprov_cote_voiliers": [
+          {
+            "formation": "form_navires_coalition",
+            "count": 4
+          }
+        ],
+        "wprov_aerodrome_allie": [
+          {
+            "formation": "form_aviation_alliee",
+            "count": 2
+          }
+        ],
+        "wprov_qg_coalition": [
+          {
+            "formation": "form_infanterie_alliee",
+            "count": 3
+          },
+          {
+            "formation": "form_renseignement_conjoint",
+            "count": 1
+          }
+        ],
+        "wprov_capitale_hizuru": [
+          {
+            "formation": "form_garde_clan",
+            "count": 3
+          }
+        ],
+        "wprov_port_hizuru": [
+          {
+            "formation": "form_marine_hizuru",
+            "count": 2
+          }
+        ]
+      },
+      "wars": [
+        [
+          "fac_marley",
+          "fac_allies"
+        ]
+      ],
+      "treaties": [
+        {
+          "kind": "commerce",
+          "a": "fac_paradis",
+          "b": "fac_hizuru"
+        }
+      ],
+      "hizuru_lean": 15
+    },
+    "politics": {
+      "player": "char_darius_zackly",
+      "legitimacy": 58,
+      "political_capital": 40,
+      "roles": {
+        "role_stratege": "char_dot_pixis",
+        "role_intendant": "char_elise_brandt",
+        "role_renseignement": "char_kaspar_lind",
+        "role_tresorier": "char_conrad_vehl",
+        "role_ordre": "char_nile_dok",
+        "role_religieux": "char_pasteur_nick",
+        "role_scientifique": "char_hange_zoe",
+        "role_medecin": "char_ilse_kruger_moll",
+        "role_diplomate": null,
+        "role_presse": "char_ottilie_brandauer",
+        "role_juriste": "char_hartmut_kessel",
+        "role_instructeur": "char_keith_shadis",
+        "role_titans": "char_moblit_berner",
+        "role_murs": "char_wendel_sauer",
+        "role_transports": "char_maren_voss",
+        "role_archiviste": "char_ida_lorenz",
+        "role_confident": "char_theodor_brahm",
+        "role_chef_cabinet": "char_friedrich_amsel"
+      },
+      "org_leaders": {
+        "org_survey_corps": "char_hange_zoe",
+        "org_garrison": "char_dot_pixis",
+        "org_military_police": "char_nile_dok",
+        "org_training_corps": "char_keith_shadis",
+        "org_culte": "char_pasteur_nick",
+        "org_cabinet": "char_darius_zackly",
+        "org_cour": "char_historia_reiss",
+        "org_guildes": "char_conrad_vehl"
+      },
+      "budget": {
+        "org_survey_corps": 15,
+        "org_garrison": 55,
+        "org_military_police": 22,
+        "org_training_corps": 8
+      },
+      "laws": [],
+      "cabinet_extra": [
+        "char_margarethe_von_alt"
+      ],
+      "org_influence": {
+        "org_survey_corps": 35,
+        "org_garrison": 60,
+        "org_military_police": 65,
+        "org_training_corps": 30,
+        "org_culte": 60,
+        "org_cabinet": 70,
+        "org_cour": 65,
+        "org_guildes": 50
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Scénario 854 (05 §5 P7) : 1er jour de 854, avant Fort Slava (E53). Guerre du Moyen-Orient en cours (12 E50, C). Morts de 850 (11 §3, errata) et d'Ymir (dévorée par Porco, 11 §4 : date « ? ») ; porteurs de 854 (11 §4 ; dates « ? » quand 11 le dit) ; Hange commande le Corps (C) ; Historia reine (12 E36, C). Wall Maria reprise (12 E44, C) ; Titans de l'île presque éliminés : « ? » (12 E44). Stocks, forces, relations et penchant d'Hizuru : A ; commerce Paradis–Hizuru : A (12 E48, E51)."
+  }
+]

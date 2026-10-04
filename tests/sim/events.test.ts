@@ -63,7 +63,10 @@ describe("moteur d'événements : Canon fidèle (AC5-02)", () => {
   });
 
   it("révélations : les six secrets sont révélés par E12, E22 et E27 ; deux Titans capturés à Trost (E11)", () => {
-    for (const s of Object.values(canonYear.intel?.secrets ?? {})) expect(s.revealed).toBe(true);
+    const six = ["secret_eren_yeager", "secret_annie_leonhart", "secret_ymir", "secret_historia_reiss", "secret_reiner_braun", "secret_bertholdt_hoover"];
+    for (const id of six) expect(canonYear.intel?.secrets[id]?.revealed, id).toBe(true);
+    // Les porteurs de Marley (P7) restent inconnus de Paradis en 850.
+    expect(canonYear.intel?.secrets["secret_pieck_finger"]?.revealed ?? false).toBe(false);
     expect(canonYear.research?.captured).toBe(2);
   });
 });

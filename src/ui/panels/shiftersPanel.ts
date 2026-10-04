@@ -6,6 +6,7 @@ import { secretOf } from "../../sim/intel/intel";
 import { founderLock, inheritCosts, inheritProblem, retireProblem, yearsLeft } from "../../sim/shifters/shifters";
 import type { ShifterSlot, ShiftersState } from "../../sim/shifters/shifters";
 import { skirmishSetup } from "../../sim/tactical/setup";
+import { isDomestic } from "../../sim/politics/vocabulary";
 import type { GameState } from "../../sim/core/state";
 import { button, displayName, el, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
@@ -114,7 +115,7 @@ export class ShiftersPanel implements Panel {
     box.append(el("h5", "", t("shifters.inherit")));
     const sel = el("select", "plan-choix");
     sel.dataset["heir"] = d.id;
-    const candidates = [...(this.ctx.world.politics?.characters.values() ?? [])].filter((c) => c.id !== slot.holder && pol.characters[c.id]?.alive && c.active_from <= s.date.year && c.faction !== "marley").sort((a, b) => displayName(a).localeCompare(displayName(b), "fr"));
+    const candidates = [...(this.ctx.world.politics?.characters.values() ?? [])].filter((c) => c.id !== slot.holder && pol.characters[c.id]?.alive && c.active_from <= s.date.year && isDomestic(c)).sort((a, b) => displayName(a).localeCompare(displayName(b), "fr"));
     const chosen = this.heir.get(d.id) ?? candidates[0]?.id ?? "";
     for (const c of candidates) {
       const o = el("option", "", displayName(c));

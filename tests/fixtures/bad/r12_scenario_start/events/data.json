@@ -1,0 +1,44 @@
+[
+  {
+    "id": "evt_850_trost_breach",
+    "code": "E10",
+    "year_min": 850,
+    "window": {
+      "after": null
+    },
+    "location": "prov_trost",
+    "text_key": "evt.850.trost_breach",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_utgard_battle",
+    "code": "E26",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_trost_breach"
+    },
+    "location": "prov_utgard",
+    "text_key": "evt.850.utgard_battle",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_police_tech_seized",
+    "code": "E37",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_utgard_battle"
+    },
+    "text_key": "evt.850.police_tech_seized",
+    "canon": "C"
+  },
+  {
+    "id": "evt_850_erwin_charge",
+    "code": "E41",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_police_tech_seized"
+    },
+    "text_key": "evt.850.erwin_charge",
+    "canon": "C"
+  }
+]

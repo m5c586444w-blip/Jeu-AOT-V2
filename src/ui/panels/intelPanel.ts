@@ -1,4 +1,5 @@
 import { t } from "../../i18n";
+import { isDomestic } from "../../sim/politics/vocabulary";
 import { toAbsoluteDay, fromAbsoluteDay } from "../../sim/core/time";
 import { agentSlots, INTEL_OPS, recruitProblem } from "../../sim/intel/intel";
 import type { Agent, IntelOp, IntelReport, IntelState } from "../../sim/intel/intel";
@@ -113,7 +114,7 @@ export class IntelPanel implements Panel {
     const w = this.ctx.world;
     const s = this.ctx.state();
     if (op === "surveiller") return w.provinces.filter((p) => p.kind !== "segment" && s.strategic?.provinces[p.id]?.control !== "paradis").map((p) => [p.id, provinceName(w, p.id)]);
-    if (op === "enqueter") return Object.entries(s.politics?.characters ?? {}).filter(([id, c]) => c.alive && id !== s.politics?.player && (w.politics?.characters.get(id)?.active_from ?? 9999) <= s.date.year).map(([id]) => [id, displayName(w.politics?.characters.get(id))]);
+    if (op === "enqueter") return Object.entries(s.politics?.characters ?? {}).filter(([id, c]) => c.alive && id !== s.politics?.player && (w.politics?.characters.get(id)?.active_from ?? 9999) <= s.date.year && isDomestic(w.politics?.characters.get(id) ?? { faction: "marley" })).map(([id]) => [id, displayName(w.politics?.characters.get(id))]);
     return [...(w.politics?.organisations.values() ?? [])].map((o) => [o.id, t(o.name_key)]);
   }
 

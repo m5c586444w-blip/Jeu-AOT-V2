@@ -2,7 +2,7 @@ import { COLLECTION_NAMES } from "./collections";
 import type { CollectionName } from "./collections";
 
 /**
- * Règles de cohérence canon R1–R11 (fichier 14 §3, fichier 11 §8 ; R7 : D-49 ; R8–R10 : P5, D-64 ; R11 : P6, 11 §4). Fonctions pures sur des données brutes.
+ * Règles de cohérence canon R1–R12 (fichier 14 §3, fichier 11 §8 ; R7 : D-49 ; R8–R10 : P5, D-64 ; R11 : P6, 11 §4 ; R12 : P7). Fonctions pures sur des données brutes.
  * Les années incertaines se comparent par `year_min` (errata utilisateur).
  */
 export interface RawEntry {
@@ -17,7 +17,7 @@ export function emptyRaw(): RawData {
   return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
-export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11";
+export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11" | "R12";
 
 export interface Violation {
   rule: RuleId;
@@ -133,7 +133,36 @@ export function checkCanon(data: RawData): Violation[] {
 
   checkEventEffects(data, push);
   checkShifterChains(data, push);
+  checkScenarioStart(data, push);
   return out;
+}
+
+/**
+ * R12 — départ d'un scénario (P7) : tout personnage dont l'événement de mort est antérieur à l'année du scénario
+ * est déclaré mort au départ, et aucun autre canon ne l'est sans raison ; chaque porteur de départ figure dans
+ * la chaîne de son Titan (11 §4), à une époque compatible.
+ */
+function checkScenarioStart(data: RawData, push: (rule: RuleId, e: RawEntry, message: string) => void): void {
+  const events = new Map(data.events.map((e) => [e.id, e]));
+  const chains = new Map(data.shifters.map((x) => [x.id, objList(x.v["chain"])]));
+  for (const sc of data.scenarios) {
+    const y = num((sc.v["start"] as Obj | undefined)?.["year"]);
+    const deceased = new Set(strList(sc.v["deceased"]));
+    if (y === undefined || (!sc.v["deceased"] && !sc.v["shifter_holders"])) continue;
+    for (const c of data.characters) {
+      const ev = str(c.v["death_event"]);
+      const ey = ev ? num(events.get(ev)?.v["year_min"]) : undefined;
+      if (ey !== undefined && ey < y && !deceased.has(c.id)) push("R12", sc, `${c.id} meurt à ${ev ?? ""} (${ey}) mais n'est pas déclaré mort au départ (${y})`);
+    }
+    for (const [sh, h] of Object.entries((sc.v["shifter_holders"] ?? {}) as Record<string, Obj>)) {
+      const who = str(h["character"]);
+      if (!who) continue;
+      const link = (chains.get(sh) ?? []).find((c) => c["holder"] === who);
+      if (!link) push("R12", sc, `${who} porte ${sh} au départ sans figurer dans sa chaîne (11 §4)`);
+      else if ((num(link["to"]) ?? 9999) < y) push("R12", sc, `${who} porte ${sh} au départ alors que sa chaîne l'arrête en ${String(link["to"])}`);
+      if (deceased.has(who)) push("R12", sc, `${who} porte ${sh} au départ mais est déclaré mort`);
+    }
+  }
 }
 
 /**

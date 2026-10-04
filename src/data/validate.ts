@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
-import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, TacticalMap, Tech, Shifter, TitanClass, TitanType, Trait, Unit } from "./schemas";
+import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, TacticalMap, Tech, Shifter, WorldProvince, Faction, Formation, TitanClass, TitanType, Trait, Unit } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
 export interface DataIssue {
@@ -31,13 +31,16 @@ export interface GameData {
   names: NameList[];
   titan_types: TitanType[];
   shifters: Shifter[];
+  world_provinces: WorldProvince[];
+  factions: Faction[];
+  formations: Formation[];
   tactical_maps: TacticalMap[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], world_provinces: [], factions: [], formations: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -96,6 +99,15 @@ export function checkReferences(data: GameData): DataIssue[] {
     for (const c of sh.chain) if (c.holder) ref(sh.id, "chain", c.holder);
     if (sh.holder_850.character) ref(sh.id, "holder_850", sh.holder_850.character);
   }
+  for (const wp of data.world_provinces) {
+    if (wp.faction !== "mer") ref(wp.id, "faction", wp.faction);
+    for (const a of wp.adjacent) ref(wp.id, "adjacent", a);
+  }
+  for (const f of data.factions) {
+    ref(f.id, "leader", f.leader);
+    for (const o of Object.keys(f.relations)) ref(f.id, "relations", o);
+  }
+  for (const fo of data.formations) ref(fo.id, "faction", fo.faction);
   for (const r of data.roles) ref(r.id, "proposal", r.proposal);
   const modifierRefs = (owner: string, target: string): void => {
     const m = /:(str_[a-z_]+|org_[a-z_]+)$/.exec(target);
@@ -120,6 +132,26 @@ export function checkReferences(data: GameData): DataIssue[] {
     }
     for (const id of [...Object.keys(sc.control), ...Object.keys(sc.control_canon), ...Object.keys(sc.garrisons), ...Object.keys(sc.buildings), ...Object.keys(sc.titan_density)]) ref(sc.id, "province", id);
     ref(sc.id, "expedition_base", sc.expedition_base);
+    for (const d of sc.deceased) ref(sc.id, "deceased", d);
+    for (const [sh, h] of Object.entries(sc.shifter_holders)) {
+      ref(sc.id, "shifter_holders", sh);
+      if (h.character) ref(sc.id, "shifter_holders", h.character);
+    }
+    if (sc.world) {
+      for (const f of sc.world.playable) ref(sc.id, "world.playable", f);
+      for (const [p, f] of Object.entries(sc.world.control)) {
+        ref(sc.id, "world.control", p);
+        ref(sc.id, "world.control", f);
+      }
+      for (const [p, list] of Object.entries(sc.world.formations)) {
+        ref(sc.id, "world.formations", p);
+        for (const x of list) ref(sc.id, "world.formations", x.formation);
+      }
+      for (const [a, b] of sc.world.wars) {
+        ref(sc.id, "world.wars", a);
+        ref(sc.id, "world.wars", b);
+      }
+    }
     for (const ids of Object.values(sc.buildings)) for (const b of ids) ref(sc.id, "buildings", b);
   }
   return issues;

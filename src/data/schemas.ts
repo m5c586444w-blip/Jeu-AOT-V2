@@ -14,6 +14,10 @@ const year = z.number().int().min(0).max(2000);
 const idOf = (prefix: string) => z.string().regex(new RegExp(`^${prefix}_[a-z0-9_]+$`), `identifiant attendu au format ${prefix}_xxx (snake_case)`);
 
 export const ProvinceIdSchema = idOf("prov");
+export const FactionIdSchema = idOf("fac");
+export const WorldProvinceIdSchema = idOf("wprov");
+export const FormationIdSchema = idOf("form");
+
 export const CharacterIdSchema = idOf("char");
 export const TechIdSchema = idOf("tech");
 export const EventIdSchema = idOf("evt");
@@ -111,6 +115,27 @@ export const ScenarioSchema = z
     production_note_key: z.string().optional(),
     /** Part de réfugiés dans la population, par région. */
     refugee_share: z.record(z.string(), z.number().min(0).max(1)).default({}),
+    /** P7 : morts avant le départ du scénario (854), avec l'événement ou la raison. */
+    deceased: z.array(CharacterIdSchema).default([]),
+    /** P7 : porteurs au départ du scénario, à la place de `holder_850`. */
+    shifter_holders: z.record(z.string().regex(/^shifter_[a-z_]+$/), z.object({ character: CharacterIdSchema.nullable(), faction: z.enum(["paradis", "marley", "inconnu", "perdu"]), since: year, since_canon: CanonSchema }).strict()).default({}),
+    /** P7 : secrets déjà percés au départ. */
+    revealed_secrets: z.array(z.string()).default([]),
+    /** P7 : drapeaux d'événements au départ. */
+    flags: z.record(z.string(), z.boolean()).default({}),
+    /** P7 : couche du monde (nations, formations, guerres). */
+    world: z
+      .object({
+        playable: z.array(FactionIdSchema).min(1),
+        control: z.record(WorldProvinceIdSchema, FactionIdSchema).default({}),
+        formations: z.record(WorldProvinceIdSchema, z.array(z.object({ formation: FormationIdSchema, count: z.number().int().min(1) }).strict())).default({}),
+        wars: z.array(z.tuple([FactionIdSchema, FactionIdSchema])).default([]),
+        treaties: z.array(z.object({ kind: z.enum(["alliance", "non_agression", "commerce", "renseignement"]), a: FactionIdSchema, b: FactionIdSchema }).strict()).default([]),
+        /** Neutralité crédible d'Hizuru (07 H01) : −100 = Marley, +100 = Paradis. */
+        hizuru_lean: z.number().min(-100).max(100).default(0),
+      })
+      .strict()
+      .optional(),
     politics: z
       .object({
         player: CharacterIdSchema,
@@ -408,6 +433,77 @@ export const ShifterSchema = z
   })
   .strict();
 
+/** P7 — nations du monde (02 §11, §13, §14). */
+export const PERSONALITIES = ["prudent", "agressif", "ideologue", "pragmatique", "opportuniste"] as const;
+export const FORMATION_KINDS = ["infanterie", "assaut", "artillerie", "mitrailleurs", "cavalerie", "blindes", "train_blinde", "chasse", "bombardement", "dirigeable", "cuirasses", "croiseurs", "transports", "police", "guerriers", "espions", "coloniaux", "antiaerien", "garde", "marine_cotiere", "ingenieurs"] as const;
+const relationAxes = z.object({ trust: z.number().min(-100).max(100), interest: z.number().min(-100).max(100), fear: z.number().min(0).max(100), ideology: z.number().min(-100).max(100) }).strict();
+
+/** data/world_provinces — les 60 provinces du monde (06 §3) et Paradis, en nœuds schématiques [A]. */
+export const WorldProvinceSchema = z
+  .object({
+    id: WorldProvinceIdSchema,
+    code: z.string().min(1),
+    name_key: z.string().min(1),
+    faction: z.union([FactionIdSchema, z.literal("mer")]),
+    type: z.enum(["urbain", "port", "fort", "militaire", "industriel", "rural", "colonie", "foret", "special", "mer", "ile"]),
+    /** Production mensuelle [A] : industrie, nourriture, hommes. */
+    industry: z.number().min(0).default(0),
+    food: z.number().min(0).default(0),
+    manpower: z.number().min(0).default(0),
+    coastal: z.boolean().default(false),
+    rail: z.boolean().default(false),
+    /** Fortification (0–1) : bonus de défense. */
+    fort: unit.default(0),
+    /** Position schématique sur l'atlas du monde (0–1000) [A]. */
+    at: z.tuple([z.number(), z.number()]),
+    adjacent: z.array(WorldProvinceIdSchema).default([]),
+    ...canonFields,
+  })
+  .strict();
+
+/** data/factions — nations jouables ou non (02 §13–14 ; 07 ; 11 §5). */
+export const FactionSchema = z
+  .object({
+    id: FactionIdSchema,
+    name_key: z.string().min(1),
+    playable: z.boolean().default(false),
+    personality: z.enum(PERSONALITIES),
+    /** Attracteurs canon (02 §14) : orientent l'IA sans la scénariser. */
+    attractors: z.array(z.enum(["fondateur", "garanties", "survie", "commerce", "revanche", "verite", "domination"])).min(1),
+    objectives: z.array(z.string().min(1)).min(1),
+    relations: z.record(FactionIdSchema, relationAxes).default({}),
+    war_support: z.number().min(0).max(100),
+    stability: z.number().min(0).max(100),
+    industry_stock: z.number().min(0).default(0),
+    manpower_stock: z.number().min(0).default(0),
+    leader: CharacterIdSchema.optional(),
+    ...canonFields,
+  })
+  .strict();
+
+/** data/formations — formations de la guerre moderne (10 §1.2–1.3) [A]. */
+export const FormationSchema = z
+  .object({
+    id: FormationIdSchema,
+    code: z.string().min(1),
+    name_key: z.string().min(1),
+    faction: FactionIdSchema,
+    kind: z.enum(FORMATION_KINDS),
+    domain: z.enum(["terre", "air", "mer"]),
+    attack: z.number().min(0),
+    defense: z.number().min(0),
+    /** Coût de levée et entretien mensuel (industrie, hommes). */
+    cost: z.object({ industry: z.number().min(0), manpower: z.number().min(0) }).strict(),
+    upkeep: z.number().min(0),
+    build_days: z.number().int().min(0),
+    /** Provinces franchies par semaine. */
+    speed: z.number().min(0),
+    /** Désactivée tant que son existence n'est pas confirmée (blindés `?`). */
+    enabled: z.boolean().default(true),
+    ...canonFields,
+  })
+  .strict();
+
 /** data/titan_types — types de Titans purs du combat tactique (F-TIT-01) : classe (03 §5.2) × comportement [A]. */
 export const TitanTypeSchema = z
   .object({
@@ -447,6 +543,9 @@ export const TacticalMapSchema = z
 export type Province = z.infer<typeof ProvinceSchema>;
 export type TitanType = z.infer<typeof TitanTypeSchema>;
 export type Shifter = z.infer<typeof ShifterSchema>;
+export type WorldProvince = z.infer<typeof WorldProvinceSchema>;
+export type Faction = z.infer<typeof FactionSchema>;
+export type Formation = z.infer<typeof FormationSchema>;
 export type ShifterAbility = z.infer<typeof ShifterAbilitySchema>;
 export type TacticalMap = z.infer<typeof TacticalMapSchema>;
 export type MapBrick = z.infer<typeof brick>;
@@ -485,6 +584,9 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   titan_types: TitanTypeSchema,
   shifters: ShifterSchema,
   tactical_maps: TacticalMapSchema,
+  world_provinces: WorldProvinceSchema,
+  factions: FactionSchema,
+  formations: FormationSchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

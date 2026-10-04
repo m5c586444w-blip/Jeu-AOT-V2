@@ -10,6 +10,7 @@ import { characterDies, DEATH_CAUSES, stressCharacter } from "../politics/charac
 import type { DeathCause } from "../politics/characters";
 import type { PoliticalState } from "../politics/state";
 import type { ResearchState } from "../research/research";
+import { isDomestic } from "../politics/vocabulary";
 import { inherit } from "../shifters/shifters";
 import type { ShiftersState } from "../shifters/shifters";
 import { pushLog } from "../strategic/economy";
@@ -394,7 +395,8 @@ function genericTick(ctx: EventCtx, day: number): void {
 function pickSubject(ctx: EventCtx, e: EventDef, rng: Rng): PendingEvent["subject"] | null {
   if (!e.subject) return {};
   if (e.subject === "personnage") {
-    const list = Object.entries(ctx.pol?.characters ?? {}).filter(([id, c]) => c.alive && id !== ctx.pol?.player && (ctx.world.politics?.characters.get(id)?.active_from ?? 9999) <= ctx.date.year).map(([id]) => id).sort();
+    const def = (id: string) => ctx.world.politics?.characters.get(id);
+    const list = Object.entries(ctx.pol?.characters ?? {}).filter(([id, c]) => c.alive && id !== ctx.pol?.player && (def(id)?.active_from ?? 9999) <= ctx.date.year && isDomestic(def(id) ?? { faction: "marley" })).map(([id]) => id).sort();
     const c = list[Math.floor(rng.next() * list.length)];
     return c ? { character: c } : null;
   }

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "scn_test_854",
+    "name_key": "scn.test",
+    "faction": "paradis",
+    "start": { "year": 854, "day": 1 },
+    "default_control": "paradis",
+    "stocks": {},
+    "rationing": "normal",
+    "morale": 50,
+    "stability": 50,
+    "deceased": [],
+    "canon": "A"
+  }
+]

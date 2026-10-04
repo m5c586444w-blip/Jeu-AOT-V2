@@ -1,0 +1,169 @@
+[
+  {
+    "id": "fac_paradis",
+    "name_key": "fac.paradis",
+    "playable": true,
+    "personality": "prudent",
+    "attractors": [
+      "survie",
+      "verite"
+    ],
+    "objectives": [
+      "obj.survivre",
+      "obj.accord_exterieur",
+      "obj.garder_fondateur"
+    ],
+    "relations": {
+      "fac_marley": {
+        "trust": -80,
+        "interest": -20,
+        "fear": 70,
+        "ideology": -90
+      },
+      "fac_hizuru": {
+        "trust": 10,
+        "interest": 40,
+        "fear": 10,
+        "ideology": 0
+      },
+      "fac_allies": {
+        "trust": -20,
+        "interest": 0,
+        "fear": 30,
+        "ideology": -40
+      }
+    },
+    "war_support": 60,
+    "stability": 55,
+    "industry_stock": 0,
+    "manpower_stock": 0,
+    "leader": "char_darius_zackly",
+    "canon": "A",
+    "notes_canon": "Objectifs : 02 §13 (exemples). Relations de départ en 854 : A."
+  },
+  {
+    "id": "fac_marley",
+    "name_key": "fac.marley",
+    "playable": true,
+    "personality": "agressif",
+    "attractors": [
+      "fondateur",
+      "domination"
+    ],
+    "objectives": [
+      "obj.recuperer_fondateur",
+      "obj.neutraliser_paradis",
+      "obj.stabiliser_empire"
+    ],
+    "relations": {
+      "fac_paradis": {
+        "trust": -90,
+        "interest": 60,
+        "fear": 40,
+        "ideology": -100
+      },
+      "fac_hizuru": {
+        "trust": -20,
+        "interest": 20,
+        "fear": 0,
+        "ideology": -20
+      },
+      "fac_allies": {
+        "trust": -60,
+        "interest": 10,
+        "fear": 20,
+        "ideology": -50
+      }
+    },
+    "war_support": 65,
+    "stability": 60,
+    "industry_stock": 400,
+    "manpower_stock": 300,
+    "leader": "char_willy_tybur",
+    "canon": "A",
+    "notes_canon": "Marley veut le Fondateur (02 §14, attracteur C) ; objectifs de 02 §13. Personnalité et chiffres : A."
+  },
+  {
+    "id": "fac_hizuru",
+    "name_key": "fac.hizuru",
+    "playable": false,
+    "personality": "pragmatique",
+    "attractors": [
+      "garanties",
+      "commerce",
+      "survie"
+    ],
+    "objectives": [
+      "obj.independance",
+      "obj.empecher_extermination",
+      "obj.pierre_glace"
+    ],
+    "relations": {
+      "fac_paradis": {
+        "trust": 10,
+        "interest": 60,
+        "fear": 10,
+        "ideology": 0
+      },
+      "fac_marley": {
+        "trust": -30,
+        "interest": 10,
+        "fear": 50,
+        "ideology": -20
+      },
+      "fac_allies": {
+        "trust": 0,
+        "interest": 10,
+        "fear": 10,
+        "ideology": 0
+      }
+    },
+    "war_support": 30,
+    "stability": 50,
+    "industry_stock": 100,
+    "manpower_stock": 50,
+    "leader": "char_kiyomi_azumabito",
+    "canon": "A",
+    "notes_canon": "Neutre intéressée, peut changer de camp (02 §11) ; en difficulté économique, convoite la pierre à éclatement de glace (11 §5, C)."
+  },
+  {
+    "id": "fac_allies",
+    "name_key": "fac.allies",
+    "playable": false,
+    "personality": "opportuniste",
+    "attractors": [
+      "revanche",
+      "survie"
+    ],
+    "objectives": [
+      "obj.vaincre_marley",
+      "obj.tenir_coalition"
+    ],
+    "relations": {
+      "fac_paradis": {
+        "trust": -30,
+        "interest": 0,
+        "fear": 30,
+        "ideology": -40
+      },
+      "fac_marley": {
+        "trust": -80,
+        "interest": 0,
+        "fear": 50,
+        "ideology": -60
+      },
+      "fac_hizuru": {
+        "trust": 0,
+        "interest": 10,
+        "fear": 0,
+        "ideology": 0
+      }
+    },
+    "war_support": 50,
+    "stability": 40,
+    "industry_stock": 200,
+    "manpower_stock": 200,
+    "canon": "A",
+    "notes_canon": "Coalition ennemie de Marley dans la guerre du Moyen-Orient (11 §5, C) ; fragile (02 §11)."
+  }
+]

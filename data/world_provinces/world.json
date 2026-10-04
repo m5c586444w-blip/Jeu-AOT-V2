@@ -1,0 +1,1515 @@
+[
+  {
+    "id": "wprov_capitale_marley",
+    "code": "MA01",
+    "name_key": "wprov.capitale_marley",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 30,
+    "food": 5,
+    "manpower": 40,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.3,
+    "at": [
+      250,
+      330
+    ],
+    "adjacent": [
+      "wprov_aerodrome_central",
+      "wprov_domaine_tybur",
+      "wprov_ministeres",
+      "wprov_quartier_affaires",
+      "wprov_ville_universitaire"
+    ],
+    "canon": "A",
+    "notes_canon": "Nom fictif (06 §3.1)."
+  },
+  {
+    "id": "wprov_liberio",
+    "code": "MA02",
+    "name_key": "wprov.liberio",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 15,
+    "food": 3,
+    "manpower": 20,
+    "coastal": true,
+    "rail": true,
+    "fort": 0.2,
+    "at": [
+      430,
+      380
+    ],
+    "adjacent": [
+      "wprov_academie_guerriers",
+      "wprov_artillerie_cotiere",
+      "wprov_liberio_internement",
+      "wprov_mer_interieure",
+      "wprov_plaines_est",
+      "wprov_port_liberio"
+    ],
+    "canon": "C",
+    "notes_canon": "Lieu canon (06 §3) ; position et production : A."
+  },
+  {
+    "id": "wprov_liberio_internement",
+    "code": "MA03",
+    "name_key": "wprov.liberio_internement",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 5,
+    "food": 2,
+    "manpower": 25,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      405,
+      410
+    ],
+    "adjacent": [
+      "wprov_academie_guerriers",
+      "wprov_arsenal_central",
+      "wprov_liberio"
+    ],
+    "canon": "C",
+    "notes_canon": "Lieu canon (06 §3) ; position et production : A."
+  },
+  {
+    "id": "wprov_fort_slava",
+    "code": "MA04",
+    "name_key": "wprov.fort_slava",
+    "faction": "fac_marley",
+    "type": "fort",
+    "industry": 2,
+    "food": 1,
+    "manpower": 5,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.8,
+    "at": [
+      470,
+      640
+    ],
+    "adjacent": [
+      "wprov_detroit_slava",
+      "wprov_forteresse_passage",
+      "wprov_raffineries_sud"
+    ],
+    "canon": "C",
+    "notes_canon": "Bastion côtier ; défaite de la flotte des Forces Alliées (06 §3.1, 12 E53)."
+  },
+  {
+    "id": "wprov_port_liberio",
+    "code": "MA05",
+    "name_key": "wprov.port_liberio",
+    "faction": "fac_marley",
+    "type": "port",
+    "industry": 10,
+    "food": 0,
+    "manpower": 5,
+    "coastal": true,
+    "rail": true,
+    "fort": 0.3,
+    "at": [
+      465,
+      360
+    ],
+    "adjacent": [
+      "wprov_artillerie_cotiere",
+      "wprov_chantiers_est",
+      "wprov_liberio",
+      "wprov_mer_interieure"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_academie_guerriers",
+    "code": "MA06",
+    "name_key": "wprov.academie_guerriers",
+    "faction": "fac_marley",
+    "type": "militaire",
+    "industry": 2,
+    "food": 0,
+    "manpower": 5,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      380,
+      330
+    ],
+    "adjacent": [
+      "wprov_arsenal_central",
+      "wprov_chantiers_est",
+      "wprov_liberio",
+      "wprov_liberio_internement",
+      "wprov_rail_nord"
+    ],
+    "canon": "C",
+    "notes_canon": "Formation des porteurs : concept C (06 §3.1)."
+  },
+  {
+    "id": "wprov_domaine_tybur",
+    "code": "MA07",
+    "name_key": "wprov.domaine_tybur",
+    "faction": "fac_marley",
+    "type": "fort",
+    "industry": 5,
+    "food": 2,
+    "manpower": 3,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.5,
+    "at": [
+      300,
+      290
+    ],
+    "adjacent": [
+      "wprov_acieries_nord",
+      "wprov_capitale_marley",
+      "wprov_rail_nord",
+      "wprov_ville_universitaire"
+    ],
+    "canon": "C",
+    "notes_canon": "Famille Tybur : concept C."
+  },
+  {
+    "id": "wprov_bassin_houiller",
+    "code": "MA08",
+    "name_key": "wprov.bassin_houiller",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 25,
+    "food": 1,
+    "manpower": 10,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      190,
+      230
+    ],
+    "adjacent": [
+      "wprov_acieries_nord",
+      "wprov_forets",
+      "wprov_mines_nord",
+      "wprov_ville_universitaire"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_acieries_nord",
+    "code": "MA09",
+    "name_key": "wprov.acieries_nord",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 28,
+    "food": 1,
+    "manpower": 10,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      260,
+      190
+    ],
+    "adjacent": [
+      "wprov_bassin_houiller",
+      "wprov_domaine_tybur",
+      "wprov_mines_nord",
+      "wprov_rail_nord"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_raffineries_sud",
+    "code": "MA10",
+    "name_key": "wprov.raffineries_sud",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 22,
+    "food": 1,
+    "manpower": 8,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      330,
+      560
+    ],
+    "adjacent": [
+      "wprov_fort_slava",
+      "wprov_plaines_est",
+      "wprov_rail_sud",
+      "wprov_vignobles_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_chantiers_est",
+    "code": "MA11",
+    "name_key": "wprov.chantiers_est",
+    "faction": "fac_marley",
+    "type": "port",
+    "industry": 20,
+    "food": 1,
+    "manpower": 8,
+    "coastal": true,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      500,
+      300
+    ],
+    "adjacent": [
+      "wprov_academie_guerriers",
+      "wprov_mer_interieure",
+      "wprov_port_liberio",
+      "wprov_rail_nord"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_aerodrome_central",
+    "code": "MA12",
+    "name_key": "wprov.aerodrome_central",
+    "faction": "fac_marley",
+    "type": "militaire",
+    "industry": 8,
+    "food": 1,
+    "manpower": 5,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      290,
+      400
+    ],
+    "adjacent": [
+      "wprov_arsenal_central",
+      "wprov_capitale_marley",
+      "wprov_espionnage_marley",
+      "wprov_quartier_affaires",
+      "wprov_rail_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_rail_nord",
+    "code": "MA13",
+    "name_key": "wprov.rail_nord",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 8,
+    "food": 2,
+    "manpower": 10,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      330,
+      240
+    ],
+    "adjacent": [
+      "wprov_academie_guerriers",
+      "wprov_acieries_nord",
+      "wprov_chantiers_est",
+      "wprov_domaine_tybur"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_rail_sud",
+    "code": "MA14",
+    "name_key": "wprov.rail_sud",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 8,
+    "food": 2,
+    "manpower": 10,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      290,
+      480
+    ],
+    "adjacent": [
+      "wprov_aerodrome_central",
+      "wprov_arsenal_central",
+      "wprov_camp_armee",
+      "wprov_camps_internement",
+      "wprov_plaines_est",
+      "wprov_raffineries_sud",
+      "wprov_vignobles_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_plaines_ouest",
+    "code": "MA15",
+    "name_key": "wprov.plaines_ouest",
+    "faction": "fac_marley",
+    "type": "rural",
+    "industry": 2,
+    "food": 30,
+    "manpower": 15,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      120,
+      360
+    ],
+    "adjacent": [
+      "wprov_camp_armee",
+      "wprov_forets",
+      "wprov_poudrieres_ouest",
+      "wprov_ville_universitaire"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_plaines_est",
+    "code": "MA16",
+    "name_key": "wprov.plaines_est",
+    "faction": "fac_marley",
+    "type": "rural",
+    "industry": 2,
+    "food": 28,
+    "manpower": 15,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      380,
+      460
+    ],
+    "adjacent": [
+      "wprov_arsenal_central",
+      "wprov_artillerie_cotiere",
+      "wprov_liberio",
+      "wprov_raffineries_sud",
+      "wprov_rail_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_vignobles_sud",
+    "code": "MA17",
+    "name_key": "wprov.vignobles_sud",
+    "faction": "fac_marley",
+    "type": "rural",
+    "industry": 3,
+    "food": 15,
+    "manpower": 8,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      230,
+      560
+    ],
+    "adjacent": [
+      "wprov_camps_internement",
+      "wprov_raffineries_sud",
+      "wprov_rail_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_mines_nord",
+    "code": "MA18",
+    "name_key": "wprov.mines_nord",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 20,
+    "food": 1,
+    "manpower": 8,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      170,
+      150
+    ],
+    "adjacent": [
+      "wprov_acieries_nord",
+      "wprov_bassin_houiller"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_forets",
+    "code": "MA19",
+    "name_key": "wprov.forets",
+    "faction": "fac_marley",
+    "type": "foret",
+    "industry": 8,
+    "food": 5,
+    "manpower": 6,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      110,
+      260
+    ],
+    "adjacent": [
+      "wprov_bassin_houiller",
+      "wprov_plaines_ouest"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_camp_armee",
+    "code": "MA20",
+    "name_key": "wprov.camp_armee",
+    "faction": "fac_marley",
+    "type": "militaire",
+    "industry": 3,
+    "food": 2,
+    "manpower": 20,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      200,
+      420
+    ],
+    "adjacent": [
+      "wprov_camps_internement",
+      "wprov_espionnage_marley",
+      "wprov_ministeres",
+      "wprov_plaines_ouest",
+      "wprov_poudrieres_ouest",
+      "wprov_rail_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_camps_internement",
+    "code": "MA21",
+    "name_key": "wprov.camps_internement",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 4,
+    "food": 2,
+    "manpower": 15,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      160,
+      480
+    ],
+    "adjacent": [
+      "wprov_camp_armee",
+      "wprov_rail_sud",
+      "wprov_vignobles_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_colonies_nord",
+    "code": "MA22",
+    "name_key": "wprov.colonies_nord",
+    "faction": "fac_marley",
+    "type": "colonie",
+    "industry": 10,
+    "food": 10,
+    "manpower": 20,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      330,
+      70
+    ],
+    "adjacent": [
+      "wprov_passage_nord"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_colonies_sud",
+    "code": "MA23",
+    "name_key": "wprov.colonies_sud",
+    "faction": "fac_marley",
+    "type": "colonie",
+    "industry": 10,
+    "food": 12,
+    "manpower": 20,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      120,
+      700
+    ],
+    "adjacent": [
+      "wprov_ocean_ouest",
+      "wprov_passage_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ville_universitaire",
+    "code": "MA24",
+    "name_key": "wprov.ville_universitaire",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 6,
+    "food": 2,
+    "manpower": 6,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      220,
+      300
+    ],
+    "adjacent": [
+      "wprov_bassin_houiller",
+      "wprov_capitale_marley",
+      "wprov_domaine_tybur",
+      "wprov_ministeres",
+      "wprov_plaines_ouest"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_quartier_affaires",
+    "code": "MA25",
+    "name_key": "wprov.quartier_affaires",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 12,
+    "food": 1,
+    "manpower": 4,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      270,
+      360
+    ],
+    "adjacent": [
+      "wprov_aerodrome_central",
+      "wprov_capitale_marley",
+      "wprov_espionnage_marley",
+      "wprov_ministeres"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_arsenal_central",
+    "code": "MA26",
+    "name_key": "wprov.arsenal_central",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 25,
+    "food": 1,
+    "manpower": 6,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      330,
+      420
+    ],
+    "adjacent": [
+      "wprov_academie_guerriers",
+      "wprov_aerodrome_central",
+      "wprov_liberio_internement",
+      "wprov_plaines_est",
+      "wprov_rail_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_poudrieres_ouest",
+    "code": "MA27",
+    "name_key": "wprov.poudrieres_ouest",
+    "faction": "fac_marley",
+    "type": "industriel",
+    "industry": 18,
+    "food": 1,
+    "manpower": 5,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      110,
+      430
+    ],
+    "adjacent": [
+      "wprov_camp_armee",
+      "wprov_plaines_ouest"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_artillerie_cotiere",
+    "code": "MA28",
+    "name_key": "wprov.artillerie_cotiere",
+    "faction": "fac_marley",
+    "type": "fort",
+    "industry": 4,
+    "food": 0,
+    "manpower": 4,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.6,
+    "at": [
+      520,
+      420
+    ],
+    "adjacent": [
+      "wprov_liberio",
+      "wprov_mer_interieure",
+      "wprov_plaines_est",
+      "wprov_port_liberio"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_espionnage_marley",
+    "code": "MA29",
+    "name_key": "wprov.espionnage_marley",
+    "faction": "fac_marley",
+    "type": "special",
+    "industry": 2,
+    "food": 0,
+    "manpower": 2,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      240,
+      400
+    ],
+    "adjacent": [
+      "wprov_aerodrome_central",
+      "wprov_camp_armee",
+      "wprov_ministeres",
+      "wprov_quartier_affaires"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ministeres",
+    "code": "MA30",
+    "name_key": "wprov.ministeres",
+    "faction": "fac_marley",
+    "type": "urbain",
+    "industry": 6,
+    "food": 1,
+    "manpower": 4,
+    "coastal": false,
+    "rail": true,
+    "fort": 0.0,
+    "at": [
+      230,
+      350
+    ],
+    "adjacent": [
+      "wprov_camp_armee",
+      "wprov_capitale_marley",
+      "wprov_espionnage_marley",
+      "wprov_quartier_affaires",
+      "wprov_ville_universitaire"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_capitale_hizuru",
+    "code": "HZ01",
+    "name_key": "wprov.capitale_hizuru",
+    "faction": "fac_hizuru",
+    "type": "urbain",
+    "industry": 10,
+    "food": 5,
+    "manpower": 10,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.3,
+    "at": [
+      900,
+      150
+    ],
+    "adjacent": [
+      "wprov_chantiers_hizuru",
+      "wprov_diplomatique_hizuru",
+      "wprov_domaine_azumabito",
+      "wprov_passage_nord",
+      "wprov_port_hizuru"
+    ],
+    "canon": "A",
+    "notes_canon": "Nom fictif (06 §3.2)."
+  },
+  {
+    "id": "wprov_domaine_azumabito",
+    "code": "HZ02",
+    "name_key": "wprov.domaine_azumabito",
+    "faction": "fac_hizuru",
+    "type": "fort",
+    "industry": 6,
+    "food": 3,
+    "manpower": 4,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.4,
+    "at": [
+      935,
+      110
+    ],
+    "adjacent": [
+      "wprov_capitale_hizuru",
+      "wprov_chantiers_hizuru",
+      "wprov_diplomatique_hizuru",
+      "wprov_plaines_hizuru"
+    ],
+    "canon": "C",
+    "notes_canon": "Lieu canon (06 §3) ; position et production : A."
+  },
+  {
+    "id": "wprov_port_hizuru",
+    "code": "HZ03",
+    "name_key": "wprov.port_hizuru",
+    "faction": "fac_hizuru",
+    "type": "port",
+    "industry": 8,
+    "food": 2,
+    "manpower": 4,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      870,
+      200
+    ],
+    "adjacent": [
+      "wprov_capitale_hizuru",
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_chantiers_hizuru",
+    "code": "HZ04",
+    "name_key": "wprov.chantiers_hizuru",
+    "faction": "fac_hizuru",
+    "type": "port",
+    "industry": 9,
+    "food": 1,
+    "manpower": 3,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      930,
+      210
+    ],
+    "adjacent": [
+      "wprov_capitale_hizuru",
+      "wprov_domaine_azumabito",
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ile_est_hizuru",
+    "code": "HZ05",
+    "name_key": "wprov.ile_est_hizuru",
+    "faction": "fac_hizuru",
+    "type": "ile",
+    "industry": 2,
+    "food": 6,
+    "manpower": 3,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      980,
+      170
+    ],
+    "adjacent": [
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_plaines_hizuru",
+    "code": "HZ06",
+    "name_key": "wprov.plaines_hizuru",
+    "faction": "fac_hizuru",
+    "type": "rural",
+    "industry": 1,
+    "food": 12,
+    "manpower": 6,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      960,
+      80
+    ],
+    "adjacent": [
+      "wprov_domaine_azumabito",
+      "wprov_montagnes_hizuru"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_montagnes_hizuru",
+    "code": "HZ07",
+    "name_key": "wprov.montagnes_hizuru",
+    "faction": "fac_hizuru",
+    "type": "rural",
+    "industry": 6,
+    "food": 2,
+    "manpower": 3,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.3,
+    "at": [
+      890,
+      70
+    ],
+    "adjacent": [
+      "wprov_diplomatique_hizuru",
+      "wprov_plaines_hizuru"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_diplomatique_hizuru",
+    "code": "HZ08",
+    "name_key": "wprov.diplomatique_hizuru",
+    "faction": "fac_hizuru",
+    "type": "urbain",
+    "industry": 2,
+    "food": 1,
+    "manpower": 1,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      900,
+      110
+    ],
+    "adjacent": [
+      "wprov_capitale_hizuru",
+      "wprov_domaine_azumabito",
+      "wprov_montagnes_hizuru"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_cite_desert",
+    "code": "AL01",
+    "name_key": "wprov.cite_desert",
+    "faction": "fac_allies",
+    "type": "urbain",
+    "industry": 8,
+    "food": 4,
+    "manpower": 15,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      520,
+      860
+    ],
+    "adjacent": [
+      "wprov_aerodrome_allie",
+      "wprov_oasis_centrale",
+      "wprov_qg_coalition",
+      "wprov_ville_marche"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_port_oriental",
+    "code": "AL02",
+    "name_key": "wprov.port_oriental",
+    "faction": "fac_allies",
+    "type": "port",
+    "industry": 8,
+    "food": 2,
+    "manpower": 6,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      640,
+      780
+    ],
+    "adjacent": [
+      "wprov_aerodrome_allie",
+      "wprov_cote_voiliers",
+      "wprov_passage_sud",
+      "wprov_qg_coalition"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_oasis_centrale",
+    "code": "AL03",
+    "name_key": "wprov.oasis_centrale",
+    "faction": "fac_allies",
+    "type": "rural",
+    "industry": 1,
+    "food": 10,
+    "manpower": 8,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      440,
+      900
+    ],
+    "adjacent": [
+      "wprov_cite_desert",
+      "wprov_depot_allie",
+      "wprov_haut_plateau",
+      "wprov_raffinerie_alliee"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_haut_plateau",
+    "code": "AL04",
+    "name_key": "wprov.haut_plateau",
+    "faction": "fac_allies",
+    "type": "rural",
+    "industry": 2,
+    "food": 6,
+    "manpower": 10,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.3,
+    "at": [
+      360,
+      820
+    ],
+    "adjacent": [
+      "wprov_depot_allie",
+      "wprov_forteresse_passage",
+      "wprov_oasis_centrale"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_forteresse_passage",
+    "code": "AL05",
+    "name_key": "wprov.forteresse_passage",
+    "faction": "fac_allies",
+    "type": "fort",
+    "industry": 2,
+    "food": 1,
+    "manpower": 5,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.6,
+    "at": [
+      420,
+      720
+    ],
+    "adjacent": [
+      "wprov_depot_allie",
+      "wprov_fort_slava",
+      "wprov_haut_plateau",
+      "wprov_province_nord_alliee"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ville_marche",
+    "code": "AL06",
+    "name_key": "wprov.ville_marche",
+    "faction": "fac_allies",
+    "type": "urbain",
+    "industry": 6,
+    "food": 4,
+    "manpower": 10,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      560,
+      930
+    ],
+    "adjacent": [
+      "wprov_camps_refugies",
+      "wprov_cite_desert",
+      "wprov_province_est_alliee",
+      "wprov_raffinerie_alliee"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_cote_voiliers",
+    "code": "AL07",
+    "name_key": "wprov.cote_voiliers",
+    "faction": "fac_allies",
+    "type": "port",
+    "industry": 4,
+    "food": 4,
+    "manpower": 6,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      600,
+      700
+    ],
+    "adjacent": [
+      "wprov_detroit_slava",
+      "wprov_port_oriental",
+      "wprov_province_nord_alliee"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_province_nord_alliee",
+    "code": "AL08",
+    "name_key": "wprov.province_nord_alliee",
+    "faction": "fac_allies",
+    "type": "rural",
+    "industry": 3,
+    "food": 8,
+    "manpower": 10,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      500,
+      760
+    ],
+    "adjacent": [
+      "wprov_cote_voiliers",
+      "wprov_depot_allie",
+      "wprov_forteresse_passage",
+      "wprov_qg_coalition"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_province_est_alliee",
+    "code": "AL09",
+    "name_key": "wprov.province_est_alliee",
+    "faction": "fac_allies",
+    "type": "rural",
+    "industry": 3,
+    "food": 8,
+    "manpower": 10,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      680,
+      880
+    ],
+    "adjacent": [
+      "wprov_aerodrome_allie",
+      "wprov_camps_refugies",
+      "wprov_ville_marche"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_depot_allie",
+    "code": "AL10",
+    "name_key": "wprov.depot_allie",
+    "faction": "fac_allies",
+    "type": "militaire",
+    "industry": 6,
+    "food": 2,
+    "manpower": 4,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      460,
+      800
+    ],
+    "adjacent": [
+      "wprov_forteresse_passage",
+      "wprov_haut_plateau",
+      "wprov_oasis_centrale",
+      "wprov_province_nord_alliee",
+      "wprov_qg_coalition"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_qg_coalition",
+    "code": "AL11",
+    "name_key": "wprov.qg_coalition",
+    "faction": "fac_allies",
+    "type": "militaire",
+    "industry": 4,
+    "food": 1,
+    "manpower": 4,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.3,
+    "at": [
+      540,
+      820
+    ],
+    "adjacent": [
+      "wprov_aerodrome_allie",
+      "wprov_cite_desert",
+      "wprov_depot_allie",
+      "wprov_port_oriental",
+      "wprov_province_nord_alliee"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_camps_refugies",
+    "code": "AL12",
+    "name_key": "wprov.camps_refugies",
+    "faction": "fac_allies",
+    "type": "urbain",
+    "industry": 0,
+    "food": 2,
+    "manpower": 6,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      620,
+      960
+    ],
+    "adjacent": [
+      "wprov_province_est_alliee",
+      "wprov_ville_marche"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_raffinerie_alliee",
+    "code": "AL13",
+    "name_key": "wprov.raffinerie_alliee",
+    "faction": "fac_allies",
+    "type": "industriel",
+    "industry": 10,
+    "food": 1,
+    "manpower": 3,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      400,
+      960
+    ],
+    "adjacent": [
+      "wprov_oasis_centrale",
+      "wprov_ville_marche"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_aerodrome_allie",
+    "code": "AL14",
+    "name_key": "wprov.aerodrome_allie",
+    "faction": "fac_allies",
+    "type": "militaire",
+    "industry": 4,
+    "food": 1,
+    "manpower": 3,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      600,
+      840
+    ],
+    "adjacent": [
+      "wprov_cite_desert",
+      "wprov_port_oriental",
+      "wprov_province_est_alliee",
+      "wprov_qg_coalition"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_detroit_slava",
+    "code": "SE01",
+    "name_key": "wprov.detroit_slava",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      540,
+      660
+    ],
+    "adjacent": [
+      "wprov_cote_voiliers",
+      "wprov_fort_slava",
+      "wprov_mer_interieure",
+      "wprov_passage_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_mer_interieure",
+    "code": "SE02",
+    "name_key": "wprov.mer_interieure",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      620,
+      450
+    ],
+    "adjacent": [
+      "wprov_artillerie_cotiere",
+      "wprov_chantiers_est",
+      "wprov_detroit_slava",
+      "wprov_liberio",
+      "wprov_ocean_est",
+      "wprov_passage_sud",
+      "wprov_port_liberio"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ocean_ouest",
+    "code": "SE03",
+    "name_key": "wprov.ocean_ouest",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      40,
+      560
+    ],
+    "adjacent": [
+      "wprov_colonies_sud",
+      "wprov_passage_nord",
+      "wprov_passage_sud"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_ocean_est",
+    "code": "SE04",
+    "name_key": "wprov.ocean_est",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      730,
+      360
+    ],
+    "adjacent": [
+      "wprov_cotes_paradis",
+      "wprov_mer_interieure",
+      "wprov_passage_nord",
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_passage_sud",
+    "code": "SE05",
+    "name_key": "wprov.passage_sud",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      740,
+      680
+    ],
+    "adjacent": [
+      "wprov_colonies_sud",
+      "wprov_cotes_paradis",
+      "wprov_detroit_slava",
+      "wprov_mer_interieure",
+      "wprov_ocean_ouest",
+      "wprov_port_oriental"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_passage_nord",
+    "code": "SE06",
+    "name_key": "wprov.passage_nord",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      720,
+      120
+    ],
+    "adjacent": [
+      "wprov_capitale_hizuru",
+      "wprov_colonies_nord",
+      "wprov_ocean_est",
+      "wprov_ocean_ouest",
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_routes_marchandes",
+    "code": "SE07",
+    "name_key": "wprov.routes_marchandes",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      820,
+      300
+    ],
+    "adjacent": [
+      "wprov_chantiers_hizuru",
+      "wprov_cotes_paradis",
+      "wprov_ile_est_hizuru",
+      "wprov_ocean_est",
+      "wprov_passage_nord",
+      "wprov_port_hizuru"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_cotes_paradis",
+    "code": "SE08",
+    "name_key": "wprov.cotes_paradis",
+    "faction": "mer",
+    "type": "mer",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": false,
+    "rail": false,
+    "fort": 0.0,
+    "at": [
+      800,
+      470
+    ],
+    "adjacent": [
+      "wprov_ocean_est",
+      "wprov_paradis",
+      "wprov_passage_sud",
+      "wprov_routes_marchandes"
+    ],
+    "canon": "A",
+    "notes_canon": "Toponyme et position schématique : A (06 §3)."
+  },
+  {
+    "id": "wprov_paradis",
+    "code": "PA00",
+    "name_key": "wprov.paradis",
+    "faction": "fac_paradis",
+    "type": "ile",
+    "industry": 0,
+    "food": 0,
+    "manpower": 0,
+    "coastal": true,
+    "rail": false,
+    "fort": 0.7,
+    "at": [
+      870,
+      520
+    ],
+    "adjacent": [
+      "wprov_cotes_paradis"
+    ],
+    "canon": "C",
+    "notes_canon": "Résumé de Paradis au monde : ses agrégats viennent de l'état détaillé (D-70)."
+  }
+]

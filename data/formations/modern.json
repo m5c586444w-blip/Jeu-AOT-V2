@@ -1,0 +1,562 @@
+[
+  {
+    "id": "form_infanterie_ligne",
+    "code": "U-M01",
+    "name_key": "form.infanterie_ligne",
+    "faction": "fac_marley",
+    "kind": "infanterie",
+    "domain": "terre",
+    "attack": 4,
+    "defense": 6,
+    "cost": {
+      "industry": 20,
+      "manpower": 30
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_infanterie_assaut",
+    "code": "U-M02",
+    "name_key": "form.infanterie_assaut",
+    "faction": "fac_marley",
+    "kind": "assaut",
+    "domain": "terre",
+    "attack": 7,
+    "defense": 4,
+    "cost": {
+      "industry": 30,
+      "manpower": 15
+    },
+    "upkeep": 3,
+    "build_days": 40,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_artillerie",
+    "code": "U-M03",
+    "name_key": "form.artillerie",
+    "faction": "fac_marley",
+    "kind": "artillerie",
+    "domain": "terre",
+    "attack": 9,
+    "defense": 2,
+    "cost": {
+      "industry": 40,
+      "manpower": 6
+    },
+    "upkeep": 4,
+    "build_days": 45,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_mitrailleurs",
+    "code": "U-M04",
+    "name_key": "form.mitrailleurs",
+    "faction": "fac_marley",
+    "kind": "mitrailleurs",
+    "domain": "terre",
+    "attack": 3,
+    "defense": 9,
+    "cost": {
+      "industry": 25,
+      "manpower": 6
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_cavalerie_legere",
+    "code": "U-M05",
+    "name_key": "form.cavalerie_legere",
+    "faction": "fac_marley",
+    "kind": "cavalerie",
+    "domain": "terre",
+    "attack": 3,
+    "defense": 2,
+    "cost": {
+      "industry": 15,
+      "manpower": 8
+    },
+    "upkeep": 2,
+    "build_days": 25,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_blindes",
+    "code": "U-M06",
+    "name_key": "form.blindes",
+    "faction": "fac_marley",
+    "kind": "blindes",
+    "domain": "terre",
+    "attack": 10,
+    "defense": 8,
+    "cost": {
+      "industry": 80,
+      "manpower": 6
+    },
+    "upkeep": 6,
+    "build_days": 90,
+    "speed": 1,
+    "enabled": false,
+    "canon": "?",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A. Blindés : existence à confirmer (10 §1.2, `?`), désactivés."
+  },
+  {
+    "id": "form_train_blinde",
+    "code": "U-M07",
+    "name_key": "form.train_blinde",
+    "faction": "fac_marley",
+    "kind": "train_blinde",
+    "domain": "terre",
+    "attack": 6,
+    "defense": 6,
+    "cost": {
+      "industry": 50,
+      "manpower": 5
+    },
+    "upkeep": 4,
+    "build_days": 60,
+    "speed": 3,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_chasse",
+    "code": "U-M08",
+    "name_key": "form.chasse",
+    "faction": "fac_marley",
+    "kind": "chasse",
+    "domain": "air",
+    "attack": 5,
+    "defense": 3,
+    "cost": {
+      "industry": 40,
+      "manpower": 3
+    },
+    "upkeep": 4,
+    "build_days": 50,
+    "speed": 3,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_bombardement",
+    "code": "U-M09",
+    "name_key": "form.bombardement",
+    "faction": "fac_marley",
+    "kind": "bombardement",
+    "domain": "air",
+    "attack": 8,
+    "defense": 1,
+    "cost": {
+      "industry": 50,
+      "manpower": 3
+    },
+    "upkeep": 5,
+    "build_days": 60,
+    "speed": 3,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_dirigeable",
+    "code": "U-M10",
+    "name_key": "form.dirigeable",
+    "faction": "fac_marley",
+    "kind": "dirigeable",
+    "domain": "air",
+    "attack": 4,
+    "defense": 1,
+    "cost": {
+      "industry": 45,
+      "manpower": 2
+    },
+    "upkeep": 4,
+    "build_days": 60,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_cuirasses",
+    "code": "U-M11",
+    "name_key": "form.cuirasses",
+    "faction": "fac_marley",
+    "kind": "cuirasses",
+    "domain": "mer",
+    "attack": 12,
+    "defense": 10,
+    "cost": {
+      "industry": 120,
+      "manpower": 10
+    },
+    "upkeep": 10,
+    "build_days": 120,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_croiseurs",
+    "code": "U-M12",
+    "name_key": "form.croiseurs",
+    "faction": "fac_marley",
+    "kind": "croiseurs",
+    "domain": "mer",
+    "attack": 7,
+    "defense": 6,
+    "cost": {
+      "industry": 70,
+      "manpower": 6
+    },
+    "upkeep": 6,
+    "build_days": 80,
+    "speed": 3,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_transports",
+    "code": "U-M13",
+    "name_key": "form.transports",
+    "faction": "fac_marley",
+    "kind": "transports",
+    "domain": "mer",
+    "attack": 0,
+    "defense": 2,
+    "cost": {
+      "industry": 30,
+      "manpower": 3
+    },
+    "upkeep": 2,
+    "build_days": 40,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_police_internement",
+    "code": "U-M14",
+    "name_key": "form.police_internement",
+    "faction": "fac_marley",
+    "kind": "police",
+    "domain": "terre",
+    "attack": 1,
+    "defense": 3,
+    "cost": {
+      "industry": 10,
+      "manpower": 10
+    },
+    "upkeep": 1,
+    "build_days": 20,
+    "speed": 1,
+    "enabled": true,
+    "canon": "C",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_section_guerriers",
+    "code": "U-M15",
+    "name_key": "form.section_guerriers",
+    "faction": "fac_marley",
+    "kind": "guerriers",
+    "domain": "terre",
+    "attack": 0,
+    "defense": 2,
+    "cost": {
+      "industry": 0,
+      "manpower": 1
+    },
+    "upkeep": 2,
+    "build_days": 0,
+    "speed": 2,
+    "enabled": true,
+    "canon": "C",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_services_secrets",
+    "code": "U-M16",
+    "name_key": "form.services_secrets",
+    "faction": "fac_marley",
+    "kind": "espions",
+    "domain": "terre",
+    "attack": 0,
+    "defense": 1,
+    "cost": {
+      "industry": 15,
+      "manpower": 2
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_troupes_coloniales",
+    "code": "U-M17",
+    "name_key": "form.troupes_coloniales",
+    "faction": "fac_marley",
+    "kind": "coloniaux",
+    "domain": "terre",
+    "attack": 3,
+    "defense": 4,
+    "cost": {
+      "industry": 10,
+      "manpower": 25
+    },
+    "upkeep": 1,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_antiaerien",
+    "code": "U-M18",
+    "name_key": "form.antiaerien",
+    "faction": "fac_marley",
+    "kind": "antiaerien",
+    "domain": "terre",
+    "attack": 1,
+    "defense": 5,
+    "cost": {
+      "industry": 25,
+      "manpower": 4
+    },
+    "upkeep": 2,
+    "build_days": 35,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_garde_clan",
+    "code": "U-H01",
+    "name_key": "form.garde_clan",
+    "faction": "fac_hizuru",
+    "kind": "garde",
+    "domain": "terre",
+    "attack": 3,
+    "defense": 6,
+    "cost": {
+      "industry": 15,
+      "manpower": 10
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_marine_hizuru",
+    "code": "U-H02",
+    "name_key": "form.marine_hizuru",
+    "faction": "fac_hizuru",
+    "kind": "marine_cotiere",
+    "domain": "mer",
+    "attack": 6,
+    "defense": 6,
+    "cost": {
+      "industry": 60,
+      "manpower": 6
+    },
+    "upkeep": 5,
+    "build_days": 70,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_ingenieurs_navals",
+    "code": "U-H03",
+    "name_key": "form.ingenieurs_navals",
+    "faction": "fac_hizuru",
+    "kind": "ingenieurs",
+    "domain": "terre",
+    "attack": 0,
+    "defense": 2,
+    "cost": {
+      "industry": 20,
+      "manpower": 4
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_infanterie_alliee",
+    "code": "U-H04",
+    "name_key": "form.infanterie_alliee",
+    "faction": "fac_allies",
+    "kind": "infanterie",
+    "domain": "terre",
+    "attack": 4,
+    "defense": 5,
+    "cost": {
+      "industry": 18,
+      "manpower": 30
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_cavalerie_alliee",
+    "code": "U-H05",
+    "name_key": "form.cavalerie_alliee",
+    "faction": "fac_allies",
+    "kind": "cavalerie",
+    "domain": "terre",
+    "attack": 3,
+    "defense": 2,
+    "cost": {
+      "industry": 12,
+      "manpower": 8
+    },
+    "upkeep": 2,
+    "build_days": 25,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_navires_coalition",
+    "code": "U-H06",
+    "name_key": "form.navires_coalition",
+    "faction": "fac_allies",
+    "kind": "croiseurs",
+    "domain": "mer",
+    "attack": 7,
+    "defense": 6,
+    "cost": {
+      "industry": 60,
+      "manpower": 6
+    },
+    "upkeep": 6,
+    "build_days": 80,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_aviation_alliee",
+    "code": "U-H07",
+    "name_key": "form.aviation_alliee",
+    "faction": "fac_allies",
+    "kind": "chasse",
+    "domain": "air",
+    "attack": 4,
+    "defense": 2,
+    "cost": {
+      "industry": 30,
+      "manpower": 3
+    },
+    "upkeep": 3,
+    "build_days": 45,
+    "speed": 3,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_renseignement_conjoint",
+    "code": "U-H08",
+    "name_key": "form.renseignement_conjoint",
+    "faction": "fac_allies",
+    "kind": "espions",
+    "domain": "terre",
+    "attack": 0,
+    "defense": 1,
+    "cost": {
+      "industry": 12,
+      "manpower": 2
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 2,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A."
+  },
+  {
+    "id": "form_corps_paradis",
+    "code": "U-P01",
+    "name_key": "form.corps_paradis",
+    "faction": "fac_paradis",
+    "kind": "infanterie",
+    "domain": "terre",
+    "attack": 4,
+    "defense": 6,
+    "cost": {
+      "industry": 15,
+      "manpower": 30
+    },
+    "upkeep": 2,
+    "build_days": 30,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A. Paradis : formations résumées de ses garnisons au monde (D-70)."
+  },
+  {
+    "id": "form_canons_mur",
+    "code": "U-P02",
+    "name_key": "form.canons_mur",
+    "faction": "fac_paradis",
+    "kind": "artillerie",
+    "domain": "terre",
+    "attack": 5,
+    "defense": 5,
+    "cost": {
+      "industry": 25,
+      "manpower": 6
+    },
+    "upkeep": 3,
+    "build_days": 40,
+    "speed": 1,
+    "enabled": true,
+    "canon": "A",
+    "notes_canon": "10 §1.2–1.3 : existence (statut indiqué) ; puissances et coûts : A. Paradis : formations résumées de ses garnisons au monde (D-70)."
+  }
+]

@@ -1,0 +1,687 @@
+[
+  {
+    "id": "char_zeke_yeager",
+    "name": "Zeke Yeager",
+    "active_from": 842,
+    "faction": "marley",
+    "rank_key": "rank.guerrier",
+    "roles": [],
+    "attributes": {
+      "command": 75,
+      "tactics": 80,
+      "intellect": 85,
+      "charisma": 60,
+      "composure": 80,
+      "ambition": 90
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 20,
+    "fame": 70,
+    "relations": [],
+    "portrait": {
+      "seed": 501,
+      "archetype": "ombre"
+    },
+    "canon": "C",
+    "notes_canon": "Guerrier, porteur du Bestial depuis 842 (11 §4, C). Double jeu (07 M03) : secret.",
+    "hidden": {
+      "titan": "bestial"
+    },
+    "bio_key": "bio.zeke_yeager"
+  },
+  {
+    "id": "char_pieck_finger",
+    "name": "Pieck Finger",
+    "active_from": 843,
+    "faction": "marley",
+    "rank_key": "rank.guerrier",
+    "roles": [],
+    "attributes": {
+      "tactics": 70,
+      "intellect": 75,
+      "endurance": 90,
+      "composure": 75
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 40,
+    "relations": [],
+    "portrait": {
+      "seed": 502,
+      "archetype": "officier"
+    },
+    "canon": "C",
+    "notes_canon": "Guerrière, porteuse de la Charrette (11 §4, 07 M04) ; date d'héritage « ? ».",
+    "hidden": {
+      "titan": "charrette"
+    },
+    "bio_key": "bio.pieck_finger"
+  },
+  {
+    "id": "char_lara_tybur",
+    "name": "Lara Tybur",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.tybur",
+    "roles": [],
+    "attributes": {
+      "intellect": 70,
+      "composure": 80
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 503,
+      "archetype": "noble"
+    },
+    "canon": "C",
+    "notes_canon": "Porteuse du Marteau de guerre (11 §4, C) ; date d'héritage « ? ».",
+    "hidden": {
+      "titan": "marteau"
+    },
+    "bio_key": "bio.lara_tybur"
+  },
+  {
+    "id": "char_porco_galliard",
+    "name": "Porco Galliard",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.guerrier",
+    "roles": [],
+    "attributes": {
+      "melee": 80,
+      "endurance": 75,
+      "ambition": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 35,
+    "relations": [],
+    "portrait": {
+      "seed": 504,
+      "archetype": "officier"
+    },
+    "canon": "C",
+    "notes_canon": "Hérite de la Mâchoire après Ymir (11 §4) ; date « ? ».",
+    "bio_key": "bio.porco_galliard"
+  },
+  {
+    "id": "char_falco_grice",
+    "name": "Falco Grice",
+    "active_from": 853,
+    "faction": "marley",
+    "rank_key": "rank.candidat",
+    "roles": [],
+    "attributes": {
+      "endurance": 65,
+      "composure": 55
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 15,
+    "relations": [],
+    "portrait": {
+      "seed": 505,
+      "archetype": "cadet"
+    },
+    "canon": "C",
+    "notes_canon": "Candidat guerrier ; Mâchoire en 854 (11 §4).",
+    "bio_key": "bio.falco_grice"
+  },
+  {
+    "id": "char_colt_grice",
+    "name": "Colt Grice",
+    "active_from": 850,
+    "faction": "marley",
+    "rank_key": "rank.candidat",
+    "roles": [],
+    "attributes": {
+      "tactics": 60,
+      "command": 55
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 506,
+      "archetype": "cadet"
+    },
+    "canon": "C",
+    "notes_canon": "Candidat au Bestial (07 GM07).",
+    "bio_key": "bio.colt_grice"
+  },
+  {
+    "id": "char_willy_tybur",
+    "name": "Willy Tybur",
+    "active_from": 850,
+    "faction": "marley",
+    "rank_key": "rank.tybur",
+    "roles": [],
+    "attributes": {
+      "charisma": 90,
+      "intellect": 75,
+      "ambition": 80
+    },
+    "traits": [],
+    "agenda": "conservateur",
+    "honesty": 50,
+    "fame": 85,
+    "relations": [],
+    "portrait": {
+      "seed": 507,
+      "archetype": "noble"
+    },
+    "canon": "C",
+    "notes_canon": "Chef de la famille Tybur (07 M02) ; tué à Liberio (12 E55, C).",
+    "bio_key": "bio.willy_tybur"
+  },
+  {
+    "id": "char_theo_magath",
+    "name": "Theo Magath",
+    "active_from": 840,
+    "faction": "marley",
+    "rank_key": "rank.general",
+    "roles": [],
+    "attributes": {
+      "command": 85,
+      "tactics": 85,
+      "composure": 75
+    },
+    "traits": [],
+    "agenda": "militariste",
+    "honesty": 50,
+    "fame": 70,
+    "relations": [],
+    "portrait": {
+      "seed": 508,
+      "archetype": "officier"
+    },
+    "canon": "C",
+    "notes_canon": "Général de Marley (07 M01).",
+    "bio_key": "bio.theo_magath"
+  },
+  {
+    "id": "char_karina_braun",
+    "name": "Karina Braun",
+    "active_from": 840,
+    "faction": "marley",
+    "rank_key": "rank.civil",
+    "roles": [],
+    "attributes": {
+      "charisma": 50,
+      "faith": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 509,
+      "archetype": "civil"
+    },
+    "canon": "C",
+    "notes_canon": "Civile, mère de Reiner (07 GM08).",
+    "bio_key": "bio.karina_braun"
+  },
+  {
+    "id": "char_berhard_kolb",
+    "name": "Berhard Kolb",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.amiral",
+    "roles": [],
+    "attributes": {
+      "command": 70,
+      "tactics": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 510,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Amiral (07 GM09, A).",
+    "bio_key": "bio.berhard_kolb"
+  },
+  {
+    "id": "char_hugo_stahl",
+    "name": "Hugo Stahl",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.general",
+    "roles": [],
+    "attributes": {
+      "command": 70,
+      "tactics": 65
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 511,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Armée de terre, artillerie (07 GM10, A).",
+    "bio_key": "bio.hugo_stahl"
+  },
+  {
+    "id": "char_mathis_renk",
+    "name": "Mathis Renk",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.colonel",
+    "roles": [],
+    "attributes": {
+      "command": 60,
+      "tactics": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 512,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Aviation (07 GM11, A).",
+    "bio_key": "bio.mathis_renk"
+  },
+  {
+    "id": "char_lisbeth_aronn",
+    "name": "Lisbeth Aronn",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.major",
+    "roles": [],
+    "attributes": {
+      "intellect": 75,
+      "composure": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 15,
+    "relations": [],
+    "portrait": {
+      "seed": 513,
+      "archetype": "ombre"
+    },
+    "canon": "A",
+    "notes_canon": "Renseignement (07 GM12, A).",
+    "bio_key": "bio.lisbeth_aronn"
+  },
+  {
+    "id": "char_casimir_rodt",
+    "name": "Casimir Rodt",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.general",
+    "roles": [],
+    "attributes": {
+      "command": 65,
+      "tactics": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 25,
+    "relations": [],
+    "portrait": {
+      "seed": 514,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Front Est, tranchées (07 GM13, A).",
+    "bio_key": "bio.casimir_rodt"
+  },
+  {
+    "id": "char_dagna_holm",
+    "name": "Dagna Holm",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.colonel",
+    "roles": [],
+    "attributes": {
+      "intellect": 70,
+      "tactics": 55
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 15,
+    "relations": [],
+    "portrait": {
+      "seed": 515,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Logistique, rail (07 GM14, A).",
+    "bio_key": "bio.dagna_holm"
+  },
+  {
+    "id": "char_otto_weiss",
+    "name": "Otto Weiss",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.commandant",
+    "roles": [],
+    "attributes": {
+      "command": 55
+    },
+    "traits": [],
+    "agenda": "conservateur",
+    "honesty": 50,
+    "fame": 15,
+    "relations": [],
+    "portrait": {
+      "seed": 516,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Police d'internement (07 GM15, A).",
+    "bio_key": "bio.otto_weiss"
+  },
+  {
+    "id": "char_yves_marchet",
+    "name": "Yves Marchet",
+    "active_from": 845,
+    "faction": "marley",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "tactics": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 517,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Artillerie côtière (07 GM16, A).",
+    "bio_key": "bio.yves_marchet"
+  },
+  {
+    "id": "char_kiyomi_azumabito",
+    "name": "Kiyomi Azumabito",
+    "active_from": 840,
+    "faction": "hizuru",
+    "rank_key": "rank.azumabito",
+    "roles": [],
+    "attributes": {
+      "charisma": 85,
+      "intellect": 85,
+      "ambition": 75
+    },
+    "traits": [],
+    "agenda": "opportuniste",
+    "honesty": 50,
+    "fame": 70,
+    "relations": [],
+    "portrait": {
+      "seed": 520,
+      "archetype": "noble"
+    },
+    "canon": "C",
+    "notes_canon": "Affaires étrangères d'Hizuru, famille Azumabito (11 §5, 07 H01).",
+    "bio_key": "bio.kiyomi_azumabito"
+  },
+  {
+    "id": "char_takeda_iori",
+    "name": "Takeda Iori",
+    "active_from": 845,
+    "faction": "hizuru",
+    "rank_key": "rank.capitaine",
+    "roles": [],
+    "attributes": {
+      "command": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 521,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Défense côtière (07 GH02, A).",
+    "bio_key": "bio.takeda_iori"
+  },
+  {
+    "id": "char_mizuki_sora",
+    "name": "Mizuki Sora",
+    "active_from": 845,
+    "faction": "hizuru",
+    "rank_key": "rank.amiral",
+    "roles": [],
+    "attributes": {
+      "command": 65,
+      "tactics": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 15,
+    "relations": [],
+    "portrait": {
+      "seed": 522,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Flotte (07 GH03, A).",
+    "bio_key": "bio.mizuki_sora"
+  },
+  {
+    "id": "char_maitre_hakuro",
+    "name": "Maître Hakuro",
+    "active_from": 840,
+    "faction": "hizuru",
+    "rank_key": "rank.ingenieur",
+    "roles": [],
+    "attributes": {
+      "intellect": 80
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 523,
+      "archetype": "clerc"
+    },
+    "canon": "A",
+    "notes_canon": "Ingénieur naval (07 GH04, A).",
+    "bio_key": "bio.maitre_hakuro"
+  },
+  {
+    "id": "char_yelena",
+    "name": "Yelena",
+    "active_from": 845,
+    "faction": "volontaires",
+    "rank_key": "rank.volontaire",
+    "roles": [],
+    "attributes": {
+      "charisma": 70,
+      "ambition": 85,
+      "composure": 75
+    },
+    "traits": [],
+    "agenda": "opportuniste",
+    "honesty": 30,
+    "fame": 40,
+    "relations": [],
+    "portrait": {
+      "seed": 524,
+      "archetype": "ombre"
+    },
+    "canon": "C",
+    "notes_canon": "Cheffe des Volontaires anti-Marleyens (11 §5, 07 H02).",
+    "bio_key": "bio.yelena"
+  },
+  {
+    "id": "char_onyankopon",
+    "name": "Onyankopon",
+    "active_from": 845,
+    "faction": "volontaires",
+    "rank_key": "rank.volontaire",
+    "roles": [],
+    "attributes": {
+      "intellect": 65,
+      "charisma": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 525,
+      "archetype": "officier"
+    },
+    "canon": "C",
+    "notes_canon": "Ex-conscrit marleyen, pilote, Volontaire anti-Marleyen (11 §5, 07 H03).",
+    "bio_key": "bio.onyankopon"
+  },
+  {
+    "id": "char_idris_qadim",
+    "name": "Idris Qadim",
+    "active_from": 845,
+    "faction": "allies",
+    "rank_key": "rank.commandant",
+    "roles": [],
+    "attributes": {
+      "command": 70,
+      "charisma": 60
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 30,
+    "relations": [],
+    "portrait": {
+      "seed": 530,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Commandant de la coalition (07 GA02, A).",
+    "bio_key": "bio.idris_qadim"
+  },
+  {
+    "id": "char_tarek_vahdat",
+    "name": "Tarek Vahdat",
+    "active_from": 845,
+    "faction": "allies",
+    "rank_key": "rank.general",
+    "roles": [],
+    "attributes": {
+      "command": 65,
+      "tactics": 65
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 531,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Terre (07 GA03, A).",
+    "bio_key": "bio.tarek_vahdat"
+  },
+  {
+    "id": "char_nabil_sorani",
+    "name": "Nabil Sorani",
+    "active_from": 845,
+    "faction": "allies",
+    "rank_key": "rank.amiral",
+    "roles": [],
+    "attributes": {
+      "command": 65
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 20,
+    "relations": [],
+    "portrait": {
+      "seed": 532,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Mer (07 GA04, A).",
+    "bio_key": "bio.nabil_sorani"
+  },
+  {
+    "id": "char_rania_haddad",
+    "name": "Rania Haddad",
+    "active_from": 845,
+    "faction": "allies",
+    "rank_key": "rank.colonel",
+    "roles": [],
+    "attributes": {
+      "intellect": 65
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 533,
+      "archetype": "officier"
+    },
+    "canon": "A",
+    "notes_canon": "Logistique (07 GA05, A).",
+    "bio_key": "bio.rania_haddad"
+  },
+  {
+    "id": "char_salim_aref",
+    "name": "Salim Aref",
+    "active_from": 845,
+    "faction": "allies",
+    "rank_key": "rank.chef_renseignement",
+    "roles": [],
+    "attributes": {
+      "intellect": 70
+    },
+    "traits": [],
+    "agenda": "pragmatique",
+    "honesty": 50,
+    "fame": 10,
+    "relations": [],
+    "portrait": {
+      "seed": 534,
+      "archetype": "ombre"
+    },
+    "canon": "A",
+    "notes_canon": "Renseignement (07 GA06, A).",
+    "bio_key": "bio.salim_aref"
+  }
+]

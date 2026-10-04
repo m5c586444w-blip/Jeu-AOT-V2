@@ -61,8 +61,12 @@ describe("horloge des 13 ans (AC6-02, F-TIT-03)", () => {
 
   it("un Titan de Marley sans porteur nommé est relayé à l'échéance (nouvel héritier, horloge à 13 ans)", () => {
     let s = withShifters(s0, (x) => {
+      // Porteur de Marley sans fiche (cas des Titans dont le porteur n'est pas un personnage).
       const b = x.titans["shifter_bestial"];
-      if (b) b.since = 838;
+      if (b) {
+        b.since = 838;
+        b.holder = null;
+      }
     });
     s = run(s, quiet, { type: "AdvanceDays", n: 360 - (s.date.day - 1) });
     expect(sh(s).titans["shifter_bestial"]).toMatchObject({ faction: "marley", since: 851, holder: null });

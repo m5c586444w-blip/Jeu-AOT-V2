@@ -74,12 +74,9 @@ try {
   const unknown = await page.locator(`${card("shifter_cuirasse")}:has-text("${fr["shifters.unknown_holder"]}")`).count();
   const erenHidden = await page.locator(`${card("shifter_assaillant")}:has-text("Eren")`).count();
   expect(unknown === 1 && erenHidden === 0, "porteurs cachés tant que leur secret n'est pas percé (Cuirassé, Assaillant)");
-  const marley = await page.locator(`${card("shifter_bestial")}:has-text("${fr["shifters.held_by.marley"]}")`).count();
-  expect(marley === 1, "Bestial : tenu par Marley, porteur non identifié (aucun nom inventé)");
-  await page.locator(`${card("shifter_bestial")} .porteur__horloge .valeur`).focus();
-  await page.waitForTimeout(150);
-  const why = await page.locator(".pourquoi").innerText();
-  expect((await page.locator(".pourquoi").isVisible()) && why.includes("13") && why.includes("842"), "horloge des 13 ans expliquée (Bestial : 13 − années depuis 842)");
+  const bestial = await page.locator(`${card("shifter_bestial")}:has-text("${fr["shifters.unknown_holder"]}")`).count();
+  const zeke = await page.locator(`${card("shifter_bestial")}:has-text("Zeke")`).count();
+  expect(bestial === 1 && zeke === 0, "Bestial : porteur inconnu de Paradis (identité secrète de Marley)");
   await audit(page, ".registre-panneau", "registre Porteurs, 1er jour");
   await page.locator(".registre-panneau").screenshot({ path: `${OUT}/p6-porteurs-850.png` });
 
@@ -91,6 +88,10 @@ try {
   const clock = await page.getAttribute(`${card("shifter_colossal")} .porteur__horloge`, "data-clock");
   // Hérité en 850 ; après 360 jours on est au 1er jour de 851 : 13 − (851 − 850) = 12 ans.
   expect(armin === 1 && clock === "12", `E42 : Armin Arlert porte le Colossal (hérité en 850), horloge au 1er jour de 851 : ${clock ?? "—"} ans`);
+  await page.locator(`${card("shifter_colossal")} .porteur__horloge .valeur`).focus();
+  await page.waitForTimeout(150);
+  const why = await page.locator(".pourquoi").innerText();
+  expect((await page.locator(".pourquoi").isVisible()) && why.includes("13") && why.includes("850"), "horloge des 13 ans expliquée (Colossal : 13 − années depuis 850)");
   const record = await page.locator(`.porteur__dossiers li:has-text("Armin Arlert")`).count();
   expect(record >= 1, "dossier d'héritage : Armin hérite en dévorant Bertholdt, coûts consignés");
   const eren = await page.locator(`${card("shifter_assaillant")}:has-text("Eren")`).count();

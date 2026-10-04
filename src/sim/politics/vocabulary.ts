@@ -5,6 +5,10 @@ export const ATTRIBUTES = ["odm", "melee", "aim", "command", "tactics", "intelle
 export type AttributeId = (typeof ATTRIBUTES)[number];
 
 /** Programmes politiques (08 §3.1 : réformateur, conservateur, opportuniste…). */
+/** Factions étrangères (P7) : leurs personnages vivent au monde, hors des registres de Paradis. */
+export const FOREIGN_FACTIONS = ["marley", "hizuru", "allies", "volontaires"] as const;
+export const isDomestic = (c: { faction: string }): boolean => !(FOREIGN_FACTIONS as readonly string[]).includes(c.faction);
+
 export const AGENDAS = ["reformateur", "conservateur", "opportuniste", "religieux", "militariste", "pragmatique"] as const;
 export type Agenda = (typeof AGENDAS)[number];
 

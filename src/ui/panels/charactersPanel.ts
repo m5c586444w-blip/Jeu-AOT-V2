@@ -1,4 +1,5 @@
 import type { Character } from "../../data/schemas";
+import { isDomestic } from "../../sim/politics/vocabulary";
 import { t } from "../../i18n";
 import { Explainer } from "../../sim/core/explain";
 import { postsOf, relationBetween, stressGain } from "../../sim/politics/characters";
@@ -47,7 +48,7 @@ export class CharactersPanel implements Panel {
     const byOrg = new Map<string, Character[]>();
     for (const c of pw.characters.values()) {
       const cs = pol.characters[c.id];
-      if (c.active_from > year) continue;
+      if (c.active_from > year || !isDomestic(c)) continue;
       if (this.filter === "vivants" && !cs?.alive) continue;
       if (this.filter === "morts" && cs?.alive) continue;
       const key = c.org ?? "sans";
