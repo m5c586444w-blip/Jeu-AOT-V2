@@ -9,7 +9,9 @@ import { acceptProposal, rejectProposal } from "../politics/advisors";
 import { characterDies, DEATH_CAUSES, nominate } from "../politics/characters";
 import type { DeathCause } from "../politics/characters";
 import { enactLaw, persuade, repealLaw, setBudget } from "../politics/politics";
-import { launchExpedition, recallExpedition } from "../military/expedition";
+import { launchExpedition, recallExpedition, resolveBattle } from "../military/expedition";
+import type { TimedOrder } from "../tactical/types";
+import { TACTICAL_ORDERS } from "../tactical/types";
 import type { MilCtx } from "../military/expedition";
 import { sendConvoy } from "../military/logistics";
 import type { ConvoyOrder } from "../military/logistics";
@@ -33,6 +35,7 @@ export type Command =
   | { type: "LaunchExpedition"; plan: ExpeditionPlan }
   | { type: "RecallExpedition"; expedition: string }
   | { type: "SendConvoy"; order: ConvoyOrder }
+  | { type: "ResolveBattle"; expedition: string; mode: "jouer" | "auto"; orders: TimedOrder[] }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -92,6 +95,14 @@ export function validateCommand(cmd: unknown): Validation {
       return validPlanShape(c["plan"]) ? { ok: true } : { ok: false, error: "LaunchExpedition.plan invalide" };
     case "RecallExpedition":
       return typeof c["expedition"] === "string" && /^exp_\d+$/.test(c["expedition"]) ? { ok: true } : { ok: false, error: "RecallExpedition.expedition invalide" };
+    case "ResolveBattle": {
+      const orders = c["orders"];
+      const okOrders =
+        Array.isArray(orders) &&
+        orders.every((o) => typeof o === "object" && o !== null && Number.isInteger((o as Record<string, unknown>)["tick"]) && typeof (o as Record<string, unknown>)["squad"] === "string" && (TACTICAL_ORDERS as readonly string[]).includes(String((o as Record<string, unknown>)["order"])));
+      const ok = typeof c["expedition"] === "string" && (c["mode"] === "jouer" || c["mode"] === "auto") && okOrders;
+      return ok ? { ok: true } : { ok: false, error: "ResolveBattle invalide" };
+    }
     case "SendConvoy": {
       const o = c["order"] as Record<string, unknown> | undefined;
       const ok = !!o && typeof o["depot"] === "string" && validSupplies(o["cargo"]) && Number.isInteger(o["wagons"]) && Number.isInteger(o["escort"]);
@@ -129,7 +140,8 @@ function validPlanShape(x: unknown): boolean {
     validSupplies(p["supplies"]) &&
     validSupplies(p["depotCargo"]) &&
     !!r &&
-    ["losses_pct", "gas_pct", "abnormal", "max_days"].every((k) => typeof r[k] === "number")
+    ["losses_pct", "gas_pct", "abnormal", "max_days"].every((k) => typeof r[k] === "number") &&
+    (p["play"] === undefined || typeof p["play"] === "boolean")
   );
 }
 
@@ -169,6 +181,7 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "LaunchExpedition":
     case "RecallExpedition":
     case "SendConvoy":
+    case "ResolveBattle":
       next = applyMilitary(next, cmd, world);
       break;
     case "Noop":
@@ -219,7 +232,7 @@ function applyPolitical(state: GameState, cmd: PoliticalCommand, world?: World):
   }
 }
 
-type MilitaryCommand = Extract<Command, { type: "LaunchExpedition" | "RecallExpedition" | "SendConvoy" }>;
+type MilitaryCommand = Extract<Command, { type: "LaunchExpedition" | "RecallExpedition" | "SendConvoy" | "ResolveBattle" }>;
 
 /** Commandes de la couche militaire (P3) : copies de travail, puis nouvel état. */
 function applyMilitary(state: GameState, cmd: MilitaryCommand, world?: World): GameState {
@@ -235,6 +248,7 @@ function applyMilitary(state: GameState, cmd: MilitaryCommand, world?: World): G
   };
   if (cmd.type === "LaunchExpedition") launchExpedition(ctx, cmd.plan);
   else if (cmd.type === "RecallExpedition") recallExpedition(ctx, cmd.expedition);
+  else if (cmd.type === "ResolveBattle") resolveBattle(ctx, cmd.expedition, cmd.mode, cmd.orders);
   else sendConvoy(ctx, cmd.order);
   return { ...state, strategic: ctx.st, politics: ctx.pol, military: ctx.mil };
 }

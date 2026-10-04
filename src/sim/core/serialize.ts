@@ -50,6 +50,15 @@ export const MIGRATIONS: readonly Migration[] = [
       return { ...raw, schemaVersion: 4, military: raw["military"] ?? null };
     },
   },
+  {
+    from: 4,
+    describe: "v4 → v5 : bataille en attente sur chaque expédition (`pending: null`), P4",
+    migrate(raw) {
+      const mil = raw["military"] as { expeditions?: Record<string, unknown>[] } | null | undefined;
+      const military = mil ? { ...mil, expeditions: (mil.expeditions ?? []).map((e) => ({ ...e, pending: e["pending"] ?? null })) } : (mil ?? null);
+      return { ...raw, schemaVersion: 5, military };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {

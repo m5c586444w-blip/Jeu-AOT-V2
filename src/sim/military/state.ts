@@ -2,7 +2,8 @@ import { Rng } from "../core/rng";
 import type { GameDate } from "../core/time";
 import type { MilitaryWorld, World } from "../strategic/world";
 import { clamp, gaussian, weighted } from "./random";
-import type { FieldDeathCause, Formation, Objective, RetreatCondition, Signal, SoldierRole } from "./vocabulary";
+import type { FieldDeathCause, Formation, Objective, RetreatCondition, Signal, SoldierRole, Weather } from "./vocabulary";
+import type { BattleSetup } from "../tactical/types";
 
 /** Soldat du Corps d'exploration (F-CHR-17) : individu généré [A], avec dossier de mort éventuel (03 §9). */
 export interface Soldier {
@@ -69,6 +70,19 @@ export interface ExpeditionPlan {
   /** Objectif « dépôt » : chargement déposé à l'arrivée (F-LOG-04). */
   depotCargo: Supplies;
   retreat: RetreatPlan;
+  /** P4 (F-EXP-18) : jouer les engagements au lieu de les auto-résoudre. */
+  play?: boolean;
+}
+
+/** Engagement en attente d'être joué (P4) : la campagne attend `ResolveBattle`. */
+export interface PendingBattle {
+  setup: BattleSetup;
+  province: string;
+  titan: string;
+  group: number;
+  misread: boolean;
+  weather: Weather;
+  engaged: { soldiers: string[]; officers: string[] };
 }
 
 export interface ExpeditionStats {
@@ -136,6 +150,8 @@ export interface Expedition {
   log: FieldLogEntry[];
   dead: string[];
   namedDead: string[];
+  /** Bataille en attente d'être jouée (P4) ; l'expédition ne bouge plus tant qu'elle n'est pas résolue. */
+  pending: PendingBattle | null;
   /** Coût politique payé au départ (F-EXP-07). */
   capitalPaid: number;
   goldPaid: number;

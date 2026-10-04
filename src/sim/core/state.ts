@@ -12,7 +12,7 @@ import { createMilitaryState } from "../military/state";
 import type { MilitaryState } from "../military/state";
 import { dailyMilitary } from "../military/tick";
 
-export const CURRENT_SCHEMA_VERSION = 4 as const;
+export const CURRENT_SCHEMA_VERSION = 5 as const;
 
 /** État complet et sérialisable de la partie (P0 + couche stratégique de P1). */
 export interface GameState {

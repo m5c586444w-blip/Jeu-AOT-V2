@@ -1277,5 +1277,13 @@
   "battle.end.victoire": "Fin : tous les Titans sont abattus — {dead} morts sur {total}.",
   "battle.end.defaite": "Fin : plus personne debout — {dead} morts sur {total}.",
   "battle.end.repli": "Fin : repli général — {dead} morts sur {total}.",
-  "battle.end.temps": "Fin : le temps est écoulé — {dead} morts sur {total}."
+  "battle.end.temps": "Fin : le temps est écoulé — {dead} morts sur {total}.",
+  "field.battle_pending": "Contact à {province} ({titan}) : bataille à jouer, la colonne attend vos ordres.",
+  "log.battle_pending": "Expédition n° {n} : bataille en attente à {province} (jouer ou auto-résoudre).",
+  "field.battle_auto": "Bataille de {province} auto-résolue.",
+  "field.battle_played": "Bataille jouée à {province} : {deaths} morts, {killed} Titans abattus ({end}).",
+  "battle.end_short.victoire": "victoire",
+  "battle.end_short.defaite": "défaite",
+  "battle.end_short.repli": "repli",
+  "battle.end_short.temps": "temps écoulé"
 }

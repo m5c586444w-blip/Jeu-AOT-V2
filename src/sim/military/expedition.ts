@@ -4,6 +4,8 @@ import type { GameDate } from "../core/time";
 import { characterDies } from "../politics/characters";
 import type { PoliticalState } from "../politics/state";
 import { effectiveAttributes } from "../politics/state";
+import { runBattle } from "../tactical/battle";
+import type { BattleSetup, TimedOrder } from "../tactical/types";
 import { pushLog } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
 import type { MilitaryWorld, World } from "../strategic/world";
@@ -113,6 +115,7 @@ export function launchExpedition(ctx: MilCtx, plan: ExpeditionPlan): Expedition 
     log: [],
     dead: [],
     namedDead: [],
+    pending: null,
     capitalPaid: capital,
     goldPaid: gold,
   };
@@ -205,6 +208,119 @@ export function engagementMedian(x: ExpeditionsBalance, f: EngagementFactors): n
   return g.deaths_base * f.threat * f.group * Math.exp(-g.skill_k * (f.skill - 50)) * f.veteran * f.gasMult * f.bladeMult * Math.exp(-g.morale_k * (f.morale - 50)) * f.exposure * (f.misread ? x.signals.misread_engage_mult : 1);
 }
 
+type PoolEntry = { kind: "s" | "o"; id: string; w: number; odm: number };
+
+/** Hommes engagés dans un contact : les plus exposés d'abord (tueurs, éclaireurs) ; officiers nommés moins exposés, Ackerman encore moins. */
+function selectEngaged(ctx: MilCtx, e: Expedition, rng: Rng, abnormal: boolean, group: number): { engaged: PoolEntry[]; rest: PoolEntry[]; engagedN: number } {
+  const x = ctx.m.exp;
+  const g = x.engagement;
+  const troops = alive(ctx, e);
+  const n = troops.length + e.officers.length;
+  const f = x.formations[e.plan.formation];
+  const engagedN = clamp(Math.round(n * f.engaged_share * (abnormal ? 1.5 : 1) * Math.sqrt(group)), Math.min(n, g.min_engaged), Math.min(n, g.max_engaged));
+  const pool: PoolEntry[] = [
+    ...troops.map((s) => ({ kind: "s" as const, id: s.id, w: ROLE_EXPOSURE[s.role] ?? 1, odm: s.odm })),
+    ...e.officers.map((id) => ({ kind: "o" as const, id, w: x.named.exposure_mult * (isAckerman(ctx, id) ? x.named.ackerman_mult : 1), odm: 80 })),
+  ];
+  const engaged: PoolEntry[] = [];
+  const rest = pool.slice();
+  while (engaged.length < engagedN && rest.length > 0) {
+    const pick = weighted(rng, rest.map((p, i) => [i, p.w] as const));
+    engaged.push(rest.splice(pick, 1)[0] as PoolEntry);
+  }
+  return { engaged, rest, engagedN };
+}
+
+/** Carte tactique du terrain d'une province (P4). */
+function battleMapFor(ctx: MilCtx, province: string): string {
+  const terrain = ctx.world.provinceById.get(province)?.terrain;
+  if (terrain === "foret") return "tmap_foret";
+  if (terrain === "mur") return "tmap_mur";
+  if (terrain === "urbain" || terrain === "souterrain" || terrain === "fort" || terrain === "ruines") return "tmap_ville";
+  return "tmap_plaine";
+}
+
+/** Prépare un engagement à jouer (F-EXP-18) : mêmes hommes engagés que l'auto-résolution, carte du terrain, type de Titan de la classe. */
+function pendBattle(ctx: MilCtx, e: Expedition, province: string, titanId: string, group: number, misread: boolean, weather: Weather): void {
+  const tw = ctx.world.tactical;
+  const cls = ctx.m.titans.find((t) => t.id === titanId);
+  if (!tw || !cls) return;
+  const rng = new Rng(ctx.seed).fork(`bataille:${e.id}:${e.day}`);
+  const { engaged } = selectEngaged(ctx, e, rng, cls.abnormal, group);
+  const types = [...tw.titanTypes.values()].filter((t) => t.class === titanId);
+  const type = types.length > 0 ? weighted(rng, types.map((t) => [t.id, t.weight] as const)) : null;
+  if (!type) return;
+  const pw = ctx.world.politics;
+  const soldiers: BattleSetup["soldiers"] = engaged.map((p) => {
+    if (p.kind === "s") {
+      const s = ctx.mil.soldiers[p.id] as Soldier;
+      return { id: s.id, name: soldierName(s), squad: s.squad, leader: s.leader, named: null, odm: s.odm, melee: s.melee, courage: s.courage, reaction: s.endurance, ackerman: false, veteran: s.expeditions };
+    }
+    const c = pw?.characters.get(p.id);
+    const a = c && pw && ctx.pol ? effectiveAttributes(pw, c, ctx.pol.characters[p.id]) : null;
+    return { id: p.id, name: c?.display_name ?? c?.name ?? p.id, squad: "officiers", leader: true, named: p.id, odm: a?.odm ?? 80, melee: a?.melee ?? 70, courage: a?.composure ?? 70, reaction: a?.endurance ?? 70, ackerman: isAckerman(ctx, p.id), veteran: 5 };
+  });
+  const night = rng.next() < x_night(ctx);
+  e.pending = {
+    setup: { map: battleMapFor(ctx, province), seed: new Rng(ctx.seed).fork(`seed:${e.id}:${e.day}`).int(1, 2 ** 30), night, soldiers, titans: [{ type, count: group }], wagon: false },
+    province,
+    titan: titanId,
+    group,
+    misread,
+    weather,
+    engaged: { soldiers: engaged.filter((p) => p.kind === "s").map((p) => p.id), officers: engaged.filter((p) => p.kind === "o").map((p) => p.id) },
+  };
+  fieldLog(e, "field.battle_pending", { province, titan: cls.name_key });
+  pushLog(ctx.st, ctx.date, "log.battle_pending", { n: e.number, province }, true);
+}
+
+/** Part des contacts nocturnes (03 §5.2) : la même que pour les rencontres. */
+function x_night(ctx: MilCtx): number {
+  const ns = ctx.m.exp.encounters.night_share;
+  return ns / (1 + ns);
+}
+
+/**
+ * Résout une bataille en attente (AC4-10) : « jouer » rejoue la bataille tactique à partir de sa graine et des ordres
+ * du joueur, puis reporte morts, blessés, gaz, lames et Titans abattus ; « auto » applique l'auto-résolution de P3.
+ */
+export function resolveBattle(ctx: MilCtx, id: string, mode: "jouer" | "auto", orders: readonly TimedOrder[]): void {
+  const e = ctx.mil.expeditions.find((x) => x.id === id);
+  const p = e?.pending;
+  if (!e || !p) throw new Error(`Aucune bataille en attente pour ${id}`);
+  e.pending = null;
+  if (mode === "auto") {
+    engage(ctx, e, new Rng(ctx.seed).fork(`auto:${e.id}:${e.day}`), p.province, p.titan, p.group, p.misread, p.weather);
+    fieldLog(e, "field.battle_auto", { province: p.province });
+    return;
+  }
+  const result = runBattle(ctx.world, p.setup, orders);
+  const cls = ctx.m.titans.find((t) => t.id === p.titan);
+  for (const u of result.dead) {
+    const cause: FieldDeathCause = u.death?.cause === "hemorragie" ? "hemorragie" : cls?.abnormal ? "anormal" : "titan";
+    if (u.named) killOfficer(ctx, e, u.named, cause, p.province);
+    else {
+      const s = ctx.mil.soldiers[u.id];
+      if (s && s.status !== "mort") killSoldier(ctx, e, s, cause, p.province);
+    }
+  }
+  for (const u of result.survivors) {
+    if (u.wound === "grave" && !u.named && !e.seriousWounded.includes(u.id)) e.seriousWounded.push(u.id);
+    if (u.wound !== "aucune") e.stats.wounded += 1;
+    const s = ctx.mil.soldiers[u.id];
+    if (s) s.kills += u.kills;
+  }
+  const gasUsed = result.state.stats.gasUsed;
+  e.gasOdm = Math.max(0, e.gasOdm - gasUsed);
+  e.stats.gasUsedOdm += gasUsed;
+  e.bladePairs = Math.max(0, e.bladePairs - result.state.stats.bladesBroken);
+  e.stats.bladesUsed += result.state.stats.bladesBroken;
+  e.stats.titansKilled += result.state.stats.napes;
+  e.stats.engagements += 1;
+  e.morale = clamp(e.morale - result.dead.length * 1.5 + result.state.stats.napes, 0, 100);
+  fieldLog(e, "field.battle_played", { province: p.province, deaths: result.dead.length, killed: result.state.stats.napes, end: `battle.end_short.${result.state.ended?.reason ?? "temps"}` });
+}
+
 /** Un engagement (03 §12) : pertes à queue épaisse (log-normale + catastrophe rare), blessés, Titans abattus, gaz. */
 function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId: string, group: number, misread: boolean, weather: Weather): void {
   const x = ctx.m.exp;
@@ -215,18 +331,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   const n = troops.length + e.officers.length;
   if (n === 0) return;
   const f = x.formations[e.plan.formation];
-  const engagedN = clamp(Math.round(n * f.engaged_share * (cls.abnormal ? 1.5 : 1) * Math.sqrt(group)), Math.min(n, g.min_engaged), Math.min(n, g.max_engaged));
-  // Les plus exposés sont tirés en premier (tueurs, éclaireurs) ; les officiers nommés s'exposent moins (Ackerman encore moins).
-  const pool: { kind: "s" | "o"; id: string; w: number; odm: number }[] = [
-    ...troops.map((s) => ({ kind: "s" as const, id: s.id, w: ROLE_EXPOSURE[s.role] ?? 1, odm: s.odm })),
-    ...e.officers.map((id) => ({ kind: "o" as const, id, w: x.named.exposure_mult * (isAckerman(ctx, id) ? x.named.ackerman_mult : 1), odm: 80 })),
-  ];
-  const engaged: typeof pool = [];
-  const rest = pool.slice();
-  while (engaged.length < engagedN && rest.length > 0) {
-    const pick = weighted(rng, rest.map((p, i) => [i, p.w] as const));
-    engaged.push(rest.splice(pick, 1)[0] as (typeof pool)[number]);
-  }
+  const { engaged, rest, engagedN } = selectEngaged(ctx, e, rng, cls.abnormal, group);
   const skill = engaged.reduce((s, p) => s + p.odm, 0) / Math.max(1, engaged.length);
   const vets = troops.length > 0 ? troops.reduce((s, t) => s + t.expeditions, 0) / troops.length : 0;
   const veteran = 1 - Math.min(x.experience.max_bonus, x.experience.survival_per_expedition * vets * g.veteran_k * 10);
@@ -237,11 +342,11 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   let deaths = Math.min(engaged.length, Math.floor(lognormal(rng, median, g.sigma)));
   const catP = g.catastrophe.p_base * (cls.abnormal ? g.catastrophe.abnormal_mult : 1) * (e.plan.formation === "colonnes" ? g.catastrophe.column_mult : 1);
   let catastrophe = false;
-  const victims: typeof pool = [];
-  const pickVictim = (from: typeof pool): void => {
+  const victims: PoolEntry[] = [];
+  const pickVictim = (from: PoolEntry[]): void => {
     if (from.length === 0) return;
     const i = weighted(rng, from.map((p, k) => [k, (110 - p.odm) * p.w] as const));
-    victims.push(from.splice(i, 1)[0] as (typeof pool)[number]);
+    victims.push(from.splice(i, 1)[0] as PoolEntry);
   };
   for (let k = 0; k < deaths; k++) pickVictim(engaged);
   if (rng.next() < catP) {
@@ -301,6 +406,8 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
 
 /** Un jour d'expédition : marche, rencontres, consommation, ravitaillement, retrait, retour. */
 export function stepExpedition(ctx: MilCtx, e: Expedition, weather: Weather): void {
+  // Bataille en attente : l'expédition attend la décision du joueur (jouer ou auto-résoudre).
+  if (e.pending) return;
   const x = ctx.m.exp;
   const g = ctx.m.geo;
   e.day += 1;
@@ -373,6 +480,10 @@ export function stepExpedition(ctx: MilCtx, e: Expedition, weather: Weather): vo
           signal(e, here, "vert", false);
           continue;
         }
+      }
+      if (e.plan.play && ctx.world.tactical) {
+        pendBattle(ctx, e, here, titan, group, misread, weather);
+        break;
       }
       engage(ctx, e, rng, here, titan, group, misread, weather);
     }
