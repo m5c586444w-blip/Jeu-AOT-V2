@@ -2,10 +2,14 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P6 terminée** → P7 — Marley, Hizuru, Alliés (mode autonome borné jusqu'à P8) |
-| Tâche | T7.0 — plan `docs/phases/P7.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P6) : code 0, 255 tests — `docs/reports/P6-verify.log` |
-| Prochaine étape | T7.1 — données du monde (60 provinces, factions, formations, personnages de Marley et d'Hizuru, scénario 854) ; **arrêt de revue après P8** |
+| Phase | **P7 terminée** → P8 — DA, interfaces finales, audio (mode autonome borné ; **arrêt de revue à la fin de P8**) |
+| Tâche | T8.0 — plan `docs/phases/P8.md` (fait) |
+| Dernier `npm run verify` | 2026-10-04 (fin de P7) : code 0, 288 tests — `docs/reports/P7-verify.log` |
+| Prochaine étape | T8.1 — identité (icônes dessinées, textures, shader) ; **arrêt de revue après P8** |
+
+## P7 terminée (2026-10-04)
+- Rapport : `docs/reports/P7.md` ; AC7-01 à AC7-10 OK, aucun échec de critère.
+- Reporté à P8 : esthétiques de Marley et d'Hizuru, dossier de choix illustré, alerte du bandeau pour Marley. À P9 : invasion amphibie par l'IA, E43–E52 jouables, Grondement.
 
 ## P6 terminée (2026-10-04)
 - Rapport : `docs/reports/P6.md` ; AC6-01 à AC6-10 OK. Deux critères ont échoué une fois chacun par erreur de test (smoke:p6, smoke:politique), puis passé : aucun arrêt.
