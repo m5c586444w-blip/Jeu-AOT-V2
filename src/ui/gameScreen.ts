@@ -241,6 +241,9 @@ export async function bootGame(): Promise<void> {
     open_shifters: () => (world.shifters ? registers?.toggle("porteurs") : undefined),
     open_world: () => (world.nations ? registers?.toggle("monde") : undefined),
     open_diplomacy: () => (world.nations ? registers?.toggle("diplomatie") : undefined),
+    open_gazette: () => registers?.toggle("gazette"),
+    open_archives: () => registers?.toggle("archives"),
+    open_epilogue: () => registers?.toggle("epilogue"),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.

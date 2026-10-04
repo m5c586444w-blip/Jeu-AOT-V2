@@ -22,7 +22,7 @@ export interface HudActions {
   openPanel?(id: string): void;
 }
 
-const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie"] as const;
+const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue"] as const;
 /** Registres propres aux institutions de Paradis : masqués quand le joueur mène une autre nation (P7). */
 const PARADIS_ONLY = new Set(["personnages", "cabinet", "decrets", "organisations", "conseil", "expeditions", "renseignement", "recherche"]);
 

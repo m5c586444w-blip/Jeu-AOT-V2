@@ -6,6 +6,7 @@ import type { World } from "../../sim/strategic/world";
 import { createBattle, stepBattle } from "../../sim/tactical/battle";
 import type { Battle } from "../../sim/tactical/battle";
 import { bodyName } from "../../sim/tactical/shifters";
+import { letterFor } from "../narrative";
 import type { BattleSetup, SoldierUnit, TacticalOrder, TimedOrder } from "../../sim/tactical/types";
 import { TACTICAL_ORDERS } from "../../sim/tactical/types";
 import { el } from "../panels/common";
@@ -307,6 +308,13 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
           ul.append(el("li", "", t("tac.sum.dossier", { name: s.name, squad: squadName(s.squad), cause: t(`tac.cause.${s.death?.cause ?? "frappe"}`), titan: titan ? t(bodyName(bt, titan)) : "—", t: clock(s.death?.t ?? 0), x: Math.round(s.death?.x ?? 0), y: Math.round(s.death?.y ?? 0) })));
         }
         box.append(ul);
+        // Lettres aux familles (04 §5.12) : les trois premières en entier, les autres comptées.
+        const letters = el("details", "bilan-lettres");
+        letters.append(el("summary", "", t("narr.letters", { n: dead.length })));
+        const place = t(o.world.tactical?.maps.get(o.setup.map)?.name_key ?? "");
+        for (const s of dead.slice(0, 3)) letters.append(el("p", "lettre", letterFor(o.world, st, s, place)));
+        if (dead.length > 3) letters.append(el("p", "registre-note", t("narr.letters_more", { n: dead.length - 3 })));
+        box.append(letters);
       }
       const ok = el("button", "registre-bouton principal", o.linked ? t("tac.validate") : t("tac.close"));
       ok.type = "button";

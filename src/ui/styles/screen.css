@@ -713,3 +713,25 @@
 .bandeau__pied .bandeau__registres { margin-left: 0; flex: 0 0 auto; }
 .choix-nation-menu { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: stretch; }
 .choix-nation-menu .tiroir-scenarios__etiquette { flex: 1 1 100%; }
+/* P8 — gazette (04 §5.10), archives (§5.13), épilogue (§5.15), lettres (§5.12) */
+.gazette { background: #ece3cc; background-image: var(--grain-fond); border: 1px solid var(--encre); padding: 0.8rem 1rem; }
+.gazette__titre { font-family: var(--f-titre); font-size: 2rem; text-align: center; margin: 0; border-bottom: 3px double var(--encre); font-weight: 400; }
+.gazette--marley { background: #d9d2c0; }
+.gazette--marley .gazette__titre { font-family: var(--f-marley); color: #7a1f1f; border-bottom-color: #2d3e50; }
+.gazette__date { font-family: var(--f-machine); font-size: 0.75rem; text-align: center; margin: 0.15rem 0; }
+.gazette__colonnes { column-count: 3; column-gap: 1.2rem; column-rule: 1px solid rgba(28, 26, 23, 0.35); margin-top: 0.5rem; }
+.gazette__article { break-inside: avoid; margin-bottom: 0.7rem; }
+.gazette__article h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
+.gazette__article--une h4 { font-size: 1.35rem; }
+.gazette__article p { margin: 0.2rem 0; text-align: justify; hyphens: auto; }
+.archives { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.5rem; }
+.fiche-archive { border: 1px solid var(--encre); padding: 0.35rem 0.5rem; background: #f1e8d2; background-image: var(--fibres); font-size: 0.88rem; }
+.fiche-archive h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
+.fiche-archive p { margin: 0.2rem 0 0; }
+.epilogue { background: #ece3cc; background-image: var(--grain-fond), var(--fibres); border: 1px solid var(--encre); padding: 1rem 1.2rem; transform: rotate(-0.4deg); }
+.epilogue__titre { font-family: var(--f-titre); font-size: 1.6rem; margin: 0 0 0.6rem; font-weight: 400; }
+.epilogue__recit p { margin: 0.25rem 0; font-style: italic; }
+.epilogue__chiffres { margin-top: 0.8rem; }
+.bilan-lettres { margin: 0.5rem 0; }
+.lettre { font-family: var(--f-machine); font-size: 0.82rem; background: #f4ecd8; border: 1px solid rgba(28, 26, 23, 0.4); padding: 0.4rem 0.6rem; margin: 0.35rem 0; }
+@media (max-width: 1100px) { .gazette__colonnes { column-count: 2; } }

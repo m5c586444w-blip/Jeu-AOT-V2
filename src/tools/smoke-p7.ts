@@ -74,7 +74,7 @@ try {
   await page.waitForSelector('.registre-panneau[data-panel="monde"]:not([hidden])');
   await page.waitForFunction(() => document.querySelector(".atlas-monde")?.getAttribute("data-drawn") === "61");
   const buttons = await page.locator(".bandeau__registre-bouton:visible").allInnerTexts();
-  expect(buttons.length === 5 && !buttons.some((b) => /Cabinet|Décrets/i.test(b)), `Marley : table de guerre ouverte, atlas de 61 provinces ; registres de Paradis masqués (${buttons.join(", ")})`);
+  expect(buttons.length === 8 && !buttons.some((b) => /Cabinet|Décrets/i.test(b)), `Marley : table de guerre ouverte, atlas de 61 provinces ; registres de Paradis masqués (${buttons.join(", ")})`);
   const ledger = await page.locator(".table-guerre__comptes").innerText();
   expect(ledger.includes("Marley") && ledger.includes(fr["world.industry"]), `comptes de la nation jouée : « ${ledger.slice(0, 90)}… »`);
 
@@ -137,7 +137,7 @@ try {
   await p2.waitForSelector('.registre-panneau[data-panel="monde"]:not([hidden])');
   await p2.waitForFunction(() => document.querySelector(".atlas-monde")?.getAttribute("data-drawn") === "61");
   const pl = await p2.locator(".table-guerre__comptes").innerText();
-  expect(pb === 13 && pl.includes("Paradis"), `Paradis en 854 : ${pb} registres (dont Monde et Chancellerie), comptes de Paradis au monde`);
+  expect(pb === 16 && pl.includes("Paradis"), `Paradis en 854 : ${pb} registres (dont Monde et Chancellerie), comptes de Paradis au monde`);
   await audit(p2, ".registre-panneau", "table de guerre (Paradis)");
   await p2.screenshot({ path: `${OUT}/p7-paradis-monde.png` });
 
