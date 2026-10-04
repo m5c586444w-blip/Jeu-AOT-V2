@@ -13,13 +13,28 @@ function zoneOf(g: GeoGraph, id: string): string {
 }
 
 /**
- * Raison pour laquelle l'étape `a → seg → b` est interdite, ou null : passer d'une zone à une autre par un segment
- * de mur exige une porte (D-52) ; longer le mur reste possible.
+ * Franchissement des murs (D-52) : une suite de segments de mur reliant deux provinces de zones différentes
+ * doit contenir une porte ; longer le mur sans changer de zone reste possible. Renvoie la clé du problème ou null.
  */
-export function crossingProblem(g: GeoGraph, a: string, seg: string, b: string): string | null {
-  if (!isWall(g, seg) || isWall(g, a) || isWall(g, b)) return null;
-  if (zoneOf(g, a) === zoneOf(g, b)) return null;
-  return g.gates.has(seg) ? null : `route.no_gate`;
+export function crossingProblem(g: GeoGraph, route: readonly string[]): { key: string; params: Record<string, string | number> } | null {
+  let entry: string | null = null;
+  let gate = false;
+  let first = "";
+  for (let i = 0; i < route.length; i++) {
+    const id = route[i] as string;
+    if (isWall(g, id)) {
+      if (entry === null) {
+        entry = i > 0 ? zoneOf(g, route[i - 1] as string) : "";
+        gate = false;
+        first = id;
+      }
+      gate = gate || g.gates.has(id);
+    } else {
+      if (entry !== null && entry !== "" && entry !== zoneOf(g, id) && !gate) return { key: "route.no_gate", params: { segment: first } };
+      entry = null;
+    }
+  }
+  return null;
 }
 
 export function edgeKm(g: GeoGraph, a: string, b: string): number | null {
@@ -41,44 +56,56 @@ export function routeProblem(g: GeoGraph, route: readonly string[]): { key: stri
     const b = route[i] as string;
     if (edgeKm(g, a, b) === null) return { key: "route.not_adjacent", params: { a, b } };
   }
-  // Un segment entre deux provinces de zones différentes doit être une porte ; idem pour un segment en début ou fin de chemin.
-  for (let i = 1; i < route.length - 1; i++) {
-    const p = crossingProblem(g, route[i - 1] as string, route[i] as string, route[i + 1] as string);
-    if (p) return { key: p, params: { segment: route[i] as string } };
-  }
-  return null;
+  return crossingProblem(g, route);
 }
 
-/** Plus court chemin (Dijkstra) respectant la règle des portes ; null si aucun. Chemin de `from` à `to` inclus. */
+/**
+ * Plus court chemin (Dijkstra) respectant la règle des portes ; null si aucun. Chemin de `from` à `to` inclus.
+ * État de recherche : province, zone d'entrée dans le mur (si on le longe), porte déjà rencontrée sur ce tronçon.
+ */
 export function shortestRoute(g: GeoGraph, from: string, to: string): string[] | null {
   if (!g.nodes.has(from) || !g.nodes.has(to)) return null;
-  // État = (province, précédente) pour appliquer la règle des portes sur les triplets.
-  const key = (cur: string, prev: string): string => `${cur}|${prev}`;
-  const dist = new Map<string, number>([[key(from, ""), 0]]);
+  interface Node {
+    k: string;
+    cur: string;
+    entry: string;
+    gate: boolean;
+    d: number;
+  }
+  const key = (cur: string, entry: string, gate: boolean): string => `${cur}|${entry}|${gate ? 1 : 0}`;
+  const startEntry = isWall(g, from) ? "" : "-";
+  const start: Node = { k: key(from, startEntry, g.gates.has(from)), cur: from, entry: startEntry, gate: g.gates.has(from), d: 0 };
+  const dist = new Map<string, number>([[start.k, 0]]);
   const back = new Map<string, string>();
-  const open: { k: string; cur: string; prev: string; d: number }[] = [{ k: key(from, ""), cur: from, prev: "", d: 0 }];
+  const open: Node[] = [start];
   while (open.length > 0) {
     open.sort((x, y) => x.d - y.d || (x.k < y.k ? -1 : 1));
-    const n = open.shift() as { k: string; cur: string; prev: string; d: number };
+    const n = open.shift() as Node;
     if (n.d > (dist.get(n.k) ?? Infinity)) continue;
     if (n.cur === to) {
-      const path = [n.cur];
-      let k = n.k;
-      while (back.has(k)) {
-        k = back.get(k) as string;
+      const path: string[] = [];
+      let k: string | undefined = n.k;
+      while (k !== undefined) {
         path.unshift(k.split("|")[0] as string);
+        k = back.get(k);
       }
       return path;
     }
     for (const e of g.adj.get(n.cur) ?? []) {
-      if (e.to === n.prev) continue;
-      if (n.prev && crossingProblem(g, n.prev, n.cur, e.to)) continue;
-      const k = key(e.to, n.cur);
+      const nextWall = isWall(g, e.to);
+      let entry = "-";
+      let gate = false;
+      if (nextWall) {
+        // On monte sur (ou on longe) le mur : on retient la zone d'où l'on vient et si une porte a été rencontrée.
+        entry = isWall(g, n.cur) ? n.entry : zoneOf(g, n.cur);
+        gate = (isWall(g, n.cur) && n.gate) || g.gates.has(e.to);
+      } else if (isWall(g, n.cur) && n.entry !== "" && n.entry !== zoneOf(g, e.to) && !n.gate) continue;
+      const k = key(e.to, entry, gate);
       const d = n.d + e.km;
       if (d < (dist.get(k) ?? Infinity)) {
         dist.set(k, d);
         back.set(k, n.k);
-        open.push({ k, cur: e.to, prev: n.cur, d });
+        open.push({ k, cur: e.to, entry, gate, d });
       }
     }
   }

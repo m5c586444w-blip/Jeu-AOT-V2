@@ -241,3 +241,8 @@
   - « Ravitaillement » ouvert (F-STR-13).
   - « Titans » lit désormais la densité du scénario (D-51).
   - « Religion » et « Légitimité », annoncés pour P2, restent fermés et sont annoncés pour P5. Il n'existe ni système religieux, ni légitimité provinciale : afficher une valeur nationale identique partout n'aurait aucun sens.
+
+## 2026-10-04 — D-58 Correctif de la règle des portes (D-52)
+- Défaut trouvé en préparant `smoke:expedition` : le contrôle ne portait que sur un pas « province → segment → province ». Un chemin longeant plusieurs segments franchissait donc le mur sans porte (Karanes → Utgard → Rose-Nord-Est → Rose-Nord → Gorge du Silence).
+- Correction : une suite de segments reliant deux zones différentes doit contenir une porte. Le plus court chemin porte dans son état la zone d'entrée et la porte rencontrée. Test ajouté : tout plus court chemin de Karanes vers Maria passe une porte, et l'ancien chemin est refusé (`route.no_gate`).
+- Lecture `[A]` : franchir la porte puis longer le pied du mur avant de s'en écarter est permis.

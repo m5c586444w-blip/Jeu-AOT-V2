@@ -4,6 +4,7 @@ import { replayFactors } from "../../src/sim/core/explain";
 import { deserialize, serialize } from "../../src/sim/core/serialize";
 import { contactRate } from "../../src/sim/military/expedition";
 import { estimatePlan, planCapitalCost, planProblem, preBrief } from "../../src/sim/military/plan";
+import { routeProblem, shortestRoute } from "../../src/sim/military/routes";
 import { FIELD_DEATH_CAUSES } from "../../src/sim/military/vocabulary";
 import { foodDays, legitimacyTarget, nationalMoraleOf } from "../../src/sim/politics/politics";
 import { hasKey } from "../../src/i18n";
@@ -25,6 +26,19 @@ describe("planification (AC3-05, F-EXP-01, F-EXP-15, F-LOG-15)", () => {
     expect(prob({ ...base, wagons: 0 })).toBe("plan.no_wagons");
     const poor = { ...s, politics: { ...pol(s), capital: 0 } };
     expect(planProblem(world, strat(poor), poor.politics, mil(poor), poor.date, base)?.key).toBe("plan.no_capital");
+  });
+
+  it("règle des portes (D-52) : longer le mur ne permet pas de le franchir ; tout plus court chemin vers Maria passe une porte", () => {
+    const g = world.military?.geo;
+    if (!g) throw new Error();
+    expect(routeProblem(g, ["prov_karanes", "prov_utgard", "prov_rose_nord_est", "prov_rose_nord", "prov_gorge_du_silence"])?.key).toBe("route.no_gate");
+    for (const [id, n] of g.nodes) {
+      if (n.zone !== "maria") continue;
+      const r = shortestRoute(g, "prov_karanes", id);
+      expect(r, id).not.toBeNull();
+      expect(routeProblem(g, r ?? []), id).toBeNull();
+      expect(r?.some((p) => g.gates.has(p)), `${id} : ${r?.join(" > ")}`).toBe(true);
+    }
   });
 
   it("coût et estimations expliqués : le « pourquoi ? » rejoue le calcul ; relais proposés hors rayon", () => {
