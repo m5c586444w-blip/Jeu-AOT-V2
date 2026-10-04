@@ -331,7 +331,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   const n = troops.length + e.officers.length;
   if (n === 0) return;
   const f = x.formations[e.plan.formation];
-  const { engaged, rest, engagedN } = selectEngaged(ctx, e, rng, cls.abnormal, group);
+  const { engaged, rest } = selectEngaged(ctx, e, rng, cls.abnormal, group);
   const skill = engaged.reduce((s, p) => s + p.odm, 0) / Math.max(1, engaged.length);
   const vets = troops.length > 0 ? troops.reduce((s, t) => s + t.expeditions, 0) / troops.length : 0;
   const veteran = 1 - Math.min(x.experience.max_bonus, x.experience.survival_per_expedition * vets * g.veteran_k * 10);
