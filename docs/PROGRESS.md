@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P4 validée par l'utilisateur (avec correctifs, faits) → P5 en mode autonome borné, jusqu'à P8 |
-| Tâche | Correctifs de revue de P4 (D-62, D-63) |
+| Phase | P5 — Renseignement, recherche, événements (mode autonome borné jusqu'à P8) |
+| Tâche | T5.0 — plan `docs/phases/P5.md` (fait) |
 | Dernier `npm run verify` | voir le commit des correctifs de revue |
-| Prochaine étape | P5 — plan `docs/phases/P5.md` ; enchaîner P5 → P8 ; **arrêt de revue après P8** |
+| Prochaine étape | T5.1 — données de P5 ; enchaîner P5 → P8 ; **arrêt de revue après P8** |
 
 ## Revue de P4 (2026-10-04) — validée, correctifs appliqués
 - Cartes d'escouade coupées : fait (D-63).
@@ -57,3 +57,4 @@
 - 2026-10-04 — P4 : T4.1 → T4.11 livrées ; erreur de procédure en T4.8 (commit 1d617bd poussé avec verify en échec, corrigé par 78276db ; garde-fou ajouté).
 - 2026-10-04 — P4 terminée : AC4-01 à AC4-14 passent (AC4-09 navigateur au 2e passage) ; rapport `docs/reports/P4.md` ; **arrêt pour revue**.
 - 2026-10-04 — Revue de P4 : validée par l'utilisateur ; correctifs D-62 et D-63 ; réalisme R-gaz KO (décision ouverte) ; R-nuit OK après correction du déploiement de nuit.
+- 2026-10-04 — P5 démarrée : plan `docs/phases/P5.md`.
