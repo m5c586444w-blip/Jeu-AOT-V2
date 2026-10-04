@@ -190,3 +190,15 @@
   - `control_canon` (scénario) : statut d'un rattachement donné dans `control`. Le scénario 850 donne `prov_ville_usine: A`.
 - Nouvelle règle **R7** de `canon:check` : le rattachement d'une province à localisation `?` doit porter un statut, et ce statut ne peut jamais être `C`. Fixture d'échec : `tests/fixtures/bad/r7_uncertain_location_as_canon`.
 - Le dossier de province affiche les deux tampons (« Localisation : ? », « Rattachement : A »), chacun avec sa fiche « pourquoi ? ».
+
+## 2026-10-04 — D-50 Périmètre de P3
+- Décision : P3 couvre les expéditions et la logistique (05 §5). S'y ajoutent les fonctions de phase P3 directement liées : générateur de soldats, lettres aux familles, blessures et séquelles, calque de ravitaillement.
+- Reportées, avec leur phase cible (`docs/phases/P3.md` §3) :
+  - expéditions secrètes → P5 ;
+  - réparations en campagne → P4 ;
+  - transport par route, rail ou mer → P7 ;
+  - fonctions politiques et sociales de phase P2/P3 sans lien avec les expéditions → P5 ou P9.
+- Raison : 05 §11 et son rappel final (cohérent et profond plutôt que vaste).
+
+## 2026-10-04 — D-51 Densité de Titans propre au scénario
+- Décision : le fichier des provinces décrit les lieux et garde sa densité de départ. La densité de Titans d'un scénario (ex. Maria perdue en 850) est un paramètre de scénario `titan_density` `[A]`. Le fait que Maria soit tombée est `[C]` ; les valeurs sont `[A]`.
