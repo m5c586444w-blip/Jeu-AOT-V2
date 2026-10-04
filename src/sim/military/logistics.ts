@@ -66,9 +66,9 @@ export function sendConvoy(ctx: MilCtx, o: ConvoyOrder): Convoy {
 }
 
 /** Risque quotidien d'interception (AC3-04) : croît avec la densité de Titans, décroît avec l'escorte. */
-export function interceptionRisk(ctx: Pick<MilCtx, "world" | "m">, province: string, escort: number): number {
+export function interceptionRisk(ctx: Pick<MilCtx, "world" | "m"> & Partial<Pick<MilCtx, "st" | "tech">>, province: string, escort: number): number {
   const c = ctx.m.log.convoy;
-  return clamp(c.interception_per_day_at_density_1 * titanDensity(ctx.world, province) * Math.exp(-c.escort_k * escort), 0, 0.95);
+  return clamp(c.interception_per_day_at_density_1 * titanDensity(ctx.world, province, ctx.st) * Math.exp(-c.escort_k * escort) * (ctx.tech?.interception ?? 1), 0, 0.95);
 }
 
 function returnEscort(ctx: MilCtx, c: Convoy): void {

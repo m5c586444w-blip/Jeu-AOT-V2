@@ -303,3 +303,27 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - **2e passage OK** : couverture 100 %, 47 pastilles, sélection, p95 4,7 ms avec 300 unités.
 - **Mesure « ms/image · unités »** : masquée, affichée par **F2** (mode debug) pendant la bataille. La console de la carte ne s'ouvre pas sous la bataille.
 - **60 FPS** : **non vérifié, GPU réel requis** (l'utilisateur n'a pas de poste local). Ne bloque pas.
+
+## 2026-10-04 — D-64 Données de P5 : événements, technologies
+- **Graphe** : le graphe des événements (12 §3) est porté par les champs `window.after`, qui sont la source unique. Il n'existe pas de fichier `graph.json` en double. Les bifurcations (12 §2) sont un champ `bifurcation` de l'événement. `canon:check` refuse les cycles (R4).
+- **Squelettes** : E01–E08 et E43–E60 sont saisis sans mécanique (`playable: false`), pour que les technologies puissent les citer (`unlock_event`). Au début de 850, ceux des années passées comptent comme « passés ».
+- **Fenêtres** : délai en jours après le prédécesseur, toujours `?` (12 : mois inconnus). Choix et effets : `A`, avec exactement un choix historique par événement canon à choix.
+- **Événement de l'errata Q1** (fusil anti-Titan) : non jouable en P5, côté Marley (P7).
+- **Technologies** : les 76 du fichier 13 sont générées depuis ses tables. Hizuru et les Alliés forment un seul arbre (« Hizuru et Alliés », 13 §9), d'où 9 arbres (F-TEC-01). Les 12 doctrines (13 §10) s'y ajoutent. Interprétations `[A]` :
+  - T-ODM-03 (extraction du gaz) est possédée au départ : la production de gaz existe dès 845 dans l'économie ;
+  - T-HIZ-01 est rattachée à E48 (la pierre est obtenue après le contact avec Paradis) ;
+  - T-INT-08, technologie de Marley, est rattachée à E50.
+- **R8–R10** :
+  - R8 : sur le chemin historique d'un événement, un personnage ne meurt qu'à son `death_event`, et chaque `death_event` jouable le tue ;
+  - R9 : références des effets et des conditions ;
+  - R10 : un événement n'exige pas une technologie postérieure à son année.
+
+## 2026-10-04 — D-65 Mort d'Erwin : E42 plutôt qu'E41
+- 11 §3 : Erwin meurt à Shiganshina (850). 12 attribue sa mort à la charge (E41), mais le choix du sérum (E42) se fait « entre Erwin et Armin ». Il faut donc qu'Erwin, mortellement blessé, soit encore en vie à E42.
+- Décision `[A]` : E41 (charge) le blesse à mort (drapeau `erwin_mortally_wounded`). E42, choix historique « Armin », le fait mourir. `death_event` = E42. Le choix « Erwin » (divergence maximale) n'est offert que s'il a été blessé à la charge.
+- Hannes : `death_event` = E28 `[A]` (11 §3 : arc de l'invasion de Wall Rose, Titan souriant).
+
+## 2026-10-04 — D-66 Forme canonique de l'état après chaque commande
+- Défaut latent révélé par P5 : un état relu d'une sauvegarde a ses clés triées, un état vivant non. Les sommes flottantes qui parcourent ces objets (provinces, stocks) diffèrent alors au dernier chiffre, et une partie rechargée diverge de la partie vivante. Le test d'aller-retour de P2 l'a montré dès que les événements ont fait varier le moral.
+- Correctif : l'état initial et l'état après chaque commande sont mis en forme canonique (clés triées), exactement comme une sauvegarde relue. Coût : une copie par commande ; le tick quotidien n'est pas touché.
+- **Isolation des outils de P3** : `sim:expeditions` et les tests d'expédition et de P2 qui supposent qu'aucun événement ne tue utilisent le monde 850 **sans chronologie**. Sinon, E19 tuerait par exemple les officiers que le plan type engage. Résultat de `sim:expeditions` : inchangé (30,3 %).

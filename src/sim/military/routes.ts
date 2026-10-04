@@ -147,9 +147,10 @@ export function supplyAt(world: World, st: StrategicState, mil: MilitaryState | 
   return best;
 }
 
-/** Densité de Titans d'une province dans le scénario (D-51). */
-export function titanDensity(world: World, province: string): number {
-  return world.scenario.titan_density[province] ?? world.provinceById.get(province)?.titan_density ?? 0;
+/** Densité de Titans d'une province : celle du scénario (D-51), plus les effets des événements (P5) si l'état est fourni. */
+export function titanDensity(world: World, province: string, st?: StrategicState): number {
+  const base = world.scenario.titan_density[province] ?? world.provinceById.get(province)?.titan_density ?? 0;
+  return Math.max(0, Math.min(1, base + (st?.titanMods?.[province] ?? 0)));
 }
 
 /**

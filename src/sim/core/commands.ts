@@ -1,4 +1,5 @@
 import type { EventBus } from "./bus";
+import { canonicalClone } from "./canonical";
 import { tickDay } from "./state";
 import type { GameState } from "./state";
 import type { GameDate } from "./time";
@@ -17,6 +18,11 @@ import { sendConvoy } from "../military/logistics";
 import type { ConvoyOrder } from "../military/logistics";
 import type { ExpeditionPlan } from "../military/state";
 import { FORMATIONS, OBJECTIVES } from "../military/vocabulary";
+import { chooseOption } from "../events/engine";
+import { assignAgent, assignProblem, INTEL_OPS, recallAgent, recruitAgent, recruitProblem } from "../intel/intel";
+import type { IntelOp } from "../intel/intel";
+import { lockOf, techMods } from "../research/research";
+import { toAbsoluteDay } from "./time";
 
 export const MAX_ADVANCE_DAYS = 3650;
 
@@ -36,6 +42,11 @@ export type Command =
   | { type: "RecallExpedition"; expedition: string }
   | { type: "SendConvoy"; order: ConvoyOrder }
   | { type: "ResolveBattle"; expedition: string; mode: "jouer" | "auto"; orders: TimedOrder[] }
+  | { type: "ChooseEventOption"; event: string; choice: string }
+  | { type: "SetResearch"; tech: string | null }
+  | { type: "RecruitAgent" }
+  | { type: "AssignAgent"; agent: string; op: IntelOp; target: string }
+  | { type: "RecallAgent"; agent: string }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -108,6 +119,16 @@ export function validateCommand(cmd: unknown): Validation {
       const ok = !!o && typeof o["depot"] === "string" && validSupplies(o["cargo"]) && Number.isInteger(o["wagons"]) && Number.isInteger(o["escort"]);
       return ok ? { ok: true } : { ok: false, error: "SendConvoy.order invalide" };
     }
+    case "ChooseEventOption":
+      return typeof c["event"] === "string" && typeof c["choice"] === "string" ? { ok: true } : { ok: false, error: "ChooseEventOption invalide" };
+    case "SetResearch":
+      return c["tech"] === null || typeof c["tech"] === "string" ? { ok: true } : { ok: false, error: "SetResearch.tech invalide" };
+    case "RecruitAgent":
+      return { ok: true };
+    case "AssignAgent":
+      return typeof c["agent"] === "string" && typeof c["target"] === "string" && (INTEL_OPS as readonly string[]).includes(String(c["op"])) ? { ok: true } : { ok: false, error: "AssignAgent invalide" };
+    case "RecallAgent":
+      return typeof c["agent"] === "string" ? { ok: true } : { ok: false, error: "RecallAgent invalide" };
     case "Noop":
       return { ok: true };
     default:
@@ -184,10 +205,18 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "ResolveBattle":
       next = applyMilitary(next, cmd, world);
       break;
+    case "ChooseEventOption":
+    case "SetResearch":
+    case "RecruitAgent":
+    case "AssignAgent":
+    case "RecallAgent":
+      next = applyP5(next, cmd, world);
+      break;
     case "Noop":
       break;
   }
-  next = { ...next, commandIndex: next.commandIndex + 1 };
+  // Forme canonique après chaque commande (D-66) : l'état vivant est identique à l'état relu d'une sauvegarde.
+  next = canonicalClone({ ...next, commandIndex: next.commandIndex + 1 });
   bus?.emit("commandApplied", { index: next.commandIndex, command: cmd });
   return next;
 }
@@ -245,12 +274,66 @@ function applyMilitary(state: GameState, cmd: MilitaryCommand, world?: World): G
     st: structuredClone(state.strategic),
     pol: state.politics ? structuredClone(state.politics) : null,
     mil: structuredClone(state.military),
+    tech: techMods(world, state.research),
   };
+  if (cmd.type === "LaunchExpedition" && cmd.plan.objective === "capture" && !ctx.tech?.capture) throw new Error("plan.capture_locked");
   if (cmd.type === "LaunchExpedition") launchExpedition(ctx, cmd.plan);
   else if (cmd.type === "RecallExpedition") recallExpedition(ctx, cmd.expedition);
   else if (cmd.type === "ResolveBattle") resolveBattle(ctx, cmd.expedition, cmd.mode, cmd.orders);
   else sendConvoy(ctx, cmd.order);
   return { ...state, strategic: ctx.st, politics: ctx.pol, military: ctx.mil };
+}
+
+type P5Command = Extract<Command, { type: "ChooseEventOption" | "SetResearch" | "RecruitAgent" | "AssignAgent" | "RecallAgent" }>;
+
+/** Commandes de P5 : événements, recherche, renseignement. Erreur explicite si la commande n'est pas recevable. */
+function applyP5(state: GameState, cmd: P5Command, world?: World): GameState {
+  if (!world || !state.strategic) throw new Error(`${cmd.type} : aucune partie chargée`);
+  const day = toAbsoluteDay(state.date);
+  switch (cmd.type) {
+    case "ChooseEventOption": {
+      if (!state.events) throw new Error("ChooseEventOption : aucun moteur d'événements");
+      const ctx = { world, seed: state.seed, date: state.date, st: structuredClone(state.strategic), pol: state.politics ? structuredClone(state.politics) : null, mil: state.military, rs: state.research ? structuredClone(state.research) : null, intel: state.intel ? structuredClone(state.intel) : null, ev: structuredClone(state.events) };
+      chooseOption(ctx, cmd.event, cmd.choice);
+      return { ...state, strategic: ctx.st, politics: ctx.pol, research: ctx.rs, intel: ctx.intel, events: ctx.ev };
+    }
+    case "SetResearch": {
+      const rs = state.research;
+      if (!rs || !world.research) throw new Error("SetResearch : aucune recherche");
+      if (cmd.tech === null) return { ...state, research: { ...rs, current: null, bank: rs.bank + rs.progress, progress: 0 } };
+      const t = world.research.techs.get(cmd.tech);
+      if (!t) throw new Error(`SetResearch : technologie inconnue ${cmd.tech}`);
+      const history = state.events?.history ?? {};
+      const lock = lockOf(world, rs, t, state.date, (id) => history[id]?.status === "survenu" || history[id]?.status === "passe", (id) => state.politics?.characters[id]?.alive ?? false);
+      if (lock) throw new Error(lock.key);
+      // Changer de sujet met l'avancement en réserve : rien n'est perdu, rien n'est doublé.
+      const bank = rs.current && rs.current !== cmd.tech ? rs.bank + rs.progress : rs.bank;
+      return { ...state, research: { ...rs, current: cmd.tech, progress: rs.current === cmd.tech ? rs.progress : 0, bank } };
+    }
+    case "RecruitAgent": {
+      if (!state.intel || !state.politics) throw new Error("RecruitAgent : aucun renseignement");
+      const problem = recruitProblem(world, state.intel, state.politics, state.research);
+      if (problem) throw new Error(problem);
+      const intel = structuredClone(state.intel);
+      const politics = structuredClone(state.politics);
+      recruitAgent(world, state.seed, intel, politics, day);
+      return { ...state, intel, politics };
+    }
+    case "AssignAgent": {
+      if (!state.intel) throw new Error("AssignAgent : aucun renseignement");
+      const problem = assignProblem(world, state.intel, cmd.agent, cmd.op, cmd.target);
+      if (problem) throw new Error(problem);
+      const intel = structuredClone(state.intel);
+      assignAgent(world, intel, cmd.agent, cmd.op, cmd.target, day);
+      return { ...state, intel };
+    }
+    case "RecallAgent": {
+      if (!state.intel) throw new Error("RecallAgent : aucun renseignement");
+      const intel = structuredClone(state.intel);
+      recallAgent(intel, cmd.agent);
+      return { ...state, intel };
+    }
+  }
 }
 
 /** Journal des commandes appliquées : source des replays et des sauvegardes rejouables. */

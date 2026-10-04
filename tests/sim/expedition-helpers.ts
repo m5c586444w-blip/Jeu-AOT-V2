@@ -6,7 +6,8 @@ import type { GameState } from "../../src/sim/core/state";
 import { standardPlan } from "../../src/sim/military/plan";
 import type { ExpeditionPlan, MilitaryState } from "../../src/sim/military/state";
 
-export const world = loadWorld("data", "scn_sandbox_850");
+/** Monde 850 sans chronologie (P5) : les tests de P3 isolent le modèle d'expédition des événements canon (D-66). */
+export const world = { ...loadWorld("data", "scn_sandbox_850"), chronicle: null };
 
 export const cmd = (s: GameState, c: Command): GameState => applyCommand(s, c, undefined, world);
 

@@ -59,6 +59,13 @@ export const MIGRATIONS: readonly Migration[] = [
       return { ...raw, schemaVersion: 5, military };
     },
   },
+  {
+    from: 5,
+    describe: "v5 → v6 : événements, recherche et renseignement (`events`, `research`, `intel` : null ; créés au premier jour simulé), P5",
+    migrate(raw) {
+      return { ...raw, schemaVersion: 6, events: raw["events"] ?? null, research: raw["research"] ?? null, intel: raw["intel"] ?? null };
+    },
+  },
 ];
 
 export class SaveFormatError extends Error {
@@ -118,5 +125,11 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (pol !== null && (typeof pol !== "object" || pol === undefined || !("legitimacy" in pol) || !("characters" in pol))) problems.push("politics");
   const mil = raw["military"];
   if (mil !== null && (typeof mil !== "object" || mil === undefined || !("soldiers" in mil) || !("expeditions" in mil))) problems.push("military");
+  const ev = raw["events"];
+  if (ev !== null && (typeof ev !== "object" || ev === undefined || !("history" in ev) || !("scheduled" in ev))) problems.push("events");
+  const rs = raw["research"];
+  if (rs !== null && (typeof rs !== "object" || rs === undefined || !("done" in rs))) problems.push("research");
+  const intel = raw["intel"];
+  if (intel !== null && (typeof intel !== "object" || intel === undefined || !("agents" in intel) || !("seen" in intel))) problems.push("intel");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

@@ -25,6 +25,14 @@ function sortKeys(value: unknown): unknown {
   return value;
 }
 
+/**
+ * Copie canonique (clés triées, champs `undefined` retirés) : exactement ce que produit une sauvegarde relue.
+ * Un état vivant et un état rechargé ont ainsi le même ordre d'itération, donc les mêmes sommes flottantes.
+ */
+export function canonicalClone<T>(value: T): T {
+  return JSON.parse(canonicalJson(value)) as T;
+}
+
 /** Hash d'état : FNV-1a 32 bits du JSON canonique, en 8 caractères hexadécimaux. */
 export function stateHash(value: unknown): string {
   return toHex8(fnv1a(canonicalJson(value)));

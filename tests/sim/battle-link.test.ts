@@ -59,7 +59,7 @@ describe("lien avec les expéditions (AC4-10, F-EXP-18)", () => {
     raw.schemaVersion = 4;
     for (const e of raw.military.expeditions) delete e["pending"];
     const m = deserialize(JSON.stringify(raw));
-    expect(m.schemaVersion).toBe(5);
+    expect(m.schemaVersion).toBe(6);
     expect(m.military?.expeditions[0]?.pending).toBeNull();
   });
 });

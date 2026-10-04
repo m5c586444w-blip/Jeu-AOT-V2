@@ -47,7 +47,7 @@
   },
   "signals": { "error_base": 0.03, "misread_engage_mult": 1.5 },
   "retreat_defaults": { "losses_pct": 35, "gas_pct": 25, "abnormal": 3, "max_days": 20 },
-  "objective_days": { "reconnaissance": 0, "exploration": 2, "recuperation": 1, "depot": 1 },
+  "objective_days": { "reconnaissance": 0, "exploration": 2, "recuperation": 1, "depot": 1, "capture": 2 },
   "politics": { "capital_base": 8, "capital_per_100": 4, "legitimacy_success": 2, "legitimacy_failure": -2, "legitimacy_per_loss_pct": -0.08, "corps_loyalty_success": 4, "corps_loyalty_per_loss_pct": -0.15, "mourning_days": 60 },
   "experience": { "survival_per_expedition": 0.1, "max_bonus": 0.4 },
   "named": { "exposure_mult": 0.6, "ackerman_mult": 0.2 },

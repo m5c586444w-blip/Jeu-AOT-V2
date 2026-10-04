@@ -60,6 +60,8 @@ export const EffectSchema = z.discriminatedUnion("op", [
   z.object({ op: z.literal("divergence"), delta: z.number() }).strict(),
   z.object({ op: z.literal("research"), delta: z.number() }).strict(),
   z.object({ op: z.literal("observe"), province: id("prov") }).strict(),
+  /** Titans capturés vivants pour l'étude (F-TEC-02 ; E11 : deux Titans capturés à Trost). */
+  z.object({ op: z.literal("captured"), delta: z.number().int() }).strict(),
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 

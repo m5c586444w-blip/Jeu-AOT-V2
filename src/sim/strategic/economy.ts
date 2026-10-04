@@ -41,6 +41,8 @@ export interface StrategicState {
   shortages: ResourceId[];
   log: AlertEntry[];
   alertSeq: number;
+  /** P5 : densité de Titans ajoutée par les événements (invasion de Rose, nettoyage…), par province. */
+  titanMods?: Record<string, number>;
 }
 
 const LOG_LIMIT = 60;

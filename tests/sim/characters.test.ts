@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { stressCharacter } from "../../src/sim/politics/characters";
-import { pol, run, start, strat, world850 } from "./politics-helpers";
+import { applyCommand } from "../../src/sim/core/commands";
+import { createInitialState } from "../../src/sim/core/state";
+import { pol, run, start, strat, world850, world850NoEvents } from "./politics-helpers";
 
 describe("mort d'un personnage (AC2-07, F-CHR-04)", () => {
   it("Erwin : dossier, deuil des proches, deuil politique, organisation, poste vacant, divergence", () => {
@@ -57,9 +59,15 @@ describe("stress et traumatisme (AC2-09, F-CHR-02)", () => {
 
 describe("fenêtres de présence (AC2-02, F-LOR-09)", () => {
   it("un personnage vivant après sa sortie canon déclenche un seul avertissement", () => {
-    const s = run(start(), { type: "AdvanceDays", n: 400 });
+    // Sans chronologie : Erwin n'est pas tué par E42 (P5) et survit à sa sortie canon.
+    const s = applyCommand(createInitialState(42, world850NoEvents), { type: "AdvanceDays", n: 400 }, undefined, world850NoEvents);
     const alerts = strat(s).log.filter((l) => l.key === "alert.divergence_alive" && l.params["name"] === "Erwin Smith");
     expect(alerts).toHaveLength(1);
     expect(alerts[0]?.date.year).toBe(851);
+  });
+  it("en Canon fidèle (P5), Erwin meurt à E42 : aucun avertissement de divergence", () => {
+    const s = run(start(), { type: "AdvanceDays", n: 400 });
+    expect(strat(s).log.some((l) => l.key === "alert.divergence_alive" && l.params["name"] === "Erwin Smith")).toBe(false);
+    expect(pol(s).characters["char_erwin_smith"]?.alive).toBe(false);
   });
 });

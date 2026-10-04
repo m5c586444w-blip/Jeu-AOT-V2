@@ -1,6 +1,8 @@
 import type { GameDate } from "../core/time";
 import type { PoliticalState } from "../politics/state";
 import type { StrategicState } from "../strategic/economy";
+import { NO_TECH } from "../research/research";
+import type { TechMods } from "../research/research";
 import type { World } from "../strategic/world";
 import { recoverWounded, stepExpedition, weatherOn } from "./expedition";
 import type { MilCtx } from "./expedition";
@@ -11,12 +13,12 @@ import type { MilitaryState } from "./state";
  * Jour militaire (P3) : blessés rétablis, expéditions et convois en route, alertes de dépôt.
  * Copie sur écriture : sans activité, les mêmes objets sont renvoyés (coût nul pour le tick).
  */
-export function dailyMilitary(world: World, seed: number, date: GameDate, mil: MilitaryState, st: StrategicState, pol: PoliticalState | null): { mil: MilitaryState; st: StrategicState; pol: PoliticalState | null } {
+export function dailyMilitary(world: World, seed: number, date: GameDate, mil: MilitaryState, st: StrategicState, pol: PoliticalState | null, tech: TechMods = NO_TECH): { mil: MilitaryState; st: StrategicState; pol: PoliticalState | null } {
   const m = world.military;
   if (!m) return { mil, st, pol };
   const busy = mil.expeditions.length > 0 || mil.convoys.some((c) => c.status === "en_route") || mil.depots.length > 0 || Object.values(mil.soldiers).some((s) => s.status === "blesse");
   if (!busy) return { mil, st, pol };
-  const ctx: MilCtx = { world, m, seed, date, st: structuredClone(st), pol: pol ? structuredClone(pol) : null, mil: structuredClone(mil) };
+  const ctx: MilCtx = { world, m, seed, date, st: structuredClone(st), pol: pol ? structuredClone(pol) : null, mil: structuredClone(mil), tech };
   recoverWounded(ctx.mil, date);
   const weather = weatherOn(world, seed, date);
   for (const e of ctx.mil.expeditions.slice()) stepExpedition(ctx, e, weather);

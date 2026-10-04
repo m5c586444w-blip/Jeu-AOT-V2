@@ -16,7 +16,8 @@ const arg = (name: string, def: string): string => {
 const N = Number(arg("n", "100"));
 const TARGET = arg("target", "prov_maria_est");
 const SQUADS = Number(arg("squads", "20"));
-const world = loadWorld("data", "scn_sandbox_850");
+// Le modèle d'expédition est mesuré seul : sans chronologie (P5, D-66), les événements canon ne tuent pas les officiers du plan.
+const world = { ...loadWorld("data", "scn_sandbox_850"), chronicle: null };
 
 interface Run {
   report: ExpeditionReport;

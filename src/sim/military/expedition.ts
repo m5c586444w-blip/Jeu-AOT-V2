@@ -13,6 +13,8 @@ import type { ExpeditionsBalance } from "../../data/balance";
 import { gasFromStock, planCapitalCost, planProblem, planSoldiers } from "./plan";
 import { clamp, lognormal, poisson, uniform, weighted } from "./random";
 import { edgeKm, supplyAt, titanDensity } from "./routes";
+import { NO_TECH } from "../research/research";
+import type { TechMods } from "../research/research";
 import type { DeadRecord, Expedition, ExpeditionPlan, ExpeditionReport, FieldLogEntry, MilitaryState, Soldier } from "./state";
 import { militaryWorld, REPORTS_LIMIT, soldierName } from "./state";
 import type { FieldDeathCause, Signal, Weather } from "./vocabulary";
@@ -27,6 +29,8 @@ export interface MilCtx {
   st: StrategicState;
   pol: PoliticalState | null;
   mil: MilitaryState;
+  /** Effets des technologies acquises (P5) ; absent = aucun. */
+  tech?: TechMods;
 }
 
 const LOG_CAP = 80;
@@ -335,10 +339,14 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   const skill = engaged.reduce((s, p) => s + p.odm, 0) / Math.max(1, engaged.length);
   const vets = troops.length > 0 ? troops.reduce((s, t) => s + t.expeditions, 0) / troops.length : 0;
   const veteran = 1 - Math.min(x.experience.max_bonus, x.experience.survival_per_expedition * vets * g.veteran_k * 10);
-  const gasNeed = engaged.length * g.gas_per_engaged[0];
+  const tech = ctx.tech ?? NO_TECH;
+  const gasNeed = engaged.length * g.gas_per_engaged[0] * tech.gasOdm;
   const gasMult = e.gasOdm < gasNeed ? g.no_gas_mult : 1;
   const bladeMult = e.bladePairs < engaged.length * 0.5 ? g.no_blades_mult : 1;
-  const median = engagementMedian(x, { threat: cls.threat, group, skill, veteran, gasMult, bladeMult, morale: e.morale, exposure: f.exposure, misread });
+  // Technologies (P5) : équipement de nuit sur la part nocturne des contacts, doctrine ; facteur 1 sans recherche.
+  const nightShare = x_night(ctx);
+  const techMult = (1 - nightShare * (1 - tech.nightLoss)) * tech.loss;
+  const median = engagementMedian(x, { threat: cls.threat, group, skill, veteran, gasMult, bladeMult, morale: e.morale, exposure: f.exposure, misread }) * techMult;
   let deaths = Math.min(engaged.length, Math.floor(lognormal(rng, median, g.sigma)));
   const catP = g.catastrophe.p_base * (cls.abnormal ? g.catastrophe.abnormal_mult : 1) * (e.plan.formation === "colonnes" ? g.catastrophe.column_mult : 1);
   let catastrophe = false;
@@ -376,7 +384,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
     if (!s) continue;
     e.stats.wounded += 1;
     if (rng.next() >= g.serious_share) continue;
-    const pDeath = hasMedic ? ctx.m.exp.medical.serious_death_with : ctx.m.exp.medical.serious_death_without;
+    const pDeath = (hasMedic ? ctx.m.exp.medical.serious_death_with : ctx.m.exp.medical.serious_death_without) * tech.woundDeath;
     if (rng.next() < pDeath) {
       killSoldier(ctx, e, s, rng.next() < ctx.m.exp.medical.infection_share ? "infection" : "hemorragie", province);
       fromWounds++;
@@ -390,7 +398,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
     const s = credited[Math.floor(rng.next() * credited.length)];
     if (s) s.kills += 1;
   }
-  const gasUsed = engaged.length * uniform(rng, g.gas_per_engaged[0], g.gas_per_engaged[1]);
+  const gasUsed = engaged.length * uniform(rng, g.gas_per_engaged[0], g.gas_per_engaged[1]) * tech.gasOdm;
   e.gasOdm = Math.max(0, e.gasOdm - gasUsed);
   e.stats.gasUsedOdm += gasUsed;
   const blades = Math.min(e.bladePairs, Math.round(engaged.length * 0.5));
@@ -455,7 +463,7 @@ export function stepExpedition(ctx: MilCtx, e: Expedition, weather: Weather): vo
   // 2. Rencontres : densité moyenne des provinces traversées dans la journée.
   const back = e.phase === "retour" && e.path.length === 1;
   if (!back) {
-    const dens = visited.reduce((s, p) => s + titanDensity(ctx.world, p), 0) / visited.length;
+    const dens = visited.reduce((s, p) => s + titanDensity(ctx.world, p, ctx.st), 0) / visited.length;
     const n = headcount(ctx, e);
     const contacts = poisson(rng, contactRate(ctx.world, dens, n, ctx.date, weather).total);
     const tactics = commanderTactics(ctx, e);
@@ -513,9 +521,10 @@ export function stepExpedition(ctx: MilCtx, e: Expedition, weather: Weather): vo
     e.morale = clamp(e.morale + 2, 0, 100);
   } else if (!back) {
     e.stats.daysOutside += 1;
-    e.morale = clamp(e.morale - x.attrition.outside_morale_per_day, 0, 100);
+    const attr = (ctx.tech ?? NO_TECH).attrition;
+    e.morale = clamp(e.morale - x.attrition.outside_morale_per_day * attr, 0, 100);
     let lost = 0;
-    const p = (e.horseFatigue / 100) * x.attrition.horse_mortality_at_fatigue_100;
+    const p = (e.horseFatigue / 100) * x.attrition.horse_mortality_at_fatigue_100 * attr;
     for (let k = 0; k < e.horses; k++) if (rng.next() < p) lost++;
     e.horses -= lost;
     e.stats.horsesLost += lost;

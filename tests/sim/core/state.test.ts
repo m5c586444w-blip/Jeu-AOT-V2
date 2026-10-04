@@ -52,10 +52,10 @@ describe("sérialisation et migration (AC-09)", () => {
     const s = run1000(42);
     expect(stateHash(deserialize(serialize(s)))).toBe(stateHash(s));
   });
-  it("un état v0 est migré jusqu'à la version courante (v0 → v1 → v2 → v3 → v4 → v5)", () => {
+  it("un état v0 est migré jusqu'à la version courante (v0 → v1 → … → v5 → v6)", () => {
     const v0 = { seed: 42, rng: { state: 42 }, turn: 365, world: { noise: 0, flags: {} } };
     const migrated = deserialize(JSON.stringify(v0));
-    expect(migrated.schemaVersion).toBe(5);
+    expect(migrated.schemaVersion).toBe(6);
     expect(migrated.strategic).toBeNull();
     expect(migrated.politics).toBeNull();
     expect(migrated.military).toBeNull();

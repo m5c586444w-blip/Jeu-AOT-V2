@@ -203,9 +203,8 @@
         "radicalisation": 0
       },
       {
-        "op": "flag",
-        "key": "titans_captured_trost",
-        "value": true
+        "op": "captured",
+        "delta": 2
       }
     ],
     "choices": [
@@ -369,11 +368,6 @@
           {
             "op": "flag",
             "key": "trost_sealed",
-            "value": true
-          },
-          {
-            "op": "flag",
-            "key": "titans_captured_trost",
             "value": true
           }
         ],

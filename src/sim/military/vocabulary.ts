@@ -12,8 +12,8 @@ export type Weather = (typeof WEATHERS)[number];
 export const SOLDIER_ROLES = ["eclaireur", "tueur", "soutien", "cavalier", "medecin"] as const;
 export type SoldierRole = (typeof SOLDIER_ROLES)[number];
 
-/** Objectifs types (02 §8), limités en P3 à ceux que l'auto-résolution sait évaluer. */
-export const OBJECTIVES = ["reconnaissance", "exploration", "recuperation", "depot"] as const;
+/** Objectifs types (02 §8), limités à ceux que l'auto-résolution sait évaluer ; « capture » exige T-ANT-06 (P5). */
+export const OBJECTIVES = ["reconnaissance", "exploration", "recuperation", "depot", "capture"] as const;
 export type Objective = (typeof OBJECTIVES)[number];
 
 /** Causes de mort d'un soldat en campagne (03 §9 : hémorragie et infection simulées). */

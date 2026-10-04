@@ -7,6 +7,8 @@ import type { PoliticalState } from "../../src/sim/politics/state";
 import type { StrategicState } from "../../src/sim/strategic/economy";
 
 export const world850 = loadWorld("data", "scn_sandbox_850");
+/** Monde 850 sans chronologie : pour les règles de P2 qui supposent qu'aucun événement canon ne tue (D-66). */
+export const world850NoEvents = { ...world850, chronicle: null };
 
 export function start(): GameState {
   return createInitialState(42, world850);
