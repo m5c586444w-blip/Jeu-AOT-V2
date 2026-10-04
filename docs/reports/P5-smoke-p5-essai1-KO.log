@@ -1,0 +1,23 @@
+[scénario 850, Canon fidèle] 1366×768
+  OK  bandeau : registres Chronique (H), Renseignement (I), Bureau d'études (B)
+  KO  dossier E09 ouvert de lui-même : 3 choix, coûts affichés (3 lignes), un tampon « conforme à la chronique », deux écarts chiffrés
+  OK  une décision due met le temps en pause
+  OK  dossier d'événement : 0 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  « Différer » referme le dossier sans décider
+  OK  chronique : le dossier différé reste en attente, avec son échéance
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.dossier-evenement .choix[data-choice="brigade"] [data-action="signer"]')[22m
+
+    at <anonymous> (/home/user/Jeu-AOT-V2/src/tools/smoke-p5.ts:98:97) {
+  log: [
+    `  - waiting for locator('.dossier-evenement .choix[data-choice="brigade"] [data-action="signer"]')`
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.22.0

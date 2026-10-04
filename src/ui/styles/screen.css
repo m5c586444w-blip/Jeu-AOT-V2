@@ -560,3 +560,68 @@
 .planche { position: fixed; inset: 0; z-index: 22; overflow: auto; padding: 0.6rem 1rem; background: var(--papier); }
 .planche-toile canvas { display: block; border: 1px solid var(--encre); }
 .planche-legendes { display: grid; font-size: 0.8rem; text-align: center; margin-top: 0.2rem; }
+
+/* ——— P5 : dossier d'événement, chronique, renseignement, bureau d'études ——— */
+.dossier-evenement { position: fixed; inset: 0; z-index: 38; display: grid; place-items: center; background: rgba(28, 26, 23, 0.35); overflow-y: auto; padding: 1rem; }
+.dossier-evenement[hidden] { display: none; }
+.dossier-evenement__papier {
+  width: min(40rem, 94vw);
+  padding: 1rem 1.4rem 1.2rem;
+  background: #f3ead2;
+  background-image: var(--grain-cadre);
+  border: 1px solid var(--encre);
+  box-shadow: 6px 7px 0 rgba(28, 26, 23, 0.35);
+  transform: rotate(-0.35deg);
+}
+.dossier-evenement__papier.forme-telegramme { font-family: var(--f-machine); background: #efe3bf; }
+.dossier-evenement__papier.forme-telegramme .dossier-evenement__corps { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.92rem; }
+.dossier-evenement__papier.forme-lettre { background-image: repeating-linear-gradient(to bottom, transparent 0 1.55rem, rgba(79, 107, 90, 0.18) 1.55rem 1.6rem); font-family: var(--f-titre); }
+.dossier-evenement__papier.forme-article .dossier-evenement__titre { font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 3px double var(--encre); }
+.dossier-evenement__papier.forme-proces_verbal { border-left: 6px double var(--encre); }
+.dossier-evenement__tete { display: flex; gap: 0.8rem; align-items: baseline; justify-content: space-between; font-family: var(--f-machine); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.dossier-evenement__titre { margin: 0.3rem 0 0.4rem; font-family: var(--f-titre); font-weight: 400; font-size: 1.35rem; }
+.dossier-evenement__corps { margin: 0 0 0.6rem; line-height: 1.5; }
+.dossier-evenement__intertitre { margin: 0.6rem 0 0.2rem; font-variant: small-caps; font-weight: 400; letter-spacing: 0.05em; }
+.choix { position: relative; border-top: 1px dashed rgba(28, 26, 23, 0.5); padding: 0.45rem 0 0.4rem; }
+.choix__libelle { margin: 0 0 0.15rem; font-weight: 600; }
+.choix__tampon { position: absolute; right: 0.2rem; top: 0.45rem; font-family: var(--f-machine); font-size: 0.68rem; border: 2px solid var(--brique); color: var(--brique); padding: 0 0.3rem; transform: rotate(4deg); }
+.choix__tampon--histoire { border-color: var(--vert-de-gris); color: var(--vert-de-gris); transform: rotate(-3deg); }
+.effets { margin: 0.1rem 0 0.3rem 1.1rem; padding: 0; font-size: 0.9rem; }
+.effet--cout { color: var(--brique); }
+.effet--gain { color: var(--vert-de-gris); }
+.chronique-jauge__barre { height: 0.55rem; border: 1px solid var(--encre); background: rgba(244, 236, 216, 0.6); }
+.chronique-jauge__trace { height: 100%; background: repeating-linear-gradient(45deg, var(--brique) 0 4px, #a7533f 4px 8px); }
+.chronique-jauge[data-branch="divergente"] .chronique-jauge__trace { background: var(--brique); }
+.chronique-evite { color: var(--inconnu); font-style: italic; }
+.chronique-bascule { color: var(--brique); }
+.chronique-ecart { font-family: var(--f-machine); font-size: 0.8rem; }
+.fiches-agents, .mur-secrets, .planches { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.6rem; margin: 0.3rem 0; }
+.fiche-agent, .fiche-secret, .planche { position: relative; border: 1px solid var(--encre); padding: 0.35rem 0.55rem 0.45rem; background: #f1e8d2; box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.25); font-size: 0.88rem; }
+.fiche-agent h4, .fiche-secret h4, .planche h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; font-size: 1.02rem; }
+.fiche-agent__statut { font-family: var(--f-machine); font-size: 0.72rem; text-transform: uppercase; color: var(--vert-de-gris); }
+.fiche-agent.statut-grille { opacity: 0.6; }
+.fiche-agent.statut-grille .fiche-agent__statut, .fiche-agent.statut-retourne .fiche-agent__statut { color: var(--brique); }
+.mur-secrets { background: #b89a72; background-image: var(--grain-cadre); padding: 0.6rem; border: 1px solid var(--encre); }
+.fiche-secret { transform: rotate(-0.8deg); }
+.fiche-secret:nth-child(2n) { transform: rotate(0.9deg); }
+.epingle { position: absolute; top: -0.35rem; left: 50%; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--brique); box-shadow: 1px 1px 0 rgba(28, 26, 23, 0.5); }
+.tampon-certitude, .tampon-recoupement { font-family: var(--f-machine); font-size: 0.7rem; text-transform: uppercase; border: 1.5px solid currentColor; padding: 0 0.25rem; }
+.certitude-rumeur { color: var(--inconnu); }
+.certitude-indice { color: var(--ocre); }
+.certitude-preuve, .certitude-revele { color: var(--brique); }
+.recoupement-confirme { color: var(--vert-de-gris); }
+.recoupement-dementi { color: var(--brique); text-decoration: line-through; }
+.recoupement-non_verifie { color: var(--inconnu); }
+.rapports { list-style: none; padding: 0; margin: 0.2rem 0; font-size: 0.9rem; }
+.rapports li { border-bottom: 1px dotted rgba(28, 26, 23, 0.35); padding: 0.15rem 0; }
+.rapport.statut-dementi strong { text-decoration: line-through; }
+.planche { background-image: linear-gradient(rgba(79, 107, 90, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 107, 90, 0.08) 1px, transparent 1px); background-size: 12px 12px; background-color: #eef0e6; }
+.planche--acquise { background-color: #e6efe3; border-width: 2px; }
+.planche--etude { border-color: var(--ocre); border-width: 2px; }
+.planche--verrou { opacity: 0.78; }
+.planche__tete { display: flex; gap: 0.4rem; align-items: baseline; }
+.planche__code { font-family: var(--f-machine); font-size: 0.72rem; color: var(--vert-de-gris); white-space: nowrap; }
+.planche__fiche { margin: 0.2rem 0; font-style: italic; }
+.planche__phase { margin: 0.1rem 0; font-family: var(--f-machine); font-size: 0.72rem; color: var(--inconnu); }
+.planche__etat { margin: 0.1rem 0; font-variant: small-caps; color: var(--vert-de-gris); }
+.registre-onglets { display: flex; flex-wrap: wrap; gap: 0.2rem; margin: 0.3rem 0; }

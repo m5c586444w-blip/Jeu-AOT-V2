@@ -64,7 +64,8 @@ try {
     if ((m.type() === "error" || m.type() === "warning") && !isDriverNoise(m.text())) errors.push(`${m.type()}: ${m.text()}`);
   });
   page.on("pageerror", (e) => errors.push(`pageerror: ${e.message}`));
-  await page.goto(url);
+  // Non-régression (P5) : pas d'ouverture automatique des dossiers d'événements, qui couvriraient les registres testés.
+  await page.goto(`${url}?dossiers=0`);
   await page.waitForSelector("html[data-ready='true']", { timeout: 30000 });
   await page.waitForTimeout(400);
   console.log("[scénario 850] 1366×768");

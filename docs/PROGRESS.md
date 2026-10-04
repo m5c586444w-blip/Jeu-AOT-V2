@@ -2,10 +2,18 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | P5 — Renseignement, recherche, événements (mode autonome borné jusqu'à P8) |
-| Tâche | T5.0 — plan `docs/phases/P5.md` (fait) |
-| Dernier `npm run verify` | voir le commit des correctifs de revue |
-| Prochaine étape | T5.1 — données de P5 ; enchaîner P5 → P8 ; **arrêt de revue après P8** |
+| Phase | P5 — Renseignement, recherche, événements : **ARRÊT OBLIGATOIRE** (critère en échec deux fois) |
+| Tâche | T5.6–T5.8 — interfaces faites ; contrôle navigateur `smoke:p5` (AC5-03, AC5-10) en échec deux fois |
+| Dernier `npm run verify` | voir le commit « T5.6–T5.8 » (code 0 exigé par le script de commit) |
+| Prochaine étape | **Attendre l'accord de l'utilisateur** sur la correction proposée ci-dessous, puis repasser `smoke:p5` et finir P5 (T5.9, T5.10) |
+
+## ARRÊT EN COURS (2026-10-04) — AC5-03 / AC5-10 : `smoke:p5` en échec deux fois
+- **1er passage** (`docs/reports/P5-smoke-p5-essai1-KO.log`) : erreur du test. Un événement générique (« Mariage de notables », survenu le 1er jour) précède E09 : le test lisait ce dossier-là (3 lignes de coûts au lieu de ≥ 4), puis rouvrait la mauvaise ligne de la chronique.
+- **2e passage** (`docs/reports/P5-smoke-p5-essai2-KO.log`, après correction du test) : le test attend en vain le dossier E09. **Défaut réel du jeu**, diagnostiqué hors commande officielle :
+  - signer un dossier exécute la commande, et la commande rafraîchit l'écran, ce qui **ouvre déjà le dossier suivant** (E09) ;
+  - le gestionnaire ferme ensuite « le » dossier, **après** la commande : il referme donc le suivant, qui est marqué « présenté » et ne se rouvre plus de lui-même. Il reste accessible par la chronique.
+- **Correction proposée** (non appliquée) : dans `src/ui/eventDossier.ts`, fermer le dossier **avant** d'envoyer la commande (`this.close()` puis `dispatch`), pour que le rafraîchissement ouvre le suivant sans qu'il soit refermé. Le test est déjà corrigé (dossiers précédents réglés jusqu'à E09, ligne E09 ciblée dans la chronique).
+- Tout le reste de P5 est fait et vérifié hors navigateur (tests unitaires : événements, recherche, renseignement, calques ; `sim:selftest`, `sim:expeditions` inchangé). Restent T5.9 (`sim:events`, contrôles) et T5.10 (rapport).
 
 ## Revue de P4 (2026-10-04) — validée, correctifs appliqués
 - Cartes d'escouade coupées : fait (D-63).
@@ -58,3 +66,4 @@
 - 2026-10-04 — P4 terminée : AC4-01 à AC4-14 passent (AC4-09 navigateur au 2e passage) ; rapport `docs/reports/P4.md` ; **arrêt pour revue**.
 - 2026-10-04 — Revue de P4 : validée par l'utilisateur ; correctifs D-62 et D-63 ; réalisme R-gaz KO (décision ouverte) ; R-nuit OK après correction du déploiement de nuit.
 - 2026-10-04 — P5 démarrée : plan `docs/phases/P5.md`.
+- 2026-10-04 — P5 : T5.0 → T5.8 livrées (données, état v6, moteurs, interfaces) ; **arrêt obligatoire** : `smoke:p5` en échec deux fois (1 : test ; 2 : défaut réel de fermeture du dossier suivant) ; correction proposée.

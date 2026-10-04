@@ -17,9 +17,11 @@ export interface PanelContext {
   confirm(message: string): Promise<boolean>;
   /** Ouvre l'écran de bataille (P4) ; renvoie les ordres d'une bataille liée validée, sinon null. */
   playBattle(setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null>;
+  /** Rouvre le dossier d'un événement en attente (P5). */
+  openEvent?(id: string): void;
 }
 
-export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions";
+export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions" | "chronique" | "renseignement" | "recherche";
 
 export interface Panel {
   readonly id: PanelId;

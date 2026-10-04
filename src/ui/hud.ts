@@ -22,7 +22,7 @@ export interface HudActions {
   openPanel?(id: string): void;
 }
 
-const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions"] as const;
+const PANELS = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche"] as const;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: string): HTMLElementTagNameMap[K] {
   const e = document.createElement(tag);
@@ -62,7 +62,8 @@ export class Hud {
     if (world.politics && actions.openPanel) {
       const nav = el("nav", "bandeau__registres");
       nav.setAttribute("aria-label", t("hud.registers"));
-      for (const id of PANELS.filter((p) => p !== "expeditions" || world.military)) {
+      const present = { expeditions: !!world.military, chronique: !!world.chronicle, renseignement: !!world.intel, recherche: !!world.research } as Record<string, boolean>;
+      for (const id of PANELS.filter((p) => present[p] ?? true)) {
         const b = el("button", "bandeau__registre-bouton", t(`panel.${id}`));
         b.type = "button";
         b.dataset["panel"] = id;

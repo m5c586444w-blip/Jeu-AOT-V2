@@ -27,7 +27,8 @@ async function open(page: Page, url: string, errors: string[]): Promise<void> {
     if ((m.type() === "error" || m.type() === "warning") && !isDriverNoise(m.text())) errors.push(`${m.type()}: ${m.text()}`);
   });
   page.on("pageerror", (e) => errors.push(`pageerror: ${e.message}`));
-  await page.goto(url);
+  // Non-régression (P5) : pas d'ouverture automatique des dossiers d'événements, qui couvriraient les registres testés.
+  await page.goto(`${url}?dossiers=0`);
   await page.waitForSelector("html[data-ready='true']", { timeout: 30000 });
   await page.waitForTimeout(500);
 }

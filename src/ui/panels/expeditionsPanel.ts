@@ -9,6 +9,7 @@ import type { DeadRecord, Expedition, ExpeditionPlan, ExpeditionReport, Military
 import { readyMembers, soldierName } from "../../sim/military/state";
 import { skirmishSetup } from "../../sim/tactical/setup";
 import { FORMATIONS, OBJECTIVES, RETREAT_CONDITIONS } from "../../sim/military/vocabulary";
+import { techMods } from "../../sim/research/research";
 import type { Formation, Objective } from "../../sim/military/vocabulary";
 import { formatNumber, formatSigned } from "../why";
 import { button, displayName, el, paramLabel, provinceName, valueEl } from "./common";
@@ -340,7 +341,13 @@ export class ExpeditionsPanel implements Panel {
     const goal = el("div", "plan-ligne");
     const objective = el("select", "registre-choix");
     objective.dataset["plan"] = "objectif";
-    for (const o of OBJECTIVES) objective.append(new Option(t(`objective.${o}`), o, false, o === d.objective));
+    // « Capture » exige le protocole de capture (T-ANT-06, P5) : l'option est grisée et dit pourquoi.
+    const canCapture = techMods(this.ctx.world, this.ctx.state().research).capture;
+    for (const o of OBJECTIVES) {
+      const opt = new Option(t(o === "capture" && !canCapture ? "objective.capture_locked" : `objective.${o}`), o, false, o === d.objective);
+      opt.disabled = o === "capture" && !canCapture;
+      objective.append(opt);
+    }
     objective.addEventListener("change", () => {
       d.objective = objective.value as Objective;
       d.depotCargo = d.objective === "depot" ? { food: 60, gas: 60, steel: 10 } : { food: 0, gas: 0, steel: 0 };

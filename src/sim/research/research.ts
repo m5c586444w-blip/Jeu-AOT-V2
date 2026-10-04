@@ -126,7 +126,7 @@ export function monthlyResearch(world: World, seed: number, rs: ResearchState, p
     rs.bank += rs.progress - t.cost;
     rs.progress = 0;
     rs.current = null;
-    out.push({ date: { ...date }, key: "research.done", params: { tech: `tech.${t.id}` } });
+    out.push({ date: { ...date }, key: "research.completed", params: { tech: `tech.${t.id}` } });
   }
   for (const l of out) rs.log.push(l);
   if (rs.log.length > LOG_CAP) rs.log.splice(0, rs.log.length - LOG_CAP);

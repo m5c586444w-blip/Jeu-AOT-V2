@@ -10,9 +10,10 @@ const fmt = (n: number): string => String(Math.round(n));
 const label = (k: string): string => k;
 
 describe("overlays (AC1-13, F-STR-02)", () => {
-  it("10 déclarés, 7 alimentés (P3 : ravitaillement), 3 fermés sans valeur", () => {
+  it("10 déclarés, tous ouverts (P5) ; sans couche de renseignement (845), religion, légitimité et renseignement restent vides", () => {
     expect(OVERLAY_IDS).toHaveLength(10);
-    expect(OVERLAY_IDS.filter(isAvailable)).toEqual(["politique", "moral", "nourriture", "gaz", "titans", "population", "ravitaillement"]);
+    // Depuis P5, les 10 calques sont ouverts (religion, légitimité, renseignement : D-57).
+    expect(OVERLAY_IDS.filter(isAvailable)).toEqual([...OVERLAY_IDS]);
     for (const id of ["religion", "legitimite", "renseignement"] as const) expect(computeOverlay(id, world, state, fmt, label)).toBeNull();
   });
   it("valeurs = état de simulation (mêmes fonctions que le tick)", () => {
@@ -28,5 +29,22 @@ describe("overlays (AC1-13, F-STR-02)", () => {
   });
   it("légendes à 5 échelons pour les échelles continues", () => {
     for (const id of ["moral", "nourriture", "gaz", "titans", "population"] as const) expect(computeOverlay(id, world, state, fmt, label)?.legend).toHaveLength(5);
+  });
+});
+
+describe("calques de P5 (AC5-06, AC5-10)", () => {
+  const w850 = loadWorld("data", "scn_sandbox_850");
+  const s850 = createInitialState(42, w850);
+  it("Titans : brouillard — Maria jamais observée reste inconnue, le territoire tenu est connu", () => {
+    const titans = computeOverlay("titans", w850, s850, fmt, label);
+    expect(titans?.values.has("prov_maria_est")).toBe(false);
+    expect(titans?.values.has("prov_karanes")).toBe(true);
+    expect(titans?.legend.at(-1)?.label).toBe("overlay.unknown");
+  });
+  it("renseignement (âge), religion (Culte), légitimité perçue : valeurs pour le territoire tenu", () => {
+    expect(computeOverlay("renseignement", w850, s850, fmt, label)?.values.get("prov_karanes")).toBe(0);
+    expect(computeOverlay("religion", w850, s850, fmt, label)?.values.get("prov_mitras")).toBe(70);
+    const legit = computeOverlay("legitimite", w850, s850, fmt, label);
+    expect(legit?.values.size).toBeGreaterThan(10);
   });
 });

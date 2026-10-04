@@ -50,7 +50,7 @@ describe("recherche (AC5-05)", () => {
   it("une recherche avance chaque mois et s'achève ; un accident fait perdre de l'avancement", () => {
     let s = run(world, s0, { type: "SetResearch", tech: "tech_field_medicine" }, { type: "AdvanceDays", n: 30 * 8 });
     expect(s.research?.done).toContain("tech_field_medicine");
-    expect(s.research?.log.some((l) => l.key === "research.done")).toBe(true);
+    expect(s.research?.log.some((l) => l.key === "research.completed")).toBe(true);
     const rs = { ...rs0, current: "tech_odm_maintenance", progress: 50 };
     const risky = { ...world, research: world.research ? { ...world.research, balance: { ...world.research.balance, risk_default: 1 } } : null };
     const log = monthlyResearch(risky, 1, rs, s0.politics, s0.date);

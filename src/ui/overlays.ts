@@ -4,13 +4,15 @@ import type { GameState } from "../sim/core/state";
 import { capacity, provinceProduction } from "../sim/strategic/economy";
 import type { World } from "../sim/strategic/world";
 import { supplyAt, titanDensity } from "../sim/military/routes";
+import { knownTitans, localLegitimacy } from "../sim/intel/intel";
+import { toAbsoluteDay } from "../sim/core/time";
 
 /** Les 10 overlays de la carte (F-STR-02). Ceux dont le système n'existe pas encore restent fermés, sans valeur inventée. */
 export const OVERLAY_IDS = ["politique", "moral", "nourriture", "gaz", "titans", "population", "religion", "legitimite", "ravitaillement", "renseignement"] as const;
 export type OverlayId = (typeof OVERLAY_IDS)[number];
 
-/** Phase qui ouvrira le registre d'un overlay non encore alimenté. */
-export const OVERLAY_PHASE: Partial<Record<OverlayId, string>> = { religion: "P5", legitimite: "P5", renseignement: "P5" };
+/** Phase qui ouvrira le registre d'un overlay non encore alimenté (tous ouverts depuis P5). */
+export const OVERLAY_PHASE: Partial<Record<OverlayId, string>> = {};
 
 export function isAvailable(id: OverlayId): boolean {
   return !(id in OVERLAY_PHASE);
@@ -66,13 +68,50 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
       return { colors, values, legend: scale(id === "nourriture" ? OCHRE : VERDIGRIS, max, fmt) };
     }
     case "titans": {
-      // Densité du scénario (D-51) : Maria perdue est peuplée de Titans en 850.
+      // Brouillard de guerre (P5, F-INT-01) : on montre ce que l'on sait, daté ; une province jamais observée reste inconnue.
+      const today = toAbsoluteDay(state.date);
       for (const p of provinces) {
-        const d = titanDensity(world, p.id);
-        values.set(p.id, d);
-        colors.set(p.id, sequential(BRICK, d));
+        const k = state.intel ? knownTitans(state.intel, p.id, today) : { value: titanDensity(world, p.id, st), age: 0 };
+        if (!k) continue;
+        values.set(p.id, k.value);
+        colors.set(p.id, sequential(BRICK, k.value));
       }
-      return { colors, values, legend: scale(BRICK, 1, (n) => fmt(n)) };
+      return { colors, values, legend: state.intel ? [...scale(BRICK, 1, (n) => fmt(n)), { label: label("overlay.unknown"), color: UNKNOWN }] : scale(BRICK, 1, (n) => fmt(n)) };
+    }
+    case "renseignement": {
+      // Âge de l'information (F-INT-01) : à jour sur le territoire tenu, vieillissante ailleurs, inconnue jamais vue.
+      if (!state.intel) return null;
+      const today = toAbsoluteDay(state.date);
+      for (const p of provinces) {
+        const k = knownTitans(state.intel, p.id, today);
+        if (!k) continue;
+        values.set(p.id, k.age);
+        colors.set(p.id, k.age <= 1 ? VERDIGRIS : sequential(OCHRE, Math.min(1, k.age / 120)));
+      }
+      return { colors, values, legend: [{ label: label("overlay.renseignement.fresh"), color: VERDIGRIS }, ...[30, 60, 120].map((d) => ({ label: label("overlay.renseignement.days").replace("{n}", fmt(d)), color: sequential(OCHRE, d / 120) })), { label: label("overlay.unknown"), color: UNKNOWN }] };
+    }
+    case "religion": {
+      // Influence du Culte des Murs (02 §5), par province, en données A.
+      if (!state.intel) return null;
+      for (const p of provinces) {
+        const v = state.intel.cult[p.id] ?? 0;
+        if (v <= 0 || st.provinces[p.id]?.control !== "paradis") continue;
+        values.set(p.id, Math.round(v));
+        colors.set(p.id, sequential(0x5b4a6b, v / 100));
+      }
+      return { colors, values, legend: scale(0x5b4a6b, 100, fmt) };
+    }
+    case "legitimite": {
+      // Légitimité perçue localement : nationale, moral, stabilité, Culte (fiche « pourquoi ? » dans le dossier de province).
+      if (!state.politics) return null;
+      for (const p of provinces) {
+        const ps = st.provinces[p.id];
+        if (!ps || ps.control !== "paradis" || ps.population <= 0) continue;
+        const v = localLegitimacy(world, state.politics, st, state.intel, p.id).value;
+        values.set(p.id, Math.round(v));
+        colors.set(p.id, diverging((v - 50) / 50));
+      }
+      return { colors, values, legend: [0, 25, 50, 75, 100].map((m) => ({ label: fmt(m), color: diverging((m - 50) / 50) })) };
     }
     case "ravitaillement": {
       // F-STR-13 : distance à la source la plus proche (mur tenu ou dépôt) ; vert-de-gris dans le rayon.

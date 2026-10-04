@@ -26,6 +26,7 @@ import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
 import { Registers } from "./registers";
 import { openBattleScreen } from "./tactical/battleScreen";
+import { EventDossier } from "./eventDossier";
 import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
@@ -173,7 +174,12 @@ export async function bootGame(): Promise<void> {
       refresh();
     }
   };
-  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle);
+  // Dossiers d'événements (P5) : ouverts d'eux-mêmes quand une décision est due ; la chronique peut les rouvrir.
+  // `?dossiers=0` (contrôles de non-régression de P1–P4) : pas d'ouverture automatique ; la chronique reste accessible.
+  const autoDossiers = new URLSearchParams(window.location.search).get("dossiers") !== "0";
+  const eventDossier = world.chronicle ? new EventDossier(document.body, world, why, safeDispatch, autoDossiers) : null;
+  const openEvent = (id: string): void => eventDossier?.open(state, id);
+  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle, openEvent);
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;
 
@@ -184,6 +190,7 @@ export async function bootGame(): Promise<void> {
     drawRoutes();
     if (layers.active) applyOverlay();
     dossier.refresh(state);
+    eventDossier?.refresh(state);
   };
 
   const keymap = new KeyMap(safeStorage());
@@ -215,6 +222,7 @@ export async function bootGame(): Promise<void> {
     overlay_next: () => layers.next(),
     overlay_off: () => layers.select(null),
     close: () => {
+      if (eventDossier?.openId) return eventDossier.close();
       if (registers?.openId) return registers.close();
       dossier.close();
       map.setSelected(null);
@@ -226,6 +234,9 @@ export async function bootGame(): Promise<void> {
     open_council: () => registers?.toggle("conseil"),
     open_journal: () => registers?.toggle("journal"),
     open_expeditions: () => (world.military ? registers?.toggle("expeditions") : undefined),
+    open_chronicle: () => (world.chronicle ? registers?.toggle("chronique") : undefined),
+    open_intel: () => (world.intel ? registers?.toggle("renseignement") : undefined),
+    open_research: () => (world.research ? registers?.toggle("recherche") : undefined),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.

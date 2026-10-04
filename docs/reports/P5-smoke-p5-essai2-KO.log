@@ -1,0 +1,18 @@
+[scénario 850, Canon fidèle] 1366×768
+  OK  bandeau : registres Chronique (H), Renseignement (I), Bureau d'études (B)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForSelector: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for locator('.dossier-evenement:not([hidden])') to be visible[22m
+
+    at <anonymous> (/home/user/Jeu-AOT-V2/src/tools/smoke-p5.ts:83:16) {
+  log: [
+    "  - waiting for locator('.dossier-evenement:not([hidden])') to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.22.0

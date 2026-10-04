@@ -124,7 +124,7 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
       if (research) {
         research = structuredClone(research);
-        for (const l of monthlyResearch(world, state.seed, research, politics, date)) pushLog(strategic, date, `log.${l.key}`, l.params, l.key === "research.done");
+        for (const l of monthlyResearch(world, state.seed, research, politics, date)) pushLog(strategic, date, `log.${l.key}`, l.params, l.key === "research.completed");
         const legit = techHook(world, research, "legitimacy_month");
         if (politics && legit !== 0) politics.legitimacy = Math.max(0, Math.min(100, politics.legitimacy + legit));
       }

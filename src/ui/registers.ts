@@ -12,9 +12,12 @@ import { ExpeditionsPanel } from "./panels/expeditionsPanel";
 import { JournalPanel } from "./panels/journalPanel";
 import { LawsPanel } from "./panels/lawsPanel";
 import { OrgsPanel } from "./panels/orgsPanel";
+import { ChroniclePanel } from "./panels/chroniclePanel";
+import { IntelPanel } from "./panels/intelPanel";
+import { ResearchPanel } from "./panels/researchPanel";
 import type { WhyTooltip } from "./why";
 
-export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions"];
+export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche"];
 
 /**
  * Registres de P2 : un seul dossier ouvert à la fois au-dessus de la carte, rafraîchi quand l'état change
@@ -30,7 +33,7 @@ export class Registers {
   onDraft: (() => void) | null = null;
   private readonly dialog = el("div", "bordereau");
 
-  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean) => Promise<TimedOrder[] | null>) {
+  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");
     const close = button("×", () => this.close(), "dossier__fermer");
@@ -41,7 +44,7 @@ export class Registers {
     this.dialog.hidden = true;
     this.dialog.setAttribute("role", "alertdialog");
     parent.append(this.frame, this.dialog);
-    const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle };
+    const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle, ...(openEvent ? { openEvent } : {}) };
     const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx)];
     if (world.military)
       list.push(
@@ -50,6 +53,9 @@ export class Registers {
           this.onDraft?.();
         }),
       );
+    if (world.chronicle) list.push(new ChroniclePanel(ctx));
+    if (world.intel) list.push(new IntelPanel(ctx));
+    if (world.research) list.push(new ResearchPanel(ctx));
     this.panels = new Map(list.map((p) => [p.id, p]));
   }
 
