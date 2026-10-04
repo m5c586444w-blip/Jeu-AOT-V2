@@ -5,6 +5,7 @@ import { chromium } from "playwright-core";
 import type { Page } from "playwright-core";
 import { createServer } from "vite";
 import fr from "../i18n/fr.json";
+import { isAvailable, OVERLAY_IDS } from "../ui/overlays";
 
 const executablePath = process.env["CHROMIUM_PATH"] ?? "/opt/pw-browsers/chromium";
 const OUT = "docs/screenshots";
@@ -115,7 +116,9 @@ try {
   // Calques et filtres.
   const overlays = await page.locator("button[data-overlay]").count();
   const closed = await page.locator("button[data-overlay]:disabled").count();
-  expect(overlays === 10 && closed === 4, `10 calques déclarés, ${10 - closed} ouverts, ${closed} non ouverts (AC1-13)`);
+  // P1 : 6 ouverts et 4 fermés ; chaque phase en ouvre d'autres (P3 : ravitaillement). Attendu dérivé de la source.
+  const expectedClosed = OVERLAY_IDS.filter((id) => !isAvailable(id)).length;
+  expect(overlays === 10 && closed === expectedClosed && 10 - closed >= 6, `10 calques déclarés, ${10 - closed} ouverts, ${closed} non ouverts (AC1-13)`);
   await page.locator('button[data-overlay="nourriture"]').click();
   await page.waitForTimeout(200);
   expect((await page.locator(".calques__case").count()) === 5, "calque Nourriture : légende à 5 échelons (AC1-13)");

@@ -232,3 +232,12 @@
   - L'ampleur d'une rupture de formation est bornée par `max_engaged`, identique pour toutes les formations. Elle croissait avec l'effectif engagé, donc doublait pour les colonnes.
   - Colonnes lourdes conformes à 03 §6 (« sécurité accrue, vitesse réduite ») : exposition par engagement 0,8 au lieu de 1,3 ; détection 0,45 ; esquive 0,35 ; allure 45 km/j.
 - Exploration hors commande (60 tirages par réglage), puis second passage de la commande officielle : **OK**. Éventail : moyenne 30,3 %, p10 15 %, p90 52,4 %, max 83,8 %. Colonnes : 64,7 %. Sortie : `docs/reports/P3-sim-expeditions.log`.
+
+## 2026-10-04 — D-57 Interface des expéditions (T3.8–T3.9)
+- Registre « Expéditions » (touche E) : expéditions en campagne (rappel), dépôts et convois, rapports. Le planificateur s'ouvre sur le côté pour laisser la carte visible. Tant qu'il est ouvert, un clic sur la carte prolonge l'itinéraire (plus court chemin depuis la dernière étape, règle des portes) au lieu d'ouvrir le dossier de province.
+- Champs numériques : ils gardent leurs chiffres (« 1 » ne change plus la vitesse quand on saisit une provision).
+- Lettres aux familles : trois modèles sobres, choisis de façon stable par défunt. Ils sont rédigés sans accord de genre, car les personnages nommés n'ont pas de genre dans les données et on n'en invente pas.
+- Calques :
+  - « Ravitaillement » ouvert (F-STR-13).
+  - « Titans » lit désormais la densité du scénario (D-51).
+  - « Religion » et « Légitimité », annoncés pour P2, restent fermés et sont annoncés pour P5. Il n'existe ni système religieux, ni légitimité provinciale : afficher une valeur nationale identique partout n'aurait aucun sens.

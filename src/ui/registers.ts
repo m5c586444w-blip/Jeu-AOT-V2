@@ -7,12 +7,13 @@ import { CharactersPanel } from "./panels/charactersPanel";
 import { button, el } from "./panels/common";
 import type { Panel, PanelContext, PanelId } from "./panels/common";
 import { CouncilPanel } from "./panels/councilPanel";
+import { ExpeditionsPanel } from "./panels/expeditionsPanel";
 import { JournalPanel } from "./panels/journalPanel";
 import { LawsPanel } from "./panels/lawsPanel";
 import { OrgsPanel } from "./panels/orgsPanel";
 import type { WhyTooltip } from "./why";
 
-export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal"];
+export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions"];
 
 /**
  * Registres de P2 : un seul dossier ouvert à la fois au-dessus de la carte, rafraîchi quand l'état change
@@ -24,6 +25,8 @@ export class Registers {
   private readonly body = el("div", "registre-corps");
   private readonly panels: Map<PanelId, Panel>;
   private current: { id: PanelId; arg?: string } | null = null;
+  /** Appelé quand l'itinéraire en préparation change (la carte le retrace). */
+  onDraft: (() => void) | null = null;
   private readonly dialog = el("div", "bordereau");
 
   constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>) {
@@ -39,6 +42,13 @@ export class Registers {
     parent.append(this.frame, this.dialog);
     const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m) };
     const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx)];
+    if (world.military)
+      list.push(
+        new ExpeditionsPanel(ctx, () => {
+          this.draw(true);
+          this.onDraft?.();
+        }),
+      );
     this.panels = new Map(list.map((p) => [p.id, p]));
   }
 
@@ -53,6 +63,7 @@ export class Registers {
     this.frame.dataset["panel"] = id;
     this.title.textContent = t(`panel.${id}`);
     this.draw(sameView);
+    this.onDraft?.();
   }
 
   toggle(id: PanelId): void {
@@ -63,6 +74,21 @@ export class Registers {
   close(): void {
     this.frame.hidden = true;
     this.current = null;
+    this.onDraft?.();
+  }
+
+  private get panel(): Panel | null {
+    return this.current && !this.frame.hidden ? (this.panels.get(this.current.id) ?? null) : null;
+  }
+
+  /** Clic sur la carte : le registre ouvert peut le consommer (planificateur). */
+  mapClick(province: string): boolean {
+    return this.panel?.mapClick?.(province) ?? false;
+  }
+
+  /** Itinéraire en préparation dans le registre ouvert. */
+  draftRoute(): readonly string[] | null {
+    return this.panel?.draftRoute?.() ?? null;
   }
 
   /** Redessine le registre ouvert (après une commande ou un jour qui passe), en gardant la position de lecture. */
@@ -74,7 +100,9 @@ export class Registers {
     if (!this.current) return;
     const scroll = keepScroll ? this.body.scrollTop : 0;
     this.body.replaceChildren();
-    this.panels.get(this.current.id)?.render(this.body, this.current.arg);
+    const panel = this.panels.get(this.current.id);
+    panel?.render(this.body, this.current.arg);
+    this.frame.classList.toggle("registre-panneau--lateral", panel?.lateral?.() ?? false);
     this.body.scrollTop = scroll;
   }
 

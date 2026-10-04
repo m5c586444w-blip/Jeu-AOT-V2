@@ -1,6 +1,6 @@
-import { hasKey, t } from "../../i18n";
+import { t } from "../../i18n";
 import { RESOURCE_IDS } from "../../sim/strategic/resources";
-import { el } from "./common";
+import { el, paramLabel } from "./common";
 import type { Panel, PanelContext } from "./common";
 
 /** Journal des alertes avec historique (F-UIX-04) : du plus récent au plus ancien, les alertes bloquantes marquées. */
@@ -22,7 +22,7 @@ export class JournalPanel implements Panel {
       for (const [k, v] of Object.entries(entry.params)) {
         if (typeof v !== "string") params[k] = v;
         else if (k === "resource" && (RESOURCE_IDS as readonly string[]).includes(v)) params[k] = t(`res.${v}`);
-        else params[k] = hasKey(v) ? t(v) : v;
+        else params[k] = paramLabel(this.ctx.world, v);
       }
       const li = el("li", entry.pause ? "journal-grave" : "");
       li.append(el("span", "journal-date", t("date.format", { year: entry.date.year, day: entry.date.day })), " ", t(entry.key, params));

@@ -10,10 +10,10 @@ const fmt = (n: number): string => String(Math.round(n));
 const label = (k: string): string => k;
 
 describe("overlays (AC1-13, F-STR-02)", () => {
-  it("10 déclarés, 6 alimentés, 4 fermés sans valeur", () => {
+  it("10 déclarés, 7 alimentés (P3 : ravitaillement), 3 fermés sans valeur", () => {
     expect(OVERLAY_IDS).toHaveLength(10);
-    expect(OVERLAY_IDS.filter(isAvailable)).toEqual(["politique", "moral", "nourriture", "gaz", "titans", "population"]);
-    for (const id of ["religion", "legitimite", "ravitaillement", "renseignement"] as const) expect(computeOverlay(id, world, state, fmt, label)).toBeNull();
+    expect(OVERLAY_IDS.filter(isAvailable)).toEqual(["politique", "moral", "nourriture", "gaz", "titans", "population", "ravitaillement"]);
+    for (const id of ["religion", "legitimite", "renseignement"] as const) expect(computeOverlay(id, world, state, fmt, label)).toBeNull();
   });
   it("valeurs = état de simulation (mêmes fonctions que le tick)", () => {
     const food = computeOverlay("nourriture", world, state, fmt, label);

@@ -1,5 +1,5 @@
 import type { Character } from "../../data/schemas";
-import { t } from "../../i18n";
+import { hasKey, t } from "../../i18n";
 import type { Command } from "../../sim/core/commands";
 import type { GameState } from "../../sim/core/state";
 import type { World } from "../../sim/strategic/world";
@@ -16,11 +16,32 @@ export interface PanelContext {
   confirm(message: string): Promise<boolean>;
 }
 
-export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal";
+export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions";
 
 export interface Panel {
   readonly id: PanelId;
   render(root: HTMLElement, arg?: string): void;
+  /** Clic sur la carte pendant que le registre est ouvert ; true = consommé (pas de dossier de province). */
+  mapClick?(province: string): boolean;
+  /** Itinéraire en préparation à tracer sur la carte (planificateur d'expédition). */
+  draftRoute?(): readonly string[] | null;
+  /** Registre posé sur le côté pour laisser la carte visible (planificateur). */
+  lateral?(): boolean;
+}
+
+/** Libellé d'un paramètre de message : clé i18n, identifiant de province, sinon la valeur telle quelle. */
+export function paramLabel(world: World, v: string | number): string | number {
+  if (typeof v !== "string") return v;
+  const p = world.provinceById.get(v);
+  if (p) return t(p.name_key);
+  const c = world.politics?.characters.get(v);
+  if (c) return displayName(c);
+  return hasKey(v) ? t(v) : v;
+}
+
+export function provinceName(world: World, id: string): string {
+  const p = world.provinceById.get(id);
+  return p ? t(p.name_key) : id;
 }
 
 export function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls = "", text?: string): HTMLElementTagNameMap[K] {

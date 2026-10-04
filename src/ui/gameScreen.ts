@@ -20,6 +20,7 @@ import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
 import { attachMapControls } from "./mapControls";
 import { buildLabels, buildMapProvinces, mapDynamic } from "./mapModel";
+import { buildMapRoutes } from "./mapRoutes";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
@@ -130,6 +131,8 @@ export async function bootGame(): Promise<void> {
     },
     select(id) {
       bubble.hide();
+      // Planificateur ouvert : le clic prolonge l'itinéraire au lieu d'ouvrir le dossier.
+      if (id && registers?.mapClick(id)) return;
       if (id) dossier.open(id, state);
       else dossier.close();
     },
@@ -153,11 +156,14 @@ export async function bootGame(): Promise<void> {
   };
   const notice = new Notice(document.body);
   if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch);
+  const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
+  if (registers) registers.onDraft = drawRoutes;
 
   const refresh = (): void => {
     hud.update(state, clock.speed);
     registers?.refresh();
     map.setDynamic(mapDynamic(state));
+    drawRoutes();
     if (layers.active) applyOverlay();
     dossier.refresh(state);
   };
@@ -201,10 +207,12 @@ export async function bootGame(): Promise<void> {
     open_orgs: () => registers?.toggle("organisations"),
     open_council: () => registers?.toggle("conseil"),
     open_journal: () => registers?.toggle("journal"),
+    open_expeditions: () => (world.military ? registers?.toggle("expeditions") : undefined),
   };
   window.addEventListener("keydown", (ev) => {
     // Seule la saisie de texte (console) et les listes déroulantes gardent leurs touches ; une case cochée ne bloque rien.
-    const typing = (ev.target instanceof HTMLInputElement && ev.target.type === "text") || ev.target instanceof HTMLSelectElement;
+    // Les champs numériques (planificateur) gardent aussi leurs chiffres : « 1 » ne doit pas changer la vitesse.
+    const typing = (ev.target instanceof HTMLInputElement && (ev.target.type === "text" || ev.target.type === "number")) || ev.target instanceof HTMLSelectElement;
     if (typing && keymap.actionFor(ev.code) !== "console") return;
     const action = keymap.actionFor(ev.code);
     const run = action ? actions[action] : undefined;

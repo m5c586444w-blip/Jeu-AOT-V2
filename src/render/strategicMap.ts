@@ -2,7 +2,7 @@ import { Application, Container, Graphics, TilingSprite } from "pixi.js";
 import type { MapData } from "../data/map";
 import { pointInPolygon } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
-import { drawBorder, drawFog, drawLand, drawPawn, drawSea, drawTerrain, drawWall, drawWash } from "./atlasLayers";
+import { drawBorder, drawDepot, drawExpeditionMarker, drawFog, drawLand, drawPawn, drawRoute, drawSea, drawTerrain, drawWall, drawWash } from "./atlasLayers";
 import type { ProvinceShape } from "./atlasLayers";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
@@ -20,6 +20,13 @@ export interface MapProvince extends ProvinceShape {
 /** État variable affiché sur la carte (fourni par l'interface à partir de l'état de simulation). */
 export interface MapDynamic {
   provinces: Record<string, { structure: number | null; garrisonOrg: string | null; control: string }>;
+}
+
+/** Itinéraires, positions et dépôts de la couche militaire (P3), en coordonnées de carte (km). */
+export interface MapRoutes {
+  routes: { points: Point[]; style: "plan" | "aller" | "retour" | "convoi" }[];
+  markers: { at: Point; kind: "expedition" | "convoi" }[];
+  depots: { at: Point; radius: number }[];
 }
 
 export interface MapFilters {
@@ -53,6 +60,7 @@ export class StrategicMap {
   private readonly gWalls = new Graphics();
   private readonly gFog = new Graphics();
   private readonly gPawns = new Graphics();
+  private readonly gRoutes = new Graphics();
   private readonly gHighlight = new Graphics();
   private readonly labels: LabelLayer;
   private grain: TilingSprite | null = null;
@@ -61,6 +69,7 @@ export class StrategicMap {
   private bucket = Number.NaN;
   private overlay: ReadonlyMap<string, number> | null = null;
   private dynamic: MapDynamic = { provinces: {} };
+  private routes: MapRoutes = { routes: [], markers: [], depots: [] };
   private filters: MapFilters = { pawns: true, labels: true, walls: true, fog: true };
   private hovered: string | null = null;
   private selected: string | null = null;
@@ -79,7 +88,7 @@ export class StrategicMap {
       labelSpecs,
       map.wall_rings.map((r) => ({ name: WALL_LABELS[r.wall]?.name ?? r.wall, radius: r.r_outer + 9, bearing: WALL_LABELS[r.wall]?.bearing ?? 0 })),
     );
-    this.world.addChild(this.gSea, this.gLand, this.gWash, this.gTerrain, this.gBorders, this.gWalls, this.gFog, this.gPawns, this.gHighlight, this.labels.container);
+    this.world.addChild(this.gSea, this.gLand, this.gWash, this.gTerrain, this.gBorders, this.gWalls, this.gFog, this.gPawns, this.gRoutes, this.gHighlight, this.labels.container);
     app.stage.addChild(this.world);
   }
 
@@ -189,6 +198,20 @@ export class StrategicMap {
     this.redrawIfNeeded();
   }
 
+  /** Itinéraires et positions des expéditions, convois et dépôts. */
+  setRoutes(r: MapRoutes): void {
+    this.routes = r;
+    this.drawRoutesLayer();
+  }
+
+  private drawRoutesLayer(): void {
+    const px = 1 / 2 ** (this.bucket / 2);
+    this.gRoutes.clear();
+    for (const d of this.routes.depots) drawDepot(this.gRoutes, d.at, d.radius, px);
+    for (const r of this.routes.routes) drawRoute(this.gRoutes, r.points, px, r.style);
+    for (const m of this.routes.markers) drawExpeditionMarker(this.gRoutes, m.at, px, m.kind);
+  }
+
   /** Couleur d'overlay par province (null = lavis par région). */
   setOverlay(colors: ReadonlyMap<string, number> | null): void {
     this.overlay = colors;
@@ -198,6 +221,7 @@ export class StrategicMap {
   setFilters(f: MapFilters): void {
     this.filters = f;
     this.gPawns.visible = f.pawns;
+    this.gRoutes.visible = f.pawns;
     this.gWalls.visible = f.walls;
     this.gFog.visible = f.fog;
     this.labels.update(this.zoom, this.lod, f.labels);
@@ -248,6 +272,7 @@ export class StrategicMap {
       const org = this.dynamic.provinces[p.id]?.garrisonOrg;
       if (org) drawPawn(this.gPawns, p.kind === "segment" ? p.anchor : [p.anchor[0] + 14, p.anchor[1] - 10], org, px);
     }
+    this.drawRoutesLayer();
     this.drawHighlight();
   }
 

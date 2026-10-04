@@ -429,3 +429,72 @@
 .avis-bref { position: fixed; z-index: 45; bottom: 1.2rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.4rem 0.9rem; background: var(--encre); color: var(--papier); font-family: var(--f-machine); }
 .avis-bref[hidden] { display: none; }
 .dossier__statuts { margin: 0.3rem 0 0; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+/* ——— P3 : registre des expéditions, planificateur, rapport, lettres ——— */
+.registre-panneau--lateral {
+  left: auto;
+  right: 0.8rem;
+  transform: rotate(0.15deg);
+  width: min(30rem, 46vw);
+}
+.exp-carte, .exp-depot {
+  border: 1px solid var(--encre);
+  padding: 0.3rem 0.6rem 0.5rem;
+  margin: 0.4rem 0;
+  background: rgba(244, 236, 216, 0.55);
+  box-shadow: 2px 2px 0 rgba(28, 26, 23, 0.25);
+}
+.exp-carte-tete { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-carte-tete h4 { margin: 0; font-family: var(--f-titre); font-weight: 400; }
+.exp-phase { font-variant: small-caps; letter-spacing: 0.05em; color: var(--vert-de-gris); }
+.exp-journal { margin: 0.2rem 0 0.4rem 1.1rem; padding: 0; font-size: 0.9rem; font-style: italic; }
+.plan-ligne { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: baseline; margin: 0.2rem 0; }
+.plan-ligne label { display: inline-flex; gap: 0.35rem; align-items: baseline; }
+.plan-radio { display: inline-flex; gap: 0.2rem; align-items: baseline; }
+.plan-nombre { width: 5.5rem; font-family: var(--f-machine); background: rgba(244, 236, 216, 0.8); border: 1px solid var(--encre); padding: 0.05rem 0.25rem; }
+.plan-itineraire { display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; margin: 0.3rem 0; padding-left: 1.2rem; font-size: 0.92rem; }
+.plan-itineraire li.ravitaille { color: var(--vert-de-gris); }
+.plan-itineraire li.hors-rayon { color: var(--brique); font-style: italic; }
+.plan-escouades { font-size: 0.88rem; }
+.plan-escouades td:first-child { width: 1.4rem; }
+.plan-officiers { line-height: 1.7; }
+.plan-avis { font-style: italic; margin: 0.25rem 0; }
+.plan-probleme { margin: 0.5rem 0 0.3rem; padding: 0.25rem 0.5rem; border-left: 3px solid var(--brique); font-style: italic; }
+.plan-probleme[data-ok="true"] { border-left-color: var(--vert-de-gris); }
+.registre-ferme-inline { font-variant: small-caps; letter-spacing: 0.04em; color: var(--inconnu); border: 1px dashed var(--inconnu); padding: 0 0.3rem; }
+.rapport-telegramme {
+  font-family: var(--f-machine);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #f1e7c9;
+  border: 1px solid var(--encre);
+  padding: 0.5rem 0.7rem;
+  box-shadow: 3px 3px 0 rgba(28, 26, 23, 0.3);
+  transform: rotate(-0.4deg);
+}
+.rapport-signaux { columns: 2; font-size: 0.88rem; margin: 0.2rem 0; }
+.fusee::marker { content: "● "; }
+.fusee-rouge::marker { color: var(--brique); }
+.fusee-vert::marker { color: var(--vert-de-gris); }
+.fusee-noir::marker { color: var(--encre); }
+.rapport-journal, .rapport-lecons { font-size: 0.92rem; margin: 0.2rem 0 0.2rem 1.1rem; padding: 0; }
+.rapport-morts { font-size: 0.9rem; }
+.issue-reussie { color: var(--vert-de-gris); }
+.issue-partielle { color: var(--ocre); }
+.issue-echec { color: var(--brique); }
+.lettre {
+  max-width: 34rem;
+  margin: 0.8rem auto;
+  padding: 1.2rem 1.6rem;
+  background: #f3ead2;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 1.55rem, rgba(79, 107, 90, 0.18) 1.55rem 1.6rem);
+  border: 1px solid rgba(28, 26, 23, 0.6);
+  box-shadow: 3px 4px 0 rgba(28, 26, 23, 0.2);
+  font-family: var(--f-titre);
+  font-size: 1.05rem;
+  line-height: 1.6rem;
+  transform: rotate(0.3deg);
+}
+.lettre-date { text-align: right; margin: 0 0 0.6rem; font-style: italic; }
+.lettre-corps { white-space: pre-line; margin: 0; }
+.lettre-signature { text-align: right; margin: 1rem 0 0; font-style: italic; }

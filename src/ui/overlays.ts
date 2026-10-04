@@ -3,13 +3,14 @@ import { BRICK, diverging, OCHRE, sequential, STONE, UNKNOWN, VERDIGRIS } from "
 import type { GameState } from "../sim/core/state";
 import { capacity, provinceProduction } from "../sim/strategic/economy";
 import type { World } from "../sim/strategic/world";
+import { supplyAt, titanDensity } from "../sim/military/routes";
 
 /** Les 10 overlays de la carte (F-STR-02). Ceux dont le système n'existe pas encore restent fermés, sans valeur inventée. */
 export const OVERLAY_IDS = ["politique", "moral", "nourriture", "gaz", "titans", "population", "religion", "legitimite", "ravitaillement", "renseignement"] as const;
 export type OverlayId = (typeof OVERLAY_IDS)[number];
 
 /** Phase qui ouvrira le registre d'un overlay non encore alimenté. */
-export const OVERLAY_PHASE: Partial<Record<OverlayId, string>> = { religion: "P2", legitimite: "P2", ravitaillement: "P3", renseignement: "P5" };
+export const OVERLAY_PHASE: Partial<Record<OverlayId, string>> = { religion: "P5", legitimite: "P5", renseignement: "P5" };
 
 export function isAvailable(id: OverlayId): boolean {
   return !(id in OVERLAY_PHASE);
@@ -65,11 +66,23 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
       return { colors, values, legend: scale(id === "nourriture" ? OCHRE : VERDIGRIS, max, fmt) };
     }
     case "titans": {
+      // Densité du scénario (D-51) : Maria perdue est peuplée de Titans en 850.
       for (const p of provinces) {
-        values.set(p.id, p.titan_density);
-        colors.set(p.id, sequential(BRICK, p.titan_density));
+        const d = titanDensity(world, p.id);
+        values.set(p.id, d);
+        colors.set(p.id, sequential(BRICK, d));
       }
       return { colors, values, legend: scale(BRICK, 1, (n) => fmt(n)) };
+    }
+    case "ravitaillement": {
+      // F-STR-13 : distance à la source la plus proche (mur tenu ou dépôt) ; vert-de-gris dans le rayon.
+      if (!world.military) return null;
+      for (const p of provinces) {
+        const s = supplyAt(world, st, state.military, p.id);
+        values.set(p.id, Math.round(s.km));
+        colors.set(p.id, s.inSupply ? VERDIGRIS : sequential(BRICK, Math.min(1, s.km / 250)));
+      }
+      return { colors, values, legend: [{ label: label("overlay.ravitaillement.in"), color: VERDIGRIS }, ...[50, 125, 250].map((km) => ({ label: `${fmt(km)} km`, color: sequential(BRICK, km / 250) }))] };
     }
     case "population": {
       for (const p of provinces) {
