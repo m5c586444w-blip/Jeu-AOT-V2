@@ -1,0 +1,148 @@
+
+> murs-et-sang@0.0.1 smoke:p8
+> tsx src/tools/smoke-p8.ts
+
+  OK  aucune bibliothèque d'icônes ni de sons parmi 17 dépendances
+[passe 1366×768 · 100 %]
+  OK  menu : table d'archives, tampon « Confidentiel », 3 chemises de scénario, aucun bouton rectangulaire générique
+  OK  menu principal [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 7 niveaux, corps ≥ 12.8 px)
+  OK  choix de la nation : 2 dossiers à blason dessiné (Paradis, Marley)
+  OK  choix du scénario et de la nation [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 9 niveaux, corps ≥ 12.8 px)
+  OK  le dossier de Paradis ouvre le scénario 854 côté Paradis
+  OK  bandeau : 14 registres sur une seule ligne (hauteur du bandeau 132 px)
+  OK  HUD stratégique [1366×768 · 100 %] : checklist 04 §2 (23 valeurs expliquées, textures sur 2 niveaux, corps ≥ 12.8 px)
+  OK  dossier de province : Trost
+  OK  dossier de province [1366×768 · 100 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 2 niveaux, corps ≥ 11.2 px)
+  OK  registre personnages [1366×768 · 100 %] : checklist 04 §2 (52 valeurs expliquées, textures sur 2 niveaux, corps ≥ 10.56 px)
+  OK  fiche de personnage : portrait gravé procédural
+  OK  fiche de personnage [1366×768 · 100 %] : checklist 04 §2 (14 valeurs expliquées, textures sur 2 niveaux, corps ≥ 10.56 px)
+  OK  registre cabinet [1366×768 · 100 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 18 px)
+  OK  registre expeditions [1366×768 · 100 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14.4 px)
+  OK  registre renseignement [1366×768 · 100 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 2 niveaux, corps ≥ 11.52 px)
+  OK  registre recherche [1366×768 · 100 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 12 niveaux, corps ≥ 10.56 px)
+  OK  registre gazette [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 3 niveaux, corps ≥ 12 px)
+  OK  Gazette de Paradis : « Le Courrier des Murs », 1 article(s) tirés de l'état
+  OK  registre archives [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 54 niveaux, corps ≥ 10.56 px)
+  OK  archives : 52 fiches tamponnées (INTERPRÉTÉ, ÉTABLI)
+  OK  registre epilogue [1366×768 · 100 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 3 niveaux, corps ≥ 14.4 px)
+  OK  épilogue : statistiques expliquées
+  OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
+  OK  options [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
+  OK  audio : humeur « calme » en paix, 299 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
+  OK  audio en bataille : couche « combat », 6 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  interface tactique [1366×768 · 100 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
+  OK  vapeur des Titans abattus : 4 nuage(s) au bilan
+  OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles
+  OK  rapport post-bataille [1366×768 · 100 %] : checklist 04 §2 (8 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
+  OK  transformation visible : 5 éclair(s) — toits 0 · vapeur 0 · éclairs 5 · occultés 0
+  OK  sous-titres des sons importants : 9 affiché(s) depuis l'ouverture
+  OK  Marley : alerte de la nation jouée « an 854, jour 8 — Marley garantit la sécurité d'Hizuru. » ; 8 registres sur une ligne
+  OK  esthétique de Marley sur la table de guerre
+  OK  table de guerre (Marley) [1366×768 · 100 %] : checklist 04 §2 (4 valeurs expliquées, textures sur 3 niveaux, corps ≥ 14.4 px)
+  OK  chancellerie : 3 fiches de nation à blason dessiné
+  OK  chancellerie (Marley) [1366×768 · 100 %] : checklist 04 §2 (16 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
+  OK  Gazette de Marley (propagande) : « Le Héraut de l'Empire »
+  OK  Gazette (Marley) [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 12 px)
+  OK  [1366×768 · 100 %] 0 erreur console
+[passe 1366×768 · 125 %]
+  OK  menu : table d'archives, tampon « Confidentiel », 3 chemises de scénario, aucun bouton rectangulaire générique
+  OK  menu principal [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 7 niveaux, corps ≥ 16 px)
+  OK  choix de la nation : 2 dossiers à blason dessiné (Paradis, Marley)
+  OK  choix du scénario et de la nation [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 9 niveaux, corps ≥ 16 px)
+  OK  le dossier de Paradis ouvre le scénario 854 côté Paradis
+  OK  bandeau : 14 registres sur une seule ligne (hauteur du bandeau 216 px)
+  OK  HUD stratégique [1366×768 · 125 %] : checklist 04 §2 (23 valeurs expliquées, textures sur 2 niveaux, corps ≥ 16 px)
+  OK  dossier de province : Trost
+  OK  dossier de province [1366×768 · 125 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14 px)
+  OK  registre personnages [1366×768 · 125 %] : checklist 04 §2 (52 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.2 px)
+  OK  fiche de personnage : portrait gravé procédural
+  OK  fiche de personnage [1366×768 · 125 %] : checklist 04 §2 (14 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.2 px)
+  OK  registre cabinet [1366×768 · 125 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 22.5 px)
+  OK  registre expeditions [1366×768 · 125 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 18 px)
+  OK  registre renseignement [1366×768 · 125 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14.4 px)
+  OK  registre recherche [1366×768 · 125 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 12 niveaux, corps ≥ 13.2 px)
+  OK  registre gazette [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 3 niveaux, corps ≥ 15 px)
+  OK  Gazette de Paradis : « Le Courrier des Murs », 1 article(s) tirés de l'état
+  OK  registre archives [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 54 niveaux, corps ≥ 13.2 px)
+  OK  archives : 52 fiches tamponnées (INTERPRÉTÉ, ÉTABLI)
+  OK  registre epilogue [1366×768 · 125 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 3 niveaux, corps ≥ 18 px)
+  OK  épilogue : statistiques expliquées
+  OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
+  OK  options [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
+  OK  audio : humeur « calme » en paix, 228 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  [1366×768 · 125 %] 0 erreur console
+[passe 3840×2160 · 100 %]
+  OK  menu : table d'archives, tampon « Confidentiel », 3 chemises de scénario, aucun bouton rectangulaire générique
+  OK  menu principal [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 7 niveaux, corps ≥ 12.8 px)
+  OK  choix de la nation : 2 dossiers à blason dessiné (Paradis, Marley)
+  OK  choix du scénario et de la nation [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 9 niveaux, corps ≥ 12.8 px)
+  OK  le dossier de Paradis ouvre le scénario 854 côté Paradis
+  OK  bandeau : 14 registres sur une seule ligne (hauteur du bandeau 132 px)
+  OK  HUD stratégique [3840×2160 · 100 %] : checklist 04 §2 (23 valeurs expliquées, textures sur 2 niveaux, corps ≥ 12.8 px)
+  OK  dossier de province : Trost
+  OK  dossier de province [3840×2160 · 100 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 2 niveaux, corps ≥ 11.2 px)
+  OK  registre personnages [3840×2160 · 100 %] : checklist 04 §2 (52 valeurs expliquées, textures sur 2 niveaux, corps ≥ 10.56 px)
+  OK  fiche de personnage : portrait gravé procédural
+  OK  fiche de personnage [3840×2160 · 100 %] : checklist 04 §2 (14 valeurs expliquées, textures sur 2 niveaux, corps ≥ 10.56 px)
+  OK  registre cabinet [3840×2160 · 100 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 18 px)
+  OK  registre expeditions [3840×2160 · 100 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14.4 px)
+  OK  registre renseignement [3840×2160 · 100 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 2 niveaux, corps ≥ 11.52 px)
+  OK  registre recherche [3840×2160 · 100 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 12 niveaux, corps ≥ 10.56 px)
+  OK  registre gazette [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 3 niveaux, corps ≥ 12 px)
+  OK  Gazette de Paradis : « Le Courrier des Murs », 1 article(s) tirés de l'état
+  OK  registre archives [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 54 niveaux, corps ≥ 10.56 px)
+  OK  archives : 52 fiches tamponnées (INTERPRÉTÉ, ÉTABLI)
+  OK  registre epilogue [3840×2160 · 100 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 3 niveaux, corps ≥ 14.4 px)
+  OK  épilogue : statistiques expliquées
+  OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
+  OK  options [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
+  OK  audio : humeur « calme » en paix, 475 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
+  OK  audio en bataille : couche « combat », 8 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  interface tactique [3840×2160 · 100 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
+  OK  vapeur des Titans abattus : 4 nuage(s) au bilan
+  OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles
+  OK  rapport post-bataille [3840×2160 · 100 %] : checklist 04 §2 (8 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
+  OK  [3840×2160 · 100 %] 0 erreur console
+[passe 3840×2160 · 125 %]
+  OK  menu : table d'archives, tampon « Confidentiel », 3 chemises de scénario, aucun bouton rectangulaire générique
+  OK  menu principal [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 7 niveaux, corps ≥ 16 px)
+  OK  choix de la nation : 2 dossiers à blason dessiné (Paradis, Marley)
+  OK  choix du scénario et de la nation [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 9 niveaux, corps ≥ 16 px)
+  OK  le dossier de Paradis ouvre le scénario 854 côté Paradis
+  OK  bandeau : 14 registres sur une seule ligne (hauteur du bandeau 164 px)
+  OK  HUD stratégique [3840×2160 · 125 %] : checklist 04 §2 (23 valeurs expliquées, textures sur 2 niveaux, corps ≥ 16 px)
+  OK  dossier de province : Trost
+  OK  dossier de province [3840×2160 · 125 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14 px)
+  OK  registre personnages [3840×2160 · 125 %] : checklist 04 §2 (52 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.2 px)
+  OK  fiche de personnage : portrait gravé procédural
+  OK  fiche de personnage [3840×2160 · 125 %] : checklist 04 §2 (14 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.2 px)
+  OK  registre cabinet [3840×2160 · 125 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 22.5 px)
+  OK  registre expeditions [3840×2160 · 125 %] : checklist 04 §2 (1 valeurs expliquées, textures sur 2 niveaux, corps ≥ 18 px)
+  OK  registre renseignement [3840×2160 · 125 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 2 niveaux, corps ≥ 14.4 px)
+  OK  registre recherche [3840×2160 · 125 %] : checklist 04 §2 (10 valeurs expliquées, textures sur 12 niveaux, corps ≥ 13.2 px)
+  OK  registre gazette [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 3 niveaux, corps ≥ 15 px)
+  OK  Gazette de Paradis : « Le Courrier des Murs », 1 article(s) tirés de l'état
+  OK  registre archives [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 54 niveaux, corps ≥ 13.2 px)
+  OK  archives : 52 fiches tamponnées (INTERPRÉTÉ, ÉTABLI)
+  OK  registre epilogue [3840×2160 · 125 %] : checklist 04 §2 (6 valeurs expliquées, textures sur 3 niveaux, corps ≥ 18 px)
+  OK  épilogue : statistiques expliquées
+  OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
+  OK  options [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
+  OK  audio : humeur « calme » en paix, 480 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
+  OK  audio en bataille : couche « combat », 8 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  interface tactique [3840×2160 · 125 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.3333 px)
+  OK  vapeur des Titans abattus : 4 nuage(s) au bilan
+  OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles
+  OK  rapport post-bataille [3840×2160 · 125 %] : checklist 04 §2 (8 valeurs expliquées, textures sur 3 niveaux, corps ≥ 16.4 px)
+  OK  Marley : alerte de la nation jouée « an 854, jour 8 — Marley garantit la sécurité d'Hizuru. » ; 8 registres sur une ligne
+  OK  esthétique de Marley sur la table de guerre
+  OK  table de guerre (Marley) [3840×2160 · 125 %] : checklist 04 §2 (4 valeurs expliquées, textures sur 3 niveaux, corps ≥ 18 px)
+  OK  chancellerie : 3 fiches de nation à blason dessiné
+  OK  chancellerie (Marley) [3840×2160 · 125 %] : checklist 04 §2 (16 valeurs expliquées, textures sur 3 niveaux, corps ≥ 16.4 px)
+  OK  Gazette de Marley (propagande) : « Le Héraut de l'Empire »
+  OK  Gazette (Marley) [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 15 px)
+  OK  [3840×2160 · 125 %] 0 erreur console
+smoke:p8 : tout est conforme.

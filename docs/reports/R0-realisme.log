@@ -18,4 +18,3 @@ Réalisme indépendant (D-62) : 6 engagements types × 1000 batailles de jour et
     titan_anormal    14.42 u dans [9, 21] OK   (anormal_coureur 11.73 · anormal_sauteur 11.65 · anormal_ignorant 13.69 · anormal_rampant 20.62)
   OK  R-gaz : gaz par homme engagé dans la plage de sa classe pour les 4 classes (D-77) ; engagements types : petit_plaine 2.77 · moyen_plaine 5.74 · grand_plaine 10.61 · petit_foret 2.40 · moyen_foret 5.72 · grand_foret 10.65
 sim:tactical : tout est conforme.
-exit 0

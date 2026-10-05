@@ -2,10 +2,31 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P8 terminée** — **ARRÊT DE REVUE OBLIGATOIRE** (CLAUDE.md, arrêt 5) : en attente de l'utilisateur |
-| Tâche | T8.8 — rapport `docs/reports/P8.md` (fait) |
-| Dernier `npm run verify` | 2026-10-04 (fin de P8) : code 0, 300 tests — `docs/reports/P8-verify.log` |
-| Prochaine étape | Revue de P8 par l'utilisateur (captures `docs/screenshots/p8-*`, décision R-gaz), puis P9 |
+| Phase | **R0 — corrections après la revue de P8** — **ARRÊT** (CLAUDE.md, arrêt 1 : critère f en échec deux fois) : en attente de l'utilisateur |
+| Tâche | R0.4 — batterie finale et rapport (rapport `docs/reports/R0.md` non rédigé) |
+| Dernier `npm run verify` | 2026-10-05 : code 0, 306 tests (commit 0333fc2) |
+| Prochaine étape | Décision de l'utilisateur sur le correctif proposé ci-dessous, puis rapport R0 |
+
+## Arrêt (2026-10-05) — R0.2f (transformation visible) en échec pour la 3e fois
+- **Historique du critère f** (`smoke:r0`, « porteur et éclair dans le champ de la caméra ») :
+  1. KO pendant la mise au point (`r0-apres-1`) : porteur hors champ ;
+  2. KO à nouveau (`r0-apres-2`) : corps sous les sous-titres, mesure prise avant que le corps existe ;
+  3. OK sur les commits 2bd1325 et 1360f79 (batteries `final-r0` et `final-r0c`) ;
+  4. **KO dans la batterie finale** (`docs/reports/R0-smoke-apres.log`).
+- **Cause du dernier échec : régression introduite par 0333fc2.**
+  - En relisant la capture « bataille » (nouvelle règle de CLAUDE.md), j'ai trouvé un défaut : aucun homme du joueur dans le champ à l'ouverture (0/36).
+  - Le correctif (ResizeObserver, hommes prioritaires au cadrage) remet 36/36 hommes dans le champ.
+  - Mais dans l'essai de porteur, les hommes sont au sud et le Cuirassé au nord : la priorité donnée aux hommes rogne le nord, et le porteur sort du champ (capture `r0-apres-transformation.png`).
+- **Défaut supplémentaire relevé sur cette capture** : les sous-titres de bataille, déplacés en bas à gauche par R0.2f, couvrent la pastille de l'escouade 1.
+- **Correctif proposé, non appliqué** :
+  - dans `frame()`, traiter les porteurs (points `reach`, pieds et tête) comme les hommes du joueur, en « à voir absolument » : l'échelle ne dépasse pas celle qui contient hommes et porteurs, et le cadre est ramené sur cette emprise ;
+  - placer les sous-titres de bataille en haut à gauche de la scène, à l'écart des pastilles d'escouade et du point d'apparition des porteurs (nord, centre).
+- **État des autres critères** (batterie finale, code 0333fc2) :
+  - `verify` : code 0 (306 tests) ;
+  - `sim:tactical --realisme` : R-gaz OK pour les 4 classes, R-nuit OK ;
+  - `sim:expeditions` : 31,9 % ;
+  - `smoke:map` : 26/26 ; `smoke:politique` : 30/30 ; `smoke:tactique` : 32/32 (sol 96 % au lieu de 100 % pour le banc de 300 unités, seuil 90 %) ; `smoke:p8` : 139/139 ;
+  - `smoke:r0` : tout OK sauf f.
 
 ## P8 terminée (2026-10-04) — arrêt de revue
 - Rapport : `docs/reports/P8.md` ; AC8-01 à AC8-08 OK ; AC8-09 (60 FPS) **non vérifié : GPU réel requis**.
