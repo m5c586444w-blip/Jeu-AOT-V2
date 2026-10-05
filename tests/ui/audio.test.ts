@@ -173,6 +173,22 @@ describe("audio (AC8-06)", () => {
     for (const id of SFX_IDS) expect((fr as Record<string, string>)[`audio.sfx.${id}`]).toBeTruthy();
   });
 
+  it("R0.2a : un même sous-titre n'est pas répété en moins d'une seconde", () => {
+    const { e, ctx, captions } = engine();
+    for (const at of [0, 0.5, 0.9]) {
+      ctx.currentTime = at;
+      e.play("pas_titan");
+    }
+    expect(captions.filter((c) => c === fr["audio.sfx.pas_titan"])).toHaveLength(1);
+    ctx.currentTime = 1.6;
+    e.play("pas_titan");
+    expect(captions.filter((c) => c === fr["audio.sfx.pas_titan"])).toHaveLength(2);
+    // Deux sons différents au même instant gardent chacun leur sous-titre.
+    ctx.currentTime = 1.7;
+    e.play("canon");
+    expect(captions).toContain(fr["audio.sfx.canon"]);
+  });
+
   it("sans WebAudio, le jeu reste muet sans erreur", () => {
     const e = new AudioEngine(() => null, VOL);
     e.start();

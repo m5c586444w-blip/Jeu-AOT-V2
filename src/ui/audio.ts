@@ -184,6 +184,9 @@ export function battleCues(a: CueSnapshot, b: CueSnapshot): Sfx[] {
   return out;
 }
 
+/** Délai minimal (s) entre deux affichages d'un même sous-titre (R0.2a). */
+export const CAPTION_GAP_S = 1;
+
 /** Délai minimal entre deux occurrences d'un même effet (évite les avalanches en bataille). */
 const SFX_GAP: Record<Sfx, number> = { gaz: 0.15, cable: 0.08, lame: 0.05, impact_chair: 0.1, impact_pierre: 0.12, pas_titan: 0.45, cri: 1.2, canon: 0.2, cloche: 1.5, tampon: 0.1, papier: 0.08, encre: 0.1, transformation: 1 };
 
@@ -216,6 +219,8 @@ export class AudioEngine {
   private duckUntil = 0;
   private silentUntil = 0;
   private readonly lastSfx = new Map<Sfx, number>();
+  /** Dernier affichage de chaque sous-titre : un même texte n'est pas répété en moins de `CAPTION_GAP_S` (R0.2a). */
+  private readonly lastCaption = new Map<string, number>();
   readonly stats: AudioStats = { mood: "calme", accent: "paradis", layers: layerTargets("calme"), notes: { calme: 0, tension: 0, combat: 0 }, sfx: {}, ducks: 0, silences: 0, captions: 0, music: 0, effects: 0 };
 
   constructor(
@@ -442,8 +447,13 @@ export class AudioEngine {
     this.lastSfx.set(id, now);
     this.stats.sfx[id] = (this.stats.sfx[id] ?? 0) + 1;
     if (this.volumes.subtitles && CAPTIONED.has(id)) {
-      this.stats.captions++;
-      this.onCaption(t(`audio.sfx.${id}`));
+      const text = t(`audio.sfx.${id}`);
+      const shown = this.lastCaption.get(text);
+      if (shown === undefined || now - shown >= CAPTION_GAP_S) {
+        this.lastCaption.set(text, now);
+        this.stats.captions++;
+        this.onCaption(text);
+      }
     }
     const g = ctx.createGain();
     g.connect(out);
@@ -551,13 +561,26 @@ export function mountSubtitles(parent: HTMLElement): (text: string) => void {
   box.setAttribute("role", "status");
   box.setAttribute("aria-live", "polite");
   parent.append(box);
+  const timers = new Map<HTMLElement, number>();
   return (text: string) => {
-    const line = document.createElement("p");
-    line.className = "sous-titres__ligne";
-    line.textContent = `[${text}]`;
-    box.append(line);
-    while (box.children.length > 3) box.firstElementChild?.remove();
-    window.setTimeout(() => line.remove(), 2500);
+    const label = `[${text}]`;
+    // Une ligne identique encore affichée est prolongée, jamais doublée (R0.2a).
+    const same = [...box.children].find((c): c is HTMLElement => c instanceof HTMLElement && c.textContent === label);
+    const line = same ?? document.createElement("p");
+    if (!same) {
+      line.className = "sous-titres__ligne";
+      line.textContent = label;
+      box.append(line);
+      while (box.children.length > 3) box.firstElementChild?.remove();
+    }
+    window.clearTimeout(timers.get(line));
+    timers.set(
+      line,
+      window.setTimeout(() => {
+        line.remove();
+        timers.delete(line);
+      }, 2500),
+    );
   };
 }
 
