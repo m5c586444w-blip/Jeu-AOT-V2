@@ -283,10 +283,15 @@ export async function bootGame(): Promise<void> {
   });
 
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
-  // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre est ouverte (registre, dossier, options…), qui la recouvrirait.
+  // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre ouverte (registre, dossier, options…) la recouvre ;
+  // une fenêtre qui ne la touche pas la laisse utilisable. Masquée par `visibility`, elle garde sa place : on peut mesurer.
   const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .choix-nation";
   const syncLegend = (): void => {
-    const covered = document.querySelector(WINDOWS) !== null;
+    const a = layers.el.getBoundingClientRect();
+    const covered = [...document.querySelectorAll(WINDOWS)].some((w) => {
+      const b = w.getBoundingClientRect();
+      return b.width > 0 && b.height > 0 && a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    });
     if ((layers.el.dataset["masque"] === "1") !== covered) layers.el.dataset["masque"] = covered ? "1" : "0";
   };
   new MutationObserver(syncLegend).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["hidden"] });
