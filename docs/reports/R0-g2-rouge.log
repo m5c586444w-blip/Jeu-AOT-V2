@@ -1,0 +1,34 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ❯ tests/ui/narrative.test.ts (5 tests | 1 failed) 276ms
+   ❯ récits (AC8-07, 04 §5.10, §5.12, §5.15) (5)
+     × R0.2g : épilogue sans « 0 » par défaut — « — » pour un compte encore nul, ligne masquée si la donnée est absente 30ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/narrative.test.ts > récits (AC8-07, 04 §5.10, §5.12, §5.15) > R0.2g : épilogue sans « 0 » par défaut — « — » pour un compte encore nul, ligne masquée si la donnée est absente
+AssertionError: La chronique a suivi son cours : 0 événements sont survenus, 0 évités.: expected 'La chronique a suivi son cours : 0 év…' not to match /(^|\D)0 /
+
+- Expected:
+/(^|\D)0 /
+
++ Received:
+"La chronique a suivi son cours : 0 événements sont survenus, 0 évités."
+
+ ❯ tests/ui/narrative.test.ts:71:51
+     69|     const start = epilogue(w850, createInitialState(42, w850));
+     70|     // Le récit non plus n'écrit pas « 0 événements » : un premier jou…
+     71|     for (const l of start.lines) expect(l, l).not.toMatch(/(^|\D)0 /);
+       |                                                   ^
+     72|     expect(start.stats.find((x) => x.key === "narr.stat.events")?.valu…
+     73|     expect(start.stats.find((x) => x.key === "narr.stat.legitimacy")?.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  21:00:14
+   Duration  1.93s (transform 51%, import 33%, tests 16%)
+

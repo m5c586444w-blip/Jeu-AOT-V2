@@ -83,7 +83,10 @@ export function epilogue(world: World, s: GameState): Epilogue {
   const happened = Object.values(ev?.history ?? {}).filter((r) => r.status === "survenu").length;
   const avoided = Object.values(ev?.history ?? {}).filter((r) => r.status === "evite").length;
   const lines: string[] = [];
-  lines.push(t(ev?.branch === "divergente" ? "narr.epi.divergent" : "narr.epi.canon", { n: happened, a: avoided }));
+  // Aucun « 0 » dans le récit (R0.2g) : rien encore d'arrivé, ou rien d'évité, se dit en toutes lettres.
+  const branch = ev?.branch === "divergente" ? "divergent" : "canon";
+  if (ev && happened + avoided === 0) lines.push(t("narr.epi.nothing_yet"));
+  else if (ev) lines.push(t(avoided === 0 ? `narr.epi.${branch}_none_avoided` : `narr.epi.${branch}`, { n: happened, a: avoided }));
   for (const [id, c] of dead.slice(0, 6)) lines.push(t("narr.epi.death", { name: world.politics?.characters.get(id)?.name ?? id, year: c.death?.date.year ?? "", cause: t(`death.cause.${c.death?.cause ?? "inconnue"}`) }));
   const sh = s.shifters;
   for (const r of (sh?.history ?? []).filter((x) => x.kind === "prepare").slice(-3)) lines.push(t("narr.epi.inherit", { titan: t(world.shifters?.defs.get(r.shifter)?.name_key ?? r.shifter), heir: world.politics?.characters.get(r.to ?? "")?.name ?? "—" }));

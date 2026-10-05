@@ -67,6 +67,8 @@ describe("récits (AC8-07, 04 §5.10, §5.12, §5.15)", () => {
       for (const x of epilogue(w, s).stats) expect(String(x.value), x.key).not.toBe("0");
     }
     const start = epilogue(w850, createInitialState(42, w850));
+    // Le récit non plus n'écrit pas « 0 événements » : un premier jour se dit autrement (relevé sur la capture, R0.4).
+    for (const l of start.lines) expect(l, l).not.toMatch(/(^|\D)0 /);
     expect(start.stats.find((x) => x.key === "narr.stat.events")?.value).toBe("—");
     expect(start.stats.find((x) => x.key === "narr.stat.legitimacy")?.value).toBe(52);
   });
