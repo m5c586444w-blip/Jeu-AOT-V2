@@ -460,3 +460,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - que la table couvre toutes les classes de Titan ;
   - que les plages croissent du petit au grand ;
   - qu'une classe absente est refusée.
+
+## 2026-10-05 — D-78 Zone de jeu ≥ 85 % : définition de la mesure et correctif 4K (R0.3)
+- **Ce que la consigne laisse ouvert.** La consigne fixe le seuil (≥ 85 %), mais ne définit pas « l'espace disponible ». Mesure retenue (`smoke:r0`), sur une grille de 48 × 27 points par `elementFromPoint` :
+  - **carte stratégique** : espace disponible = la fenêtre sous le bandeau ; zone de jeu = les points où le canevas de la carte est au premier plan, non recouvert par un panneau ;
+  - **bataille** : espace disponible = la boîte de la scène (sans la barre de titre, le carnet de combat ni les cartes d'escouade, qui sont l'interface) ; zone de jeu = les points où le canevas est au premier plan, multipliés par la part de la scène couverte par le sol de la carte.
+- **Mesure avant correction** (commit 6c4963d, `docs/reports/R0-smoke-avant.log`) :
+  - carte : 92,4 % (1366×768), 99,1 % (3840×2160) ;
+  - bataille : 100 % (1366×768), **47,0 %** (3840×2160).
+- **Cause.** Le cadrage de la bataille plafonnait l'échelle à 6 px/m en valeur absolue. Ce réglage a été fait pour une scène de 1014×588 px. En 4K, « couvrir » demande environ 8 px/m : le plafond bridait le zoom et laissait le sol au centre d'un grand vide.
+- **Correctif.** Le plafond suit la taille de la scène, rapportée à la scène de référence (× min(largeur / 1014, hauteur / 588), jamais en dessous de 1). À 1366×768, rien ne change.
+- **Interprétation à confirmer.** Il est possible que l'utilisateur ait entendu par « espace disponible » toute la fenêtre, interface comprise. Dans ce cas, la bataille à 1366×768 reste sous 85 %, puisque le carnet et les cartes d'escouade occupent environ 40 % de l'écran. Il faudrait alors superposer l'interface à la scène, un changement de mise en page hors du périmètre « aucune nouveauté visuelle » de R0.

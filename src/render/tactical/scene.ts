@@ -21,6 +21,9 @@ const PASTILLE_PX = 11;
 const FRAME_MAX_ZOOM = 6;
 /** Durée de l'éclair autour d'un corps qui surgit, en pas de simulation (20 Hz : 1,5 s). */
 const FLASH_AFTERGLOW_TICKS = 30;
+/** Scène de référence (1366×768) pour laquelle `FRAME_MAX_ZOOM` a été réglé. */
+const FRAME_REF_W = 1014;
+const FRAME_REF_H = 588;
 /** Teintes de toits (tuile, ardoise, chaume) : villes moins régulières (revue de P4, reporté à P8). */
 const ROOF_TINTS = [0x8a3b2a, 0x6b4a2f, 0x5a5f66, 0x9b6a3c, 0x7a4a3a];
 
@@ -155,7 +158,9 @@ export class TacticalScene {
       // La bataille remplit l'écran : on couvre la zone des unités (au plus 30 % au-delà du cadrage « tout voir »).
       const contain = Math.min(width / (x1 - x0), height / (y1 - y0));
       const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
-      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM, cover, contain * 1.3));
+      // Le plafond d'échelle suit la taille de la scène (R0.3) : en 4K, 6 px/m laissait le sol au centre d'un grand vide.
+      const sceneScale = Math.max(1, Math.min(width / FRAME_REF_W, height / FRAME_REF_H));
+      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM * sceneScale, cover, contain * 1.3));
       this.zoom = z;
       this.worldLayer.scale.set(z);
       let py = height / 2 - ((y0 + y1) / 2) * z;
