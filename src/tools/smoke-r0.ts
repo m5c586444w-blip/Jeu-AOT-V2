@@ -233,8 +233,8 @@ try {
       await page.selectOption('select[data-trial="map"]', "tmap_foret");
       await page.locator('[data-action="essai-porteur"]').click();
       await page.waitForSelector(".bataille canvas", { timeout: 30000 });
-      await page.locator('.bataille-vitesse[data-speed="2"]').click();
-      await page.waitForFunction(() => Number(/éclairs (\d+)/.exec(document.querySelector<HTMLElement>(".bataille")?.dataset["fx"] ?? "")?.[1] ?? 0) >= 1, undefined, { timeout: 90000 }).catch(() => undefined);
+      await page.locator('.bataille-vitesse[data-speed="0.25"]').click();
+      await page.waitForFunction(() => document.querySelector<HTMLElement>(".bataille")?.dataset["porteurVisible"] !== undefined, undefined, { timeout: 90000 }).catch(() => undefined);
       await page.locator('.bataille-vitesse[data-speed="0"]').click();
       const fx = (await page.getAttribute(".bataille", "data-fx")) ?? "";
       const seen = (await page.getAttribute(".bataille", "data-porteur-visible")) ?? "non mesuré";
@@ -266,23 +266,23 @@ try {
       return { n: boxes.length, pairs };
     });
     expect(overlaps.n > 0 && overlaps.pairs.length === 0, `d. atlas du monde : ${overlaps.n} noms tracés, ${overlaps.pairs.length} chevauchement(s)${overlaps.pairs.length ? ` (${overlaps.pairs.slice(0, 4).join(" ; ")})` : ""}`);
-    const panel = await rect(page, ".registre-panneau:not([hidden]) .registre-corps");
+    // Bande à droite de l'atlas, sur la hauteur de l'atlas : c'est là que la fenêtre était vide (revue de P8).
+    const atlas = await rect(page, ".atlas-monde");
+    const body = await rect(page, ".registre-panneau:not([hidden]) .registre-corps");
+    const beside = { x: atlas.x + atlas.w, y: atlas.y, w: body.x + body.w - (atlas.x + atlas.w), h: Math.min(atlas.h, h - atlas.y) };
     const right = await page.evaluate((p) => {
-      const body = document.querySelector(".registre-panneau:not([hidden]) .registre-corps");
-      const visibleH = Math.min(p.h, window.innerHeight - p.y);
+      const containers = new Set([".registre-corps", ".table-guerre", ".table-guerre__dossier"].map((q) => document.querySelector(".registre-panneau:not([hidden]) " + q)));
       let filled = 0;
       let n = 0;
-      for (let i = 0; i < 24; i++)
+      for (let i = 0; i < 16; i++)
         for (let j = 0; j < 20; j++) {
-          const x = p.x + p.w / 2 + ((i + 0.5) / 24) * (p.w / 2);
-          const y = p.y + ((j + 0.5) / 20) * visibleH;
           n++;
-          const e = document.elementFromPoint(x, y);
-          if (e && e !== body && body?.contains(e)) filled++;
+          const e = document.elementFromPoint(p.x + ((i + 0.5) / 16) * p.w, p.y + ((j + 0.5) / 20) * p.h);
+          if (e && !containers.has(e) && e.closest(".registre-panneau:not([hidden]) .registre-corps")) filled++;
         }
       return filled / n;
-    }, panel);
-    expect(right >= 0.5, `d. atlas du monde : moitié droite de la fenêtre occupée à ${(100 * right).toFixed(0)} % (≥ 50 %)`);
+    }, beside);
+    expect(right >= 0.5, `d. atlas du monde : bande à droite de l'atlas occupée à ${(100 * right).toFixed(0)} % (≥ 50 %)`);
     await shot("atlas", ".registre-panneau:not([hidden])");
     await page.close();
   }
