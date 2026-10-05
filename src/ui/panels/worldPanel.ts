@@ -63,9 +63,10 @@ export class WorldPanel implements Panel {
       this.view = drawWorldAtlas(canvas, this.atlas, this.selected);
       canvas.dataset["drawn"] = String(this.atlas.length);
     });
+    // Colonne de droite (R0.2d) : la province choisie, puis les Titans, les fronts et le journal, à côté de l'atlas.
     if (this.selected) side.append(...this.province(s, ns, me, this.selected));
     else side.append(el("p", "registre-note", t("world.pick_province")));
-    root.append(...this.titans(s, ns, me), ...this.fronts(ns), ...this.log(ns));
+    side.append(...this.titans(s, ns, me), ...this.fronts(ns), ...this.log(ns));
   }
 
   private model(s: GameState, ns: NationsState): AtlasProvince[] {

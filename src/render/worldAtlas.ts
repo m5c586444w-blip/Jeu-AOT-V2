@@ -1,7 +1,6 @@
 /**
  * Atlas schématique du monde (P7) : provinces des nations en taches d'aquarelle cernées d'encre, mers hachurées,
  * routes et voies maritimes en traits, pions de forces, marques de front. Dessin 2D (canvas), déterministe.
- * Les esthétiques propres à Marley et Hizuru (04 §1.1) viendront en P8 ; ici, un seul atlas d'encre.
  */
 
 export interface AtlasProvince {
@@ -37,6 +36,55 @@ function hash(s: string): number {
     h = Math.imul(h, 16777619);
   }
   return h >>> 0;
+}
+
+export interface LabelBox {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+}
+
+export interface LabelRequest {
+  id: string;
+  /** Point d'ancrage (centre de la province) et rayon de la tache, en pixels. */
+  cx: number;
+  cy: number;
+  r: number;
+  w: number;
+  h: number;
+  /** Plus grand = placé d'abord (province choisie, puis capitales et lieux canon, puis mers). */
+  priority: number;
+}
+
+const overlaps = (a: LabelBox, b: LabelBox): boolean => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+
+/**
+ * Placement des toponymes sans chevauchement (R0.2d) : glouton par priorité ; pour chaque nom, positions candidates
+ * autour de la tache (dessus, dessous, droite, gauche, puis plus loin) ; la première qui ne touche aucun nom déjà posé
+ * ni le bord est retenue. Un nom sans place libre n'est pas tracé (il reste lisible au survol et à la sélection).
+ * Retourne, par identifiant, le centre bas du texte (ancrage `textAlign = center`, `textBaseline = bottom`).
+ */
+export function placeLabels(reqs: readonly LabelRequest[], width: number, height: number, obstacles: readonly LabelBox[] = []): Map<string, { x: number; y: number; box: LabelBox }> {
+  const placed = new Map<string, { x: number; y: number; box: LabelBox }>();
+  const taken: LabelBox[] = [...obstacles];
+  const order = [...reqs].sort((a, b) => b.priority - a.priority || a.id.localeCompare(b.id));
+  for (const q of order) {
+    const pad = 1.5;
+    const candidates: [number, number][] = [];
+    for (const k of [1, 1.6, 2.3]) {
+      candidates.push([q.cx, q.cy - q.r * 0.85 * k], [q.cx, q.cy + q.r * 0.9 * k + q.h], [q.cx + q.r * k + q.w / 2, q.cy + q.h / 2], [q.cx - q.r * k - q.w / 2, q.cy + q.h / 2]);
+    }
+    for (const [x, y] of candidates) {
+      const box = { x0: x - q.w / 2 - pad, y0: y - q.h - pad, x1: x + q.w / 2 + pad, y1: y + pad };
+      if (box.x0 < 0 || box.y0 < 0 || box.x1 > width || box.y1 > height) continue;
+      if (taken.some((t) => overlaps(t, box))) continue;
+      taken.push(box);
+      placed.set(q.id, { x, y, box });
+      break;
+    }
+  }
+  return placed;
 }
 
 /** Contour irrégulier (tache) autour d'un centre, stable pour un identifiant donné. */
@@ -171,12 +219,23 @@ export function drawWorldAtlas(canvas: HTMLCanvasElement, provinces: readonly At
   ctx.fillStyle = INK;
   ctx.textAlign = "center";
   ctx.textBaseline = "bottom";
-  ctx.font = `${Math.max(8, Math.round(v.radius * 0.38))}px "IM Fell English", serif`;
-  for (const p of provinces) {
-    if (!p.major && p.id !== selected) continue;
+  const size = Math.max(8, Math.round(v.radius * 0.38));
+  ctx.font = `${size}px "IM Fell English", serif`;
+  // Aucun nom ne doit en chevaucher un autre (R0.2d) : placement glouton, la province choisie d'abord.
+  const shown = provinces.filter((p) => p.major || p.id === selected);
+  const reqs: LabelRequest[] = shown.map((p) => {
     const [cx, cy] = toScreen(v, p.at);
+    const r = v.radius * (p.id === "wprov_paradis" ? 1.75 : 1);
+    return { id: p.id, cx, cy, r, w: ctx.measureText(p.label).width, h: size, priority: p.id === selected ? 3 : p.sea ? 1 : 2 };
+  });
+  const width = canvas.clientWidth || canvas.width;
+  const height = canvas.clientHeight || canvas.height;
+  const placed = placeLabels(reqs, width, height);
+  for (const p of shown) {
+    const at = placed.get(p.id);
+    if (!at) continue;
     ctx.globalAlpha = p.sea ? 0.6 : 1;
-    ctx.fillText(p.label, cx, cy - v.radius * (p.id === "wprov_paradis" ? 1.5 : 0.85));
+    ctx.fillText(p.label, at.x, at.y);
   }
   ctx.globalAlpha = 1;
   return v;
