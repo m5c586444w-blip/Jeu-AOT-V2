@@ -1,0 +1,56 @@
+[1366×768]
+  KO  b. menu : aucune chaîne de développement (« Registre de travail — phase de fondation » présent)
+  OK  3. carte stratégique : zone de jeu 92.4 % de l'espace disponible (1366×636 px sous le bandeau ; ≥ 85 %)
+  KO  b. HUD hors debug : « Graine » visible, « Empreinte d'état » visible
+  OK  b. HUD en debug (F2) : Graine et Empreinte d'état affichées
+  KO  c. légende « Calques » recouverte par un registre ouvert : 18 % de sa surface
+  OK  c. légende « Calques » recouverte par le dossier de province : 0 %
+  OK  c. légende « Calques » recouverte par les options : 0 %
+  OK  c. la légende revient quand les fenêtres sont fermées
+  KO  g. épilogue : 5 case(s) à « 0 » (Jours écoulés, Personnages morts, Événements survenus, Divergence, Expéditions)
+  OK  3. bataille : zone de jeu 100.0 % de la scène (1014×588 px ; canevas au premier plan 100.0 % × sol 100.0 % ; ≥ 85 %)
+  KO  a. sous-titres : au plus 3 ligne(s) identique(s) à l'écran en 10 s de bataille (« [Pas de Titan, le sol tremble] »)
+      bilan : Morts 1 Titans abattus 1 Coupes réussies 2 Membres tranchés 0 Esquives 0 Sauvetages 0 Lames cassées 0 Gaz consommé 2 358
+  KO  f. transformation : porteur et éclair dans le champ de la caméra : non mesuré (toits 0 · vapeur 0 · éclairs 8 · occultés 0)
+  KO  d. atlas du monde : 18 noms tracés, 2 chevauchement(s) (Capitale de Marley / Académie des Guerriers ; Capitale d'Hizuru / Domaine Azumabito)
+  OK  d. atlas du monde : moitié droite de la fenêtre occupée à 91 % (≥ 50 %)
+[3840×2160]
+  KO  b. menu : aucune chaîne de développement (« Registre de travail — phase de fondation » présent)
+  OK  3. carte stratégique : zone de jeu 99.1 % de l'espace disponible (3840×2028 px sous le bandeau ; ≥ 85 %)
+  KO  b. HUD hors debug : « Graine » visible, « Empreinte d'état » visible
+  OK  b. HUD en debug (F2) : Graine et Empreinte d'état affichées
+  OK  c. légende « Calques » recouverte par un registre ouvert : 0 % de sa surface
+  OK  c. légende « Calques » recouverte par le dossier de province : 0 %
+  OK  c. légende « Calques » recouverte par les options : 0 %
+  OK  c. la légende revient quand les fenêtres sont fermées
+  KO  g. épilogue : 5 case(s) à « 0 » (Jours écoulés, Personnages morts, Événements survenus, Divergence, Expéditions)
+  KO  3. bataille : zone de jeu 47.0 % de la scène (3488×2004 px ; canevas au premier plan 100.0 % × sol 47.0 % ; ≥ 85 %)
+  KO  a. sous-titres : au plus 3 ligne(s) identique(s) à l'écran en 10 s de bataille (« [Pas de Titan, le sol tremble] »)
+  KO  d. atlas du monde : 18 noms tracés, 2 chevauchement(s) (Capitale de Marley / Académie des Guerriers ; Capitale d'Hizuru / Domaine Azumabito)
+  OK  d. atlas du monde : moitié droite de la fenêtre occupée à 91 % (≥ 50 %)
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.screenshot: Timeout 22136.976000000024ms exceeded.
+Call log:
+[2m  - taking element screenshot[22m
+[2m  - waiting for fonts to load...[22m
+[2m  - fonts loaded[22m
+[2m  - attempting scroll into view action[22m
+[2m    - waiting for element to be stable[22m
+
+    at shot (/tmp/claude-0/-home-user-Jeu-AOT-V2/90b628fc-0194-51ad-aa1a-21afbe15ecb3/scratchpad/wt-avant/src/tools/smoke-r0.ts:122:48)
+    at <anonymous> (/tmp/claude-0/-home-user-Jeu-AOT-V2/90b628fc-0194-51ad-aa1a-21afbe15ecb3/scratchpad/wt-avant/src/tools/smoke-r0.ts:285:11) {
+  log: [
+    '  - taking element screenshot',
+    '  - waiting for fonts to load...',
+    '  - fonts loaded',
+    '  - attempting scroll into view action',
+    '    - waiting for element to be stable'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.22.0
+exit 1
