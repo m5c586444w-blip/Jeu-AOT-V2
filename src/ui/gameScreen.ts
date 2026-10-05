@@ -283,6 +283,15 @@ export async function bootGame(): Promise<void> {
   });
 
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
+  // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre est ouverte (registre, dossier, options…), qui la recouvrirait.
+  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .choix-nation";
+  const syncLegend = (): void => {
+    const covered = document.querySelector(WINDOWS) !== null;
+    if ((layers.el.dataset["masque"] === "1") !== covered) layers.el.dataset["masque"] = covered ? "1" : "0";
+  };
+  new MutationObserver(syncLegend).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["hidden"] });
+  syncLegend();
+
   let last = performance.now();
   const loop = (now: number): void => {
     const days = busy || inBattle ? 0 : clock.consume(now - last, MAX_DAYS_PER_BATCH);

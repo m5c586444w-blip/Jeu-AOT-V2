@@ -758,3 +758,5 @@ body[data-tactique] .sous-titres { bottom: auto; top: 3.4rem; }
 /* R0.2b : graine et empreinte d'état réservées au mode debug (F2). */
 .bandeau__champ--debug { display: none; }
 html[data-debug="true"] .bandeau__champ--debug { display: inline; }
+/* R0.2c : la légende « Calques » s'efface quand une fenêtre est ouverte. */
+.calques[data-masque="1"] { visibility: hidden; }
