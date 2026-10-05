@@ -116,9 +116,10 @@ function coherence(): void {
 function realism(): void {
   const from = 1001;
   const n = Math.min(N, 1000);
-  const gasRange = world.military?.exp.engagement.gas_per_engaged ?? [3, 8];
+  const gasTable = world.military?.exp.engagement.gas_per_engaged_by_class ?? {};
   console.log(`Réalisme indépendant (D-62) : ${tw.balance.coherence.length} engagements types × ${n} batailles de jour et ${n} de nuit (graines ${from}–${from + n - 1})`);
   console.log("  type             gaz/homme (jour)  morts jour  morts nuit  nuit : Titans abattus / fin au temps limite");
+  const gasOf = new Map<string, number>();
   let dayDeaths = 0;
   let nightDeaths = 0;
   for (const c of tw.balance.coherence) {
@@ -138,17 +139,45 @@ function realism(): void {
       nightTimeout += rn.state.ended?.reason === "temps" ? 1 : 0;
     }
     const g = gas / n;
-    const ok = g >= gasRange[0] && g <= gasRange[1];
-    if (!ok) failures.push(`R-gaz ${c.id} : ${f2(g)} u hors de [${gasRange[0]}, ${gasRange[1]}]`);
+    gasOf.set(c.id, g);
     dayDeaths += day;
     nightDeaths += night;
-    console.log(`  ${c.id.padEnd(16)} ${`${f2(g)} u`.padStart(10)}  ${ok ? "OK" : "KO"}     ${f2(day / n).padStart(5)}       ${f2(night / n).padStart(5)}       ${f2(nightKills / n)} / ${((100 * nightTimeout) / n).toFixed(0)} %`);
+    console.log(`  ${c.id.padEnd(16)} ${`${f2(g)} u`.padStart(10)}        ${f2(day / n).padStart(5)}       ${f2(night / n).padStart(5)}       ${f2(nightKills / n)} / ${((100 * nightTimeout) / n).toFixed(0)} %`);
   }
   const m = tw.balance.coherence.length * n;
   const nightOk = nightDeaths < dayDeaths;
   if (!nightOk) failures.push(`R-nuit : ${f2(nightDeaths / m)} morts la nuit ≥ ${f2(dayDeaths / m)} le jour`);
   console.log(`${nightOk ? "  OK " : "  KO "} R-nuit : morts moyennes de nuit ${f2(nightDeaths / m)} < de jour ${f2(dayDeaths / m)} (03 §5.2)`);
-  console.log(`${failures.some((f) => f.startsWith("R-gaz")) ? "  KO " : "  OK "} R-gaz : gaz par homme engagé dans [${gasRange[0]}, ${gasRange[1]}] u pour les ${tw.balance.coherence.length} types (02 §15)`);
+  // R-gaz (D-77) : pour chaque classe de Titan, le gaz par homme mesuré au combat tactique (tous les types de la classe,
+  // plaine et forêt, 12 hommes contre 1, de jour) tombe dans la plage que l'auto-résolution et les expéditions consomment.
+  const nGas = Math.min(n, 250);
+  console.log(`  R-gaz par classe (${nGas} batailles par type et par terrain, graines ${from}–${from + nGas - 1}) :`);
+  let gasOk = true;
+  for (const [cls, range] of Object.entries(gasTable)) {
+    const types = [...tw.titanTypes.values()].filter((t) => t.class === cls);
+    let sum = 0;
+    let count = 0;
+    const parts: string[] = [];
+    for (const t of types) {
+      let tg = 0;
+      for (const map of ["tmap_plaine", "tmap_foret"]) {
+        for (let seed = from; seed < from + nGas; seed++) tg += runBattle(world, skirmishSetup(world, map, [{ type: t.id, count: 1 }], 12, seed)).state.stats.gasUsed / 12;
+      }
+      tg /= 2 * nGas;
+      parts.push(`${t.id.replace("ttype_", "")} ${f2(tg)}`);
+      sum += tg;
+      count++;
+    }
+    const g = count ? sum / count : NaN;
+    const ok = count > 0 && g >= range[0] && g <= range[1];
+    if (!ok) {
+      gasOk = false;
+      failures.push(`R-gaz ${cls} : ${f2(g)} u hors de [${range[0]}, ${range[1]}]`);
+    }
+    console.log(`    ${cls.padEnd(14)} ${`${f2(g)} u`.padStart(9)} dans [${range[0]}, ${range[1]}] ${ok ? "OK" : "KO"}   (${parts.join(" · ")})`);
+  }
+  const typed = [...gasOf.entries()].map(([k, v]) => `${k} ${f2(v)}`).join(" · ");
+  console.log(`${gasOk ? "  OK " : "  KO "} R-gaz : gaz par homme engagé dans la plage de sa classe pour les ${Object.keys(gasTable).length} classes (D-77) ; engagements types : ${typed}`);
 }
 
 if (process.argv.includes("--bench")) bench();

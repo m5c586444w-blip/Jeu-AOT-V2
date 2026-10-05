@@ -439,3 +439,24 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - lisibilité : aucun débordement horizontal ni texte coupé ; corps minimal ≥ 11 px × échelle (− 0,6 px de tolérance d'arrondi).
 - Quatre passes : 1366×768 et 3840×2160, à 100 % et 125 %.
 - La revue visuelle « sans template look » reste humaine. C'est l'objet de l'arrêt de revue de fin de P8.
+
+## 2026-10-05 — D-77 R-gaz : gaz par classe de Titan (options c + a, décision de l'utilisateur)
+- **Décision de l'utilisateur** (revue de P8) : options (c) + (a) de D-62.
+- **Sources.** L'auto-résolution des expéditions (`engage`) et le pré-brief (`estimatePlan`) consomment désormais le gaz selon la classe du Titan engagé. La table vient du combat tactique, mesurée sur les graines de calibrage 1–200, 12 hommes contre 1, plaine et forêt :
+  - petit : 2,7–3,1 u ;
+  - moyen : 5,3–5,4 u ;
+  - grand : 10,0 u ;
+  - Anormaux : 11,4 (sauteur) à 23,0 u (rampant).
+- **Plages retenues** `[A]`, dans `data/balance/expeditions.json` → `engagement.gas_per_engaged_by_class` :
+  - `titan_petit` [2, 4] ;
+  - `titan_moyen` [4, 7] ;
+  - `titan_grand` [8, 12,5] ;
+  - `titan_anormal` [9, 21].
+- **Consommation.** Elle est tirée uniformément dans la plage de la classe. Le seuil « gaz insuffisant » est la borne basse de la classe. Le pré-brief prend la moyenne des milieux de plage, pondérée par la fréquence des classes.
+- **Ce que la table remplace.** La plage unique [3, 8] u de 02 §15 se lit désormais comme « un combat type contre un Titan moyen » (option a) : elle reste vraie en moyenne pondérée. ERRATA > 02, mais aucun errata ne couvre ce point : c'est une décision `[A]` de l'utilisateur.
+- **Contrôle indépendant.** `sim:tactical -- --realisme` reste ce contrôle, sur les graines 1001–1250 que le calibrage n'a jamais vues. R-gaz y vérifie, classe par classe, que le gaz moyen par homme au combat tactique (tous les types de la classe, deux terrains) tombe dans la plage consommée par l'auto-résolution. R-nuit est inchangé.
+- **Mortalité.** Elle est inchangée : 31,9 % pour l'éventail, contre 25–40 %. Le nombre de tirages aléatoires est identique, et le réservoir d'une expédition type ne s'épuise pas.
+- **Test modifié et pourquoi.** `tests/data/expeditions.test.ts` exigeait `gas_per_engaged = [3, 8]`. Il encodait la donnée que l'utilisateur a décidé de remplacer : le tester tel quel reviendrait à refuser la décision. Le test vérifie désormais :
+  - que la table couvre toutes les classes de Titan ;
+  - que les plages croissent du petit au grand ;
+  - qu'une classe absente est refusée.

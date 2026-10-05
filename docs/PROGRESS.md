@@ -42,7 +42,7 @@
 - Occlusion décor/unités : les unités sont toujours dessinées par-dessus bâtiments et arbres.
 - Vapeur des Titans abattus : aujourd'hui une ellipse et des bouffées fixes, sans animation.
 
-## Décision ouverte, pour la revue de P8 — R-gaz (D-62)
+## Décision prise (revue de P8, 2026-10-05) — R-gaz (D-62) : options (c) + (a), appliquée en R0 (D-77)
 - Constat (`docs/reports/P4-revue-realisme.log`) :
   - gaz par homme et par bataille : 2,4 u contre un petit Titan, 5,7 u contre un moyen, 10,6 u contre un grand, pour une plage de [3, 8] u (02 §15) ;
   - jouer contre un grand Titan coûte environ deux fois le gaz de l'auto-résolution.

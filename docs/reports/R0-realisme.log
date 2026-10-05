@@ -1,0 +1,21 @@
+
+> murs-et-sang@0.0.1 sim:tactical
+> tsx src/tools/sim-tactical.ts --realisme
+
+Réalisme indépendant (D-62) : 6 engagements types × 1000 batailles de jour et 1000 de nuit (graines 1001–2000)
+  type             gaz/homme (jour)  morts jour  morts nuit  nuit : Titans abattus / fin au temps limite
+  petit_plaine         2.77 u         0.41        0.11       0.46 / 54 %
+  moyen_plaine         5.74 u         1.11        0.25       0.46 / 54 %
+  grand_plaine        10.61 u         2.00        0.66       0.42 / 56 %
+  petit_foret          2.40 u         0.40        0.09       0.46 / 54 %
+  moyen_foret          5.72 u         1.09        0.25       0.46 / 54 %
+  grand_foret         10.65 u         2.01        0.66       0.42 / 56 %
+  OK  R-nuit : morts moyennes de nuit 0.34 < de jour 1.17 (03 §5.2)
+  R-gaz par classe (250 batailles par type et par terrain, graines 1001–1250) :
+    titan_petit       2.47 u dans [2, 4] OK   (petit_errant 2.47)
+    titan_moyen       5.47 u dans [4, 7] OK   (moyen_errant 5.47 · moyen_meute 5.47)
+    titan_grand      10.48 u dans [8, 12.5] OK   (grand_errant 10.48)
+    titan_anormal    14.42 u dans [9, 21] OK   (anormal_coureur 11.73 · anormal_sauteur 11.65 · anormal_ignorant 13.69 · anormal_rampant 20.62)
+  OK  R-gaz : gaz par homme engagé dans la plage de sa classe pour les 4 classes (D-77) ; engagements types : petit_plaine 2.77 · moyen_plaine 5.74 · grand_plaine 10.61 · petit_foret 2.40 · moyen_foret 5.72 · grand_foret 10.65
+sim:tactical : tout est conforme.
+exit 0

@@ -130,7 +130,8 @@ export const ExpeditionsBalanceSchema = z
         skill_k: num,
         wounded_per_death: z.number().min(0),
         serious_share: prob,
-        gas_per_engaged: range,
+        /** Gaz par homme engagé, par classe de Titan (R-gaz, D-77) : table tirée du combat tactique [A]. */
+        gas_per_engaged_by_class: z.record(z.string(), range),
         horses_per_death: z.number().min(0),
         no_gas_mult: pos,
         no_blades_mult: pos,

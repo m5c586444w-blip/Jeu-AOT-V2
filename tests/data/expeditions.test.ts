@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { gasPerEngaged } from "../../src/sim/military/plan";
 import { describe, expect, it } from "vitest";
 import { geoFromMap } from "../../src/data/geo";
 import { MapSchema } from "../../src/data/map";
@@ -43,9 +44,15 @@ describe("données de P3 (AC3-01)", () => {
     expect(m.geo.adj.get("prov_karanes")?.some((e) => e.to === "prov_rose_est")).toBe(true);
   });
 
-  it("équilibrage : gaz par engagement 3–8 u (02 §15), réservoir 100 u (03 §3.2), mortalité cible notée", () => {
+  it("équilibrage : gaz par homme engagé selon la classe du Titan (R-gaz, D-77), réservoir 100 u (03 §3.2), mortalité cible notée", () => {
     const e = world850.military?.exp;
-    expect(e?.engagement.gas_per_engaged).toEqual([3, 8]);
+    // D-77 : la plage unique 3–8 u de 02 §15 est remplacée par une table par classe tirée du combat tactique [A].
+    const table = e?.engagement.gas_per_engaged_by_class ?? {};
+    for (const t of world850.military?.titans ?? []) expect(table[t.id], t.id).toBeDefined();
+    const mid = (id: string): number => ((table[id]?.[0] ?? 0) + (table[id]?.[1] ?? 0)) / 2;
+    expect(mid("titan_petit")).toBeLessThan(mid("titan_moyen"));
+    expect(mid("titan_moyen")).toBeLessThan(mid("titan_grand"));
+    expect(() => gasPerEngaged({ gas_per_engaged_by_class: table }, "titan_inconnu")).toThrow();
     expect(e?.odm_tank).toBe(100);
     expect(e?.notes_canon).toContain("25–40 %");
   });

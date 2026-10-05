@@ -1091,7 +1091,7 @@
   "why.exp_engagements_contacts": "Contacts attendus",
   "why.exp_food_horses": "Fourrage ({horses} chevaux)",
   "why.exp_food_soldiers": "Vivres ({n} hommes × {days} jours)",
-  "why.exp_gas_engagements": "Gaz d'ODM par engagement ({engaged} hommes engagés, 3 à 8 u chacun)",
+  "why.exp_gas_engagements": "Gaz d'ODM par engagement ({engaged} hommes engagés, {per} u chacun en moyenne selon la classe du Titan)",
   "why.expedition_corps": "Retour de l'expédition n° {n}",
   "why.expedition_outcome": "Bilan de l'expédition n° {n}",
   "formation.eventail": "éventail de reconnaissance longue portée",

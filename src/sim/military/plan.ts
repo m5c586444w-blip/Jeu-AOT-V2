@@ -119,6 +119,13 @@ export function planDays(world: World, plan: ExpeditionPlan): Explained {
   return new Explainer().base("why.exp_days_travel", Math.ceil(km / pace) * 2, { km: Math.round(km), pace }).add("why.exp_days_objective", e.objective_days[plan.objective] ?? 0).done();
 }
 
+/** Gaz par homme engagé contre une classe de Titan (R-gaz, D-77) ; la table couvre toutes les classes (contrôlé par les tests de données). */
+export function gasPerEngaged(g: { gas_per_engaged_by_class: Record<string, [number, number]> }, classId: string): [number, number] {
+  const r = g.gas_per_engaged_by_class[classId];
+  if (!r) throw new Error(`gaz par engagement : classe ${classId} absente de data/balance/expeditions.json`);
+  return r;
+}
+
 /**
  * Estimation analytique du pré-brief (F-EXP-15) : espérance des contacts, engagements et morts sur l'itinéraire,
  * avec les mêmes paramètres que l'auto-résolution (hors aléa). Chaque grandeur est expliquée.
@@ -165,7 +172,12 @@ export function estimatePlan(world: World, st: StrategicState, mil: MilitaryStat
     .done();
   const wounded = deaths.value * e.engagement.wounded_per_death * e.engagement.serious_share * e.medical.serious_death_without;
   const deathsAll = new Explainer().base("why.exp_deaths_combat", deaths.value).add("why.exp_deaths_wounds", wounded).mul("why.exp_deaths_cap", Math.min(1, n / Math.max(1, deaths.value + wounded))).done();
-  const gas = new Explainer().base("why.exp_gas_engagements", engagements.value * engaged * ((e.engagement.gas_per_engaged[0] + e.engagement.gas_per_engaged[1]) / 2), { engaged }).done();
+  // Gaz moyen par homme engagé : table par classe (R-gaz, D-77), pondérée par la fréquence des classes.
+  const gasPerMan = m.titans.reduce((s, t) => {
+    const r = gasPerEngaged(e.engagement, t.id);
+    return s + t.weight * ((r[0] + r[1]) / 2);
+  }, 0) / Math.max(1e-9, m.titans.reduce((s, t) => s + t.weight, 0));
+  const gas = new Explainer().base("why.exp_gas_engagements", engagements.value * engaged * gasPerMan, { engaged, per: Math.round(gasPerMan * 10) / 10 }).done();
   const food = new Explainer()
     .base("why.exp_food_soldiers", days.value * n * e.attrition.food_per_soldier, { n, days: days.value })
     .add("why.exp_food_horses", days.value * plan.horses * e.attrition.fodder_per_horse, { horses: plan.horses })

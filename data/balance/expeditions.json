@@ -1,6 +1,6 @@
 {
   "canon": "A",
-  "notes_canon": "Valeurs de départ [A] (02 §15, 03 §3.2, §5, §12), calibrées par `npm run sim:expeditions` (mortalité moyenne 25–40 % d'une expédition type en début de partie). Colonnes lourdes (03 §6 : « sécurité accrue, vitesse réduite ») : moins exposées par engagement, mais plus lentes et moins aptes à repérer et éviter (D-56). Réservoir d'ODM ≈ 100 u (03 §3.2), gaz par engagement 3–8 u (02 §15), lames : 2 paires de 4–8 coupes (03 §3.2).",
+  "notes_canon": "Valeurs de départ [A] (02 §15, 03 §3.2, §5, §12), calibrées par `npm run sim:expeditions` (mortalité moyenne 25–40 % d'une expédition type en début de partie). Colonnes lourdes (03 §6 : « sécurité accrue, vitesse réduite ») : moins exposées par engagement, mais plus lentes et moins aptes à repérer et éviter (D-56). Réservoir d'ODM ≈ 100 u (03 §3.2), gaz par homme engagé selon la classe du Titan, d'après la table du combat tactique [A] (R-gaz, D-77 : remplace la plage unique 3–8 u de 02 §15 ; petit 2–4, moyen 4–7, grand 8–12,5, anormal 9–21), lames : 2 paires de 4–8 coupes (03 §3.2).",
   "odm_units_per_stock_unit": 10,
   "odm_tank": 100,
   "gas_spare_tanks_per_soldier": 1,
@@ -21,7 +21,7 @@
     "skill_k": 0.02,
     "wounded_per_death": 1.2,
     "serious_share": 0.35,
-    "gas_per_engaged": [3, 8],
+    "gas_per_engaged_by_class": { "titan_petit": [2, 4], "titan_moyen": [4, 7], "titan_grand": [8, 12.5], "titan_anormal": [9, 21] },
     "horses_per_death": 0.8,
     "no_gas_mult": 3,
     "no_blades_mult": 2,

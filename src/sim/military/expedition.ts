@@ -10,7 +10,7 @@ import { pushLog } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
 import type { MilitaryWorld, World } from "../strategic/world";
 import type { ExpeditionsBalance } from "../../data/balance";
-import { gasFromStock, planCapitalCost, planProblem, planSoldiers } from "./plan";
+import { gasFromStock, gasPerEngaged, planCapitalCost, planProblem, planSoldiers } from "./plan";
 import { clamp, lognormal, poisson, uniform, weighted } from "./random";
 import { edgeKm, supplyAt, titanDensity } from "./routes";
 import { NO_TECH } from "../research/research";
@@ -340,7 +340,8 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
   const vets = troops.length > 0 ? troops.reduce((s, t) => s + t.expeditions, 0) / troops.length : 0;
   const veteran = 1 - Math.min(x.experience.max_bonus, x.experience.survival_per_expedition * vets * g.veteran_k * 10);
   const tech = ctx.tech ?? NO_TECH;
-  const gasNeed = engaged.length * g.gas_per_engaged[0] * tech.gasOdm;
+  const gasRange = gasPerEngaged(g, cls.id);
+  const gasNeed = engaged.length * gasRange[0] * tech.gasOdm;
   const gasMult = e.gasOdm < gasNeed ? g.no_gas_mult : 1;
   const bladeMult = e.bladePairs < engaged.length * 0.5 ? g.no_blades_mult : 1;
   // Technologies (P5) : équipement de nuit sur la part nocturne des contacts, doctrine ; facteur 1 sans recherche.
@@ -398,7 +399,7 @@ function engage(ctx: MilCtx, e: Expedition, rng: Rng, province: string, titanId:
     const s = credited[Math.floor(rng.next() * credited.length)];
     if (s) s.kills += 1;
   }
-  const gasUsed = engaged.length * uniform(rng, g.gas_per_engaged[0], g.gas_per_engaged[1]) * tech.gasOdm;
+  const gasUsed = engaged.length * uniform(rng, gasRange[0], gasRange[1]) * tech.gasOdm;
   e.gasOdm = Math.max(0, e.gasOdm - gasUsed);
   e.stats.gasUsedOdm += gasUsed;
   const blades = Math.min(e.bladePairs, Math.round(engaged.length * 0.5));
