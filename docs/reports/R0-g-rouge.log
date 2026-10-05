@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ❯ tests/ui/narrative.test.ts (5 tests | 1 failed) 295ms
+   ❯ récits (AC8-07, 04 §5.10, §5.12, §5.15) (5)
+     × R0.2g : épilogue sans « 0 » par défaut — « — » pour un compte encore nul, ligne masquée si la donnée est absente 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/narrative.test.ts > récits (AC8-07, 04 §5.10, §5.12, §5.15) > R0.2g : épilogue sans « 0 » par défaut — « — » pour un compte encore nul, ligne masquée si la donnée est absente
+AssertionError: narr.stat.legitimacy: expected [ 'narr.stat.days', …(5) ] to not include 'narr.stat.legitimacy'
+ ❯ tests/ui/narrative.test.ts:65:121
+     63|     const e845 = epilogue(w845, createInitialState(42, w845));
+     64|     const k845 = e845.stats.map((x) => x.key);
+     65|     for (const absent of ["narr.stat.legitimacy", "narr.stat.events", …
+       |                                                                                                                         ^
+     66|     for (const [w, s] of [[w845, createInitialState(42, w845)], [w850,…
+     67|       for (const x of epilogue(w, s).stats) expect(String(x.value), x.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  16:42:05
+   Duration  2.37s (transform 54%, import 32%, tests 13%)
+

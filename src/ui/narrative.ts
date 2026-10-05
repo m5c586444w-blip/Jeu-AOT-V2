@@ -92,13 +92,17 @@ export function epilogue(world: World, s: GameState): Epilogue {
     lines.push(t(`narr.epi.hizuru.${ns.hizuruSide}`));
     for (const w of ns.wars) lines.push(t("narr.epi.war", { a: t(world.nations?.factions.get(w.split("|")[0] ?? "")?.name_key ?? ""), b: t(world.nations?.factions.get(w.split("|")[1] ?? "")?.name_key ?? "") }));
   }
-  const stats: Epilogue["stats"] = [
-    { key: "narr.stat.days", value: days },
-    { key: "narr.stat.legitimacy", value: Math.round(pol?.legitimacy ?? 0) },
-    { key: "narr.stat.named_dead", value: dead.length },
-    { key: "narr.stat.events", value: happened },
-    { key: "narr.stat.divergence", value: Math.round((ev?.divergence ?? 0) * 100) / 100 },
-    { key: "narr.stat.expeditions", value: s.military?.reports.length ?? 0 },
-  ];
+  // Aucun « 0 » par défaut (R0.2g) : une donnée dont la couche manque est masquée ; un compte encore nul s'affiche « — ».
+  const count = (n: number): number | string => (n === 0 ? "—" : n);
+  const stats: Epilogue["stats"] = [{ key: "narr.stat.days", value: count(days) }];
+  if (pol) {
+    stats.push({ key: "narr.stat.legitimacy", value: Math.round(pol.legitimacy) });
+    stats.push({ key: "narr.stat.named_dead", value: count(dead.length) });
+  }
+  if (ev) {
+    stats.push({ key: "narr.stat.events", value: count(happened) });
+    stats.push({ key: "narr.stat.divergence", value: count(Math.round(ev.divergence * 100) / 100) });
+  }
+  if (s.military) stats.push({ key: "narr.stat.expeditions", value: count(s.military.reports.length) });
   return { title: t("narr.epi.title", { year: s.date.year }), lines, stats };
 }

@@ -11,6 +11,7 @@ const keys = Object.keys(fr);
 const noRawKey = (text: string): string[] => keys.filter((k) => k.includes(".") && text.includes(k));
 const w850 = loadWorld("data", "scn_sandbox_850");
 const w854 = loadWorld("data", "scn_854");
+const w845 = loadWorld("data", "scn_sandbox_845");
 const year850 = applyCommand(createInitialState(42, w850), { type: "AdvanceDays", n: 120 }, undefined, w850);
 
 describe("récits (AC8-07, 04 §5.10, §5.12, §5.15)", () => {
@@ -55,5 +56,18 @@ describe("récits (AC8-07, 04 §5.10, §5.12, §5.15)", () => {
       expect((fr as Record<string, string>)[`${x.key}_why`], x.key).toBeTruthy();
     }
     expect(noRawKey(`${e.title} ${e.lines.join(" ")}`)).toEqual([]);
+  });
+
+  it("R0.2g : épilogue sans « 0 » par défaut — « — » pour un compte encore nul, ligne masquée si la donnée est absente", () => {
+    // 845 : ni couche politique ni événements ; la légitimité, les événements et la divergence n'existent pas.
+    const e845 = epilogue(w845, createInitialState(42, w845));
+    const k845 = e845.stats.map((x) => x.key);
+    for (const absent of ["narr.stat.legitimacy", "narr.stat.events", "narr.stat.divergence"]) expect(k845, absent).not.toContain(absent);
+    for (const [w, s] of [[w845, createInitialState(42, w845)], [w850, createInitialState(42, w850)], [w850, year850]] as const) {
+      for (const x of epilogue(w, s).stats) expect(String(x.value), x.key).not.toBe("0");
+    }
+    const start = epilogue(w850, createInitialState(42, w850));
+    expect(start.stats.find((x) => x.key === "narr.stat.events")?.value).toBe("—");
+    expect(start.stats.find((x) => x.key === "narr.stat.legitimacy")?.value).toBe(52);
   });
 });
