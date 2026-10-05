@@ -364,6 +364,8 @@ export function tryCut(bt: Battle, s: SoldierUnit, t: TitanUnit, rng: Rng): void
     t.killedBy = st.soldiers.indexOf(s);
     s.kills += 1;
     st.stats.napes += 1;
+    st.stats.cutsLanded = (st.stats.cutsLanded ?? 0) + 1;
+    st.stats.killedBy = { ...st.stats.killedBy, lame: (st.stats.killedBy?.lame ?? 0) + 1 };
     st.stats.titansKilled[t.type] = (st.stats.titansKilled[t.type] ?? 0) + 1;
     for (const v of st.soldiers) if (v.mode === "saisi" && v.grabbedBy === t.id) {
       v.mode = "vol";
@@ -372,6 +374,7 @@ export function tryCut(bt: Battle, s: SoldierUnit, t: TitanUnit, rng: Rng): void
     log(st, b, "battle.nape", { name: s.name, titan: bodyName(bt, t), n: t.id + 1 });
   } else if (roll < p + c.limb_share * (1 - p)) {
     st.stats.limbs += 1;
+    st.stats.cutsLanded = (st.stats.cutsLanded ?? 0) + 1;
     const limb = t.legs === 0 && rng.next() < 0.4 ? "legs" : t.armL === 0 ? "armL" : "armR";
     t[limb] = b.titans.limb_regen_s;
     // Un bras coupé libère le camarade saisi (sauvetage, 03 §4.3, F-CMB-18).

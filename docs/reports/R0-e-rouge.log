@@ -1,0 +1,54 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ❯ tests/sim/battle-summary.test.ts (2 tests | 2 failed) 68ms
+   ❯ bilan de bataille (R0.2e) (2)
+     × un porteur abattu aux lances de foudre est attribué aux lances ; le bilan l'explique 30ms
+     × « Coupes réussies » compte les coupes qui ont porté (nuque ou membre), au plus les tentatives 35ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/sim/battle-summary.test.ts > bilan de bataille (R0.2e) > un porteur abattu aux lances de foudre est attribué aux lances ; le bilan l'explique
+AssertionError: expected undefined to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+undefined
+
+ ❯ tests/sim/battle-summary.test.ts:18:31
+     16|     const s = r.state.stats;
+     17|     expect(s.cuts).toBe(0);
+     18|     expect(s.killedBy?.lance).toBe(1);
+       |                               ^
+     19|     const rows = battleSummary(r.state);
+     20|     const killed = rows.find((x) => x.key === "tac.sum.napes");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/sim/battle-summary.test.ts > bilan de bataille (R0.2e) > « Coupes réussies » compte les coupes qui ont porté (nuque ou membre), au plus les tentatives
+AssertionError: graine 1: expected undefined to be 10 // Object.is equality
+
+- Expected:
+10
+
++ Received:
+undefined
+
+ ❯ tests/sim/battle-summary.test.ts:30:46
+     28|       const r = runBattle(world, skirmishSetup(world, "tmap_plaine", […
+     29|       const s = r.state.stats;
+     30|       expect(s.cutsLanded, `graine ${seed}`).toBe((s.killedBy?.lame ??…
+       |                                              ^
+     31|       expect(s.cutsLanded ?? 0).toBeLessThanOrEqual(s.cuts);
+     32|       const rows = battleSummary(r.state);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  16:36:18
+   Duration  900ms (transform 48%, import 42%, tests 9%, worker 1%)
+

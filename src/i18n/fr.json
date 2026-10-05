@@ -1302,9 +1302,9 @@
   "tac.sum.dead": "Morts",
   "tac.sum.dead_why": "Soldats tués pendant la bataille (frappe, saisie, chute sans gaz, hémorragie). Chacun a un dossier ci-dessous.",
   "tac.sum.napes": "Titans abattus",
-  "tac.sum.napes_why": "Nuques tranchées : seule une coupe de nuque tue un Titan.",
+  "tac.sum.napes_why": "Titans tués pendant la bataille. Une coupe de nuque tue un Titan pur ; un porteur meurt quand sa nuque est détruite, à la lame ou aux lances de foudre.",
   "tac.sum.cuts": "Coupes réussies",
-  "tac.sum.cuts_why": "Coupes qui ont porté (nuque, membres, mains), sur toutes les tentatives.",
+  "tac.sum.cuts_why": "Coupes qui ont porté (nuque ou membre) : {landed} sur {tries} tentatives.",
   "tac.sum.limbs": "Membres tranchés",
   "tac.sum.limbs_why": "Bras ou jambes coupés : le Titan est ralenti le temps de la repousse.",
   "tac.sum.dodges": "Esquives",
@@ -2567,5 +2567,12 @@
   "audio.sfx.tampon": "Coup de tampon",
   "audio.sfx.papier": "Froissement de papier",
   "audio.sfx.encre": "Plume sur le papier",
-  "audio.sfx.transformation": "Tonnerre de transformation"
+  "audio.sfx.transformation": "Tonnerre de transformation",
+  "tac.sum.by_lame": "À la lame (nuque tranchée) : {lame}.",
+  "tac.sum.by_lance": "Aux lances de foudre : {lance}.",
+  "tac.sum.by_porteur": "Par un porteur allié : {porteur}.",
+  "tac.sum.by_pur": "Par des Titans purs : {pur}.",
+  "tac.sum.spears": "Lances de foudre au but",
+  "tac.sum.spears_why": "{hits} au but sur {thrown} lancées. Tirées du sol ou des toits, elles percent l'armure et ne demandent ni coupe ni gaz.",
+  "tac.sum.gas_zero_spears": "Aucun gaz consommé : les hommes ont combattu du sol, aux lances de foudre, sans manœuvre d'ODM."
 }

@@ -7,6 +7,7 @@ import { createBattle, stepBattle } from "../../sim/tactical/battle";
 import type { Battle } from "../../sim/tactical/battle";
 import { bodyName } from "../../sim/tactical/shifters";
 import { letterFor } from "../narrative";
+import { battleSummary } from "./summary";
 import { battleCues, cueSnapshot, sharedAudio } from "../audio";
 import { loadSettings, volumesOf } from "../settings";
 import type { BattleSetup, SoldierUnit, TacticalOrder, TimedOrder } from "../../sim/tactical/types";
@@ -293,23 +294,13 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       box.append(el("h3", "", t(`battle.end_short.${st.ended?.reason ?? "temps"}`).toUpperCase()));
       const table = el("table", "registre-table");
       const dead = st.soldiers.filter((s) => s.mode === "mort");
-      const rows: [string, number, string][] = [
-        ["tac.sum.dead", dead.length, "tac.sum.dead_why"],
-        ["tac.sum.napes", st.stats.napes, "tac.sum.napes_why"],
-        ["tac.sum.cuts", st.stats.cuts, "tac.sum.cuts_why"],
-        ["tac.sum.limbs", st.stats.limbs, "tac.sum.limbs_why"],
-        ["tac.sum.dodges", st.stats.dodges, "tac.sum.dodges_why"],
-        ["tac.sum.rescues", st.stats.rescues, "tac.sum.rescues_why"],
-        ["tac.sum.blades", st.stats.bladesBroken, "tac.sum.blades_why"],
-        ["tac.sum.gas", Math.round(st.stats.gasUsed), "tac.sum.gas_why"],
-      ];
-      for (const [k, v, w] of rows) {
+      for (const r of battleSummary(st)) {
         const tr = el("tr");
         const td = el("td");
-        const span = el("span", "valeur", formatNumber(v));
-        o.why.bind(span, () => ({ title: t(k), sections: [{ text: t(w) }] }));
+        const span = el("span", "valeur", formatNumber(r.value));
+        o.why.bind(span, () => ({ title: t(r.key), sections: r.why.map((k) => ({ text: t(k, r.params) })) }));
         td.append(span);
-        tr.append(el("td", "", t(k)), td);
+        tr.append(el("td", "", t(r.key)), td);
         table.append(tr);
       }
       box.append(table);

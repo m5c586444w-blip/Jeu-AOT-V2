@@ -195,7 +195,13 @@ export interface BattleStats {
   bladeDamage?: number;
   rampages?: number;
   transformations?: number;
+  /** R0 : coupes qui ont porté (nuque ou membre), à distinguer des tentatives (`cuts`). */
+  cutsLanded?: number;
+  /** R0 : Titans abattus par cause : lame, lance de foudre, porteur allié, Titan pur (contre un porteur). */
+  killedBy?: Partial<Record<KillSource, number>>;
 }
+
+export type KillSource = "lame" | "lance" | "porteur" | "pur";
 
 /** Ordre horodaté (en pas de simulation) : la bataille se rejoue exactement avec la graine et la liste d'ordres (F-CMB-30). */
 export interface TimedOrder {

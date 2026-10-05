@@ -170,7 +170,10 @@ export function damageShifter(bt: Battle, u: ShifterUnit, zone: "nape" | "armL" 
   u.hp[zone] = Math.max(0, u.hp[zone] - dmg);
   u.stress += dmg * sb.wound_stress_per_hp;
   if (opts.source === "lame") bt.state.stats.bladeDamage = (bt.state.stats.bladeDamage ?? 0) + dmg;
-  if (u.hp.nape <= 0) endBody(bt, u, "vaincu", h);
+  if (u.hp.nape <= 0) {
+    bt.state.stats.killedBy = { ...bt.state.stats.killedBy, [opts.source]: (bt.state.stats.killedBy?.[opts.source] ?? 0) + 1 };
+    endBody(bt, u, "vaincu", h);
+  }
   return dmg;
 }
 
@@ -186,6 +189,7 @@ export function cutShifter(bt: Battle, s: SoldierUnit, body: TitanUnit, outcome:
     return;
   }
   if (outcome === "miss") return;
+  bt.state.stats.cutsLanded = (bt.state.stats.cutsLanded ?? 0) + 1;
   const zone = outcome === "nape" ? "nape" : rng.next() < 0.4 ? "legs" : rng.next() < 0.5 ? "armL" : "armR";
   damageShifter(bt, u, zone, sb.soldiers.cut_damage, { pierce: false, source: "lame" }, h);
 }
@@ -264,6 +268,7 @@ function strike(bt: Battle, u: ShifterUnit, body: TitanUnit, f: Foe, killProb: n
       v.grabbedBy = null;
     }
     bt.state.stats.titansKilled[t.type] = (bt.state.stats.titansKilled[t.type] ?? 0) + 1;
+    bt.state.stats.killedBy = { ...bt.state.stats.killedBy, porteur: (bt.state.stats.killedBy?.porteur ?? 0) + 1 };
     u.kills += 1;
     h.log("battle.shifter.kills_titan", { name: u.name, titan: bodyName(bt, t) });
     return 1;
