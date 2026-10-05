@@ -198,6 +198,23 @@ try {
     const cover = Number(await page.getAttribute(".bataille", "data-couverture"));
     const battleShare = canvasShare * cover;
     expect(battleShare >= 0.85, `3. bataille : zone de jeu ${(100 * battleShare).toFixed(1)} % de la scène (${Math.round(scene.w)}×${Math.round(scene.h)} px ; canevas au premier plan ${(100 * canvasShare).toFixed(1)} % × sol ${(100 * cover).toFixed(1)} % ; ≥ 85 %)`);
+    // Hommes du joueur dans le champ à l'ouverture (relevé sur la capture « bataille » en appliquant la règle de CLAUDE.md).
+    const inFrame = await page.evaluate(async () => {
+      const path = "/src/ui/tactical/battleScreen.ts";
+      const m = (await import(path)) as { battleProbe: { soldierOnScreen: ((i: number) => [number, number] | null) | null } };
+      const r = document.querySelector(".bataille-scene")?.getBoundingClientRect();
+      let seen = 0;
+      let n = 0;
+      for (let i = 0; i < 400; i++) {
+        const q = m.battleProbe.soldierOnScreen?.(i);
+        if (q === undefined) break;
+        if (!q || !r) continue;
+        n++;
+        if (q[0] >= 0 && q[1] >= 0 && q[0] <= r.width && q[1] <= r.height) seen++;
+      }
+      return { seen, n };
+    });
+    expect(inFrame.n > 0 && inFrame.seen / inFrame.n >= 0.9, `3. bataille : hommes du joueur dans le champ à l'ouverture ${inFrame.seen}/${inFrame.n} (≥ 90 %)`);
     await shot("bataille");
     await page.locator('.bataille-vitesse[data-speed="2"]').click();
     let maxDup = 0;

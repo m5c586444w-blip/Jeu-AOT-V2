@@ -33,6 +33,8 @@ export interface UnitPose {
   z: number;
   /** Hauteur à garder dans le champ au cadrage (m) : un porteur qui va se transformer (R0.2f). */
   reach?: number;
+  /** Homme du joueur : toujours dans le champ au cadrage, avant les Titans (R0.4). */
+  own?: boolean;
 }
 
 /** Scène tactique 2.5D (Pixi, `src/render` seulement) : décor statique, unités interpolées, câbles, fusées, caméra. */
@@ -64,6 +66,10 @@ export class TacticalScene {
   private fitZoom = 1;
   /** Marge (m) au-dessus du bord nord de la carte que la caméra peut montrer : la tête des grands corps. */
   private topMargin = 15;
+  /** Marge (m) au-delà du bord sud que la caméra peut montrer : les hommes déployés sur la ligne de départ (R0.4). */
+  private bottomMargin = 0;
+  /** Suivi de la taille de la boîte hôte (voir `create`). */
+  private sizeWatch: ResizeObserver | null = null;
   /** Cadrage initial à refaire au redimensionnement tant que le joueur n'a pas bougé la caméra. */
   private framing: (() => void) | null = null;
   selected: Set<number> = new Set();
@@ -88,6 +94,12 @@ export class TacticalScene {
       grain.height = h;
       scene.framing?.();
     });
+    // La boîte de la scène change de taille sans que la fenêtre bouge (barre des cartes d'escouade posée après coup) :
+    // Pixi n'écoute que la fenêtre ; sans cela, le bas du canevas restait caché sous les cartes (R0.4).
+    if (typeof ResizeObserver === "function") {
+      scene.sizeWatch = new ResizeObserver(() => app.resize());
+      scene.sizeWatch.observe(host);
+    }
     return scene;
   }
 
@@ -166,13 +178,26 @@ export class TacticalScene {
       const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
       // Le plafond d'échelle suit la taille de la scène (R0.3) : en 4K, 6 px/m laissait le sol au centre d'un grand vide.
       const sceneScale = this.sceneScale();
-      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM * sceneScale, cover, contain * 1.3));
+      // Les hommes du joueur tiennent toujours dans le champ (R0.4) : l'échelle ne dépasse pas celle qui les contient.
+      const own = points.filter((p) => p.own).map((p) => this.project(p.x, p.y, 0));
+      const ox = own.map((p) => p[0]);
+      const oy = own.map((p) => p[1]);
+      const ownFit = own.length > 0 ? Math.min(width / (Math.max(...ox) - Math.min(...ox) + 16), height / (Math.max(...oy) - Math.min(...oy) + 12)) : Infinity;
+      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM * sceneScale, cover, contain * 1.3, ownFit));
       this.zoom = z;
       this.worldLayer.scale.set(z);
       let py = height / 2 - ((y0 + y1) / 2) * z;
       // « Couvrir » rogne la dimension qui déborde ; si c'est la hauteur, on garde le haut quand un corps à venir s'y dresse (R0.2f).
       if (heads.length > 0) py = Math.max(py, 12 - Math.min(...heads) * z);
-      this.worldLayer.position.set(width / 2 - ((x0 + x1) / 2) * z, py);
+      let px = width / 2 - ((x0 + x1) / 2) * z;
+      if (own.length > 0) {
+        // Emprise des hommes (marge : 8 m de côté, 4 m au pied, 8 m au-dessus pour les figures) ramenée dans le champ.
+        const [ax0, ax1, ay0, ay1] = [Math.min(...ox) - 8, Math.max(...ox) + 8, Math.min(...oy) - 8, Math.max(...oy) + 4];
+        this.bottomMargin = Math.max(0, ay1 - mapH);
+        px = Math.min(Math.max(px, -ax0 * z), width - ax1 * z);
+        py = Math.min(Math.max(py, -ay0 * z), height - ay1 * z);
+      }
+      this.worldLayer.position.set(px, py);
       this.clampToMap();
     };
     this.framing();
@@ -186,7 +211,7 @@ export class TacticalScene {
     const left = 0;
     const right = this.map.width * z;
     const top = -this.topMargin * z;
-    const bottom = this.map.height * TILT * z;
+    const bottom = (this.map.height * TILT + this.bottomMargin) * z;
     const pos = this.worldLayer.position;
     const cx = right - left > width ? Math.min(-left, Math.max(width - right, pos.x)) : pos.x;
     const cy = bottom - top > height ? Math.min(-top, Math.max(height - bottom, pos.y)) : pos.y;
@@ -480,6 +505,7 @@ export class TacticalScene {
   }
 
   destroy(): void {
+    this.sizeWatch?.disconnect();
     for (const c of this.contexts.values()) c.destroy();
     this.app.destroy(true, { children: true });
   }

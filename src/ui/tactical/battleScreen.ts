@@ -83,7 +83,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   const scene = await TacticalScene.create(host);
   scene.setMap(bt.map);
   // Cadrage initial : soldats, Titans et porteurs encore sous forme humaine (R0.2f : la transformation doit être dans le champ).
-  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0 })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u) => {
+  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u) => {
     const h = o.world.shifters?.defs.get(u.shifter)?.height_m;
     return { x: u.x, y: u.y, z: 0, reach: h ? (h[0] + h[1]) / 2 : 15 };
   })]);
