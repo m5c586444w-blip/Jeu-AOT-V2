@@ -60,7 +60,12 @@ export class Hud {
     }
     const foot = el("div", "bandeau__pied");
     this.alert.setAttribute("aria-live", "polite");
-    foot.append(this.alert, this.valueCell("seed", t("app.seed"), () => ({ title: t("app.seed"), sections: [{ text: t("hud.seed_why") }] })), this.valueCell("hash", t("app.hash"), () => ({ title: t("app.hash"), sections: [{ text: t("hud.hash_why") }] })));
+    // Graine et empreinte d'état : outils de développement, visibles en mode debug (F2) seulement (R0.2b).
+    const seed = this.valueCell("seed", t("app.seed"), () => ({ title: t("app.seed"), sections: [{ text: t("hud.seed_why") }] }));
+    const hash = this.valueCell("hash", t("app.hash"), () => ({ title: t("app.hash"), sections: [{ text: t("hud.hash_why") }] }));
+    seed.classList.add("bandeau__champ--debug");
+    hash.classList.add("bandeau__champ--debug");
+    foot.append(this.alert, seed, hash);
     if (world.politics && actions.openPanel) {
       const nav = el("nav", "bandeau__registres");
       nav.setAttribute("aria-label", t("hud.registers"));

@@ -706,7 +706,6 @@
 .dossier-maitre { position: relative; background: var(--papier); background-image: var(--grain-fond), var(--fibres); border: 1px solid var(--encre); padding: 2rem 1.6rem 1.4rem; transform: rotate(-1.2deg); box-shadow: 7px 8px 0 rgba(0, 0, 0, 0.35); }
 .dossier-maitre__tampon { position: absolute; top: 1rem; right: 1rem; transform: rotate(8deg); }
 .dossier-maitre__titre { font-family: var(--f-titre); font-size: 2.6rem; margin: 0.4rem 0 0.2rem; font-weight: 400; }
-.dossier-maitre__sous-titre { font-style: italic; margin: 0 0 1rem; }
 .tiroir-scenarios, .choix-nation-menu { position: relative; background: #6b4a2f; border: 2px solid #2a1d13; padding: 0.8rem; box-shadow: inset 0 4px 0 rgba(0, 0, 0, 0.35); }
 .choix-nation-menu { grid-column: 1 / -1; }
 .tiroir-scenarios__etiquette { display: inline-block; margin: 0 0 0.6rem; padding: 0.1rem 0.8rem; background: #d9c9a0; border: 1px solid #2a1d13; font-family: var(--f-machine); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -756,3 +755,6 @@
 .choix-nation-menu[hidden] { display: none; }
 /* En bataille, les sous-titres passent au-dessus de la barre des cartes d'escouade. */
 body[data-tactique] .sous-titres { bottom: auto; top: 3.4rem; }
+/* R0.2b : graine et empreinte d'état réservées au mode debug (F2). */
+.bandeau__champ--debug { display: none; }
+html[data-debug="true"] .bandeau__champ--debug { display: inline; }

@@ -42,9 +42,8 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   const dossier = el("section", "dossier-maitre");
   const stamp = el("p", "tampon dossier-maitre__tampon", t("menu.confidential"));
   const title = el("h1", "dossier-maitre__titre", t("app.title"));
-  const sub = el("p", "dossier-maitre__sous-titre", t("app.subtitle"));
   const note = el("p", "registre-note", t("menu.note"));
-  dossier.append(stamp, title, sub, note);
+  dossier.append(stamp, title, note);
   const drawer = el("section", "tiroir-scenarios");
   drawer.append(el("h2", "tiroir-scenarios__etiquette", t("menu.scenarios")));
   const shelf = el("div", "tiroir-scenarios__chemises");

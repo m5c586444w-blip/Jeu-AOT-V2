@@ -68,6 +68,8 @@ export function mountDebugOverlay(root: HTMLElement, host: ConsoleHost, onChange
 
   const toggle = (): void => {
     panel.hidden = !panel.hidden;
+    // Mode debug (F2) : les chaînes de développement du bandeau (graine, empreinte d'état) ne s'affichent qu'ici (R0.2b).
+    document.documentElement.dataset["debug"] = String(!panel.hidden);
     if (!panel.hidden) input.focus();
     else input.blur();
   };
