@@ -345,7 +345,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     const frame = (now: number): void => {
       if (done) return;
       const t0 = performance.now();
-      const dt = Math.min(0.25, (now - last) / 1000);
+      // Le temps de bataille ne dépend pas de la fluidité (R0.3) : jusqu'à 1 s par image, la simulation rattrape le temps réel
+      // (en 4K sans GPU, une image prend ~0,75 s ; plafonné à 0,25 s, la bataille tournait au tiers de sa vitesse). Au-delà
+      // (onglet en arrière-plan), le pas reste borné.
+      const dt = Math.min(1, (now - last) / 1000);
       last = now;
       const tick = 1 / bt.world.balance.tick_hz;
       acc += dt * speed;

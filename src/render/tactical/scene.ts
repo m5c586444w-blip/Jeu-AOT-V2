@@ -96,6 +96,12 @@ export class TacticalScene {
     this.app.render();
   }
 
+  /** Rapport de la scène à la scène de référence (1014×588) : les seuils d'échelle réglés à 1366×768 le suivent (R0.3). */
+  private sceneScale(): number {
+    const { width, height } = this.app.screen;
+    return Math.max(1, Math.min(width / FRAME_REF_W, height / FRAME_REF_H));
+  }
+
   /** Part de la scène couverte par le sol de la carte (0–1) : contrôle du cadrage « la bataille remplit l'écran ». */
   coverage(): number {
     if (!this.map) return 0;
@@ -159,7 +165,7 @@ export class TacticalScene {
       const contain = Math.min(width / (x1 - x0), height / (y1 - y0));
       const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
       // Le plafond d'échelle suit la taille de la scène (R0.3) : en 4K, 6 px/m laissait le sol au centre d'un grand vide.
-      const sceneScale = Math.max(1, Math.min(width / FRAME_REF_W, height / FRAME_REF_H));
+      const sceneScale = this.sceneScale();
       const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM * sceneScale, cover, contain * 1.3));
       this.zoom = z;
       this.worldLayer.scale.set(z);
@@ -270,7 +276,8 @@ export class TacticalScene {
     g.clear();
     // Figures à l'échelle réelle, avec une taille minimale à l'écran (sinon un homme fait moins d'un pixel en vue large).
     const k = Math.max(1.8, MIN_SOLDIER_PX / this.zoom) / 2.85;
-    const overview = this.zoom < OVERVIEW_ZOOM;
+    // Seuil de la vue d'ensemble rapporté à la taille de la scène, comme le cadrage (R0.3) : même vue en 4K qu'en 1366×768.
+    const overview = this.zoom < OVERVIEW_ZOOM * this.sceneScale();
     this.view = overview ? "ensemble" : "detail";
     const t = st.tick / 20;
     for (const f of st.signals) {
