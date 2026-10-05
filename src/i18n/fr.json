@@ -2574,5 +2574,7 @@
   "tac.sum.by_pur": "Par des Titans purs : {pur}.",
   "tac.sum.spears": "Lances de foudre au but",
   "tac.sum.spears_why": "{hits} au but sur {thrown} lancées. Tirées du sol ou des toits, elles percent l'armure et ne demandent ni coupe ni gaz.",
-  "tac.sum.gas_zero_spears": "Aucun gaz consommé : les hommes ont combattu du sol, aux lances de foudre, sans manœuvre d'ODM."
+  "tac.sum.gas_zero_spears": "Aucun gaz consommé : les hommes ont combattu du sol, aux lances de foudre, sans manœuvre d'ODM.",
+  "world.fronts_none": "Aucun combat sur les fronts depuis l'ouverture du registre : les rapports hebdomadaires s'inscriront ici.",
+  "world.log_none": "Aucun acte diplomatique ni bataille consignés pour l'instant."
 }

@@ -224,7 +224,9 @@ export class WorldPanel implements Panel {
 
   private fronts(ns: NationsState): HTMLElement[] {
     const nw = this.ctx.world.nations;
-    if (!nw || ns.fronts.length === 0) return [];
+    if (!nw) return [];
+    // Section toujours présente (R0.2d) : un front encore calme se dit, il ne laisse pas un vide.
+    if (ns.fronts.length === 0) return [el("h3", "registre-intertitre", t("world.fronts")), el("p", "registre-note", t("world.fronts_none"))];
     const ul = el("ul", "registre-liste table-guerre__fronts");
     for (const f of [...ns.fronts].reverse().slice(0, 8)) {
       const d = fromAbsoluteDay(f.day);
@@ -245,7 +247,7 @@ export class WorldPanel implements Panel {
   }
 
   private log(ns: NationsState): HTMLElement[] {
-    if (ns.log.length === 0) return [];
+    if (ns.log.length === 0) return [el("h3", "registre-intertitre", t("world.log")), el("p", "registre-note", t("world.log_none"))];
     const ul = el("ul", "registre-liste");
     for (const l of [...ns.log].reverse().slice(0, 10)) {
       const d = fromAbsoluteDay(l.day);
