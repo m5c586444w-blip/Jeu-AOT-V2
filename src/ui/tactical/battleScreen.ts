@@ -82,7 +82,12 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   const bt: Battle = createBattle(o.world, o.setup);
   const scene = await TacticalScene.create(host);
   scene.setMap(bt.map);
-  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0 })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height }))]);
+  // Cadrage initial : soldats, Titans et porteurs encore sous forme humaine (R0.2f : la transformation doit être dans le champ).
+  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0 })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u) => {
+    const h = o.world.shifters?.defs.get(u.shifter)?.height_m;
+    return { x: u.x, y: u.y, z: 0, reach: h ? (h[0] + h[1]) / 2 : 15 };
+  })]);
+  let seenFlashes = 0;
   const orders: TimedOrder[] = [];
   battleProbe.soldierOnScreen = (i) => {
     const s = bt.state.soldiers[i];
@@ -397,6 +402,20 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       const cues = cueSnapshot(bt.state);
       for (const c of battleCues(lastCues, cues)) audio.play(c);
       lastCues = cues;
+      // R0.2f : après chaque éclair de transformation, dès que le corps existe, est-il dans le champ de la caméra ?
+      if (scene.fx.flashes > seenFlashes) {
+        const cw = scene.canvas.clientWidth;
+        const ch = scene.canvas.clientHeight;
+        const bodies = (bt.state.shifters ?? []).map((u) => (u.body !== null ? bt.state.titans[u.body] : undefined)).filter((b) => b !== undefined);
+        if (bodies.length > 0) {
+          seenFlashes = scene.fx.flashes;
+          const inView = bodies.some((b) => {
+            const [x, y] = scene.toScreen(b.x, b.y, b.height / 2);
+            return x >= 0 && x <= cw && y >= 0 && y <= ch;
+          });
+          root.dataset["porteurVisible"] = inView ? "oui" : "non";
+        }
+      }
       root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded}`;
       root.dataset["vue"] = scene.view;
       root.dataset["pastilles"] = String(scene.markers);

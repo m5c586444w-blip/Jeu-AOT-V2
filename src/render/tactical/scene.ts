@@ -19,6 +19,8 @@ const OVERVIEW_DOT_PX = 3;
 const PASTILLE_PX = 11;
 /** Zoom maximal du cadrage initial (la bataille remplit l'écran, sans plan trop serré). */
 const FRAME_MAX_ZOOM = 6;
+/** Durée de l'éclair autour d'un corps qui surgit, en pas de simulation (20 Hz : 1,5 s). */
+const FLASH_AFTERGLOW_TICKS = 30;
 /** Teintes de toits (tuile, ardoise, chaume) : villes moins régulières (revue de P4, reporté à P8). */
 const ROOF_TINTS = [0x8a3b2a, 0x6b4a2f, 0x5a5f66, 0x9b6a3c, 0x7a4a3a];
 
@@ -26,6 +28,8 @@ export interface UnitPose {
   x: number;
   y: number;
   z: number;
+  /** Hauteur à garder dans le champ au cadrage (m) : un porteur qui va se transformer (R0.2f). */
+  reach?: number;
 }
 
 /** Scène tactique 2.5D (Pixi, `src/render` seulement) : décor statique, unités interpolées, câbles, fusées, caméra. */
@@ -49,10 +53,14 @@ export class TacticalScene {
   private map: TacticalWorldMap | null = null;
   /** Effets dessinés (P8) : contrôles de l'écran de bataille et de smoke:p8. */
   readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0 };
+  /** Pas où chaque porteur a pris corps (index du porteur → pas) : durée de l'éclair prolongé. */
+  private readonly bodySince = new Map<number, number>();
   /** Volumes des bâtiments par colonne de 20 m (occlusion des unités qui passent derrière). */
   private occluders = new Map<number, { x0: number; x1: number; y0: number; y1: number; front: number }[]>();
   private zoom = 1;
   private fitZoom = 1;
+  /** Marge (m) au-dessus du bord nord de la carte que la caméra peut montrer : la tête des grands corps. */
+  private topMargin = 15;
   /** Cadrage initial à refaire au redimensionnement tant que le joueur n'a pas bougé la caméra. */
   private framing: (() => void) | null = null;
   selected: Set<number> = new Set();
@@ -136,17 +144,24 @@ export class TacticalScene {
       const proj = points.map((p) => this.project(p.x, p.y, 0));
       const xs = proj.map((p) => p[0]);
       const ys = proj.map((p) => p[1]);
+      // Corps à venir (porteurs) : leur tête doit entrer dans le champ, même au bord de la carte (R0.2f).
+      const reach = Math.max(0, ...points.map((p) => p.reach ?? 0));
+      const heads = points.filter((p) => (p.reach ?? 0) > 0).map((p) => this.project(p.x, p.y, p.reach ?? 0)[1] - 3);
+      this.topMargin = Math.max(15, reach + 3);
       // Marges, puis emprise rognée à la carte : « couvrir » remplit alors l'écran de sol, pas de vide.
       const mapW = this.map.width;
       const mapH = this.map.height * TILT;
-      const [x0, x1, y0, y1] = [Math.max(0, Math.min(...xs) - 12), Math.min(mapW, Math.max(...xs) + 12), Math.max(0, Math.min(...ys) - 25), Math.min(mapH, Math.max(...ys) + 12)];
+      const [x0, x1, y0, y1] = [Math.max(0, Math.min(...xs) - 12), Math.min(mapW, Math.max(...xs) + 12), Math.min(Math.max(0, Math.min(...ys) - 25), ...heads), Math.min(mapH, Math.max(...ys) + 12)];
       // La bataille remplit l'écran : on couvre la zone des unités (au plus 30 % au-delà du cadrage « tout voir »).
       const contain = Math.min(width / (x1 - x0), height / (y1 - y0));
       const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
       const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM, cover, contain * 1.3));
       this.zoom = z;
       this.worldLayer.scale.set(z);
-      this.worldLayer.position.set(width / 2 - ((x0 + x1) / 2) * z, height / 2 - ((y0 + y1) / 2) * z);
+      let py = height / 2 - ((y0 + y1) / 2) * z;
+      // « Couvrir » rogne la dimension qui déborde ; si c'est la hauteur, on garde le haut quand un corps à venir s'y dresse (R0.2f).
+      if (heads.length > 0) py = Math.max(py, 12 - Math.min(...heads) * z);
+      this.worldLayer.position.set(width / 2 - ((x0 + x1) / 2) * z, py);
       this.clampToMap();
     };
     this.framing();
@@ -159,7 +174,7 @@ export class TacticalScene {
     const z = this.zoom;
     const left = 0;
     const right = this.map.width * z;
-    const top = -15 * z;
+    const top = -this.topMargin * z;
     const bottom = this.map.height * TILT * z;
     const pos = this.worldLayer.position;
     const cx = right - left > width ? Math.min(-left, Math.max(width - right, pos.x)) : pos.x;
@@ -290,7 +305,7 @@ export class TacticalScene {
     });
     // Porteurs (P6) : éclair de transformation, cercle de camp au pied du corps.
     let flashes = 0;
-    for (const u of st.shifters ?? []) {
+    (st.shifters ?? []).forEach((u, k) => {
       const [x, y] = this.project(u.x, u.y, 0);
       if (u.phase === "transformation") {
         o.circle(x, y - 6, 9 + (t * 40) % 6).fill({ color: 0xfff1b8, alpha: 0.55 });
@@ -301,9 +316,18 @@ export class TacticalScene {
         if (b?.alive) {
           const [bx, by] = this.project(b.x, b.y, 0);
           o.ellipse(bx, by, b.height * 0.35, b.height * 0.12).stroke({ width: 0.8, color: u.side === "allie" ? VERDIGRIS : 0x9e2b25, alpha: 0.9 });
+          // Éclair prolongé autour du corps qui surgit (R0.2f) : le Titan et l'éclair se voient ensemble.
+          const since = st.tick - (this.bodySince.get(k) ?? st.tick);
+          if (!this.bodySince.has(k)) this.bodySince.set(k, st.tick);
+          if (since < FLASH_AFTERGLOW_TICKS) {
+            const fade = 1 - since / FLASH_AFTERGLOW_TICKS;
+            o.circle(bx, by - b.height * 0.5, b.height * (0.45 + 0.2 * (1 - fade))).fill({ color: 0xfff1b8, alpha: 0.4 * fade });
+            o.moveTo(bx + b.height * 0.1, by - b.height * 1.4).lineTo(bx - b.height * 0.08, by - b.height * 0.9).lineTo(bx + b.height * 0.06, by - b.height * 0.75).lineTo(bx - b.height * 0.04, by - b.height * 0.2).stroke({ width: 2, color: 0xc58a2b, alpha: fade });
+            flashes++;
+          }
         }
-      }
-    }
+      } else this.bodySince.delete(k);
+    });
     this.fx.steam = steam;
     this.fx.flashes += flashes;
     const centroids = new Map<string, { x: number; y: number; n: number; top: number }>();
