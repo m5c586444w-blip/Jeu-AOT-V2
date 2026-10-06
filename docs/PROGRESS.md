@@ -2,10 +2,27 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R0 terminée** — **ARRÊT demandé par l'utilisateur** : R1 n'est pas enchaînée |
-| Tâche | R0.4 — batterie finale et rapport `docs/reports/R0.md` (faits) |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 56 fichiers, 330 tests (commit a439c18) — `docs/reports/R0-verify.log` |
-| Prochaine étape | Revue de R0 par l'utilisateur ; points à arbitrer listés au rapport, § d et § f |
+| Phase | **R1 terminée** (essai de rendu 3D, three.js) — **ARRÊT OBLIGATOIRE** : revue de l'utilisateur après R1 (CLAUDE.md, arrêt 5) ; R2 n'est pas enchaînée |
+| Tâche | R1.8 — rapport `docs/reports/R1.md` (fait) |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 347 tests (commit abb0b06) — `docs/reports/R1-verify.log` |
+| Prochaine étape | L'utilisateur indique **RENDU = 3D** ou **RENDU = 2.5D** (rapport R1, § f et § g) ; puis consigne pour le critère f de R0, rouvert et toujours en attente |
+
+## R1 terminée (2026-10-06) — arrêt obligatoire, décision de l'utilisateur attendue
+- **Rapport.** `docs/reports/R1.md` : CR1-01 à CR1-10 OK. CR1-03 avec un écart signalé : three.js est absent du bundle principal, mais celui-ci grossit de 416 octets (routage et lien F2).
+- **Prototype.** Page `/proto3d` ou `?proto3d`, ouverte depuis la console F2 :
+  - ville irrégulière par graine ;
+  - jour, crépuscule, nuit ;
+  - deux Titans de 5 m et 15 m, trois poses chacun, marque de nuque ;
+  - 20 soldats avec câbles et gaz, 300 instanciés ;
+  - caméras libre et de suivi d'escouade, qualité basse, moyenne, haute ;
+  - repli 2D sans WebGL, three.js non téléchargé dans ce cas.
+- **Mesures** (WebGL logiciel, 1366×768) :
+  - rue : 2D 12,8 img/s ; 3D 4,8 (basse), 2,0 (moyenne), 1,6 (haute) ;
+  - 300 unités : 2D 9,1 ; 3D 13,1 (basse) ;
+  - 3840×2160 mesuré aussi. Pas de GPU réel.
+- **Recommandation** (§ g) : RENDU = 3D pour la seule bataille, à trois conditions : 2D gardé en repli, effort sur les figures et la stylisation, mesure sur GPU réel. Variante hybride si les machines sans GPU priment.
+- **À trancher avant R2** : la ville irrégulière n'existe qu'au rendu ; les cartes de la simulation restent des grilles. Les faire concorder demande de changer `src/sim`.
+- **Toujours en attente depuis R0** : critère f rouvert (marge de cadrage haute de l'écran de bataille 2D, test de boîte englobante du porteur), interrompu par R1 avant tout commit.
 
 ## R0 terminée (2026-10-06) — arrêt demandé
 - **Rapport.** `docs/reports/R0.md` : CR0-01 à CR0-07 OK, critère f OK. Chaque capture « après » y est revue selon CLAUDE.md ligne 14 (description, au moins 3 défauts possibles).
