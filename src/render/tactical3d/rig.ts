@@ -74,14 +74,22 @@ export function joint(name: string, parent: Object3D, at: [number, number, numbe
   return g;
 }
 
-/** Hauteur réelle d'une figure : boîte englobante calculée sommet par sommet, après poses et échelles. */
-export function measureBox(obj: Object3D): Box3 {
+/**
+ * Boîte englobante réelle d'une figure : calculée sommet par sommet, après poses et échelles. `skip` écarte des pièces
+ * (par exemple les lames tenues à la main, qui ne font pas partie de la taille d'un homme).
+ */
+export function measureBox(obj: Object3D, skip?: (o: Object3D) => boolean): Box3 {
   obj.updateMatrixWorld(true);
-  return new Box3().setFromObject(obj, true);
+  if (!skip) return new Box3().setFromObject(obj, true);
+  const box = new Box3();
+  obj.traverse((o) => {
+    if (o instanceof Mesh && !skip(o)) box.union(new Box3().setFromObject(o, true));
+  });
+  return box;
 }
 
-export function measureHeight(obj: Object3D): number {
-  const b = measureBox(obj);
+export function measureHeight(obj: Object3D, skip?: (o: Object3D) => boolean): number {
+  const b = measureBox(obj, skip);
   return b.max.y - b.min.y;
 }
 

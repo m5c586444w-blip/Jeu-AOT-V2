@@ -1,0 +1,34 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > hauteurs : 5 m et 15 m à ±10 % (bornes hautes des classes petite et grande des données), à chaque instant de la marche 40ms
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > anatomies différentes : tête, cou, longueur des bras, carrure 3ms
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > membres articulés : 18 articulations nommées, la marche les fait bouger 1ms
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > expressions différentes : rictus (bouche fermée, dents serrées) contre bouche béante (mâchoire ouverte) 1ms
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > marque rouge sur la nuque : derrière le cou, sous le crâne, visible de dos 1ms
+ ✓ tests/render/tactical3d/figures.test.ts > Titans 3D (R1.4) > trois poses : marche, saisie (bras tendu vers l'avant), abattu (couché au sol, vapeur) 3ms
+ ✓ tests/render/tactical3d/figures.test.ts > soldats 3D et manœuvre (R1.5) > un soldat mesure 1,80 m à ±10 % (sans ses lames) ; rapports Titans/soldat conformes à ±10 % 22ms
+ ✓ tests/render/tactical3d/figures.test.ts > soldats 3D et manœuvre (R1.5) > trois poses distinctes : vol (penché, cape au vent), accroché (genoux fléchis), au sol (en garde) 5ms
+ ✓ tests/render/tactical3d/figures.test.ts > soldats 3D et manœuvre (R1.5) > 20 soldats en 4 escouades ; câbles tendus (longueur constante au cours du balancement) ; traînées de gaz derrière les soldats en vol 86ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit Math.random 787ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit Date.now et new Date 10ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit l'import de Pixi 23ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit le DOM 7ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit any partout 15ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > interdit Pixi hors de src/render (AC1-08) 27ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > three.js uniquement dans src/render/tactical3d (R1, D-81) 80ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > Pixi reste interdit hors de src/render quand three.js l'est aussi, et dans l'essai 3D (un seul moteur) 15ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > Math.random interdit dans l'essai 3D : variations tirées d'une graine locale (R1) 4ms
+ ✓ tests/lint/sim-purity.test.ts > pureté de src/sim > autorise Math.random hors de src/sim (contrôle) 3ms
+ ✓ tests/render/tactical3d/town.test.ts > ville irrégulière par graine (R1.2) > orientations des bâtiments : écart-type > 10° (à 90° près, une grille régulière donnerait 0°), sur 200 graines 1592ms
+ ✓ tests/render/tactical3d/town.test.ts > ville irrégulière par graine (R1.2) > largeurs de rues mesurées non constantes, jamais sous le minimum déclaré 57ms
+ ✓ tests/render/tactical3d/town.test.ts > ville irrégulière par graine (R1.2) > îlots tournés, une place vide (deux îlots), maisons dans leur îlot sans se chevaucher 14ms
+ ✓ tests/render/tactical3d/town.test.ts > ville irrégulière par graine (R1.2) > 3 types de toits, fenêtres, cheminées ; hauteurs de la carte « ville » (8–20 m, ± 3 m de toit) 22ms
+ ✓ tests/render/tactical3d/town.test.ts > ville irrégulière par graine (R1.2) > même graine, même ville ; autre graine, autre ville 27ms
+
+ Test Files  3 passed (3)
+      Tests  24 passed (24)
+   Start at  17:05:43
+   Duration  1.99s (tests 81%, transform 12%, import 7%)
+
+CODE 0

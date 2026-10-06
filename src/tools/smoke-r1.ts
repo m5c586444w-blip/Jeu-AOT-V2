@@ -4,7 +4,7 @@
 //   la suit), poses, foule, raccourcis ;
 // - CR1-07 : Chromium lancé sans WebGL (--disable-3d-apis) → message clair, retour au rendu 2D, three.js jamais demandé ;
 // - CR1-08 : captures docs/screenshots/r1-* (jour, crépuscule, nuit, vue Titan, vue de dessus des 300 soldats, à 1366×768 et
-//   3840×2160 ; planche des poses, suivi d'escouade, panneau, repli sans WebGL à 1366×768).
+//   3840×2160 ; planche des poses, suivi d'escouade, panneau, repli sans WebGL et jeu 2D sans WebGL à 1366×768).
 // Navigateur : CHROMIUM_PATH ou /opt/pw-browsers/chromium.
 import { mkdirSync } from "node:fs";
 import { chromium } from "playwright-core";
@@ -132,7 +132,10 @@ try {
     expect(back !== null && !back.includes("proto3d"), `bouton « Revenir au rendu 2D » → ${back}`);
     await p.locator("[data-action='retour-2d']").click();
     await p.waitForSelector("html[data-ready='true']", { timeout: 60000 });
-    expect((await p.locator("canvas").count()) > 0, "retour : le jeu en rendu 2D (Pixi) se charge sans WebGL 2 dans la page");
+    await p.waitForTimeout(1000);
+    await p.screenshot({ path: `${OUT}/r1-sans-webgl-jeu-2d-1366.png` });
+    const gl = await p.evaluate(() => ({ webgl2: !!document.createElement("canvas").getContext("webgl2"), webgl: !!document.createElement("canvas").getContext("webgl") }));
+    expect((await p.locator("canvas").count()) > 0 && !gl.webgl2 && !gl.webgl, `retour : le jeu en rendu 2D (Pixi) se charge, sans aucun contexte WebGL dans la page (capture r1-sans-webgl-jeu-2d-1366.png)`);
   } finally {
     await noGl.close();
   }

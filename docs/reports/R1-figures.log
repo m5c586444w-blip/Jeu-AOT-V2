@@ -1,0 +1,19 @@
+
+> murs-et-sang@0.0.1 mesure:r1
+> tsx src/tools/mesure-r1.ts figures
+
+
+=== Figures (boîte englobante sommet par sommet, pose de marche, 8 instants) ===
+Titan petit (cible 5 m) : min 4.96 · moyenne 4.99 · max 5.02 · écart-type 0.03 m
+Titan grand (cible 15 m) : min 14.59 · moyenne 14.95 · max 15.20 · écart-type 0.23 m
+soldat (cible 1.8 m, pose au sol) : 1.782 m sans les lames ; 1.956 m lames levées comprises
+rapports : grand/petit 2.995 (cible 3) · petit/soldat 2.801 (cible 2.778) · grand/soldat 8.389 (cible 8.333)
+
+=== Ville (D-82) ===
+écart-type des orientations à 90° près, graines 1–200 : min 10.76 · moyenne 13.89 · max 18.10 · écart-type 1.39 °
+graine 1 : 181 maisons ; largeurs de rues mesurées (200 points) : min 6.14 · moyenne 14.30 · max 26.07 · écart-type 4.12 m
+graine 2 : 157 maisons ; largeurs de rues mesurées (200 points) : min 6.40 · moyenne 13.83 · max 24.00 · écart-type 3.84 m
+graine 3 : 148 maisons ; largeurs de rues mesurées (200 points) : min 6.74 · moyenne 15.71 · max 25.75 · écart-type 3.47 m
+graine 42 : 177 maisons ; largeurs de rues mesurées (200 points) : min 9.05 · moyenne 16.44 · max 26.46 · écart-type 3.90 m
+graine 850 : 159 maisons ; largeurs de rues mesurées (200 points) : min 6.23 · moyenne 15.06 · max 26.25 · écart-type 4.07 m
+CODE 0

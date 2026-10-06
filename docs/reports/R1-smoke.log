@@ -29,7 +29,7 @@
   OK  message clair : « Rendu 3D indisponible » (WebGL : absent)
   OK  three.js et le prototype jamais demandés (139 requêtes, dont 0 vers three.js)
   OK  bouton « Revenir au rendu 2D » → http://localhost:5186/
-  OK  retour : le jeu en rendu 2D (Pixi) se charge sans WebGL 2 dans la page
+  OK  retour : le jeu en rendu 2D (Pixi) se charge, sans aucun contexte WebGL dans la page (capture r1-sans-webgl-jeu-2d-1366.png)
 [captures] 1366×768
   OK  r1-jour-1366.png : 1366×768, 1274 appels, 510 k triangles
   OK  r1-crepuscule-1366.png : 1366×768, 1274 appels, 510 k triangles

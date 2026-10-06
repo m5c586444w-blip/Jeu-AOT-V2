@@ -1,0 +1,12 @@
+$ git diff --stat 13c9f77 -- src/sim
+(fin de sortie ; code 0)
+
+$ git diff --stat 13c9f77 -- data
+(fin de sortie ; code 0)
+
+$ grep -rlE 'from "three' src | grep -v '^src/render/tactical3d/'
+(fin de sortie)
+
+$ grep -rln 'Math.random' src/render/tactical3d
+src/render/tactical3d/rng.ts
+(fin de sortie)

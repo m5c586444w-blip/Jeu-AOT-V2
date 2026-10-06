@@ -394,3 +394,34 @@ export function roofRise(b: Pick<Building, "roof" | "width" | "depth" | "ridgeAl
 export function buildingHeight(b: Pick<Building, "floors" | "floorHeight" | "roof" | "pitch" | "width" | "depth" | "ridgeAlongFront">): number {
   return b.floors * b.floorHeight + roofRise(b);
 }
+
+/** Distance d'un point à un segment. */
+function segmentDistance(p: Vec2, a: Vec2, b: Vec2): number {
+  const d = sub(b, a);
+  const t = Math.max(0, Math.min(1, ((p.x - a.x) * d.x + (p.y - a.y) * d.y) / (d.x * d.x + d.y * d.y || 1)));
+  return len(sub(p, add(a, mul(d, t))));
+}
+
+/** Distance d'un point à un quadrilatère convexe (0 dedans). */
+export function quadDistance(p: Vec2, q: Quad): number {
+  return insideConvex(q, p) ? 0 : Math.min(...q.map((a, i) => segmentDistance(p, a, q[(i + 1) % 4] as Vec2)));
+}
+
+/**
+ * Largeurs de rue MESURÉES sur la géométrie : en 5 points du milieu de chaque rue intérieure (30 à 70 % du tronçon, loin des
+ * carrefours), distance du point de l'axe à l'îlot bâti de gauche plus distance à celui de droite. On ne relit pas la largeur
+ * déclarée : un îlot tourné élargit sa rue d'un côté (D-82).
+ */
+export function measuredStreetWidths(town: Town): number[] {
+  const out: number[] = [];
+  town.streets.forEach((s, idx) => {
+    const sides = town.blocks.filter((b) => b.sides.includes(idx));
+    const [l, r] = sides;
+    if (sides.length !== 2 || !l || !r) return;
+    for (const t of [0.3, 0.4, 0.5, 0.6, 0.7]) {
+      const p = { x: s.a.x + (s.b.x - s.a.x) * t, y: s.a.y + (s.b.y - s.a.y) * t };
+      out.push(quadDistance(p, l.inner) + quadDistance(p, r.inner));
+    }
+  });
+  return out;
+}

@@ -1,7 +1,7 @@
 import { BoxGeometry, Color, CylinderGeometry, DoubleSide, Group, Matrix4, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
 import type { BufferGeometry, Mesh } from "three";
 import { FaceBuilder } from "./townMesh";
-import { joint, limb, part, unitSphere } from "./rig";
+import { joint, limb, measureHeight, part, unitSphere } from "./rig";
 import { derive, range, seeded } from "./rng";
 
 /**
@@ -238,4 +238,9 @@ export function soldierMeshes(s: Soldier): Mesh[] {
     if ((o as Mesh).isMesh) out.push(o as Mesh);
   });
   return out;
+}
+
+/** Taille d'un soldat : du talon au sommet du crâne, sans les lames tenues à la main (en garde, elles dépassent la tête). */
+export function soldierHeight(s: Soldier): number {
+  return measureHeight(s.group, (o) => o.name === "lame");
 }

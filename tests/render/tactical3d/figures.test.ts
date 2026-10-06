@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { colorOf, forwardOf, lowestY, measureBox, measureHeight, worldPoint } from "../../../src/render/tactical3d/rig";
 import { buildOdm } from "../../../src/render/tactical3d/odm";
-import { SOLDIER_HEIGHT_M, SOLDIER_POSES, buildSoldier, soldierMaterials } from "../../../src/render/tactical3d/soldier";
+import { SOLDIER_HEIGHT_M, SOLDIER_POSES, buildSoldier, soldierHeight, soldierMaterials } from "../../../src/render/tactical3d/soldier";
 import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, buildTitan } from "../../../src/render/tactical3d/titan";
 import { generateTown } from "../../../src/render/tactical3d/town";
 import type { Titan } from "../../../src/render/tactical3d/titan";
@@ -117,10 +117,12 @@ describe("soldats 3D et manœuvre (R1.5)", () => {
   const mats = soldierMaterials();
   const soldier = buildSoldier(7, mats);
 
-  it("un soldat mesure 1,80 m à ±10 % ; rapports Titans/soldat conformes à ±10 %", () => {
+  it("un soldat mesure 1,80 m à ±10 % (sans ses lames) ; rapports Titans/soldat conformes à ±10 %", () => {
     soldier.setPose("sol", 0);
-    const h = measureHeight(soldier.group);
+    // Les lames levées en garde dépassent la tête : la boîte englobante complète (lames comprises) n'est pas la taille.
+    const h = soldierHeight(soldier);
     expect(within(h, SOLDIER_HEIGHT_M), `${h.toFixed(3)} m`).toBe(true);
+    expect(measureHeight(soldier.group)).toBeGreaterThan(h);
     const small = buildTitan(TITAN_SMALL, 850);
     const large = buildTitan(TITAN_LARGE, 850);
     small.setPose("marche", 0);

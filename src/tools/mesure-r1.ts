@@ -1,4 +1,7 @@
-// npm run mesure:r1 [-- bundle | fps | tout] — R1, CR1-03 et CR1-09 : mesures réelles, 3D (three.js) contre 2D actuel (Pixi).
+// npm run mesure:r1 [-- bundle | fps | tout | figures] — R1, CR1-03, CR1-05, CR1-06, CR1-09 : mesures réelles, 3D (three.js) contre
+// 2D actuel (Pixi).
+// - figures : hauteurs mesurées (boîte englobante) des deux Titans et d'un soldat, dispersion des orientations sur les graines
+//   1–200, largeurs de rues mesurées (graines 1, 2, 3, 42, 850). Rien n'est écrit dans R1-mesures.json.
 // - bundle : construit le commit de départ de R1 (13c9f77) dans un arbre de travail temporaire, puis l'état courant ; tailles
 //   brutes et gzip du bundle principal et des morceaux à la demande ; signatures de three.js (« THREE. ») par morceau.
 // - fps : sert la construction de production (vite preview) et ouvre, dans le même Chromium sans GPU (WebGL logiciel
@@ -18,6 +21,10 @@ import { gzipSync } from "node:zlib";
 import { chromium } from "playwright-core";
 import type { Browser, Page } from "playwright-core";
 import { preview } from "vite";
+import { measureHeight } from "../render/tactical3d/rig";
+import { SOLDIER_HEIGHT_M, buildSoldier, soldierHeight, soldierMaterials } from "../render/tactical3d/soldier";
+import { TITAN_LARGE, TITAN_SMALL, buildTitan } from "../render/tactical3d/titan";
+import { generateTown, measuredStreetWidths, orientationSpreadDeg } from "../render/tactical3d/town";
 
 const START = "13c9f77";
 const executablePath = process.env["CHROMIUM_PATH"] ?? "/opt/pw-browsers/chromium";
@@ -227,7 +234,43 @@ async function throttled(url: string, rendu: "2D" | "3D"): Promise<{ rendu: stri
   }
 }
 
+function figures(): void {
+  const stat = (xs: number[]): string => {
+    const m = xs.reduce((a, b) => a + b, 0) / xs.length;
+    const sd = Math.sqrt(xs.reduce((a, b) => a + (b - m) ** 2, 0) / xs.length);
+    return `min ${Math.min(...xs).toFixed(2)} · moyenne ${m.toFixed(2)} · max ${Math.max(...xs).toFixed(2)} · écart-type ${sd.toFixed(2)}`;
+  };
+  console.log("\n=== Figures (boîte englobante sommet par sommet, pose de marche, 8 instants) ===");
+  const phases = [0, 0.2, 0.45, 0.7, 1, 1.3, 1.7, 2.1];
+  const heights: Record<string, number[]> = {};
+  for (const spec of [TITAN_SMALL, TITAN_LARGE]) {
+    const t = buildTitan(spec, 850);
+    heights[spec.id] = phases.map((ph) => {
+      t.setPose("marche", ph);
+      return measureHeight(t.body);
+    });
+    console.log(`Titan ${spec.id} (cible ${spec.height} m) : ${stat(heights[spec.id] ?? [])} m`);
+  }
+  const s = buildSoldier(7, soldierMaterials());
+  s.setPose("sol", 0);
+  const hs = soldierHeight(s);
+  console.log(`soldat (cible ${SOLDIER_HEIGHT_M} m, pose au sol) : ${hs.toFixed(3)} m sans les lames ; ${measureHeight(s.group).toFixed(3)} m lames levées comprises`);
+  const mean = (k: string): number => (heights[k] ?? []).reduce((a, b) => a + b, 0) / (heights[k]?.length ?? 1);
+  console.log(`rapports : grand/petit ${(mean("grand") / mean("petit")).toFixed(3)} (cible 3) · petit/soldat ${(mean("petit") / hs).toFixed(3)} (cible ${(5 / 1.8).toFixed(3)}) · grand/soldat ${(mean("grand") / hs).toFixed(3)} (cible ${(15 / 1.8).toFixed(3)})`);
+  console.log("\n=== Ville (D-82) ===");
+  const spreads = Array.from({ length: 200 }, (_, i) => orientationSpreadDeg(generateTown(i + 1).buildings));
+  console.log(`écart-type des orientations à 90° près, graines 1–200 : ${stat(spreads)} °`);
+  for (const seed of [1, 2, 3, 42, 850]) {
+    const town = generateTown(seed);
+    console.log(`graine ${seed} : ${town.buildings.length} maisons ; largeurs de rues mesurées (${measuredStreetWidths(town).length} points) : ${stat(measuredStreetWidths(town))} m`);
+  }
+}
+
 results["date"] = new Date().toISOString();
+if (mode === "figures") {
+  figures();
+  process.exit(0);
+}
 let outDir = "";
 if (mode === "bundle" || mode === "tout") outDir = bundle();
 if (mode === "fps" || mode === "tout") {

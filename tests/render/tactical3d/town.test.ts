@@ -1,32 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { ROOF_KINDS, TOWN_DEFAULTS, buildingHeight, footprint, generateTown, insideConvex, orientationSpreadDeg, overlaps } from "../../../src/render/tactical3d/town";
-import type { Quad, Town, Vec2 } from "../../../src/render/tactical3d/town";
+import { ROOF_KINDS, TOWN_DEFAULTS, buildingHeight, footprint, generateTown, insideConvex, measuredStreetWidths, orientationSpreadDeg, overlaps } from "../../../src/render/tactical3d/town";
 
-/** Distance d'un point à un segment. */
-function segDist(p: Vec2, a: Vec2, b: Vec2): number {
-  const dx = b.x - a.x;
-  const dy = b.y - a.y;
-  const t = Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy || 1)));
-  return Math.hypot(p.x - (a.x + t * dx), p.y - (a.y + t * dy));
-}
-const polyDist = (p: Vec2, q: Quad): number => (insideConvex(q, p) ? 0 : Math.min(...q.map((a, i) => segDist(p, a, q[(i + 1) % 4] as Vec2))));
-
-/**
- * Largeurs de rue MESURÉES sur la géométrie : en 5 points du milieu de chaque rue intérieure (30 à 70 % du tronçon, loin des carrefours), distance du point de l'axe à l'îlot bâti
- * de gauche plus distance à celui de droite. On ne relit pas la largeur déclarée : un îlot tourné élargit sa rue d'un côté.
- */
-function measuredWidths(town: Town): number[] {
-  const out: number[] = [];
-  town.streets.forEach((s, idx) => {
-    const sides = town.blocks.filter((b) => b.sides.includes(idx));
-    if (sides.length !== 2) return;
-    for (const t of [0.3, 0.4, 0.5, 0.6, 0.7]) {
-      const p = { x: s.a.x + (s.b.x - s.a.x) * t, y: s.a.y + (s.b.y - s.a.y) * t };
-      out.push(polyDist(p, (sides[0] as Town["blocks"][number]).inner) + polyDist(p, (sides[1] as Town["blocks"][number]).inner));
-    }
-  });
-  return out;
-}
+const measuredWidths = measuredStreetWidths;
 
 const SEEDS = Array.from({ length: 200 }, (_, i) => i + 1);
 
