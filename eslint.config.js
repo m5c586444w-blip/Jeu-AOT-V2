@@ -6,6 +6,11 @@ import globals from "globals";
 /** Globaux de navigateur interdits dans src/sim (la simulation doit rester pure). */
 const BROWSER_GLOBALS = ["window", "document", "navigator", "localStorage", "sessionStorage", "indexedDB", "location", "requestAnimationFrame", "performance"];
 
+const PIXI = ["pixi.js", "pixi.js/*", "@pixi/*"];
+const PIXI_ONLY_RENDER = { group: PIXI, message: "Pixi uniquement dans src/render." };
+/** three.js : chargé à la demande, seulement par l'essai de rendu 3D (R1, D-81). */
+const THREE_ONLY_3D = { group: ["three", "three/*", "three/**"], message: "three.js uniquement dans src/render/tactical3d." };
+
 export default tseslint.config(
   { ignores: ["dist/**", "node_modules/**", "coverage/**", "tests/fixtures/**", ".probe.*"] },
   js.configs.recommended,
@@ -18,11 +23,27 @@ export default tseslint.config(
     },
   },
   {
-    // Pixi n'est autorisé que dans la couche de rendu (P1).
+    // Pixi n'est autorisé que dans la couche de rendu (P1) ; three.js que dans l'essai 3D (R1, D-81).
     files: ["**/*.ts"],
     ignores: ["src/render/**"],
     rules: {
-      "no-restricted-imports": ["error", { patterns: [{ group: ["pixi.js", "pixi.js/*", "@pixi/*"], message: "Pixi uniquement dans src/render." }] }],
+      "no-restricted-imports": ["error", { patterns: [PIXI_ONLY_RENDER, THREE_ONLY_3D] }],
+    },
+  },
+  {
+    // Dans src/render, hors de l'essai 3D : Pixi oui, three.js non.
+    files: ["src/render/**/*.ts"],
+    ignores: ["src/render/tactical3d/**"],
+    rules: {
+      "no-restricted-imports": ["error", { patterns: [THREE_ONLY_3D] }],
+    },
+  },
+  {
+    // Essai 3D (R1) : three.js seulement, pas de second moteur ; variations visuelles tirées d'une graine locale.
+    files: ["src/render/tactical3d/**/*.ts"],
+    rules: {
+      "no-restricted-imports": ["error", { patterns: [{ group: PIXI, message: "Pas de Pixi dans src/render/tactical3d : un seul moteur par vue." }] }],
+      "no-restricted-properties": ["error", { object: "Math", property: "random", message: "Variations visuelles : graine locale (rng.ts), jamais Math.random." }],
     },
   },
   {
@@ -32,7 +53,8 @@ export default tseslint.config(
       "no-restricted-globals": ["error", ...BROWSER_GLOBALS.map((name) => ({ name, message: "src/sim ne doit pas dépendre du navigateur." }))],
       "no-restricted-imports": ["error", {
         patterns: [
-          { group: ["pixi.js", "pixi.js/*", "@pixi/*"], message: "src/sim ne doit pas importer Pixi." },
+          { group: PIXI, message: "src/sim ne doit pas importer Pixi." },
+          THREE_ONLY_3D,
           { group: ["**/render/**", "**/ui/**", "**/audio/**"], message: "src/sim ne dépend pas de la présentation." },
           { group: ["node:*", "fs", "path", "worker_threads"], message: "src/sim ne dépend pas de Node." },
         ],

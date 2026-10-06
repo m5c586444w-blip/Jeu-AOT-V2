@@ -486,3 +486,26 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Position.** Le cadre est centré sur les unités, puis ramené sur l'emprise, y compris après le recalage sur la carte. Les marges au-delà des bords nord et sud suivent l'emprise : les têtes des porteurs au nord, la ligne de départ au sud.
 - **Flèches de bord.** Chaque Titan vivant dont les pieds et la tête sont hors champ est signalé par une flèche rouge, au bord du champ, sur la droite qui joint le centre au Titan. Les flèches sont tracées à chaque image, pas seulement à l'ouverture.
 - **Zone de jeu.** Le test vérifie aussi que le sol couvre au moins 85 % de la scène. Cette assertion a été ajoutée après une erreur de signe dans le ramenage : elle épinglait l'emprise au bord du champ, ne laissait que 12 % de sol, et passait les autres assertions.
+
+## 2026-10-06 — D-81 three.js pour l'essai de rendu 3D (R1, consigne de l'utilisateur)
+- **Demande.** L'utilisateur veut un aspect 3D et détaillé du combat. 03 §1 et 04 §4 demandent du 2.5D à volumes. R1 essaie three.js **sans toucher à la simulation**, pour trancher ensuite : RENDU = 3D ou RENDU = 2.5D.
+- **Pourquoi three.js** (`three` 0.186.1, licence MIT ; types `@types/three`, MIT, en dépendance de développement) :
+  - bibliothèque de rendu, pas un moteur : elle n'impose ni boucle, ni physique, ni éditeur ; la simulation à 20 Hz reste maîtresse (03 §1) ;
+  - ESM, importable morceau par morceau, compilée par Vite sans configuration ; types TypeScript complets (TS strict, pas de `any`) ;
+  - ombres portées, brume, instanciation (300 soldats), tons ACES : ce que l'essai doit montrer, sans code GLSL maison ;
+  - très répandue et documentée : le risque d'abandon est faible.
+- **Écartés.**
+  - Babylon.js (Apache 2.0) : moteur complet, plus lourd, chevauche notre boucle.
+  - PlayCanvas (MIT) : pensé pour son éditeur en ligne.
+  - WebGL brut : trop de travail pour un essai.
+  - Godot 4, l'alternative de 00 §86 : il remplacerait toute la pile (interface, carte, sauvegardes) ; hors de propos pour un essai.
+- **Deux moteurs.** 00 §86 dit « Ne mélange pas deux moteurs ». L'essai ne mélange rien dans une même vue :
+  - Pixi reste interdit dans `src/render/tactical3d` ;
+  - three.js reste interdit partout ailleurs (règle ESLint, prouvée par `tests/lint/sim-purity.test.ts`).
+  Si la 3D est retenue, la bataille serait en three.js et la carte stratégique en Pixi : deux bibliothèques dans l'application, une par vue. C'est un point de la décision de l'utilisateur (rapport R1).
+- **Chargement.** `src/main.ts` charge `src/render/tactical3d/entry.ts` par import dynamique pour `/proto3d` ou `?proto3d`.
+  - L'entrée vérifie que WebGL 2 existe (three.js l'exige depuis r163) avant d'importer three.js.
+  - Sans WebGL : message clair, bouton et retour automatique au rendu 2D ; three.js n'est pas téléchargé.
+  - Les textes du prototype restent dans son propre morceau (`texts.ts`) ; s'il est adopté, ils passeront dans `fr.json`.
+- **Bundle principal** (build de 13c9f77 contre ce commit) : 900 697 → 901 113 octets, soit +416 octets (+0,05 %). Ce sont le routage, la table de l'import dynamique, le lien de la console F2 et son libellé. three.js y pèse 0 octet : aucune signature `THREE.`, alors que le morceau du prototype en compte 45.
+- **Graine.** Les variations visuelles viennent d'une graine locale (`rng.ts`, mulberry32). `Math.random` est interdit dans le dossier par ESLint.

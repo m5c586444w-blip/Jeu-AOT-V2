@@ -12,6 +12,12 @@ export function mountDebugOverlay(root: HTMLElement, host: ConsoleHost, onChange
   const heading = document.createElement("h2");
   heading.className = "debug-console__title";
   heading.textContent = t("console.title");
+  // R1 : l'essai de rendu 3D s'ouvre depuis la console (page chargée à la demande, hors du bundle principal).
+  const proto = document.createElement("a");
+  proto.className = "debug-console__lien";
+  proto.href = "?proto3d";
+  proto.textContent = t("console.proto3d");
+  heading.append(proto);
 
   const log = document.createElement("pre");
   log.className = "debug-console__log";

@@ -32,6 +32,24 @@ describe("pureté de src/sim", () => {
     expect(await ruleIds(code, "src/tools/__probe__.ts")).toContain("no-restricted-imports");
     expect(await ruleIds(code, "src/render/__probe__.ts")).toEqual([]);
   });
+  it("three.js uniquement dans src/render/tactical3d (R1, D-81)", async () => {
+    const codes = ['import { Scene } from "three";\nexport { Scene };\n', 'import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";\nexport { OrbitControls };\n'];
+    for (const code of codes) {
+      for (const file of ["src/sim/core/__probe__.ts", "src/ui/__probe__.ts", "src/render/__probe__.ts", "src/render/tactical/__probe__.ts", "src/tools/__probe__.ts", "src/__probe__.ts"]) {
+        expect(await ruleIds(code, file), file).toContain("no-restricted-imports");
+      }
+      expect(await ruleIds(code, "src/render/tactical3d/__probe__.ts")).toEqual([]);
+    }
+  });
+  it("Pixi reste interdit hors de src/render quand three.js l'est aussi, et dans l'essai 3D (un seul moteur)", async () => {
+    const code = 'import { Graphics } from "pixi.js";\nexport { Graphics };\n';
+    expect(await ruleIds(code, "src/ui/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds(code, "src/render/tactical3d/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds(code, "src/render/tactical/__probe__.ts")).toEqual([]);
+  });
+  it("Math.random interdit dans l'essai 3D : variations tirées d'une graine locale (R1)", async () => {
+    expect(await ruleIds("export const x = Math.random();\n", "src/render/tactical3d/__probe__.ts")).toContain("no-restricted-properties");
+  });
   it("autorise Math.random hors de src/sim (contrôle)", async () => {
     expect(await ruleIds("export const x = Math.random();\n", "src/ui/__probe__.ts")).toEqual([]);
   });

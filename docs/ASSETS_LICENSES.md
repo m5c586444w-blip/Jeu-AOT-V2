@@ -29,6 +29,8 @@ Texte complet des licences : `node_modules/@fontsource/<police>/LICENSE` (instal
 |---|---|
 | pixi.js 8 | MIT |
 | zod 4 | MIT |
+| three 0.186 (essai R1, `src/render/tactical3d` seulement, chargé à la demande ; contrôles d'orbite de `three/examples/jsm`) | MIT — `node_modules/three/LICENSE` |
+| @types/three 0.186 (développement) | MIT |
 
 ## Audio
 
@@ -76,3 +78,11 @@ Aucun en P0.
 | Icônes des registres, blasons des nations | dessinés par code pour le projet (`src/ui/icons.ts`) | création du projet | aucun emblème de l'œuvre n'est repris (04 §8.5) |
 | Musique et effets sonores | synthèse WebAudio écrite pour le projet (`src/ui/audio.ts`) : oscillateurs, filtres, bruit pseudo-aléatoire calculé | création du projet | aucun échantillon, aucune banque de sons, aucune musique de l'œuvre (04 §7) ; `tests/ui/audio.test.ts` vérifie l'absence de fichier son et de chargement audio |
 | Scène tactique : toits, cheminées, vapeur, éclair | dessinés par code (`src/render/tactical/scene.ts`) | création du projet | — |
+
+## Ajouts de R1 (essai de rendu 3D)
+| Élément | Source | Licence | Usage |
+|---|---|---|---|
+| Ville 3D : maisons, toits (plat, à pignon, en croupe), fenêtres, cheminées, place, pan de mur | générée par graine (`src/render/tactical3d/town.ts`, `townMesh.ts`), géométries construites par code | création du projet | aucun fichier de modèle, aucune ville de l'œuvre reproduite |
+| Textures (façades, tuiles, pavés, herbe, peau, ciel, vapeur) | dessinées sur canvas à l'exécution, à partir d'une graine (`src/render/tactical3d/textures.ts`) | création du projet | aucune image externe |
+| Titans 3D (5 m et 15 m), soldats, câbles, traînées de gaz | primitives assemblées par code (`titan.ts`, `soldier.ts`, `odm.ts`) | création du projet | aucun design de personnage de l'œuvre ; pas de sang ; marque rouge de nuque = repère de lisibilité du projet |
+| Captures `docs/screenshots/r1-*` | rendus du projet | création du projet | — |

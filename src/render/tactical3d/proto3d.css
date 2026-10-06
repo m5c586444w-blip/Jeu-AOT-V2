@@ -1,0 +1,101 @@
+/* Essai de rendu 3D (R1) : feuille chargée avec le morceau à la demande, hors du CSS principal. */
+.p3d {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #1c1a17;
+}
+
+.p3d canvas { display: block; width: 100%; height: 100%; }
+
+.p3d-panneau {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  width: 17.5rem;
+  max-height: calc(100% - 1.6rem);
+  overflow-y: auto;
+  padding: 0.7rem 0.9rem 0.8rem;
+  background-color: var(--papier);
+  background-image: var(--fibres), var(--grain-cadre);
+  background-size: 420px 420px, 260px 260px;
+  border: 1px solid var(--encre);
+  outline: 1px solid rgba(28, 26, 23, 0.55);
+  outline-offset: 3px;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.p3d-panneau[hidden] { display: none; }
+
+.p3d-panneau h1 {
+  margin: 0;
+  font-family: var(--f-titre);
+  font-weight: 400;
+  font-size: 1.35rem;
+}
+
+.p3d-panneau .p3d-sous-titre {
+  margin: 0 0 0.5rem;
+  font-family: var(--f-machine);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.p3d-groupe { margin: 0.45rem 0 0; padding: 0; border: none; }
+
+.p3d-groupe legend {
+  padding: 0;
+  font-family: var(--f-machine);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.p3d-rangee { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.15rem; }
+
+.p3d-bouton,
+.p3d-rangee button {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--encre);
+  background: transparent;
+  border: 1px solid var(--encre);
+  padding: 0.1rem 0.45rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.p3d-rangee button[aria-pressed="true"] { background: var(--encre); color: var(--papier); }
+.p3d-rangee button:focus-visible,
+.p3d-bouton:focus-visible { outline: 2px solid var(--ocre); outline-offset: 2px; }
+
+.p3d-graine { width: 6.5rem; font: inherit; font-size: 0.9rem; border: none; border-bottom: 1px solid var(--encre); background: transparent; }
+
+.p3d-mesure {
+  margin: 0.55rem 0 0;
+  font-family: var(--f-machine);
+  font-size: 0.78rem;
+}
+
+.p3d-aide { margin: 0.4rem 0 0; font-size: 0.8rem; font-style: italic; }
+
+.p3d-liens { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 0.5rem; font-size: 0.85rem; }
+.p3d-liens a { color: var(--encre); }
+
+.p3d-chargement,
+.p3d-repli {
+  width: min(38rem, calc(100% - 2rem));
+  margin: 12vh auto 0;
+  padding: 2rem 2.4rem;
+  background-color: var(--papier);
+  background-image: var(--fibres), var(--grain-cadre);
+  border: 1px solid var(--encre);
+  outline: 1px solid rgba(28, 26, 23, 0.55);
+  outline-offset: 5px;
+}
+
+.p3d-repli h1 { margin: 0 0 0.6rem; font-family: var(--f-titre); font-weight: 400; font-size: 2rem; }
+.p3d-repli .p3d-bouton { display: inline-block; margin-top: 0.6rem; font-size: 1.1rem; padding: 0.3rem 0.9rem; }
+.p3d-repli__auto { font-style: italic; }
+.p3d-repli__detail { font-family: var(--f-machine); font-size: 0.85rem; color: #3a352d; }

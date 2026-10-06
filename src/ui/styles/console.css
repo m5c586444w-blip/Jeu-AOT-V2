@@ -29,7 +29,12 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   border-bottom: 1px solid var(--encre);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
+
+.debug-console__lien { color: var(--encre); letter-spacing: 0.05em; text-transform: none; }
 
 .debug-console__log {
   flex: 1;

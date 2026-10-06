@@ -2579,5 +2579,6 @@
   "world.log_none": "Aucun acte diplomatique ni bataille consignés pour l'instant.",
   "narr.epi.nothing_yet": "La chronique n'a encore rien consigné : la partie commence.",
   "narr.epi.canon_none_avoided": "La chronique a suivi son cours : {n} événement(s) survenu(s), aucun évité.",
-  "narr.epi.divergent_none_avoided": "L'histoire a pris un autre chemin : {n} événement(s) survenu(s), aucun évité."
+  "narr.epi.divergent_none_avoided": "L'histoire a pris un autre chemin : {n} événement(s) survenu(s), aucun évité.",
+  "console.proto3d": "Essai de rendu 3D (R1)"
 }

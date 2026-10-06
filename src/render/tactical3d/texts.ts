@@ -1,0 +1,54 @@
+/**
+ * Textes de l'essai 3D (R1). Ils restent dans le morceau chargé à la demande, pour que le bundle principal ne grossisse pas
+ * (D-81) ; si le rendu 3D est retenu, ils rejoindront `src/i18n/fr.json`.
+ */
+export const TX = {
+  pageTitle: "Murs et Sang — essai de rendu 3D",
+  title: "Essai de rendu 3D",
+  subtitle: "R1 · prototype three.js, hors simulation",
+  loading: "Chargement du moteur 3D…",
+  noWebglTitle: "Rendu 3D indisponible",
+  noWebglBody: "Ce navigateur ne fournit pas WebGL 2 : l'accélération graphique est absente ou désactivée. La bataille reste jouable avec le rendu 2D habituel.",
+  noWebglDetail: "Détail technique : {detail}",
+  noWebglBack: "Revenir au rendu 2D",
+  noWebglAuto: "Retour automatique dans {s} s.",
+  startError: "Le moteur 3D n'a pas pu démarrer.",
+  light: "Lumière",
+  lightJour: "Jour",
+  lightCrepuscule: "Crépuscule",
+  lightNuit: "Nuit",
+  camera: "Caméra",
+  camLibre: "Libre",
+  camSuivi: "Suivi d'escouade",
+  camTitan: "Vue Titan",
+  camDessus: "Vue de dessus",
+  squad: "Escouade {n}",
+  quality: "Qualité",
+  qBas: "Basse",
+  qMoyen: "Moyenne",
+  qHaut: "Haute",
+  titans: "Titans",
+  titanSmall: "Titan de {h} m",
+  titanLarge: "Titan de {h} m",
+  poseMarche: "Marche",
+  poseSaisie: "Saisie",
+  poseAbattu: "Abattu",
+  soldiers: "Soldats",
+  poseVol: "Vol",
+  poseAccroche: "Accroché",
+  poseSol: "Au sol",
+  crowd: "Charge : 300 soldats",
+  crowdOn: "affichés",
+  crowdOff: "masqués",
+  seed: "Graine",
+  regenerate: "Nouvelle ville",
+  pause: "Pause",
+  back: "Retour au jeu (rendu 2D)",
+  hide: "Masquer le panneau (H)",
+  stats: "{fps} img/s · {calls} appels · {tris} k triangles",
+  help: "Souris : glisser pour tourner, molette pour zoomer, clic droit pour déplacer. Touches 1–4 : escouades. H : panneau.",
+} as const;
+
+export function fill(template: string, params: Readonly<Record<string, string | number>>): string {
+  return template.replace(/\{(\w+)\}/g, (whole, k: string) => (k in params ? String(params[k]) : whole));
+}
