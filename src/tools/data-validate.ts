@@ -3,7 +3,7 @@ import { loadBalanceDir, loadDataDir } from "../data/loadNode";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { checkMap, MapSchema } from "../data/map";
-import { MaterialsFileSchema, StylesFileSchema, WallsFileSchema } from "../data/artSchemas";
+import { MaterialsFileSchema, StylesFileSchema, TitansFileSchema, WallsFileSchema } from "../data/artSchemas";
 import { formatIssue, jsonPath } from "../data/validate";
 
 const dir = process.argv[2] ?? "data";
@@ -22,6 +22,7 @@ for (const [file, schema] of [
   ["styles.json", StylesFileSchema],
   ["materiaux.json", MaterialsFileSchema],
   ["murs.json", WallsFileSchema],
+  ["titans.json", TitansFileSchema],
 ] as const) {
   const full = join(dir, "art", file);
   if (!existsSync(full)) continue;

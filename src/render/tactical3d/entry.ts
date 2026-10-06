@@ -97,8 +97,22 @@ export async function openProto3d(root: HTMLElement): Promise<void> {
   loading.textContent = TX.loading;
   root.replaceChildren(loading);
   try {
-    const m = await import("./proto");
-    await m.startProto(root, probe);
+    // R1b : galerie des environnements (`?proto3d=galerie`, ou `/proto3d/galerie` par la page de redirection), visionneuse
+    // d'un environnement (`?proto3d&env=E13`) ; sinon, la scène de combat de R1.
+    const q = new URLSearchParams(window.location.search);
+    if (q.get("proto3d") === "galerie" || q.has("galerie")) {
+      const m = await import("./gallery");
+      await m.startGallery(root, probe);
+    } else if (q.get("env") === "banc") {
+      const m = await import("./bench");
+      await m.startBench(root, probe);
+    } else if (q.has("env")) {
+      const m = await import("./envViewer");
+      await m.startEnvViewer(root, probe);
+    } else {
+      const m = await import("./proto");
+      await m.startProto(root, probe);
+    }
   } catch (e) {
     showFallback(root, `${TX.startError} ${String(e)}`);
   }

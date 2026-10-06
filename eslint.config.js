@@ -42,7 +42,13 @@ export default tseslint.config(
     // Essai 3D (R1) : three.js seulement, pas de second moteur ; variations visuelles tirées d'une graine locale.
     files: ["src/render/tactical3d/**/*.ts"],
     rules: {
-      "no-restricted-imports": ["error", { patterns: [{ group: PIXI, message: "Pas de Pixi dans src/render/tactical3d : un seul moteur par vue." }] }],
+      "no-restricted-imports": ["error", {
+        patterns: [
+          { group: PIXI, message: "Pas de Pixi dans src/render/tactical3d : un seul moteur par vue." },
+          // R1b : les schémas Zod des données de rendu ne servent qu'à la validation ; le morceau 3D n'en lit que les types.
+          { group: ["zod", "**/data/artSchemas", "**/data/schemas"], allowTypeImports: true, message: "Morceau 3D : types seulement (Zod reste hors du rendu)." },
+        ],
+      }],
       "no-restricted-properties": ["error", { object: "Math", property: "random", message: "Variations visuelles : graine locale (rng.ts), jamais Math.random." }],
     },
   },

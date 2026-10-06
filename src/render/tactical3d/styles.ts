@@ -189,3 +189,11 @@ export function ringMidDistanceM(): number {
 export function wallInScene(p: StyleProfile): boolean {
   return p.mur_visible.visible;
 }
+
+/** Teinte d'un sol (`materiaux.json`, sols) mêlée à la teinte `sol` du profil : terre battue, potagers, berges… */
+export function groundHex(p: StyleProfile, k: keyof MaterialsFile["sols"], share = 0.25): string {
+  const a = hexToRgb(MATERIALS.sols[k].base);
+  const b = hexToRgb(p.palette.sol);
+  const mix = a.map((v, i) => Math.round(v + ((b[i] as number) - v) * share));
+  return `#${mix.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}

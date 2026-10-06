@@ -1,0 +1,106 @@
+{
+  "soldat_m": { "valeur": 1.7, "canon": "A", "note": "Soldat du banc d'échelle : 1,7 m (consigne R1b)." },
+  "classes": [
+    {
+      "id": "classe_3",
+      "hauteur_m": 3,
+      "canon": "A",
+      "note": "Classe petite, borne basse (data/titans/classes.json, titan_petit [3, 5] ; 10, T-02).",
+      "proportions": { "legs": 0.33, "torso": 0.39, "neck": 0.03, "head": 0.25, "headW": 0.6, "shoulder": 0.155, "hip": 0.09, "chest": 0.155, "waist": 0.15, "belly": 0.14, "depth": 0.85, "upperArm": 0.15, "foreArm": 0.13, "hand": 0.075, "armR": 0.045, "thighR": 0.075, "neckR": 0.075, "hunch": 0.22 },
+      "allure": { "stride": 0.34, "walkRate": 2.5, "armSwing": 0.28, "shoulderOut": 0.1, "headTilt": 0.14 },
+      "peau": "#DBAA92",
+      "expression": "rictus",
+      "cheveux": false
+    },
+    {
+      "id": "classe_5",
+      "hauteur_m": 5,
+      "canon": "A",
+      "note": "Classe petite, borne haute (titan_petit [3, 5]) : le petit Titan de R1.",
+      "proportions": { "legs": 0.35, "torso": 0.38, "neck": 0.035, "head": 0.235, "headW": 0.58, "shoulder": 0.15, "hip": 0.085, "chest": 0.15, "waist": 0.14, "belly": 0.13, "depth": 0.82, "upperArm": 0.16, "foreArm": 0.14, "hand": 0.075, "armR": 0.042, "thighR": 0.07, "neckR": 0.07, "hunch": 0.2 },
+      "allure": { "stride": 0.36, "walkRate": 2.3, "armSwing": 0.3, "shoulderOut": 0.1, "headTilt": 0.12 },
+      "peau": "#D7A68E",
+      "expression": "rictus",
+      "cheveux": false
+    },
+    {
+      "id": "classe_8",
+      "hauteur_m": 8,
+      "canon": "A",
+      "note": "Classe moyenne (titan_moyen [6, 9] ; 03 §5.2).",
+      "proportions": { "legs": 0.43, "torso": 0.33, "neck": 0.06, "head": 0.18, "headW": 0.5, "shoulder": 0.125, "hip": 0.072, "chest": 0.12, "waist": 0.1, "belly": 0.06, "depth": 0.72, "upperArm": 0.19, "foreArm": 0.18, "hand": 0.085, "armR": 0.034, "thighR": 0.058, "neckR": 0.048, "hunch": 0.15 },
+      "allure": { "stride": 0.42, "walkRate": 1.95, "armSwing": 0.42, "shoulderOut": 0.13, "headTilt": 0.02 },
+      "peau": "#CFA38A",
+      "expression": "neutre",
+      "cheveux": true
+    },
+    {
+      "id": "classe_12",
+      "hauteur_m": 12,
+      "canon": "A",
+      "note": "Classe grande (titan_grand [10, 15]).",
+      "proportions": { "legs": 0.47, "torso": 0.31, "neck": 0.075, "head": 0.145, "headW": 0.45, "shoulder": 0.11, "hip": 0.064, "chest": 0.1, "waist": 0.075, "belly": 0.02, "depth": 0.65, "upperArm": 0.205, "foreArm": 0.2, "hand": 0.09, "armR": 0.029, "thighR": 0.05, "neckR": 0.034, "hunch": 0.12 },
+      "allure": { "stride": 0.47, "walkRate": 1.75, "armSwing": 0.5, "shoulderOut": 0.15, "headTilt": -0.04 },
+      "peau": "#C8A286",
+      "expression": "rictus",
+      "cheveux": false
+    },
+    {
+      "id": "classe_15",
+      "hauteur_m": 15,
+      "canon": "A",
+      "note": "Classe grande, borne haute (titan_grand [10, 15]) : le grand Titan de R1.",
+      "proportions": { "legs": 0.5, "torso": 0.29, "neck": 0.085, "head": 0.125, "headW": 0.42, "shoulder": 0.105, "hip": 0.06, "chest": 0.09, "waist": 0.062, "belly": 0, "depth": 0.62, "upperArm": 0.215, "foreArm": 0.215, "hand": 0.095, "armR": 0.026, "thighR": 0.046, "neckR": 0.028, "hunch": 0.1 },
+      "allure": { "stride": 0.5, "walkRate": 1.6, "armSwing": 0.55, "shoulderOut": 0.16, "headTilt": -0.08 },
+      "peau": "#C4A084",
+      "expression": "beant",
+      "cheveux": true
+    }
+  ],
+  "variantes": [
+    { "id": "anormal", "base": "classe_12", "canon": "C", "note": "Existence des anormaux C (03 §5.1 ; 10, T-04) ; allure de course, jambes longues, tête petite : A.", "modifs": { "legs": 0.06, "torso": -0.03, "head": -0.03, "armR": -0.004 }, "allure": { "stride": 0.7, "walkRate": 2.6 }, "pose": "course", "peau": "#B48C74", "expression": "beant" },
+    { "id": "sentinelle", "base": "classe_8", "canon": "A", "note": "10, T-05 : immobile jusqu'au stimulus ; debout, tête basse.", "modifs": { "hunch": 0.1 }, "allure": { "headTilt": 0.35 }, "pose": "debout", "expression": "neutre" },
+    { "id": "chasseur", "base": "classe_8", "canon": "A", "note": "10, T-06 (5–10 m) : rapide, penché en avant, bras longs.", "modifs": { "upperArm": 0.03, "foreArm": 0.03, "hunch": 0.2 }, "allure": { "stride": 0.6, "walkRate": 2.4 }, "pose": "marche", "expression": "beant" },
+    { "id": "meute", "base": "classe_5", "canon": "A", "note": "10, T-07 : agglutination par le bruit ; cinq individus de la même classe, graines différentes.", "modifs": {}, "allure": {}, "pose": "marche", "groupe": 5 },
+    { "id": "nocturne", "base": "classe_8", "canon": "A", "note": "10, T-08 : actif surtout de jour, lent la nuit ; peau pâle, yeux creux.", "modifs": {}, "allure": { "walkRate": 1.2 }, "pose": "marche", "peau": "#BAB6AE", "expression": "creuse" }
+  ],
+  "speciaux": [
+    {
+      "id": "titan_mur",
+      "hauteur_m": 50,
+      "canon": "C",
+      "note": "Titans-Murs ≈ 50 m, enchâssés dans les murs (01 ; 10, T-09). Montré en buste : le mur cache le reste. Formes génériques (D-86).",
+      "proportions": { "legs": 0.47, "torso": 0.32, "neck": 0.06, "head": 0.15, "headW": 0.46, "shoulder": 0.12, "hip": 0.07, "chest": 0.105, "waist": 0.085, "belly": 0, "depth": 0.66, "upperArm": 0.19, "foreArm": 0.18, "hand": 0.09, "armR": 0.032, "thighR": 0.055, "neckR": 0.04, "hunch": 0 },
+      "allure": { "stride": 0, "walkRate": 0, "armSwing": 0, "shoulderOut": 0.08, "headTilt": 0 },
+      "peau": "#C9A994",
+      "expression": "neutre",
+      "cheveux": false,
+      "pose": "buste"
+    },
+    {
+      "id": "rod_reiss",
+      "hauteur_m": 120,
+      "canon": "C",
+      "note": "Titan de Rod Reiss ≈ 120 m, incapable de se tenir debout (10, T-11 ; 11). Allongé, il rampe ; formes génériques (D-86).",
+      "proportions": { "legs": 0.4, "torso": 0.38, "neck": 0.07, "head": 0.15, "headW": 0.48, "shoulder": 0.12, "hip": 0.075, "chest": 0.115, "waist": 0.09, "belly": 0.05, "depth": 0.7, "upperArm": 0.2, "foreArm": 0.2, "hand": 0.09, "armR": 0.03, "thighR": 0.05, "neckR": 0.045, "hunch": 0.05 },
+      "allure": { "stride": 0.2, "walkRate": 0.4, "armSwing": 0.2, "shoulderOut": 0.1, "headTilt": 0 },
+      "peau": "#C49A84",
+      "expression": "beant",
+      "cheveux": false,
+      "pose": "allonge"
+    },
+    {
+      "id": "colossal",
+      "hauteur_m": 60,
+      "canon": "C",
+      "note": "Colossal ≈ 60 m (01 ; data/shifters/nine.json [55, 60]). Carrure large, vapeur de chaleur ; formes génériques, sans reproduire le design de l'œuvre (D-86).",
+      "proportions": { "legs": 0.46, "torso": 0.33, "neck": 0.07, "head": 0.14, "headW": 0.46, "shoulder": 0.14, "hip": 0.075, "chest": 0.12, "waist": 0.09, "belly": 0, "depth": 0.7, "upperArm": 0.2, "foreArm": 0.19, "hand": 0.09, "armR": 0.04, "thighR": 0.06, "neckR": 0.05, "hunch": 0.03 },
+      "allure": { "stride": 0.25, "walkRate": 0.6, "armSwing": 0.2, "shoulderOut": 0.12, "headTilt": 0 },
+      "peau": "#C29684",
+      "expression": "neutre",
+      "cheveux": false,
+      "pose": "debout",
+      "vapeur": true
+    }
+  ]
+}

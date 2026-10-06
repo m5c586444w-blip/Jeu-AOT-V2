@@ -38,6 +38,8 @@ export interface Block {
   /** Rotation propre de l'îlot autour de son centre (radians) : la rue s'évase ou se resserre le long de l'îlot. */
   turn: number;
   plaza: boolean;
+  /** Hors de l'enceinte (R1b : îlot coupé par la saillie du mur) : ni maison, ni pavé. */
+  outside?: boolean;
 }
 export interface Chimney {
   /** Position locale : u le long de la façade, v dans la profondeur (mètres, depuis le centre). */
@@ -84,6 +86,8 @@ export interface Town {
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
   /** Un pan de mur d'enceinte au nord, en toile de fond : 50 m [C] (01, 11 §2), épaisseur 10 m [?]. */
   wall: { a: Vec2; b: Vec2; height: number; thickness: number };
+  /** Treillis (R1b) : carrefours, et indices des tronçons verticaux `v[i][j]` et horizontaux `h[j][i]`. */
+  grid: { cols: number; rows: number; pts: Vec2[][]; v: number[][]; h: number[][] };
 }
 export interface TownOptions {
   cols: number;
@@ -98,6 +102,18 @@ export interface TownOptions {
   swirl: number;
   /** Rotation maximale d'un îlot sur lui-même (degrés). */
   blockTurnDeg: number;
+  /** Centre du treillis (R1b : une ville peut être décalée dans sa saillie). */
+  center?: Vec2;
+  /** Îlots gardés : centre d'îlot → vrai s'il est bâti (R1b : découpe par la saillie du mur). Par défaut, tous. */
+  keep?: (c: Vec2) => boolean;
+  /** Place : l'îlot le plus proche de ce point et son voisin du sud (par défaut, l'îlot central). */
+  plazaAt?: Vec2;
+  /** Maisons (R1b, profil) : largeur et profondeur de façade, étages, hauteur d'étage. */
+  lots?: { width: [number, number]; depth: [number, number]; floors: [number, number]; floorHeight: [number, number] };
+  /** Part des emplacements bâtis (densité du profil) : 1 = rue continue. */
+  fill?: number;
+  /** Largeur imposée d'un tronçon (avenue, rue à canal) : ligne verticale `i` ou horizontale `j`, tronçon `k` ; null = tirée. */
+  streetWidth?: (vertical: boolean, line: number, k: number) => number | null;
 }
 export const TOWN_DEFAULTS: TownOptions = { cols: 5, rows: 5, blockMin: 34, blockMax: 52, streetMin: 5, streetMax: 14, jitter: 9, swirl: 0.0026, blockTurnDeg: 15 };
 
@@ -228,7 +244,8 @@ function lattice(rand: Rand, o: TownOptions): { pts: Vec2[][]; bounds: Town["bou
       // Torsion : rotation croissante avec la distance au centre, pour des rues qui s'incurvent doucement.
       const r = len(base);
       const a = o.swirl * r;
-      col.push({ x: base.x * Math.cos(a) - base.y * Math.sin(a), y: base.x * Math.sin(a) + base.y * Math.cos(a) });
+      const c = o.center ?? { x: 0, y: 0 };
+      col.push({ x: c.x + base.x * Math.cos(a) - base.y * Math.sin(a), y: c.y + base.x * Math.sin(a) + base.y * Math.cos(a) });
     }
     pts.push(col);
   }
@@ -239,8 +256,14 @@ function lattice(rand: Rand, o: TownOptions): { pts: Vec2[][]; bounds: Town["bou
   };
 }
 
+/** Poids des étages : le milieu de l'intervalle est le plus fréquent. */
+function floorWeights([a, b]: [number, number]): number[] {
+  const n = Math.max(1, Math.round(b - a) + 1);
+  return Array.from({ length: n }, (_, i) => 1 + Math.min(i, n - 1 - i));
+}
+
 /** Pose les maisons d'un îlot le long de ses bords. */
-function placeBuildings(rand: Rand, block: Block, firstId: number): Building[] {
+function placeBuildings(rand: Rand, block: Block, firstId: number, o: TownOptions): Building[] {
   const q = block.inner;
   const sign = Math.sign(signedArea(q)) || 1;
   const placed: Building[] = [];
@@ -254,13 +277,13 @@ function placeBuildings(rand: Rand, block: Block, firstId: number): Building[] {
     const inward = mul({ x: -d.y, y: d.x }, sign);
     let s = range(rand, 0, 1.5);
     while (s < L - 4) {
-      const width = Math.min(range(rand, 7, 13.5), L - s);
-      const depth = Math.min(range(rand, 9, 15), minSide * 0.46);
+      const width = Math.min(range(rand, o.lots?.width[0] ?? 7, o.lots?.width[1] ?? 13.5), L - s);
+      const depth = Math.min(range(rand, o.lots?.depth[0] ?? 9, o.lots?.depth[1] ?? 15), minSide * 0.46);
       if (width < 5.5 || depth < 6) break;
       const c = add(add(a, mul(d, s + width / 2)), mul(inward, depth / 2 + 0.02));
       const roof = ROOF_KINDS[weighted(rand, [0.25, 0.45, 0.3])] as RoofKind;
-      const floors = 2 + weighted(rand, [0.25, 0.4, 0.25, 0.1]);
-      const floorHeight = range(rand, 3.0, 3.5);
+      const floors = o.lots ? o.lots.floors[0] + weighted(rand, floorWeights(o.lots.floors)) : 2 + weighted(rand, [0.25, 0.4, 0.25, 0.1]);
+      const floorHeight = range(rand, o.lots?.floorHeight[0] ?? 3.0, o.lots?.floorHeight[1] ?? 3.5);
       const b0: Building = {
         id: firstId + placed.length,
         block: block.id,
@@ -290,6 +313,11 @@ function placeBuildings(rand: Rand, block: Block, firstId: number): Building[] {
         s += 1;
         continue;
       }
+      // Densité (R1b) : un emplacement sur (1 − fill) reste vide (cour, jardin, terrain vague).
+      if (o.fill !== undefined && o.fill < 1 && rand() > o.fill) {
+        s += width + range(rand, 1, 4);
+        continue;
+      }
       placed.push(b0);
       // Ruelle entre deux maisons, une fois sur huit.
       s += width + (rand() < 0.12 ? range(rand, 1.6, 3.2) : 0);
@@ -310,7 +338,8 @@ export function generateTown(seed: number, opts: Partial<TownOptions> = {}): Tow
     const row: number[] = [];
     for (let j = 0; j < o.rows; j++) {
       row.push(streets.length);
-      streets.push({ a: P(i, j), b: P(i, j + 1), width: range(rand, o.streetMin, o.streetMax) });
+      const w = range(rand, o.streetMin, o.streetMax);
+      streets.push({ a: P(i, j), b: P(i, j + 1), width: o.streetWidth?.(true, i, j) ?? w });
     }
     vIndex.push(row);
   }
@@ -319,12 +348,28 @@ export function generateTown(seed: number, opts: Partial<TownOptions> = {}): Tow
     const row: number[] = [];
     for (let i = 0; i < o.cols; i++) {
       row.push(streets.length);
-      streets.push({ a: P(i, j), b: P(i + 1, j), width: range(rand, o.streetMin, o.streetMax) });
+      const w = range(rand, o.streetMin, o.streetMax);
+      streets.push({ a: P(i, j), b: P(i + 1, j), width: o.streetWidth?.(false, j, i) ?? w });
     }
     hIndex.push(row);
   }
-  const plazaCol = Math.floor(o.cols / 2);
-  const plazaRow = Math.floor(o.rows / 2);
+  let plazaCol = Math.floor(o.cols / 2);
+  let plazaRow = Math.floor(o.rows / 2);
+  if (o.plazaAt) {
+    const at = o.plazaAt;
+    let best = Infinity;
+    for (let i = 0; i < o.cols; i++) {
+      for (let j = 0; j + 1 < o.rows; j++) {
+        const c = mul(add(add(P(i, j), P(i + 1, j)), add(P(i + 1, j + 1), P(i, j + 1))), 0.25);
+        const d = len(sub(c, at));
+        if (d < best) {
+          best = d;
+          plazaCol = i;
+          plazaRow = j;
+        }
+      }
+    }
+  }
   const blocks: Block[] = [];
   const buildings: Building[] = [];
   const brand = seeded(derive(seed, 2));
@@ -341,8 +386,9 @@ export function generateTown(seed: number, opts: Partial<TownOptions> = {}): Tow
       const turn = (range(rand, -o.blockTurnDeg, o.blockTurnDeg) * Math.PI) / 180;
       const inner = turnInside(lot, turn);
       const block: Block = { id: blocks.length, quad, inner, sides, turn, plaza: i === plazaCol && (j === plazaRow || j === plazaRow + 1) };
+      if (o.keep && !block.plaza) block.outside = !o.keep(mul(quad.reduce((acc, p) => add(acc, p), { x: 0, y: 0 }), 0.25));
       blocks.push(block);
-      if (!block.plaza) buildings.push(...placeBuildings(brand, block, buildings.length));
+      if (!block.plaza && !block.outside) buildings.push(...placeBuildings(brand, block, buildings.length, o));
     }
   }
   const plazaBlocks = blocks.filter((b) => b.plaza);
@@ -358,6 +404,7 @@ export function generateTown(seed: number, opts: Partial<TownOptions> = {}): Tow
     plaza: { block: plazaBlock.id, blocks: plazaBlocks.map((b) => b.id), center, centers },
     bounds,
     wall: { a: { x: bounds.minX - 120, y: wy }, b: { x: bounds.maxX + 120, y: wy }, height: 50, thickness: 10 },
+    grid: { cols: o.cols, rows: o.rows, pts, v: vIndex, h: hIndex },
   };
 }
 

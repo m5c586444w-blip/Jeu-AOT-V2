@@ -119,3 +119,61 @@ export function colorOf(obj: Object3D): { r: number; g: number; b: number } {
   const m = obj instanceof Mesh && obj.material instanceof MeshStandardMaterial ? obj.material : null;
   return m ? { r: m.color.r, g: m.color.g, b: m.color.b } : { r: 0, g: 0, b: 0 };
 }
+
+/**
+ * Empreinte d'une scène (R1b, tests de déterminisme) : positions et couleurs de toutes les géométries, matrices et teintes des
+ * instances, quantifiées au millimètre, mêlées par FNV-1a. Deux scènes identiques ont la même empreinte.
+ */
+export function sceneDigest(root: Object3D): { hash: string; vertices: number; instances: number; meshes: number } {
+  let h = 2166136261;
+  const mix = (v: number): void => {
+    h = Math.imul(h ^ (Math.round(v * 1000) | 0), 16777619) >>> 0;
+  };
+  let vertices = 0;
+  let instances = 0;
+  let meshes = 0;
+  root.updateMatrixWorld(true);
+  root.traverse((o) => {
+    if (!(o instanceof Mesh)) return;
+    meshes++;
+    const g = o.geometry as BufferGeometry;
+    const pos = g.getAttribute("position");
+    const col = g.getAttribute("color");
+    vertices += pos.count;
+    for (let i = 0; i < pos.count; i += 3) {
+      mix(pos.getX(i));
+      mix(pos.getY(i));
+      mix(pos.getZ(i));
+      if (col) mix(col.getX(i) + col.getY(i) * 3 + col.getZ(i) * 7);
+    }
+    for (const e of o.matrixWorld.elements) mix(e);
+    const inst = o as Mesh & { isInstancedMesh?: boolean; count?: number; instanceMatrix?: { array: ArrayLike<number> }; instanceColor?: { array: ArrayLike<number> } | null };
+    if (inst.isInstancedMesh && inst.instanceMatrix) {
+      instances += inst.count ?? 0;
+      const a = inst.instanceMatrix.array;
+      for (let i = 0; i < a.length; i += 5) mix(a[i] as number);
+      const c = inst.instanceColor?.array;
+      if (c) for (let i = 0; i < c.length; i += 3) mix(c[i] as number);
+    }
+  });
+  return { hash: h.toString(16).padStart(8, "0"), vertices, instances, meshes };
+}
+
+/** Noms des maillages sous un objet (contrôle de présence : mur, voûte, rayons…). */
+export function meshNames(root: Object3D): string[] {
+  const out: string[] = [];
+  root.traverse((o) => {
+    if (o instanceof Mesh) out.push(o.name);
+  });
+  return out;
+}
+
+/** Niveaux de détail (objets `LOD`) sous un objet : nombre de niveaux et distances de bascule. */
+export function lodLevels(root: Object3D): { levels: number; distances: number[] }[] {
+  const out: { levels: number; distances: number[] }[] = [];
+  root.traverse((o) => {
+    const lod = o as Object3D & { isLOD?: boolean; levels?: { distance: number }[] };
+    if (lod.isLOD && lod.levels) out.push({ levels: lod.levels.length, distances: lod.levels.map((l) => l.distance) });
+  });
+  return out;
+}

@@ -6,8 +6,8 @@ import { derive, seeded } from "./rng";
  * Éclairage de l'essai 3D (R1.3) : jour, crépuscule, nuit. Soleil ou lune à ombres portées, ciel en dôme, brume
  * exponentielle, fenêtres et réverbères allumés au crépuscule et la nuit. Teintes sourdes (04 §1.2 : pas de néon).
  */
-export type LightPreset = "jour" | "crepuscule" | "nuit";
-export const LIGHT_PRESETS: readonly LightPreset[] = ["jour", "crepuscule", "nuit"];
+export type LightPreset = "jour" | "aube" | "crepuscule" | "nuit";
+export const LIGHT_PRESETS: readonly LightPreset[] = ["jour", "aube", "crepuscule", "nuit"];
 
 interface PresetDef {
   /** Élévation et azimut de l'astre (degrés ; azimut 0 = nord, 90 = est). */
@@ -34,7 +34,9 @@ interface PresetDef {
 
 const PRESETS: Record<LightPreset, PresetDef> = {
   jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.0, windows: 0, lanterns: 0, lampIntensity: 0, stars: false },
-  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.6, hemiSky: 0x9a8f9c, hemiGround: 0x3b3029, hemiIntensity: 0.65, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.05, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false },
+  // Aube (R1b.6) : soleil bas à l'est, lumière rosée et froide, brume plus dense que le jour.
+  aube: { elevation: 5, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.1, hemiSky: 0xa6aec6, hemiGround: 0x38332e, hemiIntensity: 0.6, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.05, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false },
+  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0x9a8f9c, hemiGround: 0x3b3029, hemiIntensity: 0.95, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.05, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false },
   nuit: { elevation: 38, azimuth: 140, sunColor: 0x9db2d8, sunIntensity: 0.5, hemiSky: 0x2a3550, hemiGround: 0x101215, hemiIntensity: 0.4, horizon: 0x1d2536, zenith: 0x06090f, glow: 0x8fa3c8, glowStrength: 0.35, fog: 0x121822, fogDensity: 0.0026, exposure: 1.15, windows: 1.5, lanterns: 3, lampIntensity: 60, stars: true },
 };
 
@@ -50,10 +52,14 @@ export interface LightRig {
   follow(camera: Vector3): void;
   /** Taille de la carte d'ombre (qualité). */
   setShadow(enabled: boolean, size: number): void;
+  /** R1b : déplace le centre éclairé (cible du soleil, zone d'ombres) vers la vue courante. */
+  setCenter(c: Vector3): void;
+  /** R1b : brume supplémentaire (météo), multiplicateur de densité. */
+  setFogBoost(k: number): void;
   dispose(): void;
 }
 
-export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3 }): LightRig {
+export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3; shadowExtent?: number; fogScale?: number }): LightRig {
   const group = new Group();
   group.name = "eclairage";
   scene.add(group);
@@ -62,7 +68,8 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   const sun = new DirectionalLight(0xffffff, 1);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
-  Object.assign(sun.shadow.camera, { left: -230, right: 230, top: 230, bottom: -230, near: 10, far: 900 });
+  const ext = opts.shadowExtent ?? 230;
+  Object.assign(sun.shadow.camera, { left: -ext, right: ext, top: ext, bottom: -ext, near: 10, far: Math.max(900, ext * 4) });
   sun.shadow.bias = -0.0004;
   sun.shadow.normalBias = 0.5;
   sun.target.position.copy(opts.center);
@@ -103,6 +110,8 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   });
 
   let current: LightPreset = "jour";
+  /** Multiplicateur de brume posé par la météo (R1b.6). */
+  let extraFog = 1;
   let exposure = 1;
   let lampLimit = lamps.length;
   const showLamps = (): void => {
@@ -139,12 +148,12 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       const dir = dirOf(d);
       sun.color.set(d.sunColor);
       sun.intensity = d.sunIntensity;
-      sun.position.copy(opts.center).addScaledVector(dir, 420);
+      sun.position.copy(opts.center).addScaledVector(dir, Math.max(420, ext * 1.6));
       hemi.color.set(d.hemiSky);
       hemi.groundColor.set(d.hemiGround);
       hemi.intensity = d.hemiIntensity;
       fog.color.set(d.fog);
-      fog.density = d.fogDensity;
+      fog.density = d.fogDensity * (opts.fogScale ?? 1) * extraFog;
       exposure = d.exposure;
       const pos = skyGeo.getAttribute("position");
       const col = skyGeo.getAttribute("color");
@@ -171,6 +180,15 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     follow(camera) {
       sky.position.copy(camera);
       stars.position.copy(camera);
+    },
+    setCenter(c) {
+      opts.center.copy(c);
+      sun.target.position.copy(c);
+      rig.apply(current);
+    },
+    setFogBoost(k) {
+      extraFog = k;
+      rig.apply(current);
     },
     setShadow(enabled, size) {
       sun.castShadow = enabled;

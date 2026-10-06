@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, Color, Group, MeshStandardMaterial, Points, PointsMaterial, TorusGeometry } from "three";
+import { BufferAttribute, BufferGeometry, Color, Group, MeshStandardMaterial, Points, PointsMaterial, TorusGeometry, Vector3 } from "three";
 import type { Mesh, Texture } from "three";
 import { derive, range, seeded } from "./rng";
 import { joint, lathe, limb, measureBox, part, unitSphere } from "./rig";
@@ -12,11 +12,17 @@ import { joint, lathe, limb, measureBox, part, unitSphere } from "./rig";
  * Formes inventées pour le projet : aucun Titan de l'œuvre n'est reproduit (D-83). Pas de sang : un Titan abattu fume.
  * La marque rouge de la nuque est un repère de lisibilité du point faible (03 §4.2), pas un détail de l'œuvre.
  */
-export type TitanPose = "marche" | "saisie" | "abattu";
+export type TitanPose = "marche" | "saisie" | "abattu" | "debout" | "course" | "allonge" | "buste";
+/** Les trois poses de la planche de R1. */
 export const TITAN_POSES: readonly TitanPose[] = ["marche", "saisie", "abattu"];
+/** Toutes les poses (R1b) : debout (repos, pieds au sol), course (anormal), allongé (Titan qui ne tient pas debout), buste. */
+export const ALL_TITAN_POSES: readonly TitanPose[] = ["marche", "saisie", "abattu", "debout", "course", "allonge", "buste"];
 
 export interface TitanSpec {
-  id: "petit" | "grand";
+  /** Identifiant (R1 : « petit », « grand » ; R1b : classes et Titans spéciaux de `data/art/titans.json`). */
+  id: string;
+  /** Sel de la graine locale (formes des mèches…). */
+  salt: number;
   /** Hauteur debout (m). */
   height: number;
   /** Fractions de la hauteur : jambes (sol → bassin), torse (bassin → épaules), cou, tête. Somme = 1. */
@@ -43,14 +49,22 @@ export interface TitanSpec {
   /** Voussure du dos (rad). */
   hunch: number;
   skin: number;
-  expression: "rictus" | "beant";
+  expression: "rictus" | "beant" | "neutre" | "creuse";
   hair: boolean;
   /** Amplitude de la foulée (rad). */
   stride: number;
+  /** Cadence de marche (rad/s), balancement des bras (rad), écart des épaules au repos (rad), inclinaison de la tête (rad). */
+  walkRate: number;
+  armSwing: number;
+  shoulderOut: number;
+  headTilt: number;
+  /** Vapeur permanente (chaleur du Colossal). */
+  heat?: boolean;
 }
 
 export const TITAN_SMALL: TitanSpec = {
   id: "petit",
+  salt: 11,
   height: 5,
   legs: 0.35,
   torso: 0.38,
@@ -74,10 +88,15 @@ export const TITAN_SMALL: TitanSpec = {
   expression: "rictus",
   hair: false,
   stride: 0.36,
+  walkRate: 2.3,
+  armSwing: 0.3,
+  shoulderOut: 0.1,
+  headTilt: 0.12,
 };
 
 export const TITAN_LARGE: TitanSpec = {
   id: "grand",
+  salt: 12,
   height: 15,
   legs: 0.5,
   torso: 0.29,
@@ -101,6 +120,10 @@ export const TITAN_LARGE: TitanSpec = {
   expression: "beant",
   hair: true,
   stride: 0.5,
+  walkRate: 1.6,
+  armSwing: 0.55,
+  shoulderOut: 0.16,
+  headTilt: -0.08,
 };
 
 type JointName = "bassin" | "torse" | "poitrine" | "cou" | "tete" | "machoire" | "epauleG" | "coudeG" | "poignetG" | "epauleD" | "coudeD" | "poignetD" | "hancheG" | "genouG" | "chevilleG" | "hancheD" | "genouD" | "chevilleD";
@@ -120,9 +143,9 @@ export interface Titan {
   dispose(): void;
 }
 
-export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | null = null): Titan {
+export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | null = null, calibrate = true): Titan {
   const H = spec.height;
-  const rand = seeded(derive(seed, spec.id === "petit" ? 11 : 12));
+  const rand = seeded(derive(seed, spec.salt));
   // Léger rayonnement chaud : imite la lumière qui traverse la peau, sans matériau coûteux.
   const skin = new MeshStandardMaterial({ color: spec.skin, map: skinMap, roughness: 0.58, metalness: 0, emissive: 0x2a120a, emissiveIntensity: 0.12 });
   const skinDark = new MeshStandardMaterial({ color: new Color(spec.skin).multiplyScalar(0.82), map: skinMap, roughness: 0.7 });
@@ -207,6 +230,17 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
     j.tete.add(part(mouth, dark, "bouche", [0, hh * 0.42, faceZ - hh * 0.11], [1, 0.75, 1], [0.15, 0, -Math.PI / 2 - arc / 2]));
     const teeth = new TorusGeometry(hw * 0.62, hh * 0.022, 6, 32, arc * 0.9);
     j.tete.add(part(teeth, ivory, "dents", [0, hh * 0.425, faceZ - hh * 0.09], [1, 0.62, 1], [0.15, 0, -Math.PI / 2 - (arc * 0.9) / 2]));
+  } else if (spec.expression === "neutre" || spec.expression === "creuse") {
+    // Neutre : regard fixe, bouche close en trait ; creuse (nocturne) : orbites sombres, sans pupilles.
+    const hollow = spec.expression === "creuse";
+    for (const s of [1, -1]) {
+      const ex = s * hw * 0.4;
+      j.tete.add(part(S, hollow ? dark : ivory, "oeil", [ex, hh * 0.6, faceZ - hh * 0.07], [hh * 0.075, hh * 0.05, hh * 0.05]));
+      if (!hollow) j.tete.add(part(S, dark, "pupille", [ex, hh * 0.6, faceZ - hh * 0.025], [hh * 0.02, hh * 0.02, hh * 0.012]));
+      j.tete.add(part(S, skinDark, "sourcil", [ex, hh * 0.7, faceZ - hh * 0.05], [hh * 0.1, hh * 0.02, hh * 0.035]));
+    }
+    j.tete.add(part(S, skin, "nez", [0, hh * 0.48, faceZ + hh * 0.01], [hh * 0.05, hh * 0.09, hh * 0.06], [0.25, 0, 0]));
+    j.tete.add(part(S, dark, "bouche", [0, hh * 0.33, faceZ - hh * 0.1], [hw * 0.36, hh * 0.018, hh * 0.03]));
   } else {
     // Yeux exorbités, minuscules pupilles ; sourcils froncés ; long nez ; mâchoire pendante sur une bouche noire.
     for (const s of [1, -1]) {
@@ -295,6 +329,13 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
   body.traverse((o) => {
     if (o instanceof Group && o.name.startsWith("doigt")) fingers.push(o);
   });
+  const feet: Mesh[] = [];
+  body.traverse((o) => {
+    if ((o as Mesh).isMesh && o.name === "pied") feet.push(o as Mesh);
+  });
+  const worldTmp = new Vector3();
+  /** Altitude du sol sous le Titan : celle de son groupe dans le monde. */
+  const groupY = (): number => group.getWorldPosition(worldTmp).y;
 
   const titan: Titan = {
     spec,
@@ -315,9 +356,10 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
       napeMat.emissiveIntensity = 0.55;
       j.torse.rotation.x = spec.hunch;
       j.cou.rotation.x = -spec.hunch * 0.6;
-      for (const s of ["G", "D"] as const) j[`epaule${s}`].rotation.z = (s === "G" ? 1 : -1) * (spec.id === "grand" ? 0.16 : 0.1);
-      if (p === "marche") {
-        const ph = t * (spec.id === "grand" ? 1.6 : 2.3);
+      for (const s of ["G", "D"] as const) j[`epaule${s}`].rotation.z = (s === "G" ? 1 : -1) * spec.shoulderOut;
+      if (p === "marche" || p === "course") {
+        const run = p === "course";
+        const ph = t * spec.walkRate * (run ? 1.5 : 1);
         const a = spec.stride;
         const sn = Math.sin(ph);
         const cs = Math.cos(ph);
@@ -327,7 +369,7 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         j.genouD.rotation.x = 0.08 + 0.85 * Math.max(0, -cs) ** 1.5;
         j.chevilleG.rotation.x = -0.25 * Math.max(0, cs);
         j.chevilleD.rotation.x = -0.25 * Math.max(0, -cs);
-        const arm = spec.id === "grand" ? 0.55 : 0.3;
+        const arm = spec.armSwing * (run ? 1.4 : 1);
         j.epauleG.rotation.x = arm * sn;
         j.epauleD.rotation.x = -arm * sn;
         j.coudeG.rotation.x = -0.2 - 0.15 * Math.max(0, -sn);
@@ -335,9 +377,41 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         j.bassin.position.y = legLen * (1 - 0.03 * Math.abs(sn));
         j.torse.rotation.z = 0.05 * sn;
         j.torse.rotation.y = 0.07 * sn;
-        j.tete.rotation.z = -0.04 * sn + (spec.id === "petit" ? 0.12 : -0.08);
+        j.tete.rotation.z = -0.04 * sn + spec.headTilt;
         j.machoire.rotation.x = spec.expression === "beant" ? 0.42 + 0.06 * Math.sin(ph * 2) : 0;
         for (const f of fingers) f.rotation.x = -0.35;
+        if (run) {
+          // Course : buste penché, genoux plus hauts, bras pliés.
+          j.torse.rotation.x = spec.hunch + 0.45;
+          j.cou.rotation.x = -0.5;
+          j.genouG.rotation.x += 0.35 * Math.max(0, cs);
+          j.genouD.rotation.x += 0.35 * Math.max(0, -cs);
+          j.coudeG.rotation.x = -0.9;
+          j.coudeD.rotation.x = -0.9;
+        }
+      } else if (p === "debout" || p === "buste") {
+        // Repos : jambes droites, bras pendants ; la tête suit son inclinaison (sentinelle : tête basse).
+        j.cou.rotation.x = -spec.hunch * 0.6 + spec.headTilt * 0.6;
+        j.tete.rotation.x = spec.headTilt;
+        j.coudeG.rotation.x = -0.12;
+        j.coudeD.rotation.x = -0.12;
+        j.machoire.rotation.x = spec.expression === "beant" ? 0.35 : 0;
+        for (const f of fingers) f.rotation.x = -0.4;
+      } else if (p === "allonge") {
+        // Allongé, à plat ventre, bras tendus vers l'avant comme pour ramper ; tête relevée.
+        body.rotation.x = Math.PI / 2;
+        j.torse.rotation.x = 0;
+        j.cou.rotation.x = -0.55;
+        j.tete.rotation.x = -0.35;
+        j.epauleG.rotation.set(-2.6, 0, 0.25);
+        j.epauleD.rotation.set(-2.9, 0, -0.2);
+        j.coudeG.rotation.x = -0.35;
+        j.coudeD.rotation.x = -0.15;
+        j.hancheG.rotation.set(0.08, 0, 0.12);
+        j.hancheD.rotation.set(0.02, 0, -0.1);
+        j.genouG.rotation.x = 0.5;
+        j.machoire.rotation.x = 0.5;
+        for (const f of fingers) f.rotation.x = -0.9;
       } else if (p === "saisie") {
         const breath = 0.03 * Math.sin(t * 2);
         j.torse.rotation.x = spec.hunch + 0.42 + breath;
@@ -375,7 +449,7 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         for (const f of fingers) f.rotation.x = -0.6;
         body.updateMatrixWorld(true);
         const box = measureBox(body);
-        body.position.y = -box.min.y + group.position.y * 0;
+        body.position.y = groupY() - box.min.y;
         steam.visible = true;
         const zMin = box.min.z - group.position.z;
         const zMax = box.max.z - group.position.z;
@@ -396,6 +470,32 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         (sGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
         (sGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
       }
+      // Au sol (R1b) : debout, en marche, en course, en buste, les pieds touchent le sol ; allongé, le point le plus bas du corps.
+      body.updateMatrixWorld(true);
+      if (p === "allonge") {
+        const box = measureBox(body);
+        body.position.y += groupY() - box.min.y;
+      } else if (p !== "abattu" && p !== "saisie") {
+        const low = Math.min(...feet.map((f) => measureBox(f).min.y));
+        body.position.y += groupY() - low;
+      }
+      if (spec.heat && p !== "abattu") {
+        // Vapeur de chaleur : bouffées autour des épaules et de la tête.
+        steam.visible = true;
+        for (let i = 0; i < N; i++) {
+          const [a, b, c, d] = seeds[i] as readonly [number, number, number, number];
+          const k = (t * (0.05 + 0.08 * c) + d) % 1;
+          sPos[i * 3] = (a - 0.5) * H * 0.35;
+          sPos[i * 3 + 1] = H * (0.7 + 0.5 * k);
+          sPos[i * 3 + 2] = (b - 0.5) * H * 0.25;
+          sCol[i * 4] = 0.95;
+          sCol[i * 4 + 1] = 0.94;
+          sCol[i * 4 + 2] = 0.92;
+          sCol[i * 4 + 3] = 0.28 * (1 - k) * Math.min(1, k * 5);
+        }
+        (sGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
+        (sGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+      }
       body.updateMatrixWorld(true);
     },
     dispose() {
@@ -408,6 +508,13 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
       for (const m of materials) m.dispose();
     },
   };
+  // Étalonnage (R1b) : la hauteur debout MESURÉE sur la géométrie (boîte englobante) est ramenée exactement à la hauteur de la
+  // classe ; les proportions ne donnent qu'une approximation (voussure, cheveux, calotte).
+  if (calibrate) {
+    titan.setPose("debout", 0);
+    const measured = measureBox(body).max.y - measureBox(body).min.y;
+    if (measured > 0) body.scale.setScalar(spec.height / measured);
+  }
   titan.setPose("marche", 0);
   return titan;
 }

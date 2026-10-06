@@ -50,6 +50,14 @@ describe("pureté de src/sim", () => {
   it("Math.random interdit dans l'essai 3D : variations tirées d'une graine locale (R1)", async () => {
     expect(await ruleIds("export const x = Math.random();\n", "src/render/tactical3d/__probe__.ts")).toContain("no-restricted-properties");
   });
+  it("morceau 3D : Zod et les schémas de données en types seulement (R1b : Zod reste hors du rendu)", async () => {
+    const runtime = 'import { StylesFileSchema } from "../../data/artSchemas";\nexport const s = StylesFileSchema;\n';
+    const typesOnly = 'import type { StyleProfile } from "../../data/artSchemas";\nexport type P = StyleProfile;\n';
+    expect(await ruleIds(runtime, "src/render/tactical3d/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds('import { z } from "zod";\nexport const a = z.string();\n', "src/render/tactical3d/__probe__.ts")).toContain("no-restricted-imports");
+    expect(await ruleIds(typesOnly, "src/render/tactical3d/__probe__.ts")).toEqual([]);
+    expect(await ruleIds(runtime, "src/tools/__probe__.ts")).toEqual([]);
+  });
   it("autorise Math.random hors de src/sim (contrôle)", async () => {
     expect(await ruleIds("export const x = Math.random();\n", "src/ui/__probe__.ts")).toEqual([]);
   });

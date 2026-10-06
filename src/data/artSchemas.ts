@@ -19,6 +19,14 @@ export type RoofMaterial = (typeof ROOF_MATERIALS)[number];
 export const WALL_MATERIALS = ["colombage", "enduit", "pierre_taillee", "pierre_brute", "brique", "bois"] as const;
 export type WallMaterial = (typeof WALL_MATERIALS)[number];
 
+/** Sols : cultures du patchwork, routes, berges, sable, roche, neige, boue, eau, sous-bois. */
+export const GROUNDS = ["ble", "orge", "jachere", "labour", "potager", "verger", "route", "berge", "sable", "roche", "neige", "boue", "eau", "sous_bois"] as const;
+export type Ground = (typeof GROUNDS)[number];
+
+/** Teintes physiques (matières, pas style) utilisées par le maillage. */
+export const PHYSICAL = ["fer", "fer_canon", "verre", "vitrail", "flamme", "braise", "suie", "fumee", "corde", "toile_claire", "cire", "mousse", "ecorce", "feuillage", "feuillage_clair", "conifere", "herbe_seche", "roseau", "lumiere", "cristal"] as const;
+export type Physical = (typeof PHYSICAL)[number];
+
 export const GENERATORS = ["district", "capitale", "ville", "village", "campagne", "foret_geante", "foret", "territoire", "mur", "montagne", "eaux", "cote", "chateau", "usine", "souterrain", "crypte", "camp", "glacis"] as const;
 export type Generator = (typeof GENERATORS)[number];
 
@@ -169,6 +177,8 @@ export const MaterialsFileSchema = z
         .strict(),
     ),
     accents: z.array(Hex).min(2),
+    sols: z.record(z.enum(GROUNDS), z.object({ base: Hex, canon: CanonSchema }).strict()),
+    physiques: z.record(z.enum(PHYSICAL), Hex),
     notes_canon: z.string().min(1),
   })
   .strict();
@@ -195,3 +205,55 @@ export const WallsFileSchema = z
   .strict();
 export type WallsFile = z.infer<typeof WallsFileSchema>;
 export type MaterialsFile = z.infer<typeof MaterialsFileSchema>;
+
+/** Galerie de Titans (R1b.6) : classes, variantes, Titans spéciaux ; un seul squelette, des paramètres par classe. */
+export const TITAN_PROPORTIONS = ["legs", "torso", "neck", "head", "headW", "shoulder", "hip", "chest", "waist", "belly", "depth", "upperArm", "foreArm", "hand", "armR", "thighR", "neckR", "hunch"] as const;
+const Proportions = z.object(Object.fromEntries(TITAN_PROPORTIONS.map((k) => [k, z.number()])) as Record<(typeof TITAN_PROPORTIONS)[number], z.ZodNumber>).strict();
+const Gait = z.object({ stride: z.number(), walkRate: z.number(), armSwing: z.number(), shoulderOut: z.number(), headTilt: z.number() }).strict();
+const Expression = z.enum(["rictus", "beant", "neutre", "creuse"]);
+const sumsToOne = (p: { legs: number; torso: number; neck: number; head: number }): boolean => Math.abs(p.legs + p.torso + p.neck + p.head - 1) < 1e-6;
+const TitanBody = z
+  .object({
+    id: z.string().regex(/^[a-z0-9_]+$/),
+    hauteur_m: z.number().positive(),
+    canon: CanonSchema,
+    note: z.string().min(1),
+    proportions: Proportions.refine(sumsToOne, "jambes + torse + cou + tête = 1"),
+    allure: Gait,
+    peau: Hex,
+    expression: Expression,
+    cheveux: z.boolean(),
+    pose: z.enum(["debout", "marche", "buste", "allonge", "course"]).optional(),
+    vapeur: z.boolean().optional(),
+  })
+  .strict();
+export const TitansFileSchema = z
+  .object({
+    soldat_m: Param(z.number().positive()),
+    classes: z.array(TitanBody).min(5),
+    variantes: z.array(
+      z
+        .object({
+          id: z.enum(["anormal", "sentinelle", "chasseur", "meute", "nocturne"]),
+          base: z.string(),
+          canon: CanonSchema,
+          note: z.string().min(1),
+          modifs: z.partialRecord(z.enum(TITAN_PROPORTIONS), z.number()).refine((m) => Math.abs((m.legs ?? 0) + (m.torso ?? 0) + (m.neck ?? 0) + (m.head ?? 0)) < 1e-6, "les modifications de jambes, torse, cou et tête s'annulent"),
+          allure: Gait.partial(),
+          pose: z.enum(["debout", "marche", "course"]),
+          peau: Hex.optional(),
+          expression: Expression.optional(),
+          groupe: z.number().int().positive().optional(),
+        })
+        .strict(),
+    ),
+    speciaux: z.array(TitanBody).length(3),
+  })
+  .strict()
+  .superRefine((f, ctx) => {
+    const ids = f.classes.map((c) => c.hauteur_m);
+    for (const h of [3, 5, 8, 12, 15]) if (!ids.includes(h)) ctx.addIssue({ code: "custom", message: `classe de ${h} m manquante` });
+    for (const v of f.variantes) if (!f.classes.some((c) => c.id === v.base)) ctx.addIssue({ code: "custom", message: `variante ${v.id} : classe ${v.base} inconnue` });
+    for (const [id, h] of [["titan_mur", 50], ["rod_reiss", 120], ["colossal", 60]] as const) if (!f.speciaux.some((x) => x.id === id && x.hauteur_m === h)) ctx.addIssue({ code: "custom", message: `${id} (${h} m) manquant` });
+  });
+export type TitansFile = z.infer<typeof TitansFileSchema>;

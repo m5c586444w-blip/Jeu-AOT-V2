@@ -1,20 +1,193 @@
 {
   "facades": {
-    "colombage": { "role": "facade", "base": "#D9C9A8", "trame": "#5A3E28", "canon": "A" },
-    "enduit": { "role": "facade", "base": "#D6CAB0", "canon": "A" },
-    "pierre_taillee": { "role": "pierre", "base": "#A8A294", "canon": "A" },
-    "pierre_brute": { "role": "pierre", "base": "#8E8676", "canon": "A" },
-    "brique": { "role": "base", "base": "#9A5A44", "canon": "A" },
-    "bois": { "role": "bois", "base": "#6B4A2F", "canon": "A" }
+    "colombage": {
+      "role": "facade",
+      "base": "#D9C9A8",
+      "trame": "#5A3E28",
+      "canon": "A"
+    },
+    "enduit": {
+      "role": "facade",
+      "base": "#D6CAB0",
+      "canon": "A"
+    },
+    "pierre_taillee": {
+      "role": "pierre",
+      "base": "#A8A294",
+      "canon": "A"
+    },
+    "pierre_brute": {
+      "role": "pierre",
+      "base": "#8E8676",
+      "canon": "A"
+    },
+    "brique": {
+      "role": "base",
+      "base": "#9A5A44",
+      "canon": "A"
+    },
+    "bois": {
+      "role": "bois",
+      "base": "#6B4A2F",
+      "canon": "A"
+    }
   },
   "toits": {
-    "tuiles_rouges": { "base": "#9A4A32", "pente_deg": [30, 44], "formes": { "pignon": 0.6, "croupe": 0.4 }, "canon": "A" },
-    "ardoise": { "base": "#4A525C", "pente_deg": [38, 55], "formes": { "pignon": 0.45, "croupe": 0.55 }, "canon": "A" },
-    "chaume": { "base": "#B59A62", "pente_deg": [45, 55], "formes": { "pignon": 0.35, "croupe": 0.65 }, "canon": "A" },
-    "plat": { "base": "#5A5650", "pente_deg": [0, 0], "formes": { "plat": 1 }, "canon": "A" },
-    "toile": { "base": "#C8BC9E", "pente_deg": [30, 40], "formes": { "tente": 1 }, "canon": "A" },
-    "aucun": { "base": "#6A6458", "pente_deg": [0, 0], "formes": { "aucun": 1 }, "canon": "A" }
+    "tuiles_rouges": {
+      "base": "#9A4A32",
+      "pente_deg": [
+        30,
+        44
+      ],
+      "formes": {
+        "pignon": 0.6,
+        "croupe": 0.4
+      },
+      "canon": "A"
+    },
+    "ardoise": {
+      "base": "#4A525C",
+      "pente_deg": [
+        38,
+        55
+      ],
+      "formes": {
+        "pignon": 0.45,
+        "croupe": 0.55
+      },
+      "canon": "A"
+    },
+    "chaume": {
+      "base": "#B59A62",
+      "pente_deg": [
+        45,
+        55
+      ],
+      "formes": {
+        "pignon": 0.35,
+        "croupe": 0.65
+      },
+      "canon": "A"
+    },
+    "plat": {
+      "base": "#5A5650",
+      "pente_deg": [
+        0,
+        0
+      ],
+      "formes": {
+        "plat": 1
+      },
+      "canon": "A"
+    },
+    "toile": {
+      "base": "#C8BC9E",
+      "pente_deg": [
+        30,
+        40
+      ],
+      "formes": {
+        "tente": 1
+      },
+      "canon": "A"
+    },
+    "aucun": {
+      "base": "#6A6458",
+      "pente_deg": [
+        0,
+        0
+      ],
+      "formes": {
+        "aucun": 1
+      },
+      "canon": "A"
+    }
   },
-  "accents": ["#4F6B5A", "#8A3B2A", "#B5873A", "#2A3A5C"],
-  "notes_canon": "Teintes de base et formes de toit A : elles ne servent que lorsqu'un rôle n'a pas de teinte dans la palette du profil (brique) ou pour les couvertures au-delà des deux principales. Rôles : la couverture la plus fréquente d'un profil prend `toit`, la deuxième `toit_2`."
+  "accents": [
+    "#4F6B5A",
+    "#8A3B2A",
+    "#B5873A",
+    "#2A3A5C"
+  ],
+  "notes_canon": "Teintes de base et formes de toit A : elles ne servent que lorsqu'un rôle n'a pas de teinte dans la palette du profil (brique) ou pour les couvertures au-delà des deux principales. Rôles : la couverture la plus fréquente d'un profil prend `toit`, la deuxième `toit_2`. Sols (cultures, routes, berges, sable, roche, neige, eau) : teintes de base A, mêlées à la teinte `sol` du profil. Teintes physiques (fer, verre, flamme, suie, écorce…) : constantes de matière, pas de style, gardées ici pour qu'aucune teinte ne soit écrite dans le code de R1b.",
+  "sols": {
+    "ble": {
+      "base": "#C8AE5C",
+      "canon": "A"
+    },
+    "orge": {
+      "base": "#B9AD6A",
+      "canon": "A"
+    },
+    "jachere": {
+      "base": "#8E8A58",
+      "canon": "A"
+    },
+    "labour": {
+      "base": "#6E5A40",
+      "canon": "A"
+    },
+    "potager": {
+      "base": "#5E7438",
+      "canon": "A"
+    },
+    "verger": {
+      "base": "#6F8446",
+      "canon": "A"
+    },
+    "route": {
+      "base": "#8C7A5E",
+      "canon": "A"
+    },
+    "berge": {
+      "base": "#6A6248",
+      "canon": "A"
+    },
+    "sable": {
+      "base": "#D2C29A",
+      "canon": "A"
+    },
+    "roche": {
+      "base": "#7D776E",
+      "canon": "A"
+    },
+    "neige": {
+      "base": "#E8ECEE",
+      "canon": "A"
+    },
+    "boue": {
+      "base": "#5A4E3A",
+      "canon": "A"
+    },
+    "eau": {
+      "base": "#3E5560",
+      "canon": "A"
+    },
+    "sous_bois": {
+      "base": "#3E4A2A",
+      "canon": "A"
+    }
+  },
+  "physiques": {
+    "fer": "#2D2C2A",
+    "fer_canon": "#3A3C3E",
+    "verre": "#1A1714",
+    "vitrail": "#2A2430",
+    "flamme": "#FFB050",
+    "braise": "#FF6A20",
+    "suie": "#2A2622",
+    "fumee": "#8A8680",
+    "corde": "#8A7A5A",
+    "toile_claire": "#D8CCB0",
+    "cire": "#EDE3C8",
+    "mousse": "#4E6B32",
+    "ecorce": "#4A3A2A",
+    "feuillage": "#4F6B34",
+    "feuillage_clair": "#7C9446",
+    "conifere": "#34482C",
+    "herbe_seche": "#A89A5A",
+    "roseau": "#8C8A4E",
+    "lumiere": "#FFF2D0",
+    "cristal": "#C6D0D2"
+  }
 }
