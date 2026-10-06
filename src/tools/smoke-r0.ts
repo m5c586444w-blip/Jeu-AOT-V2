@@ -163,6 +163,8 @@ try {
     const band = await rect(page, ".bandeau");
     const avail = { x: 0, y: band.y + band.h, w, h: h - (band.y + band.h) };
     const mapShare = await share(page, avail, ".carte canvas");
+    const mapWindow = await share(page, { x: 0, y: 0, w, h }, ".carte canvas");
+    console.log(`      3. carte stratégique, fenêtre entière (${w}×${h}, bandeau compris) : ${(100 * mapWindow).toFixed(1)} %`);
     expect(mapShare >= 0.85, `3. carte stratégique : zone de jeu ${(100 * mapShare).toFixed(1)} % de l'espace disponible (${Math.round(avail.w)}×${Math.round(avail.h)} px sous le bandeau ; ≥ 85 %)`);
     const hud = await page.locator(".bandeau").innerText();
     expect(!/Graine|Empreinte/.test(hud), `b. HUD hors debug : « Graine » ${/Graine/.test(hud) ? "visible" : "masquée"}, « Empreinte d'état » ${/Empreinte/.test(hud) ? "visible" : "masquée"}`);
@@ -220,6 +222,8 @@ try {
     const canvasShare = await share(page, scene, ".bataille-scene canvas");
     const cover = Number(await page.getAttribute(".bataille", "data-couverture"));
     const battleShare = canvasShare * cover;
+    const battleWindow = (await share(page, { x: 0, y: 0, w, h }, ".bataille-scene canvas")) * cover;
+    console.log(`      3. bataille, fenêtre entière (${w}×${h}, titre, carnet et cartes d'escouade compris) : ${(100 * battleWindow).toFixed(1)} %`);
     expect(battleShare >= 0.85, `3. bataille : zone de jeu ${(100 * battleShare).toFixed(1)} % de la scène (${Math.round(scene.w)}×${Math.round(scene.h)} px ; canevas au premier plan ${(100 * canvasShare).toFixed(1)} % × sol ${(100 * cover).toFixed(1)} % ; ≥ 85 %)`);
     // Hommes du joueur dans le champ à l'ouverture (relevé sur la capture « bataille » en appliquant la règle de CLAUDE.md).
     const inFrame = await page.evaluate(async () => {
