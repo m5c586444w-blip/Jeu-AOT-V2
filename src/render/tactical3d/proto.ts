@@ -1,12 +1,15 @@
-import { ACESFilmicToneMapping, Color, HemisphereLight, Mesh, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector2, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Color, DirectionalLight, Fog, HemisphereLight, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
 import { TX, fill } from "./texts";
+import { generateTown } from "./town";
+import { buildTownMeshes } from "./townMesh";
 
 /**
  * Prototype de rendu 3D du combat (R1) : scène de démonstration, sans lien avec la simulation (`src/sim` n'est pas touché).
  * Socle (R1.1) : moteur, caméra libre, boucle d'images, panneau et sonde de mesure.
+ * Ville (R1.2) : générée par graine (`?graine=N`, 850 par défaut).
  */
 export interface ProtoProbe {
   ready: boolean;
@@ -33,22 +36,36 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = PCFShadowMap;
   host.append(renderer.domElement);
 
   const scene = new Scene();
   scene.background = new Color(0xa9b4b8);
   const camera = new PerspectiveCamera(50, 1, 0.5, 4000);
-  camera.position.set(90, 70, 120);
+  camera.position.set(70, 45, 95);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(0, 5, 0);
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI * 0.495;
   controls.update();
 
-  scene.add(new HemisphereLight(0xdfe6e8, 0x6b604f, 2.2));
-  const ground = new Mesh(new PlaneGeometry(1200, 1200), new MeshStandardMaterial({ color: 0x8d8670, roughness: 1 }));
-  ground.rotation.x = -Math.PI / 2;
-  scene.add(ground);
+  scene.fog = new Fog(0xa9b4b8, 200, 1100);
+  scene.add(new HemisphereLight(0xdfe6e8, 0x6b604f, 1.2));
+  const sun = new DirectionalLight(0xfff2dc, 2.6);
+  sun.position.set(-160, 220, 120);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -220, right: 220, top: 220, bottom: -220, near: 10, far: 700 });
+  sun.shadow.bias = -0.0004;
+  sun.shadow.normalBias = 0.6;
+  scene.add(sun);
+
+  const seedParam = Number(new URLSearchParams(window.location.search).get("graine"));
+  const seed = Number.isFinite(seedParam) && seedParam > 0 ? Math.floor(seedParam) : 850;
+  const town = generateTown(seed);
+  const townMeshes = buildTownMeshes(town, seed);
+  scene.add(townMeshes.group);
 
   // Panneau : titre, mesure, retour au jeu.
   const panel = document.createElement("aside");

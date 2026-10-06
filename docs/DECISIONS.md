@@ -509,3 +509,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - Les textes du prototype restent dans son propre morceau (`texts.ts`) ; s'il est adopté, ils passeront dans `fr.json`.
 - **Bundle principal** (build de 13c9f77 contre ce commit) : 900 697 → 901 113 octets, soit +416 octets (+0,05 %). Ce sont le routage, la table de l'import dynamique, le lien de la console F2 et son libellé. three.js y pèse 0 octet : aucune signature `THREE.`, alors que le morceau du prototype en compte 45.
 - **Graine.** Les variations visuelles viennent d'une graine locale (`rng.ts`, mulberry32). `Math.random` est interdit dans le dossier par ESLint.
+
+## 2026-10-06 — D-82 Ville irrégulière : comment on mesure l'irrégularité (R1.2)
+- **Orientations : écart-type à 90° près.** Le critère demande un écart-type des orientations > 10°. Un écart-type brut des angles ne mesurerait rien : une grille parfaitement régulière a des maisons à 0° et à 90°, et son écart-type brut avoisine 45°.
+  - La mesure retenue est l'écart-type circulaire de 4θ, ramené en degrés (`orientationSpreadDeg`). Une grille régulière donne 0°, ce que le test vérifie comme contrôle.
+  - Sur les graines 1 à 200 : minimum 10,75°, moyenne 14,0°, maximum 19,0°.
+- **Largeurs de rues : mesurées sur la géométrie.** On ne relit pas la largeur déclarée. Sur chaque rue intérieure, en 5 points (de 30 à 70 % du tronçon, loin des carrefours), on mesure la distance de l'axe à l'îlot bâti de chaque côté.
+  - Contrôle : avec des rues toutes à 8 m et des îlots non tournés, la mesure donne 8 m partout.
+- **D'où vient l'irrégularité.**
+  - Carrefours tirés jusqu'à 9 m de leur place de grille.
+  - Torsion légère autour du centre (0,0026 rad/m).
+  - Largeur propre à chaque tronçon (5 à 14 m).
+  - Îlots tournés sur eux-mêmes jusqu'à ±15°, puis réduits pour ne jamais empiéter sur la rue : la rue s'évase d'un côté.
+- **Hauteurs** : 2 à 5 étages de 3,0 à 3,5 m, toit compris, soit 6,9 à 23 m. La carte tactique « ville » (`maps.json`) indique 8–20 m. Tout est `[A]`.
+- **Enceinte** : un pan de 50 m `[C]`, 10 m d'épaisseur `[?]`, en toile de fond au nord. Son parement est lisse : pas de créneaux.
