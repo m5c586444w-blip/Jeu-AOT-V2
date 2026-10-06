@@ -176,7 +176,7 @@ export function facadeTextures(seed: number, kind: WallKind): FacadeSet {
       const ww = 44;
       const wh = 72;
       const glass = drawWindow(gu, rand, b * BAY_PX + (BAY_PX - ww) / 2, y0 + 26, ww, wh, style);
-      if (rand() < 0.55) {
+      if (rand() < 0.4) {
         const warm = 200 + rand() * 55;
         gl.fillStyle = rgb(warm, warm * 0.78, warm * 0.42);
         gl.fillRect(...glass);
