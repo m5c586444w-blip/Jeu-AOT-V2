@@ -5,7 +5,13 @@
 | Phase | **R1 terminée** (essai de rendu 3D, three.js) — **ARRÊT OBLIGATOIRE** : revue de l'utilisateur après R1 (CLAUDE.md, arrêt 5) ; R2 n'est pas enchaînée |
 | Tâche | R1.8 — rapport `docs/reports/R1.md` (fait) |
 | Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 347 tests (commit abb0b06) — `docs/reports/R1-verify.log` |
-| Prochaine étape | L'utilisateur indique **RENDU = 3D** ou **RENDU = 2.5D** (rapport R1, § f et § g) ; puis consigne pour le critère f de R0, rouvert et toujours en attente |
+| Prochaine étape | **Arrêt : attendre le prompt R2 de l'utilisateur** (aucune phase démarrée). Critère f de R0, rouvert, toujours en attente |
+
+## Règles mises à jour (2026-10-06, consigne de l'utilisateur, CLAUDE.md)
+- **Arrêts de revue obligatoires** : fin de P4, P8, R1, **R2**, R3, **R4**, R7, **R8** et **P9** (R2, R4, R8 et P9 ajoutés).
+- **three.js** n'est utilisé que dans `src/render/tactical3d` ; la règle ESLint est déjà en place (`tests/lint/sim-purity.test.ts`).
+- **Relecture des captures** (CLAUDE.md, ligne 14) : toujours en vigueur (description en 3 lignes, au moins 3 défauts possibles).
+- **Exception connue** : pendant R2 seulement, `src/sim/tactical/map.ts` peut recevoir une extension additive (voir le prompt R2). Aucun autre fichier de `src/sim`.
 
 ## R1 terminée (2026-10-06) — arrêt obligatoire, décision de l'utilisateur attendue
 - **Rapport.** `docs/reports/R1.md` : CR1-01 à CR1-10 OK. CR1-03 avec un écart signalé : three.js est absent du bundle principal, mais celui-ci grossit de 416 octets (routage et lien F2).

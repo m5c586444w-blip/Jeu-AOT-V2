@@ -10,11 +10,12 @@
 - Aucun CDN (polices auto-hébergées), aucun asset de l'œuvre originale ; licences dans `docs/ASSETS_LICENSES.md`.
 - Chaque phase Pn (n ≥ 1) commence par `docs/phases/Pn.md` (tâches, AC avec commandes, hors-périmètre).
 - Fin de phase : rapport `docs/reports/Pn.md` (sorties réelles collées, captures dans `docs/screenshots/`), commit, `docs/PROGRESS.md` à jour, puis phase suivante si tous ses critères passent.
-- Pixi uniquement dans `src/render`. three.js uniquement dans `src/render/tactical3d` (chargé à la demande). Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
+- Pixi uniquement dans `src/render`. three.js n'est utilisé que dans `src/render/tactical3d` (chargé à la demande ; règle ESLint en place, prouvée par `tests/lint/sim-purity.test.ts`). Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
 - Avant d'écrire OK sur un critère visuel : ouvre chaque capture avec l'outil de lecture d'image,  décris ce que tu vois en 3 lignes et liste au moins 3 défauts possibles (texte répété, zone vide,  chevauchement, élément absent, valeur à 0 incohérente). Écris-les dans le rapport, même si tu les  juges mineurs. Si une capture est vide ou ne montre pas l'élément testé, le critère est KO.
+- Exception connue à « `git diff` de `src/sim` vide » : pendant **R2 seulement**, `src/sim/tactical/map.ts` peut recevoir une extension **additive** (voir le prompt R2). Aucun autre fichier de `src/sim`, et rien après R2.
 ## Arrêts obligatoires (écrire la raison dans docs/PROGRESS.md puis attendre l'utilisateur)
 1. Un critère d'acceptation échoue deux fois.
 2. Fait de lore ambigu qu'aucune valeur `?` paramétrable ne règle.
 3. Décision de design à impact majeur non couverte par les spécifications.
 4. Une commande ne peut pas s'exécuter (réseau, droits…).
-5. Fin de **P4**, **P8**, **R1**, **R3** et **R7** : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
+5. Fin de **P4**, **P8**, **R1**, **R2**, **R3**, **R4**, **R7**, **R8** et **P9** : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
