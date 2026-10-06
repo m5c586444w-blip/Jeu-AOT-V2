@@ -100,7 +100,11 @@ export async function openProto3d(root: HTMLElement): Promise<void> {
     // R1b : galerie des environnements (`?proto3d=galerie`, ou `/proto3d/galerie` par la page de redirection), visionneuse
     // d'un environnement (`?proto3d&env=E13`) ; sinon, la scène de combat de R1.
     const q = new URLSearchParams(window.location.search);
-    if (q.get("proto3d") === "galerie" || q.has("galerie")) {
+    if (q.get("proto3d") === "humain") {
+      // R1c : page de contrôle du corps de base (MakeHuman, CC0).
+      const m = await import("./humanViewer");
+      await m.startHumanViewer(root, probe);
+    } else if (q.get("proto3d") === "galerie" || q.has("galerie")) {
       const m = await import("./gallery");
       await m.startGallery(root, probe);
     } else if (q.get("env") === "banc") {

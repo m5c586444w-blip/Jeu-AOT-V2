@@ -282,7 +282,7 @@ describe("le générateur lit le profil (aucun style codé en dur)", () => {
   });
 
   it("aucune teinte écrite dans les fichiers de génération et de maillage de R1b (toutes viennent de data/art)", () => {
-    const files = ["styling.ts", "terrain.ts", "envCountry.ts", "envTown.ts", "envWall.ts", "envNature.ts", "environment.ts", "envMesh.ts", "meshBuildings.ts", "meshProps.ts", "meshTerrain.ts", "meshVegetation.ts", "meshWall.ts", "meshNature.ts", "texturesEnv.ts", "titanGallery.ts", "envMore.ts", "meshCave.ts"];
+    const files = ["styling.ts", "terrain.ts", "envCountry.ts", "envTown.ts", "envWall.ts", "envNature.ts", "environment.ts", "envMesh.ts", "meshBuildings.ts", "meshProps.ts", "meshTerrain.ts", "meshVegetation.ts", "meshWall.ts", "meshNature.ts", "texturesEnv.ts", "titanGallery.ts", "envMore.ts", "meshCave.ts", "humanBase.ts", "humanViewer.ts"];
     const present = new Set(readdirSync("src/render/tactical3d"));
     for (const f of files) {
       expect(present.has(f), f).toBe(true);

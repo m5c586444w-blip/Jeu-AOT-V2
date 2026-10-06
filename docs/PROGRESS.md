@@ -3,9 +3,14 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.0 : règles (CLAUDE.md), plan, manifeste, `assets:check`, sources MakeHuman téléchargées |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 66 fichiers, 405 tests ; `assets:check` : 86 entrées, 86 fichiers |
-| Prochaine étape | R1c.1 : corps de base MakeHuman en `.glb` (`assets:build`), chargé par `GLTFLoader` à la demande |
+| Tâche | R1c.1 : corps de base MakeHuman en `.glb` (`assets:build`), chargé à la demande, façonné par paramètres ; page `?proto3d=humain` |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 67 fichiers, 411 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1c.2 : soldats (base animée + équipement du projet) |
+
+## R1c.1 : corps de base (2026-10-06)
+- `npm run assets:build` : `docs/art/assets/derives/humain.glb` (5,9 Mo), déterministe (`-- --verifier` : reconstruit et identique). 12 primitives, 56 os (squelette « game_engine » + mâchoire + yeux), 50 cibles éparses avec le déplacement des articulations.
+- Servi sous `/assets3d/` (intergiciel en développement, copie dans `dist/assets3d/`) ; chargé par `GLTFLoader` importé à la demande. Bundle principal : même nom haché qu'au départ.
+- Corps façonné en 10 à 60 ms : cibles cuites, normales sans couture, proportions par chaîne d'os, hauteur exacte, pieds au sol. Page de contrôle `?proto3d=humain`.
 
 ## R1c ouverte (2026-10-06)
 - **Décision de l'utilisateur.** Règle « aucun asset externe » levée pour les corps de base et les animations ; sources non réalistes écartées ; plus d'objectif moyen d'images par seconde, latence maintenue ; scènes et environnements réalistes ; formation des districts d'après l'animé. Arrêt pour revue en fin de phase. Plan : `docs/phases/R1c.md`.
