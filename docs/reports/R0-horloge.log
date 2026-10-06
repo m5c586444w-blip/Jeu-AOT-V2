@@ -1,0 +1,11 @@
+stdout | tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_ville, 4 × ttype_moyen_errant, 36 hommes, graine 7 : même hash sous 0,25 s et 1 s, égal à runBattle
+R0-horloge tmap_ville graine 7 : runBattle 3646309350 ; plafond 0,25 s → 3646309350 · 4800 pas · 1412 images ; plafond 1 s → 3646309350 · 4800 pas · 546 images
+ ✓ tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > le nouveau plafond vaut 1 s 1ms
+ ✓ tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_ville, 4 × ttype_moyen_errant, 36 hommes, graine 7 : même hash sous 0,25 s et 1 s, égal à runBattle 207ms
+stdout | tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_plaine, 1 × ttype_grand_errant, 12 hommes, graine 1001 : même hash sous 0,25 s et 1 s, égal à runBattle
+R0-horloge tmap_plaine graine 1001 : runBattle 1216597263 ; plafond 0,25 s → 1216597263 · 1056 pas · 306 images ; plafond 1 s → 1216597263 · 1056 pas · 101 images
+stdout | tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_foret, 2 × ttype_anormal_coureur, 24 hommes, graine 42 : même hash sous 0,25 s et 1 s, égal à runBattle
+R0-horloge tmap_foret graine 42 : runBattle 1193968270 ; plafond 0,25 s → 1193968270 · 733 pas · 228 images ; plafond 1 s → 1193968270 · 733 pas · 92 images
+ ✓ tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_plaine, 1 × ttype_grand_errant, 12 hommes, graine 1001 : même hash sous 0,25 s et 1 s, égal à runBattle 28ms
+ ✓ tests/ui/battle-clock.test.ts > pas de temps par image (R0, item 3) > tmap_foret, 2 × ttype_anormal_coureur, 24 hommes, graine 42 : même hash sous 0,25 s et 1 s, égal à runBattle 40ms
+      Tests  4 passed (4)

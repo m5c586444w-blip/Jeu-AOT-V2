@@ -8,6 +8,8 @@ import type { Battle } from "../../sim/tactical/battle";
 import { bodyName } from "../../sim/tactical/shifters";
 import { letterFor } from "../narrative";
 import { battleSummary } from "./summary";
+import { advanceFrame } from "./battleClock";
+import type { BattleClock } from "./battleClock";
 import { battleCues, cueSnapshot, sharedAudio } from "../audio";
 import { loadSettings, volumesOf } from "../settings";
 import type { BattleSetup, SoldierUnit, TacticalOrder, TimedOrder } from "../../sim/tactical/types";
@@ -95,7 +97,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   };
   let speed: number = 0;
   let prev: UnitPose[] | null = null;
-  let acc = 0;
+  const frameClock: BattleClock = { acc: 0 };
   let last = performance.now();
   const audio = sharedAudio(volumesOf(loadSettings(storage())));
   audio.setMood("combat");
@@ -345,14 +347,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     const frame = (now: number): void => {
       if (done) return;
       const t0 = performance.now();
-      // Le temps de bataille ne dépend pas de la fluidité (R0.3) : jusqu'à 1 s par image, la simulation rattrape le temps réel
-      // (en 4K sans GPU, une image prend ~0,75 s ; plafonné à 0,25 s, la bataille tournait au tiers de sa vitesse). Au-delà
-      // (onglet en arrière-plan), le pas reste borné.
-      const dt = Math.min(1, (now - last) / 1000);
+      const dt = (now - last) / 1000;
       last = now;
-      const tick = 1 / bt.world.balance.tick_hz;
-      acc += dt * speed;
-      while (acc >= tick && !bt.state.ended) {
+      // Pas fixes ; le plafond par image (FRAME_DT_CAP_S) ne change que le rythme, jamais le résultat.
+      advanceFrame(bt, frameClock, dt, speed, orders, () => {
         // Positions avant le pas (interpolation), dans un tableau réutilisé.
         const ps = (prev ??= bt.state.soldiers.map(() => ({ x: 0, y: 0, z: 0 })));
         bt.state.soldiers.forEach((s, i) => {
@@ -363,9 +361,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
             p.z = s.z;
           }
         });
-        stepBattle(bt, orders.filter((x) => x.tick === bt.state.tick));
-        acc -= tick;
-      }
+      });
       const t1 = performance.now();
       if (following?.kind === "squad") {
         const sqId = following.id;
@@ -375,7 +371,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
         const s = bt.state.soldiers[following.index];
         if (s && s.mode !== "mort") scene.follow(s.x, s.y, s.z);
       }
-      scene.draw(bt.state, prev, Math.min(1, acc / tick), lookOf);
+      scene.draw(bt.state, prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), lookOf);
       const t2 = performance.now();
       scene.render();
       const t3 = performance.now();
