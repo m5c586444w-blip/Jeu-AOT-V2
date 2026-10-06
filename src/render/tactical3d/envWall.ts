@@ -163,7 +163,8 @@ export function generateWallEnv(p: StyleProfile, variant: Variant | null, seed: 
     fires: [],
     views: {
       principale: { eye: [focus - 150, ground(v2(focus - 150, -175)) + 38, -175], target: [focus + 30, 27, 0], fov: 55 },
-      seconde: { eye: [-90, top + 4.2, -2.5], target: [70, top + 1, 0.5], fov: 55 },
+      // Variante endommagée : la brèche vue de près, côté intérieur ; sinon, le chemin de ronde et ses canons.
+      seconde: damaged ? { eye: [150 - 45, ground(v2(105, -70)) + 38, -70], target: [150, 38, 0], fov: 55 } : { eye: [-90, top + 4.2, -2.5], target: [70, top + 1, 0.5], fov: 55 },
     },
     radius: size / 2,
     anchors: wallAnchors(wall, ground),

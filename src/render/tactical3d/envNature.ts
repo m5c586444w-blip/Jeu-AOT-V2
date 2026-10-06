@@ -168,6 +168,17 @@ export function generateTerritory(p: StyleProfile, variant: Variant | null, seed
     titans.push({ type: ROAMERS[k % ROAMERS.length] as string, variant: k % 5 === 4 ? "anormal" : null, x: Math.cos(a) * r, y: Math.sin(a) * r, angle: range(rand, 0, Math.PI * 2), pose: k % 6 === 5 ? "debout" : "marche", seed: derive(seed, 900 + k) });
   }
   const h = (q: Vec2): number => heightAt(t.heights, q.x, q.y);
+  // Trois Titans entre la vue principale et le village : ils traversent le champ de la caméra.
+  const eye = v2(-120, 150);
+  const toward = v2(10, 10);
+  for (const [k, f, side, type] of [
+    [0, 0.42, 18, "classe_15"],
+    [1, 0.55, -26, "classe_8"],
+    [2, 0.68, 8, "classe_12"],
+  ] as const) {
+    const q = v2(eye.x + (toward.x - eye.x) * f + side, eye.y + (toward.y - eye.y) * f + side * 0.6);
+    titans.push({ type, variant: k === 2 ? "anormal" : null, x: q.x, y: q.y, angle: Math.atan2(toward.x - q.x, toward.y - q.y) + side * 0.02, pose: k === 2 ? "course" : "marche", seed: derive(seed, 950 + k) });
+  }
   return {
     ...v,
     props,

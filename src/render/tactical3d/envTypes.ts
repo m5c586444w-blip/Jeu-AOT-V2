@@ -152,7 +152,7 @@ export interface TitanPlacement {
   x: number;
   y: number;
   angle: number;
-  pose: "marche" | "saisie" | "abattu" | "debout" | "allonge" | "buste";
+  pose: "marche" | "saisie" | "abattu" | "debout" | "allonge" | "buste" | "course";
   seed: number;
 }
 

@@ -2,10 +2,20 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1b en cours** (environnements, échelle et fidélité ; RENDU = 3D décidé par l'utilisateur) — commit de départ `b68fade` |
-| Tâche | R1b.0 — plan `docs/phases/R1b.md`, catalogue `docs/art/STYLES.md` (partie B sans modification) |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 354 tests (commit du correctif du critère f de R0) |
-| Prochaine étape | R1b.1 — profils de style `data/art/styles.json` (28 environnements), puis lot 1 |
+| Phase | **R1b en cours** (environnements, échelle et fidélité ; RENDU = 3D) — commit de départ `b68fade` |
+| Tâche | **Lot 1 livré** (E01, E02, E05, E06, E11, E13, E14, E19, E22) ; R1b.9 — lot 2 en cours, sans attendre (consigne) |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 65 fichiers, 391 tests (commit `20acdc5`) |
+| Prochaine étape | Lot 2 : E03, E04, E07, E08, E10, E12, E15–E18, E20, E21, E23–E29 ; puis mesures sans GPU, rapport `docs/reports/R1b.md`, arrêt obligatoire |
+
+## R1b, lot 1 livré (2026-10-06)
+- **Environnements.** E01 Shiganshina, E02 Trost, E05 Stohess, E06 Mitras, E11 village agricole, E13 campagne pure, E14 forêt des Arbres Géants, E19 territoire des Titans, E22 murs. Tous sont générés depuis `data/art/styles.json`, sans teinte dans le code.
+- **Planches.** Une par environnement, jour et crépuscule : `docs/screenshots/r1b-E*.png`. S'y ajoutent les variantes (845, 850, 851, clairière, lisière, Ragako 850, mur endommagé, Titans nombreux), le cycle, la météo, les ruines et incendies, le banc d'échelle.
+- **Mesures** (`npm run smoke:r1b -- lot1`, code 0) :
+  - distance entre profils ≥ 1 pour les 36 paires (minimum 1,83, E11–E13) ;
+  - rendus hors écran : ΔE moyen minimum 4,2 (seuil 2,3), ΔE grille minimum 8,3 (seuil 5) ;
+  - banc : soldat 1,68 m, Titans de 3 à 120 m et mur de 50 m conformes à ±5 %.
+- **Un critère en échec au premier passage, corrigé (pas d'arrêt : un seul échec).** ΔE grille Trost–Stohess à 4,7 (< 5) : même cadrage pour les deux districts. Vue principale composée sur les repères du profil, puis 15,1 au second passage.
+- **Bundle principal.** 902 588 octets, identique à `b68fade` une fois normalisés les noms de morceaux hachés (critère précisé au § 1 du plan) ; worker identique à l'octet.
 
 ## R1b ouverte (2026-10-06)
 - **Décision de l'utilisateur.** RENDU = 3D. Phase R1b : environnements, échelle et fidélité.

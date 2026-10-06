@@ -1,0 +1,19 @@
+horizon : sommet du mur (50 m) caché au-delà de 29.9 km pour un œil à 1,7 m ; milieu d'anneau à 50 km : 161 m cachés
+E01 Shiganshina : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E02 Trost : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E03 Karanes : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E04 Utopia, Krolva : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E05 Stohess : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E06 Mitras : profil « mur visible » = non ; maillages de mur dans la scène : non
+E07 Orvud, Ehrmich, Yarckel : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E11 Village agricole : profil « mur visible » = non ; maillages de mur dans la scène : non
+E12 Fermes isolées, moulins, granges : profil « mur visible » = non ; maillages de mur dans la scène : non
+E13 Campagne pure : profil « mur visible » = non ; maillages de mur dans la scène : non
+E14 Forêts des Arbres Géants : profil « mur visible » = non ; maillages de mur dans la scène : non
+E19 Territoire des Titans : profil « mur visible » = non ; maillages de mur dans la scène : non
+E22 Murs : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E26 Faubourgs de l'arrière-pays de Shiganshina : profil « mur visible » = oui ; maillages de mur dans la scène : oui
+E27 Bourgs et hameaux de l'arrière-pays de Maria : profil « mur visible » = non ; maillages de mur dans la scène : non
+E28 Fermes et lisières de forêt de Maria : profil « mur visible » = non ; maillages de mur dans la scène : non
+E22 : hauteur mesurée 50.05 m (sol 0.00 m) ; épaisseur 10 m (?) ; teinte #D8D0BE (?)
+E22 : 48 canons, espacement 32 m, 1 porte (fermee) ; rails continus le long du chemin de ronde
