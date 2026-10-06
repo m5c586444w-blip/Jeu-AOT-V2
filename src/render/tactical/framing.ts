@@ -39,12 +39,33 @@ export interface Frame {
   /** Marges (m) au-delà des bords nord et sud que la caméra peut montrer. */
   topMargin: number;
   bottomMargin: number;
+  /** Marge haute retenue au-dessus des porteurs (px). */
+  topMarginPx?: number;
 }
 
 export const project = (x: number, y: number, z: number): [number, number] => [x, y * TILT - z];
 
 /** Rapport de la scène à la scène de référence : les seuils d'échelle réglés à 1366×768 le suivent (R0.3). */
 export const sceneScale = (width: number, height: number): number => Math.max(1, Math.min(width / FRAME_REF_W, height / FRAME_REF_H));
+
+/** Sous ce zoom (px/m, × `sceneScale`), vue d'ensemble : pastilles d'escouade, soldats en points, Titans agrandis (revue de P4). */
+export const OVERVIEW_ZOOM = 4;
+/** Hauteur minimale d'un Titan à l'écran (px) : en vue d'ensemble, puis en vue détaillée. */
+export const OVERVIEW_TITAN_PX = 42;
+export const MIN_TITAN_PX = 22;
+/** Halo de l'éclair de transformation d'un porteur (P6) : 15 m de rayon au plus. */
+export const TRANSFORM_HALO_M = 15;
+/**
+ * Zigzags des éclairs (transformation, puis corps qui surgit, R0.2f) : ils tombent du ciel depuis 1,4 × la hauteur dessinée
+ * du Titan. Leur moitié basse reste sous la tête, donc dans le champ (D-85).
+ */
+export const BODY_BOLT = 1.4;
+
+/** Hauteur DESSINÉE d'un Titan (m) : sa taille, ou la taille minimale à l'écran si elle est plus grande. */
+export function drawnTitanHeight(height: number, zoom: number, width: number, sceneH: number): number {
+  const overview = zoom < OVERVIEW_ZOOM * sceneScale(width, sceneH);
+  return Math.max(height, (overview ? OVERVIEW_TITAN_PX : MIN_TITAN_PX) / zoom);
+}
 
 /** Échelle « carte entière » (marges comprises). */
 export const fitZoom = (width: number, height: number, mapW: number, mapH: number): number => Math.min(width / (mapW + 40), height / (mapH * TILT + 120));
@@ -60,11 +81,20 @@ export function clampToMap(f: Frame, width: number, height: number, mapW: number
   return { x, y };
 }
 
+/**
+ * Marge de cadrage haute (px) au-dessus de la tête des porteurs (R0, critère f rouvert) : 10 px visés. Elle se réduit par
+ * paliers de 2 px, jusqu'à 2 px au moins, seulement si le sol doit garder 85 % de la scène (D-78) — cas d'un porteur collé au
+ * bord nord avec les hommes au bord sud (D-85).
+ */
+export const FRAME_TOP_MARGIN_PX = 10;
+export const FRAME_TOP_MARGIN_MIN_PX = 2;
+/** Part de la scène couverte par le sol de la carte, visée au cadrage (D-78). */
+export const GROUND_SHARE_MIN = 0.85;
+
 /** Taille d'un homme (m) : sa tête doit être dans le champ comme ses pieds. */
 const MAN_HEIGHT = 1.8;
-/** Marge (m) autour de l'emprise « à voir absolument » : côtés, au-dessus des têtes, sous les pieds. */
+/** Marge (m) autour de l'emprise « à voir absolument » : côtés, sous les pieds (au-dessus des têtes : FRAME_TOP_MARGIN_PX). */
 const MUST_SIDE = 6;
-const MUST_TOP = 3;
 const MUST_FOOT = 4;
 
 interface Box {
@@ -75,8 +105,10 @@ interface Box {
 }
 
 /**
- * Cadrage d'ouverture (R0, critère f, décision de l'utilisateur) :
- * - « à voir absolument » : les hommes du joueur (pieds et tête) et les porteurs (pieds et tête du Titan à venir) ;
+ * Cadrage d'ouverture (R0, critère f, décision de l'utilisateur ; rouvert à la revue de R0) :
+ * - « à voir absolument » : les hommes du joueur (pieds et tête) et, pour les porteurs, la figure que la scène dessine (à sa
+ *   hauteur dessinée, tête comprise : `shifterExtent`), avec une marge haute de FRAME_TOP_MARGIN_PX pixels (réduite jusqu'à
+ *   FRAME_TOP_MARGIN_MIN_PX si le sol tomberait sous 85 % de la scène) ;
  * - l'échelle est la plus grande qui remplit l'écran autour des unités (couvrir, au plus 30 % au-delà de « tout voir »),
  *   plafonnée par la taille de la scène, sans jamais dépasser celle qui contient l'emprise « à voir absolument »,
  *   ni descendre sous l'échelle « carte entière », sauf si cette emprise l'exige ;
@@ -85,6 +117,45 @@ interface Box {
  * - les Titans qui ne tiennent pas dans le champ sont signalés par des flèches de bord (`edgeArrows`).
  */
 export function computeFrame(input: FrameInput): Frame {
+  let f = solveFrame(input, FRAME_TOP_MARGIN_PX);
+  for (let m = FRAME_TOP_MARGIN_PX - 2; m >= FRAME_TOP_MARGIN_MIN_PX && groundShare(f, input) < GROUND_SHARE_MIN; m -= 2) f = solveFrame(input, m);
+  return f;
+}
+
+/** Part de la scène couverte par le sol de la carte (0 à 1). */
+export function groundShare(f: Pick<Frame, "zoom" | "x" | "y">, s: Pick<FrameInput, "width" | "height" | "mapW" | "mapH">): number {
+  const gx = Math.max(0, Math.min(s.width, s.mapW * f.zoom + f.x) - Math.max(0, f.x));
+  const gy = Math.max(0, Math.min(s.height, s.mapH * TILT * f.zoom + f.y) - Math.max(0, f.y));
+  return (gx * gy) / (s.width * s.height);
+}
+
+/** Cadre pour une marge haute donnée (px). */
+function solveFrame(input: FrameInput, marginPx: number): Frame {
+  // La taille DESSINÉE d'un porteur dépend de l'échelle (figure agrandie en vue d'ensemble) : on cherche le point fixe en
+  // partant de l'échelle maximale ; la suite des échelles décroît et se stabilise en quelques tours.
+  let z = FRAME_MAX_ZOOM * sceneScale(input.width, input.height);
+  let f = frameAt(input, z, marginPx);
+  for (let i = 0; i < 24 && Math.abs(f.zoom - z) > 1e-6; i++) {
+    z = f.zoom;
+    f = frameAt(input, z, marginPx);
+  }
+  return { ...f, topMarginPx: marginPx };
+}
+
+/**
+ * Étendue DESSINÉE d'un porteur autour de ses pieds (m), à l'échelle `zoom` (R0, critère f rouvert) : la figure du Titan
+ * telle que la scène la trace (figures.ts), à sa hauteur dessinée (agrandie en vue d'ensemble) : tête jusqu'à 1,05 × cette
+ * hauteur (mesuré : 1,041 au plus sur les 10 silhouettes), largeur ±0,36, pieds 0,06 sous le sol.
+ * Les éclairs (halos, zigzags qui tombent du ciel depuis 1,4 × la hauteur) ne sont garantis qu'au pied et sur leur moitié
+ * basse : les garder entiers obligerait à montrer du vide au-dessus d'un porteur placé au bord nord, et le sol tomberait
+ * sous 85 % de la scène (D-85).
+ */
+export function shifterExtent(reach: number, zoom: number, width: number, height: number): { up: number; down: number; side: number } {
+  const dh = drawnTitanHeight(reach, zoom, width, height);
+  return { up: dh * 1.05, down: dh * 0.07, side: dh * 0.37 };
+}
+
+function frameAt(input: FrameInput, z: number, marginPx: number): Frame {
   const { width, height, mapW: mw, mapH: mh, points } = input;
   const fz = fitZoom(width, height, mw, mh);
   const mapH = mh * TILT;
@@ -93,11 +164,20 @@ export function computeFrame(input: FrameInput): Frame {
   const xs = feet.map((p) => p[0]);
   const ys = feet.map((p) => p[1]);
   const all: Box = { x0: Math.max(0, Math.min(...xs) - 12), x1: Math.min(mw, Math.max(...xs) + 12), y0: Math.max(0, Math.min(...ys) - 25), y1: Math.min(mapH, Math.max(...ys) + 12) };
-  // Emprise « à voir absolument » : pieds et têtes des hommes et des porteurs, avec marges.
+  // Emprise « à voir absolument » : pieds et têtes des hommes ; tout ce qui est dessiné pour les porteurs (figure, éclairs).
   const must = points.filter((p) => p.own || (p.reach ?? 0) > 0);
-  const mustPts = must.flatMap((p) => [project(p.x, p.y, 0), project(p.x, p.y, p.own ? MAN_HEIGHT : (p.reach ?? 0))]);
-  const mb: Box | null = mustPts.length
-    ? { x0: Math.min(...mustPts.map((q) => q[0])) - MUST_SIDE, x1: Math.max(...mustPts.map((q) => q[0])) + MUST_SIDE, y0: Math.min(...mustPts.map((q) => q[1])) - MUST_TOP, y1: Math.max(...mustPts.map((q) => q[1])) + MUST_FOOT }
+  // Marge de cadrage haute, en pixels à l'écran, au-dessus de ce qui est dessiné (têtes des hommes et des porteurs).
+  const top = marginPx / z;
+  // Côtés : 6 m autour des hommes ; autour d'un porteur, la largeur réelle de sa figure et 4 px (pas 6 m de plus : un porteur
+  // au bord de la carte ferait montrer 6 m de vide au-delà, D-85).
+  const mustBoxes = must.map((p): Box => {
+    const [px, py] = project(p.x, p.y, 0);
+    if (p.own) return { x0: px - MUST_SIDE, x1: px + MUST_SIDE, y0: py - MAN_HEIGHT - top, y1: py + MUST_FOOT };
+    const e = shifterExtent(p.reach ?? 0, z, width, height);
+    return { x0: px - e.side - 4 / z, x1: px + e.side + 4 / z, y0: py - e.up - top, y1: py + Math.max(e.down, MUST_FOOT) };
+  });
+  const mb: Box | null = mustBoxes.length
+    ? { x0: Math.min(...mustBoxes.map((q) => q.x0)), x1: Math.max(...mustBoxes.map((q) => q.x1)), y0: Math.min(...mustBoxes.map((q) => q.y0)), y1: Math.max(...mustBoxes.map((q) => q.y1)) }
     : null;
   const box: Box = mb ? { x0: Math.min(all.x0, mb.x0), x1: Math.max(all.x1, mb.x1), y0: Math.min(all.y0, mb.y0), y1: Math.max(all.y1, mb.y1) } : all;
   const contain = Math.min(width / (box.x1 - box.x0), height / (box.y1 - box.y0));

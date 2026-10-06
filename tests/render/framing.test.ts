@@ -1,8 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { writeFileSync } from "node:fs";
+import { afterAll, describe, expect, it } from "vitest";
 import { createBattle } from "../../src/sim/tactical/battle";
 import { skirmishSetup } from "../../src/sim/tactical/setup";
 import type { BattleSetup } from "../../src/sim/tactical/types";
-import { computeFrame, edgeArrows, project } from "../../src/render/tactical/framing";
+import { shifterFlashBounds, titanFigureBounds } from "../../src/render/tactical/figures";
+import type { DrawnBox } from "../../src/render/tactical/figures";
+import { FRAME_TOP_MARGIN_MIN_PX, computeFrame, drawnTitanHeight, edgeArrows, groundShare, project } from "../../src/render/tactical/framing";
 import type { Frame, UnitPose } from "../../src/render/tactical/framing";
 import { world } from "../sim/tactical-helpers";
 
@@ -109,5 +112,69 @@ describe("cadrage d'ouverture de bataille (R0, critère f), piloté par tableau"
     const a = edgeArrows(f, titans, 1014, 588);
     expect(a.map((x) => x.titan)).toEqual([1]);
     expect(edgeArrows(f, [titans[0] as (typeof titans)[number]], 1014, 588)).toEqual([]);
+  });
+});
+
+/**
+ * R0, critère f rouvert (revue de R0) : la tête du porteur était coupée par la barre de titre alors que le contrôle (un point
+ * à mi-corps) passait. On calcule ici la boîte englobante de ce que la scène DESSINE pour le porteur, avec les tracés
+ * réels (`figures.ts`, bornes Pixi, épaisseur des traits comprise) :
+ * - la figure du Titan à sa hauteur dessinée (agrandie en vue d'ensemble), tête comprise, pour les 10 silhouettes et les
+ *   deux sens : entièrement dans la zone visible, sous la marge haute retenue (10 px, jamais moins de 2 px) ;
+ * - les éclairs : le centre des halos et la moitié basse des zigzags (qui tombent du ciel) dans la zone visible (D-85).
+ * La zone visible est la scène (le canevas sous la barre de titre).
+ */
+describe("R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) contre la zone visible", () => {
+  const out: string[] = [];
+  const withShifter = SCENARIOS.filter((s) => (s.setup.shifters ?? []).length > 0);
+  it.each(withShifter.map((s) => [s.name, s] as const))("%s", (_name, s) => {
+    const b = build(s);
+    const f = computeFrame({ ...s.scene, mapW: b.mapW, mapH: b.mapH, points: b.points });
+    const toScr = (w: DrawnBox): { x0: number; y0: number; x1: number; y1: number } => ({ x0: w.minX * f.zoom + f.x, y0: w.minY * f.zoom + f.y, x1: w.maxX * f.zoom + f.x, y1: w.maxY * f.zoom + f.y });
+    for (const p of b.shifters) {
+      const [fx, fy] = project(p.x, p.y, 0);
+      const h = drawnTitanHeight(p.reach ?? 15, f.zoom, s.scene.width, s.scene.height);
+      const parts: DrawnBox[] = [];
+      for (let sil = 0; sil < 10; sil++) {
+        for (const facing of [-1, 1]) {
+          const t = titanFigureBounds(sil, facing);
+          const k = h / 100;
+          parts.push({ minX: fx + t.minX * k, minY: fy + t.minY * k, maxX: fx + t.maxX * k, maxY: fy + t.maxY * k });
+        }
+      }
+      const scr = parts.map(toScr);
+      const box = { x0: Math.min(...scr.map((q) => q.x0)), y0: Math.min(...scr.map((q) => q.y0)), x1: Math.max(...scr.map((q) => q.x1)), y1: Math.max(...scr.map((q) => q.y1)) };
+      const margin = f.topMarginPx ?? 0;
+      const where = `boîte du porteur (${box.x0.toFixed(1)}, ${box.y0.toFixed(1)}) – (${box.x1.toFixed(1)}, ${box.y1.toFixed(1)}) px dans une scène de ${s.scene.width}×${s.scene.height}, zoom ${f.zoom.toFixed(2)} px/m, figure de ${h.toFixed(1)} m, marge haute ${margin} px`;
+      // Figure entière, tête comprise, sous la marge haute retenue (jamais moins de FRAME_TOP_MARGIN_MIN_PX).
+      expect(margin, where).toBeGreaterThanOrEqual(FRAME_TOP_MARGIN_MIN_PX);
+      expect(box.y0, `tête sous le bord haut, avec la marge haute : ${where}`).toBeGreaterThanOrEqual(margin - 0.5);
+      expect(box.x0, `bord gauche : ${where}`).toBeGreaterThanOrEqual(0);
+      expect(box.x1, `bord droit : ${where}`).toBeLessThanOrEqual(s.scene.width);
+      expect(box.y1, `bord bas : ${where}`).toBeLessThanOrEqual(s.scene.height);
+      // Éclairs : le pied des halos et la moitié basse des zigzags se voient.
+      const flash = shifterFlashBounds(fx, fy, h);
+      for (const bolt of flash.bolts.map(toScr)) {
+        const midY = (bolt.y0 + bolt.y1) / 2;
+        expect(midY >= 0 && bolt.y1 <= s.scene.height, `moitié basse du zigzag visible (${bolt.y0.toFixed(1)} → ${bolt.y1.toFixed(1)} px) : ${where}`).toBe(true);
+      }
+      for (const halo of flash.halos.map(toScr)) {
+        const cx = (halo.x0 + halo.x1) / 2;
+        expect(cx >= 0 && cx <= s.scene.width && halo.y1 > 0 && halo.y0 < s.scene.height, `halo de l'éclair dans le champ : ${where}`).toBe(true);
+      }
+      out.push(`${s.name} : ${where} ; sol ${(100 * groundShare(f, { ...s.scene, mapW: b.mapW, mapH: b.mapH })).toFixed(1)} %`);
+    }
+  });
+
+  // Détail par scénario, sur demande : R0_F_LOG=1 npx vitest run tests/render/framing.test.ts → docs/reports/R0-f-boite.log.
+  afterAll(() => {
+    if (process.env["R0_F_LOG"]) writeFileSync("docs/reports/R0-f-boite.log", `${out.join("\n")}\n`);
+  });
+
+  it("contrôle de la mesure : la figure dessinée dépasse la hauteur 100 (tête) ; les zigzags montent à 1,4 × la hauteur", () => {
+    const tops = Array.from({ length: 10 }, (_, sil) => -titanFigureBounds(sil, 1).minY);
+    expect(Math.max(...tops)).toBeGreaterThan(100);
+    expect(Math.max(...tops)).toBeLessThanOrEqual(105);
+    for (const bolt of shifterFlashBounds(0, 0, 15).bolts) expect(-bolt.minY).toBeGreaterThanOrEqual(21);
   });
 });

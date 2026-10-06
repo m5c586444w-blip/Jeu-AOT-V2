@@ -4,8 +4,17 @@
 |---|---|
 | Phase | **R1 terminée** (essai de rendu 3D, three.js) — **ARRÊT OBLIGATOIRE** : revue de l'utilisateur après R1 (CLAUDE.md, arrêt 5) ; R2 n'est pas enchaînée |
 | Tâche | R1.8 — rapport `docs/reports/R1.md` (fait) |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 347 tests (commit abb0b06) — `docs/reports/R1-verify.log` |
-| Prochaine étape | **Arrêt : attendre le prompt R2 de l'utilisateur** (aucune phase démarrée). Critère f de R0, rouvert, toujours en attente |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 354 tests (commit du correctif du critère f de R0) |
+| Prochaine étape | **Arrêt : attendre l'utilisateur.** Critère f de R0 rouvert : corrigé (D-85, `docs/reports/R0.md` § g). Ensuite : prompt R2 |
+
+## R0, critère f rouvert — corrigé (2026-10-06), arrêt demandé
+- **Constat.** La tête du porteur était coupée par la barre de titre, et le contrôle testait un point à mi-corps.
+- **Correctif.** Le cadrage garde la figure DESSINÉE (hauteur agrandie en vue d'ensemble, tête comprise) avec une marge haute de 10 px, réduite jusqu'à 2 px seulement si le sol tomberait sous 85 %. Les éclairs sont à l'échelle du Titan (D-85).
+- **Preuves.**
+  - Test de boîte englobante des tracés réels : rouge contre l'ancien cadrage (tête à −0,2 et −2,0 px), vert après (16/16).
+  - `smoke:r0 -- apres` : code 0, boîte Pixi de la figure dans la scène, sous la barre de titre.
+  - Capture recapturée et revue (rapport R0 § g).
+- **Arrêt** demandé par l'utilisateur après ce commit.
 
 ## Règles mises à jour (2026-10-06, consigne de l'utilisateur, CLAUDE.md)
 - **Arrêts de revue obligatoires** : fin de P4, P8, R1, **R2**, R3, **R4**, R7, **R8** et **P9** (R2, R4, R8 et P9 ajoutés).

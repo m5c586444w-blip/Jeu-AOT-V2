@@ -6,7 +6,7 @@
 //   c. légende « Calques » jamais recouverte par une fenêtre (registre, dossier de province, options) ;
 //   d. atlas du monde : aucun nom de province qui en chevauche un autre ; moitié droite de la fenêtre occupée ;
 //   e. bilan : capture (le décompte est vérifié par tests/sim/battle-summary.test.ts) ;
-//   f. transformation : le porteur est dans le champ de la caméra quand l'éclair part ;
+//   f. transformation : la figure du porteur (boîte englobante Pixi, tête comprise) tient dans la scène, sous la barre de titre ;
 //   g. épilogue : aucune case « 0 » ;
 //   3. zone de jeu ≥ 85 % de l'espace disponible (D-78), carte stratégique et bataille, 1366×768 et 3840×2160.
 // Zone de jeu (D-78), sur une grille de 48 × 27 points par `elementFromPoint` :
@@ -288,7 +288,12 @@ try {
       await page.locator('.bataille-vitesse[data-speed="0"]').click();
       const fx = (await page.getAttribute(".bataille", "data-fx")) ?? "";
       const seen = (await page.getAttribute(".bataille", "data-porteur-visible")) ?? "non mesuré";
-      expect(seen === "oui", `f. transformation : porteur et éclair dans le champ de la caméra : ${seen} (${fx})`);
+      // Revue de R0 (critère f rouvert) : boîte englobante de la figure DESSINÉE (bornes Pixi, tête comprise), pas un point.
+      const boite = (await page.getAttribute(".bataille", "data-porteur-boite")) ?? "?";
+      const scene = await page.locator(".bataille-scene").boundingBox();
+      const title = await page.locator(".bataille-titre").boundingBox();
+      const below = scene && title ? scene.y >= title.y + title.height - 0.5 : false;
+      expect(seen === "oui" && below, `f. transformation : figure du porteur entière, tête comprise, dans la scène sous la barre de titre : ${seen} ; boîte ${boite} px ; scène y=${scene?.y.toFixed(0)}, bas de la barre de titre y=${title ? (title.y + title.height).toFixed(0) : "?"} (${fx})`);
       await shot("transformation");
       await page.locator('.bataille [data-action="quitter"]').click();
       await page.waitForFunction(() => !document.querySelector(".bataille"));

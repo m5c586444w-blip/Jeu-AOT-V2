@@ -553,3 +553,20 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 
   L'anticrénelage se fixe à la création du contexte WebGL : changer de préréglage recrée le moteur et y rebranche les contrôles.
 - **Prairie.** La première texture d'herbe, à grandes taches, se répétait de façon visible vue de dessus (contraire à 04 §2.4). Elle est remplacée par une tuile de 1024 px, sans couture, à petites touches.
+
+## 2026-10-06 — D-85 Critère f rouvert : cadrer ce qui est DESSINÉ pour le porteur, avec une marge haute (revue de R0)
+- **Constat de l'utilisateur.** Sur `r0-apres-transformation.png`, la tête du porteur était coupée par la barre de titre, alors que le contrôle passait : il testait un point à mi-corps, pas l'image.
+- **Cause.** Le cadrage gardait la tête « théorique », soit `reach` (hauteur moyenne du Titan à venir) plus 3 m. Or la scène dessine plus grand :
+  - en vue d'ensemble, la figure est agrandie à 42 px au moins : 17,4 à 18,2 m pour un Titan de 15 m à 1366×768 ;
+  - la tête dépasse le gabarit de 4 % (bornes Pixi mesurées : jusqu'à 104,1 pour 100).
+- **Correctif.**
+  - Le cadrage (`framing.ts`) prend la hauteur dessinée (`drawnTitanHeight`, la formule même de la scène), tête comprise (1,05 × cette hauteur), avec une marge haute de 10 px à l'écran.
+  - Cette hauteur dépend de l'échelle : on cherche le point fixe (la suite des échelles décroît et se stabilise).
+  - Les côtés d'un porteur sont la largeur réelle de sa figure plus 4 px, et non 6 m de plus.
+- **Conflit avec D-78 (sol ≥ 85 %), et arbitrage.** Dans le scénario de test « porteur excentré » (coin nord-est, hommes au bord sud, 1366×768), les 85 % de sol et une marge de 10 px sont incompatibles.
+  - Les 85 % imposent une échelle d'au moins 2,30 px/m, donc environ 20,7 m visibles au-dessus des pieds du porteur, pour une figure de 19,2 m.
+  - La marge haute se réduit alors par paliers de 2 px, jusqu'à 2 px au moins, et seulement dans ce cas. Les autres scénarios gardent 10 px.
+- **Éclairs.** Les zigzags tombent du ciel et sont maintenant à l'échelle du Titan, 1,4 × sa hauteur dessinée (celui de la transformation faisait 40 m fixes). Seuls leur pied et leur moitié basse sont garantis dans le champ. Les garder entiers obligerait à montrer du vide au-delà du bord nord, sous 85 % de sol.
+- **Contrôles.**
+  - `tests/render/framing.test.ts` calcule la boîte englobante de la figure DESSINÉE : les tracés réels de `figures.ts`, bornes Pixi, 10 silhouettes, deux sens. Il la compare à la zone visible pour les 6 scénarios à porteur.
+  - `smoke:r0` compare la boîte Pixi de la figure dans la vraie page (`getBounds`, tête comprise) à la scène, et vérifie que la scène commence sous la barre de titre.

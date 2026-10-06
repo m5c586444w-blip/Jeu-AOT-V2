@@ -1,0 +1,40 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ❯ tests/render/framing.test.ts (16 tests | 2 failed) 51ms
+   ❯ R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) contre la zone visible (7)
+     × hommes au sud, porteur au nord (essai de porteur), 1366×768 14ms
+     × porteur excentré (coin nord-est), 1366×768 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/render/framing.test.ts > R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) contre la zone visible > hommes au sud, porteur au nord (essai de porteur), 1366×768
+AssertionError: tête sous le bord haut, avec la marge haute : boîte du porteur (378.5, -0.2) – (408.5, 46.0) px dans une scène de 1014×588, zoom 2.42 px/m, figure de 17.4 m, marge haute 10 px: expected -0.18913734200547516 to be greater than or equal to 9.5
+ ❯ tests/render/framing.test.ts:151:80
+    149|       // Figure entière, tête comprise, sous la marge haute retenue (j…
+    150|       expect(margin, where).toBeGreaterThanOrEqual(FRAME_TOP_MARGIN_MI…
+    151|       expect(box.y0, `tête sous le bord haut, avec la marge haute : ${…
+       |                                                                                ^
+    152|       expect(box.x0, `bord gauche : ${where}`).toBeGreaterThanOrEqual(…
+    153|       expect(box.x1, `bord droit : ${where}`).toBeLessThanOrEqual(s.sc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/render/framing.test.ts > R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) contre la zone visible > porteur excentré (coin nord-est), 1366×768
+AssertionError: tête sous le bord haut, avec la marge haute : boîte du porteur (895.5, -2.0) – (925.5, 44.3) px dans une scène de 1014×588, zoom 2.32 px/m, figure de 18.1 m, marge haute 10 px: expected -1.950954992044565 to be greater than or equal to 9.5
+ ❯ tests/render/framing.test.ts:151:80
+    149|       // Figure entière, tête comprise, sous la marge haute retenue (j…
+    150|       expect(margin, where).toBeGreaterThanOrEqual(FRAME_TOP_MARGIN_MI…
+    151|       expect(box.y0, `tête sous le bord haut, avec la marge haute : ${…
+       |                                                                                ^
+    152|       expect(box.x0, `bord gauche : ${where}`).toBeGreaterThanOrEqual(…
+    153|       expect(box.x1, `bord droit : ${where}`).toBeLessThanOrEqual(s.sc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  18:07:16
+   Duration  1.10s (transform 47%, import 47%, tests 5%)
+

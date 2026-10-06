@@ -1,5 +1,6 @@
-import type { GraphicsContext } from "pixi.js";
+import { GraphicsContext } from "pixi.js";
 import { BRICK, INK, OCHRE, PAPER, STONE, VERDIGRIS } from "../palette";
+import { BODY_BOLT, TRANSFORM_HALO_M } from "./framing";
 
 /**
  * Figures de la scène tactique, dessinées par code (04 §4, §8 : vectoriel d'abord, aucun asset de l'œuvre).
@@ -112,4 +113,63 @@ export function drawFlare(g: GraphicsContext, sx: number, sy: number, k: number,
   const a = Math.max(0, 1 - age / 8);
   g.moveTo(sx, sy).lineTo(sx, sy - rise).stroke({ width: 1.5, color: c, alpha: a * 0.6 });
   g.circle(sx, sy - rise, 6 + age * 3).fill({ color: c, alpha: a * 0.55 });
+}
+
+/** Halo de transformation (P6) au pied d'un porteur, en mètres du monde ; `pulse` dans [0, 6). */
+function drawTransformHalo(g: GraphicsContext, x: number, y: number, pulse: number): void {
+  g.circle(x, y - 6, Math.min(TRANSFORM_HALO_M, 9 + pulse)).fill({ color: 0xfff1b8, alpha: 0.55 });
+}
+/** Zigzag de transformation : il tombe du ciel (1,4 × la hauteur dessinée du Titan à venir, `h`) jusqu'aux pieds. */
+function drawTransformBolt(g: GraphicsContext, x: number, y: number, h: number): void {
+  const b = h * BODY_BOLT;
+  g.moveTo(x, y - b).lineTo(x - 3, y - b * 0.65).lineTo(x + 2, y - b * 0.55).lineTo(x - 2, y - 6).stroke({ width: 1.4, color: 0xc58a2b });
+}
+/** Éclair de transformation (P6) au pied d'un porteur : halo qui pulse et zigzag à l'échelle du Titan à venir. */
+export function drawTransformFlash(g: GraphicsContext, x: number, y: number, pulse: number, h: number): void {
+  drawTransformHalo(g, x, y, pulse);
+  drawTransformBolt(g, x, y, h);
+}
+
+/** Halo autour d'un corps qui surgit (R0.2f) : `h` est la hauteur dessinée du Titan, `fade` va de 1 à 0. */
+function drawBodyHalo(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {
+  g.circle(bx, by - h * 0.5, h * (0.45 + 0.2 * (1 - fade))).fill({ color: 0xfff1b8, alpha: 0.4 * fade });
+}
+/** Éclair prolongé : du ciel (1,4 × la hauteur dessinée) jusqu'au corps. */
+function drawBodyBolt(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {
+  g.moveTo(bx + h * 0.1, by - h * BODY_BOLT).lineTo(bx - h * 0.08, by - h * 0.9).lineTo(bx + h * 0.06, by - h * 0.75).lineTo(bx - h * 0.04, by - h * 0.2).stroke({ width: 2, color: 0xc58a2b, alpha: fade });
+}
+/** Éclair prolongé autour d'un corps qui surgit (R0.2f). */
+export function drawBodyFlash(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {
+  drawBodyHalo(g, bx, by, h, fade);
+  drawBodyBolt(g, bx, by, h, fade);
+}
+
+export interface DrawnBox {
+  minX: number;
+  minY: number;
+  maxX: number;
+  maxY: number;
+}
+
+/** Bornes réelles d'un tracé (Pixi, épaisseur des traits comprise) : ce que la scène dessine, pas un point estimé. */
+function boundsOf(draw: (g: GraphicsContext) => void): DrawnBox {
+  const g = new GraphicsContext();
+  draw(g);
+  const b = g.bounds;
+  const out = { minX: b.minX, minY: b.minY, maxX: b.maxX, maxY: b.maxY };
+  g.destroy();
+  return out;
+}
+
+/** Bornes d'une figure de Titan vivant, debout, dessinée à la hauteur 100, pieds en (0, 0) : tête comprise. */
+export function titanFigureBounds(silhouette: number, facing: number): DrawnBox {
+  return boundsOf((g) => drawTitan(g, 0, 0, 100, silhouette, facing, true, false, { armL: false, armR: false, legs: false }));
+}
+
+/** Bornes des éclairs d'un porteur aux pieds (x, y), corps de hauteur dessinée `h` : halos (au plus large) et zigzags. */
+export function shifterFlashBounds(x: number, y: number, h: number): { halos: DrawnBox[]; bolts: DrawnBox[] } {
+  return {
+    halos: [boundsOf((g) => drawTransformHalo(g, x, y, 6)), boundsOf((g) => drawBodyHalo(g, x, y, h, 0))],
+    bolts: [boundsOf((g) => drawTransformBolt(g, x, y, h)), boundsOf((g) => drawBodyBolt(g, x, y, h, 1))],
+  };
 }

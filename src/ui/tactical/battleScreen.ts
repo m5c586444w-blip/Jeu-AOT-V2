@@ -86,10 +86,13 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   const scene = await TacticalScene.create(host);
   scene.setMap(bt.map);
   // Cadrage initial : soldats, Titans et porteurs encore sous forme humaine (R0.2f : la transformation doit être dans le champ).
-  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u) => {
+  // Hauteur du Titan à venir de chaque porteur : le cadrage la garde dans le champ, l'éclair de transformation s'y règle.
+  const reaches = (bt.state.shifters ?? []).map((u) => {
     const h = o.world.shifters?.defs.get(u.shifter)?.height_m;
-    return { x: u.x, y: u.y, z: 0, reach: h ? (h[0] + h[1]) / 2 : 15 };
-  })]);
+    return h ? (h[0] + h[1]) / 2 : 15;
+  });
+  scene.setShifterReach(reaches);
+  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u, k) => ({ x: u.x, y: u.y, z: 0, reach: reaches[k] ?? 15 }))]);
   let seenFlashes = 0;
   const orders: TimedOrder[] = [];
   battleProbe.markers = () => scene.markerBoxes;
@@ -419,14 +422,15 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       if (scene.fx.flashes > seenFlashes) {
         const cw = scene.canvas.clientWidth;
         const ch = scene.canvas.clientHeight;
-        const bodies = (bt.state.shifters ?? []).map((u) => (u.body !== null ? bt.state.titans[u.body] : undefined)).filter((b) => b !== undefined);
+        const bodies = (bt.state.shifters ?? []).map((u) => u.body).filter((b): b is number => b !== null && bt.state.titans[b] !== undefined);
         if (bodies.length > 0) {
           seenFlashes = scene.fx.flashes;
-          const inView = bodies.some((b) => {
-            const [x, y] = scene.toScreen(b.x, b.y, b.height / 2);
-            return x >= 0 && x <= cw && y >= 0 && y <= ch;
-          });
+          // Revue de R0 (critère f rouvert) : la boîte englobante de la figure DESSINÉE (bornes Pixi, tête comprise), pas
+          // un point à mi-corps, doit tenir entière dans la scène, sous la barre de titre.
+          const boxes = bodies.map((b) => scene.titanScreenBox(b)).filter((b) => b !== null);
+          const inView = boxes.length > 0 && boxes.every((b) => b.x0 >= 0 && b.x1 <= cw && b.y0 >= 0 && b.y1 <= ch);
           root.dataset["porteurVisible"] = inView ? "oui" : "non";
+          root.dataset["porteurBoite"] = boxes.map((b) => `(${b.x0.toFixed(1)}, ${b.y0.toFixed(1)}) – (${b.x1.toFixed(1)}, ${b.y1.toFixed(1)}) dans ${cw}×${ch}`).join(" ; ");
         }
       }
       root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded} · flèches ${scene.fx.arrows}`;

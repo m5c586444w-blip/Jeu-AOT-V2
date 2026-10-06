@@ -3,8 +3,8 @@ import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
 import { INK, OCHRE, PAPER, PAPER_DARK, STONE, VERDIGRIS } from "../palette";
 import { paperTexture } from "../paperTexture";
-import { drawFlare, drawSoldier, drawTitan } from "./figures";
-import { TILT, clampToMap, computeFrame, edgeArrows, fitZoom, sceneScale } from "./framing";
+import { drawBodyFlash, drawFlare, drawSoldier, drawTitan, drawTransformFlash } from "./figures";
+import { MIN_TITAN_PX, OVERVIEW_ZOOM, TILT, clampToMap, computeFrame, drawnTitanHeight, edgeArrows, fitZoom, sceneScale } from "./framing";
 import type { UnitPose } from "./framing";
 
 export type { UnitPose } from "./framing";
@@ -12,11 +12,7 @@ import type { SoldierLook } from "./figures";
 
 /** Taille minimale à l'écran des figures (pixels). */
 const MIN_SOLDIER_PX = 9;
-const MIN_TITAN_PX = 22;
-/** Sous ce zoom (px/m), vue d'ensemble : pastilles d'escouade, soldats en points, Titans agrandis (revue de P4). */
-export const OVERVIEW_ZOOM = 4;
 const BRICK_TINT = 0xd98a76;
-const OVERVIEW_TITAN_PX = 42;
 const OVERVIEW_DOT_PX = 3;
 const PASTILLE_PX = 11;
 /** Durée de l'éclair autour d'un corps qui surgit, en pas de simulation (20 Hz : 1,5 s). */
@@ -52,6 +48,7 @@ export class TacticalScene {
   readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0, arrows: 0 };
   /** Pas où chaque porteur a pris corps (index du porteur → pas) : durée de l'éclair prolongé. */
   private readonly bodySince = new Map<number, number>();
+  private shifterReach: number[] = [];
   /** Volumes des bâtiments par colonne de 20 m (occlusion des unités qui passent derrière). */
   private occluders = new Map<number, { x0: number; x1: number; y0: number; y1: number; front: number }[]>();
   private zoom = 1;
@@ -128,6 +125,19 @@ export class TacticalScene {
   /** Projection monde → écran (avant caméra). */
   project(x: number, y: number, z: number): [number, number] {
     return [x, y * TILT - z];
+  }
+
+  /** Hauteur du Titan à venir de chaque porteur (m), dans l'ordre de `state.shifters` : règle l'éclair de transformation. */
+  setShifterReach(reach: readonly number[]): void {
+    this.shifterReach = [...reach];
+  }
+
+  /** Boîte à l'écran (px de la scène) de la figure DESSINÉE d'un Titan : bornes Pixi des tracés, tête comprise. */
+  titanScreenBox(i: number): { x0: number; y0: number; x1: number; y1: number } | null {
+    const f = this.titanFigs[i];
+    if (!f?.visible) return null;
+    const b = f.getBounds();
+    return { x0: b.minX, y0: b.minY, x1: b.maxX, y1: b.maxY };
   }
 
   toScreen(x: number, y: number, z: number): [number, number] {
@@ -276,7 +286,8 @@ export class TacticalScene {
       if (f.context !== ctx) f.context = ctx;
       const [x, y] = this.project(tt.x, tt.y, 0);
       f.position.set(x, y);
-      f.scale.set(Math.max(tt.height, (overview ? OVERVIEW_TITAN_PX : MIN_TITAN_PX) / this.zoom) / 100);
+      // Même formule que le cadrage (framing.ts), qui garde la figure DESSINÉE dans le champ, tête comprise.
+      f.scale.set(drawnTitanHeight(tt.height, this.zoom, this.app.screen.width, this.app.screen.height) / 100);
       f.zIndex = tt.y;
     });
     const o = this.gOverlay;
@@ -299,8 +310,7 @@ export class TacticalScene {
     (st.shifters ?? []).forEach((u, k) => {
       const [x, y] = this.project(u.x, u.y, 0);
       if (u.phase === "transformation") {
-        o.circle(x, y - 6, 9 + (t * 40) % 6).fill({ color: 0xfff1b8, alpha: 0.55 });
-        o.moveTo(x, y - 40).lineTo(x - 3, y - 26).lineTo(x + 2, y - 22).lineTo(x - 2, y - 6).stroke({ width: 1.4, color: 0xc58a2b });
+        drawTransformFlash(o.context, x, y, (t * 40) % 6, drawnTitanHeight(this.shifterReach[k] ?? 15, this.zoom, this.app.screen.width, this.app.screen.height));
         flashes++;
       } else if (u.phase === "titan" && u.body !== null) {
         const b = st.titans[u.body];
@@ -312,8 +322,7 @@ export class TacticalScene {
           if (!this.bodySince.has(k)) this.bodySince.set(k, st.tick);
           if (since < FLASH_AFTERGLOW_TICKS) {
             const fade = 1 - since / FLASH_AFTERGLOW_TICKS;
-            o.circle(bx, by - b.height * 0.5, b.height * (0.45 + 0.2 * (1 - fade))).fill({ color: 0xfff1b8, alpha: 0.4 * fade });
-            o.moveTo(bx + b.height * 0.1, by - b.height * 1.4).lineTo(bx - b.height * 0.08, by - b.height * 0.9).lineTo(bx + b.height * 0.06, by - b.height * 0.75).lineTo(bx - b.height * 0.04, by - b.height * 0.2).stroke({ width: 2, color: 0xc58a2b, alpha: fade });
+            drawBodyFlash(o.context, bx, by, drawnTitanHeight(b.height, this.zoom, this.app.screen.width, this.app.screen.height), fade);
             flashes++;
           }
         }
