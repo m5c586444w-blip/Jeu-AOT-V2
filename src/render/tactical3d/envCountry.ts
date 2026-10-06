@@ -209,7 +209,7 @@ export function generateVillage(p: StyleProfile, variant: Variant | null, seed: 
   const lanes: Road[] = [];
   const at = nearestOnPath(main.path, center);
   const mainDir = pointAt(main.path, at.s).dir;
-  const nLanes = 2 + Math.round(p.densite * 4);
+  const nLanes = 3 + Math.round(p.densite * 5);
   for (let k = 0; k < nLanes; k++) {
     const s = at.s + range(rand, -o.radius * 0.7, o.radius * 0.7);
     const q = pointAt(main.path, s);
@@ -255,7 +255,7 @@ export function generateVillage(p: StyleProfile, variant: Variant | null, seed: 
         const b = box(c.x, c.y, Math.atan2(q.dir.y, q.dir.x) + (side > 0 ? Math.PI : 0), w, d, 1 + (rand() < 0.45 ? 1 : 0), range(rand, 2.8, 3.2));
         // Densité : des trous dans la rue, plus nombreux en bordure du village.
         const edge = dist2(q.p, center) / o.radius;
-        if (rand() < 0.15 + 0.5 * edge * (1 - p.densite) || dist2(c, at.p) < plazaR + d) {
+        if (rand() < 0.06 + 0.45 * edge * edge * (1 - p.densite) || dist2(c, at.p) < plazaR + d) {
           s += w + range(rand, 4, 12);
           continue;
         }
@@ -267,7 +267,7 @@ export function generateVillage(p: StyleProfile, variant: Variant | null, seed: 
             const gu = q.dir;
             paving.push({ poly: [add2(g, add2(scale2(gu, -w / 2), scale2(n, -4))), add2(g, add2(scale2(gu, w / 2), scale2(n, -4))), add2(g, add2(scale2(gu, w / 2), scale2(n, 4))), add2(g, add2(scale2(gu, -w / 2), scale2(n, 4)))], kind: "terre", y: heightAt(t.heights, g.x, g.y) + 0.05, color: groundHex(p, "potager", 0.4) });
           }
-          s += w + range(rand, 1.5, 7);
+          s += w + range(rand, 1.2, 4.5);
         } else s += 3;
       }
     }
@@ -303,10 +303,10 @@ export function generateVillage(p: StyleProfile, variant: Variant | null, seed: 
   const h = (x: number, y: number): number => heightAt(t.heights, x, y);
   const back = sub2(at.p, scale2(rot2(mainDir, 0.9), 190));
   const chapel = landmarks.find((l) => l.kind === "chapelle");
-  const streetEye = pointAt(main.path, at.s - o.radius * 0.55);
+  const streetEye = pointAt(main.path, at.s - o.radius * 0.8);
   const views: EnvData["views"] = {
     principale: { eye: [back.x, h(back.x, back.y) + 62, back.y], target: [at.p.x + mainDir.x * 30, h(at.p.x, at.p.y), at.p.y + mainDir.y * 30], fov: 55 },
-    seconde: { eye: [streetEye.p.x, h(streetEye.p.x, streetEye.p.y) + 7, streetEye.p.y], target: chapel ? [chapel.x, chapel.base + 7, chapel.y] : [at.p.x, h(at.p.x, at.p.y) + 4, at.p.y], fov: 58 },
+    seconde: { eye: [streetEye.p.x, h(streetEye.p.x, streetEye.p.y) + 12, streetEye.p.y], target: chapel ? [chapel.x, chapel.base + 6, chapel.y] : [at.p.x, h(at.p.x, at.p.y) + 4, at.p.y], fov: 58 },
   };
   void variant;
   let wall: EnvData["wall"] = null;

@@ -167,12 +167,12 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
 
   // Brume au sol : nappes superposées, plus denses en bas.
   if (mist.density > 0) {
-    const layers = 4;
+    const layers = 6;
     for (let k = 0; k < layers; k++) {
       const g = new PlaneGeometry(size, size, 1, 1);
       g.rotateX(-Math.PI / 2);
       geos.push(g);
-      const mat = new MeshBasicMaterial({ color: new Color(c.light), map: mistMap, transparent: true, opacity: mist.density * (0.22 - k * 0.04), depthWrite: false, side: DoubleSide });
+      const mat = new MeshBasicMaterial({ color: new Color(c.light), map: mistMap, transparent: true, opacity: mist.density * (0.13 - k * 0.018), depthWrite: false, side: DoubleSide });
       materials.push(mat);
       const m = new Mesh(g, mat);
       m.position.y = groundAt(0, 0) + 1.5 + (k * mist.top) / layers;

@@ -577,6 +577,22 @@ export function generateTerrain(seed: number, spec: TerrainSpec): TerrainData {
   return { spec, heights: hf, rivers, lakes, seaLevel, marshLevel, coast, roads, bridges, parcels, hedges, trees, farms };
 }
 
+/** Retire des routes de terre les tronçons qui passent dans une zone (ville pavée) ; une route coupée devient deux routes. */
+export function clipRoads(t: TerrainData, inside: (p: Vec2) => boolean): void {
+  const out: Road[] = [];
+  for (const r of t.roads) {
+    let cur: Vec2[] = [];
+    for (const p of r.path) {
+      if (inside(p)) {
+        if (cur.length > 1) out.push({ ...r, path: cur });
+        cur = [];
+      } else cur.push(p);
+    }
+    if (cur.length > 1) out.push({ ...r, path: cur });
+  }
+  t.roads = out;
+}
+
 /** Mesures du terrain pour les tests et le rapport. */
 export function terrainStats(t: TerrainData): Record<string, number> {
   let lo = Infinity;

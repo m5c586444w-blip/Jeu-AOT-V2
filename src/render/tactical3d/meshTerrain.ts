@@ -91,6 +91,24 @@ export function ribbon(path: readonly Vec2[], w: number, y: (p: Vec2, i: number)
   return fb.build();
 }
 
+/** Ruban posé sur le relief : chaque bord prend l'altitude du terrain sous lui (routes de terre). */
+export function drapedRibbon(path: readonly Vec2[], w: number, hf: Heightfield, offset: number, color: Color): BufferGeometry {
+  const fb = new FaceBuilder();
+  for (let i = 0; i + 1 < path.length; i++) {
+    const a = path[i] as Vec2;
+    const b = path[i + 1] as Vec2;
+    const prev = path[Math.max(0, i - 1)] as Vec2;
+    const next = path[Math.min(path.length - 1, i + 2)] as Vec2;
+    const na = norm2(sub2(b, prev));
+    const nb = norm2(sub2(next, a));
+    const pa = v2(-na.y * w, na.x * w);
+    const pb = v2(-nb.y * w, nb.x * w);
+    const P = (q: Vec2): [number, number, number] => [q.x, heightAt(hf, q.x, q.y) + offset, q.y];
+    fb.face([P(v2(a.x - pa.x, a.y - pa.y)), P(v2(a.x + pa.x, a.y + pa.y)), P(v2(b.x + pb.x, b.y + pb.y)), P(v2(b.x - pb.x, b.y - pb.y))], [[0, i * 0.1], [1, i * 0.1], [1, (i + 1) * 0.1], [0, (i + 1) * 0.1]], color, [0, 1, 0]);
+  }
+  return fb.build();
+}
+
 /** Polygone plan (pavage, place) en éventail depuis son centre. */
 export function flatPolygon(fb: FaceBuilder, poly: readonly Vec2[], y: number, color: Color, uvScale = 4): void {
   const c = centroid(poly);
@@ -190,11 +208,11 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
   if (t.marshLevel !== null) sheet(t.marshLevel, "marais");
 
   // Routes de terre : rubans posés sur le relief (décalage de profondeur contre le scintillement).
-  const roadMat = new MeshStandardMaterial({ vertexColors: true, roughness: 1, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+  const roadMat = new MeshStandardMaterial({ vertexColors: true, roughness: 1, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 });
   materials.push(roadMat);
   const roadColor = new Color(o.roadColor);
   for (const r of t.roads as Road[]) {
-    const m = new Mesh(ribbon(r.path, r.width / 2, (p) => heightAt(hf, p.x, p.y) + 0.08, roadColor.clone().multiplyScalar(r.kind === "route" ? 1 : 1.06)), roadMat);
+    const m = new Mesh(drapedRibbon(r.path, r.width / 2, hf, 0.12, roadColor.clone().multiplyScalar(r.kind === "route" ? 1 : 1.06)), roadMat);
     m.name = r.kind === "route" ? "route" : "chemin";
     m.receiveShadow = true;
     group.add(m);

@@ -33,10 +33,10 @@ interface PresetDef {
 }
 
 const PRESETS: Record<LightPreset, PresetDef> = {
-  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.0, windows: 0, lanterns: 0, lampIntensity: 0, stars: false },
+  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false },
   // Aube (R1b.6) : soleil bas à l'est, lumière rosée et froide, brume plus dense que le jour.
   aube: { elevation: 5, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.1, hemiSky: 0xa6aec6, hemiGround: 0x38332e, hemiIntensity: 0.6, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.05, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false },
-  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0x9a8f9c, hemiGround: 0x3b3029, hemiIntensity: 0.95, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.05, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false },
+  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0xa898a4, hemiGround: 0x4a3d33, hemiIntensity: 1.35, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.2, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false },
   nuit: { elevation: 38, azimuth: 140, sunColor: 0x9db2d8, sunIntensity: 0.5, hemiSky: 0x2a3550, hemiGround: 0x101215, hemiIntensity: 0.4, horizon: 0x1d2536, zenith: 0x06090f, glow: 0x8fa3c8, glowStrength: 0.35, fog: 0x121822, fogDensity: 0.0026, exposure: 1.15, windows: 1.5, lanterns: 3, lampIntensity: 60, stars: true },
 };
 
@@ -56,6 +56,8 @@ export interface LightRig {
   setCenter(c: Vector3): void;
   /** R1b : brume supplémentaire (météo), multiplicateur de densité. */
   setFogBoost(k: number): void;
+  /** R1b : soleil voilé (météo), multiplicateur d'intensité. */
+  setSunFactor(k: number): void;
   dispose(): void;
 }
 
@@ -110,8 +112,9 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   });
 
   let current: LightPreset = "jour";
-  /** Multiplicateur de brume posé par la météo (R1b.6). */
+  /** Multiplicateur de brume et voile du soleil posés par la météo (R1b.7). */
   let extraFog = 1;
+  let sunK = 1;
   let exposure = 1;
   let lampLimit = lamps.length;
   const showLamps = (): void => {
@@ -147,11 +150,11 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       const d = PRESETS[preset];
       const dir = dirOf(d);
       sun.color.set(d.sunColor);
-      sun.intensity = d.sunIntensity;
+      sun.intensity = d.sunIntensity * sunK;
       sun.position.copy(opts.center).addScaledVector(dir, Math.max(420, ext * 1.6));
       hemi.color.set(d.hemiSky);
       hemi.groundColor.set(d.hemiGround);
-      hemi.intensity = d.hemiIntensity;
+      hemi.intensity = d.hemiIntensity * (0.75 + 0.25 * sunK);
       fog.color.set(d.fog);
       fog.density = d.fogDensity * (opts.fogScale ?? 1) * extraFog;
       exposure = d.exposure;
@@ -188,6 +191,10 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     },
     setFogBoost(k) {
       extraFog = k;
+      rig.apply(current);
+    },
+    setSunFactor(k) {
+      sunK = k;
       rig.apply(current);
     },
     setShadow(enabled, size) {

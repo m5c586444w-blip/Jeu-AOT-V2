@@ -15,6 +15,8 @@ import type { Quality } from "./quality";
 import { rgbToLab } from "./styles";
 import { TX, fill } from "./texts";
 import { cobbleTex, facadeSet, groundTex, mistTex, roofTex, wallStoneTex } from "./texturesEnv";
+import { WEATHERS, createFires, createWeather } from "./weather";
+import type { WeatherKind } from "./weather";
 import { puffTexture, skinTexture } from "./textures";
 
 /**
@@ -158,6 +160,10 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   let light: LightPreset = LIGHT_PRESETS.find((p) => p === params.get("lumiere")) ?? "jour";
   let view: ViewName = (["principale", "seconde", "libre"] as const).find((v) => v === params.get("vue")) ?? "principale";
   const sheet = params.has("planche");
+  const cycleSheet = params.get("planche") === "cycle";
+  const weatherKind: WeatherKind = WEATHERS.find((w) => w === params.get("meteo")) ?? "aucune";
+  let time = Number(params.get("t") ?? "0") || 0;
+  const paused = params.has("pause");
   const html = document.documentElement;
   html.dataset["env"] = id;
 
@@ -188,6 +194,13 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   controls.maxPolarAngle = Math.PI * 0.495;
   const target0 = new Vector3(...env.views.principale.target);
   const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: 280, fogScale: fogScaleOf(env) });
+
+  const weather = createWeather(scene, weatherKind, { seed, particles: QUALITY[quality].particles, mistMap: tex.mist(), groundY: env.terrain ? 0 : 0, size: env.terrain?.spec.size ?? 900 });
+  lighting.setFogBoost(weather.fogBoost);
+  lighting.setSunFactor(weather.sunFactor);
+  const fires = createFires(scene, env.fires, { lights: QUALITY[quality].fireLights, puff: tex.puff(), seed });
+  for (const t of meshes.titans) t.setPose(t.pose, time);
+  html.dataset["meteo"] = weatherKind;
 
   const applyQuality = (q: Quality): void => {
     quality = q;
@@ -271,12 +284,21 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
 
   // Étiquettes de la planche.
   const labels: HTMLElement[] = [];
-  const QUADS: { view: "principale" | "seconde"; light: LightPreset; x: number; y: number }[] = [
-    { view: "principale", light: "jour", x: 0, y: 0 },
-    { view: "principale", light: "crepuscule", x: 1, y: 0 },
-    { view: "seconde", light: "jour", x: 0, y: 1 },
-    { view: "seconde", light: "crepuscule", x: 1, y: 1 },
-  ];
+  // Planche de contrôle : vue principale et vue seconde, de jour et au crépuscule ; planche « cycle » : aube, jour,
+  // crépuscule, nuit sur la vue principale.
+  const QUADS: { view: "principale" | "seconde"; light: LightPreset; x: number; y: number }[] = cycleSheet
+    ? [
+        { view: "principale", light: "aube", x: 0, y: 0 },
+        { view: "principale", light: "jour", x: 1, y: 0 },
+        { view: "principale", light: "crepuscule", x: 0, y: 1 },
+        { view: "principale", light: "nuit", x: 1, y: 1 },
+      ]
+    : [
+        { view: "principale", light: "jour", x: 0, y: 0 },
+        { view: "principale", light: "crepuscule", x: 1, y: 0 },
+        { view: "seconde", light: "jour", x: 0, y: 1 },
+        { view: "seconde", light: "crepuscule", x: 1, y: 1 },
+      ];
   if (sheet) {
     const title = document.createElement("div");
     title.className = "p3d-planche-titre";
@@ -287,7 +309,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       l.className = "p3d-planche-etiquette";
       l.style.left = `${qd.x * 50}%`;
       l.style.top = `${qd.y * 50}%`;
-      const lightName = qd.light === "jour" ? TX.lightJour : TX.lightCrepuscule;
+      const lightName = { jour: TX.lightJour, aube: TX.lightAube, crepuscule: TX.lightCrepuscule, nuit: TX.lightNuit }[qd.light];
       l.textContent = fill(TX.panelLight, { light: lightName, view: qd.view });
       host.append(l);
       labels.push(l);
@@ -321,12 +343,16 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
         setCam(camera, v, w / h);
         lighting.setCenter(new Vector3(...v.target));
         lighting.follow(camera.position);
+        camera.updateMatrixWorld();
+        weather.update(time, camera.position, camera.matrixWorldInverse);
         renderer.toneMappingExposure = lighting.exposure;
         renderer.render(scene, camera);
       }
       renderer.setScissorTest(false);
     } else {
       controls.update();
+      camera.updateMatrixWorld();
+      weather.update(time, camera.position, camera.matrixWorldInverse);
       lighting.follow(camera.position);
       renderer.toneMappingExposure = lighting.exposure;
       renderer.render(scene, camera);
@@ -352,6 +378,8 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     setCam(offCam, vv, w / h);
     lighting.setCenter(new Vector3(...vv.target));
     lighting.follow(offCam.position);
+    offCam.updateMatrixWorld();
+    weather.update(time, offCam.position, offCam.matrixWorldInverse);
     off.toneMappingExposure = lighting.exposure;
     off.render(scene, offCam);
     const gl = off.getContext();
@@ -414,7 +442,12 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
 
   let fpsFrames = 0;
   let since = performance.now();
+  let last = performance.now();
   const loop = (now: number): void => {
+    if (!paused) time += Math.min(0.1, (now - last) / 1000);
+    last = now;
+    fires.update(time);
+    if (!paused) for (const t of meshes.titans) t.setPose(t.pose, time);
     if (!held) draw();
     fpsFrames++;
     if (now - since >= 1000) {

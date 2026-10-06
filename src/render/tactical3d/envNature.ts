@@ -90,17 +90,31 @@ export function generateGiantForest(p: StyleProfile, variant: Variant | null, se
   }
   const ground = (q: Vec2): number => heightAt(t.heights, q.x, q.y);
   const anchors = giants.flatMap((g) => giantAnchors(g, ground(g)));
-  // Vues : à mi-hauteur entre les troncs (là où volent les soldats) ; au pied d'un géant, vers sa première branche.
-  const ref = giants.reduce((best, g) => (dist2(g, v2(20, 40)) < dist2(best, v2(20, 40)) ? g : best), giants[0] as GiantTree);
-  const views = lisiere
-    ? {
-        principale: { eye: [0, ground(v2(0, 300)) + 28, 300] as [number, number, number], target: [0, 40, 0] as [number, number, number], fov: 58 },
-        seconde: { eye: [ref.x + 40, ground(ref) + 2, ref.y + 50] as [number, number, number], target: [ref.x, ground(ref) + 42, ref.y] as [number, number, number], fov: 62 },
+  // Vues : sous les premières branches (14 m), d'une trouée vers le fond de la forêt ; au pied d'un géant, vers sa voûte.
+  // Les points de vue sont cherchés là où aucun tronc ni buisson ne masque l'objectif.
+  const clearAround = (q: Vec2, rg: number, rt: number): boolean => !giants.some((g) => dist2(q, g) < g.radius + rg) && !t.trees.some((x) => dist2(q, x) < rt);
+  const pick = (from: Vec2, rg: number, rt: number): Vec2 => {
+    let best = from;
+    let bd = Infinity;
+    for (let k = 0; k < 400; k++) {
+      const q = v2(from.x + range(rand, -60, 60), from.y + range(rand, -60, 60));
+      if (!clearAround(q, rg, rt)) continue;
+      const d = dist2(q, from);
+      if (d < bd) {
+        bd = d;
+        best = q;
       }
-    : {
-        principale: { eye: [-90, ground(v2(-90, 150)) + 30, 150] as [number, number, number], target: [40, 24, -70] as [number, number, number], fov: 58 },
-        seconde: { eye: [ref.x + 22, ground(ref) + 2, ref.y + 26] as [number, number, number], target: [ref.x, ground(ref) + 46, ref.y] as [number, number, number], fov: 64 },
-      };
+    }
+    return best;
+  };
+  const e1 = pick(lisiere ? v2(0, 260) : v2(-90, 150), 12, 5);
+  const ref = giants.reduce((best, g) => (dist2(g, v2(20, 40)) < dist2(best, v2(20, 40)) ? g : best), giants[0] as GiantTree);
+  const e2 = pick(v2(ref.x + 18, ref.y + 22), 6, 7);
+  const views = {
+    principale: { eye: [e1.x, ground(e1) + (lisiere ? 26 : 14), e1.y] as [number, number, number], target: lisiere ? ([0, 38, 0] as [number, number, number]) : ([e1.x + 160, ground(e1) + 30, e1.y - 230] as [number, number, number]), fov: 60 },
+    // Au-dessus de la voûte, au ras des cimes : l'échelle des géants et la brume entre les houppiers.
+    seconde: { eye: [e2.x - 120, ground(e2) + 104, e2.y + 140] as [number, number, number], target: [e2.x + 120, ground(e2) + 62, e2.y - 160] as [number, number, number], fov: 58 },
+  };
   return {
     terrain: t,
     buildings: [],
@@ -150,8 +164,8 @@ export function generateTerritory(p: StyleProfile, variant: Variant | null, seed
   const titans: TitanPlacement[] = [];
   for (let k = 0; k < n; k++) {
     const a = range(rand, 0, Math.PI * 2);
-    const r = range(rand, 60, 340);
-    titans.push({ type: ROAMERS[k % ROAMERS.length] as string, variant: k % 5 === 4 ? "anormal" : null, x: Math.cos(a) * r, y: Math.sin(a) * r + 60, angle: range(rand, 0, Math.PI * 2), pose: k % 6 === 5 ? "debout" : "marche", seed: derive(seed, 900 + k) });
+    const r = range(rand, 40, 230);
+    titans.push({ type: ROAMERS[k % ROAMERS.length] as string, variant: k % 5 === 4 ? "anormal" : null, x: Math.cos(a) * r, y: Math.sin(a) * r, angle: range(rand, 0, Math.PI * 2), pose: k % 6 === 5 ? "debout" : "marche", seed: derive(seed, 900 + k) });
   }
   const h = (q: Vec2): number => heightAt(t.heights, q.x, q.y);
   return {
@@ -159,7 +173,7 @@ export function generateTerritory(p: StyleProfile, variant: Variant | null, seed
     props,
     titans,
     views: {
-      principale: { eye: [-260, h(v2(-260, 330)) + 55, 330], target: [20, 6, 20], fov: 55 },
+      principale: { eye: [-120, h(v2(-120, 150)) + 30, 150], target: [10, 6, 10], fov: 55 },
       seconde: { eye: [v.views.seconde.eye[0], v.views.seconde.eye[1] - 4, v.views.seconde.eye[2]], target: [0, 10, 120], fov: 60 },
     },
     radius: t.spec.size / 2,

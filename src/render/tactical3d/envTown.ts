@@ -1,6 +1,6 @@
 import type { StyleProfile } from "../../data/artSchemas";
 import { prop, terrainSpecFor } from "./envCountry";
-import type { Canal, EnvData, Fire, Landmark, LandmarkKind, Paving, Prop, StyledBuilding, WallGate, WallLayout } from "./envTypes";
+import type { Canal, EnvData, Fire, Landmark, LandmarkKind, Paving, Prop, StyledBuilding, View, WallGate, WallLayout } from "./envTypes";
 import { salient, wallAnchors, wallCannons, wallLayout } from "./envWall";
 import { add2, centroid, dist2, lerp2, nearestOnPath, norm2, scale2, sub2, v2 } from "./geom2";
 import type { Vec2 } from "./geom2";
@@ -9,7 +9,7 @@ import type { Rand } from "./rng";
 import { styleBuilding, styleLandmark } from "./styling";
 import type { Variant } from "./styles";
 import { WALLS, groundHex } from "./styles";
-import { generateTerrain, heightAt } from "./terrain";
+import { clipRoads, generateTerrain, heightAt } from "./terrain";
 import type { Bridge, TerrainData } from "./terrain";
 import { generateTown, insideConvex } from "./town";
 import type { Block, Town, TownOptions } from "./town";
@@ -231,6 +231,8 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
   const mainCol = half;
   const keep = (c: Vec2): boolean => c.y > 24 && dist2(c, v2(0, 0)) < R - 26;
   const t = generateTerrain(seed, { ...terrainSpecFor(p, { size, clear: [{ c: v2(0, R * 0.45), r: R * 1.3 }], roadVia: [v2(0, -60), v2(0, R + 60)], farms: 0 }), axis: "ns" });
+  // La route de terre s'arrête aux portes : dans la saillie, les rues sont pavées.
+  clipRoads(t, (q) => q.y > -6 && dist2(q, v2(0, 0)) < R + 6);
   const town = generateTown(seed, {
     ...lo,
     cols,
@@ -301,8 +303,24 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
     const m = lerp2(col[j] as Vec2, col[j + 1] as Vec2, 0.5);
     if (Math.abs(m.y - R * 0.55) < Math.abs(streetPt.y - R * 0.55)) streetPt = m;
   }
+  // Vue principale composée sur les repères du profil : le canal et le grand édifice ; le marché et les casernes vus depuis
+  // la porte extérieure ; sinon, les toits et le clocher vers la porte.
+  const canal = b.canals[0];
+  const marketView = hasMark(p, "casernes_pierre") || hasMark(p, "cour_rassemblement");
+  let principale: View = { eye: [-R * 0.48, 95, R * 0.1], target: [R * 0.12, 6, R * 0.78], fov: 55 };
+  if (canal && canal.path.length > 1) {
+    const a = canal.path[0] as Vec2;
+    const z = canal.path[canal.path.length - 1] as Vec2;
+    // Dans l'axe du canal, en retrait vers le centre de la ville (jamais hors de la saillie), vers le grand édifice.
+    const d = norm2(sub2(z, a));
+    const e = add2(add2(a, scale2(d, 30)), v2(0, -45));
+    const tg = lerp2(a, z, 0.7);
+    principale = { eye: [e.x, 58, e.y], target: [tg.x, 2, tg.y - 30], fov: 55 };
+  } else if (marketView) {
+    principale = { eye: [R * 0.42, 70, R * 0.98], target: [-R * 0.1, 8, R * 0.3], fov: 55 };
+  }
   const views: EnvData["views"] = {
-    principale: { eye: [-R * 0.48, 95, R * 0.1], target: [R * 0.12, 6, R * 0.78], fov: 55 },
+    principale,
     seconde: { eye: [streetPt.x, h(streetPt) + 13, streetPt.y], target: [0, 22, R], fov: 52 },
   };
   return {
@@ -348,6 +366,8 @@ export function generateCapital(p: StyleProfile, variant: Variant | null, seed: 
   });
   const b: TownBuild = { p, rand, t, town, ruin, buildings: [], landmarks: [], props: [], paving: [], canals: [], bridges: [], fires: [], used: new Set() };
   b.buildings = town.buildings.map((x) => styleBuilding(x, p, rand, { hf: t.heights, ruin }));
+  const tb = town.bounds;
+  clipRoads(t, (q) => q.x > tb.minX - 10 && q.x < tb.maxX + 10 && q.y > tb.minY - 160 && q.y < tb.maxY + 10);
   const [pa, pb] = town.plaza.centers;
   if (pa && pb) {
     // Cathédrale gothique sur la place : nef nord–sud, façade (et parvis) vers le sud.
