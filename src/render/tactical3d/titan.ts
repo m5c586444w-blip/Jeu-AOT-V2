@@ -1,6 +1,7 @@
 import { BufferAttribute, BufferGeometry, Color, Group, MeshStandardMaterial, Points, PointsMaterial, TorusGeometry, Vector3 } from "three";
-import type { Mesh, Texture } from "three";
+import type { Mesh, Object3D, Texture } from "three";
 import { derive, range, seeded } from "./rng";
+import type { Rand } from "./rng";
 import { joint, lathe, limb, measureBox, part, unitSphere } from "./rig";
 
 /**
@@ -126,7 +127,7 @@ export const TITAN_LARGE: TitanSpec = {
   headTilt: -0.08,
 };
 
-type JointName = "bassin" | "torse" | "poitrine" | "cou" | "tete" | "machoire" | "epauleG" | "coudeG" | "poignetG" | "epauleD" | "coudeD" | "poignetD" | "hancheG" | "genouG" | "chevilleG" | "hancheD" | "genouD" | "chevilleD";
+export type JointName = "bassin" | "torse" | "poitrine" | "cou" | "tete" | "machoire" | "epauleG" | "coudeG" | "poignetG" | "epauleD" | "coudeD" | "poignetD" | "hancheG" | "genouG" | "chevilleG" | "hancheD" | "genouD" | "chevilleD";
 
 export interface Titan {
   spec: TitanSpec;
@@ -134,7 +135,8 @@ export interface Titan {
   group: Group;
   /** Corps articulé (basculé quand le Titan est abattu). */
   body: Group;
-  joints: Record<JointName, Group>;
+  /** Articulations : groupes (R1) ou os du corps de base (R1c). */
+  joints: Record<JointName, Object3D>;
   nape: Mesh;
   steam: Points;
   pose: TitanPose;
@@ -308,20 +310,9 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
     j[`cheville${side}`] = an;
   }
 
-  // Vapeur d'un Titan abattu (03 §5.2 : il se dissout) : bouffées qui montent, s'élargissent et pâlissent.
-  const N = 90;
-  const sGeo = new BufferGeometry();
-  const sPos = new Float32Array(N * 3);
-  const sCol = new Float32Array(N * 4);
-  const seeds = Array.from({ length: N }, () => [rand(), rand(), rand(), rand()] as const);
-  sGeo.setAttribute("position", new BufferAttribute(sPos, 3));
-  sGeo.setAttribute("color", new BufferAttribute(sCol, 4));
-  const steam = new Points(sGeo, new PointsMaterial({ size: H * 0.55, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false }));
-  steam.name = "vapeur";
-  steam.visible = false;
-  steam.frustumCulled = false;
+  const vapour = titanSteam(H, rand);
+  const steam = vapour.points;
   group.add(steam);
-  const steamMat = steam.material as PointsMaterial;
 
   const rest = new Map<Group, [number, number, number]>();
   for (const g of Object.values(j)) rest.set(g, [g.rotation.x, g.rotation.y, g.rotation.z]);
@@ -450,25 +441,7 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         body.updateMatrixWorld(true);
         const box = measureBox(body);
         body.position.y = groupY() - box.min.y;
-        steam.visible = true;
-        const zMin = box.min.z - group.position.z;
-        const zMax = box.max.z - group.position.z;
-        const span = Math.max(1, zMax - zMin);
-        const rise = H * 0.9;
-        for (let i = 0; i < N; i++) {
-          const [a, b, c, d] = seeds[i] as readonly [number, number, number, number];
-          const k = (t * (0.08 + 0.1 * c) + d) % 1;
-          sPos[i * 3] = (a - 0.5) * H * 0.3 + Math.sin(t * 0.7 + d * 6) * k * H * 0.08;
-          sPos[i * 3 + 1] = H * 0.06 + k * rise;
-          sPos[i * 3 + 2] = zMin + b * span;
-          const fade = (1 - k) * Math.min(1, k * 6);
-          sCol[i * 4] = 0.93;
-          sCol[i * 4 + 1] = 0.92;
-          sCol[i * 4 + 2] = 0.9;
-          sCol[i * 4 + 3] = 0.32 * fade;
-        }
-        (sGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
-        (sGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+        vapour.fall(t, box.min.z - group.position.z, box.max.z - group.position.z);
       }
       // Au sol (R1b) : debout, en marche, en course, en buste, les pieds touchent le sol ; allongé, le point le plus bas du corps.
       body.updateMatrixWorld(true);
@@ -479,23 +452,7 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         const low = Math.min(...feet.map((f) => measureBox(f).min.y));
         body.position.y += groupY() - low;
       }
-      if (spec.heat && p !== "abattu") {
-        // Vapeur de chaleur : bouffées autour des épaules et de la tête.
-        steam.visible = true;
-        for (let i = 0; i < N; i++) {
-          const [a, b, c, d] = seeds[i] as readonly [number, number, number, number];
-          const k = (t * (0.05 + 0.08 * c) + d) % 1;
-          sPos[i * 3] = (a - 0.5) * H * 0.35;
-          sPos[i * 3 + 1] = H * (0.7 + 0.5 * k);
-          sPos[i * 3 + 2] = (b - 0.5) * H * 0.25;
-          sCol[i * 4] = 0.95;
-          sCol[i * 4 + 1] = 0.94;
-          sCol[i * 4 + 2] = 0.92;
-          sCol[i * 4 + 3] = 0.28 * (1 - k) * Math.min(1, k * 5);
-        }
-        (sGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
-        (sGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
-      }
+      if (spec.heat && p !== "abattu") vapour.heat(t);
       body.updateMatrixWorld(true);
     },
     dispose() {
@@ -503,8 +460,7 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
         const g = (o as Mesh).geometry as BufferGeometry | undefined;
         if (g && g !== S) g.dispose();
       });
-      sGeo.dispose();
-      steamMat.dispose();
+      vapour.dispose();
       for (const m of materials) m.dispose();
     },
   };
@@ -517,6 +473,78 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
   }
   titan.setPose("marche", 0);
   return titan;
+}
+
+/**
+ * Vapeur d'un Titan (R1, partagée par les Titans de R1c) : bouffées qui montent, s'élargissent et pâlissent. Un Titan abattu
+ * se dissout en fumant (03 §5.2) ; le Colossal fume en permanence (chaleur).
+ */
+export interface TitanSteam {
+  points: Points;
+  /** Titan abattu : bouffées le long du corps couché, de `zMin` à `zMax` (repère du groupe). */
+  fall(t: number, zMin: number, zMax: number): void;
+  /** Chaleur : bouffées autour des épaules et de la tête. */
+  heat(t: number): void;
+  dispose(): void;
+}
+
+export function titanSteam(H: number, rand: Rand): TitanSteam {
+  const N = 90;
+  const sGeo = new BufferGeometry();
+  const sPos = new Float32Array(N * 3);
+  const sCol = new Float32Array(N * 4);
+  const seeds = Array.from({ length: N }, () => [rand(), rand(), rand(), rand()] as const);
+  sGeo.setAttribute("position", new BufferAttribute(sPos, 3));
+  sGeo.setAttribute("color", new BufferAttribute(sCol, 4));
+  const mat = new PointsMaterial({ size: H * 0.55, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false });
+  const points = new Points(sGeo, mat);
+  points.name = "vapeur";
+  points.visible = false;
+  points.frustumCulled = false;
+  const done = (): void => {
+    (sGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
+    (sGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+  };
+  return {
+    points,
+    fall(t, zMin, zMax) {
+      points.visible = true;
+      const span = Math.max(1, zMax - zMin);
+      const rise = H * 0.9;
+      for (let i = 0; i < N; i++) {
+        const [a, b, c, d] = seeds[i] as readonly [number, number, number, number];
+        const k = (t * (0.08 + 0.1 * c) + d) % 1;
+        sPos[i * 3] = (a - 0.5) * H * 0.3 + Math.sin(t * 0.7 + d * 6) * k * H * 0.08;
+        sPos[i * 3 + 1] = H * 0.06 + k * rise;
+        sPos[i * 3 + 2] = zMin + b * span;
+        const fade = (1 - k) * Math.min(1, k * 6);
+        sCol[i * 4] = 0.93;
+        sCol[i * 4 + 1] = 0.92;
+        sCol[i * 4 + 2] = 0.9;
+        sCol[i * 4 + 3] = 0.32 * fade;
+      }
+      done();
+    },
+    heat(t) {
+      points.visible = true;
+      for (let i = 0; i < N; i++) {
+        const [a, b, c, d] = seeds[i] as readonly [number, number, number, number];
+        const k = (t * (0.05 + 0.08 * c) + d) % 1;
+        sPos[i * 3] = (a - 0.5) * H * 0.35;
+        sPos[i * 3 + 1] = H * (0.7 + 0.5 * k);
+        sPos[i * 3 + 2] = (b - 0.5) * H * 0.25;
+        sCol[i * 4] = 0.95;
+        sCol[i * 4 + 1] = 0.94;
+        sCol[i * 4 + 2] = 0.92;
+        sCol[i * 4 + 3] = 0.28 * (1 - k) * Math.min(1, k * 5);
+      }
+      done();
+    },
+    dispose() {
+      sGeo.dispose();
+      mat.dispose();
+    },
+  };
 }
 
 /** Texture de vapeur posée après coup (DOM requis). */

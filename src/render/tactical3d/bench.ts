@@ -5,13 +5,14 @@ import { straightWall, wallLayout } from "./envWall";
 import { createLighting } from "./lighting";
 import { phys } from "./meshProps";
 import { buildWallMeshes } from "./meshWall";
+import { loadBodyKit, makeSoldier, makeTitan, soldierScaleFor, soldierStature, standSoldier } from "./bodies";
 import { measureBox, measureHeight } from "./rig";
-import { buildSoldier, soldierHeight, soldierMaterials, SOLDIER_HEIGHT_M } from "./soldier";
+import { soldierMaterials } from "./soldier";
 import { MATERIALS, WALLS } from "./styles";
 import { TX } from "./texts";
 import { puffTexture, skinTexture } from "./textures";
 import { wallStoneTex } from "./texturesEnv";
-import { buildTitan, setSteamTexture } from "./titan";
+import { setSteamTexture } from "./titan";
 import type { Titan } from "./titan";
 import { SOLDIER_BENCH_M, TITAN_CLASS_IDS, defaultPose, titanSpec, variantSpec } from "./titanGallery";
 
@@ -47,6 +48,8 @@ export async function startBench(root: HTMLElement, probe: WebGLProbe): Promise<
   const host = document.createElement("div");
   host.className = "p3d";
   root.replaceChildren(host);
+  // Corps de base MakeHuman (R1c) ou figures de R1 (`?corps=primitives`).
+  const kit = await loadBodyKit(window.location.search);
   const renderer = new WebGLRenderer({ antialias: true });
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
@@ -84,38 +87,39 @@ export async function startBench(root: HTMLElement, probe: WebGLProbe): Promise<
     titans.push(t);
     figs.push({ id: t.spec.id, label, nominal, measured, x, top: Math.max(measureBox(t.body).max.y, 2) });
   };
-  // Soldat de 1,7 m (même modèle que R1, ramené à 1,7 m).
+  // Soldat de 1,7 m (corps de base à 1,7 m, ou modèle de R1 ramené à 1,7 m), mesuré debout.
   const smats = soldierMaterials();
-  const soldier = buildSoldier(3, smats);
-  soldier.group.scale.setScalar(SOLDIER_BENCH_M / SOLDIER_HEIGHT_M);
+  const soldier = makeSoldier(kit, 3, smats, SOLDIER_BENCH_M);
+  soldier.group.scale.setScalar(soldierScaleFor(soldier, SOLDIER_BENCH_M));
   soldier.group.position.set(-6, 0, 6);
   soldier.group.rotation.y = 0.5;
-  soldier.setPose("sol", 0);
   scene.add(soldier.group);
-  figs.push({ id: "soldat", label: "soldat", nominal: SOLDIER_BENCH_M, measured: soldierHeight(soldier), x: -6, top: 2 });
+  soldier.group.updateMatrixWorld(true);
+  standSoldier(soldier);
+  figs.push({ id: "soldat", label: "soldat", nominal: SOLDIER_BENCH_M, measured: soldierStature(soldier), x: -6, top: 2 });
   let x = 0;
   for (const id of TITAN_CLASS_IDS) {
     const spec = titanSpec(id);
     x += Math.max(4, spec.height * 0.55);
-    place(buildTitan(spec, 850, skin), x, 0, "debout", `${spec.height} m`, spec.height);
+    place(makeTitan(kit, spec, 850, skin), x, 0, "debout", `${spec.height} m`, spec.height);
     x += Math.max(4, spec.height * 0.55);
   }
   x += 8;
   for (const v of ["anormal", "sentinelle", "chasseur", "nocturne"]) {
     const spec = variantSpec(v);
     x += spec.height * 0.6;
-    place(buildTitan(spec, 851, skin), x, 0, defaultPose("", v), v, spec.height);
+    place(makeTitan(kit, spec, 851, skin), x, 0, defaultPose("", v), v, spec.height);
     x += spec.height * 0.6;
   }
   // Meute : cinq Titans de 5 m, graines différentes.
   x += 6;
   for (let k = 0; k < 5; k++) {
-    const t = buildTitan(variantSpec("meute"), 900 + k, skin);
+    const t = makeTitan(kit, variantSpec("meute"), 900 + k, skin);
     place(t, x + k * 4.5, (k % 2) * 6 - 3, "marche", k === 2 ? "meute" : "", 5, 0.3 * k);
     if (k !== 2) figs.pop();
   }
   x += 40;
-  const col = buildTitan(titanSpec("colossal"), 852, skin);
+  const col = makeTitan(kit, titanSpec("colossal"), 852, skin);
   place(col, x + 20, 0, "debout", "Colossal", 60, 0.3);
   x += 70;
   // Pan de mur de 50 m avec une brèche ; le Titan-Mur en buste, dans l'épaisseur du mur.
@@ -127,12 +131,12 @@ export async function startBench(root: HTMLElement, probe: WebGLProbe): Promise<
   wallGroup.position.set(wallX, 0, 0);
   scene.add(wallGroup);
   figs.push({ id: "mur", label: "mur", nominal: WALLS.hauteur_m.valeur, measured: (wm.meshes[0] ? measureBox(wm.meshes[0]).max.y : 0) - WALLS.parapet_m.valeur, x: wallX - 30, top: 52 });
-  const mur = buildTitan(titanSpec("titan_mur"), 853, skin);
+  const mur = makeTitan(kit, titanSpec("titan_mur"), 853, skin);
   place(mur, wallX, 0, "buste", "Titan-Mur (buste)", 50, Math.PI);
   mur.group.rotation.y = 0;
   mur.setPose("buste", 0);
   x = wallX + 70;
-  const rod = buildTitan(titanSpec("rod_reiss"), 854, skin);
+  const rod = makeTitan(kit, titanSpec("rod_reiss"), 854, skin);
   place(rod, x, -20, "allonge", "Titan de Rod Reiss (allongé)", 120, Math.PI / 2);
   // Toise : bandes alternées tous les 5 m, jusqu'à 125 m.
   const pole = new Group();

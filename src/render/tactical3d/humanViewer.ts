@@ -1,18 +1,26 @@
-import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, TextureLoader, Vector3, WebGLRenderer } from "three";
-import type { Material } from "three";
+import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector3, WebGLRenderer } from "three";
+import type { Material, PointsMaterial } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
-import { EYE_TEXTURE_URL, buildHumanBody, loadHumanTemplate, skinnedBounds } from "./humanBase";
+import { buildHumanBody, loadEyeTexture, loadHumanTemplate, skinnedBounds } from "./humanBase";
 import type { HumanBody, HumanShape } from "./humanBase";
 import { SOLDIER_ANIMS } from "./humanAnim";
 import { buildHumanSoldier } from "./humanSoldier";
 import type { HumanSoldier } from "./humanSoldier";
+import { buildHumanTitan } from "./humanTitan";
+import type { HumanTitan } from "./humanTitan";
+import { TITAN_CLASS_IDS, TITAN_SPECIAL_IDS, TITAN_VARIANT_IDS, titanSpec, variantSpec } from "./titanGallery";
+import { ALL_TITAN_POSES, setSteamTexture } from "./titan";
+import type { TitanPose } from "./titan";
+import { puffTexture, skinTexture } from "./textures";
 import { createLighting } from "./lighting";
 import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
 
 /**
  * Page de contrôle du corps de base de R1c (`?proto3d=humain`) : le corps MakeHuman CC0 façonné par paramètres, en rang.
+ * `&planche=soldats` : les animations du soldat ; `&planche=titans` : classes, variantes et Titans spéciaux ramenés à la même
+ * hauteur (formes comparables, `&pose=`) ; `&planche=poses&id=classe_15` : les animations d'un Titan. `&vue=visage` : de près.
  * Sonde `window.__humain3d` : prêt, hauteurs mesurées après pose, temps de chargement et de façonnage.
  */
 export interface HumanProbe {
@@ -56,8 +64,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);
-  const eyeTex = await new TextureLoader().loadAsync(EYE_TEXTURE_URL);
-  eyeTex.colorSpace = SRGBColorSpace;
+  const eyeTex = await loadEyeTexture();
   const skin = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.cire).lerp(new Color(MATERIALS.physiques.braise), 0.18), roughness: 0.55 });
   const eyes = new MeshStandardMaterial({ map: eyeTex, roughness: 0.15 });
   const teeth = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.toile_claire), roughness: 0.35 });
@@ -82,6 +89,35 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
       soldiers.push(s);
     });
   }
+  const titans: HumanTitan[] = [];
+  if (sheet === "titans" || sheet === "poses") {
+    // Ramenés à 2,4 m (échelle du groupe) : les proportions se comparent d'un coup d'œil.
+    const skinMap = skinTexture(850);
+    const puff = puffTexture();
+    const id = q.get("id") ?? "classe_15";
+    const wanted = ALL_TITAN_POSES.find((p) => p === q.get("pose")) ?? "debout";
+    const items: { spec: ReturnType<typeof titanSpec>; pose: TitanPose }[] =
+      sheet === "titans"
+        ? [...TITAN_CLASS_IDS.map((c) => titanSpec(c)), ...TITAN_VARIANT_IDS.map(variantSpec), ...TITAN_SPECIAL_IDS.map((c) => titanSpec(c))].map((spec) => ({ spec, pose: wanted }))
+        : ALL_TITAN_POSES.map((pose) => ({ spec: titanSpec(id), pose }));
+    items.forEach(({ spec, pose }, i) => {
+      const s0 = performance.now();
+      const ti = buildHumanTitan(template, spec, 850 + i, { skinMap, eyeMap: eyeTex });
+      const k = 2.4 / spec.height;
+      ti.group.scale.setScalar(k);
+      // La taille des points de vapeur ne suit pas l'échelle du groupe.
+      (ti.steam.material as PointsMaterial).size *= k;
+      setSteamTexture(ti, puff);
+      ti.group.position.set((i - (items.length - 1) / 2) * 1.5, 0, pose === "abattu" || pose === "allonge" ? -3 : 0);
+      if (pose === "abattu" || pose === "allonge") ti.group.rotation.y = Math.PI / 2;
+      scene.add(ti.group);
+      ti.group.updateMatrixWorld(true);
+      ti.setPose(pose, t);
+      const bb = skinnedBounds(ti.human);
+      state.bodies.push({ id: `${spec.id}:${pose}`, nominal: spec.height * k, measured: bb.max.y - bb.min.y, minY: bb.min.y, buildMs: performance.now() - s0 });
+      titans.push(ti);
+    });
+  }
   (sheet === "corps" ? LINEUP : []).forEach((e, i) => {
     const s = performance.now();
     const b = buildHumanBody(template, e.shape, mat, (p) => p !== "pantalon");
@@ -94,10 +130,19 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   });
   const camera = new PerspectiveCamera(32, 1, 0.1, 4000);
   const close = q.get("vue") === "visage";
-  camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : 11);
+  const wide = titans.length > 8;
+  camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : wide ? 26 : 11);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(close ? -0.0 : 0, close ? 1.55 : 1.0, 0);
-  if (close) {
+  if (close && titans.length > 0) {
+    // Visages de Titans : deux têtes côte à côte, à partir de `&cadre=` (indice), de trois quarts.
+    const f = Math.max(0, Math.min(titans.length - 2, Number(q.get("cadre") ?? "0") || 0));
+    const head = (i: number): Vector3 => titans[i]?.joints.tete.getWorldPosition(new Vector3()) ?? new Vector3();
+    const c = head(f).add(head(f + 1)).multiplyScalar(0.5).add(new Vector3(0, 0.08, 0));
+    controls.target.copy(c);
+    const d = Number(q.get("recul") ?? "2.4") || 2.4;
+    camera.position.copy(c).add(new Vector3(0.5 * (d / 2.4), 0.05, d));
+  } else if (close) {
     camera.position.x += (0 - (LINEUP.length - 1) / 2) * 1.25 + 1.25;
     controls.target.x = (1 - (LINEUP.length - 1) / 2) * 1.25;
   }
@@ -122,6 +167,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     if (animate) {
       time += (now - last) / 1000;
       for (const s of soldiers) s.setPose(s.pose, time);
+      for (const ti of titans) ti.setPose(ti.pose, time);
     }
     last = now;
     controls.update();

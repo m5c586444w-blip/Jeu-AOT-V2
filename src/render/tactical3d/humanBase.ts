@@ -1,5 +1,5 @@
-import { Bone, BufferAttribute, BufferGeometry, Group, Matrix4, MeshStandardMaterial, Skeleton, SkinnedMesh, Vector3 } from "three";
-import type { Material } from "three";
+import { Bone, BufferAttribute, BufferGeometry, Group, Matrix4, MeshStandardMaterial, SRGBColorSpace, Skeleton, SkinnedMesh, TextureLoader, Vector3 } from "three";
+import type { Material, Texture } from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 /**
@@ -8,8 +8,9 @@ import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
  * - cibles de forme cuites sur le processeur (macro : sexe, âge, musculature, corpulence ; détail : ventre, cou, bras, jambes,
  *   torse, épaules, hanches, expressions), normales recalculées sans couture ;
  * - articulations recalées du même déplacement que la peau (déplacements par cible stockés dans le `.glb`) ;
- * - proportions (Titans) : déformations au repos par chaîne d'os (tête, cou, bras, mains, torse, jambes), appliquées aux sommets
- *   selon leurs poids et aux articulations ;
+ * - proportions (Titans) : déformations au repos par chaîne d'os (tête, cou, bras, avant-bras, mains, torse, jambes, pieds),
+ *   largeurs (carrure, bassin, profondeur, crâne) et épaisseurs (bras, jambes, cou), appliquées aux sommets selon leurs poids et
+ *   aux articulations ;
  * - hauteur finale exacte, pieds au sol (y = 0), regard vers +z.
  * Os au repos sans rotation : une rotation d'os s'exprime dans les axes du monde au repos.
  */
@@ -38,7 +39,9 @@ export function templateFromGltf(gltf: GLTF): HumanTemplate {
   gltf.scene.traverse((o) => {
     const m = o as SkinnedMesh;
     if (!m.isSkinnedMesh) return;
-    prims.push({ name: (m.material as Material).name, geometry: m.geometry });
+    const name = (m.material as Material).name;
+    if (name === "yeux") dropCornea(m.geometry);
+    prims.push({ name, geometry: m.geometry });
     skeleton ??= m.skeleton;
   });
   if (!skeleton) throw new Error("humain.glb : aucun maillage articulé");
@@ -56,6 +59,37 @@ export function templateFromGltf(gltf: GLTF): HumanTemplate {
   const morphNames = Object.keys((gltf.scene.getObjectByProperty("isSkinnedMesh", true) as SkinnedMesh | undefined)?.morphTargetDictionary ?? {});
   if (!first || morphNames.length === 0) throw new Error("humain.glb : cibles absentes");
   return { prims, morphNames, bones, boneIndex, morphJoints, regions: extras.regions };
+}
+
+/**
+ * Cornée des yeux de MakeHuman : une coque autour de l'œil, transparente dans MakeHuman, dont les coordonnées de texture
+ * tombent dans le disque bleuté du coin de l'atlas (u, v > 0,85). Opaque, elle masquerait l'iris : ses triangles sont retirés
+ * (l'œil garde un matériau brillant).
+ */
+function dropCornea(g: BufferGeometry): void {
+  const idx = g.getIndex();
+  const uv = g.getAttribute("uv");
+  if (!idx || !uv) return;
+  const keep: number[] = [];
+  for (let k = 0; k < idx.count; k += 3) {
+    let u = 0;
+    let v = 0;
+    for (let e = 0; e < 3; e++) {
+      u += uv.getX(idx.getX(k + e)) / 3;
+      v += uv.getY(idx.getX(k + e)) / 3;
+    }
+    if (u > 0.85 && v > 0.85) continue;
+    keep.push(idx.getX(k), idx.getX(k + 1), idx.getX(k + 2));
+  }
+  g.setIndex(keep);
+}
+
+/** Texture des yeux (atlas de MakeHuman, CC0) ; coordonnées à la convention glTF (pas de retournement vertical). */
+export async function loadEyeTexture(url = EYE_TEXTURE_URL): Promise<Texture> {
+  const tex = await new TextureLoader().loadAsync(url);
+  tex.flipY = false;
+  tex.colorSpace = SRGBColorSpace;
+  return tex;
 }
 
 /** Gabarit depuis le contenu d'un `.glb` (tests sous Node, outils). */
@@ -86,10 +120,24 @@ export interface Macro {
 export interface Proportions {
   head?: number;
   neck?: number;
+  /** Bras entier (épaule → poignet), puis avant-bras seul (coude → poignet), en plus. */
   arms?: number;
+  forearm?: number;
   hands?: number;
   torso?: number;
   legs?: number;
+  /** Pieds (autour de la cheville ; R1c, Titans : la taille du pied suit la longueur de la jambe). */
+  feet?: number;
+  /** Largeurs (R1c, Titans) : carrure (le torse s'élargit, les bras s'écartent), bassin (les jambes s'écartent), profondeur
+   *  du torse et du bassin, largeur du crâne. */
+  shoulders?: number;
+  hips?: number;
+  depth?: number;
+  headWidth?: number;
+  /** Épaisseurs (R1c, Titans) : rayon des bras, des jambes, du cou autour de l'axe de leurs os. */
+  armGirth?: number;
+  legGirth?: number;
+  neckGirth?: number;
 }
 
 export interface HumanShape {
@@ -133,14 +181,16 @@ export function macroInfluences(m: Macro): Record<string, number> {
 
 // ——— Chaînes d'os (déformations au repos) ———
 
-type Chain = "tete" | "cou" | "torse" | "bassin" | "brasG" | "brasD" | "mainG" | "mainD" | "jambeG" | "jambeD" | "piedG" | "piedD";
+type Chain = "tete" | "cou" | "torse" | "bassin" | "brasG" | "brasD" | "avantBrasG" | "avantBrasD" | "mainG" | "mainD" | "jambeG" | "jambeD" | "piedG" | "piedD";
 const CHAIN_OF: [RegExp, Chain][] = [
   [/^(head|jaw|eye_l|eye_r)$/, "tete"],
   [/^neck_01$/, "cou"],
   [/^(spine_0[123]|clavicle_[lr])$/, "torse"],
   [/^(pelvis|Root)$/, "bassin"],
-  [/^(upperarm|lowerarm)_l$/, "brasG"],
-  [/^(upperarm|lowerarm)_r$/, "brasD"],
+  [/^upperarm_l$/, "brasG"],
+  [/^upperarm_r$/, "brasD"],
+  [/^lowerarm_l$/, "avantBrasG"],
+  [/^lowerarm_r$/, "avantBrasD"],
   [/^(hand|thumb_0\d|index_0\d|middle_0\d|ring_0\d|pinky_0\d)_l$/, "mainG"],
   [/^(hand|thumb_0\d|index_0\d|middle_0\d|ring_0\d|pinky_0\d)_r$/, "mainD"],
   [/^(thigh|calf)_l$/, "jambeG"],
@@ -232,7 +282,15 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
       const Sh = J(`upperarm_${side}`).clone();
       const W = J(`hand_${side}`).clone();
       const W2 = W.clone().sub(Sh).multiplyScalar(kArm).add(Sh);
-      deform([`bras${S}` as Chain], (p) => p.sub(Sh).multiplyScalar(kArm).add(Sh), (b) => b === `lowerarm_${side}`);
+      deform([`bras${S}` as Chain, `avantBras${S}` as Chain], (p) => p.sub(Sh).multiplyScalar(kArm).add(Sh), (b) => b === `lowerarm_${side}`);
+      deform([`main${S}` as Chain], (p) => p.add(W2.clone().sub(W)), (_b, c) => c === `main${S}`);
+    }
+    const kFore = pr.forearm ?? 1;
+    if (kFore !== 1) {
+      const E = J(`lowerarm_${side}`).clone();
+      const W = J(`hand_${side}`).clone();
+      const W2 = W.clone().sub(E).multiplyScalar(kFore).add(E);
+      deform([`avantBras${S}` as Chain], (p) => p.sub(E).multiplyScalar(kFore).add(E), () => false);
       deform([`main${S}` as Chain], (p) => p.add(W2.clone().sub(W)), (_b, c) => c === `main${S}`);
     }
   }
@@ -240,6 +298,10 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
     const C = J("head").clone();
     const k = pr.head ?? 1;
     deform(["tete"], (p) => p.sub(C).multiplyScalar(k).add(C), (b, c) => c === "tete" && b !== "head");
+  }
+  if ((pr.headWidth ?? 1) !== 1) {
+    const k = pr.headWidth ?? 1;
+    deform(["tete"], (p) => p.setX(p.x * k), (_b, c) => c === "tete");
   }
   if ((pr.neck ?? 1) !== 1) {
     const N0 = J("neck_01").clone();
@@ -257,7 +319,16 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
     const top = J("neck_01").y;
     const shift = (top - hipY) * (k - 1);
     deform(["torse"], (p) => p.setY(hipY + (p.y - hipY) * k), (_b, c) => c === "torse");
-    deform(["tete", "cou", "brasG", "brasD", "mainG", "mainD"], (p) => p.setY(p.y + shift), (_b, c) => ["tete", "cou", "brasG", "brasD", "mainG", "mainD"].includes(c));
+    const above: Chain[] = ["tete", "cou", "brasG", "brasD", "avantBrasG", "avantBrasD", "mainG", "mainD"];
+    deform(above, (p) => p.setY(p.y + shift), (_b, c) => above.includes(c));
+  }
+  if ((pr.feet ?? 1) !== 1) {
+    const k = pr.feet ?? 1;
+    for (const side of ["l", "r"] as const) {
+      const S = side === "l" ? "G" : "D";
+      const A = J(`foot_${side}`).clone();
+      deform([`pied${S}` as Chain], (p) => p.sub(A).multiplyScalar(k).add(A), (b, c) => c === `pied${S}` && b !== `foot_${side}`);
+    }
   }
   if ((pr.legs ?? 1) !== 1) {
     const k = pr.legs ?? 1;
@@ -270,6 +341,71 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
       deform([`pied${S}` as Chain], (p) => p.setY(p.y + shift), (_b, c) => c === `pied${S}`);
     }
   }
+  // Largeurs : le torse (ou le bassin) s'élargit autour de l'axe du corps, les membres qui s'y attachent s'écartent d'autant.
+  const widen = (k: number | undefined, core: Chain, joint: string, limbs: (S: "G" | "D") => Chain[]): void => {
+    if ((k ?? 1) === 1 || k === undefined) return;
+    deform([core], (p) => p.setX(p.x * k), (_b, c) => c === core);
+    for (const side of ["l", "r"] as const) {
+      const S = side === "l" ? "G" : "D";
+      const dx = J(`${joint}_${side}`).x * (k - 1);
+      const chains = limbs(S);
+      deform(chains, (p) => p.setX(p.x + dx), (_b, c) => chains.includes(c));
+    }
+  };
+  widen(pr.shoulders, "torse", "upperarm", (S) => [`bras${S}` as Chain, `avantBras${S}` as Chain, `main${S}` as Chain]);
+  widen(pr.hips, "bassin", "thigh", (S) => [`jambe${S}` as Chain, `pied${S}` as Chain]);
+  if ((pr.depth ?? 1) !== 1) {
+    const k = pr.depth ?? 1;
+    const z0 = (J("spine_01").z + J("spine_02").z + J("spine_03").z) / 3;
+    deform(["torse", "bassin"], (p) => p.setZ(z0 + (p.z - z0) * k), () => false);
+  }
+  // Épaisseurs : chaque sommet s'écarte de l'axe de ses os (segment articulation → articulation suivante), selon ses poids.
+  const girth = (k: number | undefined, segs: [string, string][]): void => {
+    if (k === undefined || k === 1) return;
+    const seg = new Map<number, [Vector3, Vector3]>();
+    for (const [a, b] of segs) seg.set(t.boneIndex.get(a) ?? -1, [J(a).clone(), J(b).clone()]);
+    const v = new Vector3();
+    const d = new Vector3();
+    prims.forEach((p, pi) => {
+      const arr = pos[pi] as Float32Array;
+      const si = p.geometry.getAttribute("skinIndex");
+      const sw = p.geometry.getAttribute("skinWeight");
+      for (let i = 0; i < si.count; i++) {
+        let dx = 0;
+        let dy = 0;
+        let dz = 0;
+        for (let c = 0; c < 4; c++) {
+          const s2 = seg.get(si.getComponent(i, c));
+          const w = sw.getComponent(i, c);
+          if (!s2 || w <= 0) continue;
+          const [A, B] = s2;
+          v.set(arr[i * 3] as number, arr[i * 3 + 1] as number, arr[i * 3 + 2] as number);
+          d.copy(B).sub(A);
+          const u = Math.max(0, Math.min(1, v.clone().sub(A).dot(d) / Math.max(1e-9, d.lengthSq())));
+          const off = v.sub(A.clone().addScaledVector(d, u));
+          dx += w * (k - 1) * off.x;
+          dy += w * (k - 1) * off.y;
+          dz += w * (k - 1) * off.z;
+        }
+        arr[i * 3] = (arr[i * 3] as number) + dx;
+        arr[i * 3 + 1] = (arr[i * 3 + 1] as number) + dy;
+        arr[i * 3 + 2] = (arr[i * 3 + 2] as number) + dz;
+      }
+    });
+  };
+  girth(pr.armGirth, [
+    ["upperarm_l", "lowerarm_l"],
+    ["lowerarm_l", "hand_l"],
+    ["upperarm_r", "lowerarm_r"],
+    ["lowerarm_r", "hand_r"],
+  ]);
+  girth(pr.legGirth, [
+    ["thigh_l", "calf_l"],
+    ["calf_l", "foot_l"],
+    ["thigh_r", "calf_r"],
+    ["calf_r", "foot_r"],
+  ]);
+  girth(pr.neckGirth, [["neck_01", "head"]]);
   for (const s of shape.smooth ?? []) smoothRegion(prims, pos, s.iterations, s.inflate, s.region);
 
   // Hauteur et sol (cuits dans la géométrie : aucun nœud mis à l'échelle).

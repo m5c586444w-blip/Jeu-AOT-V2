@@ -5,6 +5,7 @@ import type { RoofMaterial, WallMaterial } from "../../data/artSchemas";
 import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
 import type { EnvData, View } from "./envTypes";
+import { loadBodyKit, titanFactory } from "./bodies";
 import { buildEnvironmentMeshes } from "./envMesh";
 import type { EnvScene, EnvTextures } from "./envMesh";
 import { generateEnvironment } from "./environment";
@@ -41,7 +42,7 @@ export interface EnvProbe {
   light: LightPreset;
   view: ViewName;
   quality: Quality;
-  timings: { generate: number; textures: number; build: number };
+  timings: { generate: number; bodies: number; textures: number; build: number };
   counts: Record<string, number>;
   setLight(p: LightPreset): void;
   setView(v: ViewName): void;
@@ -180,11 +181,14 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   const t0 = performance.now();
   const env = generateEnvironment(id, seed, variantId);
   const t1 = performance.now();
+  // Corps de base (R1c) chargé à la demande, seulement si la scène a des Titans ; son chargement est compté à part.
+  const kit = env.titans.length > 0 ? await loadBodyKit(window.location.search) : null;
+  const tk = performance.now();
   const tex = envTextures(env, quality);
   // Dessin des textures avant l'assemblage, pour mesurer son coût à part.
   tex.ground();
   const t2 = performance.now();
-  const meshes: EnvScene = buildEnvironmentMeshes(env, { quality, textures: tex });
+  const meshes: EnvScene = buildEnvironmentMeshes(env, { quality, textures: tex, ...titanFactory(kit) });
   const t3 = performance.now();
 
   const host = document.createElement("div");
@@ -411,7 +415,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     light,
     view,
     quality,
-    timings: { generate: t1 - t0, textures: t2 - t1, build: t3 - t2 },
+    timings: { generate: t1 - t0, bodies: tk - t1, textures: t2 - tk, build: t3 - t2 },
     counts: meshes.counts,
     setLight(p) {
       setLight(p);

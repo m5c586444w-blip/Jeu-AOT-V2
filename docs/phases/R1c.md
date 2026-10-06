@@ -75,9 +75,9 @@ Un commit par tâche, `npm run verify` avant chacun.
 | CR1c-02 | `npm run verify` au code 0 | `npm run verify` |
 | CR1c-03 | `assets:check` au code 0 sur le dépôt ; au code 1 pour chaque cas d'échec : fichier sans entrée, licence refusée, CC-BY non attribuée, source écartée, source interdite, empreinte fausse | `npm run assets:check` ; `npx vitest run tests/lint/assets-check.test.ts` |
 | CR1c-04 | Bundle principal inchangé (critère R1b) ; `GLTFLoader` seulement dans un morceau chargé à la demande ; assets hors du bundle JS | `npm run mesure:r1c -- bundle` |
-| CR1c-05 | Corps de base : maillage, 54 os, poids normalisés, cibles ; même graine, même corps (empreinte) ; le `.glb` se charge par `GLTFLoader` | `npx vitest run tests/render/tactical3d/humain.test.ts` |
+| CR1c-05 | Corps de base : maillage, 56 os, poids normalisés, cibles ; même graine, même corps (empreinte) ; le `.glb` se charge par `GLTFLoader` | `npx vitest run tests/render/tactical3d/humain.test.ts` |
 | CR1c-06 | Soldats : corps animé, au moins 6 animations, équipement attaché aux os (suit la pose), 1,7 m à ±5 %, pieds au sol | tests ; captures |
-| CR1c-07 | Titans : hauteurs à ±5 % (3 à 120 m), proportions mesurées conformes aux paramètres (tête, jambes, bras) à ±10 %, pieds au sol, toutes les poses | `npx vitest run tests/render/tactical3d/echelle.test.ts` ; banc |
+| CR1c-07 | Titans : hauteurs à ±5 % (3 à 120 m), proportions mesurées conformes aux paramètres (tête, jambes, bras) à ±10 %, pieds au sol, toutes les poses | `npx vitest run tests/render/tactical3d/titans-r1c.test.ts tests/render/tactical3d/echelle.test.ts` ; banc |
 | CR1c-08 | Districts : saillie, deux portes, route principale de porte à porte, éléments sourcés présents ; paramètres incertains marqués `?` | tests ; captures |
 | CR1c-09 | Distinction des rendus (CR1b-06) remesurée : seuils inchangés | `npm run smoke:r1b` |
 | CR1c-10 | Comparaison avant/après collée : captures appariées revues (ligne 14), temps d'image, latence (cibles 04 §9), poids | `npm run mesure:r1c` ; rapport |

@@ -11,7 +11,7 @@ import { buildWallMeshes } from "./meshWall";
 import { buildGiantForest, buildSpray } from "./meshNature";
 import { buildCave } from "./meshCave";
 import { buildTitan, setSteamTexture } from "./titan";
-import type { Titan } from "./titan";
+import type { Titan, TitanSpec } from "./titan";
 import { titanSpec } from "./titanGallery";
 import { heightAt } from "./terrain";
 import type { VegetationMeshes } from "./meshVegetation";
@@ -39,6 +39,8 @@ export interface EnvTextures {
 export interface EnvKit {
   quality: Quality;
   textures: EnvTextures | null;
+  /** Fabrique de Titans (R1c : corps de base) ; par défaut, les figures de R1. */
+  titan?: (spec: TitanSpec, seed: number, skin: Texture | null) => Titan;
 }
 
 export interface EnvScene {
@@ -178,7 +180,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
   // Titans posés (classes, variantes, Titan-Mur dans une brèche), pieds au sol (relief compris).
   const titans: Titan[] = [];
   for (const tp of env.titans) {
-    const t = buildTitan(titanSpec(tp.type, tp.variant), tp.seed, tx?.skin() ?? null);
+    const t = (kit.titan ?? buildTitan)(titanSpec(tp.type, tp.variant), tp.seed, tx?.skin() ?? null);
     const puff = tx?.puff();
     if (puff) setSteamTexture(t, puff);
     const hf = env.terrain?.heights ?? null;

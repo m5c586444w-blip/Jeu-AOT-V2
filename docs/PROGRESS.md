@@ -3,9 +3,15 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.2 : soldats sur le corps de base (7 animations du projet, équipement de R1 porté par les os) ; `/proto3d` les utilise |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 68 fichiers, 416 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1c.3 : Titans sur la base humaine déformée par les paramètres de R1b |
+| Tâche | R1c.3 : Titans sur le corps de base, déformé par les paramètres de R1b ; prototype, banc, environnements et galerie les utilisent |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 69 fichiers, 422 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1c.4 : rendu réaliste (peau, étoffes, eau, arbres, post-traitement), puis R1c.5 districts d'après l'animé |
+
+## R1c.3 : Titans (2026-10-06)
+- `humanTitan.ts` : corps de base déformé par `data/art/titans.json` (longueurs, largeurs, épaisseurs, corpulence, ventre, expressions par cibles de visage, cheveux) ; marque de nuque sur l'os du cou ; vapeur partagée avec R1 (`titanSteam`). Facteurs résolus puis vérifiés sur le corps façonné (D-87).
+- Corps de base : nouveaux déformeurs (avant-bras, pieds, carrure, bassin, profondeur, largeur du crâne, épaisseurs) ; yeux réparés (atlas lu sans retournement, cornée retirée) ; coude donné depuis le bras tendu ; corps couchés basculés d'un bloc.
+- `bodies.ts` : `makeTitan`, `titanFactory` ; prototype, banc d'échelle, visionneuse d'environnements et galerie les utilisent (repli R1 : `?corps=primitives`). Planches `?proto3d=humain&planche=titans|poses`.
+- Tests `titans-r1c.test.ts` (6) : hauteurs à ±5 % (3–120 m), tête, jambes, bras à ±10 %, pieds au sol à 0,5 %, corps couchés, articulations, mâchoire, nuque, vapeur, déterminisme, repli.
 
 ## R1c.2 : soldats (2026-10-06)
 - `humanAnim.ts` : poses écrites par le projet sur le squelette CC0 (rotations « monde » empilées os par os) ; soldats : attente, marche, course, garde au sol, vol, accroche, frappe ; Titans : marche, course, debout, saisie, abattu, allongé, buste. Pieds posés par la semelle (24 points de peau).

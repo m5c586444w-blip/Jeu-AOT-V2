@@ -1,5 +1,5 @@
 import { Quaternion, Vector3 } from "three";
-import type { Bone } from "three";
+import type { Bone, SkinnedMesh } from "three";
 import type { HumanBody } from "./humanBase";
 
 /**
@@ -67,6 +67,16 @@ class PoseBuilder {
     return this.turn(bone, this.axis(parent, local), angle);
   }
 
+  /**
+   * Couche le corps : la pose déjà écrite (repère debout) est basculée d'un bloc par `q` autour de la racine. Les rotations des
+   * os sont conjuguées par `q` (q·R·q⁻¹), celle de la racine reçoit `q` : la rotation monde finale de chaque os est q·W.
+   */
+  lay(q: Quaternion): void {
+    for (const [b, r] of this.R) this.R.set(b, q.clone().multiply(r).multiply(q.clone().invert()));
+    const root = this.R.get("Root");
+    this.R.set("Root", root ? q.clone().multiply(root) : q.clone());
+  }
+
   commit(): void {
     for (const b of this.body.skeleton.bones) {
       const parentWorld = b.parent && (b.parent as Bone).isBone ? this.world(b.parent.name) : new Quaternion();
@@ -104,12 +114,22 @@ function elbowAxis(body: HumanBody, side: "l" | "r"): Vector3 {
   return e.clone().sub(s).normalize().cross(Z).normalize();
 }
 
+/** Flexion du coude au repos : la pose de repos de MakeHuman a les avant-bras portés vers l'avant (≈ 43°). */
+function restElbow(body: HumanBody, side: "l" | "r"): number {
+  const s = body.joints.get(`upperarm_${side}`);
+  const e = body.joints.get(`lowerarm_${side}`);
+  const w = body.joints.get(`hand_${side}`);
+  if (!s || !e || !w) return 0;
+  return e.clone().sub(s).angleTo(w.clone().sub(e));
+}
+
+/** Bras : en avant (rad), écarté (rad), flexion du coude (rad, 0 = bras tendu), torsion. */
 function arm(p: PoseBuilder, body: HumanBody, side: "l" | "r", forward: number, out: number, elbow: number, twist = 0): void {
   const s = side === "l" ? 1 : -1;
   p.turn(`upperarm_${side}`, Z, armDownAngle(body, side) + s * out);
   if (twist) p.turn(`upperarm_${side}`, Y, s * twist);
   p.turn(`upperarm_${side}`, X, -forward);
-  p.bend(`lowerarm_${side}`, elbowAxis(body, side), elbow);
+  p.bend(`lowerarm_${side}`, elbowAxis(body, side), elbow - restElbow(body, side));
 }
 
 function fingers(p: PoseBuilder, body: HumanBody, side: "l" | "r", curl: number): void {
@@ -122,16 +142,18 @@ function fingers(p: PoseBuilder, body: HumanBody, side: "l" | "r", curl: number)
 export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, phase = 0): void {
   const p = new PoseBuilder(body);
   const root = body.bones["Root"];
-  if (root) root.position.set(0, 0, 0);
+  if (root) root.position.copy(body.joints.get("Root") ?? new Vector3());
   const w = Math.sin(t * 2.2 + phase);
-  p.turn("spine_01", X, g.hunch * 0.4).turn("spine_02", X, g.hunch * 0.35).turn("spine_03", X, g.hunch * 0.25);
-  p.turn("neck_01", X, -g.hunch * 0.5);
+  // Voussure (Titans) : pas pour un corps couché, qu'elle soulèverait du sol.
+  const hunch = pose === "abattu" || pose === "allonge" ? 0 : g.hunch;
+  p.turn("spine_01", X, hunch * 0.4).turn("spine_02", X, hunch * 0.35).turn("spine_03", X, hunch * 0.25);
+  p.turn("neck_01", X, -hunch * 0.5);
   p.turn("jaw", X, 0.42 * g.mouth);
   let ground = true;
   if (pose === "attente" || pose === "debout" || pose === "buste") {
     // Repos : bras le long du corps, coudes souples, respiration ; la tête suit son inclinaison.
-    arm(p, body, "l", 0.05, g.shoulderOut * 0.5, 0.18 + 0.02 * w);
-    arm(p, body, "r", 0.05, g.shoulderOut * 0.5, 0.18 - 0.02 * w);
+    arm(p, body, "l", 0.05, g.shoulderOut * 0.5, 0.35 + 0.02 * w);
+    arm(p, body, "r", 0.05, g.shoulderOut * 0.5, 0.35 - 0.02 * w);
     fingers(p, body, "l", 0.35);
     fingers(p, body, "r", 0.35);
     p.turn("spine_03", X, 0.015 * w);
@@ -144,12 +166,15 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     const a = g.stride * (run ? 1.5 : 1);
     const sn = Math.sin(ph);
     const cs = Math.cos(ph);
-    // Jambe en appui tendue, jambe libre fléchie pendant le passage ; cheville qui déroule.
-    legs(p, "l", a * sn, 0.1 + (run ? 1.3 : 0.9) * Math.max(0, cs) ** 1.4, 0.15 * sn);
-    legs(p, "r", -a * sn, 0.1 + (run ? 1.3 : 0.9) * Math.max(0, -cs) ** 1.4, -0.15 * sn);
+    // Jambe en appui tendue, jambe libre fléchie pendant le passage. Le pied en appui reste à plat (cheville = genou − hanche) :
+    // un pied pointé soulèverait le corps ; le pied libre pointe un peu.
+    const stepL = 0.1 + (run ? 1.3 : 0.9) * Math.max(0, cs) ** 1.4;
+    const stepR = 0.1 + (run ? 1.3 : 0.9) * Math.max(0, -cs) ** 1.4;
+    legs(p, "l", a * sn, stepL, stepL - a * sn + 0.25 * Math.max(0, cs));
+    legs(p, "r", -a * sn, stepR, stepR + a * sn + 0.25 * Math.max(0, -cs));
     const swing = g.armSwing * (run ? 1.5 : 1);
-    arm(p, body, "l", -swing * sn, g.shoulderOut, run ? 1.4 : 0.25 + 0.2 * Math.max(0, -sn));
-    arm(p, body, "r", swing * sn, g.shoulderOut, run ? 1.4 : 0.25 + 0.2 * Math.max(0, sn));
+    arm(p, body, "l", -swing * sn, g.shoulderOut, run ? 1.9 : 0.45 + 0.25 * Math.max(0, -sn));
+    arm(p, body, "r", swing * sn, g.shoulderOut, run ? 1.9 : 0.45 + 0.25 * Math.max(0, sn));
     fingers(p, body, "l", run ? 0.9 : 0.4);
     fingers(p, body, "r", run ? 0.9 : 0.4);
     p.turn("pelvis", Y, 0.08 * sn).turn("spine_02", Y, -0.12 * sn).turn("pelvis", Z, 0.04 * sn);
@@ -161,8 +186,8 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     legs(p, "r", -0.2, 0.3, -0.05, 0.1);
     p.turn("spine_01", X, 0.1 + 0.01 * w).turn("spine_02", Y, 0.15);
     // Avant-bras vers l'avant, un peu sous l'horizontale : les lames prolongent les avant-bras.
-    arm(p, body, "l", 0.55, 0.3, 0.75);
-    arm(p, body, "r", 0.7, 0.25, 0.6);
+    arm(p, body, "l", 0.55, 0.3, 1.5);
+    arm(p, body, "r", 0.7, 0.25, 1.35);
     fingers(p, body, "l", 1.1);
     fingers(p, body, "r", 1.1);
     p.turn("head", Y, -0.12);
@@ -172,8 +197,8 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     legs(p, "l", 0.35, 0.5, 0.1, 0.1);
     legs(p, "r", -0.3, 0.35, -0.1, 0.12);
     p.turn("spine_02", Y, 0.6 - 1.1 * k).turn("spine_01", X, 0.18);
-    arm(p, body, "l", 1.6 - 1.4 * k, 0.6 - 0.5 * k, 0.4);
-    arm(p, body, "r", 1.4 - 1.1 * k, 0.9 - 0.8 * k, 0.5);
+    arm(p, body, "l", 1.6 - 1.4 * k, 0.6 - 0.5 * k, 1.15);
+    arm(p, body, "r", 1.4 - 1.1 * k, 0.9 - 0.8 * k, 1.25);
     fingers(p, body, "l", 1.1);
     fingers(p, body, "r", 1.1);
   } else if (pose === "vol") {
@@ -182,8 +207,8 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     p.turn("pelvis", X, 0.35);
     legs(p, "l", 0.55 + 0.1 * w, 1.0, 0.25);
     legs(p, "r", 0.4 + 0.1 * w, 0.85, 0.25);
-    arm(p, body, "l", -0.7, 0.4, 0.4);
-    arm(p, body, "r", -0.7, 0.4, 0.4);
+    arm(p, body, "l", -0.7, 0.4, 1.15);
+    arm(p, body, "r", -0.7, 0.4, 1.15);
     fingers(p, body, "l", 1.1);
     fingers(p, body, "r", 1.1);
     p.turn("neck_01", X, -0.45).turn("head", X, -0.2);
@@ -193,8 +218,8 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     legs(p, "l", 0.9, 1.3, 0.2);
     legs(p, "r", 0.7, 1.0, 0.1);
     p.turn("spine_01", X, 0.45);
-    arm(p, body, "l", 0.3, 0.6, 1.0);
-    arm(p, body, "r", 1.3, 0.2, 0.3);
+    arm(p, body, "l", 0.3, 0.6, 1.75);
+    arm(p, body, "r", 1.3, 0.2, 1.05);
     fingers(p, body, "l", 1.1);
     fingers(p, body, "r", 1.1);
     p.turn("neck_01", X, -0.55);
@@ -204,32 +229,36 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     legs(p, "l", 0.5, 0.75, 0.15);
     legs(p, "r", 0.3, 0.5, 0.05);
     p.turn("spine_01", X, 0.35 + br).turn("spine_02", X, 0.12);
-    arm(p, body, "r", 1.5 + br, 0.15, 0.15);
-    arm(p, body, "l", 0.75, 0.35, 1.2);
+    arm(p, body, "r", 1.5 + br, 0.15, 0.3);
+    arm(p, body, "l", 0.75, 0.35, 1.95);
     fingers(p, body, "r", 0.15);
     fingers(p, body, "l", 1.5);
     p.turn("neck_01", X, -0.45).turn("head", X, -0.15);
     p.turn("jaw", X, 0.35 * g.mouth + 0.06);
   } else if (pose === "abattu") {
-    // Face contre terre : le corps entier pivote autour de x, membres écartés au sol, tête de côté.
+    // Face contre terre : pose écrite debout puis basculée ; membres écartés dans le plan du dos (au sol), tête de côté.
     ground = false;
-    p.turn("Root", X, Math.PI / 2);
-    arm(p, body, "l", 0.2, 1.1, 0.5);
-    arm(p, body, "r", 2.2, -0.2, 0.3);
-    legs(p, "l", 0.05, 0.15, 0, 0.18);
-    legs(p, "r", -0.02, 0.05, 0, 0.1);
+    // Bras dans le plan des épaules : la main, tombante au repos, touche le sol ; inclinés vers le sol, ils soulèveraient le
+    // corps.
+    arm(p, body, "l", 0, 1.1, 0.1);
+    arm(p, body, "r", 0, 2.5, 0.1);
+    // Pieds tendus dans le prolongement des jambes : couché sur le ventre, le corps ne repose pas sur la pointe des pieds.
+    legs(p, "l", 0.05, 0.15, -1.2, 0.18);
+    legs(p, "r", -0.02, 0.05, -1.2, 0.1);
     p.turn("neck_01", Y, 1.0);
     p.turn("jaw", X, 0.25);
+    p.lay(qa(X, Math.PI / 2));
   } else {
     // Allongé (Titan de Rod Reiss) : à plat ventre, bras tendus vers l'avant pour ramper, tête relevée.
     ground = false;
-    p.turn("Root", X, Math.PI / 2);
-    arm(p, body, "l", 2.6, 0.25, 0.35);
-    arm(p, body, "r", 2.9, 0.2, 0.15);
-    legs(p, "l", -0.08, 0.5, 0, 0.12);
-    legs(p, "r", -0.02, 0, 0, 0.1);
+    // Au-dessus de la tête (π), dans le plan des épaules ; le bras gauche, relevé, tend vers l'avant.
+    arm(p, body, "l", Math.PI + 0.2, 0.3, 0.3);
+    arm(p, body, "r", Math.PI, 0.2, 0.1);
+    legs(p, "l", -0.08, 0.5, -1.1, 0.12);
+    legs(p, "r", -0.02, 0, -1.2, 0.1);
     p.turn("neck_01", X, -0.55).turn("head", X, -0.35);
     p.turn("jaw", X, 0.5);
+    p.lay(qa(X, Math.PI / 2));
   }
   p.commit();
   body.group.updateMatrixWorld(true);
@@ -274,19 +303,34 @@ export function groundFeet(body: HumanBody): void {
   body.group.updateMatrixWorld(true);
 }
 
-/** Corps couché : son point le plus bas (articulations, plus une demi-épaisseur) au sol. */
+/** Échantillon de la peau (un sommet sur 12 par région), pour poser un corps couché. */
+const skinCache = new WeakMap<HumanBody, [SkinnedMesh, number[]][]>();
+function skinSamples(body: HumanBody): [SkinnedMesh, number[]][] {
+  let s = skinCache.get(body);
+  if (s) return s;
+  s = [];
+  for (const m of body.meshes.values()) {
+    if (!m.name.startsWith("peau_")) continue;
+    const n = m.geometry.getAttribute("position").count;
+    s.push([m, Array.from({ length: Math.ceil(n / 12) }, (_, k) => k * 12)]);
+  }
+  skinCache.set(body, s);
+  return s;
+}
+
+/** Corps couché : son point de peau le plus bas (échantillonné) au sol. */
 function groundLowest(body: HumanBody): void {
   const root = body.bones["Root"];
   if (!root) return;
-  const v = new Vector3();
+  body.skeleton.update();
   const inv = body.group.matrixWorld.clone().invert();
+  const v = new Vector3();
   let low = Infinity;
-  for (const b of body.skeleton.bones) {
-    b.getWorldPosition(v);
-    low = Math.min(low, v.applyMatrix4(inv).y);
+  for (const [m, ids] of skinSamples(body)) {
+    const toGroup = inv.clone().multiply(m.matrixWorld);
+    for (const i of ids) low = Math.min(low, m.getVertexPosition(i, v).applyMatrix4(toGroup).y);
   }
-  // Les articulations sont dans l'épaisseur du corps : on laisse l'épaisseur du torse sous la plus basse.
-  const thick = Math.abs((body.joints.get("spine_02")?.z ?? 0) - (body.joints.get("pelvis")?.z ?? 0)) + 0.09 * body.height;
-  root.position.y -= low - thick;
+  if (!Number.isFinite(low)) return;
+  root.position.y -= low;
   body.group.updateMatrixWorld(true);
 }

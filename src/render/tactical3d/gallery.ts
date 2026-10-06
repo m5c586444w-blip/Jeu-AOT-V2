@@ -1,6 +1,8 @@
 import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector3, WebGLRenderer } from "three";
 import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
+import { loadBodyKit, titanFactory } from "./bodies";
+import type { BodyKit } from "./bodies";
 import { buildEnvironmentMeshes } from "./envMesh";
 import { generateEnvironment, supportedGenerators } from "./environment";
 import { envTextures, fogScaleOf, undergroundOf } from "./envViewer";
@@ -105,13 +107,15 @@ export async function startGallery(root: HTMLElement, probe: WebGLProbe): Promis
   renderer.setSize(W, H, false);
   const camera = new PerspectiveCamera(55, W / H, 0.5, 9000);
   const t0 = performance.now();
+  let bodyKit: BodyKit | null = null;
   for (const job of jobs) {
     status.textContent = fill(TX.galleryRendering, { i: state.done + 1, n: jobs.length });
     // Laisse le navigateur peindre la page entre deux environnements.
     await new Promise((r) => setTimeout(r, 0));
     const env = generateEnvironment(job.id, seed);
     const tex = envTextures(env, "bas");
-    const meshes = buildEnvironmentMeshes(env, { quality: "bas", textures: tex });
+    const kit = env.titans.length > 0 ? (bodyKit ??= await loadBodyKit(window.location.search)) : null;
+    const meshes = buildEnvironmentMeshes(env, { quality: "bas", textures: tex, ...titanFactory(kit) });
     const scene = new Scene();
     scene.add(meshes.group);
     const v = env.views.principale;

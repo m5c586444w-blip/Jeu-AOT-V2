@@ -205,6 +205,8 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt et en marche.
       for (const b of blades) b.visible = p !== "attente" && p !== "marche";
       group.updateMatrixWorld(true);
+      // Matrices d'os à jour : les mesures sur la peau (boîtes englobantes) suivent la pose.
+      body.skeleton.update();
     },
     dispose() {
       body.dispose();
@@ -242,10 +244,11 @@ export function regionBounds(body: HumanBody): Map<string, { minX: number; maxX:
  * sous l'occiput), décalés le long de la normale. Articulée par les mêmes os que la tête.
  */
 /** Poids de chevelure d'un sommet de la tête (0 : peau, 1 : cheveux), lisse : front, tempes, nuque ; jamais les oreilles. */
-export function hairWeight(body: HumanBody, p: Vector3, inset = 0, nape = 0): number {
+export function hairWeight(body: HumanBody, p: Vector3, inset = 0, nape = 0, scale = body.height / 1.7): number {
   const eye = body.joints.get("eye_l") ?? new Vector3();
   const hj = body.joints.get("head") ?? new Vector3();
-  const s = body.height / 1.7;
+  // Échelle de la tête (un soldat : sa taille / 1,7 m ; un Titan : la taille de sa tête, qui ne suit pas sa hauteur).
+  const s = scale;
   const front = Math.max(0, Math.min(1, (p.z - hj.z) / (0.09 * s)));
   const limit = eye.y + (0.045 - nape) * s * front + (-0.055 - nape) * s * (1 - front) + inset * s;
   const ear = Math.abs(p.x) > 0.062 * s && p.y < eye.y + 0.02 * s && p.z > hj.z - 0.05 * s;
@@ -254,7 +257,7 @@ export function hairWeight(body: HumanBody, p: Vector3, inset = 0, nape = 0): nu
 }
 
 /** Teinte des cheveux portée par la couleur de sommet de la tête (le matériau de la tête est en couleurs de sommet). */
-export function paintHair(body: HumanBody, hair: Material, skin: MeshStandardMaterial): void {
+export function paintHair(body: HumanBody, hair: Material, skin: MeshStandardMaterial, scale = body.height / 1.7): void {
   const head = body.meshes.get("peau_tete");
   const hc = (hair as MeshStandardMaterial).color;
   if (!head || !hc) return;
@@ -263,7 +266,7 @@ export function paintHair(body: HumanBody, hair: Material, skin: MeshStandardMat
   const ratio = new Color(hc.r / Math.max(0.05, skin.color.r), hc.g / Math.max(0.05, skin.color.g), hc.b / Math.max(0.05, skin.color.b));
   const v = new Vector3();
   for (let i = 0; i < pos.count; i++) {
-    const w = hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)));
+    const w = hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)), 0, 0, scale);
     col[i * 3] = 1 + (ratio.r - 1) * w;
     col[i * 3 + 1] = 1 + (ratio.g - 1) * w;
     col[i * 3 + 2] = 1 + (ratio.b - 1) * w;
@@ -271,7 +274,7 @@ export function paintHair(body: HumanBody, hair: Material, skin: MeshStandardMat
   head.geometry.setAttribute("color", new BufferAttribute(col, 3));
 }
 
-export function buildHairCap(body: HumanBody, mat: Material, thickness: number, inset = 0, nape = 0): SkinnedMesh | null {
+export function buildHairCap(body: HumanBody, mat: Material, thickness: number, inset = 0, nape = 0, scale = body.height / 1.7): SkinnedMesh | null {
   const head = body.meshes.get("peau_tete");
   if (!head) return null;
   const pos = head.geometry.getAttribute("position");
@@ -286,7 +289,7 @@ export function buildHairCap(body: HumanBody, mat: Material, thickness: number, 
     let w = 0;
     for (let k = 0; k < 4; k++) if (headBones.has(si.getComponent(i, k))) w += sw.getComponent(i, k);
     if (w < 0.95) return false;
-    return hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)), inset, nape) >= 1;
+    return hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)), inset, nape, scale) >= 1;
   };
   const keep: number[] = [];
   for (let k = 0; k < idx.count; k += 3) {
@@ -300,7 +303,7 @@ export function buildHairCap(body: HumanBody, mat: Material, thickness: number, 
   const p = new Float32Array(n * 3);
   for (let i = 0; i < n; i++) {
     // L'épaisseur s'amincit vers le bord de la coque : pas de marche visible à la lisière.
-    const w = Math.min(1, hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)), inset - 0.03, nape));
+    const w = Math.min(1, hairWeight(body, v.set(pos.getX(i), pos.getY(i), pos.getZ(i)), inset - 0.03, nape, scale));
     for (let k = 0; k < 3; k++) p[i * 3 + k] = pos.getComponent(i, k) + nor.getComponent(i, k) * thickness * w;
   }
   const g = new BufferGeometry();

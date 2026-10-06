@@ -10,11 +10,11 @@ import type { Quality } from "./quality";
 import { derive } from "./rng";
 import { SOLDIER_POSES, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
 import type { SoldierLike, SoldierPose } from "./soldier";
-import { loadBodyKit, makeSoldier } from "./bodies";
+import { loadBodyKit, makeSoldier, makeTitan } from "./bodies";
 import { TX, fill } from "./texts";
 import { puffTexture, skinTexture } from "./textures";
-import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, buildTitan, setSteamTexture } from "./titan";
-import type { TitanPose } from "./titan";
+import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, setSteamTexture } from "./titan";
+import type { Titan, TitanPose } from "./titan";
 import { generateTown } from "./town";
 import { buildTownMeshes } from "./townMesh";
 
@@ -153,7 +153,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   // ——— Titans ———
   const skinMap = skinTexture(seed);
   const puff = puffTexture();
-  const titans = [buildTitan(TITAN_SMALL, seed, skinMap), buildTitan(TITAN_LARGE, seed, skinMap)] as const;
+  const titans = [makeTitan(kit, TITAN_SMALL, seed, skinMap), makeTitan(kit, TITAN_LARGE, seed, skinMap)] as const;
   for (const t of titans) {
     setSteamTexture(t, puff);
     scene.add(t.group);
@@ -213,13 +213,13 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
 
   // ——— Planche des poses : construite à la première demande ———
   const sheetOrigin = new Vector3((town.bounds.minX + town.bounds.maxX) / 2, 0, town.bounds.maxY + 110);
-  const sheet: { t: ReturnType<typeof buildTitan>; pose: TitanPose }[] = [];
+  const sheet: { t: Titan; pose: TitanPose }[] = [];
   const sheetSoldiers: { s: SoldierLike; pose: SoldierPose }[] = [];
   const buildSheet = (): void => {
     if (sheet.length > 0) return;
     TITAN_POSES.forEach((pose, i) => {
       for (const [spec, row, gap, shift] of [[TITAN_SMALL, 0, 15, -5], [TITAN_LARGE, -38, 27, 7]] as const) {
-        const t = buildTitan(spec, seed, skinMap);
+        const t = makeTitan(kit, spec, seed, skinMap);
         setSteamTexture(t, puff);
         t.group.position.copy(sheetOrigin).add(new Vector3((i - 1) * gap + shift - (pose === "abattu" ? spec.height * 0.5 : 0), 0, row));
         // De trois quarts, pour lire les bras tendus ; l'abattu de profil.
