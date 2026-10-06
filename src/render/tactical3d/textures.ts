@@ -317,20 +317,33 @@ export function flagTexture(seed: number): Texture {
   return tex(c);
 }
 
-/** Herbe rase et terre battue, hors de la ville. */
+/**
+ * Herbe rase et terre battue, hors de la ville. Pas de grandes taches : vue de haut, une tache se reconnaît à chaque
+ * répétition de la tuile (04 §2.4). Beaucoup de petites touches, raccordées aux bords (tuile sans couture).
+ */
 export function grassTexture(seed: number): Texture {
   const rand = seeded(derive(seed, 500));
-  const S = 512;
+  const S = 1024;
   const [c, g] = canvas(S, S);
   g.fillStyle = "rgb(104,108,72)";
   g.fillRect(0, 0, S, S);
-  for (let i = 0; i < 60; i++) {
-    g.fillStyle = rand() < 0.5 ? `rgba(130,118,80,${0.15 + rand() * 0.2})` : `rgba(70,84,52,${0.15 + rand() * 0.2})`;
-    g.beginPath();
-    g.ellipse(rand() * S, rand() * S, 20 + rand() * 80, 10 + rand() * 40, rand() * 3, 0, Math.PI * 2);
-    g.fill();
+  for (let i = 0; i < 900; i++) {
+    g.fillStyle = rand() < 0.5 ? `rgba(128,118,80,${0.05 + rand() * 0.08})` : `rgba(72,86,52,${0.05 + rand() * 0.08})`;
+    const x = rand() * S;
+    const y = rand() * S;
+    const rx = 6 + rand() * 22;
+    const ry = 4 + rand() * 12;
+    const a = rand() * 3;
+    // Copies décalées d'une tuile : les touches qui débordent reviennent de l'autre côté.
+    for (const dx of [-S, 0, S]) {
+      for (const dy of [-S, 0, S]) {
+        g.beginPath();
+        g.ellipse(x + dx, y + dy, rx, ry, a, 0, Math.PI * 2);
+        g.fill();
+      }
+    }
   }
-  for (let i = 0; i < 9000; i++) {
+  for (let i = 0; i < 30000; i++) {
     const v = rand();
     g.strokeStyle = v < 0.5 ? "rgba(60,72,40,0.5)" : "rgba(150,150,96,0.45)";
     const x = rand() * S;
@@ -384,6 +397,6 @@ export function skinTexture(seed: number): Texture {
     }
     g.stroke();
   }
-  speckle(g, rand, S, S, 2500, 0.08);
+  speckle(g, rand, S, S, 2500, 0.025);
   return tex(c);
 }

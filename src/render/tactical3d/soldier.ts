@@ -163,7 +163,7 @@ export function buildSoldier(seed: number, mats: SoldierMaterials): Soldier {
         j.epauleD.rotation.set(0.9, 0, -0.35);
         j.coudeG.rotation.x = -0.4;
         j.coudeD.rotation.x = -0.4;
-        j.cape.rotation.x = -1.15 - 0.15 * w;
+        j.cape.rotation.x = -0.85 - 0.12 * w;
         j.cou.rotation.x = -0.5;
       } else if (p === "accroche") {
         // Pieds contre le mur (le groupe est tourné pour que « haut » sorte du mur), genoux fléchis, prêt à s'élancer.

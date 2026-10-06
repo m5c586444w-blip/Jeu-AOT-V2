@@ -283,7 +283,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
 
   // Sol : prairie, chaussée pavée de la ville, îlots dallés, place.
   const grass = grassTexture(seed);
-  grass.repeat.set(140, 140);
+  grass.repeat.set(100, 100);
   const cob = cobbleTexture(seed);
   const flag = flagTexture(seed);
   textures.push(grass, cob, flag);

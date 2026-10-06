@@ -537,3 +537,19 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Marque de nuque.** Tache rouge derrière le cou, sous le crâne, légèrement émissive pour rester lisible la nuit ; elle s'éteint quand le Titan est abattu. C'est un repère de lisibilité du point faible (03 §4.2). Le test vérifie qu'elle est rouge, derrière la tête et à hauteur de nuque.
 - **Écart trouvé par le test.** La première version annonçait des mains « sous le genou » pour le grand ; la mesure les a trouvées au-dessus (28,5 % de la hauteur, genou à 26,7 %). Les bras ont été allongés (avant-bras 0,195 → 0,215 H) ; le test compare chaque main à son propre genou.
 - **Place.** Pour loger un Titan de 15 m, la place couvre deux îlots voisins, traversés par une rue (environ 90 × 35 m).
+
+## 2026-10-06 — D-84 Caméras et qualité de l'essai 3D (R1.6)
+- **Caméras** (03 §13 : « libre, suivre escouade… ») :
+  - libre : orbite, zoom, déplacement ;
+  - suivi d'escouade (touches 1–4) : la cible glisse vers le centre de l'escouade et la caméra garde son décalage, l'orbite reste possible. Autour du grand Titan, la caméra se place dos à lui ; sinon, côté place, face à l'escouade ;
+  - vues fixes : vue Titan, vue de dessus des 300 soldats, planche des poses.
+- **Qualité.** Trois préréglages, sur les postes qui coûtent sur une machine modeste :
+
+  | Préréglage | Résolution interne | Ombres | Anticrénelage | Réverbères la nuit |
+  |---|---|---|---|---|
+  | Basse | 75 % | non | non | 2 |
+  | Moyenne (défaut) | 100 % | 1024² | non | 4 |
+  | Haute | jusqu'à 200 % selon l'écran | 2048² | oui (MSAA) | 8 |
+
+  L'anticrénelage se fixe à la création du contexte WebGL : changer de préréglage recrée le moteur et y rebranche les contrôles.
+- **Prairie.** La première texture d'herbe, à grandes taches, se répétait de façon visible vue de dessus (contraire à 04 §2.4). Elle est remplacée par une tuile de 1024 px, sans couture, à petites touches.

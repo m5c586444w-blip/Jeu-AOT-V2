@@ -22,6 +22,7 @@ export const TX = {
   camSuivi: "Suivi d'escouade",
   camTitan: "Vue Titan",
   camDessus: "Vue de dessus",
+  camPlanche: "Planche des poses",
   squad: "Escouade {n}",
   quality: "Qualité",
   qBas: "Basse",

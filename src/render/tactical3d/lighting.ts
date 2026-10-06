@@ -1,5 +1,5 @@
 import { BackSide, BufferAttribute, BufferGeometry, Color, DirectionalLight, FogExp2, Group, HemisphereLight, Mesh, MeshBasicMaterial, PointLight, Points, PointsMaterial, SphereGeometry, Vector3 } from "three";
-import type { MeshStandardMaterial, Scene, WebGLRenderer } from "three";
+import type { MeshStandardMaterial, Scene } from "three";
 import { derive, seeded } from "./rng";
 
 /**
@@ -41,6 +41,10 @@ const PRESETS: Record<LightPreset, PresetDef> = {
 export interface LightRig {
   readonly sun: DirectionalLight;
   readonly preset: LightPreset;
+  /** Exposition du rendu pour l'heure choisie (le moteur la lit à chaque image). */
+  readonly exposure: number;
+  /** Nombre de réverbères qui éclairent vraiment (qualité). */
+  setLampLimit(n: number): void;
   apply(preset: LightPreset): void;
   /** Le dôme du ciel suit la caméra. */
   follow(camera: Vector3): void;
@@ -49,7 +53,7 @@ export interface LightRig {
   dispose(): void;
 }
 
-export function createLighting(scene: Scene, renderer: WebGLRenderer, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3 }): LightRig {
+export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3 }): LightRig {
   const group = new Group();
   group.name = "eclairage";
   scene.add(group);
@@ -99,6 +103,16 @@ export function createLighting(scene: Scene, renderer: WebGLRenderer, seed: numb
   });
 
   let current: LightPreset = "jour";
+  let exposure = 1;
+  let lampLimit = lamps.length;
+  const showLamps = (): void => {
+    const d = PRESETS[current];
+    lamps.forEach((l, i) => {
+      l.intensity = d.lampIntensity;
+      // Une lumière éteinte mais visible est quand même calculée par chaque pixel : on la retire du rendu.
+      l.visible = d.lampIntensity > 0 && i < lampLimit;
+    });
+  };
   const tmp = new Vector3();
   const dirOf = (d: PresetDef): Vector3 => {
     const el = (d.elevation * Math.PI) / 180;
@@ -112,6 +126,13 @@ export function createLighting(scene: Scene, renderer: WebGLRenderer, seed: numb
     get preset() {
       return current;
     },
+    get exposure() {
+      return exposure;
+    },
+    setLampLimit(n) {
+      lampLimit = n;
+      showLamps();
+    },
     apply(preset) {
       current = preset;
       const d = PRESETS[preset];
@@ -124,7 +145,7 @@ export function createLighting(scene: Scene, renderer: WebGLRenderer, seed: numb
       hemi.intensity = d.hemiIntensity;
       fog.color.set(d.fog);
       fog.density = d.fogDensity;
-      renderer.toneMappingExposure = d.exposure;
+      exposure = d.exposure;
       const pos = skyGeo.getAttribute("position");
       const col = skyGeo.getAttribute("color");
       const hz = new Color(d.horizon);
@@ -145,11 +166,7 @@ export function createLighting(scene: Scene, renderer: WebGLRenderer, seed: numb
       stars.visible = d.stars;
       for (const m of opts.windowMaterials) m.emissiveIntensity = d.windows;
       opts.lanternMaterial.emissiveIntensity = d.lanterns;
-      // Une lumière éteinte mais visible est quand même calculée par chaque pixel : on la retire du rendu.
-      for (const l of lamps) {
-        l.intensity = d.lampIntensity;
-        l.visible = d.lampIntensity > 0;
-      }
+      showLamps();
     },
     follow(camera) {
       sky.position.copy(camera);
