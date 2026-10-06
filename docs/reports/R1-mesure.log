@@ -1,0 +1,52 @@
+
+> murs-et-sang@0.0.1 mesure:r1
+> tsx src/tools/mesure-r1.ts tout
+
+
+=== Bundle (commit de départ 13c9f77 contre l'état courant) ===
+bundle principal avant : assets/index-CjXECuud.js  900697 octets (266.1 Kio gzip), signatures THREE. : 0
+bundle principal après : assets/index-VG5CXnb-.js  901113 octets (266.3 Kio gzip), signatures THREE. : 0
+écart : 416 octets bruts, 193 octets gzip
+CSS principal : 45945 → 46078 octets (133)
+morceaux chargés à la demande par /proto3d :
+  assets/proto-CBXi8MQF.js  622048 octets (156.1 Kio gzip), THREE. : 45
+  assets/entry-D80t_dAE.js  3656 octets (1.8 Kio gzip), THREE. : 0
+  assets/entry-C4AtPlFB.css  2270 octets (0.8 Kio gzip), THREE. : 0
+morceaux contenant three.js : assets/proto-CBXi8MQF.js
+total JS + CSS de dist : 2145276 → 2773799 octets (+628523)
+three.js hors du bundle principal : OUI
+
+=== Images par seconde, chargement, mémoire (construction de production, http://localhost:4183/) ===
+Chromium /opt/pw-browsers/chromium ; WebGL : ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+chauffe 3 s, mesure 8 s ; RSS = somme des processus du navigateur
+2D rue  —      1366×768    12.82 img/s (103 images en 8.0 s) · prêt en 2.25 s · tas JS 128.2 Mo · RSS navigateur 1202 Mo (dont GPU 299 Mo) · ensemble · 4 escouades
+2D 300  —      1366×768     9.14 img/s (74 images en 8.1 s) · prêt en 2.13 s · tas JS 129.4 Mo · RSS navigateur 1215 Mo (dont GPU 302 Mo) · ensemble · 47 escouades
+3D rue  bas    1366×768     4.77 img/s (39 images en 8.2 s) · prêt en 1.93 s · tas JS 23.4 Mo · RSS navigateur 775 Mo (dont GPU 155 Mo) · 566 appels, 182 k triangles, ombres non, MSAA non, tampon 1024×576
+3D 300  bas    1366×768    13.05 img/s (105 images en 8.0 s) · prêt en 1.21 s · tas JS 17.9 Mo · RSS navigateur 761 Mo (dont GPU 139 Mo) · 9 appels, 137 k triangles, ombres non, MSAA non, tampon 1024×576
+3D rue  moyen  1366×768     2.02 img/s (17 images en 8.4 s) · prêt en 2.54 s · tas JS 21.6 Mo · RSS navigateur 805 Mo (dont GPU 177 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 1366×768
+3D 300  moyen  1366×768     5.24 img/s (42 images en 8.0 s) · prêt en 1.56 s · tas JS 19.4 Mo · RSS navigateur 796 Mo (dont GPU 170 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA non, tampon 1366×768
+3D rue  haut   1366×768     1.61 img/s (13 images en 8.1 s) · prêt en 2.88 s · tas JS 17.3 Mo · RSS navigateur 860 Mo (dont GPU 238 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 1366×768
+3D 300  haut   1366×768     3.55 img/s (29 images en 8.2 s) · prêt en 1.81 s · tas JS 23.9 Mo · RSS navigateur 858 Mo (dont GPU 233 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 1366×768
+2D rue  —      2560×1440    3.47 img/s (28 images en 8.1 s) · prêt en 2.47 s · tas JS 128.8 Mo · RSS navigateur 1595 Mo (dont GPU 581 Mo) · ensemble · 4 escouades
+2D 300  —      2560×1440    3.13 img/s (26 images en 8.3 s) · prêt en 2.61 s · tas JS 130.6 Mo · RSS navigateur 1599 Mo (dont GPU 584 Mo) · ensemble · 47 escouades
+3D rue  bas    2560×1440    1.59 img/s (13 images en 8.2 s) · prêt en 2.65 s · tas JS 33.3 Mo · RSS navigateur 854 Mo (dont GPU 207 Mo) · 566 appels, 182 k triangles, ombres non, MSAA non, tampon 1920×1080
+3D 300  bas    2560×1440    5.13 img/s (42 images en 8.2 s) · prêt en 1.51 s · tas JS 17.3 Mo · RSS navigateur 830 Mo (dont GPU 188 Mo) · 9 appels, 137 k triangles, ombres non, MSAA non, tampon 1920×1080
+3D rue  moyen  2560×1440    0.74 img/s (7 images en 9.5 s) · prêt en 4.54 s · tas JS 16.7 Mo · RSS navigateur 912 Mo (dont GPU 251 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 2560×1440
+3D 300  moyen  2560×1440    2.23 img/s (18 images en 8.1 s) · prêt en 2.11 s · tas JS 12.5 Mo · RSS navigateur 897 Mo (dont GPU 238 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA non, tampon 2560×1440
+3D rue  haut   2560×1440    0.64 img/s (6 images en 9.3 s) · prêt en 5.32 s · tas JS 13.2 Mo · RSS navigateur 1044 Mo (dont GPU 386 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 2560×1440
+3D 300  haut   2560×1440    1.76 img/s (15 images en 8.5 s) · prêt en 2.43 s · tas JS 22.9 Mo · RSS navigateur 1030 Mo (dont GPU 375 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 2560×1440
+2D rue  —      3840×2160    1.57 img/s (13 images en 8.3 s) · prêt en 4.07 s · tas JS 128.6 Mo · RSS navigateur 2281 Mo (dont GPU 1092 Mo) · ensemble · 4 escouades
+2D 300  —      3840×2160    1.50 img/s (12 images en 8.0 s) · prêt en 3.54 s · tas JS 130.2 Mo · RSS navigateur 2248 Mo (dont GPU 1082 Mo) · ensemble · 47 escouades
+3D rue  bas    3840×2160    0.79 img/s (7 images en 8.9 s) · prêt en 4.22 s · tas JS 28.2 Mo · RSS navigateur 962 Mo (dont GPU 282 Mo) · 566 appels, 182 k triangles, ombres non, MSAA non, tampon 2880×1620
+3D 300  bas    3840×2160    2.61 img/s (21 images en 8.0 s) · prêt en 1.81 s · tas JS 30.9 Mo · RSS navigateur 941 Mo (dont GPU 263 Mo) · 9 appels, 137 k triangles, ombres non, MSAA non, tampon 2880×1620
+3D rue  moyen  3840×2160    0.36 img/s (4 images en 11.1 s) · prêt en 8.88 s · tas JS 9.4 Mo · RSS navigateur 1081 Mo (dont GPU 367 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 3840×2160
+3D 300  moyen  3840×2160    1.18 img/s (10 images en 8.5 s) · prêt en 3.17 s · tas JS 21.1 Mo · RSS navigateur 1063 Mo (dont GPU 351 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA non, tampon 3840×2160
+3D rue  haut   3840×2160    0.35 img/s (4 images en 11.6 s) · prêt en 9.26 s · tas JS 9.9 Mo · RSS navigateur 1353 Mo (dont GPU 638 Mo) · 1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 3840×2160
+3D 300  haut   3840×2160    1.00 img/s (8 images en 8.0 s) · prêt en 3.40 s · tas JS 19.2 Mo · RSS navigateur 1333 Mo (dont GPU 626 Mo) · 717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 3840×2160
+
+=== Chargement à débit limité ===
+2D chargement à 10 Mbit/s, 40 ms : prêt en 2.50 s ; JS transféré 477 Kio
+3D chargement à 10 Mbit/s, 40 ms : prêt en 3.14 s ; JS transféré 484 Kio
+
+résultats : docs/reports/R1-mesures.json
+CODE 0

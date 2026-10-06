@@ -1,0 +1,375 @@
+{
+  "date": "2026-10-06T16:41:38.372Z",
+  "start": "13c9f77",
+  "bundle": {
+    "before": {
+      "main": "assets/index-CjXECuud.js",
+      "file": "assets/index-CjXECuud.js",
+      "bytes": 900697,
+      "gzip": 272496,
+      "three": 0,
+      "css": 45945
+    },
+    "after": {
+      "main": "assets/index-VG5CXnb-.js",
+      "file": "assets/index-VG5CXnb-.js",
+      "bytes": 901113,
+      "gzip": 272689,
+      "three": 0,
+      "css": 46078
+    },
+    "lazy": [
+      {
+        "file": "assets/proto-CBXi8MQF.js",
+        "bytes": 622048,
+        "gzip": 159807,
+        "three": 45
+      },
+      {
+        "file": "assets/entry-D80t_dAE.js",
+        "bytes": 3656,
+        "gzip": 1800,
+        "three": 0
+      },
+      {
+        "file": "assets/entry-C4AtPlFB.css",
+        "bytes": 2270,
+        "gzip": 822,
+        "three": 0
+      }
+    ],
+    "threeChunks": [
+      "assets/proto-CBXi8MQF.js"
+    ],
+    "totalBefore": 2145276,
+    "totalAfter": 2773799,
+    "threeOutOfMain": true
+  },
+  "webgl": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "rows": [
+    {
+      "rendu": "2D",
+      "scene": "rue",
+      "qualite": "—",
+      "taille": "1366×768",
+      "fps": 12.815727261415951,
+      "images": 103,
+      "chargementMs": 2254.199999999255,
+      "tasMo": 128.19692993164062,
+      "rssMo": 1201.99609375,
+      "gpuMo": 299.41796875,
+      "detail": "ensemble · 4 escouades"
+    },
+    {
+      "rendu": "2D",
+      "scene": "300",
+      "qualite": "—",
+      "taille": "1366×768",
+      "fps": 9.142800662235501,
+      "images": 74,
+      "chargementMs": 2126.7999999998137,
+      "tasMo": 129.37567520141602,
+      "rssMo": 1215.4296875,
+      "gpuMo": 301.70703125,
+      "detail": "ensemble · 47 escouades"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "bas",
+      "taille": "1366×768",
+      "fps": 4.766385979492427,
+      "images": 39,
+      "chargementMs": 1927.5,
+      "tasMo": 23.447608947753906,
+      "rssMo": 775.2578125,
+      "gpuMo": 154.90234375,
+      "detail": "566 appels, 182 k triangles, ombres non, MSAA non, tampon 1024×576"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "bas",
+      "taille": "1366×768",
+      "fps": 13.046719681908549,
+      "images": 105,
+      "chargementMs": 1214.4000000003725,
+      "tasMo": 17.906513214111328,
+      "rssMo": 761.4453125,
+      "gpuMo": 138.59765625,
+      "detail": "9 appels, 137 k triangles, ombres non, MSAA non, tampon 1024×576"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "moyen",
+      "taille": "1366×768",
+      "fps": 2.0214030915576693,
+      "images": 17,
+      "chargementMs": 2538.2999999998137,
+      "tasMo": 21.565628051757812,
+      "rssMo": 805.2421875,
+      "gpuMo": 176.9609375,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 1366×768"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "moyen",
+      "taille": "1366×768",
+      "fps": 5.2431184070906935,
+      "images": 42,
+      "chargementMs": 1562.9000000003725,
+      "tasMo": 19.43100357055664,
+      "rssMo": 796.41015625,
+      "gpuMo": 170.29296875,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA non, tampon 1366×768"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "haut",
+      "taille": "1366×768",
+      "fps": 1.6106850367358971,
+      "images": 13,
+      "chargementMs": 2877.7000000001863,
+      "tasMo": 17.28396987915039,
+      "rssMo": 859.58984375,
+      "gpuMo": 238.14453125,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 1366×768"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "haut",
+      "taille": "1366×768",
+      "fps": 3.548746313586642,
+      "images": 29,
+      "chargementMs": 1805.2999999998137,
+      "tasMo": 23.92870330810547,
+      "rssMo": 857.6328125,
+      "gpuMo": 232.6796875,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 1366×768"
+    },
+    {
+      "rendu": "2D",
+      "scene": "rue",
+      "qualite": "—",
+      "taille": "2560×1440",
+      "fps": 3.4708449028162627,
+      "images": 28,
+      "chargementMs": 2471.199999999255,
+      "tasMo": 128.81877899169922,
+      "rssMo": 1595.09375,
+      "gpuMo": 581.4609375,
+      "detail": "ensemble · 4 escouades"
+    },
+    {
+      "rendu": "2D",
+      "scene": "300",
+      "qualite": "—",
+      "taille": "2560×1440",
+      "fps": 3.1283087881412333,
+      "images": 26,
+      "chargementMs": 2606.9000000003725,
+      "tasMo": 130.59964752197266,
+      "rssMo": 1598.56640625,
+      "gpuMo": 583.92578125,
+      "detail": "ensemble · 47 escouades"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "bas",
+      "taille": "2560×1440",
+      "fps": 1.58935863266247,
+      "images": 13,
+      "chargementMs": 2647,
+      "tasMo": 33.28378677368164,
+      "rssMo": 854.49609375,
+      "gpuMo": 206.50390625,
+      "detail": "566 appels, 182 k triangles, ombres non, MSAA non, tampon 1920×1080"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "bas",
+      "taille": "2560×1440",
+      "fps": 5.13497652582148,
+      "images": 42,
+      "chargementMs": 1509,
+      "tasMo": 17.28667449951172,
+      "rssMo": 830.41796875,
+      "gpuMo": 187.58984375,
+      "detail": "9 appels, 137 k triangles, ombres non, MSAA non, tampon 1920×1080"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "moyen",
+      "taille": "2560×1440",
+      "fps": 0.7392231820389596,
+      "images": 7,
+      "chargementMs": 4539.399999999441,
+      "tasMo": 16.664478302001953,
+      "rssMo": 911.6484375,
+      "gpuMo": 250.69140625,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 2560×1440"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "moyen",
+      "taille": "2560×1440",
+      "fps": 2.228191574959873,
+      "images": 18,
+      "chargementMs": 2111.7000000001863,
+      "tasMo": 12.549240112304688,
+      "rssMo": 897.25,
+      "gpuMo": 237.5390625,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA non, tampon 2560×1440"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "haut",
+      "taille": "2560×1440",
+      "fps": 0.6424189213786182,
+      "images": 6,
+      "chargementMs": 5318.299999999814,
+      "tasMo": 13.218391418457031,
+      "rssMo": 1043.7421875,
+      "gpuMo": 386.23828125,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 2560×1440"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "haut",
+      "taille": "2560×1440",
+      "fps": 1.763668430335097,
+      "images": 15,
+      "chargementMs": 2432.5,
+      "tasMo": 22.927860260009766,
+      "rssMo": 1029.74609375,
+      "gpuMo": 374.734375,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 2560×1440"
+    },
+    {
+      "rendu": "2D",
+      "scene": "rue",
+      "qualite": "—",
+      "taille": "3840×2160",
+      "fps": 1.569726022434972,
+      "images": 13,
+      "chargementMs": 4071.7999999998137,
+      "tasMo": 128.60003280639648,
+      "rssMo": 2280.65625,
+      "gpuMo": 1091.609375,
+      "detail": "ensemble · 4 escouades"
+    },
+    {
+      "rendu": "2D",
+      "scene": "300",
+      "qualite": "—",
+      "taille": "3840×2160",
+      "fps": 1.4969873130325917,
+      "images": 12,
+      "chargementMs": 3544.5,
+      "tasMo": 130.16664505004883,
+      "rssMo": 2248.4296875,
+      "gpuMo": 1081.796875,
+      "detail": "ensemble · 47 escouades"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "bas",
+      "taille": "3840×2160",
+      "fps": 0.7864815064491154,
+      "images": 7,
+      "chargementMs": 4219.699999999255,
+      "tasMo": 28.166912078857422,
+      "rssMo": 961.69921875,
+      "gpuMo": 282.46484375,
+      "detail": "566 appels, 182 k triangles, ombres non, MSAA non, tampon 2880×1620"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "bas",
+      "taille": "3840×2160",
+      "fps": 2.6112257839893953,
+      "images": 21,
+      "chargementMs": 1813.7999999998137,
+      "tasMo": 30.886070251464844,
+      "rssMo": 941.02734375,
+      "gpuMo": 262.99609375,
+      "detail": "9 appels, 137 k triangles, ombres non, MSAA non, tampon 2880×1620"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "moyen",
+      "taille": "3840×2160",
+      "fps": 0.36115098819941577,
+      "images": 4,
+      "chargementMs": 8879.200000000186,
+      "tasMo": 9.414005279541016,
+      "rssMo": 1081.33203125,
+      "gpuMo": 367.24609375,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA non, tampon 3840×2160"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "moyen",
+      "taille": "3840×2160",
+      "fps": 1.1796765326948129,
+      "images": 10,
+      "chargementMs": 3169.899999999441,
+      "tasMo": 21.122882843017578,
+      "rssMo": 1062.84765625,
+      "gpuMo": 351.25,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA non, tampon 3840×2160"
+    },
+    {
+      "rendu": "3D",
+      "scene": "rue",
+      "qualite": "haut",
+      "taille": "3840×2160",
+      "fps": 0.34538436963035796,
+      "images": 4,
+      "chargementMs": 9264.400000000373,
+      "tasMo": 9.924346923828125,
+      "rssMo": 1353.3984375,
+      "gpuMo": 638.0078125,
+      "detail": "1274 appels, 510 k triangles, ombres oui, MSAA oui, tampon 3840×2160"
+    },
+    {
+      "rendu": "3D",
+      "scene": "300",
+      "qualite": "haut",
+      "taille": "3840×2160",
+      "fps": 0.9969841230278177,
+      "images": 8,
+      "chargementMs": 3397.100000000559,
+      "tasMo": 19.204727172851562,
+      "rssMo": 1332.7890625,
+      "gpuMo": 625.515625,
+      "detail": "717 appels, 464 k triangles, ombres oui, MSAA oui, tampon 3840×2160"
+    }
+  ],
+  "throttled": [
+    {
+      "rendu": "2D",
+      "pretMs": 2502,
+      "jsOctets": 488535
+    },
+    {
+      "rendu": "3D",
+      "pretMs": 3137.199999999255,
+      "jsOctets": 495807
+    }
+  ]
+}

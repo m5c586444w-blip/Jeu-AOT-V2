@@ -177,7 +177,9 @@ export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff:
       const back = new Vector3(0, 0, -1).applyQuaternion(opts.titanLarge.quaternion);
       const d = back.applyAxisAngle(up, yaw);
       const th = 0.35 + amp * Math.sin(w * t + phase);
-      return a.addScaledVector(d, R * Math.sin(th)).addScaledVector(up, -R * Math.cos(th) * 0.6);
+      // Ancrage trop bas (Titan abattu, épaules près du sol) : le soldat passe au-dessus du corps, jamais sous le sol.
+      const below = a.y - R * 0.6 < 1;
+      return a.addScaledVector(d, R * Math.sin(th)).addScaledVector(up, (below ? 1 : -1) * R * Math.cos(th) * 0.6);
     };
     units.push({
       s: make(),

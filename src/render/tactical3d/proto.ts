@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, InstancedMesh, Matrix4, MeshStandardMaterial, PCFShadowMap, PerspectiveCamera, Quaternion, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, BoxGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PCFShadowMap, PerspectiveCamera, Quaternion, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
@@ -54,6 +54,8 @@ export interface ProtoProbe {
   time: number;
   setTime(t: number): void;
   pause(p: boolean): void;
+  /** Gèle le dessin (la dernière image reste affichée) : captures lentes en 4K logiciel. */
+  hold(h: boolean): void;
   /** Position de la caméra et centre de l'escouade suivie (contrôle du suivi). */
   view(): { camera: [number, number, number]; target: [number, number, number]; squadCenter: [number, number, number] };
   stats(): { calls: number; triangles: number; geometries: number; textures: number; width: number; height: number; pixelRatio: number; shadows: boolean; antialias: boolean; lamps: number };
@@ -155,7 +157,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   // Le grand sur la rue qui traverse la place, le petit dans le marché du sud ; tous deux tournés vers le sud.
   const face = (o: Vector3, to: Vector3): number => Math.atan2(to.x - o.x, to.z - o.z);
   titans[1].group.position.copy(along(0.5, 2));
-  titans[1].group.rotation.y = face(titans[1].group.position, along(1.1, 8));
+  // Tourné de trois quarts vers le sud-est de la place : la saisie se lit de côté depuis la vue Titan.
+  titans[1].group.rotation.y = face(titans[1].group.position, along(1.0, 26));
   titans[0].group.position.copy(along(0.84, -3));
   titans[0].group.rotation.y = face(titans[0].group.position, along(1.1, 6));
   const wantedPoses = (params.get("poses") ?? "").split(",");
@@ -224,7 +227,17 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       const s = buildSoldier(derive(seed, 700 + i), smats);
       s.group.position.copy(sheetOrigin).add(new Vector3(-9 + i * 3, pose === "vol" ? 2.5 : 0, 16));
       s.group.rotation.y = 0.75;
-      if (pose === "accroche") s.group.rotation.set(-Math.PI / 2, 0, 0, "YXZ");
+      if (pose === "vol") s.group.rotation.set(0.5, 0.75, 0, "YXZ");
+      if (pose === "accroche") {
+        // Pieds contre un pan de mur à sa gauche, « haut » du soldat sortant du mur, regard vers le ciel.
+        const wall = new Mesh(new BoxGeometry(0.6, 3.6, 1.6), new MeshStandardMaterial({ color: 0xa39d90, roughness: 0.95 }));
+        wall.position.copy(s.group.position).add(new Vector3(-0.3, 1.8, 0));
+        wall.castShadow = true;
+        wall.receiveShadow = true;
+        scene.add(wall);
+        s.group.position.add(new Vector3(0, 1.6, 0));
+        s.group.quaternion.setFromRotationMatrix(new Matrix4().makeBasis(new Vector3(0, 0, 1), new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
+      }
       scene.add(s.group);
       sheetSoldiers.push({ s, pose });
     });
@@ -241,8 +254,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     camera.fov = 50;
     if (m === "titan") {
       camera.fov = 45;
-      camera.position.copy(along(1.16, 8, 2.5));
-      controls.target.copy(along(0.5, 0, 8));
+      camera.position.copy(along(1.22, 7, 3));
+      controls.target.copy(along(0.52, 0, 7));
     } else if (m === "dessus") {
       camera.position.copy(crowdOrigin).add(new Vector3(0, 46, 12));
       controls.target.copy(crowdOrigin);
@@ -466,6 +479,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
 
   let time = Number(params.get("t") ?? "0") || 0;
   let paused = params.has("pause");
+  let held = false;
   const draw = (): void => {
     titans.forEach((t, i) => t.setPose(titanPoses[i as 0 | 1], time));
     for (const e of sheet) e.t.setPose(e.pose, time);
@@ -514,6 +528,9 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     pause(p) {
       paused = p;
     },
+    hold(h) {
+      held = h;
+    },
     view: () => ({ camera: v3(camera.position), target: v3(controls.target), squadCenter: v3(odm.squadCenter(squad)) }),
     stats: () => {
       const size = renderer.getDrawingBufferSize(new Vector2());
@@ -551,7 +568,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     if (!paused) time += Math.min(0.1, (now - last) / 1000);
     last = now;
     state.time = time;
-    draw();
+    if (!held) draw();
     fpsFrames++;
     if (now - fpsSince >= 1000) {
       state.fps = (fpsFrames * 1000) / (now - fpsSince);

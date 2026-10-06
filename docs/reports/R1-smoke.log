@@ -1,0 +1,51 @@
+
+> murs-et-sang@0.0.1 smoke:r1
+> tsx src/tools/smoke-r1.ts
+
+[accès] 1366×768
+  OK  console F2 : lien « Essai de rendu 3D (R1) » vers ?proto3d
+  OK  page /proto3d chargée, WebGL 2 : ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)
+[réglages] 1366×768
+  OK  lumière « crepuscule »
+  OK  lumière « nuit »
+  OK  lumière « jour »
+  OK  qualité basse : sans ombres, sans MSAA, résolution interne 75 % (1024×576)
+  OK  qualité haute : ombres, MSAA (moteur recréé, un seul canevas), 8 réverbères
+  OK  qualité moyenne : ombres, sans MSAA, 100 %
+  OK  suivi d'escouade 1 : cible à 0.27 m du centre de l'escouade, la caméra a suivi (0.7 m en 3 s)
+  OK  touche 4 : suivi de l'escouade 4
+  OK  caméra « titan »
+  OK  caméra « dessus »
+  OK  caméra « planche »
+  OK  caméra « libre »
+  OK  Titan de 5 m : pose « saisie »
+  OK  Titan de 15 m : pose « abattu »
+  OK  soldats : pose « vol » imposée
+  OK  foule de 300 masquée puis réaffichée
+  OK  touche L : lumière suivante
+  OK  repli forcé (?sanswebgl) : message et bouton de retour
+  OK  aucune erreur de console
+[sans WebGL] Chromium --disable-3d-apis
+  OK  message clair : « Rendu 3D indisponible » (WebGL : absent)
+  OK  three.js et le prototype jamais demandés (139 requêtes, dont 0 vers three.js)
+  OK  bouton « Revenir au rendu 2D » → http://localhost:5186/
+  OK  retour : le jeu en rendu 2D (Pixi) se charge sans WebGL 2 dans la page
+[captures] 1366×768
+  OK  r1-jour-1366.png : 1366×768, 1274 appels, 510 k triangles
+  OK  r1-crepuscule-1366.png : 1366×768, 1274 appels, 510 k triangles
+  OK  r1-nuit-1366.png : 1366×768, 1276 appels, 510 k triangles
+  OK  r1-titan-1366.png : 1366×768, 1143 appels, 482 k triangles
+  OK  r1-dessus-300-1366.png : 1366×768, 717 appels, 464 k triangles
+[captures] 3840×2160
+  OK  r1-jour-4k.png : 3840×2160, 1274 appels, 510 k triangles
+  OK  r1-crepuscule-4k.png : 3840×2160, 1274 appels, 510 k triangles
+  OK  r1-nuit-4k.png : 3840×2160, 1276 appels, 510 k triangles
+  OK  r1-titan-4k.png : 3840×2160, 1143 appels, 482 k triangles
+  OK  r1-dessus-300-4k.png : 3840×2160, 717 appels, 464 k triangles
+[captures] compléments 1366×768
+  OK  r1-planche-1366.png
+  OK  r1-suivi-1366.png
+  OK  r1-panneau-1366.png
+
+smoke:r1 : tout est OK
+CODE 0

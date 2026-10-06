@@ -35,7 +35,9 @@
     "smoke:r0": "tsx src/tools/smoke-r0.ts",
     "sim:events": "tsx src/tools/sim-events.ts",
     "sim:shifters": "tsx src/tools/sim-shifters.ts",
-    "sim:world": "tsx src/tools/sim-world.ts"
+    "sim:world": "tsx src/tools/sim-world.ts",
+    "smoke:r1": "tsx src/tools/smoke-r1.ts",
+    "mesure:r1": "tsx src/tools/mesure-r1.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

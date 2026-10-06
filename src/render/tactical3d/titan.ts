@@ -169,7 +169,6 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
   j.torse.add(part(torsoGeo, skin, "torse", [0, 0, 0], [1, 1, spec.depth]));
   if (spec.belly > 0) j.torse.add(part(S, skin, "ventre", [0, 0.28 * T, spec.waist * H * 0.32], [spec.belly * H, spec.belly * H * 1.05, spec.belly * H * 0.95]));
   for (const s of [1, -1]) {
-    if (spec.id === "grand") j.torse.add(part(S, skin, "pectoral", [s * spec.chest * H * 0.42, 0.76 * T, spec.chest * H * spec.depth * 0.62], [spec.chest * H * 0.52, spec.chest * H * 0.26, spec.chest * H * 0.1], [0.25, 0, s * 0.12]));
     j.torse.add(part(S, skin, "fessier", [s * spec.hip * H * 0.55, -0.01 * H, -spec.hip * H * 0.55], [spec.hip * H * 0.75, spec.hip * H * 0.8, spec.hip * H * 0.6]));
   }
   // Clavicules et trapèzes : la ligne d'épaule part du cou au lieu d'un cône.
