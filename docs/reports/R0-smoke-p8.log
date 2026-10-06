@@ -28,15 +28,15 @@
   OK  épilogue : statistiques expliquées
   OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
   OK  options [1366×768 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
-  OK  audio : humeur « calme » en paix, 299 notes de musique, 9 effets d'interface (papier, tampon)
-  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
-  OK  audio en bataille : couche « combat », 6 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  audio : humeur « calme » en paix, 275 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0 · flèches 1
+  OK  audio en bataille : couche « combat », 7 effets de bataille ; 1 sous-titre(s) à l'écran
   OK  interface tactique [1366×768 · 100 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
   OK  vapeur des Titans abattus : 4 nuage(s) au bilan
   OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles
   OK  rapport post-bataille [1366×768 · 100 %] : checklist 04 §2 (8 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
-  OK  transformation visible : 5 éclair(s) — toits 0 · vapeur 0 · éclairs 5 · occultés 0
-  OK  sous-titres des sons importants : 9 affiché(s) depuis l'ouverture
+  OK  transformation visible : 5 éclair(s) — toits 0 · vapeur 0 · éclairs 5 · occultés 0 · flèches 0
+  OK  sous-titres des sons importants : 10 affiché(s) depuis l'ouverture
   OK  Marley : alerte de la nation jouée « an 854, jour 8 — Marley garantit la sécurité d'Hizuru. » ; 8 registres sur une ligne
   OK  esthétique de Marley sur la table de guerre
   OK  table de guerre (Marley) [1366×768 · 100 %] : checklist 04 §2 (4 valeurs expliquées, textures sur 3 niveaux, corps ≥ 14.4 px)
@@ -70,7 +70,7 @@
   OK  épilogue : statistiques expliquées
   OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
   OK  options [1366×768 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
-  OK  audio : humeur « calme » en paix, 228 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  audio : humeur « calme » en paix, 214 notes de musique, 9 effets d'interface (papier, tampon)
   OK  [1366×768 · 125 %] 0 erreur console
 [passe 3840×2160 · 100 %]
   OK  menu : table d'archives, tampon « Confidentiel », 3 chemises de scénario, aucun bouton rectangulaire générique
@@ -97,9 +97,9 @@
   OK  épilogue : statistiques expliquées
   OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
   OK  options [3840×2160 · 100 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
-  OK  audio : humeur « calme » en paix, 475 notes de musique, 9 effets d'interface (papier, tampon)
-  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
-  OK  audio en bataille : couche « combat », 8 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  audio : humeur « calme » en paix, 465 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0 · flèches 1
+  OK  audio en bataille : couche « combat », 7 effets de bataille ; 1 sous-titre(s) à l'écran
   OK  interface tactique [3840×2160 · 100 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.12 px)
   OK  vapeur des Titans abattus : 4 nuage(s) au bilan
   OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles
@@ -130,9 +130,9 @@
   OK  épilogue : statistiques expliquées
   OK  options : 3 volumes (maître, musique, effets), musique réglée à 35 % et conservée
   OK  options [3840×2160 · 125 %] : checklist 04 §2 (0 valeurs expliquées, textures sur 2 niveaux, corps ≥ 13.3333 px)
-  OK  audio : humeur « calme » en paix, 480 notes de musique, 9 effets d'interface (papier, tampon)
-  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0
-  OK  audio en bataille : couche « combat », 8 effets de bataille ; 1 sous-titre(s) à l'écran
+  OK  audio : humeur « calme » en paix, 489 notes de musique, 9 effets d'interface (papier, tampon)
+  OK  scène tactique : bâtiments irréguliers (11 variantes de toit) — toits 11 · vapeur 0 · éclairs 0 · occultés 0 · flèches 1
+  OK  audio en bataille : couche « combat », 7 effets de bataille ; 1 sous-titre(s) à l'écran
   OK  interface tactique [3840×2160 · 125 %] : checklist 04 §2 (24 valeurs expliquées, textures sur 3 niveaux, corps ≥ 13.3333 px)
   OK  vapeur des Titans abattus : 4 nuage(s) au bilan
   OK  rapport post-bataille : télégramme, liste des morts, 1 lettre(s) aux familles

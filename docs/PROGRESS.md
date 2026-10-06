@@ -2,12 +2,26 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R0 — corrections après la revue de P8** — **ARRÊT** (CLAUDE.md, arrêt 1 : critère f en échec deux fois) : en attente de l'utilisateur |
-| Tâche | R0.4 — batterie finale et rapport (rapport `docs/reports/R0.md` non rédigé) |
-| Dernier `npm run verify` | 2026-10-05 : code 0, 306 tests (commit 0333fc2) |
-| Prochaine étape | Décision de l'utilisateur sur le correctif proposé ci-dessous, puis rapport R0 |
+| Phase | **R0 terminée** — **ARRÊT demandé par l'utilisateur** : R1 n'est pas enchaînée |
+| Tâche | R0.4 — batterie finale et rapport `docs/reports/R0.md` (faits) |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 56 fichiers, 330 tests (commit a439c18) — `docs/reports/R0-verify.log` |
+| Prochaine étape | Revue de R0 par l'utilisateur ; points à arbitrer listés au rapport, § d et § f |
 
-## Arrêt (2026-10-05) — R0.2f (transformation visible) en échec pour la 3e fois
+## R0 terminée (2026-10-06) — arrêt demandé
+- **Rapport.** `docs/reports/R0.md` : CR0-01 à CR0-07 OK, critère f OK. Chaque capture « après » y est revue selon CLAUDE.md ligne 14 (description, au moins 3 défauts possibles).
+- **Décision de l'utilisateur sur l'arrêt du critère f, appliquée** (un commit chacun) :
+  - cadrage testé par tableau (8 scénarios, flèches de bord, D-80) ;
+  - sous-titres placés hors des pastilles, des flèches et du HUD ;
+  - preuve que le plafond du pas de temps ne change aucun hash ;
+  - incident git documenté (`R0-incident-git.md`) ;
+  - délai d'AC3-06 relevé (D-79).
+- **À arbitrer.**
+  - Zone de jeu, fenêtre entière : la bataille fait 55 % à 1366 et 84 % en 4K, contre 85 % visés sur la vue seule.
+  - En 4K, les pastilles et les flèches gardent une taille fixe.
+  - Les sous-titres peuvent couvrir un corps de Titan.
+  - Sur l'atlas, des noms recouvrent encore des taches de province.
+
+## Arrêt levé (2026-10-06) — R0.2f (transformation visible) en échec pour la 3e fois : correctif décidé par l'utilisateur, appliqué
 - **Historique du critère f** (`smoke:r0`, « porteur et éclair dans le champ de la caméra ») :
   1. KO pendant la mise au point (`r0-apres-1`) : porteur hors champ ;
   2. KO à nouveau (`r0-apres-2`) : corps sous les sous-titres, mesure prise avant que le corps existe ;

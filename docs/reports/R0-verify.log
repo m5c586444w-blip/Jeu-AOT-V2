@@ -18,13 +18,13 @@
  RUN  v5.0.3 /home/user/Jeu-AOT-V2
 
 
- Test Files  53 passed (53)
-      Tests  306 passed (306)
-   Start at  18:13:20
-   Duration  30.78s (tests 76%, import 19%, transform 4%)
+ Test Files  56 passed (56)
+      Tests  330 passed (330)
+   Start at  06:25:28
+   Duration  26.76s (tests 76%, import 20%, transform 4%)
 
-    Isolate  53 workers spawned · ~136ms startup each (spawn + environment, per file)
-             at least ~2.26s faster with isolate: false — reuses workers across files instead of one per file
+    Isolate  56 workers spawned · ~119ms startup each (spawn + environment, per file)
+             at least ~2.10s faster with isolate: false — reuses workers across files instead of one per file
 
 
 > murs-et-sang@0.0.1 data:validate
@@ -54,7 +54,7 @@ sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable 
 
 vite v8.3.2 building client environment for production...
 transforming...
-✓ 952 modules transformed.
+✓ 955 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                                                   0.90 kB │ gzip:   0.41 kB
@@ -69,8 +69,8 @@ dist/assets/im-fell-english-latin-400-normal-BhowGHCQ.woff2      59.88 kB
 dist/assets/special-elite-latin-400-normal-BtSRmyJ6.woff         63.41 kB
 dist/assets/im-fell-english-latin-400-normal-CxhBQSzl.woff       69.68 kB
 dist/assets/sim.worker-BDqA4b1U.js                              620.33 kB
-dist/assets/index-YoHhh_fG.css                                   45.89 kB │ gzip:   9.44 kB
-dist/assets/webworkerAll-ga2uSPjo.js                              0.05 kB │ gzip:   0.06 kB
+dist/assets/index-BSYquyPi.css                                   45.94 kB │ gzip:   9.46 kB
+dist/assets/webworkerAll-jrDNErSE.js                              0.05 kB │ gzip:   0.06 kB
 dist/assets/getTextureBatchBindGroup-B7fcsu1p.js                  0.34 kB │ gzip:   0.27 kB
 dist/assets/classes-DEhXJjxY.js                                   0.69 kB │ gzip:   0.32 kB
 dist/assets/strata-npNEBvhE.js                                    0.80 kB │ gzip:   0.28 kB
@@ -97,22 +97,22 @@ dist/assets/nine-CUiERPM2.js                                     10.26 kB │ gz
 dist/assets/world-bMg9Gyku.js                                    11.01 kB │ gzip:   2.13 kB
 dist/assets/getTexelRangeRects-DemSBSsJ.js                       11.31 kB │ gzip:   2.98 kB
 dist/assets/paradis-BZO7jAA3.js                                  12.80 kB │ gzip:   2.46 kB
-dist/assets/init-GrRiAmqK.js                                     14.86 kB │ gzip:   4.62 kB
+dist/assets/init-BbNFOniu.js                                     14.86 kB │ gzip:   4.62 kB
 dist/assets/generic-Cvy5m8dR.js                                  16.72 kB │ gzip:   2.23 kB
 dist/assets/paradis-UPtl3Ka_.js                                  23.01 kB │ gzip:   2.61 kB
 dist/assets/world-D64zYQ6T.js                                    23.23 kB │ gzip:   2.85 kB
 dist/assets/paradis-BnsdlLLG.js                                  23.75 kB │ gzip:   3.00 kB
 dist/assets/paradis-BK6GNPE_.js                                  35.05 kB │ gzip:   5.19 kB
 dist/assets/canon_850-B4M9Lio2.js                                35.27 kB │ gzip:   5.78 kB
-dist/assets/browserAll-D37zrjR9.js                               43.48 kB │ gzip:  11.28 kB
+dist/assets/browserAll-D6M0BJQT.js                               43.48 kB │ gzip:  11.28 kB
 dist/assets/paradis-CKrauoQ1.js                                  43.72 kB │ gzip:   4.58 kB
 dist/assets/RenderTargetSystem-D6eF_o2J.js                       78.15 kB │ gzip:  22.10 kB
 dist/assets/CanvasPool-ADgchDYy.js                              113.07 kB │ gzip:  34.46 kB
-dist/assets/index-CHK0_vrC.js                                   896.50 kB │ gzip: 273.07 kB
+dist/assets/index-CjXECuud.js                                   900.69 kB │ gzip: 274.59 kB
 
-✓ built in 1.22s
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.08s
