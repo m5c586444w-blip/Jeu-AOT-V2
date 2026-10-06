@@ -10,6 +10,7 @@ import { buildHedges, buildVegetation } from "./meshVegetation";
 import { buildWallMeshes } from "./meshWall";
 import { buildGiantForest, buildSpray } from "./meshNature";
 import { buildCave } from "./meshCave";
+import { normalOf } from "./texturesEnv";
 import { buildTitan, setSteamTexture } from "./titan";
 import type { Titan, TitanSpec } from "./titan";
 import { titanSpec } from "./titanGallery";
@@ -34,6 +35,10 @@ export interface EnvTextures {
   mist(): Texture;
   skin(): Texture;
   puff(): Texture;
+  /** R1c : grappe de feuilles des cartes de houppier ; détail du sol répété ; rides de l'eau. */
+  leaves(): Texture;
+  groundDetail(): { albedo: Texture; normal: Texture };
+  waterNormal(): Texture;
 }
 
 export interface EnvKit {
@@ -52,6 +57,8 @@ export interface EnvScene {
   vegetation: VegetationMeshes | null;
   /** Comptes de construction (instances, faces) pour les tests et les mesures. */
   counts: Record<string, number>;
+  /** R1c : animations de la scène (rides de l'eau), au temps de la scène (s). */
+  animate(t: number): void;
   dispose(): void;
 }
 
@@ -71,6 +78,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
   group.name = `environnement-${env.id}`;
   const materials: Material[] = [];
   const disposers: (() => void)[] = [];
+  const animators: ((t: number) => void)[] = [];
   const counts: Record<string, number> = {};
   const p = env.profile;
 
@@ -83,7 +91,11 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       bridgeColor: p.palette.pierre,
       roadColor: `#${new Color(MATERIALS.sols.route.base).lerp(new Color(p.palette.sol), 0.25).getHexString()}`,
       paveMap: tx?.cobble() ?? null,
+      detail: tx?.groundDetail() ?? null,
+      waterNormal: tx?.waterNormal() ?? null,
+      paveNormal: tx ? normalOf(tx.cobble(), 2.5) : null,
     });
+    animators.push((time) => t.animate(time));
     group.add(t.group);
     disposers.push(() => t.dispose());
     counts["groundTriangles"] = (t.ground.geometry.index?.count ?? 0) / 3;
@@ -108,7 +120,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
   const usedWalls = new Set<WallMaterial>([...out.ground.keys(), ...out.upper.keys(), ...out.plain.keys()]);
   for (const m of [...usedWalls].sort()) {
     const set = tx?.facade(m) ?? null;
-    const mk = (map: Texture | null, lit: Texture | null): MeshStandardMaterial => new MeshStandardMaterial({ map, emissiveMap: lit, emissive: lit ? new Color(1, 1, 1) : new Color(0, 0, 0), emissiveIntensity: 0, vertexColors: true, roughness: 0.9 });
+    const mk = (map: Texture | null, lit: Texture | null): MeshStandardMaterial => new MeshStandardMaterial({ map, normalMap: normalOf(map, 1.6), emissiveMap: lit, emissive: lit ? new Color(1, 1, 1) : new Color(0, 0, 0), emissiveIntensity: 0, vertexColors: true, roughness: 0.9 });
     const up = mk(set?.upper ?? null, set?.upperLit ?? null);
     const gr = mk(set?.ground ?? null, set?.groundLit ?? null);
     if (set) windowMaterials.push(up, gr);
@@ -117,9 +129,9 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
     const fbP = out.plain.get(m);
     if (fbU) add(fbU, up, `facades-etages-${m}`);
     if (fbG) add(fbG, gr, `facades-rdc-${m}`);
-    if (fbP) add(fbP, new MeshStandardMaterial({ map: set?.plain ?? null, vertexColors: true, roughness: 0.92 }), `murs-aveugles-${m}`);
+    if (fbP) add(fbP, new MeshStandardMaterial({ map: set?.plain ?? null, normalMap: normalOf(set?.plain ?? null, 1.6), vertexColors: true, roughness: 0.92 }), `murs-aveugles-${m}`);
   }
-  for (const [c, fb] of [...out.roofs.entries()].sort((a, b) => a[0].localeCompare(b[0]))) add(fb, new MeshStandardMaterial({ map: tx?.roof(c) ?? null, vertexColors: true, roughness: c === "ardoise" ? 0.6 : 0.85, side: DoubleSide }), `toits-${c}`);
+  for (const [c, fb] of [...out.roofs.entries()].sort((a, b) => a[0].localeCompare(b[0]))) add(fb, new MeshStandardMaterial({ map: tx?.roof(c) ?? null, normalMap: normalOf(tx?.roof(c) ?? null, 2.4), vertexColors: true, roughness: c === "ardoise" ? 0.6 : 0.85, side: DoubleSide }), `toits-${c}`);
   add(out.stone, new MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: DoubleSide }), "pierre");
   add(out.wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), "bois");
   add(out.dark, new MeshStandardMaterial({ vertexColors: true, roughness: 0.3, emissive: phys("braise"), emissiveIntensity: 0 }), "baies", false);
@@ -146,6 +158,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       tx?.mist() ?? null,
       env.mist,
       env.terrain?.spec.size ?? 900,
+      tx?.leaves() ?? null,
     );
     group.add(nat.group);
     disposers.push(() => nat.dispose());
@@ -237,18 +250,24 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       env.terrain.heights,
       { leaf: nature ? [p.palette.toit, p.palette.toit_2] : [MATERIALS.physiques.feuillage, MATERIALS.physiques.feuillage_clair], conifer: MATERIALS.physiques.conifere, bush: nature ? p.palette.toit_2 : MATERIALS.physiques.feuillage },
       { near: q.lodNear, far: q.lodFar, density: q.vegetation, shadows: q.shadows },
+      tx?.leaves() ?? null,
     );
     group.add(vegetation.group);
     disposers.push(() => vegetation?.dispose());
     for (const [k, v] of Object.entries(vegetation.counts)) counts[`arbres-${k}`] = v;
-    const hedges = buildHedges(env.terrain.hedges, env.terrain.heights, MATERIALS.physiques.feuillage, q.shadows);
+    const hedges = buildHedges(env.terrain.hedges, env.terrain.heights, MATERIALS.physiques.feuillage, q.shadows, tx?.leaves() ?? null);
     if (hedges) {
       group.add(hedges);
       counts["hedgePieces"] = hedges.count;
-      disposers.push(() => {
-        hedges.dispose();
-        (hedges.material as Material).dispose();
-      });
+      // Les cartes de feuillage sont un maillage enfant des haies.
+      disposers.push(() =>
+        hedges.traverse((o) => {
+          if (o instanceof InstancedMesh) {
+            o.dispose();
+            (o.material as Material).dispose();
+          }
+        }),
+      );
     }
   }
 
@@ -260,6 +279,9 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
     lamps,
     vegetation,
     counts,
+    animate(time) {
+      for (const a of animators) a(time);
+    },
     dispose() {
       group.traverse((o) => {
         if (o instanceof Mesh && !(o instanceof InstancedMesh)) (o.geometry as BufferGeometry).dispose();

@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferAttribute, BufferGeometry, Color, DoubleSide, Group, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
+import { BoxGeometry, BufferAttribute, BufferGeometry, Color, DoubleSide, Group, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector2, Vector3 } from "three";
 import type { Material, Texture } from "three";
 import type { Paving, Canal } from "./envTypes";
 import { centroid, norm2, sub2, v2 } from "./geom2";
@@ -18,6 +18,8 @@ export interface TerrainMeshes {
   ground: Mesh;
   water: Mesh[];
   materials: Material[];
+  /** R1c : fait défiler les rides de l'eau (temps de la scène, s). */
+  animate(t: number): void;
   dispose(): void;
 }
 
@@ -165,7 +167,14 @@ export interface TerrainMeshOpts {
   roadColor: string;
   /** Pavés (navigateur) : texture claire en niveaux de gris, teintée par le sommet. */
   paveMap: Texture | null;
+  /** R1c (navigateur) : détail du sol répété (teinte et relief fins) ; rides de l'eau ; relief des pavés. */
+  detail?: { albedo: Texture; normal: Texture } | null;
+  waterNormal?: Texture | null;
+  paveNormal?: Texture | null;
 }
+
+/** Taille d'une tuile de détail du sol (m). */
+const DETAIL_TILE = 6;
 
 export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], canals: readonly Canal[], extraBridges: readonly Bridge[], o: TerrainMeshOpts): TerrainMeshes {
   const group = new Group();
@@ -175,6 +184,24 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
   const textured = o.groundMap !== null;
   const groundMat = new MeshStandardMaterial({ map: o.groundMap, vertexColors: true, roughness: 1 });
   materials.push(groundMat);
+  const owned: Texture[] = [];
+  if (o.detail && o.groundMap) {
+    // Détail répété : relief fin par la carte de normales (sa propre répétition), teinte modulée dans le shader (le sol peint
+    // garde ses parcelles ; le détail n'en change que le grain).
+    const rep = hf.size / DETAIL_TILE;
+    const normal = o.detail.normal.clone();
+    normal.repeat.set(rep, rep);
+    owned.push(normal);
+    groundMat.normalMap = normal;
+    groundMat.normalScale = new Vector2(0.85, 0.85);
+    const albedo = o.detail.albedo;
+    groundMat.onBeforeCompile = (sh) => {
+      sh.uniforms["detailMap"] = { value: albedo };
+      sh.uniforms["detailRepeat"] = { value: rep };
+      sh.fragmentShader = `uniform sampler2D detailMap;\nuniform float detailRepeat;\n${sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n\tdiffuseColor.rgb *= mix( 1.0, texture2D( detailMap, vMapUv * detailRepeat ).r * 2.0, 0.45 );")}`;
+    };
+    groundMat.customProgramCacheKey = () => "sol-detail-r1c";
+  }
   const ground = new Mesh(groundGeometry(hf, textured ? new Color(1, 1, 1) : new Color(o.sol)), groundMat);
   ground.name = "sol";
   ground.receiveShadow = true;
@@ -183,6 +210,16 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
   // Eau.
   const waterMat = new MeshStandardMaterial({ color: new Color(o.water), roughness: 0.12, metalness: 0.15, transparent: true, opacity: 0.9, side: DoubleSide });
   materials.push(waterMat);
+  let ripples: Texture | null = null;
+  if (o.waterNormal) {
+    // R1c : rides qui défilent ; surface plus lisse (le ciel s'y reflète, découpé par les rides).
+    ripples = o.waterNormal.clone();
+    ripples.repeat.set(hf.size / 9, hf.size / 9);
+    owned.push(ripples);
+    waterMat.normalMap = ripples;
+    waterMat.normalScale = new Vector2(0.16, 0.16);
+    waterMat.roughness = 0.08;
+  }
   const water: Mesh[] = [];
   const addWater = (g: BufferGeometry, name: string): void => {
     const m = new Mesh(g, waterMat);
@@ -227,7 +264,7 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
     flatPolygon(fb, pv.poly, pv.y, new Color(pv.color).multiplyScalar(k), pv.kind === "pave" ? 3 : 6);
   }
   for (const [kind, fb] of byKind) {
-    const pm = new MeshStandardMaterial({ map: kind === "terre" ? null : o.paveMap, vertexColors: true, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: kind === "dalle" ? -4 : -3, polygonOffsetUnits: kind === "dalle" ? -4 : -3 });
+    const pm = new MeshStandardMaterial({ map: kind === "terre" ? null : o.paveMap, normalMap: kind === "terre" ? null : (o.paveNormal ?? null), vertexColors: true, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: kind === "dalle" ? -4 : -3, polygonOffsetUnits: kind === "dalle" ? -4 : -3 });
     materials.push(pm);
     const m = new Mesh(fb.build(), pm);
     m.name = `pavage-${kind}`;
@@ -282,11 +319,15 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
     ground,
     water,
     materials,
+    animate(time) {
+      if (ripples) ripples.offset.set((time * 0.011) % 1, (time * 0.007) % 1);
+    },
     dispose() {
       group.traverse((x) => {
         if (x instanceof Mesh) (x.geometry as BufferGeometry).dispose();
       });
       for (const m of materials) m.dispose();
+      for (const t of owned) t.dispose();
     },
   };
 }

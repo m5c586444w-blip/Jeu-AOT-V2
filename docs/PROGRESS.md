@@ -3,9 +3,16 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.3 : Titans sur le corps de base, déformé par les paramètres de R1b ; prototype, banc, environnements et galerie les utilisent |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 69 fichiers, 422 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1c.4 : rendu réaliste (peau, étoffes, eau, arbres, post-traitement), puis R1c.5 districts d'après l'animé |
+| Tâche | R1c.4 : rendu réaliste (ciel physique, éclairage d'image, occlusion ambiante, ombres douces, arbres, relief, eau, peau et étoffe) |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 70 fichiers, 428 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1c.5 : districts d'après l'animé (faits sourcés, saillie, deux portes, route, canal) et vues E07, E17, E20 |
+
+## R1c.4 : rendu réaliste (2026-10-06)
+- Ciel physique (Preetham, nuages calculés) en plein jour ; dôme peint à l'aube, au crépuscule, la nuit, sous terre. Éclairage d'image dosé (D-88).
+- `post.ts` : occlusion ambiante (GTAO, depuis la profondeur du rendu) et sortie, en qualité moyenne et haute ; visionneuse d'environnements (y compris planches), prototype, page des corps. Ombres douces (rayon PCF).
+- `meshTrees.ts` : arbres réalistes (massifs, bois, cartes de feuillage) ; haies et voûte des Arbres Géants habillées de feuilles.
+- Relief : normales tirées des textures (murs, façades, toits, pavés), détail du sol, rides de l'eau animées, grain de peau, étoffe des uniformes. Normales des pièces assemblées corrigées.
+- Tests `rendu-r1c.test.ts` (6).
 
 ## R1c.3 : Titans (2026-10-06)
 - `humanTitan.ts` : corps de base déformé par `data/art/titans.json` (longueurs, largeurs, épaisseurs, corpulence, ventre, expressions par cibles de visage, cheveux) ; marque de nuque sur l'os du cou ; vapeur partagée avec R1 (`titanSteam`). Facteurs résolus puis vérifiés sur le corps façonné (D-87).

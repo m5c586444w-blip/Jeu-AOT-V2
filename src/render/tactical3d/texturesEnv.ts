@@ -1,4 +1,4 @@
-import { CanvasTexture, Color, RepeatWrapping, SRGBColorSpace } from "three";
+import { CanvasTexture, ClampToEdgeWrapping, Color, RepeatWrapping, SRGBColorSpace } from "three";
 import type { Texture } from "three";
 import type { RoofMaterial, StyleProfile, WallMaterial } from "../../data/artSchemas";
 import type { EnvData } from "./envTypes";
@@ -515,4 +515,217 @@ export function mistTex(seed: number): Texture {
   const t = tex(c, true);
   t.repeat.set(3, 3);
   return t;
+}
+
+/**
+ * Feuillage (R1c) : une grappe de feuilles en alpha, claire (la teinte vient de l'instance), dense au centre et clairsemée au
+ * bord, pour les cartes des houppiers (test alpha). Chaque feuille : limbe pointu, nervure plus sombre, ton varié.
+ */
+export function leafTex(seed: number): Texture {
+  const rand = seeded(derive(seed, 1600));
+  const S = 256;
+  const [c, g] = canvas(S, S);
+  g.clearRect(0, 0, S, S);
+  for (let i = 0; i < 420; i++) {
+    // Rayon tiré vers le centre : la grappe garde sa forme quand la texture est réduite (niveaux de mipmap).
+    const r = Math.pow(rand(), 0.75) * S * 0.47;
+    const a = rand() * Math.PI * 2;
+    const x = S / 2 + Math.cos(a) * r;
+    const y = S / 2 + Math.sin(a) * r;
+    const L = 9 + rand() * 9;
+    const W = L * (0.38 + rand() * 0.15);
+    const v = 0.62 + rand() * 0.38;
+    const hue = rand() * 0.12;
+    g.save();
+    g.translate(x, y);
+    g.rotate(a + (rand() - 0.5) * 1.8);
+    g.beginPath();
+    g.moveTo(-L / 2, 0);
+    g.quadraticCurveTo(0, -W, L / 2, 0);
+    g.quadraticCurveTo(0, W, -L / 2, 0);
+    g.fillStyle = `rgba(${Math.round(225 * v * (1 - hue))},${Math.round(255 * v)},${Math.round(205 * v * (1 - hue * 2))},1)`;
+    g.fill();
+    g.strokeStyle = `rgba(${Math.round(150 * v)},${Math.round(175 * v)},${Math.round(130 * v)},0.6)`;
+    g.lineWidth = 0.8;
+    g.beginPath();
+    g.moveTo(-L / 2, 0);
+    g.lineTo(L / 2, 0);
+    g.stroke();
+    g.restore();
+  }
+  const t = tex(c, true);
+  t.wrapS = ClampToEdgeWrapping;
+  t.wrapT = ClampToEdgeWrapping;
+  return t;
+}
+
+/**
+ * Carte de normales (R1c, matériaux à relief) tirée d'une image : la luminance sert de hauteur, pentes de Sobel. Mêmes
+ * répétition et enroulement que la texture d'origine. Données (pas de couleur) : espace linéaire.
+ */
+function normalFromCanvas(src: CanvasImageSource & { width: number; height: number }, strength: number): HTMLCanvasElement {
+  const w = src.width;
+  const h = src.height;
+  const [, g0] = canvas(w, h);
+  g0.drawImage(src, 0, 0);
+  const px = g0.getImageData(0, 0, w, h).data;
+  const H = (x: number, y: number): number => {
+    const i = (((y + h) % h) * w + ((x + w) % w)) * 4;
+    return (0.299 * (px[i] as number) + 0.587 * (px[i + 1] as number) + 0.114 * (px[i + 2] as number)) / 255;
+  };
+  const [c, g] = canvas(w, h);
+  const out = g.createImageData(w, h);
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++) {
+      const dx = H(x + 1, y - 1) + 2 * H(x + 1, y) + H(x + 1, y + 1) - H(x - 1, y - 1) - 2 * H(x - 1, y) - H(x - 1, y + 1);
+      const dy = H(x - 1, y + 1) + 2 * H(x, y + 1) + H(x + 1, y + 1) - H(x - 1, y - 1) - 2 * H(x, y - 1) - H(x + 1, y - 1);
+      const nx = -dx * strength;
+      const ny = dy * strength;
+      const l = Math.hypot(nx, ny, 1);
+      const i = (y * w + x) * 4;
+      out.data[i] = Math.round((nx / l / 2 + 0.5) * 255);
+      out.data[i + 1] = Math.round((ny / l / 2 + 0.5) * 255);
+      out.data[i + 2] = Math.round((1 / l / 2 + 0.5) * 255);
+      out.data[i + 3] = 255;
+    }
+  g.putImageData(out, 0, 0);
+  return c;
+}
+
+const normals = new WeakMap<Texture, Texture>();
+/** Carte de normales d'une texture procédurale (calculée une fois par texture). `null` si l'image n'est pas un canevas. */
+export function normalOf(t: Texture | null, strength = 2): Texture | null {
+  if (!t) return null;
+  const hit = normals.get(t);
+  if (hit) return hit;
+  const img = t.image as (CanvasImageSource & { width: number; height: number }) | undefined;
+  if (!img || !("width" in img) || !img.width) return null;
+  const n = tex(normalFromCanvas(img, strength), false, t.anisotropy);
+  n.wrapS = t.wrapS;
+  n.wrapT = t.wrapT;
+  n.repeat.copy(t.repeat);
+  n.offset.copy(t.offset);
+  normals.set(t, n);
+  return n;
+}
+
+/**
+ * Détail du sol (R1c) : herbe et terre à l'échelle de quelques mètres, répété sur tout le terrain. Gris centré sur 0,5 (le
+ * shader du sol multiplie la teinte peinte par 2 × détail) ; brins verticaux courts, mottes et cailloux. Sa carte de normales
+ * donne le relief fin.
+ */
+export function groundDetailTex(seed: number): { albedo: Texture; normal: Texture } {
+  const rand = seeded(derive(seed, 1700));
+  const S = 512;
+  const [c, g] = canvas(S, S);
+  g.fillStyle = "rgb(128,128,128)";
+  g.fillRect(0, 0, S, S);
+  // Nappes douces (mottes), répétées aux bords pour une tuile sans couture.
+  for (let i = 0; i < 160; i++) {
+    const x = rand() * S;
+    const y = rand() * S;
+    const r = 10 + rand() * 40;
+    const v = Math.round(100 + rand() * 56);
+    for (const ox of [-S, 0, S])
+      for (const oy of [-S, 0, S]) {
+        const grad = g.createRadialGradient(x + ox, y + oy, 0, x + ox, y + oy, r);
+        grad.addColorStop(0, `rgba(${v},${v},${v},0.35)`);
+        grad.addColorStop(1, `rgba(${v},${v},${v},0)`);
+        g.fillStyle = grad;
+        g.fillRect(x + ox - r, y + oy - r, 2 * r, 2 * r);
+      }
+  }
+  // Brins : traits courts, presque verticaux, clairs et sombres.
+  for (let i = 0; i < 9000; i++) {
+    const x = rand() * S;
+    const y = rand() * S;
+    const L = 3 + rand() * 7;
+    const a = -Math.PI / 2 + (rand() - 0.5) * 0.9;
+    const v = Math.round(rand() < 0.5 ? 70 + rand() * 50 : 150 + rand() * 70);
+    g.strokeStyle = `rgba(${v},${v},${v},0.55)`;
+    g.lineWidth = 0.8 + rand() * 0.6;
+    g.beginPath();
+    g.moveTo(x, y);
+    g.lineTo(x + Math.cos(a) * L, y + Math.sin(a) * L);
+    g.stroke();
+  }
+  speckle(g, rand, S, S, 1400, 0.4);
+  const albedo = tex(c, false, 8);
+  const normal = tex(normalFromCanvas(c, 2.4), false, 8);
+  return { albedo, normal };
+}
+
+/** Eau (R1c) : rides en bruit doux, pour une carte de normales qui défile (reflets du ciel découpés). */
+export function waterNormalTex(seed: number): Texture {
+  const rand = seeded(derive(seed, 1800));
+  const S = 256;
+  const [c, g] = canvas(S, S);
+  g.fillStyle = "rgb(128,128,128)";
+  g.fillRect(0, 0, S, S);
+  for (let i = 0; i < 600; i++) {
+    const x = rand() * S;
+    const y = rand() * S;
+    const rx = 4 + rand() * 16;
+    const ry = rx * (0.3 + rand() * 0.3);
+    const v = rand() < 0.5 ? 0 : 255;
+    for (const ox of [-S, 0, S])
+      for (const oy of [-S, 0, S]) {
+        g.save();
+        g.translate(x + ox, y + oy);
+        g.scale(1, ry / rx);
+        const grad = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+        grad.addColorStop(0, `rgba(${v},${v},${v},0.18)`);
+        grad.addColorStop(1, `rgba(${v},${v},${v},0)`);
+        g.fillStyle = grad;
+        g.fillRect(-rx, -rx, 2 * rx, 2 * rx);
+        g.restore();
+      }
+  }
+  return tex(normalFromCanvas(c, 3), false, 4);
+}
+
+/**
+ * Relief fin des corps (R1c) : peau (pores, ridules) et étoffe (armure toile) en cartes de normales répétées sur l'atlas de
+ * MakeHuman. Bruit fin et régulier : les raccords des îlots de texture ne se voient pas.
+ */
+export function bodyDetailNormals(seed: number): { skin: Texture; cloth: Texture } {
+  const rand = seeded(derive(seed, 1900));
+  const S = 256;
+  const [cs, gs] = canvas(S, S);
+  gs.fillStyle = "rgb(128,128,128)";
+  gs.fillRect(0, 0, S, S);
+  for (let i = 0; i < 2600; i++) {
+    const v = rand() < 0.75 ? 90 : 170;
+    gs.fillStyle = `rgba(${v},${v},${v},${0.25 + rand() * 0.35})`;
+    gs.beginPath();
+    gs.arc(rand() * S, rand() * S, 0.5 + rand() * 1.1, 0, Math.PI * 2);
+    gs.fill();
+  }
+  for (let i = 0; i < 160; i++) {
+    const x = rand() * S;
+    const y = rand() * S;
+    gs.strokeStyle = `rgba(100,100,100,${0.15 + rand() * 0.15})`;
+    gs.lineWidth = 0.7;
+    gs.beginPath();
+    gs.moveTo(x, y);
+    gs.quadraticCurveTo(x + (rand() - 0.5) * 20, y + (rand() - 0.5) * 6, x + (rand() - 0.5) * 30, y + (rand() - 0.5) * 8);
+    gs.stroke();
+  }
+  const [cc, gc] = canvas(S, S);
+  gc.fillStyle = "rgb(128,128,128)";
+  gc.fillRect(0, 0, S, S);
+  // Armure toile : fils alternés dessus-dessous, pas de 4 px, légère irrégularité.
+  for (let y = 0; y < S; y += 4)
+    for (let x = 0; x < S; x += 4) {
+      const over = ((x + y) / 4) % 2 === 0;
+      const v = Math.round((over ? 175 : 85) + (rand() - 0.5) * 30);
+      gc.fillStyle = `rgb(${v},${v},${v})`;
+      if (over) gc.fillRect(x, y + 1, 4, 2);
+      else gc.fillRect(x + 1, y, 2, 4);
+    }
+  const skin = tex(normalFromCanvas(cs, 1.4), false, 4);
+  skin.repeat.set(10, 10);
+  const cloth = tex(normalFromCanvas(cc, 1.1), false, 4);
+  cloth.repeat.set(36, 36);
+  return { skin, cloth };
 }

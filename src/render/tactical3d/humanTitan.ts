@@ -270,13 +270,18 @@ export interface HumanTitan extends Titan {
   human: HumanBody;
 }
 
-export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number, opts: { skinMap?: Texture | null; eyeMap?: Texture | null } = {}): HumanTitan {
+export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number, opts: { skinMap?: Texture | null; eyeMap?: Texture | null; skinNormal?: Texture | null } = {}): HumanTitan {
   const H = spec.height;
   const rand = seeded(derive(seed, spec.salt));
   const { macro, details } = titanMacro(spec);
   // Variation individuelle : surtout masculins (pas de sexe visible), âge, un peu de corpulence.
   const indiv: Macro = { gender: range(rand, 0.65, 1), age: range(rand, 0.5, 0.75), muscle: macro.muscle, weight: Math.max(0, Math.min(1, macro.weight + range(rand, -0.08, 0.08))) };
   const skin = new MeshStandardMaterial({ color: new Color(spec.skin).multiplyScalar(range(rand, 0.94, 1.04)), map: opts.skinMap ?? null, roughness: 0.58, metalness: 0, emissive: new Color(MATERIALS.physiques.braise), emissiveIntensity: 0.025 });
+  if (opts.skinNormal) {
+    // Grain de peau : à l'échelle d'un Titan, pores et plis restent fins (même carte, répétée sur l'atlas).
+    skin.normalMap = opts.skinNormal;
+    skin.normalScale.set(0.35, 0.35);
+  }
   // Tête en couleurs de sommet seulement si des cheveux y sont peints (sans attribut de couleur, la tête serait noire).
   const head = skin.clone();
   head.vertexColors = spec.hair;

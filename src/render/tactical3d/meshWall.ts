@@ -7,6 +7,7 @@ import type { Vec2 } from "./geom2";
 import { phys } from "./meshProps";
 import { derive, range, seeded } from "./rng";
 import { FaceBuilder } from "./townMesh";
+import { normalOf } from "./texturesEnv";
 
 /**
  * Maillage des murs de R1b (R1b.4) : corps de 50 m (C), parement de pierre à joints (texture), chemin de ronde avec parapet
@@ -214,7 +215,7 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
     m.receiveShadow = true;
     meshes.push(m);
   };
-  mk(body, new MeshStandardMaterial({ map: stoneMap, vertexColors: true, roughness: 0.95 }), "mur-parement");
+  mk(body, new MeshStandardMaterial({ map: stoneMap, normalMap: normalOf(stoneMap, 2.2), vertexColors: true, roughness: 0.95 }), "mur-parement");
   mk(trim, new MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), "mur-encadrements");
   mk(iron, new MeshStandardMaterial({ vertexColors: true, roughness: 0.45, metalness: 0.6 }), "mur-rails-et-ferrures");
   mk(wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.8 }), "mur-vantaux");

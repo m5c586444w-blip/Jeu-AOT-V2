@@ -1,10 +1,11 @@
-import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, LOD, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PlaneGeometry, Points, PointsMaterial, Quaternion, Vector3 } from "three";
+import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, InstancedMesh, LOD, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PlaneGeometry, Points, PointsMaterial, Quaternion, Vector3 } from "three";
 import type { Material, Texture } from "three";
 import type { GiantTree, Shaft } from "./envTypes";
 import { derive, range, seeded } from "./rng";
 import { heightAt } from "./terrain";
 import type { TerrainData } from "./terrain";
 import { FaceBuilder } from "./townMesh";
+import { unitLump, unitLumpCards } from "./meshTrees";
 
 /**
  * Maillage de la forêt des Arbres Géants (R1b.5) : troncs effilés à contreforts racinaires et mousse au pied, branches
@@ -72,14 +73,16 @@ export function shaftMesh(shafts: readonly Shaft[], groundAt: (x: number, y: num
   return m;
 }
 
-export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: number, y: number) => number, shafts: readonly Shaft[], c: NatureColors, q: { near: number; far: number; shadows: boolean }, mistMap: Texture | null, mist: { density: number; top: number }, size: number): NatureMeshes {
+export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: number, y: number) => number, shafts: readonly Shaft[], c: NatureColors, q: { near: number; far: number; shadows: boolean }, mistMap: Texture | null, mist: { density: number; top: number }, size: number, leaves: Texture | null = null): NatureMeshes {
   const group = new Group();
   group.name = "foret-geante";
   const materials: Material[] = [];
   const geos: BufferGeometry[] = [];
   const barkMat = new MeshStandardMaterial({ vertexColors: true, roughness: 0.95 });
-  const crownMat = new MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true });
-  materials.push(barkMat, crownMat);
+  // R1c : voûte en massifs lisses (intérieur sombre) habillés de cartes de feuillage quand la texture de feuilles existe.
+  const crownMat = new MeshStandardMaterial({ vertexColors: true, roughness: 1 });
+  const leafMat = leaves ? new MeshStandardMaterial({ vertexColors: true, map: leaves, alphaTest: 0.42, side: DoubleSide, roughness: 0.85 }) : null;
+  materials.push(barkMat, crownMat, ...(leafMat ? [leafMat] : []));
   const tiles = new Map<string, GiantTree[]>();
   for (const t of giants) {
     const key = `${Math.floor(t.x / GIANT_TILE)},${Math.floor(t.y / GIANT_TILE)}`;
@@ -90,8 +93,9 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
   const lods: LOD[] = [];
   let branches = 0;
   let crowns = 0;
-  const crownGeo = { near: new IcosahedronGeometry(1, 1), far: new IcosahedronGeometry(1, 0) };
-  geos.push(crownGeo.near, crownGeo.far);
+  const crownGeo = { near: unitLump(2, 3.1), far: unitLump(1, 3.1) };
+  const cardGeo = leafMat ? unitLumpCards(90, 0.62, 7) : null;
+  geos.push(crownGeo.near, crownGeo.far, ...(cardGeo ? [cardGeo] : []));
   for (const [key, list] of [...tiles.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
     const [ti, tj] = key.split(",").map(Number) as [number, number];
     const cx = (ti + 0.5) * GIANT_TILE;
@@ -159,6 +163,17 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
       im.computeBoundingSphere();
       if (near) crowns += crownsHere.length;
       level.add(im);
+      if (near && cardGeo && leafMat) {
+        const lm = new InstancedMesh(cardGeo, leafMat, crownsHere.length);
+        lm.name = "voute-feuilles";
+        lm.receiveShadow = true;
+        crownsHere.forEach((x, i) => {
+          lm.setMatrixAt(i, x.m);
+          lm.setColorAt(i, x.col);
+        });
+        lm.computeBoundingSphere();
+        level.add(lm);
+      }
       lod.addLevel(level, near ? 0 : q.near);
     }
     lod.addLevel(new Object3D(), q.far);

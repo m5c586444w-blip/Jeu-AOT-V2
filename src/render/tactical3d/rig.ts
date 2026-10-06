@@ -1,5 +1,6 @@
-import { Box3, Group, LatheGeometry, Mesh, MeshStandardMaterial, SphereGeometry, Vector2, Vector3 } from "three";
+import { Box3, Color, Group, LatheGeometry, Matrix4, Mesh, MeshStandardMaterial, PerspectiveCamera, Quaternion, Scene, SphereGeometry, Texture, Vector2, Vector3 } from "three";
 import type { BufferGeometry, Material, Object3D } from "three";
+import { FaceBuilder } from "./townMesh";
 
 /**
  * Outils de figure articulée (R1.4, R1.5) : formes organiques par révolution, articulations nommées, mesure de hauteur.
@@ -176,4 +177,23 @@ export function lodLevels(root: Object3D): { levels: number; distances: number[]
     if (lod.isLOD && lod.levels) out.push({ levels: lod.levels.length, distances: lod.levels.map((l) => l.distance) });
   });
   return out;
+}
+
+// ——— Essais sans navigateur (R1c) : objets three.js que les tests ne peuvent pas importer eux-mêmes (règle ESLint) ———
+
+/** Scène et caméra vides. */
+export function blankStage(): { scene: Scene; camera: PerspectiveCamera } {
+  return { scene: new Scene(), camera: new PerspectiveCamera() };
+}
+
+/** Texture vide : sa seule présence active un rendu (cartes de feuillage). */
+export function blankTexture(): Texture {
+  return new Texture();
+}
+
+/** Sphère passée par l'assembleur de pièces avec une translation et une échelle non uniforme (normales à vérifier). */
+export function assembledSphere(center: [number, number, number], scale: [number, number, number]): BufferGeometry {
+  const fb = new FaceBuilder();
+  fb.geometry(new SphereGeometry(1, 12, 8), new Matrix4().compose(new Vector3(...center), new Quaternion(), new Vector3(...scale)), new Color(1, 1, 1));
+  return fb.build();
 }

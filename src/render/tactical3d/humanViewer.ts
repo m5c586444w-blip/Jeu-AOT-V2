@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import type { Material, PointsMaterial } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
@@ -13,7 +13,11 @@ import { TITAN_CLASS_IDS, TITAN_SPECIAL_IDS, TITAN_VARIANT_IDS, titanSpec, varia
 import { ALL_TITAN_POSES, setSteamTexture } from "./titan";
 import type { TitanPose } from "./titan";
 import { puffTexture, skinTexture } from "./textures";
+import { dressMaterials } from "./bodies";
 import { createLighting } from "./lighting";
+import { bodyDetailNormals } from "./texturesEnv";
+import { createPost } from "./post";
+import type { PostChain } from "./post";
 import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
 
@@ -65,6 +69,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   ground.receiveShadow = true;
   scene.add(ground);
   const eyeTex = await loadEyeTexture();
+  const detail = bodyDetailNormals(850);
   const skin = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.cire).lerp(new Color(MATERIALS.physiques.braise), 0.18), roughness: 0.55 });
   const eyes = new MeshStandardMaterial({ map: eyeTex, roughness: 0.15 });
   const teeth = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.toile_claire), roughness: 0.35 });
@@ -78,6 +83,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   if (sheet === "soldats") {
     // Les animations du soldat, côte à côte (même instant) ; la vue « visage » cadre le premier de près.
     const mats = soldierMaterials();
+    dressMaterials(mats, detail);
     SOLDIER_ANIMS.forEach((a, i) => {
       const s0 = performance.now();
       const s = buildHumanSoldier(template, 300 + i, mats, { eyeMap: eyeTex });
@@ -102,7 +108,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
         : ALL_TITAN_POSES.map((pose) => ({ spec: titanSpec(id), pose }));
     items.forEach(({ spec, pose }, i) => {
       const s0 = performance.now();
-      const ti = buildHumanTitan(template, spec, 850 + i, { skinMap, eyeMap: eyeTex });
+      const ti = buildHumanTitan(template, spec, 850 + i, { skinMap, eyeMap: eyeTex, skinNormal: detail.skin });
       const k = 2.4 / spec.height;
       ti.group.scale.setScalar(k);
       // La taille des points de vapeur ne suit pas l'échelle du groupe.
@@ -150,6 +156,9 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: new Vector3(0, 0, 0), shadowExtent: 20, fogScale: 0.2 });
   lighting.useEnvironment(renderer);
   lighting.apply("jour");
+  lighting.setShadow(true, 2048);
+  // Occlusion ambiante (R1c) : plis du corps, aisselles, dessous du menton.
+  const post = createPost(scene, camera, "haut") as PostChain;
   const resize = (): void => {
     const w = host.clientWidth || window.innerWidth;
     const h = host.clientHeight || window.innerHeight;
@@ -173,7 +182,8 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     controls.update();
     lighting.follow(camera.position);
     renderer.toneMappingExposure = lighting.exposure;
-    renderer.render(scene, camera);
+    const size = renderer.getDrawingBufferSize(new Vector2());
+    post.render(renderer, size.x, size.y);
     requestAnimationFrame(loop);
   };
   window.__humain3d = state;

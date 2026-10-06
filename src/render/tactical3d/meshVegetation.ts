@@ -1,14 +1,18 @@
-import { Color, ConeGeometry, CylinderGeometry, Group, IcosahedronGeometry, InstancedMesh, LOD, Matrix4, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from "three";
-import type { BufferGeometry } from "three";
+import { Color, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, LOD, Matrix4, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from "three";
+import type { BufferGeometry, Texture } from "three";
 import type { Hedge, TreeInst, TreeKind } from "./terrain";
 import { heightAt } from "./terrain";
 import type { Heightfield } from "./terrain";
 import { phys } from "./meshProps";
+import { hedgeCards, realisticTree } from "./meshTrees";
+import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import type { TreeParts } from "./meshTrees";
 import { FaceBuilder } from "./townMesh";
 
 /**
- * Végétation instanciée de R1b (R1b.2, qualité « haute ») :
- * - une géométrie par essence et par niveau de détail (proche : tronc et plusieurs houppiers ; loin : un seul volume) ;
+ * Végétation instanciée de R1b (R1b.2, qualité « haute »), arbres réalistes de R1c :
+ * - une géométrie par essence et par niveau de détail (proche : tronc, branches, massifs bosselés et cartes de feuillage ;
+ *   loin : quelques massifs) ;
  * - le terrain est découpé en tuiles de `TILE` m : chaque tuile est un `LOD` three.js à trois niveaux (proche, loin, rien) ;
  * - la qualité règle les distances de bascule et la part d'arbres gardés (tirage fixe par arbre, pas d'aléa à l'image).
  */
@@ -26,70 +30,17 @@ export interface VegetationQuality {
 
 const m4 = (x: number, y: number, z: number, s: [number, number, number] = [1, 1, 1], ry = 0): Matrix4 => new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), ry), new Vector3(...s));
 
-/** Le tronc est assombri : l'instance multiplie tout l'arbre par la teinte du feuillage. */
-const TRUNK = (): Color => phys("ecorce").multiplyScalar(1.9);
 const LEAF = new Color(1, 1, 1);
+/** Écorce : teinte physique du projet, éclaircie (la couleur de sommet du bois l'assombrit déjà). */
+const BARK_TINT = phys("ecorce").multiplyScalar(1.9);
 
-function treeGeometry(kind: TreeKind, near: boolean): BufferGeometry {
-  const fb = new FaceBuilder();
-  const trunk = TRUNK();
-  switch (kind) {
-    case "feuillu":
-      fb.geometry(new CylinderGeometry(0.22, 0.38, 5.5, near ? 7 : 4), m4(0, 2.75, 0), trunk);
-      if (near) {
-        for (const [x, y, z, s] of [
-          [0, 7.4, 0, 3.4],
-          [1.6, 6.4, 0.8, 2.4],
-          [-1.4, 6.6, -0.6, 2.5],
-          [0.3, 8.8, -0.9, 2.2],
-        ] as const)
-          fb.geometry(new IcosahedronGeometry(1, 1), m4(x, y, z, [s, s * 0.9, s]), LEAF.clone().multiplyScalar(0.92 + 0.08 * Math.sin(x + z)));
-      } else fb.geometry(new IcosahedronGeometry(1, 0), m4(0, 7.4, 0, [3.6, 3.2, 3.6]), LEAF);
-      break;
-    case "conifere":
-      fb.geometry(new CylinderGeometry(0.18, 0.3, 4, near ? 6 : 4), m4(0, 2, 0), trunk);
-      if (near) for (const [y, r, h] of [
-        [4.5, 3, 5],
-        [7.4, 2.3, 4.4],
-        [10, 1.5, 3.8],
-      ] as const)
-        fb.geometry(new ConeGeometry(r, h, 8), m4(0, y, 0), LEAF);
-      else fb.geometry(new ConeGeometry(2.8, 10.5, 5), m4(0, 6.8, 0), LEAF);
-      break;
-    case "fruitier":
-      fb.geometry(new CylinderGeometry(0.14, 0.22, 2.2, near ? 6 : 4), m4(0, 1.1, 0), trunk);
-      if (near) {
-        fb.geometry(new IcosahedronGeometry(1, 1), m4(0, 3.2, 0, [2, 1.6, 2]), LEAF);
-        fb.geometry(new IcosahedronGeometry(1, 1), m4(0.6, 3.8, 0.4, [1.3, 1.1, 1.3]), LEAF.clone().multiplyScalar(0.94));
-      } else fb.geometry(new IcosahedronGeometry(1, 0), m4(0, 3.3, 0, [2.1, 1.8, 2.1]), LEAF);
-      break;
-    case "mort":
-      fb.geometry(new CylinderGeometry(0.16, 0.34, 7, near ? 6 : 4), m4(0, 3.5, 0), trunk);
-      if (near) for (const [a, h] of [
-        [0.5, 4.5],
-        [2.6, 5.5],
-        [4.4, 6.3],
-      ] as const) {
-        const m = new Matrix4().makeTranslation(0, h, 0).multiply(new Matrix4().makeRotationY(a)).multiply(new Matrix4().makeRotationZ(0.9)).multiply(new Matrix4().makeTranslation(0, 1.4, 0));
-        fb.geometry(new CylinderGeometry(0.05, 0.12, 2.8, 4), m, trunk);
-      }
-      break;
-    case "buisson":
-      if (near) {
-        fb.geometry(new IcosahedronGeometry(1, 1), m4(0, 0.7, 0, [1.4, 0.9, 1.3]), LEAF);
-        fb.geometry(new IcosahedronGeometry(1, 0), m4(0.8, 0.55, 0.4, [0.9, 0.7, 0.9]), LEAF.clone().multiplyScalar(0.9));
-      } else fb.geometry(new IcosahedronGeometry(1, 0), m4(0, 0.7, 0, [1.5, 0.9, 1.4]), LEAF);
-      break;
-  }
-  return fb.build();
-}
-
-const GEO = new Map<string, BufferGeometry>();
-export function treeGeo(kind: TreeKind, near: boolean): BufferGeometry {
+/** Géométries d'une essence et d'un niveau de détail (R1c : arbres réalistes, `meshTrees.ts`), calculées une fois. */
+const GEO = new Map<string, TreeParts>();
+export function treeParts(kind: TreeKind, near: boolean): TreeParts {
   const key = `${kind}-${near ? "proche" : "loin"}`;
   let g = GEO.get(key);
   if (!g) {
-    g = treeGeometry(kind, near);
+    g = realisticTree(kind, near);
     GEO.set(key, g);
   }
   return g;
@@ -115,6 +66,8 @@ export interface VegetationMeshes {
   counts: Record<TreeKind, number>;
   lods: LOD[];
   material: MeshStandardMaterial;
+  /** Cartes de feuillage (texture de feuilles, test alpha) ; absentes sans texture. */
+  leafMaterial: MeshStandardMaterial | null;
   dispose(): void;
 }
 
@@ -123,10 +76,12 @@ function tint(kind: TreeKind, f: Foliage, k: number): Color {
   return c.multiplyScalar(0.85 + 0.3 * ((k * 7.31) % 1));
 }
 
-export function buildVegetation(trees: readonly TreeInst[], hf: Heightfield | null, f: Foliage, q: VegetationQuality): VegetationMeshes {
+export function buildVegetation(trees: readonly TreeInst[], hf: Heightfield | null, f: Foliage, q: VegetationQuality, leaves: Texture | null = null): VegetationMeshes {
   const group = new Group();
   group.name = "vegetation";
-  const material = new MeshStandardMaterial({ vertexColors: true, roughness: 0.95, flatShading: true });
+  const material = new MeshStandardMaterial({ vertexColors: true, roughness: 0.9 });
+  const woodMaterial = new MeshStandardMaterial({ vertexColors: true, roughness: 0.95 });
+  const leafMaterial = leaves ? new MeshStandardMaterial({ vertexColors: true, map: leaves, alphaTest: 0.42, side: DoubleSide, roughness: 0.8 }) : null;
   const counts: Record<TreeKind, number> = { feuillu: 0, conifere: 0, fruitier: 0, mort: 0, buisson: 0 };
   const tiles = new Map<string, TreeInst[]>();
   for (const t of trees) {
@@ -152,18 +107,27 @@ export function buildVegetation(trees: readonly TreeInst[], hf: Heightfield | nu
       for (const kind of TREE_KINDS) {
         const ofKind = list.filter((t) => t.kind === kind);
         if (ofKind.length === 0) continue;
-        const im = new InstancedMesh(treeGeo(kind, near), material, ofKind.length);
-        im.name = `arbres-${kind}-${near ? "proche" : "loin"}`;
-        im.castShadow = near && q.shadows && kind !== "buisson";
-        im.receiveShadow = near;
-        ofKind.forEach((t, i) => {
-          const y = hf ? heightAt(hf, t.x, t.y) - 0.2 : 0;
-          im.setMatrixAt(i, m.compose(new Vector3(t.x - cx, y, t.y - cz), quat.setFromAxisAngle(up, t.r), new Vector3(t.s, t.s * (0.9 + ((t.r * 3.1) % 0.25)), t.s)));
-          im.setColorAt(i, tint(kind, f, (t.r * 0.159) % 1));
-        });
-        im.instanceMatrix.needsUpdate = true;
-        im.computeBoundingSphere();
-        level.add(im);
+        const parts = treeParts(kind, near);
+        for (const [geo, mat, suffix] of [
+          [parts.wood, woodMaterial, "-bois"],
+          [parts.solid, material, ""],
+          [leafMaterial ? parts.cards : null, leafMaterial, "-feuilles"],
+        ] as const) {
+          if (!geo || !mat) continue;
+          const im = new InstancedMesh(geo, mat, ofKind.length);
+          im.name = `arbres-${kind}-${near ? "proche" : "loin"}${suffix}`;
+          im.castShadow = near && q.shadows && kind !== "buisson";
+          im.receiveShadow = near;
+          ofKind.forEach((t, i) => {
+            const y = hf ? heightAt(hf, t.x, t.y) - 0.2 : 0;
+            im.setMatrixAt(i, m.compose(new Vector3(t.x - cx, y, t.y - cz), quat.setFromAxisAngle(up, t.r), new Vector3(t.s, t.s * (0.9 + ((t.r * 3.1) % 0.25)), t.s)));
+            // Le bois garde sa teinte d'écorce (à peine variée) ; houppier et feuilles prennent celle du feuillage.
+            im.setColorAt(i, mat === woodMaterial ? BARK_TINT.clone().multiplyScalar(0.85 + 0.3 * ((t.r * 0.37) % 1)) : tint(kind, f, (t.r * 0.159) % 1));
+          });
+          im.instanceMatrix.needsUpdate = true;
+          im.computeBoundingSphere();
+          level.add(im);
+        }
         if (near) counts[kind] += ofKind.length;
       }
       lod.addLevel(level, near ? 0 : q.near);
@@ -177,8 +141,11 @@ export function buildVegetation(trees: readonly TreeInst[], hf: Heightfield | nu
     counts,
     lods,
     material,
+    leafMaterial,
     dispose() {
       material.dispose();
+      woodMaterial.dispose();
+      leafMaterial?.dispose();
       group.traverse((o) => {
         if (o instanceof InstancedMesh) o.dispose();
       });
@@ -191,12 +158,21 @@ let HEDGE_GEO: BufferGeometry | null = null;
 function hedgeGeo(): BufferGeometry {
   if (HEDGE_GEO) return HEDGE_GEO;
   const fb = new FaceBuilder();
-  for (let k = 0; k < 4; k++) fb.geometry(new IcosahedronGeometry(1, 0), m4(-0.375 + k * 0.25, 0.8, 0, [0.2, 0.85 + (k % 2) * 0.15, 0.75]), LEAF.clone().multiplyScalar(0.9 + (k % 2) * 0.1));
+  // R1c : massifs lisses (normales fusionnées), un peu plus détaillés.
+  for (let k = 0; k < 4; k++) {
+    const g = mergeVertices(new IcosahedronGeometry(1, 1).deleteAttribute("normal").deleteAttribute("uv"));
+    g.computeVertexNormals();
+    fb.geometry(g.toNonIndexed(), m4(-0.375 + k * 0.25, 0.8, 0, [0.2, 0.85 + (k % 2) * 0.15, 0.75]), LEAF.clone().multiplyScalar(0.9 + (k % 2) * 0.1));
+  }
   HEDGE_GEO = fb.build();
   return HEDGE_GEO;
 }
 
-export function buildHedges(hedges: readonly Hedge[], hf: Heightfield | null, color: string, shadows: boolean): InstancedMesh | null {
+/**
+ * Haies : tronçons instanciés le long des segments ; avec la texture de feuilles (R1c), des cartes de feuillage les habillent
+ * (second maillage instancié, enfant du premier, mêmes matrices).
+ */
+export function buildHedges(hedges: readonly Hedge[], hf: Heightfield | null, color: string, shadows: boolean, leaves: Texture | null = null): InstancedMesh | null {
   const pieces: { x: number; y: number; a: number; L: number }[] = [];
   for (const h of hedges) {
     const L = Math.hypot(h.b.x - h.a.x, h.b.y - h.a.y);
@@ -208,7 +184,7 @@ export function buildHedges(hedges: readonly Hedge[], hf: Heightfield | null, co
     }
   }
   if (pieces.length === 0) return null;
-  const im = new InstancedMesh(hedgeGeo(), new MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true }), pieces.length);
+  const im = new InstancedMesh(hedgeGeo(), new MeshStandardMaterial({ vertexColors: true, roughness: 1 }), pieces.length);
   im.name = "haies";
   im.castShadow = shadows;
   im.receiveShadow = true;
@@ -224,5 +200,25 @@ export function buildHedges(hedges: readonly Hedge[], hf: Heightfield | null, co
   });
   im.instanceMatrix.needsUpdate = true;
   im.computeBoundingSphere();
+  if (leaves) {
+    const cards = new InstancedMesh(hedgeCardGeo(), new MeshStandardMaterial({ vertexColors: true, map: leaves, alphaTest: 0.42, side: DoubleSide, roughness: 0.8 }), pieces.length);
+    cards.name = "haies-feuilles";
+    cards.receiveShadow = true;
+    for (let i = 0; i < pieces.length; i++) {
+      im.getMatrixAt(i, m);
+      cards.setMatrixAt(i, m);
+      im.getColorAt(i, base);
+      cards.setColorAt(i, base);
+    }
+    cards.instanceMatrix.needsUpdate = true;
+    cards.computeBoundingSphere();
+    im.add(cards);
+  }
   return im;
+}
+
+let HEDGE_CARDS: BufferGeometry | null = null;
+function hedgeCardGeo(): BufferGeometry {
+  HEDGE_CARDS ??= hedgeCards();
+  return HEDGE_CARDS;
 }

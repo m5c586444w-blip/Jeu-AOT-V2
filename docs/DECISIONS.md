@@ -588,3 +588,12 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Coude.** La pose de repos de MakeHuman porte les avant-bras en avant (≈ 43°) : la flexion du coude est donnée depuis le bras tendu ; les valeurs des poses de soldat ont été décalées d'autant (rendu inchangé).
 - **Corps couchés.** Pose écrite debout puis basculée d'un bloc (rotations conjuguées par la bascule) ; pieds tendus, bras dans le plan des épaules (la main tombante touche le sol) ; pas de voussure.
 - **Yeux.** L'atlas d'yeux de MakeHuman est lu à la convention glTF (pas de retournement) ; la cornée, transparente dans MakeHuman, est retirée (opaque, elle cachait l'iris).
+
+## 2026-10-06 — D-88 Rendu réaliste (R1c.4) : choix non couverts par les spécifications
+- **Ciel physique le jour seulement.** Modèle de Preetham de three.js (diffusion atmosphérique, nuages calculés, aucune image) en plein jour à l'air libre. À l'aube, au crépuscule et la nuit, le modèle assombrit l'horizon opposé au soleil et jure avec la brume chaude des profils : le dôme peint de R1b reste. Sous terre : dôme peint.
+- **Éclairage d'image dosé.** La carte d'environnement est tirée du ciel montré, à luminance réduite (× 0,45) : l'horizon blanc, reflété en incidence rasante par tous les matériaux, délavait le sol. Avec le ciel physique, l'hémisphère est réduite (× 0,7) ; avec le dôme peint, elle garde son intensité de R1b.
+- **Occlusion ambiante (GTAO) depuis la profondeur du rendu.** Pas de second rendu de la scène (normales reconstruites) : les cartes de feuillage gardent leur découpe. Contournement d'un défaut de three r186 (profondeur externe passée au constructeur). Aucune en qualité basse.
+- **Ombres douces** : rayon PCF de 3 à 4 texels (le type « PCF doux » a été retiré de three).
+- **Arbres procéduraux** (aucun modèle externe) : massifs bosselés à normales de volume, intérieur sombre, cartes de feuillage découpées par une texture de feuilles dessinée ; bois non teinté par le feuillage ; conifères en étages dentelés ; haies et voûte des Arbres Géants habillées de la même façon.
+- **Relief** : cartes de normales tirées des textures procédurales (murs, façades, toits, pavés), détail du sol répété (6 m), rides de l'eau qui défilent, grain de peau et armure toile des uniformes.
+- **Normales des pièces assemblées** (`FaceBuilder`) : la matrice inverse transposée 4 × 4 appliquée comme à un point divisait par une composante w nulle ou négative ; l'ombrage plat le masquait. Matrice des normales 3 × 3.

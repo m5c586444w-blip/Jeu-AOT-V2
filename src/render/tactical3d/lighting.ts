@@ -1,5 +1,6 @@
 import { BackSide, BufferAttribute, BufferGeometry, Color, DirectionalLight, FogExp2, Group, HemisphereLight, Mesh, MeshBasicMaterial, PMREMGenerator, PointLight, Points, PointsMaterial, Scene as SceneClass, SphereGeometry, Vector3 } from "three";
-import type { MeshStandardMaterial, Scene, Texture, WebGLRenderer } from "three";
+import type { MeshStandardMaterial, Scene, ShaderMaterial, Texture, WebGLRenderer } from "three";
+import { Sky } from "three/examples/jsm/objects/Sky.js";
 import { derive, seeded } from "./rng";
 
 /**
@@ -30,14 +31,27 @@ interface PresetDef {
   lanterns: number;
   lampIntensity: number;
   stars: boolean;
+  /**
+   * R1c : ciel physique (modèle de Preetham, nuages procéduraux) du plein jour : trouble de l'air, diffusion de Rayleigh et de
+   * Mie, couverture nuageuse, gain (la luminance du modèle ramenée à l'exposition de la scène). Absent (aube, crépuscule, nuit,
+   * sous terre) : dôme peint, dont l'horizon se fond dans la brume ; le modèle, au soleil bas, assombrit l'horizon opposé.
+   */
+  physical?: { turbidity: number; rayleigh: number; mie: number; mieG: number; clouds: number; gain: number };
+  /** R1c : part de l'éclairage d'image (le ciel) ; l'hémisphère est réduite d'autant quand la carte d'environnement est active. */
+  envIntensity?: number;
 }
 
+/** Part de l'hémisphère gardée quand le ciel éclaire la scène (éclairage d'image). */
+const HEMI_WITH_ENV = 0.7;
+/** Luminance du ciel physique dans la carte d'environnement, rapportée au ciel montré. */
+const ENV_SKY_GAIN = 0.45;
+
 const PRESETS: Record<LightPreset, PresetDef> = {
-  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false },
+  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false, physical: { turbidity: 3, rayleigh: 1.1, mie: 0.004, mieG: 0.8, clouds: 0.38, gain: 0.5 }, envIntensity: 0.35 },
   // Aube (R1b.6) : soleil bas à l'est, lumière rosée et froide, brume plus dense que le jour.
-  aube: { elevation: 9, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.4, hemiSky: 0xb2b8cc, hemiGround: 0x4a443e, hemiIntensity: 1.2, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.2, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false },
-  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0xa898a4, hemiGround: 0x4a3d33, hemiIntensity: 1.35, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.2, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false },
-  nuit: { elevation: 38, azimuth: 140, sunColor: 0x9db2d8, sunIntensity: 0.5, hemiSky: 0x2a3550, hemiGround: 0x101215, hemiIntensity: 0.4, horizon: 0x1d2536, zenith: 0x06090f, glow: 0x8fa3c8, glowStrength: 0.35, fog: 0x121822, fogDensity: 0.0026, exposure: 1.15, windows: 1.5, lanterns: 3, lampIntensity: 60, stars: true },
+  aube: { elevation: 9, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.4, hemiSky: 0xb2b8cc, hemiGround: 0x4a443e, hemiIntensity: 1.2, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.2, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false, envIntensity: 0.3 },
+  crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0xa898a4, hemiGround: 0x4a3d33, hemiIntensity: 1.35, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.2, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false, envIntensity: 0.3 },
+  nuit: { elevation: 38, azimuth: 140, sunColor: 0x9db2d8, sunIntensity: 0.5, hemiSky: 0x2a3550, hemiGround: 0x101215, hemiIntensity: 0.4, horizon: 0x1d2536, zenith: 0x06090f, glow: 0x8fa3c8, glowStrength: 0.35, fog: 0x121822, fogDensity: 0.0026, exposure: 1.15, windows: 1.5, lanterns: 3, lampIntensity: 60, stars: true, envIntensity: 0.3 },
 };
 
 export interface LightRig {
@@ -102,6 +116,19 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   sky.name = "ciel";
   sky.renderOrder = -1;
   group.add(sky);
+  // R1c : ciel physique (three.js, `Sky` : diffusion atmosphérique et nuages calculés, aucune image), gain ajouté au shader.
+  const phys = new Sky();
+  phys.name = "ciel-physique";
+  phys.scale.setScalar(6000);
+  phys.renderOrder = -1;
+  const physMat = phys.material as ShaderMaterial;
+  physMat.uniforms["skyGain"] = { value: 0.5 };
+  physMat.fragmentShader = physMat.fragmentShader.replace("uniform float time;", "uniform float time;\n\t\tuniform float skyGain;").replace("gl_FragColor = vec4( texColor, 1.0 );", "gl_FragColor = vec4( texColor * skyGain, 1.0 );");
+  group.add(phys);
+  const envSky = new Sky();
+  envSky.material.dispose();
+  envSky.material = physMat;
+  envSky.scale.setScalar(1000);
 
   // Étoiles, pour la nuit seulement.
   const rand = seeded(derive(seed, 700));
@@ -130,6 +157,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   });
 
   let current: LightPreset = "jour";
+  let envOn = false;
   let pmrem: PMREMGenerator | null = null;
   let pmremOwner: WebGLRenderer | null = null;
   const envMaps = new Map<LightPreset, Texture>();
@@ -137,14 +165,28 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     if (!pmrem || opts.underground) return;
     let tex = envMaps.get(current);
     if (!tex) {
+      // La carte d'environnement vient du ciel montré : physique le jour, dôme peint la nuit.
+      // Le ciel physique éclaire avec une luminance réduite : son horizon blanc, reflété en incidence rasante par tous les
+      // matériaux, délavait le sol.
       const skyScene = new SceneClass();
-      const m = new Mesh(skyGeo, sky.material);
-      skyScene.add(m);
+      skyScene.add(phys.visible ? envSky : new Mesh(skyGeo, sky.material));
+      const gain = physMat.uniforms["skyGain"];
+      const shown = gain?.value as number;
+      if (gain && phys.visible) gain.value = shown * ENV_SKY_GAIN;
       tex = pmrem.fromScene(skyScene, 0, 0.5, 4000).texture;
+      if (gain) gain.value = shown;
       envMaps.set(current, tex);
     }
     scene.environment = tex;
+    envOn = true;
+    scene.environmentIntensity = effective(current).envIntensity ?? 0.45;
+    hemi.intensity = hemiFor(effective(current));
   };
+  /**
+   * Avec l'éclairage d'image du ciel physique, le ciel éclaire déjà les ombres : l'hémisphère est réduite. Le dôme peint (aube,
+   * crépuscule, nuit) éclaire peu : l'hémisphère garde son intensité de R1b.
+   */
+  const hemiFor = (d: PresetDef): number => d.hemiIntensity * (0.75 + 0.25 * sunK) * (envOn && d.physical && !opts.underground ? HEMI_WITH_ENV : 1);
   /** Multiplicateur de brume et voile du soleil posés par la météo (R1b.7). */
   let extraFog = 1;
   let sunK = 1;
@@ -213,7 +255,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       sun.position.copy(opts.center).addScaledVector(dir, Math.max(420, ext * 1.6));
       hemi.color.set(d.hemiSky);
       hemi.groundColor.set(d.hemiGround);
-      hemi.intensity = d.hemiIntensity * (0.75 + 0.25 * sunK);
+      hemi.intensity = hemiFor(d);
       fog.color.set(d.fog);
       fog.density = d.fogDensity * (opts.fogScale ?? 1) * extraFog;
       exposure = d.exposure;
@@ -234,6 +276,21 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
         col.setXYZ(i, c.r, c.g, c.b);
       }
       col.needsUpdate = true;
+      const ph = opts.underground ? undefined : d.physical;
+      phys.visible = ph !== undefined;
+      sky.visible = !phys.visible;
+      if (ph) {
+        const u = physMat.uniforms;
+        (u["sunPosition"]?.value as Vector3).copy(dir);
+        Object.assign(u["turbidity"] ?? {}, { value: ph.turbidity * (0.7 + 0.3 * extraFog) });
+        Object.assign(u["rayleigh"] ?? {}, { value: ph.rayleigh });
+        Object.assign(u["mieCoefficient"] ?? {}, { value: ph.mie });
+        Object.assign(u["mieDirectionalG"] ?? {}, { value: ph.mieG });
+        // Météo : ciel plus couvert quand la brume monte ou que le soleil est voilé.
+        Object.assign(u["cloudCoverage"] ?? {}, { value: Math.min(0.95, ph.clouds + 0.25 * (extraFog - 1) + 0.4 * (1 - sunK)) });
+        Object.assign(u["skyGain"] ?? {}, { value: ph.gain });
+        Object.assign(u["showSunDisc"] ?? {}, { value: 1 });
+      }
       stars.visible = d.stars;
       for (const m of opts.windowMaterials) m.emissiveIntensity = d.windows;
       opts.lanternMaterial.emissiveIntensity = d.lanterns;
@@ -242,6 +299,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     },
     follow(camera) {
       sky.position.copy(camera);
+      phys.position.copy(camera);
       stars.position.copy(camera);
     },
     setCenter(c) {
@@ -270,6 +328,8 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     },
     setShadow(enabled, size) {
       sun.castShadow = enabled;
+      // R1c : pénombre (échantillons PCF répartis sur un disque de quelques texels), plus large pour une carte fine.
+      sun.shadow.radius = size >= 2048 ? 4 : 3;
       if (sun.shadow.mapSize.x !== size) {
         sun.shadow.mapSize.set(size, size);
         sun.shadow.map?.dispose();
@@ -281,6 +341,9 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       skyGeo.dispose();
       starGeo.dispose();
       (sky.material as MeshBasicMaterial).dispose();
+      phys.geometry.dispose();
+      envSky.geometry.dispose();
+      physMat.dispose();
       (stars.material as PointsMaterial).dispose();
       sun.shadow.map?.dispose();
       for (const t of envMaps.values()) t.dispose();

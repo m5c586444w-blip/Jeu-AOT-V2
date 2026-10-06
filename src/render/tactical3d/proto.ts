@@ -11,6 +11,8 @@ import { derive } from "./rng";
 import { SOLDIER_POSES, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
 import type { SoldierLike, SoldierPose } from "./soldier";
 import { loadBodyKit, makeSoldier, makeTitan } from "./bodies";
+import { createPost } from "./post";
+import type { PostChain } from "./post";
 import { TX, fill } from "./texts";
 import { puffTexture, skinTexture } from "./textures";
 import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, setSteamTexture } from "./titan";
@@ -127,6 +129,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(50, 1, 0.5, 4000);
+  let post: PostChain | null = null;
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI * 0.495;
@@ -311,6 +314,10 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       old.dispose();
       old.forceContextLoss();
       lighting.useEnvironment(renderer);
+    }
+    if (q !== quality || !post) {
+      post?.dispose();
+      post = createPost(scene, camera, q);
     }
     quality = q;
     renderer.setPixelRatio(effectivePixelRatio(q, window.devicePixelRatio));
@@ -503,7 +510,11 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     controls.update();
     lighting.follow(camera.position);
     renderer.toneMappingExposure = lighting.exposure;
-    renderer.render(scene, camera);
+    // R1c : occlusion ambiante et sortie (post-traitement) selon la qualité ; rendu direct en qualité basse.
+    if (post) {
+      const size = renderer.getDrawingBufferSize(new Vector2());
+      post.render(renderer, size.x, size.y);
+    } else renderer.render(scene, camera);
     state.frames++;
   };
   const wantedCam = params.get("cam") ?? (params.get("vue") === "planche" ? "planche" : "libre");
@@ -541,8 +552,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     stats: () => {
       const size = renderer.getDrawingBufferSize(new Vector2());
       return {
-        calls: renderer.info.render.calls,
-        triangles: renderer.info.render.triangles,
+        calls: (post?.sceneInfo ?? renderer.info.render).calls,
+        triangles: (post?.sceneInfo ?? renderer.info.render).triangles,
         geometries: renderer.info.memory.geometries,
         textures: renderer.info.memory.textures,
         width: size.x,
@@ -580,7 +591,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       state.fps = (fpsFrames * 1000) / (now - fpsSince);
       fpsFrames = 0;
       fpsSince = now;
-      const s = renderer.info.render;
+      const s = post?.sceneInfo ?? renderer.info.render;
       measure.textContent = fill(TX.stats, { fps: state.fps.toFixed(1), calls: s.calls, tris: Math.round(s.triangles / 1000) });
     }
     requestAnimationFrame(loop);

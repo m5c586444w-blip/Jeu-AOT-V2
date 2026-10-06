@@ -7,6 +7,8 @@ import { backTo2d } from "./entry";
 import type { EnvData, View } from "./envTypes";
 import { loadBodyKit, titanFactory } from "./bodies";
 import { buildEnvironmentMeshes } from "./envMesh";
+import { createPost } from "./post";
+import type { PostChain } from "./post";
 import type { EnvScene, EnvTextures } from "./envMesh";
 import { generateEnvironment } from "./environment";
 import { LIGHT_PRESETS, createLighting } from "./lighting";
@@ -15,7 +17,7 @@ import { QUALITIES, QUALITY, effectivePixelRatio } from "./quality";
 import type { Quality } from "./quality";
 import { MATERIALS, rgbToLab } from "./styles";
 import { TX, fill } from "./texts";
-import { cobbleTex, facadeSet, groundTex, mistTex, roofTex, wallStoneTex } from "./texturesEnv";
+import { cobbleTex, facadeSet, groundDetailTex, groundTex, leafTex, mistTex, roofTex, waterNormalTex, wallStoneTex } from "./texturesEnv";
 import { WEATHERS, createFires, createWeather } from "./weather";
 import type { WeatherKind } from "./weather";
 import { puffTexture, skinTexture } from "./textures";
@@ -69,6 +71,9 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
   let mist: Texture | null = null;
   let skin: Texture | null = null;
   let puff: Texture | null = null;
+  let leaves: Texture | null = null;
+  let detail: { albedo: Texture; normal: Texture } | null = null;
+  let ripples: Texture | null = null;
   return {
     facade(m) {
       let f = facades.get(m);
@@ -110,8 +115,20 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
       puff ??= puffTexture();
       return puff;
     },
+    leaves() {
+      leaves ??= leafTex(env.seed);
+      return leaves;
+    },
+    groundDetail() {
+      detail ??= groundDetailTex(env.seed);
+      return detail;
+    },
+    waterNormal() {
+      ripples ??= waterNormalTex(env.seed);
+      return ripples;
+    },
     all() {
-      return [...[...facades.values()].flatMap((f) => [f.upper, f.upperLit, f.ground, f.groundLit, f.plain]), ...roofs.values(), ...(ground ? [ground] : []), ...(cobble ? [cobble] : []), ...(stone ? [stone] : []), ...(mist ? [mist] : []), ...(skin ? [skin] : []), ...(puff ? [puff] : [])];
+      return [...[...facades.values()].flatMap((f) => [f.upper, f.upperLit, f.ground, f.groundLit, f.plain]), ...roofs.values(), ...(ground ? [ground] : []), ...(cobble ? [cobble] : []), ...(stone ? [stone] : []), ...(mist ? [mist] : []), ...(skin ? [skin] : []), ...(puff ? [puff] : []), ...(leaves ? [leaves] : []), ...(detail ? [detail.albedo, detail.normal] : []), ...(ripples ? [ripples] : [])];
     },
   };
 }
@@ -217,7 +234,18 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   for (const t of meshes.titans) t.setPose(t.pose, time);
   html.dataset["meteo"] = weatherKind;
 
+  // R1c : occlusion ambiante et sortie (post-traitement), selon la qualité.
+  let post: PostChain | null = createPost(scene, camera, quality);
+  const drawScene = (w: number, h: number): void => {
+    const pr = renderer.getPixelRatio();
+    if (post) post.render(renderer, w * pr, h * pr);
+    else renderer.render(scene, camera);
+  };
   const applyQuality = (q: Quality): void => {
+    if (q !== quality || !post) {
+      post?.dispose();
+      post = createPost(scene, camera, q);
+    }
     quality = q;
     const d = QUALITY[q];
     renderer.setPixelRatio(effectivePixelRatio(q, window.devicePixelRatio));
@@ -360,17 +388,19 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
         lighting.follow(camera.position);
         camera.updateMatrixWorld();
         weather.update(time, camera.position, camera.matrixWorldInverse);
+        meshes.animate(time);
         renderer.toneMappingExposure = lighting.exposure;
-        renderer.render(scene, camera);
+        drawScene(w, h);
       }
       renderer.setScissorTest(false);
     } else {
       controls.update();
       camera.updateMatrixWorld();
       weather.update(time, camera.position, camera.matrixWorldInverse);
+      meshes.animate(time);
       lighting.follow(camera.position);
       renderer.toneMappingExposure = lighting.exposure;
-      renderer.render(scene, camera);
+      drawScene(size.x, size.y);
     }
     frames++;
   };
@@ -437,7 +467,8 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
         if ((o as { isInstancedMesh?: boolean }).isInstancedMesh) instances += (o as unknown as { count: number }).count;
         if ((o as { isLOD?: boolean }).isLOD) lods++;
       });
-      return { calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, width: size.x, height: size.y, pixelRatio: renderer.getPixelRatio(), instances, lods };
+      const ri = post?.sceneInfo ?? renderer.info.render;
+      return { calls: ri.calls, triangles: ri.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, width: size.x, height: size.y, pixelRatio: renderer.getPixelRatio(), instances, lods };
     },
     meanColor,
     hold(h) {
@@ -472,7 +503,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       const fps = (fpsFrames * 1000) / (now - since);
       fpsFrames = 0;
       since = now;
-      const s = renderer.info.render;
+      const s = post?.sceneInfo ?? renderer.info.render;
       measure.textContent = fill(TX.stats, { fps: fps.toFixed(1), calls: s.calls, tris: Math.round(s.triangles / 1000) });
     }
     requestAnimationFrame(loop);

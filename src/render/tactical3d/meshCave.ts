@@ -5,6 +5,7 @@ import { shaftMesh } from "./meshNature";
 import { fbm, gradientNoise } from "./noise";
 import { derive, range, seeded } from "./rng";
 import { FaceBuilder } from "./townMesh";
+import { normalOf } from "./texturesEnv";
 
 /**
  * Maillage des lieux souterrains de R1b (lot 2) :
@@ -171,8 +172,8 @@ export function buildCave(cave: CaveData, groundAt: (x: number, y: number) => nu
     const floor = new FaceBuilder();
     const dark = new FaceBuilder();
     counts["caveFaces"] = crypt(stone, floor, dark, cave, c);
-    add(stone, new MeshStandardMaterial({ map: stoneMap, vertexColors: true, roughness: 0.93, side: DoubleSide }), "crypte-voute", shadows);
-    add(floor, new MeshStandardMaterial({ map: stoneMap, vertexColors: true, roughness: 0.8 }), "crypte-dallage", false);
+    add(stone, new MeshStandardMaterial({ map: stoneMap, normalMap: normalOf(stoneMap, 2.2), vertexColors: true, roughness: 0.93, side: DoubleSide }), "crypte-voute", shadows);
+    add(floor, new MeshStandardMaterial({ map: stoneMap, normalMap: normalOf(stoneMap, 2.2), vertexColors: true, roughness: 0.8 }), "crypte-dallage", false);
     add(dark, new MeshStandardMaterial({ vertexColors: true, roughness: 1 }), "crypte-porte", false);
   } else {
     // Niveau du sol : moyenne du terrain sous la voûte.

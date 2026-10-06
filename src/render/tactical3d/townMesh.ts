@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
+import { BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, Matrix3, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
 import type { Material, Texture } from "three";
 import { derive, range, seeded } from "./rng";
 import type { Rand } from "./rng";
@@ -54,12 +54,14 @@ export class FaceBuilder {
     const p = src.getAttribute("position");
     const n = src.getAttribute("normal");
     const t = src.getAttribute("uv");
-    const nm = new Matrix4().copy(m).invert().transpose();
+    // Matrice des normales 3 × 3 (R1c) : l'inverse transposée 4 × 4 appliquée comme à un point divisait par une composante w
+    // nulle ou négative (translation), retournant des normales ; l'ombrage plat le masquait.
+    const nm = new Matrix3().getNormalMatrix(m);
     const v = new Vector3();
     for (let i = 0; i < p.count; i++) {
       v.fromBufferAttribute(p, i).applyMatrix4(m);
       this.pos.push(v.x, v.y, v.z);
-      v.fromBufferAttribute(n, i).applyMatrix4(nm).normalize();
+      v.fromBufferAttribute(n, i).applyMatrix3(nm).normalize();
       this.nor.push(v.x, v.y, v.z);
       this.uv.push(t ? t.getX(i) : 0, t ? t.getY(i) : 0);
       this.col.push(color.r, color.g, color.b);
