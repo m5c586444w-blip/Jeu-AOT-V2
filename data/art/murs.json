@@ -1,0 +1,17 @@
+{
+  "hauteur_m": { "valeur": 50, "canon": "C", "note": "Hauteur ≈ 50 m (01, 11 ; partie B, E22)." },
+  "epaisseur_m": { "valeur": 10, "canon": "?", "note": "≈ 10 m (01, ?). À valider par l'utilisateur." },
+  "teinte": { "valeur": "#D8D0BE", "canon": "?", "note": "Pierre claire grise. À valider par l'utilisateur." },
+  "porte_largeur_m": { "valeur": 12, "canon": "?", "note": "Porte massive : dimensions de rendu ?." },
+  "porte_hauteur_m": { "valeur": 18, "canon": "?", "note": "Porte massive : dimensions de rendu ?." },
+  "chemin_de_ronde_m": { "valeur": 6, "canon": "A", "note": "Largeur du chemin de ronde (rendu) A." },
+  "parapet_m": { "valeur": 1.2, "canon": "A", "note": "Garde-corps côté extérieur A." },
+  "canon_espacement_m": { "valeur": 32, "canon": "A", "note": "Canons sur rails C (partie B, E22 ; 10, E-P20) ; espacement A." },
+  "rail_longueur_m": { "valeur": 9, "canon": "A", "note": "Longueur des rails (le canon recule le long du rail) A." },
+  "rail_ecartement_m": { "valeur": 2.2, "canon": "A", "note": "Écartement des rails A." },
+  "bloc_m": { "valeur": [2.4, 1.2], "canon": "A", "note": "Pierre de taille à joints : longueur × hauteur d'un bloc A." },
+  "saillie_rayon_m": { "valeur": 380, "canon": "?", "note": "Rayon de la saillie d'un district, à l'échelle de rendu ; dimension réelle ?." },
+  "distance_maria_rose_km": { "valeur": 100, "canon": "?", "note": "≈ 100 km Maria → Rose (01, 11 §4, ?)." },
+  "distance_rose_sina_km": { "valeur": 130, "canon": "?", "note": "≈ 130 km Rose → Sina (01, 11 §4, ?)." },
+  "breche_largeur_m": { "valeur": 26, "canon": "A", "note": "Brèche de la variante endommagée (rendu) A." }
+}

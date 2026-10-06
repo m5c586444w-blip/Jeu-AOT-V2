@@ -1,0 +1,20 @@
+{
+  "facades": {
+    "colombage": { "role": "facade", "base": "#D9C9A8", "trame": "#5A3E28", "canon": "A" },
+    "enduit": { "role": "facade", "base": "#D6CAB0", "canon": "A" },
+    "pierre_taillee": { "role": "pierre", "base": "#A8A294", "canon": "A" },
+    "pierre_brute": { "role": "pierre", "base": "#8E8676", "canon": "A" },
+    "brique": { "role": "base", "base": "#9A5A44", "canon": "A" },
+    "bois": { "role": "bois", "base": "#6B4A2F", "canon": "A" }
+  },
+  "toits": {
+    "tuiles_rouges": { "base": "#9A4A32", "pente_deg": [30, 44], "formes": { "pignon": 0.6, "croupe": 0.4 }, "canon": "A" },
+    "ardoise": { "base": "#4A525C", "pente_deg": [38, 55], "formes": { "pignon": 0.45, "croupe": 0.55 }, "canon": "A" },
+    "chaume": { "base": "#B59A62", "pente_deg": [45, 55], "formes": { "pignon": 0.35, "croupe": 0.65 }, "canon": "A" },
+    "plat": { "base": "#5A5650", "pente_deg": [0, 0], "formes": { "plat": 1 }, "canon": "A" },
+    "toile": { "base": "#C8BC9E", "pente_deg": [30, 40], "formes": { "tente": 1 }, "canon": "A" },
+    "aucun": { "base": "#6A6458", "pente_deg": [0, 0], "formes": { "aucun": 1 }, "canon": "A" }
+  },
+  "accents": ["#4F6B5A", "#8A3B2A", "#B5873A", "#2A3A5C"],
+  "notes_canon": "Teintes de base et formes de toit A : elles ne servent que lorsqu'un rôle n'a pas de teinte dans la palette du profil (brique) ou pour les couvertures au-delà des deux principales. Rôles : la couverture la plus fréquente d'un profil prend `toit`, la deuxième `toit_2`."
+}

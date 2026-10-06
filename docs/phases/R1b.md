@@ -92,8 +92,10 @@ Les quatre composantes sont ramenées chacune à un « écart nettement percepti
 | Matériaux `m` | Distance de variation totale entre les parts de matériaux | 0,25 |
 | Densité `d` | Écart absolu de densité bâtie | 0,15 |
 
-- **Distance.** D = (p/10 + t/0,25 + m/0,25 + d/0,15) / 4 : le nombre moyen d'écarts nettement perceptibles par composante.
-- **Seuil.** D ≥ 1.
+- **Distance.** D = √((p/10)² + (t/0,25)² + (m/0,25)² + (d/0,15)²) : la norme des quatre écarts normalisés.
+- **Seuil.** D ≥ 1 : à elles toutes, les différences valent au moins un écart nettement perceptible.
+- **Pourquoi pas la moyenne.** Une première version prenait la moyenne des quatre écarts (seuil 1). Mais pour deux lieux sans bâtiment (forêt, montagne, côte), toits et matériaux sont nuls par construction : la moyenne aurait exigé un écart de palette de ΔE 40, sans rapport avec la perception. La norme garde le même seuil par composante (un écart nettement perceptible suffit), et elle additionne les écarts quand plusieurs composantes diffèrent.
+- **Valeurs rapportées.** Le test donne aussi chaque composante.
 - **Contrôle empirique.** Il porte sur les parts réalisées (toits, matériaux, densité) de 5 graines par profil :
   - la distance entre deux profils doit dépasser deux fois la plus grande distance mesurée entre deux graines d'un même profil (bruit de génération) ;
   - le test rapporte les deux valeurs.
