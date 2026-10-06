@@ -78,6 +78,29 @@ async function legendCovered(page: Page, win: string): Promise<number> {
 }
 
 // fs.strict désactivé : lancé depuis un worktree dont node_modules est un lien, Vite doit pouvoir servir les polices.
+/**
+ * R0, item 2 : recouvrements (boîtes englobantes) des lignes de sous-titres avec les pastilles d'escouade, les flèches de bord
+ * (marqueurs de la scène, via battleProbe) et le HUD de bataille (barre de titre, carnet, cartes d'escouade).
+ */
+async function subtitleOverlaps(page: Page): Promise<{ lines: number; hits: string[] }> {
+  return page.evaluate(async () => {
+    const path = "/src/ui/tactical/battleScreen.ts";
+    const m = (await import(path)) as { battleProbe: { markers: (() => readonly { x0: number; y0: number; x1: number; y1: number }[]) | null } };
+    const scene = document.querySelector(".bataille-scene")?.getBoundingClientRect();
+    const boxes: { name: string; x0: number; y0: number; x1: number; y1: number }[] = [];
+    if (scene) for (const b of m.battleProbe.markers?.() ?? []) boxes.push({ name: "marqueur", x0: b.x0 + scene.left, y0: b.y0 + scene.top, x1: b.x1 + scene.left, y1: b.y1 + scene.top });
+    for (const sel of [".bataille-tete", ".bataille-carnet", ".bataille-escouades"]) {
+      const r = document.querySelector(sel)?.getBoundingClientRect();
+      if (r) boxes.push({ name: sel, x0: r.left, y0: r.top, x1: r.right, y1: r.bottom });
+    }
+    const lines = [...document.querySelectorAll(".sous-titres__ligne")].map((e) => e.getBoundingClientRect());
+    const hits: string[] = [];
+    for (const l of lines)
+      for (const b of boxes) if (l.left < b.x1 && b.x0 < l.right && l.top < b.y1 && b.y0 < l.bottom) hits.push(b.name);
+    return { lines: lines.length, hits };
+  });
+}
+
 const server = await createServer({ server: { port: 5193, strictPort: false, fs: { strict: false } }, logLevel: "error" });
 await server.listen();
 const url = server.resolvedUrls?.local[0] ?? "http://localhost:5193/";
@@ -219,8 +242,13 @@ try {
     await page.locator('.bataille-vitesse[data-speed="2"]').click();
     let maxDup = 0;
     let dupText = "";
+    let seenLines = 0;
+    const subHits = new Map<string, number>();
     for (let k = 0; k < 40; k++) {
       await page.waitForTimeout(250);
+      const ov = await subtitleOverlaps(page);
+      seenLines += ov.lines;
+      for (const hname of ov.hits) subHits.set(hname, (subHits.get(hname) ?? 0) + 1);
       const lines = await page.locator(".sous-titres__ligne").allInnerTexts();
       const counts = new Map<string, number>();
       for (const l of lines) counts.set(l, (counts.get(l) ?? 0) + 1);
@@ -232,6 +260,7 @@ try {
       if (w === 1366 && k === 12) await shot("sous-titres");
     }
     expect(maxDup <= 1, `a. sous-titres : au plus ${maxDup} ligne(s) identique(s) à l'écran en 10 s de bataille${maxDup > 1 ? ` (« ${dupText} »)` : ""}`);
+    expect(seenLines > 0 && subHits.size === 0, `2. sous-titres : ${seenLines} relevés de lignes en 10 s, recouvrements avec pastilles, flèches et HUD : ${subHits.size ? [...subHits].map(([k, v]) => `${k} ×${v}`).join(", ") : "aucun"}`);
     await page.waitForSelector(".bilan", { timeout: 300000 });
     if (w === 1366) {
       const bilan = (await page.locator(".bilan table").innerText()).replace(/\s+/g, " ");

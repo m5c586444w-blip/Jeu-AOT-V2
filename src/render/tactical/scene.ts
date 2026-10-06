@@ -45,6 +45,8 @@ export class TacticalScene {
   /** Vue courante et nombre de pastilles affichées (lus par l'interface et les contrôles). */
   view: "ensemble" | "detail" = "detail";
   markers = 0;
+  /** Boîtes à l'écran (px, repère de la scène) des marqueurs : pastilles d'escouade et flèches de bord (R0, item 2). */
+  readonly markerBoxes: { x0: number; y0: number; x1: number; y1: number }[] = [];
   private map: TacticalWorldMap | null = null;
   /** Effets dessinés (P8) : contrôles de l'écran de bataille et de smoke:p8. */
   readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0, arrows: 0 };
@@ -381,6 +383,8 @@ export class TacticalScene {
       ga.poly([a.x + c * r, a.y + s2 * r, a.x - c * r * 0.7 - s2 * r * 0.75, a.y - s2 * r * 0.7 + c * r * 0.75, a.x - c * r * 0.7 + s2 * r * 0.75, a.y - s2 * r * 0.7 - c * r * 0.75]).fill({ color: 0x9e2b25, alpha: 0.9 }).stroke({ width: 1.2, color: INK });
     }
     this.fx.arrows = arrows.length;
+    this.markerBoxes.length = 0;
+    for (const a of arrows) this.markerBoxes.push({ x0: a.x - r, y0: a.y - r, x1: a.x + r, y1: a.y + r });
     if (st.wagon) {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
       o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
@@ -416,6 +420,9 @@ export class TacticalScene {
       // Escouade qui se replie : liseré brique.
       p.ring.tint = sq.order === "repli" ? BRICK_TINT : 0xffffff;
       this.markers += 1;
+      const sx = x * this.zoom + this.worldLayer.position.x;
+      const sy = y * this.zoom + this.worldLayer.position.y;
+      this.markerBoxes.push({ x0: sx - PASTILLE_PX - 2, y0: sy - PASTILLE_PX - 2, x1: sx + PASTILLE_PX + 2, y1: sy + PASTILLE_PX + 2 });
     }
   }
 

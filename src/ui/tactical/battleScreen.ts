@@ -9,6 +9,7 @@ import { bodyName } from "../../sim/tactical/shifters";
 import { letterFor } from "../narrative";
 import { battleSummary } from "./summary";
 import { advanceFrame } from "./battleClock";
+import { placeSubtitles } from "./subtitlePlacement";
 import type { BattleClock } from "./battleClock";
 import { battleCues, cueSnapshot, sharedAudio } from "../audio";
 import { loadSettings, volumesOf } from "../settings";
@@ -40,7 +41,7 @@ function lookOf(s: SoldierUnit): SoldierLook {
 }
 
 /** Sonde de contrôle (smoke:tactique) : position à l'écran d'un soldat de la bataille ouverte, relative à la scène. */
-export const battleProbe: { soldierOnScreen: ((i: number) => [number, number] | null) | null } = { soldierOnScreen: null };
+export const battleProbe: { soldierOnScreen: ((i: number) => [number, number] | null) | null; markers: (() => readonly { x0: number; y0: number; x1: number; y1: number }[]) | null } = { soldierOnScreen: null, markers: null };
 
 /** Nom affiché d'une escouade (jamais l'identifiant brut). */
 const squadName = (id: string): string => (id === "officiers" ? t("tac.officers") : id.replace("esc_", t("tac.squad_n")));
@@ -91,6 +92,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   })]);
   let seenFlashes = 0;
   const orders: TimedOrder[] = [];
+  battleProbe.markers = () => scene.markerBoxes;
   battleProbe.soldierOnScreen = (i) => {
     const s = bt.state.soldiers[i];
     return s && s.mode !== "mort" && s.mode !== "fui" ? scene.toScreen(s.x, s.y, s.z + 2) : null;
@@ -273,6 +275,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     const finish = (value: TimedOrder[] | null): void => {
       done = true;
       battleProbe.soldierOnScreen = null;
+      battleProbe.markers = null;
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
@@ -401,6 +404,17 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       const cues = cueSnapshot(bt.state);
       for (const c of battleCues(lastCues, cues)) audio.play(c);
       lastCues = cues;
+      // Sous-titres (R0, item 2) : en haut à gauche de la scène, ou au premier coin libre de pastilles et de flèches.
+      const subs = document.querySelector<HTMLElement>(".sous-titres");
+      if (subs && subs.childElementCount > 0) {
+        const sr = host.getBoundingClientRect();
+        const br = subs.getBoundingClientRect();
+        const obstacles = scene.markerBoxes.map((m) => ({ x0: m.x0 + sr.left, y0: m.y0 + sr.top, x1: m.x1 + sr.left, y1: m.y1 + sr.top }));
+        const place = placeSubtitles({ x0: sr.left, y0: sr.top, x1: sr.right, y1: sr.bottom }, { w: Math.max(br.width, 260), h: Math.max(br.height, 30) }, obstacles);
+        document.documentElement.style.setProperty("--sous-titres-x", `${Math.round(place.rect.x0)}px`);
+        document.documentElement.style.setProperty("--sous-titres-y", `${Math.round(place.rect.y0)}px`);
+        root.dataset["sousTitres"] = place.corner;
+      }
       // R0.2f : après chaque éclair de transformation, dès que le corps existe, est-il dans le champ de la caméra ?
       if (scene.fx.flashes > seenFlashes) {
         const cw = scene.canvas.clientWidth;

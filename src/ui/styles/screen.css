@@ -753,8 +753,9 @@
 .lettre { font-family: var(--f-machine); font-size: 0.82rem; background: #f4ecd8; border: 1px solid rgba(28, 26, 23, 0.4); padding: 0.4rem 0.6rem; margin: 0.35rem 0; }
 @media (max-width: 1100px) { .gazette__colonnes { column-count: 2; } }
 .choix-nation-menu[hidden] { display: none; }
-/* En bataille, les sous-titres se tiennent en bas à gauche de la scène, au-dessus des cartes d'escouade : ni sur les cartes, ni sur une transformation (R0.2f). */
-body[data-tactique] .sous-titres { left: 1rem; transform: none; align-items: flex-start; bottom: 9.6rem; }
+/* En bataille, les sous-titres se tiennent en haut à gauche de la scène, ou au premier coin libre de pastilles et de flèches
+   (position calculée par l'écran de bataille, R0 item 2). */
+body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--sous-titres-y, 4rem); bottom: auto; transform: none; align-items: flex-start; }
 /* R0.2b : graine et empreinte d'état réservées au mode debug (F2). */
 .bandeau__champ--debug { display: none; }
 html[data-debug="true"] .bandeau__champ--debug { display: inline; }
