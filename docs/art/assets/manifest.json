@@ -1,0 +1,865 @@
+{
+  "version": 1,
+  "fichiers": [
+    {
+      "fichier": "makehuman/base.obj",
+      "nom": "MakeHuman, maillage de base hm08",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/3dobjs/base.obj",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/arms/measure-lowerarm-length-decr.target.gz",
+      "nom": "MakeHuman, cible measure-lowerarm-length-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/arms/measure-lowerarm-length-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "c2ebdaf38b9fedc6db399039d95303adc6bc7614f007416f4ace0b573ecfd4c2",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/arms/measure-lowerarm-length-incr.target.gz",
+      "nom": "MakeHuman, cible measure-lowerarm-length-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/arms/measure-lowerarm-length-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d725e5b7a35dad30a2a68fae52ea0efad72ed8ac77b186409a2cdc59d3e2368d",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/arms/measure-upperarm-length-decr.target.gz",
+      "nom": "MakeHuman, cible measure-upperarm-length-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/arms/measure-upperarm-length-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "8f9b7a3494ce54b7560c10cf2ae5b350752a56c6918e28230b9035d43b139afc",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/arms/measure-upperarm-length-incr.target.gz",
+      "nom": "MakeHuman, cible measure-upperarm-length-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/arms/measure-upperarm-length-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "72890d3448778f6d25e3c9abd540582ad36598a832c28fd0b1e16073b1b3f962",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eye-left-closure.target.gz",
+      "nom": "MakeHuman, cible eye-left-closure",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eye-left-closure.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "ff0d21ceb6da55fe51e03b48a7562a650924fea9bef0c686fcd7aa44d16422ed",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eye-left-opened-up.target.gz",
+      "nom": "MakeHuman, cible eye-left-opened-up",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eye-left-opened-up.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "842d95f9f0af1807ecf45c79a1def61152a253f0696afce41aa76156be697117",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eye-right-closure.target.gz",
+      "nom": "MakeHuman, cible eye-right-closure",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eye-right-closure.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "2b7be6bc65845d77e5f83b7bf852090854747e448644997795fa59b6cf76122d",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eye-right-opened-up.target.gz",
+      "nom": "MakeHuman, cible eye-right-opened-up",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eye-right-opened-up.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "56f07d192a9321437cf6bdadc7800331316e3430ae29e9ce24f957639ccc0224",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eyebrows-left-inner-up.target.gz",
+      "nom": "MakeHuman, cible eyebrows-left-inner-up",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eyebrows-left-inner-up.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "bcbc99d31303df7855734d74dde0c1625e3a301dcdd9392d6b407616fd7679a8",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/eyebrows-right-inner-up.target.gz",
+      "nom": "MakeHuman, cible eyebrows-right-inner-up",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/eyebrows-right-inner-up.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b5da946cba48308969c3f63a5d590e1ad5c0c47975b92f485b63526d42c2df92",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/mouth-corner-puller.target.gz",
+      "nom": "MakeHuman, cible mouth-corner-puller",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/mouth-corner-puller.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d881bb8feda2637bdaef2c7d7c6bed12f0be5914949e5a2cb9b06a583af412c0",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/mouth-depression.target.gz",
+      "nom": "MakeHuman, cible mouth-depression",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/mouth-depression.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "add8cc38bb25d257811476bf253052659ea7a52d6e03715a7a3da4ae5cc1316c",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/mouth-open.target.gz",
+      "nom": "MakeHuman, cible mouth-open",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/mouth-open.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "dc1260a8728d93a9c52d6b35b5f55ad39ab8096090acd5ccad7f973c26e28818",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/expression/units/caucasian/mouth-retraction.target.gz",
+      "nom": "MakeHuman, cible mouth-retraction",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/expression/units/caucasian/mouth-retraction.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "082173954f0ee4e40a878ebbd1a69d8037112bc50fc52e624ec677484c821ea7",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/head/head-fat-incr.target.gz",
+      "nom": "MakeHuman, cible head-fat-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/head/head-fat-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "28494dfd84ee8677000ef0a8d8e3b38dff0674d16c54103997b7bbe0de943a1a",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/hip/hip-scale-horiz-decr.target.gz",
+      "nom": "MakeHuman, cible hip-scale-horiz-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/hip/hip-scale-horiz-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "f000ad7589bb05813dd6296192a70e647b9c4866db22ebd642a0f889d37b2c99",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/hip/hip-scale-horiz-incr.target.gz",
+      "nom": "MakeHuman, cible hip-scale-horiz-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/hip/hip-scale-horiz-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "12eab540daee8f1aa7fa06b9ca18224c987b057da369a2f4870228470b8d933a",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/legs/lowerlegs-height-decr.target.gz",
+      "nom": "MakeHuman, cible lowerlegs-height-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/legs/lowerlegs-height-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "2613e4e53d25f2639ee3435858b5e109c4d842309086baad2ff41ed0aabcbf39",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/legs/lowerlegs-height-incr.target.gz",
+      "nom": "MakeHuman, cible lowerlegs-height-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/legs/lowerlegs-height-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "21da332c1f436d57949b72ee1ef4d38390681d4fa241fe1f27c4b815b50d66b3",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/legs/upperlegs-height-decr.target.gz",
+      "nom": "MakeHuman, cible upperlegs-height-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/legs/upperlegs-height-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "c25f2e605bb47e49007fef94748695984531339eadb74bfd50f685e0df0ede3c",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/legs/upperlegs-height-incr.target.gz",
+      "nom": "MakeHuman, cible upperlegs-height-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/legs/upperlegs-height-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "807d3ed8398ec5ce293ea5e3c75d97998760a79b2e4896480744db8a3724ba73",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/african-female-old.target.gz",
+      "nom": "MakeHuman, cible african-female-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/african-female-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "a097b300928d3be97f30b6182cb252c2de09433cb3a571de890952a1d25d3f18",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/african-female-young.target.gz",
+      "nom": "MakeHuman, cible african-female-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/african-female-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "1147ae55ecb0f66bade3f45176b3af187e265878322db172ad1090e9f3108e84",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/african-male-old.target.gz",
+      "nom": "MakeHuman, cible african-male-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/african-male-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "fb3477ab3c05d6ea421d82717c3df89ff23f926d1e5148092e30c0efe2ea96de",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/african-male-young.target.gz",
+      "nom": "MakeHuman, cible african-male-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/african-male-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "05ed84d6df36e788cdfa8da0be15376850524b960cf2f17f3e592b9cf7d21c85",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/asian-female-old.target.gz",
+      "nom": "MakeHuman, cible asian-female-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/asian-female-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b32b6d492ebf48cb26e11bf73bf979ba946316bf9e9f2ba291e0267a2846e3cf",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/asian-female-young.target.gz",
+      "nom": "MakeHuman, cible asian-female-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/asian-female-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "ee17da733288434e5b6fa120497f1fa6e72bf7faad5d694b0431d7275139170d",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/asian-male-old.target.gz",
+      "nom": "MakeHuman, cible asian-male-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/asian-male-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "8f931e96529904375a442c77be0c31d60ace6c0461645ed7ab1a43a3c378a247",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/asian-male-young.target.gz",
+      "nom": "MakeHuman, cible asian-male-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/asian-male-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "0928ed8b9f08f60afb9884cf9e9f33a939ed3a85d7f136de9ccc88a76981d6d7",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/caucasian-female-old.target.gz",
+      "nom": "MakeHuman, cible caucasian-female-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/caucasian-female-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "2f2e27968953da08ab3bb048ce178e2936e32856f65f397968499567d3afd08f",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/caucasian-female-young.target.gz",
+      "nom": "MakeHuman, cible caucasian-female-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/caucasian-female-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "e9d6212373ac5f1e2c596fa145e363385f4d169c3c6c88ede3bab93b681af041",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/caucasian-male-old.target.gz",
+      "nom": "MakeHuman, cible caucasian-male-old",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/caucasian-male-old.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "123cb7758c86aa2aa71d80ea0c8f5f4b3e96f394180edc1682e34720c4949df6",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/caucasian-male-young.target.gz",
+      "nom": "MakeHuman, cible caucasian-male-young",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/caucasian-male-young.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "ffe69537e53148edff2776204ba48cf3bf1f3cbc72966592c8a562ab80b07333",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-averagemuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-averagemuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-averagemuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "e592836eee975b83de976b30a04444a36c1f4da7abe8c7c910e751926f040a7e",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-averagemuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-averagemuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-averagemuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "020f83918f355e2a6a5b46d4707c0fa6a713c0e2923d686cb0f999978c34d956",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-averagemuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-averagemuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-averagemuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "6714a95eb7af3b1247b4bf0446f8dfd57731362cc171dbbbdca97291c5dfe55a",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-maxmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-maxmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-maxmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "01f0f6f44313e353d9ae2590035ff35cb91a18e46cb8e45d0933f0a8105129ca",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-maxmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-maxmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-maxmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "ba2b2749f630071eb2a2f014ac5f3b8a5f0ece14f6d3a116a3eb2e4a22843e34",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-maxmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-maxmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-maxmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "c9fef1d7c1c388483e24ba80863444487791e1297958c9dc7fdbcb9cb4440193",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-minmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-minmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-minmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "11939b61eb2735abd2d3aeb0b248dc6160706abcb635b5db45758bae956deddc",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-minmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-minmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-minmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "0db6338ba03fc9e228dd884339ada9f3a0f48a7bad744dd809d4580413ac8e89",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-old-minmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-old-minmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-old-minmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "61927083c80a044ba64788eadf7341cec39f9da5c07aa4aa43625a73a929d099",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-averagemuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-averagemuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-averagemuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "30046c85a461249824548d5319d74c16392842a1ee00ca9a4485ea3eeb06e2e8",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-averagemuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-averagemuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-averagemuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "eaec00c7fe67738765170b94648e6cdf1078ff15a2c0f745645750eb6fef45bf",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-averagemuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-averagemuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-averagemuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "5c65527e5d6e83b98ffa3da5bd61372eff70f89e95585bdacd0e3f70e48062aa",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-maxmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-maxmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-maxmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b1b77fc23f47ebe4a47b14651aadcedf44b2d9c2a1323fbda396952b98632627",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-maxmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-maxmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-maxmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "6a36ca389bd4ba5e2efe1f885d493e19096cd12d2ae7c810add715f6d9fff0f2",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-maxmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-maxmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-maxmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "f67344b6aa1808737d78b619c062effe04aad0bfe67e9f80fa6294e2eb5342a5",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-minmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-minmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-minmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "2d939513053fb4a58b6752457c00419c0a2b6a658f0f034dc079d59e19931627",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-minmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-minmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-minmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "bb8da1aa94cecd782ae0d2b58067204589a06e55915717d5852452d60aa751e7",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-female-young-minmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-female-young-minmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-female-young-minmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "18ecff47c3606608472afab0f79a88afaf0c3d5c139bf81c1ef7867a9a9b78a5",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-averagemuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-averagemuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-averagemuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "3721ecc3f7a6af1d7c22ef20c709b1d37402445b3d203fe31e762b12356b59a6",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-averagemuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-averagemuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-averagemuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "185c7fba104d170770240e8700f0ff8ea03b348412af7f3496d6f047d50beb39",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-averagemuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-averagemuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-averagemuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "c9698e079ab31870666948b804c1f3b633338c16a216e2494ede7809969dee40",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-maxmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-maxmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-maxmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d2443e0ce0b3acc60ee68e5617ab15c9ee2dffc646ef4ea2411ab4d123310327",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-maxmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-maxmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-maxmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d62997eae51a94b30ab91fb04c34698e2a019c43a36c21b975b8024649eed941",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-maxmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-maxmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-maxmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "7636801e3281c99fc0738d1e89685141fe5b31627fcb16e183b329b343a07d86",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-minmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-minmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-minmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "8c7923d2afd0a53f317a89aa9a71f8ae57e0a7172ef3b577d4db7fd06c6a7a80",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-minmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-minmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-minmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "770ee3076bc68c9a328e21d33b9e3b2ff5827b66d222e85f07a8ae018fd71a88",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-old-minmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-old-minmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-old-minmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "0d5e260cedd07cd8bacd14f74a5cda27977051cae413906996c59527f372ee42",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-averagemuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-averagemuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-averagemuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "e814651195c53971503d9823d6841216718a561951ef064f81d132297f4fa494",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-averagemuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-averagemuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-averagemuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "13b79074ecf00a0d028495a51865ae9e86c06b5801b6a614257b455ffbec7d10",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-averagemuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-averagemuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-averagemuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "e4a993057e265088e082ee2aeccc860505e759b27251dc63a78314e1f8c78a16",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-maxmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-maxmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-maxmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "833caafc302bd9306de494f32ee1bc51d3a2e6641183329b031ac06ef0f4277e",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-maxmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-maxmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-maxmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "4c88d7850d64ae8a455bd375755769a2153cce98a7e0b1acce6fa0454083d14d",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-maxmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-maxmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-maxmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "0323cb5c604d13207d1a10ade8ce165df1cbf14d91de48ad959a082297669905",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-minmuscle-averageweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-minmuscle-averageweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-minmuscle-averageweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d1c0a768f42219e9630f08805939510efbe2a390b451fa52cc575205bc761d7e",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-minmuscle-maxweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-minmuscle-maxweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-minmuscle-maxweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "5cd87b8e6856a3e9e6b71d15580e1ae9b058f478ce8c1ea73c1b145df9c8e0e6",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/macrodetails/universal-male-young-minmuscle-minweight.target.gz",
+      "nom": "MakeHuman, cible universal-male-young-minmuscle-minweight",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/macrodetails/universal-male-young-minmuscle-minweight.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "166a31465a2790a321e55e274a7f43c56bfe58ad1cf443afacd45a7a23abf407",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/neck/neck-scale-horiz-incr.target.gz",
+      "nom": "MakeHuman, cible neck-scale-horiz-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/neck/neck-scale-horiz-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "8428be2a7c0e1554dbf6bb516e6ffbdfa564a8cc94d6a9ff08580c0127e44aeb",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/neck/neck-scale-vert-decr.target.gz",
+      "nom": "MakeHuman, cible neck-scale-vert-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/neck/neck-scale-vert-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "7b7f52b377bd40cebcb83b5f86939422fb7aba6b096ca376ecf38ae6a43b2e3c",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/neck/neck-scale-vert-incr.target.gz",
+      "nom": "MakeHuman, cible neck-scale-vert-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/neck/neck-scale-vert-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b455098e117b0e0266758a8b3c79a7a21556da8e0efd7ee9e7c92330a82ac88e",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/stomach/stomach-pregnant-decr.target.gz",
+      "nom": "MakeHuman, cible stomach-pregnant-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/stomach/stomach-pregnant-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "1667a6f0a54a7102e3dc21e991051441558a7dfc74e30baa1c04e9831ffecebf",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/stomach/stomach-pregnant-incr.target.gz",
+      "nom": "MakeHuman, cible stomach-pregnant-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/stomach/stomach-pregnant-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "52534e8d144d8bd492a471c78058f06428ab449569c578c6354580ee66d7a4d0",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/torso/measure-napetowaist-dist-decr.target.gz",
+      "nom": "MakeHuman, cible measure-napetowaist-dist-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/torso/measure-napetowaist-dist-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "28d34163dd8aae0cb89e1c5b1837ffc4b1e91c31f29d0f1a6efb4ef1ea6341f7",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/torso/measure-napetowaist-dist-incr.target.gz",
+      "nom": "MakeHuman, cible measure-napetowaist-dist-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/torso/measure-napetowaist-dist-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "165dc185743f8a782fd72c9e78f8ec8f7253587aae60728c8117cf9e0cc84bbf",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/torso/measure-shoulder-dist-decr.target.gz",
+      "nom": "MakeHuman, cible measure-shoulder-dist-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/torso/measure-shoulder-dist-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "6eef8cfafd4021579645565040f14113b5156d6c1d9069d39c76b732527a1709",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/torso/measure-shoulder-dist-incr.target.gz",
+      "nom": "MakeHuman, cible measure-shoulder-dist-incr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/torso/measure-shoulder-dist-incr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "d9508362063fee6f697bee2d7204cb6a799d9711fb2436f93f781242a104494f",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/default_weights.mhw",
+      "nom": "MakeHuman, poids du squelette par défaut (mâchoire)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/rigs/default_weights.mhw",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/default.mhskel",
+      "nom": "MakeHuman, squelette par défaut (articulations de la mâchoire)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/rigs/default.mhskel",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/eyes/brown_eye.png",
+      "nom": "MakeHuman, texture d'iris brun",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/materials/brown_eye.png",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "4659691c7295ad6206c78b003e5fd0e5f91dcd53032fa914a229bb48cabe424b",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/eyes/high-poly.mhclo",
+      "nom": "MakeHuman, yeux haute définition (ajustement au corps)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/high-poly/high-poly.mhclo",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b183cfe37120ab726f9b3f2ea6cd3a64c44ce7b4bd91a77c841cf70c04f83a0d",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/eyes/high-poly.obj",
+      "nom": "MakeHuman, yeux haute définition (maillage)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/eyes/high-poly/high-poly.obj",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "da2493215b708a344c33dc72f2a9a5b8fa985dcc5a70ad3b208995cf871da8e1",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/rig.game_engine.json",
+      "nom": "MakeHuman, squelette « game_engine » (MPFB2)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/rigs/standard/rig.game_engine.json",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "b324ddb4b707721c19630bfadb87c3e3b38eed3b6e4590bb3cead43ea918f799",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/weights.game_engine.json",
+      "nom": "MakeHuman, poids du squelette « game_engine » (MPFB2)",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/rigs/standard/weights.game_engine.json",
+      "licence": "CC0-1.0",
+      "date": "2026-10-06",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "9f4a773e74ce5ba08415b4f30070338e9f75bae5971b5075b10cd6b9caa58473",
+      "usage": "corps_de_base"
+    }
+  ]
+}

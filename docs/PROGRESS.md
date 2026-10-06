@@ -2,10 +2,16 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1b — ARRÊT OBLIGATOIRE n° 1** (un critère échoue une deuxième fois) — commit de départ `b68fade` |
-| Tâche | R1b.9 : générateurs du lot 2 livrés (19 environnements, toutes variantes) ; planches du lot 2 faites ; **CR1b-06 en échec** sur 2 paires de rendus sur 171 |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 65 fichiers, 399 tests (`docs/reports/R1b-verify-lot2.log`) |
-| Prochaine étape | **Attendre l'utilisateur.** Correctif proposé ci-dessous, non appliqué ; ensuite : `smoke:r1b` complet (lot 1 à refaire, voir « Teintes »), `mesure:r1b`, rapport `docs/reports/R1b.md`, arrêt de fin de phase |
+| Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
+| Tâche | R1c.0 : règles (CLAUDE.md), plan, manifeste, `assets:check`, sources MakeHuman téléchargées |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 66 fichiers, 405 tests ; `assets:check` : 86 entrées, 86 fichiers |
+| Prochaine étape | R1c.1 : corps de base MakeHuman en `.glb` (`assets:build`), chargé par `GLTFLoader` à la demande |
+
+## R1c ouverte (2026-10-06)
+- **Décision de l'utilisateur.** Règle « aucun asset externe » levée pour les corps de base et les animations ; sources non réalistes écartées ; plus d'objectif moyen d'images par seconde, latence maintenue ; scènes et environnements réalistes ; formation des districts d'après l'animé. Arrêt pour revue en fin de phase. Plan : `docs/phases/R1c.md`.
+- **R1b.** La consigne R1c passe à la suite ; le correctif de vues proposé à l'arrêt de R1b (E07, E17, E20) est repris en R1c.5, et la distinction des rendus (CR1b-06) sera remesurée.
+- **Réseau.** La politique réseau de l'environnement refuse `polyhaven.com` (et `api.`, `dl.`, `cdn.`), `quaternius.com`, `kenney.nl`, `poly.pizza`, `static.makehumancommunity.org`. Les dépôts GitHub officiels de MakeHuman sont joignables : c'est la seule source utilisée.
+- **Animations.** Aucune source réaliste joignable n'en fournit (MakeHuman : poses figées seulement) : elles seront écrites par le projet sur le squelette CC0.
 
 ## R1b, arrêt obligatoire n° 1 : CR1b-06 échoue une deuxième fois (2026-10-06)
 - **Raison de l'arrêt (CLAUDE.md, arrêt 1).** Le critère CR1b-06 (distinction des rendus hors écran) a échoué une première fois au lot 1 (Trost–Stohess, corrigé), et il échoue de nouveau au premier passage du lot 2. Je m'arrête sans tenter un second correctif.

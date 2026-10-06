@@ -18,7 +18,7 @@
     "canon:check": "tsx src/tools/canon-check.ts",
     "sim:selftest": "tsx src/tools/sim-selftest.ts",
     "sim:balance": "tsx src/tools/sim-balance.ts",
-    "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run canon:check && npm run sim:selftest && npm run build",
+    "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run assets:check && npm run canon:check && npm run sim:selftest && npm run build",
     "smoke:page": "npm run smoke:map",
     "map:generate": "tsx src/tools/map-generate.ts",
     "sim:year": "tsx src/tools/sim-year.ts",
@@ -39,7 +39,11 @@
     "smoke:r1": "tsx src/tools/smoke-r1.ts",
     "mesure:r1": "tsx src/tools/mesure-r1.ts",
     "smoke:r1b": "tsx src/tools/smoke-r1b.ts",
-    "mesure:r1b": "tsx src/tools/mesure-r1b.ts"
+    "mesure:r1b": "tsx src/tools/mesure-r1b.ts",
+    "assets:check": "tsx src/tools/assets-check.ts",
+    "assets:fetch": "tsx src/tools/assets-fetch.ts",
+    "assets:build": "tsx src/tools/assets-build.ts",
+    "mesure:r1c": "tsx src/tools/mesure-r1c.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
