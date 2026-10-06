@@ -3,7 +3,7 @@ import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
 import { buildEnvironmentMeshes } from "./envMesh";
 import { generateEnvironment, supportedGenerators } from "./environment";
-import { envTextures, fogScaleOf } from "./envViewer";
+import { envTextures, fogScaleOf, undergroundOf } from "./envViewer";
 import { createLighting } from "./lighting";
 import type { LightPreset } from "./lighting";
 import { PROFILES } from "./styles";
@@ -115,7 +115,7 @@ export async function startGallery(root: HTMLElement, probe: WebGLProbe): Promis
     const scene = new Scene();
     scene.add(meshes.group);
     const v = env.views.principale;
-    const lighting = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: new Vector3(...v.target), shadowExtent: 280, fogScale: fogScaleOf(env) });
+    const lighting = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: new Vector3(...v.target), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
     lighting.setShadow(true, 1024);
     camera.fov = v.fov;
     camera.position.set(...v.eye);

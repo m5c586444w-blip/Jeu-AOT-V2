@@ -415,7 +415,7 @@ export function generateTerrain(seed: number, spec: TerrainSpec): TerrainData {
   if (spec.water === "marais") {
     // Terrain bas et presque plat, mares dans les creux : l'eau affleure partout où le sol passe sous son niveau.
     forEachVertex(hf, (x, y, k) => {
-      hf.h[k] = (hf.h[k] as number) * 0.25 + 1.1 * fbm(noise2, x / 70, y / 70, 3);
+      hf.h[k] = (hf.h[k] as number) * 0.25 + 1.1 * fbm(noise2, x / 70, y / 70, 3) + 0.3;
     });
     marshLevel = 0.05;
     const path = riverPath(rand, noise, spec);

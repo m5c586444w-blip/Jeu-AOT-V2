@@ -146,6 +146,12 @@ function addWalls(out: BuildingBuilders, f: Frame, b: StyledBuilding, textured: 
       get(out.upper, b.material).face([P(f, u0, v0, fh), P(f, u1, v1, fh), P(f, u1, v1, top), P(f, u0, v0, top)], [[0, 0], [umax, 0], [umax, vmax], [0, vmax]], tint, o);
     }
     if (b.ruin > 0.55) {
+      // Ruine sans toit : l'intérieur des murs se voit (face intérieure, plus sombre), sinon l'arase flotte seule.
+      // Décalée de l'épaisseur du mur vers l'intérieur (la pierre est à deux faces : pas de face confondue avec la façade).
+      const inner = new Color(b.stoneHex).multiplyScalar(0.7);
+      const ol = Math.hypot(o[0], o[2]) || 1;
+      const inset = (q: V3): V3 => [q[0] - (o[0] / ol) * 0.4, q[1], q[2] - (o[2] / ol) * 0.4];
+      out.stone.face([inset(P(f, u0, v0, 0)), inset(P(f, u1, v1, 0)), inset(P(f, u1, v1, top)), inset(P(f, u0, v0, top))], [[0, 0], [umax, 0], [umax, top / fh], [0, top / fh]], inner, [-o[0], -o[1], -o[2]]);
       // Arase du mur (épaisseur visible) et poutres calcinées.
       const t = 0.45;
       const n = D(f, (u0 + u1) / 2, (v0 + v1) / 2, 0);
@@ -365,6 +371,113 @@ export function addLandmark(out: BuildingBuilders, l: Landmark, textured: boolea
           out.wood.geometry(new CylinderGeometry(0.5, 0.5, 1, 4), m, new Color(l.trimHex).multiplyScalar(1.1));
         }
       }
+      break;
+    }
+    case "chateau": {
+      // Enceinte de pierre crénelée, tours d'angle rondes, châtelet d'entrée (côté +v), logis contre la courtine du fond.
+      const stone = wallTint(l.wallHex, 1, textured);
+      const fb = get(out.plain, l.material);
+      const t = 3;
+      const sides: [number, number, number, number][] = [
+        [-l.w / 2, -l.d / 2, l.w / 2, -l.d / 2],
+        [l.w / 2, -l.d / 2, l.w / 2, l.d / 2],
+        [l.w / 2, l.d / 2, -l.w / 2, l.d / 2],
+        [-l.w / 2, l.d / 2, -l.w / 2, -l.d / 2],
+      ];
+      for (const [ua, va, ub, vb] of sides) {
+        const len = Math.hypot(ub - ua, vb - va);
+        const n = Math.max(2, Math.round(len / 9));
+        for (let k = 0; k < n; k++) {
+          const a = k / n;
+          const b = (k + 1) / n;
+          // Ruine : pans arasés à des hauteurs diverses, quelques pans tombés.
+          if (l.ruin > 0.6 && rand() < 0.22) continue;
+          const top = l.ruin > 0.3 ? l.h * (l.ruin > 0.6 ? range(rand, 0.25, 0.9) : range(rand, 0.8, 1)) : l.h;
+          const u0 = ua + (ub - ua) * a;
+          const v0 = va + (vb - va) * a;
+          const u1 = ua + (ub - ua) * b;
+          const v1 = va + (vb - va) * b;
+          frameBox(fb, f, Math.min(u0, u1) - t / 2, Math.min(v0, v1) - t / 2, Math.max(u0, u1) + t / 2, Math.max(v0, v1) + t / 2, -1, top, stone);
+          if (top > l.h * 0.97) {
+            const m = Math.max(1, Math.floor((len / n) / 2.4));
+            for (let j = 0; j < m; j += 1) {
+              const c = (j + 0.5) / m;
+              const uu = u0 + (u1 - u0) * c;
+              const vv = v0 + (v1 - v0) * c;
+              frameBox(fb, f, uu - 0.6, vv - 0.6, uu + 0.6, vv + 0.6, top, top + 1.4, stone);
+            }
+          }
+        }
+      }
+      for (const [u, v] of [
+        [-l.w / 2, -l.d / 2],
+        [l.w / 2, -l.d / 2],
+        [l.w / 2, l.d / 2],
+        [-l.w / 2, l.d / 2],
+        [-6, l.d / 2 + 1],
+        [6, l.d / 2 + 1],
+      ] as const) {
+        const c = P(f, u, v, 0);
+        const r = Math.abs(u) < 10 ? 3.6 : 5.2;
+        const th = l.ruin > 0.6 ? l.h * range(rand, 0.5, 1.2) : l.h + 7;
+        fb.geometry(new CylinderGeometry(r, r * 1.08, th + 1, 14, 1, true), mat4(c[0], f.base + th / 2 - 0.5, c[2]), stone);
+        out.stone.geometry(new CylinderGeometry(r, r, 0.3, 14), mat4(c[0], f.base + th - 0.15, c[2]), new Color(l.stoneHex).multiplyScalar(0.8));
+        if (l.cover !== "aucun" && l.ruin < 0.6) get(out.roofs, l.cover).geometry(new ConeGeometry(r * 1.15, r * 1.9, 14, 1, true), mat4(c[0], f.base + th + r * 0.95, c[2]), roofC);
+      }
+      // Porte du châtelet : ouverture sombre.
+      const g0 = P(f, -2.4, l.d / 2 + t / 2 + 0.05, 0);
+      const g1 = P(f, 2.4, l.d / 2 + t / 2 + 0.05, 0);
+      out.dark.face([g0, g1, [g1[0], g1[1] + 6, g1[2]], [g0[0], g0[1] + 6, g0[2]]], [[0, 0], [1, 0], [1, 1], [0, 1]], phys("suie"), D(f, 0, 1, 0));
+      const logis: Frame = { ...f, x: f.x - (-l.d / 2 + 9) * f.sin, y: f.y + (-l.d / 2 + 9) * f.cos };
+      hall(out, { ...l, ruin: Math.max(l.ruin, l.ruin > 0.6 ? 0.8 : 0) }, logis, l.w * 0.55, 12, 2, 4.5, "pignon", pitch, textured, true, id + 11);
+      break;
+    }
+    case "donjon": {
+      // Tour maîtresse carrée, à étages ; couronnement crénelé ; arasée en dents de scie si elle est ruinée.
+      const H = hall(out, l, f, l.w, l.d, Math.max(3, Math.round(l.h / 5)), l.h / Math.max(3, Math.round(l.h / 5)), "plat", 0, textured, true, id);
+      if (l.ruin <= 0.55) {
+        const stone = wallTint(l.wallHex, 1, textured);
+        const fb = get(out.plain, l.material);
+        const m = Math.max(3, Math.round(l.w / 2.4));
+        for (let k = 0; k < m; k++) {
+          const a = -l.w / 2 + (k + 0.5) * (l.w / m);
+          for (const [u, v] of [
+            [a, -l.d / 2],
+            [a, l.d / 2],
+            [-l.w / 2, a],
+            [l.w / 2, a],
+          ] as const)
+            frameBox(fb, f, u - 0.55, v - 0.55, u + 0.55, v + 0.55, H + 0.9, H + 2.4, stone);
+        }
+      }
+      break;
+    }
+    case "usine": {
+      // Halle de fabrique : murs de brique ou de pierre, toit en sheds (pans vitrés au nord).
+      const H = hall(out, l, f, l.w, l.d, 2, l.h / 2, "plat", 0, textured, true, id);
+      const teeth = Math.max(2, Math.round(l.w / 6));
+      const step = l.w / teeth;
+      const rise = 3.4;
+      const fb = get(out.roofs, l.cover === "aucun" ? "ardoise" : l.cover);
+      const side = wallTint(l.wallHex, 0.9, textured);
+      const gable = get(out.plain, l.material);
+      for (let k = 0; k < teeth; k++) {
+        const u0 = -l.w / 2 + k * step;
+        const u1 = u0 + step;
+        const y0 = H + 0.9;
+        fb.face([P(f, u0, -l.d / 2, y0), P(f, u0, l.d / 2, y0), P(f, u1, l.d / 2, y0 + rise), P(f, u1, -l.d / 2, y0 + rise)], [[0, 0], [l.d / 3.2, 0], [l.d / 3.2, step / 3.2], [0, step / 3.2]], roofC, D(f, -rise, 0, step));
+        out.dark.face([P(f, u1, l.d / 2, y0), P(f, u1, -l.d / 2, y0), P(f, u1, -l.d / 2, y0 + rise), P(f, u1, l.d / 2, y0 + rise)], [[0, 0], [1, 0], [1, 1], [0, 1]], phys("verre"), D(f, 1, 0, 0));
+        for (const s of [-1, 1]) gable.face([P(f, u0, (s * l.d) / 2, y0), P(f, u1, (s * l.d) / 2, y0), P(f, u1, (s * l.d) / 2, y0 + rise)], [[0, 0], [step / 6, 0], [step / 6, rise / 6]], side, D(f, 0, s, 0));
+      }
+      break;
+    }
+    case "autel": {
+      // Autel de pierre : socle, table débordante, gradin.
+      const c = new Color(l.stoneHex);
+      frameBox(out.stone, f, -l.w / 2 - 1, -l.d / 2 - 1, l.w / 2 + 1, l.d / 2 + 1, 0, 0.3, c.clone().multiplyScalar(0.85));
+      frameBox(out.stone, f, -l.w / 2 + 0.3, -l.d / 2 + 0.3, l.w / 2 - 0.3, l.d / 2 - 0.3, 0.3, l.h - 0.2, c);
+      frameBox(out.stone, f, -l.w / 2, -l.d / 2, l.w / 2, l.d / 2, l.h - 0.2, l.h, c.clone().multiplyScalar(1.08));
+      frameBox(out.stone, f, -l.w / 2 + 0.6, -l.d / 2 + 0.2, l.w / 2 - 0.6, -l.d / 2 + 0.9, l.h, l.h + 0.5, c.clone().multiplyScalar(0.95));
       break;
     }
     default: {

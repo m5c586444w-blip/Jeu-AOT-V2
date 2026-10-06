@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Color, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import type { Texture } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { RoofMaterial, WallMaterial } from "../../data/artSchemas";
@@ -9,10 +9,10 @@ import { buildEnvironmentMeshes } from "./envMesh";
 import type { EnvScene, EnvTextures } from "./envMesh";
 import { generateEnvironment } from "./environment";
 import { LIGHT_PRESETS, createLighting } from "./lighting";
-import type { LightPreset, LightRig } from "./lighting";
+import type { LightPreset, LightRig, UndergroundLight } from "./lighting";
 import { QUALITIES, QUALITY, effectivePixelRatio } from "./quality";
 import type { Quality } from "./quality";
-import { rgbToLab } from "./styles";
+import { MATERIALS, rgbToLab } from "./styles";
 import { TX, fill } from "./texts";
 import { cobbleTex, facadeSet, groundTex, mistTex, roofTex, wallStoneTex } from "./texturesEnv";
 import { WEATHERS, createFires, createWeather } from "./weather";
@@ -120,6 +120,16 @@ export function fogScaleOf(env: EnvData): number {
   return (env.terrain ? 0.5 : 1) * (1 + 3 * env.mist.density);
 }
 
+/** Éclairage souterrain d'une scène sous voûte (null à l'air libre) : ambiance du profil, glace en teinte de cristal. */
+export function undergroundOf(env: EnvData): UndergroundLight | null {
+  if (!env.cave) return null;
+  const p = env.profile.palette;
+  // Ville souterraine : lanternes partout, l'ambiance mêle la lumière des lanternes à la teinte chaude du lieu ; glace : cristal ;
+  // crypte : la teinte des bougies seule.
+  const ambient = env.cave.kind === "glace" ? MATERIALS.physiques.cristal : env.cave.kind === "ville" ? `#${new Color(MATERIALS.physiques.lumiere).lerp(new Color(p.toit_2), 0.5).getHexString()}` : p.toit_2;
+  return { ambient, ground: env.cave.kind === "ville" ? p.facade : p.sol, fog: p.toit, openings: env.cave.openings.length > 0 };
+}
+
 function setCam(camera: PerspectiveCamera, v: View, aspect: number): void {
   camera.fov = v.fov;
   camera.aspect = aspect;
@@ -193,7 +203,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI * 0.495;
   const target0 = new Vector3(...env.views.principale.target);
-  const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: 280, fogScale: fogScaleOf(env) });
+  const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
 
   const weather = createWeather(scene, weatherKind, { seed, particles: QUALITY[quality].particles, mistMap: tex.mist(), groundY: env.terrain ? 0 : 0, size: env.terrain?.spec.size ?? 900 });
   lighting.setFogBoost(weather.fogBoost);

@@ -190,3 +190,45 @@ export function generateTerritory(p: StyleProfile, variant: Variant | null, seed
     radius: t.spec.size / 2,
   };
 }
+
+/**
+ * Lisière d'Arbres Géants (profils à essence « géante » hors forêt, E28) : une bande de géants au nord du terrain, au bord
+ * sinueux ; les champs, haies, fermes et arbres ordinaires qui s'y trouvaient sont retirés. Vues recadrées sur la lisière.
+ */
+export function addGiantEdge(body: EnvBody, seed: number): EnvBody {
+  const t = body.terrain;
+  if (!t) return body;
+  const rand = seeded(derive(seed, 82));
+  const S = t.spec.size;
+  const edgeY = (x: number): number => -S / 2 + 330 + 50 * Math.sin(x / 130) + 20 * Math.sin(x / 47);
+  const inBand = (q: Vec2, m = 0): boolean => q.y < edgeY(q.x) + m;
+  const giants: GiantTree[] = [];
+  const spacing = 34;
+  for (let gy = -S / 2 + 20; gy < -S / 2 + 420; gy += spacing)
+    for (let gx = -S / 2 + 20; gx < S / 2 - 20; gx += spacing) {
+      const q = v2(gx + range(rand, -11, 11), gy + range(rand, -11, 11));
+      if (inBand(q, -8)) giants.push(giant(rand, q.x, q.y));
+    }
+  t.trees = t.trees.filter((x) => !inBand(x, 6) || (x.kind !== "fruitier" && rand() < 0.25 && !giants.some((g) => dist2(x, g) < g.radius + 4)));
+  t.parcels = t.parcels.filter((pc) => !pc.poly.some((q) => inBand(q, 10)));
+  t.hedges = t.hedges.filter((h) => !inBand(h.a, 10) && !inBand(h.b, 10));
+  t.farms = t.farms.filter((f) => !inBand(f.c, 40));
+  const keep = <T extends { x: number; y: number }>(xs: T[], m: number): T[] => xs.filter((x) => !inBand(x, m));
+  const ground = (q: Vec2): number => heightAt(t.heights, q.x, q.y);
+  const anchors = [...(body.anchors ?? []), ...giants.flatMap((g) => giantAnchors(g, ground(g)))];
+  const ex = -220;
+  const eye1 = v2(ex, edgeY(ex) + 560);
+  const eye2 = v2(160, edgeY(160) + 120);
+  return {
+    ...body,
+    buildings: keep(body.buildings, 30),
+    landmarks: keep(body.landmarks, 30),
+    props: keep(body.props, 8),
+    giants,
+    anchors,
+    views: {
+      principale: { eye: [eye1.x, ground(eye1) + 80, eye1.y], target: [60, ground(v2(60, edgeY(60))) + 30, edgeY(60) - 60], fov: 56 },
+      seconde: { eye: [eye2.x, ground(eye2) + 5, eye2.y], target: [eye2.x - 20, ground(eye2) + 42, edgeY(eye2.x - 20) - 40], fov: 62 },
+    },
+  };
+}

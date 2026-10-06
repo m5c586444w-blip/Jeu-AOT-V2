@@ -34,6 +34,8 @@ interface PropDef {
   parts: () => Part[];
   /** Ombres portées (les petits objets nombreux n'en portent pas : coût). */
   shadow?: boolean;
+  /** Lueur propre (cristaux) : matériau émissif de cette teinte physique, allumé jour et nuit. */
+  glow?: Physical;
 }
 
 const wheel = (x: number, z: number, r: number, ry: number): Part => (fb) => fb.geometry(new TorusGeometry(r, 0.06, 4, 10), m4(x, r, z, ry), W(0.55));
@@ -82,6 +84,7 @@ export const PROP_DEFS: Record<string, PropDef> = {
   bougies: { tinted: false, parts: () => [box(0, 0.45, 0, 1.2, 0.9, 0.5, phys("ecorce")), ...[-0.4, -0.15, 0.1, 0.35].flatMap((x, k) => [cyl(x, 1.0 + k * 0.03, 0, 0.04, 0.04, 0.22 + k * 0.06, phys("cire"), 6), sphere(x, 1.16 + k * 0.06, 0, 0.035, phys("flamme"))])] },
   tentes: { tinted: true, shadow: true, parts: () => [(fb) => fb.geometry(new CylinderGeometry(0.01, 2.2, 2.6, 3, 1), m4(0, 1.3, 0, 0, [1, 1, 1.8], 0, 0), W(1)), box(0, 1.3, 2.2, 0.06, 2.6, 0.06, phys("ecorce"))] },
   feux_de_camp: { tinted: false, parts: () => [...[0, 1, 2, 3, 4, 5].map((k) => rock(Math.cos(k * 1.05) * 0.8, 0.12, Math.sin(k * 1.05) * 0.8, 0.22, W(0.45), k)), cone(0, 0.45, 0, 0.35, 0.9, phys("flamme"), 6), ...[0, 1, 2].map((k) => cyl(0, 0.15, 0, 0.06, 0.06, 1.3, phys("ecorce"), 4, Math.PI / 2, 0, k))] },
+  lueurs: { tinted: true, glow: "cristal", parts: () => [0, 1, 2, 3, 4].map((k) => (fb: FaceBuilder) => fb.geometry(new ConeGeometry(0.22 + (k % 2) * 0.1, 1.4 + (k % 3) * 0.7, 5), m4(Math.cos(k * 1.3) * 0.4, 0.6 + (k % 3) * 0.3, Math.sin(k * 1.3) * 0.4, k, [1, 1, 1], (k - 2) * 0.22, (k % 3 - 1) * 0.25), W(0.9 + (k % 2) * 0.1))) },
   gravats: { tinted: true, shadow: true, parts: () => Array.from({ length: 10 }, (_, k) => rock(Math.cos(k * 2.1) * (0.6 + k * 0.35), 0.25, Math.sin(k * 2.7) * (0.6 + k * 0.3), 0.35 + (k % 4) * 0.15, W(0.75 + (k % 3) * 0.1), k)) },
 };
 
@@ -138,14 +141,14 @@ export const ACCESSORY_RENDER: Record<(typeof ACCESSORIES)[number], string> = {
   ponts: "scène : ponts de la rivière et des canaux (meshTerrain)",
   haies: "scène : haies instanciées le long des bords de cellule (meshTerrain)",
   sentier: "scène : chemins de terre (terrain.roads, meshTerrain)",
-  gue: "scène : haut-fond de la rivière (meshTerrain)",
+  gue: "scène : pierres de gué là où le chemin franchit la rivière, sans pont (envMore.generateWaters)",
   points_ancrage: "scène : points d'ancrage marqués sur les branches des arbres géants (meshNature)",
   branches_basses: "scène : branches maîtresses des arbres géants (meshNature)",
   racines: "scène : contreforts racinaires des arbres géants (meshNature)",
   mousse: "scène : mousse sur les troncs géants (meshNature)",
   rayons_lumiere: "scène : rayons de lumière sous la voûte (meshNature)",
   sous_bois: "scène : buissons du sous-bois (arbres « buisson »)",
-  embruns: "scène : particules d'embruns sur la côte (meshNature)",
+  embruns: "scène : frange d'écume sur la ligne d'eau et gouttelettes (meshNature.buildSpray)",
 };
 
 export interface PropMeshes {
@@ -179,6 +182,7 @@ export function buildProps(props: readonly Prop[], limit = Infinity): PropMeshes
   }
   const meshes: InstancedMesh[] = [];
   const material = new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 });
+  const materials: Material[] = [material];
   const m = new Matrix4();
   const q = new Quaternion();
   const up = new Vector3(0, 1, 0);
@@ -186,7 +190,12 @@ export function buildProps(props: readonly Prop[], limit = Infinity): PropMeshes
     const def = PROP_DEFS[kind] as PropDef;
     const geo = propGeometry(kind) as BufferGeometry;
     const n = Math.min(list.length, limit);
-    const im = new InstancedMesh(geo, material, n);
+    let mat = material;
+    if (def.glow) {
+      mat = new MeshStandardMaterial({ vertexColors: true, roughness: 0.25, emissive: phys(def.glow), emissiveIntensity: 0.55 });
+      materials.push(mat);
+    }
+    const im = new InstancedMesh(geo, mat, n);
     im.name = `accessoires-${kind}`;
     im.castShadow = def.shadow ?? false;
     im.receiveShadow = true;
@@ -202,9 +211,9 @@ export function buildProps(props: readonly Prop[], limit = Infinity): PropMeshes
   }
   return {
     meshes,
-    materials: [material],
+    materials,
     dispose() {
-      material.dispose();
+      for (const m of materials) m.dispose();
       for (const im of meshes) im.dispose();
     },
   };

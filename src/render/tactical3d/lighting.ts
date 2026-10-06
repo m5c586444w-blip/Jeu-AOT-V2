@@ -61,7 +61,20 @@ export interface LightRig {
   dispose(): void;
 }
 
-export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3; shadowExtent?: number; fogScale?: number }): LightRig {
+/**
+ * R1b (lot 2) : lieu souterrain. Le jour n'entre que par les puits (soleil presque vertical, ombres de la voûte) ; lumière
+ * d'ambiance et brume de la teinte du lieu, lanternes et fenêtres toujours allumées.
+ */
+export interface UndergroundLight {
+  /** Teintes (« #RRGGBB », du profil ou de `materiaux.json`) : ambiance, sol, brume. */
+  ambient: string;
+  ground: string;
+  fog: string;
+  /** Puits de jour ouverts dans la voûte. */
+  openings: boolean;
+}
+
+export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3; shadowExtent?: number; fogScale?: number; underground?: UndergroundLight | null }): LightRig {
   const group = new Group();
   group.name = "eclairage";
   scene.add(group);
@@ -117,8 +130,34 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   let sunK = 1;
   let exposure = 1;
   let lampLimit = lamps.length;
+  /**
+   * Réglages effectifs d'une heure : sous terre (R1b, lot 2), le soleil n'entre que par les puits, presque vertical ; l'ambiance
+   * prend la teinte du lieu et porte presque tout l'éclairage (sans soleil, l'hémisphère seule doit être bien plus forte) ;
+   * lanternes et fenêtres restent allumées.
+   */
+  const effective = (preset: LightPreset): PresetDef => {
+    const d0 = PRESETS[preset];
+    const ug = opts.underground ?? null;
+    if (!ug) return d0;
+    const day = preset === "jour" ? 1 : preset === "nuit" ? 0 : 0.45;
+    return {
+      ...d0,
+      elevation: 80,
+      sunIntensity: ug.openings ? d0.sunIntensity * 0.8 * day : 0,
+      hemiSky: new Color(ug.ambient).getHex(),
+      hemiGround: new Color(ug.ground).getHex(),
+      hemiIntensity: 3.4 + 1.2 * day,
+      fog: new Color(ug.fog).getHex(),
+      fogDensity: 0.0026,
+      exposure: d0.exposure + 0.2,
+      windows: Math.max(d0.windows, 0.8),
+      lanterns: Math.max(d0.lanterns, 2.2),
+      lampIntensity: Math.max(d0.lampIntensity, 40),
+      stars: false,
+    };
+  };
   const showLamps = (): void => {
-    const d = PRESETS[current];
+    const d = effective(current);
     lamps.forEach((l, i) => {
       l.intensity = d.lampIntensity;
       // Une lumière éteinte mais visible est quand même calculée par chaque pixel : on la retire du rendu.
@@ -147,7 +186,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
     },
     apply(preset) {
       current = preset;
-      const d = PRESETS[preset];
+      const d = effective(preset);
       const dir = dirOf(d);
       sun.color.set(d.sunColor);
       sun.intensity = d.sunIntensity * sunK;

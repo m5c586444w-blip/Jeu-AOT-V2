@@ -8,7 +8,8 @@ import { buildProps, phys } from "./meshProps";
 import { buildTerrainMeshes, waterColor } from "./meshTerrain";
 import { buildHedges, buildVegetation } from "./meshVegetation";
 import { buildWallMeshes } from "./meshWall";
-import { buildGiantForest } from "./meshNature";
+import { buildGiantForest, buildSpray } from "./meshNature";
+import { buildCave } from "./meshCave";
 import { buildTitan, setSteamTexture } from "./titan";
 import type { Titan } from "./titan";
 import { titanSpec } from "./titanGallery";
@@ -52,8 +53,8 @@ export interface EnvScene {
   dispose(): void;
 }
 
-/** Lampes : têtes lumineuses posées au sommet des lampadaires et lanternes (matériau des lanternes, allumé la nuit). */
-const GLOW_AT: Record<string, [number, number, number]> = { lampadaires: [0, 4.45, 0], lanternes: [0.45, 2.85, 0] };
+/** Lampes : têtes lumineuses posées au sommet des lampadaires, lanternes et bougies (matériau des lanternes, allumé la nuit) ; x, y, z, rayon. */
+const GLOW_AT: Record<string, [number, number, number, number]> = { lampadaires: [0, 4.45, 0, 0.24], lanternes: [0.45, 2.85, 0, 0.24], bougies: [0, 1.2, 0, 0.07] };
 
 /** Fenêtres éteintes : lieux abandonnés, ruinés ou sans habitants (territoire, ruines, variantes « abandonné »). */
 export function lightsOff(env: EnvData): boolean {
@@ -149,6 +150,31 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
     for (const [k, v] of Object.entries(nat.counts)) counts[k] = v;
   }
 
+  // Embruns sur la côte.
+  if (env.terrain && env.terrain.seaLevel !== null && (p.accessoires as readonly string[]).includes("embruns")) {
+    const sp = buildSpray(env.terrain, MATERIALS.physiques.lumiere, env.seed);
+    group.add(sp.group);
+    disposers.push(() => sp.dispose());
+    counts["spray"] = sp.count;
+  }
+
+  // Lieux souterrains : voûte de roche (puits de jour, stalactites) ou crypte voûtée.
+  if (env.cave) {
+    const hf = env.terrain?.heights ?? null;
+    const cv = buildCave(
+      env.cave,
+      (x, y) => (hf ? heightAt(hf, x, y) : 0),
+      env.giants.length > 0 ? [] : env.shafts,
+      { rock: p.palette.pierre, dark: p.palette.toit, light: MATERIALS.physiques.lumiere, floor: p.palette.sol, ice: MATERIALS.physiques.cristal },
+      tx?.wallStone() ?? null,
+      env.seed,
+      q.shadows,
+    );
+    group.add(cv.group);
+    disposers.push(() => cv.dispose());
+    for (const [k, v] of Object.entries(cv.counts)) counts[k] = v;
+  }
+
   // Titans posés (classes, variantes, Titan-Mur dans une brèche), pieds au sol (relief compris).
   const titans: Titan[] = [];
   for (const tp of env.titans) {
@@ -184,11 +210,12 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
     im.name = "lanternes-allumees";
     const m = new Matrix4();
     glowSpots.forEach((x, i) => {
-      const off = GLOW_AT[x.kind] as [number, number, number];
+      const off = GLOW_AT[x.kind] as [number, number, number, number];
       const c = Math.cos(-x.r + Math.PI / 2);
       const s = Math.sin(-x.r + Math.PI / 2);
-      const pos = new Vector3(x.x + off[0] * c + off[2] * s, x.z + off[1], x.y - off[0] * s + off[2] * c);
-      im.setMatrixAt(i, m.makeTranslation(pos.x, pos.y, pos.z));
+      const pos = new Vector3(x.x + off[0] * c * x.s + off[2] * s * x.s, x.z + off[1] * x.s, x.y - off[0] * s * x.s + off[2] * c * x.s);
+      const k = off[3] / 0.24;
+      im.setMatrixAt(i, m.makeScale(k, k, k).setPosition(pos.x, pos.y, pos.z));
       lamps.push(pos);
     });
     im.computeBoundingSphere();

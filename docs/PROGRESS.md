@@ -2,10 +2,39 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1b en cours** (environnements, échelle et fidélité ; RENDU = 3D) — commit de départ `b68fade` |
-| Tâche | **Lot 1 livré** (E01, E02, E05, E06, E11, E13, E14, E19, E22) ; R1b.9 — lot 2 en cours, sans attendre (consigne) |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 65 fichiers, 391 tests (commit `20acdc5`) |
-| Prochaine étape | Lot 2 : E03, E04, E07, E08, E10, E12, E15–E18, E20, E21, E23–E29 ; puis mesures sans GPU, rapport `docs/reports/R1b.md`, arrêt obligatoire |
+| Phase | **R1b — ARRÊT OBLIGATOIRE n° 1** (un critère échoue une deuxième fois) — commit de départ `b68fade` |
+| Tâche | R1b.9 : générateurs du lot 2 livrés (19 environnements, toutes variantes) ; planches du lot 2 faites ; **CR1b-06 en échec** sur 2 paires de rendus sur 171 |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 65 fichiers, 399 tests (`docs/reports/R1b-verify-lot2.log`) |
+| Prochaine étape | **Attendre l'utilisateur.** Correctif proposé ci-dessous, non appliqué ; ensuite : `smoke:r1b` complet (lot 1 à refaire, voir « Teintes »), `mesure:r1b`, rapport `docs/reports/R1b.md`, arrêt de fin de phase |
+
+## R1b, arrêt obligatoire n° 1 : CR1b-06 échoue une deuxième fois (2026-10-06)
+- **Raison de l'arrêt (CLAUDE.md, arrêt 1).** Le critère CR1b-06 (distinction des rendus hors écran) a échoué une première fois au lot 1 (Trost–Stohess, corrigé), et il échoue de nouveau au premier passage du lot 2. Je m'arrête sans tenter un second correctif.
+- **Mesure en échec** (`npm run smoke:r1b -- lot2`, code 1 ; `docs/reports/R1b-smoke-lot2-essai1-KO.log`, `R1b-distances-rendus-lot2.log`) :
+  ```
+    KO  lot 2 E17–E20 : ΔE couleur moyenne 1.2 ≥ 2,3
+    KO  lot 2 E17–E20 : ΔE grille 3.0 ≥ 5
+    KO  lot 2 E04–E07 : ΔE grille 4.8 ≥ 5
+  smoke:r1b : 3 contrôle(s) en échec.
+  ```
+  Les 169 autres paires du lot 2 passent les deux seuils (171 paires). Toutes les planches se chargent sans erreur de page.
+- **Cause.**
+  - E17 (marais) et E20 (château d'Utgard) : les deux vues principales montrent surtout une prairie verte sous un ciel gris. Le château n'occupe qu'une petite part du cadre ; l'eau du marais aussi, depuis que le marais a été relevé de 0,3 m (moins de mares).
+  - E04 et E07 (districts) : même gabarit de vue d'ensemble, deux villes de teintes voisines.
+- **Correctif proposé, non appliqué** (j'attends l'accord) :
+  - E20 : vue principale plus proche et plus basse, le château et son donjon au centre (pierre et ardoise sombres dans le cadre) ;
+  - E17 : vue principale cadrée sur la rivière et les mares (l'eau et les roseaux dans le tiers bas) ;
+  - E04–E07 : composer la vue principale de E07 sur ses repères de profil, comme pour Trost–Stohess au lot 1.
+- **Lot 2 livré par ailleurs.**
+  - 11 générateurs nouveaux (`envMore.ts`) : souterrain (E08), ville agricole (E10), forêt (E15), montagne (E16), eaux (E17), côte (E18), château (E20), usine et cavernes de glace (E21), crypte (E23), camps (E24, fort avancé ; E25), glacis (E29). Lisière d'Arbres Géants pour E28 (`addGiantEdge`).
+  - Maillages nouveaux : voûtes de roche et crypte (`meshCave.ts`), château, donjon, halle à sheds, autel (`meshBuildings.ts`), cristaux lumineux, écume et embruns.
+  - Éclairage souterrain : jour par les puits seulement, ambiance forte, lanternes et bougies toujours allumées (D-86).
+  - Tests : déterminisme du lot 2 (données et empreinte de géométrie, variantes comprises) et contenu de chaque environnement (`environnements.test.ts`).
+- **Teintes des textures corrigées (défaut trouvé en cours de lot 2, D-86).** `shade()` écrivait des composantes linéaires dans un canevas sRGB : sols et façades assombris deux fois, sur tous les environnements. Les planches du lot 1 (`docs/screenshots/r1b-E01.png`…) datent d'avant cette correction ; elles et leurs distances de rendu sont à refaire au `smoke:r1b` complet.
+- **Contrôles passés.**
+  - `git diff --stat b68fade -- src/sim` : sortie vide.
+  - `npm run verify` : code 0, 65 fichiers, 399 tests.
+  - Bundle principal : `index-*.js` 902,58 kB (taille de `b68fade`) ; worker `sim.worker-BDqA4b1U.js`, même nom haché qu'au départ.
+- **Pas encore fait.** `npm run mesure:r1b` (outil écrit : `src/tools/mesure-r1b.ts`), revue ligne 14 des planches du lot 2, galerie complète, rapport `docs/reports/R1b.md`.
 
 ## R1b, lot 1 livré (2026-10-06)
 - **Environnements.** E01 Shiganshina, E02 Trost, E05 Stohess, E06 Mitras, E11 village agricole, E13 campagne pure, E14 forêt des Arbres Géants, E19 territoire des Titans, E22 murs. Tous sont générés depuis `data/art/styles.json`, sans teinte dans le code.

@@ -109,11 +109,19 @@ try {
     ["E21", "cavernes", 2],
     ["E04", "krolva", 2],
     ["E26", "845", 2],
+    ["E15", "foret_morte", 2],
+    ["E24", "fort_avance", 2],
+    ["E29", "845", 2],
   ];
   if (!sheetsOnly) console.log("[variantes]");
   for (const [id, v, lot] of variants) {
     if (sheetsOnly || !lots.includes(lot) || !available.has(profile(id).generateur)) continue;
     results[`${id}-${v}`] = await shot(`env=${id}&variante=${v}&planche&pause&t=1&qualite=moyen`, `r1b-${id}-${v}.png`, 1920, 1080, false);
+  }
+  if (lots.includes(2) && !sheetsOnly) {
+    console.log("[lot 2 : nuit sous terre, brume du marais]");
+    results["nuit-E08"] = await shot("env=E08&lumiere=nuit&pause&t=2&panneau=0&vue=seconde", "r1b-nuit-E08.png", 1366, 768, false);
+    results["brume-E17"] = await shot("env=E17&meteo=brume&pause&t=2&panneau=0", "r1b-meteo-brume-E17.png", 1366, 768, false);
   }
   if (lots.includes(1) && !sheetsOnly) {
     console.log("[cycle et météo]");

@@ -2,7 +2,8 @@ import type { EnvData } from "./envTypes";
 import { generateCountryside, generateVillage } from "./envCountry";
 import { generateCapital, generateDistrict } from "./envTown";
 import { generateWallEnv } from "./envWall";
-import { generateGiantForest, generateTerritory } from "./envNature";
+import { addGiantEdge, generateGiantForest, generateTerritory } from "./envNature";
+import { generateCamp, generateCastle, generateCoast, generateCrypt, generateFactory, generateFarmTown, generateForest, generateGlacis, generateMountains, generateUnderground, generateWaters } from "./envMore";
 import { profile, wallInScene, withVariant } from "./styles";
 import type { Variant } from "./styles";
 
@@ -28,15 +29,30 @@ export function ruinOf(v: Variant | null): number {
 
 type Builder = (env: { p: EnvData["profile"]; v: Variant | null; seed: number; ruin: number }) => EnvBody;
 
-const BUILDERS: Partial<Record<EnvData["generator"], Builder>> = {
+const BUILDERS: Record<EnvData["generator"], Builder> = {
   district: ({ p, v, seed, ruin }) => generateDistrict(p, v, seed, ruin),
   capitale: ({ p, v, seed, ruin }) => generateCapital(p, v, seed, ruin),
   mur: ({ p, v, seed }) => generateWallEnv(p, v, seed),
   foret_geante: ({ p, v, seed }) => generateGiantForest(p, v, seed),
   territoire: ({ p, v, seed }) => generateTerritory(p, v, seed),
-  campagne: ({ p, v, seed, ruin }) => generateCountryside(p, v, seed, { ruin, abandoned: v?.etat === "abandonne" }),
+  campagne: ({ p, v, seed, ruin }) => {
+    const body = generateCountryside(p, v, seed, { ruin, abandoned: v?.etat === "abandonne" });
+    // Essence « géante » (fermes et lisières de Maria) : une lisière d'Arbres Géants borde les champs.
+    return p.vegetation.essence === "geante" ? addGiantEdge(body, seed) : body;
+  },
   village: ({ p, v, seed, ruin }) =>
     generateVillage(p, v, seed, { ruin, abandoned: v?.etat === "abandonne", radius: p.categorie === "abords" ? 190 : 150, chapel: true, suburb: p.id === "E26", ...(p.mur_visible.visible && p.mur_visible.distance_m !== null ? { wallDistance: p.mur_visible.distance_m } : {}) }),
+  souterrain: ({ p, v, seed }) => generateUnderground(p, v, seed),
+  ville: ({ p, v, seed, ruin }) => generateFarmTown(p, v, seed, ruin),
+  foret: ({ p, v, seed }) => generateForest(p, v, seed),
+  montagne: ({ p, v, seed }) => generateMountains(p, v, seed),
+  eaux: ({ p, v, seed }) => generateWaters(p, v, seed),
+  cote: ({ p, v, seed }) => generateCoast(p, v, seed),
+  chateau: ({ p, v, seed, ruin }) => generateCastle(p, v, seed, ruin),
+  usine: ({ p, v, seed }) => generateFactory(p, v, seed),
+  crypte: ({ p, v, seed }) => generateCrypt(p, v, seed),
+  camp: ({ p, v, seed }) => generateCamp(p, v, seed),
+  glacis: ({ p, v, seed }) => generateGlacis(p, v, seed),
 };
 
 export function supportedGenerators(): string[] {
@@ -47,7 +63,6 @@ export function generateEnvironment(id: string, seed: number, variantId: string 
   const base = profile(id);
   const { profile: p, variant } = withVariant(base, variantId);
   const build = BUILDERS[p.generateur];
-  if (!build) throw new Error(`générateur « ${p.generateur} » (${id}) pas encore disponible`);
   // Chaque variante a sa propre graine dérivée : Ragako, Dauper et Jinae ne sont pas le même village.
   const vseed = variant ? (seed ^ [...variant.id].reduce((h, ch) => Math.imul(h ^ ch.charCodeAt(0), 16777619), 2166136261)) >>> 0 : seed;
   const ruin = ruinOf(variant);

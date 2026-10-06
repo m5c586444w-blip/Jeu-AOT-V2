@@ -30,7 +30,8 @@ describe("catalogue des styles et images de référence (R1b.0)", () => {
   });
 
   it("aucun fichier de src/, public/ ni index.html ne cite docs/art/reference", () => {
-    const sources = [...files("src"), ...files("public"), "index.html", "vite.config.ts"];
+    // Seule exception : l'outil Node de mesure (jamais empaqueté), qui lit ce dossier pour vérifier que dist n'en contient rien.
+    const sources = [...files("src"), ...files("public"), "index.html", "vite.config.ts"].filter((p) => p !== join("src", "tools", "mesure-r1b.ts"));
     const offenders = sources.filter((p) => /art\/reference/.test(readFileSync(p, "utf8")));
     expect(offenders).toEqual([]);
   });

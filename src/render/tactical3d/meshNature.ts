@@ -1,6 +1,9 @@
-import { AdditiveBlending, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, LOD, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, Vector3 } from "three";
-import type { BufferGeometry, Material, Texture } from "three";
+import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, LOD, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Object3D, PlaneGeometry, Points, PointsMaterial, Quaternion, Vector3 } from "three";
+import type { Material, Texture } from "three";
 import type { GiantTree, Shaft } from "./envTypes";
+import { derive, range, seeded } from "./rng";
+import { heightAt } from "./terrain";
+import type { TerrainData } from "./terrain";
 import { FaceBuilder } from "./townMesh";
 
 /**
@@ -50,6 +53,23 @@ function trunk(fb: FaceBuilder, t: GiantTree, ground: number, c: NatureColors, n
   fb.uv.push(...tmp.uv);
   fb.col.push(...tmp.col);
   g.dispose();
+}
+
+/** Rayons de lumière (forêt géante, puits de jour d'une caverne) : cylindres ouverts additifs, inclinés de `tilt` (rad). */
+export function shaftMesh(shafts: readonly Shaft[], groundAt: (x: number, y: number) => number, light: string, tilt: number): Mesh {
+  const fb = new FaceBuilder();
+  const col = new Color(light);
+  for (const s of shafts) {
+    const g = new CylinderGeometry(s.radius, s.radius * 1.6, s.height, 14, 1, true);
+    const m = new Matrix4().makeTranslation(s.x, groundAt(s.x, s.y) + s.height / 2, s.y).multiply(new Matrix4().makeRotationZ(tilt));
+    fb.geometry(g, m, col);
+    g.dispose();
+  }
+  const mat = new MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.075, blending: AdditiveBlending, depthWrite: false, side: DoubleSide, fog: false });
+  const m = new Mesh(fb.build(), mat);
+  m.name = "rayons-lumiere";
+  m.renderOrder = 2;
+  return m;
 }
 
 export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: number, y: number) => number, shafts: readonly Shaft[], c: NatureColors, q: { near: number; far: number; shadows: boolean }, mistMap: Texture | null, mist: { density: number; top: number }, size: number): NatureMeshes {
@@ -148,19 +168,8 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
 
   // Rayons de lumière : cylindres ouverts, additifs, légèrement inclinés comme le soleil.
   if (shafts.length > 0) {
-    const fb = new FaceBuilder();
-    const light = new Color(c.light);
-    for (const s of shafts) {
-      const g = new CylinderGeometry(s.radius, s.radius * 1.6, s.height, 14, 1, true);
-      const m = new Matrix4().makeTranslation(s.x, groundAt(s.x, s.y) + s.height / 2, s.y).multiply(new Matrix4().makeRotationZ(0.22));
-      fb.geometry(g, m, light);
-      g.dispose();
-    }
-    const mat = new MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.075, blending: AdditiveBlending, depthWrite: false, side: DoubleSide, fog: false });
-    materials.push(mat);
-    const m = new Mesh(fb.build(), mat);
-    m.name = "rayons-lumiere";
-    m.renderOrder = 2;
+    const m = shaftMesh(shafts, groundAt, c.light, 0.22);
+    materials.push(m.material as Material);
     geos.push(m.geometry);
     group.add(m);
   }
@@ -192,6 +201,60 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
       group.traverse((o) => {
         if (o instanceof InstancedMesh) o.dispose();
       });
+    },
+  };
+}
+
+/**
+ * Embruns de la côte (accessoire « embruns ») : une frange d'écume posée sur la ligne d'eau (cherchée au sud du trait de côte,
+ * là où le sol passe sous le niveau de la mer) et un nuage fixe de gouttelettes au-dessus des brisants.
+ */
+export function buildSpray(t: TerrainData, color: string, seed: number): { group: Group; count: number; dispose(): void } {
+  const group = new Group();
+  group.name = "embruns";
+  const sea = t.seaLevel ?? 0;
+  const line: Vector3[] = [];
+  for (const c of t.coast) {
+    let y = c.y;
+    while (y < c.y + 200 && heightAt(t.heights, c.x, y) > sea) y += 1.5;
+    line.push(new Vector3(c.x, sea + 0.05, y));
+  }
+  const fb = new FaceBuilder();
+  const foam = new Color(color);
+  for (let i = 0; i + 1 < line.length; i++) {
+    const a = line[i] as Vector3;
+    const b = line[i + 1] as Vector3;
+    fb.face([[a.x, a.y, a.z - 1.5], [b.x, b.y, b.z - 1.5], [b.x, b.y, b.z + 5], [a.x, a.y, a.z + 5]], [[0, 0], [1, 0], [1, 1], [0, 1]], foam, [0, 1, 0]);
+  }
+  const foamMat = new MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.5, depthWrite: false });
+  const band = new Mesh(fb.build(), foamMat);
+  band.name = "ecume";
+  band.renderOrder = 1;
+  group.add(band);
+  const rand = seeded(derive(seed, 1800));
+  const pts: number[] = [];
+  const n = 2400;
+  for (let k = 0; k < n; k++) {
+    const i = Math.floor(rand() * (line.length - 1));
+    const a = line[i] as Vector3;
+    const b = line[i + 1] as Vector3;
+    const f = rand();
+    pts.push(a.x + (b.x - a.x) * f, sea + range(rand, 0.1, 2.8) * rand(), a.z + (b.z - a.z) * f + range(rand, -1, 4));
+  }
+  const geo = new BufferGeometry();
+  geo.setAttribute("position", new BufferAttribute(new Float32Array(pts), 3));
+  const dropMat = new PointsMaterial({ color: foam, size: 0.35, transparent: true, opacity: 0.55, depthWrite: false });
+  const drops = new Points(geo, dropMat);
+  drops.name = "gouttelettes";
+  group.add(drops);
+  return {
+    group,
+    count: n,
+    dispose() {
+      band.geometry.dispose();
+      geo.dispose();
+      foamMat.dispose();
+      dropMat.dispose();
     },
   };
 }

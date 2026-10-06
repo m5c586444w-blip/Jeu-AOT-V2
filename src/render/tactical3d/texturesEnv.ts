@@ -37,8 +37,13 @@ function tex(c: HTMLCanvasElement, color = true, aniso = 4): CanvasTexture {
 }
 
 /** Teinte CSS d'une teinte hex éclaircie ou assombrie (k > 1 éclaircit), avec alpha. */
+/**
+ * Teinte « #RRGGBB » nuancée par `k`, en `rgba()` pour le canevas. Les composantes sont lues en sRGB : `Color` les garde en
+ * linéaire, et les écrire telles quelles dans un canevas sRGB (décodé ensuite comme sRGB) assombrissait deux fois les teintes
+ * du profil (défaut trouvé en R1b, lot 2, sur les sols souterrains presque noirs).
+ */
 function shade(hex: string, k: number, a = 1): string {
-  const c = new Color(hex);
+  const c = new Color(hex).getRGB({ r: 0, g: 0, b: 0 }, SRGBColorSpace);
   const f = (v: number): number => Math.round(Math.min(255, Math.max(0, v * 255 * k)));
   return `rgba(${f(c.r)},${f(c.g)},${f(c.b)},${a})`;
 }
