@@ -1,7 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { colorOf, forwardOf, lowestY, measureBox, measureHeight, worldPoint } from "../../../src/render/tactical3d/rig";
+import { buildOdm } from "../../../src/render/tactical3d/odm";
+import { SOLDIER_HEIGHT_M, SOLDIER_POSES, buildSoldier, soldierMaterials } from "../../../src/render/tactical3d/soldier";
 import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, buildTitan } from "../../../src/render/tactical3d/titan";
+import { generateTown } from "../../../src/render/tactical3d/town";
 import type { Titan } from "../../../src/render/tactical3d/titan";
 
 /**
@@ -106,6 +109,74 @@ describe("Titans 3D (R1.4)", () => {
       expect(box.max.y - box.min.y, t.spec.id).toBeLessThan(0.3 * t.spec.height);
       expect(box.max.z - box.min.z).toBeGreaterThan(0.8 * t.spec.height);
       expect(t.steam.visible).toBe(true);
+    }
+  });
+});
+
+describe("soldats 3D et manœuvre (R1.5)", () => {
+  const mats = soldierMaterials();
+  const soldier = buildSoldier(7, mats);
+
+  it("un soldat mesure 1,80 m à ±10 % ; rapports Titans/soldat conformes à ±10 %", () => {
+    soldier.setPose("sol", 0);
+    const h = measureHeight(soldier.group);
+    expect(within(h, SOLDIER_HEIGHT_M), `${h.toFixed(3)} m`).toBe(true);
+    const small = buildTitan(TITAN_SMALL, 850);
+    const large = buildTitan(TITAN_LARGE, 850);
+    small.setPose("marche", 0);
+    large.setPose("marche", 0);
+    expect(within(measureHeight(small.body) / h, 5 / 1.8)).toBe(true);
+    expect(within(measureHeight(large.body) / h, 15 / 1.8)).toBe(true);
+  });
+
+  it("trois poses distinctes : vol (penché, cape au vent), accroché (genoux fléchis), au sol (en garde)", () => {
+    expect(SOLDIER_POSES).toEqual(["vol", "accroche", "sol"]);
+    const snap = (p: (typeof SOLDIER_POSES)[number]): number[] => {
+      soldier.setPose(p, 0);
+      return Object.values(soldier.joints).flatMap((g) => [g.rotation.x, g.rotation.y, g.rotation.z]);
+    };
+    const [v, a, s] = SOLDIER_POSES.map(snap) as [number[], number[], number[]];
+    const diff = (x: number[], y: number[]): number => x.reduce((acc, xi, i) => acc + Math.abs(xi - (y[i] ?? 0)), 0);
+    expect(diff(v, a)).toBeGreaterThan(1.5);
+    expect(diff(v, s)).toBeGreaterThan(1.5);
+    expect(diff(a, s)).toBeGreaterThan(1.5);
+    soldier.setPose("vol", 0);
+    expect(soldier.joints.cape.rotation.x).toBeLessThan(-0.8);
+  });
+
+  it("20 soldats en 4 escouades ; câbles tendus (longueur constante au cours du balancement) ; traînées de gaz derrière les soldats en vol", () => {
+    const town = generateTown(850);
+    const large = buildTitan(TITAN_LARGE, 850);
+    const p = town.plaza.centers.map((c) => ({ x: c.x, z: c.y }));
+    large.group.position.set(p[0]?.x ?? 0, 0, (p[0]?.z ?? 0) + 20);
+    const odm = buildOdm(town, 850, mats, null, {
+      plaza: worldPoint(large.group).setX(p[0]?.x ?? 0).setZ(p[0]?.z ?? 0),
+      market: worldPoint(large.group).setX(p[1]?.x ?? 0).setZ(p[1]?.z ?? 40),
+      titanLarge: large.group,
+      titanSmall: worldPoint(large.group).setX((p[1]?.x ?? 0) + 5),
+      largeShoulders: [large.joints.epauleG, large.joints.epauleD],
+    });
+    expect(odm.units).toHaveLength(20);
+    for (let q = 0; q < 4; q++) expect(odm.units.filter((u) => u.squad === q)).toHaveLength(5);
+    expect(new Set(odm.units.map((u) => u.mode))).toEqual(new Set(["vol", "accroche", "sol"]));
+    odm.update(0, null);
+    const c0 = odm.cableSegments();
+    odm.update(1.3, null);
+    const c1 = odm.cableSegments();
+    expect(c0.length).toBeGreaterThanOrEqual(16);
+    for (const [i, seg] of c0.entries()) {
+      const later = c1[i];
+      expect(seg.from.distanceTo(seg.to)).toBeGreaterThan(2);
+      // Escouade 1 (pendules sur façade) : l'ancrage est fixe, la distance ancrage–soldat ne change pas : le câble reste tendu.
+      if (odm.units[seg.unit]?.squad === 0 && later) expect(seg.to.distanceTo(seg.root)).toBeCloseTo(later.to.distanceTo(later.root), 3);
+    }
+    const trails = odm.trailPoints();
+    expect(trails).toHaveLength(10);
+    for (const tr of trails) {
+      expect(tr).toHaveLength(28);
+      // Longueur du chemin, pas distance entre extrémités : un pendule repasse par les mêmes points.
+      const path = tr.slice(1).reduce((acc, pt, i) => acc + pt.distanceTo(tr[i] ?? pt), 0);
+      expect(path).toBeGreaterThan(2);
     }
   });
 });

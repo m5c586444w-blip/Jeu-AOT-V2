@@ -1,9 +1,13 @@
-import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, InstancedMesh, Matrix4, MeshStandardMaterial, PCFShadowMap, PerspectiveCamera, Quaternion, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
 import { LIGHT_PRESETS, createLighting } from "./lighting";
+import { buildOdm } from "./odm";
+import { SOLDIER_POSES, buildSoldier, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
+import type { SoldierPose } from "./soldier";
 import type { LightPreset } from "./lighting";
+import { derive } from "./rng";
 import { TX, fill } from "./texts";
 import { puffTexture, skinTexture } from "./textures";
 import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, buildTitan, setSteamTexture } from "./titan";
@@ -17,6 +21,7 @@ import { buildTownMeshes } from "./townMesh";
  * - Ville (R1.2) : générée par graine (`?graine=N`, 850 par défaut).
  * - Lumière (R1.3) : jour, crépuscule, nuit (`?lumiere=nuit`).
  * - Titans (R1.4) : 5 m et 15 m sur la place, poses marche, saisie, abattu (`?poses=marche,saisie`).
+ * - Soldats (R1.5) : 20 soldats en 4 escouades (câbles, gaz), 300 soldats instanciés au sud de la ville (`?foule=0` les masque).
  */
 export interface ProtoProbe {
   ready: boolean;
@@ -26,6 +31,11 @@ export interface ProtoProbe {
   light: LightPreset;
   setLight(p: LightPreset): void;
   titanPoses: [TitanPose, TitanPose];
+  /** Pose imposée aux 20 soldats (null : chacun la sienne). */
+  soldierPose: SoldierPose | null;
+  setSoldierPose(p: SoldierPose | null): void;
+  crowd: boolean;
+  setCrowd(on: boolean): void;
   setTitanPose(which: 0 | 1, p: TitanPose): void;
   /** Temps d'animation (s) ; `pause` le fige, pour des captures reproductibles. */
   time: number;
@@ -158,6 +168,62 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     controls.target.copy(sheetOrigin).add(new Vector3(0, 5.5, -16));
     controls.update();
   }
+  // Soldats (R1.5) : 4 escouades autour des Titans ; foule de 300 au sud-est, hors les murs de la ville.
+  const smats = soldierMaterials();
+  const odm = buildOdm(town, seed, smats, puff, {
+    plaza: along(0, 0),
+    market: along(1, 0),
+    titanLarge: titans[1].group,
+    titanSmall: titans[0].group.position.clone(),
+    largeShoulders: [titans[1].joints.epauleG, titans[1].joints.epauleD],
+  });
+  scene.add(odm.group);
+  let soldierPose: SoldierPose | null = SOLDIER_POSES.find((p) => p === params.get("soldats")) ?? null;
+  const crowdGeo = crowdGeometry();
+  const crowdMat = new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 });
+  const CROWD = 300;
+  const crowd = new InstancedMesh(crowdGeo, crowdMat, CROWD);
+  crowd.name = "foule-300";
+  crowd.castShadow = true;
+  crowd.receiveShadow = true;
+  const crowdOrigin = new Vector3(town.bounds.maxX - 35, 0, town.bounds.maxY + 70);
+  const crowdBase: Vector3[] = [];
+  for (let i = 0; i < CROWD; i++) {
+    const block = Math.floor(i / 25);
+    const bx = block % 4;
+    const bz = Math.floor(block / 4);
+    const r = i % 25;
+    crowdBase.push(new Vector3(crowdOrigin.x + (bx - 1.5) * 13 + ((r % 5) - 2) * 1.7, 0, crowdOrigin.z + (bz - 1) * 13 + (Math.floor(r / 5) - 2) * 1.7));
+    crowd.setColorAt(i, crowdTint(seed, i));
+  }
+  scene.add(crowd);
+  crowd.visible = params.get("foule") !== "0";
+  const crowdM = new Matrix4();
+  const crowdQ = new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), Math.PI);
+  const crowdS = new Vector3(1, 1, 1);
+  const crowdP = new Vector3();
+  const updateCrowd = (t: number): void => {
+    if (!crowd.visible) return;
+    crowdBase.forEach((b, i) => {
+      // Marche au pas sur place, rang par rang.
+      crowdP.copy(b).setY(0.04 * Math.abs(Math.sin(t * 4 + (i % 25) * 0.4)));
+      crowd.setMatrixAt(i, crowdM.compose(crowdP, crowdQ, crowdS));
+    });
+    crowd.instanceMatrix.needsUpdate = true;
+    crowd.computeBoundingSphere();
+  };
+  // Planche : un soldat dans chaque pose, devant les Titans.
+  const sheetSoldiers: { s: ReturnType<typeof buildSoldier>; pose: SoldierPose }[] = [];
+  if (sheet.length > 0) {
+    SOLDIER_POSES.forEach((pose, i) => {
+      const s = buildSoldier(derive(seed, 700 + i), smats);
+      s.group.position.copy(sheetOrigin).add(new Vector3(-9 + i * 3, pose === "vol" ? 2.5 : 0, 16));
+      s.group.rotation.y = 0.75;
+      if (pose === "accroche") s.group.rotation.set(-Math.PI / 2, 0, 0, "YXZ");
+      scene.add(s.group);
+      sheetSoldiers.push({ s, pose });
+    });
+  }
   let time = Number(params.get("t") ?? "0") || 0;
   let paused = params.has("pause");
 
@@ -226,6 +292,9 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   const draw = (): void => {
     titans.forEach((t, i) => t.setPose(titanPoses[i as 0 | 1], time));
     for (const e of sheet) e.t.setPose(e.pose, time);
+    odm.update(time, soldierPose);
+    for (const e of sheetSoldiers) e.s.setPose(e.pose, time);
+    updateCrowd(time);
     controls.update();
     lighting.follow(camera.position);
     renderer.render(scene, camera);
@@ -241,6 +310,16 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     titanPoses,
     setTitanPose(which, p) {
       titanPoses[which] = p;
+    },
+    soldierPose,
+    setSoldierPose(p) {
+      soldierPose = p;
+      state.soldierPose = p;
+    },
+    crowd: crowd.visible,
+    setCrowd(on) {
+      crowd.visible = on;
+      state.crowd = on;
     },
     time,
     setTime(t) {
