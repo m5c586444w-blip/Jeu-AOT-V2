@@ -415,7 +415,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
           root.dataset["porteurVisible"] = inView ? "oui" : "non";
         }
       }
-      root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded}`;
+      root.dataset["fx"] = `toits ${scene.fx.roofs.size} · vapeur ${scene.fx.steam} · éclairs ${scene.fx.flashes} · occultés ${scene.fx.occluded} · flèches ${scene.fx.arrows}`;
       root.dataset["vue"] = scene.view;
       root.dataset["pastilles"] = String(scene.markers);
       root.dataset["zoom"] = scene.zoomLevel.toFixed(2);

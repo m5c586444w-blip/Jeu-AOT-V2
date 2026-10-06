@@ -4,10 +4,12 @@ import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
 import { INK, OCHRE, PAPER, PAPER_DARK, STONE, VERDIGRIS } from "../palette";
 import { paperTexture } from "../paperTexture";
 import { drawFlare, drawSoldier, drawTitan } from "./figures";
+import { TILT, clampToMap, computeFrame, edgeArrows, fitZoom, sceneScale } from "./framing";
+import type { UnitPose } from "./framing";
+
+export type { UnitPose } from "./framing";
 import type { SoldierLook } from "./figures";
 
-/** Facteur de projection oblique (vue de gravure, 04 §4 ; 0,8 depuis la revue de P4 : la carte de 400 × 300 m remplit une scène 16:10, D-63) : y écrasé, la hauteur z monte à l'écran. */
-const TILT = 0.8;
 /** Taille minimale à l'écran des figures (pixels). */
 const MIN_SOLDIER_PX = 9;
 const MIN_TITAN_PX = 22;
@@ -17,25 +19,11 @@ const BRICK_TINT = 0xd98a76;
 const OVERVIEW_TITAN_PX = 42;
 const OVERVIEW_DOT_PX = 3;
 const PASTILLE_PX = 11;
-/** Zoom maximal du cadrage initial (la bataille remplit l'écran, sans plan trop serré). */
-const FRAME_MAX_ZOOM = 6;
 /** Durée de l'éclair autour d'un corps qui surgit, en pas de simulation (20 Hz : 1,5 s). */
 const FLASH_AFTERGLOW_TICKS = 30;
-/** Scène de référence (1366×768) pour laquelle `FRAME_MAX_ZOOM` a été réglé. */
-const FRAME_REF_W = 1014;
-const FRAME_REF_H = 588;
 /** Teintes de toits (tuile, ardoise, chaume) : villes moins régulières (revue de P4, reporté à P8). */
 const ROOF_TINTS = [0x8a3b2a, 0x6b4a2f, 0x5a5f66, 0x9b6a3c, 0x7a4a3a];
 
-export interface UnitPose {
-  x: number;
-  y: number;
-  z: number;
-  /** Hauteur à garder dans le champ au cadrage (m) : un porteur qui va se transformer (R0.2f). */
-  reach?: number;
-  /** Homme du joueur : toujours dans le champ au cadrage, avant les Titans (R0.4). */
-  own?: boolean;
-}
 
 /** Scène tactique 2.5D (Pixi, `src/render` seulement) : décor statique, unités interpolées, câbles, fusées, caméra. */
 export class TacticalScene {
@@ -47,6 +35,8 @@ export class TacticalScene {
   private readonly titanLayer = new Container({ sortableChildren: true });
   private readonly soldierLayer = new Container();
   private readonly gOverlay = new Graphics();
+  /** Flèches de bord vers les Titans hors champ (repère écran, au-dessus du monde). */
+  private readonly gArrows = new Graphics();
   private readonly contexts = new Map<string, GraphicsContext>();
   private readonly titanFigs: Graphics[] = [];
   private readonly soldierFigs: Graphics[] = [];
@@ -57,7 +47,7 @@ export class TacticalScene {
   markers = 0;
   private map: TacticalWorldMap | null = null;
   /** Effets dessinés (P8) : contrôles de l'écran de bataille et de smoke:p8. */
-  readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0 };
+  readonly fx = { roofs: new Set<number>(), steam: 0, flashes: 0, occluded: 0, arrows: 0 };
   /** Pas où chaque porteur a pris corps (index du porteur → pas) : durée de l'éclair prolongé. */
   private readonly bodySince = new Map<number, number>();
   /** Volumes des bâtiments par colonne de 20 m (occlusion des unités qui passent derrière). */
@@ -76,7 +66,7 @@ export class TacticalScene {
 
   private constructor(private readonly app: Application) {
     this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.markerLayer);
-    app.stage.addChild(this.worldLayer);
+    app.stage.addChild(this.worldLayer, this.gArrows);
   }
 
   static async create(host: HTMLElement): Promise<TacticalScene> {
@@ -111,7 +101,7 @@ export class TacticalScene {
   /** Rapport de la scène à la scène de référence (1014×588) : les seuils d'échelle réglés à 1366×768 le suivent (R0.3). */
   private sceneScale(): number {
     const { width, height } = this.app.screen;
-    return Math.max(1, Math.min(width / FRAME_REF_W, height / FRAME_REF_H));
+    return sceneScale(width, height);
   }
 
   /** Part de la scène couverte par le sol de la carte (0–1) : contrôle du cadrage « la bataille remplit l'écran ». */
@@ -146,7 +136,7 @@ export class TacticalScene {
   fit(): void {
     if (!this.map) return;
     const { width, height } = this.app.screen;
-    this.fitZoom = Math.min(width / (this.map.width + 40), height / (this.map.height * TILT + 120));
+    this.fitZoom = fitZoom(width, height, this.map.width, this.map.height);
     this.zoom = this.fitZoom;
     this.worldLayer.scale.set(this.zoom);
     this.worldLayer.position.set((width - this.map.width * this.zoom) / 2, (height - this.map.height * TILT * this.zoom) / 2 + 30 * this.zoom);
@@ -160,45 +150,13 @@ export class TacticalScene {
     this.framing = () => {
       if (!this.map || points.length === 0) return;
       const { width, height } = this.app.screen;
-      this.fit();
-      // Emprise au sol des unités (les hauteurs feraient remonter la vue vers le ciel).
-      const proj = points.map((p) => this.project(p.x, p.y, 0));
-      const xs = proj.map((p) => p[0]);
-      const ys = proj.map((p) => p[1]);
-      // Corps à venir (porteurs) : leur tête doit entrer dans le champ, même au bord de la carte (R0.2f).
-      const reach = Math.max(0, ...points.map((p) => p.reach ?? 0));
-      const heads = points.filter((p) => (p.reach ?? 0) > 0).map((p) => this.project(p.x, p.y, p.reach ?? 0)[1] - 3);
-      this.topMargin = Math.max(15, reach + 3);
-      // Marges, puis emprise rognée à la carte : « couvrir » remplit alors l'écran de sol, pas de vide.
-      const mapW = this.map.width;
-      const mapH = this.map.height * TILT;
-      const [x0, x1, y0, y1] = [Math.max(0, Math.min(...xs) - 12), Math.min(mapW, Math.max(...xs) + 12), Math.min(Math.max(0, Math.min(...ys) - 25), ...heads), Math.min(mapH, Math.max(...ys) + 12)];
-      // La bataille remplit l'écran : on couvre la zone des unités (au plus 30 % au-delà du cadrage « tout voir »).
-      const contain = Math.min(width / (x1 - x0), height / (y1 - y0));
-      const cover = Math.max(width / (x1 - x0), height / (y1 - y0));
-      // Le plafond d'échelle suit la taille de la scène (R0.3) : en 4K, 6 px/m laissait le sol au centre d'un grand vide.
-      const sceneScale = this.sceneScale();
-      // Les hommes du joueur tiennent toujours dans le champ (R0.4) : l'échelle ne dépasse pas celle qui les contient.
-      const own = points.filter((p) => p.own).map((p) => this.project(p.x, p.y, 0));
-      const ox = own.map((p) => p[0]);
-      const oy = own.map((p) => p[1]);
-      const ownFit = own.length > 0 ? Math.min(width / (Math.max(...ox) - Math.min(...ox) + 16), height / (Math.max(...oy) - Math.min(...oy) + 12)) : Infinity;
-      const z = Math.max(this.fitZoom, Math.min(FRAME_MAX_ZOOM * sceneScale, cover, contain * 1.3, ownFit));
-      this.zoom = z;
-      this.worldLayer.scale.set(z);
-      let py = height / 2 - ((y0 + y1) / 2) * z;
-      // « Couvrir » rogne la dimension qui déborde ; si c'est la hauteur, on garde le haut quand un corps à venir s'y dresse (R0.2f).
-      if (heads.length > 0) py = Math.max(py, 12 - Math.min(...heads) * z);
-      let px = width / 2 - ((x0 + x1) / 2) * z;
-      if (own.length > 0) {
-        // Emprise des hommes (marge : 8 m de côté, 4 m au pied, 8 m au-dessus pour les figures) ramenée dans le champ.
-        const [ax0, ax1, ay0, ay1] = [Math.min(...ox) - 8, Math.max(...ox) + 8, Math.min(...oy) - 8, Math.max(...oy) + 4];
-        this.bottomMargin = Math.max(0, ay1 - mapH);
-        px = Math.min(Math.max(px, -ax0 * z), width - ax1 * z);
-        py = Math.min(Math.max(py, -ay0 * z), height - ay1 * z);
-      }
-      this.worldLayer.position.set(px, py);
-      this.clampToMap();
+      const f = computeFrame({ width, height, mapW: this.map.width, mapH: this.map.height, points });
+      this.fitZoom = f.fitZoom;
+      this.topMargin = f.topMargin;
+      this.bottomMargin = f.bottomMargin;
+      this.zoom = f.zoom;
+      this.worldLayer.scale.set(f.zoom);
+      this.worldLayer.position.set(f.x, f.y);
     };
     this.framing();
   }
@@ -207,15 +165,9 @@ export class TacticalScene {
   private clampToMap(): void {
     if (!this.map) return;
     const { width, height } = this.app.screen;
-    const z = this.zoom;
-    const left = 0;
-    const right = this.map.width * z;
-    const top = -this.topMargin * z;
-    const bottom = (this.map.height * TILT + this.bottomMargin) * z;
-    const pos = this.worldLayer.position;
-    const cx = right - left > width ? Math.min(-left, Math.max(width - right, pos.x)) : pos.x;
-    const cy = bottom - top > height ? Math.min(-top, Math.max(height - bottom, pos.y)) : pos.y;
-    pos.set(cx, cy);
+    const p = this.worldLayer.position;
+    const c = clampToMap({ zoom: this.zoom, x: p.x, y: p.y, fitZoom: this.fitZoom, topMargin: this.topMargin, bottomMargin: this.bottomMargin }, width, height, this.map.width, this.map.height);
+    p.set(c.x, c.y);
   }
 
   zoomAt(sx: number, sy: number, factor: number): void {
@@ -417,6 +369,18 @@ export class TacticalScene {
       }
     });
     this.fx.occluded = occluded;
+    // Flèches de bord (R0, critère f) : chaque Titan vivant hors champ est signalé au bord, tourné vers lui.
+    const ga = this.gArrows;
+    ga.clear();
+    const { width: sw, height: sh } = this.app.screen;
+    const arrows = edgeArrows({ zoom: this.zoom, x: this.worldLayer.position.x, y: this.worldLayer.position.y }, st.titans, sw, sh);
+    const r = 9 * this.sceneScale();
+    for (const a of arrows) {
+      const c = Math.cos(a.angle);
+      const s2 = Math.sin(a.angle);
+      ga.poly([a.x + c * r, a.y + s2 * r, a.x - c * r * 0.7 - s2 * r * 0.75, a.y - s2 * r * 0.7 + c * r * 0.75, a.x - c * r * 0.7 + s2 * r * 0.75, a.y - s2 * r * 0.7 - c * r * 0.75]).fill({ color: 0x9e2b25, alpha: 0.9 }).stroke({ width: 1.2, color: INK });
+    }
+    this.fx.arrows = arrows.length;
     if (st.wagon) {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
       o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });

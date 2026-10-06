@@ -1,0 +1,80 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ❯ tests/render/framing.test.ts (9 tests | 8 failed) 29ms
+   ❯ cadrage d'ouverture de bataille (R0, critère f), piloté par tableau (9)
+     × hommes au sud, porteur au nord (essai de porteur), 1366×768 11ms
+     × hommes au sud, porteur au nord, 3840×2160 2ms
+     × l'inverse : hommes au nord, porteur au sud, 1366×768 1ms
+     × l'inverse, 3840×2160 1ms
+     × porteur excentré (coin nord-est), 1366×768 2ms
+     × porteur excentré, 3840×2160 1ms
+     × 300 unités, 3840×2160 2ms
+     × une flèche n'apparaît que pour un Titan hors champ ; tous dans le champ → aucune flèche 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > hommes au sud, porteur au nord (essai de porteur), 1366×768
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > hommes au sud, porteur au nord, 3840×2160
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > l'inverse : hommes au nord, porteur au sud, 1366×768
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > l'inverse, 3840×2160
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > porteur excentré (coin nord-est), 1366×768
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > porteur excentré, 3840×2160
+AssertionError: pieds du porteur dans le champ: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/render/framing.test.ts:75:91
+     73|     // Porteurs : pieds et tête du Titan à venir.
+     74|     for (const p of b.shifters) {
+     75|       expect(inside(s.scene, toScreen(f, p.x, p.y, 0)), "pieds du port…
+       |                                                                                           ^
+     76|       expect(inside(s.scene, toScreen(f, p.x, p.y, p.reach ?? 0)), "tê…
+     77|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > 300 unités, 3840×2160
+AssertionError: Titan 11 hors champ : flèche de bord attendue: expected undefined to be defined
+ ❯ tests/render/framing.test.ts:90:68
+     88|         return;
+     89|       }
+     90|       expect(a, `Titan ${i} hors champ : flèche de bord attendue`).toB…
+       |                                                                    ^
+     91|       if (!a) return;
+     92|       expect(inside(s.scene, [a.x, a.y])).toBe(true);
+ ❯ tests/render/framing.test.ts:82:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/render/framing.test.ts > cadrage d'ouverture de bataille (R0, critère f), piloté par tableau > une flèche n'apparaît que pour un Titan hors champ ; tous dans le champ → aucune flèche
+AssertionError: expected [] to deeply equal [ 1 ]
+
+- Expected
++ Received
+
+- [
+-   1,
+- ]
++ []
+
+ ❯ tests/render/framing.test.ts:106:35
+    104|     ];
+    105|     const a = edgeArrows(f, titans, 1014, 588);
+    106|     expect(a.map((x) => x.titan)).toEqual([1]);
+       |                                   ^
+    107|     expect(edgeArrows(f, [titans[0] as (typeof titans)[number]], 1014,…
+    108|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 1 passed (9)
+   Start at  05:57:50
+   Duration  813ms (transform 62%, import 33%, tests 4%, worker 1%)
+

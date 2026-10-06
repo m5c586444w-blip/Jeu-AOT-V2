@@ -477,3 +477,12 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Mesure, test seul** (`npx vitest run tests/sim/expeditions.test.ts -t "perd moins que les colonnes"`, trois passages) : fichier en 16,4 / 15,8 / 16,2 s, dont 94–95 % pour le test, soit environ 15 s.
 - **Sous charge.** Pendant qu'un smoke navigateur tournait, il a dépassé le délai global de 30 s à deux reprises (31,8 s et 34,2 s, sorties du hook `stop-verify`), sans aucune assertion fausse.
 - **Correctif.** Le délai de ce seul test passe à 90 s (environ 6 fois sa durée seule) ; le délai global de `vitest.config.ts` reste à 30 s. Le test est réputé correct : seule sa limite de temps était trop serrée.
+
+## 2026-10-06 — D-80 Cadrage d'ouverture de bataille et flèches de bord (critère f, décision de l'utilisateur)
+- **Ce qu'on garde toujours dans le champ.** Les hommes du joueur (pieds et tête, 1,8 m) et les porteurs (pieds et tête du Titan à venir) forment l'emprise « à voir absolument ». Le cadrage est un calcul pur, `src/render/tactical/framing.ts`, testé par tableau : `tests/render/framing.test.ts`, 8 scénarios.
+  - Scénarios : hommes au sud et porteur au nord, l'inverse, porteur excentré, 300 unités ; chacun à 1366×768 et à 3840×2160.
+- **Échelle.** C'est la plus grande qui remplit l'écran autour des unités (« couvrir », au plus 30 % au-delà de « tout voir », plafond relatif à la scène, D-78). Elle ne dépasse jamais celle qui contient l'emprise « à voir absolument ».
+- **Lisibilité, telle que retenue ici.** L'échelle ne descend pas sous l'échelle « carte entière » ; à cette échelle, la vue d'ensemble garde les pastilles d'escouade et les Titans agrandis (revue de P4). La seule exception est une emprise qui l'exigerait ; aucun des 8 scénarios n'y conduit.
+- **Position.** Le cadre est centré sur les unités, puis ramené sur l'emprise, y compris après le recalage sur la carte. Les marges au-delà des bords nord et sud suivent l'emprise : les têtes des porteurs au nord, la ligne de départ au sud.
+- **Flèches de bord.** Chaque Titan vivant dont les pieds et la tête sont hors champ est signalé par une flèche rouge, au bord du champ, sur la droite qui joint le centre au Titan. Les flèches sont tracées à chaque image, pas seulement à l'ouverture.
+- **Zone de jeu.** Le test vérifie aussi que le sol couvre au moins 85 % de la scène. Cette assertion a été ajoutée après une erreur de signe dans le ramenage : elle épinglait l'emprise au bord du champ, ne laissait que 12 % de sol, et passait les autres assertions.
