@@ -2,10 +2,18 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1 terminée** (essai de rendu 3D, three.js) — **ARRÊT OBLIGATOIRE** : revue de l'utilisateur après R1 (CLAUDE.md, arrêt 5) ; R2 n'est pas enchaînée |
-| Tâche | R1.8 — rapport `docs/reports/R1.md` (fait) |
+| Phase | **R1b en cours** (environnements, échelle et fidélité ; RENDU = 3D décidé par l'utilisateur) — commit de départ `b68fade` |
+| Tâche | R1b.0 — plan `docs/phases/R1b.md`, catalogue `docs/art/STYLES.md` (partie B sans modification) |
 | Dernier `npm run verify` | 2026-10-06 : code 0, 58 fichiers, 354 tests (commit du correctif du critère f de R0) |
-| Prochaine étape | **Arrêt : attendre l'utilisateur.** Critère f de R0 rouvert : corrigé (D-85, `docs/reports/R0.md` § g). Ensuite : prompt R2 |
+| Prochaine étape | R1b.1 — profils de style `data/art/styles.json` (28 environnements), puis lot 1 |
+
+## R1b ouverte (2026-10-06)
+- **Décision de l'utilisateur.** RENDU = 3D. Phase R1b : environnements, échelle et fidélité.
+- **Plan.** `docs/phases/R1b.md` : 11 tâches, critères CR1b-01 à CR1b-16, seuils de distinction justifiés (§ 4).
+- **Bundle principal identique à l'octet** (sha256 `b452fe27…`, 902 588 octets).
+  - Les données de rendu (`data/art/`) sont exclues des globs des Archives et du worker.
+  - La galerie s'ouvre par une page de redirection statique.
+- **Arrêt obligatoire en fin de phase.** L'utilisateur indiquera RENDU = 3D ou 2.5D.
 
 ## R0, critère f rouvert — corrigé (2026-10-06), arrêt demandé
 - **Constat.** La tête du porteur était coupée par la barre de titre, et le contrôle testait un point à mi-corps.
