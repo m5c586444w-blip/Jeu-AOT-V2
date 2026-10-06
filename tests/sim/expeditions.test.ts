@@ -86,7 +86,8 @@ describe("auto-résolution (AC3-06, 03 §12)", () => {
       return sum / 30;
     };
     expect(mean("eventail")).toBeLessThan(mean("colonnes"));
-  });
+    // Délai relevé seul (D-79) : ~15 s seul, 31–34 s quand un navigateur tourne en parallèle ; assertions inchangées.
+  }, 90_000);
 
   it("la nuit réduit les rencontres (03 §5.2)", () => {
     const r = contactRate(world, 0.5, 100, { year: 850, day: 150 }, "clair");

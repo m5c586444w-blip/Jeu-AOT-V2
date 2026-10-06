@@ -471,3 +471,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Cause.** Le cadrage de la bataille plafonnait l'échelle à 6 px/m en valeur absolue. Ce réglage a été fait pour une scène de 1014×588 px. En 4K, « couvrir » demande environ 8 px/m : le plafond bridait le zoom et laissait le sol au centre d'un grand vide.
 - **Correctif.** Le plafond suit la taille de la scène, rapportée à la scène de référence (× min(largeur / 1014, hauteur / 588), jamais en dessous de 1). À 1366×768, rien ne change.
 - **Interprétation à confirmer.** Il est possible que l'utilisateur ait entendu par « espace disponible » toute la fenêtre, interface comprise. Dans ce cas, la bataille à 1366×768 reste sous 85 %, puisque le carnet et les cartes d'escouade occupent environ 40 % de l'écran. Il faudrait alors superposer l'interface à la scène, un changement de mise en page hors du périmètre « aucune nouveauté visuelle » de R0.
+
+## 2026-10-06 — D-79 AC3-06 : délai du test relevé, assertions inchangées (décision de l'utilisateur)
+- **Le test.** `tests/sim/expeditions.test.ts` › « sur 30 tirages, l'éventail longue portée perd moins que les colonnes lourdes » simule 60 expéditions complètes.
+- **Mesure, test seul** (`npx vitest run tests/sim/expeditions.test.ts -t "perd moins que les colonnes"`, trois passages) : fichier en 16,4 / 15,8 / 16,2 s, dont 94–95 % pour le test, soit environ 15 s.
+- **Sous charge.** Pendant qu'un smoke navigateur tournait, il a dépassé le délai global de 30 s à deux reprises (31,8 s et 34,2 s, sorties du hook `stop-verify`), sans aucune assertion fausse.
+- **Correctif.** Le délai de ce seul test passe à 90 s (environ 6 fois sa durée seule) ; le délai global de `vitest.config.ts` reste à 30 s. Le test est réputé correct : seule sa limite de temps était trop serrée.
