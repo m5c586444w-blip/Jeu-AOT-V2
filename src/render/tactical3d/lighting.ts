@@ -1,5 +1,5 @@
-import { BackSide, BufferAttribute, BufferGeometry, Color, DirectionalLight, FogExp2, Group, HemisphereLight, Mesh, MeshBasicMaterial, PointLight, Points, PointsMaterial, SphereGeometry, Vector3 } from "three";
-import type { MeshStandardMaterial, Scene } from "three";
+import { BackSide, BufferAttribute, BufferGeometry, Color, DirectionalLight, FogExp2, Group, HemisphereLight, Mesh, MeshBasicMaterial, PMREMGenerator, PointLight, Points, PointsMaterial, Scene as SceneClass, SphereGeometry, Vector3 } from "three";
+import type { MeshStandardMaterial, Scene, Texture, WebGLRenderer } from "three";
 import { derive, seeded } from "./rng";
 
 /**
@@ -58,6 +58,11 @@ export interface LightRig {
   setFogBoost(k: number): void;
   /** R1b : soleil voilé (météo), multiplicateur d'intensité. */
   setSunFactor(k: number): void;
+  /**
+   * R1c : éclairage d'image. Le dôme du ciel de l'heure courante devient la carte d'environnement de la scène (reflets des
+   * métaux, de l'eau, lumière diffuse du ciel) ; une carte par heure, calculée une fois. Rien sous terre.
+   */
+  useEnvironment(renderer: WebGLRenderer): void;
   dispose(): void;
 }
 
@@ -125,6 +130,21 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   });
 
   let current: LightPreset = "jour";
+  let pmrem: PMREMGenerator | null = null;
+  let pmremOwner: WebGLRenderer | null = null;
+  const envMaps = new Map<LightPreset, Texture>();
+  const updateEnv = (): void => {
+    if (!pmrem || opts.underground) return;
+    let tex = envMaps.get(current);
+    if (!tex) {
+      const skyScene = new SceneClass();
+      const m = new Mesh(skyGeo, sky.material);
+      skyScene.add(m);
+      tex = pmrem.fromScene(skyScene, 0, 0.5, 4000).texture;
+      envMaps.set(current, tex);
+    }
+    scene.environment = tex;
+  };
   /** Multiplicateur de brume et voile du soleil posés par la météo (R1b.7). */
   let extraFog = 1;
   let sunK = 1;
@@ -218,6 +238,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       for (const m of opts.windowMaterials) m.emissiveIntensity = d.windows;
       opts.lanternMaterial.emissiveIntensity = d.lanterns;
       showLamps();
+      updateEnv();
     },
     follow(camera) {
       sky.position.copy(camera);
@@ -236,6 +257,17 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       sunK = k;
       rig.apply(current);
     },
+    useEnvironment(renderer) {
+      // Un nouveau moteur (qualité changée) : les cartes de l'ancien contexte ne valent plus rien.
+      if (pmremOwner !== renderer) {
+        for (const t of envMaps.values()) t.dispose();
+        envMaps.clear();
+        pmrem?.dispose();
+        pmrem = new PMREMGenerator(renderer);
+        pmremOwner = renderer;
+      }
+      updateEnv();
+    },
     setShadow(enabled, size) {
       sun.castShadow = enabled;
       if (sun.shadow.mapSize.x !== size) {
@@ -251,6 +283,9 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       (sky.material as MeshBasicMaterial).dispose();
       (stars.material as PointsMaterial).dispose();
       sun.shadow.map?.dispose();
+      for (const t of envMaps.values()) t.dispose();
+      pmrem?.dispose();
+      if (envMaps.size > 0) scene.environment = null;
     },
   };
   rig.apply("jour");

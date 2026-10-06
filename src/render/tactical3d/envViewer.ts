@@ -205,6 +205,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   const target0 = new Vector3(...env.views.principale.target);
   const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
 
+  lighting.useEnvironment(renderer);
   const weather = createWeather(scene, weatherKind, { seed, particles: QUALITY[quality].particles, mistMap: tex.mist(), groundY: env.terrain ? 0 : 0, size: env.terrain?.spec.size ?? 900 });
   lighting.setFogBoost(weather.fogBoost);
   lighting.setSunFactor(weather.sunFactor);
@@ -391,10 +392,13 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     offCam.updateMatrixWorld();
     weather.update(time, offCam.position, offCam.matrixWorldInverse);
     off.toneMappingExposure = lighting.exposure;
+    // La carte d'environnement appartient au contexte qui l'a calculée : on la recalcule pour le moteur hors écran.
+    lighting.useEnvironment(off);
     off.render(scene, offCam);
     const gl = off.getContext();
     const px = new Uint8Array(w * h * 4);
     gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    lighting.useEnvironment(renderer);
     lighting.apply(before);
     setView(view);
     return pixelStats(px, w, h, g);

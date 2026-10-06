@@ -6,3 +6,7 @@ coverage/
 .vite/
 test-results/
 .probe.*
+
+# Outils de mise au point locaux (non versionnés)
+src/tools/_tmp/
+tests/_tmp/

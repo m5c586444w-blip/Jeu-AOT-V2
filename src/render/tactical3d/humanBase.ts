@@ -97,8 +97,8 @@ export interface HumanShape {
   /** Cibles de détail (nom de cible → influence ; extrapolation permise jusqu'à ±2). */
   details?: Record<string, number>;
   proportions?: Proportions;
-  /** Lissage au repos d'une région (bottes : orteils fondus). */
-  smooth?: { region: "pieds"; iterations: number; inflate: number }[];
+  /** Lissage au repos d'une région (bottes : orteils fondus) ; les sommets partagés avec une autre région restent fixes. */
+  smooth?: { region: string; iterations: number; inflate: number }[];
   /** Hauteur debout finale (m). */
   height: number;
 }
@@ -444,10 +444,17 @@ function smoothRegion(prims: HumanTemplate["prims"], pos: Float32Array[], iterat
       (neigh.get(y) ?? neigh.set(y, new Set()).get(y))?.add(x);
     }
   }
+  // Bord de la région : sommets d'origine présents dans une autre primitive de peau ; ils ne bougent pas (pas de fente).
+  const border = new Set<number>();
+  prims.forEach((q, qi) => {
+    if (qi === pi || !q.name.startsWith("peau_")) return;
+    for (const o of q.geometry.getAttribute("_orig").array as Float32Array) if (members.has(o)) border.add(o);
+  });
   const first = (o: number): number => (members.get(o) as number[])[0] as number;
   for (let it = 0; it < iterations; it++) {
     const next = new Map<number, [number, number, number]>();
     for (const [o, ns] of neigh) {
+      if (border.has(o)) continue;
       let x = 0;
       let y = 0;
       let z = 0;
@@ -465,7 +472,10 @@ function smoothRegion(prims: HumanTemplate["prims"], pos: Float32Array[], iterat
   }
   if (inflate !== 0) {
     const nor = smoothNormals([p], [a])[0] as Float32Array;
-    for (let i = 0; i < n * 3; i++) a[i] = (a[i] as number) + inflate * (nor[i] as number);
+    for (let i = 0; i < n; i++) {
+      if (border.has(orig[i] as number)) continue;
+      for (let k = 0; k < 3; k++) a[i * 3 + k] = (a[i * 3 + k] as number) + inflate * (nor[i * 3 + k] as number);
+    }
   }
 }
 

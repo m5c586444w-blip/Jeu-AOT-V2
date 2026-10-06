@@ -4,7 +4,11 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
 import { EYE_TEXTURE_URL, buildHumanBody, loadHumanTemplate, skinnedBounds } from "./humanBase";
 import type { HumanBody, HumanShape } from "./humanBase";
+import { SOLDIER_ANIMS } from "./humanAnim";
+import { buildHumanSoldier } from "./humanSoldier";
+import type { HumanSoldier } from "./humanSoldier";
 import { createLighting } from "./lighting";
+import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
 
 /**
@@ -60,7 +64,25 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const mat = (p: string): Material => (p === "yeux" ? eyes : p === "dents" ? teeth : skin);
   const state: HumanProbe = { ready: false, loadMs, bodies: [] };
   const bodies: HumanBody[] = [];
-  LINEUP.forEach((e, i) => {
+  const q = new URLSearchParams(window.location.search);
+  const sheet = q.get("planche") ?? "corps";
+  const t = Number(q.get("t") ?? "0.6") || 0.6;
+  const soldiers: HumanSoldier[] = [];
+  if (sheet === "soldats") {
+    // Les animations du soldat, côte à côte (même instant) ; la vue « visage » cadre le premier de près.
+    const mats = soldierMaterials();
+    SOLDIER_ANIMS.forEach((a, i) => {
+      const s0 = performance.now();
+      const s = buildHumanSoldier(template, 300 + i, mats, { eyeMap: eyeTex });
+      s.group.position.set((i - (SOLDIER_ANIMS.length - 1) / 2) * 1.4, a === "vol" ? 1.2 : 0, 0);
+      s.setPose(a, t);
+      scene.add(s.group);
+      const bb = skinnedBounds(s.body);
+      state.bodies.push({ id: a, nominal: s.body.height, measured: bb.max.y - bb.min.y, minY: bb.min.y, buildMs: performance.now() - s0 });
+      soldiers.push(s);
+    });
+  }
+  (sheet === "corps" ? LINEUP : []).forEach((e, i) => {
     const s = performance.now();
     const b = buildHumanBody(template, e.shape, mat, (p) => p !== "pantalon");
     const buildMs = performance.now() - s;
@@ -71,7 +93,6 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     bodies.push(b);
   });
   const camera = new PerspectiveCamera(32, 1, 0.1, 4000);
-  const q = new URLSearchParams(window.location.search);
   const close = q.get("vue") === "visage";
   camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : 11);
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -82,6 +103,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   }
   controls.update();
   const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: new Vector3(0, 0, 0), shadowExtent: 20, fogScale: 0.2 });
+  lighting.useEnvironment(renderer);
   lighting.apply("jour");
   const resize = (): void => {
     const w = host.clientWidth || window.innerWidth;
@@ -92,7 +114,16 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   };
   new ResizeObserver(resize).observe(host);
   resize();
+  const animate = q.has("anime");
+  let last = performance.now();
+  let time = t;
   const loop = (): void => {
+    const now = performance.now();
+    if (animate) {
+      time += (now - last) / 1000;
+      for (const s of soldiers) s.setPose(s.pose, time);
+    }
+    last = now;
     controls.update();
     lighting.follow(camera.position);
     renderer.toneMappingExposure = lighting.exposure;

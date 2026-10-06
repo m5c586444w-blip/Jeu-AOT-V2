@@ -2,7 +2,7 @@ import { BufferAttribute, BufferGeometry, ConeGeometry, Group, InstancedMesh, Li
 import type { Texture , Object3D} from "three";
 import { derive, range, seeded } from "./rng";
 import { buildSoldier } from "./soldier";
-import type { Soldier, SoldierMaterials, SoldierPose } from "./soldier";
+import type { SoldierLike, SoldierMaterials, SoldierPose } from "./soldier";
 import type { Town } from "./town";
 
 /**
@@ -24,7 +24,7 @@ interface Anchor {
 }
 
 interface Unit {
-  s: Soldier;
+  s: SoldierLike;
   squad: number;
   mode: SoldierPose;
   /** Point d'ancrage (fixe) ou fonction (ancrage sur un Titan qui bouge). */
@@ -36,7 +36,7 @@ interface Unit {
 
 export interface OdmScene {
   group: Group;
-  units: { soldier: Soldier; squad: number; mode: SoldierPose }[];
+  units: { soldier: SoldierLike; squad: number; mode: SoldierPose }[];
   squadCount: number;
   squadCenter(i: number): Vector3;
   /** Met à jour poses, positions, câbles et traînées ; `force` impose une pose à tous (planche, contrôles). */
@@ -81,7 +81,7 @@ const basis = (up: Vector3, fwd: Vector3): Quaternion => {
   return new Quaternion().setFromRotationMatrix(new Matrix4().makeBasis(x, y, z));
 };
 
-export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff: Texture | null, opts: { plaza: Vector3; market: Vector3; titanLarge: Object3D; titanSmall: Vector3; largeShoulders: [Object3D, Object3D] }): OdmScene {
+export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff: Texture | null, opts: { plaza: Vector3; market: Vector3; titanLarge: Object3D; titanSmall: Vector3; largeShoulders: [Object3D, Object3D]; makeSoldier?: (seed: number) => SoldierLike }): OdmScene {
   const rand = seeded(derive(seed, 900));
   const group = new Group();
   group.name = "odm";
@@ -95,8 +95,9 @@ export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff:
     k += 2;
     return a;
   };
-  const make = (): Soldier => {
-    const s = buildSoldier(derive(seed, 50 + units.length), mats);
+  const make = (): SoldierLike => {
+    const sd = derive(seed, 50 + units.length);
+    const s = opts.makeSoldier ? opts.makeSoldier(sd) : buildSoldier(sd, mats);
     group.add(s.group);
     return s;
   };

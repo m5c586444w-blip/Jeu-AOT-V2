@@ -3,9 +3,15 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.1 : corps de base MakeHuman en `.glb` (`assets:build`), chargé à la demande, façonné par paramètres ; page `?proto3d=humain` |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 67 fichiers, 411 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1c.2 : soldats (base animée + équipement du projet) |
+| Tâche | R1c.2 : soldats sur le corps de base (7 animations du projet, équipement de R1 porté par les os) ; `/proto3d` les utilise |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 68 fichiers, 416 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1c.3 : Titans sur la base humaine déformée par les paramètres de R1b |
+
+## R1c.2 : soldats (2026-10-06)
+- `humanAnim.ts` : poses écrites par le projet sur le squelette CC0 (rotations « monde » empilées os par os) ; soldats : attente, marche, course, garde au sol, vol, accroche, frappe ; Titans : marche, course, debout, saisie, abattu, allongé, buste. Pieds posés par la semelle (24 points de peau).
+- `humanSoldier.ts` : forme tirée de la graine (30 % de femmes), uniforme par région du corps (veste, pantalon, bottes lissées), sangles qui épousent la peau, col et revers sur les coutures, réservoir, lanceurs, fourreaux, lames et cape portés par les os ; cheveux peints et coque. `bodies.ts` : corps MakeHuman, repli R1 (`?corps=primitives` ou échec du chargement).
+- Éclairage : carte d'environnement PMREM tirée du ciel (reflets des métaux), sauf sous terre.
+- Tests `soldats-r1c.test.ts` (5) : pieds à ±2 cm, 1,7 m à ±5 %, équipement sur les os, poses animées, déterminisme.
 
 ## R1c.1 : corps de base (2026-10-06)
 - `npm run assets:build` : `docs/art/assets/derives/humain.glb` (5,9 Mo), déterministe (`-- --verifier` : reconstruit et identique). 12 primitives, 56 os (squelette « game_engine » + mâchoire + yeux), 50 cibles éparses avec le déplacement des articulations.

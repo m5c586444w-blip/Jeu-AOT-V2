@@ -1,5 +1,5 @@
 import { BoxGeometry, Color, CylinderGeometry, DoubleSide, Group, Matrix4, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
-import type { BufferGeometry, Mesh } from "three";
+import type { BufferGeometry, Mesh, Object3D } from "three";
 import { FaceBuilder } from "./townMesh";
 import { joint, limb, measureHeight, part, unitSphere } from "./rig";
 import { derive, range, seeded } from "./rng";
@@ -49,6 +49,13 @@ export function soldierMaterials(): SoldierMaterials {
 
 type SJoint = "bassin" | "torse" | "cou" | "tete" | "epauleG" | "coudeG" | "epauleD" | "coudeD" | "hancheG" | "genouG" | "hancheD" | "genouD" | "cape";
 
+/** Ce qu'une scène attend d'un soldat (R1 ou corps de base de R1c) : placement, départ du câble, pose. */
+export interface SoldierLike {
+  group: Group;
+  launcher: Object3D;
+  setPose(p: SoldierPose, t: number): void;
+}
+
 export interface Soldier {
   group: Group;
   joints: Record<SJoint, Group>;
@@ -82,6 +89,8 @@ const GEO = {
   },
 };
 type GeoKey = keyof typeof GEO;
+/** Pièces d'équipement du projet (R1c : réutilisées sur le corps de base MakeHuman). */
+export type GearPiece = Extract<GeoKey, "blade" | "tank" | "launcher" | "sheath" | "strap" | "cape">;
 const cache = new Map<GeoKey, BufferGeometry>();
 const geo = (k: GeoKey): BufferGeometry => {
   let g = cache.get(k);
@@ -91,6 +100,10 @@ const geo = (k: GeoKey): BufferGeometry => {
   }
   return g;
 };
+
+export function gearGeometry(k: GearPiece): BufferGeometry {
+  return geo(k);
+}
 
 export function buildSoldier(seed: number, mats: SoldierMaterials): Soldier {
   const rand = seeded(derive(seed, 31));

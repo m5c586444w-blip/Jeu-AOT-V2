@@ -8,8 +8,9 @@ import { buildOdm } from "./odm";
 import { QUALITIES, QUALITY, effectivePixelRatio } from "./quality";
 import type { Quality } from "./quality";
 import { derive } from "./rng";
-import { SOLDIER_POSES, buildSoldier, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
-import type { SoldierPose } from "./soldier";
+import { SOLDIER_POSES, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
+import type { SoldierLike, SoldierPose } from "./soldier";
+import { loadBodyKit, makeSoldier } from "./bodies";
 import { TX, fill } from "./texts";
 import { puffTexture, skinTexture } from "./textures";
 import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, buildTitan, setSteamTexture } from "./titan";
@@ -104,6 +105,8 @@ const v3 = (v: Vector3): [number, number, number] => [v.x, v.y, v.z];
 
 export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<void> {
   const params = new URLSearchParams(window.location.search);
+  // R1c : corps de base MakeHuman (CC0) pour les soldats et les Titans ; figures de R1 en repli (`?corps=primitives`).
+  const kit = await loadBodyKit(window.location.search);
   const host = document.createElement("div");
   host.className = "p3d";
   root.replaceChildren(host);
@@ -144,6 +147,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   const along = (k: number, side = 0, y = 0): Vector3 => plazaA.clone().addScaledVector(axis, k).addScaledVector(perp, side).setY(y);
   const lighting = createLighting(scene, seed, { windowMaterials: townMeshes.windowMaterials, lanternMaterial: townMeshes.lanternMaterial, lamps: townMeshes.lamps, center: along(0.5) });
   let light: LightPreset = LIGHT_PRESETS.find((p) => p === params.get("lumiere")) ?? "jour";
+  lighting.useEnvironment(renderer);
   lighting.apply(light);
 
   // ——— Titans ———
@@ -172,6 +176,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     titanLarge: titans[1].group,
     titanSmall: titans[0].group.position.clone(),
     largeShoulders: [titans[1].joints.epauleG, titans[1].joints.epauleD],
+    ...(kit.template ? { makeSoldier: (sd: number) => makeSoldier(kit, sd, smats) } : {}),
   });
   scene.add(odm.group);
   let soldierPose: SoldierPose | null = SOLDIER_POSES.find((p) => p === params.get("soldats")) ?? null;
@@ -209,7 +214,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   // ——— Planche des poses : construite à la première demande ———
   const sheetOrigin = new Vector3((town.bounds.minX + town.bounds.maxX) / 2, 0, town.bounds.maxY + 110);
   const sheet: { t: ReturnType<typeof buildTitan>; pose: TitanPose }[] = [];
-  const sheetSoldiers: { s: ReturnType<typeof buildSoldier>; pose: SoldierPose }[] = [];
+  const sheetSoldiers: { s: SoldierLike; pose: SoldierPose }[] = [];
   const buildSheet = (): void => {
     if (sheet.length > 0) return;
     TITAN_POSES.forEach((pose, i) => {
@@ -224,7 +229,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       }
     });
     SOLDIER_POSES.forEach((pose, i) => {
-      const s = buildSoldier(derive(seed, 700 + i), smats);
+      const s = makeSoldier(kit, derive(seed, 700 + i), smats);
       s.group.position.copy(sheetOrigin).add(new Vector3(-9 + i * 3, pose === "vol" ? 2.5 : 0, 16));
       s.group.rotation.y = 0.75;
       if (pose === "vol") s.group.rotation.set(0.5, 0.75, 0, "YXZ");
@@ -305,6 +310,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       controls.connect(renderer.domElement);
       old.dispose();
       old.forceContextLoss();
+      lighting.useEnvironment(renderer);
     }
     quality = q;
     renderer.setPixelRatio(effectivePixelRatio(q, window.devicePixelRatio));

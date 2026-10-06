@@ -117,6 +117,7 @@ export async function startGallery(root: HTMLElement, probe: WebGLProbe): Promis
     const v = env.views.principale;
     const lighting = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: new Vector3(...v.target), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
     lighting.setShadow(true, 1024);
+    lighting.useEnvironment(renderer);
     camera.fov = v.fov;
     camera.position.set(...v.eye);
     camera.lookAt(new Vector3(...v.target));
