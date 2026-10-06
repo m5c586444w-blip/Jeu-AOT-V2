@@ -21,10 +21,12 @@
 - Aucun asset externe : géométries, matériaux et textures sont procéduraux (canvas dessiné par code).
 - Aucune copie de design de l'œuvre. Les Titans spéciaux (Titan-Mur, Titan de Rod Reiss, Colossal) n'ont que des proportions génériques, à leur taille de lore.
 
-### Bundle principal : identique à l'octet
-- `dist/assets/index-*.js` doit garder le même sha256 qu'au build de `b68fade`.
+### Bundle principal : inchangé
+- **Mesure.** `dist/assets/index-*.js` garde la même taille, et le même contenu une fois normalisés les noms de morceaux hachés.
+- **Pourquoi pas le sha256.** L'identité à l'octet est impossible dès que le code 3D change. Le bundle principal cite le morceau 3D chargé à la demande par son nom de fichier, calculé sur son contenu (`entry-XXXXXXXX.js`). Ce nom change avec le moindre changement du code 3D, et le hachage de Pixi suit le graphe des morceaux. On compare donc taille et contenu, après remplacement de chaque `nom-XXXXXXXX.js` par `nom-#.js`.
+- **Constat du 2026-10-06.** Après le commit `204dcbf`, le bundle principal avait grossi de 24 octets. Un nouveau morceau `texts-*.js` était devenu une dépendance du chargement de `entry`, parce que le banc d'échelle importait les textes sans passer par `entry.ts`. Corrigé (le banc importe aussi `entry.ts`) : même taille, contenu identique après normalisation.
 - **Fichiers de `data/art/`.** Le navigateur des Archives (`src/ui/canonBrowser.ts`) et le worker de simulation chargent `/data/**` par `import.meta.glob`. Tout fichier ajouté sous `data/` changerait donc le bundle principal et le worker.
-  - On exclut `/data/art/**` de ces deux globs. Le motif d'exclusion ne figure pas dans le code produit : le bundle principal et le worker restent identiques à l'octet (vérifié avant de commencer, sha256 ci-dessus).
+  - On exclut `/data/art/**` de ces deux globs. Le motif d'exclusion ne figure pas dans le code produit : le bundle principal et le worker restent identiques à l'octet (vérifié avant de commencer).
   - Les profils sont lus par le seul morceau 3D chargé à la demande.
 - **Galerie.** Ne pas toucher `src/main.ts` (bundle principal). La galerie s'ouvre à `/proto3d/galerie` par une page de redirection statique, `public/proto3d/galerie.html`, vers `?proto3d=galerie`. En développement, c'est un intergiciel de `vite.config.ts` qui assure la même redirection.
 
@@ -65,7 +67,7 @@ Un commit par tâche, `npm run verify` avant chacun.
 |---|---|---|
 | CR1b-01 | La simulation n'a pas changé | `git diff --stat b68fade -- src/sim` : sortie vide |
 | CR1b-02 | `npm run verify` au code 0 | `npm run verify` |
-| CR1b-03 | Bundle principal inchangé : même sha256 et même taille qu'au build de `b68fade` (worker de simulation aussi) ; aucune image de `docs/art/reference/` dans `dist` | `npm run mesure:r1b -- bundle` |
+| CR1b-03 | Bundle principal inchangé : même taille qu'au build de `b68fade` et même contenu une fois les noms de morceaux hachés normalisés (§ 1) ; worker de simulation identique à l'octet ; aucune signature three.js dans le bundle principal ; aucune image de `docs/art/reference/` dans `dist` | `npm run mesure:r1b -- bundle` |
 | CR1b-04 | three.js seulement dans `src/render/tactical3d` ; pas de `Math.random` | `npx vitest run tests/lint/sim-purity.test.ts` |
 | CR1b-05 | 28 profils valides (un par environnement de la partie B), chacun avec `canon` ; les générateurs lisent le profil : changer une teinte, une part de toits ou la densité change le résultat ; aucune teinte codée en dur dans les fichiers de génération | `npm run data:validate` ; `npx vitest run tests/render/tactical3d/styles.test.ts` |
 | CR1b-06 | Distinction mesurable, pour chaque paire d'un même lot :<br>• distance entre profils (palette, toits, matériaux, densité) au-dessus du seuil justifié au § 4 ;<br>• distance de couleur moyenne entre rendus hors écran au-dessus de son seuil.<br>Tableaux au rapport. | `npx vitest run tests/render/tactical3d/styles.test.ts` ; `npm run smoke:r1b` (rendus) |

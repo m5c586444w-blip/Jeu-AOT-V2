@@ -1,5 +1,6 @@
 import { ACESFilmicToneMapping, BoxGeometry, Color, Group, Mesh, MeshStandardMaterial, PCFShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import type { WebGLProbe } from "./entry";
+import { backTo2d } from "./entry";
 import { straightWall, wallLayout } from "./envWall";
 import { createLighting } from "./lighting";
 import { phys } from "./meshProps";
@@ -173,6 +174,13 @@ export async function startBench(root: HTMLElement, probe: WebGLProbe): Promise<
   });
   const title = document.createElement("div");
   title.className = "p3d-planche-titre";
+  const back = document.createElement("a");
+  back.href = backTo2d(window.location.href);
+  back.textContent = TX.back;
+  back.className = "p3d-planche-etiquette";
+  back.style.right = "0.5rem";
+  back.style.bottom = "0.5rem";
+  host.append(back);
   title.textContent = `${TX.benchTitle} — soldat ${SOLDIER_BENCH_M} m · Titans 3–15 m, variantes, Colossal 60 m, mur 50 m et Titan-Mur, Rod Reiss 120 m · toise : bandes de 5 m`;
   host.append(title);
 
