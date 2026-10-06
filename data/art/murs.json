@@ -13,5 +13,7 @@
   "saillie_rayon_m": { "valeur": 380, "canon": "?", "note": "Rayon de la saillie d'un district, à l'échelle de rendu ; dimension réelle ?." },
   "distance_maria_rose_km": { "valeur": 100, "canon": "?", "note": "≈ 100 km Maria → Rose (01, 11 §4, ?)." },
   "distance_rose_sina_km": { "valeur": 130, "canon": "?", "note": "≈ 130 km Rose → Sina (01, 11 §4, ?)." },
-  "breche_largeur_m": { "valeur": 26, "canon": "A", "note": "Brèche de la variante endommagée (rendu) A." }
+  "breche_largeur_m": { "valeur": 26, "canon": "A", "note": "Brèche de la variante endommagée (rendu) A." },
+  "porte_eau_largeur_m": { "valeur": 14, "canon": "?", "note": "Porte de rivière d'un district (carte de Shiganshina, C) ; dimensions de rendu ?." },
+  "porte_eau_hauteur_m": { "valeur": 11, "canon": "?", "note": "Porte de rivière : arche au-dessus de l'eau, herse ; dimensions de rendu ?." }
 }

@@ -114,6 +114,8 @@ export interface TownOptions {
   fill?: number;
   /** Largeur imposée d'un tronçon (avenue, rue à canal) : ligne verticale `i` ou horizontale `j`, tronçon `k` ; null = tirée. */
   streetWidth?: (vertical: boolean, line: number, k: number) => number | null;
+  /** R1c : rue verticale `i` droite, à l'abscisse `x` (rue principale d'un district, de porte à porte). */
+  straightCol?: { i: number; x: number };
 }
 export const TOWN_DEFAULTS: TownOptions = { cols: 5, rows: 5, blockMin: 34, blockMax: 52, streetMin: 5, streetMax: 14, jitter: 9, swirl: 0.0026, blockTurnDeg: 15 };
 
@@ -245,7 +247,10 @@ function lattice(rand: Rand, o: TownOptions): { pts: Vec2[][]; bounds: Town["bou
       const r = len(base);
       const a = o.swirl * r;
       const c = o.center ?? { x: 0, y: 0 };
-      col.push({ x: c.x + base.x * Math.cos(a) - base.y * Math.sin(a), y: c.y + base.x * Math.sin(a) + base.y * Math.cos(a) });
+      const q = { x: c.x + base.x * Math.cos(a) - base.y * Math.sin(a), y: c.y + base.x * Math.sin(a) + base.y * Math.cos(a) };
+      // Rue droite (R1c) : les carrefours de la colonne gardent leur ordonnée, l'abscisse est fixée (mêmes tirages).
+      if (o.straightCol?.i === i) q.x = o.straightCol.x;
+      col.push(q);
     }
     pts.push(col);
   }

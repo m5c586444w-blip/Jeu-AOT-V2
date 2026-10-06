@@ -265,14 +265,15 @@ export function generateWaters(p: StyleProfile, variant: Variant | null, seed: n
   const water = t.marshLevel ?? 0;
   const mid = river ? pointAt(river.path, 700) : { p: v2(0, 0), dir: v2(1, 0) };
   const nrm = v2(-mid.dir.y, mid.dir.x);
-  const e1 = add2(mid.p, add2(scale2(nrm, 240), scale2(mid.dir, -120)));
+  // R1c (correctif proposé en fin de R1b) : vue principale basse, le long de la rivière, l'eau et les roseaux dans le tiers bas.
+  const e1 = add2(mid.p, add2(scale2(nrm, 70), scale2(mid.dir, -150)));
   const bank = add2(mid.p, scale2(nrm, (river?.width ?? 20) / 2 + 9));
   const e2 = add2(bank, scale2(mid.dir, -40));
   void variant;
   return bodyOf(t, {
     props,
     views: {
-      principale: view([e1.x, Math.max(H(t, e1), water) + 38, e1.y], [mid.p.x + mid.dir.x * 60, water, mid.p.y + mid.dir.y * 60], 58),
+      principale: view([e1.x, Math.max(H(t, e1), water) + 16, e1.y], [mid.p.x + mid.dir.x * 80 - nrm.x * 10, water + 1, mid.p.y + mid.dir.y * 80 - nrm.y * 10], 58),
       seconde: view([e2.x, Math.max(H(t, e2), water) + 2.4, e2.y], [bank.x + mid.dir.x * 90 - nrm.x * 25, water + 1.5, bank.y + mid.dir.y * 90 - nrm.y * 25], 62),
     },
     mist: { density: 0.6, top: 7 },
@@ -348,7 +349,8 @@ export function generateCastle(p: StyleProfile, variant: Variant | null, seed: n
     landmarks,
     props,
     fires: destroyed ? [{ x: site.x + 18, y: site.y - 16, z: base + 2, size: 2.5 }] : [],
-    views: { principale: view([site.x - 170, H(t, v2(site.x - 170, site.y + 150)) + 30, site.y + 150], [site.x, base + 14, site.y], 52), seconde: view([site.x - 20, base + 2.2, site.y + 18], [site.x + 16, base + 18, site.y - 12], 64) },
+    // R1c (correctif proposé en fin de R1b) : vue principale plus proche et plus basse, le château et son donjon au centre.
+    views: { principale: view([site.x - 95, Math.max(H(t, v2(site.x - 95, site.y + 80)), base - 6) + 20, site.y + 80], [site.x + 6, base + 16, site.y - 4], 50), seconde: view([site.x - 20, base + 2.2, site.y + 18], [site.x + 16, base + 18, site.y - 12], 64) },
   });
 }
 

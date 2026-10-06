@@ -201,6 +201,8 @@ export const WallsFileSchema = z
     distance_maria_rose_km: Param(z.number().positive()),
     distance_rose_sina_km: Param(z.number().positive()),
     breche_largeur_m: Param(z.number().positive()),
+    porte_eau_largeur_m: Param(z.number().positive()),
+    porte_eau_hauteur_m: Param(z.number().positive()),
   })
   .strict();
 export type WallsFile = z.infer<typeof WallsFileSchema>;

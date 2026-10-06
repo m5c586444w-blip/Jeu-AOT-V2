@@ -1,5 +1,6 @@
 import { BoxGeometry, Color, DodecahedronGeometry, IcosahedronGeometry, Matrix4, Mesh, MeshStandardMaterial, Quaternion, Vector3 } from "three";
 import type { Texture } from "three";
+import { gateSize } from "./envTypes";
 import type { WallLayout, WallPath } from "./envTypes";
 import { wallFrame } from "./envWall";
 import { pathLength, v2 } from "./geom2";
@@ -28,12 +29,12 @@ interface Span {
   gate?: WallPath["gates"][number];
 }
 
-function spans(w: WallPath, L: number, gateWidth: number, step = 8): Span[] {
+function spans(w: WallPath, L: number, gateWidth: (g: WallPath["gates"][number]) => number, step = 8): Span[] {
   const cuts = new Set<number>([0, L]);
   for (let s = step; s < L; s += step) cuts.add(s);
   for (const g of w.gates) {
-    cuts.add(g.s - gateWidth / 2);
-    cuts.add(g.s + gateWidth / 2);
+    cuts.add(g.s - gateWidth(g) / 2);
+    cuts.add(g.s + gateWidth(g) / 2);
   }
   for (const b of w.breaches) {
     cuts.add(b.s - b.width / 2);
@@ -46,7 +47,7 @@ function spans(w: WallPath, L: number, gateWidth: number, step = 8): Span[] {
     const s1 = xs[i + 1] as number;
     if (s1 - s0 < 0.05) continue;
     const mid = (s0 + s1) / 2;
-    const gate = w.gates.find((g) => Math.abs(mid - g.s) < gateWidth / 2);
+    const gate = w.gates.find((g) => Math.abs(mid - g.s) < gateWidth(g) / 2);
     const breach = w.breaches.find((b) => Math.abs(mid - b.s) < b.width / 2);
     out.push({ s0, s1, kind: breach ? "breche" : gate ? "porte" : "mur", gate });
   }
@@ -83,9 +84,11 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
       const f = wallFrame(w, s);
       return [f.dir.x * k, 0, f.dir.y * k];
     };
-    const sp = spans(w, L, layout.gateWidth);
+    const sp = spans(w, L, (gg) => gateSize(layout, gg).w);
     for (let i = 0; i < sp.length; i++) {
-      const { s0, s1, kind } = sp[i] as Span;
+      const { s0, s1, kind, gate: spanGate } = sp[i] as Span;
+      // Hauteur de l'ouverture : porte massive ou porte de rivière (R1c).
+      const openH = spanGate ? gateSize(layout, spanGate).h : layout.gateHeight;
       const g0 = g(s0);
       const g1 = g(s1);
       const top0 = g0 + H;
@@ -100,7 +103,7 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
         }
         continue;
       }
-      const bottom = kind === "porte" ? layout.gateHeight : -3;
+      const bottom = kind === "porte" ? openH : -3;
       // Parements extérieur (+T/2) et intérieur (−T/2).
       for (const side of [1, -1]) {
         const y0a = side === 1 ? g0 + bottom : g0 + bottom;
@@ -134,7 +137,7 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
         if (!nb || nb.kind === kind) continue;
         if (kind === "mur" && (nb.kind === "porte" || nb.kind === "breche")) {
           const gs = g(s);
-          const yTop = nb.kind === "porte" ? gs + layout.gateHeight : gs + H;
+          const yTop = nb.kind === "porte" && nb.gate ? gs + gateSize(layout, nb.gate).h : gs + H;
           const fl = nb.kind === "breche" ? (w.breaches.find((b) => Math.abs((nb.s0 + nb.s1) / 2 - b.s) < b.width / 2)?.floor ?? 0) : 0;
           const yBot = gs + (fl > 0 ? fl : -3);
           body.face([at(s, T / 2, yBot), at(s, -T / 2, yBot), at(s, -T / 2, yTop), at(s, T / 2, yTop)], [uvA(0, 0), uvA(T, 0), uvA(T, yTop - yBot), uvA(0, yTop - yBot)], tint.clone().multiplyScalar(0.92), dirN(s, sign));
@@ -150,7 +153,7 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
       }
       if (kind === "porte") {
         const gs = g(s0);
-        body.face([at(s0, T / 2, gs + layout.gateHeight), at(s1, T / 2, gs + layout.gateHeight), at(s1, -T / 2, gs + layout.gateHeight), at(s0, -T / 2, gs + layout.gateHeight)], [[0, 0], [1, 0], [1, 1], [0, 1]], tint.clone().multiplyScalar(0.7), [0, -1, 0]);
+        body.face([at(s0, T / 2, gs + openH), at(s1, T / 2, gs + openH), at(s1, -T / 2, gs + openH), at(s0, -T / 2, gs + openH)], [[0, 0], [1, 0], [1, 1], [0, 1]], tint.clone().multiplyScalar(0.7), [0, -1, 0]);
       }
     }
     // Portes : encadrement saillant sur les deux faces, vantaux, ou masse durcie.
@@ -158,8 +161,7 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
       const f = wallFrame(w, gate.s);
       const gs = ground(f.p);
       const ang = -Math.atan2(f.dir.y, f.dir.x);
-      const gw = layout.gateWidth;
-      const gh = layout.gateHeight;
+      const { w: gw, h: gh } = gateSize(layout, gate);
       for (const side of [1, -1]) {
         const c = (u: number, off: number, y: number): V3 => [f.p.x + f.dir.x * u + f.out.x * off * side, gs + y, f.p.y + f.dir.y * u + f.out.y * off * side];
         for (const u of [-(gw / 2 + 1.8), gw / 2 + 1.8]) trim.geometry(new BoxGeometry(3.4, gh + 6, 1.4), m4(c(u, T / 2 + 0.6, (gh + 6) / 2), ang, [1, 1, 1]), tint.clone().multiplyScalar(0.94));
@@ -167,7 +169,22 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
         trim.geometry(new BoxGeometry(gw + 9, 1, 2), m4(c(0, T / 2 + 0.9, gh + 6.3), ang, [1, 1, 1]), tint.clone().multiplyScalar(1.04));
       }
       const mid: V3 = [f.p.x, gs + gh / 2, f.p.y];
-      if (gate.state === "fermee") {
+      if (gate.kind === "eau") {
+        // Porte de rivière : herse de fer, levée (le bas des barreaux dépasse sous l'arche) ou baissée jusqu'à l'eau.
+        const down = gate.state === "fermee" ? gh : gh * 0.22;
+        for (let k = 0; k <= 8; k++) iron.geometry(new BoxGeometry(0.28, down, 0.28), m4([f.p.x + f.dir.x * (-gw / 2 + (k * gw) / 8), gs + gh - down / 2, f.p.y + f.dir.y * (-gw / 2 + (k * gw) / 8)], ang, [1, 1, 1]), phys("fer"));
+        for (let y = gh - 0.6; y > gh - down; y -= 2.2) iron.geometry(new BoxGeometry(gw, 0.25, 0.3), m4([f.p.x, gs + y, f.p.y], ang, [1, 1, 1]), phys("fer"));
+      } else if (gate.state === "rocher") {
+        // Rocher qui bouche la brèche de la porte (Trost, 850) : bloc de roche irrégulier, plus large que la porte (forme générique).
+        const r = gw * 0.95;
+        body.geometry(new DodecahedronGeometry(1, 1), m4([f.p.x + f.out.x * 2, gs + gh * 0.55, f.p.y + f.out.y * 2], 0.7, [r, gh * 0.75, T * 1.15]), tint.clone().multiplyScalar(0.72));
+        for (let k = 0; k < 10; k++) {
+          const u = range(rand, -gw, gw);
+          const off = range(rand, -T, T);
+          const q = range(rand, 1.5, 3.5);
+          body.geometry(new DodecahedronGeometry(1, 0), m4([f.p.x + f.dir.x * u + f.out.x * off, gs + q * 0.5, f.p.y + f.dir.y * u + f.out.y * off], range(rand, 0, 6), [q * 1.3, q * 0.7, q]), tint.clone().multiplyScalar(range(rand, 0.65, 0.85)));
+        }
+      } else if (gate.state === "fermee") {
         wood.geometry(new BoxGeometry(gw - 0.4, gh - 0.2, 0.9), m4(mid, ang, [1, 1, 1]), phys("ecorce").multiplyScalar(1.4));
         for (let k = 1; k < 6; k++) iron.geometry(new BoxGeometry(gw - 0.2, 0.35, 1.05), m4([mid[0], gs + (k * gh) / 6, mid[2]], ang, [1, 1, 1]), phys("fer"));
       } else if (gate.state === "scellee" || gate.state === "passage") {

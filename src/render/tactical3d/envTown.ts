@@ -217,6 +217,76 @@ function canalAlong(b: TownBuild, j: number, inside: (q: Vec2) => boolean, stree
   }
 }
 
+/**
+ * Voie d'eau d'un district (R1c, Shiganshina : portes de rivière et barques d'évacuation, épisode 2 et carte du district, C ;
+ * tracé A) : la rivière arrive de l'extérieur, franchit la saillie par une porte d'eau, traverse la ville à l'est de la rue
+ * principale, ressort par une porte d'eau de la ligne principale, près de la porte intérieure, vers l'intérieur du mur.
+ * Les maisons sur son lit sont retirées ; ponts aux croisements des rues ; barques et pontons côté porte intérieure.
+ */
+export const WATER_ROUTE = { arcAngle: Math.PI * 0.3, mainX: 0.36, width: 16, level: -2.4 };
+
+function waterRoute(b: TownBuild, R: number, size: number): Canal {
+  const a = WATER_ROUTE.arcAngle;
+  const radial = v2(Math.cos(a), Math.sin(a));
+  const gateArc = scale2(radial, R);
+  const gateMain = v2(R * WATER_ROUTE.mainX, 0);
+  // Courbe douce entre les deux portes, tirée vers l'est (jamais sur la rue principale, x = 0).
+  const ctrl = v2(R * 0.62, R * 0.38);
+  const inside: Vec2[] = [];
+  for (let k = 0; k <= 16; k++) {
+    const u = k / 16;
+    const q0 = lerp2(gateArc, ctrl, u);
+    const q1 = lerp2(ctrl, gateMain, u);
+    inside.push(lerp2(q0, q1, u));
+  }
+  const path = [add2(gateArc, scale2(radial, 220)), add2(gateArc, scale2(radial, 40)), ...inside, v2(gateMain.x, -40), v2(gateMain.x, -size / 2 + 20)];
+  const canal: Canal = { path, width: WATER_ROUTE.width, level: WATER_ROUTE.level, quay: 0.05 };
+  const clear = WATER_ROUTE.width / 2 + 3;
+  b.buildings = b.buildings.filter((h) => nearestOnPath(path, v2(h.x, h.y)).d > clear + Math.max(h.width, h.depth) / 2);
+  b.landmarks = b.landmarks.filter((l) => nearestOnPath(path, v2(l.x, l.y)).d > clear + Math.max(l.w, l.d) / 2);
+  // Ponts : là où le lit coupe une rue du treillis (segments de rue gardés).
+  const g = b.town.grid;
+  const segs: [Vec2, Vec2][] = [];
+  for (let i = 0; i <= g.cols; i++) for (let j = 0; j < g.rows; j++) segs.push([(g.pts[i] as Vec2[])[j] as Vec2, (g.pts[i] as Vec2[])[j + 1] as Vec2]);
+  for (let j = 0; j <= g.rows; j++) for (let i = 0; i < g.cols; i++) segs.push([(g.pts[i] as Vec2[])[j] as Vec2, (g.pts[i + 1] as Vec2[])[j] as Vec2]);
+  for (let k = 0; k + 1 < inside.length; k++) {
+    const p0 = inside[k] as Vec2;
+    const p1 = inside[k + 1] as Vec2;
+    for (const [s0, s1] of segs) {
+      const x = segmentHit(p0, p1, s0, s1);
+      if (!x || x.y < 30 || dist2(x, v2(0, 0)) > R - 30) continue;
+      const along = norm2(sub2(p1, p0));
+      b.bridges.push({ at: x, angle: Math.atan2(along.x, -along.y), length: WATER_ROUTE.width + 6, width: 9, deck: 0.35 });
+    }
+  }
+  // Barques d'évacuation amarrées et pontons, sur le dernier tronçon avant la porte d'eau intérieure.
+  const lastLeg = inside.slice(-7);
+  for (let k = 0; k + 1 < lastLeg.length; k++) {
+    const q = lerp2(lastLeg[k] as Vec2, lastLeg[k + 1] as Vec2, 0.5);
+    if (q.y < 18) continue;
+    const dir = norm2(sub2(lastLeg[k + 1] as Vec2, lastLeg[k] as Vec2));
+    const n = v2(-dir.y, dir.x);
+    const side = k % 2 ? 1 : -1;
+    const ang = Math.atan2(dir.y, dir.x);
+    b.props.push({ ...prop(b.t, "barques", add2(q, scale2(n, side * (WATER_ROUTE.width / 2 - 3))), ang, 1.15, b.p.palette.bois), z: WATER_ROUTE.level - 0.25 });
+    b.props.push({ ...prop(b.t, "barques", add2(q, add2(scale2(n, side * (WATER_ROUTE.width / 2 - 5.5)), scale2(dir, 6))), ang, 1.15, b.p.palette.bois), z: WATER_ROUTE.level - 0.25 });
+    b.props.push({ ...prop(b.t, "pontons", add2(q, scale2(n, side * (WATER_ROUTE.width / 2 + 1))), Math.atan2(-n.y * side, -n.x * side), 1, b.p.palette.bois), z: WATER_ROUTE.level + 0.6 });
+  }
+  return canal;
+}
+
+/** Intersection de deux segments (null s'ils ne se coupent pas). */
+function segmentHit(a: Vec2, b: Vec2, c: Vec2, d: Vec2): Vec2 | null {
+  const r = sub2(b, a);
+  const s = sub2(d, c);
+  const den = r.x * s.y - r.y * s.x;
+  if (Math.abs(den) < 1e-9) return null;
+  const ac = sub2(c, a);
+  const t = (ac.x * s.y - ac.y * s.x) / den;
+  const u = (ac.x * r.y - ac.y * r.x) / den;
+  return t >= 0 && t <= 1 && u >= 0 && u <= 1 ? add2(a, scale2(r, t)) : null;
+}
+
 /** District adossé à un mur : saillie, porte extérieure à la pointe, porte intérieure dans la ligne principale. */
 export function generateDistrict(p: StyleProfile, variant: Variant | null, seed: number, ruin: number): EnvBody {
   const rand = seeded(derive(seed, 60));
@@ -240,6 +310,9 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
     center: v2(0, (rows * avg) / 2 - avg * 0.35),
     keep,
     plazaAt: v2(0, R * 0.42),
+    // Rue principale droite de la porte intérieure à la porte extérieure (Trost : « larges rues principales qui mènent à la
+    // porte », C ; tracé droit A).
+    straightCol: { i: mainCol, x: 0 },
     lots: { width: [7, p.densite > 0.85 ? 12 : 13.5], depth: [9, 15], floors: p.batiments.etages as [number, number], floorHeight: p.batiments.hauteur_etage_m as [number, number] },
     fill: 0.5 + 0.5 * p.densite,
     streetWidth: (vertical, line) => (vertical && line === mainCol ? Math.max(12, p.rues_m[1]) : !vertical && line === canalRow ? 22 : null),
@@ -269,6 +342,11 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
     const blk = nearestBlock(b, v2(-R * 0.35, R * 0.7));
     if (blk) landmarkInBlock(b, blk, "ecurie", { w: 50, d: 50, h: 5 }, v2(0, R));
   }
+  if (hasMark(p, "poste_garnison")) {
+    // R1c : poste de la Garnison près de la porte extérieure (carte de Shiganshina : casernes, C ; position A).
+    const blk = nearestBlock(b, v2(-R * 0.22, R * 0.78));
+    if (blk) landmarkInBlock(b, blk, "caserne", { w: 34, d: 26, h: 9 }, v2(0, R));
+  }
   if (hasMark(p, "marche") && town.plaza.centers[1]) {
     const s = town.plaza.centers[1] as Vec2;
     b.landmarks.push(styleLandmark({ kind: "halle", x: s.x, y: s.y, angle: 0, w: 22, d: 30, h: 7 }, p, t.heights, ruin > 0.5 ? ruin : 0));
@@ -276,6 +354,8 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
   if (hasMark(p, "acces_souterrain") && town.plaza.centers[1]) b.props.push(prop(t, "escaliers", add2(town.plaza.centers[1] as Vec2, v2(18, 6)), 0, 1, p.palette.pierre));
   const canalStreets = new Set<number>();
   if (canalRow > 0) canalAlong(b, canalRow, (q) => keep(q) && q.y > 40, canalStreets);
+  const water = hasMark(p, "voie_eau_evacuation");
+  if (water) b.canals.push(waterRoute(b, R, size));
   carveCanals(t, b.canals);
   townPaving(b, canalStreets, CANAL_WIDTH);
   // Chemin de ronde au sol : une bande de terre battue le long du pied de la saillie.
@@ -285,12 +365,30 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
     const ring = (a: number, r: number): Vec2 => v2(Math.cos(a) * r, Math.max(2, Math.sin(a) * r));
     b.paving.push({ poly: [ring(a0, R - 34), ring(a1, R - 34), ring(a1, R - 5), ring(a0, R - 5)], kind: "terre", y: 0.05, color: groundHex(p, "route") });
   }
+  // Rue principale de porte à porte (R1c) : droite, pavée jusqu'aux deux portes, au-delà des derniers carrefours du treillis ;
+  // les maisons dont l'emprise (îlots tournés de la disposition organique) mord sur la chaussée sont retirées.
+  const colPts = (town.grid.pts[mainCol] as Vec2[]).filter((q) => keep(q));
+  const avenue = Math.max(12, p.rues_m[1]) / 2 + 1;
+  b.buildings = b.buildings.filter((h) => {
+    const u = v2(Math.cos(h.angle), Math.sin(h.angle));
+    const n = v2(-u.y, u.x);
+    const xs = [-1, 1].flatMap((a) => [-1, 1].map((c) => h.x + (u.x * a * h.width) / 2 + (n.x * c * h.depth) / 2));
+    const lo = Math.min(...xs);
+    const hi = Math.max(...xs);
+    return h.y > R + 10 || hi < -avenue || lo > avenue;
+  });
+  if (colPts.length > 0) {
+    const ys = colPts.map((q) => q.y);
+    const strip = (y0: number, y1: number): Vec2[] => [v2(-avenue, y0), v2(avenue, y0), v2(avenue, y1), v2(-avenue, y1)];
+    b.paving.push({ poly: strip(1, Math.min(...ys)), kind: "pave", y: 0.06, color: p.palette.pierre });
+    b.paving.push({ poly: strip(Math.max(...ys), R - 1), kind: "pave", y: 0.06, color: p.palette.pierre });
+  }
   plazaProps(b);
   streetProps(b);
   // État : brèche, porte scellée, passage creusé, ruines et incendies.
   const special = variant?.special ?? "";
-  const outer: WallGate["state"] = special === "breche_porte_exterieure" ? "breche" : special === "porte_scellee" ? "scellee" : special === "passage_creuse" ? "passage" : "fermee";
-  const wall: WallLayout = wallLayout(salient({ radius: R, extent: size / 2 - 10, outer, inner: "ouverte" }));
+  const outer: WallGate["state"] = special === "breche_porte_exterieure" ? "breche" : special === "porte_scellee" ? "scellee" : special === "passage_creuse" ? "passage" : special === "rocher_porte" ? "rocher" : "fermee";
+  const wall: WallLayout = wallLayout(salient({ radius: R, extent: size / 2 - 10, outer, inner: "ouverte", ...(water ? { water: { arcAngle: WATER_ROUTE.arcAngle, mainX: R * WATER_ROUTE.mainX } } : {}) }));
   b.props.push(...wallCannons(wall, (q) => heightAt(t.heights, q.x, q.y), p.palette.bois));
   ruinsAndFires(b, variant?.etat === "ravage" || variant?.etat === "ruines_incendies");
   if (outer === "breche") for (let k = 0; k < 14; k++) b.props.push(prop(t, "gravats", v2(range(rand, -14, 14), R - range(rand, 6, 40)), rand() * 6, range(rand, 1.2, 2.6), p.palette.pierre));
@@ -305,7 +403,8 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
   }
   // Vue principale composée sur les repères du profil : le canal et le grand édifice ; le marché et les casernes vus depuis
   // la porte extérieure ; sinon, les toits et le clocher vers la porte.
-  const canal = b.canals[0];
+  // Vue « canal » : les canaux d'un profil (Stohess) ; la voie d'eau de Shiganshina garde la vue des toits vers la porte.
+  const canal = canalRow > 0 ? b.canals[0] : undefined;
   const marketView = hasMark(p, "casernes_pierre") || hasMark(p, "cour_rassemblement");
   let principale: View = { eye: [-R * 0.48, 95, R * 0.1], target: [R * 0.12, 6, R * 0.78], fov: 55 };
   if (canal && canal.path.length > 1) {
@@ -318,6 +417,10 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
     principale = { eye: [e.x, 58, e.y], target: [tg.x, 2, tg.y - 30], fov: 55 };
   } else if (marketView) {
     principale = { eye: [R * 0.42, 70, R * 0.98], target: [-R * 0.1, 8, R * 0.3], fov: 55 };
+  } else if (hasMark(p, "fontaines")) {
+    // R1c (correctif proposé en fin de R1b, E07) : vue composée sur les repères du profil : la place, sa fontaine et l'église,
+    // de près, au lieu de la vue d'ensemble des toits commune aux districts.
+    principale = { eye: [plaza.x + R * 0.3, 34, plaza.y - R * 0.16], target: [plaza.x - avg * 0.5, 7, plaza.y + avg * 0.35], fov: 55 };
   }
   const views: EnvData["views"] = {
     principale,

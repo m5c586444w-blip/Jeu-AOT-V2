@@ -3,9 +3,16 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.4 : rendu réaliste (ciel physique, éclairage d'image, occlusion ambiante, ombres douces, arbres, relief, eau, peau et étoffe) |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 70 fichiers, 428 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1c.5 : districts d'après l'animé (faits sourcés, saillie, deux portes, route, canal) et vues E07, E17, E20 |
+| Tâche | R1c.5 : districts d'après l'animé (faits sourcés, saillie, deux portes, rue principale, portes de rivière, rocher de Trost) et vues E07, E17, E20 |
+| Dernier `npm run verify` | 2026-10-06 : code 0, 71 fichiers, 433 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1c.6 : comparaison avant/après (`npm run mesure:r1c`), `smoke:r1b` complet, revue des captures, rapport `docs/reports/R1c.md`, puis **arrêt pour revue** |
+
+## R1c.5 : districts d'après l'animé (2026-10-06)
+- Étude des faits : `docs/reports/R1c-annexe-districts.md` (9 faits, statut `C`/`A`/`?`, sources, limites de la recherche) ; D-89.
+- Générateur : rue principale droite et pavée de porte à porte, sans maison dessus ; Shiganshina : voie d'eau par deux portes de rivière (herse), barques et pontons côté porte intérieure, ponts, poste de la Garnison ; Trost : variante `850_rocher`.
+- Paramètres `?` : `porte_eau_largeur_m`, `porte_eau_hauteur_m` (`data/art/murs.json`).
+- Vues recadrées : E07 (repères), E17 (rivière et mares), E20 (château). Visionneuse : vue libre `&oeil=x,y,z&cible=x,y,z`.
+- Tests `districts-r1c.test.ts` (5) ; `environnements.test.ts` et `murs.test.ts` mis à jour (canal de E01, portes d'eau).
 
 ## R1c.4 : rendu réaliste (2026-10-06)
 - Ciel physique (Preetham, nuages calculés) en plein jour ; dôme peint à l'aube, au crépuscule, la nuit, sous terre. Éclairage d'image dosé (D-88).

@@ -260,6 +260,13 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     html.dataset["qualite"] = q;
     resize();
   };
+  // Vue libre placée par l'adresse (R1c, comparaisons) : `&oeil=x,y,z&cible=x,y,z` (m ; y = altitude).
+  const triple = (k: string): [number, number, number] | null => {
+    const v = (params.get(k) ?? "").split(",").map(Number);
+    return v.length === 3 && v.every((x) => Number.isFinite(x)) ? [v[0] as number, v[1] as number, v[2] as number] : null;
+  };
+  const freeEye = triple("oeil");
+  const freeTarget = triple("cible");
   const setView = (v: ViewName): void => {
     view = v;
     if (v !== "libre") {
@@ -267,6 +274,10 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       setCam(camera, vv, camera.aspect || 16 / 9);
       controls.target.set(...vv.target);
       lighting.setCenter(new Vector3(...vv.target));
+    } else if (freeEye && freeTarget) {
+      setCam(camera, { eye: freeEye, target: freeTarget, fov: 55 }, camera.aspect || 16 / 9);
+      controls.target.set(...freeTarget);
+      lighting.setCenter(new Vector3(...freeTarget));
     }
     controls.update();
     html.dataset["vue"] = v;
@@ -483,11 +494,11 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   window.__env3d = state;
   applyQuality(quality);
   setLight(light);
-  setView(view);
-  if (view === "libre") {
+  if (view === "libre" && !(freeEye && freeTarget)) {
     camera.position.set(...env.views.principale.eye);
     controls.target.set(...env.views.principale.target);
   }
+  setView(view);
 
   let fpsFrames = 0;
   let since = performance.now();

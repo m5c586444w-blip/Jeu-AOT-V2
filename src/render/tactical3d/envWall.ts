@@ -28,6 +28,8 @@ export function wallLayout(paths: WallPath[]): WallLayout {
     railGauge: WALLS.rail_ecartement_m.valeur,
     gateWidth: WALLS.porte_largeur_m.valeur,
     gateHeight: WALLS.porte_hauteur_m.valeur,
+    waterGateWidth: WALLS.porte_eau_largeur_m.valeur,
+    waterGateHeight: WALLS.porte_eau_hauteur_m.valeur,
     block: WALLS.bloc_m.valeur,
   };
 }
@@ -52,6 +54,8 @@ export interface SalientOpts {
   outer: WallGate["state"];
   inner: WallGate["state"];
   breaches?: { s: number; width: number; face: boolean }[];
+  /** R1c : voie d'eau qui franchit la saillie (angle sur l'arc, rad, π = ouest, 0 = est) et la ligne principale (abscisse x). */
+  water?: { arcAngle: number; mainX: number };
 }
 
 export function salient(o: SalientOpts): WallPath[] {
@@ -66,9 +70,16 @@ export function salient(o: SalientOpts): WallPath[] {
   const outerGate: WallGate = { s: arcLen / 2, kind: "exterieure", state: o.outer };
   const mainBreaches: { s: number; width: number; face: boolean }[] = [];
   const arcBreaches = o.breaches ?? [];
+  const mainGates = [innerGate];
+  const arcGates = [outerGate];
+  if (o.water) {
+    // Portes de rivière : la herse levée laisse passer les barques.
+    mainGates.push({ s: o.extent + o.water.mainX, kind: "eau", state: "ouverte" });
+    arcGates.push({ s: ((Math.PI - o.water.arcAngle) / Math.PI) * arcLen, kind: "eau", state: "ouverte" });
+  }
   return [
-    { path: main, out: 1, gates: [innerGate], cannons: cannonsAlong(main, [innerGate], mainBreaches), breaches: mainBreaches },
-    { path: arc, out: 1, gates: [outerGate], cannons: cannonsAlong(arc, [outerGate], arcBreaches), breaches: arcBreaches },
+    { path: main, out: 1, gates: mainGates, cannons: cannonsAlong(main, mainGates, mainBreaches), breaches: mainBreaches },
+    { path: arc, out: 1, gates: arcGates, cannons: cannonsAlong(arc, arcGates, arcBreaches), breaches: arcBreaches },
   ];
 }
 

@@ -597,3 +597,11 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Arbres procéduraux** (aucun modèle externe) : massifs bosselés à normales de volume, intérieur sombre, cartes de feuillage découpées par une texture de feuilles dessinée ; bois non teinté par le feuillage ; conifères en étages dentelés ; haies et voûte des Arbres Géants habillées de la même façon.
 - **Relief** : cartes de normales tirées des textures procédurales (murs, façades, toits, pavés), détail du sol répété (6 m), rides de l'eau qui défilent, grain de peau et armure toile des uniformes.
 - **Normales des pièces assemblées** (`FaceBuilder`) : la matrice inverse transposée 4 × 4 appliquée comme à un point divisait par une composante w nulle ou négative ; l'ombrage plat le masquait. Matrice des normales 3 × 3.
+
+## 2026-10-06 — D-89 Districts d'après l'animé (R1c.5) : choix non couverts par les spécifications
+- **Faits retenus, statut et sources** : `docs/reports/R1c-annexe-districts.md`. Le wiki communautaire est bloqué par la politique réseau : seuls les extraits renvoyés par la recherche ont pu être lus ; un fait vu sur un seul agrégateur est marqué `A`.
+- **Rue principale droite** de la porte intérieure à la porte extérieure (« larges rues qui mènent à la porte », Trost) : la colonne de rue centrale est fixée à x = 0 après les perturbations du tracé organique ; aucune maison dont l'emprise touche la chaussée ; pavée sur toute sa longueur.
+- **Portes de rivière de Shiganshina** (carte du district, épisode 2) : voie d'eau entrée par une porte d'eau de la saillie et sortie par une porte d'eau du mur principal, à l'est de la porte intérieure ; barques d'évacuation et pontons sur le dernier tronçon, ponts aux croisements des rues. Le tracé (`WATER_ROUTE`) est `A` ; les dimensions des portes d'eau (14 × 11 m) sont `?` dans `data/art/murs.json`. Herse de fer, relevée sauf en état « fermée ».
+- **Trost 850** : variante `850_rocher` (porte extérieure bouchée par un rocher générique, débris au pied).
+- **Casernes** : poste de la Garnison près de la porte extérieure de Shiganshina (position `A`).
+- **Vues E07, E17, E20** recadrées (correctif proposé à l'arrêt de R1b) : E07 composée sur ses repères, E17 sur la rivière et les mares, E20 plus proche et plus basse sur le château.

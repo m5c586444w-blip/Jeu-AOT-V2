@@ -95,8 +95,10 @@ export interface Canal {
 export interface WallGate {
   /** Abscisse sur le tracé (m). */
   s: number;
-  kind: "exterieure" | "interieure" | "porte";
-  state: "ouverte" | "fermee" | "breche" | "scellee" | "passage";
+  /** R1c : « eau » = porte de rivière (arche au-dessus de l'eau, herse). */
+  kind: "exterieure" | "interieure" | "porte" | "eau";
+  /** R1c : « rocher » = porte bouchée par un rocher (Trost, 850). */
+  state: "ouverte" | "fermee" | "breche" | "scellee" | "passage" | "rocher";
 }
 
 export interface WallPath {
@@ -125,7 +127,15 @@ export interface WallLayout {
   railGauge: number;
   gateWidth: number;
   gateHeight: number;
+  /** R1c : porte de rivière (largeur, hauteur de l'arche). */
+  waterGateWidth: number;
+  waterGateHeight: number;
   block: [number, number];
+}
+
+/** Ouverture d'une porte : porte de rivière ou porte massive. */
+export function gateSize(layout: WallLayout, g: WallGate): { w: number; h: number } {
+  return g.kind === "eau" ? { w: layout.waterGateWidth, h: layout.waterGateHeight } : { w: layout.gateWidth, h: layout.gateHeight };
 }
 
 export interface GiantTree {

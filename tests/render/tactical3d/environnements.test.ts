@@ -238,7 +238,9 @@ describe("contenu des environnements du lot 1", () => {
     expect(generateEnvironment("E05", 850).canals.length).toBe(1);
     expect(generateEnvironment("E06", 850).canals.length).toBe(2);
     expect(generateEnvironment("E06", 850).stoneBridges.length).toBeGreaterThan(10);
-    expect(generateEnvironment("E01", 850).canals).toHaveLength(0);
+    // R1c : Shiganshina a une voie d'eau (portes de rivière, barques d'évacuation ; districts-r1c.test.ts), pas de canaux.
+    expect(generateEnvironment("E01", 850).canals).toHaveLength(1);
+    expect(generateEnvironment("E02", 850).canals).toHaveLength(0);
   });
 
   it("qualité haute : végétation instanciée en tuiles à trois niveaux de détail ; plus d'instances en haute qu'en basse", () => {

@@ -16,13 +16,13 @@
       "etages": [2, 4],
       "hauteur_etage_m": [3, 3.4],
       "faitage_m": [8, 17],
-      "reperes": ["eglise_clocher", "place_centrale", "porte_exterieure", "porte_interieure", "remparts_interieurs"]
+      "reperes": ["eglise_clocher", "place_centrale", "porte_exterieure", "porte_interieure", "remparts_interieurs", "voie_eau_evacuation", "poste_garnison"]
     },
     "toits": { "tuiles_rouges": 0.82, "ardoise": 0.04, "chaume": 0.09, "plat": 0.05 },
     "materiaux": { "colombage": 0.55, "enduit": 0.2, "pierre_brute": 0.15, "pierre_taillee": 0.05, "brique": 0.05 },
     "densite": 0.8,
     "palette": { "facade": "#D9C9A8", "bois": "#6B4A2F", "pierre": "#9C8F7C", "toit": "#8A3B2A", "toit_2": "#6E4A3A", "sol": "#7A8A55" },
-    "accessoires": ["fontaines", "puits", "etals", "charrettes", "lanternes", "tonneaux", "cordes_a_linge"],
+    "accessoires": ["fontaines", "puits", "etals", "charrettes", "lanternes", "tonneaux", "cordes_a_linge", "barques", "pontons"],
     "terrain": { "type": "plat", "relief_m": 3, "eau": "aucune" },
     "vegetation": { "arbres": 0.12, "haies": 0, "champs": 0, "vergers": 0, "foret": 0, "essence": "ordinaire", "envahissement": 0 },
     "mur_visible": { "visible": true, "distance_m": 0, "forme": "saillie", "canon": "C", "note": "Ville bâtie dans une saillie du Mur Maria, avec une porte extérieure et une porte intérieure (partie B, E01)." },
@@ -32,7 +32,7 @@
       { "id": "851", "nom": "851 : repeuplée, passage creusé dans la coque", "canon": "C", "etat": "reconstruit", "special": "passage_creuse" },
       { "id": "ruines", "nom": "Ruines et incendies", "canon": "A", "etat": "ruines_incendies" }
     ],
-    "notes_canon": "District sud de Maria (R01) C. Style (colombages, tuiles rouges, église à clocher, place, rues étroites et sinueuses, remparts intérieurs) A, d'après la partie B. Forme de la coque de 850 : générique, aucun design de l'œuvre."
+    "notes_canon": "District sud de Maria (R01) C. Style (colombages, tuiles rouges, église à clocher, place, rues étroites et sinueuses, remparts intérieurs) A, d'après la partie B. Forme de la coque de 850 : générique, aucun design de l'œuvre. R1c (animé) : voie d'eau franchissant les deux murs par des portes de rivière, barques d'évacuation amarrées côté porte intérieure, casernes de la Garnison (épisode 2, « That Day : The Fall of Shiganshina, Part 2 », et carte du district) C ; tracé et position A ; dimensions des portes d'eau ?."
   },
   {
     "id": "E02",
@@ -63,9 +63,10 @@
     "mur_visible": { "visible": true, "distance_m": 0, "forme": "saillie", "canon": "?", "note": "District adossé au Mur Rose (C) ; forme en saillie comme Shiganshina : paramètre ?." },
     "variantes": [
       { "id": "850", "nom": "850 : brèche de la porte extérieure", "canon": "C", "etat": "ravage", "special": "breche_porte_exterieure" },
+      { "id": "850_rocher", "nom": "850 : brèche bouchée par le rocher", "canon": "C", "etat": "abandonne", "special": "rocher_porte" },
       { "id": "ruines", "nom": "Ruines et incendies", "canon": "A", "etat": "ruines_incendies" }
     ],
-    "notes_canon": "District sud de Rose (S01) C. Plus grande et plus urbaine que Shiganshina : grande église, marché, casernes de pierre près de la porte, QG de la Garnison (partie B) A."
+    "notes_canon": "District sud de Rose (S01) C. Plus grande et plus urbaine que Shiganshina : grande église, marché, casernes de pierre près de la porte, QG de la Garnison (partie B) A. R1c (animé) : larges rues principales qui mènent à la porte C ; en 850, la brèche de la porte extérieure est bouchée par un rocher porté par un Titan C (forme générique A)."
   },
   {
     "id": "E03",

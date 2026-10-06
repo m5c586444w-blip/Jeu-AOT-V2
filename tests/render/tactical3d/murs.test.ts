@@ -104,7 +104,8 @@ describe("le mur (R1b.4)", () => {
     expect(dmg.titans.some((t) => t.type === "titan_mur" && t.pose === "buste")).toBe(true);
     const e01 = generateEnvironment("E01", 850);
     expect(e01.wall?.paths).toHaveLength(2);
-    expect(e01.wall?.paths.flatMap((w) => w.gates.map((g) => g.kind)).sort()).toEqual(["exterieure", "interieure"]);
+    // R1c : plus les deux portes de rivière de la voie d'eau (districts-r1c.test.ts).
+    expect(e01.wall?.paths.flatMap((w) => w.gates.map((g) => g.kind)).sort()).toEqual(["eau", "eau", "exterieure", "interieure"]);
     expect(generateEnvironment("E01", 850, "850").wall?.paths[1]?.gates[0]?.state).toBe("scellee");
     expect(generateEnvironment("E01", 850, "845").wall?.paths[1]?.gates[0]?.state).toBe("breche");
     expect(generateEnvironment("E01", 850, "851").wall?.paths[1]?.gates[0]?.state).toBe("passage");
