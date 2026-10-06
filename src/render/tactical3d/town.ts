@@ -11,7 +11,7 @@ import type { Rand } from "./rng";
  * 2. Chaque tronçon de rue a sa propre largeur. Chaque îlot est le quadrilatère du treillis, rentré de la demi-largeur de
  *    chacune de ses quatre rues : en face l'un de l'autre, deux îlots sont donc toujours séparés de la largeur du tronçon.
  * 3. Les maisons sont posées le long des bords de l'îlot, façade sur la rue. On rejette celles qui débordent de l'îlot ou en
- *    chevauchent une autre. L'îlot central reste vide : c'est la place.
+ *    chevauchent une autre. L'îlot central et son voisin du sud restent vides : c'est la place, traversée par une rue.
  * Les hauteurs (8 à 21 m, toit compris) suivent celles de la carte tactique « ville » (`data/tactical_maps/maps.json`, 8–20 m).
  */
 export interface Vec2 {
@@ -78,7 +78,8 @@ export interface Town {
   streets: Street[];
   blocks: Block[];
   buildings: Building[];
-  plaza: { block: number; center: Vec2 };
+  /** La place : deux îlots voisins laissés vides, traversés par une rue (fontaine au centre du premier). */
+  plaza: { block: number; blocks: number[]; center: Vec2; centers: Vec2[] };
   /** Emprise du treillis (axes des rues extérieures). */
   bounds: { minX: number; maxX: number; minY: number; maxY: number };
   /** Un pan de mur d'enceinte au nord, en toile de fond : 50 m [C] (01, 11 §2), épaisseur 10 m [?]. */
@@ -339,20 +340,22 @@ export function generateTown(seed: number, opts: Partial<TownOptions> = {}): Tow
       const lot = insetQuad(quad, sides.map((s) => (streets[s] as Street).width / 2) as [number, number, number, number]);
       const turn = (range(rand, -o.blockTurnDeg, o.blockTurnDeg) * Math.PI) / 180;
       const inner = turnInside(lot, turn);
-      const block: Block = { id: blocks.length, quad, inner, sides, turn, plaza: i === plazaCol && j === plazaRow };
+      const block: Block = { id: blocks.length, quad, inner, sides, turn, plaza: i === plazaCol && (j === plazaRow || j === plazaRow + 1) };
       blocks.push(block);
       if (!block.plaza) buildings.push(...placeBuildings(brand, block, buildings.length));
     }
   }
-  const plazaBlock = blocks.find((b) => b.plaza) as Block;
-  const center = mul(plazaBlock.inner.reduce((s, p) => add(s, p), { x: 0, y: 0 }), 1 / 4);
+  const plazaBlocks = blocks.filter((b) => b.plaza);
+  const centers = plazaBlocks.map((b) => mul(b.inner.reduce((s, p) => add(s, p), { x: 0, y: 0 }), 1 / 4));
+  const plazaBlock = plazaBlocks[0] as Block;
+  const center = centers[0] as Vec2;
   const wy = bounds.minY - 38;
   return {
     seed,
     streets,
     blocks,
     buildings,
-    plaza: { block: plazaBlock.id, center },
+    plaza: { block: plazaBlock.id, blocks: plazaBlocks.map((b) => b.id), center, centers },
     bounds,
     wall: { a: { x: bounds.minX - 120, y: wy }, b: { x: bounds.maxX + 120, y: wy }, height: 50, thickness: 10 },
   };

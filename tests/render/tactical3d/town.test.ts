@@ -59,12 +59,13 @@ describe("ville irrégulière par graine (R1.2)", () => {
     expect(orientationSpreadDeg(generateTown(850, { jitter: 0, swirl: 0, blockTurnDeg: 0 }).buildings)).toBeLessThan(0.01);
   });
 
-  it("îlots tournés, une place vide, maisons dans leur îlot sans se chevaucher", () => {
+  it("îlots tournés, une place vide (deux îlots), maisons dans leur îlot sans se chevaucher", () => {
     const town = generateTown(850);
     expect(town.blocks.filter((b) => Math.abs(b.turn) > (2 * Math.PI) / 180).length).toBeGreaterThan(town.blocks.length / 2);
     const plaza = town.blocks.filter((b) => b.plaza);
-    expect(plaza).toHaveLength(1);
-    expect(town.buildings.some((b) => b.block === plaza[0]?.id)).toBe(false);
+    expect(plaza).toHaveLength(2);
+    expect(plaza.map((b) => b.id)).toEqual(town.plaza.blocks);
+    expect(town.buildings.some((b) => plaza.some((p) => p.id === b.block))).toBe(false);
     for (const b of town.buildings) {
       const fp = footprint(b);
       const block = town.blocks[b.block];

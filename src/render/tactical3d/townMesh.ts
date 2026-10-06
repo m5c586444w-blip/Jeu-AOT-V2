@@ -314,11 +314,13 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
   props.geometry(new CylinderGeometry(4.1, 4.1, 0.2, 10), at(pc.x, 0.8, pc.y), new Color(0x3f4c55));
   props.geometry(new CylinderGeometry(0.45, 0.6, 3.4, 8), at(pc.x, 2.1, pc.y), stone);
   props.geometry(new CylinderGeometry(1.4, 0.5, 0.6, 10), at(pc.x, 3.9, pc.y), stone);
-  const plaza = town.blocks[town.plaza.block];
   const stallColors = [new Color(0x4f6b5a), new Color(0x8a3b2a), new Color(0xb5873a), new Color(0x2a3a5c)];
-  if (plaza) {
+  town.plaza.blocks.forEach((id, bi) => {
+    const plaza = town.blocks[id];
+    const bc = town.plaza.centers[bi] ?? pc;
+    if (!plaza) return;
     plaza.inner.forEach((corner, i) => {
-      const toC = { x: pc.x - corner.x, y: pc.y - corner.y };
+      const toC = { x: bc.x - corner.x, y: bc.y - corner.y };
       const l = Math.hypot(toC.x, toC.y) || 1;
       const tx = corner.x + (toC.x / l) * 6;
       const ty = corner.y + (toC.y / l) * 6;
@@ -328,10 +330,8 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
       props.geometry(new CylinderGeometry(0.08, 0.08, 2.4, 5), at(tx + 1.2, 1.2, ty), new Color(0x5b4632));
       props.geometry(new ConeGeometry(2.2, 0.9, 4, 1), at(tx, 2.75, ty, rot + Math.PI / 4, [1.25, 1, 0.9]), stallColors[i % 4] as Color);
       props.geometry(new CylinderGeometry(1.5, 1.5, 0.12, 4), at(tx, 1.0, ty, rot + Math.PI / 4), new Color(0x7a6248));
-      // Arbre de la place.
-      const ax = corner.x + (toC.x / l) * 13;
-      const ay = corner.y + (toC.y / l) * 13;
-      addTree(props, foliage, rand, ax, ay, at);
+      // Arbre de la place (au nord seulement : le marché du sud reste dégagé pour l'action).
+      if (bi === 0) addTree(props, foliage, rand, corner.x + (toC.x / l) * 9, corner.y + (toC.y / l) * 9, at);
       // Réverbère.
       const lx = corner.x + (toC.x / l) * 2.2;
       const ly = corner.y + (toC.y / l) * 2.2;
@@ -339,7 +339,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
       lanterns.geometry(new CylinderGeometry(0.22, 0.16, 0.5, 6), at(lx, 4.45, ly), new Color(0xffffff));
       lamps.push(new Vector3(lx, 4.45, ly));
     });
-  }
+  });
   // Réverbères le long des rues : un coin d'îlot sur deux.
   for (const blk of town.blocks) {
     if (blk.plaza) continue;

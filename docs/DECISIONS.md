@@ -523,3 +523,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - Îlots tournés sur eux-mêmes jusqu'à ±15°, puis réduits pour ne jamais empiéter sur la rue : la rue s'évase d'un côté.
 - **Hauteurs** : 2 à 5 étages de 3,0 à 3,5 m, toit compris, soit 6,9 à 23 m. La carte tactique « ville » (`maps.json`) indique 8–20 m. Tout est `[A]`.
 - **Enceinte** : un pan de 50 m `[C]`, 10 m d'épaisseur `[?]`, en toile de fond au nord. Son parement est lisse : pas de créneaux.
+
+## 2026-10-06 — D-83 Titans 3D : anatomies, nuque, poses (R1.4)
+- **Tailles.** 5 m et 15 m, les bornes hautes de `ttype_petit_errant` et `ttype_grand_errant` (`data/titan_types/purs.json`). Le test relit ces données, puis mesure la boîte englobante de la figure posée, sommet par sommet, à 8 instants de la marche.
+- **Deux anatomies inventées pour le projet** : ce sont des proportions, pas des personnages ; aucun Titan de l'œuvre n'est reproduit.
+  - Petit : trapu, tête d'un quart de la hauteur, ventre lourd, bras courts, voûté ; rictus figé, joues gonflées, petits yeux vides.
+  - Grand : filiforme, petite tête sur un long cou, bras qui descendent sous le genou, mèches raides ; bouche béante, yeux exorbités.
+- **Construction.** Formes de révolution et sphères déformées, accrochées à 18 articulations nommées (bassin → torse → poitrine → cou → tête → mâchoire ; épaule → coude → poignet → doigts ; hanche → genou → cheville). Il n'y a ni maillage sculpté ni peau déformée par os : c'est la limite visible de l'essai (aspect « mannequin »), discutée au rapport.
+- **Poses.**
+  - Marche : cycle de jambes et de bras opposés, bassin qui descend à l'écart des jambes.
+  - Saisie : penché, bras droit tendu, main gauche fermée.
+  - Abattu : face contre terre, membres dans le plan du sol, vapeur qui monte (03 §5.2). Pas de sang.
+- **Marque de nuque.** Tache rouge derrière le cou, sous le crâne, légèrement émissive pour rester lisible la nuit ; elle s'éteint quand le Titan est abattu. C'est un repère de lisibilité du point faible (03 §4.2). Le test vérifie qu'elle est rouge, derrière la tête et à hauteur de nuque.
+- **Écart trouvé par le test.** La première version annonçait des mains « sous le genou » pour le grand ; la mesure les a trouvées au-dessus (28,5 % de la hauteur, genou à 26,7 %). Les bras ont été allongés (avant-bras 0,195 → 0,215 H) ; le test compare chaque main à son propre genou.
+- **Place.** Pour loger un Titan de 15 m, la place couvre deux îlots voisins, traversés par une rue (environ 90 × 35 m).
