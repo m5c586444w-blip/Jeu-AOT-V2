@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 
@@ -57,10 +57,43 @@ const assets3d = (): Plugin => {
   };
 };
 
+/**
+ * R1e : plans des lieux (`data/places/*.json`, `data/places/generated/*.json`) servis sous `/places3d/` à la visionneuse 3D,
+ * lus par `fetch` : jamais dans le bundle JS. Développement : intergiciel ; construction : copiés dans `dist/places3d/`.
+ */
+const places3d = (): Plugin => {
+  const files = (): string[] => {
+    const out: string[] = [];
+    for (const d of ["data/places", "data/places/generated"]) {
+      if (!existsSync(d)) continue;
+      for (const f of readdirSync(d)) if (f.endsWith(".json")) out.push(d === "data/places" ? f : `generated/${f}`);
+    }
+    return out;
+  };
+  return {
+    name: "places-3d",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const m = /^\/places3d\/([^?#]+)/.exec(req.url ?? "");
+        const f = m?.[1] ? decodeURIComponent(m[1]) : "";
+        if (!f || !files().includes(f)) {
+          next();
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(`data/places/${f}`));
+      });
+    },
+    generateBundle() {
+      for (const f of files()) this.emitFile({ type: "asset", fileName: `places3d/${f}`, source: readFileSync(`data/places/${f}`) });
+    },
+  };
+};
+
 export default defineConfig({
   base: "./",
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   build: { target: "es2022", sourcemap: false },
   worker: { format: "es" },
-  plugins: [galerie3d(), assets3d()],
+  plugins: [galerie3d(), assets3d(), places3d()],
 });

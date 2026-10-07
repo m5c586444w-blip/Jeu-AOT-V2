@@ -6,7 +6,7 @@ import { formatIssue } from "../data/validate";
 import { createSimEndpoint } from "../sim/sim";
 import type { SimRequest } from "../sim/sim";
 
-const files = import.meta.glob<unknown>(["/data/**/*.json", "!/data/map/**", "!/data/art/**"], { eager: true, import: "default" });
+const files = import.meta.glob<unknown>(["/data/**/*.json", "!/data/map/**", "!/data/art/**", "!/data/places/**"], { eager: true, import: "default" });
 
 const handle = createSimEndpoint(() => {
   const { source, issues } = worldSourceFromFiles(files);

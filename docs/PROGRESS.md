@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1e en cours** (système de lieux, mur Maria, pilote Shiganshina) — commit de départ `497be52` |
-| Tâche | R1e.0 : règles (CLAUDE.md), feuille de route, plan `docs/phases/R1e.md`, dette, questions ouvertes |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 451 tests ; `assets:check` : 102 entrées, 102 fichiers |
-| Prochaine étape | R1e.1 : schéma de lieu, chargeur, `places:valider`, SVG |
+| Tâche | R1e.1 : schéma de lieu, `_murs.json`, chargeur `loadPlace` (tronçons de 64 m, instances par archétype), `places:valider`, `places:captures`, `places:regenerer`, plans SVG |
+| Dernier `npm run verify` | 2026-10-07 (R1e.1) : code 0, 73 fichiers, 465 tests ; `assets:check` : 102 entrées, 102 fichiers |
+| Prochaine étape | R1e.2 : correctifs de R1d (§6, points 1 à 8) |
 
 ## Feuille de route (consigne de l'utilisateur, 2026-10-07 ; `docs/phases/R1e-consigne.md`)
 | Ordre | Phase | Contenu | Arrêt |
@@ -19,6 +19,11 @@
 | 7 | R3 → P10 | inchangées | selon le fichier 18 |
 
 Règles : plus de sous-phase inventée (hors-périmètre → `docs/reports/dette.md`) ; plus de nouvel outil de mesure ; rapports ≤ 150 lignes ; arrêts : fin de R1e, de LC-D, de R4, de P9 (et arrêts 1 à 4).
+
+## R1e.1 (2026-10-07)
+- Schéma `src/data/placeSchema.ts` (lieux N1, murailles, plans figés N2) ; `data/places/_murs.json` (hauteur 50 m [C], le reste [?] avec plage).
+- Rendu : `src/render/tactical3d/places/` (mise en place déterministe, pièces instanciées par archétype, tronçons de 64 m, sol, eau, murailles) ; visionneuse `?proto3d&lieu=<id>` ; plans servis sous `/places3d/` (hors bundle).
+- Outils : `places:valider`, `places:captures`, `places:regenerer` ; tests `tests/places/systeme.test.ts` (14).
 
 ## R1e ouverte (2026-10-07)
 - Consigne copiée mot pour mot (`docs/phases/R1e-consigne.md`) ; fichiers prérequis lus en entier (06, 11, ERRATA, rapport R1d).

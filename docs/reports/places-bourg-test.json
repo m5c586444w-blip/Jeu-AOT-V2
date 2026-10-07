@@ -1,0 +1,59 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "/tmp/claude-0/-home-user-Jeu-AOT-V2/90b628fc-0194-51ad-aa1a-21afbe15ecb3/scratchpad/dev/vue-ensemble.png",
+   "stats": {
+    "calls": 115,
+    "triangles": 68978,
+    "instances": 1643,
+    "chunks": {
+     "total": 34,
+     "visible": 34,
+     "near": 0
+    }
+   },
+   "rgb": [
+    154.85602864583333,
+    155.90500434027777,
+    131.03770833333334
+   ]
+  },
+  "place": {
+   "file": "/tmp/claude-0/-home-user-Jeu-AOT-V2/90b628fc-0194-51ad-aa1a-21afbe15ecb3/scratchpad/dev/vue-place.png",
+   "stats": {
+    "calls": 132,
+    "triangles": 170982,
+    "instances": 1385,
+    "chunks": {
+     "total": 34,
+     "visible": 17,
+     "near": 9
+    }
+   },
+   "rgb": [
+    99.42134982638889,
+    91.44816840277778,
+    74.71504340277778
+   ]
+  },
+  "rue": {
+   "file": "/tmp/claude-0/-home-user-Jeu-AOT-V2/90b628fc-0194-51ad-aa1a-21afbe15ecb3/scratchpad/dev/vue-rue.png",
+   "stats": {
+    "calls": 141,
+    "triangles": 166862,
+    "instances": 2077,
+    "chunks": {
+     "total": 34,
+     "visible": 26,
+     "near": 7
+    }
+   },
+   "rgb": [
+    129.8939496527778,
+    125.2744314236111,
+    112.08427951388889
+   ]
+  }
+ },
+ "dE": {}
+}

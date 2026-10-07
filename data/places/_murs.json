@@ -1,0 +1,318 @@
+{
+  "note": "Profil des murailles (R1e, consigne §3.1). Seule la hauteur est établie (C). Les autres valeurs sont des adaptations (A) ou des valeurs incertaines (?) avec leur plage plausible, listées dans docs/lore/questions-ouvertes.md (Q2, Q3). La coupe de chaque lieu (docs/places/<id>/mur-coupe.svg) et le modèle 3D sont lus d'ici.",
+  "sources": [
+    {
+      "ref": "docs/spec/11_AUDIT_LORE_ET_CORRECTIONS.md et ERRATA.md : murs d'environ 50 m",
+      "canon": "C"
+    },
+    {
+      "ref": "aucune (épaisseur, fruit, chemin de ronde, parapet, rayon)",
+      "canon": "?"
+    }
+  ],
+  "anneaux": {
+    "maria": {
+      "nom": "Mur Maria",
+      "hauteur_m": {
+        "valeur": 50,
+        "canon": "C",
+        "note": "≈ 50 m (fichiers 01 et 11, ERRATA)."
+      },
+      "epaisseur_base_m": {
+        "valeur": 15,
+        "canon": "?",
+        "plage": [
+          10,
+          30
+        ],
+        "note": "Aucune source officielle chiffrée (Q2)."
+      },
+      "epaisseur_sommet_m": {
+        "valeur": 10,
+        "canon": "?",
+        "plage": [
+          6,
+          15
+        ],
+        "note": "≈ 10 m (fichier 01, non sourcé) ; Q2."
+      },
+      "talus_hauteur_m": {
+        "valeur": 4,
+        "canon": "A",
+        "plage": [
+          0,
+          8
+        ],
+        "note": "Glacis maçonné au pied du parement extérieur (adaptation)."
+      },
+      "talus_avancee_m": {
+        "valeur": 2.5,
+        "canon": "A",
+        "plage": [
+          0,
+          6
+        ]
+      },
+      "fondation_profondeur_m": {
+        "valeur": 6,
+        "canon": "?",
+        "plage": [
+          2,
+          15
+        ],
+        "note": "Q2."
+      },
+      "chemin_de_ronde_m": {
+        "valeur": 7,
+        "canon": "?",
+        "plage": [
+          5,
+          12
+        ],
+        "note": "Q2."
+      },
+      "parapet_hauteur_m": {
+        "valeur": 1.2,
+        "canon": "?",
+        "plage": [
+          0.8,
+          2
+        ],
+        "note": "Garde-corps plein côté extérieur ; Q2."
+      },
+      "parapet_epaisseur_m": {
+        "valeur": 0.8,
+        "canon": "?",
+        "plage": [
+          0.5,
+          1.5
+        ],
+        "note": "Q2."
+      },
+      "fruit_part_exterieure": {
+        "valeur": 0.75,
+        "canon": "A",
+        "plage": [
+          0.5,
+          1
+        ],
+        "note": "Le parement extérieur porte l'essentiel du fruit (adaptation)."
+      },
+      "creneaux": {
+        "valeur": false,
+        "canon": "?"
+      },
+      "rayon_km": {
+        "valeur": 480,
+        "canon": "?",
+        "plage": [
+          380,
+          600
+        ],
+        "note": "Chiffre de seconde main (pages non officielles) ; Q3."
+      }
+    },
+    "rose": {
+      "nom": "Mur Rose",
+      "hauteur_m": {
+        "valeur": 50,
+        "canon": "C",
+        "note": "≈ 50 m (fichiers 01 et 11, ERRATA)."
+      },
+      "epaisseur_base_m": {
+        "valeur": 15,
+        "canon": "?",
+        "plage": [
+          10,
+          30
+        ],
+        "note": "Aucune source officielle chiffrée (Q2)."
+      },
+      "epaisseur_sommet_m": {
+        "valeur": 10,
+        "canon": "?",
+        "plage": [
+          6,
+          15
+        ],
+        "note": "≈ 10 m (fichier 01, non sourcé) ; Q2."
+      },
+      "talus_hauteur_m": {
+        "valeur": 4,
+        "canon": "A",
+        "plage": [
+          0,
+          8
+        ],
+        "note": "Glacis maçonné au pied du parement extérieur (adaptation)."
+      },
+      "talus_avancee_m": {
+        "valeur": 2.5,
+        "canon": "A",
+        "plage": [
+          0,
+          6
+        ]
+      },
+      "fondation_profondeur_m": {
+        "valeur": 6,
+        "canon": "?",
+        "plage": [
+          2,
+          15
+        ],
+        "note": "Q2."
+      },
+      "chemin_de_ronde_m": {
+        "valeur": 7,
+        "canon": "?",
+        "plage": [
+          5,
+          12
+        ],
+        "note": "Q2."
+      },
+      "parapet_hauteur_m": {
+        "valeur": 1.2,
+        "canon": "?",
+        "plage": [
+          0.8,
+          2
+        ],
+        "note": "Garde-corps plein côté extérieur ; Q2."
+      },
+      "parapet_epaisseur_m": {
+        "valeur": 0.8,
+        "canon": "?",
+        "plage": [
+          0.5,
+          1.5
+        ],
+        "note": "Q2."
+      },
+      "fruit_part_exterieure": {
+        "valeur": 0.75,
+        "canon": "A",
+        "plage": [
+          0.5,
+          1
+        ],
+        "note": "Le parement extérieur porte l'essentiel du fruit (adaptation)."
+      },
+      "creneaux": {
+        "valeur": false,
+        "canon": "?"
+      },
+      "rayon_km": {
+        "valeur": 380,
+        "canon": "?",
+        "plage": [
+          280,
+          480
+        ],
+        "note": "Chiffre de seconde main (pages non officielles) ; Q3."
+      }
+    },
+    "sina": {
+      "nom": "Mur Sina",
+      "hauteur_m": {
+        "valeur": 50,
+        "canon": "C",
+        "note": "≈ 50 m (fichiers 01 et 11, ERRATA)."
+      },
+      "epaisseur_base_m": {
+        "valeur": 15,
+        "canon": "?",
+        "plage": [
+          10,
+          30
+        ],
+        "note": "Aucune source officielle chiffrée (Q2)."
+      },
+      "epaisseur_sommet_m": {
+        "valeur": 10,
+        "canon": "?",
+        "plage": [
+          6,
+          15
+        ],
+        "note": "≈ 10 m (fichier 01, non sourcé) ; Q2."
+      },
+      "talus_hauteur_m": {
+        "valeur": 4,
+        "canon": "A",
+        "plage": [
+          0,
+          8
+        ],
+        "note": "Glacis maçonné au pied du parement extérieur (adaptation)."
+      },
+      "talus_avancee_m": {
+        "valeur": 2.5,
+        "canon": "A",
+        "plage": [
+          0,
+          6
+        ]
+      },
+      "fondation_profondeur_m": {
+        "valeur": 6,
+        "canon": "?",
+        "plage": [
+          2,
+          15
+        ],
+        "note": "Q2."
+      },
+      "chemin_de_ronde_m": {
+        "valeur": 7,
+        "canon": "?",
+        "plage": [
+          5,
+          12
+        ],
+        "note": "Q2."
+      },
+      "parapet_hauteur_m": {
+        "valeur": 1.2,
+        "canon": "?",
+        "plage": [
+          0.8,
+          2
+        ],
+        "note": "Garde-corps plein côté extérieur ; Q2."
+      },
+      "parapet_epaisseur_m": {
+        "valeur": 0.8,
+        "canon": "?",
+        "plage": [
+          0.5,
+          1.5
+        ],
+        "note": "Q2."
+      },
+      "fruit_part_exterieure": {
+        "valeur": 0.75,
+        "canon": "A",
+        "plage": [
+          0.5,
+          1
+        ],
+        "note": "Le parement extérieur porte l'essentiel du fruit (adaptation)."
+      },
+      "creneaux": {
+        "valeur": false,
+        "canon": "?"
+      },
+      "rayon_km": {
+        "valeur": 250,
+        "canon": "?",
+        "plage": [
+          150,
+          350
+        ],
+        "note": "Chiffre de seconde main (pages non officielles) ; Q3."
+      }
+    }
+  }
+}

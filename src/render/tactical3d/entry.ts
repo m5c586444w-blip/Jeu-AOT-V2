@@ -107,6 +107,10 @@ export async function openProto3d(root: HTMLElement): Promise<void> {
     } else if (q.get("proto3d") === "galerie" || q.has("galerie")) {
       const m = await import("./gallery");
       await m.startGallery(root, probe);
+    } else if (q.has("lieu")) {
+      // R1e : lieux N1 (plan d'auteur), `?proto3d&lieu=<id>`.
+      const m = await import("./places/placeViewer");
+      await m.startPlaceViewer(root, probe);
     } else if (q.get("env") === "banc") {
       const m = await import("./bench");
       await m.startBench(root, probe);

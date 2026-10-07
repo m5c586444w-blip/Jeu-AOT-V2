@@ -46,7 +46,7 @@ export default tseslint.config(
         patterns: [
           { group: PIXI, message: "Pas de Pixi dans src/render/tactical3d : un seul moteur par vue." },
           // R1b : les schémas Zod des données de rendu ne servent qu'à la validation ; le morceau 3D n'en lit que les types.
-          { group: ["zod", "**/data/artSchemas", "**/data/schemas"], allowTypeImports: true, message: "Morceau 3D : types seulement (Zod reste hors du rendu)." },
+          { group: ["zod", "**/data/artSchemas", "**/data/schemas", "**/data/placeSchema"], allowTypeImports: true, message: "Morceau 3D : types seulement (Zod reste hors du rendu)." },
         ],
       }],
       "no-restricted-properties": ["error", { object: "Math", property: "random", message: "Variations visuelles : graine locale (rng.ts), jamais Math.random." }],
