@@ -47,7 +47,8 @@
     "mesure:r1d": "tsx src/tools/mesure-r1d.ts",
     "places:valider": "tsx src/tools/places-valider.ts",
     "places:captures": "tsx src/tools/places-captures.ts",
-    "places:regenerer": "tsx src/tools/places-regenerer.ts"
+    "places:regenerer": "tsx src/tools/places-regenerer.ts",
+    "smoke:ux0": "tsx src/tools/smoke-ux0.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

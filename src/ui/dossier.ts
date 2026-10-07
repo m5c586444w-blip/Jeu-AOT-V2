@@ -1,3 +1,5 @@
+import { playerText } from "./leaks";
+import { authorOnly, isAuthorMode } from "./authorMode";
 import type { MapData } from "../data/map";
 import type { Province } from "../data/schemas";
 import { t } from "../i18n";
@@ -86,10 +88,10 @@ export class Dossier {
     close.type = "button";
     close.setAttribute("aria-label", t("dossier.close"));
     close.addEventListener("click", () => this.onClose());
-    head.append(code, title, stamp, close);
+    head.append(authorOnly(code), title, authorOnly(stamp), close);
     const sub = el("p", "dossier__sous-titre", [t(`region.${p.region}`), t(`terrain.${p.terrain}`), t(`control.${st.provinces[p.id]?.control ?? "titans"}`)].join(" · "));
     // Statuts distincts de l'existence : position sur la carte et rattachement propre au scénario (D-41, D-49).
-    const statuses = el("p", "dossier__statuts");
+    const statuses = authorOnly(el("p", "dossier__statuts"));
     if (p.location_canon) {
       const loc = el("span", `tampon-mini tampon-mini--${p.location_canon === "?" ? "incertain" : p.location_canon}`, t("dossier.location_status", { status: t(`canon.stamp.${p.location_canon}`) }));
       loc.dataset["why"] = t("dossier.location_why", { status: t(`canon.${p.location_canon}`) });
@@ -141,10 +143,10 @@ export class Dossier {
         break;
     }
     const foot = el("footer", "dossier__archives");
-    if (p.notes_canon) foot.append(el("p", "", p.notes_canon));
+    if (p.notes_canon) foot.append(authorOnly(el("p", "", p.notes_canon)));
     for (const poi of p.poi ?? []) {
       const line = el("p", "dossier__poi", `${t(poi.name_key)} `);
-      line.append(el("span", "dossier__mini-tampon", t(`canon.${poi.canon}`)));
+      line.append(authorOnly(el("span", "dossier__mini-tampon", t(`canon.${poi.canon}`))));
       foot.append(line);
     }
     this.el.append(head, sub, ...(statuses.childElementCount > 0 ? [statuses] : []), desc, tabs, body, foot);
@@ -246,7 +248,7 @@ export class Dossier {
       for (const [r, v] of Object.entries(b.production_bonus)) effects.push(t("dossier.effect_bonus", { resource: t(`res.${r}`), n: formatNumber((v ?? 0) * 100) }));
       for (const [r, v] of Object.entries(b.storage)) effects.push(t("dossier.effect_storage", { resource: t(`res.${r}`), n: formatNumber(v ?? 0) }));
       if (b.conversion) effects.push(t("dossier.effect_conversion", { from: t(`res.${b.conversion.from}`), to: t(`res.${b.conversion.to}`), n: formatNumber(b.conversion.per_day) }));
-      this.row(body, t(b.name_key), t("dossier.upkeep", { n: formatNumber(b.upkeep_gold_month) }), () => ({ title: t(b.name_key), sections: [{ text: effects.join(" · ") }, { text: t("dossier.catalog_why", { status: t(`canon.${b.canon}`) }) }] }));
+      this.row(body, t(b.name_key), t("dossier.upkeep", { n: formatNumber(b.upkeep_gold_month) }), () => ({ title: t(b.name_key), sections: [{ text: effects.join(" · ") }, { text: t("dossier.catalog_why") }] }));
     }
   }
 
@@ -254,8 +256,8 @@ export class Dossier {
     const structure = st.provinces[p.id]?.wall_structure ?? 100;
     this.row(body, t("dossier.structure"), `${formatNumber(structure)} / 100`, () => ({ title: t("dossier.structure"), sections: [{ text: t("dossier.structure_why") }] }));
     const spec = this.walls;
-    this.row(body, t("dossier.height"), `${spec.height_m.value} m`, () => ({ title: t("dossier.height"), sections: [{ text: `${spec.height_m.note} [${spec.height_m.canon}]` }] }));
-    this.row(body, t("dossier.thickness"), `${spec.thickness_m.value} m`, () => ({ title: t("dossier.thickness"), sections: [{ text: `${spec.thickness_m.note} [${spec.thickness_m.canon}]` }] }));
+    this.row(body, t("dossier.height"), `${spec.height_m.value} m`, () => ({ title: t("dossier.height"), sections: [{ text: isAuthorMode() ? `${spec.height_m.note} [${spec.height_m.canon}]` : playerText(spec.height_m.note) }] }));
+    this.row(body, t("dossier.thickness"), `${spec.thickness_m.value} m`, () => ({ title: t("dossier.thickness"), sections: [{ text: isAuthorMode() ? `${spec.thickness_m.note} [${spec.thickness_m.canon}]` : playerText(spec.thickness_m.note) }] }));
     body.append(wallSection(structure, spec));
   }
 }

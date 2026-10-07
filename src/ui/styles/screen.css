@@ -629,7 +629,7 @@
 .planche { background-image: linear-gradient(rgba(79, 107, 90, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 107, 90, 0.08) 1px, transparent 1px); background-size: 12px 12px; background-color: #eef0e6; }
 .planche--acquise { background-color: #e6efe3; border-width: 2px; }
 .planche--etude { border-color: var(--ocre); border-width: 2px; }
-.planche--verrou { opacity: 0.78; }
+.planche--verrou { opacity: 0.62; filter: grayscale(0.9); }
 .planche__tete { display: flex; gap: 0.4rem; align-items: baseline; }
 .planche__code { font-family: var(--f-machine); font-size: 0.72rem; color: var(--vert-de-gris); white-space: nowrap; }
 .planche__fiche { margin: 0.2rem 0; font-style: italic; }
@@ -761,3 +761,7 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 html[data-debug="true"] .bandeau__champ--debug { display: inline; }
 /* R0.2c : la légende « Calques » s'efface quand une fenêtre est ouverte. */
 .calques[data-masque="1"] { visibility: hidden; }
+
+/* Mode auteur (E-UX-1, UX0) : statuts canon, codes et phases ne s'affichent qu'avec F10. */
+:root:not(.mode-auteur) .auteur-seul { display: none !important; }
+.mode-auteur .auteur-seul { outline: 1px dashed var(--inconnu); outline-offset: 1px; opacity: 0.85; }

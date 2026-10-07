@@ -1,4 +1,9 @@
 import { hasKey, t } from "../../i18n";
+import type { GameState } from "../../sim/core/state";
+import { toAbsoluteDay } from "../../sim/core/time";
+import { knownTitans, secretOf } from "../../sim/intel/intel";
+import type { World } from "../../sim/strategic/world";
+import { SIDE_TO_FACTION } from "../../sim/world/war";
 import { isDomestic } from "../../sim/politics/vocabulary";
 import { epilogue, gazette } from "../narrative";
 import { emblem } from "../icons";
@@ -26,7 +31,27 @@ export class GazettePanel implements Panel {
   }
 }
 
-/** Archives (04 §5.13) : encyclopédie diégétique, chaque fiche tamponnée Établi, Interprété ou Non confirmé. */
+/** Ce que la nation jouée a découvert (E-UX-5) : les Archives ne montrent rien d'autre. */
+export const discovered = {
+  /** Événement survenu (ou antérieur au début de la partie). */
+  event: (s: GameState, id: string): boolean => {
+    const st = s.events?.history[id]?.status;
+    return st === "survenu" || st === "passe";
+  },
+  /** Province tenue, ou observée au moins une fois par le renseignement ; tout est connu sans couche de renseignement. */
+  province: (s: GameState, id: string): boolean => !s.intel || s.strategic?.provinces[id]?.control === "paradis" || knownTitans(s.intel, id, toAbsoluteDay(s.date)) !== null,
+  /** Titan dont le porteur est connu : sans porteur, porteur de la nation jouée, ou secret percé. */
+  shifter: (w: World, s: GameState, id: string): boolean => {
+    const slot = s.shifters?.titans[id];
+    if (!slot || slot.faction === "perdu") return false;
+    if (!slot.holder) return true;
+    if (s.nations && SIDE_TO_FACTION[slot.faction] === s.nations.player) return true;
+    const secret = secretOf(w, slot.holder);
+    return !secret || (s.intel?.secrets[secret]?.revealed ?? false);
+  },
+};
+
+/** Archives (04 §5.13, E-UX-5) : encyclopédie discrète de ce que l'on a découvert ; statuts canon en mode auteur seulement. */
 export class ArchivesPanel implements Panel {
   readonly id = "archives" as const;
   private tab = "personnages";
@@ -60,14 +85,14 @@ export class ArchivesPanel implements Panel {
       for (const c of [...(w.politics?.characters.values() ?? [])].filter((x) => isDomestic(x) && x.active_from <= s.date.year).sort((a, b) => displayName(a).localeCompare(displayName(b), "fr")))
         card(displayName(c), c.canon, c.bio_key && hasKey(c.bio_key) ? t(c.bio_key) : t(c.rank_key ?? "archives.no_bio"));
     } else if (this.tab === "titans") {
-      for (const d of w.shifters?.order ?? []) card(t(d.name_key), d.canon, d.abilities.map((a) => t(`shifter.ability.${a.id}`)).join(" · "));
+      for (const d of (w.shifters?.order ?? []).filter((x) => discovered.shifter(w, s, x.id))) card(t(d.name_key), d.canon, d.abilities.map((a) => t(`shifter.ability.${a.id}`)).join(" · "));
     } else if (this.tab === "lieux") {
-      for (const p of w.provinces.filter((x) => x.kind !== "segment")) card(t(p.name_key), p.canon, t(`archives.kind.${p.kind}`));
+      for (const p of w.provinces.filter((x) => x.kind !== "segment" && discovered.province(s, x.id))) card(t(p.name_key), p.canon, t(`archives.kind.${p.kind}`));
       for (const p of w.nations?.order ?? []) card(t(p.name_key), p.canon, t("archives.world_place"));
     } else if (this.tab === "evenements") {
-      for (const e of [...(w.chronicle?.canon ?? [])]) {
+      for (const e of (w.chronicle?.canon ?? []).filter((x) => discovered.event(s, x.id))) {
         const r = s.events?.history[e.id];
-        card(t(e.text_key), e.canon, t(`archives.event.${r?.status ?? "a_venir"}`));
+        card(t(e.text_key), e.canon, t(`archives.event.${r?.status ?? "passe"}`));
       }
     } else {
       for (const f of w.nations?.factions.values() ?? []) {
@@ -76,6 +101,7 @@ export class ArchivesPanel implements Panel {
         card(t(f.name_key), f.canon, f.objectives.map((o) => t(o)).join(" · "), em);
       }
     }
+    if (list.childElementCount === 0) list.append(el("p", "registre-note", t("archives.empty")));
     root.append(list);
   }
 }

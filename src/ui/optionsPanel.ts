@@ -114,6 +114,14 @@ export class OptionsPanel {
     sub.append(el("span", "", t("options.subtitles")), cb);
     sound.append(sub);
 
+    const author = el("label", "options__ligne");
+    const ab = el("input", "options__case");
+    ab.type = "checkbox";
+    ab.checked = this.settings.authorMode;
+    ab.dataset["setting"] = "authorMode";
+    ab.addEventListener("change", () => this.change({ ...this.settings, authorMode: ab.checked }));
+    author.append(el("span", "", t("options.author_mode")), ab);
+
     const keys = el("table", "options__touches");
     const caption = el("caption", "", t("options.keys"));
     keys.append(caption);
@@ -137,7 +145,13 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, sound, keys, reset);
+    this.el.append(head, lang, scale, sound, author, keys, reset);
+  }
+
+  /** Préférences changées hors du dossier (touche F10). */
+  sync(s: Settings): void {
+    this.settings = s;
+    if (this.isOpen) this.render();
   }
 
   private change(s: Settings): void {
