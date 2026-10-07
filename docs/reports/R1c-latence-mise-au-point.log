@@ -1,0 +1,57 @@
+R1c.6 — mise au point de la latence de la scène tactique (outil temporaire src/tools/_tmp/profile.ts, non versionné)
+Construction de production servie par vite preview ; Chromium /opt/pw-browsers/chromium, WebGL logiciel SwiftShader ; 1366 × 768 ;
+un navigateur neuf, une seule exécution par ligne ; profil processeur CDP (échantillonnage 200 µs) du fil principal.
+« prêt » : de la navigation à la lecture de data-proto3d = "pret" ; timings : sonde window.__proto3d (ms).
+
+== Carte d'environnement à 256 texels par face (état de l'essai 1) ==
+$ npx tsx src/tools/_tmp/profile.ts "proto3d&qualite=moyen&panneau=0&pause&t=1"
+prêt 10462 ms ; {"corps":153,"ville":291,"titans":274.30000000074506,"soldats":933.6999999992549,"poses":10.200000000186265,"premiereImage":1722.4000000003725}
+  9053 ms  (program) :-1:-1
+  1331 ms  C bodies-CJ0M_Fup.js:4161:291
+   240 ms  bp bodies-CJ0M_Fup.js:4462:42916
+
+(sonde complétée : début et réglages)
+prêt 10565 ms ; {"debut":188.3999999994412,"corps":159.90000000037253,"ville":296.70000000018626,"titans":271.59999999962747,"soldats":935.7999999998137,"reglages":110,"poses":9.799999999813735,"premiereImage":1891.2000000001863}
+chronologie (tranches de 500 ms, haut de pile du fil principal) :
+  0.0 s  (idle) 95 | (program) 83 | (anonyme) 53
+  0.5 s  (anonyme) 135 | js:bp@4462:42916 26 | js:C@4161:291 26
+  1.0 s  js:bp@4462:42916 122 | (anonyme) 114 | js:nm@4462:62304 38
+  1.5 s  (anonyme) 107 | (idle) 97 | js:bp@4462:42916 86
+  2.0 s  js:C@4161:291 150 | js:applyBoneTransform@0:144124 125 | js:multiplyMatrices@0:47268 36
+  2.5 s  js:C@4161:291 465 | js:Te@4195:13862 19 | js:vl@4127:343 3
+  3.0 s  js:C@4161:291 444 | js:Te@4195:13862 27 | js:b@3822:12913 6
+  3.5 s  js:C@4161:291 339 | (program) 141 | js:g@4168:8899 5
+  4.0 s  (program) 500
+  …      (program) 500 à chaque tranche jusqu'à 12,5 s
+ 12.5 s  (program) 277
+
+(serveur de développement, noms lisibles)
+$ DEV=1 npx tsx src/tools/_tmp/profile.ts "proto3d&qualite=moyen&panneau=0&pause&t=1"
+prêt 10098 ms ; {"debut":579.5,"corps":184.79999999981374,"ville":297.6000000005588,"titans":279.29999999981374,"soldats":906.3999999994412,"reglages":73.1000000005588,"poses":16.399999999441206,"premiereImage":1543.3999999994412}
+  8474 ms  (program) :-1:-1
+  1160 ms  onFirstUse three.module-Bj7iJlUn.js?v=dc3214f1:45920:20      ← attente de la compilation des shaders (WebGLProgram)
+   498 ms  (idle) :-1:-1
+   234 ms  smoothRegion humanBase.ts:515:21
+   108 ms  (anonyme) humanBase.ts:458:15
+    97 ms  applyBoneTransform three.module-Bj7iJlUn.js?v=dc3214f1:18030:19
+
+Variantes (même outil) :
+  lumiere=aube                                   prêt 12220 ms
+  corps=primitives                               prêt  7080 ms
+  qualite=bas, corps=primitives, lumiere=aube    prêt  6043 ms
+
+== Sans carte d'environnement (essai local, retiré) ==
+  qualite=bas, corps=primitives, lumiere=aube    prêt  2203 ms
+  qualite=moyen (corps MakeHuman, jour)          prêt  7921 ms
+
+== Carte d'environnement à 64 texels par face (correctif retenu, ENV_MAP_SIZE) ==
+  qualite=bas, corps=primitives, lumiere=aube    prêt  3341 ms
+  qualite=moyen (corps MakeHuman, jour)          prêt  9481 ms
+
+Programmes de shaders (window.__proto3d.stats().programs) :
+  qualite=moyen, corps MakeHuman : prêt 9643 ms ; 1405 appels, 1 627 222 triangles, 602 géométries, 58 textures, 35 programmes
+  qualite=moyen, corps=primitives : prêt 6140 ms ; 1274 appels, 507 782 triangles, 106 géométries, 33 textures, 23 programmes
+
+Lecture : le JavaScript de mise en place et de la première image tient en ≈ 3,9 s (dont ≈ 1,2 s d'attente de compilation des
+shaders) ; le fil principal reste ensuite ≈ 6 à 8 s en code natif « (program) » sans JavaScript : le processus GPU logiciel
+compile ses pipelines et dessine la première image avant de rendre la main.

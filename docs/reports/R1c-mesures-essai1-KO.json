@@ -1,0 +1,668 @@
+{
+  "date": "2026-10-06T23:29:28.253Z",
+  "start": "a2b2f88",
+  "bundle": {
+    "before": {
+      "main": "assets/index-C2a64iEC.js",
+      "bytes": 902588,
+      "sha256": "0df641da4bd7f51a1d98dd57403031325fed713ae736a5f710fd6cbacfc6f84e",
+      "worker": "sim.worker-BDqA4b1U.js",
+      "workerSha256": "f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be",
+      "lazy": [
+        {
+          "file": "titan-DOAI98AB.js",
+          "bytes": 588982,
+          "gzip": 150637,
+          "three": 45,
+          "gltf": 0
+        },
+        {
+          "file": "envViewer-GvoYyGE7.js",
+          "bytes": 82067,
+          "gzip": 29704,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "proto-CUnN29wN.js",
+          "bytes": 15140,
+          "gzip": 6418,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "entry-CBEZ-FGT.js",
+          "bytes": 5223,
+          "gzip": 2447,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "bench-DE7N72VI.js",
+          "bytes": 5039,
+          "gzip": 2548,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "gallery-BrXcDtw0.js",
+          "bytes": 3389,
+          "gzip": 1635,
+          "three": 0,
+          "gltf": 0
+        }
+      ]
+    },
+    "after": {
+      "main": "assets/index-1Wi3Kox7.js",
+      "bytes": 902588,
+      "sha256": "d36a810609aeff0a8b05d96dd83670a3bad1384edb8ededc63c954ced5285218",
+      "worker": "sim.worker-BDqA4b1U.js",
+      "workerSha256": "f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be",
+      "lazy": [
+        {
+          "file": "bodies-B1vGt6sS.js",
+          "bytes": 752620,
+          "gzip": 199738,
+          "three": 63,
+          "gltf": 0
+        },
+        {
+          "file": "envViewer-CjPK2vXK.js",
+          "bytes": 92296,
+          "gzip": 33636,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "post-ltUVSRk2.js",
+          "bytes": 54770,
+          "gzip": 13236,
+          "three": 2,
+          "gltf": 0
+        },
+        {
+          "file": "GLTFLoader-DegOS1aN.js",
+          "bytes": 44303,
+          "gzip": 13076,
+          "three": 25,
+          "gltf": 2
+        },
+        {
+          "file": "proto-BTEQ56RB.js",
+          "bytes": 15502,
+          "gzip": 6576,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "entry-BgBJMx7u.js",
+          "bytes": 5727,
+          "gzip": 2643,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "bench-DQSAJIOp.js",
+          "bytes": 5139,
+          "gzip": 2574,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "humanViewer-CbbSO0uU.js",
+          "bytes": 4660,
+          "gzip": 2252,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "gallery-M7s4o1PV.js",
+          "bytes": 3463,
+          "gzip": 1673,
+          "three": 0,
+          "gltf": 0
+        }
+      ]
+    },
+    "normalizedEqual": true,
+    "assets3d": [
+      {
+        "file": "derives/humain.glb",
+        "bytes": 5863048,
+        "gzip": 2167750,
+        "same": true
+      },
+      {
+        "file": "makehuman/eyes/brown_eye.png",
+        "bytes": 610817,
+        "gzip": 608449,
+        "same": true
+      }
+    ],
+    "docsArtAssetsBytes": 16028650,
+    "distImages": [
+      "assets3d/makehuman/eyes/brown_eye.png"
+    ]
+  },
+  "webgl": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "jeu": [
+    {
+      "version": "avant",
+      "pretMs": 3478.600000000093,
+      "erreurs": []
+    },
+    {
+      "version": "apres",
+      "pretMs": 2990.2000000001863,
+      "erreurs": []
+    }
+  ],
+  "scenes": [
+    {
+      "scene": "proto",
+      "version": "avant",
+      "pretMs": 2560,
+      "msParImage": 492.96153846153845,
+      "images": 13,
+      "appels": 1274,
+      "triangles": 509978,
+      "timings": null,
+      "tasMo": 19.972225189208984,
+      "rssMo": 795.140625,
+      "erreurs": []
+    },
+    {
+      "scene": "proto",
+      "version": "apres",
+      "pretMs": 10250.200000000186,
+      "msParImage": 1549.1750000000466,
+      "images": 4,
+      "appels": 1405,
+      "triangles": 1627222,
+      "timings": null,
+      "tasMo": 41.67912292480469,
+      "rssMo": 1016.51171875,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-suivi",
+      "version": "avant",
+      "pretMs": 2538.5,
+      "msParImage": 436.2142857142857,
+      "images": 14,
+      "appels": 1186,
+      "triangles": 485050,
+      "timings": null,
+      "tasMo": 21.317588806152344,
+      "rssMo": 800.921875,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-suivi",
+      "version": "apres",
+      "pretMs": 9483.200000000186,
+      "msParImage": 1499.3199999999256,
+      "images": 5,
+      "appels": 1386,
+      "triangles": 1616806,
+      "timings": null,
+      "tasMo": 48.22168731689453,
+      "rssMo": 1020.05078125,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-bas",
+      "version": "avant",
+      "pretMs": 1779.7999999998137,
+      "msParImage": 219.85714285714286,
+      "images": 28,
+      "appels": 566,
+      "triangles": 182426,
+      "timings": null,
+      "tasMo": 33.781394958496094,
+      "rssMo": 769.09765625,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-bas",
+      "version": "apres",
+      "pretMs": 9580.900000000373,
+      "msParImage": 614.0300000000746,
+      "images": 10,
+      "appels": 687,
+      "triangles": 746102,
+      "timings": null,
+      "tasMo": 55.75584030151367,
+      "rssMo": 943.6171875,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-haut",
+      "version": "avant",
+      "pretMs": 2935.7000000001863,
+      "msParImage": 589.8818181818351,
+      "images": 11,
+      "appels": 1274,
+      "triangles": 509978,
+      "timings": null,
+      "tasMo": 19.33798599243164,
+      "rssMo": 852.17578125,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-haut",
+      "version": "apres",
+      "pretMs": 10141.5,
+      "msParImage": 1652.625,
+      "images": 4,
+      "appels": 1405,
+      "triangles": 1627222,
+      "timings": null,
+      "tasMo": 42.99863815307617,
+      "rssMo": 1064.48046875,
+      "erreurs": []
+    },
+    {
+      "scene": "E01",
+      "version": "avant",
+      "pretMs": 2704.2999999998137,
+      "msParImage": 371.9235294117757,
+      "images": 17,
+      "appels": 70,
+      "triangles": 246338,
+      "timings": {
+        "generate": 114.09999999962747,
+        "textures": 26.100000000558794,
+        "build": 289.29999999981374
+      },
+      "tasMo": 33.05007553100586,
+      "rssMo": 866.7109375,
+      "erreurs": []
+    },
+    {
+      "scene": "E01",
+      "version": "apres",
+      "pretMs": 7288.899999999441,
+      "msParImage": 1167.1000000000931,
+      "images": 6,
+      "appels": 83,
+      "triangles": 242952,
+      "timings": {
+        "generate": 183.59999999962747,
+        "bodies": 0,
+        "textures": 27.700000000186265,
+        "build": 761.7000000001863
+      },
+      "tasMo": 11.175373077392578,
+      "rssMo": 953.29296875,
+      "erreurs": []
+    },
+    {
+      "scene": "E02",
+      "version": "avant",
+      "pretMs": 3061,
+      "msParImage": 495.6692307692451,
+      "images": 13,
+      "appels": 66,
+      "triangles": 270566,
+      "timings": {
+        "generate": 119.1000000005588,
+        "textures": 24.799999999813735,
+        "build": 328.09999999962747
+      },
+      "tasMo": 53.17124938964844,
+      "rssMo": 884.828125,
+      "erreurs": []
+    },
+    {
+      "scene": "E02",
+      "version": "apres",
+      "pretMs": 7601.600000000559,
+      "msParImage": 1352.1,
+      "images": 5,
+      "appels": 68,
+      "triangles": 266452,
+      "timings": {
+        "generate": 114.29999999981374,
+        "bodies": 0,
+        "textures": 26.59999999962747,
+        "build": 733.6000000005588
+      },
+      "tasMo": 10.799034118652344,
+      "rssMo": 984.77734375,
+      "erreurs": []
+    },
+    {
+      "scene": "E07",
+      "version": "avant",
+      "pretMs": 2781.7000000001863,
+      "msParImage": 427.38000000001244,
+      "images": 15,
+      "appels": 55,
+      "triangles": 257938,
+      "timings": {
+        "generate": 119.90000000037253,
+        "textures": 26.699999999254942,
+        "build": 265.20000000018626
+      },
+      "tasMo": 51.26768112182617,
+      "rssMo": 869.125,
+      "erreurs": []
+    },
+    {
+      "scene": "E07",
+      "version": "apres",
+      "pretMs": 7928.299999999814,
+      "msParImage": 1434.7400000000373,
+      "images": 5,
+      "appels": 58,
+      "triangles": 254478,
+      "timings": {
+        "generate": 118.70000000018626,
+        "bodies": 0,
+        "textures": 26.899999999441206,
+        "build": 622.6000000005588
+      },
+      "tasMo": 10.97707748413086,
+      "rssMo": 948.9453125,
+      "erreurs": []
+    },
+    {
+      "scene": "E13",
+      "version": "avant",
+      "pretMs": 3684.2000000001863,
+      "msParImage": 463.8384615384185,
+      "images": 13,
+      "appels": 62,
+      "triangles": 1304554,
+      "timings": {
+        "generate": 871.7999999998137,
+        "textures": 40.40000000037253,
+        "build": 140.59999999962747
+      },
+      "tasMo": 14.918655395507812,
+      "rssMo": 807.44921875,
+      "erreurs": []
+    },
+    {
+      "scene": "E13",
+      "version": "apres",
+      "pretMs": 9545.400000000373,
+      "msParImage": 1738.4000000001397,
+      "images": 4,
+      "appels": 88,
+      "triangles": 4911066,
+      "timings": {
+        "generate": 897.4000000003725,
+        "bodies": 0,
+        "textures": 43,
+        "build": 471.70000000018626
+      },
+      "tasMo": 10.834968566894531,
+      "rssMo": 893.0859375,
+      "erreurs": []
+    },
+    {
+      "scene": "E14",
+      "version": "avant",
+      "pretMs": 5123.200000000186,
+      "msParImage": 1072.2833333333645,
+      "images": 6,
+      "appels": 102,
+      "triangles": 1263370,
+      "timings": {
+        "generate": 117.90000000037253,
+        "textures": 27.200000000186265,
+        "build": 1284.3999999994412
+      },
+      "tasMo": 66.0176887512207,
+      "rssMo": 978.390625,
+      "erreurs": []
+    },
+    {
+      "scene": "E14",
+      "version": "apres",
+      "pretMs": 28564.200000000186,
+      "msParImage": 5988.350000000093,
+      "images": 2,
+      "appels": 134,
+      "triangles": 3166842,
+      "timings": {
+        "generate": 110.20000000018626,
+        "bodies": 0,
+        "textures": 28.09999999962747,
+        "build": 1457.5
+      },
+      "tasMo": 10.586231231689453,
+      "rssMo": 936.82421875,
+      "erreurs": []
+    },
+    {
+      "scene": "E17",
+      "version": "avant",
+      "pretMs": 2235.2999999998137,
+      "msParImage": 280.33636363633826,
+      "images": 22,
+      "appels": 52,
+      "triangles": 442304,
+      "timings": {
+        "generate": 416.30000000074506,
+        "textures": 29.5,
+        "build": 63.89999999944121
+      },
+      "tasMo": 10.676048278808594,
+      "rssMo": 769.9296875,
+      "erreurs": []
+    },
+    {
+      "scene": "E17",
+      "version": "apres",
+      "pretMs": 5908.799999999814,
+      "msParImage": 958.9857142857675,
+      "images": 7,
+      "appels": 55,
+      "triangles": 412970,
+      "timings": {
+        "generate": 423.3999999994412,
+        "bodies": 0,
+        "textures": 27.299999999813735,
+        "build": 217.90000000037253
+      },
+      "tasMo": 9.567916870117188,
+      "rssMo": 851.64453125,
+      "erreurs": []
+    },
+    {
+      "scene": "E19-titans",
+      "version": "avant",
+      "pretMs": 2751.800000000745,
+      "msParImage": 347.73888888887853,
+      "images": 18,
+      "appels": 1987,
+      "triangles": 1166534,
+      "timings": {
+        "generate": 292.30000000074506,
+        "textures": 27,
+        "build": 210.8999999994412
+      },
+      "tasMo": 28.644851684570312,
+      "rssMo": 856.00390625,
+      "erreurs": []
+    },
+    {
+      "scene": "E19-titans",
+      "version": "apres",
+      "pretMs": 8233.100000000559,
+      "msParImage": 1046.7833333333645,
+      "images": 6,
+      "appels": 493,
+      "triangles": 1265200,
+      "timings": {
+        "generate": 285.3999999994412,
+        "bodies": 131.20000000018626,
+        "textures": 26.5,
+        "build": 1262.9000000003725
+      },
+      "tasMo": 18.714447021484375,
+      "rssMo": 987.37890625,
+      "erreurs": []
+    },
+    {
+      "scene": "E20",
+      "version": "avant",
+      "pretMs": 2285.0999999996275,
+      "msParImage": 236.13846153844722,
+      "images": 26,
+      "appels": 48,
+      "triangles": 404888,
+      "timings": {
+        "generate": 302.59999999962747,
+        "textures": 29.799999999813735,
+        "build": 103.30000000074506
+      },
+      "tasMo": 15.729976654052734,
+      "rssMo": 786.08984375,
+      "erreurs": []
+    },
+    {
+      "scene": "E20",
+      "version": "apres",
+      "pretMs": 8132.9000000003725,
+      "msParImage": 1535.3249999999534,
+      "images": 4,
+      "appels": 67,
+      "triangles": 1400858,
+      "timings": {
+        "generate": 404.79999999981374,
+        "bodies": 0,
+        "textures": 27.40000000037253,
+        "build": 316.90000000037253
+      },
+      "tasMo": 13.439510345458984,
+      "rssMo": 881.765625,
+      "erreurs": []
+    },
+    {
+      "scene": "E22",
+      "version": "avant",
+      "pretMs": 1963.6000000005588,
+      "msParImage": 200.03333333333333,
+      "images": 30,
+      "appels": 33,
+      "triangles": 186448,
+      "timings": {
+        "generate": 114.79999999981374,
+        "textures": 31.40000000037253,
+        "build": 118.5
+      },
+      "tasMo": 9.013313293457031,
+      "rssMo": 794.2890625,
+      "erreurs": []
+    },
+    {
+      "scene": "E22",
+      "version": "apres",
+      "pretMs": 5508.200000000186,
+      "msParImage": 863.4375,
+      "images": 8,
+      "appels": 39,
+      "triangles": 263446,
+      "timings": {
+        "generate": 111.20000000018626,
+        "bodies": 0,
+        "textures": 30.200000000186265,
+        "build": 366.3999999994412
+      },
+      "tasMo": 8.371559143066406,
+      "rssMo": 875.79296875,
+      "erreurs": []
+    },
+    {
+      "scene": "banc",
+      "version": "avant",
+      "pretMs": 2799.9000000003725,
+      "msParImage": 721.4222222222015,
+      "images": 9,
+      "appels": 0,
+      "triangles": 0,
+      "timings": null,
+      "tasMo": 17.659244537353516,
+      "rssMo": 813.71484375,
+      "erreurs": []
+    },
+    {
+      "scene": "banc",
+      "version": "apres",
+      "pretMs": 6473.200000000186,
+      "msParImage": 1112.800000000124,
+      "images": 6,
+      "appels": 0,
+      "triangles": 0,
+      "timings": null,
+      "tasMo": 20.90481948852539,
+      "rssMo": 897.4375,
+      "erreurs": []
+    },
+    {
+      "scene": "galerie",
+      "version": "avant",
+      "pretMs": 53283.90000000037,
+      "msParImage": 16.604419889502246,
+      "images": 362,
+      "appels": 0,
+      "triangles": 0,
+      "timings": null,
+      "tasMo": 9.49947738647461,
+      "rssMo": 869.54296875,
+      "erreurs": []
+    },
+    {
+      "scene": "galerie",
+      "version": "apres",
+      "pretMs": 159538.90000000037,
+      "msParImage": 16.617955801105488,
+      "images": 362,
+      "appels": 0,
+      "triangles": 0,
+      "timings": null,
+      "tasMo": 9.921104431152344,
+      "rssMo": 911.9765625,
+      "erreurs": []
+    }
+  ],
+  "debit": [
+    {
+      "what": "jeu",
+      "version": "avant",
+      "pretMs": 2508.7000000001863,
+      "js": 491795,
+      "assets3d": 0,
+      "total": 665731
+    },
+    {
+      "what": "jeu",
+      "version": "apres",
+      "pretMs": 2402.4000000003725,
+      "js": 491791,
+      "assets3d": 0,
+      "total": 665727
+    },
+    {
+      "what": "tactique",
+      "version": "avant",
+      "pretMs": 3035.0999999996275,
+      "js": 504442,
+      "assets3d": 0,
+      "total": 540375
+    },
+    {
+      "what": "tactique",
+      "version": "apres",
+      "pretMs": 15349.899999999441,
+      "js": 574234,
+      "assets3d": 6474465,
+      "total": 7084632
+    }
+  ]
+}

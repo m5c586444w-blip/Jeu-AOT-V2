@@ -605,3 +605,12 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Trost 850** : variante `850_rocher` (porte extérieure bouchée par un rocher générique, débris au pied).
 - **Casernes** : poste de la Garnison près de la porte extérieure de Shiganshina (position `A`).
 - **Vues E07, E17, E20** recadrées (correctif proposé à l'arrêt de R1b) : E07 composée sur ses repères, E17 sur la rivière et les mares, E20 plus proche et plus basse sur le château.
+
+## 2026-10-07 — D-90 Latence de R1c : mesure par type de page, carte d'environnement réduite (R1c.6)
+- **Cibles par page** (04 §9), mesurées en WebGL logiciel, de la navigation à la première image :
+  - scène tactique (prototype de R1 : rue, 2 Titans, 20 soldats) : < 3 s ;
+  - visionneuse d'un environnement : < 8 s (chargement à froid) ;
+  - pages de contrôle (banc d'échelle, galerie des environnements) : mesurées sans cible. La galerie prenait déjà 56 s avant R1c.
+- **Carte d'environnement à 64 texels par face** (`ENV_MAP_SIZE`, `lighting.ts`). À 256, le filtrage PMREM coûtait ≈ 3,8 s au chargement sans GPU. Le ciel est lisse, et la carte ne sert qu'aux reflets flous et à la lumière diffuse.
+- **Sonde de la scène tactique** : `window.__proto3d.timings` (début, corps, ville, Titans, soldats, réglages, première image) et nombre de programmes de shaders dans `stats()`.
+- **Latence de la scène tactique en échec deux fois** (10,25 s puis 8,91 s) : arrêt, décision de l'utilisateur (`docs/reports/R1c.md` § d, § i).

@@ -2,10 +2,32 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1c en cours** (bases CC0 : corps et animations, scènes réalistes) — commit de départ `a2b2f88` |
-| Tâche | R1c.5 : districts d'après l'animé (faits sourcés, saillie, deux portes, rue principale, portes de rivière, rocher de Trost) et vues E07, E17, E20 |
-| Dernier `npm run verify` | 2026-10-06 : code 0, 71 fichiers, 433 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1c.6 : comparaison avant/après (`npm run mesure:r1c`), `smoke:r1b` complet, revue des captures, rapport `docs/reports/R1c.md`, puis **arrêt pour revue** |
+| Phase | **R1c terminée, ARRÊT** (revue de fin de R1c ; latence de la scène tactique en échec deux fois) — commit de départ `a2b2f88` |
+| Tâche | R1c.6 : comparaison avant/après, rapport `docs/reports/R1c.md` |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 71 fichiers, 433 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | **Attendre l'utilisateur** : décision sur la latence (rapport § i, options a à d), Poly Haven, questions des districts ; puis `smoke:r1b` complet (CR1b-06) |
+
+## R1c terminée — arrêt obligatoire (2026-10-07)
+- **Raisons de l'arrêt** (CLAUDE.md) :
+  - arrêt 5 : fin de R1c, revue de l'utilisateur ;
+  - arrêt 1 : un critère échoue deux fois. La latence de la scène tactique (04 §9, cible 3 s, CR1c-10) échoue aux deux passages de `npm run mesure:r1c` : **10,25 s**, puis **8,91 s** après le correctif. Elle était de 2,53 s avant R1c (rendu logiciel SwiftShader, 1366 × 768, qualité moyenne).
+- **Correctif tenté (un seul)** : carte d'environnement à 64 texels par face au lieu de 256. Gain : 1,3 s sur la scène complète, et 2,7 s sur une configuration légère (D-90). Insuffisant.
+- **Cause** (`docs/reports/R1c-latence-mise-au-point.log`) :
+  - ≈ 3,2 s de JavaScript, dont le façonnage de 20 corps (0,8 s) et l'attente de compilation des shaders ;
+  - ≈ 5,7 s de GPU logiciel pour la première image : 35 programmes, peau, relief, éclairage d'image, ombres douces, occlusion ambiante.
+  - Seule une configuration sans carte d'environnement, avec les figures de R1, en qualité basse, passe sous 3 s (2,2 s).
+- **Décision attendue** (rapport § i) :
+  - a. juger la latence sur un vrai GPU ;
+  - b. qualité basse allégée ;
+  - c. chargement progressif ;
+  - d. compression des assets (en plus de a, b ou c).
+- **Autres résultats** :
+  - bundle principal identique une fois les noms hachés normalisés (902 588 octets), worker identique à l'octet ;
+  - GLTFLoader à la demande ; assets 3D de 6,17 Mio hors du JS ;
+  - jeu (carte stratégique) chargé en 2,19 s ;
+  - E13 à 8,17 s et E14 à 26,68 s, au-dessus de la cible de 8 s ;
+  - 15 scènes capturées avant et après, revues (§ e) ; défauts listés (§ f).
+- **Pas fait, en attente de la décision** : `smoke:r1b` complet (CR1b-06), qui serait refait si le rendu change.
 
 ## R1c.5 : districts d'après l'animé (2026-10-06)
 - Étude des faits : `docs/reports/R1c-annexe-districts.md` (9 faits, statut `C`/`A`/`?`, sources, limites de la recherche) ; D-89.

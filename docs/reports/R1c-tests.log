@@ -1,0 +1,50 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > le .glb se reconstruit à l'identique depuis les sources CC0 (npm run assets:build -- --verifier) 1805ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > hauteur debout mesurée à ±5 % : classes 3–15 m, variantes, Titan-Mur 50 m, Colossal 60 m, Rod Reiss 120 m 124ms
+ ✓ tests/render/tactical3d/districts-r1c.test.ts > districts d'après l'animé (R1c.5) > chaque district : saillie hors de la ligne du mur, porte extérieure à la pointe, porte intérieure dans la ligne principale 1646ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > gabarit : 12 primitives (8 régions de peau, collant, dents, langue, yeux), 56 os, 50 cibles, poids normalisés 18ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > hauteur exacte, pieds au sol, pour des corps très différents 169ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > les cibles macro changent le corps ; les articulations les suivent ; même forme, même empreinte 86ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > proportions au repos : tête × 1,9, jambes × 0,66, bras × 0,8 (mesurées à ±5 %, avant mise à l'échelle) 66ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > mâchoire et yeux articulés : la mâchoire ouvre la bouche (dents du bas seulement), l'œil tourne sans la peau 28ms
+ ✓ tests/render/tactical3d/soldats-r1c.test.ts > soldats sur le corps de base (R1c.2) > 7 animations ; pieds au sol à ±2 cm dans les poses au sol, à chaque instant 290ms
+ ✓ tests/render/tactical3d/soldats-r1c.test.ts > soldats sur le corps de base (R1c.2) > hauteur : 1,7 m à ±5 % debout (banc) ; tailles tirées de la graine entre 1,58 et 1,86 m 424ms
+ ✓ tests/render/tactical3d/districts-r1c.test.ts > districts d'après l'animé (R1c.5) > rue principale pavée de porte à porte, sans maison dessus 1347ms
+ ✓ tests/render/tactical3d/soldats-r1c.test.ts > soldats sur le corps de base (R1c.2) > l'équipement est porté par les os : réservoir et lanceurs au bassin, fourreaux aux cuisses, lames aux mains, cape au haut du dos 50ms
+ ✓ tests/render/tactical3d/soldats-r1c.test.ts > soldats sur le corps de base (R1c.2) > les poses bougent avec le temps ; vol et accroche quittent le sol 43ms
+ ✓ tests/render/tactical3d/soldats-r1c.test.ts > soldats sur le corps de base (R1c.2) > même graine, même soldat ; graines différentes, soldats différents 199ms
+ ✓ tests/render/tactical3d/districts-r1c.test.ts > districts d'après l'animé (R1c.5) > Shiganshina : voie d'eau par deux portes de rivière, barques d'évacuation côté porte intérieure, ponts, lit libre de maisons 237ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > proportions mesurées au repos conformes aux paramètres à ±10 % : tête, jambes, bras, avant-bras 46ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > pieds au sol (±0,5 % de la hauteur), debout, en marche, en course, en buste, y compris sur un relief 1748ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > corps couchés à plat : abattu et allongé touchent le sol ; Rod Reiss allongé plus long que haut 233ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > arbres : mêmes attributs partout, bois séparé, cartes de feuillage au niveau proche, géométries déterministes 130ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > houppier : normales unitaires, tournées vers l'extérieur du houppier (lumière de volume) 24ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > pièces assemblées : la normale suit la transformation (translation, échelle non uniforme), sans retournement 9ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > ciel physique (nuages calculés) le jour à l'air libre ; dôme peint à l'aube, au crépuscule, la nuit et sous terre 24ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > post-traitement : aucun en qualité basse ; occlusion ambiante en qualité moyenne et haute 16ms
+ ✓ tests/render/tactical3d/rendu-r1c.test.ts > rendu réaliste (R1c.4) > végétation : bois non teinté par le feuillage ; cartes de feuillage seulement avec la texture de feuilles 20ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > interface des Titans de R1 : 18 articulations portées par les os, mâchoire, marque de nuque au cou, vapeur 3ms
+ ✓ tests/render/tactical3d/titans-r1c.test.ts > Titans sur le corps de base (R1c.3) > même graine, même Titan ; graines différentes, individus différents ; repli sur les figures de R1 sans gabarit 215ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > le dépôt passe : chaque fichier de docs/art/assets/ a son entrée, sa licence, sa source retenue et son empreinte 52ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > un cas valide minimal passe 1ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > fichier sans entrée, entrée sans fichier : échec 1ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > licence autre que CC0 ou CC-BY : échec ; CC-BY sans attribution : échec ; CC-BY attribuée : passe 2ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > source écartée (non réaliste), source interdite (œuvre ou fan), source inconnue : échec 6ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > empreinte fausse : échec ; dérivé sans source ou d'une source absente : échec 1ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > soldat 1,7 m et mur 50 m, mesurés, à ±5 % 2ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > Titans : classes 3, 5, 8, 12, 15 m, variantes, Titan-Mur 50 m, Colossal 60 m, Titan de Rod Reiss 120 m — hauteur debout mesurée à ±5 % 1ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > hauteurs relatives à ±5 % : Titans / soldat, mur / Titans 1ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > pieds au contact du sol : debout, en marche, en course, posés sur un relief (sol à 37 m) 219ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > Titan de Rod Reiss allongé : à plat sur le sol, plus long que haut 5ms
+ ✓ tests/render/tactical3d/echelle.test.ts > banc d'échelle (R1b.6) > données : soldat, classes et Titans spéciaux portent un statut canon 2ms
+ ✓ tests/render/tactical3d/districts-r1c.test.ts > districts d'après l'animé (R1c.5) > Trost 850 : la porte extérieure bouchée par le rocher ; les autres districts n'ont pas de voie d'eau 1234ms
+ ✓ tests/render/tactical3d/districts-r1c.test.ts > districts d'après l'animé (R1c.5) > dimensions incertaines marquées « ? » ; faits de l'animé notés dans les profils ; même graine, même district 417ms
+
+ Test Files  7 passed (7)
+      Tests  40 passed (40)
+   Start at  00:13:01
+   Duration  5.64s (tests 85%, transform 10%, import 5%)
+
+CODE 0

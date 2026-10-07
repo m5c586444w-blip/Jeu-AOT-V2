@@ -1,0 +1,136 @@
+
+> murs-et-sang@0.0.1 mesure:r1c
+> tsx src/tools/mesure-r1c.ts
+
+
+=== Bundle (commit de départ a2b2f88 contre l'état courant) ===
+bundle principal avant : assets/index-C2a64iEC.js  902588 octets (266.8 Kio gzip)  sha256 0df641da4bd7f51a1d98dd57403031325fed713ae736a5f710fd6cbacfc6f84e
+bundle principal après : assets/index-Bv_Xd8Ly.js  902588 octets (266.8 Kio gzip)  sha256 32335e58b6370e0ebe5dd657b9ff358510052fbac8fcbb82db490168298810b7
+contenu normalisé (noms de morceaux hachés remplacés) : avant 83257ce2cb2f139a…, après 83257ce2cb2f139a…
+worker avant : sim.worker-BDqA4b1U.js  620332 octets  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+worker après : sim.worker-BDqA4b1U.js  620332 octets  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+  OK  bundle principal : même taille (902588 → 902588 octets)
+  OK  bundle principal : même contenu une fois les noms de morceaux hachés normalisés
+  OK  worker de simulation identique à l'octet
+  OK  aucune signature three.js dans le bundle principal (0)
+  OK  aucune signature GLTFLoader dans le bundle principal (0)
+morceaux 3D chargés à la demande, avant : 6 morceaux, 699840 octets (188.9 Kio gzip)
+  assets/titan-DOAI98AB.js  588982 octets (147.1 Kio gzip), THREE. : 45, GLTFLoader : non
+  assets/envViewer-GvoYyGE7.js  82067 octets (29.0 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/proto-CUnN29wN.js  15140 octets (6.3 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/entry-CBEZ-FGT.js  5223 octets (2.4 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/bench-DE7N72VI.js  5039 octets (2.5 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/gallery-BrXcDtw0.js  3389 octets (1.6 Kio gzip), THREE. : 0, GLTFLoader : non
+morceaux 3D chargés à la demande, après : 9 morceaux, 978890 octets (269.1 Kio gzip)
+  assets/bodies-D6keDjFj.js  752636 octets (195.1 Kio gzip), THREE. : 63, GLTFLoader : non
+  assets/envViewer-CcVcyq-z.js  92296 octets (32.8 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/post-bUm-hArz.js  54770 octets (12.9 Kio gzip), THREE. : 2, GLTFLoader : non
+  assets/GLTFLoader-DsVKX2D1.js  44303 octets (12.8 Kio gzip), THREE. : 25, GLTFLoader : oui
+  assets/proto-CMjlxtXX.js  15896 octets (6.6 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/entry-CkW4H6Dq.js  5727 octets (2.6 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/bench-BjmyTzhG.js  5139 octets (2.5 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/humanViewer-Bzfnqgtg.js  4660 octets (2.2 Kio gzip), THREE. : 0, GLTFLoader : non
+  assets/gallery-Ck9HVdPY.js  3463 octets (1.6 Kio gzip), THREE. : 0, GLTFLoader : non
+  OK  GLTFLoader dans un morceau chargé à la demande (GLTFLoader-DsVKX2D1.js)
+  OK  aucun modèle glTF inclus dans le JS (aucun)
+assets 3D (dist/assets3d/) : 2 fichiers, 6.17 Mio (2.65 Mio gzip)
+  assets3d/derives/humain.glb  5863048 octets (2.07 Mio gzip)
+  assets3d/makehuman/eyes/brown_eye.png  610817 octets (0.58 Mio gzip)
+  OK  assets 3D servis = fichiers « execution » du manifeste (derives/humain.glb, makehuman/eyes/brown_eye.png)
+docs/art/assets (sources, dérivés et manifeste, hors construction) : 15.29 Mio
+docs/art/reference : 0 image(s) ; dist : 69 fichiers dont 1 image(s) (assets3d/makehuman/eyes/brown_eye.png)
+  OK  aucune image de référence dans dist (nom : 0, contenu : 0)
+
+=== Scènes avant/après (constructions de production ; http://localhost:4185/ et http://localhost:4186/) ===
+Chromium /opt/pw-browsers/chromium ; WebGL : ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver) ; 1366 × 768 ; navigateur neuf par mesure ; chauffe 2 s, mesure 6 s
+jeu      avant chargement à froid (carte stratégique prête) : 2.24 s
+jeu      apres chargement à froid (carte stratégique prête) : 2.19 s
+  OK  jeu avant : chargement à froid 2.24 s < 8 s
+  OK  jeu apres : chargement à froid 2.19 s < 8 s
+proto        avant prêt   2.53 s ·   465 ms/image (13 images en 6.0 s) · 1274 appels · 0.51 M triangles · tas 30 Mo · RSS 796 Mo
+proto        apres prêt   8.91 s (debut 0.18 s, corps 0.15 s, ville 0.25 s, titans 0.22 s, soldats 0.84 s, reglages 0.07 s, poses 0.01 s, premiereImage 1.51 s) ·  1596 ms/image (5 images en 8.0 s) · 1405 appels · 1.63 M triangles · 35 programmes · tas 52 Mo · RSS 1004 Mo
+  OK  proto après : aucune erreur de page
+  KO  proto après : scène tactique prête en 8.91 s < 3 s (avant : 2.53 s)
+proto-suivi  avant prêt   2.45 s ·   431 ms/image (14 images en 6.0 s) · 1186 appels · 0.49 M triangles · tas 31 Mo · RSS 793 Mo
+proto-suivi  apres prêt   8.74 s (debut 0.18 s, corps 0.15 s, ville 0.25 s, titans 0.22 s, soldats 0.81 s, reglages 0.07 s, poses 0.01 s, premiereImage 1.43 s) ·  1468 ms/image (5 images en 7.3 s) · 1386 appels · 1.62 M triangles · 35 programmes · tas 18 Mo · RSS 1012 Mo
+  OK  proto-suivi après : aucune erreur de page
+  KO  proto-suivi après : scène tactique prête en 8.74 s < 3 s (avant : 2.45 s)
+proto-bas    avant prêt   1.76 s ·   208 ms/image (29 images en 6.0 s) · 566 appels · 0.18 M triangles · tas 20 Mo · RSS 772 Mo
+proto-bas    apres prêt   5.82 s (debut 0.20 s, corps 0.16 s, ville 0.27 s, titans 0.28 s, soldats 0.84 s, reglages 0.09 s, poses 0.01 s, premiereImage 1.21 s) ·   632 ms/image (10 images en 6.3 s) · 687 appels · 0.75 M triangles · 21 programmes · tas 23 Mo · RSS 901 Mo
+  OK  proto-bas après : aucune erreur de page
+  KO  proto-bas après : scène tactique prête en 5.82 s < 3 s (avant : 1.76 s)
+proto-haut   avant prêt   3.05 s ·   585 ms/image (11 images en 6.4 s) · 1274 appels · 0.51 M triangles · tas 21 Mo · RSS 851 Mo
+proto-haut   apres prêt   9.19 s (debut 0.20 s, corps 0.13 s, ville 0.25 s, titans 0.22 s, soldats 0.81 s, reglages 0.07 s, poses 0.01 s, premiereImage 1.46 s) ·  1636 ms/image (4 images en 6.5 s) · 1405 appels · 1.63 M triangles · 35 programmes · tas 66 Mo · RSS 1065 Mo
+  OK  proto-haut après : aucune erreur de page
+  KO  proto-haut après : scène tactique prête en 9.19 s < 3 s (avant : 3.05 s)
+E01          avant prêt   2.71 s (generate 0.12 s, textures 0.03 s, build 0.27 s) ·   382 ms/image (16 images en 6.1 s) · 70 appels · 0.25 M triangles · tas 32 Mo · RSS 868 Mo
+E01          apres prêt   6.29 s (generate 0.20 s, bodies 0.00 s, textures 0.03 s, build 0.74 s) ·  1133 ms/image (6 images en 6.8 s) · 83 appels · 0.24 M triangles · tas 10 Mo · RSS 939 Mo
+  OK  E01 après : aucune erreur de page
+  OK  E01 après : prête en 6.29 s < 8 s (avant : 2.71 s)
+E02          avant prêt   3.07 s (generate 0.12 s, textures 0.03 s, build 0.29 s) ·   495 ms/image (13 images en 6.4 s) · 66 appels · 0.27 M triangles · tas 25 Mo · RSS 882 Mo
+E02          apres prêt   6.48 s (generate 0.12 s, bodies 0.00 s, textures 0.03 s, build 0.74 s) ·  1369 ms/image (5 images en 6.8 s) · 68 appels · 0.27 M triangles · tas 11 Mo · RSS 966 Mo
+  OK  E02 après : aucune erreur de page
+  OK  E02 après : prête en 6.48 s < 8 s (avant : 3.07 s)
+E07          avant prêt   2.66 s (generate 0.11 s, textures 0.03 s, build 0.24 s) ·   423 ms/image (15 images en 6.3 s) · 55 appels · 0.26 M triangles · tas 9 Mo · RSS 853 Mo
+E07          apres prêt   6.39 s (generate 0.13 s, bodies 0.00 s, textures 0.03 s, build 0.62 s) ·  1368 ms/image (5 images en 6.8 s) · 58 appels · 0.25 M triangles · tas 10 Mo · RSS 935 Mo
+  OK  E07 après : aucune erreur de page
+  OK  E07 après : prête en 6.39 s < 8 s (avant : 2.66 s)
+E13          avant prêt   3.64 s (generate 0.87 s, textures 0.04 s, build 0.15 s) ·   455 ms/image (14 images en 6.4 s) · 62 appels · 1.30 M triangles · tas 15 Mo · RSS 806 Mo
+E13          apres prêt   8.17 s (generate 0.86 s, bodies 0.00 s, textures 0.04 s, build 0.43 s) ·  1690 ms/image (4 images en 6.8 s) · 88 appels · 4.91 M triangles · tas 11 Mo · RSS 879 Mo
+  OK  E13 après : aucune erreur de page
+  KO  E13 après : prête en 8.17 s < 8 s (avant : 3.64 s)
+E14          avant prêt   4.81 s (generate 0.11 s, textures 0.03 s, build 1.17 s) ·  1053 ms/image (6 images en 6.3 s) · 102 appels · 1.26 M triangles · tas 11 Mo · RSS 934 Mo
+E14          apres prêt  26.68 s (generate 0.11 s, bodies 0.00 s, textures 0.03 s, build 1.29 s) ·  6110 ms/image (2 images en 12.2 s) · 134 appels · 3.17 M triangles · tas 11 Mo · RSS 925 Mo
+  OK  E14 après : aucune erreur de page
+  KO  E14 après : prête en 26.68 s < 8 s (avant : 4.81 s)
+E17          avant prêt   2.13 s (generate 0.40 s, textures 0.03 s, build 0.06 s) ·   286 ms/image (21 images en 6.0 s) · 52 appels · 0.44 M triangles · tas 11 Mo · RSS 770 Mo
+E17          apres prêt   4.54 s (generate 0.41 s, bodies 0.00 s, textures 0.03 s, build 0.21 s) ·   916 ms/image (7 images en 6.4 s) · 55 appels · 0.41 M triangles · tas 11 Mo · RSS 841 Mo
+  OK  E17 après : aucune erreur de page
+  OK  E17 après : prête en 4.54 s < 8 s (avant : 2.13 s)
+E19-titans   avant prêt   2.76 s (generate 0.29 s, textures 0.03 s, build 0.23 s) ·   353 ms/image (17 images en 6.0 s) · 1987 appels · 1.17 M triangles · tas 19 Mo · RSS 864 Mo
+E19-titans   apres prêt   7.44 s (generate 0.30 s, bodies 0.15 s, textures 0.03 s, build 1.33 s) ·  1054 ms/image (6 images en 6.3 s) · 493 appels · 1.27 M triangles · tas 15 Mo · RSS 976 Mo
+  OK  E19-titans après : aucune erreur de page
+  OK  E19-titans après : prête en 7.44 s < 8 s (avant : 2.76 s)
+E20          avant prêt   2.24 s (generate 0.31 s, textures 0.03 s, build 0.09 s) ·   241 ms/image (25 images en 6.0 s) · 48 appels · 0.40 M triangles · tas 11 Mo · RSS 787 Mo
+E20          apres prêt   6.84 s (generate 0.30 s, bodies 0.00 s, textures 0.03 s, build 0.31 s) ·  1602 ms/image (4 images en 6.4 s) · 67 appels · 1.40 M triangles · tas 15 Mo · RSS 870 Mo
+  OK  E20 après : aucune erreur de page
+  OK  E20 après : prête en 6.84 s < 8 s (avant : 2.24 s)
+E22          avant prêt   1.95 s (generate 0.12 s, textures 0.03 s, build 0.12 s) ·   205 ms/image (30 images en 6.1 s) · 33 appels · 0.19 M triangles · tas 9 Mo · RSS 794 Mo
+E22          apres prêt   4.53 s (generate 0.12 s, bodies 0.00 s, textures 0.03 s, build 0.36 s) ·   874 ms/image (7 images en 6.1 s) · 39 appels · 0.26 M triangles · tas 9 Mo · RSS 863 Mo
+  OK  E22 après : aucune erreur de page
+  OK  E22 après : prête en 4.53 s < 8 s (avant : 1.95 s)
+banc         avant prêt   2.81 s ·   731 ms/image (9 images en 6.6 s) · 0 appels · 0.00 M triangles · tas 15 Mo · RSS 822 Mo
+banc         apres prêt   6.50 s ·  1131 ms/image (6 images en 6.8 s) · 0 appels · 0.00 M triangles · tas 22 Mo · RSS 899 Mo
+  OK  banc après : aucune erreur de page
+  --  banc : page de contrôle, sans cible ; prête en 6.50 s (avant : 2.81 s)
+galerie      avant prêt  56.39 s ·    17 ms/image (362 images en 6.0 s) · 0 appels · 0.00 M triangles · tas 10 Mo · RSS 869 Mo
+galerie      apres prêt 106.93 s ·    17 ms/image (362 images en 6.0 s) · 0 appels · 0.00 M triangles · tas 57 Mo · RSS 1126 Mo
+  OK  galerie après : aucune erreur de page
+  --  galerie : page de contrôle, sans cible ; prête en 106.93 s (avant : 56.39 s)
+
+résumé (après / avant) :
+  proto        prêt 2.53 → 8.91 s · temps d'image 465 → 1596 ms (× 3.43) · triangles 0.51 → 1.63 M · RSS 796 → 1004 Mo
+  proto-suivi  prêt 2.45 → 8.74 s · temps d'image 431 → 1468 ms (× 3.40) · triangles 0.49 → 1.62 M · RSS 793 → 1012 Mo
+  proto-bas    prêt 1.76 → 5.82 s · temps d'image 208 → 632 ms (× 3.05) · triangles 0.18 → 0.75 M · RSS 772 → 901 Mo
+  proto-haut   prêt 3.05 → 9.19 s · temps d'image 585 → 1636 ms (× 2.80) · triangles 0.51 → 1.63 M · RSS 851 → 1065 Mo
+  E01          prêt 2.71 → 6.29 s · temps d'image 382 → 1133 ms (× 2.97) · triangles 0.25 → 0.24 M · RSS 868 → 939 Mo
+  E02          prêt 3.07 → 6.48 s · temps d'image 495 → 1369 ms (× 2.77) · triangles 0.27 → 0.27 M · RSS 882 → 966 Mo
+  E07          prêt 2.66 → 6.39 s · temps d'image 423 → 1368 ms (× 3.23) · triangles 0.26 → 0.25 M · RSS 853 → 935 Mo
+  E13          prêt 3.64 → 8.17 s · temps d'image 455 → 1690 ms (× 3.71) · triangles 1.30 → 4.91 M · RSS 806 → 879 Mo
+  E14          prêt 4.81 → 26.68 s · temps d'image 1053 → 6110 ms (× 5.80) · triangles 1.26 → 3.17 M · RSS 934 → 925 Mo
+  E17          prêt 2.13 → 4.54 s · temps d'image 286 → 916 ms (× 3.21) · triangles 0.44 → 0.41 M · RSS 770 → 841 Mo
+  E19-titans   prêt 2.76 → 7.44 s · temps d'image 353 → 1054 ms (× 2.99) · triangles 1.17 → 1.27 M · RSS 864 → 976 Mo
+  E20          prêt 2.24 → 6.84 s · temps d'image 241 → 1602 ms (× 6.66) · triangles 0.40 → 1.40 M · RSS 787 → 870 Mo
+  E22          prêt 1.95 → 4.53 s · temps d'image 205 → 874 ms (× 4.27) · triangles 0.19 → 0.26 M · RSS 794 → 863 Mo
+  banc         prêt 2.81 → 6.50 s · temps d'image 731 → 1131 ms (× 1.55) · triangles 0.00 → 0.00 M · RSS 822 → 899 Mo
+  galerie      prêt 56.39 → 106.93 s · temps d'image 17 → 17 ms (× 1.00) · triangles 0.00 → 0.00 M · RSS 869 → 1126 Mo
+
+=== Chargement à débit limité (10 Mbit/s, 40 ms, cache vide) ===
+jeu      avant à 10 Mbit/s, 40 ms : prêt en 2.52 s ; transféré : JS 480.3 Kio, assets 3D 0.00 Mio, total 0.63 Mio
+jeu      apres à 10 Mbit/s, 40 ms : prêt en 2.53 s ; transféré : JS 480.3 Kio, assets 3D 0.00 Mio, total 0.63 Mio
+tactique avant à 10 Mbit/s, 40 ms : prêt en 3.15 s ; transféré : JS 492.6 Kio, assets 3D 0.00 Mio, total 0.52 Mio
+tactique apres à 10 Mbit/s, 40 ms : prêt en 14.95 s ; transféré : JS 560.9 Kio, assets 3D 6.17 Mio, total 6.76 Mio
+
+résultats : docs/reports/R1c-mesures.json
+mesure:r1c : 6 contrôle(s) en échec.
+exit 1

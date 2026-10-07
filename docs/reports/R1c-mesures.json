@@ -1,0 +1,734 @@
+{
+  "date": "2026-10-06T23:53:20.817Z",
+  "start": "a2b2f88",
+  "bundle": {
+    "before": {
+      "main": "assets/index-C2a64iEC.js",
+      "bytes": 902588,
+      "sha256": "0df641da4bd7f51a1d98dd57403031325fed713ae736a5f710fd6cbacfc6f84e",
+      "worker": "sim.worker-BDqA4b1U.js",
+      "workerSha256": "f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be",
+      "lazy": [
+        {
+          "file": "titan-DOAI98AB.js",
+          "bytes": 588982,
+          "gzip": 150637,
+          "three": 45,
+          "gltf": 0
+        },
+        {
+          "file": "envViewer-GvoYyGE7.js",
+          "bytes": 82067,
+          "gzip": 29704,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "proto-CUnN29wN.js",
+          "bytes": 15140,
+          "gzip": 6418,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "entry-CBEZ-FGT.js",
+          "bytes": 5223,
+          "gzip": 2447,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "bench-DE7N72VI.js",
+          "bytes": 5039,
+          "gzip": 2548,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "gallery-BrXcDtw0.js",
+          "bytes": 3389,
+          "gzip": 1635,
+          "three": 0,
+          "gltf": 0
+        }
+      ]
+    },
+    "after": {
+      "main": "assets/index-Bv_Xd8Ly.js",
+      "bytes": 902588,
+      "sha256": "32335e58b6370e0ebe5dd657b9ff358510052fbac8fcbb82db490168298810b7",
+      "worker": "sim.worker-BDqA4b1U.js",
+      "workerSha256": "f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be",
+      "lazy": [
+        {
+          "file": "bodies-D6keDjFj.js",
+          "bytes": 752636,
+          "gzip": 199754,
+          "three": 63,
+          "gltf": 0
+        },
+        {
+          "file": "envViewer-CcVcyq-z.js",
+          "bytes": 92296,
+          "gzip": 33638,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "post-bUm-hArz.js",
+          "bytes": 54770,
+          "gzip": 13236,
+          "three": 2,
+          "gltf": 0
+        },
+        {
+          "file": "GLTFLoader-DsVKX2D1.js",
+          "bytes": 44303,
+          "gzip": 13076,
+          "three": 25,
+          "gltf": 2
+        },
+        {
+          "file": "proto-CMjlxtXX.js",
+          "bytes": 15896,
+          "gzip": 6719,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "entry-CkW4H6Dq.js",
+          "bytes": 5727,
+          "gzip": 2640,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "bench-BjmyTzhG.js",
+          "bytes": 5139,
+          "gzip": 2575,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "humanViewer-Bzfnqgtg.js",
+          "bytes": 4660,
+          "gzip": 2253,
+          "three": 0,
+          "gltf": 0
+        },
+        {
+          "file": "gallery-Ck9HVdPY.js",
+          "bytes": 3463,
+          "gzip": 1673,
+          "three": 0,
+          "gltf": 0
+        }
+      ]
+    },
+    "normalizedEqual": true,
+    "assets3d": [
+      {
+        "file": "derives/humain.glb",
+        "bytes": 5863048,
+        "gzip": 2167750,
+        "same": true
+      },
+      {
+        "file": "makehuman/eyes/brown_eye.png",
+        "bytes": 610817,
+        "gzip": 608449,
+        "same": true
+      }
+    ],
+    "docsArtAssetsBytes": 16028650,
+    "distImages": [
+      "assets3d/makehuman/eyes/brown_eye.png"
+    ]
+  },
+  "webgl": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "jeu": [
+    {
+      "version": "avant",
+      "pretMs": 2244.100000000559,
+      "erreurs": []
+    },
+    {
+      "version": "apres",
+      "pretMs": 2193.4000000003725,
+      "erreurs": []
+    }
+  ],
+  "scenes": [
+    {
+      "scene": "proto",
+      "version": "avant",
+      "pretMs": 2534.199999999255,
+      "msParImage": 464.9153846153416,
+      "images": 13,
+      "appels": 1274,
+      "triangles": 509978,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 30.24248504638672,
+      "rssMo": 795.9609375,
+      "erreurs": []
+    },
+    {
+      "scene": "proto",
+      "version": "apres",
+      "pretMs": 8914.899999999441,
+      "msParImage": 1596.2199999999254,
+      "images": 5,
+      "appels": 1405,
+      "triangles": 1627222,
+      "programmes": 35,
+      "timings": {
+        "debut": 181,
+        "corps": 153.70000000018626,
+        "ville": 247.8999999994412,
+        "titans": 222.5,
+        "soldats": 840.9000000003725,
+        "reglages": 72.70000000018626,
+        "poses": 9.5,
+        "premiereImage": 1509.0999999996275
+      },
+      "tasMo": 51.86628723144531,
+      "rssMo": 1003.90625,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-suivi",
+      "version": "avant",
+      "pretMs": 2454.9000000003725,
+      "msParImage": 431.4428571428704,
+      "images": 14,
+      "appels": 1186,
+      "triangles": 485050,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 30.87765121459961,
+      "rssMo": 792.67578125,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-suivi",
+      "version": "apres",
+      "pretMs": 8735.599999999627,
+      "msParImage": 1467.7400000000373,
+      "images": 5,
+      "appels": 1386,
+      "triangles": 1616806,
+      "programmes": 35,
+      "timings": {
+        "debut": 183.8999999994412,
+        "corps": 152.20000000018626,
+        "ville": 249.90000000037253,
+        "titans": 216.29999999981374,
+        "soldats": 810,
+        "reglages": 69.79999999981374,
+        "poses": 6.099999999627471,
+        "premiereImage": 1434.4000000003725
+      },
+      "tasMo": 18.34064483642578,
+      "rssMo": 1011.828125,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-bas",
+      "version": "avant",
+      "pretMs": 1761.7000000001863,
+      "msParImage": 207.6310344827522,
+      "images": 29,
+      "appels": 566,
+      "triangles": 182426,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 20.48544692993164,
+      "rssMo": 771.875,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-bas",
+      "version": "apres",
+      "pretMs": 5818.5,
+      "msParImage": 632.3599999999627,
+      "images": 10,
+      "appels": 687,
+      "triangles": 746102,
+      "programmes": 21,
+      "timings": {
+        "debut": 198.09999999962747,
+        "corps": 159.79999999981374,
+        "ville": 269,
+        "titans": 281.80000000074506,
+        "soldats": 835.6999999992549,
+        "reglages": 86.80000000074506,
+        "poses": 11.899999999441206,
+        "premiereImage": 1210.2999999998137
+      },
+      "tasMo": 23.38988494873047,
+      "rssMo": 901.328125,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-haut",
+      "version": "avant",
+      "pretMs": 3050.0999999996275,
+      "msParImage": 585.0909090909091,
+      "images": 11,
+      "appels": 1274,
+      "triangles": 509978,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 20.968669891357422,
+      "rssMo": 850.875,
+      "erreurs": []
+    },
+    {
+      "scene": "proto-haut",
+      "version": "apres",
+      "pretMs": 9189.5,
+      "msParImage": 1636,
+      "images": 4,
+      "appels": 1405,
+      "triangles": 1627222,
+      "programmes": 35,
+      "timings": {
+        "debut": 198.20000000018626,
+        "corps": 134.59999999962747,
+        "ville": 250.09999999962747,
+        "titans": 224.30000000074506,
+        "soldats": 810.5999999996275,
+        "reglages": 70.59999999962747,
+        "poses": 10,
+        "premiereImage": 1455.7000000001863
+      },
+      "tasMo": 65.9435920715332,
+      "rssMo": 1064.96484375,
+      "erreurs": []
+    },
+    {
+      "scene": "E01",
+      "version": "avant",
+      "pretMs": 2713,
+      "msParImage": 381.9749999999767,
+      "images": 16,
+      "appels": 70,
+      "triangles": 246338,
+      "programmes": 0,
+      "timings": {
+        "generate": 117.09999999962747,
+        "textures": 27.40000000037253,
+        "build": 266.3999999994412
+      },
+      "tasMo": 32.146644592285156,
+      "rssMo": 867.77734375,
+      "erreurs": []
+    },
+    {
+      "scene": "E01",
+      "version": "apres",
+      "pretMs": 6286.5,
+      "msParImage": 1133.4333333332713,
+      "images": 6,
+      "appels": 83,
+      "triangles": 242952,
+      "programmes": 0,
+      "timings": {
+        "generate": 197.59999999962747,
+        "bodies": 0,
+        "textures": 26.40000000037253,
+        "build": 735.0999999996275
+      },
+      "tasMo": 9.941104888916016,
+      "rssMo": 939.23828125,
+      "erreurs": []
+    },
+    {
+      "scene": "E02",
+      "version": "avant",
+      "pretMs": 3072.7999999998137,
+      "msParImage": 495.08461538458675,
+      "images": 13,
+      "appels": 66,
+      "triangles": 270566,
+      "programmes": 0,
+      "timings": {
+        "generate": 123.29999999981374,
+        "textures": 28.40000000037253,
+        "build": 286.5
+      },
+      "tasMo": 25.392086029052734,
+      "rssMo": 882.00390625,
+      "erreurs": []
+    },
+    {
+      "scene": "E02",
+      "version": "apres",
+      "pretMs": 6484.200000000186,
+      "msParImage": 1369,
+      "images": 5,
+      "appels": 68,
+      "triangles": 266452,
+      "programmes": 0,
+      "timings": {
+        "generate": 123.70000000018626,
+        "bodies": 0,
+        "textures": 26.200000000186265,
+        "build": 738.8999999994412
+      },
+      "tasMo": 10.694660186767578,
+      "rssMo": 965.7890625,
+      "erreurs": []
+    },
+    {
+      "scene": "E07",
+      "version": "avant",
+      "pretMs": 2656.399999999441,
+      "msParImage": 423.1333333333333,
+      "images": 15,
+      "appels": 55,
+      "triangles": 257938,
+      "programmes": 0,
+      "timings": {
+        "generate": 108.29999999981374,
+        "textures": 25.40000000037253,
+        "build": 240.70000000018626
+      },
+      "tasMo": 9.093204498291016,
+      "rssMo": 852.83203125,
+      "erreurs": []
+    },
+    {
+      "scene": "E07",
+      "version": "apres",
+      "pretMs": 6390.899999999441,
+      "msParImage": 1367.7200000001117,
+      "images": 5,
+      "appels": 58,
+      "triangles": 254478,
+      "programmes": 0,
+      "timings": {
+        "generate": 127.19999999925494,
+        "bodies": 0,
+        "textures": 26.600000000558794,
+        "build": 616.5
+      },
+      "tasMo": 10.374176025390625,
+      "rssMo": 934.73828125,
+      "erreurs": []
+    },
+    {
+      "scene": "E13",
+      "version": "avant",
+      "pretMs": 3642.9000000003725,
+      "msParImage": 454.97857142858476,
+      "images": 14,
+      "appels": 62,
+      "triangles": 1304554,
+      "programmes": 0,
+      "timings": {
+        "generate": 866.5999999996275,
+        "textures": 39.200000000186265,
+        "build": 149.8999999994412
+      },
+      "tasMo": 14.72562026977539,
+      "rssMo": 805.87890625,
+      "erreurs": []
+    },
+    {
+      "scene": "E13",
+      "version": "apres",
+      "pretMs": 8172.5999999996275,
+      "msParImage": 1690.1999999999534,
+      "images": 4,
+      "appels": 88,
+      "triangles": 4911066,
+      "programmes": 0,
+      "timings": {
+        "generate": 858.9000000003725,
+        "bodies": 0,
+        "textures": 39.09999999962747,
+        "build": 427.1000000005588
+      },
+      "tasMo": 11.079505920410156,
+      "rssMo": 879.41796875,
+      "erreurs": []
+    },
+    {
+      "scene": "E14",
+      "version": "avant",
+      "pretMs": 4805.5,
+      "msParImage": 1052.6166666665424,
+      "images": 6,
+      "appels": 102,
+      "triangles": 1263370,
+      "programmes": 0,
+      "timings": {
+        "generate": 108.80000000074506,
+        "textures": 27.5,
+        "build": 1168.199999999255
+      },
+      "tasMo": 11.031570434570312,
+      "rssMo": 934.0703125,
+      "erreurs": []
+    },
+    {
+      "scene": "E14",
+      "version": "apres",
+      "pretMs": 26680.299999999814,
+      "msParImage": 6110.25,
+      "images": 2,
+      "appels": 134,
+      "triangles": 3166842,
+      "programmes": 0,
+      "timings": {
+        "generate": 114.20000000018626,
+        "bodies": 0,
+        "textures": 26.700000000186265,
+        "build": 1291.2999999998137
+      },
+      "tasMo": 11.115966796875,
+      "rssMo": 924.90625,
+      "erreurs": []
+    },
+    {
+      "scene": "E17",
+      "version": "avant",
+      "pretMs": 2133.9000000003725,
+      "msParImage": 285.72857142856253,
+      "images": 21,
+      "appels": 52,
+      "triangles": 442304,
+      "programmes": 0,
+      "timings": {
+        "generate": 400.79999999981374,
+        "textures": 26.600000000558794,
+        "build": 61.39999999944121
+      },
+      "tasMo": 10.7503662109375,
+      "rssMo": 769.6484375,
+      "erreurs": []
+    },
+    {
+      "scene": "E17",
+      "version": "apres",
+      "pretMs": 4537,
+      "msParImage": 915.9000000001064,
+      "images": 7,
+      "appels": 55,
+      "triangles": 412970,
+      "programmes": 0,
+      "timings": {
+        "generate": 409.70000000018626,
+        "bodies": 0,
+        "textures": 27.40000000037253,
+        "build": 212.69999999925494
+      },
+      "tasMo": 11.218364715576172,
+      "rssMo": 840.6875,
+      "erreurs": []
+    },
+    {
+      "scene": "E19-titans",
+      "version": "avant",
+      "pretMs": 2762.5,
+      "msParImage": 352.95882352940083,
+      "images": 17,
+      "appels": 1987,
+      "triangles": 1166534,
+      "programmes": 0,
+      "timings": {
+        "generate": 294.40000000037253,
+        "textures": 28.40000000037253,
+        "build": 225.3999999994412
+      },
+      "tasMo": 19.04653549194336,
+      "rssMo": 864.25,
+      "erreurs": []
+    },
+    {
+      "scene": "E19-titans",
+      "version": "apres",
+      "pretMs": 7437.600000000559,
+      "msParImage": 1053.7833333333645,
+      "images": 6,
+      "appels": 493,
+      "triangles": 1265200,
+      "programmes": 0,
+      "timings": {
+        "generate": 300.40000000037253,
+        "bodies": 151.09999999962747,
+        "textures": 28.799999999813735,
+        "build": 1326.2000000001863
+      },
+      "tasMo": 14.685688018798828,
+      "rssMo": 976.2578125,
+      "erreurs": []
+    },
+    {
+      "scene": "E20",
+      "version": "avant",
+      "pretMs": 2243.2999999998137,
+      "msParImage": 240.6039999999851,
+      "images": 25,
+      "appels": 48,
+      "triangles": 404888,
+      "programmes": 0,
+      "timings": {
+        "generate": 306.79999999981374,
+        "textures": 33.700000000186265,
+        "build": 93.70000000018626
+      },
+      "tasMo": 10.636039733886719,
+      "rssMo": 787.36328125,
+      "erreurs": []
+    },
+    {
+      "scene": "E20",
+      "version": "apres",
+      "pretMs": 6840.299999999814,
+      "msParImage": 1602.2750000001397,
+      "images": 4,
+      "appels": 67,
+      "triangles": 1400858,
+      "programmes": 0,
+      "timings": {
+        "generate": 302.20000000018626,
+        "bodies": 0,
+        "textures": 29.700000000186265,
+        "build": 314.09999999962747
+      },
+      "tasMo": 15.437515258789062,
+      "rssMo": 869.84765625,
+      "erreurs": []
+    },
+    {
+      "scene": "E22",
+      "version": "avant",
+      "pretMs": 1947.4000000003725,
+      "msParImage": 204.67333333333954,
+      "images": 30,
+      "appels": 33,
+      "triangles": 186448,
+      "programmes": 0,
+      "timings": {
+        "generate": 118.40000000037253,
+        "textures": 30.5,
+        "build": 123
+      },
+      "tasMo": 8.655754089355469,
+      "rssMo": 794.47265625,
+      "erreurs": []
+    },
+    {
+      "scene": "E22",
+      "version": "apres",
+      "pretMs": 4531.200000000186,
+      "msParImage": 873.7857142857143,
+      "images": 7,
+      "appels": 39,
+      "triangles": 263446,
+      "programmes": 0,
+      "timings": {
+        "generate": 115.19999999925494,
+        "bodies": 0,
+        "textures": 30.700000000186265,
+        "build": 362.70000000018626
+      },
+      "tasMo": 8.882148742675781,
+      "rssMo": 863.3671875,
+      "erreurs": []
+    },
+    {
+      "scene": "banc",
+      "version": "avant",
+      "pretMs": 2807.7999999998137,
+      "msParImage": 730.7555555555349,
+      "images": 9,
+      "appels": 0,
+      "triangles": 0,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 14.741104125976562,
+      "rssMo": 821.82421875,
+      "erreurs": []
+    },
+    {
+      "scene": "banc",
+      "version": "apres",
+      "pretMs": 6497.700000000186,
+      "msParImage": 1131.4166666666667,
+      "images": 6,
+      "appels": 0,
+      "triangles": 0,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 21.565582275390625,
+      "rssMo": 898.69921875,
+      "erreurs": []
+    },
+    {
+      "scene": "galerie",
+      "version": "avant",
+      "pretMs": 56388.799999999814,
+      "msParImage": 16.58839779005525,
+      "images": 362,
+      "appels": 0,
+      "triangles": 0,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 9.694194793701172,
+      "rssMo": 868.55859375,
+      "erreurs": []
+    },
+    {
+      "scene": "galerie",
+      "version": "apres",
+      "pretMs": 106930.79999999981,
+      "msParImage": 16.62044198895182,
+      "images": 362,
+      "appels": 0,
+      "triangles": 0,
+      "programmes": 0,
+      "timings": null,
+      "tasMo": 57.37345504760742,
+      "rssMo": 1125.63671875,
+      "erreurs": []
+    }
+  ],
+  "debit": [
+    {
+      "what": "jeu",
+      "version": "avant",
+      "pretMs": 2521,
+      "js": 491795,
+      "assets3d": 0,
+      "total": 665731
+    },
+    {
+      "what": "jeu",
+      "version": "apres",
+      "pretMs": 2529.5999999996275,
+      "js": 491793,
+      "assets3d": 0,
+      "total": 665729
+    },
+    {
+      "what": "tactique",
+      "version": "avant",
+      "pretMs": 3153.7999999998137,
+      "js": 504442,
+      "assets3d": 0,
+      "total": 540375
+    },
+    {
+      "what": "tactique",
+      "version": "apres",
+      "pretMs": 14946.100000000559,
+      "js": 574394,
+      "assets3d": 6474465,
+      "total": 7084792
+    }
+  ]
+}

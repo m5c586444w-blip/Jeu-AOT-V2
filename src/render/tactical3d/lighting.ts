@@ -45,6 +45,12 @@ interface PresetDef {
 const HEMI_WITH_ENV = 0.7;
 /** Luminance du ciel physique dans la carte d'environnement, rapportée au ciel montré. */
 const ENV_SKY_GAIN = 0.45;
+/**
+ * Côté de la carte d'environnement (texels par face). Le ciel est lisse et la carte ne sert qu'aux reflets flous et à la
+ * lumière diffuse : 64 suffit. À 256 (défaut de three.js), le filtrage de la carte coûtait près de 4 s au chargement sans GPU
+ * (R1c.6, latence de la scène tactique).
+ */
+const ENV_MAP_SIZE = 64;
 
 const PRESETS: Record<LightPreset, PresetDef> = {
   jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false, physical: { turbidity: 3, rayleigh: 1.1, mie: 0.004, mieG: 0.8, clouds: 0.38, gain: 0.5 }, envIntensity: 0.35 },
@@ -173,7 +179,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       const gain = physMat.uniforms["skyGain"];
       const shown = gain?.value as number;
       if (gain && phys.visible) gain.value = shown * ENV_SKY_GAIN;
-      tex = pmrem.fromScene(skyScene, 0, 0.5, 4000).texture;
+      tex = pmrem.fromScene(skyScene, 0, 0.5, 4000, { size: ENV_MAP_SIZE }).texture;
       if (gain) gain.value = shown;
       envMaps.set(current, tex);
     }

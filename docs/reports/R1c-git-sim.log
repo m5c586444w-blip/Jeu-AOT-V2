@@ -1,0 +1,8 @@
+$ git diff --stat a2b2f88 -- src/sim
+(fin de sortie ; code 0)
+
+$ git diff --stat a2b2f88 -- data ':!data/art'
+(fin de sortie ; code 0)
+
+$ grep -rlE "from \"three" src | grep -v "^src/render/tactical3d/"
+(fin de sortie)
