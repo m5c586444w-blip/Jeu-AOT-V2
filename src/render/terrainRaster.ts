@@ -115,7 +115,7 @@ export function renderTerrain(t: Pick<TerrainData, "grid" | "height" | "biome">,
       if (WATER.has(bio)) {
         // Eau : plus claire près des côtes, écume sur le rivage.
         const depth = Math.max(0, -e);
-        const k = bio === BIOMES.indexOf("lac") ? 0.15 : Math.min(1, depth * 1.5);
+        const k = bio === BIOMES.indexOf("lac") ? 0.15 : Math.min(1, Math.sqrt(depth) * 1.6);
         r = 104 + (40 - 104) * k;
         g = 140 + (68 - 140) * k;
         b = 152 + (88 - 152) * k;
@@ -128,8 +128,8 @@ export function renderTerrain(t: Pick<TerrainData, "grid" | "height" | "biome">,
       } else {
         // Terre : relief ombré, variation de teinte, champs en parcelles, sommets plus clairs.
         // Teinte mêlée des 4 cellules voisines (poids bilinéaires accentués) : bords des milieux doux, sans marches.
-        const sx = gx + jx * 0.5;
-        const sy = gy + jy * 0.5;
+        const sx = gx + jx * 0.8;
+        const sy = gy + jy * 0.8;
         const ix = Math.floor(sx);
         const iy = Math.floor(sy);
         const fx = sx - ix;
@@ -141,13 +141,13 @@ export function renderTerrain(t: Pick<TerrainData, "grid" | "height" | "biome">,
         for (const [ox, oy, w0] of [[0, 0, (1 - fx) * (1 - fy)], [1, 0, fx * (1 - fy)], [0, 1, (1 - fx) * fy], [1, 1, fx * fy]] as const) {
           const nb = biomeAt(ix + ox, iy + oy);
           const [cr, cg, cb] = WATER.has(nb) ? [r0, g0, b0] : (RGB[nb] ?? [r0, g0, b0]);
-          const w = w0 * w0 * w0;
+          const w = w0 * w0;
           wr += cr * w;
           wg += cg * w;
           wb += cb * w;
           wt += w;
         }
-        const mix = 0.65;
+        const mix = 0.85;
         const br = r0 * (1 - mix) + (wr / wt) * mix;
         const bg = g0 * (1 - mix) + (wg / wt) * mix;
         const bb = b0 * (1 - mix) + (wb / wt) * mix;
@@ -158,7 +158,7 @@ export function renderTerrain(t: Pick<TerrainData, "grid" | "height" | "biome">,
         let fb = bb * light * tint;
         if (bio === BIOMES.indexOf("cultures")) {
           const plot = hash(Math.floor(gx * 1.3 + noise(gx, gy) * 0.8), Math.floor(gy * 1.3 + noise(gy, gx) * 0.8));
-          const f = 0.95 + plot * 0.09;
+          const f = 0.97 + plot * 0.05;
           fr *= f;
           fg *= f * (plot > 0.7 ? 1.06 : 1);
           fb *= f * 0.95;

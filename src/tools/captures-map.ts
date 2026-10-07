@@ -52,6 +52,10 @@ try {
     await page.waitForFunction(() => performance.getEntriesByName("carte:premiere-image").length > 0);
     const first = await page.evaluate(() => performance.getEntriesByName("carte:premiere-image")[0]?.duration ?? -1);
     console.log(`  première image de la carte : ${(first / 1000).toFixed(2)} s (terrain, image du relief, couches)`);
+    await page.waitForFunction(() => performance.getEntriesByName("carte:relief-fin").length > 0, undefined, { timeout: 60000 });
+    const fine = await page.evaluate(() => performance.getEntriesByName("carte:relief-fin")[0]?.startTime ?? -1);
+    const start = await page.evaluate(() => performance.getEntriesByName("carte:debut")[0]?.startTime ?? 0);
+    console.log(`  image fine du relief (worker) prête ${((fine - start) / 1000).toFixed(2)} s après le début de la carte`);
     await page.mouse.move(5, h / 2);
     await shoot(page, `map-${tag}-ile`);
     // Région : sud de Rose (Trost), puis province.

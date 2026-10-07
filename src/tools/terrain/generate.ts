@@ -233,6 +233,29 @@ export function generateTerrain(layout: Layout, provinces: readonly ProvinceDef[
     }
   }
 
+  // Emplacement des pions (MAP.6) : dans la province, écarté du nom et de la ville, surtout en hauteur (un nom est large et bas).
+  const townOf = new Map(towns.map((t) => [t.province, t.at]));
+  for (const p of provinces) {
+    const sec = sectorOf[p.id];
+    if (!sec || p.kind === "segment") continue;
+    const avoid = [anchors[p.id] as Point, ...(townOf.has(p.id) ? [townOf.get(p.id) as Point] : [])];
+    let best: Point | null = null;
+    let bestScore = -Infinity;
+    for (const f of [0.22, 0.35, 0.5, 0.65, 0.78]) {
+      for (const db of [-0.3, -0.18, 0, 0.18, 0.3]) {
+        const c = draw.inside(sec.ring, sec.from, sec.to, f, db);
+        if (!pointInPolygon(c, polys[p.id] as Point[])) continue;
+        const clear = Math.min(...avoid.map(([ax, ay]) => Math.hypot((c[0] - ax) / 2.5, c[1] - ay)));
+        const score = Math.min(clear, 28) - Math.abs(f - 0.5) * 10 - Math.abs(db) * 10;
+        if (score > bestScore) {
+          bestScore = score;
+          best = c;
+        }
+      }
+    }
+    if (best) pawns[p.id] = best;
+  }
+
   // ——— Grilles : province par cellule, puis relief ———
   const owner = new Int16Array(N * N).fill(-1);
   const ids = Object.keys(polys);

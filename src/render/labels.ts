@@ -58,25 +58,18 @@ export class LabelLayer {
   }
 
   /** Met à jour l'échelle (taille constante à l'écran), la visibilité par niveau, et la courbure des noms de murs. */
-  update(zoom: number, lod: Lod, visible: boolean): void {
+  /**
+   * `icons` : icônes dessinées (villes, portes, pions) en coordonnées du monde, avec un rayon minimal facultatif ; un nom ne les couvre pas.
+   * Chaque nom essaie sa place par défaut, puis au-dessus, au-dessous, à droite et à gauche ; s'il ne tient nulle part
+   * sans couvrir un autre nom, il se cache (les plus importants sont placés d'abord).
+   */
+  update(zoom: number, lod: Lod, visible: boolean, icons: readonly (readonly number[])[] = []): void {
     this.container.visible = visible;
     const level = LOD_ORDER.indexOf(lod);
     const inv = 1 / zoom;
-    // Les noms qui se chevauchent à l'écran : le plus important reste, l'autre se cache (les grands d'abord).
-    const placed: [number, number, number, number][] = [];
-    for (const { spec, text } of this.ordered) {
-      text.scale.set(inv);
-      if (spec.offset) text.position.set(spec.at[0] + spec.offset[0] * inv, spec.at[1] + spec.offset[1] * inv);
-      if (LOD_ORDER.indexOf(spec.minLod) > level) {
-        text.visible = false;
-        continue;
-      }
-      const hw = (text.width / 2) * 1.04;
-      const hh = (text.height / 2) * 0.8;
-      const box: [number, number, number, number] = [text.x - hw, text.y - hh, text.x + hw, text.y + hh];
-      text.visible = !placed.some((b) => b[0] < box[2] && box[0] < b[2] && b[1] < box[3] && box[1] < b[3]);
-      if (text.visible) placed.push(box);
-    }
+    type Box = [number, number, number, number];
+    const hit = (a: Box, b: Box): boolean => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
+    const placed: Box[] = [];
     for (const arc of this.arcs) {
       // Noms posés sur la moitié nord de l'anneau (lecture sans retournement).
       // Espacement angulaire calculé pour ~15 px par lettre à l'écran, centré sur le relèvement choisi.
@@ -88,7 +81,41 @@ export class LabelLayer {
         t.position.set(x, y);
         t.rotation = (b * Math.PI) / 180;
         t.scale.set(inv);
+        const r = 7 * inv;
+        placed.push([x - r, y - r, x + r, y + r]);
       });
+    }
+    const iconR = 7 * inv;
+    // Une icône peut porter son rayon minimal dans le monde (portes : 7 km), sinon 7 px à l'écran.
+    const iconBoxes: Box[] = icons.map(([x = 0, y = 0, min = 0]) => {
+      const r = Math.max(iconR, min * 1.15);
+      return [x - r, y - r, x + r, y + r];
+    });
+    for (const { spec, text } of this.ordered) {
+      text.scale.set(inv);
+      if (LOD_ORDER.indexOf(spec.minLod) > level) {
+        text.visible = false;
+        continue;
+      }
+      const hw = (text.width / 2) * 1.04;
+      const hh = (text.height / 2) * 0.95;
+      const gapX = text.width / 2 / inv + 22;
+      const base = spec.offset ?? [0, 0];
+      const tries: Point[] = [base, [0, -19], [0, 17], [0, 28], [0, -30], [gapX, 0], [-gapX, 0]];
+      const boxAt = ([dx, dy]: Point): Box => {
+        const x = spec.at[0] + dx * inv;
+        const y = spec.at[1] + dy * inv;
+        return [x - hw, y - hh, x + hw, y + hh];
+      };
+      const free = tries.find((o) => {
+        const b = boxAt(o);
+        return !placed.some((p) => hit(p, b)) && !iconBoxes.some((p) => hit(p, b));
+      });
+      const chosen = free ?? base;
+      const box = boxAt(chosen);
+      text.position.set(spec.at[0] + chosen[0] * inv, spec.at[1] + chosen[1] * inv);
+      text.visible = free !== undefined || !placed.some((p) => hit(p, box));
+      if (text.visible) placed.push(box);
     }
   }
 }

@@ -4,6 +4,7 @@ import type { TerrainData } from "../data/terrain";
 import type { Point } from "../sim/strategic/geometry";
 import { flat } from "./ink";
 import { renderTerrain } from "./terrainRaster";
+import type { TerrainImage } from "./terrainRaster";
 
 /**
  * Couches de la carte réaliste (MAP.3) : image du terrain, côte et îlots, fleuves, routes et ponts, murs en relief,
@@ -22,15 +23,22 @@ const OPEN_SEA = 0x284458;
 /** Taille de l'image du terrain : assez fine au zoom « région », assez petite pour la première image. */
 export const TERRAIN_TEXTURE = 1280;
 
-export function terrainSprite(t: TerrainData, size = TERRAIN_TEXTURE): Sprite {
-  const img = renderTerrain(t, size);
+/** Image fine, calculée ensuite dans un worker (zooms « province », écrans 4K). */
+export const TERRAIN_TEXTURE_FINE = 3072;
+
+export function terrainTexture(img: TerrainImage): Texture {
+  const size = img.size;
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("canvas 2D indisponible");
   ctx.putImageData(new ImageData(img.pixels, size, size), 0, 0);
-  const sprite = new Sprite(Texture.from(canvas));
+  return Texture.from(canvas);
+}
+
+export function terrainSprite(t: TerrainData, size = TERRAIN_TEXTURE): Sprite {
+  const sprite = new Sprite(terrainTexture(renderTerrain(t, size)));
   const [x0, y0, x1, y1] = t.bounds;
   sprite.position.set(x0, y0);
   sprite.width = x1 - x0;

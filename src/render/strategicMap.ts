@@ -10,7 +10,8 @@ import { flat } from "./ink";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
 import { BRICK, UNKNOWN } from "./palette";
-import { drawCoast, drawOpenSea, drawRivers, drawRoads, drawTowns, drawVeil, drawWalls, MAP_INK, terrainSprite, wallRadiusAt } from "./terrainLayers";
+import type { TerrainImage } from "./terrainRaster";
+import { drawCoast, drawOpenSea, drawRivers, drawRoads, drawTowns, drawVeil, drawWalls, MAP_INK, TERRAIN_TEXTURE_FINE, terrainSprite, terrainTexture, wallRadiusAt } from "./terrainLayers";
 
 export type { Lod } from "./labels";
 
@@ -113,6 +114,7 @@ export class StrategicMap {
     host.append(app.canvas);
     const m = new StrategicMap(app, map, provinces, labels, terrain);
     m.fit();
+    m.refineTerrain();
     return m;
   }
 
@@ -123,6 +125,23 @@ export class StrategicMap {
   get lod(): Lod {
     const r = this.zoom / this.fitZoom;
     return r < 1.6 ? "monde" : r < 3.2 ? "region" : "province";
+  }
+
+  /** Échelle des traits, icônes et noms selon la taille de l'écran : lisibles en 4K comme en 1366×768. */
+  get uiScale(): number {
+    return Math.max(1, Math.min(2.4, this.app.screen.height / 900));
+  }
+
+  /** Icônes visibles au niveau courant (villes, portes, pions) : les noms se placent à côté. */
+  private iconPoints(): number[][] {
+    const RANK = { hameau: 0, bourg: 1, fort: 1, ville: 2, district: 3, capitale: 4 } as const;
+    const minRank = [2, 1, 0][LOD_ORDER.indexOf(this.lod)] ?? 0;
+    const pts: number[][] = this.terrain.towns.filter((t) => RANK[t.size] >= minRank).map((t) => [...t.at]);
+    if (this.filters.walls) for (const g of this.terrain.gates) pts.push([g.at[0], g.at[1], 7]);
+    if (this.filters.pawns) {
+      for (const p of this.provinces) if (this.dynamic.provinces[p.id]?.garrisonOrg) pts.push([...(this.terrain.provinces[p.id]?.pawn ?? p.anchor)]);
+    }
+    return pts;
   }
 
   get zoomLevel(): number {
@@ -148,7 +167,7 @@ export class StrategicMap {
     this.world.scale.set(this.zoom);
     this.world.position.set(x, y);
     this.redrawIfNeeded();
-    this.labels.update(this.zoom, this.lod, this.filters.labels);
+    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints());
     this.onCamera?.();
   }
 
@@ -200,6 +219,7 @@ export class StrategicMap {
     this.dynamic = d;
     this.bucket = Number.NaN;
     this.redrawIfNeeded();
+    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints());
   }
 
   /** Itinéraires et positions des expéditions, convois et dépôts. */
@@ -209,7 +229,7 @@ export class StrategicMap {
   }
 
   private drawRoutesLayer(): void {
-    const px = 1 / 2 ** (this.bucket / 2);
+    const px = this.uiScale / 2 ** (this.bucket / 2);
     this.gRoutes.clear();
     for (const d of this.routes.depots) drawDepot(this.gRoutes, d.at, d.radius, px);
     for (const r of this.routes.routes) drawRoute(this.gRoutes, r.points, px, r.style);
@@ -228,7 +248,7 @@ export class StrategicMap {
     this.gRoutes.visible = f.pawns;
     this.gWalls.visible = f.walls;
     this.gFog.visible = f.fog;
-    this.labels.update(this.zoom, this.lod, f.labels);
+    this.labels.update(this.zoom / this.uiScale, this.lod, f.labels, this.iconPoints());
   }
 
   setHover(id: string | null): void {
@@ -246,7 +266,7 @@ export class StrategicMap {
     const bucket = Math.round(Math.log2(this.zoom) * 2);
     if (bucket === this.bucket) return;
     this.bucket = bucket;
-    const px = 1 / 2 ** (bucket / 2);
+    const px = this.uiScale / 2 ** (bucket / 2);
     const level = LOD_ORDER.indexOf(this.lod);
     this.drawWashLayer();
     this.gRivers.clear();
@@ -279,15 +299,15 @@ export class StrategicMap {
     this.gWash.clear();
     for (const p of this.provinces) {
       if (p.kind === "segment") continue;
-      // Calque actif : aplat transparent par province, le relief reste lisible ; sans valeur, voile neutre.
+      // Calque actif : aplat transparent par province, le relief reste lisible ; sans valeur, gris « inconnu » de la légende.
       if (!this.overlay) continue;
       const value = this.overlay.get(p.id);
-      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.1 : 0.55 });
+      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.45 : 0.55 });
     }
   }
 
   private drawHighlight(): void {
-    const px = 1 / this.zoom;
+    const px = this.uiScale / this.zoom;
     this.gHighlight.clear();
     const sel = this.selected ? this.byId.get(this.selected) : undefined;
     if (sel) {
@@ -296,6 +316,27 @@ export class StrategicMap {
     }
     const hov = this.hovered && this.hovered !== this.selected ? this.byId.get(this.hovered) : undefined;
     if (hov) this.gHighlight.poly(flat(hov.polygon)).fill({ color: 0xffffff, alpha: 0.1 }).stroke({ width: 2.2 * px, color: 0xffffff, alpha: 0.9, join: "round" });
+  }
+
+  /** Remplace l'image de départ du relief par l'image fine calculée dans un worker (sans bloquer le jeu). */
+  private refineTerrain(): void {
+    if (typeof Worker === "undefined") return;
+    const worker = new Worker(new URL("../workers/terrain.worker.ts", import.meta.url), { type: "module" });
+    const { grid, height, biome } = this.terrain;
+    worker.onmessage = (e: MessageEvent<TerrainImage>): void => {
+      worker.terminate();
+      if (this.app.renderer === null) return;
+      const old = this.terrainImage.texture;
+      const [x0, y0, x1, y1] = this.terrain.bounds;
+      this.terrainImage.texture = terrainTexture(e.data);
+      this.terrainImage.position.set(x0, y0);
+      this.terrainImage.width = x1 - x0;
+      this.terrainImage.height = y1 - y0;
+      old.destroy(true);
+      performance.mark("carte:relief-fin");
+    };
+    worker.onerror = () => worker.terminate();
+    worker.postMessage({ terrain: { grid, height, biome }, size: TERRAIN_TEXTURE_FINE });
   }
 
   destroy(): void {
