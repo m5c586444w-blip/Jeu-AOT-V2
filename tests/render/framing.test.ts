@@ -120,8 +120,8 @@ describe("cadrage d'ouverture de bataille (R0, critère f), piloté par tableau"
  * à mi-corps) passait. On calcule ici la boîte englobante de ce que la scène DESSINE pour le porteur, avec les tracés
  * réels (`figures.ts`, bornes Pixi, épaisseur des traits comprise) :
  * - la figure du Titan à sa hauteur dessinée (agrandie en vue d'ensemble), tête comprise, pour les 10 silhouettes et les
- *   deux sens : entièrement dans la zone visible, sous la marge haute retenue (10 px, jamais moins de 2 px) ;
- * - les éclairs : le centre des halos et la moitié basse des zigzags (qui tombent du ciel) dans la zone visible (D-85).
+ *   deux sens : entièrement dans la zone visible, sous la marge haute retenue (24 px, jamais moins de 4 px) ;
+ * - les éclairs : le centre des halos et les zigzags ENTIERS dans la zone visible, sous la marge haute (R1e §6, point 8).
  * La zone visible est la scène (le canevas sous la barre de titre).
  */
 describe("R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) contre la zone visible", () => {
@@ -147,22 +147,23 @@ describe("R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) 
       const margin = f.topMarginPx ?? 0;
       const where = `boîte du porteur (${box.x0.toFixed(1)}, ${box.y0.toFixed(1)}) – (${box.x1.toFixed(1)}, ${box.y1.toFixed(1)}) px dans une scène de ${s.scene.width}×${s.scene.height}, zoom ${f.zoom.toFixed(2)} px/m, figure de ${h.toFixed(1)} m, marge haute ${margin} px`;
       // Figure entière, tête comprise, sous la marge haute retenue (jamais moins de FRAME_TOP_MARGIN_MIN_PX).
-      expect(margin, where).toBeGreaterThanOrEqual(FRAME_TOP_MARGIN_MIN_PX);
+      expect(margin, where).toBeGreaterThanOrEqual(f.boltsInFrame ? FRAME_TOP_MARGIN_MIN_PX : 2);
       expect(box.y0, `tête sous le bord haut, avec la marge haute : ${where}`).toBeGreaterThanOrEqual(margin - 0.5);
       expect(box.x0, `bord gauche : ${where}`).toBeGreaterThanOrEqual(0);
       expect(box.x1, `bord droit : ${where}`).toBeLessThanOrEqual(s.scene.width);
       expect(box.y1, `bord bas : ${where}`).toBeLessThanOrEqual(s.scene.height);
-      // Éclairs : le pied des halos et la moitié basse des zigzags se voient.
+      // Éclairs : le pied des halos et les zigzags entiers se voient (R1e §6, point 8), sous la marge haute.
       const flash = shifterFlashBounds(fx, fy, h);
       for (const bolt of flash.bolts.map(toScr)) {
-        const midY = (bolt.y0 + bolt.y1) / 2;
-        expect(midY >= 0 && bolt.y1 <= s.scene.height, `moitié basse du zigzag visible (${bolt.y0.toFixed(1)} → ${bolt.y1.toFixed(1)} px) : ${where}`).toBe(true);
+        // Sauf repli (sol sous 85 % même à la marge minimale) : le haut du zigzag, à côté de la figure, peut alors sortir.
+        if (!f.boltsInFrame) continue;
+        expect(bolt.y0 >= margin - 0.5 && bolt.y1 <= s.scene.height && bolt.x0 >= 0 && bolt.x1 <= s.scene.width, `zigzag entier visible (${bolt.y0.toFixed(1)} → ${bolt.y1.toFixed(1)} px) : ${where}`).toBe(true);
       }
       for (const halo of flash.halos.map(toScr)) {
         const cx = (halo.x0 + halo.x1) / 2;
         expect(cx >= 0 && cx <= s.scene.width && halo.y1 > 0 && halo.y0 < s.scene.height, `halo de l'éclair dans le champ : ${where}`).toBe(true);
       }
-      out.push(`${s.name} : ${where} ; sol ${(100 * groundShare(f, { ...s.scene, mapW: b.mapW, mapH: b.mapH })).toFixed(1)} %`);
+      out.push(`${s.name} : ${where} ; zigzags entiers : ${f.boltsInFrame ? "oui" : "non (repli)"} ; sol ${(100 * groundShare(f, { ...s.scene, mapW: b.mapW, mapH: b.mapH })).toFixed(1)} %`);
     }
   });
 
@@ -171,10 +172,10 @@ describe("R0 f rouvert : boîte englobante du porteur dessiné (tête comprise) 
     if (process.env["R0_F_LOG"]) writeFileSync("docs/reports/R0-f-boite.log", `${out.join("\n")}\n`);
   });
 
-  it("contrôle de la mesure : la figure dessinée dépasse la hauteur 100 (tête) ; les zigzags montent à 1,4 × la hauteur", () => {
+  it("contrôle de la mesure : la figure dessinée dépasse la hauteur 100 (tête) ; les zigzags montent à 1,06 × la hauteur", () => {
     const tops = Array.from({ length: 10 }, (_, sil) => -titanFigureBounds(sil, 1).minY);
     expect(Math.max(...tops)).toBeGreaterThan(100);
     expect(Math.max(...tops)).toBeLessThanOrEqual(105);
-    for (const bolt of shifterFlashBounds(0, 0, 15).bolts) expect(-bolt.minY).toBeGreaterThanOrEqual(21);
+    for (const bolt of shifterFlashBounds(0, 0, 15).bolts) expect(-bolt.minY).toBeGreaterThanOrEqual(15.9);
   });
 });

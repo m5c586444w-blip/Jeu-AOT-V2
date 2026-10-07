@@ -160,6 +160,26 @@ function drawWindow(g: CanvasRenderingContext2D, rand: Rand, x: number, y: numbe
   return [x + 3, y + 3, w - 6, h - 6];
 }
 
+/**
+ * R1e (§6, point 1) : suie d'une ville-usine. Voile sombre général et coulures noires depuis le haut et sous les appuis ;
+ * `k` de 0 (aucune) à 1.
+ */
+function soot(g: CanvasRenderingContext2D, rand: Rand, w: number, h: number, k: number): void {
+  if (k <= 0) return;
+  g.fillStyle = `rgba(32,24,20,${0.28 * k})`;
+  g.fillRect(0, 0, w, h);
+  for (let i = 0; i < w / 10; i++) {
+    const x = rand() * w;
+    const y0 = rand() < 0.5 ? 0 : rand() * h * 0.7;
+    const len = 20 + rand() * h * 0.6;
+    const grd = g.createLinearGradient(0, y0, 0, y0 + len);
+    grd.addColorStop(0, `rgba(18,14,12,${0.5 * k})`);
+    grd.addColorStop(1, "rgba(18,14,12,0)");
+    g.fillStyle = grd;
+    g.fillRect(x, y0, 2 + rand() * 9, len);
+  }
+}
+
 export interface FacadeSet {
   upper: Texture;
   upperLit: Texture;
@@ -238,12 +258,16 @@ export function facadeSet(seed: number, m: WallMaterial, p: StyleProfile): Facad
   }
   const [cp, gp] = canvas(256, 256);
   wallBase(gp, rand, m, p, 256, 256, 256);
+  const k = p.atmosphere?.suie ?? 0;
+  soot(gu, rand, W, BAY * 2, k);
+  soot(gg, rand, W, BAY, k);
+  soot(gp, rand, 256, 256, k);
   return { upper: tex(cu), upperLit: tex(cl), ground: tex(cg), groundLit: tex(cgl), plain: tex(cp) };
 }
 
-/** Couvertures en niveaux de gris : tuiles, ardoises, chaume, terrasse, toile. */
-export function roofTex(seed: number, cover: RoofMaterial): Texture {
-  const rand = seeded(derive(seed, 1100 + ["tuiles_rouges", "ardoise", "chaume", "plat", "toile", "aucun"].indexOf(cover)));
+/** Couvertures en niveaux de gris : tuiles, ardoises, chaume, terrasse, toile ; `suie` (R1e) : couverture noircie. */
+export function roofTex(seed: number, cover: RoofMaterial, suie = 0): Texture {
+  const rand = seeded(derive(seed, 1100 + ["tuiles_rouges", "ardoise", "chaume", "plat", "toile", "aucun", "tuile_canal", "bardeau"].indexOf(cover)));
   const [c, g] = canvas(256, 256);
   g.fillStyle = "rgb(150,150,150)";
   g.fillRect(0, 0, 256, 256);
@@ -289,6 +313,40 @@ export function roofTex(seed: number, cover: RoofMaterial): Texture {
       g.fillStyle = "rgba(0,0,0,0.12)";
       g.fillRect(0, y + 28, 256, 4);
     }
+  } else if (cover === "tuile_canal") {
+    // R1e : tuiles canal (rondes), rangs alternés creux et couvrants, ombre de recouvrement.
+    for (let x = 0, col = 0; x < 256; x += 16, col++) {
+      for (let y = 0; y < 256; y += 28) {
+        const v = 150 + rand() * 70;
+        const top = col % 2 === 0;
+        const grd = g.createLinearGradient(x, 0, x + 16, 0);
+        const a = top ? 0.72 : 1.05;
+        const b = top ? 1.15 : 0.78;
+        grd.addColorStop(0, `rgb(${v * a},${v * a},${v * a})`);
+        grd.addColorStop(0.5, `rgb(${v * b},${v * b},${v * b})`);
+        grd.addColorStop(1, `rgb(${v * a},${v * a},${v * a})`);
+        g.fillStyle = grd;
+        g.fillRect(x, y, 16, 26);
+        g.fillStyle = "rgba(0,0,0,0.32)";
+        g.fillRect(x, y + 25, 16, 3);
+      }
+    }
+  } else if (cover === "bardeau") {
+    // R1e : bardeaux de bois, largeurs inégales, fil du bois.
+    for (let y = 0; y < 256; y += 12) {
+      let x = -rand() * 12;
+      while (x < 256) {
+        const w = 8 + rand() * 14;
+        const v = 140 + rand() * 80;
+        g.fillStyle = `rgb(${v},${v},${v})`;
+        g.fillRect(x + 0.7, y, w - 1.4, 11);
+        g.fillStyle = "rgba(0,0,0,0.12)";
+        for (let k = 0; k < 3; k++) g.fillRect(x + 1 + rand() * (w - 2), y + 1, 0.8, 9);
+        x += w;
+      }
+      g.fillStyle = "rgba(0,0,0,0.3)";
+      g.fillRect(0, y + 10.5, 256, 1.5);
+    }
   } else if (cover === "toile") {
     for (let y = 0; y < 256; y += 3) {
       g.fillStyle = `rgba(0,0,0,${0.04 + rand() * 0.04})`;
@@ -308,6 +366,7 @@ export function roofTex(seed: number, cover: RoofMaterial): Texture {
     g.ellipse(rand() * 256, rand() * 256, 8 + rand() * 30, 4 + rand() * 12, 0, 0, Math.PI * 2);
     g.fill();
   }
+  soot(g, rand, 256, 256, suie);
   return tex(c, true);
 }
 

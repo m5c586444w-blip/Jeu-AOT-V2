@@ -12,8 +12,11 @@ const Hex = z.string().regex(/^#[0-9A-Fa-f]{6}$/, "teinte attendue au format #RR
 const Share = z.number().min(0).max(1);
 const Range = z.tuple([z.number().min(0), z.number().min(0)]).refine(([a, b]) => a <= b, "intervalle [min, max] attendu");
 
-/** Couvertures de toit : celles de la fiche B1, plus la toile (camps) et « aucun » (ruines, lieux sans bâtiment). */
-export const ROOF_MATERIALS = ["tuiles_rouges", "ardoise", "chaume", "plat", "toile", "aucun"] as const;
+/**
+ * Couvertures de toit : celles de la fiche B1, plus la toile (camps) et « aucun » (ruines, lieux sans bâtiment) ; R1e (§6,
+ * point 2) : tuile canal et bardeau de bois.
+ */
+export const ROOF_MATERIALS = ["tuiles_rouges", "ardoise", "chaume", "plat", "toile", "aucun", "tuile_canal", "bardeau"] as const;
 export type RoofMaterial = (typeof ROOF_MATERIALS)[number];
 /** Matériaux de façade de la fiche B1. */
 export const WALL_MATERIALS = ["colombage", "enduit", "pierre_taillee", "pierre_brute", "brique", "bois"] as const;
@@ -134,6 +137,11 @@ export const StyleProfileSchema = z
       .refine((m) => m.visible === (m.forme !== "aucune") && m.visible === (m.distance_m !== null), "mur visible ⇔ forme et distance renseignées"),
     variantes: z.array(VariantSchema),
     notes_canon: z.string().min(1),
+    /**
+     * R1e (§6, point 1) : atmosphère du lieu. `fumee` : ciel gris de fumée, voile de brume, lumière plus sombre et plus rouge ;
+     * `suie` : suie sur les façades et les toits (0 à 1). Absente : ciel clair.
+     */
+    atmosphere: z.object({ fumee: Share, suie: Share, canon: CanonSchema, note: z.string().min(1) }).strict().optional(),
   })
   .strict();
 export type StyleProfile = z.infer<typeof StyleProfileSchema>;
@@ -177,6 +185,8 @@ export const MaterialsFileSchema = z
         .strict(),
     ),
     accents: z.array(Hex).min(2),
+    /** R1e (§6, point 2) : teintes d'enduit (ocre, rose, sauge, gris bleu, crème…) mêlées maison par maison à celle du profil. */
+    enduits: z.object({ teintes: z.array(Hex).min(4), canon: CanonSchema }).strict(),
     sols: z.record(z.enum(GROUNDS), z.object({ base: Hex, canon: CanonSchema }).strict()),
     physiques: z.record(z.enum(PHYSICAL), Hex),
     notes_canon: z.string().min(1),

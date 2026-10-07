@@ -18,7 +18,7 @@
       "faitage_m": [8, 17],
       "reperes": ["eglise_clocher", "place_centrale", "porte_exterieure", "porte_interieure", "remparts_interieurs", "voie_eau_evacuation", "poste_garnison"]
     },
-    "toits": { "tuiles_rouges": 0.82, "ardoise": 0.04, "chaume": 0.09, "plat": 0.05 },
+    "toits": { "tuiles_rouges": 0.62, "tuile_canal": 0.08, "bardeau": 0.08, "ardoise": 0.08, "chaume": 0.09, "plat": 0.05 },
     "materiaux": { "colombage": 0.55, "enduit": 0.2, "pierre_brute": 0.15, "pierre_taillee": 0.05, "brique": 0.05 },
     "densite": 0.8,
     "palette": { "facade": "#D9C9A8", "bois": "#6B4A2F", "pierre": "#9C8F7C", "toit": "#8A3B2A", "toit_2": "#6E4A3A", "sol": "#7A8A55" },
@@ -53,7 +53,7 @@
       "faitage_m": [11, 21],
       "reperes": ["grande_eglise", "marche", "casernes_pierre", "qg_garnison", "porte_exterieure", "porte_interieure"]
     },
-    "toits": { "tuiles_rouges": 0.45, "ardoise": 0.38, "plat": 0.17 },
+    "toits": { "tuiles_rouges": 0.38, "ardoise": 0.32, "tuile_canal": 0.06, "bardeau": 0.06, "chaume": 0.03, "plat": 0.15 },
     "materiaux": { "enduit": 0.3, "pierre_taillee": 0.35, "brique": 0.2, "colombage": 0.1, "pierre_brute": 0.05 },
     "densite": 0.92,
     "palette": { "facade": "#C9BB9C", "bois": "#5C4430", "pierre": "#8C8A84", "toit": "#9A4A32", "toit_2": "#596068", "sol": "#6F7B52" },
@@ -120,7 +120,7 @@
       "faitage_m": [7, 13],
       "reperes": ["eglise_clocher", "marche", "ecuries", "lisiere_foret", "porte_exterieure", "porte_interieure"]
     },
-    "toits": { "tuiles_rouges": 0.3, "ardoise": 0.15, "chaume": 0.5, "plat": 0.05 },
+    "toits": { "tuiles_rouges": 0.3, "ardoise": 0.15, "chaume": 0.4, "bardeau": 0.1, "plat": 0.05 },
     "materiaux": { "bois": 0.6, "pierre_brute": 0.25, "enduit": 0.1, "colombage": 0.05 },
     "densite": 0.5,
     "palette": { "facade": "#D3C49F", "bois": "#73502F", "pierre": "#8F8676", "toit": "#B19A64", "toit_2": "#A04A33", "sol": "#3F6233" },
@@ -154,7 +154,7 @@
       "faitage_m": [12, 21],
       "reperes": ["edifice_central", "fontaines", "canaux", "ponts", "acces_souterrain", "porte_exterieure", "porte_interieure"]
     },
-    "toits": { "ardoise": 0.65, "tuiles_rouges": 0.25, "plat": 0.1 },
+    "toits": { "ardoise": 0.58, "tuiles_rouges": 0.22, "bardeau": 0.05, "tuile_canal": 0.05, "plat": 0.1 },
     "materiaux": { "pierre_taillee": 0.6, "enduit": 0.3, "brique": 0.1 },
     "densite": 0.78,
     "palette": { "facade": "#D5D0C6", "bois": "#433A33", "pierre": "#7B8088", "toit": "#4A5A6B", "toit_2": "#8E5A44", "sol": "#65705C" },
@@ -219,7 +219,7 @@
       "faitage_m": [11, 18],
       "reperes": ["eglise_clocher", "place_centrale", "fontaines", "porte_exterieure", "porte_interieure"]
     },
-    "toits": { "ardoise": 0.25, "tuiles_rouges": 0.65, "plat": 0.1 },
+    "toits": { "ardoise": 0.22, "tuiles_rouges": 0.55, "tuile_canal": 0.1, "bardeau": 0.05, "plat": 0.08 },
     "materiaux": { "enduit": 0.6, "pierre_taillee": 0.25, "brique": 0.15 },
     "densite": 0.72,
     "palette": { "facade": "#E2DCCB", "bois": "#4E4236", "pierre": "#A09C92", "toit": "#A85A3E", "toit_2": "#4F6274", "sol": "#69735A" },
@@ -281,7 +281,7 @@
       "faitage_m": [6, 12],
       "reperes": ["eglise_simple", "marche", "moulins", "remparts_legers"]
     },
-    "toits": { "tuiles_rouges": 0.6, "chaume": 0.3, "ardoise": 0.1 },
+    "toits": { "tuiles_rouges": 0.5, "bardeau": 0.1, "chaume": 0.3, "ardoise": 0.1 },
     "materiaux": { "pierre_brute": 0.25, "bois": 0.15, "enduit": 0.4, "colombage": 0.2 },
     "densite": 0.42,
     "palette": { "facade": "#E0D2AE", "bois": "#6A4A2C", "pierre": "#A0967F", "toit": "#B0573C", "toit_2": "#B39B62", "sol": "#7C9A48" },
@@ -601,7 +601,7 @@
     "toits": { "plat": 0.4, "ardoise": 0.45, "tuiles_rouges": 0.15 },
     "materiaux": { "brique": 0.7, "pierre_taillee": 0.25, "bois": 0.05 },
     "densite": 0.6,
-    "palette": { "facade": "#8A5A44", "bois": "#3E322A", "pierre": "#6E6A64", "toit": "#4A4440", "toit_2": "#7A6A5A", "sol": "#5A564C" },
+    "palette": { "facade": "#7A4636", "bois": "#3E322A", "pierre": "#605650", "toit": "#4A4440", "toit_2": "#7A6A5A", "sol": "#4E463E" },
     "accessoires": ["cheminees_usine", "rails", "caisses", "tonneaux", "lanternes"],
     "terrain": { "type": "collines", "relief_m": 26, "eau": "aucune" },
     "vegetation": { "arbres": 0.08, "haies": 0, "champs": 0, "vergers": 0, "foret": 0.05, "essence": "ordinaire", "envahissement": 0 },
@@ -609,7 +609,8 @@
     "variantes": [
       { "id": "cavernes", "nom": "Cavernes de glace : anciennes caldeiras, roche sombre, lueurs", "canon": "A", "etat": "intact", "special": "cavernes" }
     ],
-    "notes_canon": "Ville-usine et cavernes de glace C, localisation ?. Brique, pierre, cheminées ; cavernes : roche sombre, lueurs A (partie B)."
+    "notes_canon": "Ville-usine et cavernes de glace C, localisation ?. Brique, pierre, cheminées ; cavernes : roche sombre, lueurs A (partie B).",
+    "atmosphere": { "fumee": 0.8, "suie": 0.65, "canon": "A", "note": "Ville-usine : fumées des cheminées d'usine, suie (adaptation ; consigne R1e §6, point 1, option a de l'utilisateur)." }
   },
   {
     "id": "E22",

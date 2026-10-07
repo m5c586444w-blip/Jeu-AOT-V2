@@ -24,6 +24,8 @@ import { WEATHERS, createFires, createWeather } from "./weather";
 import type { WeatherKind } from "./weather";
 import { puffTexture, skinTexture } from "./textures";
 import { applyPhotoTextures, loadPhotoTextures, photoCounts } from "./photoTextures";
+import { parementTextures } from "./parement";
+import type { ParementTextures } from "./parement";
 import type { Matiere } from "./photoTextures";
 
 /**
@@ -80,6 +82,7 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
   let ground: Texture | null | undefined;
   let cobble: Texture | null = null;
   let stone: Texture | null = null;
+  let par: ParementTextures | null = null;
   let mist: Texture | null = null;
   let skin: Texture | null = null;
   let puff: Texture | null = null;
@@ -98,7 +101,7 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
     roof(c) {
       let t = roofs.get(c);
       if (!t) {
-        t = roofTex(env.seed, c);
+        t = roofTex(env.seed, c, env.profile.atmosphere?.suie ?? 0);
         roofs.set(c, t);
       }
       return t;
@@ -114,6 +117,10 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
     wallStone() {
       stone ??= wallStoneTex(env.seed);
       return stone;
+    },
+    parement() {
+      par ??= parementTextures(env.seed);
+      return par;
     },
     mist() {
       mist ??= mistTex(env.seed);
@@ -140,14 +147,15 @@ export function envTextures(env: EnvData, q: Quality): EnvTextures & { all(): Te
       return ripples;
     },
     all() {
-      return [...[...facades.values()].flatMap((f) => [f.upper, f.upperLit, f.ground, f.groundLit, f.plain]), ...roofs.values(), ...(ground ? [ground] : []), ...(cobble ? [cobble] : []), ...(stone ? [stone] : []), ...(mist ? [mist] : []), ...(skin ? [skin] : []), ...(puff ? [puff] : []), ...(leaves ? [leaves] : []), ...(detail ? [detail.albedo, detail.normal] : []), ...(ripples ? [ripples] : [])];
+      return [...[...facades.values()].flatMap((f) => [f.upper, f.upperLit, f.ground, f.groundLit, f.plain]), ...roofs.values(), ...(ground ? [ground] : []), ...(cobble ? [cobble] : []), ...(stone ? [stone] : []), ...(par ? [par.A, par.B, par.C] : []), ...(mist ? [mist] : []), ...(skin ? [skin] : []), ...(puff ? [puff] : []), ...(leaves ? [leaves] : []), ...(detail ? [detail.albedo, detail.normal] : []), ...(ripples ? [ripples] : [])];
     },
   };
 }
 
 /** Densité de brume d'une scène : éclaircie pour les grands terrains, épaissie par la brume au sol (forêt, marais). */
 export function fogScaleOf(env: EnvData): number {
-  return (env.terrain ? 0.5 : 1) * (1 + 3 * env.mist.density);
+  // R1e (§6, point 6) : sous les Arbres Géants, brouillard plus mince (la brume au sol reste dessinée par ses nappes).
+  return (env.terrain ? 0.5 : 1) * (1 + 3 * env.mist.density) * (env.giants.length > 0 ? 0.55 : 1);
 }
 
 /** Éclairage souterrain d'une scène sous voûte (null à l'air libre) : ambiance du profil, glace en teinte de cristal. */
@@ -235,7 +243,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI * 0.495;
   const target0 = new Vector3(...env.views.principale.target);
-  const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
+  const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env), smoke: env.cave ? 0 : (env.profile.atmosphere?.fumee ?? 0), fill: env.giants.length > 0 ? 2.1 : 1, exposureScale: env.giants.length > 0 ? 1.3 : 1 });
 
   // Qualité basse allégée (R1d) : réglée avant la première carte d'environnement.
   lighting.setLite(quality === "bas");

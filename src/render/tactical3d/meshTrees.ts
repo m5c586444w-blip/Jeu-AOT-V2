@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, Color, CylinderGeometry, IcosahedronGeometry, Matrix4, PlaneGeometry, Quaternion, Vector3 } from "three";
+import { BufferAttribute, BufferGeometry, CatmullRomCurve3, Color, CylinderGeometry, IcosahedronGeometry, Matrix4, PlaneGeometry, Quaternion, Vector3 } from "three";
 import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import type { TreeKind } from "./terrain";
 
@@ -38,7 +38,7 @@ function noise(x: number, y: number, z: number): number {
   return l(l(l(c(0, 0, 0), c(1, 0, 0), u), l(c(0, 1, 0), c(1, 1, 0), u), v), l(l(c(0, 0, 1), c(1, 0, 1), u), l(c(0, 1, 1), c(1, 1, 1), u), v), w);
 }
 
-const BARK = new Color(0.5, 0.42, 0.34);
+export const BARK = new Color(0.5, 0.42, 0.34);
 const LEAF = new Color(1, 1, 1);
 
 /** Ajoute couleur et coordonnées de texture uniformes, garde position et normale, sans index (fusion homogène). */
@@ -147,7 +147,9 @@ function broadleaf(near: boolean, o: { trunkH: number; trunkR: number; crownY: n
   const wood: BufferGeometry[] = [];
   const parts: BufferGeometry[] = [];
   const top = new Vector3(0, o.trunkH, 0);
-  wood.push(limb(new Vector3(0, -0.3, 0), top, o.trunkR, o.trunkR * 0.62, near ? 8 : 5));
+  // R1e (§6, point 6) : tronc légèrement sinueux (proche), branches maîtresses courbes et ramifiées vers chaque massif.
+  if (near) wood.push(sweepLimb([new Vector3(0, -0.3, 0), new Vector3(o.trunkR * 0.35 * (hash(1, o.salt, 2) - 0.5), o.trunkH * 0.45, o.trunkR * 0.35 * (hash(2, o.salt, 2) - 0.5)), top], o.trunkR, o.trunkR * 0.62, 6, 8));
+  else wood.push(limb(new Vector3(0, -0.3, 0), top, o.trunkR, o.trunkR * 0.62, 5));
   const crown = new Vector3(0, o.crownY, 0);
   const lumps: Lump[] = [{ c: crown.clone(), r: new Vector3(o.crownR * 0.72, o.crownR * 0.62 * o.flat, o.crownR * 0.72) }];
   const n = near ? o.lumps : Math.min(3, o.lumps);
@@ -159,10 +161,13 @@ function broadleaf(near: boolean, o: { trunkH: number; trunkR: number; crownY: n
     lumps.push({ c: new Vector3(Math.cos(a) * rr, y, Math.sin(a) * rr), r: new Vector3(s, s * 0.85 * o.flat, s) });
   }
   if (near)
-    for (const l of lumps.slice(1)) {
-      const b = l.c.clone().multiplyScalar(0.7).setY(l.c.y - 0.25 * l.r.y);
-      wood.push(limb(top.clone().setY(o.trunkH * 0.9), b, o.trunkR * 0.45, o.trunkR * 0.15, 5));
-    }
+    lumps.slice(1).forEach((l, i) => {
+      const from = new Vector3(0, o.trunkH * (0.78 + 0.16 * hash(i, o.salt, 11)), 0);
+      const h = l.c.clone().setY(0);
+      const len = Math.max(0.6, h.length() * 0.92);
+      const br = ramifiedBranch(from, h.normalize(), len, Math.max(0.3, l.c.y - from.y - 0.2 * l.r.y), o.trunkR * 0.48, true, o.salt * 13 + i, BARK, { rings: 6, sides: 5, twigs: true });
+      wood.push(...br.wood);
+    });
   for (const [i, l] of lumps.entries()) parts.push(lump(l, crown, o.crownR, near ? 1 : 0, o.salt + i * 3.7));
   return { wood: merge(wood), solid: merge(parts), cards: near ? cards(lumps, crown, o.crownR, 20, o.crownR * 0.72, o.salt) : null };
 }
@@ -269,4 +274,102 @@ export function realisticTree(kind: TreeKind, near: boolean): TreeParts {
     case "buisson":
       return bush(near);
   }
+}
+
+/**
+ * R1e (§6, point 6) : bois courbe. Tube balayé le long d'une courbe passant par `pts` (Catmull-Rom), rayon effilé de `r0` à
+ * `r1`, repères transportés (pas de vrille), `rings` anneaux de `sides` côtés ; teinte d'écorce.
+ */
+export function sweepLimb(pts: readonly Vector3[], r0: number, r1: number, rings: number, sides: number, color = BARK): BufferGeometry {
+  // Courbe échantillonnée sans reparamétrage par la longueur (rapide) ; repères transportés le long des tangentes.
+  const curve = new CatmullRomCurve3([...pts], false, "centripetal");
+  const P = Array.from({ length: rings + 1 }, (_, i) => curve.getPoint(i / rings));
+  const T = P.map((_, i) => (P[Math.min(rings, i + 1)] as Vector3).clone().sub(P[Math.max(0, i - 1)] as Vector3).normalize());
+  const t0 = T[0] as Vector3;
+  let n = Math.abs(t0.y) < 0.9 ? new Vector3(0, 1, 0).cross(t0).normalize() : new Vector3(1, 0, 0).cross(t0).normalize();
+  const pos = new Float32Array((rings + 1) * (sides + 1) * 3);
+  const nor = new Float32Array((rings + 1) * (sides + 1) * 3);
+  const uv = new Float32Array((rings + 1) * (sides + 1) * 2);
+  const b = new Vector3();
+  const d = new Vector3();
+  for (let i = 0; i <= rings; i++) {
+    const t = T[i] as Vector3;
+    // Transport : la normale précédente, projetée sur le plan de la nouvelle tangente.
+    n = n.sub(t.clone().multiplyScalar(n.dot(t))).normalize();
+    b.crossVectors(t, n);
+    const c = P[i] as Vector3;
+    const r = r0 + (r1 - r0) * Math.pow(i / rings, 0.8);
+    for (let j = 0; j <= sides; j++) {
+      const a = (j / sides) * Math.PI * 2;
+      d.copy(n).multiplyScalar(Math.cos(a)).addScaledVector(b, Math.sin(a));
+      const k = i * (sides + 1) + j;
+      pos[k * 3] = c.x + d.x * r;
+      pos[k * 3 + 1] = c.y + d.y * r;
+      pos[k * 3 + 2] = c.z + d.z * r;
+      nor[k * 3] = d.x;
+      nor[k * 3 + 1] = d.y;
+      nor[k * 3 + 2] = d.z;
+      uv[k * 2] = j / sides;
+      uv[k * 2 + 1] = i / rings;
+    }
+  }
+  const idx: number[] = [];
+  for (let i = 0; i < rings; i++)
+    for (let j = 0; j < sides; j++) {
+      const a = i * (sides + 1) + j;
+      const e = a + sides + 1;
+      idx.push(a, e, a + 1, e, e + 1, a + 1);
+    }
+  const g = new BufferGeometry();
+  g.setAttribute("position", new BufferAttribute(pos, 3));
+  g.setAttribute("normal", new BufferAttribute(nor, 3));
+  g.setAttribute("uv", new BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return finish(g, () => color);
+}
+
+/**
+ * Branche ramifiée (R1e §6, point 6) : branche maîtresse courbe de `from` dans la direction horizontale `dir` (longueur `len`,
+ * montée finale `rise`), deux branches secondaires (à 45 % et 72 % de sa longueur, écartées de part et d'autre, montantes),
+ * et des rameaux au bout (niveau proche). Renvoie le bois et les extrémités (pour y poser le feuillage).
+ */
+export function ramifiedBranch(from: Vector3, dir: Vector3, len: number, rise: number, r0: number, near: boolean, salt: number, color = BARK, detail: { rings: number; sides: number; twigs: boolean } = { rings: 10, sides: 7, twigs: true }): { wood: BufferGeometry[]; tips: Vector3[] } {
+  const up = new Vector3(0, 1, 0);
+  const side = new Vector3().crossVectors(up, dir).normalize();
+  const wob = (k: number): number => (hash(salt, k, 3) - 0.5) * 2;
+  const P = (f: number, lift: number, lateral: number): Vector3 => from.clone().addScaledVector(dir, len * f).addScaledVector(up, lift).addScaledVector(side, lateral);
+  // Branche en arc : elle monte d'abord, s'infléchit vers l'horizontale, son bout retombe à la hauteur `rise` ; légère torsion.
+  const main = [from.clone(), P(0.26, rise * 0.6 + len * 0.13, len * 0.06 * wob(1)), P(0.6, rise * 1.05 + len * 0.1, len * 0.1 * wob(2)), P(1, rise, len * 0.05 * wob(3))];
+  const wood = [sweepLimb(main, r0, r0 * 0.22, near ? detail.rings : 2, near ? detail.sides : 4, color)];
+  const tips: Vector3[] = [main[3] as Vector3];
+  const curve = new CatmullRomCurve3(main, false, "centripetal");
+  for (const [f, s] of [
+    [0.45, 1],
+    [0.72, -1],
+  ] as const) {
+    const base = curve.getPoint(f);
+    const tan = curve.getTangent(f);
+    const out = tan.clone().setY(0).normalize().multiplyScalar(0.55).addScaledVector(side, s * (0.75 + 0.2 * wob(5 + f * 10))).normalize();
+    const l2 = len * (0.42 + 0.12 * hash(salt, f * 7, 4));
+    // Branche secondaire courbe elle aussi : montée, puis bout presque horizontal.
+    const q = [base, base.clone().addScaledVector(out, l2 * 0.4).addScaledVector(up, l2 * 0.26), base.clone().addScaledVector(out, l2 * 0.75).addScaledVector(up, l2 * 0.36), base.clone().addScaledVector(out, l2).addScaledVector(up, l2 * 0.33)];
+    if (!near) continue;
+    wood.push(sweepLimb(q, r0 * (0.5 - f * 0.18), r0 * 0.08, Math.max(2, Math.round(detail.rings * 0.6)), Math.max(4, detail.sides - 2), color));
+    tips.push(q[3] as Vector3);
+    if (detail.twigs) {
+      // Rameaux : deux brins courts au bout de chaque branche secondaire.
+      for (const t of [-1, 1]) {
+        const tip = q[3] as Vector3;
+        const tw = out.clone().addScaledVector(side, t * 0.6).normalize();
+        wood.push(sweepLimb([tip, tip.clone().addScaledVector(tw, l2 * 0.22).addScaledVector(up, l2 * 0.12)], r0 * 0.07, r0 * 0.025, 2, 4, color));
+      }
+    }
+  }
+  return { wood, tips };
+}
+
+/** `ramifiedBranch` depuis des triplets (contrôles sans three.js) : bois (positions) et extrémités. */
+export function ramifiedBranchAt(from: readonly [number, number, number], dir: readonly [number, number, number], len: number, rise: number, r0: number): { positions: Float32Array[]; tips: [number, number, number][] } {
+  const b = ramifiedBranch(new Vector3(...from), new Vector3(...dir).normalize(), len, rise, r0, true, 7, BARK, { rings: 4, sides: 5, twigs: false });
+  return { positions: b.wood.map((g) => g.getAttribute("position").array as Float32Array), tips: b.tips.map((t) => [t.x, t.y, t.z]) };
 }

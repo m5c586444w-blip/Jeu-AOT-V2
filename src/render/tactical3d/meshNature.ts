@@ -5,7 +5,9 @@ import { derive, range, seeded } from "./rng";
 import { heightAt } from "./terrain";
 import type { TerrainData } from "./terrain";
 import { FaceBuilder } from "./townMesh";
-import { unitLump, unitLumpCards } from "./meshTrees";
+import { BARK, ramifiedBranch, unitLump, unitLumpCards } from "./meshTrees";
+
+const IDENTITY = new Matrix4();
 
 /**
  * Maillage de la forêt des Arbres Géants (R1b.5) : troncs effilés à contreforts racinaires et mousse au pied, branches
@@ -66,7 +68,17 @@ export function shaftMesh(shafts: readonly Shaft[], groundAt: (x: number, y: num
     fb.geometry(g, m, col);
     g.dispose();
   }
-  const mat = new MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.075, blending: AdditiveBlending, depthWrite: false, side: DoubleSide, fog: false });
+  // R1e (§6, point 6) : rayon doux — il s'efface sur ses bords (incidence rasante) et vers le sol, plus net sous la voûte.
+  const mat = new MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.3, blending: AdditiveBlending, depthWrite: false, side: DoubleSide, fog: false });
+  mat.onBeforeCompile = (sh) => {
+    sh.vertexShader = sh.vertexShader
+      .replace("#include <common>", "#include <common>\nvarying float vShaftEdge;\nvarying float vShaftV;")
+      .replace("#include <project_vertex>", "#include <project_vertex>\n  vShaftEdge = abs(dot(normalize(normalMatrix * normal), normalize(-mvPosition.xyz)));\n  vShaftV = uv.y;");
+    sh.fragmentShader = sh.fragmentShader
+      .replace("#include <common>", "#include <common>\nvarying float vShaftEdge;\nvarying float vShaftV;")
+      .replace("#include <opaque_fragment>", "diffuseColor.a *= pow(vShaftEdge, 2.2) * smoothstep(0.0, 0.45, vShaftV) * (0.55 + 0.45 * vShaftV);\n#include <opaque_fragment>");
+  };
+  mat.customProgramCacheKey = () => "rayons-doux";
   const m = new Mesh(fb.build(), mat);
   m.name = "rayons-lumiere";
   m.renderOrder = 2;
@@ -120,21 +132,24 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
             fb.geometry(new ConeGeometry(t.radius * 0.8, 7, 5), m, new Color(c.moss).multiplyScalar(0.9));
           }
         }
-        for (const b of near ? t.branches : t.branches.filter((_, i) => i % 2 === 0)) {
-          // Branche maîtresse : part du tronc, légèrement montante.
-          const len = b.len;
-          const m = new Matrix4()
-            .makeTranslation(lx, ground + b.h, lz)
-            .multiply(new Matrix4().makeRotationY(-b.a))
-            .multiply(new Matrix4().makeRotationZ(-Math.PI / 2 + 0.18))
-            .multiply(new Matrix4().makeTranslation(0, len / 2 + t.radius * 0.4, 0));
-          fb.geometry(new CylinderGeometry(0.35, 1.0, len, near ? 7 : 4), m, new Color(c.bark).multiplyScalar(1.05));
-          if (near) branches++;
-          // Feuillage au bout des branches hautes.
-          if (b.h > t.height * 0.45) {
-            const d = t.radius * 0.6 + len;
-            crownsHere.push({ m: new Matrix4().compose(new Vector3(lx + Math.cos(b.a) * d, ground + b.h + len * 0.2, lz + Math.sin(b.a) * d), new Quaternion().setFromAxisAngle(up, b.a), new Vector3(9, 5, 8)), col: new Color(c.canopy[1]) });
+        for (const [bi, b] of (near ? t.branches : t.branches.filter((_, i) => i % 2 === 0)).entries()) {
+          // R1e (§6, point 6) : branche maîtresse courbe (elle monte en s'éloignant du tronc, son bout reste sur les points
+          // d'ancrage), deux branches secondaires écartées et montantes ; plus de cylindres droits.
+          const dir = new Vector3(Math.cos(b.a), 0, Math.sin(b.a));
+          const from = new Vector3(lx + dir.x * t.radius * 0.6, ground + b.h, lz + dir.z * t.radius * 0.6);
+          const br = ramifiedBranch(from, dir, b.len, b.len * 0.18, 1.35, near, Math.round(t.x * 7 + t.y * 13) + bi, BARK, { rings: 5, sides: 5, twigs: false });
+          for (const g of br.wood) {
+            fb.geometry(g, IDENTITY, new Color(c.bark).multiplyScalar(1.05));
+            g.dispose();
           }
+          if (near) branches++;
+          // Feuillage au bout des branches hautes (maîtresse et secondaires) ; les basses restent nues (fût dégagé des géants).
+          if (b.h < t.height * 0.48) continue;
+          const hk = Math.min(1, Math.max(0.55, (b.h / t.height - 0.2) * 1.6));
+          br.tips.forEach((tip, k) => {
+            const sc = (k === 0 ? new Vector3(8.5, 4.6, 7.5) : new Vector3(6, 3.4, 5.5)).multiplyScalar(hk);
+            crownsHere.push({ m: new Matrix4().compose(tip.clone().add(new Vector3(0, sc.y * 0.25, 0)), new Quaternion().setFromAxisAngle(up, b.a + k), sc), col: new Color(c.canopy[k % 2 ? 0 : 1]).multiplyScalar(0.95 + 0.15 * hk) });
+          });
         }
         // Voûte : masses de feuillage étagées au sommet.
         const n = near ? 8 : 4;
@@ -196,7 +211,7 @@ export function buildGiantForest(giants: readonly GiantTree[], groundAt: (x: num
       const g = new PlaneGeometry(size, size, 1, 1);
       g.rotateX(-Math.PI / 2);
       geos.push(g);
-      const mat = new MeshBasicMaterial({ color: new Color(c.light), map: mistMap, transparent: true, opacity: mist.density * (0.13 - k * 0.018), depthWrite: false, side: DoubleSide });
+      const mat = new MeshBasicMaterial({ color: new Color(c.light), map: mistMap, transparent: true, opacity: mist.density * (0.09 - k * 0.012), depthWrite: false, side: DoubleSide });
       materials.push(mat);
       const m = new Mesh(g, mat);
       m.position.y = groundAt(0, 0) + 1.5 + (k * mist.top) / layers;

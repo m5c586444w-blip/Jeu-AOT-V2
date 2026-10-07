@@ -41,6 +41,11 @@ export interface Frame {
   bottomMargin: number;
   /** Marge haute retenue au-dessus des porteurs (px). */
   topMarginPx?: number;
+  /**
+   * Zigzags des porteurs entiers dans le champ (R1e §6, point 8). Faux seulement si le sol tomberait sous 85 % même à la marge
+   * minimale : la tête reste alors entière sous la marge, seul le haut du zigzag (à côté de la figure) peut sortir.
+   */
+  boltsInFrame?: boolean;
 }
 
 export const project = (x: number, y: number, z: number): [number, number] => [x, y * TILT - z];
@@ -56,10 +61,10 @@ export const MIN_TITAN_PX = 22;
 /** Halo de l'éclair de transformation d'un porteur (P6) : 15 m de rayon au plus. */
 export const TRANSFORM_HALO_M = 15;
 /**
- * Zigzags des éclairs (transformation, puis corps qui surgit, R0.2f) : ils tombent du ciel depuis 1,4 × la hauteur dessinée
- * du Titan. Leur moitié basse reste sous la tête, donc dans le champ (D-85).
+ * Zigzags des éclairs (transformation, puis corps qui surgit, R0.2f) : ils tombent depuis 1,06 × la hauteur dessinée du Titan (à hauteur de la tête),
+ * à côté de la figure (pas sur le visage). R1e (§6, point 8) : ils sont entiers dans le champ, comme la tête.
  */
-export const BODY_BOLT = 1.4;
+export const BODY_BOLT = 1.06;
 
 /** Hauteur DESSINÉE d'un Titan (m) : sa taille, ou la taille minimale à l'écran si elle est plus grande. */
 export function drawnTitanHeight(height: number, zoom: number, width: number, sceneH: number): number {
@@ -82,12 +87,11 @@ export function clampToMap(f: Frame, width: number, height: number, mapW: number
 }
 
 /**
- * Marge de cadrage haute (px) au-dessus de la tête des porteurs (R0, critère f rouvert) : 10 px visés. Elle se réduit par
- * paliers de 2 px, jusqu'à 2 px au moins, seulement si le sol doit garder 85 % de la scène (D-78) — cas d'un porteur collé au
- * bord nord avec les hommes au bord sud (D-85).
+ * Marge de cadrage haute (px) au-dessus de la figure et des éclairs des porteurs (R0, critère f ; R1e §6, point 8) : 24 px
+ * visés. Elle se réduit par paliers de 2 px, jusqu'à 4 px au moins, seulement si le sol doit garder 85 % de la scène (D-78).
  */
-export const FRAME_TOP_MARGIN_PX = 10;
-export const FRAME_TOP_MARGIN_MIN_PX = 2;
+export const FRAME_TOP_MARGIN_PX = 24;
+export const FRAME_TOP_MARGIN_MIN_PX = 4;
 /** Part de la scène couverte par le sol de la carte, visée au cadrage (D-78). */
 export const GROUND_SHARE_MIN = 0.85;
 
@@ -117,9 +121,14 @@ interface Box {
  * - les Titans qui ne tiennent pas dans le champ sont signalés par des flèches de bord (`edgeArrows`).
  */
 export function computeFrame(input: FrameInput): Frame {
-  let f = solveFrame(input, FRAME_TOP_MARGIN_PX);
-  for (let m = FRAME_TOP_MARGIN_PX - 2; m >= FRAME_TOP_MARGIN_MIN_PX && groundShare(f, input) < GROUND_SHARE_MIN; m -= 2) f = solveFrame(input, m);
-  return f;
+  for (const bolts of [true, false]) {
+    // Repli : sans les zigzags, la marge peut descendre jusqu'à 2 px (compromis de R0, D-85), la tête restant entière.
+    const min = bolts ? FRAME_TOP_MARGIN_MIN_PX : 2;
+    let f = solveFrame(input, FRAME_TOP_MARGIN_PX, bolts);
+    for (let m = FRAME_TOP_MARGIN_PX - 2; m >= min && groundShare(f, input) < GROUND_SHARE_MIN; m -= 2) f = solveFrame(input, m, bolts);
+    if (groundShare(f, input) >= GROUND_SHARE_MIN || !bolts) return { ...f, boltsInFrame: bolts };
+  }
+  throw new Error("cadrage : inaccessible");
 }
 
 /** Part de la scène couverte par le sol de la carte (0 à 1). */
@@ -130,32 +139,31 @@ export function groundShare(f: Pick<Frame, "zoom" | "x" | "y">, s: Pick<FrameInp
 }
 
 /** Cadre pour une marge haute donnée (px). */
-function solveFrame(input: FrameInput, marginPx: number): Frame {
+function solveFrame(input: FrameInput, marginPx: number, bolts: boolean): Frame {
   // La taille DESSINÉE d'un porteur dépend de l'échelle (figure agrandie en vue d'ensemble) : on cherche le point fixe en
   // partant de l'échelle maximale ; la suite des échelles décroît et se stabilise en quelques tours.
   let z = FRAME_MAX_ZOOM * sceneScale(input.width, input.height);
-  let f = frameAt(input, z, marginPx);
+  let f = frameAt(input, z, marginPx, bolts);
   for (let i = 0; i < 24 && Math.abs(f.zoom - z) > 1e-6; i++) {
     z = f.zoom;
-    f = frameAt(input, z, marginPx);
+    f = frameAt(input, z, marginPx, bolts);
   }
   return { ...f, topMarginPx: marginPx };
 }
 
 /**
- * Étendue DESSINÉE d'un porteur autour de ses pieds (m), à l'échelle `zoom` (R0, critère f rouvert) : la figure du Titan
- * telle que la scène la trace (figures.ts), à sa hauteur dessinée (agrandie en vue d'ensemble) : tête jusqu'à 1,05 × cette
- * hauteur (mesuré : 1,041 au plus sur les 10 silhouettes), largeur ±0,36, pieds 0,06 sous le sol.
- * Les éclairs (halos, zigzags qui tombent du ciel depuis 1,4 × la hauteur) ne sont garantis qu'au pied et sur leur moitié
- * basse : les garder entiers obligerait à montrer du vide au-dessus d'un porteur placé au bord nord, et le sol tomberait
- * sous 85 % de la scène (D-85).
+ * Étendue DESSINÉE d'un porteur autour de ses pieds (m), à l'échelle `zoom` (R0, critère f ; R1e §6, point 8) : la figure du
+ * Titan telle que la scène la trace (figures.ts), à sa hauteur dessinée (agrandie en vue d'ensemble), tête jusqu'à 1,05 × cette
+ * hauteur (mesuré : 1,041 au plus sur les 10 silhouettes), et les zigzags entiers (jusqu'à BODY_BOLT × la hauteur, à droite de
+ * la figure) ; largeur ±0,38 et 1 m (zigzag et trait compris), pieds 0,06 sous le sol.
  */
-export function shifterExtent(reach: number, zoom: number, width: number, height: number): { up: number; down: number; side: number } {
+export function shifterExtent(reach: number, zoom: number, width: number, height: number, bolts = true): { up: number; down: number; side: number } {
   const dh = drawnTitanHeight(reach, zoom, width, height);
-  return { up: dh * 1.05, down: dh * 0.07, side: dh * 0.37 };
+  // Bornes des traits du zigzag (mesurées sur les tracés Pixi : 1,6 m au-dessus de son sommet) ; la tête monte à 1,05 × la hauteur.
+  return bolts ? { up: Math.max(dh * 1.05, dh * BODY_BOLT + 1.8), down: dh * 0.07, side: dh * 0.38 + 1 } : { up: dh * 1.05, down: dh * 0.07, side: dh * 0.37 };
 }
 
-function frameAt(input: FrameInput, z: number, marginPx: number): Frame {
+function frameAt(input: FrameInput, z: number, marginPx: number, bolts: boolean): Frame {
   const { width, height, mapW: mw, mapH: mh, points } = input;
   const fz = fitZoom(width, height, mw, mh);
   const mapH = mh * TILT;
@@ -173,7 +181,7 @@ function frameAt(input: FrameInput, z: number, marginPx: number): Frame {
   const mustBoxes = must.map((p): Box => {
     const [px, py] = project(p.x, p.y, 0);
     if (p.own) return { x0: px - MUST_SIDE, x1: px + MUST_SIDE, y0: py - MAN_HEIGHT - top, y1: py + MUST_FOOT };
-    const e = shifterExtent(p.reach ?? 0, z, width, height);
+    const e = shifterExtent(p.reach ?? 0, z, width, height, bolts);
     return { x0: px - e.side - 4 / z, x1: px + e.side + 4 / z, y0: py - e.up - top, y1: py + Math.max(e.down, MUST_FOOT) };
   });
   const mb: Box | null = mustBoxes.length

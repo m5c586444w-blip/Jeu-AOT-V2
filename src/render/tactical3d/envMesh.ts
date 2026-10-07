@@ -8,6 +8,7 @@ import { buildProps, phys } from "./meshProps";
 import { buildTerrainMeshes, waterColor } from "./meshTerrain";
 import { buildHedges, buildVegetation } from "./meshVegetation";
 import { buildWallMeshes } from "./meshWall";
+import type { ParementTextures } from "./parement";
 import { buildGiantForest, buildSpray } from "./meshNature";
 import { buildCave } from "./meshCave";
 import { normalOf } from "./texturesEnv";
@@ -35,6 +36,8 @@ export interface EnvTextures {
   ground(): Texture | null;
   cobble(): Texture;
   wallStone(): Texture;
+  /** R1e (§6, point 3) : trois appareils du parement sans motif répété. */
+  parement(): ParementTextures;
   mist(): Texture;
   skin(): Texture;
   puff(): Texture;
@@ -166,7 +169,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
   // Murs (seulement si le profil les montre : la règle de visibilité est appliquée par le générateur).
   if (env.wall) {
     const hf = env.terrain?.heights ?? null;
-    const wm = buildWallMeshes(env.wall, (q) => (hf ? heightAt(hf, q.x, q.y) : 0), tx?.wallStone() ?? null, env.seed);
+    const wm = buildWallMeshes(env.wall, (q) => (hf ? heightAt(hf, q.x, q.y) : 0), tx?.wallStone() ?? null, env.seed, tx?.parement() ?? null);
     for (const m of wm.meshes) group.add(m);
     disposers.push(() => wm.dispose());
     counts["wallPaths"] = env.wall.paths.length;

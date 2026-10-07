@@ -8,6 +8,7 @@ import { hedgeCards, realisticTree } from "./meshTrees";
 import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import type { TreeParts } from "./meshTrees";
 import { FaceBuilder } from "./townMesh";
+import { clearanceKeep } from "./followFraming";
 
 /**
  * Végétation instanciée de R1b (R1b.2, qualité « haute »), arbres réalistes de R1c :
@@ -221,4 +222,64 @@ let HEDGE_CARDS: BufferGeometry | null = null;
 function hedgeCardGeo(): BufferGeometry {
   HEDGE_CARDS ??= hedgeCards();
   return HEDGE_CARDS;
+}
+
+/**
+ * R1e (§6, point 4) : dégagement de la vue de suivi. Les fragments de feuillage, de bois et de cartes de feuilles proches de
+ * l'objectif (à moins de `near` m de la caméra) ou dans le cylindre de rayon `radius` qui joint la caméra à la cible sont
+ * écartés par un tramage d'écran (fondu sur un tiers du rayon) : aucun arbre ne masque plus l'escouade suivie.
+ */
+export interface ViewClearance {
+  on: { value: number };
+  eye: { value: Vector3 };
+  target: { value: Vector3 };
+  radius: { value: number };
+  near: { value: number };
+}
+
+export function clearanceFade(p: Vector3, c: ViewClearance): number {
+  if (c.on.value < 0.5) return 1;
+  return clearanceKeep(p.toArray(), c.eye.value.toArray(), c.target.value.toArray(), c.radius.value, c.near.value);
+}
+
+export function addViewClearance(root: Object3D, c: ViewClearance): number {
+  const seen = new Set<MeshStandardMaterial>();
+  root.traverse((o) => {
+    const m = (o as InstancedMesh).material;
+    for (const mat of Array.isArray(m) ? m : m ? [m] : []) if (mat instanceof MeshStandardMaterial) seen.add(mat);
+  });
+  for (const mat of seen) {
+    const prev = mat.customProgramCacheKey.bind(mat);
+    mat.onBeforeCompile = (s) => {
+      Object.assign(s.uniforms, { clrOn: c.on, clrEye: c.eye, clrTarget: c.target, clrRadius: c.radius, clrNear: c.near });
+      s.vertexShader = s.vertexShader.replace("#include <common>", "#include <common>\nvarying vec3 vClrWorld;").replace(
+        "#include <project_vertex>",
+        `#include <project_vertex>
+  vec4 clrW = vec4(transformed, 1.0);
+#ifdef USE_INSTANCING
+  clrW = instanceMatrix * clrW;
+#endif
+  vClrWorld = (modelMatrix * clrW).xyz;`,
+      );
+      s.fragmentShader = s.fragmentShader
+        .replace("#include <common>", "#include <common>\nvarying vec3 vClrWorld;\nuniform float clrOn;\nuniform vec3 clrEye;\nuniform vec3 clrTarget;\nuniform float clrRadius;\nuniform float clrNear;")
+        .replace(
+          "void main() {",
+          `void main() {
+  if (clrOn > 0.5) {
+    vec3 ab = clrTarget - clrEye;
+    float t = clamp(dot(vClrWorld - clrEye, ab) / max(1e-6, dot(ab, ab)), 0.0, 1.0);
+    float d = distance(vClrWorld, clrEye + ab * t);
+    float seg = t < 0.94 ? clamp((d - clrRadius * 0.66) / (clrRadius * 0.34), 0.0, 1.0) : 1.0;
+    float nearK = clamp((distance(vClrWorld, clrEye) - clrNear * 0.66) / (clrNear * 0.34), 0.0, 1.0);
+    float keep = min(seg, nearK);
+    float n = fract(sin(dot(floor(gl_FragCoord.xy), vec2(12.9898, 78.233))) * 43758.5453);
+    if (n > keep) discard;
+  }`,
+        );
+    };
+    mat.customProgramCacheKey = () => `${prev()}|degagement`;
+    mat.needsUpdate = true;
+  }
+  return seen.size;
 }

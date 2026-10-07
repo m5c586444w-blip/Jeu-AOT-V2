@@ -1,6 +1,6 @@
-hommes au sud, porteur au nord (essai de porteur), 1366×768 : boîte du porteur (380.7, 10.4) – (410.7, 56.6) px dans une scène de 1014×588, zoom 2.37 px/m, figure de 17.7 m, marge haute 10 px ; sol 90.3 %
-hommes au sud, porteur au nord, 3840×2160 : boîte du porteur (1311.0, 11.2) – (1399.8, 147.8) px dans une scène de 3488×2004, zoom 8.28 px/m, figure de 15.0 m, marge haute 10 px ; sol 93.9 %
-l'inverse : hommes au nord, porteur au sud, 1366×768 : boîte du porteur (503.3, 534.2) – (533.4, 580.4) px dans une scène de 1014×588, zoom 2.52 px/m, figure de 16.7 m, marge haute 10 px ; sol 97.7 %
-l'inverse, 3840×2160 : boîte du porteur (1736.6, 1833.7) – (1829.8, 1977.1) px dans une scène de 3488×2004, zoom 8.69 px/m, figure de 15.0 m, marge haute 10 px ; sol 99.1 %
-porteur excentré (coin nord-est), 1366×768 : boîte du porteur (889.4, 2.4) – (919.4, 48.6) px dans une scène de 1014×588, zoom 2.30 px/m, figure de 18.2 m, marge haute 2 px ; sol 85.1 %
-porteur excentré, 3840×2160 : boîte du porteur (3081.7, 11.1) – (3166.9, 142.2) px dans une scène de 3488×2004, zoom 7.94 px/m, figure de 15.0 m, marge haute 10 px ; sol 86.4 %
+hommes au sud, porteur au nord (essai de porteur), 1366×768 : boîte du porteur (383.7, 25.0) – (413.7, 71.2) px dans une scène de 1014×588, zoom 2.31 px/m, figure de 18.2 m, marge haute 20 px ; zigzags entiers : oui ; sol 85.5 %
+hommes au sud, porteur au nord, 3840×2160 : boîte du porteur (1317.5, 41.0) – (1404.9, 175.6) px dans une scène de 3488×2004, zoom 8.15 px/m, figure de 15.0 m, marge haute 24 px ; zigzags entiers : oui ; sol 91.1 %
+l'inverse : hommes au nord, porteur au sud, 1366×768 : boîte du porteur (503.1, 534.5) – (533.1, 580.7) px dans une scène de 1014×588, zoom 2.46 px/m, figure de 17.1 m, marge haute 24 px ; zigzags entiers : oui ; sol 93.0 %
+l'inverse, 3840×2160 : boîte du porteur (1736.7, 1834.9) – (1829.2, 1977.3) px dans une scène de 3488×2004, zoom 8.63 px/m, figure de 15.0 m, marge haute 24 px ; zigzags entiers : oui ; sol 97.8 %
+porteur excentré (coin nord-est), 1366×768 : boîte du porteur (889.4, 2.4) – (919.4, 48.6) px dans une scène de 1014×588, zoom 2.30 px/m, figure de 18.2 m, marge haute 2 px ; zigzags entiers : non (repli) ; sol 85.1 %
+porteur excentré, 3840×2160 : boîte du porteur (3065.6, 28.4) – (3149.9, 158.4) px dans une scène de 3488×2004, zoom 7.87 px/m, figure de 15.0 m, marge haute 12 px ; zigzags entiers : oui ; sol 85.0 %

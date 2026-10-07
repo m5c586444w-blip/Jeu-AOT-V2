@@ -23,7 +23,9 @@ import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, setSteamTexture } from "./titan"
 import type { Titan, TitanPose } from "./titan";
 import { generateTown } from "./town";
 import { buildTownMeshes } from "./townMesh";
-import { buildVegetation } from "./meshVegetation";
+import { addViewClearance, buildVegetation } from "./meshVegetation";
+import type { ViewClearance } from "./meshVegetation";
+import { followCorrection } from "./followFraming";
 import { MATERIALS } from "./styles";
 import { leafTex } from "./texturesEnv";
 
@@ -174,6 +176,9 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     leafTex(seed),
   );
   scene.add(townTrees.group);
+  // R1e (§6, point 4) : en suivi, le feuillage entre la caméra et l'escouade (et devant l'objectif) s'efface par tramage.
+  const clearance: ViewClearance = { on: { value: 0 }, eye: { value: new Vector3() }, target: { value: new Vector3() }, radius: { value: 3.4 }, near: { value: 7 } };
+  addViewClearance(townTrees.group, clearance);
   const center = new Vector3(town.plaza.center.x, 0, town.plaza.center.y);
   // Repères de la place : A (fontaine, au nord), B (marché, au sud), et la perpendiculaire à l'axe A→B.
   const pcs = town.plaza.centers.map((c) => new Vector3(c.x, 0, c.y));
@@ -576,6 +581,32 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       controls.target.add(delta);
     }
     controls.update();
+    if (camMode === "suivi") {
+      // R1e (§6, point 7) : soldats entiers dans le champ (pieds au-dessus du bord bas, têtes sous le bord haut) : la visée
+      // s'abaisse ou monte, la caméra recule si l'escouade déborde ; corrections lissées d'une image à l'autre.
+      camera.updateMatrixWorld();
+      // Les soldats éloignés du centre de l'escouade (accrochés à d'autres façades) ne commandent pas le cadrage.
+      const sc = odm.squadCenter(squad);
+      const ndc = odm
+        .squadPoints(squad)
+        .filter((p) => p.distanceTo(sc) < 25)
+        .map((p) => p.project(camera));
+      const fix = followCorrection(ndc);
+      const dist = camera.position.distanceTo(controls.target);
+      const k = 0.35;
+      if (fix.dolly > 1.001 && dist < 32) {
+        const back = camera.position.clone().sub(controls.target).multiplyScalar(Math.min((fix.dolly - 1) * k, 32 / dist - 1));
+        camera.position.add(back);
+      }
+      if (Math.abs(fix.shift) > 1e-4) {
+        const dy = fix.shift * dist * Math.tan((camera.fov * Math.PI) / 360) * k;
+        controls.target.y -= dy;
+      }
+      controls.update();
+      clearance.on.value = 1;
+      clearance.eye.value.copy(camera.position);
+      clearance.target.value.copy(odm.squadCenter(squad));
+    } else clearance.on.value = 0;
     lighting.follow(camera.position);
     renderer.toneMappingExposure = lighting.exposure;
     // R1c : occlusion ambiante et sortie (post-traitement) selon la qualité ; rendu direct en qualité basse.

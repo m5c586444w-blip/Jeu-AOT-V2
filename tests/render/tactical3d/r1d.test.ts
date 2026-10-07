@@ -37,6 +37,7 @@ function stubTextures(): EnvTextures & { calls: string[] } {
     ground: () => t("ground"),
     cobble: () => t("cobble"),
     wallStone: () => t("wallStone"),
+    parement: () => ({ A: t("parement"), B: t("parement"), C: t("parement") }),
     mist: () => t("mist"),
     skin: () => t("skin"),
     puff: () => t("puff"),
@@ -208,12 +209,23 @@ describe("textures de Poly Haven (R1d, CR1d-11)", () => {
     const mats = materials(m.group as unknown as { traverse(f: (o: { material?: Mat | Mat[] }) => void): void });
     const tagged = mats.filter((x) => x.map?.userData.photo);
     const kinds = new Set(tagged.map((x) => x.map?.userData.photo?.matiere));
-    for (const k of ["tuiles", "ardoise", "pave", "pierre_taille"]) expect(kinds.has(k as Matiere), k).toBe(true);
+    for (const k of ["tuiles", "ardoise", "pave"]) expect(kinds.has(k as Matiere), k).toBe(true);
+    // R1e (§6, point 3) : le parement des murs n'a plus une seule texture étiquetée ; ses appareils A et C passent aux photos de
+    // pierre de taille et de pierre brute (uniformes propres, gain qui garde la teinte procédurale).
+    const parement = mats.filter((x) => (x.userData as { parement?: unknown }).parement);
+    expect(parement.length).toBeGreaterThan(0);
     const ground = mats.find((x) => x.userData.photoDetail);
     expect(ground).toBeDefined();
     const before = new Map(tagged.map((x) => [x, { map: x.map, color: { ...x.color }, tag: x.map?.userData.photo as PhotoTag }]));
     const n = applyPhotoTextures(root, fakePhotos(), false, procMean);
-    expect(n).toBe(tagged.length + 1);
+    expect(n).toBe(tagged.length + 1 + parement.length);
+    for (const x of parement) {
+      const u = (x.userData as { parement: { parSizeA: { value: number[] }; parGainA: { value: number[] } } }).parement;
+      expect(u.parSizeA.value).toEqual([PHOTO_MATIERES.pierre_taille.taille, PHOTO_MATIERES.pierre_taille.taille]);
+      // Gain : moyenne visée (appareil A procédural ; 0,5 avec la texture blanche des contrôles) / moyenne de la photo (0,25).
+      expect(u.parGainA.value[0]).toBeCloseTo(0.5 / 0.25, 6);
+      expect((x.userData as { parementPhoto?: boolean }).parementPhoto).toBe(true);
+    }
     for (const [x, b] of before) {
       const { taille } = PHOTO_MATIERES[b.tag.matiere];
       expect(x.map).not.toBe(b.map);

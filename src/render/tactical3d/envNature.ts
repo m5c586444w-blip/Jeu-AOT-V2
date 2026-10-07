@@ -92,7 +92,19 @@ export function generateGiantForest(p: StyleProfile, variant: Variant | null, se
   const anchors = giants.flatMap((g) => giantAnchors(g, ground(g)));
   // Vues : sous les premières branches (14 m), d'une trouée vers le fond de la forêt ; au pied d'un géant, vers sa voûte.
   // Les points de vue sont cherchés là où aucun tronc ni buisson ne masque l'objectif.
-  const clearAround = (q: Vec2, rg: number, rt: number): boolean => !giants.some((g) => dist2(q, g) < g.radius + rg) && !t.trees.some((x) => dist2(q, x) < rt);
+  // R1e (§6, point 6) : ni tronc, ni buisson, ni branche (projection au sol de chaque branche maîtresse, élargie) devant l'objectif.
+  const nearBranch = (q: Vec2): boolean =>
+    giants.some((g) => {
+      if (dist2(q, g) > g.radius + 40) return false;
+      return g.branches.some((b) => {
+        const d = v2(Math.cos(b.a), Math.sin(b.a));
+        const rel = v2(q.x - g.x, q.y - g.y);
+        const along = rel.x * d.x + rel.y * d.y;
+        const across = Math.abs(rel.x * d.y - rel.y * d.x);
+        return along > 0 && along < b.len + g.radius && across < 6;
+      });
+    });
+  const clearAround = (q: Vec2, rg: number, rt: number): boolean => !giants.some((g) => dist2(q, g) < g.radius + rg) && !t.trees.some((x) => dist2(q, x) < rt) && !nearBranch(q);
   const pick = (from: Vec2, rg: number, rt: number): Vec2 => {
     let best = from;
     let bd = Infinity;
@@ -132,7 +144,8 @@ export function generateGiantForest(p: StyleProfile, variant: Variant | null, se
     views,
     radius: size / 2,
     anchors,
-    mist: { density: kind === "dense" ? 0.75 : 0.5, top: 14 },
+    // R1e (§6, point 6) : brouillard plus mince (0,75 → 0,32 en forêt dense).
+    mist: { density: kind === "dense" ? 0.32 : 0.22, top: 12 },
   };
 }
 

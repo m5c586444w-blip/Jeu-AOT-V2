@@ -8,7 +8,7 @@ import { derive, range, seeded } from "./rng";
 import type { Rand } from "./rng";
 import { styleBuilding, styleLandmark } from "./styling";
 import type { Variant } from "./styles";
-import { WALLS, groundHex } from "./styles";
+import { MATERIALS, WALLS, groundHex, roofColor } from "./styles";
 import { clipRoads, generateTerrain, heightAt } from "./terrain";
 import type { Bridge, TerrainData } from "./terrain";
 import { generateTown, insideConvex } from "./town";
@@ -28,12 +28,13 @@ const hasMark = (p: StyleProfile, k: string): boolean => p.batiments.reperes.inc
 export function layoutOptions(p: StyleProfile): Pick<TownOptions, "jitter" | "swirl" | "blockTurnDeg" | "blockMin" | "blockMax" | "streetMin" | "streetMax"> {
   const [s0, s1] = p.rues_m;
   switch (p.disposition) {
+    // R1e (§6, point 2) : îlots de tailles variées (plus d'îlots identiques).
     case "quadrillee":
-      return { jitter: 0, swirl: 0, blockTurnDeg: 0, blockMin: 50, blockMax: 58, streetMin: s0, streetMax: s1 };
+      return { jitter: 0, swirl: 0, blockTurnDeg: 0, blockMin: 40, blockMax: 68, streetMin: s0, streetMax: s1 };
     case "planifiee":
-      return { jitter: 4, swirl: 0.0012, blockTurnDeg: 5, blockMin: 42, blockMax: 54, streetMin: s0, streetMax: s1 };
+      return { jitter: 5, swirl: 0.0012, blockTurnDeg: 6, blockMin: 32, blockMax: 66, streetMin: s0, streetMax: s1 };
     default:
-      return { jitter: 11, swirl: 0.004, blockTurnDeg: 18, blockMin: 30, blockMax: 44, streetMin: s0, streetMax: s1 };
+      return { jitter: 12, swirl: 0.004, blockTurnDeg: 18, blockMin: 22, blockMax: 54, streetMin: s0, streetMax: s1 };
   }
 }
 
@@ -174,6 +175,80 @@ function townPaving(b: TownBuild, canalStreets: ReadonlySet<number>, canalWidth:
   for (const blk of town.blocks) {
     if (blk.outside) continue;
     b.paving.push({ poly: [...blk.inner], kind: "dalle", y: 0.13, color: blk.plaza ? p.palette.facade : p.palette.pierre });
+  }
+}
+
+function mixHex(a: string, b: string, k: number): string {
+  const pa = Number.parseInt(a.slice(1), 16);
+  const pb = Number.parseInt(b.slice(1), 16);
+  const ch = (n: number, sh: number): number => (n >> sh) & 255;
+  const m = (sh: number): number => Math.round(ch(pa, sh) + (ch(pb, sh) - ch(pa, sh)) * k);
+  return `#${((m(16) << 16) | (m(8) << 8) | m(0)).toString(16).padStart(6, "0")}`;
+}
+
+/**
+ * Tissu urbain (R1e, §6, point 2) : plus d'îlots identiques ni de cours pavées partout.
+ * - Placettes : un petit îlot sur neuf devient une placette pavée (arbre, puits ou fontaine, bancs).
+ * - Ruelles : les grands îlots sont traversés par une ruelle de 3 m (maisons retirées sur son passage, pavés).
+ * - Cours plantées : l'intérieur de chaque îlot bâti devient jardin ou cour en terre, avec des arbres (au moins un).
+ * - Toits : chaume sur une part des maisons de la périphérie (faubourg) ; teintes d'enduit variées maison par maison.
+ */
+function urbanFabric(b: TownBuild, centre: Vec2, edge: number): void {
+  const p = b.p;
+  const rand = seeded(derive(b.rand() * 1e9, 77));
+  const blocks = b.town.blocks.filter((k) => !k.outside && !k.plaza && !b.used.has(k.id));
+  const span = (blk: Block): { w: number; h: number; u: Vec2; c: Vec2 } => {
+    const q = blk.inner;
+    const e0 = sub2(q[1] as Vec2, q[0] as Vec2);
+    const e1 = sub2(q[3] as Vec2, q[0] as Vec2);
+    const w = Math.hypot(e0.x, e0.y);
+    const h = Math.hypot(e1.x, e1.y);
+    return { w, h, u: norm2(w >= h ? e1 : e0), c: blockCenter(blk) };
+  };
+  const inside = (blk: Block, q: Vec2): boolean => insideConvex(blk.inner, q);
+  blocks.forEach((blk, i) => {
+    const sp = span(blk);
+    if (i % 9 === 4 && Math.max(sp.w, sp.h) < 52) {
+      // Placette.
+      b.used.add(blk.id);
+      b.buildings = b.buildings.filter((h) => h.block !== blk.id);
+      b.paving.push({ poly: [...blk.inner], kind: "pave", y: 0.15, color: p.palette.pierre });
+      b.props.push(prop(b.t, has(p, "fontaines") && i % 2 ? "fontaines" : "puits", sp.c, 0, 0.8, p.palette.pierre));
+      b.t.trees.push({ x: sp.c.x + 6, y: sp.c.y + 4, s: 1.1, r: rand() * 6.28, kind: "feuillu" });
+      if (has(p, "bancs")) b.props.push(prop(b.t, "bancs", add2(sp.c, v2(-5, 3)), 0, 1, p.palette.bois));
+      return;
+    }
+    if (Math.min(sp.w, sp.h) > 40) {
+      // Ruelle traversante, parallèle au petit côté, au milieu de l'îlot.
+      const n = v2(-sp.u.y, sp.u.x);
+      b.buildings = b.buildings.filter((h) => h.block !== blk.id || Math.abs((h.x - sp.c.x) * n.x + (h.y - sp.c.y) * n.y) > 1.5 + Math.max(h.width, h.depth) / 2);
+      const L = Math.max(sp.w, sp.h);
+      const a = add2(sp.c, scale2(sp.u, -L / 2 - 2));
+      const z = add2(sp.c, scale2(sp.u, L / 2 + 2));
+      b.paving.push({ poly: [add2(a, scale2(n, -1.6)), add2(z, scale2(n, -1.6)), add2(z, scale2(n, 1.6)), add2(a, scale2(n, 1.6))], kind: "pave", y: 0.155, color: p.palette.pierre });
+    }
+    // Cour plantée : terre de jardin et arbres au cœur de l'îlot.
+    const cq = blk.inner.map((q) => add2(sp.c, scale2(sub2(q, sp.c), Math.max(0, 1 - 12.5 / Math.max(8, Math.min(sp.w, sp.h) / 2)))));
+    const area = Math.abs(cq.reduce((s2, q, k) => s2 + q.x * (cq[(k + 1) % 4] as Vec2).y - q.y * (cq[(k + 1) % 4] as Vec2).x, 0) / 2);
+    if (area < 30) return;
+    b.paving.push({ poly: cq, kind: "terre", y: 0.14, color: groundHex(p, "potager", 0.75) });
+    const n = Math.max(1, Math.round(area / 140));
+    for (let k = 0; k < n; k++) {
+      const q = lerp2(lerp2(cq[0] as Vec2, cq[1] as Vec2, 0.2 + 0.6 * rand()), lerp2(cq[3] as Vec2, cq[2] as Vec2, 0.2 + 0.6 * rand()), 0.2 + 0.6 * rand());
+      if (!inside(blk, q)) continue;
+      b.t.trees.push({ x: q.x, y: q.y, s: range(rand, 0.75, 1.15), r: rand() * 6.28, kind: rand() < 0.35 ? "fruitier" : "feuillu" });
+    }
+  });
+  // Toits de chaume au faubourg (périphérie), teintes d'enduit variées.
+  const thatch = (p.toits.chaume ?? 0) > 0;
+  const pastels = MATERIALS.enduits.teintes;
+  for (const h of b.buildings) {
+    const d = dist2(v2(h.x, h.y), centre);
+    if (thatch && h.cover !== "aucun" && h.ruin < 0.55 && d > edge * 0.78 && rand() < 0.35) {
+      h.cover = "chaume";
+      h.roofHex = roofColor(p, "chaume");
+    }
+    if (h.material === "enduit" || h.material === "colombage") h.wallHex = mixHex(h.wallHex, pastels[Math.floor(rand() * pastels.length)] as string, 0.22 + 0.2 * rand());
   }
 }
 
@@ -358,6 +433,7 @@ export function generateDistrict(p: StyleProfile, variant: Variant | null, seed:
   if (water) b.canals.push(waterRoute(b, R, size));
   carveCanals(t, b.canals);
   townPaving(b, canalStreets, CANAL_WIDTH);
+  urbanFabric(b, v2(0, R * 0.45), R * 0.55);
   // Chemin de ronde au sol : une bande de terre battue le long du pied de la saillie.
   for (let k = 0; k < 48; k++) {
     const a0 = Math.PI - (k / 48) * Math.PI;
@@ -513,6 +589,7 @@ export function generateCapital(p: StyleProfile, variant: Variant | null, seed: 
   for (const r of canalRows) canalAlong(b, r, () => true, canalStreets);
   carveCanals(t, b.canals);
   townPaving(b, canalStreets, CANAL_WIDTH);
+  urbanFabric(b, v2(0, 0), Math.max(cols, rows) * avg * 0.5);
   plazaProps(b);
   streetProps(b);
   ruinsAndFires(b, variant?.etat === "ruines_incendies");

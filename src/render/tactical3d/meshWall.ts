@@ -8,8 +8,8 @@ import type { Vec2 } from "./geom2";
 import { phys } from "./meshProps";
 import { derive, range, seeded } from "./rng";
 import { FaceBuilder } from "./townMesh";
-import { normalOf } from "./texturesEnv";
-import { PHOTO_MATIERES, tagPhoto } from "./photoTextures";
+import { parementMaterial } from "./parement";
+import type { ParementTextures } from "./parement";
 
 /**
  * Maillage des murs de R1b (R1b.4) : corps de 50 m (C), parement de pierre à joints (texture), chemin de ronde avec parapet
@@ -57,7 +57,7 @@ function spans(w: WallPath, L: number, gateWidth: (g: WallPath["gates"][number])
 
 const m4 = (p: V3, ry: number, s: V3): Matrix4 => new Matrix4().compose(new Vector3(...p), new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), ry), new Vector3(...s));
 
-export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number, stoneMap: Texture | null, seed: number): WallMeshes {
+export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number, stoneMap: Texture | null, seed: number, parement: ParementTextures | null = null): WallMeshes {
   const rand = seeded(derive(seed, 3000));
   const body = new FaceBuilder();
   const trim = new FaceBuilder();
@@ -233,12 +233,12 @@ export function buildWallMeshes(layout: WallLayout, ground: (p: Vec2) => number,
     m.receiveShadow = true;
     meshes.push(m);
   };
-  // R1d : parement en pierre de taille de Poly Haven après la première image. Une unité de texture = 4 × 4 blocs du profil
-  // (`block`, `?` paramétrable) ; la photo y est posée une fois (elle montre environ quatre assises) : la taille des blocs reste
-  // celle du profil, pas celle de la photo (2 m), qui ferait sur 50 m de mur une grille fine et répétée.
-  const face = stoneMap ? tagPhoto(stoneMap.clone(), "pierre_taille", PHOTO_MATIERES.pierre_taille.taille) : null;
-  if (face) face.needsUpdate = true;
-  mk(body, new MeshStandardMaterial({ map: face, normalMap: normalOf(stoneMap, 2.2), vertexColors: true, roughness: 0.95 }), "mur-parement");
+  // R1e (§3.1, §6 point 3) : parement sans motif répété (trois appareils mêlés par masques, panneaux de 5 à 10 m, coulures, pied
+  // moussu) ; les photos de Poly Haven y entrent après la première image (`photoTextures.ts`). Coordonnées : u = s / bu,
+  // v = (hauteur + 3) / bv.
+  void stoneMap;
+  const par = parement ? parementMaterial(parement, { uvToMeters: [bu, bv], heightAttr: false, height: H + 3, tint: new Color(1, 1, 1) }) : new MeshStandardMaterial({ vertexColors: true, roughness: 0.95 });
+  mk(body, par, "mur-parement");
   mk(trim, new MeshStandardMaterial({ vertexColors: true, roughness: 0.9 }), "mur-encadrements");
   mk(iron, new MeshStandardMaterial({ vertexColors: true, roughness: 0.45, metalness: 0.6 }), "mur-rails-et-ferrures");
   mk(wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.8 }), "mur-vantaux");

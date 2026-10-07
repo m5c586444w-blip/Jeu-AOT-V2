@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, ConeGeometry, Group, InstancedMesh, LineBasicMaterial, LineSegments, Matrix4, MeshStandardMaterial, Points, PointsMaterial, Quaternion, Vector3 } from "three";
+import { BufferAttribute, BufferGeometry, ConeGeometry, DoubleSide, Group, InstancedMesh, LineBasicMaterial, LineSegments, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, Points, PointsMaterial, Quaternion, Vector3 } from "three";
 import type { Texture , Object3D} from "three";
 import { derive, range, seeded } from "./rng";
 import { buildSoldier } from "./soldier";
@@ -12,10 +12,21 @@ import type { Town } from "./town";
  * - Escouade 3 : au sol, en garde, face au petit Titan ; l'un vient de tirer un câble sur une façade.
  * - Escouade 4 : en vol autour du grand Titan, câbles plantés dans ses épaules, vers la nuque.
  * Câbles droits (tendus) du lanceur à l'ancrage, crochet à l'ancrage ; traînées de gaz le long de la trajectoire passée.
+ * R1e (§6, point 5) : la traînée est un filet fin et effilé (deux rubans croisés, de 0,2 m au lanceur à presque rien en queue),
+ * qui pâlit et se disperse en vieillissant (dérive latérale croissante, fixe par soldat), avec quelques bouffées éparses ; plus
+ * de « boudins » blancs.
  */
 const G = 9.81;
 const TRAIL = 28;
 const TRAIL_DT = 0.07;
+/** Largeur de la traînée au lanceur et en queue (m), dérive latérale maximale (m), opacité au lanceur. */
+export const TRAIL_STYLE = { head: 0.2, tail: 0.03, drift: 0.9, alpha: 0.42 } as const;
+
+/** Largeur et opacité de la traînée au rang k (0 au lanceur, TRAIL − 1 en queue). */
+export function trailProfile(k: number): { width: number; alpha: number } {
+  const u = k / (TRAIL - 1);
+  return { width: TRAIL_STYLE.head + (TRAIL_STYLE.tail - TRAIL_STYLE.head) * Math.pow(u, 0.7), alpha: TRAIL_STYLE.alpha * Math.pow(1 - u, 1.6) };
+}
 
 interface Anchor {
   p: Vector3;
@@ -45,6 +56,8 @@ export interface OdmScene {
   cableSegments(): { unit: number; from: Vector3; to: Vector3; root: Vector3 }[];
   /** Points des traînées de gaz (après la dernière mise à jour), par soldat en vol. */
   trailPoints(): Vector3[][];
+  /** R1e (§6, point 7) : pieds et tête de chaque soldat d'une escouade (après la dernière mise à jour). */
+  squadPoints(i: number): Vector3[];
   dispose(): void;
 }
 
@@ -210,17 +223,42 @@ export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff:
   hooks.name = "crochets";
   hooks.frustumCulled = false;
   group.add(hooks);
-  // Traînées de gaz.
+  // Traînées de gaz : axe de chaque traînée (pour les contrôles), rubans croisés effilés, bouffées éparses.
   const flyers = units.filter((u) => u.flying);
-  const trailGeo = new BufferGeometry();
   const trailPos = new Float32Array(flyers.length * TRAIL * 3);
-  const trailCol = new Float32Array(flyers.length * TRAIL * 4);
-  trailGeo.setAttribute("position", new BufferAttribute(trailPos, 3));
-  trailGeo.setAttribute("color", new BufferAttribute(trailCol, 4));
-  const trails = new Points(trailGeo, new PointsMaterial({ map: puff, size: 1.3, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false }));
+  // Deux rubans par traînée (horizontal et vertical), deux sommets par rang.
+  const ribbonGeo = new BufferGeometry();
+  const ribbonPos = new Float32Array(flyers.length * 2 * TRAIL * 2 * 3);
+  const ribbonCol = new Float32Array(flyers.length * 2 * TRAIL * 2 * 4);
+  const ribbonIdx: number[] = [];
+  for (let f = 0; f < flyers.length; f++)
+    for (let r = 0; r < 2; r++) {
+      const base = (f * 2 + r) * TRAIL * 2;
+      for (let k = 0; k + 1 < TRAIL; k++) {
+        const a = base + k * 2;
+        ribbonIdx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
+      }
+    }
+  ribbonGeo.setAttribute("position", new BufferAttribute(ribbonPos, 3));
+  ribbonGeo.setAttribute("color", new BufferAttribute(ribbonCol, 4));
+  ribbonGeo.setIndex(ribbonIdx);
+  const trails = new Mesh(ribbonGeo, new MeshBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false, side: DoubleSide }));
   trails.name = "gaz";
   trails.frustumCulled = false;
   group.add(trails);
+  const PUFFS = 5;
+  const puffGeo = new BufferGeometry();
+  const puffPos = new Float32Array(flyers.length * PUFFS * 3);
+  const puffCol = new Float32Array(flyers.length * PUFFS * 4);
+  puffGeo.setAttribute("position", new BufferAttribute(puffPos, 3));
+  puffGeo.setAttribute("color", new BufferAttribute(puffCol, 4));
+  const puffs = new Points(puffGeo, new PointsMaterial({ map: puff, size: 0.55, sizeAttenuation: true, vertexColors: true, transparent: true, depthWrite: false }));
+  puffs.name = "gaz-bouffees";
+  puffs.frustumCulled = false;
+  group.add(puffs);
+  // Dérive fixe par soldat et par rang (pas d'aléa à l'image) : la traînée s'élargit et se défait en vieillissant.
+  const driftRand = seeded(derive(seed, 990));
+  const drift = flyers.map(() => Array.from({ length: TRAIL }, () => new Vector3(range(driftRand, -1, 1), range(driftRand, -0.6, 0.6), range(driftRand, -1, 1))));
 
   const m4 = new Matrix4();
   const tmp = new Vector3();
@@ -255,24 +293,53 @@ export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff:
         }
       });
       centers.forEach((c, i) => c.multiplyScalar(1 / Math.max(1, counts[i] ?? 1)));
+      const pts: Vector3[] = Array.from({ length: TRAIL }, () => new Vector3());
+      const dir = new Vector3();
+      const side = new Vector3();
+      const vert = new Vector3();
       flyers.forEach((u, f) => {
         for (let k2 = 0; k2 < TRAIL; k2++) {
-          const p = u.place(t - (k2 + 1) * TRAIL_DT).pos;
+          const p = (pts[k2] as Vector3).copy(u.place(t - (k2 + 1) * TRAIL_DT).pos);
+          p.y -= 0.4;
           const o = (f * TRAIL + k2) * 3;
           trailPos[o] = p.x;
-          trailPos[o + 1] = p.y - 0.4;
+          trailPos[o + 1] = p.y;
           trailPos[o + 2] = p.z;
-          const c = (f * TRAIL + k2) * 4;
-          const fade = 1 - k2 / TRAIL;
-          trailCol[c] = 0.92;
-          trailCol[c + 1] = 0.93;
-          trailCol[c + 2] = 0.94;
-          trailCol[c + 3] = 0.5 * fade * fade;
+          // Dispersion : le gaz dérive de plus en plus loin de la trajectoire.
+          const age = k2 / (TRAIL - 1);
+          p.addScaledVector((drift[f] as Vector3[])[k2] as Vector3, TRAIL_STYLE.drift * age * age);
+        }
+        for (let k2 = 0; k2 < TRAIL; k2++) {
+          const p = pts[k2] as Vector3;
+          dir.copy(pts[Math.min(TRAIL - 1, k2 + 1)] as Vector3).sub(pts[Math.max(0, k2 - 1)] as Vector3);
+          if (dir.lengthSq() < 1e-8) dir.set(1, 0, 0);
+          dir.normalize();
+          side.crossVectors(dir, up);
+          if (side.lengthSq() < 1e-6) side.set(1, 0, 0);
+          side.normalize();
+          vert.crossVectors(side, dir).normalize();
+          const { width, alpha } = trailProfile(k2);
+          for (let r = 0; r < 2; r++) {
+            const off = r === 0 ? side : vert;
+            const vi = ((f * 2 + r) * TRAIL + k2) * 2;
+            ribbonPos.set([p.x + off.x * width * 0.5, p.y + off.y * width * 0.5, p.z + off.z * width * 0.5, p.x - off.x * width * 0.5, p.y - off.y * width * 0.5, p.z - off.z * width * 0.5], vi * 3);
+            ribbonCol.set([0.9, 0.91, 0.92, alpha, 0.9, 0.91, 0.92, alpha], vi * 4);
+          }
+        }
+        // Bouffées éparses, de plus en plus pâles, le long de la moitié arrière.
+        for (let k = 0; k < PUFFS; k++) {
+          const rank = Math.min(TRAIL - 1, 6 + k * 4);
+          const p = pts[rank] as Vector3;
+          puffPos.set([p.x, p.y, p.z], (f * PUFFS + k) * 3);
+          puffCol.set([0.9, 0.9, 0.91, 0.16 * (1 - k / PUFFS)], (f * PUFFS + k) * 4);
         }
       });
       (cableGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
-      (trailGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
-      (trailGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+      (ribbonGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
+      (ribbonGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+      (puffGeo.getAttribute("position") as BufferAttribute).needsUpdate = true;
+      (puffGeo.getAttribute("color") as BufferAttribute).needsUpdate = true;
+      ribbonGeo.computeBoundingSphere();
       hooks.instanceMatrix.needsUpdate = true;
     },
     cableSegments() {
@@ -283,16 +350,24 @@ export function buildOdm(town: Town, seed: number, mats: SoldierMaterials, puff:
       });
       return out;
     },
+    squadPoints(i) {
+      return units.filter((u) => u.squad === i).flatMap((u) => {
+        const p = u.s.group.position.clone();
+        return [p, new Vector3(0, 1.85, 0).applyQuaternion(u.s.group.quaternion).add(p)];
+      });
+    },
     trailPoints() {
       return flyers.map((_, f) => Array.from({ length: TRAIL }, (_2, k2) => new Vector3().fromArray(trailPos, (f * TRAIL + k2) * 3)));
     },
     dispose() {
       cableGeo.dispose();
-      trailGeo.dispose();
+      ribbonGeo.dispose();
+      puffGeo.dispose();
+      (puffs.material as PointsMaterial).dispose();
       hookGeo.dispose();
       hookMat.dispose();
       (cables.material as LineBasicMaterial).dispose();
-      (trails.material as PointsMaterial).dispose();
+      (trails.material as MeshBasicMaterial).dispose();
     },
   };
   return scene;

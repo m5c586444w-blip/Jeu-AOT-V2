@@ -42,7 +42,13 @@ async function newPage(browser: Browser, w: number, h: number, errors: string[])
   return page;
 }
 
-const ready = (page: Page): Promise<unknown> => page.waitForFunction(() => document.documentElement.dataset["proto3d"] === "pret", undefined, { timeout: 900000 });
+// R1e (§6, point 1) : la capture attend aussi les textures de Poly Haven (`data-photo3d` : posées, repli ou procédurales) ;
+// le banc d'échelle n'en charge pas (`photos` faux).
+const ready = async (page: Page, photos = true): Promise<unknown> => {
+  await page.waitForFunction(() => document.documentElement.dataset["proto3d"] === "pret", undefined, { timeout: 900000 });
+  if (!photos) return null;
+  return page.waitForFunction(() => ["pret", "repli", "procedurales"].includes(document.documentElement.dataset["photo3d"] ?? ""), undefined, { timeout: 900000 });
+};
 
 const server = await createServer({ server: { port: 5193, strictPort: false }, logLevel: "error" });
 await server.listen();
@@ -57,7 +63,8 @@ async function shot(query: string, file: string, w: number, h: number, measure: 
   const errors: string[] = [];
   const page = await newPage(browser, w, h, errors);
   const t0 = Date.now();
-  await page.goto(`${url}?proto3d&${query}`);
+  // R1e : `env=E01` charge désormais le lieu Shiganshina ; ce contrôle porte sur les scènes générées de R1b (`scene=r1b`).
+  await page.goto(`${url}?proto3d&${query}&scene=r1b`);
   await ready(page);
   const loadMs = Date.now() - t0;
   await page.evaluate(() => window.__env3d?.hold(true));
@@ -137,7 +144,7 @@ try {
     const errors: string[] = [];
     const page = await newPage(browser, 1920, 1080, errors);
     await page.goto(`${url}?proto3d&env=banc`);
-    await ready(page);
+    await ready(page, false);
     await page.evaluate(() => window.__banc3d?.hold(true));
     await page.evaluate(() => window.__banc3d?.frame());
     await page.screenshot({ path: `${OUT}/r1b-banc-echelle.png`, timeout: 900000 });

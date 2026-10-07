@@ -10,7 +10,7 @@ import { derive, seeded } from "./rng";
 export type LightPreset = "jour" | "aube" | "crepuscule" | "nuit";
 export const LIGHT_PRESETS: readonly LightPreset[] = ["jour", "aube", "crepuscule", "nuit"];
 
-interface PresetDef {
+export interface PresetDef {
   /** Élévation et azimut de l'astre (degrés ; azimut 0 = nord, 90 = est). */
   elevation: number;
   azimuth: number;
@@ -62,7 +62,7 @@ const ENV_GROUND_GAIN = 0.6;
  */
 const ENV_SKY_SATURATION = 0.35;
 
-const PRESETS: Record<LightPreset, PresetDef> = {
+export const PRESETS: Record<LightPreset, PresetDef> = {
   jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false, physical: { turbidity: 3, rayleigh: 1.1, mie: 0.004, mieG: 0.8, clouds: 0.38, gain: 0.5 }, envIntensity: 0.18 },
   // Aube (R1b.6) : soleil bas à l'est, lumière rosée et froide, brume plus dense que le jour.
   aube: { elevation: 9, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.4, hemiSky: 0xb2b8cc, hemiGround: 0x4a443e, hemiIntensity: 1.2, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.2, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false, envIntensity: 0.3 },
@@ -115,7 +115,34 @@ export interface UndergroundLight {
   openings: boolean;
 }
 
-export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3; shadowExtent?: number; fogScale?: number; underground?: UndergroundLight | null }): LightRig {
+/**
+ * R1e (§6, point 1) : ciel de fumée (ville-usine). À `smoke` = 1 : ciel peint gris-brun (plus de ciel physique bleu), voile de
+ * brume dense et brun, soleil plus faible et plus rouge, ambiance plus sombre.
+ */
+const SMOKE = { sun: 0xd2845a, sky: 0x8a7b70, ground: 0x3a3028, horizon: 0x9c8b7d, zenith: 0x5f5751, glow: 0xd09868, fog: 0x86786c };
+
+export function smoky(d: PresetDef, s: number): PresetDef {
+  if (s <= 0) return d;
+  const mix = (a: number, b: number, k: number): number => new Color(a).lerp(new Color(b), Math.min(1, k)).getHex();
+  return {
+    ...d,
+    sunColor: mix(d.sunColor, SMOKE.sun, 0.6 * s),
+    sunIntensity: d.sunIntensity * (1 - 0.5 * s),
+    hemiSky: mix(d.hemiSky, SMOKE.sky, 0.75 * s),
+    hemiGround: mix(d.hemiGround, SMOKE.ground, 0.5 * s),
+    hemiIntensity: d.hemiIntensity * (1 - 0.18 * s),
+    horizon: mix(d.horizon, SMOKE.horizon, s),
+    zenith: mix(d.zenith, SMOKE.zenith, 0.9 * s),
+    glow: mix(d.glow, SMOKE.glow, s),
+    glowStrength: d.glowStrength * (1 - 0.4 * s),
+    fog: mix(d.fog, SMOKE.fog, 0.9 * s),
+    fogDensity: d.fogDensity * (1 + 2.6 * s),
+    exposure: d.exposure * (1 - 0.06 * s),
+    physical: s > 0.3 ? undefined : d.physical,
+  };
+}
+
+export function createLighting(scene: Scene, seed: number, opts: { windowMaterials: MeshStandardMaterial[]; lanternMaterial: MeshStandardMaterial; lamps: Vector3[]; center: Vector3; shadowExtent?: number; fogScale?: number; underground?: UndergroundLight | null; smoke?: number; fill?: number; exposureScale?: number }): LightRig {
   const group = new Group();
   group.name = "eclairage";
   scene.add(group);
@@ -227,7 +254,8 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
    * Avec l'éclairage d'image du ciel physique, le ciel éclaire déjà les ombres : l'hémisphère est réduite. Le dôme peint (aube,
    * crépuscule, nuit) éclaire peu : l'hémisphère garde son intensité de R1b.
    */
-  const hemiFor = (d: PresetDef): number => d.hemiIntensity * (0.75 + 0.25 * sunK) * (envOn && d.physical && !opts.underground ? HEMI_WITH_ENV : 1);
+  // R1e (§6, point 6) : `fill` éclaire les ombres sous une voûte épaisse (forêt des Arbres Géants), sans toucher au soleil.
+  const hemiFor = (d: PresetDef): number => d.hemiIntensity * (opts.fill ?? 1) * (0.75 + 0.25 * sunK) * (envOn && d.physical && !opts.underground ? HEMI_WITH_ENV : 1);
   /** Multiplicateur de brume et voile du soleil posés par la météo (R1b.7). */
   let extraFog = 1;
   let sunK = 1;
@@ -239,7 +267,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
    * lanternes et fenêtres restent allumées.
    */
   const effective = (preset: LightPreset): PresetDef => {
-    const d0 = PRESETS[preset];
+    const d0 = smoky(PRESETS[preset], opts.smoke ?? 0);
     const ug = opts.underground ?? null;
     if (!ug) return d0;
     const day = preset === "jour" ? 1 : preset === "nuit" ? 0 : 0.45;
@@ -299,7 +327,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       hemi.intensity = hemiFor(d);
       fog.color.set(d.fog);
       fog.density = d.fogDensity * (opts.fogScale ?? 1) * extraFog;
-      exposure = d.exposure;
+      exposure = d.exposure * (opts.exposureScale ?? 1);
       const pos = skyGeo.getAttribute("position");
       const col = skyGeo.getAttribute("color");
       const hz = new Color(d.horizon);

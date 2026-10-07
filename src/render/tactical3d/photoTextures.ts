@@ -1,5 +1,6 @@
 import { MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader } from "three";
 import type { Material, Mesh, Object3D, Texture } from "three";
+import type { ParementUniforms } from "./parement";
 
 /**
  * R1d (décision de l'utilisateur) : textures d'environnement de Poly Haven (CC0) — pavés, sol naturel, pierre de taille, pierre
@@ -115,8 +116,30 @@ export function applyPhotoTextures(root: Object3D, photos: PhotoTextures, lite: 
     for (const mat of m ? (Array.isArray(m) ? m : [m]) : []) {
       if (!(mat instanceof MeshStandardMaterial) || seen.has(mat)) continue;
       seen.add(mat);
-      const ud = mat.userData as { photo?: Matiere; relief?: Texture | null; photoDetail?: PhotoDetail };
-      if (ud.photo) continue;
+      const ud = mat.userData as { photo?: Matiere; relief?: Texture | null; photoDetail?: PhotoDetail; parement?: ParementUniforms; parementPhoto?: boolean };
+      if (ud.photo || ud.parementPhoto) continue;
+      if (ud.parement && mat.map) {
+        // R1e : parement sans motif répété — la pierre de taille et la pierre brute de Poly Haven deviennent les appareils A et
+        // C, à leur taille réelle ; le gain garde la teinte moyenne des appareils procéduraux qu'elles remplacent.
+        const pa = photos.get("pierre_taille");
+        const pc = photos.get("pierre_brute");
+        if (!pa || !pc) continue;
+        const u = ud.parement;
+        const gain = (target: [number, number, number], ph: [number, number, number]): [number, number, number] => [ratio(target[0], ph[0]), ratio(target[1], ph[1]), ratio(target[2], ph[2])];
+        // Les deux photos ramenées à la moyenne de l'appareil A procédural (comme l'appareil B), pas de taches.
+        const target = u.parTarget[0] > 0 ? u.parTarget : meanOf(mat.map.image);
+        u.parGainA.value = gain(target, pa.mean);
+        u.parGainC.value = gain(target, pc.mean);
+        mat.map = pa.map;
+        u.parC.value = pc.map;
+        u.parSizeA.value = [PHOTO_MATIERES.pierre_taille.taille, PHOTO_MATIERES.pierre_taille.taille];
+        u.parSizeC.value = [PHOTO_MATIERES.pierre_brute.taille, PHOTO_MATIERES.pierre_brute.taille];
+        mat.needsUpdate = true;
+        // Pas de relief photo (ses coordonnées ne suivent pas celles du shader) : marque propre, hors de `photo`.
+        ud.parementPhoto = true;
+        changed++;
+        continue;
+      }
       const tag = (mat.map?.userData as { photo?: PhotoTag } | undefined)?.photo;
       if (tag && mat.map) {
         const p = photos.get(tag.matiere);
@@ -165,7 +188,8 @@ export function photoCounts(root: Object3D): Partial<Record<Matiere, number>> {
     for (const mat of m ? (Array.isArray(m) ? m : [m]) : []) {
       if (seen.has(mat)) continue;
       seen.add(mat);
-      const k = (mat.userData as { photo?: Matiere }).photo;
+      const ud = mat.userData as { photo?: Matiere; parementPhoto?: boolean };
+      const k = ud.photo ?? (ud.parementPhoto ? "pierre_taille" : undefined);
       if (k) out[k] = (out[k] ?? 0) + 1;
     }
   });

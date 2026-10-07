@@ -119,10 +119,14 @@ export function drawFlare(g: GraphicsContext, sx: number, sy: number, k: number,
 function drawTransformHalo(g: GraphicsContext, x: number, y: number, pulse: number): void {
   g.circle(x, y - 6, Math.min(TRANSFORM_HALO_M, 9 + pulse)).fill({ color: 0xfff1b8, alpha: 0.55 });
 }
-/** Zigzag de transformation : il tombe du ciel (1,4 × la hauteur dessinée du Titan à venir, `h`) jusqu'aux pieds. */
+/**
+ * Zigzag de transformation : il tombe de BODY_BOLT × la hauteur dessinée du Titan à venir (`h`) jusqu'aux pieds, à droite de la
+ * figure du porteur (R1e §6, point 8 : il ne barre plus le visage).
+ */
 function drawTransformBolt(g: GraphicsContext, x: number, y: number, h: number): void {
   const b = h * BODY_BOLT;
-  g.moveTo(x, y - b).lineTo(x - 3, y - b * 0.65).lineTo(x + 2, y - b * 0.55).lineTo(x - 2, y - 6).stroke({ width: 1.4, color: 0xc58a2b });
+  const dx = Math.max(4, h * 0.22);
+  g.moveTo(x + dx, y - b).lineTo(x + dx - 3, y - b * 0.65).lineTo(x + dx + 2, y - b * 0.55).lineTo(x + 2, y - 6).stroke({ width: 1.4, color: 0xc58a2b });
 }
 /** Éclair de transformation (P6) au pied d'un porteur : halo qui pulse et zigzag à l'échelle du Titan à venir. */
 export function drawTransformFlash(g: GraphicsContext, x: number, y: number, pulse: number, h: number): void {
@@ -134,9 +138,9 @@ export function drawTransformFlash(g: GraphicsContext, x: number, y: number, pul
 function drawBodyHalo(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {
   g.circle(bx, by - h * 0.5, h * (0.45 + 0.2 * (1 - fade))).fill({ color: 0xfff1b8, alpha: 0.4 * fade });
 }
-/** Éclair prolongé : du ciel (1,4 × la hauteur dessinée) jusqu'au corps. */
+/** Éclair prolongé : de BODY_BOLT × la hauteur dessinée jusqu'au corps, sur son flanc droit (pas sur le visage). */
 function drawBodyBolt(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {
-  g.moveTo(bx + h * 0.1, by - h * BODY_BOLT).lineTo(bx - h * 0.08, by - h * 0.9).lineTo(bx + h * 0.06, by - h * 0.75).lineTo(bx - h * 0.04, by - h * 0.2).stroke({ width: 2, color: 0xc58a2b, alpha: fade });
+  g.moveTo(bx + h * 0.3, by - h * BODY_BOLT).lineTo(bx + h * 0.2, by - h * 0.9).lineTo(bx + h * 0.32, by - h * 0.75).lineTo(bx + h * 0.24, by - h * 0.2).stroke({ width: 2, color: 0xc58a2b, alpha: fade });
 }
 /** Éclair prolongé autour d'un corps qui surgit (R0.2f). */
 export function drawBodyFlash(g: GraphicsContext, bx: number, by: number, h: number, fade: number): void {

@@ -101,8 +101,33 @@
         "aucun": 1
       },
       "canon": "A"
+    },
+    "tuile_canal": {
+      "base": "#B4683F",
+      "pente_deg": [
+        18,
+        26
+      ],
+      "formes": {
+        "pignon": 0.5,
+        "croupe": 0.5
+      },
+      "canon": "A"
+    },
+    "bardeau": {
+      "base": "#6E5A46",
+      "pente_deg": [
+        40,
+        54
+      ],
+      "formes": {
+        "pignon": 0.7,
+        "croupe": 0.3
+      },
+      "canon": "A"
     }
   },
+  "enduits": { "teintes": ["#E2C68E", "#E4B9A8", "#CBD3B2", "#BCC6CC", "#EEE3CA", "#D9C2A0", "#E8D5B5"], "canon": "A" },
   "accents": [
     "#4F6B5A",
     "#8A3B2A",

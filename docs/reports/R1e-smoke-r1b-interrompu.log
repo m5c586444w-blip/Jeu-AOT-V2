@@ -1,0 +1,17 @@
+
+> murs-et-sang@0.0.1 smoke:r1b
+> tsx src/tools/smoke-r1b.ts tout
+
+[lot 1] planches de contrôle (1920 × 1080, qualité moyenne, image figée à t = 1 s)
+  OK  r1b-E01.png : aucune erreur de page
+  OK  E01 Shiganshina : planche en 39.1 s
+  OK  r1b-E02.png : aucune erreur de page
+  OK  E02 Trost : planche en 42.3 s
+  OK  r1b-E05.png : aucune erreur de page
+  OK  E05 Stohess : planche en 50.4 s
+  OK  r1b-E06.png : aucune erreur de page
+  OK  E06 Mitras : planche en 43.4 s
+  OK  r1b-E11.png : aucune erreur de page
+  OK  E11 Village agricole : planche en 52.6 s
+  OK  r1b-E13.png : aucune erreur de page
+  OK  E13 Campagne pure : planche en 89.0 s
