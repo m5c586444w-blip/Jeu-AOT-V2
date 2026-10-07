@@ -115,6 +115,8 @@ export class StrategicMap {
     const m = new StrategicMap(app, map, provinces, labels, terrain);
     m.fit();
     m.refineTerrain();
+    // Les tailles des noms changent quand les polices auto-hébergées finissent de charger : on replace les noms.
+    void document.fonts?.ready.then(() => m.labels.update(m.zoom / m.uiScale, m.lod, m.filters.labels, m.iconPoints()));
     return m;
   }
 

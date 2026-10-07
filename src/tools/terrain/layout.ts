@@ -62,7 +62,7 @@ export class DrawLayout {
   radius(spec: number | string, bearing: number): number {
     if (spec === 0) return 0;
     if (spec === "coast") return this.coastRadius(bearing);
-    if (typeof spec === "number") return spec * this.wallWarp(bearing) + 6 * circleNoise(bearing, spec / 9, `${this.opt.seed}:anneau:${spec}`, 3);
+    if (typeof spec === "number") return spec * this.wallWarp(bearing) + 10 * circleNoise(bearing, spec / 6, `${this.opt.seed}:anneau:${spec}`, 3);
     const [name, plus] = spec.split("+") as [keyof Layout["radii"], string | undefined];
     return (this.layout.radii[name].value + (plus === "wall" ? this.layout.wall_band_km : 0)) * this.wallWarp(bearing);
   }
@@ -76,7 +76,7 @@ export class DrawLayout {
     const r0 = this.radius(ring.r_from, bearing);
     const r1 = this.radius(ring.r_to, bearing);
     const taper = Math.min(1, Math.max(0, Math.min(r - r0, r1 - r) / 18));
-    const km = 9 * lineNoise(r, 32, `${this.opt.seed}:radiale:${ring.name}:${norm(bearing)}`, 3) * taper * taper;
+    const km = 15 * lineNoise(r, 26, `${this.opt.seed}:radiale:${ring.name}:${norm(bearing)}`, 3) * taper * taper;
     return ((km / r) * 180) / Math.PI;
   }
 

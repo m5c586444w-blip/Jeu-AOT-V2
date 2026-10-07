@@ -97,8 +97,8 @@ export class LabelLayer {
         text.visible = false;
         continue;
       }
-      const hw = (text.width / 2) * 1.04;
-      const hh = (text.height / 2) * 0.95;
+      const hw = (text.width / 2) * 1.08;
+      const hh = (text.height / 2) * 1.1;
       const gapX = text.width / 2 / inv + 22;
       const base = spec.offset ?? [0, 0];
       const tries: Point[] = [base, [0, -19], [0, 17], [0, 28], [0, -30], [gapX, 0], [-gapX, 0]];
