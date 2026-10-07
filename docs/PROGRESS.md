@@ -2,10 +2,18 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1c terminée, ARRÊT** (revue de fin de R1c ; latence de la scène tactique en échec deux fois) — commit de départ `a2b2f88` |
-| Tâche | R1c.6 : comparaison avant/après, rapport `docs/reports/R1c.md` |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 71 fichiers, 433 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | **Attendre l'utilisateur** : décision sur la latence (rapport § i, options a à d), Poly Haven, questions des districts ; puis `smoke:r1b` complet (CR1b-06) |
+| Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
+| Tâche | R1d.0 : plan `docs/phases/R1d.md`, `CLAUDE.md`, `assets:check` (textures Poly Haven) |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 71 fichiers, 437 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1d.1 : latence en deux temps et qualité basse allégée |
+
+## R1d ouverte (2026-10-07)
+- **Revue de R1c par l'utilisateur** (D-91) :
+  - latence : options c + b, sans compression d'assets ;
+  - Poly Haven pour les textures d'environnement seulement (12 au plus, 1K, WebP) ;
+  - districts gardés en `?` et `A`.
+- **Réseau** : Poly Haven joignable depuis la session (`api.polyhaven.com` et `dl.polyhaven.org` : fichier 1K téléchargé, empreinte md5 conforme à l'API).
+- **Plan** : `docs/phases/R1d.md` (7 tâches, critères CR1d-01 à CR1d-13). Arrêt en fin de phase ; R2 non lancée.
 
 ## R1c terminée — arrêt obligatoire (2026-10-07)
 - **Raisons de l'arrêt** (CLAUDE.md) :

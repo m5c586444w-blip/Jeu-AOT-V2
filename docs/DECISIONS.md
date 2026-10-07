@@ -614,3 +614,13 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Carte d'environnement à 64 texels par face** (`ENV_MAP_SIZE`, `lighting.ts`). À 256, le filtrage PMREM coûtait ≈ 3,8 s au chargement sans GPU. Le ciel est lisse, et la carte ne sert qu'aux reflets flous et à la lumière diffuse.
 - **Sonde de la scène tactique** : `window.__proto3d.timings` (début, corps, ville, Titans, soldats, réglages, première image) et nombre de programmes de shaders dans `stats()`.
 - **Latence de la scène tactique en échec deux fois** (10,25 s puis 8,91 s) : arrêt, décision de l'utilisateur (`docs/reports/R1c.md` § d, § i).
+
+## 2026-10-07 — D-91 Revue de R1c : décisions de l'utilisateur appliquées en R1d
+- **Latence (options c + b)** :
+  - « prêt » = ville visible avec les soldats et les Titans en repères simplifiés (figures en primitives de R1) ;
+  - corps détaillés chargés ensuite ; les deux instants sont mesurés ;
+  - cible de 3 s sur « prêt » en qualité basse allégée (rendu logiciel) ;
+  - qualités moyenne et haute, et mesure sur GPU réel : « à vérifier » ;
+  - pas de compression d'assets (jeu local).
+- **Poly Haven** : textures d'environnement seulement (sol, pierre, toits), au plus 12 fichiers WebP en 1K ; `assets:check` le vérifie. Choix des matières et conversion au plan R1d.
+- **Districts** : tout reste `?` ou `A` paramétrable ; pas de portes de rivière hors de Shiganshina.

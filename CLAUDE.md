@@ -13,7 +13,17 @@
   - **Interdit**, quelle que soit la licence : tout modèle ou texture tiré de L'Attaque des Titans ou d'un fan (Sketchfab, DeviantArt, Roblox, MMD, etc.).
   - Chaque fichier est dans `docs/art/assets/`, avec son entrée au manifeste `docs/art/assets/manifest.json` (nom, URL, licence, date, auteur) et son attribution dans `docs/ASSETS_LICENSES.md`. `npm run assets:check` échoue sinon (licence autre que CC0 ou CC-BY, URL hors des sources retenues, fichier sans entrée).
   - Chargement : `GLTFLoader`, à la demande, dans `src/render/tactical3d` seulement ; rien dans le bundle principal.
+  - **Textures Poly Haven (R1d, décision de l'utilisateur)** : autorisées pour les **textures d'environnement** seulement (sol, pierre, toits).
+    - Au plus **12 fichiers**, chacun en **1024 × 1024**, **WebP** (convertis depuis le JPG 1K officiel), usage `texture_environnement`.
+    - Aucun modèle, HDRI ou autre ressource Poly Haven.
+    - `npm run assets:check` le vérifie.
+  - Pas de compression d'assets (jeu en local, jamais en ligne).
 - Images par seconde (R1c, décision de l'utilisateur) : plus d'objectif moyen d'images par seconde ; les contraintes de **latence** restent (04 §9 : chargement < 8 s à froid, scène tactique < 3 s). Priorité : scènes et environnements réalistes et travaillés.
+- Latence en deux temps (R1d, décision de l'utilisateur) :
+  - « prêt » = ville visible avec les soldats (et les Titans) en **repères simplifiés** ; les corps détaillés sont chargés ensuite ; les deux instants sont mesurés ;
+  - cible de 3 s sur « prêt » en **qualité basse allégée** (rendu logiciel) ;
+  - qualités moyenne et haute, et mesure sur GPU réel : « à vérifier ».
+- Districts (revue de R1c) : tout reste `?` ou `A` paramétrable ; pas de portes de rivière ailleurs qu'à Shiganshina.
 - Chaque phase Pn (n ≥ 1) commence par `docs/phases/Pn.md` (tâches, AC avec commandes, hors-périmètre).
 - Fin de phase : rapport `docs/reports/Pn.md` (sorties réelles collées, captures dans `docs/screenshots/`), commit, `docs/PROGRESS.md` à jour, puis phase suivante si tous ses critères passent.
 - Pixi uniquement dans `src/render`. three.js n'est utilisé que dans `src/render/tactical3d` (chargé à la demande ; règle ESLint en place, prouvée par `tests/lint/sim-purity.test.ts`). Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
@@ -24,4 +34,4 @@
 2. Fait de lore ambigu qu'aucune valeur `?` paramétrable ne règle.
 3. Décision de design à impact majeur non couverte par les spécifications.
 4. Une commande ne peut pas s'exécuter (réseau, droits…).
-5. Fin de **P4**, **P8**, **R1**, **R1c**, **R2**, **R3**, **R4**, **R7**, **R8** et **P9** : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
+5. Fin de **P4**, **P8**, **R1**, **R1c**, **R1d**, **R2**, **R3**, **R4**, **R7**, **R8** et **P9** : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
