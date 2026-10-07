@@ -7,7 +7,8 @@
 //   « corps » (corps détaillés, `data-corps3d="pret"`, instant noté dans la page) ; avant R1d, les deux sont confondus.
 //   Cibles en qualité basse : scène tactique < 3 s, environnements < 8 s ; qualité moyenne et haute mesurées sans cible.
 //   Temps d'image (rappels requestAnimationFrame comptés 6 s après 2 s de chauffe), appels, triangles, mémoire ; captures
-//   appariées docs/screenshots/r1d-<scène>-avant.png, -apres.png, -comparaison.png.
+//   appariées docs/screenshots/r1d-<scène>-avant.png, -apres.png, -comparaison.png, prises après les corps détaillés et les
+//   textures de Poly Haven (instant « photos », `data-photo3d="pret"`).
 // - teintes (CR1d-08) : mêmes vues qu'en R1b (a2b2f88) — scène tactique, suivi, E01, E02, E22, qualité moyenne — moyennes
 //   CIELAB du bas de l'image (sans le ciel) : |Δb*| ≤ 2,5, ΔC* ≥ −2, ΔL10 (ombres) ≤ +8.
 // - anatomie (CR1d-09) : corps de base de face, de dos, torses et bassins de près (`?proto3d=humain&vue=anatomie`), avant
@@ -228,6 +229,9 @@ interface Row {
   pretMs: number;
   corpsMs: number | null;
   corpsEtat: string;
+  /** Instant des textures de Poly Haven (R1d.5) depuis la navigation ; `null` sans objet (avant R1d.5). */
+  photosMs: number | null;
+  photosEtat: string;
   timings: Record<string, number> | null;
   msParImage: number;
   appels: number;
@@ -274,6 +278,22 @@ async function scene(url: string, s: SceneDef, version: Row["version"], file: st
       corpsMs = pretMs;
       corpsEtat = "avec la première image";
     }
+    // Textures de Poly Haven (R1d.5), posées après la première image : attendues avant la mesure et la capture.
+    let photosMs: number | null = null;
+    let photosEtat = "sans objet";
+    const withPhotos = await page.evaluate(() => {
+      const w = window as unknown as Record<string, Probe | undefined>;
+      const t = (w["__proto3d"] ?? w["__env3d"])?.timings;
+      return t !== undefined && "photos" in t;
+    });
+    if (withPhotos) {
+      await page.waitForFunction(() => ["pret", "repli", "procedurales"].includes(document.documentElement.dataset["photo3d"] ?? ""), undefined, { timeout: 900000, polling: 100 });
+      photosEtat = await page.evaluate(() => document.documentElement.dataset["photo3d"] ?? "");
+      photosMs = await page.evaluate(() => {
+        const w = window as unknown as Record<string, Probe | undefined>;
+        return (w["__proto3d"] ?? w["__env3d"])?.timings?.["photos"] ?? 0;
+      });
+    }
     await page.waitForTimeout(WARM_MS);
     const f = await countFrames(page, MEASURE_S);
     const info = await page.evaluate(() => {
@@ -294,9 +314,9 @@ async function scene(url: string, s: SceneDef, version: Row["version"], file: st
       });
       await page.screenshot({ path: file, timeout: 900000 });
     }
-    const row: Row = { scene: s.id, version, pretMs, corpsMs, corpsEtat, timings: info.timings, msParImage: f.ms / Math.max(1, f.frames), appels: info.calls, triangles: info.triangles, programmes: info.programs, rssMo: rss, erreurs: errors };
+    const row: Row = { scene: s.id, version, pretMs, corpsMs, corpsEtat, photosMs, photosEtat, timings: info.timings, msParImage: f.ms / Math.max(1, f.frames), appels: info.calls, triangles: info.triangles, programmes: info.programs, rssMo: rss, erreurs: errors };
     console.log(
-      `${s.id.padEnd(15)} ${version.padEnd(5)} prêt ${s2(pretMs).padStart(8)}${corpsMs !== null ? ` · corps ${corpsMs > 0 ? s2(corpsMs) : corpsEtat} (${corpsEtat})` : ""} · ${row.msParImage.toFixed(0).padStart(5)} ms/image · ${row.appels} appels · ${(row.triangles / 1e6).toFixed(2)} M triangles${row.programmes ? ` · ${row.programmes} programmes` : ""} · RSS ${rss.toFixed(0)} Mo${errors.length ? ` · ${errors.length} erreur(s) : ${errors.slice(0, 2).join(" | ")}` : ""}`,
+      `${s.id.padEnd(15)} ${version.padEnd(5)} prêt ${s2(pretMs).padStart(8)}${corpsMs !== null ? ` · corps ${corpsMs > 0 ? s2(corpsMs) : corpsEtat} (${corpsEtat})` : ""}${photosMs !== null ? ` · photos ${photosMs > 0 ? s2(photosMs) : photosEtat}` : ""} · ${row.msParImage.toFixed(0).padStart(5)} ms/image · ${row.appels} appels · ${(row.triangles / 1e6).toFixed(2)} M triangles${row.programmes ? ` · ${row.programmes} programmes` : ""} · RSS ${rss.toFixed(0)} Mo${errors.length ? ` · ${errors.length} erreur(s) : ${errors.slice(0, 2).join(" | ")}` : ""}`,
     );
     return row;
   } finally {
@@ -427,6 +447,7 @@ try {
         if (s.cible === "tactique") check(a.pretMs < TACTICAL_MS, `${s.id} après : « prêt » ${s2(a.pretMs)} < 3 s${b ? ` (avant : ${s2(b.pretMs)})` : ""}`);
         if (s.cible === "environnement") check(a.pretMs < ENV_MS, `${s.id} après : « prêt » ${s2(a.pretMs)} < 8 s${b ? ` (avant : ${s2(b.pretMs)})` : ""}`);
         if (a.corpsMs !== null && a.corpsEtat !== "avec la première image") check(a.corpsEtat === "pret", `${s.id} après : corps détaillés affichés (${a.corpsEtat}, ${a.corpsMs > 0 ? s2(a.corpsMs) : "—"})`);
+        if (a.photosMs !== null) check(a.photosEtat === "pret", `${s.id} après : textures de Poly Haven posées (${a.photosEtat}, ${a.photosMs > 0 ? s2(a.photosMs) : "—"})`);
       }
       await probe.close();
       results["scenes"] = rows;

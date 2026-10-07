@@ -23,6 +23,8 @@ import { cobbleTex, facadeSet, groundDetailTex, groundTex, leafTex, mistTex, roo
 import { WEATHERS, createFires, createWeather } from "./weather";
 import type { WeatherKind } from "./weather";
 import { puffTexture, skinTexture } from "./textures";
+import { applyPhotoTextures, loadPhotoTextures, photoCounts } from "./photoTextures";
+import type { Matiere } from "./photoTextures";
 
 /**
  * Visionneuse des environnements de R1b : `?proto3d&env=E13` (variante `&variante=hiver`, graine `&graine=850`).
@@ -50,8 +52,11 @@ export interface EnvProbe {
    * Temps (ms) : génération, textures, assemblage ; `pret` : première image depuis la navigation (Titans en repères).
    * R1d, second temps (scènes avec Titans) : `bodies` (corps de base chargé et Titans détaillés façonnés), `corps` : première image
    * avec les Titans détaillés, depuis la navigation (0 sans Titans ou tant qu'ils ne sont pas là, −1 en repli).
+   * Textures de Poly Haven : `photos`, instant de la première image qui les montre (−1 en repli).
    */
-  timings: { generate: number; bodies: number; textures: number; build: number; pret: number; corps: number };
+  timings: { generate: number; bodies: number; textures: number; build: number; pret: number; corps: number; photos: number };
+  /** R1d : matériaux passés aux textures de Poly Haven, par matière. */
+  photos: Partial<Record<Matiere, number>>;
   counts: Record<string, number>;
   setLight(p: LightPreset): void;
   setView(v: ViewName): void;
@@ -429,6 +434,11 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       state.timings.corps = performance.now();
       html.dataset["corps3d"] = "pret";
     }
+    if (photoPending) {
+      photoPending = false;
+      state.timings.photos = performance.now();
+      html.dataset["photo3d"] = "pret";
+    }
   };
 
   // Rendu hors écran : un second moteur sur un canvas détaché, mêmes réglages de sortie (tonalité, sRGB).
@@ -471,7 +481,8 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     light,
     view,
     quality,
-    timings: { generate: t1 - t0, bodies: 0, textures: t2 - tk, build: t3 - t2, pret: 0, corps: 0 },
+    timings: { generate: t1 - t0, bodies: 0, textures: t2 - tk, build: t3 - t2, pret: 0, corps: 0, photos: 0 },
+    photos: {},
     counts: meshes.counts,
     setLight(p) {
       setLight(p);
@@ -536,6 +547,27 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   };
   /** R1d, second temps : Titans détaillés façonnés un par un, puis échangés d'un coup avec les repères. */
   let corpsPending = false;
+  /**
+   * R1d : textures de Poly Haven posées en dernier, après les Titans détaillés s'il y en a (repli : textures procédurales ;
+   * `?textures=procedurales` : pas de photos).
+   */
+  const startPhotos = (): void => {
+    if (params.get("textures") === "procedurales") html.dataset["photo3d"] = "procedurales";
+    else void upgradePhotos();
+  };
+  let photoPending = false;
+  const upgradePhotos = async (): Promise<void> => {
+    try {
+      const photos = await loadPhotoTextures();
+      applyPhotoTextures(scene, photos, quality === "bas");
+      state.photos = photoCounts(scene);
+      await precompile(renderer, scene, camera);
+      photoPending = true;
+    } catch {
+      state.timings.photos = -1;
+      html.dataset["photo3d"] = "repli";
+    }
+  };
   const upgradeTitans = async (): Promise<void> => {
     const s0 = performance.now();
     const kit = await loadBodyKit(window.location.search);
@@ -543,6 +575,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     if (!make) {
       state.timings.corps = -1;
       html.dataset["corps3d"] = "repli";
+      startPhotos();
       return;
     }
     const next: Titan[] = [];
@@ -562,6 +595,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     await precompile(renderer, scene, camera);
     state.timings.bodies = performance.now() - s0;
     corpsPending = true;
+    startPhotos();
   };
 
   requestAnimationFrame((now) => {
@@ -569,9 +603,13 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     state.timings.pret = performance.now();
     state.ready = true;
     html.dataset["proto3d"] = "pret";
-    if (env.titans.length === 0) return;
-    if (params.get("corps") === "primitives") html.dataset["corps3d"] = "primitives";
-    else void upgradeTitans();
+    if (env.titans.length === 0 || params.get("corps") === "primitives") {
+      if (env.titans.length > 0) html.dataset["corps3d"] = "primitives";
+      // Sans Titans détaillés à attendre : après l'image suivante, pour ne pas retarder « prêt ».
+      requestAnimationFrame(() => setTimeout(startPhotos, 0));
+      return;
+    }
+    void upgradeTitans();
   });
   void frames;
   void probe;

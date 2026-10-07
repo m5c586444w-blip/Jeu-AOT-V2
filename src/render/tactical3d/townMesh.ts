@@ -7,6 +7,7 @@ import type { FacadeSet, WallKind } from "./textures";
 import { roofRise, roofSpan } from "./town";
 import type { Building, Town, Vec2 } from "./town";
 import type { TreeInst } from "./terrain";
+import { tagPhoto } from "./photoTextures";
 
 /**
  * Maillage de la ville (R1.2) : maisons extrudées, trois types de toits, fenêtres (textures de façade), cheminées, place
@@ -118,7 +119,9 @@ interface Builders {
   ground: FaceBuilder[];
   upper: FaceBuilder[];
   plain: FaceBuilder[];
+  /** Toits de tuiles (rouges) et d'ardoise (gris) : deux matériaux, pour les textures de Poly Haven (R1d). */
   roof: FaceBuilder;
+  slate: FaceBuilder;
 }
 
 function addWalls(f: Frame, b: Building, out: Builders): void {
@@ -148,6 +151,7 @@ function addWalls(f: Frame, b: Building, out: Builders): void {
 function addRoof(f: Frame, b: Building, out: Builders, rand: Rand): void {
   const H = b.floors * b.floorHeight;
   const color = (ROOF_COLORS[b.roofColor] ?? new Color(0x777777)).clone().multiplyScalar(range(rand, 0.85, 1.08));
+  const roof = b.roofColor === 0 ? out.slate : out.roof;
   const plain = out.plain[b.wall] as FaceBuilder;
   const tint = new Color(1, 1, 1).multiplyScalar(b.tint);
   const hw = b.width / 2;
@@ -156,7 +160,7 @@ function addRoof(f: Frame, b: Building, out: Builders, rand: Rand): void {
   const uvm = (x: number, y: number): UV => [x / 3.2, y / 3.2];
   if (b.roof === "plat") {
     // Toit-terrasse sombre et acrotère.
-    out.roof.face([P(f, -hw, -hd, H + 0.05), P(f, hw, -hd, H + 0.05), P(f, hw, hd, H + 0.05), P(f, -hw, hd, H + 0.05)], [uvm(0, 0), uvm(b.width, 0), uvm(b.width, b.depth), uvm(0, b.depth)], new Color(0x4b4a46), up);
+    roof.face([P(f, -hw, -hd, H + 0.05), P(f, hw, -hd, H + 0.05), P(f, hw, hd, H + 0.05), P(f, -hw, hd, H + 0.05)], [uvm(0, 0), uvm(b.width, 0), uvm(b.width, b.depth), uvm(0, b.depth)], new Color(0x4b4a46), up);
     const t = 0.35;
     const ph = 0.9;
     const ring: [number, number, number, number][] = [
@@ -182,7 +186,7 @@ function addRoof(f: Frame, b: Building, out: Builders, rand: Rand): void {
     const g = 0.35;
     for (const s of [-1, 1]) {
       const slope = Math.hypot(half + e, rise + drop);
-      out.roof.face([R(-L / 2 - g, s * (half + e), He), R(L / 2 + g, s * (half + e), He), R(L / 2 + g, 0, H + rise), R(-L / 2 - g, 0, H + rise)], [uvm(0, 0), uvm(L + 2 * g, 0), uvm(L + 2 * g, slope), uvm(0, slope)], color, Rd(0, s, 1));
+      roof.face([R(-L / 2 - g, s * (half + e), He), R(L / 2 + g, s * (half + e), He), R(L / 2 + g, 0, H + rise), R(-L / 2 - g, 0, H + rise)], [uvm(0, 0), uvm(L + 2 * g, 0), uvm(L + 2 * g, slope), uvm(0, slope)], color, Rd(0, s, 1));
       // Pignon : triangle de mur aveugle.
       plain.face([R((s * L) / 2, -half, H), R((s * L) / 2, half, H), R((s * L) / 2, 0, H + rise)], [[0, 0], [(2 * half) / 6, 0], [half / 6, rise / 6]], tint, Rd(s, 0, 0));
     }
@@ -191,8 +195,8 @@ function addRoof(f: Frame, b: Building, out: Builders, rand: Rand): void {
     const slope = Math.hypot(half + e, rise + drop);
     for (const s of [-1, 1]) {
       // Longs pans (trapèzes) puis croupes (triangles).
-      out.roof.face([R(-L / 2 - e, s * (half + e), He), R(L / 2 + e, s * (half + e), He), R(r, 0, H + rise), R(-r, 0, H + rise)], [uvm(0, 0), uvm(L + 2 * e, 0), uvm((L + 2 * e) / 2 + r, slope), uvm((L + 2 * e) / 2 - r, slope)], color, Rd(0, s, 1));
-      out.roof.face([R(s * (L / 2 + e), -half - e, He), R(s * (L / 2 + e), half + e, He), R(s * r, 0, H + rise)], [uvm(0, 0), uvm(2 * (half + e), 0), uvm(half + e, slope)], color, Rd(s, 0, 1));
+      roof.face([R(-L / 2 - e, s * (half + e), He), R(L / 2 + e, s * (half + e), He), R(r, 0, H + rise), R(-r, 0, H + rise)], [uvm(0, 0), uvm(L + 2 * e, 0), uvm((L + 2 * e) / 2 + r, slope), uvm((L + 2 * e) / 2 - r, slope)], color, Rd(0, s, 1));
+      roof.face([R(s * (L / 2 + e), -half - e, He), R(s * (L / 2 + e), half + e, He), R(s * r, 0, H + rise)], [uvm(0, 0), uvm(2 * (half + e), 0), uvm(half + e, slope)], color, Rd(s, 0, 1));
     }
   }
 }
@@ -254,7 +258,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
   const facades: FacadeSet[] = ([0, 1, 2] as WallKind[]).map((k) => facadeTextures(seed, k));
   const roofTex = roofTexture(seed);
   const textures: Texture[] = [...facades.flatMap((f) => [f.upper, f.upperLit, f.ground, f.groundLit, f.plain]), roofTex];
-  const out: Builders = { ground: [0, 1, 2].map(() => new FaceBuilder()), upper: [0, 1, 2].map(() => new FaceBuilder()), plain: [0, 1, 2].map(() => new FaceBuilder()), roof: new FaceBuilder() };
+  const out: Builders = { ground: [0, 1, 2].map(() => new FaceBuilder()), upper: [0, 1, 2].map(() => new FaceBuilder()), plain: [0, 1, 2].map(() => new FaceBuilder()), roof: new FaceBuilder(), slate: new FaceBuilder() };
   const chimneys = new FaceBuilder();
   for (const b of town.buildings) {
     const f = frameOf(b);
@@ -284,13 +288,19 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
     add(out.ground[k] as FaceBuilder, gr, `facades-rdc-${k}`);
     add(out.plain[k] as FaceBuilder, new MeshStandardMaterial({ map: fs.plain, vertexColors: true, roughness: 0.92 }), `murs-aveugles-${k}`);
   });
-  add(out.roof, new MeshStandardMaterial({ map: roofTex, vertexColors: true, roughness: 0.82, side: DoubleSide }), "toits");
+  // R1d : tuiles et ardoise remplacées par les textures de Poly Haven après la première image (`photoTextures.ts`).
+  const slateTex = roofTex.clone();
+  slateTex.needsUpdate = true;
+  textures.push(slateTex);
+  add(out.roof, new MeshStandardMaterial({ map: tagPhoto(roofTex, "tuiles", 3.2), vertexColors: true, roughness: 0.82, side: DoubleSide }), "toits-tuiles");
+  add(out.slate, new MeshStandardMaterial({ map: tagPhoto(slateTex, "ardoise", 3.2), vertexColors: true, roughness: 0.65, side: DoubleSide }), "toits-ardoise");
   add(chimneys, new MeshStandardMaterial({ map: facades[2]?.plain ?? null, vertexColors: true, roughness: 0.95 }), "cheminees");
 
   // Sol : prairie, chaussée pavée de la ville, îlots dallés, place.
   const grass = grassTexture(seed);
   grass.repeat.set(100, 100);
-  const cob = cobbleTexture(seed);
+  tagPhoto(grass, "sol", 2400);
+  const cob = tagPhoto(cobbleTexture(seed), "pave", 5);
   const flag = flagTexture(seed);
   textures.push(grass, cob, flag);
   const field = new Mesh(new PlaneGeometry(2400, 2400), new MeshStandardMaterial({ map: grass, roughness: 1 }));
@@ -386,7 +396,12 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
   // Garde-corps plein du chemin de ronde (pas de créneaux) et contreforts bas, côté ville.
   addBox(wall, wf, -half, w.thickness / 2 - 0.6, half, w.thickness / 2, w.height, w.height + 1.2, stoneWall);
   for (let x = -half + 20; x < half; x += 45) addBox(wall, wf, x, w.thickness / 2, x + 7, w.thickness / 2 + 5, 0, 14, stoneWall.clone().multiplyScalar(0.92));
-  add(wall, new MeshStandardMaterial({ map: facades[1]?.plain ?? null, vertexColors: true, roughness: 0.95 }), "enceinte");
+  const wallTex = facades[1]?.plain.clone() ?? null;
+  if (wallTex) {
+    wallTex.needsUpdate = true;
+    textures.push(wallTex);
+  }
+  add(wall, new MeshStandardMaterial({ map: tagPhoto(wallTex, "pierre_taille", 6), vertexColors: true, roughness: 0.95 }), "enceinte");
 
   return {
     group,

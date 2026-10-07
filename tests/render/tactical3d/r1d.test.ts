@@ -9,6 +9,9 @@ import { blankStage, blankTexture } from "../../../src/render/tactical3d/rig";
 import { seeded } from "../../../src/render/tactical3d/rng";
 import { townTree } from "../../../src/render/tactical3d/townMesh";
 import { readFileSync } from "node:fs";
+import { PHOTO_MATIERES, applyPhotoTextures, photoCounts } from "../../../src/render/tactical3d/photoTextures";
+import type { Matiere, PhotoTag, PhotoTextures } from "../../../src/render/tactical3d/photoTextures";
+import { POLYHAVEN_MAPS, POLYHAVEN_TEXTURES, polyhavenFile } from "../../../src/tools/assetsSources";
 import type { Quality } from "../../../src/render/tactical3d/quality";
 
 /**
@@ -165,5 +168,97 @@ describe("arbres réalistes dans la scène tactique (R1d, CR1d-10)", () => {
     expect(names).toContain("arbres-feuillu-proche-feuilles");
     expect(v.counts.feuillu + v.counts.fruitier).toBe(12);
     v.dispose();
+  });
+});
+
+describe("textures de Poly Haven (R1d, CR1d-11)", () => {
+  interface Mat {
+    map: { userData: { photo?: PhotoTag }; repeat: { x: number; y: number } } | null;
+    normalMap: unknown;
+    color: { r: number; g: number; b: number };
+    userData: { photo?: Matiere; relief?: unknown; photoDetail?: { uniforms: { detailMap: { value: unknown }; detailGain: { value: number }; detailRepeat: { value: number } }; size: number } };
+  }
+  const materials = (root: { traverse(f: (o: { material?: Mat | Mat[] }) => void): void }): Mat[] => {
+    const out = new Set<Mat>();
+    root.traverse((o) => {
+      for (const m of o.material ? (Array.isArray(o.material) ? o.material : [o.material]) : []) out.add(m);
+    });
+    return [...out];
+  };
+  const fakePhotos = (): PhotoTextures => new Map((Object.keys(PHOTO_MATIERES) as Matiere[]).map((m) => [m, { map: blankTexture(), normal: blankTexture(), mean: [0.25, 0.2, 0.1] as [number, number, number] }]));
+  const procMean = (): [number, number, number] => [0.5, 0.5, 0.5];
+  type Root = Parameters<typeof applyPhotoTextures>[0];
+
+  it("12 fichiers : 6 matières (pavés, sol, pierre de taille, pierre brute, tuiles, ardoise) × (couleur, relief), au manifeste et servis au rendu", () => {
+    expect(POLYHAVEN_TEXTURES.map((t) => [t.matiere, t.id, t.taille])).toEqual((Object.entries(PHOTO_MATIERES) as [Matiere, { id: string; taille: number }][]).map(([m, v]) => [m, v.id, v.taille]));
+    const manifest = JSON.parse(readFileSync("docs/art/assets/manifest.json", "utf8")) as { fichiers: { fichier: string; usage: string; execution?: boolean; url: string }[] };
+    const ph = manifest.fichiers.filter((e) => e.usage === "texture_environnement");
+    expect(ph.map((e) => e.fichier).sort()).toEqual(POLYHAVEN_TEXTURES.flatMap((t) => POLYHAVEN_MAPS.map((m) => polyhavenFile(t.id, m.suffixe))).sort());
+    expect(ph).toHaveLength(12);
+    for (const e of ph) {
+      expect(e.execution, e.fichier).toBe(true);
+      expect(e.url, e.fichier).toMatch(/^https:\/\/dl\.polyhaven\.org\/file\/ph-assets\/Textures\/jpg\/1k\//);
+    }
+  });
+
+  it("environnement (Shiganshina) : toits, pavés, parement des murs et détail du sol passent aux photos ; teinte du profil conservée", () => {
+    const env = generateEnvironment("E01", 850, null);
+    const m = buildEnvironmentMeshes(env, { quality: "moyen", textures: stubTextures() });
+    const root = m.group as unknown as Root;
+    const mats = materials(m.group as unknown as { traverse(f: (o: { material?: Mat | Mat[] }) => void): void });
+    const tagged = mats.filter((x) => x.map?.userData.photo);
+    const kinds = new Set(tagged.map((x) => x.map?.userData.photo?.matiere));
+    for (const k of ["tuiles", "ardoise", "pave", "pierre_taille"]) expect(kinds.has(k as Matiere), k).toBe(true);
+    const ground = mats.find((x) => x.userData.photoDetail);
+    expect(ground).toBeDefined();
+    const before = new Map(tagged.map((x) => [x, { map: x.map, color: { ...x.color }, tag: x.map?.userData.photo as PhotoTag }]));
+    const n = applyPhotoTextures(root, fakePhotos(), false, procMean);
+    expect(n).toBe(tagged.length + 1);
+    for (const [x, b] of before) {
+      const { taille } = PHOTO_MATIERES[b.tag.matiere];
+      expect(x.map).not.toBe(b.map);
+      expect([x.map?.repeat.x, x.map?.repeat.y]).toEqual([b.tag.metres[0] / taille, b.tag.metres[1] / taille]);
+      // Moyenne conservée : couleur × moyenne de la photo = moyenne de la procédurale (0,5).
+      expect(x.color.r * 0.25).toBeCloseTo(b.color.r * 0.5, 6);
+      expect(x.color.b * 0.1).toBeCloseTo(b.color.b * 0.5, 6);
+      expect(x.normalMap).not.toBeNull();
+      expect(x.userData.relief).toBe(x.normalMap);
+      expect(x.userData.photo).toBe(b.tag.matiere);
+    }
+    expect(ground?.userData.photoDetail?.uniforms.detailGain.value).toBeCloseTo(1 / 0.25, 6);
+    expect(photoCounts(root).sol).toBe(1);
+    // Une seule fois par matériau.
+    expect(applyPhotoTextures(root, fakePhotos(), false, procMean)).toBe(0);
+    m.dispose();
+  });
+
+  it("qualité basse : relief gardé à part (pas de carte de normales) ; repli : sans photos, rien ne change", () => {
+    const env = generateEnvironment("E01", 850, null);
+    const low = buildEnvironmentMeshes(env, { quality: "bas", textures: stubTextures() });
+    const lowMats = materials(low.group as unknown as { traverse(f: (o: { material?: Mat | Mat[] }) => void): void });
+    expect(lowMats.some((x) => x.userData.photoDetail)).toBe(false);
+    expect(applyPhotoTextures(low.group as unknown as Root, fakePhotos(), true, procMean)).toBeGreaterThan(0);
+    for (const x of lowMats.filter((y) => y.userData.photo)) {
+      expect(x.normalMap).toBeNull();
+      expect(x.userData.relief).toBeTruthy();
+    }
+    applyLite(low.group as unknown as Root, false);
+    for (const x of lowMats.filter((y) => y.userData.photo)) expect(x.normalMap).toBe(x.userData.relief);
+    low.dispose();
+    const m = buildEnvironmentMeshes(env, { quality: "moyen", textures: stubTextures() });
+    const maps = materials(m.group as unknown as { traverse(f: (o: { material?: Mat | Mat[] }) => void): void }).map((x) => x.map);
+    expect(applyPhotoTextures(m.group as unknown as Root, new Map(), false, procMean)).toBe(0);
+    expect(materials(m.group as unknown as { traverse(f: (o: { material?: Mat | Mat[] }) => void): void }).map((x) => x.map)).toEqual(maps);
+    m.dispose();
+  });
+
+  it("scène tactique : chaussée, toits de tuiles et d'ardoise, enceinte et champ étiquetés ; photos chargées après les corps détaillés", () => {
+    const town = readFileSync("src/render/tactical3d/townMesh.ts", "utf8");
+    for (const k of ['"pave", 5', '"tuiles", 3.2', '"ardoise", 3.2', '"pierre_taille", 6', '"sol", 2400']) expect(town, k).toContain(k);
+    const proto = readFileSync("src/render/tactical3d/proto.ts", "utf8");
+    // Chargées en dernier : après l'échange des corps détaillés (ou leur repli), jamais avant « prêt ».
+    expect(proto.match(/void upgradePhotos\(\)/g)).toHaveLength(1);
+    expect(proto).toMatch(/const startPhotos = \(\): void => \{[^}]*void upgradePhotos\(\)/);
+    expect(proto).toMatch(/corpsPending = true;\s*startPhotos\(\);/);
   });
 });

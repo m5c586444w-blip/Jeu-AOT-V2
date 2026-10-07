@@ -3,9 +3,14 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
-| Tâche | R1d.4 : arbres réalistes dans la scène tactique (végétation des environnements, mêmes graines) |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 447 tests ; `assets:check` : 90 entrées, 90 fichiers |
-| Prochaine étape | R1d.5 textures Poly Haven ; R1d.6 mesure et rapport |
+| Tâche | R1d.5 : textures de Poly Haven (12 fichiers WebP 1K, 6 matières) intégrées à la scène tactique et aux environnements |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 451 tests ; `assets:check` : 102 entrées, 102 fichiers |
+| Prochaine étape | R1d.6 : remesure (`npm run mesure:r1d`), `smoke:r1b`, revue des captures, rapport, arrêt |
+
+## R1d.5 : textures de Poly Haven (2026-10-07)
+- 12 fichiers (`docs/art/assets/polyhaven/`), manifeste et attributions ; `assets:check` : 102 entrées (D-96).
+- Posées après les corps détaillés, teinte du profil conservée, repli procédural ; « prêt » en qualité basse : 2,01 s (`mesure:r1d -- rapide`).
+- Tests : `tests/render/tactical3d/r1d.test.ts` (CR1d-11).
 
 ## R1d.4 : arbres réalistes dans la scène tactique (2026-10-07)
 - Arbres de la place et des abords rendus par `buildVegetation` (bois, massifs, cartes de feuilles), plus d'icosaèdres (D-95).

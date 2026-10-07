@@ -13,6 +13,8 @@ import type { SoldierLike, SoldierPose } from "./soldier";
 import { loadBodyKit, makeSoldier, makeTitan } from "./bodies";
 import type { BodyKit } from "./bodies";
 import { applyLite, precompile } from "./lite";
+import { applyPhotoTextures, loadPhotoTextures, photoCounts } from "./photoTextures";
+import type { Matiere } from "./photoTextures";
 import { createPost } from "./post";
 import type { PostChain } from "./post";
 import { TX, fill } from "./texts";
@@ -76,8 +78,12 @@ export interface ProtoProbe {
    * `pret` : instant « prêt » depuis la navigation.
    * R1d, second temps : `chargementCorps` (corps de base téléchargé et préparé), `faconnage` (corps détaillés), `corps` : instant
    * de la première image avec les corps détaillés, depuis la navigation (0 tant qu'ils ne sont pas là, −1 en repli).
+   * Textures de Poly Haven : `chargementPhotos` (chargées et posées), `photos` : instant de la première image qui les montre
+   * (−1 en repli : les textures procédurales restent).
    */
-  timings: { debut: number; ville: number; titans: number; soldats: number; reglages: number; poses: number; premiereImage: number; pret: number; chargementCorps: number; faconnage: number; corps: number };
+  timings: { debut: number; ville: number; titans: number; soldats: number; reglages: number; poses: number; premiereImage: number; pret: number; chargementCorps: number; faconnage: number; corps: number; chargementPhotos: number; photos: number };
+  /** R1d : matériaux passés aux textures de Poly Haven, par matière. */
+  photos: Partial<Record<Matiere, number>>;
   /** Rend une image tout de suite et attend la suivante (captures). */
   frame(): Promise<void>;
 }
@@ -552,6 +558,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   let posed = 0;
   /** R1d : les corps détaillés viennent d'être échangés ; la prochaine image dessinée marque l'instant « corps ». */
   let corpsPending = false;
+  /** R1d : les textures de Poly Haven viennent d'être posées ; la prochaine image marque l'instant « photos ». */
+  let photoPending = false;
   const draw = (): void => {
     titans.forEach((t, i) => t.setPose(titanPoses[i as 0 | 1], time));
     for (const e of sheet) e.t.setPose(e.pose, time);
@@ -580,6 +588,11 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       corpsPending = false;
       state.timings.corps = performance.now();
       html.dataset["corps3d"] = "pret";
+    }
+    if (photoPending) {
+      photoPending = false;
+      state.timings.photos = performance.now();
+      html.dataset["photo3d"] = "pret";
     }
   };
   const wantedCam = params.get("cam") ?? (params.get("vue") === "planche" ? "planche" : "libre");
@@ -635,7 +648,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
         draw();
         requestAnimationFrame(() => resolve());
       }),
-    timings: { debut: t0, ville: tTown - t0, titans: tTitans - tTown, soldats: tSoldiers - tTitans, reglages: 0, poses: 0, premiereImage: 0, pret: 0, chargementCorps: 0, faconnage: 0, corps: 0 },
+    timings: { debut: t0, ville: tTown - t0, titans: tTitans - tTown, soldats: tSoldiers - tTitans, reglages: 0, poses: 0, premiereImage: 0, pret: 0, chargementCorps: 0, faconnage: 0, corps: 0, chargementPhotos: 0, photos: 0 },
+    photos: {},
   };
   window.__proto3d = state;
   html.dataset["lumiere"] = light;
@@ -675,6 +689,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     if (!full.template) {
       state.timings.corps = -1;
       html.dataset["corps3d"] = "repli";
+      startPhotos();
       return;
     }
     const s1 = performance.now();
@@ -710,6 +725,31 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     await precompile(renderer, scene, camera);
     state.timings.faconnage = performance.now() - s1;
     corpsPending = true;
+    startPhotos();
+  };
+
+  /**
+   * R1d : textures de Poly Haven (pavés, sol, enceinte, tuiles, ardoise) chargées en dernier — après les corps détaillés, pour ne
+   * retarder ni « prêt » ni « corps » (décodage et envoi des images occupent le fil principal) — et posées à la place des
+   * textures procédurales étiquetées ; en cas d'échec, celles-ci restent (repli). `?textures=procedurales` : pas de photos.
+   */
+  const startPhotos = (): void => {
+    if (params.get("textures") === "procedurales") html.dataset["photo3d"] = "procedurales";
+    else void upgradePhotos();
+  };
+  const upgradePhotos = async (): Promise<void> => {
+    const s0 = performance.now();
+    try {
+      const photos = await loadPhotoTextures();
+      applyPhotoTextures(scene, photos, quality === "bas");
+      state.photos = photoCounts(scene);
+      await precompile(renderer, scene, camera);
+      state.timings.chargementPhotos = performance.now() - s0;
+      photoPending = true;
+    } catch {
+      state.timings.photos = -1;
+      html.dataset["photo3d"] = "repli";
+    }
   };
 
   requestAnimationFrame((now) => {
@@ -724,6 +764,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     if (params.get("corps") === "primitives") {
       html.dataset["corps"] = "primitives";
       html.dataset["corps3d"] = "primitives";
+      startPhotos();
     } else void upgradeBodies();
   });
 }

@@ -7,6 +7,8 @@ import { MATERIALS } from "./styles";
 import { heightAt } from "./terrain";
 import type { Bridge, Heightfield, Road, TerrainData } from "./terrain";
 import { FaceBuilder } from "./townMesh";
+import { tagPhoto } from "./photoTextures";
+import type { PhotoDetail } from "./photoTextures";
 
 /**
  * Maillage du terrain de R1b (R1b.2) : sol (grille d'altitude), eau (rivière en ruban au niveau décroissant, lacs, mer, marais),
@@ -194,11 +196,12 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
     owned.push(normal);
     groundMat.normalMap = normal;
     groundMat.normalScale = new Vector2(0.85, 0.85);
-    const albedo = o.detail.albedo;
+    // R1d : uniformes partagés, que les textures de Poly Haven remplacent après la première image (`photoTextures.ts`).
+    const detail: PhotoDetail = { uniforms: { detailMap: { value: o.detail.albedo }, detailRepeat: { value: rep }, detailGain: { value: 2 } }, size: hf.size };
+    (groundMat.userData as { photoDetail?: PhotoDetail }).photoDetail = detail;
     groundMat.onBeforeCompile = (sh) => {
-      sh.uniforms["detailMap"] = { value: albedo };
-      sh.uniforms["detailRepeat"] = { value: rep };
-      sh.fragmentShader = `uniform sampler2D detailMap;\nuniform float detailRepeat;\n${sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n\tdiffuseColor.rgb *= mix( 1.0, texture2D( detailMap, vMapUv * detailRepeat ).r * 2.0, 0.45 );")}`;
+      Object.assign(sh.uniforms, detail.uniforms);
+      sh.fragmentShader = `uniform sampler2D detailMap;\nuniform float detailRepeat;\nuniform float detailGain;\n${sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n\tdiffuseColor.rgb *= mix( 1.0, texture2D( detailMap, vMapUv * detailRepeat ).r * detailGain, 0.45 );")}`;
     };
     groundMat.customProgramCacheKey = () => "sol-detail-r1c";
   }
@@ -263,8 +266,14 @@ export function buildTerrainMeshes(t: TerrainData, paving: readonly Paving[], ca
     const k = pv.kind === "terre" ? 0.85 : pv.kind === "dalle" ? 1.08 : 1;
     flatPolygon(fb, pv.poly, pv.y, new Color(pv.color).multiplyScalar(k), pv.kind === "pave" ? 3 : 6);
   }
+  // R1d : les rues pavées passent à la texture de pavés de Poly Haven (3 m par unité) ; dalles et terre gardent les leurs.
+  const paveTex = o.paveMap ? tagPhoto(o.paveMap.clone(), "pave", 3) : null;
+  if (paveTex) {
+    paveTex.needsUpdate = true;
+    owned.push(paveTex);
+  }
   for (const [kind, fb] of byKind) {
-    const pm = new MeshStandardMaterial({ map: kind === "terre" ? null : o.paveMap, normalMap: kind === "terre" ? null : (o.paveNormal ?? null), vertexColors: true, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: kind === "dalle" ? -4 : -3, polygonOffsetUnits: kind === "dalle" ? -4 : -3 });
+    const pm = new MeshStandardMaterial({ map: kind === "terre" ? null : kind === "pave" ? paveTex : o.paveMap, normalMap: kind === "terre" ? null : (o.paveNormal ?? null), vertexColors: true, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: kind === "dalle" ? -4 : -3, polygonOffsetUnits: kind === "dalle" ? -4 : -3 });
     materials.push(pm);
     const m = new Mesh(fb.build(), pm);
     m.name = `pavage-${kind}`;

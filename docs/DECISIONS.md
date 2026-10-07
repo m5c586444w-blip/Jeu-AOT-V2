@@ -684,3 +684,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Mêmes graines** : chaque arbre prend les 22 tirages de R1 (`townTree`) ; maisons, étals et réverbères ne bougent pas.
 - **Essences** : la place garde des feuillus ; aux abords, un tiers de fruitiers (vergers), le reste en feuillus. Le sommet d'un feuillu est celui de l'arbre de R1 (6 à 10 m).
 - **Qualité basse** : cartes de feuilles cachées (`applyLite`), comme dans les environnements ; tous les arbres sont gardés (une centaine, pas une forêt).
+
+## 2026-10-07 — D-96 Textures de Poly Haven (R1d.5)
+- **Six matières, 12 fichiers** (couleur et relief OpenGL, JPG 1K officiel converti en WebP 1024 × 1024 par Chromium, qualité 0,9 ; `npm run assets:fetch -- polyhaven`, `-- --verifier` : reconversion identique à l'octet). Toutes de Rob Tuytel, CC0 :
+  - pavés : Cobblestone Floor 08 (2 m) ;
+  - sol naturel : Forest Ground 01 (2 m) ;
+  - pierre de taille : Medieval Blocks 03 (2 m). Large Sandstone Blocks, d'abord retenue, porte une corniche sombre qui se répéterait tous les 3 m sur les murs ;
+  - pierre brute : Castle Wall Slates (2,5 m) ;
+  - tuiles : Roof Tiles 14 (1,5 m) ;
+  - ardoise : Roof Slates 02 (3 m). Roof Slates 03 porte un rang de faîtage qui se répéterait.
+- **Où** :
+  - scène tactique : chaussée (pavés), toits séparés en tuiles et ardoise, enceinte (pierre de taille), champ (sol) ;
+  - environnements : rues pavées (les dalles et la terre gardent leurs textures), toits de tuiles rouges et d'ardoise, parement des murs (pierre de taille), voûte des cryptes (pierre brute), détail du sol (sol naturel, relief et grain ; le sol peint garde ses parcelles).
+  - Façades enduites, colombages, briques et bois restent procéduraux (hors périmètre).
+- **Échelle** : taille réelle de la photo, sauf le parement des murs : une photo par unité de texture du profil (4 × 4 blocs, `block` `?` paramétrable), sinon une grille fine et répétée sur 50 m de mur.
+- **Teinte du profil conservée** : la couleur du matériau est multipliée, canal par canal, par (moyenne de la texture procédurale ÷ moyenne de la photo), en linéaire, bornée à [1/16, 16].
+- **Chargement en dernier** : après les corps détaillés (ou après l'image suivante s'il n'y en a pas). Chargées juste après « prêt », elles occupaient le fil principal et repoussaient l'instant observé de 2,0 à 3,4 s. Instant « photos » mesuré (`data-photo3d="pret"`, `timings.photos`).
+- **Repli** : les textures procédurales sont en place dès « prêt » et restent si le chargement échoue (`data-photo3d="repli"`). `?textures=procedurales` : sans photos (comparaison).
+- **Qualité basse allégée** : relief des photos gardé à part (`userData.relief`), comme les autres cartes de normales.

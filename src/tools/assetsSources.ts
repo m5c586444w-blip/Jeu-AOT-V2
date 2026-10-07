@@ -87,3 +87,23 @@ export function sourceFiles(): SourceFile[] {
   for (const d of ZONE_TARGETS) out.push({ fichier: `makehuman/cibles/${d}.target.gz`, url: `${MPFB}/targets/${d}.target.gz`, nom: `MakeHuman, cible ${d.split("/").pop() ?? d} (zone carénée)` });
   return out;
 }
+
+/**
+ * R1d : textures d'environnement de Poly Haven (CC0), décision de l'utilisateur : sol, pierre, toits ; 6 matières × (couleur +
+ * relief) = 12 fichiers WebP 1K, convertis du JPG 1K officiel (`npm run assets:fetch -- polyhaven`). `taille` : côté réel de
+ * la texture (m, d'après les dimensions de l'API Poly Haven) ; `matiere` : nom dans le rendu (`photoTextures.ts`).
+ */
+export const POLYHAVEN_TEXTURES = [
+  { id: "cobblestone_floor_08", matiere: "pave", nom: "Cobblestone Floor 08", taille: 2 },
+  { id: "forrest_ground_01", matiere: "sol", nom: "Forest Ground 01", taille: 2 },
+  { id: "medieval_blocks_03", matiere: "pierre_taille", nom: "Medieval Blocks 03", taille: 2 },
+  { id: "castle_wall_slates", matiere: "pierre_brute", nom: "Castle Wall Slates", taille: 2.5 },
+  { id: "roof_tiles_14", matiere: "tuiles", nom: "Roof Tiles 14", taille: 1.5 },
+  { id: "roof_slates_02", matiere: "ardoise", nom: "Roof Slates 02", taille: 3 },
+] as const;
+export const POLYHAVEN_MAPS = [
+  { api: "Diffuse", suffixe: "diff", nom: "couleur" },
+  { api: "nor_gl", suffixe: "nor_gl", nom: "relief (normales OpenGL)" },
+] as const;
+/** Fichier WebP d'une carte (chemin dans `docs/art/assets/`). */
+export const polyhavenFile = (id: string, suffixe: string): string => `polyhaven/${id}_${suffixe}_1k.webp`;

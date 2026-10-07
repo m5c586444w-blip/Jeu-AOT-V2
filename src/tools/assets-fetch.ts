@@ -9,6 +9,11 @@ import { ManifestSchema, writeAttributions } from "./assetsCheck";
 import type { Manifest, ManifestEntry } from "./assetsCheck";
 import { MH_AUTHOR, sourceFiles } from "./assetsSources";
 
+// `npm run assets:fetch -- polyhaven` : textures d'environnement de Poly Haven (R1d), voir `assets-polyhaven.ts`.
+if (process.argv.includes("polyhaven")) {
+  await import("./assets-polyhaven");
+  process.exit(0);
+}
 const ROOT = "docs/art/assets";
 const manifestPath = join(ROOT, "manifest.json");
 const today = new Date().toISOString().slice(0, 10);

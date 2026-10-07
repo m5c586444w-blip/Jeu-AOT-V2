@@ -11,6 +11,8 @@ import { buildWallMeshes } from "./meshWall";
 import { buildGiantForest, buildSpray } from "./meshNature";
 import { buildCave } from "./meshCave";
 import { normalOf } from "./texturesEnv";
+import { tagPhoto } from "./photoTextures";
+import type { Matiere } from "./photoTextures";
 import { applyLite } from "./lite";
 import { buildTitan, setSteamTexture } from "./titan";
 import type { Titan, TitanSpec } from "./titan";
@@ -150,7 +152,13 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
     if (fbG) add(fbG, gr, `facades-rdc-${m}`);
     if (fbP) add(fbP, new MeshStandardMaterial({ map: set?.plain ?? null, normalMap: normalOf(set?.plain ?? null, 1.6), vertexColors: true, roughness: 0.92 }), `murs-aveugles-${m}`);
   }
-  for (const [c, fb] of [...out.roofs.entries()].sort((a, b) => a[0].localeCompare(b[0]))) add(fb, new MeshStandardMaterial({ map: tx?.roof(c) ?? null, normalMap: normalOf(tx?.roof(c) ?? null, 2.4), vertexColors: true, roughness: c === "ardoise" ? 0.6 : 0.85, side: DoubleSide }), `toits-${c}`);
+  // R1d : tuiles et ardoise passent aux textures de Poly Haven après la première image (`photoTextures.ts`, 3,2 m par unité).
+  const roofPhoto = (c: RoofMaterial): Matiere | null => (c === "tuiles_rouges" ? "tuiles" : c === "ardoise" ? "ardoise" : null);
+  for (const [c, fb] of [...out.roofs.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+    const map = tx?.roof(c) ?? null;
+    const ph = roofPhoto(c);
+    add(fb, new MeshStandardMaterial({ map: ph ? tagPhoto(map, ph, 3.2) : map, normalMap: normalOf(map, 2.4), vertexColors: true, roughness: c === "ardoise" ? 0.6 : 0.85, side: DoubleSide }), `toits-${c}`);
+  }
   add(out.stone, new MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: DoubleSide }), "pierre");
   add(out.wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), "bois");
   add(out.dark, new MeshStandardMaterial({ vertexColors: true, roughness: 0.3, emissive: phys("braise"), emissiveIntensity: 0 }), "baies", false);
