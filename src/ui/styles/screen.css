@@ -124,6 +124,7 @@
 .bulle[hidden] { display: none; }
 .bulle__nom { font-family: var(--f-titre); font-weight: 400; font-size: 1.1rem; }
 .bulle__meta { font-variant: small-caps; letter-spacing: 0.04em; }
+.bulle__faits { display: flex; flex-direction: column; font-size: 0.9rem; }
 .bulle__aide { font-style: italic; font-size: 0.85rem; color: #4a4339; }
 
 /* Feuillet « Calques » : papier épinglé dans le coin, filet d'encre, tampons pour les registres fermés. */

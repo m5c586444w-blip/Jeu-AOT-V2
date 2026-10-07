@@ -1,0 +1,96 @@
+
+> murs-et-sang@0.0.1 verify
+> npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run assets:check && npm run canon:check && npm run sim:selftest && npm run build
+
+
+> murs-et-sang@0.0.1 typecheck
+> tsc --noEmit
+
+
+> murs-et-sang@0.0.1 lint
+> eslint . --max-warnings 0
+
+
+> murs-et-sang@0.0.1 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/claude/jeu-aot-v2
+
+stdout | tests/places/murs.test.ts > R1e.3 — parement sans motif répété (CR1e-05) > autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35
+parement R1e : max 0.501 à 19.9 m ; témoin R1d : max 1.001 à 9.9 m
+
+ ❯ tests/places/murs.test.ts (3 tests | 1 failed) 1125ms
+   ❯ R1e.3 — parement sans motif répété (CR1e-05) (1)
+     × autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35 147ms
+ ❯ tests/render/tactical3d/titans-r1c.test.ts (6 tests | 6 skipped) 10583ms
+ ❯ tests/render/tactical3d/murs.test.ts (5 tests | 1 failed) 33822ms
+   ❯ règle de visibilité du mur (R1b.4) (2)
+     × aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, capitale, nature) ; un mur dans les autres 30963ms
+ ❯ tests/render/tactical3d/environnements.test.ts (16 tests | 1 failed) 159090ms
+   ❯ même graine = même environnement (R1b) (1)
+     × lot 1 (9 environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement 34887ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/render/tactical3d/titans-r1c.test.ts [ tests/render/tactical3d/titans-r1c.test.ts ]
+Error: Hook timed out in 10000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/render/tactical3d/titans-r1c.test.ts:37:1
+     35| };
+     36|
+     37| beforeAll(async () => {
+       | ^
+     38|   const buf = readFileSync("docs/art/assets/derives/humain.glb");
+     39|   t = await templateFromBuffer(buf.buffer.slice(buf.byteOffset, buf.by…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/places/murs.test.ts > R1e.3 — parement sans motif répété (CR1e-05) > autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35
+AssertionError: expected 0.5014354337066348 to be less than 0.35
+ ❯ tests/places/murs.test.ts:36:21
+     34|     console.log(`parement R1e : max ${now.max.toFixed(3)} à ${now.lagM…
+     35|     expect(r1d.max).toBeGreaterThan(PAREMENT_MAX);
+     36|     expect(now.max).toBeLessThan(PAREMENT_MAX);
+       |                     ^
+     37|   });
+     38| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/render/tactical3d/environnements.test.ts > même graine = même environnement (R1b) > lot 1 (9 environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement
+Error: Test timed out in 30000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/render/tactical3d/environnements.test.ts:24:3
+     22|
+     23| describe("même graine = même environnement (R1b)", () => {
+     24|   it(`lot 1 (${lot1.length} environnements) : données identiques et em…
+       |   ^
+     25|     expect(lot1).toHaveLength(9);
+     26|     for (const id of lot1) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/render/tactical3d/murs.test.ts > règle de visibilité du mur (R1b.4) > aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, capitale, nature) ; un mur dans les autres
+Error: Test timed out in 30000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/render/tactical3d/murs.test.ts:37:3
+     35|   });
+     36|
+     37|   it("aucun mur dans les scènes dont le profil l'exclut (campagne inté…
+       |   ^
+     38|     for (const p of testable) {
+     39|       const env = generateEnvironment(p.id, 850);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  4 failed | 76 passed (80)
+      Tests  3 failed | 499 passed | 6 skipped (508)
+   Start at  21:10:01
+   Duration  161.04s (tests 91%, import 8%, transform 2%)
+
+EXIT 1

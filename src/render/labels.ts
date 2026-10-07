@@ -15,6 +15,8 @@ export interface LabelSpec {
   /** Niveau à partir duquel l'étiquette apparaît. */
   minLod: Lod;
   style: "capitale" | "district" | "province" | "outre";
+  /** Décalage en pixels écran (le nom passe sous l'icône de ville ou de porte posée au même point). */
+  offset?: Point;
 }
 
 const STYLES: Record<LabelSpec["style"], TextStyleOptions> = {
@@ -31,6 +33,7 @@ const STYLES: Record<LabelSpec["style"], TextStyleOptions> = {
 export class LabelLayer {
   readonly container = new Container();
   private readonly items: { spec: LabelSpec; text: Text }[] = [];
+  private ordered: { spec: LabelSpec; text: Text }[] = [];
   private readonly arcs: { name: string; radius: number; bearing: number; letters: Text[] }[] = [];
 
   constructor(specs: readonly LabelSpec[], walls: readonly { name: string; radius: number; bearing: number }[]) {
@@ -41,6 +44,8 @@ export class LabelLayer {
       this.container.addChild(text);
       this.items.push({ spec, text });
     }
+    const RANK = { capitale: 0, district: 1, province: 2, outre: 3 } as const;
+    this.ordered = [...this.items].sort((a, b) => RANK[a.spec.style] - RANK[b.spec.style] || LOD_ORDER.indexOf(a.spec.minLod) - LOD_ORDER.indexOf(b.spec.minLod));
     for (const w of walls) {
       const letters = [...w.name].map((ch) => {
         const t = new Text({ text: ch, style: { fontFamily: "IM Fell English", fontSize: 14, fill: INK, letterSpacing: 0 }, resolution: 2 });
@@ -57,9 +62,20 @@ export class LabelLayer {
     this.container.visible = visible;
     const level = LOD_ORDER.indexOf(lod);
     const inv = 1 / zoom;
-    for (const { spec, text } of this.items) {
-      text.visible = LOD_ORDER.indexOf(spec.minLod) <= level;
+    // Les noms qui se chevauchent à l'écran : le plus important reste, l'autre se cache (les grands d'abord).
+    const placed: [number, number, number, number][] = [];
+    for (const { spec, text } of this.ordered) {
       text.scale.set(inv);
+      if (spec.offset) text.position.set(spec.at[0] + spec.offset[0] * inv, spec.at[1] + spec.offset[1] * inv);
+      if (LOD_ORDER.indexOf(spec.minLod) > level) {
+        text.visible = false;
+        continue;
+      }
+      const hw = (text.width / 2) * 1.04;
+      const hh = (text.height / 2) * 0.8;
+      const box: [number, number, number, number] = [text.x - hw, text.y - hh, text.x + hw, text.y + hh];
+      text.visible = !placed.some((b) => b[0] < box[2] && box[0] < b[2] && b[1] < box[3] && box[1] < b[3]);
+      if (text.visible) placed.push(box);
     }
     for (const arc of this.arcs) {
       // Noms posés sur la moitié nord de l'anneau (lecture sans retournement).

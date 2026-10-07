@@ -1,13 +1,16 @@
-import { Application, Container, Graphics, TilingSprite } from "pixi.js";
+import { Application, Container, Graphics } from "pixi.js";
+import type { Sprite } from "pixi.js";
 import type { MapData } from "../data/map";
+import type { TerrainData } from "../data/terrain";
 import { pointInPolygon } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
-import { drawBorder, drawDepot, drawExpeditionMarker, drawFog, drawLand, drawPawn, drawRoute, drawSea, drawTerrain, drawWall, drawWash } from "./atlasLayers";
+import { drawDepot, drawExpeditionMarker, drawPawn, drawRoute } from "./atlasLayers";
 import type { ProvinceShape } from "./atlasLayers";
+import { flat } from "./ink";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
-import { BRICK, INK, REGION_WASH, UNKNOWN } from "./palette";
-import { paperTexture } from "./paperTexture";
+import { BRICK, UNKNOWN } from "./palette";
+import { drawCoast, drawOpenSea, drawRivers, drawRoads, drawTowns, drawVeil, drawWalls, MAP_INK, terrainSprite, wallRadiusAt } from "./terrainLayers";
 
 export type { Lod } from "./labels";
 
@@ -49,21 +52,25 @@ const WALL_LABELS: Record<string, { name: string; bearing: number }> = {
   sina: { name: "MUR SINA", bearing: 340 },
 };
 
-/** Carte stratégique d'atlas (04 §3) : rendu Pixi, caméra, niveaux de détail, sélection. */
+/**
+ * Carte stratégique réaliste de l'île (MAP, E-UX-3) : terrain figé (data/map/terrain), provinces, murs, villes,
+ * routes ; rendu Pixi, caméra, niveaux de détail, sélection.
+ */
 export class StrategicMap {
   private readonly world = new Container();
   private readonly gSea = new Graphics();
-  private readonly gLand = new Graphics();
+  private readonly terrainImage: Sprite;
   private readonly gWash = new Graphics();
-  private readonly gTerrain = new Graphics();
   private readonly gBorders = new Graphics();
+  private readonly gRivers = new Graphics();
+  private readonly gRoads = new Graphics();
   private readonly gWalls = new Graphics();
+  private readonly gTowns = new Graphics();
   private readonly gFog = new Graphics();
   private readonly gPawns = new Graphics();
   private readonly gRoutes = new Graphics();
   private readonly gHighlight = new Graphics();
   private readonly labels: LabelLayer;
-  private grain: TilingSprite | null = null;
   private zoom = 1;
   private fitZoom = 1;
   private bucket = Number.NaN;
@@ -82,39 +89,31 @@ export class StrategicMap {
     private readonly map: MapData,
     private readonly provinces: readonly MapProvince[],
     labelSpecs: readonly LabelSpec[],
+    private readonly terrain: TerrainData,
   ) {
     this.byId = new Map(provinces.map((p) => [p.id, p]));
     this.labels = new LabelLayer(
       labelSpecs,
-      map.wall_rings.map((r) => ({ name: WALL_LABELS[r.wall]?.name ?? r.wall, radius: r.r_outer + 9, bearing: WALL_LABELS[r.wall]?.bearing ?? 0 })),
+      terrain.walls.map((w) => {
+        const bearing = WALL_LABELS[w.wall]?.bearing ?? 0;
+        return { name: WALL_LABELS[w.wall]?.name ?? w.wall, radius: wallRadiusAt(terrain, w.wall, bearing) + w.band_km / 2 + 9, bearing };
+      }),
     );
-    this.world.addChild(this.gSea, this.gLand, this.gWash, this.gTerrain, this.gBorders, this.gWalls, this.gFog, this.gPawns, this.gRoutes, this.gHighlight, this.labels.container);
+    drawOpenSea(this.gSea, terrain.bounds);
+    this.terrainImage = terrainSprite(terrain);
+    this.world.addChild(this.gSea, this.terrainImage, this.gWash, this.gRivers, this.gBorders, this.gRoads, this.gWalls, this.gTowns, this.gFog, this.gPawns, this.gRoutes, this.gHighlight, this.labels.container);
     app.stage.addChild(this.world);
   }
 
-  static async create(host: HTMLElement, map: MapData, provinces: readonly MapProvince[], labels: readonly LabelSpec[]): Promise<StrategicMap> {
+  static async create(host: HTMLElement, map: MapData, provinces: readonly MapProvince[], labels: readonly LabelSpec[], terrain: TerrainData): Promise<StrategicMap> {
     const app = new Application();
     await app.init({ resizeTo: host, backgroundAlpha: 0, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl" });
     app.canvas.classList.add("carte__toile");
     app.canvas.setAttribute("role", "img");
     host.append(app.canvas);
-    const m = new StrategicMap(app, map, provinces, labels);
-    m.addGrain();
+    const m = new StrategicMap(app, map, provinces, labels, terrain);
     m.fit();
     return m;
-  }
-
-  /** Grain de papier multiplié sur toute la carte (04 §2.4). */
-  private addGrain(): void {
-    const grain = new TilingSprite({ texture: paperTexture(), width: this.app.screen.width, height: this.app.screen.height });
-    grain.blendMode = "multiply";
-    grain.alpha = 0.55;
-    this.app.stage.addChild(grain);
-    this.grain = grain;
-    this.app.renderer.on("resize", (w: number, h: number) => {
-      grain.width = w;
-      grain.height = h;
-    });
   }
 
   get canvas(): HTMLCanvasElement {
@@ -150,7 +149,6 @@ export class StrategicMap {
     this.world.position.set(x, y);
     this.redrawIfNeeded();
     this.labels.update(this.zoom, this.lod, this.filters.labels);
-    if (this.grain) this.grain.tilePosition.set(x, y);
     this.onCamera?.();
   }
 
@@ -249,51 +247,42 @@ export class StrategicMap {
     if (bucket === this.bucket) return;
     this.bucket = bucket;
     const px = 1 / 2 ** (bucket / 2);
-    this.gSea.clear();
-    drawSea(this.gSea, this.map.bounds, px);
-    this.gLand.clear();
-    drawLand(this.gLand, this.map.coast, px);
+    const level = LOD_ORDER.indexOf(this.lod);
     this.drawWashLayer();
-    this.gTerrain.clear();
+    this.gRivers.clear();
+    drawRivers(this.gRivers, this.terrain, px);
+    drawCoast(this.gRivers, this.terrain, px);
     this.gBorders.clear();
-    for (const p of this.provinces) {
-      drawTerrain(this.gTerrain, p, px);
-      if (p.kind !== "segment") drawBorder(this.gBorders, p, px);
-    }
+    for (const p of this.provinces) if (p.kind !== "segment") this.gBorders.poly(flat(p.polygon));
+    this.gBorders.stroke({ width: (level === 0 ? 0.8 : 1) * px, color: MAP_INK, alpha: 0.42, join: "round" });
+    this.gRoads.clear();
+    drawRoads(this.gRoads, this.terrain, px, level >= 1, level >= 2);
     this.gWalls.clear();
-    for (const ring of this.map.wall_rings) {
-      const segments = this.provinces
-        .filter((p) => p.kind === "segment" && p.region === `mur_${ring.wall}`)
-        .map((p) => {
-          const b = this.map.provinces[p.id]?.bearing ?? [0, 0];
-          return { from: b[0], to: b[1], structure: this.dynamic.provinces[p.id]?.structure ?? 100 };
-        });
-      const gates = this.map.gates.filter((g) => this.byId.get(g.province)?.region === `mur_${ring.wall}`).map((g) => g.bearing);
-      drawWall(this.gWalls, ring, segments, gates, px);
-    }
+    const segments = this.provinces
+      .filter((p) => p.kind === "segment")
+      .map((p) => ({ polygon: p.polygon, structure: this.dynamic.provinces[p.id]?.structure ?? 100 }));
+    drawWalls(this.gWalls, this.terrain, segments, px, level >= 2);
+    this.gTowns.clear();
+    drawTowns(this.gTowns, this.terrain, px, [2, 1, 0][level] ?? 0);
     this.gFog.clear();
-    for (const p of this.provinces) if (p.visibility !== "connue") drawFog(this.gFog, p, p.visibility, px);
+    for (const p of this.provinces) if (p.visibility !== "connue") drawVeil(this.gFog, p.polygon, p.visibility);
     this.gPawns.clear();
     for (const p of this.provinces) {
       const org = this.dynamic.provinces[p.id]?.garrisonOrg;
-      if (org) drawPawn(this.gPawns, p.kind === "segment" ? p.anchor : [p.anchor[0] + 14, p.anchor[1] - 10], org, px);
+      if (org) drawPawn(this.gPawns, this.terrain.provinces[p.id]?.pawn ?? p.anchor, org, px);
     }
     this.drawRoutesLayer();
     this.drawHighlight();
   }
 
   private drawWashLayer(): void {
-    const px = 1 / 2 ** (this.bucket / 2);
     this.gWash.clear();
     for (const p of this.provinces) {
       if (p.kind === "segment") continue;
-      if (this.overlay) {
-        // Calque actif : les provinces sans valeur restent neutres (aucune donnée inventée).
-        const value = this.overlay.get(p.id);
-        drawWash(this.gWash, p, value ?? UNKNOWN, value === undefined ? 0.12 : 0.62, px);
-      } else {
-        drawWash(this.gWash, p, REGION_WASH[p.region] ?? INK, 0.3, px);
-      }
+      // Calque actif : aplat transparent par province, le relief reste lisible ; sans valeur, voile neutre.
+      if (!this.overlay) continue;
+      const value = this.overlay.get(p.id);
+      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.1 : 0.55 });
     }
   }
 
@@ -302,11 +291,11 @@ export class StrategicMap {
     this.gHighlight.clear();
     const sel = this.selected ? this.byId.get(this.selected) : undefined;
     if (sel) {
-      drawBorder(this.gHighlight, sel, px, 3.2, 0.95, BRICK);
-      drawBorder(this.gHighlight, sel, px, 1, 0.9, INK);
+      this.gHighlight.poly(flat(sel.polygon)).fill({ color: 0xffffff, alpha: 0.12 }).stroke({ width: 3.2 * px, color: BRICK, alpha: 0.95, join: "round" });
+      this.gHighlight.poly(flat(sel.polygon)).stroke({ width: 1 * px, color: MAP_INK, alpha: 0.9, join: "round" });
     }
     const hov = this.hovered && this.hovered !== this.selected ? this.byId.get(this.hovered) : undefined;
-    if (hov) drawBorder(this.gHighlight, hov, px, 2.4, 0.85, INK);
+    if (hov) this.gHighlight.poly(flat(hov.polygon)).fill({ color: 0xffffff, alpha: 0.1 }).stroke({ width: 2.2 * px, color: 0xffffff, alpha: 0.9, join: "round" });
   }
 
   destroy(): void {

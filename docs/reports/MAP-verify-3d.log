@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 /home/claude/jeu-aot-v2
+
+
+ Test Files  3 passed (3)
+      Tests  27 passed (27)
+   Start at  21:13:32
+   Duration  111.78s (tests 98%, transform 2%)
+
