@@ -1,4 +1,4 @@
-// npm run mesure:r1d [-- bundle | scenes | teintes | rapide | tout] — R1d : comparaison avant (fin de R1c, 3782acd) et après,
+// npm run mesure:r1d [-- bundle | scenes | teintes | anatomie | rapide | tout] — R1d : comparaison avant (fin de R1c, 3782acd) et après,
 // mêmes conditions (constructions de production servies par vite preview, Chromium neuf par mesure, WebGL logiciel
 // SwiftShader, 1366 × 768, jour, temps figé à t = 1 s).
 // - bundle (CR1d-04) : bundle principal identique une fois les noms hachés normalisés, worker identique, three.js et
@@ -10,12 +10,14 @@
 //   appariées docs/screenshots/r1d-<scène>-avant.png, -apres.png, -comparaison.png.
 // - teintes (CR1d-08) : mêmes vues qu'en R1b (a2b2f88) — scène tactique, suivi, E01, E02, E22, qualité moyenne — moyennes
 //   CIELAB du bas de l'image (sans le ciel) : |Δb*| ≤ 2,5, ΔC* ≥ −2, ΔL10 (ombres) ≤ +8.
+// - anatomie (CR1d-09) : corps de base de face, de dos, torses et bassins de près (`?proto3d=humain&vue=anatomie`), avant
+//   (3782acd, avec la page de contrôle d'aujourd'hui) et après ; captures appariées docs/screenshots/r1d-anatomie-<vue>-*.png.
 // - rapide : la seule scène tactique en qualité basse, état courant (mise au point).
 // Ces chiffres mesurent le processeur (rendu logiciel) : ils bornent par le bas ; la mesure sur GPU réel reste à faire.
 // Navigateur : CHROMIUM_PATH ou /opt/pw-browsers/chromium. Résultats : console et docs/reports/R1d-mesures.json.
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { gzipSync } from "node:zlib";
@@ -80,6 +82,17 @@ const SCENES: SceneDef[] = [
   { id: "E22", query: `proto3d&env=E22&qualite=moyen&${Q}`, cible: "aucune", label: "murs", capture: true },
   { id: "banc", query: "proto3d&env=banc", cible: "aucune", label: "banc d'échelle", capture: true },
 ];
+/**
+ * Vues de contrôle anatomique (CR1d-09). Corps en rang (homme, Titan de sexe 0,65, femme, corpulence lourde) ; de près : torses
+ * (homme et Titan, femme et lourde), bassins.
+ */
+const ANATOMY_VIEWS: { id: string; query: string; label: string }[] = [
+  { id: "face", query: "", label: "de face" },
+  { id: "dos", query: "&dos", label: "de dos" },
+  { id: "torses-hommes", query: "&recul=0.95&hauteur=1.22&x=-0.55", label: "torses, homme et Titan 0,65" },
+  { id: "torses-femmes", query: "&recul=0.95&hauteur=1.15&x=0.55", label: "torses, femme et lourde" },
+  { id: "bassins", query: "&recul=1.25&hauteur=0.86", label: "bassins, Titan 0,65 et femme" },
+];
 /** Vues de la mesure des teintes (CR1d-08) : mêmes adresses qu'en R1b. */
 const TINT_VIEWS = ["proto", "proto-suivi", "E01", "E02", "E22"];
 
@@ -105,12 +118,13 @@ interface Built {
   dist: string;
 }
 const trees: string[] = [];
-function buildCommit(rev: string): Built {
+function buildCommit(rev: string, overlay: string[] = []): Built {
   const base = mkdtempSync(join(tmpdir(), `r1d-${rev}-`));
   trees.push(base);
   const wt = join(base, "wt");
   execFileSync("git", ["worktree", "add", "--detach", wt, rev], { cwd: ROOT, stdio: "ignore" });
   symlinkSync(join(ROOT, "node_modules"), join(wt, "node_modules"));
+  for (const f of overlay) copyFileSync(join(ROOT, f), join(wt, f));
   const dist = join(base, "dist");
   build(wt, dist);
   return { wt, dist };
@@ -387,7 +401,7 @@ try {
   trees.push(outNow);
   build(ROOT, outNow);
   const now: Built = { wt: ROOT, dist: outNow };
-  const before = mode === "rapide" || mode === "teintes" ? null : buildCommit(BEFORE);
+  const before = mode === "rapide" || mode === "teintes" || mode === "anatomie" ? null : buildCommit(BEFORE);
   if (before && (mode === "bundle" || mode === "tout")) bundle(before.dist, now.dist);
   if (mode === "scenes" || mode === "tout" || mode === "rapide") {
     const sNow = await serve(now, 4196);
@@ -431,6 +445,34 @@ try {
       await sBefore?.close();
     }
   }
+  if (mode === "anatomie" || mode === "tout") {
+    // CR1d-09 : page de contrôle d'aujourd'hui sur les deux versions du corps de base (avant : `.glb` et façonnage de R1c).
+    const old = buildCommit(BEFORE, ["src/render/tactical3d/humanViewer.ts"]);
+    const sOld = await serve(old, 4199);
+    const sNow = await serve(now, 4200);
+    const probe = await chromium.launch({ executablePath });
+    try {
+      console.log(`\n=== Anatomie (avant ${BEFORE} contre R1d ; ?proto3d=humain&vue=anatomie) ===`);
+      for (const v of ANATOMY_VIEWS) {
+        const files: [string, string] = [`${OUT}/r1d-anatomie-${v.id}-avant.png`, `${OUT}/r1d-anatomie-${v.id}-apres.png`];
+        for (const [k, url] of [sOld.url, sNow.url].entries()) {
+          const errors: string[] = [];
+          const page = await newPage(probe, errors);
+          await page.goto(`${url}?proto3d=humain&vue=anatomie${v.query}`);
+          await page.waitForFunction(() => ["pret", "sans-webgl"].includes(document.documentElement.dataset["proto3d"] ?? ""), undefined, { timeout: 900000, polling: 100 });
+          await page.screenshot({ path: files[k] as string, timeout: 900000 });
+          await page.close();
+          check(errors.length === 0, `anatomie ${v.id} ${k === 0 ? "avant" : "après"} : aucune erreur de page${errors.length ? ` (${errors.slice(0, 2).join(" | ")})` : ""}`);
+        }
+        await sideBySide(probe, { id: v.id, query: v.query, cible: "aucune", label: v.label, capture: true }, files[0], files[1], `${OUT}/r1d-anatomie-${v.id}-comparaison.png`, [`avant (${BEFORE}, R1c)`, "après (R1d)"]);
+        console.log(`  ${v.id.padEnd(14)} ${files[1]}`);
+      }
+    } finally {
+      await probe.close();
+      await sOld.close();
+      await sNow.close();
+    }
+  }
   if (mode === "teintes" || mode === "tout") {
     // CR1d-08 : mêmes vues qu'en R1b, qualité moyenne, après les corps détaillés.
     const r1b = buildCommit(R1B);
@@ -470,7 +512,7 @@ try {
     rmSync(t, { recursive: true, force: true });
   }
 }
-if (mode !== "rapide") writeFileSync("docs/reports/R1d-mesures.json", `${JSON.stringify(results, null, 2)}\n`);
+if (mode !== "rapide" && mode !== "anatomie") writeFileSync("docs/reports/R1d-mesures.json", `${JSON.stringify(results, null, 2)}\n`);
 if (failures.length > 0) {
   console.error(`mesure:r1d : ${failures.length} contrôle(s) en échec.`);
   process.exit(1);

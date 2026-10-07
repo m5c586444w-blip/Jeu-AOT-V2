@@ -1,20 +1,21 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
-import { buildHumanBody, jointDistance, macroInfluences, setBoneRotation, skinnedBounds, skinnedY, templateFromBuffer } from "../../../src/render/tactical3d/humanBase";
+import { buildHumanBody, fairRelief, jointDistance, macroInfluences, setBoneRotation, skinnedBounds, skinnedY, templateFromBuffer, zoneRelief } from "../../../src/render/tactical3d/humanBase";
+import { parseObj } from "../../../src/tools/humanBuild";
 import type { HumanBody, HumanShape, HumanTemplate } from "../../../src/render/tactical3d/humanBase";
 
 /**
  * Corps de base de R1c (CR1c-05) : le `.glb` dérivé de MakeHuman se reconstruit à l'identique, se charge par `GLTFLoader` ;
- * 56 os, 50 cibles, poids normalisés ; corps façonné à la hauteur exacte, pieds au sol ; cibles et proportions mesurables ;
- * mâchoire et yeux articulés ; même forme, même corps.
+ * 56 os, 51 cibles, poids normalisés ; corps façonné à la hauteur exacte, pieds au sol ; cibles et proportions mesurables ;
+ * mâchoire et yeux articulés ; même forme, même corps. R1d (CR1d-09) : aucun détail anatomique.
  */
 let t: HumanTemplate;
 const DEFAULT: HumanShape = { macro: { gender: 0.5, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.7 };
 
+const ab = (b: Buffer): ArrayBuffer => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
 beforeAll(async () => {
-  const buf = readFileSync("docs/art/assets/derives/humain.glb");
-  t = await templateFromBuffer(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
+  t = await templateFromBuffer(ab(readFileSync("docs/art/assets/derives/humain.glb")));
 });
 
 function digest(b: HumanBody): string {
@@ -53,12 +54,12 @@ describe("corps de base MakeHuman (R1c.1)", () => {
     expect(out).toMatch(/identiques/);
   });
 
-  it("gabarit : 12 primitives (8 régions de peau, collant, dents, langue, yeux), 56 os, 50 cibles, poids normalisés", () => {
+  it("gabarit : 12 primitives (8 régions de peau, collant, dents, langue, yeux), 56 os, 51 cibles, poids normalisés", () => {
     expect(t.prims.map((p) => p.name)).toEqual(["peau_tete", "peau_torse", "peau_bassin", "peau_bras", "peau_mains", "peau_cuisses", "peau_jambes", "peau_pieds", "pantalon", "dents", "langue", "yeux"]);
     expect(t.bones).toHaveLength(56);
     expect(t.bones[0]?.name).toBe("Root");
     for (const n of ["pelvis", "spine_03", "head", "jaw", "eye_l", "eye_r", "upperarm_l", "hand_r", "thigh_l", "foot_r"]) expect(t.boneIndex.has(n), n).toBe(true);
-    expect(t.morphNames).toHaveLength(50);
+    expect(t.morphNames).toHaveLength(51);
     for (const p of t.prims) {
       const sw = p.geometry.getAttribute("skinWeight");
       for (let i = 0; i < sw.count; i += 17) expect(sw.getX(i) + sw.getY(i) + sw.getZ(i) + sw.getW(i)).toBeCloseTo(1, 4);
@@ -118,5 +119,59 @@ describe("corps de base MakeHuman (R1c.1)", () => {
     const skinAfter = skinnedBounds(b);
     expect(skinAfter.max.y).toBeCloseTo(skinBefore.max.y, 6);
     b.dispose();
+  });
+});
+
+describe("aucun détail anatomique (R1d, CR1d-09)", () => {
+  /** Homme, Titan le plus féminin du jeu (sexe 0,65), femme, corpulence lourde : les corps de `?proto3d=humain&vue=anatomie`. */
+  const BODIES: [string, HumanShape][] = [
+    ["homme", { macro: { gender: 1, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.78 }],
+    ["Titan 0,65", { macro: { gender: 0.65, age: 0.6, muscle: 0.5, weight: 0.55 }, height: 1.72 }],
+    ["femme", { macro: { gender: 0, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.64 }],
+    ["lourde", { macro: { gender: 0.1, age: 0.6, muscle: 0.3, weight: 1 }, height: 1.6 }],
+  ];
+
+  it("ni primitive, ni cible, ni sommet génital : le groupe « helper-genital » de MakeHuman n'est pas repris", () => {
+    for (const n of [...t.prims.map((p) => p.name), ...t.morphNames]) expect(n).not.toMatch(/genit|penis|vagin|nipple|mamelon/i);
+    const obj = parseObj(readFileSync("docs/art/assets/makehuman/base.obj", "utf8"));
+    const genital = new Set<number>();
+    for (const f of obj.faces) if (f.group === "helper-genital") for (const v of f.v) genital.add(v);
+    const body = new Set<number>();
+    for (const f of obj.faces) if (f.group === "body") for (const v of f.v) body.add(v);
+    const helperOnly = [...genital].filter((v) => !body.has(v));
+    expect(helperOnly.length).toBeGreaterThan(100);
+    let found = 0;
+    for (const p of t.prims) {
+      const o = p.geometry.getAttribute("_orig");
+      for (let i = 0; i < o.count; i++) if (genital.has(Math.round(o.getX(i))) && !body.has(Math.round(o.getX(i)))) found++;
+    }
+    expect(found).toBe(0);
+  });
+
+  it("zones lissées présentes : mamelons et entrejambe ; pointe du sein arrondie au façonnage (cible « breast-point-decr »)", () => {
+    expect(t.zones["mamelons"]?.length).toBeGreaterThan(100);
+    expect(t.zones["entrejambe"]?.length).toBeGreaterThan(100);
+    expect(t.morphNames).toContain("breast_point_decr");
+    expect(macroInfluences({ gender: 0, age: 0.5, muscle: 0.5, weight: 0.5 })["breast_point_decr"]).toBeCloseTo(1.5, 6);
+    expect(macroInfluences({ gender: 1, age: 0.5, muscle: 0.5, weight: 0.5 })["breast_point_decr"]).toBeCloseTo(0, 6);
+  });
+
+  it("écart à la surface lissée < 1 mm (mamelons et entrejambe) pour l'homme, le Titan 0,65, la femme et la corpulence lourde", () => {
+    for (const [id, shape] of BODIES) {
+      const b = buildHumanBody(t, shape);
+      const m = zoneRelief(b, t.zones["mamelons"] ?? []);
+      const e = fairRelief(t, b, t.zones["entrejambe"] ?? []);
+      for (const [k, x] of Object.entries({ "mamelons, saillie": m.up, "mamelons, creux": m.down, "entrejambe, saillie": e.up, "entrejambe, creux": e.down })) expect(x, `${id} : ${k}`).toBeLessThan(0.001);
+      b.dispose();
+    }
+  });
+
+  it("la mesure voit les détails du corps de R1c (3782acd) : mamelons et entrejambe à plusieurs millimètres de la surface lissée", async () => {
+    const old = await templateFromBuffer(ab(execFileSync("git", ["show", "3782acd:docs/art/assets/derives/humain.glb"], { maxBuffer: 1 << 30 })));
+    expect(Object.keys(old.zones)).toEqual([]);
+    const femme = buildHumanBody(old, BODIES[2]?.[1] as HumanShape);
+    expect(zoneRelief(femme, t.zones["mamelons"] ?? []).up).toBeGreaterThan(0.005);
+    expect(fairRelief(old, femme, t.zones["entrejambe"] ?? []).up).toBeGreaterThan(0.005);
+    femme.dispose();
   });
 });

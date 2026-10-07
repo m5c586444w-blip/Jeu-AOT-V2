@@ -1,6 +1,8 @@
 import { Bone, BufferAttribute, BufferGeometry, Group, Matrix4, MeshStandardMaterial, SRGBColorSpace, Skeleton, SkinnedMesh, TextureLoader, Vector3 } from "three";
 import type { Material, Texture } from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { cotangentWeights, fairHeights } from "./fairing";
+import type { V3 } from "./fairing";
 
 /**
  * Corps de base de R1c : le corps humain CC0 de MakeHuman (`docs/art/assets/derives/humain.glb`, produit par
@@ -25,10 +27,17 @@ export interface HumanTemplate {
   /** Déplacement des articulations (m) par cible. */
   morphJoints: Map<string, Map<number, Vector3>>;
   regions: string[];
+  /**
+   * R1d (aucun détail anatomique) : sommets d'origine des zones lissées. « mamelons » est rabattu sur le corps façonné
+   * (`flattenZones`, contrôle `zoneRelief`) ; « entrejambe » est caréné dans le `.glb` (contrôle `fairRelief`). Les normales des
+   * deux sont adoucies (`blurZoneNormals`).
+   */
+  zones: Record<string, number[]>;
+  smoothZones: Set<number>;
 }
 
 interface GltfExtras {
-  r1c?: { os: string[]; regions: string[]; cibles: { nom: string; articulations: Record<string, number[]> }[] };
+  r1c?: { os: string[]; regions: string[]; cibles: { nom: string; articulations: Record<string, number[]> }[]; zonesLissees?: Record<string, number[]> };
 }
 
 export function templateFromGltf(gltf: GLTF): HumanTemplate {
@@ -58,7 +67,9 @@ export function templateFromGltf(gltf: GLTF): HumanTemplate {
   const first = prims[0]?.geometry;
   const morphNames = Object.keys((gltf.scene.getObjectByProperty("isSkinnedMesh", true) as SkinnedMesh | undefined)?.morphTargetDictionary ?? {});
   if (!first || morphNames.length === 0) throw new Error("humain.glb : cibles absentes");
-  return { prims, morphNames, bones, boneIndex, morphJoints, regions: extras.regions };
+  const zones = extras.zonesLissees ?? {};
+  const smoothZones = new Set(Object.values(zones).flat());
+  return { prims, morphNames, bones, boneIndex, morphJoints, regions: extras.regions, zones, smoothZones };
 }
 
 /**
@@ -176,6 +187,9 @@ export function macroInfluences(m: Macro): Record<string, number> {
     out[`mm_pm_${k}`] = g * mMin * wMin;
     out[`vieux_${k}`] = g * old;
   }
+  // R1d : aucun détail anatomique — sein arrondi (cible officielle « breast-point-decr ») d'autant plus que le corps est féminin ;
+  // la pointe du mamelon est carénée dans le .glb.
+  out["breast_point_decr"] = 1.5 * (1 - m.gender);
   return out;
 }
 
@@ -407,6 +421,7 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
   ]);
   girth(pr.neckGirth, [["neck_01", "head"]]);
   for (const s of shape.smooth ?? []) smoothRegion(prims, pos, s.iterations, s.inflate, s.region);
+  flattenZones(t, prims, pos);
 
   // Hauteur et sol (cuits dans la géométrie : aucun nœud mis à l'échelle).
   let minY = Infinity;
@@ -445,6 +460,7 @@ export function buildHumanBody(t: HumanTemplate, shape: HumanShape, material: (p
   group.updateMatrixWorld(true);
   const skeleton = new Skeleton(boneObjs);
   const normals = smoothNormals(prims, pos);
+  blurZoneNormals(t.smoothZones, prims, normals);
   const meshes = new Map<string, SkinnedMesh>();
   prims.forEach((p, pi) => {
     const g = new BufferGeometry();
@@ -504,6 +520,59 @@ function chainWeights(g: BufferGeometry, t: HumanTemplate): Map<Chain, Float32Ar
     }
   }
   return out;
+}
+
+/**
+ * R1d : dans les zones carénées, normales moyennées sur le voisinage (quelques passes) : les facettes très fines de l'ancien
+ * mamelon gardaient un point d'ombre. Pas au-delà : sur le sein, des normales moyennées effacent son modelé. Seul l'ombrage
+ * change ; les copies d'un même sommet (coutures) restent identiques.
+ */
+function blurZoneNormals(zone: ReadonlySet<number>, prims: HumanTemplate["prims"], normals: Float32Array[]): void {
+  if (zone.size === 0) return;
+  const PASSES = 4;
+  const sum = new Map<number, Vector3>();
+  const nbrs = new Map<number, Set<number>>();
+  const copies = new Map<number, [number, number][]>();
+  prims.forEach((p, pi) => {
+    const o = p.geometry.getAttribute("_orig");
+    const idx = p.geometry.getIndex();
+    if (!o || !idx || !p.name.startsWith("peau_")) return;
+    const og = (i: number): number => Math.round(o.getX(i));
+    for (let i = 0; i < o.count; i++) {
+      const v = og(i);
+      const l = copies.get(v) ?? [];
+      l.push([pi, i]);
+      copies.set(v, l);
+    }
+    for (let k = 0; k < idx.count; k += 3) {
+      const tri = [og(idx.getX(k)), og(idx.getX(k + 1)), og(idx.getX(k + 2))];
+      for (const a of tri) {
+        if (!zone.has(a)) continue;
+        const s = nbrs.get(a) ?? new Set<number>();
+        for (const b of tri) if (b !== a) s.add(b);
+        nbrs.set(a, s);
+      }
+    }
+  });
+  const normalOf = (v: number): Vector3 => {
+    const c = sum.get(v);
+    if (c) return c;
+    const [pi, i] = copies.get(v)?.[0] ?? [0, 0];
+    const a = normals[pi] as Float32Array;
+    return new Vector3(a[i * 3] as number, a[i * 3 + 1] as number, a[i * 3 + 2] as number);
+  };
+  for (let pass = 0; pass < PASSES; pass++) {
+    const next = new Map<number, Vector3>();
+    for (const [v, ns] of nbrs) {
+      const acc = normalOf(v).clone();
+      for (const n of ns) acc.add(normalOf(n));
+      next.set(v, acc.normalize());
+    }
+    for (const [v, n] of next) sum.set(v, n);
+  }
+  for (const [v, n] of sum) {
+    for (const [pi, i] of copies.get(v) ?? []) (normals[pi] as Float32Array).set([n.x, n.y, n.z], i * 3);
+  }
 }
 
 /** Normales lissées par sommet d'origine, sur toutes les primitives de la même famille (corps ou yeux). */
@@ -613,6 +682,233 @@ function smoothRegion(prims: HumanTemplate["prims"], pos: Float32Array[], iterat
       for (let k = 0; k < 3; k++) a[i * 3 + k] = (a[i * 3 + k] as number) + inflate * (nor[i * 3 + k] as number);
     }
   }
+}
+
+/** Peau soudée par sommet d'origine (`_orig`) : position, normale (somme des normales de faces), voisins, copies, triangles. */
+interface SkinGraph {
+  P: Map<number, Vector3>;
+  N: Map<number, Vector3>;
+  adj: Map<number, Set<number>>;
+  copies: Map<number, [number, number][]>;
+  tris: [number, number, number][];
+}
+function skinGraph(parts: { name: string; geometry: BufferGeometry; pos: ArrayLike<number> }[]): SkinGraph {
+  const g: SkinGraph = { P: new Map(), N: new Map(), adj: new Map(), copies: new Map(), tris: [] };
+  parts.forEach((p, pi) => {
+    if (!p.name.startsWith("peau_")) return;
+    const o = p.geometry.getAttribute("_orig");
+    const idx = p.geometry.getIndex();
+    if (!o || !idx) return;
+    const og = (i: number): number => Math.round(o.getX(i));
+    for (let i = 0; i < o.count; i++) {
+      const v = og(i);
+      const l = g.copies.get(v) ?? [];
+      l.push([pi, i]);
+      g.copies.set(v, l);
+      if (!g.P.has(v)) g.P.set(v, new Vector3(p.pos[i * 3] as number, p.pos[i * 3 + 1] as number, p.pos[i * 3 + 2] as number));
+    }
+    const e1 = new Vector3();
+    const e2 = new Vector3();
+    for (let k = 0; k < idx.count; k += 3) {
+      const tri: [number, number, number] = [og(idx.getX(k)), og(idx.getX(k + 1)), og(idx.getX(k + 2))];
+      g.tris.push(tri);
+      const [a, b, c] = tri.map((v) => g.P.get(v) as Vector3) as [Vector3, Vector3, Vector3];
+      const fn = e1.subVectors(b, a).cross(e2.subVectors(c, a)).clone();
+      for (const x of tri) {
+        (g.N.get(x) ?? g.N.set(x, new Vector3()).get(x))?.add(fn);
+        for (const y of tri) if (x !== y) (g.adj.get(x) ?? g.adj.set(x, new Set()).get(x))?.add(y);
+      }
+    }
+  });
+  for (const n of g.N.values()) n.normalize();
+  return g;
+}
+
+/** Couronnes successives autour d'un morceau de zone (la première touche la zone). */
+function zoneRings(part: readonly number[], g: SkinGraph, rings: number): number[][] {
+  const seen = new Set(part);
+  let ring = [...part];
+  const out: number[][] = [];
+  for (let r = 0; r < rings; r++) {
+    const next: number[] = [];
+    for (const v of ring) {
+      for (const n of g.adj.get(v) ?? []) {
+        if (seen.has(n)) continue;
+        seen.add(n);
+        next.push(n);
+      }
+    }
+    out.push(next);
+    ring = next;
+  }
+  return out;
+}
+
+/** Quadrique h = a·u² + b·uv + c·v² + d·u + e·v + f d'un pourtour, dans le repère (u, w, n) de sa normale moyenne. */
+interface ZoneFit {
+  c: Vector3;
+  u: Vector3;
+  w: Vector3;
+  n: Vector3;
+  q: number[];
+}
+function fitQuadric(annulus: readonly number[], g: SkinGraph): ZoneFit | null {
+  if (annulus.length < 12) return null;
+  const c = new Vector3();
+  const n = new Vector3();
+  for (const v of annulus) {
+    c.add(g.P.get(v) as Vector3);
+    n.add(g.N.get(v) as Vector3);
+  }
+  c.multiplyScalar(1 / annulus.length);
+  n.normalize();
+  const u = Math.abs(n.x) < 0.9 ? new Vector3(1, 0, 0) : new Vector3(0, 1, 0);
+  u.sub(n.clone().multiplyScalar(u.dot(n))).normalize();
+  const fit: ZoneFit = { c, u, w: n.clone().cross(u), n, q: [] };
+  const A = Array.from({ length: 6 }, () => new Array<number>(7).fill(0));
+  for (const v of annulus) {
+    const [x, y, h] = zoneLocal(fit, g.P.get(v) as Vector3);
+    const row = [x * x, x * y, y * y, x, y, 1];
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 6; j++) (A[i] as number[])[j] = ((A[i] as number[])[j] as number) + (row[i] as number) * (row[j] as number);
+      (A[i] as number[])[6] = ((A[i] as number[])[6] as number) + (row[i] as number) * h;
+    }
+  }
+  for (let i = 0; i < 6; i++) {
+    let piv = i;
+    for (let k = i + 1; k < 6; k++) if (Math.abs((A[k] as number[])[i] as number) > Math.abs((A[piv] as number[])[i] as number)) piv = k;
+    [A[i], A[piv]] = [A[piv] as number[], A[i] as number[]];
+    const d = (A[i] as number[])[i] as number;
+    if (Math.abs(d) < 1e-18) return null;
+    for (let k = 0; k < 6; k++) {
+      if (k === i) continue;
+      const f = ((A[k] as number[])[i] as number) / d;
+      for (let j = i; j < 7; j++) (A[k] as number[])[j] = ((A[k] as number[])[j] as number) - f * ((A[i] as number[])[j] as number);
+    }
+  }
+  fit.q = A.map((r, i) => (r[6] as number) / (r[i] as number));
+  return fit;
+}
+const zoneLocal = (f: ZoneFit, p: Vector3): [number, number, number] => {
+  const d = p.clone().sub(f.c);
+  return [d.dot(f.u), d.dot(f.w), d.dot(f.n)];
+};
+const zoneHeight = (f: ZoneFit, x: number, y: number): number => {
+  const q = f.q as [number, number, number, number, number, number];
+  return q[0] * x * x + q[1] * x * y + q[2] * y * y + q[3] * x + q[4] * y + q[5];
+};
+
+/**
+ * Surface lissée d'un morceau de zone, en hauteurs le long de la normale de son pourtour : la quadrique ajustée sur la 3ᵉ à la
+ * 5ᵉ couronne (la forme du sein), plus l'écart de la peau à cette quadrique sur la 1ʳᵉ couronne, prolongé dans la zone par
+ * interpolation harmonique — la surface rejoint la peau sans marche ni pli. `cur` : hauteur actuelle de chaque sommet.
+ */
+function smoothedZone(part: readonly number[], g: SkinGraph): { fit: ZoneFit; target: Map<number, number>; cur: Map<number, number> } | null {
+  const rings = zoneRings(part, g, 5);
+  const fit = fitQuadric(rings.slice(2).flat(), g);
+  if (!fit) return null;
+  const cur = new Map<number, number>();
+  const resid = new Map<number, number>();
+  for (const v of [...part, ...(rings[0] ?? [])]) {
+    const [x, y, h] = zoneLocal(fit, g.P.get(v) as Vector3);
+    cur.set(v, h);
+    resid.set(v, part.includes(v) ? 0 : h - zoneHeight(fit, x, y));
+  }
+  for (let it = 0; it < 2000; it++) {
+    let moved = 0;
+    for (const v of part) {
+      let sum = 0;
+      let k = 0;
+      for (const n of g.adj.get(v) ?? []) {
+        const r = resid.get(n);
+        if (r === undefined) continue;
+        sum += r;
+        k++;
+      }
+      const r = k > 0 ? sum / k : 0;
+      moved = Math.max(moved, Math.abs(r - (resid.get(v) as number)));
+      resid.set(v, r);
+    }
+    if (moved < 1e-9) break;
+  }
+  const target = new Map<number, number>();
+  for (const v of part) {
+    const [x, y] = zoneLocal(fit, g.P.get(v) as Vector3);
+    target.set(v, zoneHeight(fit, x, y) + (resid.get(v) as number));
+  }
+  return { fit, target, cur };
+}
+
+/**
+ * R1d : aucun détail anatomique — chaque aréole et sa couronne (zone « mamelons ») sont rabattues, le long de la normale de
+ * leur pourtour, sur leur surface lissée (`smoothedZone`) : le sein garde sa forme, sans mamelon ni aréole.
+ */
+function flattenZones(t: HumanTemplate, prims: HumanTemplate["prims"], pos: Float32Array[]): void {
+  const zone = t.zones["mamelons"];
+  if (!zone || zone.length === 0) return;
+  const g = skinGraph(prims.map((p, pi) => ({ name: p.name, geometry: p.geometry, pos: pos[pi] as Float32Array })));
+  for (const part of zoneParts(zone, g)) {
+    const s = smoothedZone(part, g);
+    if (!s) continue;
+    for (const v of part) {
+      const q = (g.P.get(v) as Vector3).clone().addScaledVector(s.fit.n, (s.target.get(v) as number) - (s.cur.get(v) as number));
+      for (const [pi, i] of g.copies.get(v) ?? []) (pos[pi] as Float32Array).set([q.x, q.y, q.z], i * 3);
+    }
+  }
+}
+
+/**
+ * R1d (contrôle) : relief des mamelons par rapport à leur surface lissée (`smoothedZone`, recalculée sur le corps façonné, au
+ * repos) : `up`, plus grande saillie d'un sommet au-dessus d'elle ; `down`, plus grand creux (m). Un mamelon ressort de
+ * plusieurs millimètres ; une zone rabattue, de presque rien.
+ */
+export function zoneRelief(body: HumanBody, zone: Iterable<number>): { up: number; down: number } {
+  const g = skinGraph([...body.meshes].map(([name, m]) => ({ name, geometry: m.geometry, pos: m.geometry.getAttribute("position").array })));
+  let up = 0;
+  let down = 0;
+  for (const part of zoneParts([...zone].filter((v) => g.P.has(v)), g)) {
+    const s = smoothedZone(part, g);
+    if (!s) continue;
+    for (const v of part) {
+      const d = (s.cur.get(v) as number) - (s.target.get(v) as number);
+      up = Math.max(up, d);
+      down = Math.max(down, -d);
+    }
+  }
+  return { up, down };
+}
+
+/**
+ * R1d (contrôle) : relief de l'entrejambe par rapport à sa surface carénée — le même opérateur que la construction
+ * (`assets:build`, `fairing.ts`) : plaque mince du pourtour, poids cotangents et normales du corps de référence caréné.
+ * `up` : plus grande saillie au-dessus de cette surface ; `down` : plus grand creux (m, corps façonné au repos).
+ */
+export function fairRelief(t: HumanTemplate, body: HumanBody, zone: Iterable<number>): { up: number; down: number } {
+  const ref = skinGraph(t.prims.map((p) => ({ name: p.name, geometry: p.geometry, pos: p.geometry.getAttribute("position").array })));
+  const cur = skinGraph([...body.meshes].map(([name, m]) => ({ name, geometry: m.geometry, pos: m.geometry.getAttribute("position").array })));
+  const z = [...zone].filter((v) => ref.P.has(v) && cur.P.has(v));
+  const P = (g: SkinGraph) => (v: number): V3 => (g.P.get(v) as Vector3).toArray() as V3;
+  const h = fairHeights((v, c) => P(cur)(v)[c] as number, z, cotangentWeights(ref.tris, P(ref)), (v) => (ref.N.get(v) as Vector3).toArray() as V3);
+  let up = 0;
+  let down = 0;
+  for (const x of h) {
+    up = Math.max(up, -x);
+    down = Math.max(down, x);
+  }
+  return { up, down };
+}
+
+/** Morceaux connexes d'une zone dans la peau. */
+function zoneParts(zone: Iterable<number>, g: SkinGraph): number[][] {
+  const left = new Set(zone);
+  const parts: number[][] = [];
+  for (const start of [...left]) {
+    if (!left.delete(start)) continue;
+    const part = [start];
+    for (let i = 0; i < part.length; i++) for (const n of g.adj.get(part[i] as number) ?? []) if (left.delete(n)) part.push(n);
+    parts.push(part);
+  }
+  return parts;
 }
 
 /** Positions des sommets après poses (processeur), pour les mesures : hauteur, pieds au sol. */

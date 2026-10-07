@@ -3,9 +3,15 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
-| Tâche | R1d.1 : latence en deux temps (prêt = ville et repères simplifiés, corps détaillés ensuite), qualité basse allégée, `mesure:r1d` |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 441 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1d.3 : corps sans détail anatomique ; R1d.4 arbres ; R1d.5 textures ; R1d.6 mesure et rapport |
+| Tâche | R1d.3 : corps de base sans détail anatomique (entrejambe carénée dans le `.glb`, mamelons rabattus au façonnage, contrôles et captures) |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 445 tests ; `assets:check` : 90 entrées, 90 fichiers |
+| Prochaine étape | R1d.4 arbres réalistes dans la scène tactique ; R1d.5 textures Poly Haven ; R1d.6 mesure et rapport |
+
+## R1d.3 : corps sans détail anatomique (2026-10-07)
+- **Organes génitaux** : aucun (groupe « helper-genital » de MakeHuman non repris) ; entrejambe carénée dans le corps de référence et ses 51 cibles.
+- **Mamelons et aréoles** : rabattus au façonnage sur la surface lissée de leur pourtour ; pointe du sein arrondie (« breast-point-decr »).
+- **Mesure** (D-94) : écart à la surface lissée, homme, Titan 0,65, femme, lourde. Avant (R1c) : mamelons 3,3 à 26,3 mm, entrejambe 8,6 à 14,6 mm. Après : 0,00 mm et < 0,5 mm (test `humain.test.ts`, < 1 mm).
+- **Captures** : `npm run mesure:r1d -- anatomie`, `docs/screenshots/r1d-anatomie-*` (face, dos, torses, bassins ; avant et après), revues au rapport.
 
 ## R1d ouverte (2026-10-07)
 - **Revue de R1c par l'utilisateur** (D-91) :

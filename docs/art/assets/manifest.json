@@ -6,9 +6,9 @@
       "nom": "Corps de base humain (dérivé de MakeHuman)",
       "url": "https://github.com/makehumancommunity/makehuman/tree/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data",
       "licence": "CC0-1.0",
-      "date": "2026-10-06",
+      "date": "2026-10-07",
       "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
-      "sha256": "2f378c2d85d3435e1ee179284cd67fef20bb7785eeda127dd8188df399082cfe",
+      "sha256": "d7071c034454e209f910d6f71696c5abeaa64442ebecac9bb819570268c5e007",
       "usage": "derive",
       "derive_de": [
         "makehuman/base.obj",
@@ -87,6 +87,7 @@
         "makehuman/cibles/hip/hip-scale-horiz-incr.target.gz",
         "makehuman/cibles/hip/hip-scale-horiz-decr.target.gz",
         "makehuman/cibles/head/head-fat-incr.target.gz",
+        "makehuman/cibles/breast/breast-point-decr.target.gz",
         "makehuman/cibles/expression/units/caucasian/mouth-open.target.gz",
         "makehuman/cibles/expression/units/caucasian/mouth-corner-puller.target.gz",
         "makehuman/cibles/expression/units/caucasian/mouth-retraction.target.gz",
@@ -96,7 +97,9 @@
         "makehuman/cibles/expression/units/caucasian/eye-left-closure.target.gz",
         "makehuman/cibles/expression/units/caucasian/eye-right-closure.target.gz",
         "makehuman/cibles/expression/units/caucasian/eyebrows-left-inner-up.target.gz",
-        "makehuman/cibles/expression/units/caucasian/eyebrows-right-inner-up.target.gz"
+        "makehuman/cibles/expression/units/caucasian/eyebrows-right-inner-up.target.gz",
+        "makehuman/cibles/breast/nipple-size-decr.target.gz",
+        "makehuman/cibles/breast/nipple-point-decr.target.gz"
       ],
       "execution": true,
       "note": "Produit par npm run assets:build (src/tools/assets-build.ts) ; aucune modification manuelle."
@@ -149,6 +152,36 @@
       "date": "2026-10-06",
       "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
       "sha256": "72890d3448778f6d25e3c9abd540582ad36598a832c28fd0b1e16073b1b3f962",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/breast/breast-point-decr.target.gz",
+      "nom": "MakeHuman, cible breast-point-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/breast/breast-point-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-07",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "401c1b924ab065d0edf96103946bcb18c2897e0e1517b0d4e6324869c73efdcd",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/breast/nipple-point-decr.target.gz",
+      "nom": "MakeHuman, cible nipple-point-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/breast/nipple-point-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-07",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "dc29d46f34c3b78069e286e68c3423499402ba8c4645db8721b6413f27623c3a",
+      "usage": "corps_de_base"
+    },
+    {
+      "fichier": "makehuman/cibles/breast/nipple-size-decr.target.gz",
+      "nom": "MakeHuman, cible nipple-size-decr",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/mpfb2/d0a32e57a7f915cb2f2b95410e2117648c7bbb7e/src/mpfb/data/targets/breast/nipple-size-decr.target.gz",
+      "licence": "CC0-1.0",
+      "date": "2026-10-07",
+      "auteur": "MakeHuman Team : Data Collection AB, Joel Palmius, Jonas Hauquier ; cibles d'origine de Manuel Bastioni (CC0 depuis 2020)",
+      "sha256": "2fe6078016390e778bb127ff4a0c4a028f68a4a40bb244319615a2eb506b694b",
       "usage": "corps_de_base"
     },
     {

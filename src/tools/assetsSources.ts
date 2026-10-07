@@ -44,6 +44,8 @@ export const DETAIL_TARGETS = [
   "hip/hip-scale-horiz-incr",
   "hip/hip-scale-horiz-decr",
   "head/head-fat-incr",
+  // R1d : aucun détail anatomique — sein moins pointu, selon la féminité du corps (humanBase.macroInfluences).
+  "breast/breast-point-decr",
   "expression/units/caucasian/mouth-open",
   "expression/units/caucasian/mouth-corner-puller",
   "expression/units/caucasian/mouth-retraction",
@@ -55,6 +57,12 @@ export const DETAIL_TARGETS = [
   "expression/units/caucasian/eyebrows-left-inner-up",
   "expression/units/caucasian/eyebrows-right-inner-up",
 ] as const;
+
+/**
+ * R1d : cibles officielles qui ne servent qu'à délimiter la zone carénée des mamelons (aucun détail anatomique) : leurs sommets
+ * marquent l'aréole et la pointe. Elles ne sont pas appliquées.
+ */
+export const ZONE_TARGETS = ["breast/nipple-size-decr", "breast/nipple-point-decr"] as const;
 
 export function sourceFiles(): SourceFile[] {
   const out: SourceFile[] = [
@@ -76,5 +84,6 @@ export function sourceFiles(): SourceFile[] {
           out.push({ fichier: `makehuman/cibles/macrodetails/${n}.target.gz`, url: `${MPFB}/targets/macrodetails/${n}.target.gz`, nom: `MakeHuman, cible ${n}` });
         }
   for (const d of DETAIL_TARGETS) out.push({ fichier: `makehuman/cibles/${d}.target.gz`, url: `${MPFB}/targets/${d}.target.gz`, nom: `MakeHuman, cible ${d.split("/").pop() ?? d}` });
+  for (const d of ZONE_TARGETS) out.push({ fichier: `makehuman/cibles/${d}.target.gz`, url: `${MPFB}/targets/${d}.target.gz`, nom: `MakeHuman, cible ${d.split("/").pop() ?? d} (zone carénée)` });
   return out;
 }

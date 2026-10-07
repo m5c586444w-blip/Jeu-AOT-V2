@@ -1,0 +1,23 @@
+
+> murs-et-sang@0.0.1 mesure:r1d
+> tsx src/tools/mesure-r1d.ts anatomie
+
+
+=== Anatomie (avant 3782acd contre R1d ; ?proto3d=humain&vue=anatomie) ===
+  OK  anatomie face avant : aucune erreur de page
+  OK  anatomie face après : aucune erreur de page
+  face           docs/screenshots/r1d-anatomie-face-apres.png
+  OK  anatomie dos avant : aucune erreur de page
+  OK  anatomie dos après : aucune erreur de page
+  dos            docs/screenshots/r1d-anatomie-dos-apres.png
+  OK  anatomie torses-hommes avant : aucune erreur de page
+  OK  anatomie torses-hommes après : aucune erreur de page
+  torses-hommes  docs/screenshots/r1d-anatomie-torses-hommes-apres.png
+  OK  anatomie torses-femmes avant : aucune erreur de page
+  OK  anatomie torses-femmes après : aucune erreur de page
+  torses-femmes  docs/screenshots/r1d-anatomie-torses-femmes-apres.png
+  OK  anatomie bassins avant : aucune erreur de page
+  OK  anatomie bassins après : aucune erreur de page
+  bassins        docs/screenshots/r1d-anatomie-bassins-apres.png
+mesure:r1d : tous les contrôles passent.
+exit 0

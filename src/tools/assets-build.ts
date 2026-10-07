@@ -8,12 +8,15 @@
 // - Cibles de forme éparses, relatives au corps par défaut (sexe 0,5, 25 ans, musculature et corpulence moyennes) : macro
 //   (homme, femme ; musculature, corpulence et leurs croisements, par sexe ; âge) et détail (ventre, cou, bras, jambes, torse,
 //   épaules, hanches, expressions). Chaque cible porte le déplacement des articulations qu'elle produit (extras).
+// - R1d : aucun détail anatomique. Le groupe « helper-genital » n'est pas repris ; les zones des mamelons et de l'entrejambe
+//   sont lissées dans le corps de référence et dans chaque cible, avec le même opérateur linéaire : tout mélange reste lisse.
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { ManifestSchema, writeAttributions } from "./assetsCheck";
 import type { ManifestEntry } from "./assetsCheck";
-import { MH_AUTHOR, MAKEHUMAN_COMMIT, MPFB2_COMMIT, DETAIL_TARGETS, sourceFiles } from "./assetsSources";
+import { MH_AUTHOR, MAKEHUMAN_COMMIT, MPFB2_COMMIT, DETAIL_TARGETS, ZONE_TARGETS, sourceFiles } from "./assetsSources";
+import { cotangentWeights, fairHeights } from "../render/tactical3d/fairing";
 import { ARRAY_BUFFER, ELEMENT_ARRAY_BUFFER, GlbWriter } from "./glbWriter";
 import { DEFAULT_MACRO, GENDERS, applyTarget, bodyPositions, fitProxy, jointGroups, meanOf, parseMhclo, parseObj, parseTarget } from "./humanBuild";
 import type { LEVELS, Target, V3 } from "./humanBuild";
@@ -65,6 +68,96 @@ for (const g of GENDERS) {
   morphs.push({ name: `vieux_${k}`, delta: diff(bodyPositions(obj.pos, targets, { ...DEFAULT_MACRO, gender: gv, age: 1 }), bodyPositions(obj.pos, targets, { ...DEFAULT_MACRO, gender: gv })) });
 }
 for (const d of DETAIL_TARGETS) morphs.push({ name: (d.split("/").pop() as string).replace(/-/g, "_"), delta: fromTargets([d, 1]) });
+
+// ——— R1d : zones lissées (aucun détail anatomique) ———
+// Deux zones, écrites dans les extras (`zonesLissees`, sommets d'origine) :
+// - Entrejambe : sommets du corps à moins de ENTREJAMBE_DM de l'aide génitale de MakeHuman (maillage non repris), élargis de
+//   deux couronnes ; « carénée » ici à bord fixe (plaque mince le long de la normale, `fair`) dans le corps de référence et dans
+//   chaque cible, avec le même opérateur linéaire : le corps façonné par n'importe quel mélange de cibles reste caréné.
+// - Mamelons : sommets des cibles officielles « nipple-size » et « nipple-point », élargis de MAMELON_COURONNES couronnes ;
+//   rabattus sur le corps façonné (`humanBase.flattenZones`) : une plaque mince faite ici prolonge la pointe du sein ou creuse
+//   le torse masculin (mesuré en R1d.3).
+const ENTREJAMBE_DM = 0.45;
+const MAMELON_COURONNES = 1;
+const FAIR_ITER = 2000;
+const FAIR_PASSES = 6;
+const neighbours = new Map<number, Set<number>>();
+for (const f of obj.faces) {
+  if (f.group !== "body") continue;
+  for (let k = 0; k < f.v.length; k++) {
+    const a = f.v[k] as number;
+    const b = f.v[(k + 1) % f.v.length] as number;
+    for (const [x, y] of [
+      [a, b],
+      [b, a],
+    ] as const) {
+      const s = neighbours.get(x) ?? new Set<number>();
+      s.add(y);
+      neighbours.set(x, s);
+    }
+  }
+}
+/** Faces du corps triangulées en éventail ; poids cotangents d'une géométrie (positions en décimètres). */
+const bodyTris = obj.faces.filter((f) => f.group === "body").flatMap((f) => f.v.slice(1, -1).map((_, k) => [f.v[0] as number, f.v[k + 1] as number, f.v[k + 2] as number] as const));
+const cotOf = (X: Float64Array): ReturnType<typeof cotangentWeights> => cotangentWeights(bodyTris, (v) => [X[v * 3] as number, X[v * 3 + 1] as number, X[v * 3 + 2] as number]);
+const grow = (zone: Set<number>, rings: number): Set<number> => {
+  const out = new Set(zone);
+  for (let r = 0; r < rings; r++) for (const v of [...out]) for (const n of neighbours.get(v) ?? []) out.add(n);
+  return out;
+};
+// Aréole et mamelon : sommets des cibles « nipple-size » et « nipple-point ».
+const nipple = new Set<number>();
+for (const z of ZONE_TARGETS) for (const v of targets.get(z)?.idx ?? []) nipple.add(v);
+const genital = new Set<number>();
+for (const f of obj.faces) if (f.group === "helper-genital") for (const v of f.v) genital.add(v);
+const crotch = new Set<number>();
+for (const v of neighbours.keys()) {
+  for (const g of genital) {
+    if (Math.hypot((D[v * 3] as number) - (D[g * 3] as number), (D[v * 3 + 1] as number) - (D[g * 3 + 1] as number), (D[v * 3 + 2] as number) - (D[g * 3 + 2] as number)) < ENTREJAMBE_DM) {
+      crotch.add(v);
+      break;
+    }
+  }
+}
+const ZONES: [string, number[]][] = [
+  ["mamelons", [...grow(nipple, MAMELON_COURONNES)].sort((a, b) => a - b)],
+  ["entrejambe", [...grow(crotch, 2)].sort((a, b) => a - b)],
+];
+/** Normales unitaires d'une géométrie (somme des normales de faces). */
+const normalsOf = (X: Float64Array): ((v: number) => V3) => {
+  const acc = new Float64Array(N * 3);
+  for (const [a, b, c] of bodyTris) {
+    const e1 = [0, 1, 2].map((q) => (X[b * 3 + q] as number) - (X[a * 3 + q] as number));
+    const e2 = [0, 1, 2].map((q) => (X[c * 3 + q] as number) - (X[a * 3 + q] as number));
+    const n = [(e1[1] as number) * (e2[2] as number) - (e1[2] as number) * (e2[1] as number), (e1[2] as number) * (e2[0] as number) - (e1[0] as number) * (e2[2] as number), (e1[0] as number) * (e2[1] as number) - (e1[1] as number) * (e2[0] as number)];
+    for (const v of [a, b, c]) for (let q = 0; q < 3; q++) acc[v * 3 + q] = (acc[v * 3 + q] as number) + (n[q] as number);
+  }
+  return (v) => {
+    const n: V3 = [acc[v * 3] as number, acc[v * 3 + 1] as number, acc[v * 3 + 2] as number];
+    const l = Math.hypot(...n) || 1;
+    return [n[0] / l, n[1] / l, n[2] / l];
+  };
+};
+/** Carénage d'une zone (`fairHeights`) appliqué à un tableau de positions ou de décalages. */
+const fair = (arr: Float64Array, zone: readonly number[], cotW: ReturnType<typeof cotangentWeights>, normal: (v: number) => V3): void => {
+  const h = fairHeights((v, c) => arr[v * 3 + c] as number, zone, cotW, normal, FAIR_ITER);
+  zone.forEach((v, k) => {
+    const n = normal(v);
+    for (let c = 0; c < 3; c++) arr[v * 3 + c] = (arr[v * 3 + c] as number) + (h[k] as number) * (n[c] as number);
+  });
+};
+/**
+ * Entrejambe : l'opérateur (poids cotangents, normales) dépend de la géométrie carénée ; il est recalculé sur le corps de
+ * référence caréné jusqu'au point fixe (FAIR_PASSES passes), puis appliqué à chaque cible. Le contrôle (`humanBase.zoneRelief`)
+ * recalcule ce même opérateur sur le corps de référence du `.glb` et y trouve une surface déjà carénée.
+ */
+const crotchZone = ZONES.find(([n]) => n === "entrejambe")?.[1] ?? [];
+let op = { cotW: cotOf(D), normal: normalsOf(D) };
+for (let pass = 0; pass < FAIR_PASSES; pass++) {
+  fair(D, crotchZone, op.cotW, op.normal);
+  op = { cotW: cotOf(D), normal: normalsOf(D) };
+}
+for (const m of morphs) fair(m.delta, crotchZone, op.cotW, op.normal);
 
 // ——— Repère : mètres, sol à y = 0 ———
 const groups = jointGroups(obj);
@@ -318,6 +411,8 @@ j.scenes.push({
       regard: "+z",
       macroDefaut: DEFAULT_MACRO,
       regions: REGIONS,
+      // R1d : sommets d'origine (attribut _ORIG) des zones lissées, pour le contrôle.
+      zonesLissees: Object.fromEntries(ZONES),
       os: bones,
       cibles: morphJoints,
     },

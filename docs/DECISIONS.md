@@ -658,3 +658,23 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - Densité des arbres de la qualité basse (0,32). Ombres et post-traitement déjà coupés.
   - La bascule se fait aussi à chaud (`applyLite`, `setLite`).
 - **Mesure ponctuelle** (`npm run mesure:r1d -- rapide`, construction de production, WebGL logiciel) : scène tactique en qualité basse, « prêt » 1,77 s, « corps » 6,92 s.
+
+## 2026-10-07 — D-94 Corps de base sans détail anatomique (R1d.3)
+- **Organes génitaux** : absents depuis R1c. Le groupe « helper-genital » de MakeHuman (maillage d'aide, hors du corps) n'est pas repris dans le `.glb` ; aucune primitive ni cible génitale (test).
+- **Entrejambe** : la peau où s'attachait cette aide (sommets du corps à moins de 4,5 cm, élargis de deux couronnes) est carénée à la construction (`assets:build`).
+  - Plaque mince à bord fixe, le long de la normale de chaque sommet (`fairing.ts`).
+  - Même opérateur linéaire sur le corps de référence et sur chacune des 51 cibles : tout mélange reste caréné.
+  - L'opérateur (poids cotangents, normales) est recalculé sur le corps caréné jusqu'au point fixe (6 passes), pour qu'un contrôle sur le `.glb` retrouve la même surface.
+- **Mamelons et aréoles** (cibles officielles « nipple-size » et « nipple-point », élargies d'une couronne) : rabattus au façonnage (`humanBase.flattenZones`) sur une **surface lissée** :
+  - quadrique ajustée sur la 3ᵉ à la 5ᵉ couronne autour de la zone (la forme du sein) ;
+  - plus l'écart de la peau à cette quadrique sur la 1ʳᵉ couronne, prolongé dans la zone par interpolation harmonique ; la surface rejoint la peau sans marche.
+  - La pointe du sein féminin est arrondie par la cible officielle « breast-point-decr » (1,5 × (1 − sexe)).
+  - Normales adoucies dans les deux zones (4 passes) : les facettes fines de l'ancien mamelon gardaient un point d'ombre.
+- **Essais écartés (mesurés ou vus de près)** :
+  - plaque mince des mamelons à la construction : elle prolonge la pointe du sein, et creuse ou pointe le torse masculin ;
+  - projection sur la seule quadrique : plateaux ovales cernés d'un pli, surtout sur les corpulences lourdes ;
+  - normales adoucies au-delà de la zone : le sein perd son modelé.
+- **Mesure** (`zoneRelief`, `fairRelief`) : écart à la surface lissée, sur l'homme, le Titan de sexe 0,65, la femme et la corpulence lourde, au repos.
+  - Corps de R1c (`3782acd`) : mamelons de 3,3 à 26,3 mm, entrejambe de 8,6 à 14,6 mm.
+  - R1d : 0,00 mm sur les mamelons, moins de 0,5 mm sur l'entrejambe.
+- **Fesses** : le sillon interfessier est la forme du corps de MakeHuman ; il reste (vue de dos revue).

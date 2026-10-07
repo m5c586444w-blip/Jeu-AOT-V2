@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Color, Mesh, MeshStandardMaterial, PCFShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import type { Material, PointsMaterial } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "./entry";
@@ -25,6 +25,8 @@ import { MATERIALS } from "./styles";
  * Page de contrôle du corps de base de R1c (`?proto3d=humain`) : le corps MakeHuman CC0 façonné par paramètres, en rang.
  * `&planche=soldats` : les animations du soldat ; `&planche=titans` : classes, variantes et Titans spéciaux ramenés à la même
  * hauteur (formes comparables, `&pose=`) ; `&planche=poses&id=classe_15` : les animations d'un Titan. `&vue=visage` : de près.
+ * R1d : `&vue=anatomie` : torses et bassins de l'homme, de la femme et de la corpulence lourde, de près (contrôle : aucun détail
+ * anatomique) ; `&dos` : les mêmes de dos.
  * Sonde `window.__humain3d` : prêt, hauteurs mesurées après pose, temps de chargement et de façonnage.
  */
 export interface HumanProbe {
@@ -61,7 +63,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = PCFSoftShadowMap;
+  renderer.shadowMap.type = PCFShadowMap; // PCFSoftShadowMap est retiré de three.js (avertissement) ; il valait déjà PCFShadowMap.
   host.append(renderer.domElement);
   const scene = new Scene();
   const ground = new Mesh(new PlaneGeometry(60, 30), new MeshStandardMaterial({ color: new Color(MATERIALS.sols.route.base), roughness: 1 }));
@@ -124,11 +126,21 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
       titans.push(ti);
     });
   }
-  (sheet === "corps" ? LINEUP : []).forEach((e, i) => {
+  const anatomy = q.get("vue") === "anatomie";
+  // Contrôle anatomique (R1d) : homme, Titan le plus féminin du jeu (sexe 0,65), femme, corpulence lourde.
+  const ANATOMY: { id: string; shape: HumanShape }[] = [
+    { id: "homme", shape: { macro: { gender: 1, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.78 } },
+    { id: "Titan 0,65", shape: { macro: { gender: 0.65, age: 0.6, muscle: 0.5, weight: 0.55 }, height: 1.72 } },
+    { id: "femme", shape: { macro: { gender: 0, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.64 } },
+    { id: "lourde", shape: { macro: { gender: 0.1, age: 0.6, muscle: 0.3, weight: 1 }, height: 1.6 } },
+  ];
+  const lineup = anatomy ? ANATOMY : LINEUP;
+  (sheet === "corps" ? lineup : []).forEach((e, i) => {
     const s = performance.now();
     const b = buildHumanBody(template, e.shape, mat, (p) => p !== "pantalon");
     const buildMs = performance.now() - s;
-    b.group.position.set((i - (LINEUP.length - 1) / 2) * 1.25, 0, 0);
+    b.group.position.set((i - (lineup.length - 1) / 2) * (anatomy ? 0.55 : 1.25), 0, 0);
+    if (q.has("dos")) b.group.rotation.y = Math.PI;
     scene.add(b.group);
     const bb = skinnedBounds(b);
     state.bodies.push({ id: e.id, nominal: e.shape.height, measured: bb.max.y - bb.min.y, minY: bb.min.y, buildMs });
@@ -140,6 +152,14 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : wide ? 26 : 11);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(close ? -0.0 : 0, close ? 1.55 : 1.0, 0);
+  if (anatomy) {
+    // Du haut de la poitrine au haut des cuisses, de face, à hauteur de nombril ; `&recul=`, `&hauteur=`, `&x=` pour s'approcher.
+    const num = (k: string, d: number): number => (q.has(k) ? Number(q.get(k)) : d);
+    const y = num("hauteur", 1.08);
+    const x = num("x", 0);
+    camera.position.set(x, y, num("recul", 2.3));
+    controls.target.set(x, y, 0);
+  }
   if (close && titans.length > 0) {
     // Visages de Titans : deux têtes côte à côte, à partir de `&cadre=` (indice), de trois quarts.
     const f = Math.max(0, Math.min(titans.length - 2, Number(q.get("cadre") ?? "0") || 0));
