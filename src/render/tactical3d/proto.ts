@@ -11,6 +11,8 @@ import { derive } from "./rng";
 import { SOLDIER_POSES, crowdGeometry, crowdTint, soldierMaterials } from "./soldier";
 import type { SoldierLike, SoldierPose } from "./soldier";
 import { loadBodyKit, makeSoldier, makeTitan } from "./bodies";
+import type { BodyKit } from "./bodies";
+import { applyLite, precompile } from "./lite";
 import { createPost } from "./post";
 import type { PostChain } from "./post";
 import { TX, fill } from "./texts";
@@ -30,6 +32,9 @@ import { buildTownMeshes } from "./townMesh";
  * - Caméras et qualité (R1.6) : libre, suivi d'escouade, vue Titan, vue de dessus, planche (`?cam=suivi2`) ;
  *   qualité basse, moyenne, haute (`?qualite=bas`).
  * Autres paramètres : `?pause`, `?t=1.5` (temps d'animation), `?panneau=0`, `?soldats=vol`.
+ * R1d, latence en deux temps : la première image (« prêt », `data-proto3d="pret"`) montre la ville avec les soldats et les
+ * Titans en repères simplifiés (figures en primitives de R1) ; le corps de base est ensuite chargé, les corps détaillés façonnés
+ * par morceaux puis échangés (« corps », `data-corps3d="pret"`). `?corps=primitives` : les repères restent.
  */
 export type CameraMode = "libre" | "suivi" | "titan" | "dessus" | "planche";
 export const CAMERA_MODES: readonly CameraMode[] = ["libre", "suivi", "titan", "dessus", "planche"];
@@ -63,11 +68,13 @@ export interface ProtoProbe {
   view(): { camera: [number, number, number]; target: [number, number, number]; squadCenter: [number, number, number] };
   stats(): { calls: number; triangles: number; geometries: number; textures: number; programs: number; width: number; height: number; pixelRatio: number; shadows: boolean; antialias: boolean; lamps: number };
   /**
-   * Temps de mise en place (ms, R1c, latence de la scène tactique) : début (de la navigation à l'entrée dans la page),
-   * corps de base (chargement et préparation), ville et lumière, Titans, soldats, réglages (qualité, caméra, panneau) ;
-   * puis la première image : poses, rendu (compilation des shaders comprise).
+   * Temps de mise en place (ms) : début (de la navigation à l'entrée dans la page), ville et lumière, Titans et soldats en
+   * repères, réglages (qualité, caméra, panneau) ; puis la première image : poses, rendu (compilation des shaders comprise) ;
+   * `pret` : instant « prêt » depuis la navigation.
+   * R1d, second temps : `chargementCorps` (corps de base téléchargé et préparé), `faconnage` (corps détaillés), `corps` : instant
+   * de la première image avec les corps détaillés, depuis la navigation (0 tant qu'ils ne sont pas là, −1 en repli).
    */
-  timings: { debut: number; corps: number; ville: number; titans: number; soldats: number; reglages: number; poses: number; premiereImage: number };
+  timings: { debut: number; ville: number; titans: number; soldats: number; reglages: number; poses: number; premiereImage: number; pret: number; chargementCorps: number; faconnage: number; corps: number };
   /** Rend une image tout de suite et attend la suivante (captures). */
   frame(): Promise<void>;
 }
@@ -114,13 +121,13 @@ const v3 = (v: Vector3): [number, number, number] => [v.x, v.y, v.z];
 export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<void> {
   const params = new URLSearchParams(window.location.search);
   const t0 = performance.now();
-  // R1c : corps de base MakeHuman (CC0) pour les soldats et les Titans ; figures de R1 en repli (`?corps=primitives`).
-  const kit = await loadBodyKit(window.location.search);
-  const tKit = performance.now();
   const host = document.createElement("div");
   host.className = "p3d";
   root.replaceChildren(host);
   const html = document.documentElement;
+  // R1d : repères simplifiés (figures de R1) pour la première image ; corps de base MakeHuman (CC0) ensuite.
+  let kit: BodyKit = { template: null, eyeMap: null, reason: "reperes" };
+  html.dataset["corps"] = "reperes";
 
   // ——— Moteur (recréé si l'anticrénelage change) ———
   let quality: Quality = QUALITIES.find((q) => q === params.get("qualite")) ?? "moyen";
@@ -158,6 +165,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   const along = (k: number, side = 0, y = 0): Vector3 => plazaA.clone().addScaledVector(axis, k).addScaledVector(perp, side).setY(y);
   const lighting = createLighting(scene, seed, { windowMaterials: townMeshes.windowMaterials, lanternMaterial: townMeshes.lanternMaterial, lamps: townMeshes.lamps, center: along(0.5) });
   let light: LightPreset = LIGHT_PRESETS.find((p) => p === params.get("lumiere")) ?? "jour";
+  // Qualité basse allégée (R1d) : réglée avant la première carte d'environnement, pour ne pas la calculer pour rien.
+  lighting.setLite(quality === "bas");
   lighting.useEnvironment(renderer);
   lighting.apply(light);
   const tTown = performance.now();
@@ -165,32 +174,38 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   // ——— Titans ———
   const skinMap = skinTexture(seed);
   const puff = puffTexture();
-  const titans = [makeTitan(kit, TITAN_SMALL, seed, skinMap), makeTitan(kit, TITAN_LARGE, seed, skinMap)] as const;
-  for (const t of titans) {
-    setSteamTexture(t, puff);
-    scene.add(t.group);
-  }
   // Le grand sur la rue qui traverse la place, le petit dans le marché du sud ; tous deux tournés vers le sud.
   const face = (o: Vector3, to: Vector3): number => Math.atan2(to.x - o.x, to.z - o.z);
-  titans[1].group.position.copy(along(0.5, 2));
-  // Tourné de trois quarts vers le sud-est de la place : la saisie se lit de côté depuis la vue Titan.
-  titans[1].group.rotation.y = face(titans[1].group.position, along(1.0, 26));
-  titans[0].group.position.copy(along(0.84, -3));
-  titans[0].group.rotation.y = face(titans[0].group.position, along(1.1, 6));
+  const placeTitans = (ts: [Titan, Titan]): void => {
+    for (const t of ts) {
+      setSteamTexture(t, puff);
+      scene.add(t.group);
+    }
+    ts[1].group.position.copy(along(0.5, 2));
+    // Tourné de trois quarts vers le sud-est de la place : la saisie se lit de côté depuis la vue Titan.
+    ts[1].group.rotation.y = face(ts[1].group.position, along(1.0, 26));
+    ts[0].group.position.copy(along(0.84, -3));
+    ts[0].group.rotation.y = face(ts[0].group.position, along(1.1, 6));
+  };
+  let titans: [Titan, Titan] = [makeTitan(kit, TITAN_SMALL, seed, skinMap), makeTitan(kit, TITAN_LARGE, seed, skinMap)];
+  placeTitans(titans);
   const tTitans = performance.now();
   const wantedPoses = (params.get("poses") ?? "").split(",");
   const titanPoses: [TitanPose, TitanPose] = [TITAN_POSES.find((p) => p === wantedPoses[0]) ?? "marche", TITAN_POSES.find((p) => p === wantedPoses[1]) ?? "marche"];
 
   // ——— Soldats : 4 escouades autour des Titans ; foule de 300 au sud-est, hors de la ville ———
   const smats = soldierMaterials();
-  const odm = buildOdm(town, seed, smats, puff, {
-    plaza: along(0, 0),
-    market: along(1, 0),
-    titanLarge: titans[1].group,
-    titanSmall: titans[0].group.position.clone(),
-    largeShoulders: [titans[1].joints.epauleG, titans[1].joints.epauleD],
-    ...(kit.template ? { makeSoldier: (sd: number) => makeSoldier(kit, sd, smats) } : {}),
-  });
+  /** Les 20 soldats et leurs câbles : repères (figures de R1), ou corps détaillés tirés d'un lot préparé par morceaux. */
+  const makeOdm = (k: BodyKit, ready: Map<number, SoldierLike> | null) =>
+    buildOdm(town, seed, smats, puff, {
+      plaza: along(0, 0),
+      market: along(1, 0),
+      titanLarge: titans[1].group,
+      titanSmall: titans[0].group.position.clone(),
+      largeShoulders: [titans[1].joints.epauleG, titans[1].joints.epauleD],
+      ...(k.template ? { makeSoldier: (sd: number) => ready?.get(sd) ?? makeSoldier(k, sd, smats) } : {}),
+    });
+  let odm = makeOdm(kit, null);
   scene.add(odm.group);
   const tSoldiers = performance.now();
   let soldierPose: SoldierPose | null = SOLDIER_POSES.find((p) => p === params.get("soldats")) ?? null;
@@ -229,6 +244,19 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   const sheetOrigin = new Vector3((town.bounds.minX + town.bounds.maxX) / 2, 0, town.bounds.maxY + 110);
   const sheet: { t: Titan; pose: TitanPose }[] = [];
   const sheetSoldiers: { s: SoldierLike; pose: SoldierPose }[] = [];
+  const sheetWalls: Mesh[] = [];
+  /** R1d : la planche est refaite avec les corps détaillés quand ils arrivent. */
+  const clearSheet = (): void => {
+    for (const e of sheet) {
+      scene.remove(e.t.group);
+      e.t.dispose();
+    }
+    for (const e of sheetSoldiers) scene.remove(e.s.group);
+    for (const w of sheetWalls) scene.remove(w);
+    sheet.length = 0;
+    sheetSoldiers.length = 0;
+    sheetWalls.length = 0;
+  };
   const buildSheet = (): void => {
     if (sheet.length > 0) return;
     TITAN_POSES.forEach((pose, i) => {
@@ -254,6 +282,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
         wall.castShadow = true;
         wall.receiveShadow = true;
         scene.add(wall);
+        sheetWalls.push(wall);
         s.group.position.add(new Vector3(0, 1.6, 0));
         s.group.quaternion.setFromRotationMatrix(new Matrix4().makeBasis(new Vector3(0, 0, 1), new Vector3(1, 0, 0), new Vector3(0, 1, 0)));
       }
@@ -334,6 +363,9 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     renderer.setPixelRatio(effectivePixelRatio(q, window.devicePixelRatio));
     renderer.shadowMap.enabled = d.shadows;
     lighting.setShadow(d.shadows, d.shadowMap);
+    // R1d : qualité basse allégée (sans éclairage d'image, ciel peint, sans relief ni cartes de feuilles).
+    lighting.setLite(q === "bas");
+    applyLite(scene, q === "bas");
     lighting.setLampLimit(d.lamps);
     resize();
     qualityChoice?.set(q);
@@ -505,6 +537,8 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   let paused = params.has("pause");
   let held = false;
   let posed = 0;
+  /** R1d : les corps détaillés viennent d'être échangés ; la prochaine image dessinée marque l'instant « corps ». */
+  let corpsPending = false;
   const draw = (): void => {
     titans.forEach((t, i) => t.setPose(titanPoses[i as 0 | 1], time));
     for (const e of sheet) e.t.setPose(e.pose, time);
@@ -529,6 +563,11 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       post.render(renderer, size.x, size.y);
     } else renderer.render(scene, camera);
     state.frames++;
+    if (corpsPending) {
+      corpsPending = false;
+      state.timings.corps = performance.now();
+      html.dataset["corps3d"] = "pret";
+    }
   };
   const wantedCam = params.get("cam") ?? (params.get("vue") === "planche" ? "planche" : "libre");
   const camMatch = /^suivi([1-4])$/.exec(wantedCam);
@@ -583,7 +622,7 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
         draw();
         requestAnimationFrame(() => resolve());
       }),
-    timings: { debut: t0, corps: tKit - t0, ville: tTown - tKit, titans: tTitans - tTown, soldats: tSoldiers - tTitans, reglages: 0, poses: 0, premiereImage: 0 },
+    timings: { debut: t0, ville: tTown - t0, titans: tTitans - tTown, soldats: tSoldiers - tTitans, reglages: 0, poses: 0, premiereImage: 0, pret: 0, chargementCorps: 0, faconnage: 0, corps: 0 },
   };
   window.__proto3d = state;
   html.dataset["lumiere"] = light;
@@ -611,13 +650,67 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
     }
     requestAnimationFrame(loop);
   };
+  /**
+   * R1d, second temps : corps de base chargé, Titans puis soldats façonnés par morceaux (l'image continue entre deux
+   * morceaux), puis échangés d'un coup avec les repères ; les câbles sont refaits sur les nouveaux corps (mêmes graines, mêmes
+   * places). Les shaders des nouveaux matériaux sont compilés avant l'échange.
+   */
+  const upgradeBodies = async (): Promise<void> => {
+    const s0 = performance.now();
+    const full = await loadBodyKit(window.location.search);
+    state.timings.chargementCorps = performance.now() - s0;
+    if (!full.template) {
+      state.timings.corps = -1;
+      html.dataset["corps3d"] = "repli";
+      return;
+    }
+    const s1 = performance.now();
+    const breathe = (): Promise<void> => new Promise((r) => setTimeout(r, 0));
+    const small = makeTitan(full, TITAN_SMALL, seed, skinMap);
+    await breathe();
+    const large = makeTitan(full, TITAN_LARGE, seed, skinMap);
+    await breathe();
+    const ready = new Map<number, SoldierLike>();
+    for (let i = 0; i < 20; i++) {
+      const sd = derive(seed, 50 + i);
+      ready.set(sd, makeSoldier(full, sd, smats));
+      if (i % 4 === 3) await breathe();
+    }
+    for (const t of titans) {
+      scene.remove(t.group);
+      t.dispose();
+    }
+    titans = [small, large];
+    placeTitans(titans);
+    scene.remove(odm.group);
+    odm.dispose();
+    kit = full;
+    odm = makeOdm(kit, ready);
+    scene.add(odm.group);
+    html.dataset["corps"] = kit.reason.split(" ")[0] ?? "";
+    if (sheet.length > 0) {
+      clearSheet();
+      buildSheet();
+    }
+    if (camMode === "suivi") setCamera("suivi", squad);
+    applyLite(scene, quality === "bas");
+    await precompile(renderer, scene, camera);
+    state.timings.faconnage = performance.now() - s1;
+    corpsPending = true;
+  };
+
   requestAnimationFrame((now) => {
     const t = performance.now();
     state.timings.reglages = t - tSoldiers;
     loop(now);
     state.timings.poses = posed - t;
     state.timings.premiereImage = performance.now() - t;
+    state.timings.pret = performance.now();
     state.ready = true;
     html.dataset["proto3d"] = "pret";
+    if (params.get("corps") === "primitives") {
+      html.dataset["corps"] = "primitives";
+      html.dataset["corps3d"] = "primitives";
+    } else void upgradeBodies();
   });
 }

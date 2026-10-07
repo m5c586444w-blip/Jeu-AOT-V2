@@ -93,6 +93,12 @@ export interface LightRig {
    * métaux, de l'eau, lumière diffuse du ciel) ; une carte par heure, calculée une fois. Rien sous terre.
    */
   useEnvironment(renderer: WebGLRenderer): void;
+  /**
+   * R1d : qualité basse allégée. Sans éclairage d'image (l'hémisphère reprend toute sa part) et avec le dôme peint au lieu du
+   * ciel physique (moins de calcul par pixel, pas de carte d'environnement à filtrer).
+   */
+  setLite(lite: boolean): void;
+  readonly lite: boolean;
   dispose(): void;
 }
 
@@ -184,7 +190,14 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   let pmrem: PMREMGenerator | null = null;
   let pmremOwner: WebGLRenderer | null = null;
   const envMaps = new Map<LightPreset, Texture>();
+  let lite = false;
   const updateEnv = (): void => {
+    if (lite) {
+      scene.environment = null;
+      envOn = false;
+      hemi.intensity = hemiFor(effective(current));
+      return;
+    }
     if (!pmrem || opts.underground) return;
     let tex = envMaps.get(current);
     if (!tex) {
@@ -304,7 +317,7 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
         col.setXYZ(i, c.r, c.g, c.b);
       }
       col.needsUpdate = true;
-      const ph = opts.underground ? undefined : d.physical;
+      const ph = opts.underground || lite ? undefined : d.physical;
       phys.visible = ph !== undefined;
       sky.visible = !phys.visible;
       if (ph) {
@@ -329,6 +342,14 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       sky.position.copy(camera);
       phys.position.copy(camera);
       stars.position.copy(camera);
+    },
+    get lite() {
+      return lite;
+    },
+    setLite(on) {
+      if (on === lite) return;
+      lite = on;
+      rig.apply(current);
     },
     setCenter(c) {
       opts.center.copy(c);

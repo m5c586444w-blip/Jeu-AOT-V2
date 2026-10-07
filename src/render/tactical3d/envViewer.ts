@@ -6,7 +6,9 @@ import type { WebGLProbe } from "./entry";
 import { backTo2d } from "./entry";
 import type { EnvData, View } from "./envTypes";
 import { loadBodyKit, titanFactory } from "./bodies";
-import { buildEnvironmentMeshes } from "./envMesh";
+import { buildEnvironmentMeshes, makeEnvTitan } from "./envMesh";
+import type { Titan } from "./titan";
+import { applyLite, precompile } from "./lite";
 import { createPost } from "./post";
 import type { PostChain } from "./post";
 import type { EnvScene, EnvTextures } from "./envMesh";
@@ -44,7 +46,12 @@ export interface EnvProbe {
   light: LightPreset;
   view: ViewName;
   quality: Quality;
-  timings: { generate: number; bodies: number; textures: number; build: number };
+  /**
+   * Temps (ms) : génération, textures, assemblage ; `pret` : première image depuis la navigation (Titans en repères).
+   * R1d, second temps (scènes avec Titans) : `bodies` (corps de base chargé et Titans détaillés façonnés), `corps` : première image
+   * avec les Titans détaillés, depuis la navigation (0 sans Titans ou tant qu'ils ne sont pas là, −1 en repli).
+   */
+  timings: { generate: number; bodies: number; textures: number; build: number; pret: number; corps: number };
   counts: Record<string, number>;
   setLight(p: LightPreset): void;
   setView(v: ViewName): void;
@@ -198,14 +205,13 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   const t0 = performance.now();
   const env = generateEnvironment(id, seed, variantId);
   const t1 = performance.now();
-  // Corps de base (R1c) chargé à la demande, seulement si la scène a des Titans ; son chargement est compté à part.
-  const kit = env.titans.length > 0 ? await loadBodyKit(window.location.search) : null;
+  // R1d : la première image montre les Titans en repères (figures de R1) ; le corps de base est chargé ensuite.
   const tk = performance.now();
   const tex = envTextures(env, quality);
   // Dessin des textures avant l'assemblage, pour mesurer son coût à part.
   tex.ground();
   const t2 = performance.now();
-  const meshes: EnvScene = buildEnvironmentMeshes(env, { quality, textures: tex, ...titanFactory(kit) });
+  const meshes: EnvScene = buildEnvironmentMeshes(env, { quality, textures: tex });
   const t3 = performance.now();
 
   const host = document.createElement("div");
@@ -226,6 +232,8 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
   const target0 = new Vector3(...env.views.principale.target);
   const lighting: LightRig = createLighting(scene, seed, { windowMaterials: meshes.windowMaterials, lanternMaterial: meshes.lanternMaterial, lamps: meshes.lamps, center: target0.clone(), shadowExtent: Math.max(280, env.cave?.radius ?? 0), fogScale: fogScaleOf(env), underground: undergroundOf(env) });
 
+  // Qualité basse allégée (R1d) : réglée avant la première carte d'environnement.
+  lighting.setLite(quality === "bas");
   lighting.useEnvironment(renderer);
   const weather = createWeather(scene, weatherKind, { seed, particles: QUALITY[quality].particles, mistMap: tex.mist(), groundY: env.terrain ? 0 : 0, size: env.terrain?.spec.size ?? 900 });
   lighting.setFogBoost(weather.fogBoost);
@@ -252,6 +260,8 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     renderer.shadowMap.enabled = d.shadows;
     lighting.setShadow(d.shadows, d.shadowMap);
     lighting.setLampLimit(d.lamps);
+    lighting.setLite(q === "bas");
+    applyLite(scene, q === "bas");
     for (const lod of meshes.vegetation?.lods ?? []) {
       const levels = lod.levels;
       if (levels[1]) levels[1].distance = d.lodNear;
@@ -414,6 +424,11 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       drawScene(size.x, size.y);
     }
     frames++;
+    if (corpsPending) {
+      corpsPending = false;
+      state.timings.corps = performance.now();
+      html.dataset["corps3d"] = "pret";
+    }
   };
 
   // Rendu hors écran : un second moteur sur un canvas détaché, mêmes réglages de sortie (tonalité, sRGB).
@@ -456,7 +471,7 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     light,
     view,
     quality,
-    timings: { generate: t1 - t0, bodies: tk - t1, textures: t2 - tk, build: t3 - t2 },
+    timings: { generate: t1 - t0, bodies: 0, textures: t2 - tk, build: t3 - t2, pret: 0, corps: 0 },
     counts: meshes.counts,
     setLight(p) {
       setLight(p);
@@ -519,10 +534,44 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
     }
     requestAnimationFrame(loop);
   };
+  /** R1d, second temps : Titans détaillés façonnés un par un, puis échangés d'un coup avec les repères. */
+  let corpsPending = false;
+  const upgradeTitans = async (): Promise<void> => {
+    const s0 = performance.now();
+    const kit = await loadBodyKit(window.location.search);
+    const make = titanFactory(kit).titan;
+    if (!make) {
+      state.timings.corps = -1;
+      html.dataset["corps3d"] = "repli";
+      return;
+    }
+    const next: Titan[] = [];
+    for (let i = 0; i < env.titans.length; i++) {
+      next.push(makeEnvTitan(env, i, make, tex));
+      await new Promise((r) => setTimeout(r, 0));
+    }
+    meshes.titans.forEach((t, i) => {
+      const n = next[i];
+      if (!n) return;
+      meshes.group.remove(t.group);
+      t.dispose();
+      meshes.group.add(n.group);
+      meshes.titans[i] = n;
+    });
+    applyLite(scene, quality === "bas");
+    await precompile(renderer, scene, camera);
+    state.timings.bodies = performance.now() - s0;
+    corpsPending = true;
+  };
+
   requestAnimationFrame((now) => {
     loop(now);
+    state.timings.pret = performance.now();
     state.ready = true;
     html.dataset["proto3d"] = "pret";
+    if (env.titans.length === 0) return;
+    if (params.get("corps") === "primitives") html.dataset["corps3d"] = "primitives";
+    else void upgradeTitans();
   });
   void frames;
   void probe;

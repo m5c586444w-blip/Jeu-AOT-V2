@@ -642,3 +642,19 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - murs (E22) : b* 15,2 → 9,6 → 13,7.
 
   Mesure de fin de phase : CR1d-08.
+
+## 2026-10-07 — D-93 Latence en deux temps et qualité basse allégée (R1d.1)
+- **Repères simplifiés** = les figures en primitives de R1 (soldats et Titans). Elles ont déjà la même interface que les corps de base (poses, lanceurs, articulations) : câbles, suivi de caméra et planche restent valables. Les places sont les mêmes avant et après l'échange (mêmes graines).
+- **Second temps.**
+  - Le corps de base est chargé après la première image.
+  - Les corps détaillés sont façonnés par morceaux, la main étant rendue à l'image entre deux morceaux : 2 Titans, puis les soldats par 4.
+  - Ils sont échangés d'un coup, après compilation de leurs shaders (en parallèle si le moteur le permet, sinon d'un coup en WebGL logiciel).
+  - L'instant « corps » est la première image dessinée après l'échange (`data-corps3d="pret"`, `timings.corps`).
+  - La visionneuse fait de même pour ses Titans.
+- **Qualité basse allégée.**
+  - Sans éclairage d'image : l'hémisphère reprend toute sa part.
+  - Dôme peint au lieu du ciel physique.
+  - Sans cartes de relief ni détail du sol, sans cartes de feuilles (forêts, haies, voûte des Arbres Géants).
+  - Densité des arbres de la qualité basse (0,32). Ombres et post-traitement déjà coupés.
+  - La bascule se fait aussi à chaud (`applyLite`, `setLite`).
+- **Mesure ponctuelle** (`npm run mesure:r1d -- rapide`, construction de production, WebGL logiciel) : scène tactique en qualité basse, « prêt » 1,77 s, « corps » 6,92 s.

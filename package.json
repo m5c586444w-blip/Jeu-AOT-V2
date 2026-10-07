@@ -43,7 +43,8 @@
     "assets:check": "tsx src/tools/assets-check.ts",
     "assets:fetch": "tsx src/tools/assets-fetch.ts",
     "assets:build": "tsx src/tools/assets-build.ts",
-    "mesure:r1c": "tsx src/tools/mesure-r1c.ts"
+    "mesure:r1c": "tsx src/tools/mesure-r1c.ts",
+    "mesure:r1d": "tsx src/tools/mesure-r1d.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

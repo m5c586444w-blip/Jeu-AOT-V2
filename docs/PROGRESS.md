@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
-| Tâche | R1d.2 : teintes (éclairage d'image : ciel désaturé, sol, intensité), D-92 |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 71 fichiers, 437 tests ; `assets:check` : 87 entrées, 87 fichiers |
-| Prochaine étape | R1d.1 : latence en deux temps et qualité basse allégée ; R1d.3 corps ; R1d.4 arbres ; R1d.5 textures |
+| Tâche | R1d.1 : latence en deux temps (prêt = ville et repères simplifiés, corps détaillés ensuite), qualité basse allégée, `mesure:r1d` |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 441 tests ; `assets:check` : 87 entrées, 87 fichiers |
+| Prochaine étape | R1d.3 : corps sans détail anatomique ; R1d.4 arbres ; R1d.5 textures ; R1d.6 mesure et rapport |
 
 ## R1d ouverte (2026-10-07)
 - **Revue de R1c par l'utilisateur** (D-91) :

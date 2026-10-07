@@ -11,6 +11,7 @@ import { buildWallMeshes } from "./meshWall";
 import { buildGiantForest, buildSpray } from "./meshNature";
 import { buildCave } from "./meshCave";
 import { normalOf } from "./texturesEnv";
+import { applyLite } from "./lite";
 import { buildTitan, setSteamTexture } from "./titan";
 import type { Titan, TitanSpec } from "./titan";
 import { titanSpec } from "./titanGallery";
@@ -70,9 +71,27 @@ export function lightsOff(env: EnvData): boolean {
   return env.generator === "territoire" || env.variant?.etat === "abandonne" || env.variant?.etat === "ruines_incendies";
 }
 
+/** Le Titan n° `i` de l'environnement, fabriqué, texturé, placé (pieds au sol, relief compris) et posé. */
+export function makeEnvTitan(env: EnvData, i: number, make: NonNullable<EnvKit["titan"]>, tx: EnvTextures | null): Titan {
+  const tp = env.titans[i];
+  if (!tp) throw new Error(`${env.id} : pas de Titan n° ${i}`);
+  const t = make(titanSpec(tp.type, tp.variant), tp.seed, tx?.skin() ?? null);
+  const puff = tx?.puff();
+  if (puff) setSteamTexture(t, puff);
+  const hf = env.terrain?.heights ?? null;
+  t.group.position.set(tp.x, tp.pose === "buste" ? 0 : hf ? heightAt(hf, tp.x, tp.y) : 0, tp.y);
+  t.group.rotation.y = tp.angle;
+  t.group.updateMatrixWorld(true);
+  t.setPose(tp.pose, 0.6);
+  return t;
+}
+
 export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
   const q = QUALITY[kit.quality];
   const tx = kit.textures;
+  // R1d : qualité basse allégée — ni cartes de feuilles (forêts, haies, voûte), ni relief (normales), ni détail du sol.
+  const lite = kit.quality === "bas";
+  const leaves = lite ? null : (tx?.leaves() ?? null);
   const textured = tx !== null;
   const group = new Group();
   group.name = `environnement-${env.id}`;
@@ -91,9 +110,9 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       bridgeColor: p.palette.pierre,
       roadColor: `#${new Color(MATERIALS.sols.route.base).lerp(new Color(p.palette.sol), 0.25).getHexString()}`,
       paveMap: tx?.cobble() ?? null,
-      detail: tx?.groundDetail() ?? null,
-      waterNormal: tx?.waterNormal() ?? null,
-      paveNormal: tx ? normalOf(tx.cobble(), 2.5) : null,
+      detail: lite ? null : (tx?.groundDetail() ?? null),
+      waterNormal: lite ? null : (tx?.waterNormal() ?? null),
+      paveNormal: tx && !lite ? normalOf(tx.cobble(), 2.5) : null,
     });
     animators.push((time) => t.animate(time));
     group.add(t.group);
@@ -158,7 +177,7 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       tx?.mist() ?? null,
       env.mist,
       env.terrain?.spec.size ?? 900,
-      tx?.leaves() ?? null,
+      leaves,
     );
     group.add(nat.group);
     disposers.push(() => nat.dispose());
@@ -192,18 +211,11 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
 
   // Titans posés (classes, variantes, Titan-Mur dans une brèche), pieds au sol (relief compris).
   const titans: Titan[] = [];
-  for (const tp of env.titans) {
-    const t = (kit.titan ?? buildTitan)(titanSpec(tp.type, tp.variant), tp.seed, tx?.skin() ?? null);
-    const puff = tx?.puff();
-    if (puff) setSteamTexture(t, puff);
-    const hf = env.terrain?.heights ?? null;
-    t.group.position.set(tp.x, tp.pose === "buste" ? 0 : hf ? heightAt(hf, tp.x, tp.y) : 0, tp.y);
-    t.group.rotation.y = tp.angle;
+  env.titans.forEach((_, i) => {
+    const t = makeEnvTitan(env, i, kit.titan ?? buildTitan, tx);
     group.add(t.group);
-    t.group.updateMatrixWorld(true);
-    t.setPose(tp.pose, 0.6);
     titans.push(t);
-  }
+  });
   counts["titans"] = titans.length;
   disposers.push(() => {
     for (const t of titans) t.dispose();
@@ -250,12 +262,12 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       env.terrain.heights,
       { leaf: nature ? [p.palette.toit, p.palette.toit_2] : [MATERIALS.physiques.feuillage, MATERIALS.physiques.feuillage_clair], conifer: MATERIALS.physiques.conifere, bush: nature ? p.palette.toit_2 : MATERIALS.physiques.feuillage },
       { near: q.lodNear, far: q.lodFar, density: q.vegetation, shadows: q.shadows },
-      tx?.leaves() ?? null,
+      leaves,
     );
     group.add(vegetation.group);
     disposers.push(() => vegetation?.dispose());
     for (const [k, v] of Object.entries(vegetation.counts)) counts[`arbres-${k}`] = v;
-    const hedges = buildHedges(env.terrain.hedges, env.terrain.heights, MATERIALS.physiques.feuillage, q.shadows, tx?.leaves() ?? null);
+    const hedges = buildHedges(env.terrain.hedges, env.terrain.heights, MATERIALS.physiques.feuillage, q.shadows, leaves);
     if (hedges) {
       group.add(hedges);
       counts["hedgePieces"] = hedges.count;
@@ -270,6 +282,8 @@ export function buildEnvironmentMeshes(env: EnvData, kit: EnvKit): EnvScene {
       );
     }
   }
+
+  if (lite) applyLite(group, true);
 
   return {
     group,
