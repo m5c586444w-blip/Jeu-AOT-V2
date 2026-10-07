@@ -48,7 +48,9 @@
     "places:valider": "tsx src/tools/places-valider.ts",
     "places:captures": "tsx src/tools/places-captures.ts",
     "places:regenerer": "tsx src/tools/places-regenerer.ts",
-    "smoke:ux0": "tsx src/tools/smoke-ux0.ts"
+    "smoke:ux0": "tsx src/tools/smoke-ux0.ts",
+    "map:terrain": "tsx src/tools/map-terrain.ts",
+    "captures:map": "tsx src/tools/captures-map.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
