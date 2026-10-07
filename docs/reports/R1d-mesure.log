@@ -1,0 +1,209 @@
+
+> murs-et-sang@0.0.1 mesure:r1d
+> tsx src/tools/mesure-r1d.ts
+
+
+=== Bundle (avant 3782acd contre l'état courant) ===
+bundle principal avant : assets/index-Bv_Xd8Ly.js  902588 octets (266.8 Kio gzip)
+bundle principal après : assets/index-BXWZxVA8.js  902588 octets (266.8 Kio gzip)
+worker avant : sim.worker-BDqA4b1U.js  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+worker après : sim.worker-BDqA4b1U.js  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+  OK  bundle principal : même taille (902588 → 902588 octets)
+  OK  bundle principal : même contenu une fois les noms de morceaux hachés normalisés
+  OK  worker de simulation identique à l'octet
+  OK  ni three.js ni GLTFLoader dans le bundle principal
+morceaux 3D à la demande, avant : 9 morceaux, 978890 octets (269.1 Kio gzip)
+morceaux 3D à la demande, après : 9 morceaux, 981079 octets (270.0 Kio gzip)
+  OK  aucun modèle ni texture d'asset inclus dans le JS (aucun)
+assets 3D (dist/assets3d/) : 14 fichiers, 10.47 Mio
+  assets3d/derives/humain.glb  5886104 octets
+  assets3d/makehuman/eyes/brown_eye.png  610817 octets
+  assets3d/polyhaven/castle_wall_slates_diff_1k.webp  368808 octets
+  assets3d/polyhaven/castle_wall_slates_nor_gl_1k.webp  445322 octets
+  assets3d/polyhaven/cobblestone_floor_08_diff_1k.webp  345736 octets
+  assets3d/polyhaven/cobblestone_floor_08_nor_gl_1k.webp  400558 octets
+  assets3d/polyhaven/forrest_ground_01_diff_1k.webp  460062 octets
+  assets3d/polyhaven/forrest_ground_01_nor_gl_1k.webp  596190 octets
+  assets3d/polyhaven/medieval_blocks_03_diff_1k.webp  378902 octets
+  assets3d/polyhaven/medieval_blocks_03_nor_gl_1k.webp  551922 octets
+  assets3d/polyhaven/roof_slates_02_diff_1k.webp  286824 octets
+  assets3d/polyhaven/roof_slates_02_nor_gl_1k.webp  299098 octets
+  assets3d/polyhaven/roof_tiles_14_diff_1k.webp  175196 octets
+  assets3d/polyhaven/roof_tiles_14_nor_gl_1k.webp  170298 octets
+  OK  assets 3D servis = fichiers « execution » du manifeste (14)
+  OK  aucune image de référence dans dist (0)
+
+=== Scènes (constructions de production ; WebGL logiciel ; 1366 × 768 ; navigateur neuf par mesure) ===
+jeu             avant chargement à froid (carte stratégique prête) : 2.59 s
+jeu             apres chargement à froid (carte stratégique prête) : 2.60 s
+  OK  jeu : chargement à froid 2.60 s < 8 s
+proto-bas       avant prêt   6.16 s · corps 6.16 s (avec la première image) ·   652 ms/image · 687 appels · 0.75 M triangles · 21 programmes · RSS 916 Mo
+proto-bas       apres prêt   1.99 s · corps 8.62 s (pret) · photos 10.78 s ·   356 ms/image · 695 appels · 0.76 M triangles · 21 programmes · RSS 1060 Mo
+  OK  proto-bas après : aucune erreur de page
+  OK  proto-bas après : « prêt » 1.99 s < 3 s (avant : 6.16 s)
+  OK  proto-bas après : corps détaillés affichés (pret, 8.62 s)
+  OK  proto-bas après : textures de Poly Haven posées (pret, 10.78 s)
+E01-bas         avant prêt   4.18 s ·   443 ms/image · 45 appels · 0.20 M triangles · RSS 819 Mo
+E01-bas         apres prêt   2.72 s · photos 3.69 s ·   182 ms/image · 45 appels · 0.20 M triangles · RSS 862 Mo
+  OK  E01-bas après : aucune erreur de page
+  OK  E01-bas après : « prêt » 2.72 s < 8 s (avant : 4.18 s)
+  OK  E01-bas après : textures de Poly Haven posées (pret, 3.69 s)
+E02-bas         avant prêt   4.31 s ·   608 ms/image · 39 appels · 0.21 M triangles · RSS 871 Mo
+E02-bas         apres prêt   2.58 s · photos 3.80 s ·   246 ms/image · 39 appels · 0.21 M triangles · RSS 882 Mo
+  OK  E02-bas après : aucune erreur de page
+  OK  E02-bas après : « prêt » 2.58 s < 8 s (avant : 4.31 s)
+  OK  E02-bas après : textures de Poly Haven posées (pret, 3.80 s)
+E13-bas         avant prêt   5.09 s ·   731 ms/image · 66 appels · 2.73 M triangles · RSS 768 Mo
+E13-bas         apres prêt   3.36 s · photos 5.13 s ·   457 ms/image · 64 appels · 2.23 M triangles · RSS 784 Mo
+  OK  E13-bas après : aucune erreur de page
+  OK  E13-bas après : « prêt » 3.36 s < 8 s (avant : 5.09 s)
+  OK  E13-bas après : textures de Poly Haven posées (pret, 5.13 s)
+E14-bas         avant prêt   9.47 s ·  2125 ms/image · 82 appels · 0.80 M triangles · RSS 868 Mo
+E14-bas         apres prêt   3.60 s · photos 5.47 s ·   488 ms/image · 79 appels · 0.66 M triangles · RSS 885 Mo
+  OK  E14-bas après : aucune erreur de page
+  OK  E14-bas après : « prêt » 3.60 s < 8 s (avant : 9.47 s)
+  OK  E14-bas après : textures de Poly Haven posées (pret, 5.47 s)
+E19-titans-bas  avant prêt   5.41 s · corps 5.41 s (avec la première image) ·   394 ms/image · 274 appels · 0.70 M triangles · RSS 855 Mo
+E19-titans-bas  apres prêt   2.29 s · corps 12.01 s (pret) · photos 13.44 s ·   254 ms/image · 273 appels · 0.70 M triangles · RSS 1006 Mo
+  OK  E19-titans-bas après : aucune erreur de page
+  OK  E19-titans-bas après : « prêt » 2.29 s < 8 s (avant : 5.41 s)
+  OK  E19-titans-bas après : corps détaillés affichés (pret, 12.01 s)
+  OK  E19-titans-bas après : textures de Poly Haven posées (pret, 13.44 s)
+E22-bas         avant prêt   2.81 s ·   252 ms/image · 26 appels · 0.20 M triangles · RSS 755 Mo
+E22-bas         apres prêt   1.64 s · photos 2.37 s ·   124 ms/image · 25 appels · 0.19 M triangles · RSS 794 Mo
+  OK  E22-bas après : aucune erreur de page
+  OK  E22-bas après : « prêt » 1.64 s < 8 s (avant : 2.81 s)
+  OK  E22-bas après : textures de Poly Haven posées (pret, 2.37 s)
+proto           avant prêt  10.06 s · corps 10.06 s (avec la première image) ·  1670 ms/image · 1405 appels · 1.63 M triangles · 35 programmes · RSS 999 Mo
+proto           apres prêt   6.59 s · corps 40.18 s (pret) · photos 48.72 s ·  1728 ms/image · 1435 appels · 1.67 M triangles · 65 programmes · RSS 1024 Mo
+  OK  proto après : aucune erreur de page
+  OK  proto après : corps détaillés affichés (pret, 40.18 s)
+  OK  proto après : textures de Poly Haven posées (pret, 48.72 s)
+proto-suivi     avant prêt  10.09 s · corps 10.09 s (avec la première image) ·  1587 ms/image · 1386 appels · 1.62 M triangles · 35 programmes · RSS 1028 Mo
+proto-suivi     apres prêt   7.33 s · corps 42.39 s (pret) · photos 51.00 s ·  1739 ms/image · 1420 appels · 1.67 M triangles · 65 programmes · RSS 1025 Mo
+  OK  proto-suivi après : aucune erreur de page
+  OK  proto-suivi après : corps détaillés affichés (pret, 42.39 s)
+  OK  proto-suivi après : textures de Poly Haven posées (pret, 51.00 s)
+proto-haut      avant prêt  10.34 s · corps 10.34 s (avec la première image) ·  1760 ms/image · 1405 appels · 1.63 M triangles · 35 programmes · RSS 1049 Mo
+proto-haut      apres prêt   6.87 s · corps 41.46 s (pret) · photos 50.96 s ·  1886 ms/image · 1435 appels · 1.67 M triangles · 65 programmes · RSS 1089 Mo
+  OK  proto-haut après : aucune erreur de page
+  OK  proto-haut après : corps détaillés affichés (pret, 41.46 s)
+  OK  proto-haut après : textures de Poly Haven posées (pret, 50.96 s)
+E01             avant prêt   6.90 s ·  1201 ms/image · 83 appels · 0.24 M triangles · RSS 936 Mo
+E01             apres prêt   6.99 s · photos 12.29 s ·  1196 ms/image · 83 appels · 0.24 M triangles · RSS 1006 Mo
+  OK  E01 après : aucune erreur de page
+  OK  E01 après : textures de Poly Haven posées (pret, 12.29 s)
+E02             avant prêt   7.44 s ·  1495 ms/image · 68 appels · 0.27 M triangles · RSS 971 Mo
+E02             apres prêt   7.28 s · photos 13.63 s ·  1503 ms/image · 68 appels · 0.27 M triangles · RSS 997 Mo
+  OK  E02 après : aucune erreur de page
+  OK  E02 après : textures de Poly Haven posées (pret, 13.63 s)
+E07             avant prêt   6.81 s ·  1473 ms/image · 58 appels · 0.25 M triangles · RSS 933 Mo
+E07             apres prêt   6.77 s · photos 12.98 s ·  1567 ms/image · 58 appels · 0.25 M triangles · RSS 977 Mo
+  OK  E07 après : aucune erreur de page
+  OK  E07 après : textures de Poly Haven posées (pret, 12.98 s)
+E13             avant prêt   8.78 s ·  1778 ms/image · 88 appels · 4.91 M triangles · RSS 878 Mo
+E13             apres prêt   8.86 s · photos 16.78 s ·  1817 ms/image · 88 appels · 4.91 M triangles · RSS 931 Mo
+  OK  E13 après : aucune erreur de page
+  OK  E13 après : textures de Poly Haven posées (pret, 16.78 s)
+E14             avant prêt  28.25 s ·  6160 ms/image · 134 appels · 3.17 M triangles · RSS 919 Mo
+E14             apres prêt  28.52 s · photos 66.40 s ·  6185 ms/image · 134 appels · 3.17 M triangles · RSS 981 Mo
+  OK  E14 après : aucune erreur de page
+  OK  E14 après : textures de Poly Haven posées (pret, 66.40 s)
+E17             avant prêt   4.98 s ·   999 ms/image · 55 appels · 0.41 M triangles · RSS 840 Mo
+E17             apres prêt   4.89 s · photos 8.78 s ·  1005 ms/image · 55 appels · 0.41 M triangles · RSS 899 Mo
+  OK  E17 après : aucune erreur de page
+  OK  E17 après : textures de Poly Haven posées (pret, 8.78 s)
+E19-titans      avant prêt   8.32 s · corps 8.32 s (avec la première image) ·  1199 ms/image · 493 appels · 1.27 M triangles · RSS 996 Mo
+E19-titans      apres prêt   6.18 s · corps 55.36 s (pret) · photos 60.53 s ·  1244 ms/image · 493 appels · 1.27 M triangles · RSS 1013 Mo
+  OK  E19-titans après : aucune erreur de page
+  OK  E19-titans après : corps détaillés affichés (pret, 55.36 s)
+  OK  E19-titans après : textures de Poly Haven posées (pret, 60.53 s)
+E20             avant prêt   7.37 s ·  1623 ms/image · 67 appels · 1.40 M triangles · RSS 868 Mo
+E20             apres prêt   7.35 s · photos 14.50 s ·  1711 ms/image · 67 appels · 1.40 M triangles · RSS 918 Mo
+  OK  E20 après : aucune erreur de page
+  OK  E20 après : textures de Poly Haven posées (pret, 14.50 s)
+E22             avant prêt   5.07 s ·   916 ms/image · 39 appels · 0.26 M triangles · RSS 863 Mo
+E22             apres prêt   5.13 s · photos 8.95 s ·   972 ms/image · 39 appels · 0.26 M triangles · RSS 949 Mo
+  OK  E22 après : aucune erreur de page
+  OK  E22 après : textures de Poly Haven posées (pret, 8.95 s)
+banc            avant prêt   7.05 s · corps 7.05 s (avec la première image) ·  1169 ms/image · 0 appels · 0.00 M triangles · RSS 897 Mo
+banc            apres prêt   9.03 s · corps 9.03 s (avec la première image) ·  1180 ms/image · 0 appels · 0.00 M triangles · RSS 1041 Mo
+  OK  banc après : aucune erreur de page
+
+résumé (avant R1c → après R1d) :
+  proto-bas       prêt 6.16 s → 1.99 s · corps 6.16 s → 8.62 s · temps d'image 652 → 356 ms · RSS 916 → 1060 Mo
+  E01-bas         prêt 4.18 s → 2.72 s · temps d'image 443 → 182 ms · RSS 819 → 862 Mo
+  E02-bas         prêt 4.31 s → 2.58 s · temps d'image 608 → 246 ms · RSS 871 → 882 Mo
+  E13-bas         prêt 5.09 s → 3.36 s · temps d'image 731 → 457 ms · RSS 768 → 784 Mo
+  E14-bas         prêt 9.47 s → 3.60 s · temps d'image 2125 → 488 ms · RSS 868 → 885 Mo
+  E19-titans-bas  prêt 5.41 s → 2.29 s · corps 5.41 s → 12.01 s · temps d'image 394 → 254 ms · RSS 855 → 1006 Mo
+  E22-bas         prêt 2.81 s → 1.64 s · temps d'image 252 → 124 ms · RSS 755 → 794 Mo
+  proto           prêt 10.06 s → 6.59 s · corps 10.06 s → 40.18 s · temps d'image 1670 → 1728 ms · RSS 999 → 1024 Mo
+  proto-suivi     prêt 10.09 s → 7.33 s · corps 10.09 s → 42.39 s · temps d'image 1587 → 1739 ms · RSS 1028 → 1025 Mo
+  proto-haut      prêt 10.34 s → 6.87 s · corps 10.34 s → 41.46 s · temps d'image 1760 → 1886 ms · RSS 1049 → 1089 Mo
+  E01             prêt 6.90 s → 6.99 s · temps d'image 1201 → 1196 ms · RSS 936 → 1006 Mo
+  E02             prêt 7.44 s → 7.28 s · temps d'image 1495 → 1503 ms · RSS 971 → 997 Mo
+  E07             prêt 6.81 s → 6.77 s · temps d'image 1473 → 1567 ms · RSS 933 → 977 Mo
+  E13             prêt 8.78 s → 8.86 s · temps d'image 1778 → 1817 ms · RSS 878 → 931 Mo
+  E14             prêt 28.25 s → 28.52 s · temps d'image 6160 → 6185 ms · RSS 919 → 981 Mo
+  E17             prêt 4.98 s → 4.89 s · temps d'image 999 → 1005 ms · RSS 840 → 899 Mo
+  E19-titans      prêt 8.32 s → 6.18 s · corps 8.32 s → 55.36 s · temps d'image 1199 → 1244 ms · RSS 996 → 1013 Mo
+  E20             prêt 7.37 s → 7.35 s · temps d'image 1623 → 1711 ms · RSS 868 → 918 Mo
+  E22             prêt 5.07 s → 5.13 s · temps d'image 916 → 972 ms · RSS 863 → 949 Mo
+  banc            prêt 7.05 s → 9.03 s · corps 7.05 s → 9.03 s · temps d'image 1169 → 1180 ms · RSS 897 → 1041 Mo
+
+=== Anatomie (avant 3782acd contre R1d ; ?proto3d=humain&vue=anatomie) ===
+  OK  anatomie face avant : aucune erreur de page
+  OK  anatomie face après : aucune erreur de page
+  face           docs/screenshots/r1d-anatomie-face-apres.png
+  OK  anatomie dos avant : aucune erreur de page
+  OK  anatomie dos après : aucune erreur de page
+  dos            docs/screenshots/r1d-anatomie-dos-apres.png
+  OK  anatomie torses-hommes avant : aucune erreur de page
+  OK  anatomie torses-hommes après : aucune erreur de page
+  torses-hommes  docs/screenshots/r1d-anatomie-torses-hommes-apres.png
+  OK  anatomie torses-femmes avant : aucune erreur de page
+  OK  anatomie torses-femmes après : aucune erreur de page
+  torses-femmes  docs/screenshots/r1d-anatomie-torses-femmes-apres.png
+  OK  anatomie bassins avant : aucune erreur de page
+  OK  anatomie bassins après : aucune erreur de page
+  bassins        docs/screenshots/r1d-anatomie-bassins-apres.png
+
+=== Teintes (R1b a2b2f88 contre R1d ; bas de l'image, 65 % inférieurs ; jour, qualité moyenne) ===
+proto           r1b   prêt   2.89 s · corps 2.89 s (avec la première image) ·   512 ms/image · 1274 appels · 0.51 M triangles · RSS 789 Mo
+proto           apres prêt   6.72 s · corps 43.77 s (pret) · photos 52.70 s ·  1728 ms/image · 1435 appels · 1.67 M triangles · 65 programmes · RSS 1028 Mo
+  proto        R1b : L* 55.4  a* 0.8  b* 12.2  C* 12.6  L10 28.4
+               R1d : L* 58.1  a* 0.8  b* 10.8  C* 11.5  L10 33.3
+  OK  proto : |Δb*| = 1.4 ≤ 2,5
+  OK  proto : ΔC* = -1.1 ≥ −2
+  OK  proto : ΔL10 (ombres) = 4.9 ≤ +8
+proto-suivi     r1b   prêt   2.77 s · corps 2.77 s (avec la première image) ·   480 ms/image · 1186 appels · 0.49 M triangles · RSS 794 Mo
+proto-suivi     apres prêt   7.04 s · corps 43.31 s (pret) · photos 51.96 s ·  1734 ms/image · 1420 appels · 1.67 M triangles · 65 programmes · RSS 1020 Mo
+  proto-suivi  R1b : L* 57.9  a* 0.6  b* 12.4  C* 12.6  L10 35.0
+               R1d : L* 56.0  a* -1.5  b* 12.9  C* 14.1  L10 32.5
+  OK  proto-suivi : |Δb*| = 0.5 ≤ 2,5
+  OK  proto-suivi : ΔC* = 1.5 ≥ −2
+  OK  proto-suivi : ΔL10 (ombres) = -2.6 ≤ +8
+E01             r1b   prêt   2.87 s ·   388 ms/image · 70 appels · 0.25 M triangles · RSS 854 Mo
+E01             apres prêt   7.03 s · photos 12.40 s ·  1212 ms/image · 83 appels · 0.24 M triangles · RSS 1047 Mo
+  E01          R1b : L* 34.7  a* 2.4  b* 12.9  C* 15.4  L10 13.1
+               R1d : L* 42.1  a* 1.1  b* 11.6  C* 13.7  L10 17.8
+  OK  E01 : |Δb*| = 1.4 ≤ 2,5
+  OK  E01 : ΔC* = -1.6 ≥ −2
+  OK  E01 : ΔL10 (ombres) = 4.7 ≤ +8
+E02             r1b   prêt   3.26 s ·   524 ms/image · 66 appels · 0.27 M triangles · RSS 885 Mo
+E02             apres prêt   7.04 s · photos 13.29 s ·  1526 ms/image · 68 appels · 0.27 M triangles · RSS 997 Mo
+  E02          R1b : L* 41.0  a* 4.4  b* 10.2  C* 12.7  L10 13.1
+               R1d : L* 45.9  a* 4.7  b* 8.8  C* 11.7  L10 17.8
+  OK  E02 : |Δb*| = 1.4 ≤ 2,5
+  OK  E02 : ΔC* = -1.0 ≥ −2
+  OK  E02 : ΔL10 (ombres) = 4.7 ≤ +8
+E22             r1b   prêt   2.22 s ·   218 ms/image · 33 appels · 0.19 M triangles · RSS 792 Mo
+E22             apres prêt   5.19 s · photos 9.16 s ·   933 ms/image · 39 appels · 0.26 M triangles · RSS 949 Mo
+  E22          R1b : L* 48.6  a* -6.6  b* 15.2  C* 16.9  L10 24.3
+               R1d : L* 53.1  a* -6.5  b* 13.4  C* 15.4  L10 31.5
+  OK  E22 : |Δb*| = 1.8 ≤ 2,5
+  OK  E22 : ΔC* = -1.5 ≥ −2
+  OK  E22 : ΔL10 (ombres) = 7.2 ≤ +8
+mesure:r1d : tous les contrôles passent.
+exit 0

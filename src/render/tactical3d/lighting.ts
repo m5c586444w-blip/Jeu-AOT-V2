@@ -42,7 +42,7 @@ interface PresetDef {
 }
 
 /** Part de l'hémisphère gardée quand le ciel éclaire la scène (éclairage d'image). */
-const HEMI_WITH_ENV = 0.95;
+const HEMI_WITH_ENV = 0.85;
 /** Luminance du ciel physique dans la carte d'environnement, rapportée au ciel montré. */
 const ENV_SKY_GAIN = 0.45;
 /**

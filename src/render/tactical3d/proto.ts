@@ -765,6 +765,13 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
       html.dataset["corps"] = "primitives";
       html.dataset["corps3d"] = "primitives";
       startPhotos();
-    } else void upgradeBodies();
+    } else
+      upgradeBodies().catch((e: unknown) => {
+        // Un échec du second temps ne bloque pas la page : les repères restent, l'erreur est notée (mesures).
+        state.timings.corps = -1;
+        html.dataset["corps3d"] = "repli";
+        html.dataset["corpsErreur"] = String(e).slice(0, 200);
+        startPhotos();
+      });
   });
 }

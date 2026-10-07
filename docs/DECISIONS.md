@@ -702,3 +702,18 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Chargement en dernier** : après les corps détaillés (ou après l'image suivante s'il n'y en a pas). Chargées juste après « prêt », elles occupaient le fil principal et repoussaient l'instant observé de 2,0 à 3,4 s. Instant « photos » mesuré (`data-photo3d="pret"`, `timings.photos`).
 - **Repli** : les textures procédurales sont en place dès « prêt » et restent si le chargement échoue (`data-photo3d="repli"`). `?textures=procedurales` : sans photos (comparaison).
 - **Qualité basse allégée** : relief des photos gardé à part (`userData.relief`), comme les autres cartes de normales.
+
+## 2026-10-07 — D-97 Ombres de jour approfondies ; mesure de R1d fiabilisée (R1d.6)
+- **Premier passage de `npm run mesure:r1d`** (`docs/reports/R1d-mesure-essai1-KO.log`) : CR1d-08 en échec sur les murs (E22). ΔL10 (ombres) = +9,0 pour +8 au plus. Les quatre autres vues passaient (ΔL10 de −2,6 à +5,8).
+- **Cause, mesurée** :
+  - les ombres sont plus claires qu'en R1b partout : l'hémisphère (95 %) et l'éclairage d'image remplissent l'ombre portée ;
+  - sur E22, s'ajoute le parement en photo (R1d.5), dont les pixels les plus sombres le sont moins que les joints procéduraux : L10 31,4 sans photos, 33,3 avec.
+  - Cartes des 10 % de pixels les plus sombres comparées à celles de R1b : l'ombre portée du mur, à gauche, ne compte plus parmi eux.
+- **Correctif (un seul)** : `HEMI_WITH_ENV` de 0,95 à 0,85 (part de l'hémisphère gardée quand le ciel éclaire la scène, moyenne et haute). L'ombre est moins remplie, ce qui va dans le sens de la revue de R1c (« teintes blanchies »).
+  - 0,78 creuserait encore E22, mais ferait approcher E01 de la borne de chroma (ΔC* vers −1,8).
+- **Second passage** (`docs/reports/R1d-mesure.log`) : tous les contrôles passent. E22 : ΔL10 +7,2 ; E01 : ΔC* −1,6.
+- **Mesure fiabilisée** :
+  - le second temps n'est attendu que sur les pages de R1d (leur sonde a `pret`) : en R1c, `timings.corps` était la durée de façonnage, et la mesure attendait un signal qui ne vient jamais ;
+  - attente bornée à 300 s (un second temps bloqué devient un contrôle en échec, pas un arrêt de toute la mesure) ;
+  - côté page, une erreur du second temps est notée (`data-corps3d="repli"`, `data-corps-erreur`) au lieu de laisser la page attendre sans fin.
+- **Conditions de mesure** : une mesure ne tourne jamais en même temps qu'un `verify`. Le crochet de fin de tour en a lancé un pendant un passage : temps faussés (jeu à 4,00 s au lieu de 2,3 s), passage jeté.

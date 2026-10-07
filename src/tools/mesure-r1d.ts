@@ -38,6 +38,8 @@ const MEASURE_S = 6;
 const TACTICAL_MS = 3000;
 const ENV_MS = 8000;
 const COLD_MS = 8000;
+/** Attente maximale d'un second temps (corps détaillés, textures de Poly Haven) en rendu logiciel. */
+const SECOND_MS = 300000;
 const results: Record<string, unknown> = { date: new Date().toISOString(), before: BEFORE, r1b: R1B };
 const failures: string[] = [];
 const check = (ok: boolean, label: string): void => {
@@ -264,12 +266,19 @@ async function scene(url: string, s: SceneDef, version: Row["version"], file: st
     const progressive = await page.evaluate(() => {
       const w = window as unknown as Record<string, Probe | undefined>;
       const t = (w["__proto3d"] ?? w["__env3d"])?.timings;
-      return t !== undefined && "corps" in t;
+      // Second temps : pages de R1d seulement (leur sonde a « pret ») ; en R1c, `corps` était la durée de façonnage des corps.
+      return t !== undefined && "pret" in t && "corps" in t;
     });
     const hasBodies = /^proto|E19-titans|banc/.test(s.id);
     if (progressive && hasBodies && s.id !== "banc") {
-      await page.waitForFunction(() => ["pret", "primitives", "repli"].includes(document.documentElement.dataset["corps3d"] ?? ""), undefined, { timeout: 900000, polling: 100 });
-      corpsEtat = (await page.evaluate(() => document.documentElement.dataset["corps3d"] ?? "")) ?? "";
+      // Délai borné : un second temps bloqué est noté (contrôle en échec), sans arrêter toute la mesure.
+      const ok = await page.waitForFunction(() => ["pret", "primitives", "repli"].includes(document.documentElement.dataset["corps3d"] ?? ""), undefined, { timeout: SECOND_MS, polling: 100 }).then(
+        () => true,
+        () => false,
+      );
+      corpsEtat = ok ? ((await page.evaluate(() => document.documentElement.dataset["corps3d"] ?? "")) ?? "") : `délai de ${SECOND_MS / 1000} s dépassé`;
+      const err = await page.evaluate(() => document.documentElement.dataset["corpsErreur"] ?? "");
+      if (err) errors.push(`corps : ${err}`);
       corpsMs = await page.evaluate(() => {
         const w = window as unknown as Record<string, Probe | undefined>;
         return (w["__proto3d"] ?? w["__env3d"])?.timings?.["corps"] ?? 0;
@@ -287,8 +296,11 @@ async function scene(url: string, s: SceneDef, version: Row["version"], file: st
       return t !== undefined && "photos" in t;
     });
     if (withPhotos) {
-      await page.waitForFunction(() => ["pret", "repli", "procedurales"].includes(document.documentElement.dataset["photo3d"] ?? ""), undefined, { timeout: 900000, polling: 100 });
-      photosEtat = await page.evaluate(() => document.documentElement.dataset["photo3d"] ?? "");
+      const ok = await page.waitForFunction(() => ["pret", "repli", "procedurales"].includes(document.documentElement.dataset["photo3d"] ?? ""), undefined, { timeout: SECOND_MS, polling: 100 }).then(
+        () => true,
+        () => false,
+      );
+      photosEtat = ok ? await page.evaluate(() => document.documentElement.dataset["photo3d"] ?? "") : `délai de ${SECOND_MS / 1000} s dépassé`;
       photosMs = await page.evaluate(() => {
         const w = window as unknown as Record<string, Probe | undefined>;
         return (w["__proto3d"] ?? w["__env3d"])?.timings?.["photos"] ?? 0;

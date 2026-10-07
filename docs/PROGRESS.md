@@ -2,10 +2,28 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
-| Tâche | R1d.5 : textures de Poly Haven (12 fichiers WebP 1K, 6 matières) intégrées à la scène tactique et aux environnements |
+| Phase | **R1d terminée — arrêt obligatoire** (revue de l'utilisateur) — commit de départ `3782acd` |
+| Tâche | R1d.6 : remesure, `smoke:r1b`, captures revues, rapport `docs/reports/R1d.md` |
 | Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 451 tests ; `assets:check` : 102 entrées, 102 fichiers |
-| Prochaine étape | R1d.6 : remesure (`npm run mesure:r1d`), `smoke:r1b`, revue des captures, rapport, arrêt |
+| Prochaine étape | **Attendre la revue de R1d** (rapport § i). R2 n'est pas lancée |
+
+## R1d terminée — arrêt obligatoire (2026-10-07)
+- **Raison de l'arrêt** : fin de R1d, revue de l'utilisateur (CLAUDE.md, arrêt 5).
+- **Critères** (`docs/reports/R1d.md` § a) : 12 sur 13 OK.
+  - CR1d-08 (teintes) : échec au premier passage (E22, ΔL10 +9,0) ; corrigé une fois (D-97) ; OK au second.
+  - **CR1d-12 (distinction des rendus) : KO, premier échec.** E07–E21 : ΔE couleur moyenne 2,1 pour 2,3 ; 206 paires sur 207 passent. Cause mesurée : la correction des teintes (R1d.2) rapproche Orvud et la ville-usine (5,1 en R1c ; les photos n'y sont pour rien). Pas de correctif : choix artistique pour E21 (rapport § i, question 1).
+- **Résultats clés** :
+  - scène tactique en qualité basse : « prêt » 1,99 s (6,16 s en R1c), « corps » 8,62 s ;
+  - environnements en qualité basse : « prêt » de 1,64 à 3,60 s ;
+  - jeu : 2,60 s ;
+  - corps sans mamelons ni organes génitaux (écart à la surface lissée 0,00 mm et < 0,5 mm) ;
+  - arbres réalistes dans la scène tactique ; 12 textures de Poly Haven.
+- **Décisions attendues** (rapport § i) : E07–E21 ; mesure sur GPU réel ; étendue des textures en photo ; rendu des corps.
+
+## R1d.6 : remesure et rapport (2026-10-07)
+- `npm run mesure:r1d` : essai 1 KO (CR1d-08, E22) ; correctif `HEMI_WITH_ENV` 0,85 (D-97) ; essai 2 : tous les contrôles passent.
+- Mesure fiabilisée : second temps attendu seulement sur les pages de R1d, attente bornée, erreur du second temps notée (D-97).
+- `npm run smoke:r1b` : 1 contrôle en échec (E07–E21). Journaux gardés sous les noms de R1d ; captures de R1b remises à leur état de R1b.
 
 ## R1d.5 : textures de Poly Haven (2026-10-07)
 - 12 fichiers (`docs/art/assets/polyhaven/`), manifeste et attributions ; `assets:check` : 102 entrées (D-96).

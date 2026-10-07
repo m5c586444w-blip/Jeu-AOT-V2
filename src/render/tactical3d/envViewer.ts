@@ -609,7 +609,12 @@ export async function startEnvViewer(root: HTMLElement, probe: WebGLProbe): Prom
       requestAnimationFrame(() => setTimeout(startPhotos, 0));
       return;
     }
-    void upgradeTitans();
+    upgradeTitans().catch((e: unknown) => {
+      state.timings.corps = -1;
+      html.dataset["corps3d"] = "repli";
+      html.dataset["corpsErreur"] = String(e).slice(0, 200);
+      startPhotos();
+    });
   });
   void frames;
   void probe;

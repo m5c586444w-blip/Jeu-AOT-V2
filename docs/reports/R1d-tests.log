@@ -1,0 +1,40 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > le dépôt passe : chaque fichier de docs/art/assets/ a son entrée, sa licence, sa source retenue et son empreinte 59ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > un cas valide minimal passe 2ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > fichier sans entrée, entrée sans fichier : échec 1ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > licence autre que CC0 ou CC-BY : échec ; CC-BY sans attribution : échec ; CC-BY attribuée : passe 2ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > source écartée (non réaliste), source interdite (œuvre ou fan), source inconnue : échec 6ms
+ ✓ tests/lint/assets-check.test.ts > assets:check (R1c) > empreinte fausse : échec ; dérivé sans source ou d'une source absente : échec 2ms
+ ✓ tests/lint/assets-check.test.ts > assets:check, textures Poly Haven (R1d) > dimensions lues dans l'en-tête WebP ; un autre format n'est pas un WebP 1ms
+ ✓ tests/lint/assets-check.test.ts > assets:check, textures Poly Haven (R1d) > 12 textures d'environnement WebP 1K de Poly Haven : passe 3ms
+ ✓ tests/lint/assets-check.test.ts > assets:check, textures Poly Haven (R1d) > plus de 12 textures, autre taille, autre format : échec 5ms
+ ✓ tests/lint/assets-check.test.ts > assets:check, textures Poly Haven (R1d) > Poly Haven pour autre chose qu'une texture d'environnement, texture d'environnement hors de Poly Haven : échec 5ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > le .glb se reconstruit à l'identique depuis les sources CC0 (npm run assets:build -- --verifier) 4270ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > gabarit : 12 primitives (8 régions de peau, collant, dents, langue, yeux), 56 os, 51 cibles, poids normalisés 17ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > hauteur exacte, pieds au sol, pour des corps très différents 410ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > les cibles macro changent le corps ; les articulations les suivent ; même forme, même empreinte 383ms
+ ✓ tests/render/tactical3d/r1d.test.ts > qualité basse allégée (R1d, CR1d-07) > forêt des Arbres Géants et campagne : aucune carte de feuilles ni détail du sol en qualité basse ; présents en moyenne 4641ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > proportions au repos : tête × 1,9, jambes × 0,66, bras × 0,8 (mesurées à ±5 %, avant mise à l'échelle) 181ms
+ ✓ tests/render/tactical3d/humain.test.ts > corps de base MakeHuman (R1c.1) > mâchoire et yeux articulés : la mâchoire ouvre la bouche (dents du bas seulement), l'œil tourne sans la peau 111ms
+ ✓ tests/render/tactical3d/r1d.test.ts > qualité basse allégée (R1d, CR1d-07) > forêt : moins d'arbres gardés en qualité basse qu'en moyenne (densité de la qualité) 1056ms
+ ✓ tests/render/tactical3d/humain.test.ts > aucun détail anatomique (R1d, CR1d-09) > ni primitive, ni cible, ni sommet génital : le groupe « helper-genital » de MakeHuman n'est pas repris 90ms
+ ✓ tests/render/tactical3d/humain.test.ts > aucun détail anatomique (R1d, CR1d-09) > zones lissées présentes : mamelons et entrejambe ; pointe du sein arrondie au façonnage (cible « breast-point-decr ») 1ms
+ ✓ tests/render/tactical3d/humain.test.ts > aucun détail anatomique (R1d, CR1d-09) > écart à la surface lissée < 1 mm (mamelons et entrejambe) pour l'homme, le Titan 0,65, la femme et la corpulence lourde 1226ms
+ ✓ tests/render/tactical3d/r1d.test.ts > qualité basse allégée (R1d, CR1d-07) > à chaud : relief et cartes de feuilles retirés en qualité basse, rendus en la quittant 1ms
+ ✓ tests/render/tactical3d/r1d.test.ts > qualité basse allégée (R1d, CR1d-07) > éclairage : en qualité basse, dôme peint au lieu du ciel physique, sans éclairage d'image ; retour au ciel physique ensuite 10ms
+ ✓ tests/render/tactical3d/r1d.test.ts > arbres réalistes dans la scène tactique (R1d, CR1d-10) > un arbre de la ville prend les 22 tirages de R1 (le reste de la ville garde ses graines) ; place : feuillu ; abords : feuillus et fruitiers 4ms
+ ✓ tests/render/tactical3d/r1d.test.ts > arbres réalistes dans la scène tactique (R1d, CR1d-10) > plus d'icosaèdres de R1 dans la ville : les arbres sont rendus par la végétation réaliste (bois séparé, massifs, cartes de feuilles) 2ms
+ ✓ tests/render/tactical3d/r1d.test.ts > textures de Poly Haven (R1d, CR1d-11) > 12 fichiers : 6 matières (pavés, sol, pierre de taille, pierre brute, tuiles, ardoise) × (couleur, relief), au manifeste et servis au rendu 2ms
+ ✓ tests/render/tactical3d/r1d.test.ts > textures de Poly Haven (R1d, CR1d-11) > environnement (Shiganshina) : toits, pavés, parement des murs et détail du sol passent aux photos ; teinte du profil conservée 453ms
+ ✓ tests/render/tactical3d/humain.test.ts > aucun détail anatomique (R1d, CR1d-09) > la mesure voit les détails du corps de R1c (3782acd) : mamelons et entrejambe à plusieurs millimètres de la surface lissée 394ms
+ ✓ tests/render/tactical3d/r1d.test.ts > textures de Poly Haven (R1d, CR1d-11) > qualité basse : relief gardé à part (pas de carte de normales) ; repli : sans photos, rien ne change 507ms
+ ✓ tests/render/tactical3d/r1d.test.ts > textures de Poly Haven (R1d, CR1d-11) > scène tactique : chaussée, toits de tuiles et d'ardoise, enceinte et champ étiquetés ; photos chargées après les corps détaillés 1ms
+
+ Test Files  3 passed (3)
+      Tests  30 passed (30)
+   Start at  14:51:37
+   Duration  7.89s (tests 89%, transform 9%, import 2%)
+
+CODE 0
