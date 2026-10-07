@@ -1,4 +1,5 @@
-import type { Place, WallsParams } from "../../data/placeSchema";
+import type { FrozenPlan, Place, WallsParams } from "../../data/placeSchema";
+import { frozenLayout, frozenPlace } from "../../render/tactical3d/places/frozen";
 import { layoutPlace, placeMetrics } from "../../render/tactical3d/places/layout";
 import { gateElevationSvg, placePlanSvg, wallSectionSvg } from "../../render/tactical3d/places/svg";
 import { placePopulations, simPopulations } from "./population";
@@ -21,4 +22,10 @@ export function placeSvgs(place: Place, walls: WallsParams): Record<string, stri
     }
   }
   return out;
+}
+
+/** Plan SVG d'un lieu N2 figé (dossier court : plan.svg, consigne §5), lu des lignes du plan sans regénérer. */
+export function frozenSvgs(plan: FrozenPlan, walls: WallsParams): Record<string, string> {
+  const place = frozenPlace(plan);
+  return { "plan.svg": placePlanSvg(place, frozenLayout(plan, place), walls, null) };
 }

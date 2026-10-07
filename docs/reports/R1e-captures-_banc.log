@@ -1,0 +1,104 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts _banc
+
+  docs/places/_banc/vue-mur-face.png : 21 appels, 22 k triangles, tronçons 0/2
+  docs/places/_banc/vue-ensemble.png : 43 appels, 40 k triangles, tronçons 2/2
+  docs/places/_banc/vue-mur-pied.png : 46 appels, 40 k triangles, tronçons 2/2
+  docs/places/_banc/vue-mur-ville.png : 35 appels, 24 k triangles, tronçons 2/2
+  docs/places/_banc/vue-mur-chemin.png : 46 appels, 40 k triangles, tronçons 2/2
+  docs/places/_banc/vue-mur-loin.png : 40 appels, 40 k triangles, tronçons 2/2
+  docs/places/_banc/porte-exterieure-exterieure-face.png : 33 appels, 38 k triangles, tronçons 1/2
+  docs/places/_banc/porte-exterieure-exterieure-detail.png : 28 appels, 35 k triangles, tronçons 0/2
+  docs/places/_banc/porte-exterieure-interieure-face.png : 33 appels, 38 k triangles, tronçons 1/2
+  docs/places/_banc/porte-exterieure-interieure-detail.png : 28 appels, 35 k triangles, tronçons 0/2
+  docs/places/_banc/porte-exterieure-passage.png : 33 appels, 38 k triangles, tronçons 1/2
+  docs/places/_banc/porte-exterieure-haut.png : 28 appels, 35 k triangles, tronçons 0/2
+  docs/places/_banc/porte-exterieure-echelle.png : 266 appels, 130 k triangles, tronçons 2/2
+  docs/places/_banc/porte-interieure-exterieure-face.png : 37 appels, 34 k triangles, tronçons 2/2
+  docs/places/_banc/porte-interieure-exterieure-detail.png : 37 appels, 34 k triangles, tronçons 2/2
+  docs/places/_banc/porte-interieure-interieure-face.png : 39 appels, 35 k triangles, tronçons 2/2
+  docs/places/_banc/porte-interieure-interieure-detail.png : 38 appels, 43 k triangles, tronçons 1/2
+  docs/places/_banc/porte-interieure-passage.png : 33 appels, 31 k triangles, tronçons 1/2
+  docs/places/_banc/porte-interieure-haut.png : 34 appels, 39 k triangles, tronçons 1/2
+  docs/places/_banc/porte-interieure-echelle.png : 262 appels, 122 k triangles, tronçons 2/2
+  docs/places/_banc/porte-riviere-exterieure-face.png : 32 appels, 28 k triangles, tronçons 1/2
+  docs/places/_banc/porte-riviere-exterieure-detail.png : 30 appels, 27 k triangles, tronçons 1/2
+  docs/places/_banc/porte-riviere-interieure-face.png : 36 appels, 28 k triangles, tronçons 2/2
+  docs/places/_banc/porte-riviere-interieure-detail.png : 37 appels, 31 k triangles, tronçons 2/2
+  docs/places/_banc/porte-riviere-passage.png : 35 appels, 31 k triangles, tronçons 2/2
+  docs/places/_banc/porte-riviere-haut.png : 46 appels, 44 k triangles, tronçons 2/2
+  docs/places/_banc/porte-riviere-echelle.png : 252 appels, 117 k triangles, tronçons 1/2
+  docs/places/_banc/mur-face-r1d.png (témoin R1d)
+  docs/places/_banc/etat-intact.png
+  docs/places/_banc/etat-brise.png
+  docs/places/_banc/etat-bouche.png
+  ΔE 36.0 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail
+  ΔE 32.8 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-face
+  ΔE 45.2 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-detail
+  ΔE 54.0 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-passage
+  ΔE 27.4 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-haut
+  ΔE 14.9 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-echelle
+  ΔE 30.5 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-face
+  ΔE 27.5 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail
+  ΔE 33.4 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-passage
+  ΔE 40.6 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-haut
+  ΔE 38.0 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-echelle
+  ΔE 29.2 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-interieure-detail
+  ΔE 33.7 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-passage
+  ΔE 35.5 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-haut
+  ΔE 33.6 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-echelle
+  ΔE 36.3 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-passage
+  ΔE 43.4 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-haut
+  ΔE 41.3 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-echelle
+  ΔE 58.1 ≥ 6 : porte-exterieure-passage | porte-exterieure-haut
+  ΔE 53.4 ≥ 6 : porte-exterieure-passage | porte-exterieure-echelle
+  ΔE 26.8 ≥ 6 : porte-exterieure-haut | porte-exterieure-echelle
+  ΔE 34.9 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-exterieure-detail
+  ΔE 32.8 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-face
+  ΔE 40.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-detail
+  ΔE 46.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-passage
+  ΔE 27.0 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-haut
+  ΔE 11.1 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-echelle
+  ΔE 31.7 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-face
+  ΔE 29.9 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-detail
+  ΔE 42.9 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-passage
+  ΔE 48.2 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-haut
+  ΔE 39.3 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-echelle
+  ΔE 29.0 ≥ 6 : porte-interieure-interieure-face | porte-interieure-interieure-detail
+  ΔE 32.6 ≥ 6 : porte-interieure-interieure-face | porte-interieure-passage
+  ΔE 42.5 ≥ 6 : porte-interieure-interieure-face | porte-interieure-haut
+  ΔE 34.4 ≥ 6 : porte-interieure-interieure-face | porte-interieure-echelle
+  ΔE 45.4 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-passage
+  ΔE 47.1 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-haut
+  ΔE 38.5 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-echelle
+  ΔE 53.7 ≥ 6 : porte-interieure-passage | porte-interieure-haut
+  ΔE 47.7 ≥ 6 : porte-interieure-passage | porte-interieure-echelle
+  ΔE 24.0 ≥ 6 : porte-interieure-haut | porte-interieure-echelle
+  ΔE 34.5 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-exterieure-detail
+  ΔE 28.0 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-interieure-face
+  ΔE 32.2 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-interieure-detail
+  ΔE 47.7 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-passage
+  ΔE 27.7 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-haut
+  ΔE 18.1 ≥ 6 : porte-riviere-exterieure-face | porte-riviere-echelle
+  ΔE 28.4 ≥ 6 : porte-riviere-exterieure-detail | porte-riviere-interieure-face
+  ΔE 29.9 ≥ 6 : porte-riviere-exterieure-detail | porte-riviere-interieure-detail
+  ΔE 32.4 ≥ 6 : porte-riviere-exterieure-detail | porte-riviere-passage
+  ΔE 49.4 ≥ 6 : porte-riviere-exterieure-detail | porte-riviere-haut
+  ΔE 40.9 ≥ 6 : porte-riviere-exterieure-detail | porte-riviere-echelle
+  ΔE 20.6 ≥ 6 : porte-riviere-interieure-face | porte-riviere-interieure-detail
+  ΔE 29.6 ≥ 6 : porte-riviere-interieure-face | porte-riviere-passage
+  ΔE 43.9 ≥ 6 : porte-riviere-interieure-face | porte-riviere-haut
+  ΔE 36.6 ≥ 6 : porte-riviere-interieure-face | porte-riviere-echelle
+  ΔE 36.5 ≥ 6 : porte-riviere-interieure-detail | porte-riviere-passage
+  ΔE 41.4 ≥ 6 : porte-riviere-interieure-detail | porte-riviere-haut
+  ΔE 34.9 ≥ 6 : porte-riviere-interieure-detail | porte-riviere-echelle
+  ΔE 60.5 ≥ 6 : porte-riviere-passage | porte-riviere-haut
+  ΔE 50.8 ≥ 6 : porte-riviere-passage | porte-riviere-echelle
+  ΔE 25.1 ≥ 6 : porte-riviere-haut | porte-riviere-echelle
+  ΔE 7.7 ≥ 6 : porte-exterieure-exterieure-face | porte-interieure-exterieure-face
+  ΔE 0.0 < 6 : etat-intact | etat-brise
+  ΔE 0.1 < 6 : etat-intact | etat-bouche
+  ΔE 0.1 < 6 : etat-brise | etat-bouche
+places:captures : _banc capturés.
+exit 0

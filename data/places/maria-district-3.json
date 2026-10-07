@@ -1,0 +1,11388 @@
+{
+ "id": "maria-district-3",
+ "nom": "maria-district-3",
+ "libelle": "District du mur Maria (nom non établi)",
+ "canon": "?",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 et 11 : quatre districts par mur (affirmation de l'utilisateur, consigne R1e) ; nom, rang, orientation non établis (Q1)",
+   "canon": "?"
+  },
+  {
+   "ref": "identité du district, plan, noms de rues, dimensions : adaptation (consigne R1e : « un district agricole et grenier, un district de garnison et d'artillerie, un district de marché et de rivière »)",
+   "canon": "A"
+  }
+ ],
+ "province": null,
+ "style": "E01",
+ "population": {
+  "province": null,
+  "part": 1,
+  "valeur": 36000,
+  "canon": "?",
+  "note": "Valeur paramétrable (Q8) : aucun district de ce nom dans les données de simulation."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 190,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   1172.5,
+   7.5
+  ],
+  [
+   1170.9,
+   61.4
+  ],
+  [
+   1166.1,
+   122.6
+  ],
+  [
+   1158.1,
+   183.4
+  ],
+  [
+   1146.9,
+   243.8
+  ],
+  [
+   1132.5,
+   303.5
+  ],
+  [
+   1115.1,
+   362.3
+  ],
+  [
+   1094.6,
+   420.2
+  ],
+  [
+   1071.1,
+   476.9
+  ],
+  [
+   1044.7,
+   532.3
+  ],
+  [
+   1015.4,
+   586.2
+  ],
+  [
+   983.3,
+   638.6
+  ],
+  [
+   948.6,
+   689.2
+  ],
+  [
+   911.2,
+   737.9
+  ],
+  [
+   871.3,
+   784.6
+  ],
+  [
+   829.1,
+   829.1
+  ],
+  [
+   784.6,
+   871.3
+  ],
+  [
+   737.9,
+   911.2
+  ],
+  [
+   689.2,
+   948.6
+  ],
+  [
+   638.6,
+   983.3
+  ],
+  [
+   586.3,
+   1015.4
+  ],
+  [
+   532.3,
+   1044.7
+  ],
+  [
+   476.9,
+   1071.1
+  ],
+  [
+   420.2,
+   1094.6
+  ],
+  [
+   362.3,
+   1115.1
+  ],
+  [
+   303.5,
+   1132.5
+  ],
+  [
+   243.8,
+   1146.9
+  ],
+  [
+   183.4,
+   1158.1
+  ],
+  [
+   122.6,
+   1166.1
+  ],
+  [
+   61.4,
+   1170.9
+  ],
+  [
+   0,
+   1172.5
+  ],
+  [
+   -61.4,
+   1170.9
+  ],
+  [
+   -122.6,
+   1166.1
+  ],
+  [
+   -183.4,
+   1158.1
+  ],
+  [
+   -243.8,
+   1146.9
+  ],
+  [
+   -303.5,
+   1132.5
+  ],
+  [
+   -362.3,
+   1115.1
+  ],
+  [
+   -420.2,
+   1094.6
+  ],
+  [
+   -476.9,
+   1071.1
+  ],
+  [
+   -532.3,
+   1044.7
+  ],
+  [
+   -586.2,
+   1015.4
+  ],
+  [
+   -638.6,
+   983.3
+  ],
+  [
+   -689.2,
+   948.6
+  ],
+  [
+   -737.9,
+   911.2
+  ],
+  [
+   -784.6,
+   871.3
+  ],
+  [
+   -829.1,
+   829.1
+  ],
+  [
+   -871.3,
+   784.6
+  ],
+  [
+   -911.2,
+   737.9
+  ],
+  [
+   -948.6,
+   689.2
+  ],
+  [
+   -983.3,
+   638.6
+  ],
+  [
+   -1015.4,
+   586.2
+  ],
+  [
+   -1044.7,
+   532.3
+  ],
+  [
+   -1071.1,
+   476.9
+  ],
+  [
+   -1094.6,
+   420.2
+  ],
+  [
+   -1115.1,
+   362.3
+  ],
+  [
+   -1132.5,
+   303.5
+  ],
+  [
+   -1146.9,
+   243.8
+  ],
+  [
+   -1158.1,
+   183.4
+  ],
+  [
+   -1166.1,
+   122.6
+  ],
+  [
+   -1170.9,
+   61.4
+  ],
+  [
+   -1172.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg des Charrons",
+   "canon": "A",
+   "polygone": [
+    [
+     -640,
+     -24
+    ],
+    [
+     640,
+     -24
+    ],
+    [
+     640,
+     -460
+    ],
+    [
+     -640,
+     -460
+    ]
+   ],
+   "population": {
+    "province": null,
+    "part": 1,
+    "valeur": 4000,
+    "canon": "?",
+    "note": "Valeur paramétrable (Q8)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 80,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "est",
+  "canon": "?"
+ },
+ "etendue_m": 3160,
+ "enceinte": {
+  "mur": "maria",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 1180,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -1180,
+      0
+     ],
+     [
+      1180,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1580,
+      0
+     ],
+     [
+      -1180,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      1180,
+      0
+     ],
+     [
+      1580,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 370.7,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1112.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1742.3,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1964.8,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2595,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 3336.4,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1120,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1240,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 20,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte extérieure",
+   "role": "exterieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 1853.5,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 1180,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-2",
+   "nom": "Rue des Boulets",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1120,
+     25
+    ],
+    [
+     -1120,
+     282.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue des Mèches",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1040,
+     25
+    ],
+    [
+     -1040,
+     502.4
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue des Écouvillons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -960,
+     25
+    ],
+    [
+     -960,
+     642.2
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue de la Mitraille",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -880,
+     25
+    ],
+    [
+     -880,
+     745
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Canonniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -800,
+     25
+    ],
+    [
+     -800,
+     833.1
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Sapeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -720,
+     25
+    ],
+    [
+     -720,
+     903.1
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-0",
+   "nom": "Rue des Fourriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     25
+    ],
+    [
+     -640,
+     345
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-1",
+   "nom": "Rue des Fourriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     505
+    ],
+    [
+     -640,
+     961.5
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Rue des Cantinières",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -560,
+     25
+    ],
+    [
+     -560,
+     1010.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-10",
+   "nom": "Rue du Train",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -480,
+     25
+    ],
+    [
+     -480,
+     1050.5
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Rue des Pionniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     25
+    ],
+    [
+     -400,
+     1083.5
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-0",
+   "nom": "Rue de la Fonderie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -320,
+     25
+    ],
+    [
+     -320,
+     505
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-1",
+   "nom": "Rue de la Fonderie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -320,
+     745
+    ],
+    [
+     -320,
+     1109.8
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13-0",
+   "nom": "Rue des Fondeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -240,
+     25
+    ],
+    [
+     -240,
+     505
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13-1",
+   "nom": "Rue des Fondeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -240,
+     745
+    ],
+    [
+     -240,
+     1129.8
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-0",
+   "nom": "Rue du Polygone",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -160,
+     25
+    ],
+    [
+     -160,
+     505
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-1",
+   "nom": "Rue du Polygone",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -160,
+     745
+    ],
+    [
+     -160,
+     1143.9
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-0",
+   "nom": "Rue des Artificiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -80,
+     25
+    ],
+    [
+     -80,
+     185
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-1",
+   "nom": "Rue des Artificiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -80,
+     265
+    ],
+    [
+     -80,
+     1152.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Rue des Bombardiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     80,
+     25
+    ],
+    [
+     80,
+     1152.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-18",
+   "nom": "Rue des Armuriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     160,
+     25
+    ],
+    [
+     160,
+     1143.9
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue de la Poudrière",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     240,
+     25
+    ],
+    [
+     240,
+     1129.8
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-20",
+   "nom": "Rue des Salpêtriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     320,
+     25
+    ],
+    [
+     320,
+     1109.8
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-21-0",
+   "nom": "Rue des Tambours",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     25
+    ],
+    [
+     400,
+     105
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-21-1",
+   "nom": "Rue des Tambours",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     185
+    ],
+    [
+     400,
+     1083.5
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-22",
+   "nom": "Rue des Clairons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     480,
+     25
+    ],
+    [
+     480,
+     1050.5
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-23",
+   "nom": "Rue des Sentinelles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     560,
+     25
+    ],
+    [
+     560,
+     1010.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-24",
+   "nom": "Rue de la Relève",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     640,
+     25
+    ],
+    [
+     640,
+     825
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-25",
+   "nom": "Rue du Guet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     720,
+     25
+    ],
+    [
+     720,
+     903.1
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-26",
+   "nom": "Rue de la Patrouille",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     800,
+     25
+    ],
+    [
+     800,
+     833.1
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-27",
+   "nom": "Rue du Bastion",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     880,
+     25
+    ],
+    [
+     880,
+     745
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-28",
+   "nom": "Rue de la Courtine",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     960,
+     25
+    ],
+    [
+     960,
+     642.2
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-29",
+   "nom": "Rue de l'Escarpe",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1040,
+     25
+    ],
+    [
+     1040,
+     502.4
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-30",
+   "nom": "Rue de la Contrescarpe",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1120,
+     25
+    ],
+    [
+     1120,
+     282.2
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue des Casernes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1150.2,
+     105
+    ],
+    [
+     1150.2,
+     105
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue de la Garde",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1140.1,
+     185
+    ],
+    [
+     1140.1,
+     185
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue des Recrues",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1120,
+     265
+    ],
+    [
+     1120,
+     265
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue de l'Intendance",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1102.3,
+     345
+    ],
+    [
+     1102.3,
+     345
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-0",
+   "nom": "Rue de l'Exercice",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1074,
+     425
+    ],
+    [
+     -720,
+     425
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-1",
+   "nom": "Rue de l'Exercice",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -560,
+     425
+    ],
+    [
+     1074,
+     425
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue de la Parade",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1038.7,
+     505
+    ],
+    [
+     1038.7,
+     505
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-0",
+   "nom": "Rue des Drapeaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -995.9,
+     585
+    ],
+    [
+     -400,
+     585
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-1",
+   "nom": "Rue des Drapeaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -80,
+     585
+    ],
+    [
+     995.9,
+     585
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8-0",
+   "nom": "Rue de la Revue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -944.4,
+     665
+    ],
+    [
+     -400,
+     665
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8-1",
+   "nom": "Rue de la Revue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -80,
+     665
+    ],
+    [
+     944.4,
+     665
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue des Manœuvres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -880,
+     745
+    ],
+    [
+     880,
+     745
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-10",
+   "nom": "Rue du Magasin",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -808.3,
+     825
+    ],
+    [
+     808.3,
+     825
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11",
+   "nom": "Rue des Vivres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -717.6,
+     905
+    ],
+    [
+     560,
+     905
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-12",
+   "nom": "Rue des Chevaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -603.2,
+     985
+    ],
+    [
+     603.2,
+     985
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-13",
+   "nom": "Rue des Forges",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -447,
+     1065
+    ],
+    [
+     447,
+     1065
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-14",
+   "nom": "Rue de la Batterie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -151.7,
+     1145
+    ],
+    [
+     151.7,
+     1145
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue de l'Artillerie",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     1172
+    ]
+   ],
+   "largeur_m": 20,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1154.7,
+     25
+    ],
+    [
+     1151.9,
+     84.6
+    ],
+    [
+     1146,
+     143.9
+    ],
+    [
+     1137,
+     202.9
+    ],
+    [
+     1125.1,
+     261.3
+    ],
+    [
+     1110.1,
+     319
+    ],
+    [
+     1092.1,
+     375.9
+    ],
+    [
+     1071.3,
+     431.8
+    ],
+    [
+     1047.6,
+     486.5
+    ],
+    [
+     1021,
+     539.9
+    ],
+    [
+     991.8,
+     591.9
+    ],
+    [
+     959.9,
+     642.3
+    ],
+    [
+     925.5,
+     691
+    ],
+    [
+     888.6,
+     737.8
+    ],
+    [
+     849.4,
+     782.7
+    ],
+    [
+     807.8,
+     825.5
+    ],
+    [
+     764.1,
+     866.1
+    ],
+    [
+     718.4,
+     904.4
+    ],
+    [
+     670.8,
+     940.3
+    ],
+    [
+     621.3,
+     973.6
+    ],
+    [
+     570.3,
+     1004.4
+    ],
+    [
+     517.7,
+     1032.5
+    ],
+    [
+     463.7,
+     1057.8
+    ],
+    [
+     408.5,
+     1080.4
+    ],
+    [
+     352.2,
+     1100
+    ],
+    [
+     294.9,
+     1116.7
+    ],
+    [
+     236.9,
+     1130.4
+    ],
+    [
+     178.2,
+     1141.2
+    ],
+    [
+     119.1,
+     1148.8
+    ],
+    [
+     59.6,
+     1153.5
+    ],
+    [
+     0,
+     1155
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     1155
+    ],
+    [
+     -59.6,
+     1153.5
+    ],
+    [
+     -119.1,
+     1148.8
+    ],
+    [
+     -178.2,
+     1141.2
+    ],
+    [
+     -236.9,
+     1130.4
+    ],
+    [
+     -294.9,
+     1116.7
+    ],
+    [
+     -352.2,
+     1100
+    ],
+    [
+     -408.5,
+     1080.4
+    ],
+    [
+     -463.7,
+     1057.8
+    ],
+    [
+     -517.7,
+     1032.5
+    ],
+    [
+     -570.3,
+     1004.4
+    ],
+    [
+     -621.3,
+     973.6
+    ],
+    [
+     -670.8,
+     940.3
+    ],
+    [
+     -718.4,
+     904.4
+    ],
+    [
+     -764.1,
+     866.1
+    ],
+    [
+     -807.8,
+     825.5
+    ],
+    [
+     -849.4,
+     782.7
+    ],
+    [
+     -888.6,
+     737.8
+    ],
+    [
+     -925.5,
+     691
+    ],
+    [
+     -959.9,
+     642.3
+    ],
+    [
+     -991.8,
+     591.9
+    ],
+    [
+     -1021,
+     539.9
+    ],
+    [
+     -1047.6,
+     486.5
+    ],
+    [
+     -1071.3,
+     431.8
+    ],
+    [
+     -1092.1,
+     375.9
+    ],
+    [
+     -1110.1,
+     319
+    ],
+    [
+     -1125.1,
+     261.3
+    ],
+    [
+     -1137,
+     202.9
+    ],
+    [
+     -1146,
+     143.9
+    ],
+    [
+     -1151.9,
+     84.6
+    ],
+    [
+     -1154.7,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1155,
+     25
+    ],
+    [
+     1155,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1650
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Charrons",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -30
+    ],
+    [
+     -630,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin des Selliers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -420,
+     -30
+    ],
+    [
+     -420,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin du Manège",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -210,
+     -30
+    ],
+    [
+     -210,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x4",
+   "nom": "Chemin des Écuries",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     210,
+     -30
+    ],
+    [
+     210,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin du Polygone",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     420,
+     -30
+    ],
+    [
+     420,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     630,
+     -30
+    ],
+    [
+     630,
+     -450
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin des Remontes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -30
+    ],
+    [
+     630,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin des Bourreliers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -170
+    ],
+    [
+     630,
+     -170
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin de la Butte",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -310
+    ],
+    [
+     630,
+     -310
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin des Charrons",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -450
+    ],
+    [
+     630,
+     -450
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1190
+    ],
+    [
+     0,
+     1600
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place du Corps de garde",
+   "canon": "A",
+   "polygone": [
+    [
+     -1034.8,
+     272.2
+    ],
+    [
+     -967.2,
+     272.2
+    ],
+    [
+     -967.2,
+     339.8
+    ],
+    [
+     -1034.8,
+     339.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette des Tambours",
+   "canon": "A",
+   "polygone": [
+    [
+     -874.8,
+     670.2
+    ],
+    [
+     -805.2,
+     670.2
+    ],
+    [
+     -805.2,
+     737.8
+    ],
+    [
+     -874.8,
+     737.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    -840,
+    704
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-2",
+   "nom": "Place de la Relève",
+   "canon": "A",
+   "polygone": [
+    [
+     -474.8,
+     992.2
+    ],
+    [
+     -405.2,
+     992.2
+    ],
+    [
+     -405.2,
+     1059.8
+    ],
+    [
+     -441.8,
+     1059.8
+    ],
+    [
+     -474.1,
+     1046.4
+    ],
+    [
+     -474.8,
+     1046.1
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-3",
+   "nom": "Placette du Guet",
+   "canon": "A",
+   "polygone": [
+    [
+     165.2,
+     910.2
+    ],
+    [
+     234.8,
+     910.2
+    ],
+    [
+     234.8,
+     977.8
+    ],
+    [
+     165.2,
+     977.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    200,
+    944
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-4",
+   "nom": "Place de l'Intendance",
+   "canon": "A",
+   "polygone": [
+    [
+     647.2,
+     350.2
+    ],
+    [
+     714.8,
+     350.2
+    ],
+    [
+     714.8,
+     419.8
+    ],
+    [
+     647.2,
+     419.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-d-armes",
+   "nom": "Place d'Armes",
+   "canon": "A",
+   "polygone": [
+    [
+     -394.8,
+     512.2
+    ],
+    [
+     -85.2,
+     512.2
+    ],
+    [
+     -85.2,
+     737.8
+    ],
+    [
+     -394.8,
+     737.8
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-civile",
+   "nom": "Place de la Ville",
+   "canon": "A",
+   "polygone": [
+    [
+     -154.8,
+     190.2
+    ],
+    [
+     -11.2,
+     190.2
+    ],
+    [
+     -11.2,
+     257.8
+    ],
+    [
+     -154.8,
+     257.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    -83,
+    224
+   ],
+   "marche": true
+  },
+  {
+   "id": "parvis-de-l-etat-major",
+   "nom": "Parvis de l'État-major",
+   "canon": "A",
+   "polygone": [
+    [
+     -74.8,
+     590.2
+    ],
+    [
+     -11.2,
+     590.2
+    ],
+    [
+     -11.2,
+     659.8
+    ],
+    [
+     -74.8,
+     659.8
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": [
+    -43,
+    625
+   ],
+   "marche": false
+  },
+  {
+   "id": "champ-de-la-poudriere",
+   "nom": "Champ de la Poudrière",
+   "canon": "A",
+   "polygone": [
+    [
+     565.2,
+     830.2
+    ],
+    [
+     714.8,
+     830.2
+    ],
+    [
+     714.8,
+     898.8
+    ],
+    [
+     669.2,
+     933.8
+    ],
+    [
+     606.6,
+     975.6
+    ],
+    [
+     602.8,
+     977.8
+    ],
+    [
+     565.2,
+     977.8
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon",
+    "croupe",
+    "mansarde"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute",
+    "pierre_taillee",
+    "brique"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9",
+    "#D4CCBC",
+    "#C8C0B0"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14,
+    24
+   ],
+   "profondeur_m": 13,
+   "boutiques": false,
+   "passage_m": 70,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 40
+   }
+  },
+  "officiers": {
+   "etages": [
+    3,
+    3,
+    4,
+    2
+   ],
+   "hauteur_etage_m": 3.3,
+   "toits": [
+    "mansarde",
+    "croupe",
+    "croupe",
+    "pavillon"
+   ],
+   "pente_deg": [
+    40,
+    55
+   ],
+   "couvertures": [
+    "ardoise",
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "enduit",
+    "pierre_taillee",
+    "brique"
+   ],
+   "teintes": [
+    "#EDE6D6",
+    "#E6DCC6",
+    "#F0E9DD",
+    "#DCD3C0",
+    "#E3D8C4"
+   ],
+   "parcelles_m": [
+    12,
+    14,
+    10,
+    16
+   ],
+   "profondeur_m": 14,
+   "boutiques": false,
+   "passage_m": 55,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 100
+   }
+  },
+  "armuriers": {
+   "etages": [
+    2,
+    2,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "croupe"
+   ],
+   "pente_deg": [
+    36,
+    48
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "ardoise",
+    "tuile_plate",
+    "bardeau"
+   ],
+   "facades": [
+    "brique",
+    "pierre_brute",
+    "bois",
+    "enduit"
+   ],
+   "teintes": [
+    "#C9B8A0",
+    "#BFAE96",
+    "#D3C3AA",
+    "#B8A68C"
+   ],
+   "parcelles_m": [
+    9,
+    12,
+    8,
+    14
+   ],
+   "profondeur_m": 12,
+   "boutiques": true,
+   "passage_m": 35,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 35
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "quartier-de-la-garnison",
+   "nom": "Quartier de la garnison",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-officiers",
+   "nom": "Quartier des officiers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-armuriers",
+   "nom": "Quartier des armuriers",
+   "canon": "A"
+  },
+  {
+   "id": "ville-civile",
+   "nom": "Ville civile",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-soldats-maries",
+   "nom": "Quartier des familles de soldats",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-des-charrons",
+   "nom": "Faubourg des Charrons",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1148.2,
+     31.2
+    ],
+    [
+     -1125.2,
+     31.2
+    ],
+    [
+     -1125.2,
+     99.8
+    ],
+    [
+     -1144.1,
+     99.8
+    ],
+    [
+     -1148.2,
+     37.6
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1143.4,
+     110.2
+    ],
+    [
+     -1125.2,
+     110.2
+    ],
+    [
+     -1125.2,
+     179.8
+    ],
+    [
+     -1134.4,
+     179.8
+    ],
+    [
+     -1143.3,
+     112.6
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1114.8,
+     31.2
+    ],
+    [
+     -1045.2,
+     31.2
+    ],
+    [
+     -1045.2,
+     99.8
+    ],
+    [
+     -1114.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1114.8,
+     110.2
+    ],
+    [
+     -1045.2,
+     110.2
+    ],
+    [
+     -1045.2,
+     179.8
+    ],
+    [
+     -1114.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1114.8,
+     190.2
+    ],
+    [
+     -1045.2,
+     190.2
+    ],
+    [
+     -1045.2,
+     257.8
+    ],
+    [
+     -1114.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1114.8,
+     272.2
+    ],
+    [
+     -1045.2,
+     272.2
+    ],
+    [
+     -1045.2,
+     339.8
+    ],
+    [
+     -1097.2,
+     339.8
+    ],
+    [
+     -1099.3,
+     333.5
+    ],
+    [
+     -1114.8,
+     275.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1093.7,
+     350.2
+    ],
+    [
+     -1045.2,
+     350.2
+    ],
+    [
+     -1045.2,
+     419.8
+    ],
+    [
+     -1068.9,
+     419.8
+    ],
+    [
+     -1075.2,
+     404.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1034.8,
+     31.2
+    ],
+    [
+     -967.2,
+     31.2
+    ],
+    [
+     -967.2,
+     99.8
+    ],
+    [
+     -1034.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1034.8,
+     110.2
+    ],
+    [
+     -967.2,
+     110.2
+    ],
+    [
+     -967.2,
+     179.8
+    ],
+    [
+     -1034.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1034.8,
+     190.2
+    ],
+    [
+     -967.2,
+     190.2
+    ],
+    [
+     -967.2,
+     257.8
+    ],
+    [
+     -1034.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1034.8,
+     350.2
+    ],
+    [
+     -967.2,
+     350.2
+    ],
+    [
+     -967.2,
+     419.8
+    ],
+    [
+     -1034.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1034.8,
+     430.2
+    ],
+    [
+     -967.2,
+     430.2
+    ],
+    [
+     -967.2,
+     497.8
+    ],
+    [
+     -1034.7,
+     497.8
+    ],
+    [
+     -1034.8,
+     497.6
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1027.6,
+     512.2
+    ],
+    [
+     -967.2,
+     512.2
+    ],
+    [
+     -967.2,
+     579.8
+    ],
+    [
+     -991.1,
+     579.8
+    ],
+    [
+     -1013.2,
+     541.5
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     31.2
+    ],
+    [
+     -885.2,
+     31.2
+    ],
+    [
+     -885.2,
+     99.8
+    ],
+    [
+     -952.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     110.2
+    ],
+    [
+     -885.2,
+     110.2
+    ],
+    [
+     -885.2,
+     179.8
+    ],
+    [
+     -952.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     190.2
+    ],
+    [
+     -885.2,
+     190.2
+    ],
+    [
+     -885.2,
+     257.8
+    ],
+    [
+     -952.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     272.2
+    ],
+    [
+     -885.2,
+     272.2
+    ],
+    [
+     -885.2,
+     339.8
+    ],
+    [
+     -952.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     350.2
+    ],
+    [
+     -885.2,
+     350.2
+    ],
+    [
+     -885.2,
+     419.8
+    ],
+    [
+     -952.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     430.2
+    ],
+    [
+     -885.2,
+     430.2
+    ],
+    [
+     -885.2,
+     497.8
+    ],
+    [
+     -952.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     512.2
+    ],
+    [
+     -885.2,
+     512.2
+    ],
+    [
+     -885.2,
+     579.8
+    ],
+    [
+     -952.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -952.8,
+     590.2
+    ],
+    [
+     -885.2,
+     590.2
+    ],
+    [
+     -885.2,
+     659.8
+    ],
+    [
+     -940,
+     659.8
+    ],
+    [
+     -952.8,
+     640.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -933,
+     670.2
+    ],
+    [
+     -885.2,
+     670.2
+    ],
+    [
+     -885.2,
+     732
+    ],
+    [
+     -888,
+     728.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.8,
+     31.2
+    ],
+    [
+     -805.2,
+     31.2
+    ],
+    [
+     -805.2,
+     99.8
+    ],
+    [
+     -874.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.8,
+     110.2
+    ],
+    [
+     -805.2,
+     110.2
+    ],
+    [
+     -805.2,
+     179.8
+    ],
+    [
+     -874.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.8,
+     190.2
+    ],
+    [
+     -805.2,
+     190.2
+    ],
+    [
+     -805.2,
+     257.8
+    ],
+    [
+     -874.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.8,
+     272.2
+    ],
+    [
+     -805.2,
+     272.2
+    ],
+    [
+     -805.2,
+     339.8
+    ],
+    [
+     -874.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -874.8,
+     350.2
+    ],
+    [
+     -805.2,
+     350.2
+    ],
+    [
+     -805.2,
+     419.8
+    ],
+    [
+     -874.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -874.8,
+     430.2
+    ],
+    [
+     -805.2,
+     430.2
+    ],
+    [
+     -805.2,
+     497.8
+    ],
+    [
+     -874.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -874.8,
+     512.2
+    ],
+    [
+     -805.2,
+     512.2
+    ],
+    [
+     -805.2,
+     579.8
+    ],
+    [
+     -874.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -874.8,
+     590.2
+    ],
+    [
+     -805.2,
+     590.2
+    ],
+    [
+     -805.2,
+     659.8
+    ],
+    [
+     -874.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -867.5,
+     752.2
+    ],
+    [
+     -805.2,
+     752.2
+    ],
+    [
+     -805.2,
+     818.6
+    ],
+    [
+     -838.5,
+     785.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     31.2
+    ],
+    [
+     -725.2,
+     31.2
+    ],
+    [
+     -725.2,
+     99.8
+    ],
+    [
+     -794.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     110.2
+    ],
+    [
+     -725.2,
+     110.2
+    ],
+    [
+     -725.2,
+     179.8
+    ],
+    [
+     -794.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     190.2
+    ],
+    [
+     -725.2,
+     190.2
+    ],
+    [
+     -725.2,
+     257.8
+    ],
+    [
+     -794.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     272.2
+    ],
+    [
+     -725.2,
+     272.2
+    ],
+    [
+     -725.2,
+     339.8
+    ],
+    [
+     -794.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     350.2
+    ],
+    [
+     -725.2,
+     350.2
+    ],
+    [
+     -725.2,
+     419.8
+    ],
+    [
+     -794.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.8,
+     430.2
+    ],
+    [
+     -725.2,
+     430.2
+    ],
+    [
+     -725.2,
+     497.8
+    ],
+    [
+     -794.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.8,
+     512.2
+    ],
+    [
+     -725.2,
+     512.2
+    ],
+    [
+     -725.2,
+     579.8
+    ],
+    [
+     -794.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.8,
+     590.2
+    ],
+    [
+     -725.2,
+     590.2
+    ],
+    [
+     -725.2,
+     659.8
+    ],
+    [
+     -794.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.8,
+     670.2
+    ],
+    [
+     -725.2,
+     670.2
+    ],
+    [
+     -725.2,
+     737.8
+    ],
+    [
+     -794.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.8,
+     752.2
+    ],
+    [
+     -725.2,
+     752.2
+    ],
+    [
+     -725.2,
+     819.8
+    ],
+    [
+     -794.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -793.6,
+     830.2
+    ],
+    [
+     -725.2,
+     830.2
+    ],
+    [
+     -725.2,
+     890.8
+    ],
+    [
+     -728.8,
+     888
+    ],
+    [
+     -785.3,
+     838.5
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -714.8,
+     31.2
+    ],
+    [
+     -647.2,
+     31.2
+    ],
+    [
+     -647.2,
+     99.8
+    ],
+    [
+     -714.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -714.8,
+     110.2
+    ],
+    [
+     -647.2,
+     110.2
+    ],
+    [
+     -647.2,
+     179.8
+    ],
+    [
+     -714.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -714.8,
+     190.2
+    ],
+    [
+     -647.2,
+     190.2
+    ],
+    [
+     -647.2,
+     257.8
+    ],
+    [
+     -714.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -714.8,
+     272.2
+    ],
+    [
+     -647.2,
+     272.2
+    ],
+    [
+     -647.2,
+     339.8
+    ],
+    [
+     -714.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -714.8,
+     512.2
+    ],
+    [
+     -647.2,
+     512.2
+    ],
+    [
+     -647.2,
+     579.8
+    ],
+    [
+     -714.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -714.8,
+     590.2
+    ],
+    [
+     -647.2,
+     590.2
+    ],
+    [
+     -647.2,
+     659.8
+    ],
+    [
+     -714.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -714.8,
+     670.2
+    ],
+    [
+     -647.2,
+     670.2
+    ],
+    [
+     -647.2,
+     737.8
+    ],
+    [
+     -714.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -714.8,
+     752.2
+    ],
+    [
+     -647.2,
+     752.2
+    ],
+    [
+     -647.2,
+     819.8
+    ],
+    [
+     -714.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -714.8,
+     830.2
+    ],
+    [
+     -647.2,
+     830.2
+    ],
+    [
+     -647.2,
+     899.8
+    ],
+    [
+     -713.5,
+     899.8
+    ],
+    [
+     -714.8,
+     898.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -699.9,
+     910.2
+    ],
+    [
+     -647.2,
+     910.2
+    ],
+    [
+     -647.2,
+     948.5
+    ],
+    [
+     -669.2,
+     933.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     31.2
+    ],
+    [
+     -565.2,
+     31.2
+    ],
+    [
+     -565.2,
+     99.8
+    ],
+    [
+     -632.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     110.2
+    ],
+    [
+     -565.2,
+     110.2
+    ],
+    [
+     -565.2,
+     179.8
+    ],
+    [
+     -632.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     190.2
+    ],
+    [
+     -565.2,
+     190.2
+    ],
+    [
+     -565.2,
+     257.8
+    ],
+    [
+     -632.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     272.2
+    ],
+    [
+     -565.2,
+     272.2
+    ],
+    [
+     -565.2,
+     339.8
+    ],
+    [
+     -632.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     512.2
+    ],
+    [
+     -565.2,
+     512.2
+    ],
+    [
+     -565.2,
+     579.8
+    ],
+    [
+     -632.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -632.8,
+     590.2
+    ],
+    [
+     -565.2,
+     590.2
+    ],
+    [
+     -565.2,
+     659.8
+    ],
+    [
+     -632.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -632.8,
+     670.2
+    ],
+    [
+     -565.2,
+     670.2
+    ],
+    [
+     -565.2,
+     737.8
+    ],
+    [
+     -632.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -632.8,
+     752.2
+    ],
+    [
+     -565.2,
+     752.2
+    ],
+    [
+     -565.2,
+     819.8
+    ],
+    [
+     -632.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -632.8,
+     830.2
+    ],
+    [
+     -565.2,
+     830.2
+    ],
+    [
+     -565.2,
+     899.8
+    ],
+    [
+     -632.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -632.8,
+     910.2
+    ],
+    [
+     -565.2,
+     910.2
+    ],
+    [
+     -565.2,
+     977.8
+    ],
+    [
+     -602.8,
+     977.8
+    ],
+    [
+     -606.6,
+     975.6
+    ],
+    [
+     -632.8,
+     958.1
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     31.2
+    ],
+    [
+     -485.2,
+     31.2
+    ],
+    [
+     -485.2,
+     99.8
+    ],
+    [
+     -554.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     110.2
+    ],
+    [
+     -485.2,
+     110.2
+    ],
+    [
+     -485.2,
+     179.8
+    ],
+    [
+     -554.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     190.2
+    ],
+    [
+     -485.2,
+     190.2
+    ],
+    [
+     -485.2,
+     257.8
+    ],
+    [
+     -554.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     272.2
+    ],
+    [
+     -485.2,
+     272.2
+    ],
+    [
+     -485.2,
+     339.8
+    ],
+    [
+     -554.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     350.2
+    ],
+    [
+     -485.2,
+     350.2
+    ],
+    [
+     -485.2,
+     419.8
+    ],
+    [
+     -554.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     430.2
+    ],
+    [
+     -485.2,
+     430.2
+    ],
+    [
+     -485.2,
+     497.8
+    ],
+    [
+     -554.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     512.2
+    ],
+    [
+     -485.2,
+     512.2
+    ],
+    [
+     -485.2,
+     579.8
+    ],
+    [
+     -554.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     590.2
+    ],
+    [
+     -485.2,
+     590.2
+    ],
+    [
+     -485.2,
+     659.8
+    ],
+    [
+     -554.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -554.8,
+     670.2
+    ],
+    [
+     -485.2,
+     670.2
+    ],
+    [
+     -485.2,
+     737.8
+    ],
+    [
+     -554.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-9-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -554.8,
+     752.2
+    ],
+    [
+     -485.2,
+     752.2
+    ],
+    [
+     -485.2,
+     819.8
+    ],
+    [
+     -554.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -554.8,
+     830.2
+    ],
+    [
+     -485.2,
+     830.2
+    ],
+    [
+     -485.2,
+     899.8
+    ],
+    [
+     -554.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -554.8,
+     910.2
+    ],
+    [
+     -485.2,
+     910.2
+    ],
+    [
+     -485.2,
+     977.8
+    ],
+    [
+     -554.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -554.8,
+     992.2
+    ],
+    [
+     -485.2,
+     992.2
+    ],
+    [
+     -485.2,
+     1040.9
+    ],
+    [
+     -541.5,
+     1013.2
+    ],
+    [
+     -554.8,
+     1005.5
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     31.2
+    ],
+    [
+     -405.2,
+     31.2
+    ],
+    [
+     -405.2,
+     99.8
+    ],
+    [
+     -474.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     110.2
+    ],
+    [
+     -405.2,
+     110.2
+    ],
+    [
+     -405.2,
+     179.8
+    ],
+    [
+     -474.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     190.2
+    ],
+    [
+     -405.2,
+     190.2
+    ],
+    [
+     -405.2,
+     257.8
+    ],
+    [
+     -474.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     272.2
+    ],
+    [
+     -405.2,
+     272.2
+    ],
+    [
+     -405.2,
+     339.8
+    ],
+    [
+     -474.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     350.2
+    ],
+    [
+     -405.2,
+     350.2
+    ],
+    [
+     -405.2,
+     419.8
+    ],
+    [
+     -474.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "quartier-des-officiers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     430.2
+    ],
+    [
+     -405.2,
+     430.2
+    ],
+    [
+     -405.2,
+     497.8
+    ],
+    [
+     -474.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "officiers"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     512.2
+    ],
+    [
+     -405.2,
+     512.2
+    ],
+    [
+     -405.2,
+     579.8
+    ],
+    [
+     -474.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     590.2
+    ],
+    [
+     -405.2,
+     590.2
+    ],
+    [
+     -405.2,
+     659.8
+    ],
+    [
+     -474.8,
+     659.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -474.8,
+     670.2
+    ],
+    [
+     -405.2,
+     670.2
+    ],
+    [
+     -405.2,
+     737.8
+    ],
+    [
+     -474.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -474.8,
+     752.2
+    ],
+    [
+     -405.2,
+     752.2
+    ],
+    [
+     -405.2,
+     819.8
+    ],
+    [
+     -474.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -474.8,
+     830.2
+    ],
+    [
+     -405.2,
+     830.2
+    ],
+    [
+     -405.2,
+     899.8
+    ],
+    [
+     -474.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -474.8,
+     910.2
+    ],
+    [
+     -405.2,
+     910.2
+    ],
+    [
+     -405.2,
+     977.8
+    ],
+    [
+     -474.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     31.2
+    ],
+    [
+     -327.2,
+     31.2
+    ],
+    [
+     -327.2,
+     99.8
+    ],
+    [
+     -394.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     110.2
+    ],
+    [
+     -327.2,
+     110.2
+    ],
+    [
+     -327.2,
+     179.8
+    ],
+    [
+     -394.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     190.2
+    ],
+    [
+     -327.2,
+     190.2
+    ],
+    [
+     -327.2,
+     257.8
+    ],
+    [
+     -394.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     272.2
+    ],
+    [
+     -327.2,
+     272.2
+    ],
+    [
+     -327.2,
+     339.8
+    ],
+    [
+     -394.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     350.2
+    ],
+    [
+     -327.2,
+     350.2
+    ],
+    [
+     -327.2,
+     419.8
+    ],
+    [
+     -394.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.8,
+     430.2
+    ],
+    [
+     -327.2,
+     430.2
+    ],
+    [
+     -327.2,
+     497.8
+    ],
+    [
+     -394.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.8,
+     752.2
+    ],
+    [
+     -327.2,
+     752.2
+    ],
+    [
+     -327.2,
+     819.8
+    ],
+    [
+     -394.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.8,
+     830.2
+    ],
+    [
+     -327.2,
+     830.2
+    ],
+    [
+     -327.2,
+     899.8
+    ],
+    [
+     -394.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.8,
+     910.2
+    ],
+    [
+     -327.2,
+     910.2
+    ],
+    [
+     -327.2,
+     977.8
+    ],
+    [
+     -394.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.8,
+     992.2
+    ],
+    [
+     -327.2,
+     992.2
+    ],
+    [
+     -327.2,
+     1059.8
+    ],
+    [
+     -394.8,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.8,
+     1070.2
+    ],
+    [
+     -327.2,
+     1070.2
+    ],
+    [
+     -327.2,
+     1101
+    ],
+    [
+     -333.5,
+     1099.3
+    ],
+    [
+     -394.8,
+     1078.5
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     31.2
+    ],
+    [
+     -245.2,
+     31.2
+    ],
+    [
+     -245.2,
+     99.8
+    ],
+    [
+     -312.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     110.2
+    ],
+    [
+     -245.2,
+     110.2
+    ],
+    [
+     -245.2,
+     179.8
+    ],
+    [
+     -312.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     190.2
+    ],
+    [
+     -245.2,
+     190.2
+    ],
+    [
+     -245.2,
+     257.8
+    ],
+    [
+     -312.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     272.2
+    ],
+    [
+     -245.2,
+     272.2
+    ],
+    [
+     -245.2,
+     339.8
+    ],
+    [
+     -312.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     350.2
+    ],
+    [
+     -245.2,
+     350.2
+    ],
+    [
+     -245.2,
+     419.8
+    ],
+    [
+     -312.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -312.8,
+     430.2
+    ],
+    [
+     -245.2,
+     430.2
+    ],
+    [
+     -245.2,
+     497.8
+    ],
+    [
+     -312.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -312.8,
+     752.2
+    ],
+    [
+     -245.2,
+     752.2
+    ],
+    [
+     -245.2,
+     819.8
+    ],
+    [
+     -312.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -312.8,
+     830.2
+    ],
+    [
+     -245.2,
+     830.2
+    ],
+    [
+     -245.2,
+     899.8
+    ],
+    [
+     -312.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -312.8,
+     910.2
+    ],
+    [
+     -245.2,
+     910.2
+    ],
+    [
+     -245.2,
+     977.8
+    ],
+    [
+     -312.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -312.8,
+     992.2
+    ],
+    [
+     -245.2,
+     992.2
+    ],
+    [
+     -245.2,
+     1059.8
+    ],
+    [
+     -312.8,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -312.8,
+     1070.2
+    ],
+    [
+     -245.2,
+     1070.2
+    ],
+    [
+     -245.2,
+     1121.9
+    ],
+    [
+     -260.9,
+     1118.8
+    ],
+    [
+     -312.8,
+     1104.9
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     31.2
+    ],
+    [
+     -165.2,
+     31.2
+    ],
+    [
+     -165.2,
+     99.8
+    ],
+    [
+     -234.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     110.2
+    ],
+    [
+     -165.2,
+     110.2
+    ],
+    [
+     -165.2,
+     179.8
+    ],
+    [
+     -234.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     190.2
+    ],
+    [
+     -165.2,
+     190.2
+    ],
+    [
+     -165.2,
+     257.8
+    ],
+    [
+     -234.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     272.2
+    ],
+    [
+     -165.2,
+     272.2
+    ],
+    [
+     -165.2,
+     339.8
+    ],
+    [
+     -234.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     350.2
+    ],
+    [
+     -165.2,
+     350.2
+    ],
+    [
+     -165.2,
+     419.8
+    ],
+    [
+     -234.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -234.8,
+     430.2
+    ],
+    [
+     -165.2,
+     430.2
+    ],
+    [
+     -165.2,
+     497.8
+    ],
+    [
+     -234.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -234.8,
+     752.2
+    ],
+    [
+     -165.2,
+     752.2
+    ],
+    [
+     -165.2,
+     819.8
+    ],
+    [
+     -234.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -234.8,
+     830.2
+    ],
+    [
+     -165.2,
+     830.2
+    ],
+    [
+     -165.2,
+     899.8
+    ],
+    [
+     -234.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -234.8,
+     910.2
+    ],
+    [
+     -165.2,
+     910.2
+    ],
+    [
+     -165.2,
+     977.8
+    ],
+    [
+     -234.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -234.8,
+     992.2
+    ],
+    [
+     -165.2,
+     992.2
+    ],
+    [
+     -165.2,
+     1059.8
+    ],
+    [
+     -234.8,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -234.8,
+     1070.2
+    ],
+    [
+     -165.2,
+     1070.2
+    ],
+    [
+     -165.2,
+     1136.3
+    ],
+    [
+     -187.1,
+     1133.5
+    ],
+    [
+     -234.8,
+     1124
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -154.8,
+     31.2
+    ],
+    [
+     -85.2,
+     31.2
+    ],
+    [
+     -85.2,
+     99.8
+    ],
+    [
+     -154.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -154.8,
+     110.2
+    ],
+    [
+     -85.2,
+     110.2
+    ],
+    [
+     -85.2,
+     179.8
+    ],
+    [
+     -154.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -154.8,
+     272.2
+    ],
+    [
+     -85.2,
+     272.2
+    ],
+    [
+     -85.2,
+     339.8
+    ],
+    [
+     -154.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -154.8,
+     350.2
+    ],
+    [
+     -85.2,
+     350.2
+    ],
+    [
+     -85.2,
+     419.8
+    ],
+    [
+     -154.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -154.8,
+     430.2
+    ],
+    [
+     -85.2,
+     430.2
+    ],
+    [
+     -85.2,
+     497.8
+    ],
+    [
+     -154.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-14-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -154.8,
+     752.2
+    ],
+    [
+     -85.2,
+     752.2
+    ],
+    [
+     -85.2,
+     819.8
+    ],
+    [
+     -154.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -154.8,
+     830.2
+    ],
+    [
+     -85.2,
+     830.2
+    ],
+    [
+     -85.2,
+     899.8
+    ],
+    [
+     -154.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -154.8,
+     910.2
+    ],
+    [
+     -85.2,
+     910.2
+    ],
+    [
+     -85.2,
+     977.8
+    ],
+    [
+     -154.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -154.8,
+     992.2
+    ],
+    [
+     -85.2,
+     992.2
+    ],
+    [
+     -85.2,
+     1059.8
+    ],
+    [
+     -154.8,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -154.8,
+     1070.2
+    ],
+    [
+     -85.2,
+     1070.2
+    ],
+    [
+     -85.2,
+     1139.8
+    ],
+    [
+     -138.9,
+     1139.8
+    ],
+    [
+     -154.8,
+     1137.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     31.2
+    ],
+    [
+     -11.2,
+     31.2
+    ],
+    [
+     -11.2,
+     99.8
+    ],
+    [
+     -74.8,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     110.2
+    ],
+    [
+     -11.2,
+     110.2
+    ],
+    [
+     -11.2,
+     179.8
+    ],
+    [
+     -74.8,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     272.2
+    ],
+    [
+     -11.2,
+     272.2
+    ],
+    [
+     -11.2,
+     339.8
+    ],
+    [
+     -74.8,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     350.2
+    ],
+    [
+     -11.2,
+     350.2
+    ],
+    [
+     -11.2,
+     419.8
+    ],
+    [
+     -74.8,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     430.2
+    ],
+    [
+     -11.2,
+     430.2
+    ],
+    [
+     -11.2,
+     497.8
+    ],
+    [
+     -74.8,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-6",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     512.2
+    ],
+    [
+     -11.2,
+     512.2
+    ],
+    [
+     -11.2,
+     579.8
+    ],
+    [
+     -74.8,
+     579.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-8",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -74.8,
+     670.2
+    ],
+    [
+     -11.2,
+     670.2
+    ],
+    [
+     -11.2,
+     737.8
+    ],
+    [
+     -74.8,
+     737.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -74.8,
+     752.2
+    ],
+    [
+     -11.2,
+     752.2
+    ],
+    [
+     -11.2,
+     819.8
+    ],
+    [
+     -74.8,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -74.8,
+     830.2
+    ],
+    [
+     -11.2,
+     830.2
+    ],
+    [
+     -11.2,
+     899.8
+    ],
+    [
+     -74.8,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -74.8,
+     910.2
+    ],
+    [
+     -11.2,
+     910.2
+    ],
+    [
+     -11.2,
+     977.8
+    ],
+    [
+     -74.8,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -74.8,
+     992.2
+    ],
+    [
+     -11.2,
+     992.2
+    ],
+    [
+     -11.2,
+     1059.8
+    ],
+    [
+     -74.8,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -74.8,
+     1070.2
+    ],
+    [
+     -11.2,
+     1070.2
+    ],
+    [
+     -11.2,
+     1139.8
+    ],
+    [
+     -74.8,
+     1139.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     31.2
+    ],
+    [
+     74.8,
+     31.2
+    ],
+    [
+     74.8,
+     99.8
+    ],
+    [
+     11.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     110.2
+    ],
+    [
+     74.8,
+     110.2
+    ],
+    [
+     74.8,
+     179.8
+    ],
+    [
+     11.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     190.2
+    ],
+    [
+     74.8,
+     190.2
+    ],
+    [
+     74.8,
+     257.8
+    ],
+    [
+     11.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     272.2
+    ],
+    [
+     74.8,
+     272.2
+    ],
+    [
+     74.8,
+     339.8
+    ],
+    [
+     11.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     350.2
+    ],
+    [
+     74.8,
+     350.2
+    ],
+    [
+     74.8,
+     419.8
+    ],
+    [
+     11.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     430.2
+    ],
+    [
+     74.8,
+     430.2
+    ],
+    [
+     74.8,
+     497.8
+    ],
+    [
+     11.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-6",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     512.2
+    ],
+    [
+     74.8,
+     512.2
+    ],
+    [
+     74.8,
+     579.8
+    ],
+    [
+     11.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-7",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     590.2
+    ],
+    [
+     74.8,
+     590.2
+    ],
+    [
+     74.8,
+     659.8
+    ],
+    [
+     11.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-8",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     670.2
+    ],
+    [
+     74.8,
+     670.2
+    ],
+    [
+     74.8,
+     737.8
+    ],
+    [
+     11.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-9",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     752.2
+    ],
+    [
+     74.8,
+     752.2
+    ],
+    [
+     74.8,
+     819.8
+    ],
+    [
+     11.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-10",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     830.2
+    ],
+    [
+     74.8,
+     830.2
+    ],
+    [
+     74.8,
+     899.8
+    ],
+    [
+     11.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     910.2
+    ],
+    [
+     74.8,
+     910.2
+    ],
+    [
+     74.8,
+     977.8
+    ],
+    [
+     11.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-16-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     992.2
+    ],
+    [
+     74.8,
+     992.2
+    ],
+    [
+     74.8,
+     1059.8
+    ],
+    [
+     11.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-16-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     1070.2
+    ],
+    [
+     74.8,
+     1070.2
+    ],
+    [
+     74.8,
+     1139.8
+    ],
+    [
+     11.2,
+     1139.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     85.2,
+     31.2
+    ],
+    [
+     154.8,
+     31.2
+    ],
+    [
+     154.8,
+     99.8
+    ],
+    [
+     85.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     85.2,
+     110.2
+    ],
+    [
+     154.8,
+     110.2
+    ],
+    [
+     154.8,
+     179.8
+    ],
+    [
+     85.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "ville-civile",
+   "fonction": "culte",
+   "polygone": [
+    [
+     85.2,
+     190.2
+    ],
+    [
+     154.8,
+     190.2
+    ],
+    [
+     154.8,
+     257.8
+    ],
+    [
+     85.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-3",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     85.2,
+     272.2
+    ],
+    [
+     154.8,
+     272.2
+    ],
+    [
+     154.8,
+     339.8
+    ],
+    [
+     85.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     85.2,
+     350.2
+    ],
+    [
+     154.8,
+     350.2
+    ],
+    [
+     154.8,
+     419.8
+    ],
+    [
+     85.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     430.2
+    ],
+    [
+     154.8,
+     430.2
+    ],
+    [
+     154.8,
+     497.8
+    ],
+    [
+     85.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     512.2
+    ],
+    [
+     154.8,
+     512.2
+    ],
+    [
+     154.8,
+     579.8
+    ],
+    [
+     85.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     590.2
+    ],
+    [
+     154.8,
+     590.2
+    ],
+    [
+     154.8,
+     659.8
+    ],
+    [
+     85.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     670.2
+    ],
+    [
+     154.8,
+     670.2
+    ],
+    [
+     154.8,
+     737.8
+    ],
+    [
+     85.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     752.2
+    ],
+    [
+     154.8,
+     752.2
+    ],
+    [
+     154.8,
+     819.8
+    ],
+    [
+     85.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     830.2
+    ],
+    [
+     154.8,
+     830.2
+    ],
+    [
+     154.8,
+     899.8
+    ],
+    [
+     85.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-11",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     85.2,
+     910.2
+    ],
+    [
+     154.8,
+     910.2
+    ],
+    [
+     154.8,
+     977.8
+    ],
+    [
+     85.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-17-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     85.2,
+     992.2
+    ],
+    [
+     154.8,
+     992.2
+    ],
+    [
+     154.8,
+     1059.8
+    ],
+    [
+     85.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-17-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     85.2,
+     1070.2
+    ],
+    [
+     154.8,
+     1070.2
+    ],
+    [
+     154.8,
+     1137.7
+    ],
+    [
+     138.9,
+     1139.8
+    ],
+    [
+     85.2,
+     1139.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     165.2,
+     31.2
+    ],
+    [
+     234.8,
+     31.2
+    ],
+    [
+     234.8,
+     99.8
+    ],
+    [
+     165.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     165.2,
+     110.2
+    ],
+    [
+     234.8,
+     110.2
+    ],
+    [
+     234.8,
+     179.8
+    ],
+    [
+     165.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     165.2,
+     190.2
+    ],
+    [
+     234.8,
+     190.2
+    ],
+    [
+     234.8,
+     257.8
+    ],
+    [
+     165.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     165.2,
+     272.2
+    ],
+    [
+     234.8,
+     272.2
+    ],
+    [
+     234.8,
+     339.8
+    ],
+    [
+     165.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     165.2,
+     350.2
+    ],
+    [
+     234.8,
+     350.2
+    ],
+    [
+     234.8,
+     419.8
+    ],
+    [
+     165.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     430.2
+    ],
+    [
+     234.8,
+     430.2
+    ],
+    [
+     234.8,
+     497.8
+    ],
+    [
+     165.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     512.2
+    ],
+    [
+     234.8,
+     512.2
+    ],
+    [
+     234.8,
+     579.8
+    ],
+    [
+     165.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     590.2
+    ],
+    [
+     234.8,
+     590.2
+    ],
+    [
+     234.8,
+     659.8
+    ],
+    [
+     165.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     670.2
+    ],
+    [
+     234.8,
+     670.2
+    ],
+    [
+     234.8,
+     737.8
+    ],
+    [
+     165.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     752.2
+    ],
+    [
+     234.8,
+     752.2
+    ],
+    [
+     234.8,
+     819.8
+    ],
+    [
+     165.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     165.2,
+     830.2
+    ],
+    [
+     234.8,
+     830.2
+    ],
+    [
+     234.8,
+     899.8
+    ],
+    [
+     165.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-18-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     165.2,
+     992.2
+    ],
+    [
+     234.8,
+     992.2
+    ],
+    [
+     234.8,
+     1059.8
+    ],
+    [
+     165.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-18-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     165.2,
+     1070.2
+    ],
+    [
+     234.8,
+     1070.2
+    ],
+    [
+     234.8,
+     1124
+    ],
+    [
+     187.1,
+     1133.5
+    ],
+    [
+     165.2,
+     1136.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     245.2,
+     31.2
+    ],
+    [
+     312.8,
+     31.2
+    ],
+    [
+     312.8,
+     99.8
+    ],
+    [
+     245.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "ville-civile",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     245.2,
+     110.2
+    ],
+    [
+     312.8,
+     110.2
+    ],
+    [
+     312.8,
+     179.8
+    ],
+    [
+     245.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     245.2,
+     190.2
+    ],
+    [
+     312.8,
+     190.2
+    ],
+    [
+     312.8,
+     257.8
+    ],
+    [
+     245.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     245.2,
+     272.2
+    ],
+    [
+     312.8,
+     272.2
+    ],
+    [
+     312.8,
+     339.8
+    ],
+    [
+     245.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     245.2,
+     350.2
+    ],
+    [
+     312.8,
+     350.2
+    ],
+    [
+     312.8,
+     419.8
+    ],
+    [
+     245.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     430.2
+    ],
+    [
+     312.8,
+     430.2
+    ],
+    [
+     312.8,
+     497.8
+    ],
+    [
+     245.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     512.2
+    ],
+    [
+     312.8,
+     512.2
+    ],
+    [
+     312.8,
+     579.8
+    ],
+    [
+     245.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     590.2
+    ],
+    [
+     312.8,
+     590.2
+    ],
+    [
+     312.8,
+     659.8
+    ],
+    [
+     245.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     670.2
+    ],
+    [
+     312.8,
+     670.2
+    ],
+    [
+     312.8,
+     737.8
+    ],
+    [
+     245.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     752.2
+    ],
+    [
+     312.8,
+     752.2
+    ],
+    [
+     312.8,
+     819.8
+    ],
+    [
+     245.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     830.2
+    ],
+    [
+     312.8,
+     830.2
+    ],
+    [
+     312.8,
+     899.8
+    ],
+    [
+     245.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-11",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     245.2,
+     910.2
+    ],
+    [
+     312.8,
+     910.2
+    ],
+    [
+     312.8,
+     977.8
+    ],
+    [
+     245.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-19-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     245.2,
+     992.2
+    ],
+    [
+     312.8,
+     992.2
+    ],
+    [
+     312.8,
+     1059.8
+    ],
+    [
+     245.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-19-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     245.2,
+     1070.2
+    ],
+    [
+     312.8,
+     1070.2
+    ],
+    [
+     312.8,
+     1104.9
+    ],
+    [
+     260.9,
+     1118.8
+    ],
+    [
+     245.2,
+     1121.9
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-20-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     327.2,
+     31.2
+    ],
+    [
+     394.8,
+     31.2
+    ],
+    [
+     394.8,
+     99.8
+    ],
+    [
+     327.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     327.2,
+     190.2
+    ],
+    [
+     394.8,
+     190.2
+    ],
+    [
+     394.8,
+     257.8
+    ],
+    [
+     327.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     327.2,
+     272.2
+    ],
+    [
+     394.8,
+     272.2
+    ],
+    [
+     394.8,
+     339.8
+    ],
+    [
+     327.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     327.2,
+     350.2
+    ],
+    [
+     394.8,
+     350.2
+    ],
+    [
+     394.8,
+     419.8
+    ],
+    [
+     327.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     430.2
+    ],
+    [
+     394.8,
+     430.2
+    ],
+    [
+     394.8,
+     497.8
+    ],
+    [
+     327.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     512.2
+    ],
+    [
+     394.8,
+     512.2
+    ],
+    [
+     394.8,
+     579.8
+    ],
+    [
+     327.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     590.2
+    ],
+    [
+     394.8,
+     590.2
+    ],
+    [
+     394.8,
+     659.8
+    ],
+    [
+     327.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     670.2
+    ],
+    [
+     394.8,
+     670.2
+    ],
+    [
+     394.8,
+     737.8
+    ],
+    [
+     327.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     752.2
+    ],
+    [
+     394.8,
+     752.2
+    ],
+    [
+     394.8,
+     819.8
+    ],
+    [
+     327.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     830.2
+    ],
+    [
+     394.8,
+     830.2
+    ],
+    [
+     394.8,
+     899.8
+    ],
+    [
+     327.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-11",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     327.2,
+     910.2
+    ],
+    [
+     394.8,
+     910.2
+    ],
+    [
+     394.8,
+     977.8
+    ],
+    [
+     327.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-20-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     327.2,
+     992.2
+    ],
+    [
+     394.8,
+     992.2
+    ],
+    [
+     394.8,
+     1059.8
+    ],
+    [
+     327.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-20-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     327.2,
+     1070.2
+    ],
+    [
+     394.8,
+     1070.2
+    ],
+    [
+     394.8,
+     1078.5
+    ],
+    [
+     333.5,
+     1099.3
+    ],
+    [
+     327.2,
+     1101
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-21-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.2,
+     31.2
+    ],
+    [
+     474.8,
+     31.2
+    ],
+    [
+     474.8,
+     99.8
+    ],
+    [
+     405.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.2,
+     190.2
+    ],
+    [
+     474.8,
+     190.2
+    ],
+    [
+     474.8,
+     257.8
+    ],
+    [
+     405.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.2,
+     272.2
+    ],
+    [
+     474.8,
+     272.2
+    ],
+    [
+     474.8,
+     339.8
+    ],
+    [
+     405.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.2,
+     350.2
+    ],
+    [
+     474.8,
+     350.2
+    ],
+    [
+     474.8,
+     419.8
+    ],
+    [
+     405.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     430.2
+    ],
+    [
+     474.8,
+     430.2
+    ],
+    [
+     474.8,
+     497.8
+    ],
+    [
+     405.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     512.2
+    ],
+    [
+     474.8,
+     512.2
+    ],
+    [
+     474.8,
+     579.8
+    ],
+    [
+     405.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     590.2
+    ],
+    [
+     474.8,
+     590.2
+    ],
+    [
+     474.8,
+     659.8
+    ],
+    [
+     405.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     670.2
+    ],
+    [
+     474.8,
+     670.2
+    ],
+    [
+     474.8,
+     737.8
+    ],
+    [
+     405.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     752.2
+    ],
+    [
+     474.8,
+     752.2
+    ],
+    [
+     474.8,
+     819.8
+    ],
+    [
+     405.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     830.2
+    ],
+    [
+     474.8,
+     830.2
+    ],
+    [
+     474.8,
+     899.8
+    ],
+    [
+     405.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-11",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     405.2,
+     910.2
+    ],
+    [
+     474.8,
+     910.2
+    ],
+    [
+     474.8,
+     977.8
+    ],
+    [
+     405.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-21-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     405.2,
+     992.2
+    ],
+    [
+     474.8,
+     992.2
+    ],
+    [
+     474.8,
+     1046.1
+    ],
+    [
+     474.1,
+     1046.4
+    ],
+    [
+     441.8,
+     1059.8
+    ],
+    [
+     405.2,
+     1059.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-22-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     485.2,
+     31.2
+    ],
+    [
+     554.8,
+     31.2
+    ],
+    [
+     554.8,
+     99.8
+    ],
+    [
+     485.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-22-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     485.2,
+     110.2
+    ],
+    [
+     554.8,
+     110.2
+    ],
+    [
+     554.8,
+     179.8
+    ],
+    [
+     485.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-22-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     485.2,
+     190.2
+    ],
+    [
+     554.8,
+     190.2
+    ],
+    [
+     554.8,
+     257.8
+    ],
+    [
+     485.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-22-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     485.2,
+     272.2
+    ],
+    [
+     554.8,
+     272.2
+    ],
+    [
+     554.8,
+     339.8
+    ],
+    [
+     485.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-22-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     485.2,
+     350.2
+    ],
+    [
+     554.8,
+     350.2
+    ],
+    [
+     554.8,
+     419.8
+    ],
+    [
+     485.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-22-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     430.2
+    ],
+    [
+     554.8,
+     430.2
+    ],
+    [
+     554.8,
+     497.8
+    ],
+    [
+     485.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     512.2
+    ],
+    [
+     554.8,
+     512.2
+    ],
+    [
+     554.8,
+     579.8
+    ],
+    [
+     485.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     590.2
+    ],
+    [
+     554.8,
+     590.2
+    ],
+    [
+     554.8,
+     659.8
+    ],
+    [
+     485.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     670.2
+    ],
+    [
+     554.8,
+     670.2
+    ],
+    [
+     554.8,
+     737.8
+    ],
+    [
+     485.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     752.2
+    ],
+    [
+     554.8,
+     752.2
+    ],
+    [
+     554.8,
+     819.8
+    ],
+    [
+     485.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-10",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     830.2
+    ],
+    [
+     554.8,
+     830.2
+    ],
+    [
+     554.8,
+     899.8
+    ],
+    [
+     485.2,
+     899.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-11",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     485.2,
+     910.2
+    ],
+    [
+     554.8,
+     910.2
+    ],
+    [
+     554.8,
+     977.8
+    ],
+    [
+     485.2,
+     977.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-22-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     485.2,
+     992.2
+    ],
+    [
+     554.8,
+     992.2
+    ],
+    [
+     554.8,
+     1005.5
+    ],
+    [
+     541.5,
+     1013.2
+    ],
+    [
+     485.2,
+     1040.9
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-23-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     565.2,
+     31.2
+    ],
+    [
+     632.8,
+     31.2
+    ],
+    [
+     632.8,
+     99.8
+    ],
+    [
+     565.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     565.2,
+     110.2
+    ],
+    [
+     632.8,
+     110.2
+    ],
+    [
+     632.8,
+     179.8
+    ],
+    [
+     565.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     565.2,
+     190.2
+    ],
+    [
+     632.8,
+     190.2
+    ],
+    [
+     632.8,
+     257.8
+    ],
+    [
+     565.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     565.2,
+     272.2
+    ],
+    [
+     632.8,
+     272.2
+    ],
+    [
+     632.8,
+     339.8
+    ],
+    [
+     565.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     565.2,
+     350.2
+    ],
+    [
+     632.8,
+     350.2
+    ],
+    [
+     632.8,
+     419.8
+    ],
+    [
+     565.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     565.2,
+     430.2
+    ],
+    [
+     632.8,
+     430.2
+    ],
+    [
+     632.8,
+     497.8
+    ],
+    [
+     565.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-23-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     565.2,
+     512.2
+    ],
+    [
+     632.8,
+     512.2
+    ],
+    [
+     632.8,
+     579.8
+    ],
+    [
+     565.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-23-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     565.2,
+     590.2
+    ],
+    [
+     632.8,
+     590.2
+    ],
+    [
+     632.8,
+     659.8
+    ],
+    [
+     565.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-23-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     565.2,
+     670.2
+    ],
+    [
+     632.8,
+     670.2
+    ],
+    [
+     632.8,
+     737.8
+    ],
+    [
+     565.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-23-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     565.2,
+     752.2
+    ],
+    [
+     632.8,
+     752.2
+    ],
+    [
+     632.8,
+     819.8
+    ],
+    [
+     565.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-24-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     647.2,
+     31.2
+    ],
+    [
+     714.8,
+     31.2
+    ],
+    [
+     714.8,
+     99.8
+    ],
+    [
+     647.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     647.2,
+     110.2
+    ],
+    [
+     714.8,
+     110.2
+    ],
+    [
+     714.8,
+     179.8
+    ],
+    [
+     647.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     647.2,
+     190.2
+    ],
+    [
+     714.8,
+     190.2
+    ],
+    [
+     714.8,
+     257.8
+    ],
+    [
+     647.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     647.2,
+     272.2
+    ],
+    [
+     714.8,
+     272.2
+    ],
+    [
+     714.8,
+     339.8
+    ],
+    [
+     647.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-5",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     647.2,
+     430.2
+    ],
+    [
+     714.8,
+     430.2
+    ],
+    [
+     714.8,
+     497.8
+    ],
+    [
+     647.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-24-6",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     647.2,
+     512.2
+    ],
+    [
+     714.8,
+     512.2
+    ],
+    [
+     714.8,
+     579.8
+    ],
+    [
+     647.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-24-7",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     647.2,
+     590.2
+    ],
+    [
+     714.8,
+     590.2
+    ],
+    [
+     714.8,
+     659.8
+    ],
+    [
+     647.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-24-8",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     647.2,
+     670.2
+    ],
+    [
+     714.8,
+     670.2
+    ],
+    [
+     714.8,
+     737.8
+    ],
+    [
+     647.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-24-9",
+   "quartier": "quartier-des-armuriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     647.2,
+     752.2
+    ],
+    [
+     714.8,
+     752.2
+    ],
+    [
+     714.8,
+     819.8
+    ],
+    [
+     647.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "armuriers"
+  },
+  {
+   "id": "i-25-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     31.2
+    ],
+    [
+     794.8,
+     31.2
+    ],
+    [
+     794.8,
+     99.8
+    ],
+    [
+     725.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     110.2
+    ],
+    [
+     794.8,
+     110.2
+    ],
+    [
+     794.8,
+     179.8
+    ],
+    [
+     725.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     190.2
+    ],
+    [
+     794.8,
+     190.2
+    ],
+    [
+     794.8,
+     257.8
+    ],
+    [
+     725.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     272.2
+    ],
+    [
+     794.8,
+     272.2
+    ],
+    [
+     794.8,
+     339.8
+    ],
+    [
+     725.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-4",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     350.2
+    ],
+    [
+     794.8,
+     350.2
+    ],
+    [
+     794.8,
+     419.8
+    ],
+    [
+     725.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-5",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     725.2,
+     430.2
+    ],
+    [
+     794.8,
+     430.2
+    ],
+    [
+     794.8,
+     497.8
+    ],
+    [
+     725.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     725.2,
+     512.2
+    ],
+    [
+     794.8,
+     512.2
+    ],
+    [
+     794.8,
+     579.8
+    ],
+    [
+     725.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-25-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     725.2,
+     590.2
+    ],
+    [
+     794.8,
+     590.2
+    ],
+    [
+     794.8,
+     659.8
+    ],
+    [
+     725.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-25-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     725.2,
+     670.2
+    ],
+    [
+     794.8,
+     670.2
+    ],
+    [
+     794.8,
+     737.8
+    ],
+    [
+     725.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-25-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     725.2,
+     752.2
+    ],
+    [
+     794.8,
+     752.2
+    ],
+    [
+     794.8,
+     819.8
+    ],
+    [
+     725.2,
+     819.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-25-10",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     725.2,
+     830.2
+    ],
+    [
+     793.6,
+     830.2
+    ],
+    [
+     785.3,
+     838.5
+    ],
+    [
+     728.8,
+     888
+    ],
+    [
+     725.2,
+     890.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-0",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.2,
+     31.2
+    ],
+    [
+     874.8,
+     31.2
+    ],
+    [
+     874.8,
+     99.8
+    ],
+    [
+     805.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-1",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.2,
+     110.2
+    ],
+    [
+     874.8,
+     110.2
+    ],
+    [
+     874.8,
+     179.8
+    ],
+    [
+     805.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-2",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.2,
+     190.2
+    ],
+    [
+     874.8,
+     190.2
+    ],
+    [
+     874.8,
+     257.8
+    ],
+    [
+     805.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-3",
+   "quartier": "quartier-des-soldats-maries",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.2,
+     272.2
+    ],
+    [
+     874.8,
+     272.2
+    ],
+    [
+     874.8,
+     339.8
+    ],
+    [
+     805.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     350.2
+    ],
+    [
+     874.8,
+     350.2
+    ],
+    [
+     874.8,
+     419.8
+    ],
+    [
+     805.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     430.2
+    ],
+    [
+     874.8,
+     430.2
+    ],
+    [
+     874.8,
+     497.8
+    ],
+    [
+     805.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     512.2
+    ],
+    [
+     874.8,
+     512.2
+    ],
+    [
+     874.8,
+     579.8
+    ],
+    [
+     805.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     590.2
+    ],
+    [
+     874.8,
+     590.2
+    ],
+    [
+     874.8,
+     659.8
+    ],
+    [
+     805.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     670.2
+    ],
+    [
+     874.8,
+     670.2
+    ],
+    [
+     874.8,
+     737.8
+    ],
+    [
+     805.2,
+     737.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-26-9",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     805.2,
+     752.2
+    ],
+    [
+     867.5,
+     752.2
+    ],
+    [
+     838.5,
+     785.3
+    ],
+    [
+     805.2,
+     818.6
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     31.2
+    ],
+    [
+     952.8,
+     31.2
+    ],
+    [
+     952.8,
+     99.8
+    ],
+    [
+     885.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     110.2
+    ],
+    [
+     952.8,
+     110.2
+    ],
+    [
+     952.8,
+     179.8
+    ],
+    [
+     885.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     190.2
+    ],
+    [
+     952.8,
+     190.2
+    ],
+    [
+     952.8,
+     257.8
+    ],
+    [
+     885.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-3",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     272.2
+    ],
+    [
+     952.8,
+     272.2
+    ],
+    [
+     952.8,
+     339.8
+    ],
+    [
+     885.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     350.2
+    ],
+    [
+     952.8,
+     350.2
+    ],
+    [
+     952.8,
+     419.8
+    ],
+    [
+     885.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     430.2
+    ],
+    [
+     952.8,
+     430.2
+    ],
+    [
+     952.8,
+     497.8
+    ],
+    [
+     885.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     512.2
+    ],
+    [
+     952.8,
+     512.2
+    ],
+    [
+     952.8,
+     579.8
+    ],
+    [
+     885.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-7",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     590.2
+    ],
+    [
+     952.8,
+     590.2
+    ],
+    [
+     952.8,
+     640.7
+    ],
+    [
+     940,
+     659.8
+    ],
+    [
+     885.2,
+     659.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-27-8",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     885.2,
+     670.2
+    ],
+    [
+     933,
+     670.2
+    ],
+    [
+     888,
+     728.8
+    ],
+    [
+     885.2,
+     732
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     31.2
+    ],
+    [
+     1034.8,
+     31.2
+    ],
+    [
+     1034.8,
+     99.8
+    ],
+    [
+     967.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     110.2
+    ],
+    [
+     1034.8,
+     110.2
+    ],
+    [
+     1034.8,
+     179.8
+    ],
+    [
+     967.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     190.2
+    ],
+    [
+     1034.8,
+     190.2
+    ],
+    [
+     1034.8,
+     257.8
+    ],
+    [
+     967.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-3",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     272.2
+    ],
+    [
+     1034.8,
+     272.2
+    ],
+    [
+     1034.8,
+     339.8
+    ],
+    [
+     967.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     350.2
+    ],
+    [
+     1034.8,
+     350.2
+    ],
+    [
+     1034.8,
+     419.8
+    ],
+    [
+     967.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-5",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     430.2
+    ],
+    [
+     1034.8,
+     430.2
+    ],
+    [
+     1034.8,
+     497.6
+    ],
+    [
+     1034.7,
+     497.8
+    ],
+    [
+     967.2,
+     497.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-28-6",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     967.2,
+     512.2
+    ],
+    [
+     1027.6,
+     512.2
+    ],
+    [
+     1013.2,
+     541.5
+    ],
+    [
+     991.1,
+     579.8
+    ],
+    [
+     967.2,
+     579.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-29-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1045.2,
+     31.2
+    ],
+    [
+     1114.8,
+     31.2
+    ],
+    [
+     1114.8,
+     99.8
+    ],
+    [
+     1045.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-29-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1045.2,
+     110.2
+    ],
+    [
+     1114.8,
+     110.2
+    ],
+    [
+     1114.8,
+     179.8
+    ],
+    [
+     1045.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-29-2",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1045.2,
+     190.2
+    ],
+    [
+     1114.8,
+     190.2
+    ],
+    [
+     1114.8,
+     257.8
+    ],
+    [
+     1045.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-29-3",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1045.2,
+     272.2
+    ],
+    [
+     1114.8,
+     272.2
+    ],
+    [
+     1114.8,
+     275.8
+    ],
+    [
+     1099.3,
+     333.5
+    ],
+    [
+     1097.2,
+     339.8
+    ],
+    [
+     1045.2,
+     339.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-29-4",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1045.2,
+     350.2
+    ],
+    [
+     1093.7,
+     350.2
+    ],
+    [
+     1075.2,
+     404.7
+    ],
+    [
+     1068.9,
+     419.8
+    ],
+    [
+     1045.2,
+     419.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-30-0",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1125.2,
+     31.2
+    ],
+    [
+     1148.2,
+     31.2
+    ],
+    [
+     1148.2,
+     37.6
+    ],
+    [
+     1144.1,
+     99.8
+    ],
+    [
+     1125.2,
+     99.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-30-1",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     1125.2,
+     110.2
+    ],
+    [
+     1143.4,
+     110.2
+    ],
+    [
+     1143.3,
+     112.6
+    ],
+    [
+     1134.4,
+     179.8
+    ],
+    [
+     1125.2,
+     179.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -625.8,
+     -165.3
+    ],
+    [
+     -424.2,
+     -165.3
+    ],
+    [
+     -424.2,
+     -34.7
+    ],
+    [
+     -625.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -625.8,
+     -305.3
+    ],
+    [
+     -424.2,
+     -305.3
+    ],
+    [
+     -424.2,
+     -174.7
+    ],
+    [
+     -625.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -625.8,
+     -445.3
+    ],
+    [
+     -424.2,
+     -445.3
+    ],
+    [
+     -424.2,
+     -314.7
+    ],
+    [
+     -625.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -415.8,
+     -165.3
+    ],
+    [
+     -214.2,
+     -165.3
+    ],
+    [
+     -214.2,
+     -34.7
+    ],
+    [
+     -415.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -415.8,
+     -305.3
+    ],
+    [
+     -214.2,
+     -305.3
+    ],
+    [
+     -214.2,
+     -174.7
+    ],
+    [
+     -415.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -415.8,
+     -445.3
+    ],
+    [
+     -214.2,
+     -445.3
+    ],
+    [
+     -214.2,
+     -314.7
+    ],
+    [
+     -415.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -205.8,
+     -165.3
+    ],
+    [
+     -7,
+     -165.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -205.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -205.8,
+     -305.3
+    ],
+    [
+     -7,
+     -305.3
+    ],
+    [
+     -7,
+     -174.7
+    ],
+    [
+     -205.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -205.8,
+     -445.3
+    ],
+    [
+     -7,
+     -445.3
+    ],
+    [
+     -7,
+     -314.7
+    ],
+    [
+     -205.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     7,
+     -165.3
+    ],
+    [
+     205.8,
+     -165.3
+    ],
+    [
+     205.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     7,
+     -305.3
+    ],
+    [
+     205.8,
+     -305.3
+    ],
+    [
+     205.8,
+     -174.7
+    ],
+    [
+     7,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     7,
+     -445.3
+    ],
+    [
+     205.8,
+     -445.3
+    ],
+    [
+     205.8,
+     -314.7
+    ],
+    [
+     7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     214.2,
+     -165.3
+    ],
+    [
+     415.8,
+     -165.3
+    ],
+    [
+     415.8,
+     -34.7
+    ],
+    [
+     214.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     214.2,
+     -305.3
+    ],
+    [
+     415.8,
+     -305.3
+    ],
+    [
+     415.8,
+     -174.7
+    ],
+    [
+     214.2,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     214.2,
+     -445.3
+    ],
+    [
+     415.8,
+     -445.3
+    ],
+    [
+     415.8,
+     -314.7
+    ],
+    [
+     214.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     424.2,
+     -165.3
+    ],
+    [
+     625.8,
+     -165.3
+    ],
+    [
+     625.8,
+     -34.7
+    ],
+    [
+     424.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     424.2,
+     -305.3
+    ],
+    [
+     625.8,
+     -305.3
+    ],
+    [
+     625.8,
+     -174.7
+    ],
+    [
+     424.2,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-des-charrons",
+   "zone": "faubourg",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     424.2,
+     -445.3
+    ],
+    [
+     625.8,
+     -445.3
+    ],
+    [
+     625.8,
+     -314.7
+    ],
+    [
+     424.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "etat-major",
+   "nom": "État-major de la garnison",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -40,
+    545
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 15,
+   "etages": 3,
+   "toit": "mansarde",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E4DDCE",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "pente": 55
+   }
+  },
+  {
+   "id": "caserne-du-rempart",
+   "nom": "Caserne du Rempart",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -360,
+    1025
+   ],
+   "emprise_m": [
+    62,
+    56
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "caserne-de-l-artillerie",
+   "nom": "Caserne de l'Artillerie",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    200,
+    1105
+   ],
+   "emprise_m": [
+    62,
+    56
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D2CBBD",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "caserne-neuve",
+   "nom": "Caserne Neuve",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -360,
+    465
+   ],
+   "emprise_m": [
+    62,
+    56
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#C9B7A2",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 38
+   }
+  },
+  {
+   "id": "arsenal",
+   "nom": "Arsenal",
+   "canon": "A",
+   "archetype": "arsenal",
+   "position": [
+    200,
+    545
+   ],
+   "emprise_m": [
+    62,
+    40
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#C8C0B2",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "fonderie-de-canons",
+   "nom": "Fonderie de canons",
+   "canon": "A",
+   "archetype": "usine",
+   "position": [
+    440,
+    705
+   ],
+   "emprise_m": [
+    48,
+    30
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#B79C84",
+   "reperes_canon": [],
+   "params": {
+    "pente": 32
+   }
+  },
+  {
+   "id": "ecole-d-artillerie",
+   "nom": "École d'artillerie",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    440,
+    465
+   ],
+   "emprise_m": [
+    46,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E1D9C8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "poudriere",
+   "nom": "Poudrière",
+   "canon": "A",
+   "archetype": "arsenal",
+   "position": [
+    640,
+    880
+   ],
+   "emprise_m": [
+    22,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#BDB4A4",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église de la garnison",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    120,
+    225
+   ],
+   "emprise_m": [
+    20,
+    42
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 17,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E0D8C8",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 44,
+    "clocher_cote": 8,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "magasin-aux-vivres",
+   "nom": "Magasin aux vivres",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    -600,
+    865
+   ],
+   "emprise_m": [
+    60,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CEC4B0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "poste-porte-exterieure",
+   "nom": "Poste de garde de la porte extérieure",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -62,
+    1080
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "tilleul",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "tilleul",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-3",
+    "essence": "marronnier",
+    "intervalle_m": 13,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-9",
+    "essence": "tilleul",
+    "intervalle_m": 13,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-24",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -240,
+     520
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 20,
+    "nom": "Tilleul de la place d'Armes"
+   },
+   {
+    "position": [
+     -120,
+     210
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 18
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     600,
+     960
+    ],
+    "essence": "chene",
+    "hauteur_m": 22
+   }
+  ],
+  "parcs": [
+   {
+    "id": "jardin-des-officiers",
+    "nom": "Jardin des Officiers",
+    "canon": "A",
+    "polygone": [
+     [
+      -714.8,
+      350.2
+     ],
+     [
+      -565.2,
+      350.2
+     ],
+     [
+      -565.2,
+      497.8
+     ],
+     [
+      -714.8,
+      497.8
+     ]
+    ],
+    "essences": [
+     "marronnier",
+     "tilleul",
+     "erable"
+    ],
+    "arbres_par_ha": 75
+   },
+   {
+    "id": "cimetiere-militaire",
+    "nom": "Enclos du souvenir",
+    "canon": "A",
+    "polygone": [
+     [
+      327.2,
+      110.2
+     ],
+     [
+      474.8,
+      110.2
+     ],
+     [
+      474.8,
+      179.8
+     ],
+     [
+      327.2,
+      179.8
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 60
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -900,
+      -60
+     ],
+     [
+      -660,
+      -60
+     ],
+     [
+      -660,
+      -460
+     ],
+     [
+      -900,
+      -460
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -900,
+      -470
+     ],
+     [
+      900,
+      -470
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      660,
+      -60
+     ],
+     [
+      900,
+      -60
+     ],
+     [
+      900,
+      -460
+     ],
+     [
+      660,
+      -460
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -560,
+    300
+   ],
+   [
+    520,
+    280
+   ],
+   [
+    -200,
+    900
+   ],
+   [
+    700,
+    760
+   ]
+  ],
+  "fontaines": [
+   [
+    -40,
+    625
+   ],
+   [
+    -80,
+    225
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1262.6,
+    1970.6,
+    861.4
+   ],
+   "cible": [
+    30,
+    554.6,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    790.6,
+    1.8
+   ],
+   "cible": [
+    0,
+    259.6,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-d-armes",
+   "nom": "Place d'Armes et État-major",
+   "oeil": [
+    -380,
+    760,
+    10
+   ],
+   "cible": [
+    -120,
+    560,
+    8
+   ],
+   "fov": 62
+  },
+  {
+   "id": "arsenal",
+   "nom": "Arsenal et fonderie",
+   "oeil": [
+    80,
+    700,
+    7
+   ],
+   "cible": [
+    300,
+    540,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "rempart-canons",
+   "nom": "Batterie du rempart",
+   "oeil": [
+    589.5,
+    1021,
+    52.5
+   ],
+   "cible": [
+    204.7,
+    1161.1,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -624.8,
+    999.8,
+    52.5
+   ],
+   "cible": [
+    -204.7,
+    1161.1,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    14,
+    1020,
+    2
+   ],
+   "cible": [
+    0,
+    1180,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, avant la chute du mur Maria",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "846-abandon",
+   "nom": "846, territoire de Maria abandonné",
+   "date": "846",
+   "canon": "?",
+   "sources": [
+    {
+     "ref": "ERRATA.md et docs/spec/01 : le territoire du mur Maria est abandonné après 845 (C)",
+     "canon": "C"
+    },
+    {
+     "ref": "sort de ce district (portes, ruines, végétation) : non établi",
+     "canon": "?"
+    }
+   ],
+   "portes": {},
+   "ruines": [
+    {
+     "polygone": [
+      [
+       -200,
+       900
+      ],
+      [
+       250,
+       900
+      ],
+      [
+       250,
+       1120
+      ],
+      [
+       -200,
+       1120
+      ]
+     ],
+     "part": 0.25
+    }
+   ],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.8,
+   "ciel": "brumeux",
+   "habitants": 0
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

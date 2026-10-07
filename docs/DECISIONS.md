@@ -717,3 +717,37 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - attente bornée à 300 s (un second temps bloqué devient un contrôle en échec, pas un arrêt de toute la mesure) ;
   - côté page, une erreur du second temps est notée (`data-corps3d="repli"`, `data-corps-erreur`) au lieu de laisser la page attendre sans fin.
 - **Conditions de mesure** : une mesure ne tourne jamais en même temps qu'un `verify`. Le crochet de fin de tour en a lancé un pendant un passage : temps faussés (jeu à 4,00 s au lieu de 2,3 s), passage jeté.
+
+## 2026-10-07 — D-98 Correctifs de R1d (R1e.2, consigne §6)
+- **1. Fumée de la ville-usine** : profil `atmosphere` (fumée, suie) dans `styles.json` (E21) ; ciel enfumé, brume, suie sur les façades ; Orvud (E07) garde son ciel clair.
+- **2. Tissu urbain** : placettes, ruelles, cours plantées, chaume en périphérie, enduits pastel (`materiaux.json` : `enduits`) ; tuile canal et bardeau.
+- **3. Parement** : trois appareils procéduraux mêlés par masques de bruit, panneaux, coulures, pied moussu (`parement.ts`) ; photos de Poly Haven à leur taille réelle par-dessus (A et C).
+- **4. Caméra de suivi** : les arbres trop proches de la caméra s'effacent en tramé (`addViewClearance`).
+- **5. Traînées de gaz** : rubans croisés effilés et bouffées (`TRAIL_STYLE`).
+- **6. Forêt géante** : branches ramifiées et courbes, feuillage seulement en hauteur, puits de lumière doux, brume allégée, exposition × 1,3.
+- **7. Suivi d'escouade** : seuls les membres à moins de 25 m du centre comptent ; recul plafonné à 32 m.
+- **8. Éclairs de transformation** : dessinés à côté de la figure ; cadrage qui les inclut, repli sans eux (compromis de R0).
+- `smoke:r1b` attend les textures en photo (dette n° 2) ; le banc d'échelle n'en charge pas (attente levée).
+
+## 2026-10-07 — D-99 Murailles et portes (R1e.3)
+- Coupe du mur lue de `_murs.json` (hauteur 50 m [C], le reste [?] avec plage) ; parement de R1e sur les murailles des lieux.
+- Portes paramétriques (`gates3d.ts`) : extérieure (vantail levant, treuils, contrepoids, trous d'assassin, bossages, tourelles), intérieure (battants, herse, pilastres, postes de garde), de rivière (herse sur l'eau) ; états intacte, brisée (845), bouchée [?].
+- Banc d'essai `?proto3d&lieu=_banc` : mur de 600 m et trois portes ; témoin de parement de R1d (`&parement=r1d`).
+- Coordonnées de texture en mètres partout (parement 6,4 × 4,8 m, chêne 2 × 4 m, ardoise et tuile 3 m) : le parement des portes était répété tous les mètres.
+
+## 2026-10-07 — D-100 Shiganshina et la visionneuse des lieux (R1e.4)
+- Plan d'auteur rayonnant-concentrique (`src/tools/places/auteur/shiganshina.ts`) : 17 anneaux, quatre bandes de rues rayonnantes, Grand-Rue, canal [A]/[?] et ses deux portes de rivière, quais, 8 quartiers, places, parcs, faubourg.
+- Bâtiments repères à constructeur propre (`landmarks3d.ts`) : église (nef, bas-côtés, abside, clocher-porche à flèche, sans emblème), halle, caserne à cour, roue du moulin ; les autres en grande maison de leur gabarit.
+- États : rochers (dont celui de la maison des Jaeger [C]), incendies (flammes et fumée), végétation de friche selon l'abandon.
+- `?proto3d&env=E01` charge le lieu (consigne §2.3) ; `&scene=r1b` garde la scène générée de R1b pour `smoke:r1b` et `mesure:r1c/r1d`.
+- Visionneuse : brouillard à l'échelle de la vue (densité × 450 / distance, borné à 0,12) et tronçons au-delà de la visibilité non dessinés ; arbres lointains (> 480 m) en houppier de 20 faces sans ombre ; plus de butée d'inclinaison (elle relevait les vues à hauteur d'homme au-dessus des toits) ; aucun arbre d'alignement à moins de 45 m d'une porte.
+
+## 2026-10-07 — D-101 Trois autres districts du mur Maria (R1e.5)
+- Noms non établis (Q1) : `maria-district-2`, `-3`, `-4`, libellé « District du mur Maria (nom non établi) », canon `?`, orientations ouest, est, nord `?`, populations `?` (Q8).
+- Outil commun `saillie.ts` (damier d'auteur, rotation, cellules réclamées fusionnées, placettes, faubourg) ; trois identités [A] : greniers et foirail (damier large), garnison et artillerie (damier de 80 m, place d'Armes, canons tous les 20 m), marché et rivière (damier oblique à 33°, rivière et port dans le faubourg, aucune porte de rivière).
+
+## 2026-10-07 — D-102 Mémoire des lieux (R1e.6, consigne §4)
+- Plan figé N2 (`data/places/generated/<id>.json`) : lignes entières quantifiées, version et graine du générateur, et empreinte de rendu écrite au gel ; le rendu lit les lignes sans relancer le générateur ; un test vérifie l'empreinte.
+- Village de démonstration `village-des-saules` [A] (6 % de la province des hameaux de l'ouest de Maria : 522 habitants, 114 bâtiments).
+- Deltas : IndexedDB séparée (`murs-et-sang-lieux`), clé (lieu, version), modifications par bâtiment codées en entiers variables (rang en écart, `ruine << 2 | état`) : 100 lieux × 400 bâtiments = 104,6 Kio.
+- Cache LRU de 8 lieux (`PlaceCache`) ; budget visé 250 000 triangles et 400 appels par lieu (à confirmer sur le PC de l'utilisateur).

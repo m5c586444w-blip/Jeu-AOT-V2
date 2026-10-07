@@ -325,6 +325,9 @@ export type WallsParams = z.infer<typeof WallsParamsSchema>;
 
 // ——— Plan figé d'un lieu N2 (§4) ———
 
+export const CULTURES = ["ble", "orge", "jachere", "labour", "prairie", "potager", "verger"] as const;
+export type Culture = (typeof CULTURES)[number];
+
 /**
  * Plan compact : positions quantifiées à 0,1 m (entiers ×10), hauteurs à 0,25 m (entiers ×4), angles au degré, archétype par
  * index. `b` : [x, y, angle, largeur, profondeur, hauteur, archétype, toit, couverture, façade, teinte] ; `t` : [x, y, essence, hauteur].
@@ -352,7 +355,9 @@ export const FrozenPlanSchema = z
     rues: z.array(z.object({ trace: z.array(z.tuple([z.number().int(), z.number().int()])).min(2), largeur: z.number().int().positive(), revetement: z.enum(PAVINGS) }).strict()),
     b: z.array(z.array(z.number().int()).length(11)),
     t: z.array(z.array(z.number().int()).length(4)),
-    champs: z.array(z.object({ polygone: z.array(z.tuple([z.number().int(), z.number().int()])).min(3), culture: z.enum(["ble", "orge", "jachere", "labour", "prairie", "potager", "verger"]) }).strict()),
+    champs: z.array(z.object({ polygone: z.array(z.tuple([z.number().int(), z.number().int()])).min(3), culture: z.enum(CULTURES) }).strict()),
+    /** Empreinte de rendu au moment du gel (`frozenHash`) : un test vérifie qu'elle ne change plus (CR1e-09). */
+    empreinte: z.string().min(1),
   })
   .strict();
 export type FrozenPlan = z.infer<typeof FrozenPlanSchema>;

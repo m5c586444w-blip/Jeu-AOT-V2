@@ -1,5 +1,6 @@
 import type { Block, Building, Facade, Gabarit, Place, PlaceState, RoofCover, RoofForm, Species, Street } from "../../../data/placeSchema";
 import type { P2, Poly2 } from "./geom";
+import { wallFrameAt } from "./walls";
 import { add, area, bbox, ccw, centroid, convexOverlap, cross, cycle, dist, dot, halton, hashStr, inset, inside, left, mul, polylineDist, polylineLength, rectPoly, sub, unit, along } from "./geom";
 
 /**
@@ -288,6 +289,16 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
     if (!g) throw new Error(`lieu ${place.id} : gabarit inconnu ${b.gabarit}`);
     return layoutBlock(b, g, isFront);
   });
+  // Les bâtiments repères prennent la place des maisons courantes qu'ils recouvrent (emprise élargie de 2 m).
+  const marks = place.batiments.map((b) => {
+    const a = (b.angle_deg * Math.PI) / 180;
+    return rectPoly(b.position, [Math.cos(a), Math.sin(a)], b.emprise_m[0] / 2 + 2, b.emprise_m[1] / 2 + 2);
+  });
+  const free = (hh: HouseInst): boolean => {
+    const poly = rectPoly([hh.x, hh.y], [Math.cos(hh.a), Math.sin(hh.a)], hh.w / 2, hh.d / 2);
+    return !marks.some((m) => convexOverlap(m, poly, 0.05));
+  };
+  for (const bl of blocks) bl.houses = bl.houses.filter(free);
   const houses = blocks.flatMap((b) => b.houses);
   for (const hh of houses) hh.ruin = ruinOf(state, hh.id, [hh.x, hh.y]);
   const houseGrid = new Grid<HouseInst>(32);
@@ -321,6 +332,14 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
     const count = Math.round((area(park.polygone) / 10000) * park.arbres_par_ha);
     sow(park.polygone, count, hashStr(park.id) % 500, 4, 1.5).forEach((p, i) => push(p, cycle(park.essences, i * 3 + (i >> 2)), "parc", i, 3.5));
   }
+  // Abords des portes dégagés : aucun arbre d'alignement à moins de 45 m d'une porte (vues des portes, passage des convois).
+  const gateSpots: P2[] = place.enceinte
+    ? place.portes.flatMap((g) => {
+        const tr = place.enceinte?.traces.find((x) => x.id === g.trace);
+        return tr ? [wallFrameAt(tr, g.s_m).p] : [];
+      })
+    : [];
+  const nearGate = (q: P2): boolean => gateSpots.some((gp) => dist(q, gp) < 45);
   for (const al of place.vegetation.alignements) {
     const r = streets.find((x) => x.id === al.rue);
     if (!r) continue;
@@ -335,7 +354,7 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
         const q = add(p, mul(left(d), side * off));
         // Pas d'arbre dans un carrefour ni contre une façade.
         if (streetGrid.near(q[0], q[1]).some((o) => o !== r && polylineDist(q, o.trace) < o.largeur_m / 2 + 2)) continue;
-        if (inHouse(q, 1.2)) continue;
+        if (inHouse(q, 1.2) || nearGate(q)) continue;
         push(q, al.essence, "rue", i * 2 + (side > 0 ? 1 : 0), 4);
       }
     }
@@ -373,6 +392,14 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
       const c = centroid(gp);
       if (!inHouse(c, 0.5)) push(c, gi % 2 ? "fruitier" : cycle(courtSpecies, gi + bi), "jardin", bi * 17 + gi, 4);
     });
+    // Abandon (état du lieu) : végétation spontanée dans les îlots — bouleaux, saules et frênes de friche, 60 par ha à
+    // l'abandon complet.
+    if (state.abandon > 0) {
+      const n = Math.round((area(bl.block.polygone) / 10000) * 60 * state.abandon);
+      sow(bl.block.polygone, n, (hashStr(bl.block.id) % 991) + 7, 4, 2).forEach((p, i) => {
+        if (!inHouse(p, 0.8)) push(p, i % 3 === 0 ? "saule" : "bouleau", "jardin", bi * 53 + i + 7, 3.5);
+      });
+    }
   });
 
   const landmarks = place.batiments.map((b) => ({ ...b, chunk: chunkOf(b.position[0], b.position[1]), ruin: ruinOf(state, b.id, b.position) }));

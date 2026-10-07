@@ -255,7 +255,8 @@ async function scene(url: string, s: SceneDef, version: Row["version"], file: st
   const errors: string[] = [];
   try {
     const page = await newPage(browser, errors);
-    await page.goto(`${url}?${s.query}`);
+    // R1e : `env=E01` charge désormais le lieu Shiganshina ; ces mesures portent sur la scène générée de R1b (`scene=r1b`).
+    await page.goto(`${url}?${s.query}&scene=r1b`);
     await page.waitForFunction(() => ["pret", "sans-webgl"].includes(document.documentElement.dataset["proto3d"] ?? ""), undefined, { timeout: 900000, polling: 50 });
     const pretMs = await page.evaluate(() => performance.now());
     const state = await page.evaluate(() => document.documentElement.dataset["proto3d"] ?? "");

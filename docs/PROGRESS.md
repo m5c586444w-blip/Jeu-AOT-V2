@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1e en cours** (système de lieux, mur Maria, pilote Shiganshina) — commit de départ `497be52` |
-| Tâche | R1e.1 : schéma de lieu, `_murs.json`, chargeur `loadPlace` (tronçons de 64 m, instances par archétype), `places:valider`, `places:captures`, `places:regenerer`, plans SVG |
-| Dernier `npm run verify` | 2026-10-07 (R1e.1) : code 0, 73 fichiers, 465 tests ; `assets:check` : 102 entrées, 102 fichiers |
-| Prochaine étape | R1e.2 : correctifs de R1d (§6, points 1 à 8) |
+| Phase | **R1e — ARRÊT OBLIGATOIRE n° 1** (CR1e-05 en échec deux fois) — commit de départ `497be52` |
+| Tâche | R1e.3 : parement des murailles (CR1e-05) ; R1e.2 à R1e.6 faits dans le code, captures des lieux à reprendre |
+| Dernier `npm run verify` | voir `docs/reports/R1e-verify-arret.log` (sortie collée ci-dessous) |
+| Prochaine étape | décision de l'utilisateur sur CR1e-05 (voir « Arrêt » ci-dessous), puis captures des lieux, rapport R1e |
 
 ## Feuille de route (consigne de l'utilisateur, 2026-10-07 ; `docs/phases/R1e-consigne.md`)
 | Ordre | Phase | Contenu | Arrêt |
@@ -19,6 +19,51 @@
 | 7 | R3 → P10 | inchangées | selon le fichier 18 |
 
 Règles : plus de sous-phase inventée (hors-périmètre → `docs/reports/dette.md`) ; plus de nouvel outil de mesure ; rapports ≤ 150 lignes ; arrêts : fin de R1e, de LC-D, de R4, de P9 (et arrêts 1 à 4).
+
+## Arrêt obligatoire n° 1 — CR1e-05 en échec deux fois (2026-10-07)
+- **Critère** (plan R1e §2) : parement vu de face sur le banc (120 m × 50 m) ; autocorrélation normalisée de la luminance des
+  colonnes (6 à 46 m de haut), décalages de 2 à 30 m : maximum < 0,35 ; le témoin de R1d doit dépasser 0,35.
+- **Premier essai** (captures complètes du banc, `npx vitest run tests/places/murs.test.ts`) :
+  ```
+  parement R1e : max 0.689 à 2.1 m ; témoin R1d : max 1.001 à 9.9 m
+  AssertionError: expected 0.6886860769154525 to be less than 0.35
+  ```
+  Cause mesurée : la variance des colonnes venait de plaques larges (teinte des panneaux de 7,3 m, masques des appareils), d'où
+  une forte corrélation dès 2 m.
+- **Correctif (un seul)** (`src/render/tactical3d/parement.ts`) : coulures en bandes verticales étroites (0,55 m) tirées une à
+  une (présence, intensité, longueur), teinte des panneaux réduite de moitié.
+- **Second essai** (même commande) :
+  ```
+  parement R1e : max 0.501 à 19.9 m ; témoin R1d : max 1.001 à 9.9 m
+  ```
+  Courbe complète (diagnostic, même image) : `1 m 0.18 | 2 m 0.26 | 3 m 0.24 | 4 m 0.15 | 6 m 0.15 | 8 m 0.31 | 10 m 0.15 |
+  12 m 0.21 | 15 m 0.09 | 18 m 0.06 | 20 m 0.48 | 22 m 0.11 | 25 m 0.07 | 30 m 0.04` (témoin R1d : 0,95 à 10 et 20 m).
+  Tout est sous 0,35 sauf **un pic isolé à 20 m** : une vraie répétition, de cause non établie.
+  - Le hachage des bandes n'est pas périodique en double précision (corrélation −0,09 à 35 bandes = 19,25 m).
+  - Les photos de Poly Haven (2 m et 2,5 m) donneraient aussi un pic à 10 m (0,15 seulement).
+  - La coordonnée le long du mur est continue (`wall3d.ts`).
+- **Décision demandée** :
+  - (a) autoriser un troisième essai : isoler la composante de 20 m (rendu de face appareil par appareil, photos et coulures
+    séparées), la supprimer, puis remesurer ;
+  - (b) ou accepter CR1e-05 en l'état (0,50 ; témoin 1,00) et poursuivre ;
+  - (c) ou redéfinir la mesure.
+- **État des autres tâches de R1e** (rien n'est perdu ; tout est commité, voir le journal git) :
+  - R1e.2 (correctifs 1 à 8) : fait ; planches `docs/screenshots/r1e-correctifs-1.png` à `-8.png` ; `smoke:r0 -- apres` : code 0.
+    `smoke:r1b` : premier passage arrêté au banc d'échelle (attente des photos, corrigée) ; second passage interrompu pour le
+    correctif de parement : à relancer.
+  - R1e.3 (murs et portes) : banc capturé ; CR1e-06 (7 vues par porte, ΔE ≥ 6, extérieure ≠ intérieure) : test vert.
+  - R1e.4 (Shiganshina), R1e.5 (trois districts), R1e.6 (mémoire, village N2) : faits dans le code et validés hors captures
+    (population ÷ densité : écarts de −8,5 % à +7,9 % ; arbres ≥ 23 par ha bâti) ; captures des lieux à faire.
+  - R1e.7 (captures, rapport) : à faire après la décision.
+- **Second point à trancher : CR1e-10 et le correctif 8.** `npm run mesure:r1d -- bundle` (`docs/reports/R1e-bundle.log`) :
+  `KO bundle principal : même taille (902588 → 902798 octets)`. Les 210 octets viennent du correctif 8 (cadrage des éclairs de
+  transformation, `src/render/tactical/framing.ts`, rendu 2D du bundle principal : `boltsInFrame`). Le correctif 8 est demandé
+  par la consigne (§6) et touche forcément le bundle principal : « bundle principal inchangé » ne peut pas tenir avec lui.
+  Les autres contrôles passent (worker identique à l'octet, ni three.js ni GLTFLoader dans le bundle, aucun asset dans le JS).
+- **`npm run verify`** (`docs/reports/R1e-verify-arret.log`, `R1e-verify-suite.log`) : typecheck et lint au code 0 ; tests
+  `Test Files 1 failed | 77 passed (78)`, `Tests 1 failed | 492 passed (493)` — le seul échec est CR1e-05 ; ensuite, lancés un à
+  un : `data:validate`, `assets:check` (102 entrées), `canon:check`, `sim:selftest`, `build` au code 0. `src/sim` inchangé
+  depuis `497be52` (0 ligne de diff).
 
 ## R1e.1 (2026-10-07)
 - Schéma `src/data/placeSchema.ts` (lieux N1, murailles, plans figés N2) ; `data/places/_murs.json` (hauteur 50 m [C], le reste [?] avec plage).

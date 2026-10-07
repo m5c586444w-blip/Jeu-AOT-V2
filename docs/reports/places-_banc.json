@@ -1,0 +1,559 @@
+{
+ "shots": {
+  "mur-face": {
+   "file": "docs/places/_banc/vue-mur-face.png",
+   "stats": {
+    "calls": 21,
+    "triangles": 22493,
+    "instances": 0,
+    "chunks": {
+     "total": 2,
+     "visible": 0,
+     "near": 0
+    }
+   },
+   "rgb": [
+    178.18767795138888,
+    174.98065538194444,
+    156.17359375
+   ]
+  },
+  "ensemble": {
+   "file": "docs/places/_banc/vue-ensemble.png",
+   "stats": {
+    "calls": 43,
+    "triangles": 40252,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    159.43762586805556,
+    166.26865017361112,
+    142.44357638888889
+   ]
+  },
+  "mur-pied": {
+   "file": "docs/places/_banc/vue-mur-pied.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 40412,
+    "instances": 4,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    179.320625,
+    181.54637152777778,
+    166.80259114583333
+   ]
+  },
+  "mur-ville": {
+   "file": "docs/places/_banc/vue-mur-ville.png",
+   "stats": {
+    "calls": 35,
+    "triangles": 24075,
+    "instances": 4,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    112.17890625,
+    116.52469618055555,
+    108.44607204861111
+   ]
+  },
+  "mur-chemin": {
+   "file": "docs/places/_banc/vue-mur-chemin.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 40412,
+    "instances": 4,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    195.04948784722222,
+    200.1894314236111,
+    196.16374131944445
+   ]
+  },
+  "mur-loin": {
+   "file": "docs/places/_banc/vue-mur-loin.png",
+   "stats": {
+    "calls": 40,
+    "triangles": 40092,
+    "instances": 2,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    161.46754774305555,
+    172.7951779513889,
+    153.39055555555555
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/_banc/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 33,
+    "triangles": 38493,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    166.1386371527778,
+    159.67002604166666,
+    137.25852430555557
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/_banc/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 28,
+    "triangles": 34645,
+    "instances": 0,
+    "chunks": {
+     "total": 2,
+     "visible": 0,
+     "near": 0
+    }
+   },
+   "rgb": [
+    101.58418836805555,
+    90.68330729166667,
+    76.9583767361111
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/_banc/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 33,
+    "triangles": 38493,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    100.05829861111111,
+    102.01000434027777,
+    90.72687065972222
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/_banc/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 28,
+    "triangles": 34645,
+    "instances": 0,
+    "chunks": {
+     "total": 2,
+     "visible": 0,
+     "near": 0
+    }
+   },
+   "rgb": [
+    78.17627604166667,
+    79.3824435763889,
+    76.35648003472222
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/_banc/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 33,
+    "triangles": 38493,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    43.866627604166666,
+    38.26161458333333,
+    31.366063368055556
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/_banc/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 28,
+    "triangles": 34645,
+    "instances": 0,
+    "chunks": {
+     "total": 2,
+     "visible": 0,
+     "near": 0
+    }
+   },
+   "rgb": [
+    169.48387152777778,
+    174.75645399305554,
+    166.6070269097222
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/_banc/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 266,
+    "triangles": 130308,
+    "instances": 4,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 0
+    }
+   },
+   "rgb": [
+    148.39072916666666,
+    154.8793532986111,
+    135.5428689236111
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/_banc/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 37,
+    "triangles": 34382,
+    "instances": 6,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    158.22850260416666,
+    155.47532552083334,
+    129.12391927083334
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/_banc/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 37,
+    "triangles": 34382,
+    "instances": 6,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    103.05313802083333,
+    96.47491319444444,
+    83.0814453125
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/_banc/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 39,
+    "triangles": 34954,
+    "instances": 6,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    100.96002604166667,
+    101.74071614583333,
+    88.35412760416666
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/_banc/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 38,
+    "triangles": 42680,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    85.19499131944444,
+    86.77328125,
+    83.07570746527777
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/_banc/porte-interieure-passage.png",
+   "stats": {
+    "calls": 33,
+    "triangles": 30536,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    90.97235677083333,
+    90.48873697916666,
+    83.66666232638889
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/_banc/porte-interieure-haut.png",
+   "stats": {
+    "calls": 34,
+    "triangles": 38928,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    191.130390625,
+    198.46081163194444,
+    192.48069010416665
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/_banc/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 262,
+    "triangles": 121832,
+    "instances": 5,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 1
+    }
+   },
+   "rgb": [
+    147.81534722222221,
+    155.86692274305557,
+    137.14570746527778
+   ]
+  },
+  "porte-riviere-exterieure-face": {
+   "file": "docs/places/_banc/porte-riviere-exterieure-face.png",
+   "stats": {
+    "calls": 32,
+    "triangles": 27567,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    147.2826388888889,
+    146.5164453125,
+    127.52351996527777
+   ]
+  },
+  "porte-riviere-exterieure-detail": {
+   "file": "docs/places/_banc/porte-riviere-exterieure-detail.png",
+   "stats": {
+    "calls": 30,
+    "triangles": 27449,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    95.50998263888889,
+    92.41735677083334,
+    80.27713975694445
+   ]
+  },
+  "porte-riviere-interieure-face": {
+   "file": "docs/places/_banc/porte-riviere-interieure-face.png",
+   "stats": {
+    "calls": 36,
+    "triangles": 27743,
+    "instances": 5,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 1
+    }
+   },
+   "rgb": [
+    84.1592751736111,
+    88.24889756944444,
+    76.61189236111112
+   ]
+  },
+  "porte-riviere-interieure-detail": {
+   "file": "docs/places/_banc/porte-riviere-interieure-detail.png",
+   "stats": {
+    "calls": 37,
+    "triangles": 31411,
+    "instances": 6,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    92.57839409722222,
+    94.94194878472223,
+    91.09780815972222
+   ]
+  },
+  "porte-riviere-passage": {
+   "file": "docs/places/_banc/porte-riviere-passage.png",
+   "stats": {
+    "calls": 35,
+    "triangles": 31293,
+    "instances": 6,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    61.68799479166667,
+    60.670802951388886,
+    55.15828125
+   ]
+  },
+  "porte-riviere-haut": {
+   "file": "docs/places/_banc/porte-riviere-haut.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 44048,
+    "instances": 5,
+    "chunks": {
+     "total": 2,
+     "visible": 2,
+     "near": 1
+    }
+   },
+   "rgb": [
+    182.08291232638888,
+    189.22519965277777,
+    183.34176649305556
+   ]
+  },
+  "porte-riviere-echelle": {
+   "file": "docs/places/_banc/porte-riviere-echelle.png",
+   "stats": {
+    "calls": 252,
+    "triangles": 117463,
+    "instances": 3,
+    "chunks": {
+     "total": 2,
+     "visible": 1,
+     "near": 1
+    }
+   },
+   "rgb": [
+    149.84378038194444,
+    157.78973958333333,
+    140.20387586805555
+   ]
+  }
+ },
+ "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 36.00098046522588,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 32.75072542973676,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.18054065954132,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 54.015544696201175,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 27.42799073228905,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.9344704201544,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 30.526851543795278,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 27.520552918121666,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 33.398808980454845,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 40.57131606624111,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.02236242899304,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 29.24443280959877,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 33.68060020151995,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 35.51554336980587,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 33.59837876180296,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 36.34239924575376,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 43.425083671095265,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 41.282147403248516,
+  "porte-exterieure-passage | porte-exterieure-haut": 58.095733038655304,
+  "porte-exterieure-passage | porte-exterieure-echelle": 53.37169041114743,
+  "porte-exterieure-haut | porte-exterieure-echelle": 26.825614475038183,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 34.94203236448115,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 32.771797478175685,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 40.58225140639554,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 46.599605167722885,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 26.999582459534093,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 11.129267855800245,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 31.672168872148372,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 29.934844115099434,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 42.86192772352874,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 48.21992645494654,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 39.255961303035264,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 29.036351092893653,
+  "porte-interieure-interieure-face | porte-interieure-passage": 32.62205800289301,
+  "porte-interieure-interieure-face | porte-interieure-haut": 42.504713331889626,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 34.446875989183766,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 45.36850362471521,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 47.1293318787093,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 38.49575908583441,
+  "porte-interieure-passage | porte-interieure-haut": 53.74716228949883,
+  "porte-interieure-passage | porte-interieure-echelle": 47.67969541603189,
+  "porte-interieure-haut | porte-interieure-echelle": 24.016450817480013,
+  "porte-riviere-exterieure-face | porte-riviere-exterieure-detail": 34.48428364001175,
+  "porte-riviere-exterieure-face | porte-riviere-interieure-face": 27.992597710530738,
+  "porte-riviere-exterieure-face | porte-riviere-interieure-detail": 32.15274314054755,
+  "porte-riviere-exterieure-face | porte-riviere-passage": 47.749847849201224,
+  "porte-riviere-exterieure-face | porte-riviere-haut": 27.710066294358445,
+  "porte-riviere-exterieure-face | porte-riviere-echelle": 18.14160874289572,
+  "porte-riviere-exterieure-detail | porte-riviere-interieure-face": 28.36204845946959,
+  "porte-riviere-exterieure-detail | porte-riviere-interieure-detail": 29.90129575194769,
+  "porte-riviere-exterieure-detail | porte-riviere-passage": 32.36411852639218,
+  "porte-riviere-exterieure-detail | porte-riviere-haut": 49.38034617781527,
+  "porte-riviere-exterieure-detail | porte-riviere-echelle": 40.89109628792707,
+  "porte-riviere-interieure-face | porte-riviere-interieure-detail": 20.576787214986567,
+  "porte-riviere-interieure-face | porte-riviere-passage": 29.55213424260526,
+  "porte-riviere-interieure-face | porte-riviere-haut": 43.88483754809464,
+  "porte-riviere-interieure-face | porte-riviere-echelle": 36.62620500227827,
+  "porte-riviere-interieure-detail | porte-riviere-passage": 36.48676274281369,
+  "porte-riviere-interieure-detail | porte-riviere-haut": 41.388009121742435,
+  "porte-riviere-interieure-detail | porte-riviere-echelle": 34.87204694116587,
+  "porte-riviere-passage | porte-riviere-haut": 60.45790313548576,
+  "porte-riviere-passage | porte-riviere-echelle": 50.770461944252766,
+  "porte-riviere-haut | porte-riviere-echelle": 25.077944600995394,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 7.680789199681213,
+  "etat-intact | etat-brise": 0.046338320227203335,
+  "etat-intact | etat-bouche": 0.05503099739581836,
+  "etat-brise | etat-bouche": 0.07302814799737185
+ }
+}

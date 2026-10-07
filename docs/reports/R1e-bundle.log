@@ -1,0 +1,32 @@
+
+=== Bundle (avant 3782acd contre l'état courant) ===
+bundle principal avant : assets/index-Bv_Xd8Ly.js  902588 octets (266.8 Kio gzip)
+bundle principal après : assets/index-FvaFE5qM.js  902798 octets (266.9 Kio gzip)
+worker avant : sim.worker-BDqA4b1U.js  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+worker après : sim.worker-BDqA4b1U.js  sha256 f30d630d5356e51fb52913c9828c84a1c6951626b088c4b922bbd792537854be
+  KO  bundle principal : même taille (902588 → 902798 octets)
+  KO  bundle principal : même contenu une fois les noms de morceaux hachés normalisés
+  OK  worker de simulation identique à l'octet
+  OK  ni three.js ni GLTFLoader dans le bundle principal
+morceaux 3D à la demande, avant : 9 morceaux, 978890 octets (269.1 Kio gzip)
+morceaux 3D à la demande, après : 10 morceaux, 998224 octets (277.2 Kio gzip)
+  OK  aucun modèle ni texture d'asset inclus dans le JS (aucun)
+assets 3D (dist/assets3d/) : 14 fichiers, 10.47 Mio
+  assets3d/derives/humain.glb  5886104 octets
+  assets3d/makehuman/eyes/brown_eye.png  610817 octets
+  assets3d/polyhaven/castle_wall_slates_diff_1k.webp  368808 octets
+  assets3d/polyhaven/castle_wall_slates_nor_gl_1k.webp  445322 octets
+  assets3d/polyhaven/cobblestone_floor_08_diff_1k.webp  345736 octets
+  assets3d/polyhaven/cobblestone_floor_08_nor_gl_1k.webp  400558 octets
+  assets3d/polyhaven/forrest_ground_01_diff_1k.webp  460062 octets
+  assets3d/polyhaven/forrest_ground_01_nor_gl_1k.webp  596190 octets
+  assets3d/polyhaven/medieval_blocks_03_diff_1k.webp  378902 octets
+  assets3d/polyhaven/medieval_blocks_03_nor_gl_1k.webp  551922 octets
+  assets3d/polyhaven/roof_slates_02_diff_1k.webp  286824 octets
+  assets3d/polyhaven/roof_slates_02_nor_gl_1k.webp  299098 octets
+  assets3d/polyhaven/roof_tiles_14_diff_1k.webp  175196 octets
+  assets3d/polyhaven/roof_tiles_14_nor_gl_1k.webp  170298 octets
+  OK  assets 3D servis = fichiers « execution » du manifeste (14)
+  OK  aucune image de référence dans dist (0)
+mesure:r1d : 2 contrôle(s) en échec.
+exit 1

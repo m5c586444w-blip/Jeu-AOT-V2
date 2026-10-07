@@ -1,0 +1,21 @@
+=== npm run data:validate
+data:validate : « data » valide (74 provinces, 80 personnages, 88 technologies, 91 événements, 9 Titans-porteurs, 0 positionnements, 11 bâtiments, 3 scénarios ; équilibrage : economy, time, politics, society, expeditions, logistics, tactical, events, research, intel, shifters, world ; rendu : 28 profils de style).
+exit 0
+=== npm run assets:check
+assets:check : 102 entrées, 102 fichiers ; licences, sources et empreintes conformes.
+exit 0
+=== npm run canon:check
+canon:check : « data » conforme (R1–R12, 592 entrées).
+exit 0
+=== npm run sim:selftest
+[scn_854, Marley] direct : f0ca0b94 | worker : f0ca0b94 | date an 854, jour 181 | guerres : fac_marley|fac_paradis | Marteau → char_eren_yeager
+[scn_sandbox_850 + expédition] direct : 0d187108 | worker : 0d187108 | date an 850, jour 168 | rapport : 72 morts / 103
+[scn_sandbox_850 + bataille jouée] direct : 682039d9 | worker : 682039d9 | date an 850, jour 129 | 7 commandes | bataille reportée
+sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 854, 854 mené par Marley, 850 avec une expédition, 850 avec une bataille jouée).
+exit 0
+=== npm run build
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.51s
+exit 0

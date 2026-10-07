@@ -1,5 +1,6 @@
 import "./proto3d.css";
 import { TX, fill } from "./texts";
+import { placeForEnv } from "./places/envRoutes";
 
 /**
  * Entrée de l'essai 3D (R1), chargée à la demande par `src/main.ts`. Elle n'importe pas three.js : elle vérifie d'abord
@@ -107,8 +108,8 @@ export async function openProto3d(root: HTMLElement): Promise<void> {
     } else if (q.get("proto3d") === "galerie" || q.has("galerie")) {
       const m = await import("./gallery");
       await m.startGallery(root, probe);
-    } else if (q.has("lieu")) {
-      // R1e : lieux N1 (plan d'auteur), `?proto3d&lieu=<id>`.
+    } else if (q.has("lieu") || placeForEnv(q)) {
+      // R1e : lieux N1 (plan d'auteur) et N2 figés, `?proto3d&lieu=<id>` ; `?proto3d&env=E01` charge Shiganshina (§2.3).
       const m = await import("./places/placeViewer");
       await m.startPlaceViewer(root, probe);
     } else if (q.get("env") === "banc") {

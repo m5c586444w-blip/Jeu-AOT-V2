@@ -5,8 +5,8 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { PlaceSchema } from "../data/placeSchema";
 import type { Place } from "../data/placeSchema";
-import { readPlace, readWalls } from "./places/check";
-import { placeSvgs } from "./places/svgFiles";
+import { readFrozen, readPlace, readWalls } from "./places/check";
+import { frozenSvgs, placeSvgs } from "./places/svgFiles";
 import { AUTHORS } from "./places/auteur";
 import { GENERATED } from "./places/generes";
 
@@ -27,9 +27,19 @@ for (const id of ids) {
   const author = AUTHORS[id];
   const gen = GENERATED[id];
   if (gen) {
-    const plan = gen();
-    writeFileSync(`data/places/generated/${id}.json`, `${JSON.stringify(plan)}\n`);
-    console.log(`${id} (N2) : plan figé réécrit (${plan.b.length} bâtiments, graine ${plan.generateur.graine}, générateur v${plan.generateur.version}).`);
+    const plan = svgOnly ? readFrozen(id).plan : gen();
+    if (!plan) {
+      console.error(`${id} : plan figé absent`);
+      failed++;
+      continue;
+    }
+    if (!svgOnly) {
+      mkdirSync("data/places/generated", { recursive: true });
+      writeFileSync(`data/places/generated/${id}.json`, `${JSON.stringify(plan)}\n`);
+      console.log(`${id} (N2) : plan figé réécrit (${plan.b.length} bâtiments, ${plan.t.length} arbres, graine ${plan.generateur.graine}, générateur v${plan.generateur.version}, empreinte ${plan.empreinte}).`);
+    }
+    mkdirSync(`docs/places/${id}`, { recursive: true });
+    for (const [file, text] of Object.entries(frozenSvgs(plan, walls))) writeFileSync(`docs/places/${id}/${file}`, `${text}\n`);
     continue;
   }
   let place: Place;

@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Box3, PCFShadowMap, PerspectiveCamera, SRGBColorSpace, Scene, Vector2, Vector3, WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { WebGLProbe } from "../entry";
 import { backTo2d } from "../entry";
@@ -13,12 +13,14 @@ import { createPost } from "../post";
 import type { PostChain } from "../post";
 import { QUALITIES, QUALITY, effectivePixelRatio } from "../quality";
 import type { Quality } from "../quality";
-import { fetchPlace, buildPlaceScene } from "./loadPlace";
+import { fetchPlace, fetchWalls, buildPlaceScene } from "./loadPlace";
+import { benchPlace } from "./bench";
 import type { SceneView } from "./loadPlace";
 import { placeExtras } from "./extras";
+import { placeForEnv } from "./envRoutes";
 
 /**
- * Visionneuse des lieux N1 (R1e) : `?proto3d&lieu=shiganshina` ; `?proto3d&env=E01` charge aussi Shiganshina (la scène E01 de
+ * Visionneuse des lieux N1 et N2 figés (R1e) : `?proto3d&lieu=shiganshina`, `?proto3d&lieu=village-des-saules` ; `?proto3d&env=E01` charge aussi Shiganshina (la scène E01 de
  * R1b est remplacée par le lieu, consigne §2.3).
  * - `&etat=` : variante datée ; `&vue=` : point de vue nommé du lieu ou vue de porte (`porte-<id>-<vue>`) ; `&lumiere=`,
  *   `&qualite=`, `&oeil=x,y,z&cible=x,y,z` (vue libre, y = altitude), `&panneau=0`.
@@ -47,7 +49,6 @@ export function labGrid(px: Uint8Array, w: number, h: number, gx: number, gy: nu
   return { rgb, lab: rgbToLab(...rgb), grid: cells.map((c) => rgbToLab((c[0] as number) / (c[3] as number), (c[1] as number) / (c[3] as number), (c[2] as number) / (c[3] as number))) };
 }
 
-export const ENV_TO_PLACE: Record<string, string> = { E01: "shiganshina" };
 
 export interface PlaceProbe {
   ready: boolean;
@@ -65,6 +66,9 @@ export interface PlaceProbe {
   /** Couleur moyenne d'une vue rendue hors écran (w × h), grille CIELAB de gx × gy cases (ligne par ligne, du haut). */
   meanColor(view: string, w: number, h: number, gx: number, gy: number): MeanColor;
   frame(): Promise<void>;
+  /** Contrôle : objets de la scène (nom, type, boîte englobante) et masquage par nom (diagnostic d'un artefact). */
+  objects(): { name: string; type: string; box: [number, number, number, number, number, number] | null }[];
+  hide(names: string[]): void;
 }
 
 declare global {
@@ -75,8 +79,7 @@ declare global {
 
 export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Promise<void> {
   const params = new URLSearchParams(window.location.search);
-  const envId = (params.get("env") ?? "").toUpperCase();
-  const id = params.get("lieu") ?? ENV_TO_PLACE[envId] ?? "shiganshina";
+  const id = params.get("lieu") ?? placeForEnv(params) ?? "shiganshina";
   const seedParam = Number(params.get("graine"));
   const seed = Number.isFinite(seedParam) && seedParam > 0 ? Math.floor(seedParam) : 845;
   const quality: Quality = QUALITIES.find((q) => q === params.get("qualite")) ?? "moyen";
@@ -85,10 +88,11 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
   html.dataset["lieu"] = id;
 
   const t0 = performance.now();
-  const { place, walls } = await fetchPlace(id);
+  // Banc d'essai (R1e.3) : lieu fabriqué en code, murailles lues comme les autres.
+  const { place, walls, frozen } = id === "_banc" ? { place: benchPlace(), walls: await fetchWalls(), frozen: undefined } : await fetchPlace(id);
   const t1 = performance.now();
   const stateId = params.get("etat") ?? place.etat_defaut;
-  const scene3 = buildPlaceScene(place, walls, { seed, state: stateId, custom: (s) => placeExtras(s, stateId) });
+  const scene3 = buildPlaceScene(place, walls, { seed, state: stateId, custom: (s) => placeExtras(s, stateId), r1dWall: params.get("parement") === "r1d", ...(frozen ? { frozen } : {}) });
   const t2 = performance.now();
   html.dataset["etat"] = scene3.layout.state.id;
 
@@ -106,7 +110,9 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const camera = new PerspectiveCamera(55, 16 / 9, 0.5, 12000);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
-  controls.maxPolarAngle = Math.PI * 0.495;
+  // Pas de butée d'inclinaison : les vues à hauteur d'homme visent plus haut que l'œil (portes, Grand-Rue) ; une butée à
+  // l'horizontale relevait la caméra au-dessus des toits.
+  controls.maxPolarAngle = Math.PI;
   const views = scene3.views;
   const viewIds = Object.keys(views);
   const firstView = views[viewIds[0] ?? ""] as SceneView;
@@ -139,6 +145,14 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
     cam.updateMatrixWorld();
   };
   const viewDef = (v: string): SceneView => (v === "libre" && freeEye && freeTarget ? { eye: freeEye, target: freeTarget, fov: 55 } : (views[v] ?? firstView));
+  // Brouillard à l'échelle de la vue : les vues d'ensemble (2 à 3 km) restent lisibles ; au-delà de la visibilité (2 % de
+  // transmission), les tronçons ne sont plus dessinés.
+  const viewFog = (d: SceneView): void => {
+    const dist = new Vector3(...d.eye).distanceTo(new Vector3(...d.target));
+    lighting.setFogBoost(Math.min(1, Math.max(0.12, 450 / Math.max(1, dist))));
+    const fogD = (scene.fog as { density?: number } | null)?.density ?? 0;
+    scene3.setFarLimit(fogD > 0 ? 1.98 / fogD : Infinity);
+  };
   const setView = (v: string): void => {
     view = v;
     const d = viewDef(v);
@@ -146,6 +160,8 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
     controls.target.set(...d.target);
     lighting.setCenter(new Vector3(...d.target));
     controls.update();
+    viewFog(d);
+    scene3.onView(v);
     html.dataset["vue"] = v;
   };
 
@@ -232,6 +248,8 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
     off.setSize(w, h, false);
     const d = viewDef(v);
     setCam(offCam, d, w / h);
+    scene3.onView(v);
+    viewFog(d);
     scene3.update(offCam, true);
     lighting.setCenter(new Vector3(...d.target));
     lighting.follow(offCam.position);
@@ -275,6 +293,20 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
       return { calls: ri.calls, triangles: ri.triangles, instances, chunks: scene3.chunkStats() };
     },
     meanColor,
+    objects() {
+      const out: { name: string; type: string; box: [number, number, number, number, number, number] | null }[] = [];
+      scene.traverse((o) => {
+        if (!(o as { isMesh?: boolean }).isMesh && !(o as { isPoints?: boolean }).isPoints) return;
+        const b = new Box3().setFromObject(o);
+        out.push({ name: o.name || o.parent?.name || "?", type: o.type, box: b.isEmpty() ? null : [b.min.x, b.min.y, b.min.z, b.max.x, b.max.y, b.max.z] });
+      });
+      return out;
+    },
+    hide(names) {
+      scene.traverse((o) => {
+        if (names.includes(o.name)) o.visible = false;
+      });
+    },
     frame: () =>
       new Promise((resolve) => {
         draw();

@@ -1,6 +1,6 @@
 import { BufferAttribute, BufferGeometry, Color, CylinderGeometry, DoubleSide, Group, Matrix4, Mesh, MeshStandardMaterial, Quaternion, ShapeUtils, Vector2, Vector3 } from "three";
 import type { Material, Texture } from "three";
-import type { Place } from "../../../data/placeSchema";
+import type { Culture, Place } from "../../../data/placeSchema";
 import { tagPhoto } from "../photoTextures";
 import { grassTexture } from "../textures";
 import { waterNormalTex } from "../texturesEnv";
@@ -96,7 +96,10 @@ export interface GroundMeshes {
 
 const COURT: Record<string, string> = { plantee: "#ffffff", jardin: "#c7b48c", pavee: "#d8d2c6" };
 
-export function buildGround(place: Place, L: PlaceLayout, seed: number): GroundMeshes {
+/** Teintes des champs d'un lieu N2 (sur la texture d'herbe, ou de terre pour le labour et le potager). */
+const CULTURE_TINT: Record<Culture, number> = { ble: 0xd9c27a, orge: 0xc9c08a, jachere: 0xa8b07c, labour: 0x9c8462, prairie: 0xc4d29c, potager: 0xa89670, verger: 0xd0dcb0 };
+
+export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: { polygone: [number, number][]; culture: Culture }[] = []): GroundMeshes {
   const group = new Group();
   group.name = "sol";
   const textures: Texture[] = [];
@@ -130,6 +133,15 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number): GroundM
     const tex = kind === "pavee" ? pavingTexture("dalles", seed) : kind === "jardin" ? pavingTexture("terre", seed) : grass;
     if (tex !== grass) textures.push(tex);
     add3(t.build(), new MeshStandardMaterial({ map: tex, roughness: 1, color: new Color(COURT[kind]) }), `cours-${kind}`);
+  }
+  // Champs (lieux N2) : une couche par culture.
+  for (const cult of [...new Set(fields.map((f) => f.culture))]) {
+    const t = new Tris(cult === "labour" || cult === "potager" ? 6 : 10);
+    for (const f of fields) if (f.culture === cult) t.flat(f.polygone, 0.02);
+    const soilLike = cult === "labour" || cult === "potager";
+    const tex = soilLike ? pavingTexture("terre", seed + 3) : grass;
+    if (tex !== grass) textures.push(tex);
+    add3(t.build(), new MeshStandardMaterial({ map: tex, roughness: 1, color: CULTURE_TINT[cult] }), `champs-${cult}`);
   }
   // Parcs, vergers, potagers.
   const parks = new Tris(8);
