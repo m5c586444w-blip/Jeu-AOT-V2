@@ -55,6 +55,7 @@ export function buildLabels(map: MapData, provinces: readonly Province[], terrai
     const minLod: LabelSpec["minLod"] = MONDE.has(code) ? "monde" : p.kind === "segment" ? "province" : "region";
     const at: [number, number] = code === "I01" ? [geo.anchor[0], geo.anchor[1] - 22] : geo.anchor;
     // Plus de taches « inexploré » écrites sur la carte (E-UX-3) : l'inconnu est seulement voilé.
+    if (p.kind === "segment" && !MONDE.has(code)) return [{ id: p.id, text: t(p.name_key), at: terrain ? onWallLine(terrain, at) : at, minLod, style, alongWall: true }];
     return [{ id: p.id, text: t(p.name_key), at, minLod, style, ...(code !== "I01" && onIcon(at) ? { offset: [0, style === "district" ? -19 : 15] as [number, number] } : {}) }];
   });
 }
@@ -66,4 +67,21 @@ export function mapDynamic(state: GameState): MapDynamic {
     out.provinces[id] = { structure: ps.wall_structure, garrisonOrg: ps.garrison?.org ?? null, control: ps.control };
   }
   return out;
+}
+
+/** Point de la ligne médiane du mur le plus proche, au même relèvement : le nom d'un segment s'écrit dans sa bande. */
+function onWallLine(terrain: TerrainData, [x, y]: readonly number[]): [number, number] {
+  const r = Math.hypot(x ?? 0, y ?? 0);
+  const b = (Math.atan2(x ?? 0, -(y ?? 0)) * 180) / Math.PI;
+  let best = r;
+  let gap = Infinity;
+  for (const w of terrain.walls) {
+    const i = Math.round((((b % 360) + 360) % 360) / (360 / w.line.length)) % w.line.length;
+    const p = w.line[i];
+    if (!p) continue;
+    const rw = Math.hypot(p[0], p[1]);
+    if (Math.abs(rw - r) < gap) [best, gap] = [rw, Math.abs(rw - r)];
+  }
+  const a = (b * Math.PI) / 180;
+  return [best * Math.sin(a), -best * Math.cos(a)];
 }

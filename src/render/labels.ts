@@ -17,6 +17,8 @@ export interface LabelSpec {
   style: "capitale" | "district" | "province" | "outre";
   /** Décalage en pixels écran (le nom passe sous l'icône de ville ou de porte posée au même point). */
   offset?: Point;
+  /** Nom écrit lettre à lettre dans la bande du mur, le long de l'anneau (segments de mur). */
+  alongWall?: boolean;
 }
 
 const STYLES: Record<LabelSpec["style"], TextStyleOptions> = {
@@ -35,6 +37,7 @@ export class LabelLayer {
   private readonly items: { spec: LabelSpec; text: Text }[] = [];
   private ordered: { spec: LabelSpec; text: Text }[] = [];
   private readonly arcs: { name: string; radius: number; bearing: number; letters: Text[] }[] = [];
+  private readonly bands: { spec: LabelSpec; letters: Text[] }[] = [];
 
   /** `onWall(x, y)` : vrai si le point tombe sur la bande d'un mur ; un nom de lieu n'y est pas posé. */
   constructor(
@@ -43,6 +46,16 @@ export class LabelLayer {
     private readonly onWall: (x: number, y: number) => boolean = () => false,
   ) {
     for (const spec of specs) {
+      if (spec.alongWall) {
+        const letters = [...spec.text].map((ch) => {
+          const t = new Text({ text: ch, style: STYLES[spec.style], resolution: 2 });
+          t.anchor.set(0.5);
+          this.container.addChild(t);
+          return t;
+        });
+        this.bands.push({ spec, letters });
+        continue;
+      }
       const text = new Text({ text: spec.text, style: STYLES[spec.style], resolution: 2 });
       text.anchor.set(0.5);
       text.position.set(spec.at[0], spec.at[1]);
@@ -123,6 +136,50 @@ export class LabelLayer {
       for (const fx of [0, 0.5, 1]) for (const fy of [0, 0.5, 1]) if (this.onWall(x0 + (x1 - x0) * fx, y0 + (y1 - y0) * fy)) return true;
       return false;
     };
+    // Noms de segments dans la bande de leur mur : lus de gauche à droite (sens inversé sur la moitié sud de l'anneau),
+    // glissés le long du mur jusqu'à ne couvrir ni porte, ni pion, ni autre nom ; cachés s'ils ne tiennent pas.
+    for (const { spec, letters } of this.bands) {
+      const show = LOD_ORDER.indexOf(spec.minLod) <= level;
+      const radius = Math.hypot(spec.at[0], spec.at[1]);
+      const home = (Math.atan2(spec.at[0], -spec.at[1]) * 180) / Math.PI;
+      const south = Math.cos((home * Math.PI) / 180) < 0;
+      const widths = letters.map((t) => (t.width / (t.scale.x || 1)) * inv);
+      const total = widths.reduce((a, w) => a + w, 0);
+      const span = ((total / radius) * 180) / Math.PI;
+      const lay = (center: number): { b: number; x: number; y: number; box: Box }[] => {
+        let acc = 0;
+        return widths.map((w) => {
+          const along = ((acc + w / 2) / radius) * (180 / Math.PI) - span / 2;
+          acc += w;
+          const b = south ? center - along : center + along;
+          const [x, y] = polar(radius, b);
+          const r = 6 * inv;
+          return { b, x, y, box: [x - r, y - r, x + r, y + r] as Box };
+        });
+      };
+      let spot: ReturnType<typeof lay> | undefined;
+      if (show) {
+        const step = Math.max(1, span / 4);
+        for (let k = 0; k <= 12 && !spot; k++) {
+          for (const sign of k === 0 ? [1] : [1, -1]) {
+            const cand = lay(home + sign * k * step);
+            if (cand.every(({ box }) => !placed.some((p) => hit(p, box)) && !iconBoxes.some((p) => hit(p, box)))) {
+              spot = cand;
+              break;
+            }
+          }
+        }
+      }
+      letters.forEach((t, i) => {
+        const c = spot?.[i];
+        t.visible = c !== undefined;
+        if (!c) return;
+        t.scale.set(inv);
+        t.position.set(c.x, c.y);
+        t.rotation = ((south ? c.b + 180 : c.b) * Math.PI) / 180;
+        placed.push(c.box);
+      });
+    }
     for (const { spec, text } of this.ordered) {
       text.scale.set(inv);
       if (LOD_ORDER.indexOf(spec.minLod) > level) {

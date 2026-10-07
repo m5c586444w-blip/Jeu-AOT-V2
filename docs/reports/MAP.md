@@ -27,7 +27,8 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
   créneaux et segments abîmés, villes par taille, brouillard en voile sans texte.
 - **MAP.4** Trois niveaux (île, région, province) ; routes secondaires dès « région », ponts et créneaux à « province » ;
   noms de murs courbés, glissés le long de l'anneau à l'écart des pions et des portes ; les noms de lieux essaient
-  9 positions, évitent icônes et bandes de murs (sauf villes posées sur un mur) et se masquent sinon.
+  9 positions, évitent icônes et bandes de murs (sauf villes posées sur un mur) et se masquent sinon ; les noms de
+  segments s'écrivent dans la bande de leur mur, le long de l'anneau, à l'écart des portes et des pions.
 - **MAP.5** Calques en aplat transparent (0,55) ; valeur inconnue en gris de légende (0,45). Infobulle : nom, région,
   état, mur en %, population, garnison et effectif, ressource principale ; clic : dossier (smoke:map).
 - **MAP.6** Emplacement de pion par province, choisi dans le polygone loin du nom et de la ville (test : dans la province).
@@ -68,7 +69,7 @@ $ npm run verify   (typecheck et lint passent, puis)
 EXIT 1
 $ npm run data:validate && … && npm run sim:selftest && npm run build   (suite de la chaîne)
 sim:selftest : OK (direct = worker : sans monde, bac à sable 845, …, 850 avec une bataille jouée).
-✓ built in 1.47s
+✓ built in 1.64s
 EXIT 0
 ```
 
@@ -78,8 +79,8 @@ EXIT 0
    halo clair large autour de l'île ; panneau « Calques » qui masque le sud-ouest.
 2. `map-1366-region` — Sud de l'île : Trost, Shiganshina, lac, fleuves, routes, noms des provinces. Défauts : « Fort avancé
    de Maria » et « Forêt des Arbres Géants » serrés ; « Faubourgs de Shiganshina » sur une route ; frontières de Maria assez droites.
-3. `map-1366-province` — Trost et Shiganshina, portes, ponts, routes, forêts ; aucun nom sur un mur. Défauts : noms de
-   segments de mur (Rose-Sud-Est, porte de Trost) masqués faute de place ; taches de champs marbrées ; nœuds de routes visibles.
+3. `map-1366-province` — Trost et Shiganshina, portes, ponts, routes ; noms de segments écrits dans les bandes de murs.
+   Défauts : « Maria-Sud-Ouest » coupé au bord gauche ; « Rose-Sud-Est » presque vertical ; champs marbrés.
 4. `map-1366-calque-politique` — Vert « tenue » dans les murs, rouge « aux Titans » hors Maria, gris « perdue » sur Maria.
    Défauts : rouge et brun du relief proches ; pions par-dessus l'aplat ; légende sur la carte.
 5. `map-1366-calque-nourriture` — Ocre plus fort au sud de Rose et près de Karanes. Défauts : l'échelle claire se lit mal
@@ -90,8 +91,9 @@ EXIT 0
    Défauts : panneau « Calques » minuscule (phase UI) ; blocs carrés au bord des forêts ; « Mur Rose » proche d'un lac.
 8. `map-4k-region` — Sud en 4K, image fine : forêts, lac, fleuves nets. Défauts : « Forêt des Arbres Géants » et « Fort
    avancé » serrés ; « Karanes » coupé en haut ; « Faubourgs de Shiganshina » collé à « Shiganshina ».
-9. `map-4k-province` — Trost en 4K : routes, ponts, rivières, murs à créneaux ; noms hors des bandes de murs. Défauts :
-   « Plaines intérieures de Maria » coupé au bord droit ; champs en taches régulières ; noms de segments rares.
+9. `map-4k-province` — Trost en 4K : routes, ponts, rivières, murs ; « Sina-Sud », « Rose-Sud — porte de Trost »,
+   « Maria-Sud — porte de Shiganshina » lisibles dans les bandes. Défauts : « Plaines intérieures de Maria » coupé au bord
+   droit ; champs en taches régulières ; nœuds de routes visibles.
 10. `map-4k-calque-politique` — Aplats lisibles sur le relief. Défauts : légende minuscule ; frontières fines peu visibles
     sous l'aplat ; pions noirs sur aplat sombre.
 11. `map-4k-calque-nourriture` — Dégradé ocre lisible. Défauts : faible contraste entre 0 et 562 ; voile gris hors Maria ;
@@ -105,4 +107,3 @@ EXIT 0
 - Panneau « Calques » à 4K : phase UI.
 - Échec de verify sans lien avec MAP : CR1e-05 (arrêt R1e, rouge sur la branche par défaut, décision de l'utilisateur).
   Lors d'un passage précédent, trois tests 3D avaient dépassé leur délai sous charge (verts seuls, `MAP-verify-3d.log`).
-- Noms des segments de mur au zoom « province » : souvent masqués faute de place ; à poser le long du mur (suite MAP).
