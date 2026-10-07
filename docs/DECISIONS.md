@@ -678,3 +678,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - Corps de R1c (`3782acd`) : mamelons de 3,3 à 26,3 mm, entrejambe de 8,6 à 14,6 mm.
   - R1d : 0,00 mm sur les mamelons, moins de 0,5 mm sur l'entrejambe.
 - **Fesses** : le sillon interfessier est la forme du corps de MakeHuman ; il reste (vue de dos revue).
+
+## 2026-10-07 — D-95 Arbres réalistes dans la scène tactique (R1d.4)
+- Les arbres de la ville de R1 (place et abords) sont rendus par la végétation des environnements (`buildVegetation`, arbres de R1c : bois séparé, massifs bosselés, cartes de feuilles) au lieu de trois icosaèdres sur un cylindre.
+- **Mêmes graines** : chaque arbre prend les 22 tirages de R1 (`townTree`) ; maisons, étals et réverbères ne bougent pas.
+- **Essences** : la place garde des feuillus ; aux abords, un tiers de fruitiers (vergers), le reste en feuillus. Le sommet d'un feuillu est celui de l'arbre de R1 (6 à 10 m).
+- **Qualité basse** : cartes de feuilles cachées (`applyLite`), comme dans les environnements ; tous les arbres sont gardés (une centaine, pas une forêt).

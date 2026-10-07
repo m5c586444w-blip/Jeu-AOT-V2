@@ -3,9 +3,14 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **R1d en cours** (latence en deux temps, teintes, corps sans détail anatomique, arbres, textures Poly Haven) — commit de départ `3782acd` |
-| Tâche | R1d.3 : corps de base sans détail anatomique (entrejambe carénée dans le `.glb`, mamelons rabattus au façonnage, contrôles et captures) |
-| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 445 tests ; `assets:check` : 90 entrées, 90 fichiers |
-| Prochaine étape | R1d.4 arbres réalistes dans la scène tactique ; R1d.5 textures Poly Haven ; R1d.6 mesure et rapport |
+| Tâche | R1d.4 : arbres réalistes dans la scène tactique (végétation des environnements, mêmes graines) |
+| Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 447 tests ; `assets:check` : 90 entrées, 90 fichiers |
+| Prochaine étape | R1d.5 textures Poly Haven ; R1d.6 mesure et rapport |
+
+## R1d.4 : arbres réalistes dans la scène tactique (2026-10-07)
+- Arbres de la place et des abords rendus par `buildVegetation` (bois, massifs, cartes de feuilles), plus d'icosaèdres (D-95).
+- Mêmes tirages qu'en R1 : le reste de la ville est inchangé. Qualité basse : sans cartes de feuilles.
+- Test : `tests/render/tactical3d/r1d.test.ts` (CR1d-10) ; captures à la remesure (R1d.6).
 
 ## R1d.3 : corps sans détail anatomique (2026-10-07)
 - **Organes génitaux** : aucun (groupe « helper-genital » de MakeHuman non repris) ; entrejambe carénée dans le corps de référence et ses 51 cibles.

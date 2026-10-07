@@ -6,6 +6,9 @@ import { createLighting } from "../../../src/render/tactical3d/lighting";
 import { applyLite, liteCounts } from "../../../src/render/tactical3d/lite";
 import { buildVegetation } from "../../../src/render/tactical3d/meshVegetation";
 import { blankStage, blankTexture } from "../../../src/render/tactical3d/rig";
+import { seeded } from "../../../src/render/tactical3d/rng";
+import { townTree } from "../../../src/render/tactical3d/townMesh";
+import { readFileSync } from "node:fs";
 import type { Quality } from "../../../src/render/tactical3d/quality";
 
 /**
@@ -121,5 +124,46 @@ describe("qualité basse allégée (R1d, CR1d-07)", () => {
     rig.setLite(false);
     expect([phys.visible, dome.visible]).toEqual([true, false]);
     rig.dispose();
+  });
+});
+
+describe("arbres réalistes dans la scène tactique (R1d, CR1d-10)", () => {
+  it("un arbre de la ville prend les 22 tirages de R1 (le reste de la ville garde ses graines) ; place : feuillu ; abords : feuillus et fruitiers", () => {
+    let draws = 0;
+    const base = seeded(850);
+    const counted = (): number => {
+      draws++;
+      return base();
+    };
+    const kinds = new Set<string>();
+    for (let i = 0; i < 60; i++) {
+      const before = draws;
+      const t = townTree(counted, i, 2 * i, i % 5 === 0);
+      expect(draws - before).toBe(22);
+      if (i % 5 === 0) expect(t.kind).toBe("feuillu");
+      kinds.add(t.kind);
+      expect([t.x, t.y]).toEqual([i, 2 * i]);
+      // Feuillu : sommet de 6 à 10 m, comme les arbres de R1 ; fruitier : échelle de verger.
+      expect(t.s).toBeGreaterThan(0.5);
+      expect(t.s).toBeLessThan(1.2);
+    }
+    expect([...kinds].sort()).toEqual(["feuillu", "fruitier"]);
+  });
+
+  it("plus d'icosaèdres de R1 dans la ville : les arbres sont rendus par la végétation réaliste (bois séparé, massifs, cartes de feuilles)", () => {
+    const src = readFileSync("src/render/tactical3d/townMesh.ts", "utf8");
+    expect(src).not.toMatch(/IcosahedronGeometry/);
+    expect(src).not.toMatch(/"feuillages"/);
+    expect(readFileSync("src/render/tactical3d/proto.ts", "utf8")).toMatch(/buildVegetation\(\s*townMeshes\.trees/);
+    const rand = seeded(3);
+    const trees = Array.from({ length: 12 }, (_, i) => townTree(rand, i * 20, 0, i < 4));
+    const v = buildVegetation(trees, null, { leaf: ["#4F6B34", "#7C9446"], conifer: "#34482C", bush: "#4F6B34" }, { near: 400, far: 4000, density: 1, shadows: true }, blankTexture());
+    const names: string[] = [];
+    v.group.traverse((o) => names.push(o.name));
+    expect(names).toContain("arbres-feuillu-proche-bois");
+    expect(names).toContain("arbres-feuillu-proche");
+    expect(names).toContain("arbres-feuillu-proche-feuilles");
+    expect(v.counts.feuillu + v.counts.fruitier).toBe(12);
+    v.dispose();
   });
 });

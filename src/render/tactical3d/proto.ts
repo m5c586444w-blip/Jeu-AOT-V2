@@ -21,6 +21,9 @@ import { TITAN_LARGE, TITAN_POSES, TITAN_SMALL, setSteamTexture } from "./titan"
 import type { Titan, TitanPose } from "./titan";
 import { generateTown } from "./town";
 import { buildTownMeshes } from "./townMesh";
+import { buildVegetation } from "./meshVegetation";
+import { MATERIALS } from "./styles";
+import { leafTex } from "./texturesEnv";
 
 /**
  * Prototype de rendu 3D du combat (R1) : scène de démonstration, sans lien avec la simulation (`src/sim` n'est pas touché).
@@ -155,6 +158,16 @@ export async function startProto(root: HTMLElement, probe: WebGLProbe): Promise<
   const town = generateTown(seed);
   const townMeshes = buildTownMeshes(town, seed);
   scene.add(townMeshes.group);
+  // R1d : arbres réalistes des environnements (bois, massifs, cartes de feuilles) à la place des icosaèdres de R1 ; les cartes
+  // de feuilles sont cachées en qualité basse (`applyLite`).
+  const townTrees = buildVegetation(
+    townMeshes.trees,
+    null,
+    { leaf: [MATERIALS.physiques.feuillage, MATERIALS.physiques.feuillage_clair], conifer: MATERIALS.physiques.conifere, bush: MATERIALS.physiques.feuillage },
+    { near: 400, far: 4000, density: 1, shadows: true },
+    leafTex(seed),
+  );
+  scene.add(townTrees.group);
   const center = new Vector3(town.plaza.center.x, 0, town.plaza.center.y);
   // Repères de la place : A (fontaine, au nord), B (marché, au sud), et la perpendiculaire à l'axe A→B.
   const pcs = town.plaza.centers.map((c) => new Vector3(c.x, 0, c.y));

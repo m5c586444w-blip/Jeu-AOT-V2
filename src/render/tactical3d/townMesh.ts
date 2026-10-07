@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, Matrix3, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
+import { BufferAttribute, BufferGeometry, Color, ConeGeometry, CylinderGeometry, DoubleSide, Group, Matrix3, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
 import type { Material, Texture } from "three";
 import { derive, range, seeded } from "./rng";
 import type { Rand } from "./rng";
@@ -6,11 +6,13 @@ import { cobbleTexture, facadeTextures, flagTexture, grassTexture, roofTexture }
 import type { FacadeSet, WallKind } from "./textures";
 import { roofRise, roofSpan } from "./town";
 import type { Building, Town, Vec2 } from "./town";
+import type { TreeInst } from "./terrain";
 
 /**
  * Maillage de la ville (R1.2) : maisons extrudées, trois types de toits, fenêtres (textures de façade), cheminées, place
- * avec fontaine, étals et arbres, réverbères, pan d'enceinte. Tout est fusionné par matériau : une quinzaine d'appels de
- * dessin pour toute la ville, quelle que soit la graine.
+ * avec fontaine et étals, réverbères, pan d'enceinte. Tout est fusionné par matériau : une quinzaine d'appels de dessin pour
+ * toute la ville, quelle que soit la graine. R1d : les arbres (place, abords) sont des emplacements (`trees`), rendus par la
+ * végétation réaliste des environnements.
  */
 type V3 = [number, number, number];
 type UV = [number, number];
@@ -242,6 +244,8 @@ export interface TownMeshes {
   lanternMaterial: MeshStandardMaterial;
   /** Position des lanternes de réverbère (pour les lumières de nuit). */
   lamps: Vector3[];
+  /** R1d : arbres de la place et des abords, rendus par la végétation réaliste (`buildVegetation`, comme les environnements). */
+  trees: TreeInst[];
   dispose(): void;
 }
 
@@ -306,7 +310,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
 
   // Place : fontaine, étals, arbres, réverbères.
   const props = new FaceBuilder();
-  const foliage = new FaceBuilder();
+  const trees: TreeInst[] = [];
   const lanterns = new FaceBuilder();
   const lamps: Vector3[] = [];
   const at = (x: number, y: number, z: number, rotY = 0, s: V3 = [1, 1, 1]): Matrix4 => new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromAxisAngle(new Vector3(0, 1, 0), rotY), new Vector3(...s));
@@ -333,7 +337,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
       props.geometry(new ConeGeometry(2.2, 0.9, 4, 1), at(tx, 2.75, ty, rot + Math.PI / 4, [1.25, 1, 0.9]), stallColors[i % 4] as Color);
       props.geometry(new CylinderGeometry(1.5, 1.5, 0.12, 4), at(tx, 1.0, ty, rot + Math.PI / 4), new Color(0x7a6248));
       // Arbre de la place (au nord seulement : le marché du sud reste dégagé pour l'action).
-      if (bi === 0) addTree(props, foliage, rand, corner.x + (toC.x / l) * 9, corner.y + (toC.y / l) * 9, at);
+      if (bi === 0) trees.push(townTree(rand, corner.x + (toC.x / l) * 9, corner.y + (toC.y / l) * 9, true));
       // Réverbère.
       const lx = corner.x + (toC.x / l) * 2.2;
       const ly = corner.y + (toC.y / l) * 2.2;
@@ -366,10 +370,9 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
     const x = (Math.cos(a) > 0 ? bd.maxX : bd.minX) + Math.cos(a) * r;
     const y = (Math.sin(a) > 0 ? bd.maxY : bd.minY) + Math.sin(a) * r;
     if (y < town.wall.a.y + 20) continue;
-    addTree(props, foliage, rand, x, y, at);
+    trees.push(townTree(rand, x, y, false));
   }
   add(props, new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), "place-et-mobilier");
-  add(foliage, new MeshStandardMaterial({ vertexColors: true, roughness: 1, flatShading: true }), "feuillages");
   const lanternMaterial = new MeshStandardMaterial({ color: 0x3a3226, emissive: 0xffc070, emissiveIntensity: 0, roughness: 0.5 });
   add(lanterns, lanternMaterial, "lanternes", false);
 
@@ -390,6 +393,7 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
     windowMaterials,
     lanternMaterial,
     lamps,
+    trees,
     dispose(): void {
       group.traverse((o) => {
         if (o instanceof Mesh) (o.geometry as BufferGeometry).dispose();
@@ -400,12 +404,15 @@ export function buildTownMeshes(town: Town, seed: number): TownMeshes {
   };
 }
 
-function addTree(trunks: FaceBuilder, foliage: FaceBuilder, rand: Rand, x: number, y: number, at: (x: number, y: number, z: number, r?: number, s?: V3) => Matrix4): void {
+/** Hauteur au sommet de l'arbre feuillu moyen de `realisticTree` (m), pour l'échelle des arbres de la ville. */
+const FEUILLU_TOP = 10.8;
+/**
+ * Arbre de la ville (R1d) : place (feuillu) ou abords (feuillus et fruitiers des vergers). Mêmes tirages qu'en R1 (hauteur de
+ * 5 à 9 m, teinte, trois massifs : 22 tirages) : le reste de la ville garde ses graines ; la hauteur au sommet est celle de R1.
+ */
+export function townTree(rand: Rand, x: number, y: number, plaza: boolean): TreeInst {
   const h = range(rand, 5, 9);
-  trunks.geometry(new CylinderGeometry(0.18, 0.3, h * 0.55, 6), at(x, h * 0.275, y), new Color(0x4a3a2a));
-  const green = new Color().setHSL(range(rand, 0.17, 0.25), range(rand, 0.25, 0.4), range(rand, 0.22, 0.3));
-  for (let k = 0; k < 3; k++) {
-    const s = range(rand, 1.6, 2.6) * (h / 7);
-    foliage.geometry(new IcosahedronGeometry(1, 1), at(x + range(rand, -1, 1), h * range(rand, 0.62, 0.85), y + range(rand, -1, 1), rand() * 3, [s, s * range(rand, 0.8, 1.1), s]), green.clone().multiplyScalar(range(rand, 0.85, 1.1)));
-  }
+  const d = Array.from({ length: 21 }, () => rand());
+  const orchard = !plaza && (d[0] as number) < 0.35;
+  return { x, y, kind: orchard ? "fruitier" : "feuillu", s: orchard ? 0.85 + 0.3 * (d[1] as number) : (h + 1) / FEUILLU_TOP, r: (d[6] as number) * Math.PI * 2 };
 }
