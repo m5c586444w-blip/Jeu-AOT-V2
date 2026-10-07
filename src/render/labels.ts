@@ -36,7 +36,12 @@ export class LabelLayer {
   private ordered: { spec: LabelSpec; text: Text }[] = [];
   private readonly arcs: { name: string; radius: number; bearing: number; letters: Text[] }[] = [];
 
-  constructor(specs: readonly LabelSpec[], walls: readonly { name: string; radius: number; bearing: number }[]) {
+  /** `onWall(x, y)` : vrai si le point tombe sur la bande d'un mur ; un nom de lieu n'y est pas posé. */
+  constructor(
+    specs: readonly LabelSpec[],
+    walls: readonly { name: string; radius: number; bearing: number }[],
+    private readonly onWall: (x: number, y: number) => boolean = () => false,
+  ) {
     for (const spec of specs) {
       const text = new Text({ text: spec.text, style: STYLES[spec.style], resolution: 2 });
       text.anchor.set(0.5);
@@ -70,27 +75,54 @@ export class LabelLayer {
     type Box = [number, number, number, number];
     const hit = (a: Box, b: Box): boolean => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
     const placed: Box[] = [];
-    for (const arc of this.arcs) {
-      // Noms posés sur la moitié nord de l'anneau (lecture sans retournement).
-      // Espacement angulaire calculé pour ~15 px par lettre à l'écran, centré sur le relèvement choisi.
-      const step = (15 / (arc.radius * zoom)) * (180 / Math.PI);
-      const start = arc.bearing - ((arc.letters.length - 1) * step) / 2;
-      arc.letters.forEach((t, i) => {
-        const b = start + i * step;
-        const [x, y] = polar(arc.radius, b);
-        t.position.set(x, y);
-        t.rotation = (b * Math.PI) / 180;
-        t.scale.set(inv);
-        const r = 7 * inv;
-        placed.push([x - r, y - r, x + r, y + r]);
-      });
-    }
-    const iconR = 7 * inv;
+    const iconR = 9 * inv;
     // Une icône peut porter son rayon minimal dans le monde (portes : 7 km), sinon 7 px à l'écran.
     const iconBoxes: Box[] = icons.map(([x = 0, y = 0, min = 0]) => {
       const r = Math.max(iconR, min * 1.15);
       return [x - r, y - r, x + r, y + r];
     });
+    for (const arc of this.arcs) {
+      // Noms posés sur la moitié nord de l'anneau (lecture sans retournement).
+      // Espacement angulaire calculé pour ~15 px par lettre à l'écran ; le relèvement glisse (± 60°) jusqu'à
+      // une place où aucune lettre ne couvre une icône (porte, ville, pion) ni un autre nom de mur.
+      const step = (15 / (arc.radius * zoom + 16)) * (180 / Math.PI);
+      const boxesAt = (center: number): { b: number; x: number; y: number; box: Box }[] => {
+        const start = center - ((arc.letters.length - 1) * step) / 2;
+        const r = 7 * inv;
+        // Lettres à 16 px à l'écran au-delà du bord extérieur du mur : elles ne passent pas sur les pions posés sur le mur.
+        const radius = arc.radius + 16 * inv;
+        return arc.letters.map((_, i) => {
+          const b = start + i * step;
+          const [x, y] = polar(radius, b);
+          return { b, x, y, box: [x - r, y - r, x + r, y + r] as Box };
+        });
+      };
+      const shifts = [0];
+      for (let d = 3; d <= 60; d += 3) shifts.push(d, -d);
+      // Nombre de lettres qui couvrent quelque chose ; à défaut de place libre, le décalage le moins encombré l'emporte.
+      const cost = (c: number): number => boxesAt(c).filter(({ box }) => placed.some((p) => hit(p, box)) || iconBoxes.some((p) => hit(p, box))).length;
+      let best = 0;
+      let bestCost = Infinity;
+      for (const d of shifts) {
+        const k = cost(arc.bearing + d);
+        if (k < bestCost) [best, bestCost] = [d, k];
+        if (k === 0) break;
+      }
+      const center = arc.bearing + best;
+      boxesAt(center).forEach(({ b, x, y, box }, i) => {
+        const t = arc.letters[i];
+        if (!t) return;
+        t.position.set(x, y);
+        t.rotation = (b * Math.PI) / 180;
+        t.scale.set(inv);
+        placed.push(box);
+      });
+    }
+    // Neuf points de la boîte (coins, milieux des côtés, centre) testés contre les bandes de murs.
+    const crossesWall = ([x0, y0, x1, y1]: Box): boolean => {
+      for (const fx of [0, 0.5, 1]) for (const fy of [0, 0.5, 1]) if (this.onWall(x0 + (x1 - x0) * fx, y0 + (y1 - y0) * fy)) return true;
+      return false;
+    };
     for (const { spec, text } of this.ordered) {
       text.scale.set(inv);
       if (LOD_ORDER.indexOf(spec.minLod) > level) {
@@ -101,20 +133,20 @@ export class LabelLayer {
       const hh = (text.height / 2) * 1.1;
       const gapX = text.width / 2 / inv + 22;
       const base = spec.offset ?? [0, 0];
-      const tries: Point[] = [base, [0, -19], [0, 17], [0, 28], [0, -30], [gapX, 0], [-gapX, 0]];
+      const tries: Point[] = [base, [0, -19], [0, 17], [0, 28], [0, -30], [gapX, 0], [-gapX, 0], [0, 40], [0, -42]];
       const boxAt = ([dx, dy]: Point): Box => {
         const x = spec.at[0] + dx * inv;
         const y = spec.at[1] + dy * inv;
         return [x - hw, y - hh, x + hw, y + hh];
       };
-      const free = tries.find((o) => {
-        const b = boxAt(o);
-        return !placed.some((p) => hit(p, b)) && !iconBoxes.some((p) => hit(p, b));
-      });
+      const clear = (b: Box): boolean => !placed.some((p) => hit(p, b)) && !iconBoxes.some((p) => hit(p, b));
+      // Hors des murs d'abord ; une ville posée sur un mur (district, porte) garde son nom même s'il le touche.
+      const onWallTown = spec.style === "district" || spec.style === "capitale";
+      const free = tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o))) ?? (onWallTown ? tries.find((o) => clear(boxAt(o))) : undefined);
       const chosen = free ?? base;
       const box = boxAt(chosen);
       text.position.set(spec.at[0] + chosen[0] * inv, spec.at[1] + chosen[1] * inv);
-      text.visible = free !== undefined || !placed.some((p) => hit(p, box));
+      text.visible = free !== undefined || (!placed.some((p) => hit(p, box)) && (onWallTown || !crossesWall(box)));
       if (text.visible) placed.push(box);
     }
   }

@@ -2,7 +2,7 @@ import { Application, Container, Graphics } from "pixi.js";
 import type { Sprite } from "pixi.js";
 import type { MapData } from "../data/map";
 import type { TerrainData } from "../data/terrain";
-import { pointInPolygon } from "../sim/strategic/geometry";
+import { bearingOf, pointInPolygon } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
 import { drawDepot, drawExpeditionMarker, drawPawn, drawRoute } from "./atlasLayers";
 import type { ProvinceShape } from "./atlasLayers";
@@ -97,8 +97,13 @@ export class StrategicMap {
       labelSpecs,
       terrain.walls.map((w) => {
         const bearing = WALL_LABELS[w.wall]?.bearing ?? 0;
-        return { name: WALL_LABELS[w.wall]?.name ?? w.wall, radius: wallRadiusAt(terrain, w.wall, bearing) + w.band_km / 2 + 9, bearing };
+        return { name: WALL_LABELS[w.wall]?.name ?? w.wall, radius: wallRadiusAt(terrain, w.wall, bearing) + w.band_km / 2, bearing };
       }),
+      (x, y) => {
+        const r = Math.hypot(x, y);
+        const b = bearingOf([x, y]);
+        return terrain.walls.some((w) => Math.abs(r - wallRadiusAt(terrain, w.wall, b)) < w.band_km / 2 + 2.5);
+      },
     );
     drawOpenSea(this.gSea, terrain.bounds);
     this.terrainImage = terrainSprite(terrain);
