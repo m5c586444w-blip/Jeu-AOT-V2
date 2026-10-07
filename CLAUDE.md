@@ -29,9 +29,21 @@
 - Pixi uniquement dans `src/render`. three.js n'est utilisé que dans `src/render/tactical3d` (chargé à la demande ; règle ESLint en place, prouvée par `tests/lint/sim-purity.test.ts`). Tenir `docs/PROGRESS.md` à jour (phase, tâche, dernier verify, prochaine étape).
 - Avant d'écrire OK sur un critère visuel : ouvre chaque capture avec l'outil de lecture d'image,  décris ce que tu vois en 3 lignes et liste au moins 3 défauts possibles (texte répété, zone vide,  chevauchement, élément absent, valeur à 0 incohérente). Écris-les dans le rapport, même si tu les  juges mineurs. Si une capture est vide ou ne montre pas l'élément testé, le critère est KO.
 - Exception connue à « `git diff` de `src/sim` vide » : pendant **R2 seulement**, `src/sim/tactical/map.ts` peut recevoir une extension **additive** (voir le prompt R2). Aucun autre fichier de `src/sim`, et rien après R2.
+
+## Réorganisation (R1e, décision de l'utilisateur)
+- Consigne complète : `docs/phases/R1e-consigne.md` (prime sur ce résumé en cas de doute).
+- Feuille de route : R1e (pilote : Shiganshina et mur Maria) → LC-B (mur Rose) → LC-C (mur Sina) → LC-D (hors-murs) → R2 → T1 → R3…P10.
+- Lieux principaux : faits à la main (data/places/<id>.json, plan d'auteur). Lieux courants : générés une fois puis figés (data/places/generated/). Villes de taille réaliste (population ÷ densité) et plantées.
+- Interdit : créer une sous-phase (R1f, R1g…). Hors-périmètre : docs/reports/dette.md.
+- Interdit : nouvel outil de mesure ; ne pas optimiser pour le rendu logiciel.
+- Rapports : 150 lignes maximum.
+- Arrêts de revue : fin de R1e, fin de LC-D, fin de R4, fin de P9 (et les arrêts 1 à 4).
+- Droit d'auteur : formes des lieux reconstruites d'après les descriptions ; aucun fichier de l'œuvre ou de fans, aucun décalque.
+- Lore : jamais de nom ou de chiffre inventé présenté comme canon ; sources officielles seulement ; incertain = [?] + docs/lore/questions-ouvertes.md.
+
 ## Arrêts obligatoires (écrire la raison dans docs/PROGRESS.md puis attendre l'utilisateur)
 1. Un critère d'acceptation échoue deux fois.
 2. Fait de lore ambigu qu'aucune valeur `?` paramétrable ne règle.
 3. Décision de design à impact majeur non couverte par les spécifications.
 4. Une commande ne peut pas s'exécuter (réseau, droits…).
-5. Fin de **P4**, **P8**, **R1**, **R1c**, **R1d**, **R2**, **R3**, **R4**, **R7**, **R8** et **P9** : revue de l'utilisateur (rapport du fichier 14 §7, sorties réelles collées).
+5. Fin de **R1e**, fin de **LC-D**, fin de **R4**, fin de **P9** : revue de l'utilisateur (rapport court, sorties réelles collées). Remplace l'ancienne liste (décision de l'utilisateur, R1e).

@@ -2,10 +2,28 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1d terminée — arrêt obligatoire** (revue de l'utilisateur) — commit de départ `3782acd` |
-| Tâche | R1d.6 : remesure, `smoke:r1b`, captures revues, rapport `docs/reports/R1d.md` |
+| Phase | **R1e en cours** (système de lieux, mur Maria, pilote Shiganshina) — commit de départ `497be52` |
+| Tâche | R1e.0 : règles (CLAUDE.md), feuille de route, plan `docs/phases/R1e.md`, dette, questions ouvertes |
 | Dernier `npm run verify` | 2026-10-07 : code 0, 72 fichiers, 451 tests ; `assets:check` : 102 entrées, 102 fichiers |
-| Prochaine étape | **Attendre la revue de R1d** (rapport § i). R2 n'est pas lancée |
+| Prochaine étape | R1e.1 : schéma de lieu, chargeur, `places:valider`, SVG |
+
+## Feuille de route (consigne de l'utilisateur, 2026-10-07 ; `docs/phases/R1e-consigne.md`)
+| Ordre | Phase | Contenu | Arrêt |
+|---|---|---|---|
+| 1 | **R1e** | Correctifs de R1d, système de lieux, mémoire des lieux, mur Maria : Shiganshina à la main et trois autres districts | **oui** (pilote) |
+| 2 | LC-B | Mur Rose : Trost, Karanes, Utopia, Krolva, camp d'entraînement, quartier général | non |
+| 3 | LC-C | Mur Sina : Mitras, Stohess, Orvud, Ehrmich, Yarckel, ville souterraine, chapelle Reiss | non |
+| 4 | LC-D | Hors-murs : forêt des Arbres Géants, Utgard, Ragako, Dauper, Jinae, ferme, Liberio, fort du front, port | **oui** |
+| 5 | R2 | 3D branchée sur la vraie bataille (exception `map.ts`) | selon le fichier 18 |
+| 6 | T1 | Titans réalistes (prompt à écrire après R2) | — |
+| 7 | R3 → P10 | inchangées | selon le fichier 18 |
+
+Règles : plus de sous-phase inventée (hors-périmètre → `docs/reports/dette.md`) ; plus de nouvel outil de mesure ; rapports ≤ 150 lignes ; arrêts : fin de R1e, de LC-D, de R4, de P9 (et arrêts 1 à 4).
+
+## R1e ouverte (2026-10-07)
+- Consigne copiée mot pour mot (`docs/phases/R1e-consigne.md`) ; fichiers prérequis lus en entier (06, 11, ERRATA, rapport R1d).
+- Recherche de lore : aucune source officielle pour les noms des trois autres districts de Maria ni pour l'épaisseur des murs → `?` (`docs/lore/questions-ouvertes.md`, Q1–Q10).
+- Population de la simulation (scénario 845) : Shiganshina 60 870 habitants → saillie d'environ 1,2 km de rayon à 280 hab/ha (cœur ancien dense).
 
 ## R1d terminée — arrêt obligatoire (2026-10-07)
 - **Raison de l'arrêt** : fin de R1d, revue de l'utilisateur (CLAUDE.md, arrêt 5).
