@@ -12,10 +12,12 @@ export interface Settings {
   volMusic: number;
   volSfx: number;
   subtitles: boolean;
+  /** Mode auteur (E-UX-1) : statuts canon et codes internes visibles ; désactivé par défaut. */
+  authorMode: boolean;
 }
 
 const KEY = "murs-et-sang:preferences";
-export const DEFAULT_SETTINGS: Settings = { locale: "fr", uiScale: 100, volMaster: 70, volMusic: 60, volSfx: 80, subtitles: true };
+export const DEFAULT_SETTINGS: Settings = { locale: "fr", uiScale: 100, volMaster: 70, volMusic: 60, volSfx: 80, subtitles: true, authorMode: false };
 export const UI_SCALES = [100, 125, 150, 175, 200] as const;
 
 const vol = (v: unknown, d: number): number => (typeof v === "number" && v >= 0 && v <= 100 ? Math.round(v) : d);
@@ -35,6 +37,7 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       volMusic: vol(s.volMusic, DEFAULT_SETTINGS.volMusic),
       volSfx: vol(s.volSfx, DEFAULT_SETTINGS.volSfx),
       subtitles: typeof s.subtitles === "boolean" ? s.subtitles : DEFAULT_SETTINGS.subtitles,
+      authorMode: s.authorMode === true,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };

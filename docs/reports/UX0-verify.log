@@ -1,0 +1,61 @@
+
+> murs-et-sang@0.0.1 verify
+> npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run assets:check && npm run canon:check && npm run sim:selftest && npm run build
+
+
+> murs-et-sang@0.0.1 typecheck
+> tsc --noEmit
+
+
+> murs-et-sang@0.0.1 lint
+> eslint . --max-warnings 0
+
+
+> murs-et-sang@0.0.1 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/claude/jeu-aot-v2
+
+ ❯ tests/render/tactical3d/murs.test.ts (5 tests | 1 failed) 35471ms
+   ❯ règle de visibilité du mur (R1b.4) (2)
+     × aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, c
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯ ❯ tests/render/tactical3d/environnements.test.ts (16 tests | 1 failed) 130115ms
+   ❯ même graine = même environnement (R1b) (1)
+     × lot 1 (9 environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement 33135ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/render/tactical3d/environnements.test.ts > même graine = même environnement (R1b) > lot 1 (9 environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement
+Error: Test timed out in 30000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/render/tactical3d/environnements.test.ts:24:3
+     22|
+     23| describe("même graine = même environnement (R1b)", () => {
+     24|   it(`lot 1 (${lot1.length} environnements) : données identiques et em…
+       |   ^
+     25|     expect(lot1).toHaveLength(9);
+     26|     for (const id of lot1) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/render/tactical3d/murs.test.ts > règle de visibilité du mur (R1b.4) > aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, capitale, nature) ; un mur dans les autres
+Error: Test timed out in 30000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/render/tactical3d/murs.test.ts:37:3
+     35|   });
+     36|
+     37|   it("aucun mur dans les scènes dont le profil l'exclut (campagne inté…
+       |   ^
+     38|     for (const p of testable) {
+     39|       const env = generateEnvironment(p.id, 850);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 72 passed (74)
+      Tests  2 failed | 469 passed (471)
+   Start at  19:48:31
+   Duration  131.83s (tests 91%, import 7%, transform 2%)
+
+code:1

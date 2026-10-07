@@ -4,13 +4,23 @@ import { lockOf, monthlyPoints, monthsLeft } from "../../sim/research/research";
 import { button, el, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 import { formatNumber } from "../why";
+import { authorOnly, isAuthorMode } from "../authorMode";
+
+/** Phases dont la mécanique existe dans le jeu : une étude rattachée à une phase future n'apparaît pas (UX0.3). */
+const LIVE_PHASES: ReadonlySet<string> = new Set(["P6", "P7", "P8"]);
+
+/** Une étude est montrée au joueur si sa mécanique existe, ou si elle est déjà acquise ou à l'étude. */
+export function isShownTech(x: Pick<Tech, "id" | "mechanic_phase">, done: readonly string[], current: string | null, author = false): boolean {
+  return author || !x.mechanic_phase || LIVE_PHASES.has(x.mechanic_phase) || done.includes(x.id) || current === x.id;
+}
 
 /** Ordre des arbres du fichier 13 (§1 à §10). */
 const TREE_ORDER = ["odm", "anti_titan", "medecine", "logistique", "fortification", "renseignement", "administration", "armes_modernes", "hizuru_allies", "doctrine"];
 
 /**
- * Bureau d'études (04 §5.9, 13) : planches par arbre ; chaque technologie montre son état (acquise, à l'étude,
- * disponible, verrouillée avec sa raison) et sa fiche ; la mécanique d'une phase future est annoncée, sans valeur.
+ * Recherche (04 §5.9, 13 ; ERRATA_UX) : planches par arbre ; chaque technologie montre son état (acquise, à l'étude,
+ * disponible, ou grisée avec sa condition en langage de jeu) et sa fiche. Codes, statuts canon, années planchers et
+ * phases ne paraissent qu'en mode auteur (F10) ; une étude dont la mécanique n'existe pas encore est absente.
  */
 export class ResearchPanel implements Panel {
   readonly id = "recherche" as const;
@@ -42,7 +52,8 @@ export class ResearchPanel implements Panel {
     root.append(now);
     for (const l of rs.log.slice(-3).reverse()) root.append(el("p", l.key === "research.accident" ? "plan-probleme" : "registre-note", t(l.key, { ...l.params, tech: t(String(l.params["tech"] ?? "")) })));
 
-    const present = new Set(rw.order.map((x) => x.tree));
+    const shown = rw.order.filter((x) => isShownTech(x, rs.done, rs.current, isAuthorMode()));
+    const present = new Set(shown.map((x) => x.tree));
     const trees = [...TREE_ORDER.filter((x) => present.has(x)), ...[...present].filter((x) => !TREE_ORDER.includes(x))];
     const tab = this.tree && trees.includes(this.tree) ? this.tree : (trees[0] ?? "");
     const nav = el("nav", "registre-onglets");
@@ -60,7 +71,7 @@ export class ResearchPanel implements Panel {
     const fired = (id: string): boolean => history[id]?.status === "survenu" || history[id]?.status === "passe";
     const alive = (id: string): boolean => s.politics?.characters[id]?.alive ?? false;
     const board = el("div", "planches");
-    for (const x of rw.order.filter((y) => y.tree === tab)) board.append(this.sheet(x, rs.done.includes(x.id), rs.current === x.id, lockOf(this.ctx.world, rs, x, s.date, fired, alive)));
+    for (const x of shown.filter((y) => y.tree === tab)) board.append(this.sheet(x, rs.done.includes(x.id), rs.current === x.id, lockOf(this.ctx.world, rs, x, s.date, fired, alive)));
     root.append(board);
   }
 
@@ -68,13 +79,13 @@ export class ResearchPanel implements Panel {
     const card = el("article", `planche ${done ? "planche--acquise" : current ? "planche--etude" : lock ? "planche--verrou" : "planche--libre"}`);
     card.dataset["tech"] = x.id;
     const head = el("header", "planche__tete");
-    head.append(el("span", "planche__code", x.code ?? ""), el("h4", "", t(`tech.${x.id}`)), stamp(x.canon));
+    head.append(authorOnly(el("span", "planche__code", x.code ?? "")), el("h4", "", t(`tech.${x.id}`)), stamp(x.canon));
     card.append(head, el("p", "planche__fiche", t(`tech.${x.id}.sheet`)));
     const meta = el("p", "registre-note");
-    if (x.cost !== null) meta.append(`${t("research.cost")} `, valueEl(this.ctx, formatNumber(x.cost), () => ({ title: t("research.cost"), sections: [{ text: t("research.cost_why") }] })), " · ");
-    meta.append(t("research.min_year", { year: x.min_year }));
+    if (x.cost !== null) meta.append(`${t("research.cost")} `, valueEl(this.ctx, formatNumber(x.cost), () => ({ title: t("research.cost"), sections: [{ text: t("research.cost_why") }] })), " ");
+    meta.append(authorOnly(el("span", "", t("research.min_year", { year: x.min_year }))));
     card.append(meta);
-    if (x.mechanic_phase) card.append(el("p", "planche__phase", t("research.phase", { phase: x.mechanic_phase })));
+    if (x.mechanic_phase) card.append(authorOnly(el("p", "planche__phase", t("research.phase", { phase: x.mechanic_phase }))));
     if (done) card.append(el("p", "planche__etat", t("research.done")));
     else if (current) card.append(el("p", "planche__etat", t("research.studying")));
     else if (lock && lock.key !== "research.lock.done") {

@@ -1,3 +1,4 @@
+import { isAuthorMode } from "../authorMode";
 import type { Character } from "../../data/schemas";
 import { isDomestic } from "../../sim/politics/vocabulary";
 import { t } from "../../i18n";
@@ -209,7 +210,7 @@ function traitSummary(tr: { name_key: string; attributes: Record<string, number 
   for (const [a, v] of Object.entries(tr.attributes)) if (v) parts.push(`${t(`attr.${a}`)} ${v > 0 ? "+" : "−"}${Math.abs(v)}`);
   if (tr.stress_gain !== 1) parts.push(t("characters.trait_stress", { k: formatNumber(tr.stress_gain) }));
   if (tr.advice_bias) parts.push(t(`bias.${tr.advice_bias}`));
-  return `${t(tr.name_key)} : ${parts.join(" ; ") || t("characters.trait_vote_only")}${tr.notes_canon ? ` — ${tr.notes_canon}` : ""}`;
+  return `${t(tr.name_key)} : ${parts.join(" ; ") || t("characters.trait_vote_only")}${tr.notes_canon && isAuthorMode() ? ` — ${tr.notes_canon}` : ""}`;
 }
 
 function escapeXml(s: string): string {

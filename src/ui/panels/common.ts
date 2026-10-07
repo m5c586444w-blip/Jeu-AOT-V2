@@ -5,6 +5,7 @@ import type { GameState } from "../../sim/core/state";
 import type { BattleSetup, TimedOrder } from "../../sim/tactical/types";
 import type { World } from "../../sim/strategic/world";
 import type { WhyContent, WhyTooltip } from "../why";
+import { authorOnly } from "../authorMode";
 
 /** Contexte partagé par les registres (P2). */
 export interface PanelContext {
@@ -75,10 +76,11 @@ export function displayName(c: Character | undefined): string {
   return c ? (c.display_name ?? c.name) : "—";
 }
 
+/** Statut canon d'une fiche : visible en mode auteur seulement (E-UX-1). */
 export function stamp(canon: string): HTMLSpanElement {
   const s = el("span", `tampon-mini tampon-mini--${canon === "?" ? "incertain" : canon}`, t(`canon.stamp.${canon}`));
   s.dataset["why"] = t("dossier.canon_why", { status: t(`canon.${canon}`) });
-  return s;
+  return authorOnly(s);
 }
 
 /** Message affiché quand le scénario n'a pas de couche politique. */

@@ -1,3 +1,4 @@
+import { isAuthorMode, setAuthorMode } from "./authorMode";
 import mapJson from "../../data/map/paradis.json";
 import type { MapData } from "../data/map";
 import { t } from "../i18n";
@@ -71,6 +72,7 @@ export async function bootGame(): Promise<void> {
   setLocale(settings.locale);
   document.documentElement.lang = settings.locale;
   document.documentElement.style.fontSize = `${settings.uiScale}%`;
+  setAuthorMode(settings.authorMode);
   await document.fonts.ready;
 
   const worker = new Worker(new URL("../workers/sim.worker.ts", import.meta.url), { type: "module" });
@@ -327,8 +329,20 @@ export async function bootGame(): Promise<void> {
     audio.setVolumes(volumesOf(s));
     if (s.locale !== settings.locale) window.location.reload();
     document.documentElement.style.fontSize = `${s.uiScale}%`;
+    if (s.authorMode !== isAuthorMode()) {
+      setAuthorMode(s.authorMode);
+      refresh();
+    }
   });
   actions.options = () => options.toggle();
+  // Mode auteur (E-UX-1) : F10 bascule l'affichage des statuts du lore et des codes internes.
+  actions.author_mode = () => {
+    const s = { ...loadSettings(safeStorage()), authorMode: !isAuthorMode() };
+    saveSettings(safeStorage(), s);
+    setAuthorMode(s.authorMode);
+    options.sync(s);
+    refresh();
+  };
   // Choix de la nation jouée (P7, scénario 854) : `?faction=fac_marley`, sinon un dossier de choix au départ.
   const playable = world.scenario.world?.playable ?? [];
   if (playable.length > 1) {

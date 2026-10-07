@@ -1,3 +1,4 @@
+import { authorOnly } from "./authorMode";
 import { t } from "../i18n";
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
@@ -58,7 +59,7 @@ export class EventDossier {
     const paper = el("article", `dossier-evenement__papier forme-${e.form}`);
     const head = el("header", "dossier-evenement__tete");
     head.append(el("span", "dossier-evenement__forme", t(`evt.form.${e.form}`)), el("span", "dossier-evenement__date", t("date.format", { year: state.date.year, day: state.date.day })));
-    if (e.kind === "canon" && e.code) head.append(el("span", "tampon-mini tampon-mini--C", t("evt.canon_stamp", { code: e.code })));
+    if (e.kind === "canon" && e.code) head.append(authorOnly(el("span", "tampon-mini tampon-mini--C", t("evt.canon_stamp", { code: e.code }))));
     paper.append(head, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
     const happened = effectLines(this.world, e.effects, p.subject);
     if (happened.length > 0) {

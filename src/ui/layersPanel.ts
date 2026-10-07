@@ -1,3 +1,4 @@
+import { authorOnly } from "./authorMode";
 import { t } from "../i18n";
 import type { MapFilters } from "../render/strategicMap";
 import { isAvailable, OVERLAY_IDS, OVERLAY_PHASE } from "./overlays";
@@ -65,7 +66,7 @@ export class LayersPanel {
       const stamp = document.createElement("span");
       stamp.className = "calques__tampon";
       stamp.textContent = t("layers.closed", { phase: OVERLAY_PHASE[id] ?? "?" });
-      li.append(b, stamp);
+      li.append(b, authorOnly(stamp));
       return li;
     }
     li.append(b);

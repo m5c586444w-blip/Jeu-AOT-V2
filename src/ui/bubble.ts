@@ -1,3 +1,4 @@
+import { isAuthorMode } from "./authorMode";
 import type { Province } from "../data/schemas";
 import type { GameState } from "../sim/core/state";
 import { t } from "../i18n";
@@ -21,7 +22,7 @@ export class Bubble {
     name.textContent = t(p.name_key);
     const meta = document.createElement("span");
     meta.className = "bulle__meta";
-    meta.textContent = [t(`region.${p.region}`), ps ? t(`control.${ps.control}`) : null, t(`canon.${p.canon}`)].filter(Boolean).join(" · ");
+    meta.textContent = [t(`region.${p.region}`), ps ? t(`control.${ps.control}`) : null, isAuthorMode() ? t(`canon.${p.canon}`) : null].filter(Boolean).join(" · ");
     const hint = document.createElement("span");
     hint.className = "bulle__aide";
     hint.textContent = t("map.click_hint");
