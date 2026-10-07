@@ -42,7 +42,7 @@ interface PresetDef {
 }
 
 /** Part de l'hémisphère gardée quand le ciel éclaire la scène (éclairage d'image). */
-const HEMI_WITH_ENV = 0.7;
+const HEMI_WITH_ENV = 0.95;
 /** Luminance du ciel physique dans la carte d'environnement, rapportée au ciel montré. */
 const ENV_SKY_GAIN = 0.45;
 /**
@@ -51,9 +51,19 @@ const ENV_SKY_GAIN = 0.45;
  * (R1c.6, latence de la scène tactique).
  */
 const ENV_MAP_SIZE = 64;
+/**
+ * R1d : sol de la carte d'environnement (lumière renvoyée par le sol, teinte `hemiGround` de l'heure), rapporté à cette teinte.
+ * Sans lui, la moitié basse de la carte prolongeait le ciel : les façades recevaient une lumière bleue de tous côtés.
+ */
+const ENV_GROUND_GAIN = 0.6;
+/**
+ * R1d : saturation du ciel physique dans la carte d'environnement. À pleine saturation, la lumière diffuse du ciel bleuissait
+ * et blanchissait façades, sols et ombres (revue de R1c, D-88) ; mesuré : b* moyen de la scène tactique 6,1 contre 12,2 en R1b.
+ */
+const ENV_SKY_SATURATION = 0.35;
 
 const PRESETS: Record<LightPreset, PresetDef> = {
-  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false, physical: { turbidity: 3, rayleigh: 1.1, mie: 0.004, mieG: 0.8, clouds: 0.38, gain: 0.5 }, envIntensity: 0.35 },
+  jour: { elevation: 52, azimuth: 215, sunColor: 0xfff1dc, sunIntensity: 3.1, hemiSky: 0xcfdbe2, hemiGround: 0x6b604f, hemiIntensity: 1.15, horizon: 0xc8d0cf, zenith: 0x7d98ab, glow: 0xfff3dc, glowStrength: 0.25, fog: 0xbfc6c4, fogDensity: 0.0014, exposure: 1.1, windows: 0, lanterns: 0, lampIntensity: 0, stars: false, physical: { turbidity: 3, rayleigh: 1.1, mie: 0.004, mieG: 0.8, clouds: 0.38, gain: 0.5 }, envIntensity: 0.18 },
   // Aube (R1b.6) : soleil bas à l'est, lumière rosée et froide, brume plus dense que le jour.
   aube: { elevation: 9, azimuth: 95, sunColor: 0xffc4a0, sunIntensity: 2.4, hemiSky: 0xb2b8cc, hemiGround: 0x4a443e, hemiIntensity: 1.2, horizon: 0xeab4a2, zenith: 0x56668e, glow: 0xffd2ac, glowStrength: 0.75, fog: 0xb4a8b2, fogDensity: 0.0024, exposure: 1.2, windows: 0.25, lanterns: 0.6, lampIntensity: 10, stars: false, envIntensity: 0.3 },
   crepuscule: { elevation: 6, azimuth: 255, sunColor: 0xffa060, sunIntensity: 2.9, hemiSky: 0xa898a4, hemiGround: 0x4a3d33, hemiIntensity: 1.35, horizon: 0xe0a070, zenith: 0x3c4862, glow: 0xffb070, glowStrength: 0.85, fog: 0xa88470, fogDensity: 0.0021, exposure: 1.2, windows: 0.55, lanterns: 1.2, lampIntensity: 18, stars: false, envIntensity: 0.3 },
@@ -129,12 +139,19 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
   phys.renderOrder = -1;
   const physMat = phys.material as ShaderMaterial;
   physMat.uniforms["skyGain"] = { value: 0.5 };
-  physMat.fragmentShader = physMat.fragmentShader.replace("uniform float time;", "uniform float time;\n\t\tuniform float skyGain;").replace("gl_FragColor = vec4( texColor, 1.0 );", "gl_FragColor = vec4( texColor * skyGain, 1.0 );");
+  // R1d : saturation du ciel (1 à l'écran ; réduite pour la carte d'environnement, voir ENV_SKY_SATURATION).
+  physMat.uniforms["skySat"] = { value: 1 };
+  physMat.fragmentShader = physMat.fragmentShader
+    .replace("uniform float time;", "uniform float time;\n\t\tuniform float skyGain;\n\t\tuniform float skySat;")
+    .replace("gl_FragColor = vec4( texColor, 1.0 );", "vec3 skyC = texColor * skyGain;\n\t\t\tgl_FragColor = vec4( mix( vec3( dot( skyC, vec3( 0.2126, 0.7152, 0.0722 ) ) ), skyC, skySat ), 1.0 );");
   group.add(phys);
   const envSky = new Sky();
   envSky.material.dispose();
   envSky.material = physMat;
   envSky.scale.setScalar(1000);
+  // R1d : demi-sphère basse de la carte d'environnement (le sol), de la teinte du sol de l'heure.
+  const envGroundMat = new MeshBasicMaterial({ color: 0x000000, side: BackSide, fog: false });
+  const envGround = new Mesh(new SphereGeometry(400, 32, 8, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), envGroundMat);
 
   // Étoiles, pour la nuit seulement.
   const rand = seeded(derive(seed, 700));
@@ -176,11 +193,16 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       // matériaux, délavait le sol.
       const skyScene = new SceneClass();
       skyScene.add(phys.visible ? envSky : new Mesh(skyGeo, sky.material));
+      envGroundMat.color.set(effective(current).hemiGround).multiplyScalar(ENV_GROUND_GAIN);
+      skyScene.add(envGround);
       const gain = physMat.uniforms["skyGain"];
+      const sat = physMat.uniforms["skySat"];
       const shown = gain?.value as number;
       if (gain && phys.visible) gain.value = shown * ENV_SKY_GAIN;
+      if (sat) sat.value = ENV_SKY_SATURATION;
       tex = pmrem.fromScene(skyScene, 0, 0.5, 4000, { size: ENV_MAP_SIZE }).texture;
       if (gain) gain.value = shown;
+      if (sat) sat.value = 1;
       envMaps.set(current, tex);
     }
     scene.environment = tex;
@@ -349,6 +371,8 @@ export function createLighting(scene: Scene, seed: number, opts: { windowMateria
       (sky.material as MeshBasicMaterial).dispose();
       phys.geometry.dispose();
       envSky.geometry.dispose();
+      envGround.geometry.dispose();
+      envGroundMat.dispose();
       physMat.dispose();
       (stars.material as PointsMaterial).dispose();
       sun.shadow.map?.dispose();

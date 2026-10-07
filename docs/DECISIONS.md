@@ -624,3 +624,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   - pas de compression d'assets (jeu local).
 - **Poly Haven** : textures d'environnement seulement (sol, pierre, toits), au plus 12 fichiers WebP en 1K ; `assets:check` le vérifie. Choix des matières et conversion au plan R1d.
 - **Districts** : tout reste `?` ou `A` paramétrable ; pas de portes de rivière hors de Shiganshina.
+
+## 2026-10-07 — D-92 Teintes : éclairage d'image corrigé (R1d.2, corrige D-88)
+- **Cause mesurée.** Sans éclairage d'image (intensité 0, hémisphère entière), les teintes reviennent à celles de R1b :
+  - scène tactique : b* 12,1 contre 12,2, L* 56,0 contre 55,4 ;
+  - Trost : b* 9,7 contre 10,2.
+
+  Le relief, l'occlusion ambiante et les normales corrigées de R1c n'y sont pour presque rien. C'est la lumière diffuse du ciel physique, très bleu, qui bleuissait et blanchissait façades, sols et ombres.
+- **Réglage.**
+  - Carte d'environnement tirée d'un ciel désaturé à 35 % (`ENV_SKY_SATURATION`).
+  - Sol ajouté à la carte (demi-sphère basse de la teinte `hemiGround`, × 0,6) : la moitié basse ne prolonge plus le ciel.
+  - Intensité de jour de 0,35 à 0,18 ; hémisphère gardée à 95 % (au lieu de 70 %).
+  - Les reflets des métaux restent tirés de la même carte.
+- **Mesure de mise au point** (bas de l'image, jour, qualité moyenne ; R1b → R1c → R1d) :
+  - scène tactique : b* 12,2 → 6,1 → 10,7 ; ombres L10 28,4 → 40,2 → 33,7 ;
+  - Trost : b* 10,2 → 4,3 → 8,7 ;
+  - murs (E22) : b* 15,2 → 9,6 → 13,7.
+
+  Mesure de fin de phase : CR1d-08.
