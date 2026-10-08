@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **PA en cours** sur `claude/v2-pa` (fichier 21 §7 + 23 §3.2). Direction autonome (D-107). |
-| Tâche | PA.2–PA.7, PA.10 (simulation et données : armées, artillerie, marine, IA, succession) faites ; D-124 à D-127 |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 606/606 (95 fichiers, `docs/reports/PA-verify-2.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : PA.5 rendu (batteries, impacts et zones de danger dans le rendu tactique Pixi), puis PA.8 (pions d'armées, trajets, registre « armées », alerte de rencontre, succession), PA.9 (`smoke:pa`, captures), rapport `docs/reports/PA.md` |
+| Phase | **PA en revue** sur `claude/v2-pa` (fichier 21 §7 + 23 §3.2) : rapport `docs/reports/PA.md`, CPA-01 à 10 OK. Direction autonome (D-107). |
+| Tâche | PA.1–PA.10 faites (simulation, données, rendu des batteries, registre « Armées », `smoke:pa`, 9 captures) ; D-124 à D-128 ; dettes n° 33–36 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 606/606 (95 fichiers, `docs/reports/PA-verify-3.log`) ; `smoke:pa` code 0 (`docs/reports/PA-smoke.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de PA par la direction (`docs/reports/PA.md`), puis fusion ou correctifs ; ensuite phase suivante de la feuille de route (fichier 24) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

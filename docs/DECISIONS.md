@@ -1027,3 +1027,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Délai** : `tests/render/tactical3d/titans-r1c.test.ts` (dette n° 26) : `beforeAll` à 120 s ; il dépassait 10 s sous la
   charge de `verify` (premier verify de PA : 1 échec, `docs/reports/PA-verify-1.log`).
 - **Réversible** : oui.
+
+## 2026-10-08 — D-128 Interface des armées : registre « Armées », alertes, canons de rempart en bataille (phase PA)
+- **Contexte** : PA.8 (ordre de mouvement, liste des unités en marche, alerte de rencontre, fiche d'artillerie) sans refonte de la carte ni
+  nouvel habillage.
+- **Choix** : registre latéral « Armées » (touche S, groupe Armée du menu) ; destination choisie au clic sur la carte (trajet en tirets,
+  puis trait cerné d'encre une fois l'ordre donné) ; étendards d'armées (insigne, effectif, jauges de moral et de vivres), flottes et
+  rencontres sur la carte, les noms de lieux s'écartent des étendards ; le registre s'ouvre de lui-même sur une rencontre ou une crise de
+  succession (jeu en pause) ; journal de raisonnement des IA en mode auteur seulement. En bataille, un segment de mur tenu et gardé, sur place
+  ou voisin, tire avec ses canons de rempart [C] (une pièce pour 400 hommes, règle du siège), seule artillerie de Paradis sans
+  `tech_mobile_cannon` [?].
+- **Réversible** : oui.

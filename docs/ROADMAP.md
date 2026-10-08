@@ -9,7 +9,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 | N1 | UI | 22 §5 | 280 | oui (revue par sous-agent, D-113) | terminée, fusionnée par sa PR (dette n° 19 à 21) |
 | N1 | AUD | 22 §6 + 23 §3.1 | 120 | non | terminée, fusionnée par sa PR (D-114 à D-117) |
 | N1 | CHR | 22 §7 | 120 | non | terminée, fusionnée par sa PR (D-118 à D-123) |
-| N1 | PA | 21 §7 + 23 §3.2 | 200 | oui | à faire |
+| N1 | PA | 21 §7 + 23 §3.2 | 200 | oui | en revue (`docs/reports/PA.md`) |
 | N2 | MIS | 23 §5 | 150 | non | à faire |
 | N2 | TUT | 23 §5 | 100 | non | à faire |
 | N2 | R2+ | 18 §1 + 23 §4 | 300 | oui | à faire |
