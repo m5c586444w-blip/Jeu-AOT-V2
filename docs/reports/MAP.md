@@ -6,7 +6,7 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 ## Critères
 | Id | État | Preuve |
 |---|---|---|
-| CMAP-01 verify code 0 | **KO hors MAP** : seul échec CR1e-05 (R1e, déjà rouge sur la branche par défaut) ; 507/508 tests ; reste de la chaîne code 0 | `MAP-verify.log`, `MAP-verify-suite.log` |
+| CMAP-01 verify code 0 | **KO hors MAP** : seul échec CR1e-05 (R1e, déjà rouge sur la branche par défaut) ; 509/510 tests ; reste de la chaîne code 0 | `MAP-verify.log`, `MAP-verify-suite.log` |
 | CMAP-02 `src/sim` inchangé | OK | `git diff origin/claude/attack-on-titan-strategy-game-4ukom6 --stat -- src/sim` : vide |
 | CMAP-03 sim:selftest | OK | `MAP-verify-suite.log` |
 | CMAP-04 voisinage dessiné = données | OK | `npm run map:terrain -- --check` : « identique » ; `tests/map` |
@@ -37,12 +37,12 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 
 ## Performance (Chromium headless, rendu logiciel, `npm run captures:map`)
 ```
-[1366×768] carte prête en 5.63 s (chargement de la page compris)
-  première image de la carte : 1.42 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 7.19 s après le début de la carte
-[3840×2160] carte prête en 8.13 s (chargement de la page compris)
-  première image de la carte : 1.62 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 8.91 s après le début de la carte
+[1366×768] carte prête en 5.54 s (chargement de la page compris)
+  première image de la carte : 1.41 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 6.89 s après le début de la carte
+[3840×2160] carte prête en 8.38 s (chargement de la page compris)
+  première image de la carte : 1.52 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 8.21 s après le début de la carte
 Aucune erreur console.
 ```
 Première image < 3 s : OK. « carte prête » inclut le serveur de développement Vite (modules non groupés).
@@ -53,7 +53,7 @@ $ npm run map:terrain -- --check
 voisinage dessiné / données : identique
 fichier figé reproduit à l'identique (52d42f01)
 $ npx vitest run tests/map
-      Tests  9 passed (9)
+      Tests  11 passed (11)   (terrain 9, noms 2 : segments sur la ligne médiane de leur mur)
 $ npm run smoke:map   (extrait)
   OK  survol → bulle « Trost » (AC1-10)
   OK  clic → dossier de Trost (AC1-10)
@@ -64,12 +64,12 @@ smoke:map : OK (captures dans docs/screenshots/).
 ```
 $ npm run verify   (typecheck et lint passent, puis)
  FAIL  tests/places/murs.test.ts > R1e.3 — parement sans motif répété (CR1e-05) > autocorrélation …
- Test Files  1 failed | 79 passed (80)
-      Tests  1 failed | 507 passed (508)
+ Test Files  1 failed | 80 passed (81)
+      Tests  1 failed | 509 passed (510)
 EXIT 1
 $ npm run data:validate && … && npm run sim:selftest && npm run build   (suite de la chaîne)
 sim:selftest : OK (direct = worker : sans monde, bac à sable 845, …, 850 avec une bataille jouée).
-✓ built in 1.64s
+✓ built in 1.51s
 EXIT 0
 ```
 
@@ -80,7 +80,7 @@ EXIT 0
 2. `map-1366-region` — Sud de l'île : Trost, Shiganshina, lac, fleuves, routes, noms des provinces. Défauts : « Fort avancé
    de Maria » et « Forêt des Arbres Géants » serrés ; « Faubourgs de Shiganshina » sur une route ; frontières de Maria assez droites.
 3. `map-1366-province` — Trost et Shiganshina, portes, ponts, routes ; noms de segments écrits dans les bandes de murs.
-   Défauts : « Maria-Sud-Ouest » coupé au bord gauche ; « Rose-Sud-Est » presque vertical ; champs marbrés.
+   Défauts : « Maria-Sud-Ouest » coupé au bord gauche ; « Rose-Sud-Est » presque vertical ; champs encore en plaques.
 4. `map-1366-calque-politique` — Vert « tenue » dans les murs, rouge « aux Titans » hors Maria, gris « perdue » sur Maria.
    Défauts : rouge et brun du relief proches ; pions par-dessus l'aplat ; légende sur la carte.
 5. `map-1366-calque-nourriture` — Ocre plus fort au sud de Rose et près de Karanes. Défauts : l'échelle claire se lit mal
@@ -93,7 +93,7 @@ EXIT 0
    avancé » serrés ; « Karanes » coupé en haut ; « Faubourgs de Shiganshina » collé à « Shiganshina ».
 9. `map-4k-province` — Trost en 4K : routes, ponts, rivières, murs ; « Sina-Sud », « Rose-Sud — porte de Trost »,
    « Maria-Sud — porte de Shiganshina » lisibles dans les bandes. Défauts : « Plaines intérieures de Maria » coupé au bord
-   droit ; champs en taches régulières ; nœuds de routes visibles.
+   droit ; champs en plaques douces ; nœuds de routes visibles.
 10. `map-4k-calque-politique` — Aplats lisibles sur le relief. Défauts : légende minuscule ; frontières fines peu visibles
     sous l'aplat ; pions noirs sur aplat sombre.
 11. `map-4k-calque-nourriture` — Dégradé ocre lisible. Défauts : faible contraste entre 0 et 562 ; voile gris hors Maria ;

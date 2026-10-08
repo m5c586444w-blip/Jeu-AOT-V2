@@ -10,7 +10,7 @@ const COLORS: Record<(typeof BIOMES)[number], number> = {
   mer: 0x4b6f80,
   plage: 0xd2c49a,
   prairie: 0x8e9e60,
-  cultures: 0xa9a96e,
+  cultures: 0xa1a468,
   foret: 0x4c6a3c,
   arbres_geants: 0x2c4a2a,
   marais: 0x667458,
@@ -152,7 +152,7 @@ export function renderTerrain(t: Pick<TerrainData, "grid" | "height" | "biome">,
         const bg = g0 * (1 - mix) + (wg / wt) * mix;
         const bb = b0 * (1 - mix) + (wb / wt) * mix;
         const light = 0.55 + 0.75 * Math.max(0, shade);
-        const tint = 1 + fine * 6 + (noise(gx * 0.9, gy * 0.9) - 0.5) * 0.12;
+        const tint = 1 + fine * 6 + (noise(gx * 0.9, gy * 0.9) - 0.5) * 0.07;
         let fr = br * light * tint;
         let fg = bg * light * tint;
         let fb = bb * light * tint;
