@@ -31,3 +31,4 @@ Format : **quoi** — où — gravité (faible / moyenne / forte). Tag `LC-repor
 | 25 | AUD : `smoke:p8` non relancé (il réécrit les captures `docs/screenshots/p8-*`) ; contrôle en navigateur réel fait par une sonde jetable (§5 du rapport) ; textes anglais des nouvelles options absents (repli sur le français) ; pas de son de pas de soldats ; pas de clic sonore dans le menu | `src/tools/smoke-p8.ts`, `src/i18n/en.json` | faible | AUD |
 | 26 | `tests/render/tactical3d/titans-r1c.test.ts` : le `beforeAll` dure 9,2 s pour un délai de 10 s ; échoue sous charge (premier `verify` de AUD.1) | `tests/render/tactical3d/titans-r1c.test.ts` | faible | AUD.1 |
 
+| 27 | `smoke:p8`, passe 3840×2160 : `waitForSelector('.pourquoi:not([hidden])')` expire (5 s) à `smoke-p8.ts:283` ; même échec sur la base d12a8d2 (après UI) : antérieur à AUD | `src/tools/smoke-p8.ts` | faible | AUD (revue D-117) |

@@ -25,13 +25,17 @@ export interface Settings {
   userTracks: Record<string, Mood | "off">;
   /** Mode auteur (E-UX-1) : statuts canon et codes internes visibles ; désactivé par défaut. */
   authorMode: boolean;
+  /** Révision de la musique : des préférences antérieures à la musique d'AUD reprennent le volume de musique par défaut. */
+  audioRev?: number;
 }
 
 const KEY = "murs-et-sang:preferences";
+/** Révision 2 : musique d'AUD (D-117). Les anciennes préférences gardaient 60 % de musique, soit un gain de 0,42 > 0,35. */
+export const AUDIO_REV = 2;
 /** Volumes par défaut : musique 0,70 × 0,45 = 0,315 (≤ 0,35, E-UX-4 et fichier 24 §2.4). */
 export const DEFAULT_SETTINGS: Settings = {
   locale: "fr", uiScale: 100, volMaster: 70, volMusic: 45, volAmbient: 50, volSfx: 80, volUi: 60, subtitles: true,
-  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false,
+  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, audioRev: AUDIO_REV,
 };
 export const MUSIC_SOURCES = ["synthese", "mixte", "perso"] as const;
 export type MusicSource = (typeof MUSIC_SOURCES)[number];
@@ -70,7 +74,7 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       locale: s.locale === "en" ? "en" : "fr",
       uiScale: typeof s.uiScale === "number" && s.uiScale >= 100 && s.uiScale <= 200 ? s.uiScale : DEFAULT_SETTINGS.uiScale,
       volMaster: vol(s.volMaster, DEFAULT_SETTINGS.volMaster),
-      volMusic: vol(s.volMusic, DEFAULT_SETTINGS.volMusic),
+      volMusic: s.audioRev === AUDIO_REV ? vol(s.volMusic, DEFAULT_SETTINGS.volMusic) : DEFAULT_SETTINGS.volMusic,
       volAmbient: vol(s.volAmbient, DEFAULT_SETTINGS.volAmbient),
       volSfx: vol(s.volSfx, DEFAULT_SETTINGS.volSfx),
       volUi: vol(s.volUi, DEFAULT_SETTINGS.volUi),
@@ -79,6 +83,7 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       musicSource: MUSIC_SOURCES.includes(s.musicSource as MusicSource) ? (s.musicSource as MusicSource) : DEFAULT_SETTINGS.musicSource,
       userTracks: userTracksOf(s.userTracks),
       authorMode: s.authorMode === true,
+      audioRev: AUDIO_REV,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };

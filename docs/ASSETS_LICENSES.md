@@ -227,8 +227,8 @@ figure ici, que les œuvres du domaine public sont antérieures à 1929 et que l
 | `canon_matin` | Canon du matin | Projet | 2026 | composition originale du projet (suite d'accords courante du canon baroque, lieu commun libre) |
 | `marche_garnison` | Marche de la garnison | Projet | 2026 | composition originale du projet, forme de marche militaire (à la manière de Sousa) |
 | `marche_bataillons` | Marche des bataillons | Projet | 2026 | composition originale du projet |
-| `galop_eclaireurs` | Galop des éclaireurs | Projet | 2026 | composition originale du projet |
-| `marche_legion` | Marche de la Légion | Projet | 2026 | composition originale du projet |
+| `galop_eclaireurs` | Galop des cavaliers | Projet | 2026 | composition originale du projet |
+| `marche_legion` | Marche des remparts | Projet | 2026 | composition originale du projet |
 
 Les pièces de Sousa, Schubert, Elgar, Boccherini et Beethoven (marche turque) citées par la direction n'ont **pas** été transcrites : leurs
 thèmes n'ont pas pu être restitués avec assez de fidélité de mémoire ; les marches ci-dessus sont des compositions originales dans leur idiome.

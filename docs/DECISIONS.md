@@ -918,3 +918,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   jamais par une dissonance. Volume par défaut : général 70 % × musique 45 % = 0,315. « Musique en combat seulement » coupe le bus hors combat.
 - **Réversible** : oui (constantes `MOOD_TONE` et `DEFAULT_SETTINGS`).
 
+
+## 2026-10-08 — D-117 Revue et fusion de la phase AUD (direction autonome)
+- **Contexte** : AUD faite par un sous-agent (≈ 90 tours sur 120) ; réseau de musique refusé (D-114) : musique synthétisée.
+  Revue par un sous-agent distinct : aucun bloquant ; trois points corrigés en une passe (volume des anciennes préférences,
+  deux titres proches de l'œuvre, source des mesures dans le rapport) ; `smoke:p8` en 4K en échec aussi sur la base (dette n° 27).
+- **Choix** : fusion après `npm run verify` code 0 (560/560, `docs/reports/AUD-verify-revue.log`).
+- **Options écartées** : bloquer sur `smoke:p8` 4K (antérieur à AUD, prouvé sur la base) ; laisser 60 % aux anciennes
+  préférences (Gabriel a déjà joué : il entendrait la musique au-dessus de 0,35).
+- **Réversible** : oui. **À valider par Gabriel** : l'écoute (non faite, impossible ici) ; la fidélité des transcriptions.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| AUD (sous-agent) | Sonnet | high | ≈ 90 | |
+| Revue et fusion AUD | Opus / défaut | défaut | ≈ 20 | 1 passe de correctifs |

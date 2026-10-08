@@ -53,7 +53,7 @@ Les transcriptions « domaine public » sont faites de mémoire : elles peuvent 
 Orchestration : timbres synthétisés (flûte, hautbois, clarinette, violon, cor, trompette, piccolo, cordes, piano, harpe, pizzicato, tuba, percussions) ; réverbération légère, compresseur.
 États : calme = classique, filtre passe-bas 3200 Hz, niveau 0,80, silences de 6 à 11 s ; tension = marches en bois et cordes, 5200 Hz, 0,92, 3 à 6 s ; combat = marches avec cuivres et caisse claire, 9500 Hz, 1,00, 1,5 à 3,5 s.
 
-## 4. Critères (sorties réelles ; `docs/reports/AUD-verify.log`)
+## 4. Critères (sorties réelles : `npx vitest run tests/audio tests/ui/audio.test.ts` pour les mesures ; `docs/reports/AUD-verify.log` pour verify)
 
 | ID | Résultat | Preuve |
 |---|---|---|
@@ -90,3 +90,21 @@ le canon du matin (cordes pincées), les ambiances de forêt et de ville.
 
 Premier `verify` (AUD.1) : une suite en échec (délai de 10 s d'un hook de `titans-r1c`, 6/6 relancée seule en 9,2 s : fragile sous charge) ; second :
 `tokens.test` a refusé la graine `0xa11b1e` (ressemble à une couleur), changée en décimal ; troisième : code 0. Tours : ≈ 95 sur 120.
+
+## Revue de la direction autonome (2026-10-08, D-117)
+- Relecture indépendante : aucun bloquant. Mesures des tests retrouvées à l'identique ; licences du domaine public correctes ;
+  aucun appel `Math.random` / `Date.now` ; `src/sim` et fichiers audio versionnés : diff vide.
+- Correctifs : préférences antérieures (musique à 60 %, gain 0,42) ramenées une fois à 45 % (`audioRev`, test ajouté) ;
+  « Galop des éclaireurs » et « Marche de la Légion » renommés « Galop des cavaliers » et « Marche des remparts » (titres
+  trop proches de l'œuvre) ; source des mesures corrigée ci-dessus.
+- `smoke:p8` : passes 1366×768 (100 % et 125 %) entièrement OK (dont « 5 volumes » et « humeur calme ») ; la passe 4K expire
+  à `smoke-p8.ts:283` aussi sur la base d12a8d2 : antérieur à AUD, dette n° 27.
+```
+ Test Files  88 passed (88)
+      Tests  560 passed (560)
+assets:check : 102 entrées, 102 fichiers ; licences, sources et empreintes conformes.
+canon:check : « data » conforme (R1–R12, 592 entrées).
+sim:selftest : OK (direct = worker : …, 850 avec une bataille jouée).
+✓ built in 1.88s
+EXIT 0
+```

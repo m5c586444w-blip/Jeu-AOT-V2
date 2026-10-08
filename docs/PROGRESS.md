@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **AUD en revue** (branche `claude/v2-aud`, D-114 à D-116). UI fusionnée (D-113). Direction autonome (D-107). |
-| Tâche | AUD terminée : AUD.1 à AUD.5 faites, CAUD-01 à 07 OK ; écoute à faire par Gabriel (dette n° 22) |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 559/559 (88 fichiers, `docs/reports/AUD-verify.log`) ; `src/sim` : diff vide |
-| Prochaine étape | PROCHAINE ACTION EXACTE : revue de AUD par un agent distinct puis fusion par la direction ; ensuite CHR (fichier 22 §7) |
+| Phase | **AUD terminée et fusionnée (D-117).** Prochaine phase : CHR (fichier 22 §7). Direction autonome (D-107). |
+| Tâche | Revue de AUD : volume des anciennes préférences, deux titres renommés, dette n° 27 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 560/560 (88 fichiers, `docs/reports/AUD-verify-revue.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/CHR.md` puis exécuter CHR sur `claude/v2-chr` (critères CCHR-01 à 06) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

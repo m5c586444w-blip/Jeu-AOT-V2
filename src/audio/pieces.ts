@@ -223,7 +223,7 @@ export const PIECES: readonly PieceDef[] = [
   },
   {
     id: "galop_eclaireurs",
-    title: "Galop des éclaireurs",
+    title: "Galop des cavaliers",
     composer: "Projet",
     year: null,
     origin: "original",
@@ -251,7 +251,7 @@ export const PIECES: readonly PieceDef[] = [
   },
   {
     id: "marche_legion",
-    title: "Marche de la Légion",
+    title: "Marche des remparts",
     composer: "Projet",
     year: null,
     origin: "original",
