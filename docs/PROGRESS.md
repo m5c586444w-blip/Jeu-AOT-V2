@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **CHR terminée, en revue** (branche `claude/v2-chr`, fusion par la direction). Prochaine phase : PA (fichier 21 §7 + 23 §3.2). |
-| Tâche | CHR.1 à CHR.5 faites ; rapport `docs/reports/CHR.md` ; D-118 à D-121 ; dettes n° 28 à 32 |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 587/587 (92 fichiers, `docs/reports/CHR-verify.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : revue de CHR par la direction, fusion, puis lancer PA sur une branche `claude/v2-pa` |
+| Phase | **CHR terminée et fusionnée (D-123).** Prochaine phase : PA (fichier 21 §7 + 23 §3.2). Direction autonome (D-107). |
+| Tâche | Revue de CHR : spoilers de la frise, faits de fond « Titans », hash documenté (D-122) |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 588/588 (92 fichiers, `docs/reports/CHR-verify-revue.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/PA.md` (audit PA.1) puis exécuter PA sur `claude/v2-pa` (critères CPA-01 à 10, amendement 23 §3.2) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

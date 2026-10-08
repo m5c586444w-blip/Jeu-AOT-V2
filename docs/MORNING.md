@@ -1,15 +1,14 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
 **Établi (sorties réelles)**
-- MAP (PR n° 2) et UI (PR n° 3) fusionnées ; AUD fusionnée : verify code 0, 560/560 (`docs/reports/AUD-verify-revue.log`).
-- AUD : 11 pièces synthétisées (5 du domaine public transcrites, 6 originales), 3 états, gain par défaut 0,315, aucune note grave tenue > 0,4 s, boucles ≥ 4 min ; dossier `assets_user/musique/` pour tes enregistrements.
-- Chaque phase relue par un sous-agent distinct ; bloquants corrigés (4K de la carte, « débogage » en UI).
-- UI revérifiée par une seconde session : `verify` code 0 sur la tête de la PR n° 3 (530/530) ; 12 captures relues par un sous-agent neuf, aucun bloquant non couvert ; défauts mineurs ajoutés au rapport UI (à joindre à la dette n° 21).
+- Fusionnées : MAP (PR n° 2), UI (n° 3), AUD (n° 4), CHR (sa PR) ; dernier verify code 0, 588/588 (`docs/reports/CHR-verify-revue.log`).
+- CHR : frise 845–854+, 60 événements du fichier 12 couverts (40 jouables, 20 en texte), 3,6 faits de fond par mois, chronique non vide au départ ; plus d'issue dévoilée avant décision.
+- Chaque phase relue par un sous-agent distinct ; UI revérifiée en plus par ta session CLI (commit 3b71ac1, docs seulement, D-123).
 
-**En dette** : n° 13–15 (carte), 19–21 (UI : erreurs Pixi, aspect « tableur »), 22–27 (écoute, enregistrements, smoke:p8 en 4K).
+**En dette** : n° 13–15 (carte), 19–21 (UI), 22–27 (audio), 28–32 (CHR : bac à sable 845 sans chronologie, 20 événements en texte seul).
 
-**À valider par Gabriel** : écouter la musique (je ne peux pas) ; D-114 (réseau de musique refusé : autoriser les domaines listés dans `docs/reports/AUD.md` pour de vrais enregistrements) ; D-113 (UI fusionnée avec dette).
+**À valider par Gabriel** : écouter la musique ; D-114 (domaines de musique à autoriser) ; D-122 (les faits de fond changent le hash des parties 850 et 854) ; D-123 (deux sessions sur le dépôt).
 
-**Prochaine action** : phase CHR (fichier 22 §7) sur `claude/v2-chr`.
+**Prochaine action** : phase PA (fichier 21 §7 + 23 §3.2) sur `claude/v2-pa`.
 
-**Quota** : non mesuré (aucun % fourni) ; ≈ 425 tours depuis ce matin (tableaux D-107, D-113, D-117).
+**Quota** : non mesuré (aucun % fourni) ; ≈ 590 tours depuis ce matin (tableaux D-107, D-113, D-117, D-123).

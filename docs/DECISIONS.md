@@ -973,3 +973,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Correctifs de la passe** : (1) la frise ne montre ni résumé ni effets d'un événement « en cours » ou « annoncé » (accroche neutre ; test `timeline`) ; (2) faits de fond « titans » sans sujet de province, sans effet sur une province, textes sans nom de province ; « revient à {province} » et « familles de {province} » reformulés ; (3) dossier : « aujourd'hui » au lieu de « sous 0 jours ».
 - **Réversible** : oui (retirer `fond` de l'équilibrage).
 
+
+## 2026-10-08 — D-123 Revue et fusion de CHR ; push concurrent sur la branche principale
+- **CHR** : revue indépendante sans bloquant ; une passe de correctifs (D-122 : pas d'issue dévoilée avant décision, faits
+  de fond « Titans » sans province, « aujourd'hui » au dossier, changement de hash documenté). `npm run verify` code 0,
+  588/588 (`docs/reports/CHR-verify-revue.log`). Fusion. Réversible : oui.
+- **Push concurrent** : `git fetch` avant la fusion montre `3b71ac1` (16:20 UTC) sur la branche principale, écrit par la
+  session CLI de Gabriel (`session_014pHhi7…`) : documentation seulement (`docs/reports/UI.md`, `docs/MORNING.md`), seconde
+  revue de UI. Fusionné dans `claude/v2-chr` sans conflit ; sa ligne de MORNING reprise. Aucune action sur cette session
+  (consigne : ne pas la contacter). **À valider par Gabriel** : une seule session de code à la fois sur le dépôt.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| CHR (sous-agent) | Sonnet | high | ≈ 105 | |
+| Revue CHR + correctifs + fusion | Opus / Sonnet | défaut | ≈ 50 | 1 passe |
