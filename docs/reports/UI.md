@@ -100,9 +100,9 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
 11. `ui-11-economie-1366` — Rationnement en tête ; ressources à gauche ; détail de la nourriture (réserve, variation,
     production, consommation, pertes, totaux). Défauts : consommation « +7800 » en rouge (signe ambigu) ; « Population »
     hors de vue sans défilement visible ; zéros redondants du niveau « Normal ».
-12. `ui-12-chancellerie-1366` — Nations à blason à gauche, Hizuru choisi : axes, traité, proposition, guerre, embargo.
-    Défauts : « Journal de raisonnement des nations (débogage) » visible du joueur ; « commerce » proposé alors qu'il est
-    en vigueur ; grand vide sous la liste.
+12. `ui-12-chancellerie-1366` — refaite après le correctif D-113 (branche principale, CHR comprise) : Paradis en 854,
+    Hizuru choisi (axes, traité, proposition, guerre, embargo) ; plus de journal « (débogage) » (texte de la page vérifié).
+    Défauts : « commerce » proposé alors qu'il est en vigueur ; « réponse prévue : 43 » sans unité ; grand vide en bas.
 
 ## Ce qui reste
 1. `smoke:tactique` : erreurs Pixi `geometry` / `clear` après la fermeture de la planche des figures (dette n° 20).
@@ -134,7 +134,7 @@ EXIT 0
   `Tests 530 passed (530)`, `✓ built in 2.14s`, `EXIT 0` ; `git diff 7146a98 a13fd36 --stat -- src/sim` : vide.
 - Les 12 captures relues une à une par un sous-agent neuf (recadrages à taille réelle en 4K) : **aucun bloquant non
   couvert**. Le seul bloquant visible, « (débogage) » en ui-12, est corrigé dans `a13fd36` (`authorOnly`, `dip.ai_log`,
-  `leaks.ts`), mais la capture ui-12 n'a pas été refaite ; ui-01 et ui-05 précèdent aussi leurs correctifs.
+  `leaks.ts`), capture ui-12 refaite ensuite (sans la mention) ; ui-01 et ui-05 précèdent leurs correctifs.
 - CUI-05 confirmé (réserve : l'arbre de recherche reste une grille 2×3 de cases) ; CUI-07 : aucun texte illisible, mais des
   troncatures (dette n° 21) ; CUI-08 confirmé (12 captures non vides, chacune montre son écran) ; le défaut cité pour
   ui-04 (titre de groupe recouvert) n'est pas visible.
