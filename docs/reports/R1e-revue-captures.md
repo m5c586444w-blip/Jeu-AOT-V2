@@ -191,3 +191,9 @@ Première capture (vue d'ensemble seule, consigne §5), après le correctif de `
   secteurs (blé, orge, labour, prairie) séparés par des chemins rayonnants ; quelques arbres isolés. — *rayures et
   triangles dentelés sur les champs (champs à +2 cm de la prairie : précision de profondeur insuffisante à 1,5 km, dette
   n° 11) ; maisons minuscules à cette distance ; tiers supérieur noyé dans la brume, secteurs de champs trop géométriques.*
+
+## 8. Galerie du smoke de R1b (`docs/screenshots/r1b-galerie.png`, passage de R1e)
+
+- **r1b-galerie** : page « Galerie des environnements », lot 1, huit environnements en vignettes jour et crépuscule (E01,
+  E02, E05, E06, E11, E13, E14, E19), « 56 vignettes rendues en 88 s ». — *vignettes étirées en hauteur ; E01 montre encore
+  la ville générée de R1b, pas le lieu de Shiganshina (dette n° 3) ; page coupée à 900 px (les autres lots hors cadre).*
