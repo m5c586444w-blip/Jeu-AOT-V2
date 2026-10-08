@@ -290,6 +290,25 @@ export function planDay(world: World, state: StrategicState, date: GameDate, m: 
   return { date, resources, famine, moraleTarget, stabilityTarget };
 }
 
+/**
+ * Ajoute au plan du jour les prélèvements des armées en campagne (PA, `armies.drawn` : vivres, gaz, poudre, or) : une ligne
+ * « Ravitaillement des armées » (ou « Entretien des armées » pour l'or) dans la consommation et la variation nette, et le stock
+ * attendu diminué d'autant. Les prélèvements sont plafonnés au stock disponible par la couche des armées (dette n° 35, D-129).
+ */
+export function withArmyDraws(plan: DayPlan, drawn: Readonly<Record<string, number>> | undefined): DayPlan {
+  if (!drawn) return plan;
+  const resources = { ...plan.resources };
+  for (const r of RESOURCE_IDS) {
+    const v = drawn[r] ?? 0;
+    if (v === 0) continue;
+    const key = r === "gold" ? "why.army_upkeep" : "why.army_supply";
+    const day = resources[r];
+    const add = (x: Explained, sign: number): Explained => ({ value: x.value + sign * v, factors: [...x.factors, { key, op: "add", value: sign * v }] });
+    resources[r] = { ...day, consumption: add(day.consumption, 1), net: add(day.net, -1), next: day.next - v };
+  }
+  return { ...plan, resources };
+}
+
 const clamp100 = (v: number): number => Math.max(0, Math.min(100, v));
 
 export function pushLog(s: StrategicState, date: GameDate, key: string, params: Record<string, string | number>, pause: boolean): void {

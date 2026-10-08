@@ -594,8 +594,10 @@ export function encounterSetup(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed">
     }
   };
   add("allie", ours.flatMap((a) => armyPieces(ctx.aw, a)));
-  // Canons de rempart [C] : un segment de mur tenu et gardé, sur place ou voisin, tire avec sa garnison (même règle qu'au siège).
-  const wall = ctx.st ? wallGunsNear(ctx.world, ctx.st, enc.province) : 0;
+  // Canons de rempart [C] : ils ne quittent pas les murs (catalogue) ; ils ne tirent que si la rencontre a lieu sur un segment
+  // de mur, avec la garnison des segments tenus sur place ou voisins (même règle qu'au siège). En plaine, ils restent en garnison (D-129).
+  const onWall = isWallProvince(geoOf(ctx.world), enc.province);
+  const wall = ctx.st && onWall ? wallGunsNear(ctx.world, ctx.st, enc.province) : 0;
   if (wall > 0 && ctx.aw.pieces.get("art_canon_rempart")?.enabled) add("allie", [{ piece: "art_canon_rempart", count: wall }]);
   for (const sd of enc.sides) if (sd.faction !== "fac_paradis") add("ennemi", sd.armies.flatMap((id) => {
     const a = findArmy(ctx.s, id);
@@ -618,6 +620,14 @@ function applyArmyLoss(aw: ArmiesWorld, a: ArmyState, share: number): number {
   for (const r of a.regiments) r.strength = Math.max(0, r.strength * (1 - share));
   a.regiments = a.regiments.filter((r) => r.strength >= 0.1);
   return before - armyMen(aw, a);
+}
+
+/** Pertes hors bataille (marche, famine, bombardement, Titans, mer), cumulées par cause pour la fiche de l'armée (D-129). */
+function marchLoss(aw: ArmiesWorld, a: ArmyState, share: number, cause: "forcee" | "famine" | "bombardement" | "titans" | "mer"): void {
+  const men = applyArmyLoss(aw, a, share);
+  if (men <= 0) return;
+  const m = (a.marchLosses ??= {});
+  m[cause] = (m[cause] ?? 0) + men;
 }
 
 function destroyArmy(ctx: ArmyCtx, a: ArmyState, key: string): void {
@@ -807,7 +817,12 @@ export function dailyArmies(ctx: ArmyCtx): void {
     const speed = armyBaseSpeed(ctx.aw, a) * (b.move.terrain_speed[terrainOf(ctx.world, next)] ?? 1) * fat * (a.forced ? b.move.forced_mult : 1);
     a.progress += speed;
     a.fatigue = a.forced ? clamp(a.fatigue + b.move.forced_fatigue_per_day, 0, 100) : Math.max(a.fatigue - b.move.rest_recovery / 2, Math.min(b.move.march_fatigue_cap, a.fatigue + b.move.fatigue_per_day));
-    if (a.forced) applyArmyLoss(ctx.aw, a, b.move.forced_attrition * (1 + a.fatigue / 100));
+    if (a.forced) marchLoss(ctx.aw, a, b.move.forced_attrition * (1 + a.fatigue / 100), "forcee");
+    // Épuisée, l'armée ne force plus l'allure (D-129) : au-delà, la marche forcée serait plus lente qu'une marche normale.
+    if (a.forced && a.fatigue >= 100) {
+      a.forced = false;
+      if (a.faction === playerOf(ctx.ns)) pushArmyLog(ctx.s, ctx.date, "army.log.exhausted", { army: a.name_key });
+    }
     moves.push({ a, from: a.province, to: next, km });
   }
   const crossed = new Set<string>();
@@ -870,7 +885,7 @@ export function dailyArmies(ctx: ArmyCtx): void {
     const dens = ctx.st.provinces[a.province]?.control === "paradis" ? 0 : titanDensity(ctx.world, a.province, ctx.st);
     if (dens <= 0) continue;
     const odmShare = a.regiments.filter((r) => ["odm", "lances"].includes(ctx.aw.regiments.get(r.regiment)?.kind ?? "")).reduce((n, r) => n + r.count, 0) / Math.max(1, a.regiments.reduce((n, r) => n + r.count, 0));
-    applyArmyLoss(ctx.aw, a, b.titans.attrition_per_density * dens * (1 - b.titans.odm_protection * odmShare));
+    marchLoss(ctx.aw, a, b.titans.attrition_per_density * dens * (1 - b.titans.odm_protection * odmShare), "titans");
     if (rng.next() < dens * b.titans.encounter_per_density) {
       const n = Math.max(1, Math.round(dens * b.titans.group_per_density * (0.5 + rng.next())));
       openEncounter(ctx, a.province, "titans", [{ faction: a.faction, armies: [a.id] }], n, null);
@@ -937,7 +952,7 @@ function dailyFleets(ctx: ArmyCtx): void {
         f.ships = f.ships.filter((s) => s.strength >= 0.1);
         for (const id of f.embarked) {
           const a = findArmy(ctx.s, id);
-          if (a) applyArmyLoss(ctx.aw, a, escorted ? share * 0.1 : share * 0.5);
+          if (a) marchLoss(ctx.aw, a, escorted ? share * 0.1 : share * 0.5, "mer");
         }
       }
       pushArmyLog(ctx.s, ctx.date, "army.log.naval_battle", { sea });
@@ -958,9 +973,10 @@ function dailyFleets(ctx: ArmyCtx): void {
     if (power <= 0) continue;
     for (const a of ctx.s.armies) {
       if (!a.province || !sea.coasts.includes(a.province) || !hostile(ctx.ns, a.faction, f.faction)) continue;
-      applyArmyLoss(ctx.aw, a, Math.min(0.05, power * 0.0015));
+      const before = a.marchLosses?.["bombardement"] ?? 0;
+      marchLoss(ctx.aw, a, Math.min(0.05, power * 0.0015), "bombardement");
       a.morale = clamp(a.morale - Math.min(5, power * 0.1), 0, 100);
-      pushArmyLog(ctx.s, ctx.date, "army.log.shore_bombardment", { army: a.name_key, fleet: f.name_key });
+      pushArmyLog(ctx.s, ctx.date, "army.log.shore_bombardment", { army: a.name_key, fleet: f.name_key, n: Math.round((a.marchLosses?.["bombardement"] ?? 0) - before) });
     }
   }
 }
@@ -1009,7 +1025,7 @@ function dailySupply(ctx: ArmyCtx): void {
     } else if (friendly || naval) a.supply = Math.min(b.supply.max_days, a.supply + (naval ? b.supply.naval_supply : b.supply.resupply_per_day / 2));
     else a.supply = Math.max(0, a.supply - 1);
     if (a.supply <= 0) {
-      applyArmyLoss(ctx.aw, a, b.supply.starvation_attrition);
+      marchLoss(ctx.aw, a, b.supply.starvation_attrition, "famine");
       a.morale = clamp(a.morale - b.supply.starvation_morale, 0, 100);
     } else if (!a.engaged) a.morale = clamp(a.morale + Math.sign(b.morale.base - a.morale) * Math.min(b.morale.drift, Math.abs(b.morale.base - a.morale)), 0, 100);
   }
@@ -1103,8 +1119,15 @@ function dailyOccupation(ctx: ArmyCtx): void {
 function monthlyUpkeep(ctx: ArmyCtx): void {
   for (const a of ctx.s.armies) {
     const cost = a.regiments.reduce((n, r) => n + (ctx.aw.regiments.get(r.regiment)?.upkeep ?? 0) * r.count, 0) + armyPieces(ctx.aw, a).reduce((n, p) => n + (ctx.aw.pieces.get(p.piece)?.upkeep ?? 0) * p.count, 0);
-    if (a.faction === "fac_paradis") drawStock(ctx, "gold", cost);
-    else {
+    if (a.faction === "fac_paradis") {
+      // Solde plafonnée au trésor disponible (D-129) : le reste n'est pas payé, et l'armée impayée perd du moral.
+      const paid = Math.min(cost, Math.max(0, ctx.st.stocks["gold"] ?? 0));
+      drawStock(ctx, "gold", paid);
+      if (paid < cost) {
+        a.morale = clamp(a.morale - ctx.aw.balance.supply.starvation_morale, 0, 100);
+        pushArmyLog(ctx.s, ctx.date, "army.log.unpaid", { army: a.name_key });
+      }
+    } else {
       const n = ctx.ns?.nations[a.faction];
       if (n) n.industry = Math.max(0, n.industry - cost * 0.1);
     }

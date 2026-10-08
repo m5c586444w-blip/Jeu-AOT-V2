@@ -51,6 +51,8 @@ export interface ArmyState {
   engaged: string | null;
   /** Jour du débarquement (pénalité au premier combat). */
   landed: number | null;
+  /** Pertes hors bataille par cause (hommes) : marche forcée, famine, bombardement côtier, Titans, mer (D-129). Facultatif. */
+  marchLosses?: Record<string, number>;
 }
 
 export interface ShipStack {

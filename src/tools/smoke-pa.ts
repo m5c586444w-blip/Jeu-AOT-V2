@@ -145,6 +145,9 @@ try {
   const choices = await page.locator(".armee__rencontre button").allInnerTexts();
   expect(choices.length === 3, `trois issues proposées : ${choices.join(" / ")}`);
   await page.screenshot({ path: `${OUT}/pa-rencontre.png` });
+  // Pertes avant le contact expliquées par cause (D-129).
+  const pertes = (await page.locator(".armee__pertes").count()) > 0 ? (await page.locator(".armee__pertes").innerText()).replace(/\s+/g, " ") : "";
+  expect(pertes.includes(fr["armies.march_losses"]), `fiche de l'armée : « ${pertes.slice(0, 120)} »`);
 
   // ——— 5. Bataille livrée : artillerie des deux camps ———
   await page.locator('.armee__rencontre [data-action="jouer"]').click();
@@ -203,7 +206,7 @@ try {
   await audit(m, ".registre-panneau", "registre des armées (Marley)");
   await m.close();
 
-  // ——— 7. 850 : rencontre de Titans au pied du mur Rose, canons de rempart de Paradis ———
+  // ——— 7. 850 : rencontre de Titans en plaine de Maria, canons de rempart restés sur le mur Rose ———
   console.log("[850, Paradis] 1366×768");
   const p8 = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   await open(p8, `${url}?scenario=scn_sandbox_850&dossiers=0`, errors);
@@ -229,7 +232,8 @@ try {
     await p8.locator('[data-action="quitter"]').click();
     await p8.waitForSelector(".bilan", { timeout: 120000 });
     const b8 = await p8.locator(".bilan").innerText();
-    expect(b8.includes(fr["tac.sum.shells"]), "canons de rempart de Paradis en bataille : ligne « Obus tirés » au bilan");
+    // Les canons de rempart ne quittent pas les murs (D-129) : en plaine de Maria, aucun obus de Paradis.
+    expect(!b8.includes(fr["tac.sum.shells"]), "canons de rempart restés en garnison : aucun « Obus tirés » en plaine");
     await p8.locator('.bilan [data-action="valider"]').click();
   }
   await p8.close();

@@ -1038,3 +1038,24 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   ou voisin, tire avec ses canons de rempart [C] (une pièce pour 400 hommes, règle du siège), seule artillerie de Paradis sans
   `tech_mobile_cannon` [?].
 - **Réversible** : oui.
+
+## 2026-10-08 — D-129 Passe de revue PA : ravitaillement expliqué, solde plafonnée, marche forcée bornée, canons de rempart sur les murs
+- **Contexte** : revue indépendante de PA. (1) Les prélèvements des armées (`armies.drawn`) manquaient au « pourquoi ? » (dette n° 35) ;
+  le test AC1-04 les rajoutait à part. (2) L'entretien mensuel en or pouvait rendre le trésor négatif. (3) Armée du Sud 1 180 → 209 hommes
+  avant le contact (capture `pa-rencontre`). (4) Canons de rempart (« ne quittent pas les murs ») en bataille en plaine de Maria (850).
+- **Options** : (1) prédire les prélèvements dans `planDay` (rejouer la journée des armées) ou ajouter au plan les prélèvements consignés ;
+  (3) baisser l'usure, plafonner la durée, ou arrêter la marche forcée à l'épuisement ; (4) segment sur place seulement, ou aussi voisin.
+- **Choix** : (1) `withArmyDraws(plan, drawn)` (ajout dans `strategic/economy.ts`) : ligne « Ravitaillement des armées (dernier jour) »
+  (« Entretien des armées » pour l'or) dans la consommation et la variation nette ; bandeau et écran Économie l'affichent ; AC1-04 compare
+  la variation réelle à la variation expliquée, sans compensation. (2) Solde payée dans la limite du trésor ; le reste impayé : moral −3
+  (`starvation_morale`) et ligne « n'est pas payée » au registre. (3) Cause mesurée : marche forcée maintenue ≈ 85 jours (usure 0,8 %/jour
+  à fatigue 100, plus lente qu'une marche normale : 0,75 × au lieu de 1) puis bombardement côtier par la flotte de Marley (≤ 5 %/jour,
+  voulu). Correctif : une armée épuisée (fatigue 100) cesse d'elle-même la marche forcée ; pertes hors bataille cumulées par cause
+  (`marchLosses?`, facultatif) et ligne « Pertes en marche » de la fiche ; le registre chiffre chaque bombardement. (4) Canons de rempart en
+  bataille seulement si la rencontre a lieu sur un segment de mur (garnisons du segment et des segments voisins tenus) ; ailleurs ils
+  restent en garnison. Un district au pied du mur (Trost, Karanes) n'est pas un segment : pas de canons (aucune donnée ne les y place).
+- **Raison** : plus petit changement ; aucune règle nouvelle hors de l'équilibrage existant ; `src/sim` modifié par ajouts et gardes.
+- **Empreintes** : `sim:selftest` inchangé (845 `59a9b1b2`, 850 `7d032fb4`, 854 `1aca7ab8`, Marley `c718bf0d`, expédition `20cdd5ca`,
+  bataille `dd7651fd`, sans monde `3c17ecdc`) : aucun scénario de l'autotest ne force la marche, ne vide le trésor ni ne bat en plaine
+  avec un mur voisin.
+- **Réversible** : oui.

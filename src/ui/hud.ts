@@ -2,7 +2,7 @@ import { hasKey, t } from "../i18n";
 import { stateHash } from "../sim/core/canonical";
 import type { GameState } from "../sim/core/state";
 import { fromAbsoluteDay, monthOf, seasonOf } from "../sim/core/time";
-import { planDay, planMonth, totals } from "../sim/strategic/economy";
+import { planDay, planMonth, totals, withArmyDraws } from "../sim/strategic/economy";
 import type { DayPlan, StrategicState } from "../sim/strategic/economy";
 import type { ResourceId } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
@@ -290,7 +290,7 @@ export class Hud {
       this.scheduleMeasure?.();
     }
     const st = this.strat();
-    this.plan = st ? planDay(this.world, st, state.date) : null;
+    this.plan = st ? withArmyDraws(planDay(this.world, st, state.date), state.armies?.drawn) : null;
     const d = state.date;
     this.set("date", t("date.format", { year: d.year, day: d.day }));
     this.set("season", `${t(`season.${seasonOf(d)}`)}, ${t("hud.month", { n: monthOf(d) })}`);

@@ -6,7 +6,7 @@ import type { Command } from "../../src/sim/core/commands";
 import { createInitialState } from "../../src/sim/core/state";
 import type { GameState } from "../../src/sim/core/state";
 import { deserialize, serialize } from "../../src/sim/core/serialize";
-import { encounterSetup, visibleProvinces } from "../../src/sim/armies/armies";
+import { armyUpkeep, encounterSetup, visibleProvinces } from "../../src/sim/armies/armies";
 import { armyMen } from "../../src/sim/armies/state";
 import type { ArmiesState, ArmyState } from "../../src/sim/armies/state";
 
@@ -194,5 +194,58 @@ describe("Succession (PA.10)", () => {
     s = run(w850, s, { type: "ArmySetGeneral", army: "army_850_sud", general: "char_rico_brzenska" });
     expect(army(s, "army_850_sud").general).toBe("char_rico_brzenska");
     expect(army(s, "army_850_sud").interim).toBe(false);
+  });
+});
+
+describe("Passe de revue PA (D-129)", () => {
+  const men = (world: typeof w850, s: GameState, id: string): number => armyMen(req(world.armies), army(s, id));
+  it("marche normale sur le trajet du smoke (Trost → Maria-Sud-Est) : aucune attrition de marche", () => {
+    let s = run(w854, createInitialState(1, w854), { type: "ArmyMove", army: "army_854_sud", to: "prov_maria_sud_est" });
+    const start = men(w854, s, "army_854_sud");
+    for (let i = 0; i < 80 && army(s, "army_854_sud").province !== "prov_maria_sud_est"; i++) s = days(w854, s, 1);
+    expect(army(s, "army_854_sud").province).toBe("prov_maria_sud_est");
+    expect(men(w854, s, "army_854_sud")).toBeGreaterThanOrEqual(start * 0.98);
+    expect(army(s, "army_854_sud").marchLosses?.["forcee"] ?? 0).toBe(0);
+  });
+  it("marche forcée : bornée (l'armée épuisée cesse d'elle-même), toute perte hors bataille expliquée par cause", () => {
+    let s = run(w854, createInitialState(1, w854), { type: "ArmyMove", army: "army_854_sud", to: "prov_maria_nord" }, { type: "ArmyForcedMarch", army: "army_854_sud", on: true });
+    const start = men(w854, s, "army_854_sud");
+    s = days(w854, s, 40);
+    const a = army(s, "army_854_sud");
+    expect(a.forced).toBe(false);
+    expect(ar(s).log.some((l) => l.key === "army.log.exhausted")).toBe(true);
+    const forced = a.marchLosses?.["forcee"] ?? 0;
+    expect(forced).toBeGreaterThan(0);
+    expect(forced).toBeLessThanOrEqual(start * 0.08);
+    const explained = Object.values(a.marchLosses ?? {}).reduce((n, v) => n + v, 0);
+    expect(start - men(w854, s, "army_854_sud")).toBeCloseTo(explained, 6);
+  });
+  it("entretien mensuel en or plafonné au trésor : jamais négatif, armée impayée démoralisée", () => {
+    let s = createInitialState(2, w850);
+    while ((s.date.day + 1) % 30 !== 1) s = days(w850, s, 1);
+    // Trésor presque vide la veille du 1er du mois (production d'or du jour comprise, le stock reste sous l'entretien).
+    s = { ...s, strategic: { ...req(s.strategic), stocks: { ...req(s.strategic).stocks, gold: 0 } } };
+    const gold = req(s.strategic).stocks.gold;
+    const morale = army(s, "army_850_est").morale;
+    s = days(w850, s, 1);
+    // Prélevé = or du jour seulement (production comprise), moins que l'entretien dû.
+    const due = ar(s).armies.filter((a) => a.faction === "fac_paradis").reduce((n, a) => n + armyUpkeep(req(w850.armies), a), 0);
+    expect(gold).toBe(0);
+    expect(ar(s).drawn?.["gold"] ?? 0).toBeLessThan(due);
+    expect(req(s.strategic).stocks.gold).toBeGreaterThanOrEqual(0);
+    expect(ar(s).log.some((l) => l.key === "army.log.unpaid")).toBe(true);
+    expect(army(s, "army_850_est").morale).toBeLessThan(morale);
+  });
+  it("canons de rempart : jamais en plaine (restent en garnison) ; en bataille sur un segment de mur tenu", () => {
+    let s = run(w850, createInitialState(5, w850), { type: "ArmyMove", army: "army_850_sud", to: "prov_plaines_interieures_maria_sud" });
+    for (let i = 0; i < 60 && !ar(s).encounters.some((e) => e.kind === "titans" && e.status === "attente"); i++) s = days(w850, s, 1);
+    const enc = req(ar(s).encounters.find((e) => e.kind === "titans" && e.status === "attente"));
+    const ctx = { world: w850, aw: req(w850.armies), s: ar(s), seed: s.seed, st: req(s.strategic) };
+    const plain = encounterSetup(ctx, enc.id);
+    expect(plain).not.toBeNull();
+    expect((plain?.artillery ?? []).some((b) => b.piece === "art_canon_rempart")).toBe(false);
+    const onWall: ArmiesState = { ...ar(s), encounters: ar(s).encounters.map((e) => (e.id === enc.id ? { ...e, province: "prov_rose_sud" } : e)) };
+    const wall = encounterSetup({ ...ctx, s: onWall }, enc.id);
+    expect((wall?.artillery ?? []).some((b) => b.piece === "art_canon_rempart")).toBe(true);
   });
 });

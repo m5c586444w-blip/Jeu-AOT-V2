@@ -177,6 +177,15 @@ export class ArmiesPanel implements Panel {
     d.append(kv);
     const strength = armyStrength(c, a);
     d.append(el("p", "registre-note", `${t("armies.strength")} : ${formatNumber(Math.round(strength))}`));
+    // Pertes hors bataille, par cause (D-129) : la fiche explique toute baisse d'effectif avant le contact.
+    const lost = Object.entries(a.marchLosses ?? {}).filter(([, n]) => Math.round(n) > 0).sort(([x], [y]) => x.localeCompare(y));
+    if (lost.length) {
+      const total = lost.reduce((n, [, v]) => n + v, 0);
+      const row = el("div", "kv armee__pertes");
+      row.append(el("span", "kv__cle", t("armies.march_losses")), valueEl(this.ctx, formatNumber(Math.round(total)), () => ({ title: t("armies.march_losses"), sections: [{ rows: lost.map(([k, v]) => ({ label: t(`armies.loss.${k}`), value: formatNumber(Math.round(v)) })) }, { text: t("armies.march_losses_why") }] })));
+      row.append(el("span", "registre-note", ` (${lost.map(([k, v]) => `${t(`armies.loss.${k}`)} ${formatNumber(Math.round(v))}`).join(", ")})`));
+      d.append(row);
+    }
     // Trajet.
     if (a.route.length) d.append(el("p", "plan-ligne", `${t("armies.route")} : ${[a.province ?? "", ...a.route].map((p) => provinceName(this.ctx.world, p)).join(" → ")}${a.forced ? ` · ${t("armies.forced")}` : ""}`));
     // Régiments et fiche d'artillerie.
