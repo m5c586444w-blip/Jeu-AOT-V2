@@ -121,7 +121,7 @@ export class StrategicMap {
     m.fit();
     m.refineTerrain();
     // Les tailles des noms changent quand les polices auto-hébergées finissent de charger : on replace les noms.
-    void document.fonts?.ready.then(() => m.labels.update(m.zoom / m.uiScale, m.lod, m.filters.labels, m.iconPoints()));
+    void document.fonts?.ready.then(() => m.labels.update(m.zoom / m.uiScale, m.lod, m.filters.labels, m.iconPoints(), m.viewBox()));
     return m;
   }
 
@@ -137,6 +137,13 @@ export class StrategicMap {
   /** Échelle des traits, icônes et noms selon la taille de l'écran : lisibles en 4K comme en 1366×768. */
   get uiScale(): number {
     return Math.max(1, Math.min(2.4, this.app.screen.height / 900));
+  }
+
+  /** Partie du monde visible à l'écran : un nom coupé par le bord cherche d'abord une place entière. */
+  private viewBox(): [number, number, number, number] {
+    const [x0, y0] = this.toWorld(0, 0);
+    const [x1, y1] = this.toWorld(this.app.screen.width, this.app.screen.height);
+    return [x0, y0, x1, y1];
   }
 
   /** Icônes visibles au niveau courant (villes, portes, pions) : les noms se placent à côté. */
@@ -174,7 +181,7 @@ export class StrategicMap {
     this.world.scale.set(this.zoom);
     this.world.position.set(x, y);
     this.redrawIfNeeded();
-    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints());
+    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints(), this.viewBox());
     this.onCamera?.();
   }
 
@@ -226,7 +233,7 @@ export class StrategicMap {
     this.dynamic = d;
     this.bucket = Number.NaN;
     this.redrawIfNeeded();
-    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints());
+    this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints(), this.viewBox());
   }
 
   /** Itinéraires et positions des expéditions, convois et dépôts. */
@@ -255,7 +262,7 @@ export class StrategicMap {
     this.gRoutes.visible = f.pawns;
     this.gWalls.visible = f.walls;
     this.gFog.visible = f.fog;
-    this.labels.update(this.zoom / this.uiScale, this.lod, f.labels, this.iconPoints());
+    this.labels.update(this.zoom / this.uiScale, this.lod, f.labels, this.iconPoints(), this.viewBox());
   }
 
   setHover(id: string | null): void {

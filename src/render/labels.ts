@@ -81,7 +81,7 @@ export class LabelLayer {
    * Chaque nom essaie sa place par défaut, puis au-dessus, au-dessous, à droite et à gauche ; s'il ne tient nulle part
    * sans couvrir un autre nom, il se cache (les plus importants sont placés d'abord).
    */
-  update(zoom: number, lod: Lod, visible: boolean, icons: readonly (readonly number[])[] = []): void {
+  update(zoom: number, lod: Lod, visible: boolean, icons: readonly (readonly number[])[] = [], view?: readonly [number, number, number, number]): void {
     this.container.visible = visible;
     const level = LOD_ORDER.indexOf(lod);
     const inv = 1 / zoom;
@@ -199,7 +199,11 @@ export class LabelLayer {
       const clear = (b: Box): boolean => !placed.some((p) => hit(p, b)) && !iconBoxes.some((p) => hit(p, b));
       // Hors des murs d'abord ; une ville posée sur un mur (district, porte) garde son nom même s'il le touche.
       const onWallTown = spec.style === "district" || spec.style === "capitale";
-      const free = tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o))) ?? (onWallTown ? tries.find((o) => clear(boxAt(o))) : undefined);
+      const inView = ([x0, y0, x1, y1]: Box): boolean => !view || (x0 >= view[0] && y0 >= view[1] && x1 <= view[2] && y1 <= view[3]);
+      const free =
+        tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o)) && inView(boxAt(o))) ??
+        tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o))) ??
+        (onWallTown ? tries.find((o) => clear(boxAt(o))) : undefined);
       const chosen = free ?? base;
       const box = boxAt(chosen);
       text.position.set(spec.at[0] + chosen[0] * inv, spec.at[1] + chosen[1] * inv);

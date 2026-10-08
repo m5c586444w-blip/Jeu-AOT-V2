@@ -28,7 +28,8 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 - **MAP.4** Trois niveaux (île, région, province) ; routes secondaires dès « région », ponts et créneaux à « province » ;
   noms de murs courbés, glissés le long de l'anneau à l'écart des pions et des portes ; les noms de lieux essaient
   9 positions, évitent icônes et bandes de murs (sauf villes posées sur un mur) et se masquent sinon ; les noms de
-  segments s'écrivent dans la bande de leur mur, le long de l'anneau, à l'écart des portes et des pions.
+  segments s'écrivent dans la bande de leur mur, le long de l'anneau, à l'écart des portes et des pions ; un nom
+  coupé par le bord de l'écran prend d'abord une place entière.
 - **MAP.5** Calques en aplat transparent (0,55) ; valeur inconnue en gris de légende (0,45). Infobulle : nom, région,
   état, mur en %, population, garnison et effectif, ressource principale ; clic : dossier (smoke:map).
 - **MAP.6** Emplacement de pion par province, choisi dans le polygone loin du nom et de la ville (test : dans la province).
@@ -37,12 +38,12 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 
 ## Performance (Chromium headless, rendu logiciel, `npm run captures:map`)
 ```
-[1366×768] carte prête en 5.54 s (chargement de la page compris)
-  première image de la carte : 1.41 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 6.89 s après le début de la carte
-[3840×2160] carte prête en 8.38 s (chargement de la page compris)
+[1366×768] carte prête en 5.82 s (chargement de la page compris)
   première image de la carte : 1.52 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 8.21 s après le début de la carte
+  image fine du relief (worker) prête 7.18 s après le début de la carte
+[3840×2160] carte prête en 8.05 s (chargement de la page compris)
+  première image de la carte : 1.48 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 8.77 s après le début de la carte
 Aucune erreur console.
 ```
 Première image < 3 s : OK. « carte prête » inclut le serveur de développement Vite (modules non groupés).
@@ -69,7 +70,7 @@ $ npm run verify   (typecheck et lint passent, puis)
 EXIT 1
 $ npm run data:validate && … && npm run sim:selftest && npm run build   (suite de la chaîne)
 sim:selftest : OK (direct = worker : sans monde, bac à sable 845, …, 850 avec une bataille jouée).
-✓ built in 1.51s
+✓ built in 1.50s
 EXIT 0
 ```
 
@@ -90,7 +91,7 @@ EXIT 0
 7. `map-4k-ile` — Même vue en 3840×2160, noms et icônes à l'échelle, relief net ; Karanes nommé à droite de sa porte.
    Défauts : panneau « Calques » minuscule (phase UI) ; blocs carrés au bord des forêts ; « Mur Rose » proche d'un lac.
 8. `map-4k-region` — Sud en 4K, image fine : forêts, lac, fleuves nets. Défauts : « Forêt des Arbres Géants » et « Fort
-   avancé » serrés ; « Karanes » coupé en haut ; « Faubourgs de Shiganshina » collé à « Shiganshina ».
+   avancé » serrés ; « Krolva » et « Karanes » entiers en haut, mais collés au bord ; « Faubourgs de Shiganshina » collé à « Shiganshina ».
 9. `map-4k-province` — Trost en 4K : routes, ponts, rivières, murs ; « Sina-Sud », « Rose-Sud — porte de Trost »,
    « Maria-Sud — porte de Shiganshina » lisibles dans les bandes. Défauts : « Plaines intérieures de Maria » coupé au bord
    droit ; champs en plaques douces ; nœuds de routes visibles.
