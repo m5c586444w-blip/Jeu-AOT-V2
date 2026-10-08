@@ -10,3 +10,7 @@ test-results/
 # Outils de mise au point locaux (non versionnés)
 src/tools/_tmp/
 tests/_tmp/
+
+# Musique personnelle de l'utilisateur (AUD.4) : jamais versionnée, sauf la notice
+assets_user/musique/*
+!assets_user/musique/LISEZ-MOI.md

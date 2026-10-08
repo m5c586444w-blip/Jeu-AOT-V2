@@ -106,6 +106,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   let last = performance.now();
   const audio = sharedAudio(volumesOf(loadSettings(storage())));
   audio.setMood("combat");
+  audio.setAmbience(bt.map.terrain === "ville" ? "ville" : bt.map.terrain === "foret" ? "foret" : bt.map.terrain === "mur" ? "mur" : "vent");
   let lastCues = cueSnapshot(bt.state);
   let following: { kind: "squad"; id: string } | { kind: "soldat"; index: number } | null = null;
   let done = false;

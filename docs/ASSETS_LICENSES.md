@@ -34,7 +34,8 @@ Texte complet des licences : `node_modules/@fontsource/<police>/LICENSE` (instal
 
 ## Audio
 
-Aucun en P0.
+Aucun en P0. Depuis AUD (D-114) : musique et sons synthétisés par le code ; **aucun enregistrement, aucun échantillon** (le réseau du cloud
+refusait les domaines de musique). Voir « Musique de AUD » plus bas.
 
 ## Ajouts de P2
 
@@ -206,3 +207,31 @@ Aucun en P0.
 | `polyhaven/roof_tiles_14_diff_1k.webp` | Poly Haven, Roof Tiles 14 (couleur), 1K, converti en WebP | CC0-1.0 | Rob Tuytel (Poly Haven) | <https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_tiles_14/roof_tiles_14_diff_1k.jpg> | 2026-10-07 |
 | `polyhaven/roof_tiles_14_nor_gl_1k.webp` | Poly Haven, Roof Tiles 14 (relief (normales OpenGL)), 1K, converti en WebP | CC0-1.0 | Rob Tuytel (Poly Haven) | <https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_tiles_14/roof_tiles_14_nor_gl_1k.jpg> | 2026-10-07 |
 <!-- R1c : fin de la table générée -->
+
+## Musique de AUD (D-114)
+
+Aucun fichier audio dans le dépôt : chaque pièce est une **partition transcrite en notes dans le code** (`src/audio/pieces.ts`), jouée par
+la synthèse WebAudio du projet (`src/audio/instruments.ts`). Les compositions du domaine public ci-dessous sont libres (compositeur mort depuis
+plus de 70 ans, œuvre publiée avant 1929) ; la transcription (faite de mémoire, elle peut s'écarter de l'original), l'accompagnement et
+l'orchestration sont du projet. Aucune musique de jeu vidéo ni de l'œuvre originale. `tests/audio/music.test.ts` vérifie que chaque pièce
+figure ici, que les œuvres du domaine public sont antérieures à 1929 et que leur compositeur est mort depuis plus de 70 ans.
+
+| Pièce (identifiant) | Titre | Compositeur | Publication | Statut |
+|---|---|---|---|---|
+| `ode_joie` | Ode à la joie (en jeu de salon, puis en marche) | Ludwig van Beethoven (mort en 1827) | 1824 | composition du domaine public, transcription et synthèse originales du projet |
+| `menuet_sol` | Menuet en sol | Christian Petzold (attribué autrefois à J.-S. Bach) (mort en 1733) | vers 1725 | composition du domaine public, transcription et synthèse originales du projet |
+| `petite_musique` | Petite musique de nuit (premier thème) | Wolfgang Amadeus Mozart (mort en 1791) | composée en 1787, publiée en 1827 | composition du domaine public, transcription et synthèse originales du projet (quatre premières mesures ; suite du projet) |
+| `andante_haydn` | Andante en do (thème de la « Surprise », sans l'accord fort) | Joseph Haydn (mort en 1809) | 1791 | composition du domaine public, transcription et synthèse originales du projet |
+| `rondo_turque` | Rondo à la turque (thème, puis épisode en do) | Wolfgang Amadeus Mozart (mort en 1791) | 1784 | composition du domaine public, transcription et synthèse originales du projet (épisode en do et cadences du projet) |
+| `aube_remparts` | Aube sur les remparts | Projet | 2026 | composition originale du projet |
+| `canon_matin` | Canon du matin | Projet | 2026 | composition originale du projet (suite d'accords courante du canon baroque, lieu commun libre) |
+| `marche_garnison` | Marche de la garnison | Projet | 2026 | composition originale du projet, forme de marche militaire (à la manière de Sousa) |
+| `marche_bataillons` | Marche des bataillons | Projet | 2026 | composition originale du projet |
+| `galop_eclaireurs` | Galop des cavaliers | Projet | 2026 | composition originale du projet |
+| `marche_legion` | Marche des remparts | Projet | 2026 | composition originale du projet |
+
+Les pièces de Sousa, Schubert, Elgar, Boccherini et Beethoven (marche turque) citées par la direction n'ont **pas** été transcrites : leurs
+thèmes n'ont pas pu être restitués avec assez de fidélité de mémoire ; les marches ci-dessus sont des compositions originales dans leur idiome.
+
+Pistes de l'utilisateur (AUD.4) : `assets_user/musique/` (mp3, ogg), hors dépôt (`.gitignore`) ; la licence de chaque fichier est de la
+responsabilité de l'utilisateur (notice `assets_user/musique/LISEZ-MOI.md`).

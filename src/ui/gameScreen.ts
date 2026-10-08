@@ -37,6 +37,7 @@ import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
 import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
+import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
 import { setLocale } from "../i18n";
 
 /** Scénario par défaut (P2 : bac à sable politique de 850) ; `?scenario=` pour en choisir un autre. */
@@ -241,22 +242,26 @@ export async function bootGame(): Promise<void> {
 
   // Audio (04 §7) : humeur tirée de l'état, cloche et ducking sur les alertes, silence sur la mort d'un personnage nommé.
   const audio = sharedAudio(volumesOf(settings));
+  syncLibrary(audio, settings);
+  void loadUserTracks().then(() => syncLibrary(audio, loadSettings(safeStorage())));
   let heardSeq = Math.max(0, ...(state.strategic?.log ?? []).map((l) => l.seq));
   const listen = (): void => {
     audio.setAccent(accentOf(state.nations?.player));
     audio.setMood(moodOf(moodInput(state, inBattle)));
-    const fresh = (state.strategic?.log ?? []).filter((l) => l.seq > heardSeq && l.pause);
+    if (!inBattle) audio.setAmbience("vent");
+    const news = (state.strategic?.log ?? []).filter((l) => l.seq > heardSeq);
+    const fresh = news.filter((l) => l.pause);
     heardSeq = Math.max(heardSeq, ...(state.strategic?.log ?? []).map((l) => l.seq));
     if (fresh.some((l) => l.key === "alert.character_died" || l.key === "alert.divergence_death")) {
       audio.silence(3);
       audio.play("cloche");
     } else if (fresh.length) {
       audio.duck(3);
-      audio.play("cloche");
-    }
+      audio.play("alerte");
+    } else if (news.length) audio.play("notification", 0.8);
   };
   document.addEventListener("click", (ev) => {
-    if ((ev.target as HTMLElement | null)?.closest?.("button, [role=button], select, summary")) audio.play("papier", 0.7);
+    if ((ev.target as HTMLElement | null)?.closest?.("button, [role=button], select, summary")) audio.play("clic");
   });
 
   const refresh = (): void => {
@@ -381,14 +386,19 @@ export async function bootGame(): Promise<void> {
   const options = new OptionsPanel(document.body, keymap, settings, (s) => {
     saveSettings(safeStorage(), s);
     audio.setVolumes(volumesOf(s));
+    syncLibrary(audio, s);
     if (s.locale !== settings.locale) window.location.reload();
     applyUiScale(s.uiScale);
     if (s.authorMode !== isAuthorMode()) {
       setAuthorMode(s.authorMode);
       refresh();
     }
-  });
-  actions.options = () => options.toggle();
+  }, userTracks);
+  onUserTracks(() => options.sync(loadSettings(safeStorage())));
+  actions.options = () => {
+    options.toggle();
+    audio.play(options.isOpen ? "ouvrir" : "fermer");
+  };
   // Mode auteur (E-UX-1) : F10 bascule l'affichage des statuts du lore et des codes internes.
   actions.author_mode = () => {
     const s = { ...loadSettings(safeStorage()), authorMode: !isAuthorMode() };

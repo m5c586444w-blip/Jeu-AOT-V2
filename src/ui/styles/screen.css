@@ -344,9 +344,12 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .options__remise { margin-top: 0.7rem; padding: 0.2rem 0.7rem; color: var(--texte-second); background: transparent; border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); }
 .options__son { border: none; border-top: var(--filet-l) solid var(--filet-doux); margin: 0.6rem 0 0; padding: 0.3rem 0 0; }
 .options__son legend { font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-clair); }
-.options__son .options__ligne > span:first-child { min-width: 9.5rem; }
+.options__son .options__ligne > span:first-child { min-width: 11.5rem; }
 .options__curseur { flex: 1; margin: 0 0.5rem; }
 .options__valeur { min-width: 3.2rem; text-align: right; }
+.options__note { margin: 0.4rem 0 0; font-size: var(--t-s); color: var(--texte-second); }
+.options__sous-titre { margin: 0.5rem 0 0.1rem; font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--texte-second); }
+.options__piste > span:first-child { min-width: 0; overflow-wrap: anywhere; }
 
 /* ——— Personnages (maître-détail) ——— */
 .perso-ligne { grid-template-columns: 2.2rem minmax(0, 1fr) auto; }

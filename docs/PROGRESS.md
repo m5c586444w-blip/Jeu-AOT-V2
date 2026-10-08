@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **UI terminée et fusionnée (D-113).** Prochaine phase : AUD (fichier 22 §6 + 23 §3.1). Direction autonome (D-107). |
-| Tâche | Revue de UI : correctif « débogage » (E-UX-1), dettes n° 20 et 21 |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify-revue.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/AUD.md` puis exécuter AUD sur `claude/v2-aud` (critères CAUD-01 à 07) |
+| Phase | **AUD terminée et fusionnée (D-117).** Prochaine phase : CHR (fichier 22 §7). Direction autonome (D-107). |
+| Tâche | Revue de AUD : volume des anciennes préférences, deux titres renommés, dette n° 27 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 560/560 (88 fichiers, `docs/reports/AUD-verify-revue.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/CHR.md` puis exécuter CHR sur `claude/v2-chr` (critères CCHR-01 à 06) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
