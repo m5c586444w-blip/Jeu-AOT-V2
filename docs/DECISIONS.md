@@ -889,3 +889,32 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | UI (sous-agent) | Opus | xhigh | ≈ 250 | relancé une fois |
 | Revue et fusion UI (direction + 3 relecteurs) | Opus / Sonnet | défaut | ≈ 30 | 1 correctif |
+
+## 2026-10-08 — D-114 Musique synthétisée, aucun enregistrement téléchargé (phase AUD)
+- **Contexte** : le prompt AUD (fichier 23 §3.1) prévoit des enregistrements libres (Wikimedia Commons, archive.org, Musopen, FreePD,
+  marineband.marines.mil). Le réseau du cloud refuse ces domaines (403 du proxy, « CONNECT tunnel failed »).
+- **Options** : (a) arrêt de la phase (arrêt 4 : commande impossible) ; (b) contourner par un autre site ou un miroir ; (c) synthétiser la
+  musique à partir de partitions du domaine public transcrites dans le code, et prévoir `assets_user/musique/` pour des enregistrements de Gabriel.
+- **Choix** : (c), décidé par la direction. Aucun contournement. Chaque pièce a son entrée dans `docs/ASSETS_LICENSES.md` ; les domaines à
+  autoriser et la procédure de dépôt sont dans `docs/reports/AUD.md` §2.
+- **Réversible** : oui (les enregistrements pourront s'ajouter aux listes sans toucher au code, via `assets_user/musique/`).
+
+## 2026-10-08 — D-115 Répertoire : transcrire ce qui est sûr, composer le reste (phase AUD)
+- **Contexte** : la direction cite Sousa, Schubert, Haydn, Mozart, Boccherini, Beethoven, Elgar. Sans partition ni réseau, seuls les thèmes
+  restitués avec assez de fidélité de mémoire peuvent être transcrits.
+- **Options** : (a) transcrire tous les thèmes cités, avec des erreurs présentées comme l'œuvre ; (b) transcrire seulement les thèmes sûrs et
+  composer des marches originales dans l'idiome demandé ; (c) ne composer que des pièces originales.
+- **Choix** : (b). Cinq pièces du domaine public (Beethoven, Petzold, Mozart ×2, Haydn), six pièces originales ; la transcription « de mémoire »
+  est dite telle dans les licences ; Sousa, Schubert, Elgar et Boccherini ne sont pas transcrits (le nom du compositeur n'est jamais attribué à une
+  pièce originale). Chaque état a ses propres pièces : classique rythmé en paix, marches en tension et au combat.
+- **Réversible** : oui (une pièce se remplace dans `src/audio/pieces.ts` sans toucher au moteur).
+
+## 2026-10-08 — D-116 Un état audible à la fois ; filtre et niveau par état ; volume par défaut 0,315 (phase AUD)
+- **Contexte** : l'ancien moteur empilait trois couches (la couche calme persistait sous les autres, avec son bourdon). E-UX-4 interdit le
+  bourdon et la dissonance tenue ; le fichier 24 §2.4 fixe le volume par défaut à 35 % au plus.
+- **Options** : (a) garder les couches empilées avec de nouvelles notes ; (b) un fondu enchaîné entre pièces d'états différents, chaque état
+  ayant son filtre passe-bas et son niveau ; (c) une seule piste avec filtre variable.
+- **Choix** : (b) ; la tension monte par le choix des pièces (marches), des timbres, du filtre (3200, 5200, 9500 Hz) et du niveau (0,80, 0,92, 1,00),
+  jamais par une dissonance. Volume par défaut : général 70 % × musique 45 % = 0,315. « Musique en combat seulement » coupe le bus hors combat.
+- **Réversible** : oui (constantes `MOOD_TONE` et `DEFAULT_SETTINGS`).
+
