@@ -1,6 +1,7 @@
 import { t } from "../i18n";
 import { emblem } from "./icons";
 import { applyPaperTextures } from "./paper";
+import { applyUiScale } from "./settings";
 
 /**
  * Menu principal (04 §5.1–5.2) : table d'archives sous la lampe, dossier tamponné « CONFIDENTIEL », tiroir des scénarios ;
@@ -34,7 +35,7 @@ function go(params: Record<string, string>): void {
 
 export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   applyPaperTextures(document.documentElement);
-  document.documentElement.style.fontSize = `${uiScale}%`;
+  applyUiScale(uiScale);
   const table = el("main", "table-archives");
   table.setAttribute("aria-label", t("menu.table"));
   const lamp = el("div", "table-archives__lampe");

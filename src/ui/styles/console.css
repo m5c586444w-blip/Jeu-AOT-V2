@@ -1,4 +1,4 @@
-/* Console de service : feuille tapée à la machine, glissée sous le registre. */
+/* Console de service (F2) : panneau de développement, même thème sombre. */
 .debug-console {
   position: fixed;
   left: 50%;
@@ -8,64 +8,33 @@
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  background-color: #efe6cf;
-  background-image: var(--grain-cadre), repeating-linear-gradient(transparent 0 1.55rem, rgba(79, 107, 90, 0.18) 1.55rem 1.6rem);
-  border: 1px solid var(--encre);
+  background: var(--fond-profond);
+  border: var(--filet-l) solid var(--filet);
   border-bottom: none;
+  border-top: 2px solid var(--accent);
   font-family: var(--f-machine);
-  font-size: 1rem;
-  color: var(--encre);
-  z-index: 10;
+  font-size: var(--t-s);
+  color: var(--texte);
+  z-index: 70;
 }
-
 .debug-console[hidden] { display: none; }
-
 .debug-console__title {
   margin: 0;
   padding: 0.4rem 1rem;
   font-family: var(--f-machine);
   font-weight: 400;
-  font-size: 0.95rem;
+  font-size: var(--t-s);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--encre);
+  color: var(--accent);
+  border-bottom: var(--filet-l) solid var(--filet-doux);
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
-
-.debug-console__lien { color: var(--encre); letter-spacing: 0.05em; text-transform: none; }
-
-.debug-console__log {
-  flex: 1;
-  margin: 0;
-  padding: 0.6rem 1rem;
-  overflow: auto;
-  font: inherit;
-  white-space: pre-wrap;
-  line-height: 1.6rem;
-  min-height: 6rem;
-}
-
-.debug-console__line--in { color: #3a352d; }
-.debug-console__line--err { color: var(--brique); }
-
-.debug-console__form {
-  display: flex;
-  gap: 0.5rem;
-  align-items: baseline;
-  padding: 0.45rem 1rem 0.7rem;
-  border-top: 1px dashed var(--encre);
-}
-
-.debug-console__input {
-  flex: 1;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--encre);
-  padding: 0.15rem 0;
-}
-
-.debug-console__input:focus { outline: 2px solid var(--ocre); outline-offset: 2px; }
+.debug-console__lien { color: var(--texte-second); letter-spacing: 0.05em; text-transform: none; }
+.debug-console__log { flex: 1; margin: 0; padding: 0.6rem 1rem; overflow: auto; font: inherit; white-space: pre-wrap; line-height: 1.5; min-height: 6rem; }
+.debug-console__line--in { color: var(--texte-second); }
+.debug-console__line--err { color: var(--danger); }
+.debug-console__form { display: flex; gap: 0.5rem; align-items: baseline; padding: 0.45rem 1rem 0.7rem; border-top: var(--filet-l) solid var(--filet-doux); }
+.debug-console__input { flex: 1; font: inherit; color: inherit; background: var(--champ); border: var(--filet-l) solid var(--filet); padding: 0.2rem 0.4rem; }

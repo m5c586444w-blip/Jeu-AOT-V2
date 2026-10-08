@@ -1,5 +1,5 @@
 import type { Province } from "../data/schemas";
-import { BRICK, diverging, OCHRE, sequential, STONE, UNKNOWN, VERDIGRIS } from "../render/palette";
+import { BRICK, diverging, INK_SOFT, OCHRE, PLUM, sequential, STONE, UNKNOWN, VERDIGRIS } from "../render/palette";
 import type { GameState } from "../sim/core/state";
 import { capacity, provinceProduction } from "../sim/strategic/economy";
 import type { World } from "../sim/strategic/world";
@@ -97,9 +97,9 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
         const v = state.intel.cult[p.id] ?? 0;
         if (v <= 0 || st.provinces[p.id]?.control !== "paradis") continue;
         values.set(p.id, Math.round(v));
-        colors.set(p.id, sequential(0x5b4a6b, v / 100));
+        colors.set(p.id, sequential(PLUM, v / 100));
       }
-      return { colors, values, legend: scale(0x5b4a6b, 100, fmt) };
+      return { colors, values, legend: scale(PLUM, 100, fmt) };
     }
     case "legitimite": {
       // Légitimité perçue localement : nationale, moral, stabilité, Culte (fiche « pourquoi ? » dans le dossier de province).
@@ -129,8 +129,8 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
         if (n > 0) values.set(p.id, n);
       }
       const max = Math.max(1, ...values.values());
-      for (const [pid, v] of values) colors.set(pid, sequential(0x3a352d, v / max));
-      return { colors, values, legend: scale(0x3a352d, max, fmt) };
+      for (const [pid, v] of values) colors.set(pid, sequential(INK_SOFT, v / max));
+      return { colors, values, legend: scale(INK_SOFT, max, fmt) };
     }
     default:
       return null;

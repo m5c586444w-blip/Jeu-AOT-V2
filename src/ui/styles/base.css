@@ -1,148 +1,83 @@
-/* Feuille de base « registre » — palette Paradis du fichier 04 §1.2. Aucune police système. */
-:root {
-  --papier: #e8dcc0;
-  --papier-sombre: #cdbf9f;
-  --encre: #1c1a17;
-  --pierre: #8a8577;
-  --ocre: #b5873a;
-  --vert-de-gris: #4f6b5a;
-  --brique: #8a3b2a;
-  --inconnu: #7b766b;
-  --f-titre: "IM Fell English", "EB Garamond", serif;
-  --f-texte: "EB Garamond", serif;
-  --f-machine: "Special Elite", "EB Garamond", serif;
-  --f-marley: "UnifrakturMaguntia", "IM Fell English", serif;
-  color-scheme: light;
-}
-
+/* Feuille de base (phase UI) : thème sombre, typographie, focus, défilement. Couleurs : jetons de tokens.css seulement. */
 * { box-sizing: border-box; }
 
-html { font-size: 100%; }
+/*
+ * Taille de base = préférence d'échelle (100 à 200 %) × facteur de hauteur d'écran. Le style en ligne `font-size: N %`
+ * posé par le jeu reste lu par les contrôles ; c'est cette règle qui fait foi (`--ui-echelle` porte la préférence).
+ */
+html { font-size: calc(100% * var(--ui-echelle) * var(--k-ecran)) !important; background: var(--fond-profond); }
 
 body {
   margin: 0;
   min-height: 100vh;
-  color: var(--encre);
+  color: var(--texte);
   font-family: var(--f-texte);
-  font-size: 1.125rem;
-  line-height: 1.5;
-  background-color: var(--papier-sombre);
-  background-image: var(--taches), var(--grain-fond), linear-gradient(var(--papier-sombre), var(--papier-sombre));
-  background-size: 900px 900px, 300px 300px, auto;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  font-variant-numeric: lining-nums;
+  background-color: var(--fond);
+  background-image: var(--grain-fond, none);
+  background-size: 300px 300px;
+  -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5 { color: var(--texte-fort); font-family: var(--f-titre); font-weight: 500; line-height: 1.15; }
+p { margin: 0.35em 0; }
+a { color: var(--accent-clair); }
+::selection { background: var(--lueur-laiton-forte); color: var(--texte-fort); }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+/* Barres de défilement fines et sombres */
+* { scrollbar-width: thin; scrollbar-color: var(--n-600) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: var(--n-600); border: 3px solid var(--panneau); border-radius: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Valeurs chiffrées : chiffres alignés */
+.valeur { font-family: var(--f-chiffres); font-variant-numeric: lining-nums tabular-nums; color: var(--texte-fort); }
+
+/* Page de démarrage de P0 (registre) : même thème sombre */
 .registre {
   position: relative;
   width: min(46rem, calc(100% - 2rem));
   margin: clamp(1rem, 6vh, 4.5rem) auto 2rem;
-  padding: 2.6rem clamp(1.2rem, 5vw, 3.4rem) 2.2rem;
-  background-color: var(--papier);
-  background-image: var(--fibres), var(--grain-cadre);
-  background-size: 420px 420px, 260px 260px;
-  /* Double filet d'encre, légèrement décalé : un cadre tracé à la main, pas un composant. */
-  border: 1px solid var(--encre);
-  outline: 1px solid rgba(28, 26, 23, 0.55);
-  outline-offset: 5px;
-  transform: rotate(-0.35deg);
+  padding: 2rem clamp(1.2rem, 5vw, 3rem);
+  background: var(--panneau);
+  border: var(--filet-l) solid var(--filet);
+  border-top: 2px solid var(--accent);
 }
-
-.registre::before {
-  /* Coin renforcé (toile collée) en haut à gauche. */
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 3.2rem;
-  height: 3.2rem;
-  border-top: 5px solid var(--pierre);
-  border-left: 5px solid var(--pierre);
-  opacity: 0.7;
-}
-
-.registre__entete {
-  border-bottom: 2px solid var(--encre);
-  padding-bottom: 0.9rem;
-  margin-bottom: 1.4rem;
-}
-
-.registre__titre {
-  font-family: var(--f-titre);
-  font-weight: 400;
-  font-size: clamp(2.3rem, 7vw, 3.6rem);
-  letter-spacing: 0.02em;
-  line-height: 1.05;
-  margin: 0;
-}
-
-.registre__sous-titre {
-  font-style: italic;
-  margin: 0.35rem 0 0;
-  color: #3a352d;
-}
-
-.registre__table {
-  width: 100%;
-  border-collapse: collapse;
-  font-variant-numeric: tabular-nums lining-nums;
-}
-
-.registre__table th,
-.registre__table td {
-  padding: 0.45rem 0.2rem;
-  border-bottom: 1px dotted rgba(28, 26, 23, 0.55);
-  vertical-align: baseline;
-}
-
-.registre__table th {
-  width: 42%;
-  text-align: left;
-  font-weight: 400;
-  font-variant: small-caps;
-  letter-spacing: 0.06em;
-}
-
-.registre__table td {
-  font-family: var(--f-machine);
-  font-size: 1.05rem;
-}
-
-.registre__pied {
-  margin-top: 1.6rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.8rem 2rem;
-  font-size: 0.95rem;
-}
-
-.registre__note { margin: 0; max-width: 28rem; font-style: italic; color: #3a352d; }
-
+.registre__entete { border-bottom: var(--filet-l) solid var(--filet); padding-bottom: 0.8rem; margin-bottom: 1.2rem; }
+.registre__titre { font-size: clamp(2rem, 6vw, 3rem); margin: 0; letter-spacing: 0.02em; }
+.registre__sous-titre { color: var(--texte-second); margin: 0.3rem 0 0; }
+.registre__table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+.registre__table th, .registre__table td { padding: 0.4rem 0.2rem; border-bottom: var(--filet-l) solid var(--filet-doux); text-align: left; }
+.registre__table th { width: 42%; font-weight: 400; color: var(--texte-second); }
+.registre__pied { margin-top: 1.4rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.8rem 2rem; font-size: var(--t-s); color: var(--texte-second); }
+.registre__note { margin: 0; max-width: 28rem; color: var(--texte-second); }
 .touche {
-  font-family: var(--f-machine);
-  border: 1px solid var(--encre);
-  padding: 0 0.3rem;
-  margin-right: 0.25rem;
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0 0.35em;
+  margin: 0 0.2em;
+  font-size: 0.85em;
+  text-align: center;
+  color: var(--texte-fort);
+  background: var(--panneau-haut);
+  border: var(--filet-l) solid var(--filet);
+  border-bottom-width: 2px;
+  border-radius: var(--rayon);
 }
+.tampon { display: inline-block; padding: 0.15rem 0.6rem; font-size: var(--t-s); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: var(--filet-l) solid var(--accent-fonce); }
 
-/* Tampon encré : rotation, bord irrégulier par double trait, encre qui ne couvre pas tout. */
-.tampon {
-  position: absolute;
-  top: 1.4rem;
-  right: 1.4rem;
-  padding: 0.3rem 0.7rem;
-  font-family: var(--f-machine);
-  font-size: 0.95rem;
-  letter-spacing: 0.18em;
-  color: var(--brique);
-  border: 3px double var(--brique);
-  transform: rotate(6deg);
-  opacity: 0.85;
-  mix-blend-mode: multiply;
-  -webkit-mask-image: var(--masque-tampon);
-  mask-image: var(--masque-tampon);
-  mask-size: 160px 160px;
-}
+/* Lecteurs d'écran seulement */
+.lecteur-seul { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-@media (max-width: 560px) {
-  .tampon { position: static; display: inline-block; margin-bottom: 1rem; }
-}
+/* Mode auteur (E-UX-1, UX0) : statuts canon, codes et phases ne s'affichent qu'avec F10. */
+:root:not(.mode-auteur) .auteur-seul { display: none !important; }
+.mode-auteur .auteur-seul { outline: 1px dashed var(--texte-discret); outline-offset: 1px; opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

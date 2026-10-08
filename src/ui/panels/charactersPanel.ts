@@ -13,9 +13,10 @@ import { formatNumber } from "../why";
 import { button, displayName, el, noPolitics, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 
-const RELATION_COLOR: Record<string, string> = {
-  amitie: "#4f6b5a", loyaute: "#4f6b5a", respect: "#b5873a", amour: "#8a3b2a", mentor: "#4f6b5a", dette: "#7b766b",
-  rivalite: "#8a3b2a", haine: "#8a3b2a", tension: "#b5873a",
+/** Teinte du fil de relation (classe CSS, jetons de tokens.css). */
+const RELATION_TONE: Record<string, string> = {
+  amitie: "bonne", loyaute: "bonne", respect: "neutre", amour: "forte", mentor: "bonne", dette: "discrete",
+  rivalite: "mauvaise", haine: "mauvaise", tension: "neutre",
 };
 
 /** Registre des personnages et fiche personnage (F-CHR-01, F-ADV-15, 04 §5.5). */
@@ -175,20 +176,19 @@ export class CharactersPanel implements Panel {
     const h = 240;
     const cx = w / 2;
     const cy = h / 2;
-    const parts: string[] = [`<svg class="tableau-enquete" viewBox="0 0 ${w} ${h}" role="img" aria-label="${t("characters.relations")}">`, `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" fill="#b89a6a" fill-opacity="0.25" stroke="#1c1a17"/>`];
+    const parts: string[] = [`<svg class="tableau-enquete" viewBox="0 0 ${w} ${h}" role="img" aria-label="${t("characters.relations")}">`, `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" class="enq-fond"/>`];
     const nodes = others.map((o, i) => {
       const a = (i / others.length) * Math.PI * 2 - Math.PI / 2;
       return { o, x: cx + Math.cos(a) * 160, y: cy + Math.sin(a) * 88 };
     });
     for (const n of nodes) {
       const rel = relationBetween(pw, c.id, n.o.id);
-      const color = RELATION_COLOR[rel?.type ?? ""] ?? "#1c1a17";
-      parts.push(`<path d="M${cx} ${cy} Q${(cx + n.x) / 2} ${(cy + n.y) / 2 + 14} ${n.x} ${n.y}" fill="none" stroke="${color}" stroke-width="${1 + Math.abs(rel?.strength ?? 0) / 40}"/>`);
+      const tone = RELATION_TONE[rel?.type ?? ""] ?? "discrete";
+      parts.push(`<path d="M${cx} ${cy} Q${(cx + n.x) / 2} ${(cy + n.y) / 2 + 14} ${n.x} ${n.y}" class="enq-fil enq-fil--${tone}" stroke-width="${1 + Math.abs(rel?.strength ?? 0) / 40}"/>`);
     }
     const card = (x: number, y: number, label: string, dead: boolean): string =>
-      `<g><rect x="${x - 46}" y="${y - 11}" width="92" height="22" fill="#efe6cf" stroke="#1c1a17" transform="rotate(${((x * 7) % 5) - 2} ${x} ${y})"/>` +
-      `<circle cx="${x}" cy="${y - 11}" r="3" fill="#8a3b2a"/>` +
-      `<text x="${x}" y="${y + 4}" text-anchor="middle" font-family="EB Garamond" font-size="10.5" fill="#1c1a17"${dead ? ' text-decoration="line-through"' : ""}>${escapeXml(label)}</text></g>`;
+      `<g><rect x="${x - 48}" y="${y - 11}" width="96" height="22" class="enq-carte"/>` +
+      `<text x="${x}" y="${y + 4}" text-anchor="middle" font-size="10.5" class="enq-nom${dead ? " enq-nom--mort" : ""}">${escapeXml(label)}</text></g>`;
     for (const n of nodes) parts.push(card(n.x, n.y, displayName(n.o), !pol.characters[n.o.id]?.alive));
     parts.push(card(cx, cy, displayName(c), !pol.characters[c.id]?.alive));
     parts.push("</svg>");

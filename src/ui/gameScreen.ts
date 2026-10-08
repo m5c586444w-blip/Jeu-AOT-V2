@@ -34,7 +34,7 @@ import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
-import { crossesAutosave, loadSettings, saveSettings, volumesOf } from "./settings";
+import { applyUiScale, crossesAutosave, loadSettings, saveSettings, volumesOf } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { setLocale } from "../i18n";
 
@@ -72,7 +72,7 @@ export async function bootGame(): Promise<void> {
   const settings = loadSettings(safeStorage());
   setLocale(settings.locale);
   document.documentElement.lang = settings.locale;
-  document.documentElement.style.fontSize = `${settings.uiScale}%`;
+  applyUiScale(settings.uiScale);
   setAuthorMode(settings.authorMode);
   await document.fonts.ready;
 
@@ -333,7 +333,7 @@ export async function bootGame(): Promise<void> {
     saveSettings(safeStorage(), s);
     audio.setVolumes(volumesOf(s));
     if (s.locale !== settings.locale) window.location.reload();
-    document.documentElement.style.fontSize = `${s.uiScale}%`;
+    applyUiScale(s.uiScale);
     if (s.authorMode !== isAuthorMode()) {
       setAuthorMode(s.authorMode);
       refresh();

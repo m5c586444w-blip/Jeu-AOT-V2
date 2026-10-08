@@ -1,0 +1,251 @@
+/*
+ * Composants de base (UI.1) : bouton, onglet, liste, infobulle, jauge, barre, étiquette, séparateur, panneau.
+ * Chaque composant a son nom de kit (`.btn`, `.onglet`…) ; les anciens noms des registres (`.registre-bouton`…) restent
+ * branchés sur les mêmes règles pour ne pas casser les écrans ni les contrôles automatiques.
+ * Page de contrôle : /ui-kit.html (serveur de développement seulement, non publiée dans le jeu).
+ */
+
+/* — Bouton — */
+.btn, .registre-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 2em;
+  padding: 0.2em 0.85em;
+  margin: 0.25rem 0.35rem 0 0;
+  font-family: var(--f-texte);
+  font-size: var(--t-m);
+  line-height: 1.2;
+  color: var(--texte-fort);
+  background: linear-gradient(var(--reflet-fort), var(--reflet)) , var(--panneau-haut);
+  border: var(--filet-l) solid var(--filet);
+  border-radius: var(--rayon);
+  cursor: pointer;
+  transition: background-color 0.12s, border-color 0.12s;
+}
+.btn:hover:not(:disabled), .registre-bouton:hover:not(:disabled) { border-color: var(--accent-fonce); background-color: var(--n-700); }
+.btn--principal, .registre-bouton.principal { color: var(--accent-texte); background: linear-gradient(var(--accent-clair), var(--accent)); border-color: var(--accent-fonce); font-weight: 600; }
+.btn--principal:hover:not(:disabled), .registre-bouton.principal:hover:not(:disabled) { background: var(--accent-clair); }
+.btn--danger { color: var(--texte-fort); background: var(--danger-plein); border-color: var(--danger); }
+.btn--discret { background: transparent; border-color: transparent; color: var(--texte-second); }
+.btn--discret:hover:not(:disabled) { color: var(--texte-fort); background: var(--reflet-fort); }
+.btn--petit, .registre-bouton.petit { min-height: 1.7em; padding: 0.1em 0.6em; font-size: var(--t-s); margin: 0 0.25rem; }
+.btn:disabled, .registre-bouton:disabled { opacity: 0.45; }
+.btn[aria-pressed="true"], .registre-bouton[aria-pressed="true"] { border-color: var(--accent); color: var(--accent-clair); background: var(--accent-fond); }
+.btn .ico, .registre-bouton .ico { width: 1.15em; height: 1.15em; }
+
+/* Bouton-lien (nom cliquable dans une liste) */
+.lien-dossier, .registre-retour {
+  font: inherit;
+  padding: 0;
+  color: var(--texte-fort);
+  background: none;
+  border: none;
+  border-bottom: var(--filet-l) dotted var(--texte-discret);
+  cursor: pointer;
+  text-align: left;
+}
+.lien-dossier:hover, .registre-retour:hover { color: var(--accent-clair); border-bottom-color: var(--accent); }
+.registre-retour { border-bottom: none; color: var(--texte-second); font-size: var(--t-s); }
+
+/* — Onglets — */
+.onglets, .registre-filtres, .registre-onglets, .dossier__onglets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  margin: 0.2rem 0 0.6rem;
+  border-bottom: var(--filet-l) solid var(--filet);
+}
+.onglet, .registre-onglet, .dossier__onglet {
+  position: relative;
+  padding: 0.3em 0.8em 0.35em;
+  margin-bottom: -1px;
+  font-family: var(--f-texte);
+  font-size: var(--t-s);
+  letter-spacing: 0.02em;
+  color: var(--texte-second);
+  background: transparent;
+  border: var(--filet-l) solid transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.onglet:hover, .registre-onglet:hover, .dossier__onglet:hover { color: var(--texte-fort); background: var(--reflet); }
+.onglet[aria-selected="true"], .onglet[aria-pressed="true"], .registre-onglet[aria-pressed="true"], .dossier__onglet[aria-selected="true"] {
+  color: var(--texte-fort);
+  border-bottom-color: var(--accent);
+  background: var(--reflet);
+}
+
+/* — Liste (maître) — */
+.liste { list-style: none; margin: 0; padding: 0; border-top: var(--filet-l) solid var(--filet-doux); }
+.liste__groupe { margin: 0.8rem 0 0.2rem; padding: 0 0.4rem; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--texte-discret); }
+.liste__item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.2rem 0.6rem;
+  padding: 0.35rem 0.5rem;
+  border-bottom: var(--filet-l) solid var(--filet-doux);
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+.liste__item:hover { background: var(--reflet); }
+.liste__item[aria-selected="true"] { background: var(--accent-fond); border-left-color: var(--accent); }
+.liste__item--eteint { color: var(--texte-discret); }
+.liste__titre { color: var(--texte-fort); }
+.liste__meta { font-size: var(--t-s); color: var(--texte-discret); }
+
+/* Maître-détail (U5) */
+.maitre-detail { display: grid; grid-template-columns: minmax(15rem, 2fr) minmax(0, 3fr); gap: 0 1.2rem; min-height: 0; }
+.maitre-detail > .maitre { min-width: 0; overflow: auto; max-height: var(--hauteur-utile, 70vh); padding-right: 0.3rem; }
+.maitre-detail > .detail { min-width: 0; overflow: auto; max-height: var(--hauteur-utile, 70vh); padding-left: 1.1rem; border-left: var(--filet-l) solid var(--filet-doux); }
+
+/* — Infobulles (U4) : bulle de carte et fiche « pourquoi ? » — */
+.infobulle, .pourquoi, .bulle {
+  position: fixed;
+  z-index: var(--z-bulle);
+  pointer-events: none;
+  max-width: 24rem;
+  padding: 0.5rem 0.7rem 0.55rem;
+  color: var(--texte);
+  background: var(--fond-profond);
+  border: var(--filet-l) solid var(--filet);
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 4px 0 var(--ombre);
+  font-size: var(--t-s);
+  line-height: 1.35;
+}
+.pourquoi[hidden], .bulle[hidden] { display: none; }
+.pourquoi__titre, .bulle__nom { display: block; margin-bottom: 0.2rem; font-family: var(--f-titre); font-size: var(--t-m); font-weight: 600; color: var(--texte-fort); }
+.pourquoi__section + .pourquoi__section { margin-top: 0.35rem; padding-top: 0.3rem; border-top: var(--filet-l) solid var(--filet-doux); }
+.pourquoi__libelle { display: block; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-clair); }
+.pourquoi table { width: 100%; border-collapse: collapse; margin-top: 0.1rem; }
+.pourquoi td { padding: 0.05rem 0.2rem 0.05rem 0; vertical-align: baseline; color: var(--texte-second); }
+.pourquoi__valeur { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; color: var(--texte-fort); }
+.pourquoi__valeur[data-sign="plus"] { color: var(--succes); }
+.pourquoi__valeur[data-sign="moins"] { color: var(--danger-clair); }
+.pourquoi__total td { border-top: var(--filet-l) solid var(--filet); color: var(--texte-fort); font-weight: 600; }
+.pourquoi p { margin: 0.15rem 0 0; color: var(--texte-second); }
+.pourquoi__touche { margin-top: 0.35rem; font-size: var(--t-xs); color: var(--texte-discret); }
+.bulle__meta { font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-clair); }
+.bulle__faits { display: flex; flex-direction: column; margin-top: 0.2rem; color: var(--texte); }
+.bulle__aide { margin-top: 0.25rem; font-size: var(--t-xs); color: var(--texte-discret); }
+[data-why] { cursor: help; }
+
+/* — Jauge (valeur sur une échelle) et barre (progression) — */
+.jauge { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.15rem 0.6rem; }
+.jauge__libelle { font-size: var(--t-s); color: var(--texte-second); }
+.jauge__piste, .barre, .chronique-jauge__barre {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 0.45rem;
+  background: var(--fond-profond);
+  border: var(--filet-l) solid var(--filet-doux);
+  overflow: hidden;
+}
+.jauge__remplissage, .barre__remplissage, .chronique-jauge__trace { height: 100%; background: var(--accent); }
+.jauge--danger .jauge__remplissage, .chronique-jauge[data-branch="divergente"] .chronique-jauge__trace { background: var(--danger); }
+.jauge--succes .jauge__remplissage { background: var(--succes); }
+.jauge__repere { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--texte-fort); }
+
+/* — Étiquette (badge) — */
+.etiquette {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.05em 0.5em;
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texte-second);
+  background: var(--panneau-haut);
+  border: var(--filet-l) solid var(--filet);
+  border-radius: var(--rayon);
+  white-space: nowrap;
+}
+.etiquette--accent { color: var(--accent-clair); border-color: var(--accent-fonce); background: var(--accent-fond); }
+.etiquette--danger { color: var(--danger-clair); border-color: var(--danger-plein); background: var(--danger-fond); }
+.etiquette--succes { color: var(--succes-clair); border-color: var(--vert-600); background: var(--succes-fond); }
+.etiquette--alerte { color: var(--alerte); border-color: var(--alerte); background: var(--alerte-fond); }
+.etiquette--info { color: var(--info); border-color: var(--bleu-600); background: var(--info-fond); }
+
+/* — Séparateur — */
+.separateur, hr { height: 0; margin: 0.7rem 0; border: none; border-top: var(--filet-l) solid var(--filet-doux); }
+.separateur--titre { display: flex; align-items: center; gap: 0.6rem; border: none; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--texte-discret); }
+.separateur--titre::after { content: ""; flex: 1; border-top: var(--filet-l) solid var(--filet-doux); }
+
+/* — Panneau — */
+.panneau { background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 2px solid var(--accent); }
+.panneau__tete { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.9rem; border-bottom: var(--filet-l) solid var(--filet-doux); background: linear-gradient(var(--reflet-fort), transparent); }
+.panneau__titre { margin: 0; font-size: var(--t-l); letter-spacing: 0.03em; }
+.panneau__corps { padding: 0.6rem 0.9rem 0.9rem; }
+
+/* — Hiérarchie de texte (U3) — */
+.titre-section, .registre-intertitre, .dossier__intertitre {
+  margin: 1rem 0 0.4rem;
+  padding-bottom: 0.2rem;
+  font-family: var(--f-titre);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-clair);
+  border-bottom: var(--filet-l) solid var(--filet-doux);
+}
+.sous-titre { color: var(--texte-second); font-size: var(--t-s); }
+.registre-note, .texte-discret { color: var(--texte-second); font-size: var(--t-s); }
+.registre-champ { margin: 0.25rem 0; color: var(--texte-second); }
+.registre-ferme { margin: 1rem 0; padding: 0.8rem; text-align: center; color: var(--texte-second); background: var(--panneau-creux); border: var(--filet-l) dashed var(--filet); }
+.plan-probleme { margin: 0.4rem 0; padding: 0.25rem 0.55rem; font-size: var(--t-s); color: var(--texte); background: var(--danger-fond); border-left: 3px solid var(--danger); }
+.plan-probleme[data-ok="true"] { background: var(--succes-fond); border-left-color: var(--succes); }
+.registre-alerte { color: var(--danger-clair); }
+
+/* Ligne clé-valeur */
+.kv, .fiche-ligne, .dossier__ligne { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem; padding: 0.22rem 0; border-bottom: var(--filet-l) solid var(--filet-doux); }
+.kv__cle, .dossier__libelle { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--texte-second); }
+.kv__valeur, .dossier__valeur { white-space: nowrap; color: var(--texte-fort); font-variant-numeric: tabular-nums lining-nums; }
+
+/* Variation colorée (U3) */
+.variation[data-sign="hausse"], .bandeau__delta[data-sign="hausse"] { color: var(--succes); }
+.variation[data-sign="baisse"], .bandeau__delta[data-sign="baisse"] { color: var(--danger-clair); }
+.variation[data-sign="rupture"], .bandeau__delta[data-sign="rupture"] { color: var(--texte-fort); background: var(--danger-plein); padding: 0 0.25em; }
+.variation[data-sign="stable"] { color: var(--texte-discret); }
+
+/* — Tableau — */
+.registre-table, .tableau { width: 100%; border-collapse: collapse; font-size: var(--t-s); }
+.registre-table th, .tableau th { padding: 0.3rem 0.4rem; text-align: left; font-weight: 400; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--texte-discret); border-bottom: var(--filet-l) solid var(--filet); }
+.registre-table td, .tableau td { padding: 0.28rem 0.4rem; border-bottom: var(--filet-l) solid var(--filet-doux); vertical-align: baseline; }
+.registre-table tr:hover td { background: var(--reflet); }
+.registre-table caption { text-align: left; padding: 0 0 0.3rem; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-clair); }
+.ligne-morte td { color: var(--texte-discret); text-decoration: line-through; text-decoration-thickness: 1px; }
+
+/* — Champs de formulaire — */
+select, .registre-choix, .plan-choix, .options__choix, .bandeau__decret {
+  min-height: 1.9em;
+  padding: 0.1em 0.5em;
+  color: var(--texte-fort);
+  background: var(--champ);
+  border: var(--filet-l) solid var(--filet);
+  border-radius: var(--rayon);
+  max-width: 100%;
+}
+select option { background: var(--champ); color: var(--texte-fort); }
+input[type="number"], input[type="text"], .plan-nombre {
+  padding: 0.15em 0.4em;
+  color: var(--texte-fort);
+  background: var(--champ);
+  border: var(--filet-l) solid var(--filet);
+  border-radius: var(--rayon);
+}
+input[type="range"], input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+
+/* — Icônes dessinées (U6) : deux tailles — */
+.ico { display: inline-block; width: 1.25em; height: 1.25em; vertical-align: -0.25em; flex: none; color: currentColor; }
+.ico--s { width: 1em; height: 1em; vertical-align: -0.15em; }
+.ico--l { width: 1.6em; height: 1.6em; }
+.icone { width: 1.25em; height: 1.25em; vertical-align: -0.25em; color: currentColor; }
+.liste__tete { display: inline-flex; align-items: center; color: var(--accent); }
+.liste__tete .portrait { width: 2.2rem; height: 2.64rem; border: var(--filet-l) solid var(--filet-doux); }
+.liste__milieu { display: flex; flex-direction: column; min-width: 0; }
+.liste__queue { text-align: right; }
