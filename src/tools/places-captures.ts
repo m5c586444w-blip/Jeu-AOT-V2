@@ -144,12 +144,14 @@ try {
       const page = await open(`lieu=${id}&etat=${st}`, errors);
       const loadMs = Date.now() - t0;
       const views = (await page.evaluate(() => window.__place3d?.views ?? [])).filter((v) => !viewFilter || viewFilter.includes(v));
-      const wanted = views.filter((v) => args.includes("--sans-portes") ? !v.startsWith("porte-") : true);
+      const isGateView = (v: string): boolean => place.portes.some((g) => GATE_VIEWS.some((gv) => v === `porte-${g.id}-${gv}`));
+      const wanted = views.filter((v) => (args.includes("--sans-portes") ? !isGateView(v) : true));
       for (const v of wanted) {
         await page.evaluate((vv) => window.__place3d?.setView(vv), v);
         await page.evaluate(() => window.__place3d?.frame());
         await page.evaluate(() => window.__place3d?.frame());
-        const file = `${dir}/${v.startsWith("porte-") ? v : `vue-${v}`}.png`;
+        // Vue d'une porte (`porte-<porte>-<vue>`) ou point de vue du lieu (`vue-<id>`, même si l'id commence par « porte- »).
+        const file = `${dir}/${isGateView(v) ? v : `vue-${v}`}.png`;
         await page.screenshot({ path: file, timeout: 900000 });
         const stats = await page.evaluate(() => window.__place3d?.stats());
         const mean = await page.evaluate((vv) => window.__place3d?.meanColor(vv, 640, 360, 64, 36), v);

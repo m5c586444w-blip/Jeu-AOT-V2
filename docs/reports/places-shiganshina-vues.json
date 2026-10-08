@@ -1,0 +1,778 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/shiganshina/vue-ensemble.png",
+   "stats": {
+    "calls": 218,
+    "triangles": 1025360,
+    "instances": 53135,
+    "chunks": {
+     "total": 991,
+     "visible": 991,
+     "near": 0
+    }
+   },
+   "rgb": [
+    146.25597222222223,
+    147.93581163194443,
+    116.55507378472223
+   ]
+  },
+  "grand-rue": {
+   "file": "docs/places/shiganshina/vue-grand-rue.png",
+   "stats": {
+    "calls": 261,
+    "triangles": 1032013,
+    "instances": 24618,
+    "chunks": {
+     "total": 991,
+     "visible": 493,
+     "near": 10
+    }
+   },
+   "rgb": [
+    87.12200520833333,
+    86.34184895833333,
+    55.5562890625
+   ]
+  },
+  "place-centrale": {
+   "file": "docs/places/shiganshina/vue-place-centrale.png",
+   "stats": {
+    "calls": 240,
+    "triangles": 1063428,
+    "instances": 18330,
+    "chunks": {
+     "total": 991,
+     "visible": 308,
+     "near": 11
+    }
+   },
+   "rgb": [
+    145.69835503472223,
+    158.86762586805557,
+    157.20345920138888
+   ]
+  },
+  "canal": {
+   "file": "docs/places/shiganshina/vue-canal.png",
+   "stats": {
+    "calls": 226,
+    "triangles": 550448,
+    "instances": 8447,
+    "chunks": {
+     "total": 991,
+     "visible": 132,
+     "near": 9
+    }
+   },
+   "rgb": [
+    118.21339409722222,
+    128.07164496527778,
+    113.57404513888889
+   ]
+  },
+  "marche": {
+   "file": "docs/places/shiganshina/vue-marche.png",
+   "stats": {
+    "calls": 219,
+    "triangles": 714786,
+    "instances": 8020,
+    "chunks": {
+     "total": 991,
+     "visible": 121,
+     "near": 9
+    }
+   },
+   "rgb": [
+    158.27034722222223,
+    160.23546006944446,
+    152.29170572916667
+   ]
+  },
+  "quartier-ouvrier": {
+   "file": "docs/places/shiganshina/vue-quartier-ouvrier.png",
+   "stats": {
+    "calls": 242,
+    "triangles": 1265511,
+    "instances": 28705,
+    "chunks": {
+     "total": 991,
+     "visible": 533,
+     "near": 10
+    }
+   },
+   "rgb": [
+    108.56297309027778,
+    110.34956163194444,
+    86.806640625
+   ]
+  },
+  "maison-jaeger": {
+   "file": "docs/places/shiganshina/vue-maison-jaeger.png",
+   "stats": {
+    "calls": 218,
+    "triangles": 749849,
+    "instances": 15074,
+    "chunks": {
+     "total": 991,
+     "visible": 176,
+     "near": 8
+    }
+   },
+   "rgb": [
+    118.21837673611111,
+    115.38879774305556,
+    104.07970052083333
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/shiganshina/vue-rempart.png",
+   "stats": {
+    "calls": 228,
+    "triangles": 618495,
+    "instances": 15014,
+    "chunks": {
+     "total": 991,
+     "visible": 287,
+     "near": 6
+    }
+   },
+   "rgb": [
+    179.40240451388888,
+    187.84860243055556,
+    187.82532118055556
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/shiganshina/vue-faubourg.png",
+   "stats": {
+    "calls": 269,
+    "triangles": 1067405,
+    "instances": 42800,
+    "chunks": {
+     "total": 991,
+     "visible": 721,
+     "near": 5
+    }
+   },
+   "rgb": [
+    155.18240017361111,
+    156.40727430555555,
+    141.79460069444445
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/shiganshina/porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 149,
+    "triangles": 624049,
+    "instances": 1334,
+    "chunks": {
+     "total": 991,
+     "visible": 26,
+     "near": 10
+    }
+   },
+   "rgb": [
+    72.42385416666667,
+    64.4909201388889,
+    47.520442708333334
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/shiganshina/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 272,
+    "triangles": 1123047,
+    "instances": 40289,
+    "chunks": {
+     "total": 991,
+     "visible": 705,
+     "near": 8
+    }
+   },
+   "rgb": [
+    142.02551649305556,
+    142.55103298611112,
+    120.74432725694444
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/shiganshina/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 273,
+    "triangles": 1169666,
+    "instances": 36573,
+    "chunks": {
+     "total": 991,
+     "visible": 678,
+     "near": 10
+    }
+   },
+   "rgb": [
+    102.20715277777778,
+    90.07111979166666,
+    75.07927083333334
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/shiganshina/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 124,
+    "triangles": 526182,
+    "instances": 823,
+    "chunks": {
+     "total": 991,
+     "visible": 20,
+     "near": 10
+    }
+   },
+   "rgb": [
+    95.3608984375,
+    89.76027777777777,
+    74.30184895833334
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/shiganshina/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 122,
+    "triangles": 447126,
+    "instances": 554,
+    "chunks": {
+     "total": 991,
+     "visible": 13,
+     "near": 8
+    }
+   },
+   "rgb": [
+    64.61342881944445,
+    70.91802517361111,
+    72.79788194444444
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/shiganshina/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 108,
+    "triangles": 390038,
+    "instances": 427,
+    "chunks": {
+     "total": 991,
+     "visible": 16,
+     "near": 8
+    }
+   },
+   "rgb": [
+    48.227161458333335,
+    42.237604166666664,
+    34.86424045138889
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/shiganshina/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 222,
+    "triangles": 632009,
+    "instances": 11259,
+    "chunks": {
+     "total": 991,
+     "visible": 183,
+     "near": 8
+    }
+   },
+   "rgb": [
+    165.16009114583332,
+    172.39161024305557,
+    168.14973090277778
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/shiganshina/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 477,
+    "triangles": 1043632,
+    "instances": 36045,
+    "chunks": {
+     "total": 991,
+     "visible": 578,
+     "near": 7
+    }
+   },
+   "rgb": [
+    142.54043836805556,
+    145.422734375,
+    121.79680121527778
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/shiganshina/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 266,
+    "triangles": 1059429,
+    "instances": 27241,
+    "chunks": {
+     "total": 991,
+     "visible": 436,
+     "near": 12
+    }
+   },
+   "rgb": [
+    102.38856336805556,
+    95.08338975694444,
+    81.23388888888888
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/shiganshina/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 269,
+    "triangles": 1009658,
+    "instances": 28013,
+    "chunks": {
+     "total": 991,
+     "visible": 415,
+     "near": 10
+    }
+   },
+   "rgb": [
+    55.39927517361111,
+    53.891987847222225,
+    46.27338541666666
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/shiganshina/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 196,
+    "triangles": 772497,
+    "instances": 6373,
+    "chunks": {
+     "total": 991,
+     "visible": 183,
+     "near": 12
+    }
+   },
+   "rgb": [
+    122.47864583333333,
+    120.40445746527777,
+    105.40778211805555
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/shiganshina/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 192,
+    "triangles": 576729,
+    "instances": 1482,
+    "chunks": {
+     "total": 991,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    125.88772135416667,
+    120.23641493055555,
+    108.82502170138889
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/shiganshina/porte-interieure-passage.png",
+   "stats": {
+    "calls": 184,
+    "triangles": 882668,
+    "instances": 6883,
+    "chunks": {
+     "total": 991,
+     "visible": 179,
+     "near": 13
+    }
+   },
+   "rgb": [
+    71.93964409722223,
+    71.00348524305555,
+    63.697482638888886
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/shiganshina/porte-interieure-haut.png",
+   "stats": {
+    "calls": 232,
+    "triangles": 930945,
+    "instances": 22402,
+    "chunks": {
+     "total": 991,
+     "visible": 287,
+     "near": 10
+    }
+   },
+   "rgb": [
+    177.18411458333333,
+    182.51623697916668,
+    179.880625
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/shiganshina/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 470,
+    "triangles": 1003627,
+    "instances": 22393,
+    "chunks": {
+     "total": 991,
+     "visible": 413,
+     "near": 10
+    }
+   },
+   "rgb": [
+    102.52780381944444,
+    103.14431857638888,
+    87.16588107638889
+   ]
+  },
+  "porte-riviere-saillie-exterieure-face": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-exterieure-face.png",
+   "stats": {
+    "calls": 262,
+    "triangles": 975035,
+    "instances": 38763,
+    "chunks": {
+     "total": 991,
+     "visible": 658,
+     "near": 6
+    }
+   },
+   "rgb": [
+    121.89678819444444,
+    122.57858506944444,
+    105.9156640625
+   ]
+  },
+  "porte-riviere-saillie-exterieure-detail": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-exterieure-detail.png",
+   "stats": {
+    "calls": 266,
+    "triangles": 911132,
+    "instances": 30405,
+    "chunks": {
+     "total": 991,
+     "visible": 568,
+     "near": 8
+    }
+   },
+   "rgb": [
+    86.96008680555556,
+    83.21990017361111,
+    70.59766059027778
+   ]
+  },
+  "porte-riviere-saillie-interieure-face": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-interieure-face.png",
+   "stats": {
+    "calls": 102,
+    "triangles": 277040,
+    "instances": 297,
+    "chunks": {
+     "total": 991,
+     "visible": 5,
+     "near": 5
+    }
+   },
+   "rgb": [
+    97.05008680555555,
+    96.2946484375,
+    82.05727430555555
+   ]
+  },
+  "porte-riviere-saillie-interieure-detail": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-interieure-detail.png",
+   "stats": {
+    "calls": 81,
+    "triangles": 216108,
+    "instances": 215,
+    "chunks": {
+     "total": 991,
+     "visible": 3,
+     "near": 3
+    }
+   },
+   "rgb": [
+    78.17459635416667,
+    86.33303385416667,
+    88.08397135416666
+   ]
+  },
+  "porte-riviere-saillie-passage": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-passage.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 180798,
+    "instances": 153,
+    "chunks": {
+     "total": 991,
+     "visible": 2,
+     "near": 2
+    }
+   },
+   "rgb": [
+    62.80947916666667,
+    61.864505208333334,
+    56.17039496527778
+   ]
+  },
+  "porte-riviere-saillie-haut": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-haut.png",
+   "stats": {
+    "calls": 207,
+    "triangles": 458211,
+    "instances": 7425,
+    "chunks": {
+     "total": 991,
+     "visible": 104,
+     "near": 6
+    }
+   },
+   "rgb": [
+    168.55761284722223,
+    178.54735677083335,
+    178.8128298611111
+   ]
+  },
+  "porte-riviere-saillie-echelle": {
+   "file": "docs/places/shiganshina/porte-riviere-saillie-echelle.png",
+   "stats": {
+    "calls": 464,
+    "triangles": 921719,
+    "instances": 36195,
+    "chunks": {
+     "total": 991,
+     "visible": 611,
+     "near": 2
+    }
+   },
+   "rgb": [
+    144.69432725694443,
+    147.84571614583334,
+    127.4493142361111
+   ]
+  },
+  "porte-riviere-maria-exterieure-face": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-exterieure-face.png",
+   "stats": {
+    "calls": 278,
+    "triangles": 742470,
+    "instances": 22918,
+    "chunks": {
+     "total": 991,
+     "visible": 420,
+     "near": 7
+    }
+   },
+   "rgb": [
+    86.271640625,
+    90.81254774305556,
+    77.84657118055556
+   ]
+  },
+  "porte-riviere-maria-exterieure-detail": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-exterieure-detail.png",
+   "stats": {
+    "calls": 280,
+    "triangles": 834805,
+    "instances": 29009,
+    "chunks": {
+     "total": 991,
+     "visible": 478,
+     "near": 9
+    }
+   },
+   "rgb": [
+    62.53259548611111,
+    61.23328993055556,
+    52.96942274305555
+   ]
+  },
+  "porte-riviere-maria-interieure-face": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-interieure-face.png",
+   "stats": {
+    "calls": 192,
+    "triangles": 552244,
+    "instances": 5457,
+    "chunks": {
+     "total": 991,
+     "visible": 136,
+     "near": 6
+    }
+   },
+   "rgb": [
+    101.13361979166666,
+    83.20362847222222,
+    62.35792534722222
+   ]
+  },
+  "porte-riviere-maria-interieure-detail": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-interieure-detail.png",
+   "stats": {
+    "calls": 181,
+    "triangles": 509003,
+    "instances": 1317,
+    "chunks": {
+     "total": 991,
+     "visible": 20,
+     "near": 8
+    }
+   },
+   "rgb": [
+    170.54944444444445,
+    165.88548177083334,
+    152.77165364583334
+   ]
+  },
+  "porte-riviere-maria-passage": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-passage.png",
+   "stats": {
+    "calls": 185,
+    "triangles": 905946,
+    "instances": 7267,
+    "chunks": {
+     "total": 991,
+     "visible": 184,
+     "near": 8
+    }
+   },
+   "rgb": [
+    102.52860677083333,
+    92.24042100694444,
+    75.04851996527778
+   ]
+  },
+  "porte-riviere-maria-haut": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-haut.png",
+   "stats": {
+    "calls": 245,
+    "triangles": 869864,
+    "instances": 33287,
+    "chunks": {
+     "total": 991,
+     "visible": 509,
+     "near": 7
+    }
+   },
+   "rgb": [
+    175.04666666666665,
+    179.02229166666666,
+    176.8293359375
+   ]
+  },
+  "porte-riviere-maria-echelle": {
+   "file": "docs/places/shiganshina/porte-riviere-maria-echelle.png",
+   "stats": {
+    "calls": 461,
+    "triangles": 736491,
+    "instances": 15118,
+    "chunks": {
+     "total": 991,
+     "visible": 270,
+     "near": 6
+    }
+   },
+   "rgb": [
+    115.3512890625,
+    123.28794704861112,
+    108.75573350694444
+   ]
+  }
+ },
+ "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 31.112289744641593,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 37.285175401681876,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 41.38248655978976,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 44.834450853934044,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 30.77957706878243,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 21.07366770353725,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 28.10948795849431,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 31.720154794555494,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.77504695751503,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 42.97727166450433,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.18026050063101,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 30.192753818139156,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 27.526692567795806,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 42.24721396999817,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 42.707309922790785,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.267497603257457,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 45.12863316259828,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 42.54918692741555,
+  "porte-exterieure-passage | porte-exterieure-haut": 56.37479493546053,
+  "porte-exterieure-passage | porte-exterieure-echelle": 50.47588699624418,
+  "porte-exterieure-haut | porte-exterieure-echelle": 30.318733087425187,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 27.32688346237207,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 31.72885422814736,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 30.93590589869227,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 31.022110952683608,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 39.78555789349767,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 27.45566698189573,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 38.743666192093976,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 37.99419043150604,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 25.031182948102977,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 55.213736365125406,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 34.17303800196882,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 36.72320106530768,
+  "porte-interieure-interieure-face | porte-interieure-passage": 36.07973543475526,
+  "porte-interieure-interieure-face | porte-interieure-haut": 41.07962370207431,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 41.878150360881754,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.465821941906306,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 34.84955458799854,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 33.490583149516034,
+  "porte-interieure-passage | porte-interieure-haut": 54.5686373724716,
+  "porte-interieure-passage | porte-interieure-echelle": 38.338074655758575,
+  "porte-interieure-haut | porte-interieure-echelle": 39.64681874433997,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-exterieure-detail": 29.23077988825976,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-interieure-face": 35.0707300601774,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-interieure-detail": 27.319685647013138,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-passage": 39.80165996713775,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-haut": 34.13154655326708,
+  "porte-riviere-saillie-exterieure-face | porte-riviere-saillie-echelle": 20.067605046834327,
+  "porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-interieure-face": 29.186236988598566,
+  "porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-interieure-detail": 30.22486754192891,
+  "porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-passage": 25.799329000662755,
+  "porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-haut": 47.22996001821736,
+  "porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-echelle": 37.698487295812,
+  "porte-riviere-saillie-interieure-face | porte-riviere-saillie-interieure-detail": 28.83120076176271,
+  "porte-riviere-saillie-interieure-face | porte-riviere-saillie-passage": 29.634455725351497,
+  "porte-riviere-saillie-interieure-face | porte-riviere-saillie-haut": 45.98757329149882,
+  "porte-riviere-saillie-interieure-face | porte-riviere-saillie-echelle": 41.69728036129407,
+  "porte-riviere-saillie-interieure-detail | porte-riviere-saillie-passage": 30.745037069126276,
+  "porte-riviere-saillie-interieure-detail | porte-riviere-saillie-haut": 40.613595616083806,
+  "porte-riviere-saillie-interieure-detail | porte-riviere-saillie-echelle": 31.490661880402065,
+  "porte-riviere-saillie-passage | porte-riviere-saillie-haut": 54.753219123614414,
+  "porte-riviere-saillie-passage | porte-riviere-saillie-echelle": 47.652660347950444,
+  "porte-riviere-saillie-haut | porte-riviere-saillie-echelle": 27.274172521900397,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-exterieure-detail": 20.526494706601923,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-interieure-face": 25.166577035991722,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-interieure-detail": 36.63280839497633,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-passage": 22.87325060177023,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-haut": 43.242527739770225,
+  "porte-riviere-maria-exterieure-face | porte-riviere-maria-echelle": 21.268008534418797,
+  "porte-riviere-maria-exterieure-detail | porte-riviere-maria-interieure-face": 27.480778552744514,
+  "porte-riviere-maria-exterieure-detail | porte-riviere-maria-interieure-detail": 46.365038740593405,
+  "porte-riviere-maria-exterieure-detail | porte-riviere-maria-passage": 23.451875794712038,
+  "porte-riviere-maria-exterieure-detail | porte-riviere-maria-haut": 53.28212820997506,
+  "porte-riviere-maria-exterieure-detail | porte-riviere-maria-echelle": 33.772603556752365,
+  "porte-riviere-maria-interieure-face | porte-riviere-maria-interieure-detail": 44.097985027268834,
+  "porte-riviere-maria-interieure-face | porte-riviere-maria-passage": 27.42573366059479,
+  "porte-riviere-maria-interieure-face | porte-riviere-maria-haut": 45.427134315955705,
+  "porte-riviere-maria-interieure-face | porte-riviere-maria-echelle": 35.730356934920124,
+  "porte-riviere-maria-interieure-detail | porte-riviere-maria-passage": 35.65208129721552,
+  "porte-riviere-maria-interieure-detail | porte-riviere-maria-haut": 26.792476623396155,
+  "porte-riviere-maria-interieure-detail | porte-riviere-maria-echelle": 29.366462352187327,
+  "porte-riviere-maria-passage | porte-riviere-maria-haut": 46.26032177077045,
+  "porte-riviere-maria-passage | porte-riviere-maria-echelle": 32.255434388487764,
+  "porte-riviere-maria-haut | porte-riviere-maria-echelle": 32.02264686911552,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 36.51093205010333,
+  "etat-845-avant | etat-845-breche": 20.752591392580303,
+  "etat-845-avant | etat-850-reprise": 14.984843014092824,
+  "etat-845-breche | etat-850-reprise": 5.920122401553009
+ }
+}

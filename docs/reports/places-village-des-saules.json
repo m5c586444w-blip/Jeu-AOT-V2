@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/village-des-saules/vue-ensemble.png",
+   "stats": {
+    "calls": 84,
+    "triangles": 23681,
+    "instances": 733,
+    "chunks": {
+     "total": 142,
+     "visible": 142,
+     "near": 0
+    }
+   },
+   "rgb": [
+    139.48121527777778,
+    143.7395138888889,
+    110.4156467013889
+   ]
+  }
+ },
+ "dE": {}
+}

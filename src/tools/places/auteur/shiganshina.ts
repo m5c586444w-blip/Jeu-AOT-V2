@@ -455,25 +455,25 @@ export function shiganshina(): Place {
     vegetation,
     eau: {
       voies: [{ id: "canal", nom: "Canal de Shiganshina", canon: "?", type: "canal", trace: [pt(CANAL_A[0] - 40, -900), CANAL_A, CANAL_B, polar(R + 420, 52)], largeur_m: CANAL_W, quais: true }],
-      ponts: [262, 490, 718, 946, 1174].map((r, i) => {
-        // Ponts : là où l'anneau croise le canal (point du canal le plus proche de l'anneau).
-        const t = (() => {
-          let best = 0;
-          let bd = Infinity;
-          for (let k = 0; k <= 200; k++) {
-            const u = k / 200;
-            const q: P2 = [CANAL_A[0] + (CANAL_B[0] - CANAL_A[0]) * u, CANAL_A[1] + (CANAL_B[1] - CANAL_A[1]) * u];
-            const d = Math.abs(Math.hypot(q[0], q[1]) - r);
-            if (d < bd) {
-              bd = d;
-              best = u;
-            }
+      ponts: [262, 490, 718, 946, 1174].flatMap((r, i) => {
+        // Ponts : là où l'anneau croise le canal (point du canal le plus proche de l'anneau). Un anneau qui ne croise pas le
+        // canal (262 m : le canal entre à 470 m) n'a pas de pont : son « point le plus proche » tombait dans le mur, sous la
+        // porte de rivière.
+        let t = 0;
+        let bd = Infinity;
+        for (let k = 0; k <= 200; k++) {
+          const u = k / 200;
+          const q: P2 = [CANAL_A[0] + (CANAL_B[0] - CANAL_A[0]) * u, CANAL_A[1] + (CANAL_B[1] - CANAL_A[1]) * u];
+          const d = Math.abs(Math.hypot(q[0], q[1]) - r);
+          if (d < bd) {
+            bd = d;
+            t = u;
           }
-          return best;
-        })();
+        }
+        if (bd > 20) return [];
         const q = pt(CANAL_A[0] + (CANAL_B[0] - CANAL_A[0]) * t, CANAL_A[1] + (CANAL_B[1] - CANAL_A[1]) * t);
         const ang = (Math.atan2(CANAL_B[1] - CANAL_A[1], CANAL_B[0] - CANAL_A[0]) * 180) / Math.PI + 90;
-        return { id: `pont-${i}`, position: q, angle_deg: r1(ang), longueur_m: CANAL_W + 10, largeur_m: 9, type: i % 2 ? "bois" : "pierre" };
+        return [{ id: `pont-${i}`, position: q, angle_deg: r1(ang), longueur_m: CANAL_W + 10, largeur_m: 9, type: i % 2 ? ("bois" as const) : ("pierre" as const) }];
       }),
       puits: [pt(-120, 300), pt(380, 840), pt(-600, 900)],
       fontaines: [pt(-30, 604), pt(-45, 1136)],
@@ -481,14 +481,14 @@ export function shiganshina(): Place {
     points_de_vue: [
       { id: "ensemble", nom: "Vue d'ensemble (sud-ouest)", oeil: P(-1450, 2250, 980), cible: P(40, 640, 0), fov: 50 },
       { id: "grand-rue", nom: "Grand-Rue vers la porte intérieure", oeil: P(5, 905, 1.8), cible: P(0, 300, 16), fov: 58 },
-      { id: "place-centrale", nom: "Place Centrale et église", oeil: P(-62, 650, 9), cible: P(48, 590, 12), fov: 60 },
+      { id: "place-centrale", nom: "Place Centrale et église", oeil: P(-50, 612, 4), cible: P(112, 592, 17), fov: 60 },
       { id: "canal", nom: "Canal et quais", oeil: P(canalMid[0] - 40, canalMid[1] - 110, 6), cible: P(canalMid[0] + 40, canalMid[1] + 120, 2), fov: 58 },
       { id: "marche", nom: "Place du Marché", oeil: P(-80, 1090, 10), cible: P(50, 1150, 4), fov: 60 },
       { id: "quartier-ouvrier", nom: "Ruelle du quartier ouvrier", oeil: [...polar(905, 150), 1.7] as [number, number, number], cible: [...polar(780, 152), 6] as [number, number, number], fov: 62 },
       { id: "maison-jaeger", nom: "Maison des Jaeger", oeil: [...polar(792, 98.6), 1.7] as [number, number, number], cible: [jaeger[0], jaeger[1], 5], fov: 55 },
       { id: "rempart", nom: "Chemin de ronde de la saillie", oeil: [wallView[0], wallView[1], 52.5], cible: [...polar(R - 1, 100), 50] as [number, number, number], fov: 60 },
       { id: "faubourg", nom: "Faubourg et porte intérieure", oeil: P(260, -620, 28), cible: P(0, -40, 18), fov: 55 },
-      { id: "porte-depuis-la-ville", nom: "Porte extérieure depuis la ville", oeil: P(14, 1190, 2), cible: P(0, R, 22), fov: 58 },
+      { id: "porte-depuis-la-ville", nom: "Porte extérieure depuis la ville", oeil: P(3, 1180, 1.8), cible: P(0, R, 22), fov: 58 },
     ],
     etats: [
       { id: "845-avant", nom: "845, avant la brèche", date: "845", canon: "C", sources: [{ ref: "Manga, chap. 1", canon: "C" }], portes: {}, ruines: [], incendies: [], rochers: [], abandon: 0, ciel: "clair", habitants: 1 },

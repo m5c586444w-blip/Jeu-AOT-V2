@@ -77,6 +77,12 @@ declare global {
   }
 }
 
+/**
+ * Ciel des états (CR1e-07) : la fumée de 845 est un voile brun (comme la ville-usine, correctif 1), la brume de 850 un voile
+ * gris ; brouillard modéré pour que la vue d'ensemble reste lisible (2,6 et 1,8 noyaient les deux états dans le même gris).
+ */
+const STATE_FOG: Record<"clair" | "enfume" | "brumeux", number> = { clair: 0.7, enfume: 1.2, brumeux: 0.9 };
+
 export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Promise<void> {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("lieu") ?? placeForEnv(params) ?? "shiganshina";
@@ -117,7 +123,7 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const viewIds = Object.keys(views);
   const firstView = views[viewIds[0] ?? ""] as SceneView;
   const sky = scene3.layout.state.ciel;
-  const lighting = createLighting(scene, seed, { windowMaterials: scene3.windowMaterials, lanternMaterial: scene3.lanternMaterial, lamps: scene3.lamps, center: new Vector3(...firstView.target), shadowExtent: 420, fogScale: sky === "enfume" ? 2.6 : sky === "brumeux" ? 1.8 : 0.7 });
+  const lighting = createLighting(scene, seed, { windowMaterials: scene3.windowMaterials, lanternMaterial: scene3.lanternMaterial, lamps: scene3.lamps, center: new Vector3(...firstView.target), shadowExtent: 420, fogScale: STATE_FOG[sky], smoke: sky === "enfume" ? 0.75 : 0 });
   lighting.setLite(quality === "bas");
   lighting.useEnvironment(renderer);
   if (sky === "enfume") lighting.setSunFactor(0.6);

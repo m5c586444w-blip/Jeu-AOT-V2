@@ -1,4 +1,4 @@
-# maria-district-4 — inspirations (monde réel, [A])
+# Quinta (`maria-district-4`) — inspirations (monde réel, [A])
 
 Identité d'auteur : district de marché et de rivière. Aucune image de l'œuvre ni de fans ; plan construit en code (`src/tools/places/auteur/maria-district-4.ts`).
 

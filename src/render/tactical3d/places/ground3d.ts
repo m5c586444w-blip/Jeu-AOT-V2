@@ -15,6 +15,46 @@ import { pavingTexture } from "./textures";
  * (statique) ; coordonnées de texture en mètres du plan (aucune couture d'un ruban à l'autre).
  */
 const PAVE_M = 4;
+/** Pas de la grille qui recoupe les surfaces du sol (m). */
+const GRID_M = 64;
+
+/** Polygone convexe coupé par le demi-plan `côté * (p[axe] - v) >= 0` (Sutherland–Hodgman). */
+function clipAxis(poly: P2[], axis: 0 | 1, v: number, side: 1 | -1): P2[] {
+  const out: P2[] = [];
+  for (let k = 0; k < poly.length; k++) {
+    const a = poly[k] as P2;
+    const b = poly[(k + 1) % poly.length] as P2;
+    const da = side * (a[axis] - v);
+    const db = side * (b[axis] - v);
+    if (da >= 0) out.push(a);
+    if (da >= 0 !== db >= 0) {
+      const t = da / (da - db);
+      out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+    }
+  }
+  return out;
+}
+
+/** Morceaux (polygones convexes) d'un triangle dans chaque case de la grille qu'il touche. */
+function clipToGrid(tri: P2[], cell: number): P2[][] {
+  const xs = tri.map((p) => p[0]);
+  const ys = tri.map((p) => p[1]);
+  const i0 = Math.floor(Math.min(...xs) / cell);
+  const i1 = Math.ceil(Math.max(...xs) / cell);
+  const j0 = Math.floor(Math.min(...ys) / cell);
+  const j1 = Math.ceil(Math.max(...ys) / cell);
+  if (i1 - i0 <= 1 && j1 - j0 <= 1) return [tri];
+  const out: P2[][] = [];
+  for (let i = i0; i < i1; i++) {
+    const cx = clipAxis(clipAxis(tri, 0, i * cell, 1), 0, (i + 1) * cell, -1);
+    if (cx.length < 3) continue;
+    for (let j = j0; j < j1; j++) {
+      const c = clipAxis(clipAxis(cx, 1, j * cell, 1), 1, (j + 1) * cell, -1);
+      if (c.length >= 3) out.push(c);
+    }
+  }
+  return out;
+}
 
 /** Accumulateur de triangles (position, normale verticale ou donnée, uv en mètres / échelle). */
 class Tris {
@@ -22,21 +62,28 @@ class Tris {
   nor: number[] = [];
   uv: number[] = [];
   constructor(private readonly uvScale: number) {}
-  /** Polygone horizontal (triangulé), à l'altitude y. */
-  flat(poly: Poly2, y: number, holes: Poly2[] = []): void {
+  /**
+   * Polygone horizontal (triangulé), à l'altitude y. Chaque triangle est recoupé par la grille de pas `cell` mètres (0 : non) :
+   * en rendu logiciel, un triangle de plusieurs centaines de mètres perd la précision de profondeur qui garde les chaussées
+   * (+6 cm) au-dessus de la prairie.
+   */
+  flat(poly: Poly2, y: number, holes: Poly2[] = [], cell = GRID_M): void {
     const contour = poly.map((p) => new Vector2(p[0], p[1]));
     const hs = holes.map((h) => h.map((p) => new Vector2(p[0], p[1])));
     const all = [...contour, ...hs.flat()];
     for (const t of ShapeUtils.triangulateShape(contour, hs)) {
-      // Ordre : normale vers le haut (repère monde : y vers le haut, z = y du plan).
-      const [a, b, c] = t.map((i) => all[i] as Vector2) as [Vector2, Vector2, Vector2];
-      const cross = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-      const tri = cross > 0 ? [a, c, b] : [a, b, c];
-      for (const v of tri) {
-        this.pos.push(v.x, y, v.y);
-        this.nor.push(0, 1, 0);
-        this.uv.push(v.x / this.uvScale, v.y / this.uvScale);
-      }
+      const tri = t.map((i) => [(all[i] as Vector2).x, (all[i] as Vector2).y] as P2);
+      for (const piece of cell > 0 ? clipToGrid(tri, cell) : [tri]) for (let k = 1; k + 1 < piece.length; k++) this.tri(piece[0] as P2, piece[k] as P2, piece[k + 1] as P2, y);
+    }
+  }
+  private tri(a: P2, b: P2, c: P2, y: number): void {
+    // Ordre : normale vers le haut (repère monde : y vers le haut, z = y du plan).
+    const cross = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+    if (Math.abs(cross) < 1e-9) return;
+    for (const v of cross > 0 ? [a, c, b] : [a, b, c]) {
+      this.pos.push(v[0], y, v[1]);
+      this.nor.push(0, 1, 0);
+      this.uv.push(v[0] / this.uvScale, v[1] / this.uvScale);
     }
   }
   /** Quadrilatère quelconque (sommets monde), normale calculée, uv donnés. */
@@ -112,14 +159,24 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
     m.receiveShadow = receive;
     group.add(m);
   };
-  // Prairie : grand carré percé par les canaux.
+  // Prairie : carré du lieu percé par les canaux, puis anneau jusqu'à l'horizon du brouillard (pas de bord visible en vue
+  // d'ensemble), 25 cm plus bas : ses triangles de plusieurs kilomètres n'ont pas la précision de profondeur voulue pour
+  // passer sous les chaussées (+6 cm) en qualité moyenne.
   const E = place.etendue_m * 0.8;
+  const EF = Math.max(E * 1.5, 9000);
   const canals = place.eau.voies.map((w) => ribbon(w.trace, w.largeur_m));
   const grass = grassTexture(seed);
   tagPhoto(grass, "sol", 8);
   textures.push(grass);
   const field = new Tris(8);
   field.flat([[-E, -E], [E, -E], [E, E], [-E, E]], 0, canals);
+  for (const q of [
+    [[-EF, -EF], [EF, -EF], [EF, -E], [-EF, -E]],
+    [[-EF, E], [EF, E], [EF, EF], [-EF, EF]],
+    [[-EF, -E], [-E, -E], [-E, E], [-EF, E]],
+    [[E, -E], [EF, -E], [EF, E], [E, E]],
+  ] as [number, number][][])
+    field.flat(q, -0.25, [], 0);
   add3(field.build(), new MeshStandardMaterial({ map: grass, roughness: 1, color: 0xd8e0c0 }), "prairie");
   // Cours d'îlots : pelouse, potager, dalles (selon le gabarit).
   for (const kind of ["plantee", "jardin", "pavee"] as const) {

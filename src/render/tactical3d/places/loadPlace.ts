@@ -318,9 +318,10 @@ export async function fetchPlace(id: string, base = "places3d/"): Promise<{ plac
     return r.json();
   };
   const walls = (await get("_murs.json")) as WallsParams;
-  // Lieu N1 (plan d'auteur), sinon lieu N2 figé.
+  // Lieu N1 (plan d'auteur), sinon lieu N2 figé. Un fichier absent peut revenir en page HTML (repli du serveur de
+  // développement, statut 200) : seule une réponse JSON vaut plan d'auteur.
   const r = await fetch(`${base}${id}.json`);
-  if (r.ok) return { place: (await r.json()) as Place, walls };
+  if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) return { place: (await r.json()) as Place, walls };
   const frozen = (await get(`generated/${id}.json`)) as FrozenPlan;
   return { place: frozenPlace(frozen), walls, frozen };
 }

@@ -1,11 +1,11 @@
 import type { Gabarit, Place, Street } from "../../../data/placeSchema";
 import { pt, r1 } from "./kit";
-import { BASE_GABARITS, LIBELLE, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
+import { BASE_GABARITS, NOMS, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
 import { authored, buildSaillie, building, cellKey, claimRect, quarter } from "./saillie";
 import type { Claim } from "./saillie";
 
 /**
- * District 4 du mur Maria (nom non établi, Q1) — identité d'auteur [A] : district de marché et de rivière. Damier oblique
+ * Quinta, district nord du mur Maria (nom et position [?], Q1) — identité d'auteur [A] : district de marché et de rivière. Damier oblique
  * (33°), recoupé par l'axe principal en îlots triangulaires, comme une ville marchande qui a grandi le long d'une route plus
  * ancienne que ses rues ; grand marché et halle, marché aux draps, maison du Change, hôtel de ville. La rivière coule à
  * l'intérieur du mur Maria, parallèle au mur, à 340 m derrière la porte intérieure : port, quais et entrepôts dans le
@@ -49,8 +49,8 @@ const RIVER_W = 42;
 export function mariaDistrict4(): Place {
   return buildSaillie({
     id: "maria-district-4",
-    nom: "maria-district-4",
-    libelle: LIBELLE,
+    nom: NOMS.nord,
+    libelle: NOMS.nord,
     canon: "?",
     sources: SOURCES_MARIA,
     province: null,
@@ -150,11 +150,13 @@ export function mariaDistrict4(): Place {
       fontaines: pts([[-160, 720], [140, 420]]),
     }),
     points_de_vue(ctx) {
-      const gm = ctx.at(255, 680);
-      const dr = ctx.at(-170, 765);
+      const gmEye = ctx.at(330, 755);
+      const gm = ctx.at(235, 650);
+      const drEye = ctx.at(-95, 840);
+      const dr = ctx.at(-190, 735);
       return baseViews(ctx, [
-        { id: "grand-marche", nom: "Grand Marché et grande halle", oeil: [r1(gm[0] + 90), r1(gm[1] + 70), 9], cible: [gm[0], gm[1], 6], fov: 60 },
-        { id: "marche-aux-draps", nom: "Marché aux Draps", oeil: [r1(dr[0] - 80), r1(dr[1] + 60), 8], cible: [dr[0], dr[1], 6], fov: 60 },
+        { id: "grand-marche", nom: "Grand Marché et grande halle", oeil: [gmEye[0], gmEye[1], 7], cible: [gm[0], gm[1], 6], fov: 60 },
+        { id: "marche-aux-draps", nom: "Marché aux Draps", oeil: [drEye[0], drEye[1], 6], cible: [dr[0], dr[1], 6], fov: 60 },
         { id: "port", nom: "Port de la rivière", oeil: [-160, r1(RIVER_Y - 60), 10], cible: [120, -220, 4], fov: 60 },
       ]);
     },

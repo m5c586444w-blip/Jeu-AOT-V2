@@ -1,0 +1,526 @@
+
+> murs-et-sang@0.0.1 smoke:r1b
+> tsx src/tools/smoke-r1b.ts tout
+
+[lot 1] planches de contrôle (1920 × 1080, qualité moyenne, image figée à t = 1 s)
+  OK  r1b-E01.png : aucune erreur de page
+  OK  E01 Shiganshina : planche en 36.3 s
+  OK  r1b-E02.png : aucune erreur de page
+  OK  E02 Trost : planche en 75.4 s
+  OK  r1b-E05.png : aucune erreur de page
+  OK  E05 Stohess : planche en 51.1 s
+  OK  r1b-E06.png : aucune erreur de page
+  OK  E06 Mitras : planche en 47.7 s
+  OK  r1b-E11.png : aucune erreur de page
+  OK  E11 Village agricole : planche en 47.3 s
+  OK  r1b-E13.png : aucune erreur de page
+  OK  E13 Campagne pure : planche en 81.2 s
+  OK  r1b-E14.png : aucune erreur de page
+  OK  E14 Forêts des Arbres Géants : planche en 199.6 s
+  OK  r1b-E19.png : aucune erreur de page
+  OK  E19 Territoire des Titans : planche en 74.3 s
+  OK  r1b-E22.png : aucune erreur de page
+  OK  E22 Murs : planche en 14.0 s
+[lot 2] planches de contrôle (1920 × 1080, qualité moyenne, image figée à t = 1 s)
+  OK  r1b-E03.png : aucune erreur de page
+  OK  E03 Karanes : planche en 22.2 s
+  OK  r1b-E04.png : aucune erreur de page
+  OK  E04 Utopia, Krolva : planche en 23.4 s
+  OK  r1b-E07.png : aucune erreur de page
+  OK  E07 Orvud, Ehrmich, Yarckel : planche en 23.5 s
+  OK  r1b-E08.png : aucune erreur de page
+  OK  E08 Ville souterraine : planche en 15.8 s
+  OK  r1b-E10.png : aucune erreur de page
+  OK  E10 Ville agricole : planche en 28.4 s
+  OK  r1b-E12.png : aucune erreur de page
+  OK  E12 Fermes isolées, moulins, granges : planche en 37.9 s
+  OK  r1b-E15.png : aucune erreur de page
+  OK  E15 Bois et forêts ordinaires : planche en 109.9 s
+  OK  r1b-E16.png : aucune erreur de page
+  OK  E16 Montagnes, plateaux, gorges : planche en 14.9 s
+  OK  r1b-E17.png : aucune erreur de page
+  OK  E17 Rivières, lacs, marais : planche en 13.4 s
+  OK  r1b-E18.png : aucune erreur de page
+  OK  E18 Côte et plage : planche en 12.5 s
+  OK  r1b-E20.png : aucune erreur de page
+  OK  E20 Château d'Utgard : planche en 36.5 s
+  OK  r1b-E21.png : aucune erreur de page
+  OK  E21 Ville-usine et cavernes de glace : planche en 22.0 s
+  OK  r1b-E23.png : aucune erreur de page
+  OK  E23 Chapelle souterraine Reiss : planche en 11.1 s
+  OK  r1b-E24.png : aucune erreur de page
+  OK  E24 Camps militaires : planche en 14.9 s
+  OK  r1b-E25.png : aucune erreur de page
+  OK  E25 Camps de réfugiés (845–846) : planche en 13.2 s
+  OK  r1b-E26.png : aucune erreur de page
+  OK  E26 Faubourgs de l'arrière-pays de Shiganshina : planche en 20.1 s
+  OK  r1b-E27.png : aucune erreur de page
+  OK  E27 Bourgs et hameaux de l'arrière-pays de Maria : planche en 24.3 s
+  OK  r1b-E28.png : aucune erreur de page
+  OK  E28 Fermes et lisières de forêt de Maria : planche en 64.5 s
+  OK  r1b-E29.png : aucune erreur de page
+  OK  E29 Glacis extérieur de Shiganshina : planche en 12.0 s
+[variantes]
+  OK  r1b-E01-845.png : aucune erreur de page
+  OK  r1b-E01-850.png : aucune erreur de page
+  OK  r1b-E01-851.png : aucune erreur de page
+  OK  r1b-E14-clairiere.png : aucune erreur de page
+  OK  r1b-E14-lisiere.png : aucune erreur de page
+  OK  r1b-E11-ragako_850.png : aucune erreur de page
+  OK  r1b-E22-endommage.png : aucune erreur de page
+  OK  r1b-E19-titans.png : aucune erreur de page
+  OK  r1b-E07-orvud_850.png : aucune erreur de page
+  OK  r1b-E20-ruines_850.png : aucune erreur de page
+  OK  r1b-E21-cavernes.png : aucune erreur de page
+  OK  r1b-E04-krolva.png : aucune erreur de page
+  OK  r1b-E26-845.png : aucune erreur de page
+  OK  r1b-E15-foret_morte.png : aucune erreur de page
+  OK  r1b-E24-fort_avance.png : aucune erreur de page
+  OK  r1b-E29-845.png : aucune erreur de page
+[lot 2 : nuit sous terre, brume du marais]
+  OK  r1b-nuit-E08.png : aucune erreur de page
+  OK  r1b-meteo-brume-E17.png : aucune erreur de page
+[cycle et météo]
+  OK  r1b-cycle-E01.png : aucune erreur de page
+  OK  r1b-meteo-brume-E05.png : aucune erreur de page
+  OK  r1b-meteo-pluie-E11.png : aucune erreur de page
+  OK  r1b-meteo-neige-E13.png : aucune erreur de page
+  OK  r1b-ruines-incendies-E01.png : aucune erreur de page
+  OK  r1b-nuit-E02.png : aucune erreur de page
+[banc d'échelle]
+  OK  banc : soldat mesuré 1.70 m pour 1.7 m (±5 %)
+  OK  banc : classe_3 mesuré 2.95 m pour 3 m (±5 %)
+  OK  banc : classe_5 mesuré 4.93 m pour 5 m (±5 %)
+  OK  banc : classe_8 mesuré 8.01 m pour 8 m (±5 %)
+  OK  banc : classe_12 mesuré 11.92 m pour 12 m (±5 %)
+  OK  banc : classe_15 mesuré 15.06 m pour 15 m (±5 %)
+  OK  banc : classe_12_anormal mesuré 11.93 m pour 12 m (±5 %)
+  OK  banc : classe_8_sentinelle mesuré 7.95 m pour 8 m (±5 %)
+  OK  banc : classe_8_chasseur mesuré 7.83 m pour 8 m (±5 %)
+  OK  banc : classe_8_nocturne mesuré 8.02 m pour 8 m (±5 %)
+  OK  banc : classe_5_meute mesuré 4.94 m pour 5 m (±5 %)
+  OK  banc : colossal mesuré 59.95 m pour 60 m (±5 %)
+  OK  banc : mur mesuré 50.00 m pour 50 m (±5 %)
+  OK  banc : titan_mur mesuré 50.05 m pour 50 m (±5 %)
+  OK  banc : rod_reiss mesuré 119.66 m pour 120 m (±5 %)
+  OK  banc : aucune erreur de page
+[galerie] /proto3d/galerie
+  OK  galerie : /proto3d/galerie redirige vers http://localhost:5193/?proto3d=galerie
+  OK  galerie : 28 environnements rendus sur 28 en 88 s
+  OK  galerie : aucune erreur de page
+  OK  lot 1 E01–E02 : ΔE couleur moyenne 3.9 ≥ 2,3
+  OK  lot 1 E01–E02 : ΔE grille 9.3 ≥ 5
+  OK  lot 1 E13–E19 : ΔE couleur moyenne 6.1 ≥ 2,3
+  OK  lot 1 E13–E19 : ΔE grille 10.7 ≥ 5
+  OK  lot 1 E01–E22 : ΔE couleur moyenne 6.6 ≥ 2,3
+  OK  lot 1 E01–E22 : ΔE grille 12.7 ≥ 5
+  OK  lot 1 E02–E06 : ΔE couleur moyenne 7.0 ≥ 2,3
+  OK  lot 1 E02–E06 : ΔE grille 11.0 ≥ 5
+  OK  lot 1 E02–E22 : ΔE couleur moyenne 7.4 ≥ 2,3
+  OK  lot 1 E02–E22 : ΔE grille 15.0 ≥ 5
+  OK  lot 1 E06–E22 : ΔE couleur moyenne 8.1 ≥ 2,3
+  OK  lot 1 E06–E22 : ΔE grille 15.8 ≥ 5
+  OK  lot 1 E11–E13 : ΔE couleur moyenne 9.6 ≥ 2,3
+  OK  lot 1 E11–E13 : ΔE grille 13.6 ≥ 5
+  OK  lot 1 E01–E06 : ΔE couleur moyenne 9.7 ≥ 2,3
+  OK  lot 1 E01–E06 : ΔE grille 13.9 ≥ 5
+  OK  lot 1 E11–E19 : ΔE couleur moyenne 10.9 ≥ 2,3
+  OK  lot 1 E11–E19 : ΔE grille 16.3 ≥ 5
+  OK  lot 1 E13–E22 : ΔE couleur moyenne 11.0 ≥ 2,3
+  OK  lot 1 E13–E22 : ΔE grille 12.8 ≥ 5
+  OK  lot 1 E19–E22 : ΔE couleur moyenne 13.7 ≥ 2,3
+  OK  lot 1 E19–E22 : ΔE grille 16.4 ≥ 5
+  OK  lot 1 E01–E13 : ΔE couleur moyenne 14.5 ≥ 2,3
+  OK  lot 1 E01–E13 : ΔE grille 18.8 ≥ 5
+  OK  lot 1 E01–E05 : ΔE couleur moyenne 15.6 ≥ 2,3
+  OK  lot 1 E01–E05 : ΔE grille 19.7 ≥ 5
+  OK  lot 1 E02–E05 : ΔE couleur moyenne 16.0 ≥ 2,3
+  OK  lot 1 E02–E05 : ΔE grille 21.3 ≥ 5
+  OK  lot 1 E01–E19 : ΔE couleur moyenne 16.1 ≥ 2,3
+  OK  lot 1 E01–E19 : ΔE grille 22.9 ≥ 5
+  OK  lot 1 E02–E13 : ΔE couleur moyenne 16.7 ≥ 2,3
+  OK  lot 1 E02–E13 : ΔE grille 20.0 ≥ 5
+  OK  lot 1 E05–E06 : ΔE couleur moyenne 17.0 ≥ 2,3
+  OK  lot 1 E05–E06 : ΔE grille 18.7 ≥ 5
+  OK  lot 1 E02–E19 : ΔE couleur moyenne 17.6 ≥ 2,3
+  OK  lot 1 E02–E19 : ΔE grille 22.6 ≥ 5
+  OK  lot 1 E11–E22 : ΔE couleur moyenne 18.2 ≥ 2,3
+  OK  lot 1 E11–E22 : ΔE grille 21.0 ≥ 5
+  OK  lot 1 E01–E11 : ΔE couleur moyenne 18.8 ≥ 2,3
+  OK  lot 1 E01–E11 : ΔE grille 20.3 ≥ 5
+  OK  lot 1 E06–E13 : ΔE couleur moyenne 18.9 ≥ 2,3
+  OK  lot 1 E06–E13 : ΔE grille 20.6 ≥ 5
+  OK  lot 1 E05–E22 : ΔE couleur moyenne 19.4 ≥ 2,3
+  OK  lot 1 E05–E22 : ΔE grille 25.5 ≥ 5
+  OK  lot 1 E06–E19 : ΔE couleur moyenne 20.7 ≥ 2,3
+  OK  lot 1 E06–E19 : ΔE grille 24.7 ≥ 5
+  OK  lot 1 E02–E11 : ΔE couleur moyenne 22.0 ≥ 2,3
+  OK  lot 1 E02–E11 : ΔE grille 24.7 ≥ 5
+  OK  lot 1 E05–E14 : ΔE couleur moyenne 23.3 ≥ 2,3
+  OK  lot 1 E05–E14 : ΔE grille 34.0 ≥ 5
+  OK  lot 1 E06–E11 : ΔE couleur moyenne 26.1 ≥ 2,3
+  OK  lot 1 E06–E11 : ΔE grille 30.2 ≥ 5
+  OK  lot 1 E05–E13 : ΔE couleur moyenne 28.3 ≥ 2,3
+  OK  lot 1 E05–E13 : ΔE grille 34.9 ≥ 5
+  OK  lot 1 E05–E11 : ΔE couleur moyenne 31.1 ≥ 2,3
+  OK  lot 1 E05–E11 : ΔE grille 34.2 ≥ 5
+  OK  lot 1 E05–E19 : ΔE couleur moyenne 31.3 ≥ 2,3
+  OK  lot 1 E05–E19 : ΔE grille 38.3 ≥ 5
+  OK  lot 1 E01–E14 : ΔE couleur moyenne 31.6 ≥ 2,3
+  OK  lot 1 E01–E14 : ΔE grille 38.8 ≥ 5
+  OK  lot 1 E02–E14 : ΔE couleur moyenne 34.4 ≥ 2,3
+  OK  lot 1 E02–E14 : ΔE grille 42.3 ≥ 5
+  OK  lot 1 E14–E22 : ΔE couleur moyenne 35.4 ≥ 2,3
+  OK  lot 1 E14–E22 : ΔE grille 37.3 ≥ 5
+  OK  lot 1 E11–E14 : ΔE couleur moyenne 35.6 ≥ 2,3
+  OK  lot 1 E11–E14 : ΔE grille 39.1 ≥ 5
+  OK  lot 1 E06–E14 : ΔE couleur moyenne 37.5 ≥ 2,3
+  OK  lot 1 E06–E14 : ΔE grille 46.5 ≥ 5
+  OK  lot 1 E13–E14 : ΔE couleur moyenne 38.6 ≥ 2,3
+  OK  lot 1 E13–E14 : ΔE grille 40.6 ≥ 5
+  OK  lot 1 E14–E19 : ΔE couleur moyenne 42.3 ≥ 2,3
+  OK  lot 1 E14–E19 : ΔE grille 46.0 ≥ 5
+  OK  lot 2 E03–E16 : ΔE couleur moyenne 2.6 ≥ 2,3
+  OK  lot 2 E03–E16 : ΔE grille 10.2 ≥ 5
+  OK  lot 2 E04–E16 : ΔE couleur moyenne 2.9 ≥ 2,3
+  OK  lot 2 E04–E16 : ΔE grille 6.3 ≥ 5
+  OK  lot 2 E03–E25 : ΔE couleur moyenne 3.8 ≥ 2,3
+  OK  lot 2 E03–E25 : ΔE grille 13.7 ≥ 5
+  OK  lot 2 E17–E20 : ΔE couleur moyenne 4.5 ≥ 2,3
+  OK  lot 2 E17–E20 : ΔE grille 11.0 ≥ 5
+  OK  lot 2 E10–E12 : ΔE couleur moyenne 4.5 ≥ 2,3
+  OK  lot 2 E10–E12 : ΔE grille 8.5 ≥ 5
+  OK  lot 2 E16–E25 : ΔE couleur moyenne 4.6 ≥ 2,3
+  OK  lot 2 E16–E25 : ΔE grille 16.3 ≥ 5
+  OK  lot 2 E03–E04 : ΔE couleur moyenne 4.6 ≥ 2,3
+  OK  lot 2 E03–E04 : ΔE grille 9.8 ≥ 5
+  OK  lot 2 E15–E28 : ΔE couleur moyenne 5.0 ≥ 2,3
+  OK  lot 2 E15–E28 : ΔE grille 7.6 ≥ 5
+  OK  lot 2 E04–E25 : ΔE couleur moyenne 5.5 ≥ 2,3
+  OK  lot 2 E04–E25 : ΔE grille 13.4 ≥ 5
+  OK  lot 2 E26–E28 : ΔE couleur moyenne 5.5 ≥ 2,3
+  OK  lot 2 E26–E28 : ΔE grille 8.8 ≥ 5
+  OK  lot 2 E25–E26 : ΔE couleur moyenne 5.6 ≥ 2,3
+  OK  lot 2 E25–E26 : ΔE grille 10.1 ≥ 5
+  OK  lot 2 E17–E25 : ΔE couleur moyenne 5.7 ≥ 2,3
+  OK  lot 2 E17–E25 : ΔE grille 14.1 ≥ 5
+  OK  lot 2 E24–E26 : ΔE couleur moyenne 5.9 ≥ 2,3
+  OK  lot 2 E24–E26 : ΔE grille 10.5 ≥ 5
+  OK  lot 2 E16–E20 : ΔE couleur moyenne 5.9 ≥ 2,3
+  OK  lot 2 E16–E20 : ΔE grille 17.4 ≥ 5
+  OK  lot 2 E17–E26 : ΔE couleur moyenne 5.9 ≥ 2,3
+  OK  lot 2 E17–E26 : ΔE grille 10.6 ≥ 5
+  OK  lot 2 E10–E27 : ΔE couleur moyenne 6.3 ≥ 2,3
+  OK  lot 2 E10–E27 : ΔE grille 13.2 ≥ 5
+  OK  lot 2 E20–E28 : ΔE couleur moyenne 6.5 ≥ 2,3
+  OK  lot 2 E20–E28 : ΔE grille 9.7 ≥ 5
+  OK  lot 2 E17–E28 : ΔE couleur moyenne 7.2 ≥ 2,3
+  OK  lot 2 E17–E28 : ΔE grille 13.1 ≥ 5
+  OK  lot 2 E16–E17 : ΔE couleur moyenne 7.2 ≥ 2,3
+  OK  lot 2 E16–E17 : ΔE grille 16.5 ≥ 5
+  OK  lot 2 E03–E17 : ΔE couleur moyenne 7.3 ≥ 2,3
+  OK  lot 2 E03–E17 : ΔE grille 15.6 ≥ 5
+  OK  lot 2 E20–E25 : ΔE couleur moyenne 7.3 ≥ 2,3
+  OK  lot 2 E20–E25 : ΔE grille 11.3 ≥ 5
+  OK  lot 2 E03–E20 : ΔE couleur moyenne 7.3 ≥ 2,3
+  OK  lot 2 E03–E20 : ΔE grille 17.3 ≥ 5
+  OK  lot 2 E10–E24 : ΔE couleur moyenne 7.6 ≥ 2,3
+  OK  lot 2 E10–E24 : ΔE grille 9.9 ≥ 5
+  OK  lot 2 E12–E24 : ΔE couleur moyenne 7.8 ≥ 2,3
+  OK  lot 2 E12–E24 : ΔE grille 10.6 ≥ 5
+  OK  lot 2 E04–E20 : ΔE couleur moyenne 7.8 ≥ 2,3
+  OK  lot 2 E04–E20 : ΔE grille 16.3 ≥ 5
+  OK  lot 2 E24–E29 : ΔE couleur moyenne 8.1 ≥ 2,3
+  OK  lot 2 E24–E29 : ΔE grille 13.3 ≥ 5
+  OK  lot 2 E20–E26 : ΔE couleur moyenne 8.1 ≥ 2,3
+  OK  lot 2 E20–E26 : ΔE grille 11.0 ≥ 5
+  OK  lot 2 E12–E29 : ΔE couleur moyenne 8.5 ≥ 2,3
+  OK  lot 2 E12–E29 : ΔE grille 12.8 ≥ 5
+  OK  lot 2 E08–E23 : ΔE couleur moyenne 8.6 ≥ 2,3
+  OK  lot 2 E08–E23 : ΔE grille 11.7 ≥ 5
+  OK  lot 2 E16–E26 : ΔE couleur moyenne 8.7 ≥ 2,3
+  OK  lot 2 E16–E26 : ΔE grille 14.4 ≥ 5
+  OK  lot 2 E04–E26 : ΔE couleur moyenne 8.8 ≥ 2,3
+  OK  lot 2 E04–E26 : ΔE grille 12.9 ≥ 5
+  OK  lot 2 E15–E20 : ΔE couleur moyenne 8.9 ≥ 2,3
+  OK  lot 2 E15–E20 : ΔE grille 11.7 ≥ 5
+  OK  lot 2 E15–E26 : ΔE couleur moyenne 8.9 ≥ 2,3
+  OK  lot 2 E15–E26 : ΔE grille 11.3 ≥ 5
+  OK  lot 2 E04–E15 : ΔE couleur moyenne 9.1 ≥ 2,3
+  OK  lot 2 E04–E15 : ΔE grille 16.1 ≥ 5
+  OK  lot 2 E25–E28 : ΔE couleur moyenne 9.1 ≥ 2,3
+  OK  lot 2 E25–E28 : ΔE grille 13.0 ≥ 5
+  OK  lot 2 E03–E26 : ΔE couleur moyenne 9.1 ≥ 2,3
+  OK  lot 2 E03–E26 : ΔE grille 14.0 ≥ 5
+  OK  lot 2 E04–E17 : ΔE couleur moyenne 9.2 ≥ 2,3
+  OK  lot 2 E04–E17 : ΔE grille 15.8 ≥ 5
+  OK  lot 2 E26–E29 : ΔE couleur moyenne 9.4 ≥ 2,3
+  OK  lot 2 E26–E29 : ΔE grille 18.2 ≥ 5
+  OK  lot 2 E16–E28 : ΔE couleur moyenne 9.5 ≥ 2,3
+  OK  lot 2 E16–E28 : ΔE grille 18.5 ≥ 5
+  OK  lot 2 E04–E28 : ΔE couleur moyenne 9.6 ≥ 2,3
+  OK  lot 2 E04–E28 : ΔE grille 16.8 ≥ 5
+  OK  lot 2 E24–E25 : ΔE couleur moyenne 9.7 ≥ 2,3
+  OK  lot 2 E24–E25 : ΔE grille 12.0 ≥ 5
+  OK  lot 2 E17–E18 : ΔE couleur moyenne 10.1 ≥ 2,3
+  OK  lot 2 E17–E18 : ΔE grille 17.5 ≥ 5
+  OK  lot 2 E12–E27 : ΔE couleur moyenne 10.1 ≥ 2,3
+  OK  lot 2 E12–E27 : ΔE grille 15.0 ≥ 5
+  OK  lot 2 E15–E16 : ΔE couleur moyenne 10.2 ≥ 2,3
+  OK  lot 2 E15–E16 : ΔE grille 18.5 ≥ 5
+  OK  lot 2 E24–E28 : ΔE couleur moyenne 10.3 ≥ 2,3
+  OK  lot 2 E24–E28 : ΔE grille 13.6 ≥ 5
+  OK  lot 2 E18–E29 : ΔE couleur moyenne 10.7 ≥ 2,3
+  OK  lot 2 E18–E29 : ΔE grille 19.7 ≥ 5
+  OK  lot 2 E10–E26 : ΔE couleur moyenne 11.0 ≥ 2,3
+  OK  lot 2 E10–E26 : ΔE grille 14.6 ≥ 5
+  OK  lot 2 E04–E07 : ΔE couleur moyenne 11.1 ≥ 2,3
+  OK  lot 2 E04–E07 : ΔE grille 13.9 ≥ 5
+  OK  lot 2 E15–E17 : ΔE couleur moyenne 11.1 ≥ 2,3
+  OK  lot 2 E15–E17 : ΔE grille 14.0 ≥ 5
+  OK  lot 2 E15–E25 : ΔE couleur moyenne 11.2 ≥ 2,3
+  OK  lot 2 E15–E25 : ΔE grille 13.1 ≥ 5
+  OK  lot 2 E03–E28 : ΔE couleur moyenne 11.2 ≥ 2,3
+  OK  lot 2 E03–E28 : ΔE grille 17.3 ≥ 5
+  OK  lot 2 E24–E27 : ΔE couleur moyenne 11.2 ≥ 2,3
+  OK  lot 2 E24–E27 : ΔE grille 15.0 ≥ 5
+  OK  lot 2 E25–E29 : ΔE couleur moyenne 11.2 ≥ 2,3
+  OK  lot 2 E25–E29 : ΔE grille 15.4 ≥ 5
+  OK  lot 2 E17–E29 : ΔE couleur moyenne 11.3 ≥ 2,3
+  OK  lot 2 E17–E29 : ΔE grille 22.5 ≥ 5
+  OK  lot 2 E17–E24 : ΔE couleur moyenne 11.4 ≥ 2,3
+  OK  lot 2 E17–E24 : ΔE grille 18.4 ≥ 5
+  OK  lot 2 E10–E29 : ΔE couleur moyenne 11.5 ≥ 2,3
+  OK  lot 2 E10–E29 : ΔE grille 15.3 ≥ 5
+  OK  lot 2 E12–E26 : ΔE couleur moyenne 11.8 ≥ 2,3
+  OK  lot 2 E12–E26 : ΔE grille 13.3 ≥ 5
+  OK  lot 2 E07–E16 : ΔE couleur moyenne 11.8 ≥ 2,3
+  OK  lot 2 E07–E16 : ΔE grille 15.5 ≥ 5
+  OK  lot 2 E03–E15 : ΔE couleur moyenne 12.4 ≥ 2,3
+  OK  lot 2 E03–E15 : ΔE grille 17.1 ≥ 5
+  OK  lot 2 E18–E25 : ΔE couleur moyenne 12.6 ≥ 2,3
+  OK  lot 2 E18–E25 : ΔE grille 18.3 ≥ 5
+  OK  lot 2 E15–E24 : ΔE couleur moyenne 12.6 ≥ 2,3
+  OK  lot 2 E15–E24 : ΔE grille 14.7 ≥ 5
+  OK  lot 2 E10–E28 : ΔE couleur moyenne 12.8 ≥ 2,3
+  OK  lot 2 E10–E28 : ΔE grille 14.3 ≥ 5
+  OK  lot 2 E03–E07 : ΔE couleur moyenne 12.8 ≥ 2,3
+  OK  lot 2 E03–E07 : ΔE grille 16.3 ≥ 5
+  OK  lot 2 E04–E24 : ΔE couleur moyenne 12.8 ≥ 2,3
+  OK  lot 2 E04–E24 : ΔE grille 16.7 ≥ 5
+  OK  lot 2 E03–E24 : ΔE couleur moyenne 13.4 ≥ 2,3
+  OK  lot 2 E03–E24 : ΔE grille 16.4 ≥ 5
+  OK  lot 2 E16–E24 : ΔE couleur moyenne 13.5 ≥ 2,3
+  OK  lot 2 E16–E24 : ΔE grille 18.7 ≥ 5
+  OK  lot 2 E03–E18 : ΔE couleur moyenne 13.6 ≥ 2,3
+  OK  lot 2 E03–E18 : ΔE grille 18.1 ≥ 5
+  OK  lot 2 E18–E26 : ΔE couleur moyenne 13.8 ≥ 2,3
+  OK  lot 2 E18–E26 : ΔE grille 19.5 ≥ 5
+  OK  lot 2 E18–E20 : ΔE couleur moyenne 13.9 ≥ 2,3
+  OK  lot 2 E18–E20 : ΔE grille 20.5 ≥ 5
+  OK  lot 2 E20–E24 : ΔE couleur moyenne 13.9 ≥ 2,3
+  OK  lot 2 E20–E24 : ΔE grille 17.5 ≥ 5
+  OK  lot 2 E28–E29 : ΔE couleur moyenne 14.3 ≥ 2,3
+  OK  lot 2 E28–E29 : ΔE grille 20.3 ≥ 5
+  OK  lot 2 E03–E29 : ΔE couleur moyenne 14.6 ≥ 2,3
+  OK  lot 2 E03–E29 : ΔE grille 25.3 ≥ 5
+  OK  lot 2 E26–E27 : ΔE couleur moyenne 14.7 ≥ 2,3
+  OK  lot 2 E26–E27 : ΔE grille 18.8 ≥ 5
+  OK  lot 2 E12–E28 : ΔE couleur moyenne 15.1 ≥ 2,3
+  OK  lot 2 E12–E28 : ΔE grille 15.9 ≥ 5
+  OK  lot 2 E16–E18 : ΔE couleur moyenne 15.2 ≥ 2,3
+  OK  lot 2 E16–E18 : ΔE grille 20.8 ≥ 5
+  OK  lot 2 E27–E28 : ΔE couleur moyenne 15.3 ≥ 2,3
+  OK  lot 2 E27–E28 : ΔE grille 21.1 ≥ 5
+  OK  lot 2 E10–E15 : ΔE couleur moyenne 15.5 ≥ 2,3
+  OK  lot 2 E10–E15 : ΔE grille 16.3 ≥ 5
+  OK  lot 2 E20–E29 : ΔE couleur moyenne 15.5 ≥ 2,3
+  OK  lot 2 E20–E29 : ΔE grille 18.3 ≥ 5
+  OK  lot 2 E16–E29 : ΔE couleur moyenne 15.7 ≥ 2,3
+  OK  lot 2 E16–E29 : ΔE grille 28.3 ≥ 5
+  OK  lot 2 E10–E17 : ΔE couleur moyenne 15.7 ≥ 2,3
+  OK  lot 2 E10–E17 : ΔE grille 21.3 ≥ 5
+  OK  lot 2 E07–E25 : ΔE couleur moyenne 15.8 ≥ 2,3
+  OK  lot 2 E07–E25 : ΔE grille 24.5 ≥ 5
+  OK  lot 2 E12–E17 : ΔE couleur moyenne 16.0 ≥ 2,3
+  OK  lot 2 E12–E17 : ΔE grille 18.1 ≥ 5
+  OK  lot 2 E07–E20 : ΔE couleur moyenne 16.1 ≥ 2,3
+  OK  lot 2 E07–E20 : ΔE grille 27.6 ≥ 5
+  OK  lot 2 E15–E27 : ΔE couleur moyenne 16.2 ≥ 2,3
+  OK  lot 2 E15–E27 : ΔE grille 23.2 ≥ 5
+  OK  lot 2 E10–E25 : ΔE couleur moyenne 16.3 ≥ 2,3
+  OK  lot 2 E10–E25 : ΔE grille 17.6 ≥ 5
+  OK  lot 2 E12–E25 : ΔE couleur moyenne 16.3 ≥ 2,3
+  OK  lot 2 E12–E25 : ΔE grille 17.6 ≥ 5
+  OK  lot 2 E04–E29 : ΔE couleur moyenne 16.4 ≥ 2,3
+  OK  lot 2 E04–E29 : ΔE grille 27.3 ≥ 5
+  OK  lot 2 E18–E24 : ΔE couleur moyenne 16.6 ≥ 2,3
+  OK  lot 2 E18–E24 : ΔE grille 21.3 ≥ 5
+  OK  lot 2 E18–E28 : ΔE couleur moyenne 16.8 ≥ 2,3
+  OK  lot 2 E18–E28 : ΔE grille 22.4 ≥ 5
+  OK  lot 2 E07–E21 : ΔE couleur moyenne 17.1 ≥ 2,3
+  OK  lot 2 E07–E21 : ΔE grille 19.3 ≥ 5
+  OK  lot 2 E07–E15 : ΔE couleur moyenne 17.1 ≥ 2,3
+  OK  lot 2 E07–E15 : ΔE grille 26.7 ≥ 5
+  OK  lot 2 E08–E21 : ΔE couleur moyenne 17.1 ≥ 2,3
+  OK  lot 2 E08–E21 : ΔE grille 32.4 ≥ 5
+  OK  lot 2 E27–E29 : ΔE couleur moyenne 17.2 ≥ 2,3
+  OK  lot 2 E27–E29 : ΔE grille 24.2 ≥ 5
+  OK  lot 2 E04–E18 : ΔE couleur moyenne 17.5 ≥ 2,3
+  OK  lot 2 E04–E18 : ΔE grille 23.5 ≥ 5
+  OK  lot 2 E10–E20 : ΔE couleur moyenne 18.1 ≥ 2,3
+  OK  lot 2 E10–E20 : ΔE grille 20.2 ≥ 5
+  OK  lot 2 E12–E18 : ΔE couleur moyenne 18.2 ≥ 2,3
+  OK  lot 2 E12–E18 : ΔE grille 22.0 ≥ 5
+  OK  lot 2 E15–E29 : ΔE couleur moyenne 18.3 ≥ 2,3
+  OK  lot 2 E15–E29 : ΔE grille 23.7 ≥ 5
+  OK  lot 2 E12–E15 : ΔE couleur moyenne 18.4 ≥ 2,3
+  OK  lot 2 E12–E15 : ΔE grille 19.6 ≥ 5
+  OK  lot 2 E07–E17 : ΔE couleur moyenne 18.9 ≥ 2,3
+  OK  lot 2 E07–E17 : ΔE grille 25.5 ≥ 5
+  OK  lot 2 E04–E10 : ΔE couleur moyenne 19.1 ≥ 2,3
+  OK  lot 2 E04–E10 : ΔE grille 24.2 ≥ 5
+  OK  lot 2 E12–E20 : ΔE couleur moyenne 19.2 ≥ 2,3
+  OK  lot 2 E12–E20 : ΔE grille 19.9 ≥ 5
+  OK  lot 2 E07–E28 : ΔE couleur moyenne 19.4 ≥ 2,3
+  OK  lot 2 E07–E28 : ΔE grille 28.3 ≥ 5
+  OK  lot 2 E10–E16 : ΔE couleur moyenne 19.6 ≥ 2,3
+  OK  lot 2 E10–E16 : ΔE grille 25.6 ≥ 5
+  OK  lot 2 E07–E26 : ΔE couleur moyenne 19.8 ≥ 2,3
+  OK  lot 2 E07–E26 : ΔE grille 24.6 ≥ 5
+  OK  lot 2 E25–E27 : ΔE couleur moyenne 19.9 ≥ 2,3
+  OK  lot 2 E25–E27 : ΔE grille 25.3 ≥ 5
+  OK  lot 2 E03–E10 : ΔE couleur moyenne 20.0 ≥ 2,3
+  OK  lot 2 E03–E10 : ΔE grille 23.0 ≥ 5
+  OK  lot 2 E03–E12 : ΔE couleur moyenne 20.1 ≥ 2,3
+  OK  lot 2 E03–E12 : ΔE grille 23.6 ≥ 5
+  OK  lot 2 E17–E27 : ΔE couleur moyenne 20.1 ≥ 2,3
+  OK  lot 2 E17–E27 : ΔE grille 27.3 ≥ 5
+  OK  lot 2 E04–E12 : ΔE couleur moyenne 20.1 ≥ 2,3
+  OK  lot 2 E04–E12 : ΔE grille 24.4 ≥ 5
+  OK  lot 2 E10–E18 : ΔE couleur moyenne 20.3 ≥ 2,3
+  OK  lot 2 E10–E18 : ΔE grille 23.1 ≥ 5
+  OK  lot 2 E12–E16 : ΔE couleur moyenne 20.3 ≥ 2,3
+  OK  lot 2 E12–E16 : ΔE grille 25.6 ≥ 5
+  OK  lot 2 E15–E18 : ΔE couleur moyenne 21.1 ≥ 2,3
+  OK  lot 2 E15–E18 : ΔE grille 25.0 ≥ 5
+  OK  lot 2 E04–E27 : ΔE couleur moyenne 21.3 ≥ 2,3
+  OK  lot 2 E04–E27 : ΔE grille 22.5 ≥ 5
+  OK  lot 2 E20–E27 : ΔE couleur moyenne 21.5 ≥ 2,3
+  OK  lot 2 E20–E27 : ΔE grille 27.1 ≥ 5
+  OK  lot 2 E16–E27 : ΔE couleur moyenne 22.5 ≥ 2,3
+  OK  lot 2 E16–E27 : ΔE grille 24.4 ≥ 5
+  OK  lot 2 E03–E27 : ΔE couleur moyenne 23.3 ≥ 2,3
+  OK  lot 2 E03–E27 : ΔE grille 26.2 ≥ 5
+  OK  lot 2 E07–E24 : ΔE couleur moyenne 23.6 ≥ 2,3
+  OK  lot 2 E07–E24 : ΔE grille 28.3 ≥ 5
+  OK  lot 2 E21–E23 : ΔE couleur moyenne 24.1 ≥ 2,3
+  OK  lot 2 E21–E23 : ΔE grille 31.8 ≥ 5
+  OK  lot 2 E07–E18 : ΔE couleur moyenne 25.8 ≥ 2,3
+  OK  lot 2 E07–E18 : ΔE grille 32.5 ≥ 5
+  OK  lot 2 E18–E27 : ΔE couleur moyenne 26.1 ≥ 2,3
+  OK  lot 2 E18–E27 : ΔE grille 30.9 ≥ 5
+  OK  lot 2 E07–E29 : ΔE couleur moyenne 26.9 ≥ 2,3
+  OK  lot 2 E07–E29 : ΔE grille 38.2 ≥ 5
+  OK  lot 2 E04–E21 : ΔE couleur moyenne 27.2 ≥ 2,3
+  OK  lot 2 E04–E21 : ΔE grille 28.6 ≥ 5
+  OK  lot 2 E16–E21 : ΔE couleur moyenne 28.4 ≥ 2,3
+  OK  lot 2 E16–E21 : ΔE grille 29.5 ≥ 5
+  OK  lot 2 E03–E21 : ΔE couleur moyenne 29.7 ≥ 2,3
+  OK  lot 2 E03–E21 : ΔE grille 30.9 ≥ 5
+  OK  lot 2 E07–E10 : ΔE couleur moyenne 29.9 ≥ 2,3
+  OK  lot 2 E07–E10 : ΔE grille 36.4 ≥ 5
+  OK  lot 2 E15–E21 : ΔE couleur moyenne 30.0 ≥ 2,3
+  OK  lot 2 E15–E21 : ΔE grille 34.9 ≥ 5
+  OK  lot 2 E07–E12 : ΔE couleur moyenne 31.1 ≥ 2,3
+  OK  lot 2 E07–E12 : ΔE grille 36.2 ≥ 5
+  OK  lot 2 E07–E27 : ΔE couleur moyenne 31.2 ≥ 2,3
+  OK  lot 2 E07–E27 : ΔE grille 32.4 ≥ 5
+  OK  lot 2 E20–E21 : ΔE couleur moyenne 31.7 ≥ 2,3
+  OK  lot 2 E20–E21 : ΔE grille 36.7 ≥ 5
+  OK  lot 2 E21–E25 : ΔE couleur moyenne 32.4 ≥ 2,3
+  OK  lot 2 E21–E25 : ΔE grille 36.3 ≥ 5
+  OK  lot 2 E07–E08 : ΔE couleur moyenne 33.9 ≥ 2,3
+  OK  lot 2 E07–E08 : ΔE grille 36.5 ≥ 5
+  OK  lot 2 E21–E28 : ΔE couleur moyenne 33.9 ≥ 2,3
+  OK  lot 2 E21–E28 : ΔE grille 38.7 ≥ 5
+  OK  lot 2 E17–E21 : ΔE couleur moyenne 35.2 ≥ 2,3
+  OK  lot 2 E17–E21 : ΔE grille 38.2 ≥ 5
+  OK  lot 2 E21–E26 : ΔE couleur moyenne 35.5 ≥ 2,3
+  OK  lot 2 E21–E26 : ΔE grille 38.8 ≥ 5
+  OK  lot 2 E21–E24 : ΔE couleur moyenne 38.8 ≥ 2,3
+  OK  lot 2 E21–E24 : ΔE grille 42.0 ≥ 5
+  OK  lot 2 E07–E23 : ΔE couleur moyenne 40.1 ≥ 2,3
+  OK  lot 2 E07–E23 : ΔE grille 41.1 ≥ 5
+  OK  lot 2 E18–E21 : ΔE couleur moyenne 42.7 ≥ 2,3
+  OK  lot 2 E18–E21 : ΔE grille 45.1 ≥ 5
+  OK  lot 2 E04–E08 : ΔE couleur moyenne 43.1 ≥ 2,3
+  OK  lot 2 E04–E08 : ΔE grille 43.2 ≥ 5
+  OK  lot 2 E21–E29 : ΔE couleur moyenne 43.5 ≥ 2,3
+  OK  lot 2 E21–E29 : ΔE grille 49.7 ≥ 5
+  OK  lot 2 E21–E27 : ΔE couleur moyenne 43.9 ≥ 2,3
+  OK  lot 2 E21–E27 : ΔE grille 47.2 ≥ 5
+  OK  lot 2 E10–E21 : ΔE couleur moyenne 44.3 ≥ 2,3
+  OK  lot 2 E10–E21 : ΔE grille 48.6 ≥ 5
+  OK  lot 2 E08–E15 : ΔE couleur moyenne 44.4 ≥ 2,3
+  OK  lot 2 E08–E15 : ΔE grille 49.1 ≥ 5
+  OK  lot 2 E08–E16 : ΔE couleur moyenne 44.7 ≥ 2,3
+  OK  lot 2 E08–E16 : ΔE grille 46.3 ≥ 5
+  OK  lot 2 E03–E08 : ΔE couleur moyenne 46.2 ≥ 2,3
+  OK  lot 2 E03–E08 : ΔE grille 47.0 ≥ 5
+  OK  lot 2 E12–E21 : ΔE couleur moyenne 46.4 ≥ 2,3
+  OK  lot 2 E12–E21 : ΔE grille 50.4 ≥ 5
+  OK  lot 2 E08–E20 : ΔE couleur moyenne 47.7 ≥ 2,3
+  OK  lot 2 E08–E20 : ΔE grille 49.8 ≥ 5
+  OK  lot 2 E08–E25 : ΔE couleur moyenne 48.6 ≥ 2,3
+  OK  lot 2 E08–E25 : ΔE grille 48.4 ≥ 5
+  OK  lot 2 E08–E28 : ΔE couleur moyenne 48.8 ≥ 2,3
+  OK  lot 2 E08–E28 : ΔE grille 52.8 ≥ 5
+  OK  lot 2 E04–E23 : ΔE couleur moyenne 49.0 ≥ 2,3
+  OK  lot 2 E04–E23 : ΔE grille 49.2 ≥ 5
+  OK  lot 2 E15–E23 : ΔE couleur moyenne 50.3 ≥ 2,3
+  OK  lot 2 E15–E23 : ΔE grille 53.6 ≥ 5
+  OK  lot 2 E16–E23 : ΔE couleur moyenne 50.8 ≥ 2,3
+  OK  lot 2 E16–E23 : ΔE grille 51.9 ≥ 5
+  OK  lot 2 E08–E26 : ΔE couleur moyenne 50.9 ≥ 2,3
+  OK  lot 2 E08–E26 : ΔE grille 52.7 ≥ 5
+  OK  lot 2 E08–E17 : ΔE couleur moyenne 51.3 ≥ 2,3
+  OK  lot 2 E08–E17 : ΔE grille 54.5 ≥ 5
+  OK  lot 2 E03–E23 : ΔE couleur moyenne 52.2 ≥ 2,3
+  OK  lot 2 E03–E23 : ΔE grille 52.8 ≥ 5
+  OK  lot 2 E08–E24 : ΔE couleur moyenne 53.6 ≥ 2,3
+  OK  lot 2 E08–E24 : ΔE grille 54.5 ≥ 5
+  OK  lot 2 E20–E23 : ΔE couleur moyenne 54.2 ≥ 2,3
+  OK  lot 2 E20–E23 : ΔE grille 55.8 ≥ 5
+  OK  lot 2 E23–E25 : ΔE couleur moyenne 54.3 ≥ 2,3
+  OK  lot 2 E23–E25 : ΔE grille 54.0 ≥ 5
+  OK  lot 2 E23–E28 : ΔE couleur moyenne 54.9 ≥ 2,3
+  OK  lot 2 E23–E28 : ΔE grille 58.1 ≥ 5
+  OK  lot 2 E23–E26 : ΔE couleur moyenne 56.6 ≥ 2,3
+  OK  lot 2 E23–E26 : ΔE grille 58.1 ≥ 5
+  OK  lot 2 E08–E27 : ΔE couleur moyenne 56.6 ≥ 2,3
+  OK  lot 2 E08–E27 : ΔE grille 59.1 ≥ 5
+  OK  lot 2 E17–E23 : ΔE couleur moyenne 57.6 ≥ 2,3
+  OK  lot 2 E17–E23 : ΔE grille 60.0 ≥ 5
+  OK  lot 2 E08–E10 : ΔE couleur moyenne 58.4 ≥ 2,3
+  OK  lot 2 E08–E10 : ΔE grille 61.3 ≥ 5
+  OK  lot 2 E23–E24 : ΔE couleur moyenne 58.6 ≥ 2,3
+  OK  lot 2 E23–E24 : ΔE grille 59.3 ≥ 5
+  OK  lot 2 E08–E29 : ΔE couleur moyenne 59.2 ≥ 2,3
+  OK  lot 2 E08–E29 : ΔE grille 60.7 ≥ 5
+  OK  lot 2 E08–E18 : ΔE couleur moyenne 59.5 ≥ 2,3
+  OK  lot 2 E08–E18 : ΔE grille 61.6 ≥ 5
+  OK  lot 2 E08–E12 : ΔE couleur moyenne 61.0 ≥ 2,3
+  OK  lot 2 E08–E12 : ΔE grille 63.3 ≥ 5
+  OK  lot 2 E23–E27 : ΔE couleur moyenne 61.2 ≥ 2,3
+  OK  lot 2 E23–E27 : ΔE grille 63.1 ≥ 5
+  OK  lot 2 E10–E23 : ΔE couleur moyenne 63.4 ≥ 2,3
+  OK  lot 2 E10–E23 : ΔE grille 66.0 ≥ 5
+  OK  lot 2 E23–E29 : ΔE couleur moyenne 64.6 ≥ 2,3
+  OK  lot 2 E23–E29 : ΔE grille 66.1 ≥ 5
+  OK  lot 2 E18–E23 : ΔE couleur moyenne 65.7 ≥ 2,3
+  OK  lot 2 E18–E23 : ΔE grille 67.3 ≥ 5
+  OK  lot 2 E12–E23 : ΔE couleur moyenne 66.0 ≥ 2,3
+  OK  lot 2 E12–E23 : ΔE grille 68.1 ≥ 5
+smoke:r1b : tous les contrôles passent.
+exit 0

@@ -1,11 +1,11 @@
-# maria-district-3 — lore
+# District est du mur Maria (`maria-district-3`) — lore
 
-Libellé affiché : « District du mur Maria (nom non établi) ».
+Nom affiché : « District est du mur Maria » (fichier 24 §3, réponse de l'utilisateur ; statut `[?]`, jamais affiché en jeu).
 
 | Élément | Statut | Source / note |
 |---|---|---|
 | Existence de trois autres districts sur le mur Maria | [?] | affirmation de l'utilisateur (consigne R1e) ; aucune source officielle retrouvée (Q1) |
-| Nom, rang, orientation (est) | [?] | Q1 — à renseigner dans `data/places/maria-district-3.json` |
+| Nom « District est du mur Maria », orientation est | [?] | fichier 24 §3 (utilisateur, source non précisée) ; non retrouvé dans une source officielle (Q1) |
 | Forme en saillie à deux portes | [A] | forme établie pour Shiganshina et Trost, reprise ici |
 | Identité : district de garnison et d'artillerie | [A] | consigne R1e (« par exemple ») |
 | Population : 36 000 (+ 4 000 au faubourg) habitants | [?] | aucune province dans les données de simulation (Q8) |

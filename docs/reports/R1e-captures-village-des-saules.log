@@ -1,0 +1,7 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts village-des-saules
+
+  docs/places/village-des-saules/vue-ensemble.png : 84 appels, 24 k triangles, tronçons 142/142
+places:captures : village-des-saules capturés.
+exit 0

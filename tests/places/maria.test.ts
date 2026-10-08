@@ -37,18 +37,23 @@ describe("Mur Maria : quatre districts (CR1e-08)", () => {
     expect(maria.map((p) => p.id).sort()).toEqual(["maria-district-2", "maria-district-3", "maria-district-4", "shiganshina"]);
     expect(maria.find((p) => p.id === "shiganshina")?.canon).toBe("C");
   });
-  it("noms non établis : canon ?, libellé « nom non établi », orientation et population ?, listés dans questions-ouvertes.md", () => {
+  // Fichier 24 §3 : Quinta au nord (nom donné par l'utilisateur, [?]), districts est et ouest sans nom connu.
+  const NAMES: Record<string, [string, string]> = { "maria-district-2": ["District ouest du mur Maria", "ouest"], "maria-district-3": ["District est du mur Maria", "est"], "maria-district-4": ["Quinta", "nord"] };
+  it("noms non confirmés : canon ?, Quinta / est / ouest (fichier 24 §3), orientation et population ?, listés dans questions-ouvertes.md", () => {
     const q = readFileSync("docs/lore/questions-ouvertes.md", "utf8");
     for (const id of DISTRICTS) {
-      const p = maria.find((x) => x.id === id);
+      const p = maria.find((x) => x.id === id) as (typeof maria)[number] & { orientation: { valeur: string } };
       expect(p, id).toBeDefined();
       if (!p) continue;
+      const [nom, ori] = NAMES[id] as [string, string];
       expect(p.canon).toBe("?");
-      expect(p.nom).toBe(id);
-      expect(p.libelle).toBe("District du mur Maria (nom non établi)");
+      expect(p.nom).toBe(nom);
+      expect(p.libelle).toBe(nom);
+      expect(p.orientation.valeur).toBe(ori);
       expect(p.orientation.canon).toBe("?");
       expect(p.population.canon).toBe("?");
-      expect(q).toContain(id.replace(/-\d$/, "-*"));
+      expect(q).toContain(id);
+      expect(q).toContain(nom);
     }
   });
   it("portes de rivière seulement à Shiganshina", () => {

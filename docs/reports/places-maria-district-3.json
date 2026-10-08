@@ -1,0 +1,446 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/maria-district-3/vue-ensemble.png",
+   "stats": {
+    "calls": 219,
+    "triangles": 749468,
+    "instances": 31159,
+    "chunks": {
+     "total": 757,
+     "visible": 757,
+     "near": 0
+    }
+   },
+   "rgb": [
+    145.1054470486111,
+    147.70505208333333,
+    116.46964409722223
+   ]
+  },
+  "axe-principal": {
+   "file": "docs/places/maria-district-3/vue-axe-principal.png",
+   "stats": {
+    "calls": 240,
+    "triangles": 1051069,
+    "instances": 20673,
+    "chunks": {
+     "total": 757,
+     "visible": 384,
+     "near": 10
+    }
+   },
+   "rgb": [
+    103.31786892361112,
+    101.49654513888889,
+    89.95902777777778
+   ]
+  },
+  "place-d-armes": {
+   "file": "docs/places/maria-district-3/vue-place-d-armes.png",
+   "stats": {
+    "calls": 239,
+    "triangles": 774613,
+    "instances": 21510,
+    "chunks": {
+     "total": 757,
+     "visible": 429,
+     "near": 4
+    }
+   },
+   "rgb": [
+    152.68161024305556,
+    150.25558159722223,
+    132.58355902777777
+   ]
+  },
+  "arsenal": {
+   "file": "docs/places/maria-district-3/vue-arsenal.png",
+   "stats": {
+    "calls": 218,
+    "triangles": 646796,
+    "instances": 14189,
+    "chunks": {
+     "total": 757,
+     "visible": 249,
+     "near": 9
+    }
+   },
+   "rgb": [
+    123.37669270833334,
+    108.5631857638889,
+    97.04787326388889
+   ]
+  },
+  "rempart-canons": {
+   "file": "docs/places/maria-district-3/vue-rempart-canons.png",
+   "stats": {
+    "calls": 213,
+    "triangles": 469923,
+    "instances": 6225,
+    "chunks": {
+     "total": 757,
+     "visible": 205,
+     "near": 6
+    }
+   },
+   "rgb": [
+    190.0656857638889,
+    193.5974652777778,
+    190.02682291666667
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/maria-district-3/vue-rempart.png",
+   "stats": {
+    "calls": 206,
+    "triangles": 517169,
+    "instances": 7652,
+    "chunks": {
+     "total": 757,
+     "visible": 221,
+     "near": 7
+    }
+   },
+   "rgb": [
+    164.63069444444446,
+    172.83358072916667,
+    174.35683159722223
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/maria-district-3/vue-faubourg.png",
+   "stats": {
+    "calls": 234,
+    "triangles": 745767,
+    "instances": 26562,
+    "chunks": {
+     "total": 757,
+     "visible": 585,
+     "near": 0
+    }
+   },
+   "rgb": [
+    157.28542534722223,
+    164.1597092013889,
+    145.9326171875
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/maria-district-3/vue-porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 111,
+    "triangles": 511816,
+    "instances": 761,
+    "chunks": {
+     "total": 757,
+     "visible": 26,
+     "near": 12
+    }
+   },
+   "rgb": [
+    104.27204427083333,
+    103.49823350694444,
+    92.50500434027778
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/maria-district-3/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 250,
+    "triangles": 874134,
+    "instances": 29054,
+    "chunks": {
+     "total": 757,
+     "visible": 576,
+     "near": 8
+    }
+   },
+   "rgb": [
+    163.54149305555555,
+    158.3430815972222,
+    137.0419140625
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/maria-district-3/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 253,
+    "triangles": 917933,
+    "instances": 25938,
+    "chunks": {
+     "total": 757,
+     "visible": 527,
+     "near": 10
+    }
+   },
+   "rgb": [
+    102.08688368055556,
+    89.8395529513889,
+    75.13625434027777
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/maria-district-3/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 73,
+    "triangles": 317832,
+    "instances": 352,
+    "chunks": {
+     "total": 757,
+     "visible": 16,
+     "near": 6
+    }
+   },
+   "rgb": [
+    107.48760850694444,
+    107.77357204861111,
+    99.35210503472223
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/maria-district-3/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 88,
+    "triangles": 314198,
+    "instances": 325,
+    "chunks": {
+     "total": 757,
+     "visible": 11,
+     "near": 7
+    }
+   },
+   "rgb": [
+    64.20060763888888,
+    71.03491753472223,
+    73.4772829861111
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/maria-district-3/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 281814,
+    "instances": 296,
+    "chunks": {
+     "total": 757,
+     "visible": 14,
+     "near": 6
+    }
+   },
+   "rgb": [
+    48.21355902777778,
+    42.222378472222225,
+    34.85797743055556
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/maria-district-3/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 204,
+    "triangles": 465717,
+    "instances": 5106,
+    "chunks": {
+     "total": 757,
+     "visible": 144,
+     "near": 8
+    }
+   },
+   "rgb": [
+    164.79095052083332,
+    172.54875,
+    169.05975694444444
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/maria-district-3/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 456,
+    "triangles": 743489,
+    "instances": 20699,
+    "chunks": {
+     "total": 757,
+     "visible": 475,
+     "near": 5
+    }
+   },
+   "rgb": [
+    159.0398480902778,
+    160.83252170138888,
+    138.3011935763889
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/maria-district-3/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 247,
+    "triangles": 873025,
+    "instances": 16413,
+    "chunks": {
+     "total": 757,
+     "visible": 330,
+     "near": 12
+    }
+   },
+   "rgb": [
+    118.4243359375,
+    116.07514756944444,
+    103.26033854166667
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/maria-district-3/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 243,
+    "triangles": 818124,
+    "instances": 15475,
+    "chunks": {
+     "total": 757,
+     "visible": 310,
+     "near": 10
+    }
+   },
+   "rgb": [
+    54.98555121527778,
+    53.36364149305555,
+    45.813480902777776
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/maria-district-3/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 174,
+    "triangles": 710022,
+    "instances": 5001,
+    "chunks": {
+     "total": 757,
+     "visible": 123,
+     "near": 12
+    }
+   },
+   "rgb": [
+    160.04444878472222,
+    154.6222612847222,
+    139.46950520833335
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/maria-district-3/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 160,
+    "triangles": 559881,
+    "instances": 1590,
+    "chunks": {
+     "total": 757,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    125.04503038194444,
+    119.35516059027778,
+    107.95096788194445
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/maria-district-3/porte-interieure-passage.png",
+   "stats": {
+    "calls": 169,
+    "triangles": 868338,
+    "instances": 5106,
+    "chunks": {
+     "total": 757,
+     "visible": 120,
+     "near": 13
+    }
+   },
+   "rgb": [
+    78.41857204861111,
+    78.03921875,
+    71.91249131944444
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/maria-district-3/porte-interieure-haut.png",
+   "stats": {
+    "calls": 216,
+    "triangles": 782700,
+    "instances": 13244,
+    "chunks": {
+     "total": 757,
+     "visible": 252,
+     "near": 10
+    }
+   },
+   "rgb": [
+    184.62553385416666,
+    190.52658854166665,
+    188.14576822916666
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/maria-district-3/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 459,
+    "triangles": 893986,
+    "instances": 16753,
+    "chunks": {
+     "total": 757,
+     "visible": 321,
+     "near": 10
+    }
+   },
+   "rgb": [
+    134.1083637152778,
+    130.81670572916667,
+    114.57533420138888
+   ]
+  }
+ },
+ "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 35.79164853666272,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 36.77494481217143,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.701616777244205,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 51.3138040065843,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 27.907006394868134,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.250122463651767,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 31.58872146189113,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 32.101254174335935,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.682334513225555,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 42.73988669700523,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.39610851674318,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 29.380915889537505,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 35.12924645936191,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 35.28114807722474,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 38.959730419381515,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.573851825439412,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 44.731910570929884,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 43.44129955353234,
+  "porte-exterieure-passage | porte-exterieure-haut": 56.07060674747907,
+  "porte-exterieure-passage | porte-exterieure-echelle": 52.791696162479326,
+  "porte-exterieure-haut | porte-exterieure-echelle": 26.035845585308603,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 28.99338298809863,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 24.84660489923106,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 32.643535369563594,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 32.73086494162979,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 37.83245333200976,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 18.712979656734067,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 44.41305638424441,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 37.73270743909947,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 26.976030415736787,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 58.08269714635963,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 37.51400879124996,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 27.65440414380718,
+  "porte-interieure-interieure-face | porte-interieure-passage": 42.66883783528407,
+  "porte-interieure-interieure-face | porte-interieure-haut": 27.755770679724883,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 30.094900419161043,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.92767566628622,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 33.75641916845865,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 29.573406529913466,
+  "porte-interieure-passage | porte-interieure-haut": 52.04154795442375,
+  "porte-interieure-passage | porte-interieure-echelle": 41.22283739324368,
+  "porte-interieure-haut | porte-interieure-echelle": 34.455794540520905,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.32872109495323,
+  "etat-845-avant | etat-846-abandon": 3.3658258218846457
+ }
+}

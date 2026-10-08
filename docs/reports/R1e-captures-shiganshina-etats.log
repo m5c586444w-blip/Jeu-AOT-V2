@@ -1,0 +1,12 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts shiganshina --vues aucune
+
+  docs/places/shiganshina/etat-845-avant.png
+  docs/places/shiganshina/etat-845-breche.png
+  docs/places/shiganshina/etat-850-reprise.png
+  ΔE 20.1 ≥ 6 : etat-845-avant | etat-845-breche
+  ΔE 3.4 < 6 : etat-845-avant | etat-850-reprise
+  ΔE 18.4 ≥ 6 : etat-845-breche | etat-850-reprise
+places:captures : shiganshina capturés.
+exit 0

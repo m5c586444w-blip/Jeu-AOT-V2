@@ -294,9 +294,25 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
     const a = (b.angle_deg * Math.PI) / 180;
     return rectPoly(b.position, [Math.cos(a), Math.sin(a)], b.emprise_m[0] / 2 + 2, b.emprise_m[1] / 2 + 2);
   });
+  // Abords des portes (R1e.7, vues de §3.2) : une place sans maison ni arbre devant chaque face. Côté extérieur, 135 m de
+  // profondeur, de 60 m à gauche à 32 m à droite de l'axe (ligne de vue de la vue « échelle », repères d'échelle) ; côté
+  // intérieur, 80 m sur la largeur du passage plus 16 m de chaque côté (vue de face intérieure, passage des convois).
+  const aprons = place.enceinte
+    ? place.portes.flatMap((g) => {
+        const tr = place.enceinte?.traces.find((x) => x.id === g.trace);
+        return tr ? [{ f: wallFrameAt(tr, g.s_m), half: g.passage.largeur_m / 2 + 16 }] : [];
+      })
+    : [];
+  const inApron = (q: P2): boolean =>
+    aprons.some(({ f, half }) => {
+      const r = sub(q, f.p);
+      const u = dot(r, f.d);
+      const z = dot(r, f.out);
+      return z >= 0 ? z < 135 && u > -60 && u < 32 : z > -80 && Math.abs(u) < half;
+    });
   const free = (hh: HouseInst): boolean => {
     const poly = rectPoly([hh.x, hh.y], [Math.cos(hh.a), Math.sin(hh.a)], hh.w / 2, hh.d / 2);
-    return !marks.some((m) => convexOverlap(m, poly, 0.05));
+    return !marks.some((m) => convexOverlap(m, poly, 0.05)) && !poly.some(inApron);
   };
   for (const bl of blocks) bl.houses = bl.houses.filter(free);
   const houses = blocks.flatMap((b) => b.houses);
@@ -408,7 +424,7 @@ export function layoutPlace(place: Place, stateId?: string | null): PlaceLayout 
     const a = (b.angle_deg * Math.PI) / 180;
     return rectPoly(b.position, [Math.cos(a), Math.sin(a)], b.emprise_m[0] / 2 + 1, b.emprise_m[1] / 2 + 1);
   });
-  const keptTrees = trees.filter((t) => !lmPolys.some((p) => inside(p, [t.x, t.y])));
+  const keptTrees = trees.filter((t) => !lmPolys.some((p) => inside(p, [t.x, t.y])) && !inApron([t.x, t.y]));
   const chunks = [...new Set([...houses.map((x) => x.chunk), ...keptTrees.map((x) => x.chunk), ...landmarks.map((x) => x.chunk)])].sort((a, b) => a - b);
   return { place, state, blocks, houses, trees: keptTrees, landmarks, chunks };
 }

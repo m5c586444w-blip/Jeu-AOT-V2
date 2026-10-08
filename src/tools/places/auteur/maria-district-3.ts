@@ -1,11 +1,11 @@
 import type { Gabarit, Place } from "../../../data/placeSchema";
 import { pt } from "./kit";
-import { BASE_GABARITS, LIBELLE, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
+import { BASE_GABARITS, NOMS, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
 import { buildSaillie, building, cellKey, claimRect, lines, quarter } from "./saillie";
 import type { Claim } from "./saillie";
 
 /**
- * District 3 du mur Maria (nom non établi, Q1) — identité d'auteur [A] : district de garnison et d'artillerie. Damier serré et
+ * District est du mur Maria (nom et position [?], Q1) — identité d'auteur [A] : district de garnison et d'artillerie. Damier serré et
  * régulier de 80 m (plan de ville militaire), place d'Armes à l'ouest de l'axe, arsenal, fonderie de canons et école
  * d'artillerie à l'est, trois casernes à cour, champ de la poudrière isolé contre le rempart, canons de rempart tous les
  * 20 m (au lieu de 32). Faubourg des charrons et des selliers derrière la porte intérieure.
@@ -42,8 +42,8 @@ claims[cellKey(S, T, 80, 185)] = { kind: "ilot", fonction: "culte", densite: 0.5
 export function mariaDistrict3(): Place {
   return buildSaillie({
     id: "maria-district-3",
-    nom: "maria-district-3",
-    libelle: LIBELLE,
+    nom: NOMS.est,
+    libelle: NOMS.est,
     canon: "?",
     sources: SOURCES_MARIA,
     province: null,
@@ -132,7 +132,7 @@ export function mariaDistrict3(): Place {
     eau: () => ({ voies: [], ponts: [], puits: pts([[-560, 300], [520, 280], [-200, 900], [700, 760]]), fontaines: pts([[-40, 625], [-80, 225]]) }),
     points_de_vue(ctx) {
       return baseViews(ctx, [
-        { id: "place-d-armes", nom: "Place d'Armes et État-major", oeil: [-380, 760, 10], cible: [-120, 560, 8], fov: 62 },
+        { id: "place-d-armes", nom: "Place d'Armes et État-major", oeil: [-385, 735, 7], cible: [-120, 560, 8], fov: 62 },
         { id: "arsenal", nom: "Arsenal et fonderie", oeil: [80, 700, 7], cible: [300, 540, 8], fov: 60 },
         { id: "rempart-canons", nom: "Batterie du rempart", oeil: [...[Math.cos((60 * Math.PI) / 180) * (ctx.R - 1), Math.sin((60 * Math.PI) / 180) * (ctx.R - 1)].map((v) => Math.round(v * 10) / 10), 52.5] as [number, number, number], cible: [...[Math.cos((80 * Math.PI) / 180) * (ctx.R - 1), Math.sin((80 * Math.PI) / 180) * (ctx.R - 1)].map((v) => Math.round(v * 10) / 10), 50] as [number, number, number], fov: 60 },
       ]);

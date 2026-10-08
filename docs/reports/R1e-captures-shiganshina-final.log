@@ -1,0 +1,135 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts shiganshina
+
+  docs/places/shiganshina/vue-ensemble.png : 217 appels, 1054 k triangles, tronçons 986/986
+  docs/places/shiganshina/vue-grand-rue.png : 259 appels, 1062 k triangles, tronçons 492/986
+  docs/places/shiganshina/vue-place-centrale.png : 235 appels, 1095 k triangles, tronçons 308/986
+  docs/places/shiganshina/vue-canal.png : 226 appels, 582 k triangles, tronçons 132/986
+  docs/places/shiganshina/vue-marche.png : 219 appels, 739 k triangles, tronçons 119/986
+  docs/places/shiganshina/vue-quartier-ouvrier.png : 241 appels, 1295 k triangles, tronçons 532/986
+  docs/places/shiganshina/vue-maison-jaeger.png : 218 appels, 782 k triangles, tronçons 176/986
+  docs/places/shiganshina/vue-rempart.png : 228 appels, 649 k triangles, tronçons 283/986
+  docs/places/shiganshina/vue-faubourg.png : 267 appels, 1096 k triangles, tronçons 716/986
+  docs/places/shiganshina/vue-porte-depuis-la-ville.png : 148 appels, 622 k triangles, tronçons 22/986
+  docs/places/shiganshina/porte-exterieure-exterieure-face.png : 266 appels, 1082 k triangles, tronçons 700/986
+  docs/places/shiganshina/porte-exterieure-exterieure-detail.png : 267 appels, 1160 k triangles, tronçons 675/986
+  docs/places/shiganshina/porte-exterieure-interieure-face.png : 117 appels, 479 k triangles, tronçons 16/986
+  docs/places/shiganshina/porte-exterieure-interieure-detail.png : 115 appels, 409 k triangles, tronçons 9/986
+  docs/places/shiganshina/porte-exterieure-passage.png : 104 appels, 344 k triangles, tronçons 12/986
+  docs/places/shiganshina/porte-exterieure-haut.png : 217 appels, 609 k triangles, tronçons 180/986
+  docs/places/shiganshina/porte-exterieure-echelle.png : 477 appels, 1011 k triangles, tronçons 573/986
+  docs/places/shiganshina/porte-interieure-exterieure-face.png : 260 appels, 926 k triangles, tronçons 431/986
+  docs/places/shiganshina/porte-interieure-exterieure-detail.png : 263 appels, 980 k triangles, tronçons 410/986
+  docs/places/shiganshina/porte-interieure-interieure-face.png : 190 appels, 640 k triangles, tronçons 182/986
+  docs/places/shiganshina/porte-interieure-interieure-detail.png : 184 appels, 452 k triangles, tronçons 23/986
+  docs/places/shiganshina/porte-interieure-passage.png : 183 appels, 753 k triangles, tronçons 178/986
+  docs/places/shiganshina/porte-interieure-haut.png : 226 appels, 843 k triangles, tronçons 286/986
+  docs/places/shiganshina/porte-interieure-echelle.png : 464 appels, 877 k triangles, tronçons 408/986
+  docs/places/shiganshina/porte-riviere-saillie-exterieure-face.png : 261 appels, 993 k triangles, tronçons 657/986
+  docs/places/shiganshina/porte-riviere-saillie-exterieure-detail.png : 265 appels, 929 k triangles, tronçons 567/986
+  docs/places/shiganshina/porte-riviere-saillie-interieure-face.png : 100 appels, 297 k triangles, tronçons 5/986
+  docs/places/shiganshina/porte-riviere-saillie-interieure-detail.png : 79 appels, 248 k triangles, tronçons 3/986
+  docs/places/shiganshina/porte-riviere-saillie-passage.png : 33 appels, 212 k triangles, tronçons 2/986
+  docs/places/shiganshina/porte-riviere-saillie-haut.png : 207 appels, 478 k triangles, tronçons 104/986
+  docs/places/shiganshina/porte-riviere-saillie-echelle.png : 464 appels, 950 k triangles, tronçons 606/986
+  docs/places/shiganshina/porte-riviere-maria-exterieure-face.png : 268 appels, 751 k triangles, tronçons 416/986
+  docs/places/shiganshina/porte-riviere-maria-exterieure-detail.png : 275 appels, 843 k triangles, tronçons 474/986
+  docs/places/shiganshina/porte-riviere-maria-interieure-face.png : 185 appels, 561 k triangles, tronçons 136/986
+  docs/places/shiganshina/porte-riviere-maria-interieure-detail.png : 171 appels, 528 k triangles, tronçons 20/986
+  docs/places/shiganshina/porte-riviere-maria-passage.png : 175 appels, 925 k triangles, tronçons 184/986
+  docs/places/shiganshina/porte-riviere-maria-haut.png : 235 appels, 886 k triangles, tronçons 508/986
+  docs/places/shiganshina/porte-riviere-maria-echelle.png : 453 appels, 755 k triangles, tronçons 270/986
+  docs/places/shiganshina/etat-845-avant.png
+  docs/places/shiganshina/etat-845-breche.png
+  docs/places/shiganshina/etat-850-reprise.png
+  ΔE 35.6 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail
+  ΔE 36.1 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-face
+  ΔE 45.3 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-detail
+  ΔE 51.3 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-passage
+  ΔE 28.0 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-haut
+  ΔE 14.0 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-echelle
+  ΔE 31.7 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-face
+  ΔE 31.7 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail
+  ΔE 22.8 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-passage
+  ΔE 43.0 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-haut
+  ΔE 38.1 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-echelle
+  ΔE 29.2 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-interieure-detail
+  ΔE 34.7 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-passage
+  ΔE 35.7 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-haut
+  ΔE 38.4 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-echelle
+  ΔE 25.2 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-passage
+  ΔE 45.1 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-haut
+  ΔE 43.2 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-echelle
+  ΔE 56.4 ≥ 6 : porte-exterieure-passage | porte-exterieure-haut
+  ΔE 52.7 ≥ 6 : porte-exterieure-passage | porte-exterieure-echelle
+  ΔE 25.9 ≥ 6 : porte-exterieure-haut | porte-exterieure-echelle
+  ΔE 28.4 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-exterieure-detail
+  ΔE 28.2 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-face
+  ΔE 32.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-detail
+  ΔE 32.4 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-passage
+  ΔE 35.8 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-haut
+  ΔE 18.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-echelle
+  ΔE 48.2 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-face
+  ΔE 38.0 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-detail
+  ΔE 27.2 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-passage
+  ΔE 55.2 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-haut
+  ΔE 36.8 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-echelle
+  ΔE 32.1 ≥ 6 : porte-interieure-interieure-face | porte-interieure-interieure-detail
+  ΔE 47.0 ≥ 6 : porte-interieure-interieure-face | porte-interieure-passage
+  ΔE 28.0 ≥ 6 : porte-interieure-interieure-face | porte-interieure-haut
+  ΔE 32.3 ≥ 6 : porte-interieure-interieure-face | porte-interieure-echelle
+  ΔE 36.8 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-passage
+  ΔE 34.9 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-haut
+  ΔE 29.5 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-echelle
+  ΔE 53.4 ≥ 6 : porte-interieure-passage | porte-interieure-haut
+  ΔE 41.0 ≥ 6 : porte-interieure-passage | porte-interieure-echelle
+  ΔE 32.4 ≥ 6 : porte-interieure-haut | porte-interieure-echelle
+  ΔE 29.2 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-exterieure-detail
+  ΔE 28.3 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-interieure-face
+  ΔE 27.3 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-interieure-detail
+  ΔE 39.8 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-passage
+  ΔE 34.1 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-haut
+  ΔE 20.0 ≥ 6 : porte-riviere-saillie-exterieure-face | porte-riviere-saillie-echelle
+  ΔE 26.7 ≥ 6 : porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-interieure-face
+  ΔE 30.3 ≥ 6 : porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-interieure-detail
+  ΔE 25.8 ≥ 6 : porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-passage
+  ΔE 47.1 ≥ 6 : porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-haut
+  ΔE 37.6 ≥ 6 : porte-riviere-saillie-exterieure-detail | porte-riviere-saillie-echelle
+  ΔE 25.8 ≥ 6 : porte-riviere-saillie-interieure-face | porte-riviere-saillie-interieure-detail
+  ΔE 33.0 ≥ 6 : porte-riviere-saillie-interieure-face | porte-riviere-saillie-passage
+  ΔE 39.2 ≥ 6 : porte-riviere-saillie-interieure-face | porte-riviere-saillie-haut
+  ΔE 34.9 ≥ 6 : porte-riviere-saillie-interieure-face | porte-riviere-saillie-echelle
+  ΔE 30.7 ≥ 6 : porte-riviere-saillie-interieure-detail | porte-riviere-saillie-passage
+  ΔE 40.6 ≥ 6 : porte-riviere-saillie-interieure-detail | porte-riviere-saillie-haut
+  ΔE 31.5 ≥ 6 : porte-riviere-saillie-interieure-detail | porte-riviere-saillie-echelle
+  ΔE 54.8 ≥ 6 : porte-riviere-saillie-passage | porte-riviere-saillie-haut
+  ΔE 47.6 ≥ 6 : porte-riviere-saillie-passage | porte-riviere-saillie-echelle
+  ΔE 27.3 ≥ 6 : porte-riviere-saillie-haut | porte-riviere-saillie-echelle
+  ΔE 20.4 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-exterieure-detail
+  ΔE 34.0 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-interieure-face
+  ΔE 36.6 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-interieure-detail
+  ΔE 27.6 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-passage
+  ΔE 43.3 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-haut
+  ΔE 21.3 ≥ 6 : porte-riviere-maria-exterieure-face | porte-riviere-maria-echelle
+  ΔE 44.8 ≥ 6 : porte-riviere-maria-exterieure-detail | porte-riviere-maria-interieure-face
+  ΔE 45.3 ≥ 6 : porte-riviere-maria-exterieure-detail | porte-riviere-maria-interieure-detail
+  ΔE 20.4 ≥ 6 : porte-riviere-maria-exterieure-detail | porte-riviere-maria-passage
+  ΔE 52.4 ≥ 6 : porte-riviere-maria-exterieure-detail | porte-riviere-maria-haut
+  ΔE 33.7 ≥ 6 : porte-riviere-maria-exterieure-detail | porte-riviere-maria-echelle
+  ΔE 14.4 ≥ 6 : porte-riviere-maria-interieure-face | porte-riviere-maria-interieure-detail
+  ΔE 50.0 ≥ 6 : porte-riviere-maria-interieure-face | porte-riviere-maria-passage
+  ΔE 27.1 ≥ 6 : porte-riviere-maria-interieure-face | porte-riviere-maria-haut
+  ΔE 32.3 ≥ 6 : porte-riviere-maria-interieure-face | porte-riviere-maria-echelle
+  ΔE 49.4 ≥ 6 : porte-riviere-maria-interieure-detail | porte-riviere-maria-passage
+  ΔE 26.8 ≥ 6 : porte-riviere-maria-interieure-detail | porte-riviere-maria-haut
+  ΔE 29.6 ≥ 6 : porte-riviere-maria-interieure-detail | porte-riviere-maria-echelle
+  ΔE 56.6 ≥ 6 : porte-riviere-maria-passage | porte-riviere-maria-haut
+  ΔE 39.5 ≥ 6 : porte-riviere-maria-passage | porte-riviere-maria-echelle
+  ΔE 32.0 ≥ 6 : porte-riviere-maria-haut | porte-riviere-maria-echelle
+  ΔE 33.6 ≥ 6 : porte-exterieure-exterieure-face | porte-interieure-exterieure-face
+  ΔE 20.1 ≥ 6 : etat-845-avant | etat-845-breche
+  ΔE 3.4 < 6 : etat-845-avant | etat-850-reprise
+  ΔE 18.4 ≥ 6 : etat-845-breche | etat-850-reprise
+places:captures : shiganshina capturés.
+exit 0

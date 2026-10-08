@@ -1,0 +1,30 @@
+
+> murs-et-sang@0.0.1 places:valider
+> tsx src/tools/places-valider.ts
+
+_murs.json : valide (Maria, Rose, Sina ; hauteur 50 m [C], base 15 m [?])
+OK maria-district-2 : 7 262 maisons, 9 repères, 23 413 arbres
+   zone principal (coeur) : 42 000 hab. ÷ 165 = 254,5 ha ; bâti 249,8 ha (îlots 199,0, rues 50,8) ; écart -1,9 % ; 46,7 arbres/ha bâti ; 51,7 arbres/ha d'îlot
+   zone faubourg (faubourg) : 6 000 hab. ÷ 70 = 85,7 ha ; bâti 92,5 ha (îlots 84,0, rues 8,6) ; écart +7,9 % ; 55,6 arbres/ha bâti ; 60,4 arbres/ha d'îlot
+   parc jardin-des-semences : 1,00 ha, 80 arbres (79,8/ha)
+   parc promenade-des-tilleuls : 0,98 ha, 64 arbres (65,3/ha)
+OK maria-district-3 : 5 751 maisons, 11 repères, 9 608 arbres
+   zone principal (coeur) : 36 000 hab. ÷ 190 = 189,5 ha ; bâti 186,1 ha (îlots 133,0, rues 53,1) ; écart -1,8 % ; 27,7 arbres/ha bâti ; 29,8 arbres/ha d'îlot
+   zone faubourg (faubourg) : 4 000 hab. ÷ 80 = 50,0 ha ; bâti 52,2 ha (îlots 47,2, rues 5,0) ; écart +4,4 % ; 47,5 arbres/ha bâti ; 51,5 arbres/ha d'îlot
+   parc jardin-des-officiers : 2,21 ha, 166 arbres (75,2/ha)
+   parc cimetiere-militaire : 1,03 ha, 62 arbres (60,4/ha)
+OK maria-district-4 : 7 629 maisons, 10 repères, 9 593 arbres
+   zone principal (coeur) : 50 000 hab. ÷ 240 = 208,3 ha ; bâti 210,4 ha (îlots 158,5, rues 51,9) ; écart +1,0 % ; 29,4 arbres/ha bâti ; 33,9 arbres/ha d'îlot
+   zone faubourg (faubourg) : 5 000 hab. ÷ 90 = 55,6 ha ; bâti 50,8 ha (îlots 45,2, rues 5,6) ; écart -8,5 % ; 22,8 arbres/ha bâti ; 25,0 arbres/ha d'îlot
+   parc verger-du-rempart : 1,92 ha, 163 arbres (85,0/ha)
+   parc jardin-des-marchands : 2,55 ha, 179 arbres (70,2/ha)
+OK shiganshina : 10 111 maisons, 9 repères, 14 493 arbres
+   zone principal (coeur) : 60 870 hab. ÷ 230 = 264,7 ha ; bâti 254,4 ha (îlots 191,1, rues 63,4) ; écart -3,9 % ; 30,2 arbres/ha bâti ; 34,3 arbres/ha d'îlot
+   zone faubourg (faubourg) : 4 174 hab. ÷ 100 = 41,7 ha ; bâti 40,0 ha (îlots 37,0, rues 3,0) ; écart -4,2 % ; 38,5 arbres/ha bâti ; 39,8 arbres/ha d'îlot
+   parc jardin-des-tilleuls : 0,40 ha, 28 arbres (69,6/ha)
+   parc enclos-de-l-eglise : 0,47 ha, 26 arbres (55,5/ha)
+   parc verger-du-rempart-est : 0,42 ha, 38 arbres (89,8/ha)
+   parc verger-du-rempart-ouest : 0,49 ha, 44 arbres (89,2/ha)
+OK village-des-saules (N2, figé) : 114 bâtiments, 392 arbres, population 522, capacité 678, générateur village v1, graine 4101
+places:valider : 4 lieu(x) N1 et 1 plan(s) figé(s) valides.
+exit 0

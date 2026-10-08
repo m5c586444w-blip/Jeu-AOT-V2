@@ -2,10 +2,31 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1e — ARRÊT OBLIGATOIRE n° 1** (CR1e-05 en échec deux fois) — commit de départ `497be52` |
-| Tâche | R1e.3 : parement des murailles (CR1e-05) ; R1e.2 à R1e.6 faits dans le code, captures des lieux à reprendre |
-| Dernier `npm run verify` | voir `docs/reports/R1e-verify-arret.log` (sortie collée ci-dessous) |
-| Prochaine étape | décision de l'utilisateur sur CR1e-05 (voir « Arrêt » ci-dessous), puis captures des lieux, rapport R1e |
+| Phase | **R1e terminée et acceptée.** Prochaine phase : MAP (PR n° 2). LC-B en attente. |
+| Tâche | R1e.7 faite : captures des lieux, revue, rapport `docs/reports/R1e.md` |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 493/493 (78 fichiers, `docs/reports/R1e-verify.log`) ; après rebase sur la fusion UX0 : code 0, 499/499 (79 fichiers) |
+| Prochaine étape | MAP (PR n° 2) ; LC-B, LC-C, LC-D en attente (semaine 4, fichier 24, N3) ; CR1e-07 en dette (n° 9), à reprendre en R2 |
+
+## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
+- R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
+- CR1e-07 laissé en dette (n° 9), à reprendre en R2.
+- Pas de feu vert pour LC-B, LC-C ni LC-D pour l'instant : placées en semaine 4 (fichier 24, N3).
+
+## R1e terminée — arrêt de revue (2026-10-08)
+- **Raison de l'arrêt** : fin de R1e (pilote Shiganshina) : revue de l'utilisateur (objectif et CLAUDE.md, arrêt 5).
+- **Critères** (`docs/reports/R1e.md` § a) : 9 OK, 2 acceptés par l'utilisateur (CR1e-05 à 0,50, CR1e-10 : D-103),
+  CR1e-07 en dette (deux échecs, 845-avant / 850-reprise ΔE 3,4 ; fichier 24 §4).
+- **Sorties** : `verify` code 0 (493/493) ; `places:valider` code 0 (4 lieux N1, 1 N2) ; `smoke:r1b -- tout` 513 OK, code 0 ;
+  portes : toutes les paires ≥ 6 (Shiganshina 85, min. 14,0) ; deltas de 100 lieux 104,6 Kio ; `src/sim` : 0 ligne de diff.
+- **Revue des captures** (`docs/reports/R1e-revue-captures.md`, 154 captures) : correctifs faits pendant la revue (D-105) :
+  sol recoupé en grille (axes des districts en herbe), places dégagées devant les portes et pont retiré du mur (cinq vues
+  de porte sans porte), `fetchPlace` (village jamais affiché). Nouvelles dettes n° 11 (rayures des champs) et 12.
+- **À trancher par l'utilisateur** : suite LC-B → LC-D comme prévu, ou installation du plan V2 (fichier 24 : lieux en
+  semaine 4, niveau N3) ; pistes de CR1e-07 (dette n° 9).
+
+## Reprise (2026-10-07) — décisions de l'utilisateur
+- « Accepter 0,5 pour le moment » (CR1e-05) ; « garder tout, c'est du bon boulot » (CR1e-10 : correctif 8 gardé). D-103.
+- Noms des districts de Maria repris du fichier 24 §3 (Quinta au nord, districts est et ouest, tous `?`). D-104.
 
 ## Feuille de route (consigne de l'utilisateur, 2026-10-07 ; `docs/phases/R1e-consigne.md`)
 | Ordre | Phase | Contenu | Arrêt |
@@ -20,7 +41,7 @@
 
 Règles : plus de sous-phase inventée (hors-périmètre → `docs/reports/dette.md`) ; plus de nouvel outil de mesure ; rapports ≤ 150 lignes ; arrêts : fin de R1e, de LC-D, de R4, de P9 (et arrêts 1 à 4).
 
-## Arrêt obligatoire n° 1 — CR1e-05 en échec deux fois (2026-10-07)
+## Arrêt obligatoire n° 1 — CR1e-05 en échec deux fois (2026-10-07) — levé par l'utilisateur (D-103)
 - **Critère** (plan R1e §2) : parement vu de face sur le banc (120 m × 50 m) ; autocorrélation normalisée de la luminance des
   colonnes (6 à 46 m de haut), décalages de 2 à 30 m : maximum < 0,35 ; le témoin de R1d doit dépasser 0,35.
 - **Premier essai** (captures complètes du banc, `npx vitest run tests/places/murs.test.ts`) :

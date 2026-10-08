@@ -16781,17 +16781,6 @@
   ],
   "ponts": [
    {
-    "id": "pont-0",
-    "position": [
-     470,
-     0
-    ],
-    "angle_deg": 161.3,
-    "longueur_m": 26,
-    "largeur_m": 9,
-    "type": "pierre"
-   },
-   {
     "id": "pont-1",
     "position": [
      488.1,
@@ -16896,14 +16885,14 @@
    "id": "place-centrale",
    "nom": "Place Centrale et église",
    "oeil": [
-    -62,
-    650,
-    9
+    -50,
+    612,
+    4
    ],
    "cible": [
-    48,
-    590,
-    12
+    112,
+    592,
+    17
    ],
    "fov": 60
   },
@@ -17001,9 +16990,9 @@
    "id": "porte-depuis-la-ville",
    "nom": "Porte extérieure depuis la ville",
    "oeil": [
-    14,
-    1190,
-    2
+    3,
+    1180,
+    1.8
    ],
    "cible": [
     0,
