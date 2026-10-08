@@ -26,7 +26,14 @@ export class IntelPanel implements Panel {
       return;
     }
     const today = toAbsoluteDay(s.date);
-    root.append(el("h3", "registre-intertitre", t("intel.agents", { n: intel.agents.filter((a) => a.status !== "grille").length, max: agentSlots(this.ctx.world, s.research) })));
+    // Deux colonnes (U5) : agents et leurs ordres à gauche ; rapports datés et mur des secrets à droite.
+    const cols = el("div", "rens-colonnes");
+    const left = el("section", "rens-agents");
+    const right = el("section", "rens-rapports");
+    cols.append(left, right);
+    root.append(cols);
+    root = left;
+    left.append(el("h3", "registre-intertitre", t("intel.agents", { n: intel.agents.filter((a) => a.status !== "grille").length, max: agentSlots(this.ctx.world, s.research) })));
     const wall = el("div", "fiches-agents");
     for (const a of intel.agents) wall.append(this.agentCard(a, today));
     root.append(wall);
@@ -37,6 +44,7 @@ export class IntelPanel implements Panel {
     root.append(recruit);
     if (problem) root.append(el("p", "plan-probleme", t(problem)));
 
+    root = right;
     root.append(el("h3", "registre-intertitre", t("intel.reports")));
     const visible = intel.reports.filter((r) => r.day <= today);
     if (visible.length === 0) root.append(el("p", "registre-note", t("intel.no_report")));

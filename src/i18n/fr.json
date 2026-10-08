@@ -2612,5 +2612,19 @@
   "notif.yesterday": "Hier",
   "notif.go": "Aller sur le lieu",
   "notif.place": "Lieu",
-  "register.key": "Touche {key} : ouvrir ou fermer ce registre"
+  "register.key": "Touche {key} : ouvrir ou fermer ce registre",
+  "characters.none": "Aucun personnage dans cette liste.",
+  "cabinet.pick_motion": "Choisissez une motion : le vote prévu de chaque membre et ses raisons s'affichent ici.",
+  "laws.in_force_short": "En vigueur",
+  "laws.cost_short": "Coût : {capital} cap.",
+  "research.locked": "verrouillée",
+  "research.available": "disponible",
+  "research.prereqs": "Prérequis",
+  "dip.at_war_short": "En guerre",
+  "dip.no_treaty_short": "Sans traité",
+  "dip.actions": "Propositions et actes",
+  "journal.filter.tout": "Toutes les alertes",
+  "journal.filter.graves": "Graves seulement",
+  "journal.none_grave": "Aucune alerte grave.",
+  "laws.vote_short": "Vote requis"
 }

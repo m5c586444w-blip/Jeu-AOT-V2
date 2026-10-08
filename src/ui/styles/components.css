@@ -249,3 +249,6 @@ input[type="range"], input[type="checkbox"], input[type="radio"] { accent-color:
 .liste__tete .portrait { width: 2.2rem; height: 2.64rem; border: var(--filet-l) solid var(--filet-doux); }
 .liste__milieu { display: flex; flex-direction: column; min-width: 0; }
 .liste__queue { text-align: right; }
+
+/* Cases à cocher et boutons radio à l'échelle du texte (lisibles en 4K, CUI-07). */
+input[type="checkbox"], input[type="radio"] { width: 1em; height: 1em; margin: 0; accent-color: var(--accent); flex: none; }

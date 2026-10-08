@@ -118,7 +118,9 @@ try {
   await page.waitForTimeout(300);
   const lean1 = await page.locator(".chancellerie__hizuru .valeur").innerText();
   expect(nations === 3 && lean1 !== lean0, `chancellerie : 3 nations ; garantie à Hizuru (penchant ${lean0} → ${lean1})`);
-  await page.locator('.fiche-nation[data-nation="fac_hizuru"] .plan-ligne .valeur').focus();
+  // Phase UI : liste des nations et fiche de la nation choisie (maître-détail) ; on choisit Hizuru, puis sa réponse prévue.
+  await page.locator('.fiche-nation[data-nation="fac_hizuru"]').click();
+  await page.locator('.chancellerie__detail .plan-ligne .valeur').focus();
   await page.waitForTimeout(150);
   expect((await page.locator(".pourquoi").innerText()).includes(fr["why.dip_trust"].split(" (")[0] ?? ""), "réponse prévue d'Hizuru expliquée (confiance, intérêt…)");
   await audit(page, ".registre-panneau", "chancellerie (Marley)");

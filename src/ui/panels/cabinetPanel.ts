@@ -44,8 +44,15 @@ export class CabinetPanel implements Panel {
 
     const law = this.motion ? pw.laws.get(this.motion) : undefined;
     const vote = law ? computeVote(this.ctx.world, pol, law) : null;
-    root.append(this.table(members, vote));
-    if (law && vote) root.append(this.motionBox(law, vote, root));
+    // Vue de table (U5) : salle et billes à gauche, motion, décompte et raisons de chacun à droite.
+    const view = el("div", "cabinet-vue");
+    const left = el("div", "cabinet-gauche");
+    left.append(this.table(members, vote), this.legend());
+    const right = el("div", "cabinet-droite");
+    if (law && vote) right.append(this.motionBox(law, vote, root));
+    else right.append(el("p", "registre-note cabinet-invite", t("cabinet.pick_motion")));
+    view.append(left, right);
+    root.append(view);
     if (pol.lastVote) {
       const lv = pol.lastVote;
       const res = el("p", `cabinet-dernier ${lv.passed ? "adopte" : "rejete"}`);
@@ -57,9 +64,20 @@ export class CabinetPanel implements Panel {
         abst: lv.abstention,
         result: t(lv.passed ? "cabinet.passed" : lv.veto ? "cabinet.vetoed" : "cabinet.rejected"),
       });
-      root.append(res);
+      left.append(res);
     }
     void st;
+  }
+
+  /** Légende des billes : pour, contre, abstention. */
+  private legend(): HTMLElement {
+    const ul = el("ul", "cabinet-legende");
+    for (const v of ["pour", "contre", "abstention"] as const) {
+      const li = el("li");
+      li.append(el("span", `puce puce--${v}`), t(`cabinet.${v}`));
+      ul.append(li);
+    }
+    return ul;
   }
 
   private refresh(root: HTMLElement): void {

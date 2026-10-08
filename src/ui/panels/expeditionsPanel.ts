@@ -103,6 +103,13 @@ export class ExpeditionsPanel implements Panel {
     const head = el("p", "registre-champ");
     head.append(t("exp.corps"), " ", valueEl(this.ctx, String(ready), () => ({ title: t("exp.corps"), sections: [{ text: t("exp.corps_why", { total: Object.keys(mil.soldiers).length, dead: Object.values(mil.soldiers).filter((s) => s.status === "mort").length, wounded: Object.values(mil.soldiers).filter((s) => s.status === "blesse").length }) }] })));
     root.append(head, plan);
+    // Deux colonnes (U5) : expéditions en cours et logistique à gauche ; rapports et essais à droite.
+    const cols = el("div", "exp-colonnes");
+    const left = el("section", "exp-gauche");
+    const right = el("section", "exp-droite");
+    cols.append(left, right);
+    root.append(cols);
+    root = left;
 
     root.append(el("h3", "registre-intertitre", t("exp.active")));
     if (mil.expeditions.length === 0) root.append(el("p", "registre-note", t("exp.none_active")));
@@ -118,6 +125,7 @@ export class ExpeditionsPanel implements Panel {
       root.append(p);
     }
 
+    root = right;
     root.append(el("h3", "registre-intertitre", t("exp.reports")));
     if (mil.reports.length === 0) root.append(el("p", "registre-note", t("exp.no_report")));
     const table = el("table", "registre-table");

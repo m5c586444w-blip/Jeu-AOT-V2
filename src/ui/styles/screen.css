@@ -348,6 +348,11 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 
 /* ——— Personnages (maître-détail) ——— */
 .perso-ligne { grid-template-columns: 2.2rem minmax(0, 1fr) auto; }
+.perso-ligne .liste__milieu .lien-dossier { padding: 0; border: none; background: none; font: inherit; color: var(--texte-fort); text-align: left; cursor: pointer; }
+.perso-ligne.ligne-morte .lien-dossier { color: var(--texte-discret); text-decoration: line-through; }
+.perso-ligne .registre-poste { font-size: var(--t-xs); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.perso-ligne .liste__queue { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+.perso-ligne .liste__queue .liste__meta { font-size: var(--t-xs); }
 .perso-ligne .liste-portrait svg { width: 2.2rem; height: 2.6rem; display: block; }
 .perso-ligne__nom { display: flex; flex-direction: column; min-width: 0; }
 .perso-ligne__nom .lien-dossier { border-bottom: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -417,7 +422,10 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .avis-alarme td { background: var(--danger-fond); }
 .conseil-role { white-space: nowrap; color: var(--texte-second); }
 .journal-liste { list-style: none; margin: 0; padding: 0; font-size: var(--t-s); }
-.journal-liste li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.6rem; padding: 0.3rem 0.4rem; border-bottom: var(--filet-l) solid var(--filet-doux); }
+.journal-liste li { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 0.6rem; padding: 0.3rem 0.4rem; border-bottom: var(--filet-l) solid var(--filet-doux); }
+.journal-jour { margin: 0.8rem 0 0.2rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--texte-discret); }
+.journal-icone { display: inline-flex; color: var(--accent); }
+.journal-grave .journal-icone { color: var(--danger); }
 .journal-liste li:hover { background: var(--reflet); }
 .journal-grave { border-left: 3px solid var(--danger); }
 .journal-grave > :last-child { color: var(--danger-clair); }
@@ -514,8 +522,8 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .arbre__lien--acquis { stroke: var(--succes); }
 .arbre__lien--actif { stroke: var(--accent); stroke-width: 0.12; }
 .arbre__colonne { position: absolute; top: 0; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--texte-discret); }
-.planche {
-  position: absolute;
+.arbre__plan > .planche { position: absolute; }
+.arbre__plan > .planche {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
@@ -527,7 +535,8 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
   border-left: 3px solid var(--n-500);
   cursor: pointer;
 }
-.planche:hover { border-color: var(--accent-fonce); }
+.arbre__plan > .planche:hover { border-color: var(--accent-fonce); }
+.arbre__plan > .planche:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
 .planche[aria-selected="true"] { box-shadow: 0 0 0 2px var(--accent); }
 .planche--acquise { border-left-color: var(--succes); background: var(--succes-fond); }
 .planche--etude { border-left-color: var(--accent); background: var(--accent-fond); }
@@ -775,3 +784,18 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: 22; ov
 .facteurs .pourquoi__total td { color: var(--texte-fort); font-weight: 600; border-bottom: none; }
 .eco-provinces { width: 100%; }
 .eco-provinces td:not(:first-child), .eco-provinces th:not(:first-child) { text-align: right; }
+
+/* ——— Écrans maître-détail (UI.4) ——— */
+.cabinet-legende { list-style: none; margin: 0.3rem 0 0; padding: 0; }
+.cabinet-legende li { display: inline-flex; align-items: center; gap: 0.35rem; }
+.cabinet-invite { padding: 0.8rem; border: var(--filet-l) dashed var(--filet); }
+.chancellerie__detail { min-width: 0; }
+.fiche-nation__milieu { display: flex; flex-direction: column; min-width: 0; }
+.rech-detail { position: sticky; top: 0; padding: 0.2rem 0 0 0.9rem; border-left: var(--filet-l) solid var(--filet-doux); }
+.rech-detail .etiquette { margin-bottom: 0.4rem; }
+.rech-detail__fiche { margin: 0.3rem 0 0.6rem; font-size: var(--t-s); color: var(--texte-second); }
+.rech-prereqs { list-style: none; margin: 0; padding: 0; font-size: var(--t-s); }
+.rech-prereqs li { display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0; color: var(--texte-second); }
+.rech-prereq--acquis { color: var(--succes-clair); }
+.decrets-vue .decret { border: none; padding: 0; }
+.exp-gauche, .exp-droite, .rens-agents, .rens-rapports { min-width: 0; }

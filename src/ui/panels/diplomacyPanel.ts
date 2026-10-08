@@ -3,6 +3,7 @@ import { t } from "../../i18n";
 import { acceptance, hizuruDrift, TREATY_KINDS } from "../../sim/world/diplomacy";
 import type { TreatyKind } from "../../sim/world/diplomacy";
 import { atWar, hasTreaty } from "../../sim/world/nations";
+import { sep, tag } from "../kit";
 import { button, el, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 import { formatNumber } from "../why";
@@ -14,6 +15,7 @@ import { formatNumber } from "../why";
 export class DiplomacyPanel implements Panel {
   readonly id = "diplomatie" as const;
   private kind = new Map<string, TreatyKind>();
+  private selected: string | null = null;
 
   constructor(private readonly ctx: PanelContext) {}
 
@@ -42,25 +44,66 @@ export class DiplomacyPanel implements Panel {
       hz.append(g);
     }
     root.append(hz);
+    // Liste des nations à gauche (relation, traité ou guerre), fiche de la nation choisie à droite (U5).
+    const others = [...nw.factions.values()].filter((x) => x.id !== me);
+    if (!others.some((f) => f.id === this.selected)) this.selected = others[0]?.id ?? null;
     const grid = el("div", "chancellerie");
-    for (const f of [...nw.factions.values()].filter((x) => x.id !== me)) {
-      const card = el("article", `fiche-nation fiche-nation--${f.id}`);
-      card.dataset["nation"] = f.id;
-      const head = el("header", "planche__tete");
+    const list = el("div", "chancellerie__liste");
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", t("panel.diplomatie"));
+    for (const f of others) {
+      const war = atWar(ns, me, f.id);
+      const ties = TREATY_KINDS.filter((k) => hasTreaty(ns, k, me, f.id));
+      const row = el("article", `fiche-nation fiche-nation--${f.id}`);
+      row.dataset["nation"] = f.id;
+      row.setAttribute("role", "option");
+      row.setAttribute("aria-selected", String(f.id === this.selected));
+      row.tabIndex = 0;
       const blason = el("span", "fiche-nation__blason");
       blason.innerHTML = emblem(f.id);
       blason.setAttribute("aria-hidden", "true");
-      head.append(blason, el("h4", "", t(f.name_key)), el("span", "registre-note", t(`dip.personality.${f.personality}`)));
-      card.append(head);
+      const mid = el("div", "fiche-nation__milieu");
+      mid.append(el("h4", "", t(f.name_key)), el("span", "registre-note", t(`dip.personality.${f.personality}`)));
+      const state = war ? tag(t("dip.at_war_short"), "danger") : ties.length ? tag(t(`world.treaty.${ties[0] ?? "commerce"}`), "succes") : tag(t("dip.no_treaty_short"), "neutre");
+      row.append(blason, mid, state);
+      const pick = (): void => {
+        this.selected = f.id;
+        this.ctx.open("diplomatie");
+      };
+      row.addEventListener("click", pick);
+      row.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter" && ev.target === row) {
+          ev.preventDefault();
+          pick();
+        }
+      });
+      list.append(row);
+    }
+    const detail = el("div", "chancellerie__detail");
+    const f = others.find((x) => x.id === this.selected);
+    if (f) {
+      const head = el("header", "chancellerie__detail-tete");
+      const big = el("span", "chancellerie__blason");
+      big.innerHTML = emblem(f.id);
+      big.setAttribute("aria-hidden", "true");
+      const id = el("div");
+      id.append(el("h3", "", t(f.name_key)), el("span", "registre-note", t(`dip.personality.${f.personality}`)));
+      head.append(big, id);
+      detail.append(head);
       const r = ns.relations[f.id]?.[me];
       if (r) {
-        const p = el("p", "registre-note");
-        for (const axis of ["trust", "interest", "fear", "ideology"] as const) p.append(`${t(`dip.axis.${axis}`)} `, valueEl(this.ctx, formatNumber(Math.round(r[axis])), () => ({ title: t(`dip.axis.${axis}`), sections: [{ text: t(`dip.axis.${axis}_why`) }] })), " ");
-        card.append(p);
+        const axes = el("div", "chancellerie__axes");
+        for (const axis of ["trust", "interest", "fear", "ideology"] as const) {
+          const kv = el("div", "kv");
+          kv.append(el("span", "kv__cle", t(`dip.axis.${axis}`)), valueEl(this.ctx, formatNumber(Math.round(r[axis])), () => ({ title: t(`dip.axis.${axis}`), sections: [{ text: t(`dip.axis.${axis}_why`) }] }), "kv__valeur"));
+          axes.append(kv);
+        }
+        detail.append(axes);
       }
       const ties = TREATY_KINDS.filter((k) => hasTreaty(ns, k, me, f.id)).map((k) => t(`world.treaty.${k}`));
       const war = atWar(ns, me, f.id);
-      card.append(el("p", war ? "plan-probleme" : "registre-note", war ? t("dip.at_war") : ties.length ? t("dip.treaties", { list: ties.join(", ") }) : t("dip.no_treaty")));
+      detail.append(el("p", war ? "plan-probleme" : "registre-note", war ? t("dip.at_war") : ties.length ? t("dip.treaties", { list: ties.join(", ") }) : t("dip.no_treaty")));
+      detail.append(sep(t("dip.actions")));
       if (!war) {
         const sel = el("select", "plan-choix");
         sel.dataset["treaty"] = f.id;
@@ -81,14 +124,14 @@ export class DiplomacyPanel implements Panel {
         const go = button(t("dip.propose"), () => void this.ctx.dispatch({ type: "ProposeTreaty", to: f.id, kind: chosen }), "registre-bouton petit principal");
         go.dataset["action"] = "proposer";
         line.append(go);
-        card.append(line);
+        detail.append(line);
         const w = button(t("dip.declare_war"), () => {
           void this.ctx.confirm(t("dip.declare_war_confirm", { nation: t(f.name_key) })).then((ok) => {
             if (ok) void this.ctx.dispatch({ type: "DeclareWar", to: f.id });
           });
-        }, "registre-bouton petit");
+        }, "registre-bouton petit btn--danger");
         w.dataset["action"] = "guerre";
-        card.append(w);
+        detail.append(w);
       } else {
         const u = acceptance(this.ctx.world, ns, me, f.id, "paix");
         const line = el("p", "plan-ligne");
@@ -96,14 +139,14 @@ export class DiplomacyPanel implements Panel {
         const go = button(t("dip.peace"), () => void this.ctx.dispatch({ type: "MakePeace", to: f.id }), "registre-bouton petit");
         go.dataset["action"] = "paix";
         line.append(go);
-        card.append(line);
+        detail.append(line);
       }
       const on = ns.embargoes.includes(`${me}>${f.id}`);
       const e = button(on ? t("dip.embargo_off") : t("dip.embargo_on"), () => void this.ctx.dispatch({ type: "Embargo", to: f.id, on: !on }), "registre-bouton petit");
       e.dataset["action"] = "embargo";
-      card.append(" ", e);
-      grid.append(card);
+      detail.append(" ", e);
     }
+    grid.append(list, detail);
     root.append(grid);
     // Journal de raisonnement des IA (02 §14), replié.
     const det = el("details", "chancellerie__ia");

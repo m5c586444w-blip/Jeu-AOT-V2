@@ -52,6 +52,7 @@ interface Checklist {
   outside: boolean;
   clipped: string[];
   minFont: number;
+  cardGrid: string[];
 }
 
 async function checklist(page: Page, scope: string): Promise<Checklist> {
@@ -107,7 +108,34 @@ async function checklist(page: Page, scope: string): Promise<Checklist> {
           return e.scrollWidth > e.clientWidth + 2 && (e.textContent ?? "").trim().length > 0;
         })
         .map(label);
+      // Grille de cartes identiques (CUI-05, U5) : au moins 4 frères de même classe, en plusieurs colonnes d'une grille ou
+      // d'une rangée qui passe à la ligne, chacun encadré (quatre filets) ou sur un fond propre. Un arbre (positions
+      // absolues, liens tracés) ou une liste en une colonne n'en sont pas.
+      const cardGrid: string[] = [];
+      for (const parent of all) {
+        const pcs = getComputedStyle(parent);
+        const laidOut = /grid/.test(pcs.display) || (/flex/.test(pcs.display) && pcs.flexWrap === "wrap");
+        if (!laidOut || !visible(parent)) continue;
+        const groups = new Map<string, HTMLElement[]>();
+        for (const c of [...parent.children] as HTMLElement[]) {
+          // Boutons et onglets alignés ne sont pas des cartes.
+          if (!visible(c) || !c.className || c.tagName === "BUTTON" || c.getAttribute("role") === "tab") continue;
+          groups.set(String(c.className), [...(groups.get(String(c.className)) ?? []), c]);
+        }
+        for (const [cls, kids] of groups) {
+          if (kids.length < 4) continue;
+          const lefts = new Set(kids.map((k) => Math.round(k.getBoundingClientRect().left)));
+          const card = kids.every((k) => {
+            const cs = getComputedStyle(k);
+            const framed = ["Top", "Right", "Bottom", "Left"].every((side) => parseFloat(cs.getPropertyValue(`border-${side.toLowerCase()}-width`)) > 0 && cs.getPropertyValue(`border-${side.toLowerCase()}-style`) !== "none");
+            const filled = cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== pcs.backgroundColor;
+            return framed || filled;
+          });
+          if (lefts.size >= 2 && card) cardGrid.push(`${kids.length} × ${kids[0]?.tagName.toLowerCase()}.${cls.split(" ")[0]}`);
+        }
+      }
       return {
+        cardGrid: [...new Set(cardGrid)].slice(0, 4),
         fonts: [...badFonts].slice(0, 6),
         fontsLoaded: [...used].every((f) => document.fonts.check(`16px "${f}"`)),
         icons,
@@ -127,7 +155,7 @@ async function checklist(page: Page, scope: string): Promise<Checklist> {
 }
 
 /** Applique la checklist 04 §2 à un écran ; aucune clé ni identifiant brut visible. */
-async function review(page: Page, pass: Pass, name: string, scope: string, opts: { minTexture?: number } = {}): Promise<void> {
+async function review(page: Page, pass: Pass, name: string, scope: string, opts: { minTexture?: number; noCardGrid?: boolean } = {}): Promise<void> {
   await page.evaluate(() => document.fonts.ready);
   const c = await checklist(page, scope);
   const visible = await page.locator(scope).first().innerText();
@@ -145,6 +173,7 @@ async function review(page: Page, pass: Pass, name: string, scope: string, opts:
   if (c.hOverflow || c.outside) problems.push("débordement hors de la fenêtre");
   if (c.clipped.length) problems.push(`texte coupé : ${c.clipped.join(", ")}`);
   if (c.minFont < minFont) problems.push(`corps minimal ${c.minFont} px < ${minFont.toFixed(1)} px`);
+  if (opts.noCardGrid && c.cardGrid.length) problems.push(`grille de cartes identiques (CUI-05) : ${c.cardGrid.join(", ")}`);
   expect(problems.length === 0, `${name} [${pass.tag}] : checklist 04 §2 (${c.values} valeurs expliquées, textures sur ${c.textureLevels} niveaux, corps ≥ ${c.minFont} px)${problems.length ? ` — ${problems.join(" ; ")}` : ""}`);
 }
 
@@ -252,12 +281,17 @@ try {
     await shot(page, pass, "dossier-province");
     await page.keyboard.press("Escape");
 
+    // Écrans de la liste U5 (CUI-05) : aucun en grille de cartes identiques.
+    const MASTER_DETAIL = new Set(["personnages", "cabinet", "expeditions", "renseignement", "recherche", "decrets", "economie", "journal", "diplomatie"]);
     const panels: [string, string][] = [
       ["personnages", "personnages"],
       ["cabinet", "cabinet"],
       ["expeditions", "expeditions"],
       ["renseignement", "renseignement"],
       ["recherche", "recherche"],
+      ["decrets", "decrets"],
+      ["economie", "economie"],
+      ["journal", "journal"],
       ["gazette", "gazette"],
       ["archives", "archives"],
       ["epilogue", "epilogue"],
@@ -267,14 +301,14 @@ try {
       const band = await page.$eval(".bandeau", (b) => b.getBoundingClientRect().bottom);
       const top = await page.$eval(".registre-panneau:not([hidden])", (p) => p.getBoundingClientRect().top);
       if (top < band - 2) expect(false, `${name} : le registre chevauche le bandeau (${Math.round(top)} < ${Math.round(band)})`);
-      await review(page, pass, `registre ${name}`, ".registre-panneau:not([hidden])");
+      await review(page, pass, `registre ${name}`, ".registre-panneau:not([hidden])", { noCardGrid: MASTER_DETAIL.has(id) });
       await shot(page, pass, name);
       if (id === "personnages") {
         await page.locator(".registre-panneau .lien-dossier").first().click();
         await page.waitForSelector(".fiche-nom");
         const portrait = await page.locator(".fiche-portrait svg").count();
         expect(portrait === 1, "fiche de personnage : portrait gravé procédural");
-        await review(page, pass, "fiche de personnage", ".registre-panneau:not([hidden])");
+        await review(page, pass, "fiche de personnage", ".registre-panneau:not([hidden])", { noCardGrid: true });
         await shot(page, pass, "fiche-personnage");
       }
       if (id === "gazette") {
@@ -388,7 +422,7 @@ try {
       await m.keyboard.press("KeyD");
       await m.waitForSelector('.registre-panneau[data-panel="diplomatie"]:not([hidden])');
       expect((await m.locator(".fiche-nation__blason svg").count()) === 3, "chancellerie : 3 fiches de nation à blason dessiné");
-      await review(m, pass, "chancellerie (Marley)", ".registre-panneau:not([hidden])");
+      await review(m, pass, "chancellerie (Marley)", ".registre-panneau:not([hidden])", { noCardGrid: true });
       await shot(m, pass, "chancellerie-marley");
       await m.keyboard.press("KeyN");
       await m.waitForSelector('.registre-panneau[data-panel="gazette"]:not([hidden])');

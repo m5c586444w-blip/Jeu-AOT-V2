@@ -142,6 +142,8 @@ try {
 
   // ——— Décrets : décret direct confirmé ———
   await openPanel(page, "decrets");
+  // Phase UI : liste des décrets et décret choisi en entier (maître-détail) ; on choisit le décret, puis on le signe.
+  await page.locator(`.liste__item[data-law="${DIRECT_LAW}"]`).click();
   await page.locator(`.decret[data-law="${DIRECT_LAW}"] .registre-bouton.principal`).click();
   await page.locator("[data-confirm='oui']").click();
   await page.waitForSelector(`.decret[data-law="${DIRECT_LAW}"] .decret-tampon`, { timeout: 5000 });

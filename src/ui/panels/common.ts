@@ -87,3 +87,26 @@ export function stamp(canon: string): HTMLSpanElement {
 export function noPolitics(root: HTMLElement): void {
   root.append(el("p", "registre-ferme", t("panel.no_politics")));
 }
+
+/** Positions de lecture des listes « maître » par registre : conservées quand le registre est redessiné. */
+const masterScroll = new Map<string, number>();
+
+/**
+ * Écran « liste + détail » (U5) : liste à gauche (`.maitre`), fiche à droite (`.detail`). `done()` pose l'écran dans
+ * `root` et rend à la liste sa position de lecture.
+ */
+export function masterDetail(root: HTMLElement, key: string, cls = ""): { master: HTMLElement; detail: HTMLElement; done(): void } {
+  const md = el("div", `maitre-detail ${cls}`.trim());
+  const master = el("div", "maitre");
+  const detail = el("div", "detail");
+  master.addEventListener("scroll", () => masterScroll.set(key, master.scrollTop), { passive: true });
+  md.append(master, detail);
+  return {
+    master,
+    detail,
+    done(): void {
+      root.append(md);
+      master.scrollTop = masterScroll.get(key) ?? 0;
+    },
+  };
+}
