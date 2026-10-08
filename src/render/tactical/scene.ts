@@ -515,6 +515,7 @@ export class TacticalScene {
   destroy(): void {
     this.sizeWatch?.disconnect();
     for (const c of this.contexts.values()) c.destroy();
-    this.app.destroy(true, { children: true });
+    // Pas `true` : il libérerait les ressources globales de Pixi encore utilisées par la carte stratégique (dette n° 20).
+    this.app.destroy({ removeView: true }, { children: true });
   }
 }
