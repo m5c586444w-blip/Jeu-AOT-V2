@@ -1,0 +1,43 @@
+
+> murs-et-sang@0.0.1 verify
+> npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run assets:check && npm run canon:check && npm run sim:selftest && npm run build
+
+
+> murs-et-sang@0.0.1 typecheck
+> tsc --noEmit
+
+
+> murs-et-sang@0.0.1 lint
+> eslint . --max-warnings 0
+
+
+> murs-et-sang@0.0.1 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/claude/Jeu-AOT-V2
+
+ ❯ tests/render/tactical3d/titans-r1c.test.ts (6 tests | 6 skipped) 12374ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/render/tactical3d/titans-r1c.test.ts [ tests/render/tactical3d/titans-r1c.test.ts ]
+Error: Hook timed out in 10000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/render/tactical3d/titans-r1c.test.ts:37:1
+     35| };
+     36|
+     37| beforeAll(async () => {
+       | ^
+     38|   const buf = readFileSync("docs/art/assets/derives/humain.glb");
+     39|   t = await templateFromBuffer(buf.buffer.slice(buf.byteOffset, buf.by…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 91 passed (92)
+      Tests  582 passed | 6 skipped (588)
+   Start at  16:30:22
+   Duration  187.49s (tests 90%, import 8%, transform 2%)
+
+EXIT 1
