@@ -5,6 +5,7 @@
 - CHR : frise 845–854+, 60 événements du fichier 12 couverts (40 jouables, 20 en texte), 3,6 faits de fond par mois, chronique non vide au départ ; plus d'issue dévoilée avant décision.
 - Chaque phase relue par un sous-agent distinct ; UI revérifiée en plus par ta session CLI (commit 3b71ac1, docs seulement, D-123).
 - Dette n° 20 corrigée (UI) : erreurs Pixi de `smoke:tactique` dues à `destroy(true)`, qui libérait les ressources globales de Pixi ; `smoke:tactique` OK (0 erreur console).
+- CUI-07 corrigé (UI) : plus aucun nom coupé dans l'arbre de recherche (1366 et 4K), barre du haut en deux groupes (U3) ; `smoke:p5`, `smoke:r0`, `smoke:p8` OK.
 
 **En dette** : n° 13–15 (carte), 19 et 21 (UI), 22–27 (audio), 28–32 (CHR : bac à sable 845 sans chronologie, 20 événements en texte seul).
 

@@ -30,6 +30,8 @@
 .bandeau__nation-nom { order: -1; font-family: var(--f-orne); font-size: var(--t-l); letter-spacing: 0.03em; color: var(--texte-fort); white-space: nowrap; }
 
 .bandeau__registre { grid-area: registre; display: flex; flex-wrap: wrap; align-items: stretch; align-content: center; min-width: 0; }
+.bandeau__groupe { display: flex; flex-wrap: wrap; align-items: stretch; align-content: center; min-width: 0; }
+.bandeau__groupe--etat { border-left: 2px solid var(--filet); }
 .bandeau__ressource, .bandeau__champ {
   display: grid;
   grid-template-columns: auto auto;
@@ -588,14 +590,14 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .planche--libre { border-left-color: var(--accent-fonce); }
 .planche--verrou { color: var(--texte-discret); }
 .planche__tete { display: flex; gap: 0.35rem; align-items: center; min-width: 0; }
-.planche__tete h4 { margin: 0; min-width: 0; font-size: var(--t-s); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--texte-fort); }
+.planche__tete h4 { margin: 0; min-width: 0; font-size: var(--t-s); font-weight: 600; line-height: 1.2; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; color: var(--texte-fort); }
 .planche--verrou .planche__tete h4 { color: var(--texte-second); }
 .planche__tete .ico { color: var(--accent); }
 .planche__code { font-size: var(--t-xs); color: var(--texte-discret); white-space: nowrap; }
 .planche__fiche { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--texte-second); font-size: var(--t-xs); }
 .planche__phase { margin: 0; font-size: var(--t-xs); color: var(--texte-discret); }
 .planche__etat { margin: 0; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--succes-clair); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.planche .plan-probleme { margin: 0; padding: 0 0.3rem; font-size: var(--t-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.planche .plan-probleme { margin: 0; padding: 0 0.3rem; font-size: var(--t-xs); line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .planche .registre-note { margin: 0; font-size: var(--t-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .planche .registre-bouton { align-self: flex-start; margin: 0.1rem 0 0; }
 .rech-detail h3 { margin: 0 0 0.3rem; font-size: var(--t-xl); }

@@ -26,7 +26,7 @@ une ligne KO (2 erreurs de page, § Smoke). La bataille n'est plus recouverte (9
 | CUI-04 no-leaks | **OK après correctif de revue** | revue D-113 : « (débogage) » visible en Chancellerie, non détecté ; journal des IA réservé au mode auteur, motif « débogage » ajouté ; `tests/ui` 77/77 |
 | CUI-05 pas de grille de cartes | **OK** | `smoke:p8` « tout est conforme » : contrôle « grille de cartes » sur les 9 écrans U5, 4 passes |
 | CUI-06 ≥ 60 icônes | **OK** | `tests/ui/icons.test.ts` (90 icônes) |
-| CUI-07 lisible 1366 et 4K | **OK, dette n° 21** | `smoke:p8` 4 passes (1366 et 3840, 100 et 125 %) : 171 OK, 0 KO ; captures 1366 et 4K ; noms tronqués (ui-08, ui-05) et barre du haut à 9 éléments en dette n° 21 (revue D-113) |
+| CUI-07 lisible 1366 et 4K | **OK après correctif** | `smoke:p8` 4 passes : 171 OK, 0 KO (avant et après correctif) ; arbre de recherche : 0 texte coupé sur 50 cases (1366 et 4K, cases de 6,3 rem) ; barre du haut en 2 groupes (6 ressources, 3 valeurs d'état) ; § Seconde relecture |
 | CUI-08 écrans capturés et lus | **OK (12 captures)** | § Captures ; décrets, expéditions, journal, épilogue vus seulement par smoke:p8 (`p8-*.png`) |
 | CUI-09 contraste AA | **OK** | `tests/ui/contrast.test.ts` |
 
@@ -90,8 +90,9 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
    Défauts : texte coupé à deux lignes ; infobulle qui masque la seconde entrée ; ligne de catégorie seule qui allonge.
 7. `ui-07-cabinet-1366` — Salle (sièges, billes vertes et grises) à gauche ; motion « Conscription étendue », vote prévu
    6 pour, 2 abstentions, persuasion. Défauts : grand vide sous la salle ; noms des sièges petits ; « 0 or » dans le bouton.
-8. `ui-08-recherche-4k` (3840×2160) — Arbre à liens (acquises, verrou, disponibles) et fiche « Bouteilles de gaz
-   compactes ». Défauts : arbre petit, grand vide dessous ; noms et verrous coupés (« éclateme… ») ; onglets sur 2 lignes.
+8. `ui-08-recherche-4k` (3840×2160) — refaite après le correctif CUI-07 : onglet « Hizuru et Alliés », 5 cases verrouillées,
+   noms sur deux lignes et conditions entières, fiche « Armes anti-Titan alliées ». Défauts : arbre petit, grand vide
+   dessous ; onglets sur deux lignes ; branche entière hors de portée en 850, onglet visible quand même.
 9. `ui-09-renseignement-1366` — Agents à gauche (couverture, loyauté, compétence, mission), rapports et secrets à droite.
    Défauts : colonne droite vide au départ ; moitié basse vide ; boutons « Envoyer » non alignés.
 10. `ui-10-bataille-1366` — Bataille d'essai, canevas entier au-dessus du registre (correctif D-112), carnet à droite,
@@ -132,16 +133,15 @@ EXIT 0
 ## Seconde relecture indépendante (2026-10-08, session de R1e)
 - `npm run verify` relancé sur la tête de la PR n° 3 (`a13fd36`, copie à part) : `Test Files 86 passed (86)`,
   `Tests 530 passed (530)`, `✓ built in 2.14s`, `EXIT 0` ; `git diff 7146a98 a13fd36 --stat -- src/sim` : vide.
-- Les 12 captures relues une à une par un sous-agent neuf (recadrages à taille réelle en 4K) : **aucun bloquant non
-  couvert**. Le seul bloquant visible, « (débogage) » en ui-12, est corrigé dans `a13fd36` (`authorOnly`, `dip.ai_log`,
-  `leaks.ts`), capture ui-12 refaite ensuite (sans la mention) ; ui-01 et ui-05 précèdent leurs correctifs.
-- CUI-05 confirmé (réserve : l'arbre de recherche reste une grille 2×3 de cases) ; CUI-07 : aucun texte illisible, mais des
-  troncatures (dette n° 21) ; CUI-08 confirmé (12 captures non vides, chacune montre son écran) ; le défaut cité pour
-  ui-04 (titre de groupe recouvert) n'est pas visible.
+- 12 captures relues une à une par un sous-agent neuf (4K à taille réelle) : **aucun bloquant non couvert** ; « (débogage) »
+  (ui-12) corrigé dans `a13fd36`, capture ui-12 refaite sans la mention. CUI-05 et CUI-08 confirmés (réserve : arbre en
+  grille 2×3) ; le défaut cité pour ui-04 n'est pas visible ; ui-01 et ui-05 précèdent leurs correctifs.
 - **Dette n° 20 corrigée** : cause mesurée, `Application.destroy(true, …)` (planche des figures, bataille, carte) appelle
   `GlobalResourceRegistry.release()` de Pixi 8.22 et détruit la réserve de lots encore utilisée par les autres rendus ;
-  correctif `destroy({ removeView: true }, …)` (3 lignes). `smoke:tactique` : « OK 0 erreur console », 32 OK, EXIT 0 ;
-  `smoke:map` et `smoke:p6` : EXIT 0.
+  correctif `destroy({ removeView: true }, …)` (3 lignes). `smoke:tactique` « OK 0 erreur console », 32 OK ; map, p6 : EXIT 0.
+- **CUI-07 corrigé** : cases de l'arbre de 4,6 à 6,3 rem, nom sur 2 lignes et condition sur 3 au lieu d'une ligne coupée
+  (0 texte coupé sur 50 cases, mesuré en 1366 et en 4K) ; barre du haut en deux groupes (U3 : 2 au premier niveau, puis 6
+  et 3). `smoke:p5` 22 OK, `smoke:r0` 32 OK (zone de jeu 93,1 % et 96,8 %), `smoke:p8` 171 OK, tous EXIT 0.
 - Défauts mineurs non cités jusqu'ici, à joindre à la dette n° 21 : menu (« 845, avant la brèche » contre « Shiganshina
   vient de tomber », année répétée) ; signes contradictoires dans l'infobulle de la nourriture (« −8 304 » au résumé,
   « +7 800 » et « +504 » en rouge au détail ; pertes « −225 » / « +225 ») ; six valeurs de la barre du haut sans étiquette ;

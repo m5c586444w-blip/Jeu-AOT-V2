@@ -78,16 +78,20 @@ export class Hud {
     id.append(el("h1", "bandeau__titre", t("app.title")), this.nation);
     head.append(this.blason, id);
 
+    // Deux groupes (U3 : jamais plus de 7 éléments au même niveau) : les ressources clés, puis l'état du pays.
     const ledger = el("div", "bandeau__registre");
-    for (const r of HUD_RESOURCES) ledger.append(this.resourceCell(r));
-    ledger.append(this.valueCell("morale", t("hud.morale"), "moral", () => this.moraleWhy()));
+    const resources = el("div", "bandeau__groupe bandeau__groupe--ressources");
+    const realm = el("div", "bandeau__groupe bandeau__groupe--etat");
+    ledger.append(resources, realm);
+    for (const r of HUD_RESOURCES) resources.append(this.resourceCell(r));
+    realm.append(this.valueCell("morale", t("hud.morale"), "moral", () => this.moraleWhy()));
     // Autre nation jouée (P7) : ses propres comptes (industrie, hommes, soutien à la guerre, stabilité).
     if (world.nations) {
       const nat = (key: string, label: string, iconId: string, why: () => WhyContent): void => {
         const c = this.valueCell(key, label, iconId, why);
         c.dataset["paradis"] = "0";
         c.dataset["autre"] = "1";
-        ledger.append(c);
+        realm.append(c);
       };
       nat("n_industry", t("world.industry"), "acier", () => this.nationWhy("industry"));
       nat("n_manpower", t("world.manpower"), "hommes", () => this.nationWhy("manpower"));
@@ -95,8 +99,8 @@ export class Hud {
       nat("n_stability", t("world.stability"), "legitimite", () => ({ title: t("world.stability"), sections: [{ text: t("world.stability_why") }] }));
     }
     if (world.politics) {
-      ledger.append(this.valueCell("legitimacy", t("hud.legitimacy"), "legitimite", () => ({ title: t("hud.legitimacy"), sections: [{ text: t("hud.legitimacy_why") }] })));
-      ledger.append(this.valueCell("capital", t("hud.capital"), "sceau", () => ({ title: t("hud.capital"), sections: [{ text: t("hud.capital_why") }] })));
+      realm.append(this.valueCell("legitimacy", t("hud.legitimacy"), "legitimite", () => ({ title: t("hud.legitimacy"), sections: [{ text: t("hud.legitimacy_why") }] })));
+      realm.append(this.valueCell("capital", t("hud.capital"), "sceau", () => ({ title: t("hud.capital"), sections: [{ text: t("hud.capital_why") }] })));
     }
 
     const time = el("div", "bandeau__temps");
