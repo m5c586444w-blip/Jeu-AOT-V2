@@ -22,7 +22,7 @@ une ligne KO (2 erreurs de page, § Smoke). La bataille n'est plus recouverte (9
 |---|---|---|
 | CUI-01 verify code 0 | **OK** | `docs/reports/UI-verify-correctifs.log` (après dc09c21), extrait ci-dessous |
 | CUI-02 `src/sim` inchangé | **OK** | `git diff origin/claude/attack-on-titan-strategy-game-4ukom6 --stat -- src/sim` : sortie vide |
-| CUI-03 tous les `smoke:*` | **KO (1 ligne), dette n° 20** | 9/10 OK ; `smoke:tactique` : « KO 0 erreur console » (2 erreurs de page Pixi, dette n° 20) |
+| CUI-03 tous les `smoke:*` | **OK après correctif** (dette n° 20 close) | 9/10 OK en UI.7 ; `smoke:tactique` KO (2 erreurs Pixi), corrigé ensuite : « OK 0 erreur console », EXIT 0 (`docs/reports/UI-smoke-tactique-correctif.log`, § Seconde relecture) |
 | CUI-04 no-leaks | **OK après correctif de revue** | revue D-113 : « (débogage) » visible en Chancellerie, non détecté ; journal des IA réservé au mode auteur, motif « débogage » ajouté ; `tests/ui` 77/77 |
 | CUI-05 pas de grille de cartes | **OK** | `smoke:p8` « tout est conforme » : contrôle « grille de cartes » sur les 9 écrans U5, 4 passes |
 | CUI-06 ≥ 60 icônes | **OK** | `tests/ui/icons.test.ts` (90 icônes) |
@@ -105,7 +105,7 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
     Défauts : « commerce » proposé alors qu'il est en vigueur ; « réponse prévue : 43 » sans unité ; grand vide en bas.
 
 ## Ce qui reste
-1. `smoke:tactique` : erreurs Pixi `geometry` / `clear` après la fermeture de la planche des figures (dette n° 20).
+1. `smoke:tactique` : erreurs Pixi `geometry` / `clear` (dette n° 20) — corrigées depuis (§ Seconde relecture).
 2. Dette n° 19 et défauts des captures : mention « (débogage) » de la chancellerie (corrigée ensuite, revue D-113), fond 4K du menu, textes anglais,
    légende de carte (dettes 13 et 14).
 
@@ -138,13 +138,13 @@ EXIT 0
 - CUI-05 confirmé (réserve : l'arbre de recherche reste une grille 2×3 de cases) ; CUI-07 : aucun texte illisible, mais des
   troncatures (dette n° 21) ; CUI-08 confirmé (12 captures non vides, chacune montre son écran) ; le défaut cité pour
   ui-04 (titre de groupe recouvert) n'est pas visible.
-- Défauts mineurs non cités jusqu'ici, à joindre à la dette n° 21 :
-  - menu : « 845, avant la brèche » contredit « Shiganshina vient de tomber » ; année répétée ;
-  - signes contradictoires dans l'infobulle de la nourriture (« −8 304 » au résumé, « +7 800 » et « +504 » en rouge au
-    détail ; pertes « −225 » / « +225 ») ;
-  - barre du haut : six valeurs à icône seule, sans étiquette ; « Cabinet » de la liste des personnages différent des sièges ;
-  - cabinet : « 2 abstention », colonne de nombres sans en-tête ;
-  - unité du capital variable (« 10 cap. », « 6 de capital ») ;
-  - « Hommes 12 000 » contre « Soldats (25 200) » en Économie ; aucune alerte pour la pierre épuisée en ≈ 12 jours ;
-  - onglets « Hizuru et Alliés » et « Armes modernes » visibles en 850 ; « 50 d'industrie » sans ressource affichée ;
-  - « réponse prévue : 43 » sans unité.
+- **Dette n° 20 corrigée** : cause mesurée, `Application.destroy(true, …)` (planche des figures, bataille, carte) appelle
+  `GlobalResourceRegistry.release()` de Pixi 8.22 et détruit la réserve de lots encore utilisée par les autres rendus ;
+  correctif `destroy({ removeView: true }, …)` (3 lignes). `smoke:tactique` : « OK 0 erreur console », 32 OK, EXIT 0 ;
+  `smoke:map` et `smoke:p6` : EXIT 0.
+- Défauts mineurs non cités jusqu'ici, à joindre à la dette n° 21 : menu (« 845, avant la brèche » contre « Shiganshina
+  vient de tomber », année répétée) ; signes contradictoires dans l'infobulle de la nourriture (« −8 304 » au résumé,
+  « +7 800 » et « +504 » en rouge au détail ; pertes « −225 » / « +225 ») ; six valeurs de la barre du haut sans étiquette ;
+  « Cabinet » des personnages différent des sièges ; « 2 abstention », colonne sans en-tête ; unité du capital variable ;
+  « Hommes 12 000 » contre « Soldats (25 200) » ; aucune alerte pour la pierre épuisée en ≈ 12 jours ; onglets « Hizuru et
+  Alliés » et « Armes modernes » visibles en 850 ; « 50 d'industrie » sans ressource affichée ; « réponse prévue : 43 » sans unité.

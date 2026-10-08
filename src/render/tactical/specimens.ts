@@ -42,6 +42,8 @@ export async function drawSpecimenSheet(hosts: [HTMLElement, HTMLElement, HTMLEl
     }),
   ];
   return () => {
-    for (const a of apps) a.destroy(true, { children: true });
+    // `{ removeView: true }` et non `true` : `true` libère aussi les ressources globales de Pixi (réserve de lots), dont la
+    // carte stratégique et la bataille se servent encore (« reading 'geometry' » au rendu suivant, dette n° 20).
+    for (const a of apps) a.destroy({ removeView: true }, { children: true });
   };
 }

@@ -354,6 +354,7 @@ export class StrategicMap {
   }
 
   destroy(): void {
-    this.app.destroy(true, { children: true });
+    // Pas `true` : il libérerait les ressources globales de Pixi encore utilisées par d'autres rendus (dette n° 20).
+    this.app.destroy({ removeView: true }, { children: true });
   }
 }
