@@ -1,0 +1,288 @@
+[
+ {
+  "type": "army",
+  "id": "army_845_sud",
+  "scenario": "scn_sandbox_845",
+  "faction": "fac_paradis",
+  "name_key": "army.sud",
+  "insignia": "garnison",
+  "general": null,
+  "general_key": "army.general.garnison_sud",
+  "province": "prov_trost",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 4
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   },
+   {
+    "regiment": "rgt_convoi",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_845_est",
+  "scenario": "scn_sandbox_845",
+  "faction": "fac_paradis",
+  "name_key": "army.est",
+  "insignia": "garnison",
+  "general": null,
+  "general_key": "army.general.garnison_est",
+  "province": "prov_karanes",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 3
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_845_brigade",
+  "scenario": "scn_sandbox_845",
+  "faction": "fac_paradis",
+  "name_key": "army.brigade",
+  "insignia": "brigade",
+  "general": null,
+  "general_key": "army.general.brigade",
+  "province": "prov_mitras",
+  "regiments": [
+   {
+    "regiment": "rgt_brigade",
+    "count": 3
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_850_sud",
+  "scenario": "scn_sandbox_850",
+  "faction": "fac_paradis",
+  "name_key": "army.sud",
+  "insignia": "garnison",
+  "general": "char_dot_pixis",
+  "general_key": "army.general.garnison_sud",
+  "province": "prov_trost",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 5
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   },
+   {
+    "regiment": "rgt_convoi",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Dot Pixis commande la Garnison du Sud (C) ; composition et effectifs : A."
+ },
+ {
+  "type": "army",
+  "id": "army_850_est",
+  "scenario": "scn_sandbox_850",
+  "faction": "fac_paradis",
+  "name_key": "army.est",
+  "insignia": "garnison",
+  "general": "char_brune_aldous",
+  "general_key": "army.general.garnison_est",
+  "province": "prov_karanes",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 3
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_850_brigade",
+  "scenario": "scn_sandbox_850",
+  "faction": "fac_paradis",
+  "name_key": "army.brigade",
+  "insignia": "brigade",
+  "general": "char_nile_dok",
+  "general_key": "army.general.brigade",
+  "province": "prov_mitras",
+  "regiments": [
+   {
+    "regiment": "rgt_brigade",
+    "count": 3
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Nile Dok commande la Brigade (C) ; composition : A."
+ },
+ {
+  "type": "army",
+  "id": "army_854_sud",
+  "scenario": "scn_854",
+  "faction": "fac_paradis",
+  "name_key": "army.sud",
+  "insignia": "garnison",
+  "general": "char_dot_pixis",
+  "general_key": "army.general.garnison_sud",
+  "province": "prov_trost",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 5
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   },
+   {
+    "regiment": "rgt_convoi",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_854_est",
+  "scenario": "scn_854",
+  "faction": "fac_paradis",
+  "name_key": "army.est",
+  "insignia": "garnison",
+  "general": "char_brune_aldous",
+  "general_key": "army.general.garnison_est",
+  "province": "prov_karanes",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 3
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_854_brigade",
+  "scenario": "scn_854",
+  "faction": "fac_paradis",
+  "name_key": "army.brigade",
+  "insignia": "brigade",
+  "general": "char_nile_dok",
+  "general_key": "army.general.brigade",
+  "province": "prov_mitras",
+  "regiments": [
+   {
+    "regiment": "rgt_brigade",
+    "count": 3
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_854_marley",
+  "scenario": "scn_854",
+  "faction": "fac_marley",
+  "name_key": "army.marley_expedition",
+  "insignia": "marley",
+  "general": "char_theo_magath",
+  "general_key": "army.general.marley",
+  "province": null,
+  "regiments": [
+   {
+    "regiment": "rgt_m_infanterie",
+    "count": 3
+   },
+   {
+    "regiment": "rgt_m_artillerie",
+    "count": 2
+   },
+   {
+    "regiment": "rgt_m_obusiers",
+    "count": 1
+   },
+   {
+    "regiment": "rgt_m_mitrailleurs",
+    "count": 1
+   }
+  ],
+  "morale": 75,
+  "supply_days": 30,
+  "canon": "A",
+  "notes_canon": "Corps expéditionnaire de Marley embarqué, menace de débarquement : A (aucun débarquement de cette forme dans le canon). Magath : général de Marley (C)."
+ },
+ {
+  "type": "fleet",
+  "id": "flt_854_marley",
+  "scenario": "scn_854",
+  "faction": "fac_marley",
+  "name_key": "fleet.marley",
+  "admiral": "char_berhard_kolb",
+  "sea": "sea_large",
+  "ships": [
+   {
+    "ship": "ship_cuirasse",
+    "count": 2
+   },
+   {
+    "ship": "ship_croiseur",
+    "count": 2
+   },
+   {
+    "ship": "ship_transport",
+    "count": 3
+   }
+  ],
+  "embarked": [
+   "army_854_marley"
+  ],
+  "canon": "A",
+  "notes_canon": "Flotte de Marley au large de l'île en 854 : A (composition et présence)."
+ }
+]

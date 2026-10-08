@@ -29,6 +29,8 @@ import { declareWar, embargo, guaranteeHizuru, guaranteeProblem, makePeace, prop
 import type { TreatyKind } from "../world/diplomacy";
 import { atWar } from "../world/nations";
 import { toAbsoluteDay } from "./time";
+import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
+import type { ArmyCommand } from "../armies/layer";
 
 export const MAX_ADVANCE_DAYS = 3650;
 
@@ -66,6 +68,7 @@ export type Command =
   | { type: "Ultimatum"; to: string; province: string }
   | { type: "Embargo"; to: string; on: boolean }
   | { type: "GuaranteeHizuru" }
+  | ArmyCommand
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -175,7 +178,13 @@ export function validateCommand(cmd: unknown): Validation {
       return { ok: true };
     case "Noop":
       return { ok: true };
+    case "ResolveEncounter": {
+      const orders = c["orders"];
+      const okOrders = Array.isArray(orders) && orders.every((o) => typeof o === "object" && o !== null && Number.isInteger((o as Record<string, unknown>)["tick"]) && typeof (o as Record<string, unknown>)["squad"] === "string" && (TACTICAL_ORDERS as readonly string[]).includes(String((o as Record<string, unknown>)["order"])));
+      return okOrders && validArmyCommand(c) ? { ok: true } : { ok: false, error: "ResolveEncounter invalide" };
+    }
     default:
+      if ((ARMY_COMMANDS as readonly string[]).includes(String(c["type"]))) return validArmyCommand(c) ? { ok: true } : { ok: false, error: `${String(c["type"])} invalide` };
       return { ok: false, error: `type de commande inconnu : ${String(c["type"])}` };
   }
 }
@@ -274,6 +283,9 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       next = applyP7(next, cmd, world);
       break;
     case "Noop":
+      break;
+    default:
+      next = applyArmyCommand(next, cmd, world);
       break;
   }
   // Forme canonique après chaque commande (D-66) : l'état vivant est identique à l'état relu d'une sauvegarde.

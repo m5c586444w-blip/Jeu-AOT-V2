@@ -1,0 +1,114 @@
+{
+ "canon": "A",
+ "notes_canon": "Équilibrage des armées (PA) : adaptations sans source ; à régler au jeu.",
+ "move": {
+  "terrain_speed": {
+   "urbain": 1,
+   "rural": 1,
+   "plaine": 1,
+   "foret": 0.7,
+   "mur": 0.8,
+   "cote": 0.9,
+   "souterrain": 0.6,
+   "fort": 0.9,
+   "ruines": 0.8,
+   "fleuve": 0.75,
+   "marais": 0.55,
+   "plateau": 0.85,
+   "vallee": 0.9,
+   "collines": 0.8,
+   "montagne": 0.5,
+   "lac": 0.6,
+   "militaire": 1
+  },
+  "forced_mult": 1.5,
+  "fatigue_per_day": 4,
+  "forced_fatigue_per_day": 12,
+  "rest_recovery": 10,
+  "fatigue_speed_floor": 0.5,
+    "march_fatigue_cap": 20,
+  "forced_attrition": 0.004,
+  "sea_speed_mult": 1
+ },
+ "supply": {
+  "max_days": 30,
+  "resupply_per_day": 5,
+  "starvation_attrition": 0.01,
+  "starvation_morale": 3,
+  "gas_out_odm_mult": 0.5,
+  "naval_supply": 3
+ },
+ "morale": {
+  "base": 70,
+  "drift": 1.5,
+  "victory": 8,
+  "defeat": 15,
+  "general_lost": 12,
+  "rout_below": 20
+ },
+ "combat": {
+  "base_losses": 0.06,
+  "noise": 0.3,
+  "fatigue_penalty": 0.4,
+  "command_bonus_per_point": 0.004,
+  "defender_terrain": {
+   "urbain": 1.25,
+   "foret": 1.2,
+   "mur": 1.6,
+   "fort": 1.4,
+   "montagne": 1.3,
+   "marais": 1.1,
+   "collines": 1.15
+  },
+  "wall_defense_mult": 1.5,
+  "artillery_weight": 0.6,
+  "counter_battery": 0.5,
+  "general_death_chance": 0.04,
+  "retreat_losses": 0.05,
+  "landing_penalty": 0.7,
+  "landing_cliffs_penalty": 0.4
+ },
+ "titans": {
+  "attrition_per_density": 0.004,
+  "encounter_per_density": 0.35,
+  "odm_protection": 0.6,
+  "group_per_density": 6
+ },
+ "vision": {
+  "base": 1,
+  "cavalry": 2
+ },
+ "encounter": {
+  "pending_days_max": 5,
+  "battle_soldiers_max": 48
+ },
+ "siege": {
+  "wall_per_piece_day": 0.06,
+  "garrison_losses_per_piece_day": 2,
+  "capture_below_structure": 35
+ },
+ "naval": {
+  "battle_losses": 0.12,
+  "blockade_supply_mult": 0.5,
+  "escort_ratio": 1
+ },
+ "garrison": {
+  "transfer_max": 2000,
+  "relief_morale": 5
+ },
+ "succession": {
+  "crisis_days": 30,
+  "legitimacy_hit": 8,
+  "stability_hit": 5,
+  "claimants": 3,
+  "loyalty_rival": -10,
+  "interim_command_mult": 0.8
+ },
+ "ai": {
+  "threat_ratio": 0.8,
+  "attack_ratio": 1.3,
+  "landing_min_ratio": 1.0,
+  "retreat_ratio": 0.5,
+  "decision_cap": 120
+ }
+}

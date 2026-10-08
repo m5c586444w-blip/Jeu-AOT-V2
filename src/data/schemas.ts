@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { CollectionName } from "./collections";
 import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
 import { ChoiceSchema, ConditionSchema, EffectSchema, TechEffectSchema } from "./effects";
+import { ArmiesEntrySchema, ArtilleryEntrySchema } from "./armySchemas";
 
 // Messages d'erreur de Zod en français (langue principale du projet).
 z.config(z.locales.fr());
@@ -597,6 +598,8 @@ export const COLLECTIONS: Record<CollectionName, z.ZodType> = {
   world_provinces: WorldProvinceSchema,
   factions: FactionSchema,
   formations: FormationSchema,
+  artillery: ArtilleryEntrySchema,
+  armies: ArmiesEntrySchema,
 };
 
 export { COLLECTION_NAMES } from "./collections";

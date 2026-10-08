@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **CHR terminée et fusionnée (D-123).** Prochaine phase : PA (fichier 21 §7 + 23 §3.2). Direction autonome (D-107). |
-| Tâche | Revue de CHR : spoilers de la frise, faits de fond « Titans », hash documenté (D-122) |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 588/588 (92 fichiers, `docs/reports/CHR-verify-revue.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/PA.md` (audit PA.1) puis exécuter PA sur `claude/v2-pa` (critères CPA-01 à 10, amendement 23 §3.2) |
+| Phase | **PA en cours** sur `claude/v2-pa` (fichier 21 §7 + 23 §3.2). Direction autonome (D-107). |
+| Tâche | PA.2–PA.7, PA.10 (simulation et données : armées, artillerie, marine, IA, succession) faites ; D-124 à D-127 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 606/606 (95 fichiers, `docs/reports/PA-verify-2.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : PA.5 rendu (batteries, impacts et zones de danger dans le rendu tactique Pixi), puis PA.8 (pions d'armées, trajets, registre « armées », alerte de rencontre, succession), PA.9 (`smoke:pa`, captures), rapport `docs/reports/PA.md` |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

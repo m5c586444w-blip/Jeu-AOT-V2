@@ -17,7 +17,7 @@ export function emptyRaw(): RawData {
   return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
-export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11" | "R12";
+export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13";
 
 export interface Violation {
   rule: RuleId;
@@ -134,7 +134,72 @@ export function checkCanon(data: RawData): Violation[] {
   checkEventEffects(data, push);
   checkShifterChains(data, push);
   checkScenarioStart(data, push);
+  checkWeapons(data, eventYear, push);
   return out;
+}
+
+/** Les lances de foudre n'existent qu'à la fin de 850 (11 §1, E40) : technologies qui les débloquent. */
+export const THUNDER_SPEAR_TECHS: readonly string[] = ["tech_thunder_spear_prototype", "tech_thunder_spear_mass", "tech_thunder_spear_improved"];
+
+/**
+ * R13 — armes et forces de PA (21 §7, 23 §3.2) : aucune arme avant sa date (année minimale ≥ celle de l'événement ou de la
+ * technologie exigée ; lances de foudre verrouillées par T-ANT-08/09) ; aucune armée de départ avec une arme pas encore
+ * disponible ni un général hors de sa fenêtre de présence ; aucun navire ni flotte pour Paradis.
+ */
+function checkWeapons(data: RawData, eventYear: (id: string) => number | undefined, push: (rule: RuleId, e: RawEntry, message: string) => void): void {
+  const techs = new Map(data.techs.map((t) => [t.id, t]));
+  const chars = new Map(data.characters.map((c) => [c.id, c]));
+  const scenarioYear = new Map(data.scenarios.map((sc) => [sc.id, num((sc.v["start"] as Record<string, unknown> | undefined)?.["year"])]));
+  const minYearOf = (e: RawEntry): number | undefined => num((e.v["requires"] as Record<string, unknown> | undefined)?.["min_year"]);
+  const reqs = new Map<string, number>();
+  for (const e of [...data.artillery, ...data.armies]) {
+    const r = e.v["requires"] as Record<string, unknown> | undefined;
+    if (!r) continue;
+    const y = num(r["min_year"]);
+    if (y === undefined) {
+      push("R13", e, "requires.min_year manquant");
+      continue;
+    }
+    reqs.set(e.id, y);
+    const ev = str(r["event"]);
+    const ey = ev ? eventYear(ev) : undefined;
+    if (ev && ey === undefined) push("R13", e, `événement exigé inconnu : ${ev}`);
+    if (ey !== undefined && y < ey) push("R13", e, `disponible en ${y}, avant l'événement ${ev ?? ""} (${ey})`);
+    const tech = str(r["tech"]);
+    const tt = tech ? techs.get(tech) : undefined;
+    if (tech && !tt) push("R13", e, `technologie exigée inconnue : ${tech}`);
+    const ty = tt ? num(tt.v["min_year"]) : undefined;
+    if (ty !== undefined && y < ty) push("R13", e, `disponible en ${y}, avant la technologie ${tech ?? ""} (${ty})`);
+    if (e.v["kind"] === "lances" && (!tech || !THUNDER_SPEAR_TECHS.includes(tech) || y < 850)) push("R13", e, "lances de foudre sans verrou T-ANT-08/09 ou avant 850 (11 §1)");
+    if ((e.v["type"] === "ship" || e.v["type"] === "fleet") && e.v["faction"] === "fac_paradis") push("R13", e, "aucune marine pour Paradis (23 §3.2)");
+  }
+  for (const e of data.armies) {
+    if (e.v["type"] === "fleet" && e.v["faction"] === "fac_paradis") push("R13", e, "aucune flotte pour Paradis (23 §3.2)");
+    if (e.v["type"] !== "army" && e.v["type"] !== "fleet") continue;
+    const y = scenarioYear.get(str(e.v["scenario"]) ?? "");
+    if (y === undefined) {
+      push("R13", e, `scénario inconnu : ${String(e.v["scenario"])}`);
+      continue;
+    }
+    for (const r of (e.v["regiments"] ?? e.v["ships"] ?? []) as Record<string, unknown>[]) {
+      const id = str(r["regiment"] ?? r["ship"]) ?? "";
+      const ry = reqs.get(id);
+      if (ry !== undefined && ry > y) push("R13", e, `${id} (disponible en ${ry}) au départ de ${y}`);
+      const entry = data.armies.find((x) => x.id === id);
+      const tech = str((entry?.v["requires"] as Record<string, unknown> | undefined)?.["tech"]);
+      const tt = tech ? techs.get(tech) : undefined;
+      if (tt && (num(tt.v["min_year"]) ?? 0) > y) push("R13", e, `${id} exige ${tech ?? ""} (${String(tt.v["min_year"])}) au départ de ${y}`);
+    }
+    const who = str(e.v["general"] ?? e.v["admiral"]);
+    const c = who ? chars.get(who) : undefined;
+    if (who && !c) push("R13", e, `chef inconnu : ${who}`);
+    if (c) {
+      const from = num(c.v["active_from"]);
+      const until = num(c.v["active_until"]);
+      if ((from !== undefined && from > y) || (until !== undefined && until < y)) push("R13", e, `${who} hors de sa fenêtre de présence en ${y} (11 §3)`);
+    }
+  }
+  void minYearOf;
 }
 
 /**

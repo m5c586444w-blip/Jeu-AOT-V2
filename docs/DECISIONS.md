@@ -987,3 +987,43 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | CHR (sous-agent) | Sonnet | high | ≈ 105 | |
 | Revue CHR + correctifs + fusion | Opus / Sonnet | défaut | ≈ 50 | 1 passe |
+
+## 2026-10-08 — D-124 Couche des armées optionnelle dans l'état ; empreintes des scénarios (phase PA)
+- **Contexte** : PA ajoute armées, flottes, rencontres, sièges et succession (21 §7, 23 §3.2). L'état doit rester
+  rechargeable, et `src/sim` ne doit changer que par ajouts.
+- **Options** : (a) passer à la version de schéma 9 et migrer les vieilles sauvegardes en créant les armées ; (b) champ
+  facultatif `GameState.armies`, créé au départ d'un scénario qui a des armées (`data/armies/depart.json`), jamais
+  créé pour une vieille sauvegarde (commande journalisée `RaiseArmies` pour l'ajouter).
+- **Choix** : (b). La version de schéma reste 8. Une vieille sauvegarde garde son empreinte (test `armies.test.ts`).
+- **Empreintes du selftest** (après CHR → après PA) : 845 `08bedd60` → `59a9b1b2` ; 850 `86f2d847` → `7d032fb4` ;
+  854 `49e288fa` → `1aca7ab8` ; 854 Marley `028d6da4` → `c718bf0d` ; expédition `249d21e4` → `20cdd5ca` ;
+  bataille `5cbf06a3` → `dd7651fd`. « Sans monde » (`3c17ecdc`) inchangé. Cause : armées présentes dès le départ
+  (marche, ravitaillement puisé dans les stocks, IA de Marley quand elle est en guerre).
+- **Raison** : aucune migration forcée, comportement neuf seulement pour les parties neuves.
+- **Réversible** : oui (retirer `data/armies/depart.json` rend l'état identique à celui de CHR).
+
+## 2026-10-08 — D-125 Prélèvements des armées hors plan économique (phase PA)
+- **Contexte** : les armées de Paradis en territoire tenu puisent vivres et gaz dans les stocks nationaux ; les sièges
+  dépensent de la poudre ; l'entretien mensuel de l'or. Le test AC1-04 compare la variation des stocks au plan du jour.
+- **Options** : (a) faire entrer les armées dans `planDay` (toucher `strategic/economy.ts` et les quatre appels de l'UI) ;
+  (b) prélèvement à part, consigné dans `armies.drawn` (jour courant), ajouté par le test AC1-04.
+- **Choix** : (b). AC1-04 reste exact : variation réelle + prélèvements des armées = variation expliquée.
+- **Réversible** : oui. Dette : afficher ces prélèvements dans le « pourquoi ? » de l'économie.
+
+## 2026-10-08 — D-126 Pas de marine pour Paradis ; armes incertaines désactivables (phase PA)
+- **Contexte** : 23 §3.2 (pas de marine pour Paradis ; Marley, Alliés et Hizuru en ont une), 11 §8 (aucune arme
+  anachronique).
+- **Choix** : règle R13 de `canon:check` (aucun navire ni aucune flotte de Paradis ; lances foudroyantes liées à une
+  technique, 850 au plus tôt ; aucune unité de départ postérieure au scénario). Canons de rempart `C`, canons sur rail
+  `C` (21 §7, 11 §1) ; canons de campagne et mortiers de Paradis, mitraille, boulets ramés `?` avec `enabled`.
+  Matériel de Marley `A` (mention générale de l'artillerie, détails non canon). `tech_ports_navy` ne donne aucune flotte.
+- **Réversible** : oui (champ `enabled`, données).
+
+## 2026-10-08 — D-127 Bataille tactique centrée sur Paradis ; délai d'un test 3D (phase PA)
+- **Contexte** : la bataille tactique existante oppose soldats de Paradis et Titans.
+- **Choix** : « jouer » n'est proposé qu'à Paradis joué, si la rencontre a des Titans ou des batteries ennemies
+  (artillerie de Marley = batteries ennemies, tirs d'éclats). Le choc armée contre armée sans Titans se règle par le
+  modèle rapide, pondéré par le résultat tactique s'il est joué. Combat humain contre humain complet : R2 ou après (dette).
+- **Délai** : `tests/render/tactical3d/titans-r1c.test.ts` (dette n° 26) : `beforeAll` à 120 s ; il dépassait 10 s sous la
+  charge de `verify` (premier verify de PA : 1 échec, `docs/reports/PA-verify-1.log`).
+- **Réversible** : oui.

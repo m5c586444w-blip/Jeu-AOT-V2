@@ -1,0 +1,765 @@
+[
+ {
+  "type": "regiment",
+  "id": "rgt_garnison",
+  "code": "U-P05",
+  "name_key": "rgt.garnison",
+  "faction": "fac_paradis",
+  "kind": "infanterie",
+  "men": 200,
+  "attack": 3,
+  "defense": 6,
+  "anti_titan": 2,
+  "speed_km_day": 24,
+  "food_per_day": 2,
+  "gas_per_day": 0,
+  "upkeep": 60,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 U-P05 (section de Garnison, C) ; compagnie de 200 hommes et valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_batterie_rempart",
+  "code": "U-P06",
+  "name_key": "rgt.batterie_rempart",
+  "faction": "fac_paradis",
+  "kind": "artillerie",
+  "men": 40,
+  "attack": 2,
+  "defense": 8,
+  "anti_titan": 6,
+  "speed_km_day": 6,
+  "food_per_day": 0.5,
+  "gas_per_day": 0,
+  "upkeep": 50,
+  "pieces": {
+   "piece": "art_canon_rempart",
+   "count": 4
+  },
+  "scout": 0,
+  "static": true,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_wall_artillery"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 U-P06 (équipe d'artillerie, C) servant des canons de mur (11 §1) ; ne quitte pas les murs. Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_batterie_rail",
+  "code": "U-P06",
+  "name_key": "rgt.batterie_rail",
+  "faction": "fac_paradis",
+  "kind": "artillerie",
+  "men": 48,
+  "attack": 2,
+  "defense": 8,
+  "anti_titan": 7,
+  "speed_km_day": 6,
+  "food_per_day": 0.5,
+  "gas_per_day": 0,
+  "upkeep": 60,
+  "pieces": {
+   "piece": "art_canon_rail",
+   "count": 4
+  },
+  "scout": 0,
+  "static": true,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_wall_artillery"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "Batterie de canons sur rails (rempart de Trost, 21 §7 [C]) ; ne quitte pas les murs. Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_artillerie_campagne",
+  "code": "V-02",
+  "name_key": "rgt.artillerie_campagne",
+  "faction": "fac_paradis",
+  "kind": "artillerie",
+  "men": 60,
+  "attack": 5,
+  "defense": 3,
+  "anti_titan": 5,
+  "speed_km_day": 16,
+  "food_per_day": 0.6,
+  "gas_per_day": 0,
+  "upkeep": 70,
+  "pieces": {
+   "piece": "art_canon_campagne",
+   "count": 4
+  },
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_mobile_cannon"
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Chariots-canons (10 V-02) : canons mobiles « ? » (11 §1), paramétrable. Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_mortiers_paradis",
+  "code": "U-P06",
+  "name_key": "rgt.mortiers_paradis",
+  "faction": "fac_paradis",
+  "kind": "artillerie",
+  "men": 40,
+  "attack": 4,
+  "defense": 2,
+  "anti_titan": 3,
+  "speed_km_day": 16,
+  "food_per_day": 0.4,
+  "gas_per_day": 0,
+  "upkeep": 50,
+  "pieces": {
+   "piece": "art_mortier_paradis",
+   "count": 4
+  },
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_mobile_cannon"
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Mortiers de Paradis : non attestés → « ? » (21 §7 les demande)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_cavalerie",
+  "code": "U-P04",
+  "name_key": "rgt.cavalerie",
+  "faction": "fac_paradis",
+  "kind": "cavalerie",
+  "men": 120,
+  "attack": 3,
+  "defense": 2,
+  "anti_titan": 2,
+  "speed_km_day": 48,
+  "food_per_day": 1.5,
+  "gas_per_day": 0,
+  "upkeep": 50,
+  "scout": 1,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-P04 (section de cavalerie, A). Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_odm",
+  "code": "U-P02",
+  "name_key": "rgt.odm",
+  "faction": "fac_paradis",
+  "kind": "odm",
+  "men": 60,
+  "attack": 4,
+  "defense": 3,
+  "anti_titan": 8,
+  "speed_km_day": 40,
+  "food_per_day": 0.6,
+  "gas_per_day": 1.2,
+  "upkeep": 70,
+  "scout": 1,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 U-P02 (escouades ODM de combat, C) en compagnie. Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_brigade",
+  "code": "U-P08",
+  "name_key": "rgt.brigade",
+  "faction": "fac_paradis",
+  "kind": "police",
+  "men": 120,
+  "attack": 3,
+  "defense": 4,
+  "anti_titan": 2,
+  "speed_km_day": 24,
+  "food_per_day": 1.2,
+  "gas_per_day": 0.3,
+  "upkeep": 55,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 U-P08 (Brigade militaire, C). Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_lances_foudre",
+  "code": "U-P07",
+  "name_key": "rgt.lances_foudre",
+  "faction": "fac_paradis",
+  "kind": "lances",
+  "men": 40,
+  "attack": 7,
+  "defense": 3,
+  "anti_titan": 14,
+  "speed_km_day": 36,
+  "food_per_day": 0.4,
+  "gas_per_day": 1,
+  "upkeep": 90,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 850,
+   "tech": "tech_thunder_spear_mass"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 U-P07 : lances de foudre dès la fin de 850 seulement (11 §1, E40) : exige T-ANT-09."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_genie",
+  "code": "U-P11",
+  "name_key": "rgt.genie",
+  "faction": "fac_paradis",
+  "kind": "genie",
+  "men": 80,
+  "attack": 1,
+  "defense": 4,
+  "anti_titan": 1,
+  "speed_km_day": 20,
+  "food_per_day": 0.8,
+  "gas_per_day": 0,
+  "upkeep": 40,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-P11 (génie, A) : répare les murs assiégés."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_convoi",
+  "code": "U-P12",
+  "name_key": "rgt.convoi",
+  "faction": "fac_paradis",
+  "kind": "convoi",
+  "men": 60,
+  "attack": 0,
+  "defense": 1,
+  "anti_titan": 0,
+  "speed_km_day": 22,
+  "food_per_day": 0.6,
+  "gas_per_day": 0,
+  "upkeep": 30,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-P12 (convoi de ravitaillement, A) : allonge l'autonomie."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_milice",
+  "code": "U-P15",
+  "name_key": "rgt.milice",
+  "faction": "fac_paradis",
+  "kind": "milice",
+  "men": 300,
+  "attack": 1,
+  "defense": 3,
+  "anti_titan": 0,
+  "speed_km_day": 20,
+  "food_per_day": 3,
+  "gas_per_day": 0,
+  "upkeep": 20,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-P15 (milice civile, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_infanterie",
+  "code": "U-M01",
+  "name_key": "rgt.m_infanterie",
+  "faction": "fac_marley",
+  "kind": "infanterie",
+  "men": 500,
+  "attack": 5,
+  "defense": 6,
+  "anti_titan": 3,
+  "speed_km_day": 28,
+  "food_per_day": 4,
+  "gas_per_day": 0,
+  "upkeep": 10,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_repeating_rifle"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M01 (infanterie de ligne, A). Valeurs : A."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_assaut",
+  "code": "U-M02",
+  "name_key": "rgt.m_assaut",
+  "faction": "fac_marley",
+  "kind": "assaut",
+  "men": 200,
+  "attack": 8,
+  "defense": 4,
+  "anti_titan": 3,
+  "speed_km_day": 28,
+  "food_per_day": 1.6,
+  "gas_per_day": 0,
+  "upkeep": 12,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M02 (infanterie d'assaut, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_artillerie",
+  "code": "U-M03",
+  "name_key": "rgt.m_artillerie",
+  "faction": "fac_marley",
+  "kind": "artillerie",
+  "men": 120,
+  "attack": 6,
+  "defense": 2,
+  "anti_titan": 6,
+  "speed_km_day": 24,
+  "food_per_day": 1,
+  "gas_per_day": 0,
+  "upkeep": 16,
+  "pieces": {
+   "piece": "art_marley_campagne",
+   "count": 6
+  },
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M03 (batterie d'artillerie, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_obusiers",
+  "code": "U-M03",
+  "name_key": "rgt.m_obusiers",
+  "faction": "fac_marley",
+  "kind": "artillerie",
+  "men": 120,
+  "attack": 7,
+  "defense": 2,
+  "anti_titan": 7,
+  "speed_km_day": 20,
+  "food_per_day": 1,
+  "gas_per_day": 0,
+  "upkeep": 18,
+  "pieces": {
+   "piece": "art_marley_obusier",
+   "count": 4
+  },
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 E-M03 (obusiers, A) : tir de barrage."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_lourde",
+  "code": "E-M04",
+  "name_key": "rgt.m_lourde",
+  "faction": "fac_marley",
+  "kind": "artillerie",
+  "men": 160,
+  "attack": 8,
+  "defense": 1,
+  "anti_titan": 8,
+  "speed_km_day": 14,
+  "food_per_day": 1.2,
+  "gas_per_day": 0,
+  "upkeep": 24,
+  "pieces": {
+   "piece": "art_marley_lourde",
+   "count": 4
+  },
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 E-M04 (artillerie lourde de siège, A) : train d'artillerie lent."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_mitrailleurs",
+  "code": "U-M04",
+  "name_key": "rgt.m_mitrailleurs",
+  "faction": "fac_marley",
+  "kind": "mitrailleurs",
+  "men": 80,
+  "attack": 3,
+  "defense": 9,
+  "anti_titan": 3,
+  "speed_km_day": 24,
+  "food_per_day": 0.8,
+  "gas_per_day": 0,
+  "upkeep": 10,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M04 (mitrailleurs, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_anti_titan",
+  "code": "E-M05",
+  "name_key": "rgt.m_anti_titan",
+  "faction": "fac_marley",
+  "kind": "anti_titan",
+  "men": 100,
+  "attack": 4,
+  "defense": 3,
+  "anti_titan": 10,
+  "speed_km_day": 26,
+  "food_per_day": 0.8,
+  "gas_per_day": 0,
+  "upkeep": 14,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 850,
+   "tech": "tech_antititan_rifle"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "10 E-M05 : fusils anti-Titan confirmés (emploi en 854, 11 §6) ; date de développement « ? » (T-MOD-05)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_m_cavalerie",
+  "code": "U-M05",
+  "name_key": "rgt.m_cavalerie",
+  "faction": "fac_marley",
+  "kind": "cavalerie",
+  "men": 100,
+  "attack": 3,
+  "defense": 2,
+  "anti_titan": 1,
+  "speed_km_day": 50,
+  "food_per_day": 1.2,
+  "gas_per_day": 0,
+  "upkeep": 8,
+  "scout": 1,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M05 (cavalerie légère, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_a_infanterie",
+  "code": "U-H04",
+  "name_key": "rgt.a_infanterie",
+  "faction": "fac_allies",
+  "kind": "infanterie",
+  "men": 400,
+  "attack": 4,
+  "defense": 5,
+  "anti_titan": 2,
+  "speed_km_day": 26,
+  "food_per_day": 3.2,
+  "gas_per_day": 0,
+  "upkeep": 8,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-H04 (infanterie alliée, A)."
+ },
+ {
+  "type": "regiment",
+  "id": "rgt_h_garde",
+  "code": "U-H01",
+  "name_key": "rgt.h_garde",
+  "faction": "fac_hizuru",
+  "kind": "infanterie",
+  "men": 150,
+  "attack": 3,
+  "defense": 6,
+  "anti_titan": 1,
+  "speed_km_day": 26,
+  "food_per_day": 1.2,
+  "gas_per_day": 0,
+  "upkeep": 8,
+  "scout": 0,
+  "static": false,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-H01 (garde du clan, A)."
+ },
+ {
+  "type": "ship",
+  "id": "ship_cuirasse",
+  "code": "V-10",
+  "name_key": "ship.cuirasse",
+  "faction": "fac_marley",
+  "kind": "cuirasse",
+  "attack": 12,
+  "defense": 10,
+  "capacity": 0,
+  "speed_km_day": 420,
+  "guns": {
+   "piece": "art_marley_navale_cuirasse",
+   "count": 8
+  },
+  "upkeep": 10,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 V-10 / U-M11 (cuirassés, A ; T-MOD-04 « ? »). Valeurs : A."
+ },
+ {
+  "type": "ship",
+  "id": "ship_croiseur",
+  "code": "V-11",
+  "name_key": "ship.croiseur",
+  "faction": "fac_marley",
+  "kind": "croiseur",
+  "attack": 7,
+  "defense": 6,
+  "capacity": 1,
+  "speed_km_day": 520,
+  "guns": {
+   "piece": "art_marley_navale_croiseur",
+   "count": 6
+  },
+  "upkeep": 6,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 V-11 / U-M12 (croiseurs, escorte, A)."
+ },
+ {
+  "type": "ship",
+  "id": "ship_transport",
+  "code": "V-12",
+  "name_key": "ship.transport",
+  "faction": "fac_marley",
+  "kind": "transport",
+  "attack": 0,
+  "defense": 2,
+  "capacity": 3,
+  "speed_km_day": 380,
+  "upkeep": 2,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 V-12 / U-M13 (transports de troupes, A)."
+ },
+ {
+  "type": "ship",
+  "id": "ship_coalition",
+  "code": "U-H06",
+  "name_key": "ship.coalition",
+  "faction": "fac_allies",
+  "kind": "croiseur",
+  "attack": 7,
+  "defense": 6,
+  "capacity": 2,
+  "speed_km_day": 450,
+  "upkeep": 6,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-H06 (navires de coalition, A)."
+ },
+ {
+  "type": "ship",
+  "id": "ship_hizuru",
+  "code": "V-13",
+  "name_key": "ship.hizuru",
+  "faction": "fac_hizuru",
+  "kind": "cotier",
+  "attack": 6,
+  "defense": 6,
+  "capacity": 2,
+  "speed_km_day": 400,
+  "upkeep": 5,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 V-13 / U-H02 (navires d'Hizuru, A)."
+ },
+ {
+  "type": "sea",
+  "id": "sea_nord_est",
+  "name_key": "sea.nord_est",
+  "x": 481,
+  "y": -481,
+  "adjacent": [
+   "sea_sud_est",
+   "sea_nord_ouest",
+   "sea_large"
+  ],
+  "coasts": [
+   "prov_plateau_du_nord",
+   "prov_vallee_oubliee",
+   "prov_steppe_orientale"
+  ],
+  "offmap": false,
+  "canon": "A",
+  "notes_canon": "Zones maritimes de l'île : découpage A (aucune source)."
+ },
+ {
+  "type": "sea",
+  "id": "sea_sud_est",
+  "name_key": "sea.sud_est",
+  "x": 481,
+  "y": 481,
+  "adjacent": [
+   "sea_nord_est",
+   "sea_sud_ouest",
+   "sea_large"
+  ],
+  "coasts": [
+   "prov_cote_est",
+   "prov_ruines_premier_cordon",
+   "prov_plaines_meurtries"
+  ],
+  "offmap": false,
+  "canon": "A"
+ },
+ {
+  "type": "sea",
+  "id": "sea_sud_ouest",
+  "name_key": "sea.sud_ouest",
+  "x": -481,
+  "y": 481,
+  "adjacent": [
+   "sea_sud_est",
+   "sea_nord_ouest",
+   "sea_large"
+  ],
+  "coasts": [
+   "prov_plaines_meurtries",
+   "prov_falaises_cote_sud",
+   "prov_riviere_des_cendres"
+  ],
+  "offmap": false,
+  "canon": "A"
+ },
+ {
+  "type": "sea",
+  "id": "sea_nord_ouest",
+  "name_key": "sea.nord_ouest",
+  "x": -481,
+  "y": -481,
+  "adjacent": [
+   "sea_sud_ouest",
+   "sea_nord_est",
+   "sea_large"
+  ],
+  "coasts": [
+   "prov_marais_brumeux",
+   "prov_foret_morte",
+   "prov_plateau_du_nord"
+  ],
+  "offmap": false,
+  "canon": "A"
+ },
+ {
+  "type": "sea",
+  "id": "sea_large",
+  "name_key": "sea.large",
+  "x": 0,
+  "y": -760,
+  "adjacent": [
+   "sea_nord_est",
+   "sea_sud_est",
+   "sea_sud_ouest",
+   "sea_nord_ouest"
+  ],
+  "coasts": [],
+  "offmap": true,
+  "canon": "A",
+  "notes_canon": "Au large : relie l'île aux mers du monde (wprov_cotes_paradis, P7)."
+ }
+]

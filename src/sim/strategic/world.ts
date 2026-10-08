@@ -1,5 +1,6 @@
 import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
+import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
 import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Faction, Formation, Scenario, Shifter, Stratum, TacticalMap, WorldProvince, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
@@ -26,6 +27,20 @@ export interface World {
   shifters: ShifterWorld | null;
   /** Monde des nations (P7) : absent hors d'un scénario à couche `world`. */
   nations: NationsWorld | null;
+  /** Armées, artillerie et marine (PA) : absentes sans données ou sans armée de départ pour le scénario. */
+  armies?: ArmiesWorld | null;
+}
+
+export interface ArmiesWorld {
+  balance: ArmiesBalance;
+  pieces: ReadonlyMap<string, Piece>;
+  munitions: ReadonlyMap<string, Munition>;
+  regiments: ReadonlyMap<string, Regiment>;
+  ships: ReadonlyMap<string, Ship>;
+  seas: ReadonlyMap<string, Sea>;
+  /** Armées et flottes de départ du scénario, dans l'ordre des données. */
+  starts: readonly ArmyStart[];
+  fleets: readonly FleetStart[];
 }
 
 export interface NationsWorld {
@@ -145,6 +160,27 @@ export interface WorldSource {
   factions?: readonly Faction[];
   formations?: readonly Formation[];
   worldBalance?: WorldBalance;
+  artillery?: readonly ArtilleryEntry[];
+  armies?: readonly ArmiesEntry[];
+  armiesBalance?: ArmiesBalance;
+}
+
+/** Couche PA : construite si l'équilibrage, la couche militaire (graphe) et au moins une armée de départ existent. */
+export function buildArmiesWorld(src: WorldSource, scenarioId: string, hasGeo: boolean): ArmiesWorld | null {
+  if (!src.armiesBalance || !hasGeo || !src.armies) return null;
+  const starts = src.armies.filter((a): a is ArmyStart => a.type === "army" && a.scenario === scenarioId);
+  if (starts.length === 0) return null;
+  const art = src.artillery ?? [];
+  return {
+    balance: src.armiesBalance,
+    pieces: new Map(art.filter((a): a is Piece => a.type === "piece").map((a) => [a.id, a])),
+    munitions: new Map(art.filter((a): a is Munition => a.type === "munition").map((a) => [a.id, a])),
+    regiments: new Map(src.armies.filter((a): a is Regiment => a.type === "regiment").map((a) => [a.id, a])),
+    ships: new Map(src.armies.filter((a): a is Ship => a.type === "ship").map((a) => [a.id, a])),
+    seas: new Map(src.armies.filter((a): a is Sea => a.type === "sea").map((a) => [a.id, a])),
+    starts,
+    fleets: src.armies.filter((a): a is FleetStart => a.type === "fleet" && a.scenario === scenarioId),
+  };
 }
 
 export function buildGeo(g: GeoData): GeoGraph {
@@ -173,7 +209,13 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
       society: src.society,
     };
   }
+  const military: MilitaryWorld | null =
+    src.geo && src.expeditions && src.logistics && src.names?.[0] && src.titans?.length
+      ? { geo: buildGeo(src.geo), units: new Map((src.units ?? []).map((u) => [u.id, u])), titans: src.titans, names: src.names[0], exp: src.expeditions, log: src.logistics }
+      : null;
+  const armies = buildArmiesWorld(src, scenarioId, military !== null);
   return {
+    ...(armies ? { armies } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),
@@ -181,10 +223,7 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     time: src.time,
     scenario,
     politics,
-    military:
-      src.geo && src.expeditions && src.logistics && src.names?.[0] && src.titans?.length
-        ? { geo: buildGeo(src.geo), units: new Map((src.units ?? []).map((u) => [u.id, u])), titans: src.titans, names: src.names[0], exp: src.expeditions, log: src.logistics }
-        : null,
+    military,
     tactical:
       src.tactical && src.titanTypes?.length && src.tacticalMaps?.length
         ? { balance: src.tactical, titanTypes: new Map(src.titanTypes.map((t) => [t.id, t])), titanClasses: new Map((src.titans ?? []).map((t) => [t.id, t])), maps: new Map(src.tacticalMaps.map((m) => [m.id, m])) }

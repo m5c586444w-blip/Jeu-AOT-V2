@@ -1,5 +1,6 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
+import type { ArmiesEntry, ArtilleryEntry } from "./armySchemas";
 import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, TacticalMap, Tech, Shifter, WorldProvince, Faction, Formation, TitanClass, TitanType, Trait, Unit } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
@@ -35,12 +36,14 @@ export interface GameData {
   factions: Faction[];
   formations: Formation[];
   tactical_maps: TacticalMap[];
+  artillery: ArtilleryEntry[];
+  armies: ArmiesEntry[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], world_provinces: [], factions: [], formations: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], world_provinces: [], factions: [], formations: [], artillery: [], armies: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -109,6 +112,50 @@ export function checkReferences(data: GameData): DataIssue[] {
   }
   for (const fo of data.formations) ref(fo.id, "faction", fo.faction);
   for (const r of data.roles) ref(r.id, "proposal", r.proposal);
+  // PA : artillerie, régiments, navires, mers, armées et flottes de départ.
+  const req = (owner: string, r: { tech?: string | undefined; event?: string | undefined }): void => {
+    ref(owner, "requires.tech", r.tech);
+    ref(owner, "requires.event", r.event);
+  };
+  for (const a of data.artillery) {
+    ref(a.id, "faction", a.type === "piece" ? a.faction : undefined);
+    if (a.type === "piece") for (const m of a.ammo) ref(a.id, "ammo", m);
+    else for (const f of a.factions) ref(a.id, "factions", f);
+    req(a.id, a.requires);
+  }
+  for (const a of data.armies) {
+    switch (a.type) {
+      case "regiment":
+        ref(a.id, "faction", a.faction);
+        ref(a.id, "pieces", a.pieces?.piece);
+        req(a.id, a.requires);
+        break;
+      case "ship":
+        ref(a.id, "faction", a.faction);
+        ref(a.id, "guns", a.guns?.piece);
+        req(a.id, a.requires);
+        break;
+      case "sea":
+        for (const s of a.adjacent) ref(a.id, "adjacent", s);
+        for (const p of a.coasts) ref(a.id, "coasts", p);
+        break;
+      case "army":
+        ref(a.id, "scenario", a.scenario);
+        ref(a.id, "faction", a.faction);
+        ref(a.id, "general", a.general ?? undefined);
+        ref(a.id, "province", a.province ?? undefined);
+        for (const r of a.regiments) ref(a.id, "regiments", r.regiment);
+        break;
+      case "fleet":
+        ref(a.id, "scenario", a.scenario);
+        ref(a.id, "faction", a.faction);
+        ref(a.id, "admiral", a.admiral ?? undefined);
+        ref(a.id, "sea", a.sea);
+        for (const s of a.ships) ref(a.id, "ships", s.ship);
+        for (const e of a.embarked) ref(a.id, "embarked", e);
+        break;
+    }
+  }
   const modifierRefs = (owner: string, target: string): void => {
     const m = /:(str_[a-z_]+|org_[a-z_]+)$/.exec(target);
     if (m) ref(owner, "effects", m[1]);
