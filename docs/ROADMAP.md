@@ -6,7 +6,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 |---|---|---|---|---|---|
 | N1 | UX0 | 22 §3 | 60 | non | fusionnée (PR n° 1) |
 | N1 | MAP | 22 §4 | 220 | oui (revue par sous-agent, D-106) | terminée, fusionnée par la PR n° 2 |
-| N1 | UI | 22 §5 | 280 | oui | en revue (branche `claude/v2-ui`, rapport `docs/reports/UI.md`) |
+| N1 | UI | 22 §5 | 280 | oui (revue par sous-agent, D-113) | terminée, fusionnée par sa PR (dette n° 19 à 21) |
 | N1 | AUD | 22 §6 + 23 §3.1 | 120 | non | à faire |
 | N1 | CHR | 22 §7 | 120 | non | à faire |
 | N1 | PA | 21 §7 + 23 §3.2 | 200 | oui | à faire |

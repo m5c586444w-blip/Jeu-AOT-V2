@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **UI en revue** (branche `claude/v2-ui`, rapport `docs/reports/UI.md`) : UI.1 à UI.7 faites ; 9 smoke sur 10 OK (`smoke:tactique` : 2 erreurs de page Pixi, dette n° 20). |
-| Tâche | UI.7 : correctifs des smoke KO (dc09c21), second passage, 12 captures lues |
-| Dernier `npm run verify` | 2026-10-08 (après dc09c21) : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify-correctifs.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : revue de la phase UI par la direction (rapport `docs/reports/UI.md`) ; puis dette n° 20 (erreurs Pixi de smoke:tactique à la fermeture de la planche des figures) et n° 19 |
+| Phase | **UI terminée et fusionnée (D-113).** Prochaine phase : AUD (fichier 22 §6 + 23 §3.1). Direction autonome (D-107). |
+| Tâche | Revue de UI : correctif « débogage » (E-UX-1), dettes n° 20 et 21 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify-revue.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/AUD.md` puis exécuter AUD sur `claude/v2-aud` (critères CAUD-01 à 07) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

@@ -10,6 +10,7 @@ export const LEAK_PATTERNS: readonly { id: string; re: RegExp }[] = [
   { id: "renvoi aux spécifications", re: /[Ff]ichier \d{2}\b|\b\d{2} §\s?\d+|\b\d{2} [A-Z]{1,2}\d{2}\b|\bdata\/[\w/.-]+/u },
   { id: "phase de développement", re: /\bphase P?\d+\b|\bP(?:[0-9]|10)\b|[Mm]écanique en\b|registre non (?:encore )?ouvert|NON OUVERT/u },
   { id: "annonce", re: /pas avant (?:l'an )?\d{3}|n'existe pas encore|ça va arriver|arrive en phase/iu },
+  { id: "débogage", re: /débogage|\bdebug\b/iu },
   { id: "identifiant de données", re: /\b(?:prov|char|org|str|evt|tech|secret|agent|shifter|ttype|tmap|wprov|fac|form|scn)_[a-z0-9_]+/u },
 ];
 
@@ -32,7 +33,7 @@ export function findLeaks(text: string): Leak[] {
 }
 
 /** Clés de traduction réservées au mode auteur ou à la console de service (jamais affichées au joueur hors F10, F2). */
-export const AUTHOR_KEYS: readonly RegExp[] = [/^console\./, /^canon\./, /^dossier\.canon_why$/, /^dossier\.(location|control)_(status|why)$/, /^research\.min_year$/, /^research\.phase$/, /^layers\.closed$/, /^evt\.canon_stamp$/, /^app\./, /^debug\./];
+export const AUTHOR_KEYS: readonly RegExp[] = [/^console\./, /^canon\./, /^dossier\.canon_why$/, /^dossier\.(location|control)_(status|why)$/, /^research\.min_year$/, /^research\.phase$/, /^layers\.closed$/, /^evt\.canon_stamp$/, /^app\./, /^debug\./, /^dip\.ai_log$/];
 
 const SPEC_REF = /^(?:\d{2} §\s?[\d.]+|\d{2} [A-Z]{1,2}\d{2}|[A-Z]{1,3}-(?:[A-Z]{2,4}-)?\d{1,3}|E\d{2}|[CA?])$/u;
 

@@ -871,3 +871,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Choix** : (b), `calc(var(--z-fenetre) + 2)` pour `.bataille` et les planches ; le registre réapparaît intact après la
   bataille. smoke:p5 : étude d'une technologie montrée (bouteilles de gaz compactes), verrou attendu « Exige … ».
 - **Réversible** : oui.
+
+## 2026-10-08 — D-113 Revue et fusion de la phase UI (direction autonome)
+- **Contexte** : UI faite par un sous-agent (UI.1 à UI.7, ≈ 250 tours sur 280) ; relancé une fois après un arrêt de 2 h sans
+  progrès pendant les smoke. Revue par un sous-agent distinct : un bloquant (« (débogage) » visible en Chancellerie).
+- **Choix** : (1) correctif unique : journal des IA réservé au mode auteur, motif « débogage » ajouté au contrôle de fuites,
+  vérifié par un troisième sous-agent ; (2) `smoke:tactique` (2 erreurs Pixi, deux passages en échec) mis en dette n° 20
+  selon le fichier 24 §4 : les batailles vont au bout ; la bataille 2D sera remplacée en R2+ ; (3) défauts de finition
+  « tableur » en dette n° 21 (pas de troisième passe, fichier 24 §4) ; (4) `npm run verify` code 0 (530/530,
+  `docs/reports/UI-verify-revue.log`), `src/sim` diff vide ; fusion.
+- **Options écartées** : bloquer la fusion sur `smoke:tactique` (critère non bloquant au sens du fichier 24 §4 ; AUD, CHR
+  et PA n'en dépendent pas) ; nouvelle passe de finition (refonte au passage, interdite).
+- **Réversible** : oui (revert du commit de fusion).
+- **À valider par Gabriel** : l'aspect général de l'interface (dette n° 21 liste ce que le relecteur juge encore « tableur »).
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| UI (sous-agent) | Opus | xhigh | ≈ 250 | relancé une fois |
+| Revue et fusion UI (direction + 3 relecteurs) | Opus / Sonnet | défaut | ≈ 30 | 1 correctif |

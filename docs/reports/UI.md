@@ -23,7 +23,7 @@ une ligne KO (2 erreurs de page, § Smoke). La bataille n'est plus recouverte (9
 | CUI-01 verify code 0 | **OK** | `docs/reports/UI-verify-correctifs.log` (après dc09c21), extrait ci-dessous |
 | CUI-02 `src/sim` inchangé | **OK** | `git diff origin/claude/attack-on-titan-strategy-game-4ukom6 --stat -- src/sim` : sortie vide |
 | CUI-03 tous les `smoke:*` | **KO (1 ligne)** | 9/10 OK ; `smoke:tactique` : « KO 0 erreur console » (2 erreurs de page Pixi, dette n° 20) |
-| CUI-04 no-leaks | **OK** | `smoke:ux0` : « 119 écrans contrôlés ; 0 échec(s). » ; `no-leaks.test.ts` vert |
+| CUI-04 no-leaks | **OK après correctif de revue** | revue D-113 : « (débogage) » visible en Chancellerie, non détecté ; journal des IA réservé au mode auteur, motif « débogage » ajouté ; `tests/ui` 77/77 |
 | CUI-05 pas de grille de cartes | **OK** | `smoke:p8` « tout est conforme » : contrôle « grille de cartes » sur les 9 écrans U5, 4 passes |
 | CUI-06 ≥ 60 icônes | **OK** | `tests/ui/icons.test.ts` (90 icônes) |
 | CUI-07 lisible 1366 et 4K | **OK** | `smoke:p8` 4 passes (1366 et 3840, 100 et 125 %) : 171 OK, 0 KO ; captures 1366 et 4K |
@@ -108,3 +108,23 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
 1. `smoke:tactique` : erreurs Pixi `geometry` / `clear` après la fermeture de la planche des figures (dette n° 20).
 2. Dette n° 19 et défauts des captures : mention « (débogage) » de la chancellerie, fond 4K du menu, textes anglais,
    légende de carte (dettes 13 et 14).
+
+## Revue de la direction autonome (2026-10-08, D-113)
+- Relecture indépendante (12 captures, rapport, diff des smoke) : **un bloquant**, « Journal de raisonnement des nations
+  (débogage) » visible en Chancellerie (E-UX-1). Correctif unique : `<details>` marqué `authorOnly`, clé `dip.ai_log` en
+  clé d'auteur, motif « débogage / debug » ajouté à `LEAK_PATTERNS` (le test l'a attrapé avant la mise en clé d'auteur).
+- Contrôles des smoke : non affaiblis (p5 plus strict sur la fuite, p8 adapté au menu U8, contrôles ajoutés).
+- `smoke:tactique` (dette n° 20) : sur la branche principale (copie à part, même jour), la ligne « 0 erreur console » est
+  aussi KO, mais pour 3 réponses 403 et sans les erreurs Pixi : les erreurs Pixi viennent probablement de la phase UI.
+  Les batailles se jouent jusqu'au bout (carnet tenu). Deux passages en échec : dette, à reprendre en R2+.
+- Écarts du rapport relevés par le relecteur : CUI-07 « lisible » alors que la capture 8 montre des noms tronqués ;
+  la barre du haut compte 9 éléments (U3 : 7 au plus). En dette n° 21.
+- Sortie réelle après correctif (`UI-verify-revue.log`) :
+```
+ Test Files  86 passed (86)
+      Tests  530 passed (530)
+canon:check : « data » conforme (R1–R12, 592 entrées).
+sim:selftest : OK (direct = worker : …, 850 avec une bataille jouée).
+✓ built in 2.08s
+EXIT 0
+```

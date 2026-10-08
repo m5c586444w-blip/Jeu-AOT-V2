@@ -1,14 +1,15 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
 **Établi (sorties réelles)**
-- MAP fusionnée (PR n° 2) : `npm run verify` code 0, 510/510 (`docs/reports/MAP-verify-fusion.log`) ; `src/sim` inchangé.
-- Captures de la carte relues par deux sous-agents distincts ; un bloquant (panneau Calques illisible en 4K) corrigé.
+- MAP fusionnée (PR n° 2) : verify code 0, 510/510 ; `src/sim` inchangé.
+- UI fusionnée : verify code 0, 530/530 (`docs/reports/UI-verify-revue.log`) ; 9 smoke sur 10 OK ; 90 icônes ; menu plein écran.
+- Revue UI par sous-agent distinct : un bloquant (« débogage » visible en Chancellerie), corrigé et revérifié.
 
-**En dette** : n° 13 à 15 (légendes des calques Titans et Nourriture, rose du calque politique, noms serrés, relief faible).
+**En dette** : n° 13 à 15 (calques de la carte), n° 19 à 21 (UI : erreurs Pixi de smoke:tactique, panneaux à moitié vides, chiffres bruts, portraits).
 
-**Décisions à valider par Gabriel** : D-106 (délai de 240 s pour deux tests 3D lents ; la carte elle-même), D-107 (gouvernance).
+**À valider par Gabriel** : D-106 (délai de 2 tests 3D), D-107 (gouvernance), D-113 (fusion UI avec smoke:tactique en dette ; aspect « tableur » restant).
 
-**Prochaine action** : phase UI (fichier 22 §5) sur `claude/v2-ui`, par un sous-agent neuf.
+**Prochaine action** : phase AUD (fichier 22 §6 + 23 §3.1) sur `claude/v2-aud`.
 
-**Quota** : non mesuré (aucun % fourni) ; ≈ 35 tours de direction consommés (tableau dans `docs/DECISIONS.md`, D-107).
-**Interprété / non confirmé** : la lisibilité de la carte sur ton écran réel.
+**Quota** : non mesuré (aucun % fourni) ; ≈ 315 tours depuis ce matin (tableau D-107 et D-113).
+**Interprété / non confirmé** : le rendu réel sur ton écran ; l'origine exacte des erreurs Pixi (probablement UI).

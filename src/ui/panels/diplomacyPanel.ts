@@ -1,3 +1,4 @@
+import { authorOnly } from "../authorMode";
 import { emblem } from "../icons";
 import { t } from "../../i18n";
 import { acceptance, hizuruDrift, TREATY_KINDS } from "../../sim/world/diplomacy";
@@ -148,8 +149,8 @@ export class DiplomacyPanel implements Panel {
     }
     grid.append(list, detail);
     root.append(grid);
-    // Journal de raisonnement des IA (02 §14), replié.
-    const det = el("details", "chancellerie__ia");
+    // Journal de raisonnement des IA (02 §14), replié ; réservé au mode auteur (E-UX-1).
+    const det = authorOnly(el("details", "chancellerie__ia"));
     det.append(el("summary", "", t("dip.ai_log")));
     const ul = el("ul", "registre-liste");
     for (const d of [...ns.ai].reverse().slice(0, 12)) {
