@@ -1,6 +1,7 @@
 import { isAuthorMode, setAuthorMode } from "./authorMode";
 import mapJson from "../../data/map/paradis.json";
 import type { MapData } from "../data/map";
+import type { TerrainData } from "../data/terrain";
 import { t } from "../i18n";
 import { StrategicMap } from "../render/strategicMap";
 import { SaveStore } from "../save/saveStore";
@@ -21,7 +22,7 @@ import { KeyMap } from "./keymap";
 import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
 import { attachMapControls } from "./mapControls";
-import { buildLabels, buildMapProvinces, mapDynamic } from "./mapModel";
+import { buildLabels, buildMapProvinces, drawingMap, mapDynamic } from "./mapModel";
 import { buildMapRoutes } from "./mapRoutes";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
@@ -118,13 +119,17 @@ export async function bootGame(): Promise<void> {
   screen.append(hud.el, host);
   app.append(screen);
 
-  const mapData = mapJson as unknown as MapData;
-  const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces));
+  // Carte réaliste (MAP) : terrain figé chargé à part, en une seule ressource ; durée jusqu'à la première image mesurée (MAP.7).
+  performance.mark("carte:debut");
+  const terrain = (await import("../../data/map/terrain/paradis.json")).default as unknown as TerrainData;
+  const mapData = drawingMap(mapJson as unknown as MapData, terrain);
+  const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces, terrain), terrain);
   const byId = new Map(world.provinces.map((p) => [p.id, p]));
   map.onCamera = () => {
     host.dataset["lod"] = map.lod;
   };
   host.dataset["lod"] = map.lod;
+  requestAnimationFrame(() => requestAnimationFrame(() => performance.measure("carte:premiere-image", "carte:debut")));
   const dossier = new Dossier(host, world, mapData.walls, why, () => {
     dossier.close();
     map.setSelected(null);

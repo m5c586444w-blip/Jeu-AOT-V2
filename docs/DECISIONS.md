@@ -796,3 +796,34 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   avec le statut 200 ; `fetchPlace` le prenait pour un lieu N1 et le moteur échouait (« not valid JSON »), d'où le repli 2D.
   Seule une réponse JSON vaut maintenant plan d'auteur ; sinon le plan figé `generated/<id>.json` est lu. Vu à la première
   capture du village.
+
+## 2026-10-08 — D-106 Direction autonome : reprise et fusion de MAP
+- **Contexte** : Gabriel délègue toutes les décisions à une direction autonome (fil « Direction autonome Murs et Sang ») ; les
+  arrêts de revue sont remplacés par la revue d'un sous-agent distinct de celui qui a produit le travail. MAP (PR n° 2,
+  branche `claude/v2-map`) avait 4 commits de retard sur la branche principale ; son seul échec de verify était CR1e-05.
+- **Contrôle des pushs concurrents** : `git fetch` du 2026-10-08 06:00Z ; dernier commit de la branche principale `4670392`
+  (fin de R1e, session CLI de Gabriel) ; aucun autre push concurrent.
+- **Choix** : (1) fusion de la branche principale dans `claude/v2-map` (commit de fusion, pas de rebase) ; (2) verify : CR1e-05
+  passe (seuil 0,51, D-103), mais deux tests 3D de R1b dépassent 30 s sous la charge de la suite complète (36 s et 47 s ;
+  verts seuls, déjà signalé pendant MAP). Délai porté à 240 s pour ces deux tests, comme le test « lot 2 » voisin qui l'avait
+  déjà. Options écartées : désactiver les tests (interdit), lancer la suite en série (verify deux fois plus long).
+  (3) Revue des captures par un sous-agent : un bloquant (panneau « Calques » illisible en 4K) corrigé une fois
+  (`zoom` selon la hauteur d'écran), recapturé, relu par un second sous-agent : aucun bloquant. Le reste en dette n° 13 à 15.
+  (4) `npm run verify` code 0 (510/510, `docs/reports/MAP-verify-fusion.log`) ; `src/sim` : diff vide. Fusion de la PR n° 2.
+- **Réversible** : oui (revert du commit de fusion).
+- **À valider par Gabriel** : la carte elle-même (arrêt de revue MAP du fichier 24 remplacé par la revue du sous-agent).
+
+## 2026-10-08 — D-107 Gouvernance de la direction autonome
+- **Une phase = un sous-agent neuf** (outil Agent) qui travaille sur sa propre branche `claude/v2-<phase>` et ouvre une PR
+  brouillon ; la direction ne code pas la phase elle-même. **Revue** = un autre sous-agent neuf, qui n'a pas produit le travail.
+  **Fusion** par la direction quand : verify code 0 collé, critères OK ou en dette, captures décrites (3 lignes, 3 défauts),
+  rapport ≤ 150 lignes. Une seule session de code à la fois sur une branche.
+- **Modèle et effort** : un sous-agent ne peut pas changer de modèle ni d'effort en dehors de ceux que l'outil propose ; la
+  direction tourne sur Opus 5.5 ; les phases « mécaniques » (AUD, CHR) reçoivent le modèle Sonnet quand l'outil le permet.
+- **Plafonds de tours** : ceux de `docs/ROADMAP.md`, rappelés dans la consigne de chaque sous-agent.
+- **Réversible** : oui.
+
+### Tableau de consommation (estimé d'après les tours ; aucun % de quota fourni par Gabriel)
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| Reprise MAP (direction) | Opus 5.5 | défaut | ≈ 35 | verify ×2, 2 revues de captures, 1 correctif |

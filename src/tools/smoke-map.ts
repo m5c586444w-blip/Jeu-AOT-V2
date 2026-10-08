@@ -5,6 +5,7 @@ import { chromium } from "playwright-core";
 import type { Page } from "playwright-core";
 import { createServer } from "vite";
 import fr from "../i18n/fr.json";
+import terrain from "../../data/map/terrain/paradis.json";
 import { isAvailable, OVERLAY_IDS } from "../ui/overlays";
 
 const executablePath = process.env["CHROMIUM_PATH"] ?? "/opt/pw-browsers/chromium";
@@ -56,12 +57,16 @@ try {
   if (!box) throw new Error("canvas sans dimensions");
   const cx = box.x + box.width / 2;
   const cy = box.y + box.height / 2;
-  // Trost : sud de Rose (relèvement 180°) ; on survole puis on clique.
-  const trostY = cy + box.height * 0.235;
-  await page.mouse.move(cx, trostY);
+  // Trost : position tirée de la carte réaliste (MAP) ; vue d'ensemble = île cadrée, centre du monde au centre du canvas.
+  const [bx0, by0, bx1, by1] = terrain.bounds as [number, number, number, number];
+  const fitZoom = Math.min(box.width / (bx1 - bx0), box.height / (by1 - by0)) * 0.98;
+  const [tx, ty] = terrain.provinces.prov_trost.anchor as [number, number];
+  const trostX = cx + tx * fitZoom;
+  const trostY = cy + ty * fitZoom - 4;
+  await page.mouse.move(trostX, trostY);
   await page.waitForTimeout(150);
   expect((await page.locator(".bulle").isVisible()) && (await page.locator(".bulle__nom").innerText()) === "Trost", "survol → bulle « Trost » (AC1-10)");
-  await page.mouse.click(cx, trostY);
+  await page.mouse.click(trostX, trostY);
   await page.waitForTimeout(200);
   expect((await page.locator(".dossier").isVisible()) && (await page.locator(".dossier__titre").innerText()) === "Trost", "clic → dossier de Trost (AC1-10)");
   await page.screenshot({ path: `${OUT}/p1-dossier.png` });
@@ -74,7 +79,7 @@ try {
   await page.keyboard.press("Escape");
   expect(!(await page.locator(".dossier").isVisible()), "Échap ferme le dossier");
 
-  await page.mouse.dblclick(cx, trostY);
+  await page.mouse.dblclick(trostX, trostY);
   await page.waitForTimeout(200);
   const lod1 = await page.getAttribute(".carte", "data-lod");
   expect(lod0 === "monde" && lod1 !== "monde", `double-clic → centrage et rapprochement (${lod0} → ${lod1}) (AC1-10)`);

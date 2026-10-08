@@ -34,7 +34,7 @@ describe("règle de visibilité du mur (R1b.4)", () => {
     expect(d).toBeLessThan(mid);
   });
 
-  it("aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, capitale, nature) ; un mur dans les autres", () => {
+  it("aucun mur dans les scènes dont le profil l'exclut (campagne intérieure, capitale, nature) ; un mur dans les autres", { timeout: 240000 }, () => {
     for (const p of testable) {
       const env = generateEnvironment(p.id, 850);
       const meshes = buildEnvironmentMeshes(env, { quality: "bas", textures: null });
