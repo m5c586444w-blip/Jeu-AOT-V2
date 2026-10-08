@@ -2626,5 +2626,15 @@
   "journal.filter.tout": "Toutes les alertes",
   "journal.filter.graves": "Graves seulement",
   "journal.none_grave": "Aucune alerte grave.",
-  "laws.vote_short": "Vote requis"
+  "laws.vote_short": "Vote requis",
+  "narr.epi.stats": "Bilan",
+  "menu.title": "Menu principal",
+  "menu.tagline": "Gouverner, défendre, survivre derrière les Murs.",
+  "menu.new": "Nouvelle partie",
+  "menu.continue": "Continuer",
+  "menu.continue_why": "Reprendre la dernière partie ({scenario}) à sa sauvegarde automatique la plus récente.",
+  "menu.continue_none": "Aucune partie commencée dans ce navigateur.",
+  "menu.options": "Options",
+  "menu.quit": "Quitter",
+  "menu.quit_note": "Le navigateur ne laisse pas une page fermer son propre onglet : fermez-le. La partie est sauvegardée automatiquement à intervalles."
 }

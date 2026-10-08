@@ -694,11 +694,11 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: 22; ov
 .choix-nation__dossier--fac_paradis { border-left-color: var(--nation-paradis); }
 
 /* ——— Menu principal (U8) ——— */
-.menu-principal { position: relative; min-height: 100vh; overflow: hidden; display: grid; grid-template-columns: minmax(18rem, 30rem) 1fr minmax(20rem, 34rem); color: var(--texte); background: var(--fond-profond); }
-.menu-principal__fond { position: absolute; inset: 0; background-size: cover; background-position: center 40%; }
+.menu-principal { position: relative; min-height: 100vh; overflow: hidden; display: grid; grid-template-columns: minmax(22rem, 36rem) 1fr minmax(20rem, 34rem); color: var(--texte); background: var(--fond-profond); }
+.menu-principal__fond { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
 .menu-principal__voile { position: absolute; inset: 0; background: linear-gradient(90deg, var(--voile-fort) 0%, var(--voile) 32%, transparent 55%, var(--voile) 75%, var(--voile-fort) 100%); }
 .menu-principal__colonne { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; padding: 3rem clamp(1.5rem, 4vw, 4rem); }
-.menu-principal__titre { margin: 0; font-family: var(--f-orne); font-size: clamp(2.6rem, 5vw, 4.4rem); font-weight: 400; line-height: 1; letter-spacing: 0.02em; color: var(--texte-fort); text-shadow: 0 2px 0 var(--ombre); }
+.menu-principal__titre { margin: 0; white-space: nowrap; font-family: var(--f-orne); font-size: clamp(2.6rem, 5vw, 4.4rem); font-weight: 400; line-height: 1; letter-spacing: 0.02em; color: var(--texte-fort); text-shadow: 0 2px 0 var(--ombre); }
 .menu-principal__devise { margin: 0.2rem 0 1.6rem; font-size: var(--t-l); color: var(--accent-clair); letter-spacing: 0.08em; }
 .menu-entree { display: flex; align-items: center; gap: 0.8rem; width: 100%; padding: 0.55rem 0.9rem; text-align: left; font-size: var(--t-l); letter-spacing: 0.06em; color: var(--texte-fort); background: var(--voile); border: var(--filet-l) solid transparent; border-left: 3px solid transparent; }
 .menu-entree:hover:not(:disabled), .menu-entree[aria-pressed="true"] { background: var(--voile-fort); border-color: var(--filet-doux); border-left-color: var(--accent); color: var(--accent-clair); }
@@ -709,10 +709,14 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: 22; ov
 .menu-scenarios { position: relative; z-index: 1; grid-column: 3; align-self: center; margin: 1.5rem clamp(1rem, 3vw, 3rem) 1.5rem 0; padding: 0 0 0.8rem; background: var(--voile-fort); border: var(--filet-l) solid var(--filet); border-top: 2px solid var(--accent); }
 .menu-scenarios[hidden] { display: none; }
 .menu-scenarios__titre { margin: 0; padding: 0.55rem 0.9rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--texte-second); border-bottom: var(--filet-l) solid var(--filet-doux); }
-.chemise { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); grid-template-rows: auto auto auto; column-gap: 0.8rem; width: 100%; padding: 0.6rem 0.9rem; text-align: left; color: var(--texte); background: transparent; border: none; border-bottom: var(--filet-l) solid var(--filet-doux); border-left: 3px solid transparent; }
+.chemise { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; column-gap: 0.8rem; width: 100%; padding: 0.6rem 0.9rem; text-align: left; color: var(--texte); background: transparent; border: none; border-bottom: var(--filet-l) solid var(--filet-doux); border-left: 3px solid transparent; }
 .chemise:hover, .chemise:focus-visible, .chemise[aria-pressed="true"] { background: var(--reflet-fort); border-left-color: var(--accent); }
-.chemise__couverture { grid-row: 1 / span 3; align-self: center; display: block; width: 5.5rem; height: 3.6rem; overflow: hidden; color: var(--accent); background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); }
-.chemise__couverture svg { width: 100%; height: 100%; display: block; }
+.chemise__couverture { display: flex; align-items: center; justify-content: center; width: 5.5rem; height: 3.6rem; overflow: hidden; color: var(--texte-fort); background: var(--panneau-creux) url("/menu/murs-crepuscule.jpg") no-repeat; background-size: 520%; border: var(--filet-l) solid var(--filet-doux); }
+.chemise[data-scenario="scn_sandbox_845"] .chemise__couverture { background-position: 14% 72%; }
+.chemise[data-scenario="scn_sandbox_850"] .chemise__couverture { background-position: 50% 60%; }
+.chemise[data-scenario="scn_854"] .chemise__couverture { background-position: 72% 64%; }
+.chemise__texte { display: flex; flex-direction: column; min-width: 0; }
+.chemise__couverture svg { width: 2.6rem; height: 2.6rem; display: block; filter: drop-shadow(0 1px 0 var(--ombre)); }
 .chemise--nation .chemise__couverture { display: flex; align-items: center; justify-content: center; }
 .chemise--nation .chemise__couverture svg { width: 2.8rem; height: 2.8rem; }
 .chemise--fac_marley .chemise__couverture { color: var(--nation-marley); }
@@ -721,7 +725,7 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: 22; ov
 .chemise__resume { font-size: var(--t-s); color: var(--texte-second); line-height: 1.35; }
 .choix-nation-menu { border-top: var(--filet-l) solid var(--filet); margin-top: 0.4rem; }
 .choix-nation-menu[hidden] { display: none; }
-.choix-nation-menu .tiroir-scenarios__etiquette { margin: 0; padding: 0.55rem 0.9rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--texte-second); border-bottom: var(--filet-l) solid var(--filet-doux); }
+.menu-scenarios__sous-titre { margin: 0; padding: 0.55rem 0.9rem; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--texte-second); border-bottom: var(--filet-l) solid var(--filet-doux); }
 .menu-options { position: relative; z-index: 1; }
 @media (max-width: 1000px) { .menu-principal { grid-template-columns: 1fr; } .menu-scenarios { grid-column: 1; margin: 0 1rem 1rem; } }
 
@@ -799,3 +803,21 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: 22; ov
 .rech-prereq--acquis { color: var(--succes-clair); }
 .decrets-vue .decret { border: none; padding: 0; }
 .exp-gauche, .exp-droite, .rens-agents, .rens-rapports { min-width: 0; }
+
+/* Menu principal (UI.5) : entrées, mention, note de sortie. */
+.menu-principal__entrees { display: flex; flex-direction: column; gap: 0.35rem; max-width: 22rem; }
+.menu-principal__note { margin: 0.6rem 0 0; max-width: 22rem; font-size: var(--t-s); color: var(--accent-clair); }
+.menu-principal__mention { margin: 2rem 0 0; max-width: 24rem; font-size: var(--t-xs); color: var(--texte-discret); }
+.menu-scenarios__liste { display: flex; flex-direction: column; }
+.chemise--nation .chemise__couverture { background-image: none; }
+
+/* Épilogue (UI.5) */
+.epilogue__tete { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
+.epilogue__blason { display: inline-flex; width: 3.4rem; height: 3.4rem; color: var(--accent); }
+.epilogue__blason svg { width: 100%; height: 100%; }
+.epilogue__tete .epilogue__titre { margin: 0; }
+.epilogue__colonnes { display: grid; grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr); gap: 1.4rem; align-items: start; }
+.epilogue__recit { font-size: var(--t-m); line-height: 1.55; }
+.epilogue__bilan { padding: 0.5rem 0.8rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); border-top: 2px solid var(--accent); }
+.epilogue__bilan .titre-section { margin-top: 0; }
+.epilogue__bilan .epilogue__chiffres { margin-top: 0.2rem; max-width: none; width: 100%; }

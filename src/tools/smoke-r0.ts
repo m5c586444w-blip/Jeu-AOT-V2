@@ -149,9 +149,9 @@ try {
 
     // ——— b. Menu ———
     await page.goto(`${url}?menu=1`);
-    await page.waitForSelector(".table-archives", { timeout: 60000 });
+    await page.waitForSelector(".menu-principal", { timeout: 60000 });
     await page.evaluate(() => document.fonts.ready);
-    const menuText = await page.locator(".table-archives").innerText();
+    const menuText = await page.locator(".menu-principal").innerText();
     expect(!/Registre de travail|phase de fondation/i.test(menuText), `b. menu : aucune chaîne de développement (« Registre de travail — phase de fondation » ${/Registre de travail/.test(menuText) ? "présent" : "absent"})`);
     if (w === 1366) await shot("menu");
 

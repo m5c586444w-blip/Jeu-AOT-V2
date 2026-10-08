@@ -236,19 +236,25 @@ try {
     // ——— 1–2. Menu principal ; choix du scénario et de la nation ———
     const menu = await newPage(browser, pass, errors);
     await menu.goto(`${url}?menu=1`);
-    await menu.waitForSelector(".table-archives", { timeout: 60000 });
+    await menu.waitForSelector(".menu-principal", { timeout: 60000 });
     await menu.evaluate(() => document.fonts.ready);
-    const covers = await menu.locator(".chemise[data-scenario]").count();
-    const stamp = await menu.locator(".dossier-maitre__tampon").innerText();
-    const rectButtons = await menu.$$eval(".table-archives button", (bs) => bs.filter((b) => !b.classList.contains("chemise")).length);
-    expect(covers === 3 && stamp.length > 0 && rectButtons === 0, `menu : table d'archives, tampon « ${stamp} », ${covers} chemises de scénario, aucun bouton rectangulaire générique`);
-    await review(menu, pass, "menu principal", ".table-archives");
+    // Phase UI (U8) : plein écran sur le rendu des murs au crépuscule, 4 entrées, scénarios illustrés à droite, aucun tampon.
+    await menu.waitForFunction(() => {
+      const i = document.querySelector<HTMLImageElement>(".menu-principal__fond");
+      return !!i && i.complete && i.naturalWidth > 0;
+    }, undefined, { timeout: 20000 });
+    const covers = await menu.locator(".chemise[data-scenario] .chemise__couverture svg").count();
+    const entries = await menu.locator(".menu-entree").allInnerTexts();
+    const stamps = await menu.locator(".menu-principal .tampon").count();
+    const full = await menu.$eval(".menu-principal__fond", (i) => { const r = i.getBoundingClientRect(); return r.width >= window.innerWidth - 1 && r.height >= window.innerHeight - 1; });
+    expect(covers === 3 && entries.length === 4 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
+    await review(menu, pass, "menu principal", ".menu-principal");
     await shot(menu, pass, "menu");
     await menu.locator('.chemise[data-scenario="scn_854"]').click();
     await menu.waitForSelector(".choix-nation-menu:not([hidden])");
     const blasons = await menu.locator(".choix-nation-menu .chemise__couverture svg").count();
-    expect(blasons === 2, `choix de la nation : ${blasons} dossiers à blason dessiné (Paradis, Marley)`);
-    await review(menu, pass, "choix du scénario et de la nation", ".table-archives");
+    expect(blasons === 2, `choix de la nation : ${blasons} nations à blason dessiné (Paradis, Marley)`);
+    await review(menu, pass, "choix du scénario et de la nation", ".menu-principal");
     await shot(menu, pass, "choix-nation");
     await menu.locator('.chemise--nation[data-nation="fac_paradis"]').click();
     await menu.waitForSelector("html[data-ready='true'] .bandeau", { timeout: 90000 });

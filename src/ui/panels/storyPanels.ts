@@ -114,7 +114,14 @@ export class EpiloguePanel implements Panel {
   render(root: HTMLElement): void {
     const e = epilogue(this.ctx.world, this.ctx.state());
     const sheet = el("article", "epilogue");
-    sheet.append(el("h3", "epilogue__titre", e.title));
+    // Fin de partie (U8) : blason de la nation jouée, récit à gauche, bilan chiffré à droite.
+    const head = el("header", "epilogue__tete");
+    const blason = el("span", "epilogue__blason");
+    blason.innerHTML = emblem(this.ctx.state().nations?.player ?? "fac_paradis");
+    blason.setAttribute("aria-hidden", "true");
+    head.append(blason, el("h3", "epilogue__titre", e.title));
+    sheet.append(head);
+    const cols = el("div", "epilogue__colonnes");
     const story = el("div", "epilogue__recit");
     for (const l of e.lines) story.append(el("p", "", l));
     const table = el("table", "registre-table epilogue__chiffres");
@@ -127,7 +134,10 @@ export class EpiloguePanel implements Panel {
       tr.append(th, td);
       table.append(tr);
     }
-    sheet.append(story, table, el("p", "registre-note", t("narr.epi.note")));
+    const side = el("aside", "epilogue__bilan");
+    side.append(el("h4", "titre-section", t("narr.epi.stats")), table, el("p", "registre-note", t("narr.epi.note")));
+    cols.append(story, side);
+    sheet.append(cols);
     root.append(sheet);
   }
 }

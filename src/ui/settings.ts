@@ -67,3 +67,6 @@ export function applyUiScale(percent: number): void {
   root.style.fontSize = `${percent}%`;
   root.style.setProperty("--ui-echelle", String(percent / 100));
 }
+
+/** Dernière partie lancée dans ce navigateur (scénario, nation) : l'entrée « Continuer » du menu principal la reprend. */
+export const LAST_GAME_KEY = "murs-et-sang:derniere-partie";

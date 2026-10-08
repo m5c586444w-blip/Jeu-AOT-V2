@@ -35,7 +35,7 @@ import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
-import { applyUiScale, crossesAutosave, loadSettings, saveSettings, volumesOf } from "./settings";
+import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { setLocale } from "../i18n";
 
@@ -87,13 +87,27 @@ export async function bootGame(): Promise<void> {
   if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
   const world = buildWorld(first.source, scenario);
   let state: GameState = first.state;
+  const storePromise = SaveStore.open(indexedDB, () => Date.now());
+  // « Continuer » (menu principal, U8) : reprend la sauvegarde automatique la plus récente de ce scénario, s'il y en a une.
+  if (new URLSearchParams(window.location.search).get("reprendre") === "1") {
+    try {
+      const store = await storePromise;
+      for (const s of (await store.list()).filter((x) => x.slot.startsWith("auto-"))) {
+        const saved = await store.load(s.slot);
+        if (saved.strategic?.scenario !== scenario) continue;
+        state = (await sim.load(saved)).state;
+        break;
+      }
+    } catch {
+      // Aucune sauvegarde lisible : la partie commence au début du scénario.
+    }
+  }
 
   const clock = new GameClock(world.time.ms_per_day);
   const why = new WhyTooltip();
   const screen = document.createElement("div");
   screen.className = "ecran";
   let busy = false;
-  const storePromise = SaveStore.open(indexedDB, () => Date.now());
   const dispatch = async (cmd: Command): Promise<void> => {
     busy = true;
     const before = state.date;
@@ -388,6 +402,12 @@ export async function bootGame(): Promise<void> {
     const faction = wanted && playable.includes(wanted) ? wanted : await chooseFaction(world, playable);
     if (faction !== state.nations?.player) await safeDispatch({ type: "SetPlayerFaction", faction });
     if (faction !== "fac_paradis") registers?.open("monde");
+  }
+  // Dernière partie (scénario, nation) : l'entrée « Continuer » du menu principal la reprend.
+  try {
+    safeStorage()?.setItem(LAST_GAME_KEY, JSON.stringify({ scenario, ...(state.nations ? { faction: state.nations.player } : {}), reprendre: "1" }));
+  } catch {
+    // Stockage refusé : « Continuer » restera indisponible.
   }
   refresh();
   document.documentElement.dataset["ready"] = "true";

@@ -99,7 +99,7 @@ try {
   page.on("pageerror", (e) => errors.push(e.message));
 
   await page.goto(`${url}?menu=1`);
-  await page.waitForSelector(".table-archives", { timeout: 60000 });
+  await page.waitForSelector(".menu-principal", { timeout: 60000 });
   await check(page, "menu principal");
   await page.screenshot({ path: `${OUT}/ux0-menu.png` });
 

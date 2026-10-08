@@ -93,6 +93,13 @@ Aucun en P0.
 - **Animations.** Aucune animation externe : MakeHuman ne livre que des poses figées. Marche, course, attente, vol, frappe et poses des Titans sont écrites par le projet (`src/render/tactical3d/humanAnim.ts`), sur le squelette CC0.
 - **Poly Haven.** Rien n'est utilisé : hôtes refusés par la politique réseau de l'environnement, et textures d'environnement hors de la portée « corps de base et animations ».
 
+## Ajouts de la phase UI (refonte de l'interface)
+| Élément | Source | Licence | Usage |
+|---|---|---|---|
+| Icônes de l'interface (90 tracés : ressources, registres, gestion, alertes, événements, commandes) et blasons | `src/ui/icons.ts`, tracés SVG dessinés à la main pour le projet, sans bibliothèque | création du projet | aucun emblème de l'œuvre ; aucun emoji |
+| Fond du menu principal, `public/menu/murs-crepuscule.jpg` | rendu de la scène 3D du projet (Shiganshina, plan d'auteur, lumière « crépuscule », vue « rempart »), capturé par Chromium | création du projet ; les textures d'environnement visibles sont les textures CC0 de Poly Haven listées ci-dessous | aucun fichier de l'œuvre ou de fans, aucun décalque |
+| Captures `docs/screenshots/ui-*` | rendus du projet | création du projet | — |
+
 <!-- R1c : début de la table générée depuis docs/art/assets/manifest.json (npm run assets:fetch, assets:build) -->
 | Fichier (`docs/art/assets/`) | Nom | Licence | Auteur | Source | Récupéré le |
 |---|---|---|---|---|---|
