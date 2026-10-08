@@ -2,10 +2,15 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1e terminée — arrêt de revue** (fin de R1e, pilote ; CLAUDE.md, arrêt 5) — départ `497be52` |
+| Phase | **R1e terminée et acceptée.** Prochaine phase : MAP (PR n° 2). LC-B en attente. |
 | Tâche | R1e.7 faite : captures des lieux, revue, rapport `docs/reports/R1e.md` |
 | Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 493/493 (78 fichiers, `docs/reports/R1e-verify.log`) ; après rebase sur la fusion UX0 : code 0, 499/499 (79 fichiers) |
-| Prochaine étape | **attendre l'utilisateur** : revue de R1e ; puis LC-B, LC-C, LC-D (ou plan V2 du fichier 24, à trancher) |
+| Prochaine étape | MAP (PR n° 2) ; LC-B, LC-C, LC-D en attente (semaine 4, fichier 24, N3) ; CR1e-07 en dette (n° 9), à reprendre en R2 |
+
+## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
+- R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
+- CR1e-07 laissé en dette (n° 9), à reprendre en R2.
+- Pas de feu vert pour LC-B, LC-C ni LC-D pour l'instant : placées en semaine 4 (fichier 24, N3).
 
 ## R1e terminée — arrêt de revue (2026-10-08)
 - **Raison de l'arrêt** : fin de R1e (pilote Shiganshina) : revue de l'utilisateur (objectif et CLAUDE.md, arrêt 5).
