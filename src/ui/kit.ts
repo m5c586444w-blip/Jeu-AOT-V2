@@ -53,7 +53,19 @@ export function listItem(opts: { title: string | HTMLElement; meta?: string; lea
   const trail = h("span", "liste__queue");
   if (opts.trail) trail.append(opts.trail);
   li.append(lead, mid, trail);
-  if (opts.onSelect) li.addEventListener("click", opts.onSelect);
+  const select = opts.onSelect;
+  if (select) {
+    // Clavier (U10) : la ligne prend le focus ; Entrée ou Espace la sélectionne.
+    li.tabIndex = 0;
+    li.setAttribute("role", "option");
+    li.addEventListener("click", select);
+    li.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        select();
+      }
+    });
+  }
   return li;
 }
 

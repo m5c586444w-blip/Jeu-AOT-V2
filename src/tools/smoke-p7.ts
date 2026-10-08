@@ -137,7 +137,7 @@ try {
   await p2.waitForSelector('.registre-panneau[data-panel="monde"]:not([hidden])');
   await p2.waitForFunction(() => document.querySelector(".atlas-monde")?.getAttribute("data-drawn") === "61");
   const pl = await p2.locator(".table-guerre__comptes").innerText();
-  expect(pb === 16 && pl.includes("Paradis"), `Paradis en 854 : ${pb} registres (dont Monde et Chancellerie), comptes de Paradis au monde`);
+  expect(pb === 17 && pl.includes("Paradis"), `Paradis en 854 : ${pb} registres (dont Monde et Chancellerie), comptes de Paradis au monde`);
   await audit(p2, ".registre-panneau", "table de guerre (Paradis)");
   await p2.screenshot({ path: `${OUT}/p7-paradis-monde.png` });
 

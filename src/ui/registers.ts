@@ -18,10 +18,12 @@ import { ResearchPanel } from "./panels/researchPanel";
 import { ShiftersPanel } from "./panels/shiftersPanel";
 import { WorldPanel } from "./panels/worldPanel";
 import { DiplomacyPanel } from "./panels/diplomacyPanel";
+import { EconomyPanel } from "./panels/economyPanel";
+import { registerIcon } from "./icons";
 import { ArchivesPanel, EpiloguePanel, GazettePanel } from "./panels/storyPanels";
 import type { WhyTooltip } from "./why";
 
-export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue"];
+export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue", "economie"];
 
 /**
  * Registres de P2 : un seul dossier ouvert à la fois au-dessus de la carte, rafraîchi quand l'état change
@@ -30,6 +32,12 @@ export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets
 export class Registers {
   private readonly frame = el("section", "registre-panneau");
   private readonly title = el("h2", "registre-titre");
+  private readonly headIcon = el("span", "registre-icone");
+  private readonly shortcut = el("span", "registre-touche");
+  /** Libellé de la touche d'un registre (U10), fourni par l'écran de jeu. */
+  keyOf: ((id: PanelId) => string) | null = null;
+  /** Appelé à l'ouverture et à la fermeture (bouton enfoncé du menu de gestion, dossier de province refermé). */
+  onChange: ((id: PanelId | null) => void) | null = null;
   private readonly body = el("div", "registre-corps");
   private readonly panels: Map<PanelId, Panel>;
   private current: { id: PanelId; arg?: string } | null = null;
@@ -46,13 +54,14 @@ export class Registers {
     const close = button("×", () => this.close(), "dossier__fermer");
     close.setAttribute("aria-label", t("dossier.close"));
     const head = el("header", "registre-tete");
-    head.append(this.title, close);
+    this.headIcon.setAttribute("aria-hidden", "true");
+    head.append(this.headIcon, this.title, this.shortcut, close);
     this.frame.append(head, this.body);
     this.dialog.hidden = true;
     this.dialog.setAttribute("role", "alertdialog");
     parent.append(this.frame, this.dialog);
     const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle, ...(openEvent ? { openEvent } : {}) };
-    const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx)];
+    const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx), new EconomyPanel(ctx)];
     if (world.military)
       list.push(
         new ExpeditionsPanel(ctx, () => {
@@ -79,8 +88,13 @@ export class Registers {
     this.frame.hidden = false;
     this.frame.dataset["panel"] = id;
     this.title.textContent = t(`panel.${id}`);
+    this.headIcon.innerHTML = registerIcon(id);
+    const key = this.keyOf?.(id) ?? "";
+    this.shortcut.textContent = key ? `[${key}]` : "";
+    this.shortcut.title = key ? t("register.key", { key }) : "";
     this.draw(sameView);
     this.onDraft?.();
+    this.onChange?.(id);
   }
 
   toggle(id: PanelId): void {
@@ -92,6 +106,7 @@ export class Registers {
     this.frame.hidden = true;
     this.current = null;
     this.onDraft?.();
+    this.onChange?.(null);
   }
 
   private get panel(): Panel | null {

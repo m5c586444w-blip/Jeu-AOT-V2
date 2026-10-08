@@ -71,7 +71,7 @@ try {
   console.log("[scénario 850] 1366×768");
 
   // 6 registres de P2 + « Expéditions » (P3) + « Chronique », « Renseignement », « Bureau d'études » (P5).
-  expect((await page.locator(".bandeau__registre-bouton").count()) === 14, "bandeau : 14 registres (P2 + Expéditions + P5 + Porteurs + Gazette, Archives, Épilogue)");
+  expect((await page.locator(".bandeau__registre-bouton").count()) === 15, "menu de gestion : 15 registres (P2 + Expéditions + P5 + Porteurs + Gazette, Archives, Épilogue + Économie)");
   await page.screenshot({ path: `${OUT}/p2-ecran.png` });
 
   // Un mois passe : capital, propositions du conseil, entrées de journal.

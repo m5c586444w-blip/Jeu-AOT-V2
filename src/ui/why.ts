@@ -3,7 +3,8 @@ import { RESOURCE_IDS } from "../sim/strategic/resources";
 import { hasKey, t } from "../i18n";
 
 /** Une ligne d'explication : soit une valeur expliquée (facteurs), soit un texte. */
-export type WhyContent = { title: string; sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean }[] };
+/** `cost` : la valeur est une dépense (consommation, pertes) ; une hausse y est un malus (couleur inversée, U4). */
+export type WhyContent = { title: string; sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean; cost?: boolean }[] };
 
 const nf = (digits: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
 
@@ -36,15 +37,36 @@ export function displayedFactors(x: Explained): Factor[] {
   return x.factors.filter((f) => !(f.op === "base" && f.value === 0 && x.factors.length > 1));
 }
 
-function factorRow(f: Factor): HTMLTableRowElement {
+function factorRow(f: Factor, cost = false): HTMLTableRowElement {
   const tr = document.createElement("tr");
   const label = document.createElement("td");
   label.textContent = t(f.key, resolveParams(f.params));
   const val = document.createElement("td");
   val.className = "pourquoi__valeur";
   val.textContent = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : f.op === "base" ? formatNumber(f.value) : formatSigned(f.value);
+  // Bonus et malus colorés (U4) : un ajout positif ou un multiplicateur > 1 est un bonus ; la base reste neutre.
+  const sign = f.op === "base" ? 0 : f.op === "mul" ? Math.sign(f.value - 1) : Math.sign(f.value);
+  if (sign !== 0) val.dataset["sign"] = sign > 0 !== cost ? "plus" : "moins";
   tr.append(label, val);
   return tr;
+}
+
+/** Tableau des facteurs d'une valeur expliquée, avec sa ligne de total (écrans « maître-détail », U4). */
+export function explainedTable(x: Explained, opts: { signed?: boolean; cost?: boolean } = {}): HTMLTableElement {
+  const signed = opts.signed ?? false;
+  const table = document.createElement("table");
+  table.className = "facteurs";
+  for (const f of displayedFactors(x)) table.append(factorRow(f, opts.cost));
+  const tr = document.createElement("tr");
+  tr.className = "pourquoi__total";
+  const label = document.createElement("td");
+  label.textContent = t("why.total");
+  const val = document.createElement("td");
+  val.className = "pourquoi__valeur";
+  val.textContent = signed ? formatSigned(x.value) : formatNumber(x.value);
+  tr.append(label, val);
+  table.append(tr);
+  return table;
 }
 
 /**
@@ -113,7 +135,7 @@ export class WhyTooltip {
     }
     if (s.explained) {
       const table = document.createElement("table");
-      for (const f of displayedFactors(s.explained)) table.append(factorRow(f));
+      for (const f of displayedFactors(s.explained)) table.append(factorRow(f, s.cost));
       box.append(table);
     }
     if (s.text) {

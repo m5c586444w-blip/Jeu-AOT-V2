@@ -238,8 +238,9 @@ try {
     // HUD (AC8-04) : registres sur une seule ligne, tous visibles.
     const tops = await page.$$eval(".bandeau__registre-bouton", (bs) => bs.filter((b) => (b as HTMLElement).offsetParent !== null).map((b) => Math.round(b.getBoundingClientRect().top)));
     const bandH = await page.$eval(".bandeau", (b) => b.getBoundingClientRect().height);
-    expect(tops.length === 14 && Math.max(...tops) - Math.min(...tops) <= 2, `bandeau : ${tops.length} registres sur une seule ligne (hauteur du bandeau ${Math.round(bandH)} px)`);
+    expect(tops.length === 15 && Math.max(...tops) - Math.min(...tops) <= 2, `menu de gestion : ${tops.length} registres sur une seule ligne (hauteur du bandeau ${Math.round(bandH)} px)`);
     await review(page, pass, "HUD stratégique", ".bandeau");
+    await review(page, pass, "menu de gestion", ".gestion");
     await shot(page, pass, "hud");
 
     // Dossier de province (clic sur Trost, comme smoke:map).

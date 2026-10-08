@@ -161,11 +161,15 @@ try {
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(600);
     const band = await rect(page, ".bandeau");
-    const avail = { x: 0, y: band.y + band.h, w, h: h - (band.y + band.h) };
+    // Phase UI (D-108) : le menu de gestion est une barre de l'interface en bas de l'écran, comme le bandeau en haut ;
+    // l'espace disponible est la fenêtre entre les deux (même règle que la bataille : l'interface n'en fait pas partie).
+    const gestion = await rect(page, ".gestion");
+    const bottom = gestion.h > 0 ? gestion.y : h;
+    const avail = { x: 0, y: band.y + band.h, w, h: bottom - (band.y + band.h) };
     const mapShare = await share(page, avail, ".carte canvas");
     const mapWindow = await share(page, { x: 0, y: 0, w, h }, ".carte canvas");
     console.log(`      3. carte stratégique, fenêtre entière (${w}×${h}, bandeau compris) : ${(100 * mapWindow).toFixed(1)} %`);
-    expect(mapShare >= 0.85, `3. carte stratégique : zone de jeu ${(100 * mapShare).toFixed(1)} % de l'espace disponible (${Math.round(avail.w)}×${Math.round(avail.h)} px sous le bandeau ; ≥ 85 %)`);
+    expect(mapShare >= 0.85, `3. carte stratégique : zone de jeu ${(100 * mapShare).toFixed(1)} % de l'espace disponible (${Math.round(avail.w)}×${Math.round(avail.h)} px entre le bandeau et le menu de gestion ; ≥ 85 %)`);
     const hud = await page.locator(".bandeau").innerText();
     expect(!/Graine|Empreinte/.test(hud), `b. HUD hors debug : « Graine » ${/Graine/.test(hud) ? "visible" : "masquée"}, « Empreinte d'état » ${/Empreinte/.test(hud) ? "visible" : "masquée"}`);
     await page.keyboard.press("F2");

@@ -18,7 +18,8 @@ import type { ConsoleHost } from "./debugConsole";
 import { mountDebugOverlay } from "./debugOverlay";
 import { Dossier } from "./dossier";
 import { Hud } from "./hud";
-import { KeyMap } from "./keymap";
+import { KeyMap, keyLabel, PANEL_ACTION } from "./keymap";
+import { NotificationFeed } from "./notifications";
 import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
 import { attachMapControls } from "./mapControls";
@@ -106,17 +107,23 @@ export async function bootGame(): Promise<void> {
     refresh();
   };
   let registers: Registers | null = null;
+  const keymap = new KeyMap(safeStorage());
+  const keyOf = (id: string): string => {
+    const a = PANEL_ACTION[id];
+    return a ? keyLabel(keymap.codeOf(a)) : "";
+  };
   const hud = new Hud(world, state, why, {
     setSpeed: (s) => {
       clock.setSpeed(s);
       refresh();
     },
-    setRationing: (level) => void dispatch({ type: "SetRationing", level }),
+    keyOf,
     ...(world.politics ? { openPanel: (id: string) => registers?.toggle(id as PanelId) } : {}),
   });
   const host = document.createElement("div");
   host.className = "carte";
-  screen.append(hud.el, host);
+  // Écran (U2) : barre supérieure, carte, menu de gestion en bas.
+  screen.append(hud.el, host, hud.gestion);
   app.append(screen);
 
   // Carte réaliste (MAP) : terrain figé chargé à part, en une seule ressource ; durée jusqu'à la première image mesurée (MAP.7).
@@ -190,6 +197,29 @@ export async function bootGame(): Promise<void> {
   const eventDossier = world.chronicle ? new EventDossier(document.body, world, why, safeDispatch, autoDossiers) : null;
   const openEvent = (id: string): void => eventDossier?.open(state, id);
   if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle, openEvent);
+  if (registers) {
+    registers.keyOf = keyOf;
+    // Un registre ouvert referme le dossier de province (même côté de l'écran) ; son bouton reste enfoncé.
+    registers.onChange = (id) => {
+      hud.setOpenPanel(id);
+      if (id) {
+        dossier.close();
+        map.setSelected(null);
+      }
+    };
+  }
+  // Fil de notifications (U9) : un clic sur une entrée qui nomme un lieu centre la carte et ouvre son dossier.
+  const feed = new NotificationFeed(
+    host,
+    world,
+    (province) => {
+      registers?.close();
+      map.centerOn(province);
+      map.setSelected(province);
+      dossier.open(province, state);
+    },
+    () => registers?.open("journal"),
+  );
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;
 
@@ -216,6 +246,7 @@ export async function bootGame(): Promise<void> {
   const refresh = (): void => {
     listen();
     hud.update(state, clock.speed);
+    feed.update(state);
     registers?.refresh();
     map.setDynamic(mapDynamic(state));
     drawRoutes();
@@ -224,7 +255,6 @@ export async function bootGame(): Promise<void> {
     eventDossier?.refresh(state);
   };
 
-  const keymap = new KeyMap(safeStorage());
   const PAN = 80;
   const setSpeed = (s: number) => () => {
     clock.setSpeed(s);
@@ -274,10 +304,13 @@ export async function bootGame(): Promise<void> {
     open_gazette: () => registers?.toggle("gazette"),
     open_archives: () => registers?.toggle("archives"),
     open_epilogue: () => registers?.toggle("epilogue"),
+    open_economy: () => registers?.toggle("economie"),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.
     if (document.body.dataset["tactique"]) return;
+    // Touche déjà traitée par un composant (Entrée ou Espace sur une ligne de liste) : pas d'action globale.
+    if (ev.defaultPrevented) return;
     // Seule la saisie de texte (console) et les listes déroulantes gardent leurs touches ; une case cochée ne bloque rien.
     // Les champs numériques (planificateur) gardent aussi leurs chiffres : « 1 » ne doit pas changer la vitesse.
     const typing = (ev.target instanceof HTMLInputElement && (ev.target.type === "text" || ev.target.type === "number")) || ev.target instanceof HTMLSelectElement;
