@@ -144,14 +144,17 @@ try {
   await panel(page, "KeyB", "recherche");
   await page.locator(".registre-onglet[data-tree='odm']").click();
   await page.waitForTimeout(200);
-  await page.locator(".planche[data-tech='tech_odm_maintenance'] [data-action='etudier']").click();
+  // Depuis UX0, une étude dont la mécanique n'existe pas encore (l'entretien d'ODM, P9) n'est plus montrée : on lance les
+  // bouteilles de gaz compactes, disponibles au départ.
+  await page.locator(".planche[data-tech='tech_compact_gas'] [data-action='etudier']").click();
   await page.waitForTimeout(300);
   await panel(page, "KeyB", "recherche");
-  expect((await page.locator(".bureau-courant").innerText()).includes("Entretien"), "étude lancée : entretien d'ODM standardisé à l'étude");
+  expect((await page.locator(".bureau-courant").innerText()).includes(fr["tech.tech_compact_gas"]), `étude lancée : ${fr["tech.tech_compact_gas"]} à l'étude`);
   await page.locator(".registre-onglet[data-tree='anti_titan']").click();
   await page.waitForTimeout(200);
   const spear = await page.locator(".planche[data-tech='tech_thunder_spear_prototype'] .plan-probleme").innerText().catch(() => "");
-  expect(spear.includes("N'existe pas encore"), `verrou expliqué : lance de foudre — « ${spear.replace(/\s+/g, " ")} »`);
+  // Condition écrite en langage de jeu (UX0 : plus de « N'existe pas encore »).
+  expect(spear.startsWith("Exige") && !spear.includes("N'existe pas encore"), `verrou expliqué : lance de foudre — « ${spear.replace(/\s+/g, " ")} »`);
   await audit(page, ".registre-panneau", "bureau d'études");
   await page.locator(".registre-panneau").screenshot({ path: `${OUT}/p5-bureau.png` });
   await page.keyboard.press("Escape");

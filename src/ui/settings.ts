@@ -56,3 +56,17 @@ export function saveSettings(storage: Pick<Storage, "setItem"> | null, s: Settin
 export function crossesAutosave(before: GameDate, after: GameDate, everyDays: number): boolean {
   return Math.floor(toAbsoluteDay(after) / everyDays) > Math.floor(toAbsoluteDay(before) / everyDays);
 }
+
+/**
+ * Échelle d'interface (100 à 200 %) : `--ui-echelle` règle la taille de base (base.css), multipliée par le facteur de
+ * hauteur d'écran (tokens.css). Le style en ligne `font-size` reste posé pour les contrôles existants (AC1-14).
+ */
+export function applyUiScale(percent: number): void {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  root.style.fontSize = `${percent}%`;
+  root.style.setProperty("--ui-echelle", String(percent / 100));
+}
+
+/** Dernière partie lancée dans ce navigateur (scénario, nation) : l'entrée « Continuer » du menu principal la reprend. */
+export const LAST_GAME_KEY = "murs-et-sang:derniere-partie";

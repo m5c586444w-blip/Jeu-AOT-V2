@@ -132,6 +132,18 @@ try {
   await audit(page, "expédition en campagne");
   await page.keyboard.press("Escape");
   await page.waitForTimeout(200);
+  // Phase UI (U9) : le fil de notifications nomme la cible de l'expédition ; un clic y mène (dossier de la province).
+  const placed = page.locator(".notifications:not([hidden]) button.notification");
+  const nPlaced = await placed.count();
+  let opened = "";
+  if (nPlaced > 0) {
+    await placed.first().click();
+    await page.waitForSelector(".dossier:visible", { timeout: 10000 }).catch(() => undefined);
+    opened = (await page.locator(".dossier__titre").first().innerText().catch(() => "")).trim();
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(150);
+  }
+  expect(nPlaced >= 1 && opened.length > 0, `fil de notifications : ${nPlaced} entrée(s) avec lieu ; clic → dossier « ${opened || "non ouvert"} »`);
   await page.locator(".carte").screenshot({ path: `${OUT}/p3-carte-expedition.png` });
 
   // ——— Retour et rapport ———

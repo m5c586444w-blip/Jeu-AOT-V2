@@ -52,6 +52,7 @@ interface Checklist {
   outside: boolean;
   clipped: string[];
   minFont: number;
+  cardGrid: string[];
 }
 
 async function checklist(page: Page, scope: string): Promise<Checklist> {
@@ -107,7 +108,34 @@ async function checklist(page: Page, scope: string): Promise<Checklist> {
           return e.scrollWidth > e.clientWidth + 2 && (e.textContent ?? "").trim().length > 0;
         })
         .map(label);
+      // Grille de cartes identiques (CUI-05, U5) : au moins 4 frères de même classe, en plusieurs colonnes d'une grille ou
+      // d'une rangée qui passe à la ligne, chacun encadré (quatre filets) ou sur un fond propre. Un arbre (positions
+      // absolues, liens tracés) ou une liste en une colonne n'en sont pas.
+      const cardGrid: string[] = [];
+      for (const parent of all) {
+        const pcs = getComputedStyle(parent);
+        const laidOut = /grid/.test(pcs.display) || (/flex/.test(pcs.display) && pcs.flexWrap === "wrap");
+        if (!laidOut || !visible(parent)) continue;
+        const groups = new Map<string, HTMLElement[]>();
+        for (const c of [...parent.children] as HTMLElement[]) {
+          // Boutons et onglets alignés ne sont pas des cartes.
+          if (!visible(c) || !c.className || c.tagName === "BUTTON" || c.getAttribute("role") === "tab") continue;
+          groups.set(String(c.className), [...(groups.get(String(c.className)) ?? []), c]);
+        }
+        for (const [cls, kids] of groups) {
+          if (kids.length < 4) continue;
+          const lefts = new Set(kids.map((k) => Math.round(k.getBoundingClientRect().left)));
+          const card = kids.every((k) => {
+            const cs = getComputedStyle(k);
+            const framed = ["Top", "Right", "Bottom", "Left"].every((side) => parseFloat(cs.getPropertyValue(`border-${side.toLowerCase()}-width`)) > 0 && cs.getPropertyValue(`border-${side.toLowerCase()}-style`) !== "none");
+            const filled = cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== pcs.backgroundColor;
+            return framed || filled;
+          });
+          if (lefts.size >= 2 && card) cardGrid.push(`${kids.length} × ${kids[0]?.tagName.toLowerCase()}.${cls.split(" ")[0]}`);
+        }
+      }
       return {
+        cardGrid: [...new Set(cardGrid)].slice(0, 4),
         fonts: [...badFonts].slice(0, 6),
         fontsLoaded: [...used].every((f) => document.fonts.check(`16px "${f}"`)),
         icons,
@@ -127,7 +155,7 @@ async function checklist(page: Page, scope: string): Promise<Checklist> {
 }
 
 /** Applique la checklist 04 §2 à un écran ; aucune clé ni identifiant brut visible. */
-async function review(page: Page, pass: Pass, name: string, scope: string, opts: { minTexture?: number } = {}): Promise<void> {
+async function review(page: Page, pass: Pass, name: string, scope: string, opts: { minTexture?: number; noCardGrid?: boolean } = {}): Promise<void> {
   await page.evaluate(() => document.fonts.ready);
   const c = await checklist(page, scope);
   const visible = await page.locator(scope).first().innerText();
@@ -145,6 +173,7 @@ async function review(page: Page, pass: Pass, name: string, scope: string, opts:
   if (c.hOverflow || c.outside) problems.push("débordement hors de la fenêtre");
   if (c.clipped.length) problems.push(`texte coupé : ${c.clipped.join(", ")}`);
   if (c.minFont < minFont) problems.push(`corps minimal ${c.minFont} px < ${minFont.toFixed(1)} px`);
+  if (opts.noCardGrid && c.cardGrid.length) problems.push(`grille de cartes identiques (CUI-05) : ${c.cardGrid.join(", ")}`);
   expect(problems.length === 0, `${name} [${pass.tag}] : checklist 04 §2 (${c.values} valeurs expliquées, textures sur ${c.textureLevels} niveaux, corps ≥ ${c.minFont} px)${problems.length ? ` — ${problems.join(" ; ")}` : ""}`);
 }
 
@@ -207,19 +236,25 @@ try {
     // ——— 1–2. Menu principal ; choix du scénario et de la nation ———
     const menu = await newPage(browser, pass, errors);
     await menu.goto(`${url}?menu=1`);
-    await menu.waitForSelector(".table-archives", { timeout: 60000 });
+    await menu.waitForSelector(".menu-principal", { timeout: 60000 });
     await menu.evaluate(() => document.fonts.ready);
-    const covers = await menu.locator(".chemise[data-scenario]").count();
-    const stamp = await menu.locator(".dossier-maitre__tampon").innerText();
-    const rectButtons = await menu.$$eval(".table-archives button", (bs) => bs.filter((b) => !b.classList.contains("chemise")).length);
-    expect(covers === 3 && stamp.length > 0 && rectButtons === 0, `menu : table d'archives, tampon « ${stamp} », ${covers} chemises de scénario, aucun bouton rectangulaire générique`);
-    await review(menu, pass, "menu principal", ".table-archives");
+    // Phase UI (U8) : plein écran sur le rendu des murs au crépuscule, 4 entrées, scénarios illustrés à droite, aucun tampon.
+    await menu.waitForFunction(() => {
+      const i = document.querySelector<HTMLImageElement>(".menu-principal__fond");
+      return !!i && i.complete && i.naturalWidth > 0;
+    }, undefined, { timeout: 20000 });
+    const covers = await menu.locator(".chemise[data-scenario] .chemise__couverture svg").count();
+    const entries = await menu.locator(".menu-entree").allInnerTexts();
+    const stamps = await menu.locator(".menu-principal .tampon").count();
+    const full = await menu.$eval(".menu-principal__fond", (i) => { const r = i.getBoundingClientRect(); return r.width >= window.innerWidth - 1 && r.height >= window.innerHeight - 1; });
+    expect(covers === 3 && entries.length === 4 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
+    await review(menu, pass, "menu principal", ".menu-principal");
     await shot(menu, pass, "menu");
     await menu.locator('.chemise[data-scenario="scn_854"]').click();
     await menu.waitForSelector(".choix-nation-menu:not([hidden])");
     const blasons = await menu.locator(".choix-nation-menu .chemise__couverture svg").count();
-    expect(blasons === 2, `choix de la nation : ${blasons} dossiers à blason dessiné (Paradis, Marley)`);
-    await review(menu, pass, "choix du scénario et de la nation", ".table-archives");
+    expect(blasons === 2, `choix de la nation : ${blasons} nations à blason dessiné (Paradis, Marley)`);
+    await review(menu, pass, "choix du scénario et de la nation", ".menu-principal");
     await shot(menu, pass, "choix-nation");
     await menu.locator('.chemise--nation[data-nation="fac_paradis"]').click();
     await menu.waitForSelector("html[data-ready='true'] .bandeau", { timeout: 90000 });
@@ -238,9 +273,59 @@ try {
     // HUD (AC8-04) : registres sur une seule ligne, tous visibles.
     const tops = await page.$$eval(".bandeau__registre-bouton", (bs) => bs.filter((b) => (b as HTMLElement).offsetParent !== null).map((b) => Math.round(b.getBoundingClientRect().top)));
     const bandH = await page.$eval(".bandeau", (b) => b.getBoundingClientRect().height);
-    expect(tops.length === 14 && Math.max(...tops) - Math.min(...tops) <= 2, `bandeau : ${tops.length} registres sur une seule ligne (hauteur du bandeau ${Math.round(bandH)} px)`);
+    expect(tops.length === 15 && Math.max(...tops) - Math.min(...tops) <= 2, `menu de gestion : ${tops.length} registres sur une seule ligne (hauteur du bandeau ${Math.round(bandH)} px)`);
     await review(page, pass, "HUD stratégique", ".bandeau");
+    await review(page, pass, "menu de gestion", ".gestion");
     await shot(page, pass, "hud");
+
+    // Phase UI (U4) : infobulle de calcul à trois niveaux au plus — titre et valeur, sections et sous-totaux, facteurs colorés.
+    await page.hover(".bandeau__ressource[data-resource='food'] .bandeau__delta");
+    await page.waitForSelector(".pourquoi:not([hidden])", { timeout: 5000 });
+    const tip = await page.$eval(".pourquoi", (p) => ({
+      value: p.querySelector(".pourquoi__tete .pourquoi__chiffre")?.textContent ?? "",
+      subs: p.querySelectorAll(".pourquoi__section > .pourquoi__libelle .pourquoi__sous-total").length,
+      rows: p.querySelectorAll(".pourquoi__section table tr").length,
+      signs: p.querySelectorAll(".pourquoi__valeur[data-sign]").length,
+      nested: p.querySelectorAll(".pourquoi__section .pourquoi__section, .pourquoi table table").length,
+    }));
+    expect(tip.value.length > 0 && tip.subs >= 2 && tip.rows >= 3 && tip.signs >= 1 && tip.nested === 0, `infobulle de la nourriture : valeur « ${tip.value} », ${tip.subs} sous-totaux, ${tip.rows} facteurs dont ${tip.signs} colorés, ${tip.nested} niveau au-delà du troisième`);
+    // U10 : le nom et la touche d'un registre dans l'infobulle de son bouton.
+    await page.hover(".bandeau__registre-bouton[data-panel='personnages']");
+    await page.waitForTimeout(150);
+    const keyTip = await page.$eval(".pourquoi", (p) => ({ title: p.querySelector(".pourquoi__titre")?.textContent ?? "", key: p.querySelector(".pourquoi__touche .touche")?.textContent ?? "" }));
+    expect(keyTip.title === fr["panel.personnages"] && keyTip.key === "C", `infobulle d'un registre : « ${keyTip.title} », touche ${keyTip.key || "absente"}`);
+    await page.mouse.move(Math.round(pass.w / 2), Math.round(pass.h / 2));
+
+    // Phase UI (U9) : fil de notifications regroupé par jour, icône et catégorie, clic = aller sur le lieu ; historique.
+    // Page à part : le temps y avance (vitesse 5) sans fausser les contrôles suivants (humeur musicale « en paix »).
+    const fp = await newPage(browser, pass, errors);
+    await fp.goto(`${url}?scenario=scn_sandbox_850&dossiers=0`);
+    await fp.waitForSelector("html[data-ready='true']", { timeout: 90000 });
+    await fp.mouse.click(Math.round(pass.w / 2), Math.round(pass.h * 0.6));
+    await fp.keyboard.press("Escape");
+    await fp.keyboard.press("Digit5");
+    await fp.waitForSelector(".notifications:not([hidden]) .notification", { timeout: 60000 }).catch(() => undefined);
+    await fp.keyboard.press("Space");
+    const feed = await fp.evaluate(() => ({
+      groups: document.querySelectorAll(".notifications__groupe").length,
+      items: document.querySelectorAll(".notification").length,
+      icons: document.querySelectorAll(".notification > svg.ico").length,
+      cats: document.querySelectorAll(".notification__meta").length,
+      places: document.querySelectorAll("button.notification").length,
+    }));
+    let opened = "";
+    if (feed.places > 0) {
+      await fp.locator("button.notification").first().click();
+      await fp.waitForSelector(".dossier:visible", { timeout: 10000 }).catch(() => undefined);
+      opened = (await fp.locator(".dossier__titre").first().innerText().catch(() => "")).trim();
+      await fp.keyboard.press("Escape");
+    }
+    // Le clic sur une entrée qui nomme un lieu est contrôlé par smoke:expedition (départ d'une expédition, lieu = sa cible).
+    expect(feed.groups >= 1 && feed.items >= 1 && feed.icons === feed.items && feed.cats === feed.items && (feed.places === 0 || opened.length > 0), `fil de notifications : ${feed.items} entrées en ${feed.groups} groupe(s), ${feed.icons} icônes, ${feed.cats} catégories ; ${feed.places} avec lieu${opened ? ` (clic → dossier « ${opened} »)` : ""}`);
+    await fp.locator(".notifications__bouton").first().click();
+    expect((await fp.locator(".registre-panneau:not([hidden])").getAttribute("data-panel")) === "journal", "historique du fil : le journal s'ouvre");
+    await fp.keyboard.press("Escape");
+    await fp.close();
 
     // Dossier de province (clic sur Trost, comme smoke:map).
     const box = await page.locator(".carte canvas").first().boundingBox();
@@ -251,12 +336,17 @@ try {
     await shot(page, pass, "dossier-province");
     await page.keyboard.press("Escape");
 
+    // Écrans de la liste U5 (CUI-05) : aucun en grille de cartes identiques.
+    const MASTER_DETAIL = new Set(["personnages", "cabinet", "expeditions", "renseignement", "recherche", "decrets", "economie", "journal", "diplomatie"]);
     const panels: [string, string][] = [
       ["personnages", "personnages"],
       ["cabinet", "cabinet"],
       ["expeditions", "expeditions"],
       ["renseignement", "renseignement"],
       ["recherche", "recherche"],
+      ["decrets", "decrets"],
+      ["economie", "economie"],
+      ["journal", "journal"],
       ["gazette", "gazette"],
       ["archives", "archives"],
       ["epilogue", "epilogue"],
@@ -266,14 +356,14 @@ try {
       const band = await page.$eval(".bandeau", (b) => b.getBoundingClientRect().bottom);
       const top = await page.$eval(".registre-panneau:not([hidden])", (p) => p.getBoundingClientRect().top);
       if (top < band - 2) expect(false, `${name} : le registre chevauche le bandeau (${Math.round(top)} < ${Math.round(band)})`);
-      await review(page, pass, `registre ${name}`, ".registre-panneau:not([hidden])");
+      await review(page, pass, `registre ${name}`, ".registre-panneau:not([hidden])", { noCardGrid: MASTER_DETAIL.has(id) });
       await shot(page, pass, name);
       if (id === "personnages") {
         await page.locator(".registre-panneau .lien-dossier").first().click();
         await page.waitForSelector(".fiche-nom");
         const portrait = await page.locator(".fiche-portrait svg").count();
         expect(portrait === 1, "fiche de personnage : portrait gravé procédural");
-        await review(page, pass, "fiche de personnage", ".registre-panneau:not([hidden])");
+        await review(page, pass, "fiche de personnage", ".registre-panneau:not([hidden])", { noCardGrid: true });
         await shot(page, pass, "fiche-personnage");
       }
       if (id === "gazette") {
@@ -387,7 +477,7 @@ try {
       await m.keyboard.press("KeyD");
       await m.waitForSelector('.registre-panneau[data-panel="diplomatie"]:not([hidden])');
       expect((await m.locator(".fiche-nation__blason svg").count()) === 3, "chancellerie : 3 fiches de nation à blason dessiné");
-      await review(m, pass, "chancellerie (Marley)", ".registre-panneau:not([hidden])");
+      await review(m, pass, "chancellerie (Marley)", ".registre-panneau:not([hidden])", { noCardGrid: true });
       await shot(m, pass, "chancellerie-marley");
       await m.keyboard.press("KeyN");
       await m.waitForSelector('.registre-panneau[data-panel="gazette"]:not([hidden])');

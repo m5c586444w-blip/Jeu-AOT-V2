@@ -8,6 +8,9 @@ export const VERDIGRIS = 0x4f6b5a;
 export const BRICK = 0x8a3b2a;
 export const UNKNOWN = 0x7b766b;
 export const SEA = 0xc9c6b0;
+/** Teintes des calques « religion » et « population » (déplacées de src/ui/overlays.ts : aucune couleur en dur dans src/ui, U1). */
+export const PLUM = 0x5b4a6b;
+export const INK_SOFT = 0x3a352d;
 
 /** Teinte d'aquarelle par région (lavis de base, avant overlays). */
 export const REGION_WASH: Record<string, number> = {

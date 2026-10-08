@@ -44,8 +44,15 @@ export class CabinetPanel implements Panel {
 
     const law = this.motion ? pw.laws.get(this.motion) : undefined;
     const vote = law ? computeVote(this.ctx.world, pol, law) : null;
-    root.append(this.table(members, vote));
-    if (law && vote) root.append(this.motionBox(law, vote, root));
+    // Vue de table (U5) : salle et billes à gauche, motion, décompte et raisons de chacun à droite.
+    const view = el("div", "cabinet-vue");
+    const left = el("div", "cabinet-gauche");
+    left.append(this.table(members, vote), this.legend());
+    const right = el("div", "cabinet-droite");
+    if (law && vote) right.append(this.motionBox(law, vote, root));
+    else right.append(el("p", "registre-note cabinet-invite", t("cabinet.pick_motion")));
+    view.append(left, right);
+    root.append(view);
     if (pol.lastVote) {
       const lv = pol.lastVote;
       const res = el("p", `cabinet-dernier ${lv.passed ? "adopte" : "rejete"}`);
@@ -57,9 +64,20 @@ export class CabinetPanel implements Panel {
         abst: lv.abstention,
         result: t(lv.passed ? "cabinet.passed" : lv.veto ? "cabinet.vetoed" : "cabinet.rejected"),
       });
-      root.append(res);
+      left.append(res);
     }
     void st;
+  }
+
+  /** Légende des billes : pour, contre, abstention. */
+  private legend(): HTMLElement {
+    const ul = el("ul", "cabinet-legende");
+    for (const v of ["pour", "contre", "abstention"] as const) {
+      const li = el("li");
+      li.append(el("span", `puce puce--${v}`), t(`cabinet.${v}`));
+      ul.append(li);
+    }
+    return ul;
   }
 
   private refresh(root: HTMLElement): void {
@@ -75,8 +93,8 @@ export class CabinetPanel implements Panel {
     const w = 560;
     const h = 250;
     const svg: string[] = [`<svg viewBox="0 0 ${w} ${h}" class="cabinet-plan" role="img" aria-label="${t("cabinet.room")}">`];
-    svg.push(`<ellipse cx="${w / 2}" cy="${h / 2}" rx="170" ry="62" fill="#6b4a2f" fill-opacity="0.35" stroke="#1c1a17" stroke-width="1.5"/>`);
-    svg.push(`<ellipse cx="${w / 2}" cy="${h / 2}" rx="160" ry="54" fill="none" stroke="#1c1a17" stroke-width="0.6"/>`);
+    svg.push(`<ellipse cx="${w / 2}" cy="${h / 2}" rx="170" ry="62" class="cab-table"/>`);
+    svg.push(`<ellipse cx="${w / 2}" cy="${h / 2}" rx="160" ry="54" class="cab-table-filet"/>`);
     const n = members.length + 1;
     const seat = (i: number): [number, number] => {
       const a = (i / n) * Math.PI * 2 - Math.PI / 2;
@@ -87,19 +105,18 @@ export class CabinetPanel implements Panel {
       return [w / 2 + Math.cos(a) * 140, h / 2 + Math.sin(a) * 44];
     };
     const [px, py] = seat(0);
-    svg.push(`<rect x="${px - 50}" y="${py - 13}" width="100" height="26" fill="#1c1a17"/><text x="${px}" y="${py + 4}" text-anchor="middle" font-family="IM Fell English" font-size="12" fill="#e8dcc0">${t("cabinet.chair")}</text>`);
+    svg.push(`<rect x="${px - 50}" y="${py - 13}" width="100" height="26" class="cab-president"/><text x="${px}" y="${py + 4}" text-anchor="middle" font-size="12.5" class="cab-president-texte">${t("cabinet.chair")}</text>`);
     members.forEach((m, i) => {
       const [x, y] = seat(i + 1);
       const [bx, by] = ball(i + 1);
       const c = pw.characters.get(m.character);
-      svg.push(`<rect x="${x - 58}" y="${y - 14}" width="116" height="28" fill="#efe6cf" stroke="#1c1a17"/>`);
-      svg.push(`<text x="${x}" y="${y - 1}" text-anchor="middle" font-family="EB Garamond" font-size="11" fill="#1c1a17">${esc(displayName(c))}</text>`);
+      svg.push(`<rect x="${x - 60}" y="${y - 15}" width="120" height="30" class="cab-siege"/>`);
+      svg.push(`<text x="${x}" y="${y - 1}" text-anchor="middle" font-size="11.5" class="cab-nom">${esc(displayName(c))}</text>`);
       const roleName = m.role ? t(pw.roles.find((r) => r.id === m.role)?.name_key ?? "") : t("cabinet.seat_extra");
-      svg.push(`<text x="${x}" y="${y + 10}" text-anchor="middle" font-family="EB Garamond" font-style="italic" font-size="9" fill="#3a352d">${esc(roleName)}</text>`);
+      svg.push(`<text x="${x}" y="${y + 10.5}" text-anchor="middle" font-size="9.5" class="cab-role">${esc(roleName)}</text>`);
       const line = vote?.record.lines.find((l) => l.character === m.character);
       if (line) {
-        const fill = line.vote === "pour" ? "#f4ecd8" : line.vote === "contre" ? "#1c1a17" : "#7b766b";
-        svg.push(`<circle cx="${bx}" cy="${by}" r="8" fill="${fill}" stroke="#1c1a17" stroke-width="1.2"/><circle cx="${bx - 2.5}" cy="${by - 2.5}" r="2" fill="#ffffff" opacity="0.5"/>`);
+        svg.push(`<circle cx="${bx}" cy="${by}" r="8" class="bille bille--${line.vote}"/><circle cx="${bx - 2.5}" cy="${by - 2.5}" r="2" class="bille-reflet"/>`);
       }
     });
     svg.push("</svg>");

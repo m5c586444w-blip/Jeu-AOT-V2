@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **MAP terminée et fusionnée (PR n° 2, D-106).** Prochaine phase : UI (fichier 22 §5). Direction autonome depuis le 2026-10-08 (D-107). |
-| Tâche | Reprise de MAP : fusion de la branche principale, revue des captures par sous-agent, correctif du panneau en 4K |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 510/510 (81 fichiers, `docs/reports/MAP-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/UI.md` puis exécuter UI sur `claude/v2-ui` (critères CUI-01 à 09) ; compte rendu dans `docs/MORNING.md` |
+| Phase | **UI terminée et fusionnée (D-113).** Prochaine phase : AUD (fichier 22 §6 + 23 §3.1). Direction autonome (D-107). |
+| Tâche | Revue de UI : correctif « débogage » (E-UX-1), dettes n° 20 et 21 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify-revue.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/AUD.md` puis exécuter AUD sur `claude/v2-aud` (critères CAUD-01 à 07) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

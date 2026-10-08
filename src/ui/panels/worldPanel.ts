@@ -9,9 +9,13 @@ import { projectProblem, SIDE_TO_FACTION } from "../../sim/world/war";
 import { button, el, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 import { formatNumber } from "../why";
+import { tokenColor } from "../theme";
 
-/** Couleurs d'aquarelle des nations (04 §1.2 : ocre de Paradis, rouge sombre de Marley, indigo d'Hizuru, bois des Alliés). */
-export const NATION_COLORS: Record<string, string> = { fac_paradis: "#b5873a", fac_marley: "#7a1f1f", fac_hizuru: "#2a3a5c", fac_allies: "#6b4a2f" };
+/** Couleur d'une nation sur l'atlas : jeton `--nation-*` de tokens.css (aucune couleur en dur hors des jetons, U1). */
+export function nationColor(faction: string | undefined): string {
+  const name = faction ? `--nation-${faction.replace(/^fac_/, "")}` : "--nation-sans";
+  return tokenColor(name) || tokenColor("--nation-neutre");
+}
 
 /**
  * Table de guerre (P7) : atlas du monde, comptes de la nation jouée, province choisie (forces, levées, mouvements),
@@ -84,10 +88,10 @@ export class WorldPanel implements Panel {
         id: p.id,
         at: p.at,
         sea: p.faction === "mer",
-        fill: owner ? (NATION_COLORS[owner] ?? "#8a8577") : "#c9cbbd",
+        fill: p.faction === "mer" ? tokenColor("--nation-mer") : owner ? nationColor(owner) : tokenColor("--nation-sans"),
         label: t(p.name_key),
         adjacent: p.adjacent,
-        tokens: [...by].sort(([a], [b]) => a.localeCompare(b)).map(([f, count]) => ({ color: NATION_COLORS[f] ?? "#8a8577", count })),
+        tokens: [...by].sort(([a], [b]) => a.localeCompare(b)).map(([f, count]) => ({ color: nationColor(f), count })),
         front: ns.fronts.some((f) => f.province === p.id && f.day >= day - 7),
         titan: ns.projections.some((x) => x.province === p.id && x.restUntil === null),
         major: p.faction === "mer" || p.canon === "C" || p.code.endsWith("01") || p.id === "wprov_fort_slava",

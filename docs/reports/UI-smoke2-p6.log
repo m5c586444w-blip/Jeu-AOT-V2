@@ -1,0 +1,23 @@
+
+> murs-et-sang@0.0.1 smoke:p6
+> tsx src/tools/smoke-p6.ts
+
+[scénario 850, Canon fidèle] 1366×768
+  OK  bandeau : registre Porteurs (T)
+  OK  9 fiches de Titans, 16 capacités en fiches (coût, portée, délai, recharge)
+  OK  porteurs cachés tant que leur secret n'est pas percé (Cuirassé, Assaillant)
+  OK  Bestial : porteur inconnu de Paradis (identité secrète de Marley)
+  OK  registre Porteurs, 1er jour : 17 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  E42 : Armin Arlert porte le Colossal (hérité en 850), horloge au 1er jour de 851 : 12 ans
+  OK  horloge des 13 ans expliquée (Colossal : 13 − années depuis 850)
+  OK  dossier d'héritage : Armin hérite en dévorant Bertholdt, coûts consignés
+  OK  Eren révélé (E12) : porteur de l'Assaillant au service de Paradis
+  OK  héritage préparé : 6 coûts prévus (dévoré, sérum, horloge, stress, loyauté, légitimité), refus expliqué : « Aucune dose de sérum. »
+  OK  Eren retiré du service (le bouton propose de le rappeler)
+  OK  registre Porteurs, fin 850 : 23 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  bataille d'essai : le porteur se transforme (journal), Titan Cuirassé nommé
+  OK  écran de bataille avec porteur : 21 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  bataille d'essai menée jusqu'au bilan
+  OK  bilan de la bataille avec porteur : 9 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  0 erreur console
+smoke:p6 : tout est conforme.

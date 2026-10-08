@@ -1,0 +1,44 @@
+
+> murs-et-sang@0.0.1 smoke:r0
+> tsx src/tools/smoke-r0.ts
+
+[1366×768]
+  OK  b. menu : aucune chaîne de développement (« Registre de travail — phase de fondation » absent)
+      3. carte stratégique, fenêtre entière (1366×768, bandeau compris) : 72.4 %
+  OK  3. carte stratégique : zone de jeu 93.1 % de l'espace disponible (1366×622 px entre le bandeau et le menu de gestion ; ≥ 85 %)
+  OK  b. HUD hors debug : « Graine » masquée, « Empreinte d'état » masquée
+  OK  b. HUD en debug (F2) : Graine et Empreinte d'état affichées
+  OK  c. légende « Calques » recouverte par un registre ouvert : 0 % de sa surface
+  OK  c. légende « Calques » recouverte par le dossier de province : 0 %
+  OK  c. légende « Calques » recouverte par les options : 0 %
+  OK  c. la légende revient quand les fenêtres sont fermées
+  OK  g. épilogue : 0 case(s) à « 0 »
+      3. bataille, fenêtre entière (1366×768, titre, carnet et cartes d'escouade compris) : 2.7 %
+  KO  3. bataille : zone de jeu 7.3 % de la scène (1014×578 px ; canevas au premier plan 7.4 % × sol 99.0 % ; ≥ 85 %)
+  OK  3. bataille : hommes du joueur dans le champ à l'ouverture 36/36 (≥ 90 %)
+  OK  a. sous-titres : au plus 1 ligne(s) identique(s) à l'écran en 10 s de bataille
+  OK  2. sous-titres : 17 relevés de lignes en 10 s, recouvrements avec pastilles, flèches et HUD : aucun
+      bilan : Morts 1 Titans abattus 1 Coupes réussies 1 Membres tranchés 0 Esquives 0 Sauvetages 0 Lames cassées 0 Gaz consommé 2 358
+  OK  f. transformation : figure du porteur entière, tête comprise, dans la scène sous la barre de titre : oui ; boîte (555.6, 20.7) – (579.1, 66.6) dans 1013×578 px ; scène y=48, bas de la barre de titre y=34 (toits 0 · vapeur 0 · éclairs 62 · occultés 0 · flèches 0)
+  OK  d. atlas du monde : 18 noms tracés, 0 chevauchement(s)
+  OK  d. atlas du monde : bande à droite de l'atlas occupée à 75 % (≥ 50 %)
+[3840×2160]
+  OK  b. menu : aucune chaîne de développement (« Registre de travail — phase de fondation » absent)
+      3. carte stratégique, fenêtre entière (3840×2160, bandeau compris) : 82.5 %
+  OK  3. carte stratégique : zone de jeu 96.8 % de l'espace disponible (3840×1872 px entre le bandeau et le menu de gestion ; ≥ 85 %)
+  OK  b. HUD hors debug : « Graine » masquée, « Empreinte d'état » masquée
+  OK  b. HUD en debug (F2) : Graine et Empreinte d'état affichées
+  OK  c. légende « Calques » recouverte par un registre ouvert : 0 % de sa surface
+  OK  c. légende « Calques » recouverte par le dossier de province : 0 %
+  OK  c. légende « Calques » recouverte par les options : 0 %
+  OK  c. la légende revient quand les fenêtres sont fermées
+  OK  g. épilogue : 0 case(s) à « 0 »
+      3. bataille, fenêtre entière (3840×2160, titre, carnet et cartes d'escouade compris) : 23.1 %
+  KO  3. bataille : zone de jeu 33.5 % de la scène (3136×1837 px ; canevas au premier plan 33.8 % × sol 99.0 % ; ≥ 85 %)
+  OK  3. bataille : hommes du joueur dans le champ à l'ouverture 36/36 (≥ 90 %)
+  OK  a. sous-titres : au plus 1 ligne(s) identique(s) à l'écran en 10 s de bataille
+  OK  2. sous-titres : 3 relevés de lignes en 10 s, recouvrements avec pastilles, flèches et HUD : aucun
+  OK  d. atlas du monde : 18 noms tracés, 0 chevauchement(s)
+  OK  d. atlas du monde : bande à droite de l'atlas occupée à 66 % (≥ 50 %)
+  OK  0 erreur console
+smoke:r0 (avant) : ÉCHEC (2)

@@ -1,0 +1,191 @@
+/*
+ * Jetons de style (phase UI, principe U1) : SEUL fichier de l'interface où une couleur est écrite en dur.
+ * Toutes les autres feuilles et tous les modules TypeScript de src/ui passent par ces variables
+ * (contrôlé par tests/ui/tokens.test.ts ; contrastes AA par tests/ui/contrast.test.ts).
+ * Thème sombre sobre : fond anthracite, panneaux à filet fin, accent laiton, rouge de danger, vert d'état.
+ */
+:root {
+  /* — Neutres (anthracite → ivoire) — */
+  --n-950: #0c0e11;
+  --n-900: #14171c;
+  --n-850: #181b21;
+  --n-800: #1c2128;
+  --n-750: #232932;
+  --n-700: #2b323c;
+  --n-600: #3a434f;
+  --n-500: #59636f;
+  --n-400: #8c96a2;
+  --n-300: #aab2bc;
+  --n-200: #ccd2d9;
+  --n-100: #e9ecef;
+
+  /* — Laiton (accent) — */
+  --laiton-300: #e6cd94;
+  --laiton-400: #d8b874;
+  --laiton-500: #c9a45c;
+  --laiton-600: #a5843f;
+  --laiton-800: #4a3c22;
+  --laiton-900: #2a2316;
+
+  /* — États — */
+  --rouge-400: #e0786b;
+  --rouge-500: #d3604f;
+  --rouge-600: #a8392e;
+  --rouge-900: #3a1d1b;
+  --vert-400: #86c294;
+  --vert-500: #6fb07f;
+  --vert-600: #4f8a5f;
+  --vert-900: #1a2d21;
+  --ambre-500: #dba545;
+  --ambre-900: #33270f;
+  --bleu-400: #8fb2d6;
+  --bleu-600: #4d6f94;
+  --bleu-900: #18222f;
+
+  /* — Nations (accents de faction) — */
+  --nation-paradis: #c9a45c;
+  --nation-marley: #d0605a;
+  --nation-hizuru: #7f9dd6;
+  --nation-allies: #c08f5c;
+  --nation-neutre: #8c96a2;
+  --nation-mer: #22303d;
+  --nation-sans: #4a525c;
+
+  /* — Transparences (voiles, ombres, survols) — */
+  --voile-fort: rgba(8, 10, 13, 0.78);
+  --voile: rgba(8, 10, 13, 0.55);
+  --voile-leger: rgba(8, 10, 13, 0.28);
+  --ombre: rgba(0, 0, 0, 0.45);
+  --lueur-laiton: rgba(201, 164, 92, 0.16);
+  --lueur-laiton-forte: rgba(201, 164, 92, 0.32);
+  --lueur-rouge: rgba(211, 96, 79, 0.16);
+  --lueur-vert: rgba(111, 176, 127, 0.14);
+  --reflet: rgba(255, 255, 255, 0.04);
+  --reflet-fort: rgba(255, 255, 255, 0.08);
+
+  /* — Portraits peints (U7) : carnations, chevelures, tenues — */
+  --peau-1: #ecc9a6;
+  --peau-2: #ddb08a;
+  --peau-3: #c3906a;
+  --peau-4: #a0704e;
+  --peau-5: #7a5038;
+  --peau-ombre: rgba(70, 35, 20, 0.28);
+  --levres: #9a5a4c;
+  --oeil: #2a2420;
+  --cheveux-1: #1d1916;
+  --cheveux-2: #3e2a1d;
+  --cheveux-3: #6b4528;
+  --cheveux-4: #b88f52;
+  --cheveux-5: #86401f;
+  --cheveux-6: #8d8780;
+  --cheveux-7: #d4cfc7;
+  --tenue-officier: #3d4636;
+  --tenue-soldat: #5b4430;
+  --tenue-cadet: #6a5738;
+  --tenue-civil: #4b4954;
+  --tenue-clerc: #1f2024;
+  --tenue-noble: #5a2330;
+  --tenue-ombre: #131518;
+  --tenue-ombre-portee: rgba(0, 0, 0, 0.45);
+  --chemise: #d9d4c8;
+
+  /* — Papier (réservé aux documents d'époque : gazette, lettres ; E-UX-2 « éléments précis ») — */
+  --papier: #e6dcc4;
+  --papier-sombre: #cfc2a3;
+  --encre: #1d1b18;
+  --encre-douce: #4a443a;
+
+  /* — Rôles sémantiques (utilisés par toutes les feuilles) — */
+  --fond: var(--n-900);
+  --fond-profond: var(--n-950);
+  --panneau: var(--n-800);
+  --panneau-haut: var(--n-750);
+  --panneau-creux: var(--n-850);
+  --champ: var(--n-850);
+  --filet: var(--n-600);
+  --filet-doux: var(--n-700);
+  --texte: var(--n-200);
+  --texte-fort: var(--n-100);
+  --texte-second: var(--n-300);
+  --texte-discret: var(--n-400);
+  --texte-inactif: var(--n-500);
+  --accent: var(--laiton-500);
+  --accent-clair: var(--laiton-400);
+  --accent-fonce: var(--laiton-600);
+  --accent-fond: var(--laiton-900);
+  --accent-texte: var(--n-950);
+  --danger: var(--rouge-500);
+  --danger-clair: var(--rouge-400);
+  --danger-fond: var(--rouge-900);
+  --danger-plein: var(--rouge-600);
+  --succes: var(--vert-500);
+  --succes-clair: var(--vert-400);
+  --succes-fond: var(--vert-900);
+  --alerte: var(--ambre-500);
+  --alerte-fond: var(--ambre-900);
+  --info: var(--bleu-400);
+  --info-fond: var(--bleu-900);
+  --focus: var(--laiton-300);
+
+  /* — Typographie (polices du projet, auto-hébergées) — */
+  --f-titre: "EB Garamond", serif;
+  --f-texte: "EB Garamond", serif;
+  --f-chiffres: "EB Garamond", serif;
+  --f-machine: "Special Elite", "EB Garamond", serif;
+  --f-orne: "IM Fell English", "EB Garamond", serif;
+  --f-marley: "UnifrakturMaguntia", "IM Fell English", serif;
+  --t-xs: 0.78rem;
+  --t-s: 0.88rem;
+  --t-m: 1rem;
+  --t-l: 1.18rem;
+  --t-xl: 1.45rem;
+  --t-xxl: 2rem;
+
+  /* — Espacements, filets, rayons (rayons ≤ 3 px : U11, pas de « cartes arrondies à ombre douce ») — */
+  --e-1: 0.25rem;
+  --e-2: 0.5rem;
+  --e-3: 0.75rem;
+  --e-4: 1rem;
+  --e-5: 1.5rem;
+  --e-6: 2rem;
+  --rayon: 2px;
+  --filet-l: 1px;
+
+  /* — Profondeurs — */
+  --z-carte: 1;
+  --z-hud: 10;
+  --z-panneau: 15;
+  --z-fenetre: 25;
+  --z-modale: 38;
+  --z-bulle: 60;
+
+  /* — Échelle d'interface : préférence du joueur × hauteur d'écran (lisible de 1366×768 à 3840×2160) — */
+  --ui-echelle: 1;
+  --k-ecran: 1;
+  color-scheme: dark;
+}
+
+@media (min-height: 1000px) { :root { --k-ecran: 1.2; } }
+@media (min-height: 1300px) { :root { --k-ecran: 1.45; } }
+@media (min-height: 1700px) { :root { --k-ecran: 1.75; } }
+@media (min-height: 2000px) { :root { --k-ecran: 2; } }
+
+/* — Thèmes d'accent par nation jouée (U1) : `html[data-faction]` — */
+:root[data-faction="fac_paradis"] { --accent: var(--nation-paradis); }
+:root[data-faction="fac_marley"] {
+  --accent: var(--nation-marley);
+  --accent-clair: var(--rouge-400);
+  --accent-fonce: var(--rouge-600);
+  --accent-fond: var(--rouge-900);
+  --lueur-laiton: rgba(208, 96, 90, 0.16);
+  --lueur-laiton-forte: rgba(208, 96, 90, 0.32);
+}
+:root[data-faction="fac_hizuru"] {
+  --accent: var(--nation-hizuru);
+  --accent-clair: var(--bleu-400);
+  --accent-fonce: var(--bleu-600);
+  --accent-fond: var(--bleu-900);
+  --lueur-laiton: rgba(127, 157, 214, 0.16);
+  --lueur-laiton-forte: rgba(127, 157, 214, 0.32);
+}
+:root[data-faction="fac_allies"] { --accent: var(--nation-allies); }

@@ -10,18 +10,20 @@ import { ATTRIBUTES } from "../../sim/politics/vocabulary";
 import type { PoliticsWorld } from "../../sim/strategic/world";
 import { portraitSvg } from "../portrait";
 import { formatNumber } from "../why";
-import { button, displayName, el, noPolitics, stamp, valueEl } from "./common";
+import { button, displayName, el, masterDetail, noPolitics, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 
-const RELATION_COLOR: Record<string, string> = {
-  amitie: "#4f6b5a", loyaute: "#4f6b5a", respect: "#b5873a", amour: "#8a3b2a", mentor: "#4f6b5a", dette: "#7b766b",
-  rivalite: "#8a3b2a", haine: "#8a3b2a", tension: "#b5873a",
+/** Teinte du fil de relation (classe CSS, jetons de tokens.css). */
+const RELATION_TONE: Record<string, string> = {
+  amitie: "bonne", loyaute: "bonne", respect: "neutre", amour: "forte", mentor: "bonne", dette: "discrete",
+  rivalite: "mauvaise", haine: "mauvaise", tension: "neutre",
 };
 
 /** Registre des personnages et fiche personnage (F-CHR-01, F-ADV-15, 04 §5.5). */
 export class CharactersPanel implements Panel {
   readonly id = "personnages" as const;
   private filter: "vivants" | "morts" | "tous" = "vivants";
+  private selected: string | null = null;
 
   constructor(private readonly ctx: PanelContext) {}
 
@@ -29,17 +31,22 @@ export class CharactersPanel implements Panel {
     const pw = this.ctx.world.politics;
     const pol = this.ctx.state().politics;
     if (!pw || !pol) return noPolitics(root);
-    if (arg && pw.characters.has(arg)) return this.sheet(root, pw, pol, arg);
-    this.list(root, pw, pol);
+    if (arg && pw.characters.has(arg)) this.selected = arg;
+    const md = masterDetail(root, "personnages", "perso-vue");
+    const shown = this.list(md.master, pw, pol);
+    const id = this.selected && pw.characters.has(this.selected) ? this.selected : shown[0];
+    if (id) this.sheet(md.detail, pw, pol, id);
+    else md.detail.append(el("p", "registre-note", t("characters.none")));
+    md.done();
   }
 
-  private list(root: HTMLElement, pw: PoliticsWorld, pol: PoliticalState): void {
+  /** Liste filtrable (vivants, morts, tous), groupée par organisation ; renvoie les identifiants affichés. */
+  private list(root: HTMLElement, pw: PoliticsWorld, pol: PoliticalState): string[] {
     const bar = el("div", "registre-filtres");
     for (const f of ["vivants", "morts", "tous"] as const) {
       const b = button(t(`characters.filter.${f}`), () => {
         this.filter = f;
-        root.replaceChildren();
-        this.list(root, pw, pol);
+        this.ctx.open("personnages", this.selected ?? undefined);
       }, "registre-onglet");
       b.setAttribute("aria-pressed", String(this.filter === f));
       bar.append(b);
@@ -55,25 +62,42 @@ export class CharactersPanel implements Panel {
       const key = c.org ?? "sans";
       byOrg.set(key, [...(byOrg.get(key) ?? []), c]);
     }
+    const shown: string[] = [];
+    const ul = el("ul", "liste perso-liste");
+    ul.setAttribute("aria-label", t("panel.personnages"));
     for (const [org, list] of byOrg) {
-      root.append(el("h3", "registre-intertitre", org === "sans" ? t("characters.no_org") : t(pw.organisations.get(org)?.name_key ?? org)));
-      const table = el("table", "registre-table");
+      ul.append(el("li", "liste__groupe", org === "sans" ? t("characters.no_org") : t(pw.organisations.get(org)?.name_key ?? org)));
       for (const c of list) {
+        shown.push(c.id);
         const cs = pol.characters[c.id];
-        const tr = el("tr", cs?.alive ? "" : "ligne-morte");
-        const name = button(displayName(c), () => this.ctx.open("personnages", c.id), "lien-dossier");
-        const tdName = el("td");
-        tdName.append(name, " ", stamp(c.canon));
-        tr.append(tdName, el("td", "", t(c.rank_key ?? "rank.inconnu")));
+        const li = el("li", `liste__item perso-ligne${cs?.alive ? "" : " ligne-morte"}`);
+        li.dataset["character"] = c.id;
+        li.setAttribute("aria-selected", String(c.id === this.selected));
+        const lead = el("span", "liste__tete");
+        lead.innerHTML = portraitSvg(c.portrait?.seed ?? 1, c.portrait?.archetype ?? "civil", !cs?.alive);
+        const mid = el("span", "liste__milieu");
+        // Le nom est le bouton (clavier) ; un clic n'importe où sur la ligne ouvre la fiche.
+        const name = el("button", "lien-dossier", displayName(c));
+        name.type = "button";
+        const title = el("span", "liste__titre");
+        title.append(name, " ", stamp(c.canon));
         const posts = postsOf(pol, c.id).map((p) => (p.kind === "role" ? t(pw.roles.find((r) => r.id === p.id)?.name_key ?? p.id) : t("characters.leads", { org: t(pw.organisations.get(p.id)?.name_key ?? p.id) })));
-        tr.append(el("td", "registre-poste", posts.join(", ")));
-        const tdStress = el("td");
-        if (cs) tdStress.append(valueEl(this.ctx, formatNumber(cs.stress), () => this.stressWhy(pw, c, cs)));
-        tr.append(tdStress);
-        table.append(tr);
+        mid.append(title, el("span", "liste__meta registre-poste", [t(c.rank_key ?? "rank.inconnu"), ...posts].join(" · ")));
+        const trail = el("span", "liste__queue");
+        if (cs) {
+          trail.append(valueEl(this.ctx, formatNumber(cs.stress), () => this.stressWhy(pw, c, cs)));
+          trail.append(el("span", "liste__meta", t("characters.stress")));
+        }
+        li.append(lead, mid, trail);
+        li.addEventListener("click", () => {
+          this.selected = c.id;
+          this.ctx.open("personnages", c.id);
+        });
+        ul.append(li);
       }
-      root.append(table);
     }
+    root.append(ul);
+    return shown;
   }
 
   private stressWhy(pw: PoliticsWorld, c: Character, cs: CharacterState) {
@@ -90,7 +114,6 @@ export class CharactersPanel implements Panel {
   private sheet(root: HTMLElement, pw: PoliticsWorld, pol: PoliticalState, id: string): void {
     const c = pw.characters.get(id) as Character;
     const cs = pol.characters[id];
-    const back = button(t("characters.back"), () => this.ctx.open("personnages"), "registre-retour");
     const head = el("header", "fiche-tete");
     const portrait = el("div", "fiche-portrait");
     portrait.innerHTML = portraitSvg(c.portrait?.seed ?? 1, c.portrait?.archetype ?? "civil", !cs?.alive);
@@ -99,7 +122,7 @@ export class CharactersPanel implements Panel {
     ident.append(stamp(c.canon));
     ident.append(el("p", "fiche-bio", c.bio_key ? t(c.bio_key) : ""));
     head.append(portrait, ident);
-    root.append(back, head);
+    root.append(head);
 
     if (cs?.death) {
       const d = cs.death;
@@ -175,20 +198,19 @@ export class CharactersPanel implements Panel {
     const h = 240;
     const cx = w / 2;
     const cy = h / 2;
-    const parts: string[] = [`<svg class="tableau-enquete" viewBox="0 0 ${w} ${h}" role="img" aria-label="${t("characters.relations")}">`, `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" fill="#b89a6a" fill-opacity="0.25" stroke="#1c1a17"/>`];
+    const parts: string[] = [`<svg class="tableau-enquete" viewBox="0 0 ${w} ${h}" role="img" aria-label="${t("characters.relations")}">`, `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" class="enq-fond"/>`];
     const nodes = others.map((o, i) => {
       const a = (i / others.length) * Math.PI * 2 - Math.PI / 2;
       return { o, x: cx + Math.cos(a) * 160, y: cy + Math.sin(a) * 88 };
     });
     for (const n of nodes) {
       const rel = relationBetween(pw, c.id, n.o.id);
-      const color = RELATION_COLOR[rel?.type ?? ""] ?? "#1c1a17";
-      parts.push(`<path d="M${cx} ${cy} Q${(cx + n.x) / 2} ${(cy + n.y) / 2 + 14} ${n.x} ${n.y}" fill="none" stroke="${color}" stroke-width="${1 + Math.abs(rel?.strength ?? 0) / 40}"/>`);
+      const tone = RELATION_TONE[rel?.type ?? ""] ?? "discrete";
+      parts.push(`<path d="M${cx} ${cy} Q${(cx + n.x) / 2} ${(cy + n.y) / 2 + 14} ${n.x} ${n.y}" class="enq-fil enq-fil--${tone}" stroke-width="${1 + Math.abs(rel?.strength ?? 0) / 40}"/>`);
     }
     const card = (x: number, y: number, label: string, dead: boolean): string =>
-      `<g><rect x="${x - 46}" y="${y - 11}" width="92" height="22" fill="#efe6cf" stroke="#1c1a17" transform="rotate(${((x * 7) % 5) - 2} ${x} ${y})"/>` +
-      `<circle cx="${x}" cy="${y - 11}" r="3" fill="#8a3b2a"/>` +
-      `<text x="${x}" y="${y + 4}" text-anchor="middle" font-family="EB Garamond" font-size="10.5" fill="#1c1a17"${dead ? ' text-decoration="line-through"' : ""}>${escapeXml(label)}</text></g>`;
+      `<g><rect x="${x - 48}" y="${y - 11}" width="96" height="22" class="enq-carte"/>` +
+      `<text x="${x}" y="${y + 4}" text-anchor="middle" font-size="10.5" class="enq-nom${dead ? " enq-nom--mort" : ""}">${escapeXml(label)}</text></g>`;
     for (const n of nodes) parts.push(card(n.x, n.y, displayName(n.o), !pol.characters[n.o.id]?.alive));
     parts.push(card(cx, cy, displayName(c), !pol.characters[c.id]?.alive));
     parts.push("</svg>");

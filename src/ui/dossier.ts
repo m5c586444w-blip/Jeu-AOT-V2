@@ -265,19 +265,19 @@ export class Dossier {
 /** Coupe du mur (élévation stylisée) dessinée en SVG : hauteur et épaisseur à l'échelle relative. */
 function wallSection(structure: number, spec: WallSpec): HTMLElement {
   const fig = el("figure", "dossier__coupe");
-  const crack = structure < 100 ? `<path d="M64 30 L70 52 L62 74 L71 96" fill="none" stroke="#8a3b2a" stroke-width="2"/>` : "";
+  const crack = structure < 100 ? `<path d="M64 30 L70 52 L62 74 L71 96" fill="none" class="coupe-fissure" stroke-width="2"/>` : "";
   fig.innerHTML =
     `<svg viewBox="0 0 220 130" role="img" aria-label="${t("dossier.section_alt")}">` +
-    `<path d="M10 118 L210 118" stroke="#1c1a17" stroke-width="1.4"/>` +
-    `<path d="M10 121 L210 121" stroke="#1c1a17" stroke-width="0.6" stroke-dasharray="3 3"/>` +
-    `<path d="M52 118 L56 16 L84 16 L88 118 Z" fill="#8a8577" stroke="#1c1a17" stroke-width="1.6"/>` +
-    Array.from({ length: 9 }, (_, i) => `<path d="M${55 + i * 0.4} ${28 + i * 10} L${85 - i * 0.4} ${28 + i * 10}" stroke="#1c1a17" stroke-width="0.6" opacity="0.6"/>`).join("") +
-    `<path d="M54 16 L54 9 L60 9 L60 13 L66 13 L66 9 L74 9 L74 13 L80 13 L80 9 L86 9 L86 16" fill="none" stroke="#1c1a17" stroke-width="1.2"/>` +
+    `<path d="M10 118 L210 118" stroke="currentColor" stroke-width="1.4"/>` +
+    `<path d="M10 121 L210 121" stroke="currentColor" stroke-width="0.6" stroke-dasharray="3 3"/>` +
+    `<path d="M52 118 L56 16 L84 16 L88 118 Z" class="coupe-mur" stroke="currentColor" stroke-width="1.6"/>` +
+    Array.from({ length: 9 }, (_, i) => `<path d="M${55 + i * 0.4} ${28 + i * 10} L${85 - i * 0.4} ${28 + i * 10}" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>`).join("") +
+    `<path d="M54 16 L54 9 L60 9 L60 13 L66 13 L66 9 L74 9 L74 13 L80 13 L80 9 L86 9 L86 16" fill="none" stroke="currentColor" stroke-width="1.2"/>` +
     crack +
-    `<path d="M100 16 L100 118" stroke="#1c1a17" stroke-width="0.8"/><path d="M96 16 L104 16 M96 118 L104 118" stroke="#1c1a17" stroke-width="0.8"/>` +
-    `<text x="108" y="70" font-family="Special Elite" font-size="11" fill="#1c1a17">≈ ${spec.height_m.value} m${spec.height_m.canon === "?" ? " ?" : ""}</text>` +
-    `<path d="M52 126 L88 126" stroke="#1c1a17" stroke-width="0.8"/>` +
-    `<text x="40" y="129" font-family="Special Elite" font-size="9" fill="#1c1a17">≈ ${spec.thickness_m.value} m${spec.thickness_m.canon === "?" ? " ?" : ""}</text>` +
+    `<path d="M100 16 L100 118" stroke="currentColor" stroke-width="0.8"/><path d="M96 16 L104 16 M96 118 L104 118" stroke="currentColor" stroke-width="0.8"/>` +
+    `<text x="108" y="70" font-size="11" fill="currentColor">≈ ${spec.height_m.value} m${spec.height_m.canon === "?" ? " ?" : ""}</text>` +
+    `<path d="M52 126 L88 126" stroke="currentColor" stroke-width="0.8"/>` +
+    `<text x="40" y="129" font-size="9" fill="currentColor">≈ ${spec.thickness_m.value} m${spec.thickness_m.canon === "?" ? " ?" : ""}</text>` +
     `</svg>`;
   fig.append(el("figcaption", "", t("dossier.section_caption")));
   return fig;

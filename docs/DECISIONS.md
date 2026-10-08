@@ -827,3 +827,65 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 | Phase | Modèle | Effort | Tours (estimés) | Note |
 |---|---|---|---|---|
 | Reprise MAP (direction) | Opus 5.5 | défaut | ≈ 35 | verify ×2, 2 revues de captures, 1 correctif |
+
+## 2026-10-08 — D-108 Part de la carte mesurée entre la barre supérieure et le menu de gestion (phase UI)
+- **Contexte** : U2 place le menu de gestion en bas de l'écran ; `smoke:r0` mesurait la part de carte visible sous le seul
+  bandeau, sur toute la hauteur restante ; la nouvelle barre du bas comptait comme « carte cachée ».
+- **Options** : (a) garder la mesure (≈ 80 % à 1366 × 768 : critère R0 perdu) ; (b) mesurer la zone de jeu entre les deux
+  barres, cadre fixe de l'écran au même titre que le bandeau ; (c) rendre le menu de gestion flottant sur la carte.
+- **Choix** : (b). Le fil de notifications et le panneau « Calques » restent dans la zone mesurée et sont compactés.
+  Mesure : 87,7 % à 1366 × 768, 95,7 % à 3840 × 2160 (seuil 85 %).
+- **Réversible** : oui (une ligne de `smoke-r0.ts`).
+
+## 2026-10-08 — D-109 Menu de gestion en bas, regroupé, mode compact (phase UI)
+- **Contexte** : U2 demande un menu « en bas ou à gauche », six groupes, icône + étiquette ; 17 registres pour Paradis.
+- **Options** : (a) colonne à gauche (masque le dossier de province, déjà à gauche) ; (b) barre en bas, groupes titrés.
+- **Choix** : (b) ; quand la largeur ne suffit pas (1366 px à 125 %), les étiquettes sont masquées (icônes seules, nom et
+  touche dans l'infobulle), avec hystérésis pour éviter le battement ; mesures dans `requestAnimationFrame` (aucune boucle
+  de `ResizeObserver`). Nouvel écran « Économie » (touche V) pour les ressources hors de la barre (U2).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-110 Fond du menu principal : rendu de la scène 3D du projet (phase UI)
+- **Contexte** : U8 veut les murs au crépuscule en arrière-plan ; aucun asset externe nouveau n'est permis.
+- **Options** : (a) scène 3D en direct derrière le menu (three.js dans le bundle principal, chargement > 8 s en rendu
+  logiciel) ; (b) image tirée une fois de la scène existante (`?proto3d&lieu=shiganshina&lumiere=crepuscule&vue=rempart`).
+- **Choix** : (b), `public/menu/murs-crepuscule.jpg` (1920 × 1080), aussi utilisée en vignette des scénarios ; attribution
+  dans `docs/ASSETS_LICENSES.md` (rendu du projet ; textures CC0 de Poly Haven visibles).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-111 Infobulles à trois niveaux et raccourcis (phase UI)
+- **Contexte** : U4 (détail de calcul sur trois niveaux au plus) et U10 (raccourcis dans les infobulles).
+- **Choix** : modèle pur `whyModel` (`src/ui/why.ts`) : niveau 1 titre et valeur, niveau 2 sections et sous-totaux, niveau 3
+  facteurs colorés (sens inversé pour une dépense) ; les attributs `title` natifs des commandes sont remplacés par la même
+  infobulle (`hint`), avec la touche en pied (« Raccourci C »). Les touches sont écrites sans crochets : « [A] », « [C] »
+  sont des marques de statut canon pour le détecteur de fuites (UX0).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-112 Plans d'affichage : bataille au-dessus des registres ; smoke:p5 aligné sur UX0 (phase UI)
+- **Contexte** : en UI.1, les registres sont passés à `--z-fenetre` (25) ; la bataille et les planches plein écran
+  restaient à 22. Le registre des expéditions, d'où part la bataille d'essai, recouvrait donc le canevas
+  (`smoke:r0` : 7,3 % de la scène visible ; clics et molette perdus). Par ailleurs `smoke:p5` lançait l'entretien d'ODM,
+  masqué depuis UX0 (mécanique P9), et attendait « N'existe pas encore », que UX0 classe comme fuite.
+- **Options** : (a) fermer les registres à l'ouverture d'une bataille ; (b) placer les modes plein écran au-dessus des
+  fenêtres, sous les options (40) et les dossiers d'événement (38).
+- **Choix** : (b), `calc(var(--z-fenetre) + 2)` pour `.bataille` et les planches ; le registre réapparaît intact après la
+  bataille. smoke:p5 : étude d'une technologie montrée (bouteilles de gaz compactes), verrou attendu « Exige … ».
+- **Réversible** : oui.
+
+## 2026-10-08 — D-113 Revue et fusion de la phase UI (direction autonome)
+- **Contexte** : UI faite par un sous-agent (UI.1 à UI.7, ≈ 250 tours sur 280) ; relancé une fois après un arrêt de 2 h sans
+  progrès pendant les smoke. Revue par un sous-agent distinct : un bloquant (« (débogage) » visible en Chancellerie).
+- **Choix** : (1) correctif unique : journal des IA réservé au mode auteur, motif « débogage » ajouté au contrôle de fuites,
+  vérifié par un troisième sous-agent ; (2) `smoke:tactique` (2 erreurs Pixi, deux passages en échec) mis en dette n° 20
+  selon le fichier 24 §4 : les batailles vont au bout ; la bataille 2D sera remplacée en R2+ ; (3) défauts de finition
+  « tableur » en dette n° 21 (pas de troisième passe, fichier 24 §4) ; (4) `npm run verify` code 0 (530/530,
+  `docs/reports/UI-verify-revue.log`), `src/sim` diff vide ; fusion.
+- **Options écartées** : bloquer la fusion sur `smoke:tactique` (critère non bloquant au sens du fichier 24 §4 ; AUD, CHR
+  et PA n'en dépendent pas) ; nouvelle passe de finition (refonte au passage, interdite).
+- **Réversible** : oui (revert du commit de fusion).
+- **À valider par Gabriel** : l'aspect général de l'interface (dette n° 21 liste ce que le relecteur juge encore « tableur »).
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| UI (sous-agent) | Opus | xhigh | ≈ 250 | relancé une fois |
+| Revue et fusion UI (direction + 3 relecteurs) | Opus / Sonnet | défaut | ≈ 30 | 1 correctif |
