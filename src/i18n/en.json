@@ -40,5 +40,9 @@
   "alert.army_landing": "Enemy landing: {province}",
   "alert.siege": "Siege: {segment}",
   "alert.wall_breach": "Wall breached: {segment}",
-  "alert.succession_crisis": "Succession crisis: {n} claimants"
+  "alert.succession_crisis": "Succession crisis: {n} claimants",
+  "panel.armees": "Armies",
+  "action.open_armies": "Armies in the field",
+  "tac.cause.eclat": "shell splinter",
+  "narr.cause.eclat": "from a shell splinter"
 }

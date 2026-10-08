@@ -560,7 +560,7 @@ export function canPlay(ctx: Pick<ArmyCtx, "aw" | "s" | "ns" | "world">, enc: En
 const TERRAIN_MAP: Record<string, string> = { urbain: "tmap_ville", foret: "tmap_foret", mur: "tmap_mur", fort: "tmap_mur", militaire: "tmap_ville" };
 
 /** Bataille tactique d'une rencontre (PA.5) : échantillon de soldats de Paradis, Titans rencontrés, batteries des deux camps. */
-export function encounterSetup(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed">, encId: string): BattleSetup | null {
+export function encounterSetup(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed"> & { st?: StrategicState }, encId: string): BattleSetup | null {
   const enc = ctx.s.encounters.find((e) => e.id === encId);
   const tw = ctx.world.tactical;
   if (!enc || !tw) return null;
@@ -594,12 +594,22 @@ export function encounterSetup(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed">
     }
   };
   add("allie", ours.flatMap((a) => armyPieces(ctx.aw, a)));
+  // Canons de rempart [C] : un segment de mur tenu et gardé, sur place ou voisin, tire avec sa garnison (même règle qu'au siège).
+  const wall = ctx.st ? wallGunsNear(ctx.world, ctx.st, enc.province) : 0;
+  if (wall > 0 && ctx.aw.pieces.get("art_canon_rempart")?.enabled) add("allie", [{ piece: "art_canon_rempart", count: wall }]);
   for (const sd of enc.sides) if (sd.faction !== "fac_paradis") add("ennemi", sd.armies.flatMap((id) => {
     const a = findArmy(ctx.s, id);
     return a ? armyPieces(ctx.aw, a) : [];
   }));
   const spears = ours.some((a) => a.regiments.some((r) => ctx.aw.regiments.get(r.regiment)?.kind === "lances"));
   return { ...setup, ...(batteries.length > 0 ? { artillery: batteries } : {}), ...(spears ? { thunderSpears: true } : {}) };
+}
+
+/** Pièces de rempart en état de tirer près d'une province : segment tenu, une pièce servie par 400 hommes de garnison. */
+export function wallGunsNear(world: World, st: StrategicState, province: string): number {
+  const g = geoOf(world);
+  const around = [province, ...(g.adj.get(province) ?? []).map((e) => e.to)].filter((p) => isWallProvince(g, p) && st.provinces[p]?.control === "paradis").sort();
+  return Math.min(6, around.reduce((n, p) => n + Math.floor((st.provinces[p]?.garrison?.soldiers ?? 0) / 400), 0));
 }
 
 /** Pertes d'une armée : part des hommes retirée de l'état des régiments ; un régiment sous 10 % disparaît. */

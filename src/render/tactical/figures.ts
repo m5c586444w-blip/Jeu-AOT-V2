@@ -177,3 +177,74 @@ export function shifterFlashBounds(x: number, y: number, h: number): { halos: Dr
     bolts: [boundsOf((g) => drawTransformBolt(g, x, y, h)), boundsOf((g) => drawBodyBolt(g, x, y, h, 1))],
   };
 }
+
+/** Modèle de pièce d'artillerie (PA.5) : deux modèles simples par camp, dessinés par code. */
+export type GunModel = "canon_paradis" | "mortier_paradis" | "canon_marley" | "obusier_marley";
+
+export function gunModel(piece: string): GunModel {
+  if (piece.startsWith("art_marley")) return piece.includes("obusier") || piece.includes("lourde") ? "obusier_marley" : "canon_marley";
+  return piece.includes("mortier") ? "mortier_paradis" : "canon_paradis";
+}
+
+const WOOD = 0x6b4a2f;
+const STEEL = 0x5a5f66;
+const KHAKI = 0x7a6f4a;
+
+/**
+ * Pièce d'artillerie vue de trois quarts, en mètres projetés (`s` ≈ 1 m, taille minimale imposée par la scène) :
+ * affût de bois et fût noir pour Paradis (canon, mortier trapu) ; acier, bouclier et roues cerclées pour Marley
+ * (canon long, obusier levé). Une pièce réduite au silence est renversée et grisée.
+ */
+export function drawGun(g: GraphicsContext, sx: number, sy: number, s: number, model: GunModel, facing: number, silenced: boolean): void {
+  const f = facing >= 0 ? 1 : -1;
+  const marley = model === "canon_marley" || model === "obusier_marley";
+  const body = silenced ? STONE : marley ? STEEL : WOOD;
+  const barrel = silenced ? STONE : marley ? STEEL : INK;
+  const wheelR = marley ? 0.55 * s : 0.75 * s;
+  if (silenced) {
+    g.poly([sx - 1.4 * s, sy, sx + 1.4 * s, sy - 0.2 * s, sx + 1.2 * s, sy - 0.6 * s, sx - 1.2 * s, sy - 0.4 * s]).fill({ color: body, alpha: 0.8 }).stroke({ width: 0.12 * s, color: INK });
+    g.circle(sx + 0.6 * s * f, sy - 0.5 * s, wheelR).stroke({ width: 0.14 * s, color: INK, alpha: 0.7 });
+    return;
+  }
+  // Ombre au sol.
+  g.ellipse(sx, sy, 1.7 * s, 0.35 * s).fill({ color: INK, alpha: 0.18 });
+  // Affût (flèche traînante vers l'arrière).
+  g.poly([sx - 1.6 * s * f, sy - 0.1 * s, sx + 0.3 * s * f, sy - wheelR - 0.1 * s, sx + 0.6 * s * f, sy - wheelR + 0.25 * s, sx - 1.5 * s * f, sy + 0.1 * s]).fill({ color: body }).stroke({ width: 0.1 * s, color: INK });
+  // Fût : long et peu levé (canons), court et levé (mortier, obusier).
+  const angle = model === "mortier_paradis" ? 0.9 : model === "obusier_marley" ? 0.55 : 0.18;
+  const len = model === "mortier_paradis" ? 1.1 * s : model === "obusier_marley" ? 1.8 * s : model === "canon_marley" ? 2.6 * s : 2.2 * s;
+  const width = model === "mortier_paradis" ? 0.55 * s : 0.3 * s;
+  const bx = sx + 0.2 * s * f;
+  const by = sy - wheelR - 0.1 * s;
+  const ex = bx + Math.cos(angle) * len * f;
+  const ey = by - Math.sin(angle) * len;
+  g.moveTo(bx, by).lineTo(ex, ey).stroke({ width, color: barrel, cap: "round" });
+  if (!marley) g.circle(bx - 0.15 * s * f, by + 0.05 * s, width * 0.7).fill({ color: barrel });
+  // Bouclier de Marley.
+  if (marley) g.rect(bx + 0.15 * s * f - (f < 0 ? 0.25 * s : 0), by - 0.95 * s, 0.25 * s, 1.1 * s).fill({ color: KHAKI }).stroke({ width: 0.08 * s, color: INK });
+  // Roues (rayons pour Paradis, bandage plein pour Marley).
+  const wx = sx + 0.25 * s * f;
+  const wy = sy - wheelR;
+  g.circle(wx, wy, wheelR).stroke({ width: (marley ? 0.22 : 0.14) * s, color: INK });
+  if (!marley) for (let i = 0; i < 4; i++) {
+    const a = (i * Math.PI) / 4;
+    g.moveTo(wx - Math.cos(a) * wheelR, wy - Math.sin(a) * wheelR).lineTo(wx + Math.cos(a) * wheelR, wy + Math.sin(a) * wheelR).stroke({ width: 0.06 * s, color: INK });
+  }
+  g.circle(wx, wy, 0.12 * s).fill({ color: marley ? STEEL : OCHRE });
+}
+
+/** Impact d'obus : souffle qui s'élargit puis fumée qui retombe (`age` en secondes, `r` = rayon du souffle en mètres). */
+export function drawImpact(g: GraphicsContext, x: number, y: number, r: number, tilt: number, age: number, enemy: boolean): void {
+  if (age < 0 || age > 3) return;
+  const a = Math.max(0, 1 - age / 3);
+  if (age < 0.5) g.ellipse(x, y, r * (0.4 + age * 1.2), r * tilt * (0.4 + age * 1.2)).fill({ color: 0xf2c76b, alpha: 0.75 * (1 - age * 2) });
+  g.ellipse(x, y, r * (0.6 + age * 0.3), r * tilt * (0.6 + age * 0.3)).stroke({ width: Math.max(0.3, r * 0.06), color: enemy ? BRICK : OCHRE, alpha: a * 0.8 });
+  for (let i = 0; i < 3; i++) g.circle(x + (i - 1) * r * 0.35, y - r * (0.3 + age * 0.5) - i * r * 0.1, r * (0.25 + age * 0.15)).fill({ color: STONE, alpha: a * 0.45 });
+}
+
+/** Zone de danger d'une batterie : ellipse au sol (souffle + dispersion), hachurée légère, rouge pour le feu ennemi. */
+export function drawDangerZone(g: GraphicsContext, x: number, y: number, r: number, tilt: number, enemy: boolean): void {
+  const c = enemy ? BRICK : OCHRE;
+  g.ellipse(x, y, r, r * tilt).fill({ color: c, alpha: 0.1 }).stroke({ width: Math.max(0.4, r * 0.03), color: c, alpha: 0.55 });
+  g.moveTo(x - r * 0.25, y).lineTo(x + r * 0.25, y).moveTo(x, y - r * tilt * 0.25).lineTo(x, y + r * tilt * 0.25).stroke({ width: Math.max(0.3, r * 0.02), color: c, alpha: 0.6 });
+}

@@ -3,7 +3,7 @@ import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
 import { INK, OCHRE, PAPER, PAPER_DARK, STONE, VERDIGRIS } from "../palette";
 import { paperTexture } from "../paperTexture";
-import { drawBodyFlash, drawFlare, drawSoldier, drawTitan, drawTransformFlash } from "./figures";
+import { drawBodyFlash, drawDangerZone, drawFlare, drawGun, drawImpact, drawSoldier, drawTitan, drawTransformFlash, gunModel } from "./figures";
 import { MIN_TITAN_PX, OVERVIEW_ZOOM, TILT, clampToMap, computeFrame, drawnTitanHeight, edgeArrows, fitZoom, sceneScale } from "./framing";
 import type { UnitPose } from "./framing";
 
@@ -398,7 +398,35 @@ export class TacticalScene {
       const [x, y] = this.project(st.wagon.x, st.wagon.y, 0);
       o.rect(x - 4, y - 4, 8, 4).fill({ color: OCHRE }).stroke({ width: 0.6, color: INK });
     }
+    this.drawArtillery(st);
     this.drawPastilles(st, centroids);
+  }
+
+  /** Artillerie (PA.5) : zones de danger visées, impacts récents, pièces au bord de déploiement (taille minimale à l'écran). */
+  private drawArtillery(st: BattleState): void {
+    const list = st.batteries;
+    if (!list || list.length === 0) return;
+    const o = this.gOverlay;
+    const t = st.tick / 20;
+    for (const b of list) {
+      if (!b.aim || b.alive <= 0) continue;
+      const [x, y] = this.project(b.aim.x, b.aim.y, 0);
+      drawDangerZone(o.context, x, y, b.aim.r, TILT, b.side === "ennemi");
+    }
+    for (const imp of st.impacts ?? []) {
+      const [x, y] = this.project(imp.x, imp.y, 0);
+      drawImpact(o.context, x, y, imp.r, TILT, t - imp.t, imp.side === "ennemi");
+    }
+    const s = Math.max(1, 14 / this.zoom);
+    for (const b of list) {
+      const model = gunModel(b.piece);
+      const facing = b.side === "allie" ? 1 : -1;
+      const shown = Math.min(4, b.count);
+      for (let i = 0; i < shown; i++) {
+        const [x, y] = this.project(b.x + (i - (shown - 1) / 2) * 3.2 * s, b.y, 0);
+        drawGun(o.context, x, y, s, model, facing, i >= b.alive);
+      }
+    }
   }
 
   /** Pastilles d'escouade (vue d'ensemble) : numéro au centre des hommes debout, taille constante à l'écran. */

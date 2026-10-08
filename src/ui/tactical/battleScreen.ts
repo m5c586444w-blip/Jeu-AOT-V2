@@ -92,7 +92,7 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     return h ? (h[0] + h[1]) / 2 : 15;
   });
   scene.setShifterReach(reaches);
-  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u, k) => ({ x: u.x, y: u.y, z: 0, reach: reaches[k] ?? 15 }))]);
+  scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u, k) => ({ x: u.x, y: u.y, z: 0, reach: reaches[k] ?? 15 })), ...(bt.state.batteries ?? []).map((b) => ({ x: b.x, y: b.y, z: 0 }))]);
   let seenFlashes = 0;
   const orders: TimedOrder[] = [];
   battleProbe.markers = () => scene.markerBoxes;

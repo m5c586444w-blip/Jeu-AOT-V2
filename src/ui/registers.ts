@@ -8,6 +8,7 @@ import { CharactersPanel } from "./panels/charactersPanel";
 import { button, el } from "./panels/common";
 import type { Panel, PanelContext, PanelId } from "./panels/common";
 import { CouncilPanel } from "./panels/councilPanel";
+import { ArmiesPanel } from "./panels/armiesPanel";
 import { ExpeditionsPanel } from "./panels/expeditionsPanel";
 import { JournalPanel } from "./panels/journalPanel";
 import { LawsPanel } from "./panels/lawsPanel";
@@ -24,7 +25,7 @@ import { ArchivesPanel, EpiloguePanel, GazettePanel } from "./panels/storyPanels
 import { hint } from "./why";
 import type { WhyTooltip } from "./why";
 
-export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue", "economie"];
+export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue", "economie", "armees"];
 
 /**
  * Registres de P2 : un seul dossier ouvert à la fois au-dessus de la carte, rafraîchi quand l'état change
@@ -46,6 +47,8 @@ export class Registers {
   /** Appelé quand l'itinéraire en préparation change (la carte le retrace). */
   onDraft: (() => void) | null = null;
   private readonly dialog = el("div", "bordereau");
+  /** Registre des armées (PA.8) : la carte lui passe les clics sur les étendards. */
+  armies: ArmiesPanel | null = null;
 
   private readonly stateOf: () => GameState;
 
@@ -72,6 +75,13 @@ export class Registers {
           this.onDraft?.();
         }),
       );
+    if (world.armies) {
+      this.armies = new ArmiesPanel(ctx, () => {
+        this.draw(true);
+        this.onDraft?.();
+      });
+      list.push(this.armies);
+    }
     if (world.chronicle) list.push(new ChroniclePanel(ctx));
     if (world.intel) list.push(new IntelPanel(ctx));
     if (world.research) list.push(new ResearchPanel(ctx));
