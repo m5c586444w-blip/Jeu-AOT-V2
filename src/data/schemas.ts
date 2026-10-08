@@ -301,14 +301,23 @@ export const TechSchema = z
   .strict();
 
 export const EVENT_FAMILIES = ["civil", "militaire", "politique", "personnage", "titans", "monde", "etranger"] as const;
+/** Thèmes de la frise (CHR.3) : filtre de la chronologie. */
+export const EVENT_THEMES = ["politique", "militaire", "titans", "famille", "monde"] as const;
+export type EventTheme = (typeof EVENT_THEMES)[number];
 export const EVENT_FORMS = ["rapport", "lettre", "telegramme", "article", "proces_verbal"] as const;
 
 export const EventDefSchema = z
   .object({
     id: EventIdSchema,
     code: z.string().regex(/^E\d{2}$/).optional(),
-    /** Canon (12 §1, graphe) ou générique (12 §5). */
-    kind: z.enum(["canon", "generic"]).default("canon"),
+    /** Canon (12 §1, graphe), générique à décision (12 §5) ou de fond (CHR.2 : petit fait de la vie du royaume, sans décision). */
+    kind: z.enum(["canon", "generic", "fond"]).default("canon"),
+    /** Thème de la frise (CHR.3). */
+    theme: z.enum(EVENT_THEMES).optional(),
+    /** Année approximative (le canon ne la donne pas avec certitude) : la frise écrit « vers ». */
+    date_approx: z.boolean().optional(),
+    /** Frise : événement caché au joueur tant que celui-ci n'est pas survenu (E03, révélé à la chapelle Reiss). */
+    known_after: EventIdSchema.optional(),
     /** Faux pour un squelette sans mécanique (événement d'une phase ultérieure, référencé par une technologie). */
     playable: z.boolean().default(true),
     year_min: year,
@@ -341,7 +350,8 @@ export const EventDefSchema = z
   })
   .strict()
   .refine((e) => e.year_max === undefined || e.year_max >= e.year_min, { message: "year_max doit être ≥ year_min", path: ["year_max"] })
-  .refine((e) => e.kind === "canon" || (e.family !== undefined && e.chance !== undefined), { message: "un événement générique exige family et chance", path: ["family"] })
+  .refine((e) => e.kind === "canon" || (e.family !== undefined && (e.kind === "fond" || e.chance !== undefined)), { message: "un événement générique exige family et chance (fond : family)", path: ["family"] })
+  .refine((e) => e.kind !== "fond" || e.choices.length === 0, { message: "un événement de fond n'a pas de choix", path: ["choices"] })
   .refine((e) => new Set(e.choices.map((c) => c.id)).size === e.choices.length, { message: "identifiants de choix en double", path: ["choices"] })
   .refine((e) => e.kind !== "canon" || !e.playable || e.choices.length === 0 || e.choices.filter((c) => c.historical).length === 1, { message: "un événement canon à choix a exactement un choix historique", path: ["choices"] });
 

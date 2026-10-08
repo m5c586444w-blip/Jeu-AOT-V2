@@ -71,6 +71,18 @@ for (const scenarioId of [DEFAULT_SCENARIO, "scn_sandbox_850"]) {
     for (const [id, s] of Object.entries(pol.strata)) if (!(s.satisfaction >= 0 && s.satisfaction <= 100 && s.radicalisation >= 0 && s.radicalisation <= 100)) year.problems.push(`strate ${id} hors bornes`);
     if (!(pol.legitimacy >= 0 && pol.legitimacy <= 100)) year.problems.push("légitimité hors bornes");
   }
+  // CHR.2 / CCHR-04 : événements de fond par mois de jeu (la chronique de départ n'est pas comptée).
+  const ev = year.state.events;
+  const cw = w.chronicle;
+  if (ev && cw && cw.fond.length > 0) {
+    const first = w.scenario.start.year * 360 + w.scenario.start.day - 1;
+    const fond = ev.chronicle.filter((c) => cw.events.get(c.event)?.kind === "fond" && c.day > first);
+    const perMonth = Array.from({ length: 12 }, (_, m) => fond.filter((c) => Math.floor((c.day - first) / 30) === m).length);
+    const distinct = new Set(fond.map((c) => c.event)).size;
+    console.log(`  fond : ${fond.length} événements en 12 mois (${perMonth.join(", ")} par mois), moyenne ${(fond.length / 12).toFixed(2)}, ${distinct} textes distincts, ${ev.chronicle.length - fond.length} autres entrées de chronique`);
+    if (fond.length / 12 < 3 || Math.min(...perMonth) < 3) year.problems.push(`événements de fond : ${perMonth.join(", ")} (moins de 3 par mois)`);
+    if (distinct !== fond.length) year.problems.push("événements de fond : un texte revient dans l'année");
+  } else console.log("  fond : pas de couche d'événements dans ce scénario (bac à sable économique)");
   if (year.problems.length > 0) failed = true;
   for (const p of year.problems.slice(0, 20)) console.error(`  INVARIANT ${p}`);
   const s74 = stats(year.times);

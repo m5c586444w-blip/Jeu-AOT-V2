@@ -6,7 +6,9 @@ import { toAbsoluteDay } from "../sim/core/time";
 import { choiceAvailable, daysLeft } from "../sim/events/engine";
 import type { PendingEvent } from "../sim/events/engine";
 import type { World } from "../sim/strategic/world";
+import { archetypeOf, archetypeSvg } from "./eventArt";
 import { effectLines, eventBody } from "./eventText";
+import type { EffectLine } from "./eventText";
 import { button, el } from "./panels/common";
 import { formatNumber } from "./why";
 import type { WhyTooltip } from "./why";
@@ -60,21 +62,34 @@ export class EventDossier {
     const head = el("header", "dossier-evenement__tete");
     head.append(el("span", "dossier-evenement__forme", t(`evt.form.${e.form}`)), el("span", "dossier-evenement__date", t("date.format", { year: state.date.year, day: state.date.day })));
     if (e.kind === "canon" && e.code) head.append(authorOnly(el("span", "tampon-mini tampon-mini--C", t("evt.canon_stamp", { code: e.code }))));
-    paper.append(head, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
+    const art = el("figure", `dossier-evenement__illustration dossier-evenement__illustration--${archetypeOf(e)}`);
+    art.innerHTML = archetypeSvg(archetypeOf(e));
+    art.setAttribute("role", "presentation");
+    paper.append(head, art, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
     const happened = effectLines(this.world, e.effects, p.subject);
     if (happened.length > 0) {
       paper.append(el("h3", "dossier-evenement__intertitre", t("evt.consequences")));
       paper.append(this.lines(happened));
     }
-    paper.append(el("h3", "dossier-evenement__intertitre", t("evt.decision", { n: daysLeft(p, state.date) })));
+    paper.append(el("h3", "dossier-evenement__intertitre", daysLeft(p, state.date) <= 0 ? t("evt.decision_today") : t("evt.decision", { n: daysLeft(p, state.date) })));
     const ctx = { world: this.world, date: state.date, st: state.strategic ?? (() => { throw new Error("état"); })(), pol: state.politics, ev: state.events ?? (() => { throw new Error("événements"); })(), intel: state.intel, rs: state.research };
     const weight = e.divergence_weight ?? 0;
     for (const c of e.choices.filter((x) => choiceAvailable(ctx, x))) {
       const box = el("div", "choix");
       box.dataset["choice"] = c.id;
-      box.append(el("p", "choix__libelle", t(`${e.text_key}.choice.${c.id}`)));
+      const label = t(`${e.text_key}.choice.${c.id}`);
+      box.append(el("p", "choix__libelle", label));
       const lines = effectLines(this.world, c.effects, p.subject);
-      box.append(lines.length > 0 ? this.lines(lines) : el("p", "registre-note", t("evt.no_cost")));
+      // Clair d'abord : les trois effets principaux sous le libellé ; la liste complète, et ce qu'elle engage, dans l'infobulle.
+      box.append(lines.length > 0 ? this.lines(lines.slice(0, INLINE_EFFECTS)) : el("p", "registre-note", t("evt.no_cost")));
+      if (lines.length > INLINE_EFFECTS) box.append(el("p", "choix__suite", t("evt.more_effects", { n: lines.length - INLINE_EFFECTS })));
+      this.why.bind(box, () => ({
+        title: label,
+        sections: [
+          { label: t("evt.effects_all"), rows: lines.length > 0 ? lines.map(effectRow) : [{ label: t("evt.no_cost"), value: "·" }] },
+          { text: e.kind === "canon" ? t(c.historical ? "evt.historical_why" : "evt.diverges_why") : t(daysLeft(p, state.date) > 0 ? "evt.free_choice_why" : "evt.free_choice_why_today", { n: daysLeft(p, state.date) }) },
+        ],
+      }));
       if (e.kind === "canon") {
         const stamp = c.historical ? el("span", "choix__tampon choix__tampon--histoire", t("evt.historical")) : el("span", "choix__tampon", t("evt.diverges", { d: formatNumber(weight * c.divergence) }));
         stamp.dataset["why"] = t(c.historical ? "evt.historical_why" : "evt.diverges_why");
@@ -109,7 +124,16 @@ export class EventDossier {
   }
 }
 
+/** Effets montrés sous le libellé d'un choix ; le reste est dans l'infobulle. */
+const INLINE_EFFECTS = 3;
+
+/** Ligne d'infobulle d'un effet : le texte, et un signe coloré (gain, coût ou neutre). */
+function effectRow(l: EffectLine): { label: string; value: string; sign?: "plus" | "moins" } {
+  return l.tone === "gain" ? { label: l.text, value: "+", sign: "plus" } : l.tone === "cout" ? { label: l.text, value: "−", sign: "moins" } : { label: l.text, value: "·" };
+}
+
 /** Jour d'échéance lisible pour la chronique. */
 export function pendingLabel(p: PendingEvent, state: GameState): string {
-  return t("evt.pending_line", { n: Math.max(0, p.deadline - toAbsoluteDay(state.date)) });
+  const n = Math.max(0, p.deadline - toAbsoluteDay(state.date));
+  return n === 0 ? t("evt.pending_line_today") : t("evt.pending_line", { n });
 }

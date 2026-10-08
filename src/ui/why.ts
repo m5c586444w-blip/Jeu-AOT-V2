@@ -11,7 +11,7 @@ import { hasKey, t } from "../i18n";
 export type WhyContent = {
   title: string;
   value?: string;
-  sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean; cost?: boolean }[];
+  sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean; cost?: boolean; rows?: WhyRow[] }[];
   key?: string;
   keyLabel?: string;
 };
@@ -84,7 +84,7 @@ export function factorLine(f: Factor, cost = false): WhyRow {
 /** Modèle à trois niveaux d'une infobulle (U4), indépendant du DOM. */
 export function whyModel(c: WhyContent): WhyModel {
   const sections = c.sections.map((s): WhySection => {
-    const out: WhySection = { rows: s.explained ? displayedFactors(s.explained).map((f) => factorLine(f, s.cost)) : [] };
+    const out: WhySection = { rows: s.rows ?? (s.explained ? displayedFactors(s.explained).map((f) => factorLine(f, s.cost)) : []) };
     if (s.label) out.label = s.label;
     if (s.explained) out.subtotal = `${s.signed ? formatSigned(s.explained.value) : formatNumber(s.explained.value)}${s.unit ?? ""}`;
     if (s.text) out.text = s.text;

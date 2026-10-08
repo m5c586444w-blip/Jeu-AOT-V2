@@ -932,3 +932,58 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | AUD (sous-agent) | Sonnet | high | ≈ 90 | |
 | Revue et fusion AUD | Opus / défaut | défaut | ≈ 20 | 1 passe de correctifs |
+
+
+## 2026-10-08 — D-118 Événements de fond : extension additive de `src/sim/events/engine.ts` (phase CHR)
+- **Contexte** : le fichier 24 §2.4 et CHR.2 demandent au moins 3 petits événements par mois. Le tirage des génériques (`genericTick`) ne le permet pas :
+  un seul dossier en attente, 8 jours d'écart minimal, probabilités faibles, et chaque générique exige une décision (3 décisions par mois seraient une corvée).
+- **Options** : (a) monter `checks_per_month` et les `chance` des génériques (données seules, mais 3 dossiers de décision par mois, et le tirage des génériques change) ;
+  (b) un second tirage, indépendant, pour des faits sans décision ; (c) injecter les faits de fond dans l'interface seulement (sans trace dans l'état).
+- **Choix** : (b). Nouveau `kind: "fond"` (données `data/events/fond.json`, 94 entrées `canon: "A"`, sans choix, sans personnage nommé) ; `fondTick` tire chaque mois
+  3 à 4 jours répartis en tranches égales (`fondDays`, graine + mois), choisit un événement de l'époque non repris depuis 360 jours (famille différente de la précédente si possible),
+  applique ses petits effets et l'inscrit à la chronique (aucune pause). `seedBackstory` inscrit 3 faits au premier jour. Plafond de la chronique 200 → 800 entrées.
+  Aucune règle existante ne change : sans `fond` dans l'équilibrage (anciennes données), rien ne se passe ; le tirage des génériques garde son flux d'aléa
+  (test `tests/sim/fond.test.ts` : chronique des génériques identique avec et sans fond). Réglage : `data/balance/events.json` (`fond`).
+- **Raison** : trois faits par mois sans pause, déterministes, testés ; chronique non vide dès le départ.
+- **Réversible** : oui (supprimer `fond` de l'équilibrage coupe tout ; le code reste inerte).
+
+## 2026-10-08 — D-119 La frise remplace le registre « Chronique » (même identifiant), sans nouvel écran (phase CHR)
+- **Contexte** : CHR.3 demande un écran « Chronologie ». Le registre `chronique` (touche H, bouton « Monde ») existait déjà ; en créer un second aurait doublé touches, icônes, tests et smoke.
+- **Options** : (a) nouveau registre `chronologie` à côté ; (b) refondre `chronique` en frise : jauge de divergence et dossiers en attente conservés (mêmes classes), plus axe 845 à 854+, liste et fiche, filtre par thème, onglet « Vie du royaume ».
+- **Choix** : (b). Modèle pur `src/ui/timeline.ts` (testé sans navigateur), panneau `chroniclePanel.ts`. Titre affiché : « Chronologie ».
+- **Réversible** : oui.
+
+## 2026-10-08 — D-120 Niveau de renseignement et annonces de la frise (E-UX-6) (phase CHR)
+- **Contexte** : « annoncés (rumeur ou prévision, selon le niveau de renseignement ; invisibles sinon) » sans règle chiffrée dans les spécifications.
+- **Choix** (valeurs `A`, dans `src/ui/timeline.ts`) : niveau 0 à 3 = meilleure certitude sur un secret (aucune, rumeur, indice, preuve) ou nombre de rapports recoupés (1, 3, 6). Événement programmé : niveau 1, rumeur (thème vague, ni titre ni date) à 90 jours ; niveau 2, prévision (titre, mois) à 200 jours ; niveau 3, date exacte à 400 jours. Événement non programmé : visible dès le niveau 2, à une ou (niveau 3) trois étapes de la chaîne. E03 reste caché jusqu'à la chapelle Reiss (`known_after`). Squelettes sans mécanique : suivent leur prédécesseur et l'année du récit (en cours pendant leur période, passés ensuite). Sans renseignement, rien n'est annoncé.
+- **Limite** : les révélations du récit (E20…) font monter les secrets, donc le niveau passe vite à 3 en 850 (voir dette n° 30).
+- **Réversible** : oui (une fonction).
+
+## 2026-10-08 — D-121 Le bac à sable 845 n'a pas de chronologie (phase CHR)
+- **Contexte** : `scn_sandbox_845` n'a pas de couche politique, donc ni événements ni chronique (test `narrative` : « 845 : ni couche politique ni événements »). Les faits de fond et la frise ont besoin de cette couche.
+- **Options** : (a) ajouter une couche d'événements à 845 (change l'épilogue, les tests et le hash de ce bac à sable) ; (b) laisser 845 tel quel : la chronologie existe en 850 et 854, qui couvrent l'axe 845–854+ par leurs passés.
+- **Choix** : (b), dette n° 28. `sim:year` le dit en toutes lettres.
+- **Réversible** : oui.
+
+## 2026-10-08 — D-122 Faits de fond actifs par défaut : effets sur les empreintes, sauvegardes, plafond de chronique (phase CHR, complète D-118)
+- **Contexte** : revue CHR. Les faits de fond (`data/balance/events.json`, bloc `fond`) sont actifs par défaut et ont des effets économiques ; ils changent l'empreinte de 5 scénarios du selftest sur 7.
+- **Empreintes** (avant la passe de revue → après les correctifs 2, qui retire des effets et des sujets de la famille « titans ») : bac à sable 850 `5418280e` → `75ab1de6` → `86f2d847` ; 854 `9e0b9622` → `2c69c20e` → `49e288fa` ; 854 Marley `f0ca0b94` → `232f1056` → `028d6da4` ; expédition `0d187108` → `0c0707bf` → `249d21e4` ; bataille `682039d9` → `7dd5a8c7` → `5cbf06a3`. « Sans monde » (`3c17ecdc`) et bac à sable 845 (`08bedd60`) sont identiques.
+- **Sauvegardes** : les anciennes se chargent (le hash contrôlé est celui de l'état enregistré) mais recevront des faits de fond en continuant la partie.
+- **Plafond de chronique à 800** : change l'empreinte des parties de plus de 200 entrées.
+- **Correctifs de la passe** : (1) la frise ne montre ni résumé ni effets d'un événement « en cours » ou « annoncé » (accroche neutre ; test `timeline`) ; (2) faits de fond « titans » sans sujet de province, sans effet sur une province, textes sans nom de province ; « revient à {province} » et « familles de {province} » reformulés ; (3) dossier : « aujourd'hui » au lieu de « sous 0 jours ».
+- **Réversible** : oui (retirer `fond` de l'équilibrage).
+
+
+## 2026-10-08 — D-123 Revue et fusion de CHR ; push concurrent sur la branche principale
+- **CHR** : revue indépendante sans bloquant ; une passe de correctifs (D-122 : pas d'issue dévoilée avant décision, faits
+  de fond « Titans » sans province, « aujourd'hui » au dossier, changement de hash documenté). `npm run verify` code 0,
+  588/588 (`docs/reports/CHR-verify-revue.log`). Fusion. Réversible : oui.
+- **Push concurrent** : `git fetch` avant la fusion montre `3b71ac1` (16:20 UTC) sur la branche principale, écrit par la
+  session CLI de Gabriel (`session_014pHhi7…`) : documentation seulement (`docs/reports/UI.md`, `docs/MORNING.md`), seconde
+  revue de UI. Fusionné dans `claude/v2-chr` sans conflit ; sa ligne de MORNING reprise. Aucune action sur cette session
+  (consigne : ne pas la contacter). **À valider par Gabriel** : une seule session de code à la fois sur le dépôt.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| CHR (sous-agent) | Sonnet | high | ≈ 105 | |
+| Revue CHR + correctifs + fusion | Opus / Sonnet | défaut | ≈ 50 | 1 passe |

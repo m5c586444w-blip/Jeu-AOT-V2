@@ -9,7 +9,8 @@
     },
     "text_key": "evt.845.shiganshina_breach",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "titans"
   },
   {
     "id": "evt_845_wall_maria_gate",
@@ -21,7 +22,8 @@
     },
     "text_key": "evt.845.wall_maria_gate",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "titans"
   },
   {
     "id": "evt_845_royal_family_massacre",
@@ -33,7 +35,9 @@
     },
     "text_key": "evt.845.royal_family_massacre",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "famille",
+    "known_after": "evt_850_reiss_chapel"
   },
   {
     "id": "evt_845_retreat_to_rose",
@@ -45,7 +49,8 @@
     },
     "text_key": "evt.845.retreat_to_rose",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "militaire"
   },
   {
     "id": "evt_845_refugee_crisis",
@@ -58,7 +63,8 @@
     },
     "text_key": "evt.845.refugee_crisis",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde"
   },
   {
     "id": "evt_846_reclamation",
@@ -70,7 +76,8 @@
     },
     "text_key": "evt.846.reclamation",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "politique"
   },
   {
     "id": "evt_846_famine",
@@ -82,7 +89,8 @@
     },
     "text_key": "evt.846.famine",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde"
   },
   {
     "id": "evt_847_104th_recruitment",
@@ -94,7 +102,9 @@
     },
     "text_key": "evt.847.104th_recruitment",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "militaire",
+    "date_approx": true
   },
   {
     "id": "evt_850_yeager_basement",
@@ -106,7 +116,8 @@
     },
     "text_key": "evt.850.yeager_basement",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "famille"
   },
   {
     "id": "evt_850_wall_maria_cleanup",
@@ -119,7 +130,9 @@
     },
     "text_key": "evt.850.wall_maria_cleanup",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_850_ocean",
@@ -132,7 +145,9 @@
     },
     "text_key": "evt.850.ocean",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_851_marley_fleet",
@@ -144,7 +159,8 @@
     },
     "text_key": "evt.851.marley_fleet",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde"
   },
   {
     "id": "evt_851_volunteers",
@@ -157,7 +173,9 @@
     },
     "text_key": "evt.851.volunteers",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_851_hizuru_visit",
@@ -170,7 +188,9 @@
     },
     "text_key": "evt.851.hizuru_visit",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_851_eren_departure",
@@ -183,7 +203,9 @@
     },
     "text_key": "evt.851.eren_departure",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "titans",
+    "date_approx": true
   },
   {
     "id": "evt_851_middle_east_war",
@@ -196,7 +218,9 @@
     },
     "text_key": "evt.851.middle_east_war",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_853_hizuru_refusal",
@@ -208,7 +232,8 @@
     },
     "text_key": "evt.853.hizuru_refusal",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde"
   },
   {
     "id": "evt_851_marley_ships_lost",
@@ -221,7 +246,9 @@
     },
     "text_key": "evt.851.marley_ships_lost",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde",
+    "date_approx": true
   },
   {
     "id": "evt_854_rumbling",
@@ -233,7 +260,8 @@
     },
     "text_key": "evt.854.rumbling",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "titans"
   },
   {
     "id": "evt_854_heaven_earth_battle",
@@ -245,6 +273,7 @@
     },
     "text_key": "evt.854.heaven_earth_battle",
     "canon": "C",
-    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850."
+    "notes_canon": "Squelette (12 §1) : existence et ordre C ; mécanique dans une phase ultérieure (P6–P7) ou passé au début du scénario 850.",
+    "theme": "monde"
   }
 ]

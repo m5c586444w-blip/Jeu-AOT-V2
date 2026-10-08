@@ -68,7 +68,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.104th_graduation",
     "canon": "C",
-    "notes_canon": "Existence et contexte : C (12 E09). Choix et effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Existence et contexte : C (12 E09). Choix et effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_trost_breach",
@@ -175,7 +176,8 @@
     "form": "telegramme",
     "text_key": "evt.850.trost_breach",
     "canon": "C",
-    "notes_canon": "Brèche par le Colossal : C. Ampleur des pertes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Brèche par le Colossal : C. Ampleur des pertes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_trost_defense",
@@ -256,7 +258,8 @@
     "form": "rapport",
     "text_key": "evt.850.trost_defense",
     "canon": "C",
-    "notes_canon": "Défense de Trost et capture de Titans pour l'étude (Hange) : C (12 E11, §4). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Défense de Trost et capture de Titans pour l'étude (Hange) : C (12 E11, §4). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_eren_first_transformation",
@@ -321,7 +324,8 @@
     "form": "rapport",
     "text_key": "evt.850.eren_first_transformation",
     "canon": "C",
-    "notes_canon": "Transformation d'Eren : C (pilier narratif). « Retenir » : divergence maximale (12 B2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Transformation d'Eren : C (pilier narratif). « Retenir » : divergence maximale (12 B2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_trost_plug",
@@ -434,7 +438,8 @@
     "form": "telegramme",
     "text_key": "evt.850.trost_plug",
     "canon": "C",
-    "notes_canon": "Bouchage par Eren et le rocher : C. Débloque le scellement par durcissement (13 T-FOR-03). Branches non historiques : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Bouchage par Eren et le rocher : C. Débloque le scellement par durcissement (13 T-FOR-03). Branches non historiques : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_eren_trial",
@@ -528,7 +533,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.eren_trial",
     "canon": "C",
-    "notes_canon": "Procès : C. Gardes alternatives : A (12 B3). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Procès : C. Gardes alternatives : A (12 B3). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_branch_choice",
@@ -594,7 +600,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.branch_choice",
     "canon": "C",
-    "notes_canon": "Choix des branches : C. Quotas : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Choix des branches : C. Quotas : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_expedition57_preparation",
@@ -664,7 +671,8 @@
     "form": "rapport",
     "text_key": "evt.850.expedition57_preparation",
     "canon": "C",
-    "notes_canon": "Préparation, arme de contention, formation : C (12 E16, 13 T-ANT-04/05). Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Préparation, arme de contention, formation : C (12 E16, 13 T-ANT-04/05). Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_expedition57",
@@ -730,7 +738,8 @@
     "form": "telegramme",
     "text_key": "evt.850.expedition57",
     "canon": "C",
-    "notes_canon": "Attaque du Titan féminin : C. Demi-tour : A (divergence forte). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Attaque du Titan féminin : C. Demi-tour : A (divergence forte). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_giant_tree_forest",
@@ -801,7 +810,8 @@
     "form": "rapport",
     "text_key": "evt.850.giant_tree_forest",
     "canon": "C",
-    "notes_canon": "Piège de la forêt : C. Localisation de la forêt : ? (P1). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Piège de la forêt : C. Localisation de la forêt : ? (P1). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_special_squad_loss",
@@ -861,7 +871,8 @@
     "form": "rapport",
     "text_key": "evt.850.special_squad_loss",
     "canon": "C",
-    "notes_canon": "Morts de l'escouade spéciale : 850, expédition 57, fiabilité « à vérifier » (11 §3 : [?]). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Morts de l'escouade spéciale : 850, expédition 57, fiabilité « à vérifier » (11 §3 : [?]). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_traitor_investigation",
@@ -930,7 +941,8 @@
     "form": "rapport",
     "text_key": "evt.850.traitor_investigation",
     "canon": "C",
-    "notes_canon": "Enquête sur les traîtres : C. Méthodes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Enquête sur les traîtres : C. Méthodes : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_stohess_capture",
@@ -1025,7 +1037,8 @@
     "form": "rapport",
     "text_key": "evt.850.stohess_capture",
     "canon": "C",
-    "notes_canon": "Capture à Stohess : C. L'arrestation discrète n'est possible qu'avec une preuve obtenue par le renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Capture à Stohess : C. L'arrestation discrète n'est possible qu'avec une preuve obtenue par le renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_annie_crystallization",
@@ -1084,7 +1097,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.annie_crystallization",
     "canon": "C",
-    "notes_canon": "Cristallisation : C. Garde : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Cristallisation : C. Garde : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_wall_titan_discovery",
@@ -1178,7 +1192,8 @@
     "form": "rapport",
     "text_key": "evt.850.wall_titan_discovery",
     "canon": "C",
-    "notes_canon": "Titan dans le mur Sina : C. Réaction publique : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Titan dans le mur Sina : C. Réaction publique : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_wall_rose_invasion",
@@ -1266,7 +1281,8 @@
     "form": "telegramme",
     "text_key": "evt.850.wall_rose_invasion",
     "canon": "C",
-    "notes_canon": "Invasion de Wall Rose, mort de Mike à E24 (errata) : C. Bestial : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Invasion de Wall Rose, mort de Mike à E24 (errata) : C. Bestial : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_ragako",
@@ -1344,7 +1360,8 @@
     "form": "rapport",
     "text_key": "evt.850.ragako",
     "canon": "C",
-    "notes_canon": "Ragako : C. Conséquences : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Ragako : C. Conséquences : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_utgard_battle",
@@ -1429,7 +1446,8 @@
     "form": "rapport",
     "text_key": "evt.850.utgard_battle",
     "canon": "C",
-    "notes_canon": "Utgard (nuit), morts de Nanaba et Gelgar : C (11 §3). Destruction du château : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Utgard (nuit), morts de Nanaba et Gelgar : C (11 §3). Destruction du château : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_ymir_historia_revelations",
@@ -1469,7 +1487,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.ymir_historia_revelations",
     "canon": "C",
-    "notes_canon": "Révélations : C (12 E27). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Révélations : C (12 E27). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_armored_colossal_fight",
@@ -1624,7 +1643,8 @@
     "form": "telegramme",
     "text_key": "evt.850.armored_colossal_fight",
     "canon": "C",
-    "notes_canon": "Combat et enlèvement : C. Mort de Hannes : arc de l'invasion de Wall Rose (11 §3), rattachée à E28 (A). L'arrestation préventive exige une preuve du renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Combat et enlèvement : C. Mort de Hannes : arc de l'invasion de Wall Rose (11 §3), rattachée à E28 (A). L'arrestation préventive exige une preuve du renseignement (A). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_sina_gates_closed",
@@ -1699,7 +1719,8 @@
     "form": "article",
     "text_key": "evt.850.sina_gates_closed",
     "canon": "C",
-    "notes_canon": "Fermeture des portes pendant le procès d'Erwin : C (12 E29). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Fermeture des portes pendant le procès d'Erwin : C (12 E29). Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_survey_corps_hunted",
@@ -1782,7 +1803,8 @@
     "form": "rapport",
     "text_key": "evt.850.survey_corps_hunted",
     "canon": "C",
-    "notes_canon": "Traque du Corps : C. Accusation de meurtre : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Traque du Corps : C. Accusation de meurtre : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_levi_kenny_street_fight",
@@ -1846,7 +1868,8 @@
     "form": "rapport",
     "text_key": "evt.850.levi_kenny_street_fight",
     "canon": "C",
-    "notes_canon": "Combat de rue : C ; localisation : ? (errata Q2). ODM anti-personnel découvert : C (13 T-ODM-06). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Combat de rue : C ; localisation : ? (errata Q2). ODM anti-personnel découvert : C (13 T-ODM-06). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_erwin_trial",
@@ -1933,7 +1956,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.erwin_trial",
     "canon": "C",
-    "notes_canon": "Procès d'Erwin : C. Divergence forte s'il est exécuté (12 E32). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Procès d'Erwin : C. Divergence forte s'il est exécuté (12 E32). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_coup",
@@ -2019,7 +2043,8 @@
     "form": "telegramme",
     "text_key": "evt.850.coup",
     "canon": "C",
-    "notes_canon": "Coup d'État sans violence : C. Version violente : A (12 B4). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Coup d'État sans violence : C. Version violente : A (12 B4). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_reiss_chapel",
@@ -2082,7 +2107,8 @@
     "form": "rapport",
     "text_key": "evt.850.reiss_chapel",
     "canon": "C",
-    "notes_canon": "Chapelle Reiss, secret du Fondateur : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Chapelle Reiss, secret du Fondateur : C. Choix : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "famille"
   },
   {
     "id": "evt_850_rod_reiss_titan",
@@ -2173,7 +2199,8 @@
     "form": "telegramme",
     "text_key": "evt.850.rod_reiss_titan",
     "canon": "C",
-    "notes_canon": "Titan de Rod Reiss, morts de Rod et Kenny à E35 (errata Q2) : C. Sérum de Kenny : C (débloque T-MED-05, errata Q2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Titan de Rod Reiss, morts de Rod et Kenny à E35 (errata Q2) : C. Sérum de Kenny : C (débloque T-MED-05, errata Q2). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_historia_coronation",
@@ -2268,7 +2295,8 @@
     "form": "article",
     "text_key": "evt.850.historia_coronation",
     "canon": "C",
-    "notes_canon": "Couronnement : C. Orphelinats : C. Conseillers : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Couronnement : C. Orphelinats : C. Conseillers : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "politique"
   },
   {
     "id": "evt_850_police_tech_seized",
@@ -2350,7 +2378,8 @@
     "form": "rapport",
     "text_key": "evt.850.police_tech_seized",
     "canon": "C",
-    "notes_canon": "Saisie : C. Lances de foudre (13 T-ANT-08) : Hange vivante requise (C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Saisie : C. Lances de foudre (13 T-ANT-08) : Hange vivante requise (C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_shiganshina_preparations",
@@ -2429,7 +2458,8 @@
     "form": "rapport",
     "text_key": "evt.850.shiganshina_preparations",
     "canon": "C",
-    "notes_canon": "Préparatifs : C. Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Préparatifs : C. Coûts : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_shiganshina_battle",
@@ -2507,7 +2537,8 @@
     "form": "telegramme",
     "text_key": "evt.850.shiganshina_battle",
     "canon": "C",
-    "notes_canon": "Bataille de Shiganshina : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Bataille de Shiganshina : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_thunder_spears_first_use",
@@ -2562,7 +2593,8 @@
     "form": "rapport",
     "text_key": "evt.850.thunder_spears_first_use",
     "canon": "C",
-    "notes_canon": "Premier emploi des lances de foudre contre le Cuirassé : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Premier emploi des lances de foudre contre le Cuirassé : C. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_erwin_charge",
@@ -2625,7 +2657,8 @@
     "form": "rapport",
     "text_key": "evt.850.erwin_charge",
     "canon": "C",
-    "notes_canon": "Charge d'Erwin : C. Sa mort est portée par E42 (A, D-65) : le sérum est disputé entre Erwin mourant et Armin. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Charge d'Erwin : C. Sa mort est portée par E42 (A, D-65) : le sérum est disputé entre Erwin mourant et Armin. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "militaire"
   },
   {
     "id": "evt_850_serum_choice",
@@ -2707,7 +2740,8 @@
     "form": "proces_verbal",
     "text_key": "evt.850.serum_choice",
     "canon": "C",
-    "notes_canon": "Choix du sérum : C (Armin). Bertholdt dévoré : C (fiabilité moyenne, 11 §3). Héritage effectif (P6) : l'élu dévore Bertholdt capturé, consomme la dose et reçoit 13 ans (02 §10, C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »)."
+    "notes_canon": "Choix du sérum : C (Armin). Bertholdt dévoré : C (fiabilité moyenne, 11 §3). Héritage effectif (P6) : l'élu dévore Bertholdt capturé, consomme la dose et reçoit 13 ans (02 §10, C). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
   },
   {
     "id": "evt_850_marley_antititan_rifle",
@@ -2719,6 +2753,8 @@
     "text_key": "evt.850.marley_antititan_rifle",
     "canon": "?",
     "notes_canon": "Événement paramétrable hors des 60 événements canon (errata Q1) : date de mise au point des fusils anti-Titan inconnue ; placé après E28 (premier affrontement Guerriers/Paradis). Non jouable en P5 : côté Marley, mécanique en P7.",
-    "playable": false
+    "playable": false,
+    "theme": "militaire",
+    "date_approx": true
   }
 ]

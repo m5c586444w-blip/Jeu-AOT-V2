@@ -94,7 +94,8 @@
     "form": "telegramme",
     "text_key": "evt.854.fort_slava",
     "canon": "C",
-    "notes_canon": "Flotte alliée détruite par le Bestial, victoire de Marley, fin de la guerre du Moyen-Orient : C (12 E53, 11 §5). Effets chiffrés : A. Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Flotte alliée détruite par le Bestial, victoire de Marley, fin de la guerre du Moyen-Orient : C (12 E53, 11 §5). Effets chiffrés : A. Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "militaire"
   },
   {
     "id": "evt_854_operation_paradis",
@@ -155,7 +156,8 @@
     "form": "proces_verbal",
     "text_key": "evt.854.operation_paradis",
     "canon": "C",
-    "notes_canon": "Zeke propose de reprendre le Fondateur ; les Tybur soutiennent : C (12 E54). Effets : A. Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Zeke propose de reprendre le Fondateur ; les Tybur soutiennent : C (12 E54). Effets : A. Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "politique"
   },
   {
     "id": "evt_854_liberio_raid",
@@ -267,7 +269,8 @@
     "form": "article",
     "text_key": "evt.854.liberio_raid",
     "canon": "C",
-    "notes_canon": "Mort de Willy Tybur ; Eren hérite du Marteau de guerre (11 §4 : Lara Tybur → Eren, 854) ; déclaration de guerre : C (12 E55). Alliance anti-Eldia : ? (11 §5), traduite par la peur et l'idéologie (A). Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Mort de Willy Tybur ; Eren hérite du Marteau de guerre (11 §4 : Lara Tybur → Eren, 854) ; déclaration de guerre : C (12 E55). Alliance anti-Eldia : ? (11 §5), traduite par la peur et l'idéologie (A). Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "militaire"
   },
   {
     "id": "evt_854_liberio_escape",
@@ -327,7 +330,8 @@
     "form": "rapport",
     "text_key": "evt.854.liberio_escape",
     "canon": "C",
-    "notes_canon": "Zeke assigné à résidence côté Paradis : C (12 E56). Mort de Sasha : non vérifiée (11 §3, ?), non portée ici. Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Zeke assigné à résidence côté Paradis : C (12 E56). Mort de Sasha : non vérifiée (11 §3, ?), non portée ici. Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "militaire"
   },
   {
     "id": "evt_854_yeagerist_coup",
@@ -399,7 +403,8 @@
     "form": "telegramme",
     "text_key": "evt.854.yeagerist_coup",
     "canon": "C",
-    "notes_canon": "Zackly assassiné ; Pixis prend brièvement le commandement : C (12 E57, 11 §3). Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Zackly assassiné ; Pixis prend brièvement le commandement : C (12 E57, 11 §3). Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "politique"
   },
   {
     "id": "evt_854_marley_counterattack",
@@ -474,6 +479,7 @@
     "form": "telegramme",
     "text_key": "evt.854.marley_counterattack",
     "canon": "C",
-    "notes_canon": "Mort de Pixis et Nile lors de la contre-attaque : C (12 E58, 11 §3). Fenêtre en jours : ? (12 : mois inconnus)."
+    "notes_canon": "Mort de Pixis et Nile lors de la contre-attaque : C (12 E58, 11 §3). Fenêtre en jours : ? (12 : mois inconnus).",
+    "theme": "militaire"
   }
 ]
