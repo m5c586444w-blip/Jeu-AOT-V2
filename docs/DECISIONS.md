@@ -860,3 +860,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   infobulle (`hint`), avec la touche en pied (« Raccourci C »). Les touches sont écrites sans crochets : « [A] », « [C] »
   sont des marques de statut canon pour le détecteur de fuites (UX0).
 - **Réversible** : oui.
+
+## 2026-10-08 — D-112 Plans d'affichage : bataille au-dessus des registres ; smoke:p5 aligné sur UX0 (phase UI)
+- **Contexte** : en UI.1, les registres sont passés à `--z-fenetre` (25) ; la bataille et les planches plein écran
+  restaient à 22. Le registre des expéditions, d'où part la bataille d'essai, recouvrait donc le canevas
+  (`smoke:r0` : 7,3 % de la scène visible ; clics et molette perdus). Par ailleurs `smoke:p5` lançait l'entretien d'ODM,
+  masqué depuis UX0 (mécanique P9), et attendait « N'existe pas encore », que UX0 classe comme fuite.
+- **Options** : (a) fermer les registres à l'ouverture d'une bataille ; (b) placer les modes plein écran au-dessus des
+  fenêtres, sous les options (40) et les dossiers d'événement (38).
+- **Choix** : (b), `calc(var(--z-fenetre) + 2)` pour `.bataille` et les planches ; le registre réapparaît intact après la
+  bataille. smoke:p5 : étude d'une technologie montrée (bouteilles de gaz compactes), verrou attendu « Exige … ».
+- **Réversible** : oui.

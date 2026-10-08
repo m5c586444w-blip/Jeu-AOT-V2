@@ -1,0 +1,28 @@
+
+> murs-et-sang@0.0.1 smoke:p5
+> tsx src/tools/smoke-p5.ts
+
+[scénario 850, Canon fidèle] 1366×768
+  OK  bandeau : registres Chronique (H), Renseignement (I), Bureau d'études (B)
+  OK  dossier E09 ouvert de lui-même : 3 choix, coûts affichés (5 lignes), un tampon « conforme à la chronique », deux écarts chiffrés
+  OK  une décision due met le temps en pause
+  OK  dossier d'événement : 0 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  « Différer » referme le dossier sans décider
+  OK  chronique : le dossier différé reste en attente, avec son échéance
+  OK  choix non historique signé : divergence 0,06 / 2,5, écart inscrit à la chronique
+  OK  chronique : 2 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  recrutement : 2 → 3 agents (capital dépensé)
+  OK  agent envoyé surveiller Shiganshina
+  OK  rapports reçus : 2, chacun daté, avec certitude et état de recoupement
+  OK  mur des secrets : au moins un secret épinglé (Eren, révélé par E12)
+  OK  salle de renseignement : 9 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  étude lancée : Bouteilles de gaz compactes à l'étude
+  OK  verrou expliqué : lance de foudre — « Exige : « Saisie des technologies de la Police intérieure ». »
+  OK  bureau d'études : 10 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  calque renseignement : légende (5 échelons)
+  OK  calque religion : légende (5 échelons)
+  OK  calque legitimite : légende (5 échelons)
+  OK  calque Titans : brouillard, « inconnu » pour les provinces jamais observées
+  OK  planificateur : objectif « capture » grisé, avec sa raison (« Capture d'un Titan (exige le protocole de capture) »)
+  OK  0 erreur console
+smoke:p5 : tout est conforme.

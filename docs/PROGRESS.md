@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **UI en revue** (branche `claude/v2-ui`, rapport `docs/reports/UI.md`) : UI.1 à UI.6 faites ; UI.7 incomplet (4 smoke OK, 6 KO, causes mesurées). |
-| Tâche | UI.7 : passage des `smoke:*`, captures, rapport (arrêté sur demande de la direction, 2026-10-08 10 h 30 UTC) |
-| Dernier `npm run verify` | 2026-10-08 (après UI.6, commit 5713f29) : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : sur `claude/v2-ui`, trouver l'élément qui recouvre le canevas de bataille (`elementFromPoint` au centre de `.bataille-scene`, dette n° 16), puis les correctifs d'une ligne du rapport UI § « Ce qui reste » (titre en petites capitales, `.touche { font-family: inherit }`, contrôle du fil de smoke:p8 après l'audio), sélecteur de smoke:p5 ; verify ; relancer seulement map, tactique, p5, p6, p8, r0 ; compléter les captures (CUI-08) |
+| Phase | **UI en revue** (branche `claude/v2-ui`, rapport `docs/reports/UI.md`) : UI.1 à UI.7 faites ; 9 smoke sur 10 OK (`smoke:tactique` : 2 erreurs de page Pixi, dette n° 20). |
+| Tâche | UI.7 : correctifs des smoke KO (dc09c21), second passage, 12 captures lues |
+| Dernier `npm run verify` | 2026-10-08 (après dc09c21) : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify-correctifs.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de la phase UI par la direction (rapport `docs/reports/UI.md`) ; puis dette n° 20 (erreurs Pixi de smoke:tactique à la fermeture de la planche des figures) et n° 19 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
