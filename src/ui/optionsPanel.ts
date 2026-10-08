@@ -1,7 +1,8 @@
 import { t } from "../i18n";
 import { ACTIONS, keyLabel } from "./keymap";
 import type { Action, KeyMap } from "./keymap";
-import { UI_SCALES } from "./settings";
+import type { UserTrack } from "../audio/userTracks";
+import { MUSIC_SOURCES, UI_SCALES } from "./settings";
 import type { Settings } from "./settings";
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: string): HTMLElementTagNameMap[K] {
@@ -21,6 +22,8 @@ export class OptionsPanel {
     private readonly keymap: KeyMap,
     private settings: Settings,
     private readonly onSettings: (s: Settings) => void,
+    /** Pistes présentes dans `assets_user/musique/` (AUD.4), lues au moment de l'affichage. */
+    private readonly tracks: () => readonly UserTrack[] = () => [],
   ) {
     this.el.hidden = true;
     this.el.setAttribute("aria-label", t("options.title"));
@@ -87,7 +90,7 @@ export class OptionsPanel {
     // Son (04 §7) : volumes maître, musique, effets ; sous-titres des sons importants.
     const sound = el("fieldset", "options__son");
     sound.append(el("legend", "", t("options.sound")));
-    for (const k of ["volMaster", "volMusic", "volSfx"] as const) {
+    for (const k of ["volMaster", "volMusic", "volAmbient", "volSfx", "volUi"] as const) {
       const row = el("label", "options__ligne");
       row.append(el("span", "", t(`options.${k}`)));
       const r = el("input", "options__curseur");
@@ -105,14 +108,57 @@ export class OptionsPanel {
       row.append(r, out);
       sound.append(row);
     }
-    const sub = el("label", "options__ligne");
-    const cb = el("input", "options__case");
-    cb.type = "checkbox";
-    cb.checked = this.settings.subtitles;
-    cb.dataset["setting"] = "subtitles";
-    cb.addEventListener("change", () => this.change({ ...this.settings, subtitles: cb.checked }));
-    sub.append(el("span", "", t("options.subtitles")), cb);
-    sound.append(sub);
+    for (const k of ["musicCombatOnly", "subtitles"] as const) {
+      const line = el("label", "options__ligne");
+      const box = el("input", "options__case");
+      box.type = "checkbox";
+      box.checked = this.settings[k];
+      box.dataset["setting"] = k;
+      box.addEventListener("change", () => this.change({ ...this.settings, [k]: box.checked }));
+      line.append(el("span", "", t(`options.${k}`)), box);
+      sound.append(line);
+    }
+
+    // Musique (AUD.4, AUD.5) : source et pistes personnelles, chacune affectée à un état ou écartée.
+    const music = el("fieldset", "options__son options__musique");
+    music.append(el("legend", "", t("options.music")));
+    const src = el("label", "options__ligne");
+    src.append(el("span", "", t("options.musicSource")));
+    const srcSel = el("select", "options__choix");
+    for (const v of MUSIC_SOURCES) {
+      const o = el("option", "", t(`options.source_${v}`));
+      o.value = v;
+      o.selected = this.settings.musicSource === v;
+      srcSel.append(o);
+    }
+    srcSel.dataset["setting"] = "musicSource";
+    srcSel.addEventListener("change", () => this.change({ ...this.settings, musicSource: MUSIC_SOURCES.find((v) => v === srcSel.value) ?? "mixte" }));
+    src.append(srcSel);
+    music.append(src);
+    const list = this.tracks();
+    if (list.length === 0) music.append(el("p", "options__note", t("options.tracks_none")));
+    else {
+      music.append(el("h3", "options__sous-titre", t("options.tracks")));
+      for (const tr of list) {
+        const row = el("label", "options__ligne options__piste");
+        row.append(el("span", "", tr.name));
+        const sel = el("select", "options__choix");
+        const current = this.settings.userTracks[tr.file] ?? tr.mood;
+        for (const v of ["calme", "tension", "combat", "off"] as const) {
+          const o = el("option", "", t(`options.track_${v}`));
+          o.value = v;
+          o.selected = current === v;
+          sel.append(o);
+        }
+        sel.dataset["track"] = tr.file;
+        sel.addEventListener("change", () => {
+          const v = sel.value;
+          if (v === "calme" || v === "tension" || v === "combat" || v === "off") this.change({ ...this.settings, userTracks: { ...this.settings.userTracks, [tr.file]: v } });
+        });
+        row.append(sel);
+        music.append(row);
+      }
+    }
 
     const author = el("label", "options__ligne");
     const ab = el("input", "options__case");
@@ -145,7 +191,7 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, sound, author, keys, reset);
+    this.el.append(head, lang, scale, sound, music, author, keys, reset);
   }
 
   /** Préférences changées hors du dossier (touche F10). */

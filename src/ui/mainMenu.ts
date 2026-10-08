@@ -4,7 +4,9 @@ import { KeyMap } from "./keymap";
 import { OptionsPanel } from "./optionsPanel";
 import { applyPaperTextures } from "./paper";
 import { safeStorage } from "./gameScreen";
-import { applyUiScale, LAST_GAME_KEY, loadSettings, saveSettings } from "./settings";
+import { sharedAudio } from "./audio";
+import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
+import { applyUiScale, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 
 /**
  * Menu principal (U8, phase UI) : plein écran ; en fond, les murs au crépuscule (capture de la scène 3D du projet,
@@ -86,7 +88,14 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   cont.disabled = !last;
   cont.title = last ? t("menu.continue_why", { scenario: t(`scn.${(last["scenario"] ?? "").replace(/^scn_/, "")}`) }) : t("menu.continue_none");
   const settings = loadSettings(safeStorage());
+  // Musique du menu : classique rythmé (état « calme »), réglée par les mêmes préférences que la carte.
+  const audio = sharedAudio(volumesOf(settings));
+  audio.setMood("calme");
+  audio.setAmbience("vent");
+  syncLibrary(audio, settings);
+  void loadUserTracks().then(() => syncLibrary(audio, loadSettings(safeStorage())));
   let options: OptionsPanel | null = null;
+  onUserTracks(() => options?.sync(loadSettings(safeStorage())));
   const quitNote = el("p", "menu-principal__note");
   quitNote.hidden = true;
   nav.append(
@@ -98,10 +107,13 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
     entry("options", "reglages", t("menu.options"), () => {
       options ??= new OptionsPanel(document.body, new KeyMap(safeStorage()), settings, (s) => {
         saveSettings(safeStorage(), s);
+        audio.setVolumes(volumesOf(s));
+        syncLibrary(audio, s);
         applyUiScale(s.uiScale);
         if (s.locale !== settings.locale) window.location.reload();
-      });
+      }, userTracks);
       options.toggle();
+      audio.play(options.isOpen ? "ouvrir" : "fermer");
     }),
     entry("quitter", "quitter", t("menu.quit"), () => {
       // Un onglet ouvert par l'utilisateur ne peut pas être fermé par la page : on le dit.

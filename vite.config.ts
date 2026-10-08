@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
+import { listUserMusic, readUserMusic, userMusicIndex } from "./src/tools/userMusic";
 
 const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf8")) as { version: string };
 
@@ -90,10 +91,51 @@ const places3d = (): Plugin => {
   };
 };
 
+/**
+ * AUD.4 : musique de l'utilisateur. Les fichiers mp3 et ogg de `assets_user/musique/` sont servis sous `/musique-utilisateur/`
+ * avec un index `index.json` (développement : intergiciel, lu à chaque requête ; construction : copiés dans
+ * `dist/musique-utilisateur/`). Le dossier est facultatif ; rien n'entre dans le bundle JS.
+ */
+const musiqueUtilisateur = (): Plugin => {
+  const types: Record<string, string> = { mp3: "audio/mpeg", ogg: "audio/ogg" };
+  return {
+    name: "musique-utilisateur",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const m = /^\/musique-utilisateur\/([^?#]+)/.exec(req.url ?? "");
+        if (!m?.[1]) {
+          next();
+          return;
+        }
+        const f = decodeURIComponent(m[1]);
+        if (f === "index.json") {
+          res.setHeader("Content-Type", "application/json");
+          res.end(userMusicIndex());
+          return;
+        }
+        const data = readUserMusic(f);
+        if (!data) {
+          next();
+          return;
+        }
+        res.setHeader("Content-Type", types[f.split(".").pop()?.toLowerCase() ?? ""] ?? "application/octet-stream");
+        res.end(data);
+      });
+    },
+    generateBundle() {
+      this.emitFile({ type: "asset", fileName: "musique-utilisateur/index.json", source: userMusicIndex() });
+      for (const f of listUserMusic()) {
+        const data = readUserMusic(f.fichier);
+        if (data) this.emitFile({ type: "asset", fileName: `musique-utilisateur/${f.fichier}`, source: data });
+      }
+    },
+  };
+};
+
 export default defineConfig({
   base: "./",
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   build: { target: "es2022", sourcemap: false },
   worker: { format: "es" },
-  plugins: [galerie3d(), assets3d(), places3d()],
+  plugins: [galerie3d(), assets3d(), places3d(), musiqueUtilisateur()],
 });

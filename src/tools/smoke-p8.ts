@@ -386,7 +386,7 @@ try {
     const sliders = await page.locator(".options__curseur").count();
     await page.locator('.options__curseur[data-setting="volMusic"]').fill("35");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("murs-et-sang:preferences") ?? "{}") as { volMusic?: number });
-    expect(sliders === 3 && saved.volMusic === 35, `options : ${sliders} volumes (maître, musique, effets), musique réglée à 35 % et conservée`);
+    expect(sliders === 5 && saved.volMusic === 35, `options : ${sliders} volumes (général, musique, ambiances, effets, interface), musique réglée à 35 % et conservée`);
     await review(page, pass, "options", ".options");
     await shot(page, pass, "options", ".options");
     await page.keyboard.press("F9");
