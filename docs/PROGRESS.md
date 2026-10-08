@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **AUD terminée et fusionnée (D-117).** Prochaine phase : CHR (fichier 22 §7). Direction autonome (D-107). |
-| Tâche | Revue de AUD : volume des anciennes préférences, deux titres renommés, dette n° 27 |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 560/560 (88 fichiers, `docs/reports/AUD-verify-revue.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/CHR.md` puis exécuter CHR sur `claude/v2-chr` (critères CCHR-01 à 06) |
+| Phase | **CHR terminée, en revue** (branche `claude/v2-chr`, fusion par la direction). Prochaine phase : PA (fichier 21 §7 + 23 §3.2). |
+| Tâche | CHR.1 à CHR.5 faites ; rapport `docs/reports/CHR.md` ; D-118 à D-121 ; dettes n° 28 à 32 |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 587/587 (92 fichiers, `docs/reports/CHR-verify.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de CHR par la direction, fusion, puis lancer PA sur une branche `claude/v2-pa` |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

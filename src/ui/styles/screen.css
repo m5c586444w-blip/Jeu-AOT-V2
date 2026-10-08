@@ -514,6 +514,46 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .chronique-ecart { font-size: var(--t-xs); color: var(--alerte); }
 .chronique-attente { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
 
+/* ——— Chronologie : frise 845 à 854+, liste et fiche (CHR.3) ——— */
+.registre-panneau:has(.frise-vue) .registre-corps > :not(.maitre-detail) { flex: none; }
+.frise-vue { min-height: 11rem; }
+.frise-resume { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.3rem 1.2rem; }
+.frise-resume .chronique-jauge { flex: 1 1 18rem; margin: 0.2rem 0 0.2rem; }
+.chronique-attente__libelle { font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-clair); }
+.frise-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1rem; margin: 0.35rem 0 0.2rem; }
+.frise-tete .onglets { margin: 0; }
+.frise__renseignement { margin: 0; display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--t-s); color: var(--texte-second); }
+.frise__themes { margin: 0; }
+.frise__themes .ico { margin-right: 0.25rem; vertical-align: -0.12em; }
+.frise { display: flex; align-items: stretch; flex-wrap: wrap; gap: 3px; margin: 0.25rem 0 0.5rem; padding-top: 0.2rem; }
+.frise__annee { flex: 1 1 0; min-width: 2.4rem; display: flex; flex-direction: column; justify-content: flex-end; border-bottom: 2px solid var(--filet); }
+.frise__annee--courante { border-bottom-color: var(--accent); }
+.frise__reperes { display: flex; flex-wrap: wrap; align-content: flex-end; gap: 2px; min-height: 1.7rem; padding-bottom: 0.25rem; }
+.frise__repere { width: 0.5rem; height: 1.05rem; padding: 0; border: 1px solid var(--filet); background: transparent; cursor: pointer; }
+.frise__repere[data-statut="passe"] { background: var(--accent); border-color: var(--accent-fonce); }
+.frise__repere[data-statut="en_cours"] { background: var(--succes); border-color: var(--succes-clair); }
+.frise__repere[data-statut="annonce"] { border: 1px dashed var(--info); background: transparent; }
+.frise__repere[data-statut="evite"] { border-color: var(--texte-discret); background: linear-gradient(135deg, transparent 44%, var(--texte-discret) 44%, var(--texte-discret) 56%, transparent 56%); }
+.frise__repere[data-ecart] { box-shadow: 0 -3px 0 var(--alerte); }
+.frise__repere--eteint { opacity: 0.22; }
+.frise__repere--choisi { outline: 2px solid var(--texte-fort); outline-offset: 1px; }
+.frise__repere--legende { display: inline-block; width: 0.5rem; height: 0.85rem; margin-right: 0.35rem; vertical-align: -0.1em; cursor: default; }
+.frise__annee-nom { padding-top: 0.15rem; text-align: center; font-size: var(--t-xs); color: var(--texte-discret); }
+.frise__annee--courante .frise__annee-nom { color: var(--accent-clair); font-weight: 600; }
+.frise__legende { flex-basis: 100%; margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.15rem 1rem; font-size: var(--t-xs); color: var(--texte-second); }
+.frise__section { position: sticky; top: 0; z-index: 1; list-style: none; padding: 0.3rem 0.4rem 0.15rem; background: var(--panneau); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--texte-discret); border-bottom: var(--filet-l) solid var(--filet-doux); }
+.frise__etat--passe { color: var(--succes); }
+.frise__etat--en_cours { color: var(--accent-clair); }
+.frise__etat--annonce { color: var(--info); }
+.frise__etat--evite { color: var(--texte-discret); }
+.frise-fiche__tete { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.2rem; }
+.frise-fiche__theme { display: inline-flex; padding: 0.4rem; color: var(--accent); border: var(--filet-l) solid var(--filet); background: var(--panneau-creux); }
+.frise-fiche__titre { margin: 0; font-size: var(--t-l); }
+.frise-fiche__etiquettes { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.3rem 0; }
+.frise-fiche__date { font-size: var(--t-s); color: var(--texte-second); }
+.frise-fiche__resume { margin: 0.5rem 0; line-height: 1.45; }
+.frise-fiche__ecart, .frise-fiche__choix { margin: 0.3rem 0; font-size: var(--t-s); color: var(--texte-second); }
+
 /* ——— Recherche : arbre (U5) ——— */
 .rech-tete { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem 1rem; align-items: center; padding: 0.4rem 0.6rem; margin-bottom: 0.4rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); }
 .bureau-courant { margin: 0; color: var(--texte); }
@@ -648,6 +688,13 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .choix__libelle { margin: 0 0 0.15rem; font-weight: 600; color: var(--texte-fort); }
 .choix__tampon { position: absolute; right: 0.5rem; top: 0.5rem; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--danger-clair); border: var(--filet-l) solid var(--danger-plein); padding: 0 0.35rem; border-radius: var(--rayon); }
 .choix__tampon--histoire { color: var(--succes-clair); border-color: var(--vert-600); }
+.choix__suite { margin: 0.1rem 0 0; font-size: var(--t-xs); color: var(--texte-discret); }
+.dossier-evenement__illustration { float: right; width: 8.4rem; margin: 0.8rem 0 0.4rem 1rem; padding: 0.35rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); }
+.dossier-evenement__illustration .art { display: block; width: 100%; height: auto; }
+.art__sol { fill: none; stroke: var(--filet); stroke-width: 1.4; }
+.art__forme { fill: var(--panneau-haut); stroke: var(--texte-second); stroke-width: 1.3; stroke-linejoin: round; }
+.art__trait { fill: none; stroke: var(--texte-discret); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.art__accent { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .effets { margin: 0.1rem 0 0.3rem 1.1rem; padding: 0; font-size: var(--t-s); }
 .effet--cout { color: var(--danger-clair); }
 .effet--gain { color: var(--succes-clair); }

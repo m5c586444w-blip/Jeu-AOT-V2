@@ -946,3 +946,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   (test `tests/sim/fond.test.ts` : chronique des génériques identique avec et sans fond). Réglage : `data/balance/events.json` (`fond`).
 - **Raison** : trois faits par mois sans pause, déterministes, testés ; chronique non vide dès le départ.
 - **Réversible** : oui (supprimer `fond` de l'équilibrage coupe tout ; le code reste inerte).
+
+## 2026-10-08 — D-119 La frise remplace le registre « Chronique » (même identifiant), sans nouvel écran (phase CHR)
+- **Contexte** : CHR.3 demande un écran « Chronologie ». Le registre `chronique` (touche H, bouton « Monde ») existait déjà ; en créer un second aurait doublé touches, icônes, tests et smoke.
+- **Options** : (a) nouveau registre `chronologie` à côté ; (b) refondre `chronique` en frise : jauge de divergence et dossiers en attente conservés (mêmes classes), plus axe 845 à 854+, liste et fiche, filtre par thème, onglet « Vie du royaume ».
+- **Choix** : (b). Modèle pur `src/ui/timeline.ts` (testé sans navigateur), panneau `chroniclePanel.ts`. Titre affiché : « Chronologie ».
+- **Réversible** : oui.
+
+## 2026-10-08 — D-120 Niveau de renseignement et annonces de la frise (E-UX-6) (phase CHR)
+- **Contexte** : « annoncés (rumeur ou prévision, selon le niveau de renseignement ; invisibles sinon) » sans règle chiffrée dans les spécifications.
+- **Choix** (valeurs `A`, dans `src/ui/timeline.ts`) : niveau 0 à 3 = meilleure certitude sur un secret (aucune, rumeur, indice, preuve) ou nombre de rapports recoupés (1, 3, 6). Événement programmé : niveau 1, rumeur (thème vague, ni titre ni date) à 90 jours ; niveau 2, prévision (titre, mois) à 200 jours ; niveau 3, date exacte à 400 jours. Événement non programmé : visible dès le niveau 2, à une ou (niveau 3) trois étapes de la chaîne. E03 reste caché jusqu'à la chapelle Reiss (`known_after`). Squelettes sans mécanique : suivent leur prédécesseur et l'année du récit (en cours pendant leur période, passés ensuite). Sans renseignement, rien n'est annoncé.
+- **Limite** : les révélations du récit (E20…) font monter les secrets, donc le niveau passe vite à 3 en 850 (voir dette n° 30).
+- **Réversible** : oui (une fonction).
+
+## 2026-10-08 — D-121 Le bac à sable 845 n'a pas de chronologie (phase CHR)
+- **Contexte** : `scn_sandbox_845` n'a pas de couche politique, donc ni événements ni chronique (test `narrative` : « 845 : ni couche politique ni événements »). Les faits de fond et la frise ont besoin de cette couche.
+- **Options** : (a) ajouter une couche d'événements à 845 (change l'épilogue, les tests et le hash de ce bac à sable) ; (b) laisser 845 tel quel : la chronologie existe en 850 et 854, qui couvrent l'axe 845–854+ par leurs passés.
+- **Choix** : (b), dette n° 28. `sim:year` le dit en toutes lettres.
+- **Réversible** : oui.

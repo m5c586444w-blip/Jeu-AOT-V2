@@ -32,3 +32,9 @@ Format : **quoi** — où — gravité (faible / moyenne / forte). Tag `LC-repor
 | 26 | `tests/render/tactical3d/titans-r1c.test.ts` : le `beforeAll` dure 9,2 s pour un délai de 10 s ; échoue sous charge (premier `verify` de AUD.1) | `tests/render/tactical3d/titans-r1c.test.ts` | faible | AUD.1 |
 
 | 27 | `smoke:p8`, passe 3840×2160 : `waitForSelector('.pourquoi:not([hidden])')` expire (5 s) à `smoke-p8.ts:283` ; même échec sur la base d12a8d2 (après UI) : antérieur à AUD | `src/tools/smoke-p8.ts` | faible | AUD (revue D-117) |
+| 28 | Le bac à sable 845 (économie seule) n'a ni événements, ni faits de fond, ni chronologie : la chronique « non vide dès le début » vaut pour 850 et 854 (D-121) | `data/scenarios/sandbox_845.json`, `src/sim/strategic/world.ts` | moyenne | CHR |
+| 29 | 20 événements du fichier 12 restent « texte seul » (E01–E08, E43–E52, E59–E60) : résumé et place sur la frise, aucune décision ni effet ; E53 reste daté par E50 (data) : mécaniser la suite 851–853 sans décaler E53 exige de choisir des délais `?` | `data/events/canon_skeletons.json` | moyenne | CHR |
+| 30 | Frise : le niveau de renseignement monte à « certitudes » dès 120 jours en 850 (les révélations du récit remplissent les secrets) ; les annonces sont donc plus généreuses que voulu. Piste : compter seulement les preuves obtenues par les agents du joueur | `src/ui/timeline.ts` (`intelLevel`) | faible | CHR |
+| 31 | Frise : « Des officiers nommés seront exposés » (futur) reste affiché sur un événement déjà survenu ; en 4K le registre garde sa largeur en rem (panneau étroit) ; noms de province insérés tels quels dans les faits de fond (« revient à Camp d'entraînement ») | `src/ui/eventText.ts`, `screen.css`, `data/events/fond.json` | faible | CHR |
+| 32 | `smoke:ux0` dure plus de 10 minutes (il a été relancé en arrière-plan) | `src/tools/smoke-ux0.ts` | faible | CHR |
+
