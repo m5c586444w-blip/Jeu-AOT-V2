@@ -22,7 +22,7 @@ une ligne KO (2 erreurs de page, § Smoke). La bataille n'est plus recouverte (9
 |---|---|---|
 | CUI-01 verify code 0 | **OK** | `docs/reports/UI-verify-correctifs.log` (après dc09c21), extrait ci-dessous |
 | CUI-02 `src/sim` inchangé | **OK** | `git diff origin/claude/attack-on-titan-strategy-game-4ukom6 --stat -- src/sim` : sortie vide |
-| CUI-03 tous les `smoke:*` | **KO (1 ligne)** | 9/10 OK ; `smoke:tactique` : « KO 0 erreur console » (2 erreurs de page Pixi, dette n° 20) |
+| CUI-03 tous les `smoke:*` | **KO (1 ligne), dette n° 20** | 9/10 OK ; `smoke:tactique` : « KO 0 erreur console » (2 erreurs de page Pixi, dette n° 20) |
 | CUI-04 no-leaks | **OK après correctif de revue** | revue D-113 : « (débogage) » visible en Chancellerie, non détecté ; journal des IA réservé au mode auteur, motif « débogage » ajouté ; `tests/ui` 77/77 |
 | CUI-05 pas de grille de cartes | **OK** | `smoke:p8` « tout est conforme » : contrôle « grille de cartes » sur les 9 écrans U5, 4 passes |
 | CUI-06 ≥ 60 icônes | **OK** | `tests/ui/icons.test.ts` (90 icônes) |
