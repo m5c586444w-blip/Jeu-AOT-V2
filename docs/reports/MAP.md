@@ -30,7 +30,7 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
   9 positions, évitent icônes et bandes de murs (sauf villes posées sur un mur) et se masquent sinon ; les noms de
   segments s'écrivent dans la bande de leur mur, le long de l'anneau, à l'écart des portes et des pions ; un nom
   coupé par le bord de l'écran prend d'abord une place entière.
-- **MAP.5** Calques en aplat transparent (0,55) ; valeur inconnue en gris de légende (0,45). Infobulle : nom, région,
+- **MAP.5** Calques en aplat transparent (0,64) ; valeur inconnue en gris de légende (0,45). Infobulle : nom, région,
   état, mur en %, population, garnison et effectif, ressource principale ; clic : dossier (smoke:map).
 - **MAP.6** Emplacement de pion par province, choisi dans le polygone loin du nom et de la ville (test : dans la province).
 - **MAP.7** Terrain chargé à la demande en une ressource ; première image puis image fine (3072 px) calculée dans un worker.
@@ -38,12 +38,12 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 
 ## Performance (Chromium headless, rendu logiciel, `npm run captures:map`)
 ```
-[1366×768] carte prête en 5.82 s (chargement de la page compris)
-  première image de la carte : 1.52 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 7.18 s après le début de la carte
-[3840×2160] carte prête en 8.05 s (chargement de la page compris)
-  première image de la carte : 1.48 s (terrain, image du relief, couches)
-  image fine du relief (worker) prête 8.77 s après le début de la carte
+[1366×768] carte prête en 5.62 s (chargement de la page compris)
+  première image de la carte : 1.47 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 6.90 s après le début de la carte
+[3840×2160] carte prête en 7.87 s (chargement de la page compris)
+  première image de la carte : 1.50 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 8.63 s après le début de la carte
 Aucune erreur console.
 ```
 Première image < 3 s : OK. « carte prête » inclut le serveur de développement Vite (modules non groupés).
@@ -70,7 +70,7 @@ $ npm run verify   (typecheck et lint passent, puis)
 EXIT 1
 $ npm run data:validate && … && npm run sim:selftest && npm run build   (suite de la chaîne)
 sim:selftest : OK (direct = worker : sans monde, bac à sable 845, …, 850 avec une bataille jouée).
-✓ built in 1.50s
+✓ built in 1.54s
 EXIT 0
 ```
 

@@ -371,7 +371,9 @@ Règles : plus de sous-phase inventée (hors-périmètre → `docs/reports/dette
 ## Phase MAP (branche `claude/v2-map`, PR brouillon n° 2, nuit du 2026-10-07)
 - Fait : MAP.1 à MAP.7 (terrain figé `data/map/terrain/paradis.json`, polygones et voisinage identiques aux données,
   rendu Pixi réaliste, infobulle, pions, image fine en worker). Rapport : `docs/reports/MAP.md`.
-- Dernier verify : 507/508, seul échec CR1e-05 (arrêt R1e, hors MAP) ; suite de la chaîne code 0 (`MAP-verify*.log`).
+- Nuit : frontières sinueuses, noms de murs hors des pions, noms de lieux hors des bandes de murs et entiers à l'écran,
+  noms de segments écrits dans leur mur (test `tests/map/labels.test.ts`), champs adoucis, calques à 0,64.
+- Dernier verify (2026-10-08, ~00:40 UTC) : 509/510, seul échec CR1e-05 (arrêt R1e, hors MAP) ; suite de la chaîne code 0 (`MAP-verify*.log`).
 - smoke:map OK ; `map:terrain -- --check` reproduit l'empreinte ; 12 captures 1366×768 et 4K lues.
 - Prochaine étape : revue de la carte par l'utilisateur (arrêt de revue de fin de MAP, fichier 22 §4) ; ne pas fusionner sans accord.
 - UX0 : PR n° 1 fusionnée (verify sur la branche fusionnée : seul CR1e-05 en échec ; R1b 3D seuls : 21/21).

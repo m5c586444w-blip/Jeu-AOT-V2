@@ -20,9 +20,9 @@
 stdout | tests/places/murs.test.ts > R1e.3 — parement sans motif répété (CR1e-05) > autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35
 parement R1e : max 0.501 à 19.9 m ; témoin R1d : max 1.001 à 9.9 m
 
- ❯ tests/places/murs.test.ts (3 tests | 1 failed) 908ms
+ ❯ tests/places/murs.test.ts (3 tests | 1 failed) 1010ms
    ❯ R1e.3 — parement sans motif répété (CR1e-05) (1)
-     × autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35 139ms
+     × autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35 136ms
 
 ⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
 
@@ -41,7 +41,7 @@ AssertionError: expected 0.5014354337066348 to be less than 0.35
 
  Test Files  1 failed | 80 passed (81)
       Tests  1 failed | 509 passed (510)
-   Start at  00:19:45
-   Duration  107.40s (tests 91%, import 7%, transform 2%)
+   Start at  00:31:44
+   Duration  104.95s (tests 91%, import 7%, transform 2%)
 
 EXIT 1

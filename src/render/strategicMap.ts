@@ -316,7 +316,7 @@ export class StrategicMap {
       // Calque actif : aplat transparent par province, le relief reste lisible ; sans valeur, gris « inconnu » de la légende.
       if (!this.overlay) continue;
       const value = this.overlay.get(p.id);
-      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.45 : 0.55 });
+      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.45 : 0.64 });
     }
   }
 
