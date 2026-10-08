@@ -17,7 +17,7 @@ export function emptyRaw(): RawData {
   return Object.fromEntries(COLLECTION_NAMES.map((c) => [c, []])) as unknown as RawData;
 }
 
-export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13";
+export type RuleId = "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13" | "R14";
 
 export interface Violation {
   rule: RuleId;
@@ -135,7 +135,57 @@ export function checkCanon(data: RawData): Violation[] {
   checkShifterChains(data, push);
   checkScenarioStart(data, push);
   checkWeapons(data, eventYear, push);
+  checkMissions(data, eventYear, push);
   return out;
+}
+
+/**
+ * R14 — missions nationales (MIS, 23 §5) : une mission ne force jamais un événement du récit (les événements qu'elle déclenche sont
+ * génériques ou de fond ; 12 §3) ; chaque référence existe et appartient au même scénario et à la même nation ; aucun cycle de
+ * prérequis ; aucune mission avant l'année de la technologie ou de l'événement qu'elle exige (11 §8) ; une mission `C` ou `?` documente sa source.
+ */
+function checkMissions(data: RawData, eventYear: (id: string) => number | undefined, push: (rule: RuleId, e: RawEntry, message: string) => void): void {
+  const missions = new Map(data.missions.map((m) => [m.id, m]));
+  const events = new Map(data.events.map((e) => [e.id, e]));
+  const techs = new Map(data.techs.map((t) => [t.id, t]));
+  const after = (m: RawEntry): string[] => [...strList(m.v["prereqs"])];
+  for (const m of data.missions) {
+    const scenarios = strList(m.v["scenarios"]);
+    const nation = str(m.v["nation"]);
+    const minYear = num(m.v["min_year"]);
+    if ((m.v["canon"] === "C" || m.v["canon"] === "?") && !str(m.v["notes_canon"])) push("R14", m, "mission canon C ou ? sans notes_canon (source ou question ouverte)");
+    if (nation === "marley" && scenarios.some((s) => s !== "scn_854")) push("R14", m, "mission de Marley hors du scénario 854");
+    for (const id of strList(m.v["events"])) {
+      const ev = events.get(id);
+      if (!ev) push("R14", m, `événement déclenché inconnu : ${id}`);
+      else if ((str(ev.v["kind"]) ?? "canon") === "canon") push("R14", m, `déclenche l'événement canon ${id} : une mission ne force jamais le récit (12 §3)`);
+    }
+    for (const f of objList(m.v["effects"])) {
+      if (["control", "kill", "inherit", "schedule", "divergence", "flag", "capture_shifter", "shifter_faction", "world_war", "world_losses", "serum", "captured", "reveal", "stress"].includes(str(f["op"]) ?? "")) push("R14", m, `effet interdit : ${String(f["op"])}`);
+    }
+    for (const ref of [...strList(m.v["prereqs"]), ...strList(m.v["any_of"]), ...strList(m.v["exclusive_with"])]) {
+      const other = missions.get(ref);
+      if (!other) {
+        push("R14", m, `mission référencée inconnue : ${ref}`);
+        continue;
+      }
+      if (str(other.v["nation"]) !== nation) push("R14", m, `${ref} appartient à une autre nation`);
+      const there = strList(other.v["scenarios"]);
+      for (const s of scenarios) if (!there.includes(s)) push("R14", m, `${ref} n'est pas offerte dans ${s}, où cette mission l'exige`);
+    }
+    for (const c of objList(m.v["requires"])) {
+      const tech = str(c["tech"]);
+      const ty = tech ? num(techs.get(tech)?.v["min_year"]) : undefined;
+      if (tech && ty !== undefined && minYear !== undefined && ty > minYear) push("R14", m, `exige ${tech} (année ${ty}) avant ${ty} (min_year ${minYear})`);
+      const fired = str(c["fired"]);
+      const fy = fired ? eventYear(fired) : undefined;
+      if (fired && fy !== undefined && minYear !== undefined && fy > minYear) push("R14", m, `exige l'événement ${fired} (année ${fy}) avant ${fy} (min_year ${minYear})`);
+    }
+  }
+  for (const cycle of findCycles(data.missions, after)) {
+    const first = missions.get(cycle[0] as string);
+    if (first) push("R14", first, `prérequis cycliques : ${cycle.join(" → ")}`);
+  }
 }
 
 /** Les lances de foudre n'existent qu'à la fin de 850 (11 §1, E40) : technologies qui les débloquent. */

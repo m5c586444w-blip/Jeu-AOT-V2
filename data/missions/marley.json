@@ -1,0 +1,358 @@
+[
+  {
+    "id": "mis_marley_mobilisation_industrielle",
+    "nation": "marley",
+    "branch": "economique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 90,
+    "cost": {
+      "gold": 30,
+      "manpower": 10
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "industry",
+        "delta": 70
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_reforme_conscription",
+    "nation": "marley",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 40,
+      "manpower": 10
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "manpower",
+        "delta": 60
+      },
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": -2
+      }
+    ],
+    "ai_weight": 1.2,
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_arsenaux",
+    "nation": "marley",
+    "branch": "economique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 80
+    },
+    "prereqs": [
+      "mis_marley_mobilisation_industrielle"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "industry",
+        "delta": 120
+      },
+      {
+        "op": "world_support",
+        "faction": "fac_marley",
+        "delta": 2
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_corps_expeditionnaire",
+    "nation": "marley",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 120,
+      "manpower": 40
+    },
+    "prereqs": [
+      "mis_marley_reforme_conscription"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_support",
+        "faction": "fac_marley",
+        "delta": 6
+      }
+    ],
+    "ai_weight": 1.5,
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_flotte_transport",
+    "nation": "marley",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 150,
+      "manpower": 20
+    },
+    "prereqs": [
+      "mis_marley_arsenaux"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_support",
+        "faction": "fac_marley",
+        "delta": 4
+      },
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": 1
+      }
+    ],
+    "ai_weight": 1.3,
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_securite_interieure",
+    "nation": "marley",
+    "branch": "politique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 30,
+      "manpower": 15
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": 6
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_propagande_guerre",
+    "nation": "marley",
+    "branch": "politique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 90,
+    "cost": {
+      "gold": 25
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_support",
+        "faction": "fac_marley",
+        "delta": 8
+      },
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": -1
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_reseau_renseignement",
+    "nation": "marley",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 40,
+      "manpower": 10
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_relation",
+        "from": "fac_marley",
+        "to": "fac_paradis",
+        "axis": "fear",
+        "delta": -10
+      },
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "industry",
+        "delta": 10
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_contre_espionnage",
+    "nation": "marley",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 30
+    },
+    "prereqs": [
+      "mis_marley_reseau_renseignement"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": 3
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_pression_hizuru",
+    "nation": "marley",
+    "branch": "monde",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 50
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_hizuru",
+        "delta": -8
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_hizuru",
+        "to": "fac_marley",
+        "axis": "fear",
+        "delta": 6
+      }
+    ],
+    "ai_weight": 1.2,
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_accord_allies",
+    "nation": "marley",
+    "branch": "monde",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 40
+    },
+    "prereqs": [],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_relation",
+        "from": "fac_allies",
+        "to": "fac_marley",
+        "axis": "trust",
+        "delta": 10
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_allies",
+        "to": "fac_marley",
+        "axis": "interest",
+        "delta": 8
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu de la branche simplifiée de Marley (adaptation)."
+  },
+  {
+    "id": "mis_marley_campagne_de_paradis",
+    "nation": "marley",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 360,
+    "cost": {
+      "gold": 200,
+      "manpower": 60
+    },
+    "prereqs": [
+      "mis_marley_corps_expeditionnaire",
+      "mis_marley_flotte_transport"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_support",
+        "faction": "fac_marley",
+        "delta": 10
+      },
+      {
+        "op": "nation",
+        "faction": "fac_marley",
+        "stat": "stability",
+        "delta": -2
+      }
+    ],
+    "ai_weight": 2,
+    "canon": "?",
+    "notes_canon": "Marley vise le pouvoir du Titan Fondateur (12, attracteur) ; le plan de campagne est une adaptation de jeu qui ne déclenche aucun événement."
+  }
+]

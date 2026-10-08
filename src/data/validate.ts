@@ -1,6 +1,7 @@
 import type { z } from "zod";
 import { COLLECTION_NAMES, COLLECTIONS } from "./schemas";
 import type { ArmiesEntry, ArtilleryEntry } from "./armySchemas";
+import type { Mission } from "./missionSchemas";
 import type { Building, Character, CollectionName, EventDef, Law, NameList, Organisation, Placement, Province, Role, Scenario, Stratum, TacticalMap, Tech, Shifter, WorldProvince, Faction, Formation, TitanClass, TitanType, Trait, Unit } from "./schemas";
 
 /** Une erreur de donnée porte toujours le chemin du fichier et le chemin JSON. */
@@ -38,12 +39,13 @@ export interface GameData {
   tactical_maps: TacticalMap[];
   artillery: ArtilleryEntry[];
   armies: ArmiesEntry[];
+  missions: Mission[];
   /** Fichier d'origine de chaque identifiant (pour les messages de canon:check). */
   sources: Map<string, string>;
 }
 
 export function emptyData(): GameData {
-  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], world_provinces: [], factions: [], formations: [], artillery: [], armies: [], sources: new Map() };
+  return { provinces: [], characters: [], techs: [], events: [], placements: [], buildings: [], scenarios: [], traits: [], strata: [], organisations: [], laws: [], roles: [], units: [], titans: [], names: [], titan_types: [], tactical_maps: [], shifters: [], world_provinces: [], factions: [], formations: [], artillery: [], armies: [], missions: [], sources: new Map() };
 }
 
 export function jsonPath(path: readonly PropertyKey[]): string {
@@ -154,6 +156,30 @@ export function checkReferences(data: GameData): DataIssue[] {
         for (const s of a.ships) ref(a.id, "ships", s.ship);
         for (const e of a.embarked) ref(a.id, "embarked", e);
         break;
+    }
+  }
+  // MIS : prérequis, exclusions, événements déclenchés, scénarios, lois, conditions.
+  for (const m of data.missions) {
+    for (const x of [...m.prereqs, ...m.any_of, ...m.exclusive_with]) ref(m.id, "prereqs", x);
+    for (const e of m.events) ref(m.id, "events", e);
+    for (const s of m.scenarios) ref(m.id, "scenarios", s);
+    for (const f of m.effects) {
+      if ("province" in f && f.province !== "all" && !f.province.endsWith("_subject")) ref(m.id, "effects", f.province);
+      if (f.op === "org_loyalty" || f.op === "org_influence") ref(m.id, "effects", f.org);
+      if (f.op === "stratum") ref(m.id, "effects", f.stratum);
+      if (f.op === "nation") ref(m.id, "effects", f.faction);
+    }
+    for (const c of m.requires) {
+      if ("tech" in c) ref(m.id, "requires", c.tech);
+      if ("law" in c) ref(m.id, "requires", c.law);
+      if ("fired" in c) ref(m.id, "requires", c.fired);
+      if ("not_fired" in c) ref(m.id, "requires", c.not_fired);
+      if ("control" in c) ref(m.id, "requires", c.control);
+      if ("garrison_at_least" in c) ref(m.id, "requires", c.garrison_at_least);
+      if ("army_in" in c) ref(m.id, "requires", c.army_in);
+      if ("at_war" in c) ref(m.id, "requires", c.at_war);
+      if ("alive" in c) ref(m.id, "requires", c.alive);
+      if ("dead" in c) ref(m.id, "requires", c.dead);
     }
   }
   const modifierRefs = (owner: string, target: string): void => {

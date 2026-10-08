@@ -1,0 +1,452 @@
+[
+  {
+    "id": "evt_mis_revue_postes",
+    "kind": "fond",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.revue_postes",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_promotion_cadres",
+    "kind": "fond",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.promotion_cadres",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_audience_districts",
+    "kind": "fond",
+    "theme": "politique",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 0.5
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.audience_districts",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_greniers_ouverts",
+    "kind": "fond",
+    "theme": "famille",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.greniers_ouverts",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_procession_murs",
+    "kind": "fond",
+    "theme": "politique",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.procession_murs",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_carte_reseau",
+    "kind": "fond",
+    "theme": "politique",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "research",
+        "delta": 5
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.mis.carte_reseau",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_convoi_arrive",
+    "kind": "fond",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "horses",
+        "delta": 80
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.convoi_arrive",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_chantier_remparts",
+    "kind": "fond",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.mis.chantier_remparts",
+    "canon": "A",
+    "notes_canon": "Événement déclenché par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_dilemme_batteries",
+    "kind": "generic",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0,
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [
+      {
+        "id": "nord",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "titans",
+            "province": "prov_maria_nord",
+            "delta": -0.04
+          },
+          {
+            "op": "stability",
+            "province": "prov_maria_nord",
+            "delta": 2
+          }
+        ],
+        "canon": "A"
+      },
+      {
+        "id": "sud",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "titans",
+            "province": "prov_maria_sud",
+            "delta": -0.04
+          },
+          {
+            "op": "morale",
+            "province": "prov_maria_sud",
+            "delta": 2
+          }
+        ],
+        "canon": "A"
+      }
+    ],
+    "deadline_days": 20,
+    "form": "rapport",
+    "text_key": "evt.mis.dilemme_batteries",
+    "canon": "A",
+    "notes_canon": "Décision déclenchée par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_dilemme_reforme",
+    "kind": "generic",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0,
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [
+      {
+        "id": "imposer",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": -3
+          },
+          {
+            "op": "legitimacy",
+            "delta": 1
+          },
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -1
+          }
+        ],
+        "canon": "A"
+      },
+      {
+        "id": "negocier",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "capital",
+            "delta": -2
+          },
+          {
+            "op": "org_loyalty",
+            "org": "org_garrison",
+            "delta": 2
+          }
+        ],
+        "canon": "A"
+      }
+    ],
+    "deadline_days": 20,
+    "form": "rapport",
+    "text_key": "evt.mis.dilemme_reforme",
+    "canon": "A",
+    "notes_canon": "Décision déclenchée par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_dilemme_reconquete",
+    "kind": "generic",
+    "theme": "militaire",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "chance": 0,
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [
+      {
+        "id": "occuper",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "manpower",
+            "delta": -100
+          },
+          {
+            "op": "morale",
+            "province": "prov_plaines_interieures_maria_sud",
+            "delta": 3
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_interieures_maria_sud",
+            "delta": -0.03
+          }
+        ],
+        "canon": "A"
+      },
+      {
+        "id": "inventorier",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "research",
+            "delta": 20
+          },
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": 1500
+          }
+        ],
+        "canon": "A"
+      }
+    ],
+    "deadline_days": 20,
+    "form": "rapport",
+    "text_key": "evt.mis.dilemme_reconquete",
+    "canon": "A",
+    "notes_canon": "Décision déclenchée par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  },
+  {
+    "id": "evt_mis_dilemme_culte",
+    "kind": "generic",
+    "theme": "politique",
+    "year_min": 845,
+    "playable": false,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "chance": 0,
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [
+      {
+        "id": "accepter",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "org_influence",
+            "org": "org_culte",
+            "delta": 4
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 1
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_clerge",
+            "satisfaction": 2,
+            "radicalisation": 0
+          }
+        ],
+        "canon": "A"
+      },
+      {
+        "id": "refuser",
+        "historical": false,
+        "divergence": 0,
+        "requires": [],
+        "effects": [
+          {
+            "op": "org_loyalty",
+            "org": "org_culte",
+            "delta": -3
+          },
+          {
+            "op": "legitimacy",
+            "delta": 1
+          }
+        ],
+        "canon": "A"
+      }
+    ],
+    "deadline_days": 20,
+    "form": "rapport",
+    "text_key": "evt.mis.dilemme_culte",
+    "canon": "A",
+    "notes_canon": "Décision déclenchée par une mission (MIS) : aucun fait du récit, aucun personnage nommé."
+  }
+]

@@ -91,6 +91,18 @@ try {
   const field = played.state().military?.expeditions[0]?.log.find((l) => l.key === "field.battle_played") ?? played.state().military?.reports.at(-1);
   console.log(`[scn_sandbox_850 + bataille jouée] direct : ${played.hash()} | worker : ${last.hash} | date an ${pd.year}, jour ${pd.day} | ${playScript.length} commandes | ${field ? "bataille reportée" : "bataille absente"}`);
   if (last.hash !== played.hash() || !field) failed = true;
+  // MIS : deux missions lancées en 845 (économie seule), accomplies avant la fin ; 854 laisse l'IA de Marley choisir les siennes (ligne « 854 »).
+  {
+    const w845 = loadWorld("data", DEFAULT_SCENARIO);
+    const missionScript: Command[] = [{ type: "StartMission", mission: "mis_mil_inventaire_garnisons" }, { type: "StartMission", mission: "mis_eco_recensement_greniers" }, { type: "AdvanceDays", n: 90 }, { type: "StartMission", mission: "mis_mil_reforme_armee" }, { type: "AdvanceDays", n: 200 }];
+    const m845 = createSim(SEED, w845);
+    for (const c of missionScript) m845.dispatch(c);
+    let lm = await client.init(SEED, DEFAULT_SCENARIO);
+    for (const c of missionScript) lm = await client.dispatch(c);
+    const side = m845.state().missions?.sides["paradis"];
+    console.log(`[${DEFAULT_SCENARIO} + missions] direct : ${m845.hash()} | worker : ${lm.hash} | date an ${lm.state.date.year}, jour ${lm.state.date.day} | missions accomplies : ${side?.done.join(", ") ?? "aucune"}`);
+    if (lm.hash !== m845.hash() || (side?.done.length ?? 0) !== 3) failed = true;
+  }
 } finally {
   await worker.terminate();
 }
@@ -98,5 +110,5 @@ if (failed) {
   console.error("sim:selftest : ÉCHEC (hash différent entre direct et worker).");
   process.exitCode = 1;
 } else {
-  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 854, 854 mené par Marley, 850 avec une expédition, 850 avec une bataille jouée).");
+  console.log("sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 854, 854 mené par Marley, 850 avec une expédition, 850 avec une bataille jouée, 845 avec des missions).");
 }

@@ -1,5 +1,6 @@
 import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
+import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
 import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Faction, Formation, Scenario, Shifter, Stratum, TacticalMap, WorldProvince, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
 
@@ -29,6 +30,15 @@ export interface World {
   nations: NationsWorld | null;
   /** Armées, artillerie et marine (PA) : absentes sans données ou sans armée de départ pour le scénario. */
   armies?: ArmiesWorld | null;
+  /** Missions nationales (MIS) : absentes sans équilibrage ou sans mission pour le scénario. */
+  missions?: MissionsWorld | null;
+}
+
+export interface MissionsWorld {
+  balance: MissionsBalance;
+  /** Missions offertes dans le scénario, dans l'ordre des données. */
+  order: readonly Mission[];
+  byId: ReadonlyMap<string, Mission>;
 }
 
 export interface ArmiesWorld {
@@ -163,6 +173,16 @@ export interface WorldSource {
   artillery?: readonly ArtilleryEntry[];
   armies?: readonly ArmiesEntry[];
   armiesBalance?: ArmiesBalance;
+  missions?: readonly Mission[];
+  missionsBalance?: MissionsBalance;
+}
+
+/** Couche MIS : construite si l'équilibrage existe et si au moins une mission est offerte dans le scénario. */
+export function buildMissionsWorld(src: WorldSource, scenarioId: string): MissionsWorld | null {
+  if (!src.missionsBalance || !src.missions) return null;
+  const order = src.missions.filter((m) => m.scenarios.includes(scenarioId));
+  if (order.length === 0) return null;
+  return { balance: src.missionsBalance, order, byId: new Map(order.map((m) => [m.id, m])) };
 }
 
 /** Couche PA : construite si l'équilibrage, la couche militaire (graphe) et au moins une armée de départ existent. */
@@ -214,8 +234,10 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
       ? { geo: buildGeo(src.geo), units: new Map((src.units ?? []).map((u) => [u.id, u])), titans: src.titans, names: src.names[0], exp: src.expeditions, log: src.logistics }
       : null;
   const armies = buildArmiesWorld(src, scenarioId, military !== null);
+  const missions = buildMissionsWorld(src, scenarioId);
   return {
     ...(armies ? { armies } : {}),
+    ...(missions ? { missions } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),
