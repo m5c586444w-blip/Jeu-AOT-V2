@@ -70,5 +70,11 @@ Tests ajoutés : `events-coverage` (6), `fond` (9), `timeline` (10), `event-art`
 ## Modifications de `src/sim`
 `src/sim/events/engine.ts` (fondDays, fondTick, seedBackstory, plafond de chronique 800) et `src/sim/strategic/world.ts` (`ChronicleWorld.fond`) : additives, déterministes (graine et jour, aucun `Math.random`/`Date.now`), sans `any`, testées ; `sim:selftest` code 0. Décision D-118.
 
+## Passe de revue (D-122)
+Faits de fond actifs par défaut (`data/balance/events.json`), à effets économiques : 5 scénarios du selftest sur 7 changent d'empreinte (« sans monde » et bac à sable 845 identiques ; valeurs dans D-122). Anciennes sauvegardes : chargées, mais elles recevront des faits de fond ; plafond de chronique 800 : change l'empreinte au-delà de 200 entrées. Réversible (retirer `fond`).
+Correctifs : (1) spoiler : fiche d'un événement en cours ou annoncé sans résumé d'issue ni effets, accroche neutre, test ajouté ; (2) famille « titans » sans `subject: province`, sans effet de province, textes sans nom de province, « revient à / familles de {province} » reformulés ; (3) « Décision attendue (aujourd'hui) » au lieu de « sous 0 jours ». Capture 1 (fiche « en cours ») et 5 (« sous 0 jours ») : défauts corrigés, non refaites. Capture 2 : défaut « revient à Camp d'entraînement » corrigé.
+Non corrigé : autres textes « à {province} » avec un nom de lieu non urbain (cosmétique).
+Verify de la passe (`CHR-verify-revue.log`) : `Test Files  92 passed (92)`, `Tests  588 passed (588)`, `EXIT 0`.
+
 ## Dettes ouvertes
 n° 28 à 32 (`docs/reports/dette.md`). Décisions : D-118 à D-121.

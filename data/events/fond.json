@@ -1673,15 +1673,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "stability",
-        "province": "prov_subject",
-        "delta": 1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_fissure_surface",
@@ -1698,7 +1691,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1717,15 +1709,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "morale",
-        "province": "prov_subject",
-        "delta": -1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_fausse_alarme",
@@ -1742,15 +1727,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "morale",
-        "province": "prov_subject",
-        "delta": -1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_titan_immobile",
@@ -1767,7 +1745,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1786,7 +1763,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1805,15 +1781,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "morale",
-        "province": "prov_subject",
-        "delta": -1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_echelle_rouillee",
@@ -1830,15 +1799,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "stability",
-        "province": "prov_subject",
-        "delta": 1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_treuils_graisses",
@@ -1855,7 +1817,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1874,7 +1835,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [
       {
@@ -1899,7 +1859,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1918,7 +1877,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [
       {
@@ -1943,7 +1901,6 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
     "effects": [],
     "choices": [],
@@ -1962,15 +1919,8 @@
     "family": "titans",
     "theme": "titans",
     "cooldown_days": 360,
-    "subject": "province",
     "conditions": [],
-    "effects": [
-      {
-        "op": "stability",
-        "province": "prov_subject",
-        "delta": 1
-      }
-    ],
+    "effects": [],
     "choices": [],
     "form": "rapport",
     "text_key": "evt.fond.mur_maitre_macon",

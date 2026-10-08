@@ -71,7 +71,7 @@ export class EventDossier {
       paper.append(el("h3", "dossier-evenement__intertitre", t("evt.consequences")));
       paper.append(this.lines(happened));
     }
-    paper.append(el("h3", "dossier-evenement__intertitre", t("evt.decision", { n: daysLeft(p, state.date) })));
+    paper.append(el("h3", "dossier-evenement__intertitre", daysLeft(p, state.date) <= 0 ? t("evt.decision_today") : t("evt.decision", { n: daysLeft(p, state.date) })));
     const ctx = { world: this.world, date: state.date, st: state.strategic ?? (() => { throw new Error("état"); })(), pol: state.politics, ev: state.events ?? (() => { throw new Error("événements"); })(), intel: state.intel, rs: state.research };
     const weight = e.divergence_weight ?? 0;
     for (const c of e.choices.filter((x) => choiceAvailable(ctx, x))) {
@@ -134,5 +134,6 @@ function effectRow(l: EffectLine): { label: string; value: string; sign?: "plus"
 
 /** Jour d'échéance lisible pour la chronique. */
 export function pendingLabel(p: PendingEvent, state: GameState): string {
-  return t("evt.pending_line", { n: Math.max(0, p.deadline - toAbsoluteDay(state.date)) });
+  const n = Math.max(0, p.deadline - toAbsoluteDay(state.date));
+  return n === 0 ? t("evt.pending_line_today") : t("evt.pending_line", { n });
 }

@@ -195,6 +195,8 @@ export function buildTimeline(world: World, state: GameState): TimelineItem[] {
     if (c.status === "en_attente" && !pending) continue;
     items.push({ ...base(e, "quotidien", c.subject), year: fromAbsoluteDay(c.day).year, sort: c.day, status: pending ? "en_cours" : "passe", foresight: null, day: c.day, dayApprox: null, gap: 0, conform: null, choice: c.choice, pending });
   }
+  // Pas de spoiler : tant qu'un événement n'est pas résolu, ni résumé d'issue ni effets (le panneau les masque aussi).
+  for (const i of items) if (i.status === "en_cours" || (i.status === "annonce" && i.foresight !== "rumeur")) i.summary = t("chrono.hook_summary");
   return items.sort((a, b) => a.sort - b.sort || a.id.localeCompare(b.id));
 }
 

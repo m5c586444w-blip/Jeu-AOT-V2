@@ -3,6 +3,7 @@ import { loadWorld } from "../../src/data/worldNode";
 import { createInitialState, tickDay } from "../../src/sim/core/state";
 import type { GameState } from "../../src/sim/core/state";
 import { axisYears, buildTimeline, dateLabel, filterItems, foresightFor, intelLevel } from "../../src/ui/timeline";
+import { t } from "../../src/i18n";
 import { findLeaks } from "../../src/ui/leaks";
 
 /** Frise « Chronologie » (CHR.3, E-UX-6) : états des événements, annonces selon le renseignement, thèmes, axe. */
@@ -115,6 +116,17 @@ describe("une année de jeu", () => {
     expect(by.get("E50")?.status).toBe("en_cours");
     expect(by.get("E51")?.status).toBe("annonce");
     expect(by.get("E51")?.foresight).toBe("prevision");
+  });
+
+  it("pas de spoiler : en cours et annoncé (hors rumeur) n'affichent aucun résumé d'issue", () => {
+    const all = [...items, ...canon(buildTimeline(w850, withLevel(s, "preuve")))];
+    const open = all.filter((i) => i.status === "en_cours" || i.status === "annonce");
+    expect(open.length).toBeGreaterThan(0);
+    for (const i of open) {
+      expect(i.summary).not.toBe("");
+      expect(i.summary === t("chrono.hook_summary") || i.summary === t("chrono.rumor_summary")).toBe(true);
+    }
+    expect(all.some((i) => i.status === "passe" && i.summary !== t("chrono.hook_summary"))).toBe(true);
   });
 
   it("filtre par thème et axe 845 à 854+", () => {

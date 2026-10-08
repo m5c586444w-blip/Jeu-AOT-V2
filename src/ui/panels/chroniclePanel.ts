@@ -74,7 +74,7 @@ export class ChroniclePanel implements Panel {
         if (!e) continue;
         const row = el("p", "registre-champ chronique-attente");
         row.dataset["pending"] = p.id;
-        row.append(el("span", "chronique-attente__libelle", t("chron.pending_short")), el("strong", "", t(e.text_key)), ` · ${t("evt.pending_line", { n: daysLeft(p, s.date) })} `);
+        row.append(el("span", "chronique-attente__libelle", t("chron.pending_short")), el("strong", "", t(e.text_key)), ` · ${(daysLeft(p, s.date) <= 0 ? t("evt.pending_line_today") : t("evt.pending_line", { n: daysLeft(p, s.date) }))} `);
         const open = button(t("chron.open"), () => this.ctx.openEvent?.(p.id), "registre-bouton petit");
         open.dataset["action"] = "ouvrir-dossier";
         row.append(open);
@@ -256,7 +256,7 @@ export class ChroniclePanel implements Panel {
       open.dataset["action"] = "ouvrir-dossier-fiche";
       box.append(open);
     }
-    if ((i.status === "passe" || i.status === "en_cours") && i.def.effects.length > 0) {
+    if (i.status === "passe" && i.def.effects.length > 0) {
       const lines = effectLines(this.ctx.world, i.def.effects, i.subject);
       if (lines.length > 0) {
         box.append(h("h4", "dossier-evenement__intertitre", t("evt.consequences")));

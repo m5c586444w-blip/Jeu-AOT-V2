@@ -964,3 +964,12 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Options** : (a) ajouter une couche d'événements à 845 (change l'épilogue, les tests et le hash de ce bac à sable) ; (b) laisser 845 tel quel : la chronologie existe en 850 et 854, qui couvrent l'axe 845–854+ par leurs passés.
 - **Choix** : (b), dette n° 28. `sim:year` le dit en toutes lettres.
 - **Réversible** : oui.
+
+## 2026-10-08 — D-122 Faits de fond actifs par défaut : effets sur les empreintes, sauvegardes, plafond de chronique (phase CHR, complète D-118)
+- **Contexte** : revue CHR. Les faits de fond (`data/balance/events.json`, bloc `fond`) sont actifs par défaut et ont des effets économiques ; ils changent l'empreinte de 5 scénarios du selftest sur 7.
+- **Empreintes** (avant la passe de revue → après les correctifs 2, qui retire des effets et des sujets de la famille « titans ») : bac à sable 850 `5418280e` → `75ab1de6` → `86f2d847` ; 854 `9e0b9622` → `2c69c20e` → `49e288fa` ; 854 Marley `f0ca0b94` → `232f1056` → `028d6da4` ; expédition `0d187108` → `0c0707bf` → `249d21e4` ; bataille `682039d9` → `7dd5a8c7` → `5cbf06a3`. « Sans monde » (`3c17ecdc`) et bac à sable 845 (`08bedd60`) sont identiques.
+- **Sauvegardes** : les anciennes se chargent (le hash contrôlé est celui de l'état enregistré) mais recevront des faits de fond en continuant la partie.
+- **Plafond de chronique à 800** : change l'empreinte des parties de plus de 200 entrées.
+- **Correctifs de la passe** : (1) la frise ne montre ni résumé ni effets d'un événement « en cours » ou « annoncé » (accroche neutre ; test `timeline`) ; (2) faits de fond « titans » sans sujet de province, sans effet sur une province, textes sans nom de province ; « revient à {province} » et « familles de {province} » reformulés ; (3) dossier : « aujourd'hui » au lieu de « sous 0 jours ».
+- **Réversible** : oui (retirer `fond` de l'équilibrage).
+
