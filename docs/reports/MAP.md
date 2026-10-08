@@ -6,14 +6,14 @@ Ce rapport ne décrit que ce qui a été vérifié ; les sorties réelles sont c
 ## Critères
 | Id | État | Preuve |
 |---|---|---|
-| CMAP-01 verify code 0 | **KO hors MAP** : seul échec CR1e-05 (R1e, déjà rouge sur la branche par défaut) ; 509/510 tests ; reste de la chaîne code 0 | `MAP-verify.log`, `MAP-verify-suite.log` |
+| CMAP-01 verify code 0 | **OK** après fusion de la branche principale (CR1e-05 accepté, D-103) et délai de 240 s pour deux tests 3D lents (D-106) : 510/510, `EXIT 0` | `MAP-verify-fusion.log` |
 | CMAP-02 `src/sim` inchangé | OK | `git diff origin/claude/attack-on-titan-strategy-game-4ukom6 --stat -- src/sim` : vide |
 | CMAP-03 sim:selftest | OK | `MAP-verify-suite.log` |
 | CMAP-04 voisinage dessiné = données | OK | `npm run map:terrain -- --check` : « identique » ; `tests/map` |
 | CMAP-05 aire minimale | OK | `tests/map` : provinces ≥ 2 500 km², segments de mur ≥ 1 000 km² |
 | CMAP-06 terrain reproductible | OK | `--check` : « fichier figé reproduit à l'identique (52d42f01) » ; test de déterminisme |
 | CMAP-07 smoke:map | OK | `MAP-smoke.log` : 26 contrôles OK, « smoke:map : OK » |
-| CMAP-08 captures lues | OK | 12 captures ci-dessous, lues une à une |
+| CMAP-08 captures lues | OK après correctif | 12 captures lues une à une, puis relues par un sous-agent distinct (D-106) : panneau « Calques » illisible en 4K (bloquant) corrigé, 4K recapturées et relues : aucun bloquant |
 
 ## Ce qui est fait
 - **MAP.1** `npm run map:terrain` (graine `paradis-v1`, version 1, empreinte) écrit `data/map/terrain/paradis.json` (932 Kio) :
@@ -108,3 +108,21 @@ EXIT 0
 - Panneau « Calques » à 4K : phase UI.
 - Échec de verify sans lien avec MAP : CR1e-05 (arrêt R1e, rouge sur la branche par défaut, décision de l'utilisateur).
   Lors d'un passage précédent, trois tests 3D avaient dépassé leur délai sous charge (verts seuls, `MAP-verify-3d.log`).
+
+## Revue de la direction autonome (2026-10-08, D-106)
+- Relecture indépendante des 12 captures : un bloquant (panneau « Calques » et légendes à 8–10 px physiques en 4K).
+  Correctif unique : le feuillet grandit avec la hauteur d'écran (`screen.css`, `zoom` ×1,35 / ×1,8 / ×2,4). Seconde
+  relecture : libellés ≈ 1,6 % de la hauteur, légendes ≈ 1 % ; « aucun bloquant ».
+- Les captures « 4K » font en réalité 3840×2029 (fenêtre sans la barre du navigateur) ; la 1366 environ 1366×637.
+- Défauts non bloquants mis en dette (n° 13 à 15) : provinces sans aplat aux calques Titans et Nourriture, légende sans
+  unité et seuils non arrondis, rose voilé proche de « aux Titans », noms serrés, relief faible, île presque ronde.
+- Sortie réelle (`MAP-verify-fusion.log`) :
+```
+ Test Files  81 passed (81)
+      Tests  510 passed (510)
+assets:check : 102 entrées, 102 fichiers ; licences, sources et empreintes conformes.
+canon:check : « data » conforme (R1–R12, 592 entrées).
+sim:selftest : OK (direct = worker : sans monde, bac à sable 845, …, 850 avec une bataille jouée).
+✓ built in 1.93s
+EXIT 0
+```

@@ -177,6 +177,11 @@
   opacity: 0.8;
 }
 
+/* Lisible en 4K : le feuillet grandit avec la hauteur d'écran, comme les noms de la carte (×1 à ×2,4). */
+@media (min-height: 1000px) { .calques { zoom: 1.35; } }
+@media (min-height: 1400px) { .calques { zoom: 1.8; } }
+@media (min-height: 2000px) { .calques { zoom: 2.4; } }
+
 .calques__legende:empty { display: none; }
 .calques__explication { margin: 0.5rem 0 0.25rem; font-style: italic; font-size: 0.85rem; line-height: 1.3; }
 .calques__echelle { display: flex; gap: 0.15rem; }

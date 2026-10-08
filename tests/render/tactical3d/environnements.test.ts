@@ -21,7 +21,7 @@ const lot1 = LOTS[1].filter((id) => available.has(profile(id).generateur));
 const lot2 = LOTS[2].filter((id) => available.has(profile(id).generateur));
 
 describe("même graine = même environnement (R1b)", () => {
-  it(`lot 1 (${lot1.length} environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement`, () => {
+  it(`lot 1 (${lot1.length} environnements) : données identiques et empreinte de géométrie identique ; autre graine, autre environnement`, { timeout: 240000 }, () => {
     expect(lot1).toHaveLength(9);
     for (const id of lot1) {
       const a = generateEnvironment(id, 850);

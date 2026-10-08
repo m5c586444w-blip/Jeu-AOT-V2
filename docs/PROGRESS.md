@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R1e terminée et acceptée.** Prochaine phase : MAP (PR n° 2). LC-B en attente. |
-| Tâche | R1e.7 faite : captures des lieux, revue, rapport `docs/reports/R1e.md` |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 493/493 (78 fichiers, `docs/reports/R1e-verify.log`) ; après rebase sur la fusion UX0 : code 0, 499/499 (79 fichiers) |
-| Prochaine étape | MAP (PR n° 2) ; LC-B, LC-C, LC-D en attente (semaine 4, fichier 24, N3) ; CR1e-07 en dette (n° 9), à reprendre en R2 |
+| Phase | **MAP terminée et fusionnée (PR n° 2, D-106).** Prochaine phase : UI (fichier 22 §5). Direction autonome depuis le 2026-10-08 (D-107). |
+| Tâche | Reprise de MAP : fusion de la branche principale, revue des captures par sous-agent, correctif du panneau en 4K |
+| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 510/510 (81 fichiers, `docs/reports/MAP-verify-fusion.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/UI.md` puis exécuter UI sur `claude/v2-ui` (critères CUI-01 à 09) ; compte rendu dans `docs/MORNING.md` |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
