@@ -218,7 +218,8 @@ button.notification:hover { background: var(--reflet-fort); }
 .notification__texte { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; text-overflow: ellipsis; font-size: var(--t-s); line-height: 1.25; color: var(--texte-fort); }
 .notification__date { grid-column: 2; font-size: var(--t-xs); color: var(--texte-discret); }
 .notification__nombre { grid-column: 3; grid-row: 1; font-size: var(--t-xs); color: var(--accent-clair); }
-.notification__lieu { grid-column: 2; font-size: var(--t-xs); color: var(--accent-clair); }
+.notification__meta { grid-column: 2; font-size: var(--t-xs); letter-spacing: 0.04em; color: var(--texte-discret); }
+.notification__lieu { color: var(--accent-clair); }
 
 /* ——— Calques (modes de carte) en bas à droite ——— */
 .calques {
@@ -281,7 +282,8 @@ button.notification:hover { background: var(--reflet-fort); }
 .registre-icone .ico, .registre-icone .icone { width: 1.5rem; height: 1.5rem; }
 .registre-touche:empty { display: none; }
 .registre-titre { margin: 0; flex: 1; font-size: var(--t-xl); letter-spacing: 0.03em; }
-.registre-touche { font-size: var(--t-xs); color: var(--texte-discret); }
+.registre-touche { display: inline-flex; font-size: var(--t-xs); color: var(--texte-discret); }
+.registre-touche .touche { margin: 0; }
 .registre-corps { flex: 1; min-height: 0; overflow: auto; padding: 0.5rem 0.9rem 0.9rem; }
 .registre-panneau:has(.maitre-detail) .registre-corps { overflow: hidden; display: flex; flex-direction: column; }
 .registre-panneau:has(.maitre-detail) .maitre-detail { flex: 1; min-height: 0; --hauteur-utile: 100%; }

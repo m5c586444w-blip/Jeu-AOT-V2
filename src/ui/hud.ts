@@ -10,7 +10,7 @@ import { nationIncome, nationUpkeep } from "../sim/world/nations";
 import { emblem, icon, registerIcon, resourceIcon } from "./icons";
 import { paramLabel } from "./panels/common";
 import { setPlayerFaction } from "./theme";
-import { formatNumber, formatSigned } from "./why";
+import { formatNumber, formatSigned, hint } from "./why";
 import type { WhyContent, WhyTooltip } from "./why";
 
 /**
@@ -107,7 +107,7 @@ export class Hud {
       menu.type = "button";
       menu.innerHTML = icon("menu");
       menu.append(el("span", "lecteur-seul", t("menu.open")));
-      menu.title = t("menu.open");
+      hint(menu, t("menu.open"));
       menu.dataset["action"] = "menu";
       menu.addEventListener("click", () => {
         window.location.search = "?menu=1";
@@ -172,8 +172,8 @@ export class Hud {
         b.type = "button";
         b.innerHTML = registerIcon(id);
         b.append(el("span", "gestion__etiquette", t(`panel.${id}`)));
-        const key = this.actions.keyOf?.(id) ?? "";
-        b.title = key ? `${t(`panel.${id}`)} [${key}]` : t(`panel.${id}`);
+        // Nom et raccourci dans l'infobulle (U2, U10), aussi quand l'étiquette est masquée (mode compact).
+        hint(b, t(`panel.${id}`), this.actions.keyOf?.(id) ?? "");
         b.dataset["panel"] = id;
         b.setAttribute("aria-pressed", "false");
         if (PARADIS_ONLY.has(id)) b.dataset["paradis"] = "1";
@@ -228,8 +228,7 @@ export class Hud {
       if (s === 0) b.innerHTML = icon("pause");
       else b.textContent = String(s);
       b.type = "button";
-      b.title = s === 0 ? t("hud.pause") : `${t("hud.speed_n", { n: s })} [${s}]`;
-      b.setAttribute("aria-label", b.title);
+      hint(b, s === 0 ? t("hud.pause") : t("hud.speed_n", { n: s }), this.actions.keyOf?.(s === 0 ? "pause" : `speed_${s}`) ?? "");
       b.addEventListener("click", () => this.actions.setSpeed(s));
       this.speedButtons.push(b);
       box.append(b);
@@ -371,13 +370,15 @@ export class Hud {
     const day = this.plan?.resources[r];
     const st = this.strat();
     if (!day || !st) return { title: t(`res.${r}`), sections: [] };
+    const key = this.actions.keyOf?.("economie") ?? "";
     return {
       title: t("hud.stock_title", { resource: t(`res.${r}`) }),
+      value: `${formatNumber(st.stocks[r])} / ${formatNumber(day.capacity.value)}`,
       sections: [
         { text: t("hud.stock_text", { stock: formatNumber(st.stocks[r]), cap: formatNumber(day.capacity.value) }) },
         { label: t("hud.capacity"), explained: day.capacity },
-        { text: t("hud.economy_hint", { key: this.actions.keyOf?.("economie") ?? "" }) },
       ],
+      ...(key ? { key, keyLabel: t("hud.economy_hint") } : {}),
     };
   }
 
@@ -391,6 +392,7 @@ export class Hud {
     const pop = st ? totals(st).population : 0;
     return {
       title: t("hud.morale"),
+      ...(st ? { value: formatNumber(nationalMorale(st)) } : {}),
       sections: [{ text: t("hud.morale_why") }, ...(target ? [{ label: t("hud.morale_target"), explained: target }] : []), { text: `${t("hud.population")} : ${formatNumber(pop)}` }],
     };
   }
@@ -413,7 +415,7 @@ export function resourceDeltaWhy(world: World, plan: DayPlan | null, st: Strateg
     if (r === "gold") sections.push({ label: t("hud.month_taxes"), explained: m.taxes }, { label: t("hud.month_upkeep"), explained: m.upkeep, cost: true });
     else sections.push({ label: t("hud.month_manpower"), explained: m.manpower });
   }
-  return { title: t("hud.delta_title", { resource: t(`res.${r}`) }), sections };
+  return { title: t("hud.delta_title", { resource: t(`res.${r}`) }), value: t("hud.per_day", { n: formatSigned(day.net.value) }), sections };
 }
 
 /** Moral national = moyenne des moraux provinciaux pondérée par la population (02 §4). */

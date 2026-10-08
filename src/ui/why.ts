@@ -2,9 +2,42 @@ import type { Explained, Factor } from "../sim/core/explain";
 import { RESOURCE_IDS } from "../sim/strategic/resources";
 import { hasKey, t } from "../i18n";
 
-/** Une ligne d'explication : soit une valeur expliquée (facteurs), soit un texte. */
-/** `cost` : la valeur est une dépense (consommation, pertes) ; une hausse y est un malus (couleur inversée, U4). */
-export type WhyContent = { title: string; sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean; cost?: boolean }[] };
+/**
+ * Contenu d'une infobulle de calcul (U4), sur trois niveaux au plus : (1) titre et valeur ; (2) sections, chacune avec son
+ * sous-total ; (3) facteurs (sources, bonus, malus). Une section est une valeur expliquée (facteurs) ou un texte.
+ * `cost` : la valeur est une dépense (consommation, pertes) ; une hausse y est un malus (couleur inversée).
+ * `key` : touche du raccourci associé (U10), affichée en pied avec `keyLabel` (par défaut « Raccourci »).
+ */
+export type WhyContent = {
+  title: string;
+  value?: string;
+  sections: { label?: string; explained?: Explained; text?: string; unit?: string; signed?: boolean; cost?: boolean }[];
+  key?: string;
+  keyLabel?: string;
+};
+
+/** Nombre de niveaux d'une infobulle de calcul (U4 : trois au plus). */
+export const WHY_LEVELS = 3;
+
+export interface WhyRow {
+  label: string;
+  value: string;
+  sign?: "plus" | "moins";
+}
+export interface WhySection {
+  label?: string;
+  subtotal?: string;
+  rows: WhyRow[];
+  text?: string;
+}
+/** Modèle d'une infobulle : niveau 1 (titre, valeur), niveau 2 (sections), niveau 3 (lignes de facteurs). */
+export interface WhyModel {
+  title: string;
+  value?: string;
+  sections: WhySection[];
+  key?: string;
+  keyLabel?: string;
+}
 
 const nf = (digits: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
 
@@ -37,18 +70,61 @@ export function displayedFactors(x: Explained): Factor[] {
   return x.factors.filter((f) => !(f.op === "base" && f.value === 0 && x.factors.length > 1));
 }
 
+/** Ligne d'un facteur : libellé, valeur (base, ajout signé ou coefficient) et sens (bonus ou malus). */
+export function factorLine(f: Factor, cost = false): WhyRow {
+  const value = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : f.op === "base" ? formatNumber(f.value) : formatSigned(f.value);
+  // Bonus et malus colorés (U4) : un ajout positif ou un multiplicateur > 1 est un bonus ; la base reste neutre ;
+  // pour une dépense (consommation, pertes), le sens est inversé.
+  const sign = f.op === "base" ? 0 : f.op === "mul" ? Math.sign(f.value - 1) : Math.sign(f.value);
+  const row: WhyRow = { label: t(f.key, resolveParams(f.params)), value };
+  if (sign !== 0) row.sign = sign > 0 !== cost ? "plus" : "moins";
+  return row;
+}
+
+/** Modèle à trois niveaux d'une infobulle (U4), indépendant du DOM. */
+export function whyModel(c: WhyContent): WhyModel {
+  const sections = c.sections.map((s): WhySection => {
+    const out: WhySection = { rows: s.explained ? displayedFactors(s.explained).map((f) => factorLine(f, s.cost)) : [] };
+    if (s.label) out.label = s.label;
+    if (s.explained) out.subtotal = `${s.signed ? formatSigned(s.explained.value) : formatNumber(s.explained.value)}${s.unit ?? ""}`;
+    if (s.text) out.text = s.text;
+    return out;
+  });
+  const m: WhyModel = { title: c.title, sections };
+  if (c.value) m.value = c.value;
+  if (c.key) m.key = c.key;
+  if (c.keyLabel) m.keyLabel = c.keyLabel;
+  return m;
+}
+
 function factorRow(f: Factor, cost = false): HTMLTableRowElement {
+  return rowEl(factorLine(f, cost));
+}
+
+function rowEl(r: WhyRow): HTMLTableRowElement {
   const tr = document.createElement("tr");
   const label = document.createElement("td");
-  label.textContent = t(f.key, resolveParams(f.params));
+  label.textContent = r.label;
   const val = document.createElement("td");
   val.className = "pourquoi__valeur";
-  val.textContent = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : f.op === "base" ? formatNumber(f.value) : formatSigned(f.value);
-  // Bonus et malus colorés (U4) : un ajout positif ou un multiplicateur > 1 est un bonus ; la base reste neutre.
-  const sign = f.op === "base" ? 0 : f.op === "mul" ? Math.sign(f.value - 1) : Math.sign(f.value);
-  if (sign !== 0) val.dataset["sign"] = sign > 0 !== cost ? "plus" : "moins";
+  val.textContent = r.value;
+  if (r.sign) val.dataset["sign"] = r.sign;
   tr.append(label, val);
   return tr;
+}
+
+/**
+ * Infobulle simple d'une commande (bouton, onglet) : nom, et touche du raccourci s'il y en a un (U10). Remplace l'attribut
+ * `title` natif par la même infobulle que les valeurs ; `note` ajoute une ligne (ex. « clic : aller sur le lieu »).
+ */
+export function hint(el: HTMLElement, text: string, key = "", note = ""): void {
+  el.dataset["why"] = text;
+  if (key) el.dataset["touche"] = key;
+  else delete el.dataset["touche"];
+  if (note) el.dataset["whyNote"] = note;
+  else delete el.dataset["whyNote"];
+  el.removeAttribute("title");
+  if (el instanceof HTMLButtonElement && !el.hasAttribute("aria-label")) el.setAttribute("aria-label", text);
 }
 
 /** Tableau des facteurs d'une valeur expliquée, avec sa ligne de total (écrans « maître-détail », U4). */
@@ -103,19 +179,10 @@ export class WhyTooltip {
 
   private show(target: Element): void {
     const provider = this.providers.get(target);
-    this.el.replaceChildren();
-    const title = document.createElement("strong");
-    title.className = "pourquoi__titre";
-    if (provider) {
-      const content = provider();
-      title.textContent = content.title;
-      this.el.append(title);
-      for (const s of content.sections) this.el.append(this.section(s));
-    } else {
-      // Explication textuelle simple (ex. registre non encore ouvert).
-      title.textContent = (target as HTMLElement).dataset["why"] ?? "";
-      this.el.append(title);
-    }
+    const data = (target as HTMLElement).dataset;
+    const model: WhyModel = provider ? whyModel(provider()) : { title: data["why"] ?? "", sections: data["whyNote"] ? [{ rows: [], text: data["whyNote"] }] : [] };
+    if (!model.key && data["touche"]) model.key = data["touche"];
+    this.render(model);
     this.el.hidden = false;
     const r = target.getBoundingClientRect();
     const w = this.el.offsetWidth;
@@ -124,18 +191,54 @@ export class WhyTooltip {
     this.el.style.top = `${r.bottom + h + 8 < window.innerHeight ? r.bottom + 6 : Math.max(6, r.top - h - 6)}px`;
   }
 
-  private section(s: WhyContent["sections"][number]): HTMLElement {
+  /** Niveau 1 : titre et valeur ; niveau 2 : sections et sous-totaux ; niveau 3 : facteurs ; pied : raccourci. */
+  private render(m: WhyModel): void {
+    this.el.replaceChildren();
+    const head = document.createElement("div");
+    head.className = "pourquoi__tete";
+    const title = document.createElement("strong");
+    title.className = "pourquoi__titre";
+    title.textContent = m.title;
+    head.append(title);
+    if (m.value) {
+      const v = document.createElement("span");
+      v.className = "pourquoi__chiffre";
+      v.textContent = m.value;
+      head.append(v);
+    }
+    this.el.append(head);
+    for (const s of m.sections) this.el.append(this.section(s));
+    if (m.key) {
+      const foot = document.createElement("p");
+      foot.className = "pourquoi__touche";
+      const k = document.createElement("kbd");
+      k.className = "touche";
+      k.textContent = m.key;
+      foot.append(`${m.keyLabel ?? t("why.shortcut")} `, k);
+      this.el.append(foot);
+    }
+  }
+
+  private section(s: WhySection): HTMLElement {
     const box = document.createElement("div");
     box.className = "pourquoi__section";
     if (s.label) {
-      const h = document.createElement("span");
+      const h = document.createElement("div");
       h.className = "pourquoi__libelle";
-      h.textContent = s.explained ? `${s.label} : ${s.signed ? formatSigned(s.explained.value) : formatNumber(s.explained.value)}${s.unit ?? ""}` : s.label;
+      const name = document.createElement("span");
+      name.textContent = s.label;
+      h.append(name);
+      if (s.subtotal) {
+        const v = document.createElement("span");
+        v.className = "pourquoi__sous-total";
+        v.textContent = s.subtotal;
+        h.append(v);
+      }
       box.append(h);
     }
-    if (s.explained) {
+    if (s.rows.length) {
       const table = document.createElement("table");
-      for (const f of displayedFactors(s.explained)) table.append(factorRow(f, s.cost));
+      for (const r of s.rows) table.append(rowEl(r));
       box.append(table);
     }
     if (s.text) {

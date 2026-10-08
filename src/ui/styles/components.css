@@ -119,7 +119,11 @@
 .pourquoi[hidden], .bulle[hidden] { display: none; }
 .pourquoi__titre, .bulle__nom { display: block; margin-bottom: 0.2rem; font-family: var(--f-titre); font-size: var(--t-m); font-weight: 600; color: var(--texte-fort); }
 .pourquoi__section + .pourquoi__section { margin-top: 0.35rem; padding-top: 0.3rem; border-top: var(--filet-l) solid var(--filet-doux); }
-.pourquoi__libelle { display: block; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-clair); }
+.pourquoi__tete { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.2rem; }
+.pourquoi__tete .pourquoi__titre { margin-bottom: 0; }
+.pourquoi__chiffre { font-family: var(--f-titre); font-size: var(--t-m); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; color: var(--accent-clair); }
+.pourquoi__libelle { display: flex; justify-content: space-between; gap: 1rem; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-clair); }
+.pourquoi__sous-total { letter-spacing: 0; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; color: var(--texte-fort); }
 .pourquoi table { width: 100%; border-collapse: collapse; margin-top: 0.1rem; }
 .pourquoi td { padding: 0.05rem 0.2rem 0.05rem 0; vertical-align: baseline; color: var(--texte-second); }
 .pourquoi__valeur { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; color: var(--texte-fort); }
@@ -127,7 +131,7 @@
 .pourquoi__valeur[data-sign="moins"] { color: var(--danger-clair); }
 .pourquoi__total td { border-top: var(--filet-l) solid var(--filet); color: var(--texte-fort); font-weight: 600; }
 .pourquoi p { margin: 0.15rem 0 0; color: var(--texte-second); }
-.pourquoi__touche { margin-top: 0.35rem; font-size: var(--t-xs); color: var(--texte-discret); }
+.pourquoi__touche { margin-top: 0.4rem; padding-top: 0.3rem; border-top: var(--filet-l) solid var(--filet-doux); font-size: var(--t-xs); color: var(--texte-second); }
 .bulle__meta { font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-clair); }
 .bulle__faits { display: flex; flex-direction: column; margin-top: 0.2rem; color: var(--texte); }
 .bulle__aide { margin-top: 0.25rem; font-size: var(--t-xs); color: var(--texte-discret); }

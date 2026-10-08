@@ -18,7 +18,7 @@ import type { ConsoleHost } from "./debugConsole";
 import { mountDebugOverlay } from "./debugOverlay";
 import { Dossier } from "./dossier";
 import { Hud } from "./hud";
-import { KeyMap, keyLabel, PANEL_ACTION } from "./keymap";
+import { ACTIONS, KeyMap, keyLabel, PANEL_ACTION } from "./keymap";
 import { NotificationFeed } from "./notifications";
 import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
@@ -122,8 +122,9 @@ export async function bootGame(): Promise<void> {
   };
   let registers: Registers | null = null;
   const keymap = new KeyMap(safeStorage());
+  // Touche d'un registre (`personnages`) ou d'une action (`pause`, `speed_2`), pour les infobulles (U10).
   const keyOf = (id: string): string => {
-    const a = PANEL_ACTION[id];
+    const a = PANEL_ACTION[id] ?? ACTIONS.find((x) => x === id);
     return a ? keyLabel(keymap.codeOf(a)) : "";
   };
   const hud = new Hud(world, state, why, {
@@ -233,6 +234,7 @@ export async function bootGame(): Promise<void> {
       dossier.open(province, state);
     },
     () => registers?.open("journal"),
+    keyOf("journal"),
   );
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;

@@ -4,6 +4,7 @@ import { fromAbsoluteDay, toAbsoluteDay } from "../sim/core/time";
 import type { World } from "../sim/strategic/world";
 import { alertText } from "./hud";
 import { alertIcon, icon } from "./icons";
+import { hint } from "./why";
 
 /** Une entrée du fil, quelle que soit sa source (journal de Paradis ou journal du monde). */
 export interface FeedEntry {
@@ -83,6 +84,7 @@ export class NotificationFeed {
     private readonly world: World,
     private readonly go: (province: string) => void,
     openHistory: () => void,
+    historyKey = "",
   ) {
     this.el.className = "notifications";
     this.el.setAttribute("aria-label", t("notif.title"));
@@ -96,15 +98,13 @@ export class NotificationFeed {
     history.type = "button";
     history.className = "notifications__bouton";
     history.innerHTML = icon("historique");
-    history.title = t("notif.history");
-    history.setAttribute("aria-label", t("notif.history"));
+    hint(history, t("notif.history"), historyKey);
     history.addEventListener("click", openHistory);
     const fold = document.createElement("button");
     fold.type = "button";
     fold.className = "notifications__bouton";
     fold.innerHTML = icon("moins");
-    fold.title = t("notif.fold");
-    fold.setAttribute("aria-label", t("notif.fold"));
+    hint(fold, t("notif.fold"));
     fold.setAttribute("aria-expanded", "true");
     fold.addEventListener("click", () => {
       const folded = this.el.dataset["replie"] !== "true";
@@ -145,11 +145,13 @@ export class NotificationFeed {
     if (b instanceof HTMLButtonElement) b.type = "button";
     b.className = "notification";
     b.dataset["gravite"] = it.grave ? "grave" : "courante";
-    b.innerHTML = icon(alertIcon(it.key));
+    // Icône et catégorie (U9), puis le texte (titre de l'entrée, deux lignes au plus ; texte complet dans l'infobulle).
+    const kind = alertIcon(it.key);
+    b.innerHTML = icon(kind);
+    b.dataset["categorie"] = kind;
     const text = document.createElement("span");
     text.className = "notification__texte";
     text.textContent = it.text;
-    text.title = it.text;
     b.append(text);
     if (it.count > 1) {
       const n = document.createElement("span");
@@ -157,15 +159,19 @@ export class NotificationFeed {
       n.textContent = `×${it.count}`;
       b.append(n);
     }
+    const meta = document.createElement("span");
+    meta.className = "notification__meta";
+    meta.append(t(`notif.cat.${kind}`));
     if (it.place) {
       const place = it.place;
       const p = document.createElement("span");
       p.className = "notification__lieu";
       p.textContent = t(this.world.provinceById.get(place)?.name_key ?? "notif.place");
-      b.append(p);
-      b.title = t("notif.go");
+      meta.append(" · ", p);
       b.addEventListener("click", () => this.go(place));
     }
+    b.append(meta);
+    hint(b, it.text, "", it.place ? t("notif.go") : "");
     li.append(b);
     return li;
   }

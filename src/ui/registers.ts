@@ -21,6 +21,7 @@ import { DiplomacyPanel } from "./panels/diplomacyPanel";
 import { EconomyPanel } from "./panels/economyPanel";
 import { registerIcon } from "./icons";
 import { ArchivesPanel, EpiloguePanel, GazettePanel } from "./panels/storyPanels";
+import { hint } from "./why";
 import type { WhyTooltip } from "./why";
 
 export const PANEL_IDS: readonly PanelId[] = ["personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue", "economie"];
@@ -34,8 +35,9 @@ export class Registers {
   private readonly title = el("h2", "registre-titre");
   private readonly headIcon = el("span", "registre-icone");
   private readonly shortcut = el("span", "registre-touche");
+  private closeButton: HTMLButtonElement | null = null;
   /** Libellé de la touche d'un registre (U10), fourni par l'écran de jeu. */
-  keyOf: ((id: PanelId) => string) | null = null;
+  keyOf: ((id: string) => string) | null = null;
   /** Appelé à l'ouverture et à la fermeture (bouton enfoncé du menu de gestion, dossier de province refermé). */
   onChange: ((id: PanelId | null) => void) | null = null;
   private readonly body = el("div", "registre-corps");
@@ -53,6 +55,7 @@ export class Registers {
     this.frame.setAttribute("role", "dialog");
     const close = button("×", () => this.close(), "dossier__fermer");
     close.setAttribute("aria-label", t("dossier.close"));
+    this.closeButton = close;
     const head = el("header", "registre-tete");
     this.headIcon.setAttribute("aria-hidden", "true");
     head.append(this.headIcon, this.title, this.shortcut, close);
@@ -90,8 +93,13 @@ export class Registers {
     this.title.textContent = t(`panel.${id}`);
     this.headIcon.innerHTML = registerIcon(id);
     const key = this.keyOf?.(id) ?? "";
-    this.shortcut.textContent = key ? `[${key}]` : "";
-    this.shortcut.title = key ? t("register.key", { key }) : "";
+    // Touche du registre en tête (U10), dessinée comme une touche de clavier ; son rôle dans l'infobulle.
+    this.shortcut.replaceChildren();
+    if (key) {
+      this.shortcut.append(el("kbd", "touche", key));
+      hint(this.shortcut, t("register.key", { key }));
+    }
+    if (this.closeButton) hint(this.closeButton, t("dossier.close"), this.keyOf?.("close") ?? "");
     this.draw(sameView);
     this.onDraft?.();
     this.onChange?.(id);

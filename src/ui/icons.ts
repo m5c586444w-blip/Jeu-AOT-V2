@@ -141,6 +141,7 @@ export function alertIcon(key: string): string {
   if (/research|tech/.test(key)) return "recherche";
   if (/riot|unrest|revolt|strata|org/.test(key)) return "rumeur";
   if (/winter|season|harvest/.test(key)) return "hiver";
+  if (/event/.test(key)) return "journal";
   return "alerte";
 }
 

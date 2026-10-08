@@ -278,6 +278,48 @@ try {
     await review(page, pass, "menu de gestion", ".gestion");
     await shot(page, pass, "hud");
 
+    // Phase UI (U4) : infobulle de calcul à trois niveaux au plus — titre et valeur, sections et sous-totaux, facteurs colorés.
+    await page.hover(".bandeau__ressource[data-resource='food'] .bandeau__delta");
+    await page.waitForSelector(".pourquoi:not([hidden])", { timeout: 5000 });
+    const tip = await page.$eval(".pourquoi", (p) => ({
+      value: p.querySelector(".pourquoi__tete .pourquoi__chiffre")?.textContent ?? "",
+      subs: p.querySelectorAll(".pourquoi__section > .pourquoi__libelle .pourquoi__sous-total").length,
+      rows: p.querySelectorAll(".pourquoi__section table tr").length,
+      signs: p.querySelectorAll(".pourquoi__valeur[data-sign]").length,
+      nested: p.querySelectorAll(".pourquoi__section .pourquoi__section, .pourquoi table table").length,
+    }));
+    expect(tip.value.length > 0 && tip.subs >= 2 && tip.rows >= 3 && tip.signs >= 1 && tip.nested === 0, `infobulle de la nourriture : valeur « ${tip.value} », ${tip.subs} sous-totaux, ${tip.rows} facteurs dont ${tip.signs} colorés, ${tip.nested} niveau au-delà du troisième`);
+    // U10 : le nom et la touche d'un registre dans l'infobulle de son bouton.
+    await page.hover(".bandeau__registre-bouton[data-panel='personnages']");
+    await page.waitForTimeout(150);
+    const keyTip = await page.$eval(".pourquoi", (p) => ({ title: p.querySelector(".pourquoi__titre")?.textContent ?? "", key: p.querySelector(".pourquoi__touche .touche")?.textContent ?? "" }));
+    expect(keyTip.title === fr["panel.personnages"] && keyTip.key === "C", `infobulle d'un registre : « ${keyTip.title} », touche ${keyTip.key || "absente"}`);
+    await page.mouse.move(Math.round(pass.w / 2), Math.round(pass.h / 2));
+
+    // Phase UI (U9) : fil de notifications regroupé par jour, icône et catégorie, clic = aller sur le lieu ; historique.
+    await page.keyboard.press("Digit5");
+    await page.waitForSelector(".notifications:not([hidden]) .notification", { timeout: 60000 }).catch(() => undefined);
+    await page.keyboard.press("Space");
+    const feed = await page.evaluate(() => ({
+      groups: document.querySelectorAll(".notifications__groupe").length,
+      items: document.querySelectorAll(".notification").length,
+      icons: document.querySelectorAll(".notification > svg.ico").length,
+      cats: document.querySelectorAll(".notification__meta").length,
+      places: document.querySelectorAll("button.notification").length,
+    }));
+    let opened = "";
+    if (feed.places > 0) {
+      await page.locator("button.notification").first().click();
+      await page.waitForSelector(".dossier:visible", { timeout: 10000 }).catch(() => undefined);
+      opened = (await page.locator(".dossier__titre").first().innerText().catch(() => "")).trim();
+      await page.keyboard.press("Escape");
+    }
+    // Le clic sur une entrée qui nomme un lieu est contrôlé par smoke:expedition (départ d'une expédition, lieu = sa cible).
+    expect(feed.groups >= 1 && feed.items >= 1 && feed.icons === feed.items && feed.cats === feed.items && (feed.places === 0 || opened.length > 0), `fil de notifications : ${feed.items} entrées en ${feed.groups} groupe(s), ${feed.icons} icônes, ${feed.cats} catégories ; ${feed.places} avec lieu${opened ? ` (clic → dossier « ${opened} »)` : ""}`);
+    await page.locator(".notifications__bouton").first().click();
+    expect((await page.locator(".registre-panneau:not([hidden])").getAttribute("data-panel")) === "journal", "historique du fil : le journal s'ouvre");
+    await page.keyboard.press("Escape");
+
     // Dossier de province (clic sur Trost, comme smoke:map).
     const box = await page.locator(".carte canvas").first().boundingBox();
     if (box) await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2 + box.height * 0.235);
