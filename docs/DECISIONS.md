@@ -827,3 +827,36 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 | Phase | Modèle | Effort | Tours (estimés) | Note |
 |---|---|---|---|---|
 | Reprise MAP (direction) | Opus 5.5 | défaut | ≈ 35 | verify ×2, 2 revues de captures, 1 correctif |
+
+## 2026-10-08 — D-108 Part de la carte mesurée entre la barre supérieure et le menu de gestion (phase UI)
+- **Contexte** : U2 place le menu de gestion en bas de l'écran ; `smoke:r0` mesurait la part de carte visible sous le seul
+  bandeau, sur toute la hauteur restante ; la nouvelle barre du bas comptait comme « carte cachée ».
+- **Options** : (a) garder la mesure (≈ 80 % à 1366 × 768 : critère R0 perdu) ; (b) mesurer la zone de jeu entre les deux
+  barres, cadre fixe de l'écran au même titre que le bandeau ; (c) rendre le menu de gestion flottant sur la carte.
+- **Choix** : (b). Le fil de notifications et le panneau « Calques » restent dans la zone mesurée et sont compactés.
+  Mesure : 87,7 % à 1366 × 768, 95,7 % à 3840 × 2160 (seuil 85 %).
+- **Réversible** : oui (une ligne de `smoke-r0.ts`).
+
+## 2026-10-08 — D-109 Menu de gestion en bas, regroupé, mode compact (phase UI)
+- **Contexte** : U2 demande un menu « en bas ou à gauche », six groupes, icône + étiquette ; 17 registres pour Paradis.
+- **Options** : (a) colonne à gauche (masque le dossier de province, déjà à gauche) ; (b) barre en bas, groupes titrés.
+- **Choix** : (b) ; quand la largeur ne suffit pas (1366 px à 125 %), les étiquettes sont masquées (icônes seules, nom et
+  touche dans l'infobulle), avec hystérésis pour éviter le battement ; mesures dans `requestAnimationFrame` (aucune boucle
+  de `ResizeObserver`). Nouvel écran « Économie » (touche V) pour les ressources hors de la barre (U2).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-110 Fond du menu principal : rendu de la scène 3D du projet (phase UI)
+- **Contexte** : U8 veut les murs au crépuscule en arrière-plan ; aucun asset externe nouveau n'est permis.
+- **Options** : (a) scène 3D en direct derrière le menu (three.js dans le bundle principal, chargement > 8 s en rendu
+  logiciel) ; (b) image tirée une fois de la scène existante (`?proto3d&lieu=shiganshina&lumiere=crepuscule&vue=rempart`).
+- **Choix** : (b), `public/menu/murs-crepuscule.jpg` (1920 × 1080), aussi utilisée en vignette des scénarios ; attribution
+  dans `docs/ASSETS_LICENSES.md` (rendu du projet ; textures CC0 de Poly Haven visibles).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-111 Infobulles à trois niveaux et raccourcis (phase UI)
+- **Contexte** : U4 (détail de calcul sur trois niveaux au plus) et U10 (raccourcis dans les infobulles).
+- **Choix** : modèle pur `whyModel` (`src/ui/why.ts`) : niveau 1 titre et valeur, niveau 2 sections et sous-totaux, niveau 3
+  facteurs colorés (sens inversé pour une dépense) ; les attributs `title` natifs des commandes sont remplacés par la même
+  infobulle (`hint`), avec la touche en pied (« Raccourci C »). Les touches sont écrites sans crochets : « [A] », « [C] »
+  sont des marques de statut canon pour le détecteur de fuites (UX0).
+- **Réversible** : oui.

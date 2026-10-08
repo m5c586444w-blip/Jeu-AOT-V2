@@ -1,0 +1,21 @@
+
+> murs-et-sang@0.0.1 smoke:p7
+> tsx src/tools/smoke-p7.ts
+
+[scénario 854] 1366×768
+  OK  dossier de choix de la nation : 2 nations jouables (Paradis, Marley)
+  OK  Marley : table de guerre ouverte, atlas de 61 provinces ; registres de Paradis masqués (Porteurs, Chancellerie, Monde, Chronique, Journal, Gazette, Archives, Épilogue)
+  OK  comptes de la nation jouée : « Marley · industrie 400 · hommes 300 · soutien à la guerre 65 · stabilité 60 · en guerre co… »
+  OK  atlas : Fort Slava choisie au clic
+  OK  levée ordonnée à Fort Slava (date de fin affichée)
+  OK  infanterie de Marley entrée dans la Forteresse du Passage (Alliés)
+  OK  Bestial projeté sur la Forteresse (bordereau signé), rappel possible
+  OK  une semaine de front : 1 rapport(s) ; puissance d'attaque expliquée, Titan compris
+  OK  table de guerre (Marley) : 9 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  chancellerie : 3 nations ; garantie à Hizuru (penchant 15 → 0)
+  OK  réponse prévue d'Hizuru expliquée (confiance, intérêt…)
+  OK  chancellerie (Marley) : 6 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  Paradis en 854 : 17 registres (dont Monde et Chancellerie), comptes de Paradis au monde
+  OK  table de guerre (Paradis) : 4 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  0 erreur console
+smoke:p7 : tout est conforme.

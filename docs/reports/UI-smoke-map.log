@@ -1,0 +1,33 @@
+
+> murs-et-sang@0.0.1 smoke:map
+> tsx src/tools/smoke-map.ts
+
+[100 %] 1366×768
+  OK  carte rendue dans un canvas (AC1-10)
+  OK  capture de la carte non vide (> 150 Ko)
+  OK  survol → bulle « Trost » (AC1-10)
+  OK  clic → dossier de Trost (AC1-10)
+  OK  onglet Renseignement « non encore ouvert » (diégétique)
+  OK  Échap ferme le dossier
+  OK  double-clic → centrage et rapprochement (monde → region) (AC1-10)
+  OK  molette → niveau « province » (F-STR-01)
+  OK  touche F → retour à la vue d'ensemble
+  OK  28 valeurs affichées, toutes avec « pourquoi ? » (AC1-11)
+  OK  fiche « pourquoi ? » de la nourriture : 10 facteurs (AC1-11)
+  OK  aucune clé de traduction brute visible (AC1-11)
+  OK  vitesse 5 : la date avance (an 850, jour 1 → an 850, jour 2) (AC1-12)
+  OK  Espace : pause, la date ne bouge plus (AC1-12)
+  OK  10 calques déclarés, 10 ouverts, 0 non ouverts (AC1-13)
+  OK  calque Nourriture : légende à 5 échelons (AC1-13)
+  OK  filtres (pions, toponymes, murs, brouillard) (F-STR-16)
+  OK  F9 ouvre les options (AC1-14)
+  OK  échelle d'interface 125 % appliquée (AC1-14)
+  OK  raccourci « pause » réassigné à B (AC1-14)
+  OK  F2 ouvre la console de service
+  OK  console : « canon » répond
+  OK  aucune erreur console (AC1-10)
+[125 %] 1093×614 (×1,25)
+  OK  pas de défilement horizontal à 125 %
+  OK  aucune erreur console à 125 %
+  KO  langue EN : titre traduit (F-UIX-18)
+smoke:map : 1 échec(s).

@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **MAP terminée et fusionnée (PR n° 2, D-106).** Prochaine phase : UI (fichier 22 §5). Direction autonome depuis le 2026-10-08 (D-107). |
-| Tâche | Reprise de MAP : fusion de la branche principale, revue des captures par sous-agent, correctif du panneau en 4K |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 510/510 (81 fichiers, `docs/reports/MAP-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/UI.md` puis exécuter UI sur `claude/v2-ui` (critères CUI-01 à 09) ; compte rendu dans `docs/MORNING.md` |
+| Phase | **UI en revue** (branche `claude/v2-ui`, rapport `docs/reports/UI.md`) : UI.1 à UI.6 faites ; UI.7 incomplet (4 smoke OK, 6 KO, causes mesurées). |
+| Tâche | UI.7 : passage des `smoke:*`, captures, rapport (arrêté sur demande de la direction, 2026-10-08 10 h 30 UTC) |
+| Dernier `npm run verify` | 2026-10-08 (après UI.6, commit 5713f29) : code 0 ; tests 530/530 (86 fichiers, `docs/reports/UI-verify.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : sur `claude/v2-ui`, trouver l'élément qui recouvre le canevas de bataille (`elementFromPoint` au centre de `.bataille-scene`, dette n° 16), puis les correctifs d'une ligne du rapport UI § « Ce qui reste » (titre en petites capitales, `.touche { font-family: inherit }`, contrôle du fil de smoke:p8 après l'audio), sélecteur de smoke:p5 ; verify ; relancer seulement map, tactique, p5, p6, p8, r0 ; compléter les captures (CUI-08) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

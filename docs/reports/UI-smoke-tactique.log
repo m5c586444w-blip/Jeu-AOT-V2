@@ -1,0 +1,111 @@
+
+> murs-et-sang@0.0.1 smoke:tactique
+> tsx src/tools/smoke-tactique.ts
+
+[scénario 850] 1366×768
+  OK  planche : 10 silhouettes de Titans, 8 types de soldats, 7 états et signaux (25 légendes)
+7:42:57 AM [vite] (client) [Unhandled error] TypeError: Cannot read properties of null (reading 'geometry')
+ > _BatcherPipe.execute node_modules/pixi.js/lib/rendering/batcher/shared/BatcherPipe.mjs:72:31
+ > executeInstructions node_modules/pixi.js/lib/scene/container/utils/executeInstructions.mjs:7:39
+ > RenderGroupSystem.render node_modules/pixi.js/lib/scene/container/RenderGroupSystem.mjs:34:4
+ > SystemRunner.emit node_modules/pixi.js/lib/rendering/renderers/shared/system/SystemRunner.mjs:19:21
+ > WebGLRenderer.render node_modules/pixi.js/lib/rendering/renderers/shared/system/AbstractRenderer.mjs:106:24
+ > _Application.render node_modules/pixi.js/lib/app/Application.mjs:84:18
+ > TickerListener.emit node_modules/pixi.js/lib/ticker/TickerListener.mjs:40:17
+ > _Ticker.update node_modules/pixi.js/lib/ticker/Ticker.mjs:441:28
+ > _tick node_modules/pixi.js/lib/ticker/Ticker.mjs:126:13
+
+  OK  carte Bataille d'essai — Ville des Murs : 4 cartes d'escouade, carnet tenu (165 pas)
+  OK  revue P4 : 4 cartes d'escouade entières dans la largeur (0 coupée(s))
+  OK  revue P4 : « ms/image · unités » masqué hors debug ; F2 l'affiche puis le masque (sans ouvrir la console de la carte)
+7:43:07 AM [vite] (client) [Unhandled error] TypeError: Cannot read properties of null (reading 'clear')
+ > _DefaultBatcher.break node_modules/pixi.js/lib/rendering/batcher/shared/Batcher.mjs:135:17
+ > _BatcherPipe.buildEnd node_modules/pixi.js/lib/rendering/batcher/shared/BatcherPipe.mjs:49:28
+ > RenderGroupSystem._buildInstructions node_modules/pixi.js/lib/scene/container/RenderGroupSystem.mjs:137:22
+ > RenderGroupSystem._updateRenderGroups node_modules/pixi.js/lib/scene/container/RenderGroupSystem.mjs:103:11
+ > RenderGroupSystem.render node_modules/pixi.js/lib/scene/container/RenderGroupSystem.mjs:29:9
+ > SystemRunner.emit node_modules/pixi.js/lib/rendering/renderers/shared/system/SystemRunner.mjs:19:21
+ > WebGLRenderer.render node_modules/pixi.js/lib/rendering/renderers/shared/system/AbstractRenderer.mjs:106:24
+ > _Application.render node_modules/pixi.js/lib/app/Application.mjs:84:18
+ > TickerListener.emit node_modules/pixi.js/lib/ticker/TickerListener.mjs:40:17
+ > _Ticker.update node_modules/pixi.js/lib/ticker/Ticker.mjs:441:28
+
+  OK  carte Bataille d'essai — Forêt des Arbres Géants : 4 cartes d'escouade, carnet tenu (163 pas)
+  OK  carte Bataille d'essai — Plaine hors-murs : 4 cartes d'escouade, carnet tenu (147 pas)
+  OK  carte Bataille d'essai — Mur (sommet et face) : 4 cartes d'escouade, carnet tenu (144 pas)
+  OK  écran de bataille : 12 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  pause active à l'ouverture : la bataille ne progresse pas (pas 0)
+  OK  ordre « tenir » donné en pause (affiché sur la carte d'escouade, bataille toujours arrêtée)
+  OK  l'ordre est consigné au carnet de combat
+  OK  vitesses : 5.0 pas/s à ×0,25, 40.5 pas/s à ×2
+  OK  Espace : pause ; les raccourcis de la carte sont neutralisés pendant la bataille
+  OK  touche J sans effet pendant la bataille
+  KO  sélection d'un soldat au clic (aucune) ; la caméra le suit (—)
+  OK  caméra : suivi de l'escouade 02
+  KO  caméra : zoom à la molette (3.07 puis 3.07 px/m)
+  OK  fiche « pourquoi ? » sur le gaz d'une escouade
+  OK  écran de bataille en cours : 12 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  bilan : 8 lignes chiffrées, 4 morts, 4 dossiers de morts (victoire)
+  OK  bilan : 16 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.bilan [data-action="valider"]')[22m
+[2m    - locator resolved to <button type="button" data-action="valider" class="registre-bouton principal">Fermer</button>[22m
+[2m  - attempting click action[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible, enabled and stable[22m
+[2m      - element is visible, enabled and stable[22m
+[2m      - scrolling into view if needed[22m
+[2m      - done scrolling[22m
+[2m      - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    28 × waiting for element to be visible, enabled and stable[22m
+[2m       - element is visible, enabled and stable[22m
+[2m       - scrolling into view if needed[22m
+[2m       - done scrolling[22m
+[2m       - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events[22m
+[2m     - retrying click action[22m
+[2m       - waiting 500ms[22m
+
+    at <anonymous> (/home/claude/Jeu-AOT-V2/src/tools/smoke-tactique.ts:216:56) {
+  log: [
+    `  - waiting for locator('.bilan [data-action="valider"]')`,
+    '    - locator resolved to <button type="button" data-action="valider" class="registre-bouton principal">Fermer</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    28 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <div class="registre-corps">…</div> from <section role="dialog" data-bloc="paradis" class="registre-panneau" data-panel="expeditions">…</section> subtree intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.22.0
