@@ -1,11 +1,11 @@
 import type { Gabarit, Place } from "../../../data/placeSchema";
 import { pt } from "./kit";
-import { BASE_GABARITS, LIBELLE, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
+import { BASE_GABARITS, NOMS, SOURCES_MARIA, baseViews, mariaStates, pts } from "./maria";
 import { authored, buildSaillie, building, cellKey, claimRect, quarter } from "./saillie";
 import type { Claim } from "./saillie";
 
 /**
- * District 2 du mur Maria (nom non établi, Q1) — identité d'auteur [A] : district agricole et des greniers. Damier large
+ * District ouest du mur Maria (nom et position [?], Q1) — identité d'auteur [A] : district agricole et des greniers. Damier large
  * (îlots de 120 m sur 95 m) à grands jardins, quartier des greniers et foirail au pied de la porte extérieure (le grain et le
  * bétail entrent par là), halle aux grains sur la place du Grenier, quartier des bouviers à l'ouest (fermes urbaines,
  * granges), quartier des meuniers à l'est, faubourg de fermes et de vergers derrière la porte intérieure.
@@ -42,8 +42,8 @@ claims[cellKey(S, T, 120, 320)] = { kind: "ilot", fonction: "culte", densite: 0.
 export function mariaDistrict2(): Place {
   return buildSaillie({
     id: "maria-district-2",
-    nom: "maria-district-2",
-    libelle: LIBELLE,
+    nom: NOMS.ouest,
+    libelle: NOMS.ouest,
     canon: "?",
     sources: SOURCES_MARIA,
     province: null,
@@ -132,8 +132,8 @@ export function mariaDistrict2(): Place {
     eau: () => ({ voies: [], ponts: [], puits: pts([[-830, 470], [400, 760], [-500, 1150], [700, 980], [-250, 300]]), fontaines: pts([[-117.5, 590], [120, 1100]]) }),
     points_de_vue(ctx) {
       return baseViews(ctx, [
-        { id: "place-du-grenier", nom: "Place du Grenier et halle aux grains", oeil: [-200, 640, 9], cible: [-110, 560, 6], fov: 60 },
-        { id: "foirail", nom: "Foirail et greniers", oeil: [260, 1215, 12], cible: [100, 960, 8], fov: 60 },
+        { id: "place-du-grenier", nom: "Place du Grenier et halle aux grains", oeil: [-222, 598, 5], cible: [-110, 560, 6], fov: 60 },
+        { id: "foirail", nom: "Foirail et greniers", oeil: [228, 1182, 6], cible: [60, 960, 8], fov: 60 },
         { id: "eglise", nom: "Parvis et église", oeil: [240, 230, 6], cible: [180, 360, 20], fov: 58 },
         { id: "quartier-des-bouviers", nom: "Rue du quartier des Bouviers", oeil: [-955, 700, 1.7], cible: [-955, 950, 6], fov: 62 },
       ]);

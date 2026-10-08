@@ -7,10 +7,14 @@ import { pt, r1 } from "./kit";
  * états (845 avant la chute ; 846 abandon du territoire de Maria, établi [C] ; ce qu'il advient de chaque district : [?]),
  * vues et gabarits de base (chaque district les reprend et les ajuste).
  */
-export const LIBELLE = "District du mur Maria (nom non établi)";
+/**
+ * Noms affichés (fichier 24 §3, réponse de l'utilisateur du 2026-10-07, source non précisée) : Quinta au nord, `[?]` paramétrable,
+ * affiché sans mention de statut ; les districts est et ouest sans nom connu. Aucun n'est retrouvé dans une source officielle (Q1).
+ */
+export const NOMS = { nord: "Quinta", est: "District est du mur Maria", ouest: "District ouest du mur Maria" } as const;
 
 export const SOURCES_MARIA: Place["sources"] = [
-  { ref: "docs/spec/01 et 11 : quatre districts par mur (affirmation de l'utilisateur, consigne R1e) ; nom, rang, orientation non établis (Q1)", canon: "?" },
+  { ref: "consigne R1e et fichier 24 §3 : quatre districts sur le mur Maria (affirmation de l'utilisateur) ; Quinta au nord (nom donné par l'utilisateur, non retrouvé dans une source officielle) ; rang et orientations non établis (Q1)", canon: "?" },
   { ref: "identité du district, plan, noms de rues, dimensions : adaptation (consigne R1e : « un district agricole et grenier, un district de garnison et d'artillerie, un district de marché et de rivière »)", canon: "A" },
 ];
 
@@ -46,7 +50,7 @@ export function baseViews(ctx: Ctx, own: Place["points_de_vue"]): Place["points_
     ...own,
     { id: "rempart", nom: "Chemin de ronde de la saillie", oeil: P(w[0] as number, w[1] as number, 52.5), cible: P(w2[0] as number, w2[1] as number, 50), fov: 60 },
     { id: "faubourg", nom: "Faubourg et porte intérieure", oeil: P(260, -620, 28), cible: P(0, -40, 18), fov: 55 },
-    { id: "porte-depuis-la-ville", nom: "Porte extérieure depuis la ville", oeil: P(14, R - 160, 2), cible: P(0, R, 22), fov: 58 },
+    { id: "porte-depuis-la-ville", nom: "Porte extérieure depuis la ville", oeil: P(3, R - 160, 1.8), cible: P(0, R, 22), fov: 58 },
   ];
 }
 

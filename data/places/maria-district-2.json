@@ -1,12 +1,12 @@
 {
  "id": "maria-district-2",
- "nom": "maria-district-2",
- "libelle": "District du mur Maria (nom non établi)",
+ "nom": "District ouest du mur Maria",
+ "libelle": "District ouest du mur Maria",
  "canon": "?",
  "niveau": "N1",
  "sources": [
   {
-   "ref": "docs/spec/01 et 11 : quatre districts par mur (affirmation de l'utilisateur, consigne R1e) ; nom, rang, orientation non établis (Q1)",
+   "ref": "consigne R1e et fichier 24 §3 : quatre districts sur le mur Maria (affirmation de l'utilisateur) ; Quinta au nord (nom donné par l'utilisateur, non retrouvé dans une source officielle) ; rang et orientations non établis (Q1)",
    "canon": "?"
   },
   {
@@ -9507,9 +9507,9 @@
    "id": "place-du-grenier",
    "nom": "Place du Grenier et halle aux grains",
    "oeil": [
-    -200,
-    640,
-    9
+    -222,
+    598,
+    5
    ],
    "cible": [
     -110,
@@ -9522,12 +9522,12 @@
    "id": "foirail",
    "nom": "Foirail et greniers",
    "oeil": [
-    260,
-    1215,
-    12
+    228,
+    1182,
+    6
    ],
    "cible": [
-    100,
+    60,
     960,
     8
    ],
@@ -9597,9 +9597,9 @@
    "id": "porte-depuis-la-ville",
    "nom": "Porte extérieure depuis la ville",
    "oeil": [
-    14,
+    3,
     1180,
-    2
+    1.8
    ],
    "cible": [
     0,

@@ -1,11 +1,11 @@
-# maria-district-4 — lore
+# Quinta (`maria-district-4`) — lore
 
-Libellé affiché : « District du mur Maria (nom non établi) ».
+Nom affiché : « Quinta » (fichier 24 §3, réponse de l'utilisateur ; statut `[?]`, jamais affiché en jeu).
 
 | Élément | Statut | Source / note |
 |---|---|---|
 | Existence de trois autres districts sur le mur Maria | [?] | affirmation de l'utilisateur (consigne R1e) ; aucune source officielle retrouvée (Q1) |
-| Nom, rang, orientation (nord) | [?] | Q1 — à renseigner dans `data/places/maria-district-4.json` |
+| Nom « Quinta », orientation nord | [?] | fichier 24 §3 (utilisateur, source non précisée) ; non retrouvé dans une source officielle (Q1) |
 | Forme en saillie à deux portes | [A] | forme établie pour Shiganshina et Trost, reprise ici |
 | Identité : district de marché et de rivière | [A] | consigne R1e (« par exemple ») |
 | Population : 50 000 (+ 5 000 au faubourg) habitants | [?] | aucune province dans les données de simulation (Q8) |

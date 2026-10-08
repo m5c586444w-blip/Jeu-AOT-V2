@@ -751,3 +751,48 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - Village de démonstration `village-des-saules` [A] (6 % de la province des hameaux de l'ouest de Maria : 522 habitants, 114 bâtiments).
 - Deltas : IndexedDB séparée (`murs-et-sang-lieux`), clé (lieu, version), modifications par bâtiment codées en entiers variables (rang en écart, `ruine << 2 | état`) : 100 lieux × 400 bâtiments = 104,6 Kio.
 - Cache LRU de 8 lieux (`PlaceCache`) ; budget visé 250 000 triangles et 400 appels par lieu (à confirmer sur le PC de l'utilisateur).
+
+## 2026-10-07 — D-103 Décisions de l'utilisateur après l'arrêt n° 1 (R1e)
+- **CR1e-05** (parement) : « Accepter 0,5 pour le moment ». Le test accepte un maximum < 0,51 (mesure : 0,501 à 19,9 m) ; le témoin de
+  R1d doit toujours dépasser 0,35 ; la cible 0,35 et le pic à 20 m restent en dette (n° 8).
+- **CR1e-10** (bundle principal) : « garder tout ». Le correctif 8 (cadrage des éclairs, rendu 2D) reste ; le bundle principal
+  passe de 902 588 à 902 798 octets, écart accepté ; les autres contrôles du bundle sont inchangés.
+
+
+## 2026-10-07 — D-104 Noms des districts de Maria, ouvrages du rempart, sol des lieux (R1e.4–R1e.5)
+- **Noms** (fichier 24 §3, réponse de l'utilisateur, source non précisée) : `maria-district-4` (nord) s'affiche « Quinta »,
+  `maria-district-3` « District est du mur Maria », `maria-district-2` « District ouest du mur Maria » ; tout reste `?`
+  (Q1) ; identifiants de fichier inchangés. Le plan V2 (fichiers 18 à 24) n'est pas encore installé : la session 0 est à
+  lancer par l'utilisateur ; seule cette donnée de lore est reprise ici.
+- **Rempart** (`rampart3d.ts`) : canons sur le chemin de ronde au pas des données (aucun à moins de 30 m d'une porte), sur
+  plate-forme ; escaliers contre la face côté ville, cinq volées en lacet de 10 m, marches de 25 cm, paliers, mur d'échiffre.
+- **Sol** : la prairie s'étend jusqu'à 9 km (horizon dans le brouillard) : plus de bord de « table » en vue d'ensemble.
+- **Place Centrale** : point de vue déplacé sur la place (l'œil tombait dans le cabinet du Dr Jaeger).
+
+## 2026-10-07 — D-105 Captures des lieux : sol, ciel des états, points de vue (R1e.7)
+- **Sol** : carré du lieu à y = 0 (percé par les canaux) et anneau jusqu'à l'horizon 25 cm plus bas. Un carré unique de 18 km
+  (deux triangles) passait devant les chaussées en qualité moyenne (précision de profondeur) : régression vue sur l'axe du
+  district est. Le carré du lieu, encore fait de deux triangles de 5 km dans les districts sans canal, cachait toujours
+  l'axe à certains points de vue : toutes les surfaces du sol (prairie, chaussées, places, parcs, champs, eau) sont
+  recoupées par une grille de 64 m (`clipToGrid`, Sutherland–Hodgman). Shiganshina, les trois districts et le village
+  recapturés après ce correctif.
+- **Ciel des états** (CR1e-07) : brouillard d'état × 1,2 (enfumé) et × 0,9 (brumeux) au lieu de × 2,6 et × 1,8 ; voile de fumée
+  brun pour 845 (comme la ville-usine). Après deux essais, 845-avant / 850-reprise reste à 3,4 : dette n° 9 (règle du
+  fichier 24 §4).
+- **Points de vue** : yeux replacés sur les places et dans les rues (place Centrale, porte depuis la ville, place du Grenier,
+  foirail, place d'Armes, Grand Marché, marché aux Draps) ; ils tombaient dans des maisons.
+- **Outil de captures** : un point de vue dont l'identifiant commence par « porte- » n'est plus pris pour une vue de porte
+  (nom de fichier et filtre `--sans-portes`).
+- **Abords des portes** (revue des captures, CLAUDE.md l. 14 : une vue qui ne montre pas la porte est KO) : la figure
+  d'échelle des portes intérieures était cachée par les maisons et vergers du faubourg ; la face intérieure de la porte de
+  rivière du mur Maria, par une maison du quai (canal oblique). `layout.ts` dégage une place sans maison ni arbre devant
+  chaque face : côté extérieur 135 m de profondeur, de 60 m à gauche à 32 m à droite de l'axe (ligne de vue de la vue
+  « échelle ») ; côté intérieur 80 m sur la largeur du passage plus 16 m de chaque côté. Coût : 31 à 42 maisons et 59 à 83
+  arbres par lieu ; le banc est inchangé.
+- **Pont dans le mur** : l'anneau de 262 m de Shiganshina ne croise pas le canal (il entre à 470 m) ; son « point le plus
+  proche » posait `pont-0` dans le mur, sous la porte de rivière (la vue du passage montrait la pierre du pont). Un anneau à
+  plus de 20 m du canal n'a plus de pont.
+- **Lieux N2 dans la visionneuse** : en développement, un plan d'auteur absent (`/places3d/<id>.json`) revenait en page HTML
+  avec le statut 200 ; `fetchPlace` le prenait pour un lieu N1 et le moteur échouait (« not valid JSON »), d'où le repli 2D.
+  Seule une réponse JSON vaut maintenant plan d'auteur ; sinon le plan figé `generated/<id>.json` est lu. Vu à la première
+  capture du village.

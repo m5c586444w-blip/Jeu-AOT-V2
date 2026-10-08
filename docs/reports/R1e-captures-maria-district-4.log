@@ -1,0 +1,74 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts maria-district-4
+
+  docs/places/maria-district-4/vue-ensemble.png : 213 appels, 824 k triangles, tronçons 893/897
+  docs/places/maria-district-4/vue-axe-principal.png : 249 appels, 958 k triangles, tronçons 437/897
+  docs/places/maria-district-4/vue-grand-marche.png : 237 appels, 641 k triangles, tronçons 420/897
+  docs/places/maria-district-4/vue-marche-aux-draps.png : 222 appels, 503 k triangles, tronçons 299/897
+  docs/places/maria-district-4/vue-port.png : 248 appels, 704 k triangles, tronçons 430/897
+  docs/places/maria-district-4/vue-rempart.png : 233 appels, 605 k triangles, tronçons 245/897
+  docs/places/maria-district-4/vue-faubourg.png : 230 appels, 695 k triangles, tronçons 640/897
+  docs/places/maria-district-4/vue-porte-depuis-la-ville.png : 117 appels, 500 k triangles, tronçons 28/897
+  docs/places/maria-district-4/porte-exterieure-exterieure-face.png : 259 appels, 919 k triangles, tronçons 673/897
+  docs/places/maria-district-4/porte-exterieure-exterieure-detail.png : 255 appels, 914 k triangles, tronçons 591/897
+  docs/places/maria-district-4/porte-exterieure-interieure-face.png : 90 appels, 328 k triangles, tronçons 16/897
+  docs/places/maria-district-4/porte-exterieure-interieure-detail.png : 97 appels, 327 k triangles, tronçons 12/897
+  docs/places/maria-district-4/porte-exterieure-passage.png : 49 appels, 280 k triangles, tronçons 13/897
+  docs/places/maria-district-4/porte-exterieure-haut.png : 214 appels, 548 k triangles, tronçons 161/897
+  docs/places/maria-district-4/porte-exterieure-echelle.png : 459 appels, 783 k triangles, tronçons 527/897
+  docs/places/maria-district-4/porte-interieure-exterieure-face.png : 251 appels, 770 k triangles, tronçons 373/897
+  docs/places/maria-district-4/porte-interieure-exterieure-detail.png : 252 appels, 844 k triangles, tronçons 353/897
+  docs/places/maria-district-4/porte-interieure-interieure-face.png : 190 appels, 446 k triangles, tronçons 103/897
+  docs/places/maria-district-4/porte-interieure-interieure-detail.png : 175 appels, 380 k triangles, tronçons 24/897
+  docs/places/maria-district-4/porte-interieure-passage.png : 181 appels, 479 k triangles, tronçons 98/897
+  docs/places/maria-district-4/porte-interieure-haut.png : 235 appels, 640 k triangles, tronçons 303/897
+  docs/places/maria-district-4/porte-interieure-echelle.png : 466 appels, 789 k triangles, tronçons 357/897
+  docs/places/maria-district-4/etat-845-avant.png
+  docs/places/maria-district-4/etat-846-abandon.png
+  ΔE 35.8 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail
+  ΔE 37.6 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-face
+  ΔE 45.5 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-interieure-detail
+  ΔE 51.4 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-passage
+  ΔE 27.6 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-haut
+  ΔE 14.2 ≥ 6 : porte-exterieure-exterieure-face | porte-exterieure-echelle
+  ΔE 31.6 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-face
+  ΔE 32.1 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail
+  ΔE 22.6 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-passage
+  ΔE 42.0 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-haut
+  ΔE 38.5 ≥ 6 : porte-exterieure-exterieure-detail | porte-exterieure-echelle
+  ΔE 29.8 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-interieure-detail
+  ΔE 35.6 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-passage
+  ΔE 35.9 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-haut
+  ΔE 39.8 ≥ 6 : porte-exterieure-interieure-face | porte-exterieure-echelle
+  ΔE 25.6 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-passage
+  ΔE 44.4 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-haut
+  ΔE 43.4 ≥ 6 : porte-exterieure-interieure-detail | porte-exterieure-echelle
+  ΔE 55.8 ≥ 6 : porte-exterieure-passage | porte-exterieure-haut
+  ΔE 52.8 ≥ 6 : porte-exterieure-passage | porte-exterieure-echelle
+  ΔE 25.6 ≥ 6 : porte-exterieure-haut | porte-exterieure-echelle
+  ΔE 28.7 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-exterieure-detail
+  ΔE 26.1 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-face
+  ΔE 33.1 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-interieure-detail
+  ΔE 32.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-passage
+  ΔE 37.6 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-haut
+  ΔE 15.1 ≥ 6 : porte-interieure-exterieure-face | porte-interieure-echelle
+  ΔE 45.8 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-face
+  ΔE 38.3 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-interieure-detail
+  ΔE 27.0 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-passage
+  ΔE 58.0 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-haut
+  ΔE 38.3 ≥ 6 : porte-interieure-exterieure-detail | porte-interieure-echelle
+  ΔE 29.0 ≥ 6 : porte-interieure-interieure-face | porte-interieure-interieure-detail
+  ΔE 44.8 ≥ 6 : porte-interieure-interieure-face | porte-interieure-passage
+  ΔE 27.7 ≥ 6 : porte-interieure-interieure-face | porte-interieure-haut
+  ΔE 25.3 ≥ 6 : porte-interieure-interieure-face | porte-interieure-echelle
+  ΔE 36.5 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-passage
+  ΔE 33.9 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-haut
+  ΔE 28.9 ≥ 6 : porte-interieure-interieure-detail | porte-interieure-echelle
+  ΔE 52.2 ≥ 6 : porte-interieure-passage | porte-interieure-haut
+  ΔE 40.2 ≥ 6 : porte-interieure-passage | porte-interieure-echelle
+  ΔE 30.3 ≥ 6 : porte-interieure-haut | porte-interieure-echelle
+  ΔE 34.2 ≥ 6 : porte-exterieure-exterieure-face | porte-interieure-exterieure-face
+  ΔE 3.3 < 6 : etat-845-avant | etat-846-abandon
+places:captures : maria-district-4 capturés.
+exit 0

@@ -1,4 +1,4 @@
-# maria-district-2 — inspirations (monde réel, [A])
+# District ouest du mur Maria (`maria-district-2`) — inspirations (monde réel, [A])
 
 Identité d'auteur : district agricole et des greniers. Aucune image de l'œuvre ni de fans ; plan construit en code (`src/tools/places/auteur/maria-district-2.ts`).
 

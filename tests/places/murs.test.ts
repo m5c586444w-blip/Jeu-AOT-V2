@@ -15,7 +15,13 @@ import { decodePng } from "./png";
  *   face extérieure de la porte extérieure et celle de la porte intérieure (`docs/reports/places-_banc.json`).
  */
 const DIR = "docs/places/_banc";
+/** Seuil du plan R1e (§2) : le témoin de R1d doit le dépasser. */
 export const PAREMENT_MAX = 0.35;
+/**
+ * Décision de l'utilisateur (2026-10-07, D-103) : après deux essais (0,689 puis 0,501, pic isolé à 20 m), le parement de R1e
+ * est accepté « à 0,5 pour le moment » ; la cible 0,35 reste en dette (docs/reports/dette.md, n° 8).
+ */
+export const PAREMENT_ACCEPTE = 0.51;
 
 function faceAutocorr(file: string): { max: number; lagM: number } {
   const img = decodePng(file);
@@ -28,12 +34,12 @@ function faceAutocorr(file: string): { max: number; lagM: number } {
 }
 
 describe("R1e.3 — parement sans motif répété (CR1e-05)", () => {
-  it("autocorrélation des colonnes (2–30 m) : parement R1e < 0,35, témoin R1d > 0,35", () => {
+  it("autocorrélation des colonnes (2–30 m) : parement R1e < 0,51 (accepté, cible 0,35), témoin R1d > 0,35", () => {
     const now = faceAutocorr(`${DIR}/vue-mur-face.png`);
     const r1d = faceAutocorr(`${DIR}/mur-face-r1d.png`);
     console.log(`parement R1e : max ${now.max.toFixed(3)} à ${now.lagM.toFixed(1)} m ; témoin R1d : max ${r1d.max.toFixed(3)} à ${r1d.lagM.toFixed(1)} m`);
     expect(r1d.max).toBeGreaterThan(PAREMENT_MAX);
-    expect(now.max).toBeLessThan(PAREMENT_MAX);
+    expect(now.max).toBeLessThan(PAREMENT_ACCEPTE);
   });
 });
 

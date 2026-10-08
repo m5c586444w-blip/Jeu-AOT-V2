@@ -1,4 +1,4 @@
-# maria-district-3 — inspirations (monde réel, [A])
+# District est du mur Maria (`maria-district-3`) — inspirations (monde réel, [A])
 
 Identité d'auteur : district de garnison et d'artillerie. Aucune image de l'œuvre ni de fans ; plan construit en code (`src/tools/places/auteur/maria-district-3.ts`).
 

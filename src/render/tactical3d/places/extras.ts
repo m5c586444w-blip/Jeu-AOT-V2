@@ -8,6 +8,7 @@ import type { PlaceLayout } from "./layout";
 import type { SceneView } from "./loadPlace";
 import type { PlaceMaterials } from "./placeMaterials";
 import { buildLandmarks } from "./landmarks3d";
+import { buildRampart } from "./rampart3d";
 import { scaleFigures } from "./scaleFigures";
 import { ROOF_TILE_M, roofCoverTexture } from "./textures";
 import { PAREMENT_SIZES, parementTextures } from "../parement";
@@ -68,7 +69,7 @@ export function placeExtras(scene: { place: Place; layout: PlaceLayout; ring: Ri
   const scaleGroups = new Map<string, Group>();
   const state = place.etats.find((s) => s.id === stateId) ?? place.etats[0];
   const custom = place.batiments.some((b) => ["eglise", "halle", "caserne", "moulin"].includes(b.archetype));
-  const gates = ring !== null && place.enceinte !== null && place.portes.length > 0;
+  const gates = ring !== null && place.enceinte !== null && (place.portes.length > 0 || place.enceinte.escaliers.length > 0 || place.enceinte.canons.espacement_m > 0);
   let handled = new Set<string>();
   if (gates || custom) {
     const par = parementTextures(seed);
@@ -91,6 +92,12 @@ export function placeExtras(scene: { place: Place; layout: PlaceLayout; ring: Ri
       group.add(lm.group);
       handled = lm.handled;
       disposers.push(() => lm.dispose());
+    }
+    // Canons et escaliers du rempart (consigne §5).
+    if (ring && place.enceinte) {
+      const rp = buildRampart(place, ring, mats.stone);
+      group.add(rp.group);
+      disposers.push(() => rp.dispose());
     }
     for (const g of gates && place.enceinte && ring ? place.portes : []) {
       const t = place.enceinte?.traces.find((x) => x.id === g.trace);
