@@ -10,6 +10,7 @@ import "./styles/base.css";
 import "./styles/components.css";
 import "./styles/screen.css";
 import { bar, btn, gauge, h, listItem, panel, sep, tag, tabs, variation } from "./kit";
+import { ICONS, icon } from "./icons";
 import { portraitSvg, ARCHETYPES } from "./portrait";
 
 const root = document.getElementById("kit");
@@ -28,7 +29,7 @@ if (root) {
   };
 
   const buttons = sec("Boutons");
-  buttons.append(btn("Signer le décret", () => undefined, { variant: "principal", key: "Entrée" }), btn("Différer", () => undefined), btn("Déclarer la guerre", () => undefined, { variant: "danger" }), btn("Annuler", () => undefined, { variant: "discret" }), btn("Persuader", () => undefined, { small: true }));
+  buttons.append(btn("Signer le décret", () => undefined, { variant: "principal", icon: icon("signer"), key: "Entrée" }), btn("Différer", () => undefined, { icon: icon("horloge") }), btn("Déclarer la guerre", () => undefined, { variant: "danger", icon: icon("epees") }), btn("Annuler", () => undefined, { variant: "discret" }), btn("Persuader", () => undefined, { small: true }));
   const off = btn("Indisponible", () => undefined);
   off.disabled = true;
   buttons.append(off);
@@ -67,7 +68,7 @@ if (root) {
   tip.append(fake);
 
   const pn = sec("Panneau");
-  const p = panel("Province");
+  const p = panel("Province", icon("lieu"));
   p.body.append(h("div", "kv"));
   p.body.lastElementChild?.append(h("span", "kv__cle", "Population"), h("span", "kv__valeur valeur", "212 000"));
   pn.append(p.root);
@@ -86,6 +87,19 @@ if (root) {
     sw.append(c);
   }
   pal.append(sw);
+
+  const ic = sec(`Icônes dessinées (${Object.keys(ICONS).length})`);
+  const wall = h("div", "");
+  wall.style.display = "grid";
+  wall.style.gridTemplateColumns = "repeat(auto-fill, minmax(7.5rem, 1fr))";
+  wall.style.gap = "0.3rem";
+  for (const id of Object.keys(ICONS)) {
+    const cell = h("div", "kv");
+    cell.innerHTML = `${icon(id, "ico ico--l")}${icon(id, "ico ico--s")}`;
+    cell.append(h("span", "liste__meta", id));
+    wall.append(cell);
+  }
+  ic.append(wall);
 
   const pt = sec("Portraits peints (U7)");
   const row = h("div", "");
