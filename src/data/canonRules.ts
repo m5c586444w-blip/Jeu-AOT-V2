@@ -268,7 +268,7 @@ function checkEventEffects(data: RawData, push: (rule: RuleId, e: RawEntry, mess
       for (const [i, f] of objList(c["effects"]).entries()) refs(e, f, `choix ${String(c["id"])} effects[${i}]`);
       for (const [i, r] of objList(c["requires"]).entries()) refs(e, r, `choix ${String(c["id"])} requires[${i}]`);
     }
-    if (e.v["playable"] === false || e.v["kind"] === "generic") continue;
+    if (e.v["playable"] === false || e.v["kind"] === "generic" || e.v["kind"] === "fond") continue;
     const historical = [...effects, ...choices.filter((c) => c["historical"] === true).flatMap((c) => objList(c["effects"]))];
     for (const k of historical.filter((f) => killed(f) !== undefined)) {
       const who = killed(k) ?? "";

@@ -227,6 +227,16 @@ export const EventsBalanceSchema = z
     divergence_threshold: pos,
     deadline_days: z.number().int().min(0),
     generic: z.object({ checks_per_month: z.number().int().min(0), min_gap_days: z.number().int().min(0), max_pending: z.number().int().min(1) }).strict(),
+    /** CHR.2 : événements de fond. Absent = aucun (anciennes données). `per_month` : nombre d'événements par mois, bornes incluses ; `backstory` : lignes de chronique au départ. */
+    fond: z
+      .object({
+        per_month: z.tuple([z.number().int().min(1), z.number().int().min(1)]),
+        backstory: z.number().int().min(0),
+        cooldown_days: z.number().int().min(0),
+      })
+      .strict()
+      .refine((f) => f.per_month[1] >= f.per_month[0], { message: "per_month : max ≥ min" })
+      .optional(),
   })
   .strict();
 

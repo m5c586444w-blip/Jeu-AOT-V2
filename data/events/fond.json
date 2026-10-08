@@ -1,0 +1,2250 @@
+[
+  {
+    "id": "evt_fond_pol_registre_audiences",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 0.3
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.pol_registre_audiences",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_impot_retard",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -150
+      },
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.pol_impot_retard",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_discours_place",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_bourgeoisie",
+        "satisfaction": -1,
+        "radicalisation": 1
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.pol_discours_place",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_ordonnance_marches",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.pol_ordonnance_marches",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_visite_inspecteur",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      },
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.pol_visite_inspecteur",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_audience_paysans",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": 1,
+        "radicalisation": 0
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.pol_audience_paysans",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_banquet_notables",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -200
+      },
+      {
+        "op": "legitimacy",
+        "delta": -0.3
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.pol_banquet_notables",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_lettre_pasteur",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "cult",
+        "province": "prov_subject",
+        "delta": 1
+      },
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -150
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.pol_lettre_pasteur",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_accord_guildes",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": 200
+      },
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.pol_accord_guildes",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_bureaux_remanies",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.pol_bureaux_remanies",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_controle_comptes",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": 100
+      },
+      {
+        "op": "legitimacy",
+        "delta": 0.2
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.pol_controle_comptes",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_pol_pension_veuves",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 0.3
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_militaires",
+        "satisfaction": 1,
+        "radicalisation": 0
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.pol_pension_veuves",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_ordre_du_jour",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.2
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.cab_ordre_du_jour",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_querelle_voirie",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.cab_querelle_voirie",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_presidence_commission",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.2
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.cab_presidence_commission",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_note_egaree",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.3
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.cab_note_egaree",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_preseance",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.cab_preseance",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_alliance_couloir",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.cab_alliance_couloir",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_demission_retiree",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.2
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.cab_demission_retiree",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_deux_chiffres",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.cab_deux_chiffres",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_vote_nul",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.cab_vote_nul",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_seance_interminable",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.2
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.cab_seance_interminable",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_secretaire_zele",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.cab_secretaire_zele",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_cab_reconciliation",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "politique",
+    "theme": "politique",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 0.3
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.cab_reconciliation",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_jumeaux",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_jumeaux",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_mariage_village",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 2
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.fam_mariage_village",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_veillee_aieul",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_veillee_aieul",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_orphelins",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.fam_orphelins",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_querelle_heritage",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.fam_querelle_heritage",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_retour_fils",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_retour_fils",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_lettre_mere",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_lettre_mere",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_bapteme",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.fam_bapteme",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_maitre_ecole",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_maitre_ecole",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_soupe_aieule",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.fam_soupe_aieule",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_fiancailles_rompues",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_fiancailles_rompues",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_jeux_neige",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "hiver"
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.fam_jeux_neige",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_apprenti",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.fam_apprenti",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_fam_veuve_boutique",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "famille",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": 100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.fam_veuve_boutique",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_voyageur",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_voyageur",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_prix_beurre",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      },
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": -300
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_prix_beurre",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_etoile_filante",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_etoile_filante",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_garnison_deplacee",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_garnison_deplacee",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_tresor_enfoui",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_tresor_enfoui",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_taxe_fenetres",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": -0.2
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_taxe_fenetres",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_guerisseur",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_guerisseur",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_courrier_perdu",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "lettre",
+    "text_key": "evt.fond.rum_courrier_perdu",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_chanson_nouvelle",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_chanson_nouvelle",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_prophete",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_prophete",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_vieille_carte",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_vieille_carte",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_nouvelles_foire",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_nouvelles_foire",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_cheval_blanc",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_cheval_blanc",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rum_ombre_toit",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "monde",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "article",
+    "text_key": "evt.fond.rum_ombre_toit",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_semailles",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "printemps"
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_semailles",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_gel_tardif",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "printemps"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": -600
+      },
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_gel_tardif",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_degel",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "printemps"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_degel",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_pluie_bienvenue",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "ete"
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      },
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 300
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_pluie_bienvenue",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_fenaison",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "ete"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 400
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_fenaison",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_orage_bles",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "ete"
+      }
+    ],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_orage_bles",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_pommes",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "automne"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 500
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_pommes",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_battage",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "automne"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 400
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_battage",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_champignons",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "automne"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_champignons",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_brouillard",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "automne"
+      }
+    ],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_brouillard",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_premieres_neiges",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "hiver"
+      }
+    ],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_premieres_neiges",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_grand_froid",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "hiver"
+      }
+    ],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -150
+      },
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_grand_froid",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_marche_hiver",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [
+      {
+        "season": "hiver"
+      }
+    ],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_marche_hiver",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_surplus_lait",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 200
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_surplus_lait",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_renard_poulaillers",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_renard_poulaillers",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_rec_moulin_brise",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "civil",
+    "theme": "monde",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": -300
+      },
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.rec_moulin_brise",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_fissure_surface",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_fissure_surface",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_vigies_doublees",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_vigies_doublees",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_fausse_alarme",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_fausse_alarme",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_titan_immobile",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_titan_immobile",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_badigeon",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_badigeon",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_corbeaux",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_corbeaux",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_echelle_rouillee",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_echelle_rouillee",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_treuils_graisses",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_treuils_graisses",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_ronde_nuit",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_ronde_nuit",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_eboulis_talus",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gold",
+        "delta": -100
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_eboulis_talus",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_essai_canon",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_essai_canon",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_odeur_gaz",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gas",
+        "delta": -60
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_odeur_gaz",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_curieux",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_curieux",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mur_maitre_macon",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "titans",
+    "theme": "titans",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mur_maitre_macon",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_exercice_aube",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_exercice_aube",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_soupe_froide",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_soupe_froide",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_remise_galons",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_remise_galons",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_inventaire_lames",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "steel",
+        "delta": -20
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_inventaire_lames",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_cheval_boiteux",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_cheval_boiteux",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_marche_endurance",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_marche_endurance",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_permissions",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_permissions",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_bagarre_auberge",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "stability",
+        "province": "prov_subject",
+        "delta": -1
+      }
+    ],
+    "choices": [],
+    "form": "proces_verbal",
+    "text_key": "evt.fond.mil_bagarre_auberge",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_tir_entrainement",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_tir_entrainement",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_depot_range",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "gas",
+        "delta": 50
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_depot_range",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_recit_veteran",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [
+      {
+        "op": "morale",
+        "province": "prov_subject",
+        "delta": 1
+      }
+    ],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_recit_veteran",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  },
+  {
+    "id": "evt_fond_mil_cours_du_soir",
+    "kind": "fond",
+    "year_min": 845,
+    "window": {
+      "after": null
+    },
+    "family": "militaire",
+    "theme": "militaire",
+    "cooldown_days": 360,
+    "subject": "province",
+    "conditions": [],
+    "effects": [],
+    "choices": [],
+    "form": "rapport",
+    "text_key": "evt.fond.mil_cours_du_soir",
+    "canon": "A",
+    "notes_canon": "Événement de fond générique (CHR.2) : aucun fait canon, aucun personnage nommé ; texte, saison, fréquence et effets : A."
+  }
+]

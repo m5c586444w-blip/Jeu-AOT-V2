@@ -1,11 +1,19 @@
 {
   "canon": "A",
-  "notes_canon": "Moteur d'événements (02 §12, 12 §0–§3). Seuil de divergence, délai de décision et fréquence des génériques : A.",
+  "notes_canon": "Moteur d'événements (02 §12, 12 §0–§3). Seuil de divergence, délai de décision et fréquence des génériques : A. Événements de fond (CHR.2) : 3 à 4 par mois, 3 lignes au départ, aucun texte repris avant 360 jours : A.",
   "divergence_threshold": 2.5,
   "deadline_days": 5,
   "generic": {
     "checks_per_month": 3,
     "min_gap_days": 8,
     "max_pending": 1
+  },
+  "fond": {
+    "per_month": [
+      3,
+      4
+    ],
+    "backstory": 3,
+    "cooldown_days": 360
   }
 }

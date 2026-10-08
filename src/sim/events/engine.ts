@@ -2,7 +2,7 @@ import type { Choice, Condition, Effect } from "../../data/effects";
 import type { EventDef } from "../../data/schemas";
 import { Rng } from "../core/rng";
 import type { GameDate } from "../core/time";
-import { fromAbsoluteDay, seasonOf, toAbsoluteDay } from "../core/time";
+import { DAYS_PER_MONTH, fromAbsoluteDay, seasonOf, toAbsoluteDay } from "../core/time";
 import { addEvidence, atLeast, observe, revealSecret } from "../intel/intel";
 import type { IntelState } from "../intel/intel";
 import type { MilitaryState } from "../military/state";
@@ -20,6 +20,7 @@ import { pushLog } from "../strategic/economy";
 import type { StrategicState } from "../strategic/economy";
 import type { World } from "../strategic/world";
 import { predecessorsOf } from "../strategic/world";
+import type { ChronicleWorld } from "../strategic/world";
 
 /**
  * Moteur d'événements (02 §12, 12 §0–§3) : échéancier déterministe, conditions, effets typés, choix, échéance,
@@ -83,7 +84,8 @@ export interface EventCtx {
   na?: NationsState | null;
 }
 
-const CHRONICLE_CAP = 200;
+/** Plafond de la chronique : une décennie d'événements de fond (3 à 4 par mois) y tient avec les événements canon (CHR.2). */
+const CHRONICLE_CAP = 800;
 const clamp = (v: number, lo: number, hi: number): number => Math.max(lo, Math.min(hi, v));
 
 export function createEventsState(world: World, seed: number, date: GameDate): EventsState | null {
@@ -99,7 +101,78 @@ export function createEventsState(world: World, seed: number, date: GameDate): E
     if (past) s.history[e.id] = { status: "passe", day: today, choice: null, auto: false, divergence: 0 };
   }
   if (cw.mode === "canon_fidele") for (const e of cw.canon) if (ready(s, e)) schedule(s, e, seed, today);
+  seedBackstory(world, s, seed, date);
   return s;
+}
+
+// ——— Événements de fond (CHR.2) ———
+
+/**
+ * Jours (0 à 29) d'un mois où un événement de fond survient : de 3 à 4 jours répartis en tranches égales, chacun tiré dans sa tranche
+ * (pas de grappe, jamais deux le même jour). Déterministe : ne dépend que de la graine et du mois.
+ */
+export function fondDays(seed: number, month: number, perMonth: readonly [number, number]): number[] {
+  const rng = new Rng(seed).fork(`fond:mois:${month}`);
+  const n = rng.int(perMonth[0], perMonth[1]);
+  const width = 30 / n;
+  return Array.from({ length: n }, (_, k) => {
+    const lo = Math.floor(width * k);
+    const hi = Math.max(lo, Math.floor(width * (k + 1)) - 1);
+    return rng.int(lo, hi);
+  });
+}
+
+const inEra = (e: EventDef, year: number): boolean => e.year_min <= year && (e.year_max === undefined || e.year_max >= year);
+
+/** Candidats d'un jour : époque, délai de réemploi (aucun texte ne revient dans l'année), famille différente de la précédente. */
+function fondCandidates(cw: ChronicleWorld, ev: EventsState, year: number, day: number): EventDef[] {
+  const cool = cw.balance.fond?.cooldown_days ?? 0;
+  const lastFamily = (() => {
+    for (let i = ev.chronicle.length - 1; i >= 0 && i >= ev.chronicle.length - 12; i--) {
+      const e = cw.events.get(ev.chronicle[i]?.event ?? "");
+      if (e?.kind === "fond") return e.family;
+    }
+    return undefined;
+  })();
+  const all = cw.fond.filter((e) => inEra(e, year) && day - (ev.genericLast[e.id] ?? -99999) >= Math.max(cool, e.cooldown_days ?? 0));
+  const varied = all.filter((e) => e.family !== lastFamily);
+  return varied.length > 0 ? varied : all;
+}
+
+function fondTick(ctx: EventCtx, day: number): void {
+  const cw = ctx.world.chronicle;
+  const b = cw?.balance.fond;
+  if (!cw || !b || cw.fond.length === 0) return;
+  if (!fondDays(ctx.seed, Math.floor(day / DAYS_PER_MONTH), b.per_month).includes(day % DAYS_PER_MONTH)) return;
+  const rng = new Rng(ctx.seed).fork(`fond:jour:${day}`);
+  const order = rng.shuffle(fondCandidates(cw, ctx.ev, ctx.date.year, day));
+  for (const e of order) {
+    if (!e.conditions.every((c) => conditionHolds(ctx, c))) continue;
+    const subject = pickSubject(ctx, e, rng);
+    if (subject === null) continue;
+    fire(ctx, e, day, subject);
+    return;
+  }
+}
+
+/** Chronique non vide dès le début : quelques faits de fond datés du premier jour (aucun effet appliqué). */
+function seedBackstory(world: World, s: EventsState, seed: number, date: GameDate): void {
+  const cw = world.chronicle;
+  const b = cw?.balance.fond;
+  if (!cw || !b || b.backstory <= 0 || cw.fond.length === 0) return;
+  const day = toAbsoluteDay(date);
+  const rng = new Rng(seed).fork("fond:depart");
+  const own = world.provinces.filter((p) => p.pop_level > 0 && (world.scenario.control[p.id] ?? world.scenario.default_control) === "paradis");
+  const pool = rng.shuffle(cw.fond.filter((e) => inEra(e, date.year) && e.conditions.length === 0 && (e.subject === undefined || e.subject === "province")));
+  let done = 0;
+  for (const e of pool) {
+    if (done >= b.backstory) break;
+    const province = e.subject === "province" ? rng.pick(own) : undefined;
+    if (e.subject === "province" && !province) continue;
+    s.genericLast[e.id] = day;
+    chronicle(s, { day, event: e.id, status: "survenu", choice: null, auto: false, divergence: 0, subject: province ? { province: province.id } : {} });
+    done++;
+  }
 }
 
 const ready = (s: EventsState, e: EventDef): boolean => !s.history[e.id] && !s.scheduled.some((x) => x.id === e.id) && predecessorsOf(e).every((p) => s.history[p]?.status === "survenu" || s.history[p]?.status === "passe");
@@ -403,6 +476,7 @@ export function dailyEvents(ctx: EventCtx): void {
     else avoid(ctx, e, day);
   }
   genericTick(ctx, day);
+  fondTick(ctx, day);
 }
 
 function genericTick(ctx: EventCtx, day: number): void {

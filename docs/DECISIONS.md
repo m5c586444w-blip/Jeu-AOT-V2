@@ -932,3 +932,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | AUD (sous-agent) | Sonnet | high | ≈ 90 | |
 | Revue et fusion AUD | Opus / défaut | défaut | ≈ 20 | 1 passe de correctifs |
+
+
+## 2026-10-08 — D-118 Événements de fond : extension additive de `src/sim/events/engine.ts` (phase CHR)
+- **Contexte** : le fichier 24 §2.4 et CHR.2 demandent au moins 3 petits événements par mois. Le tirage des génériques (`genericTick`) ne le permet pas :
+  un seul dossier en attente, 8 jours d'écart minimal, probabilités faibles, et chaque générique exige une décision (3 décisions par mois seraient une corvée).
+- **Options** : (a) monter `checks_per_month` et les `chance` des génériques (données seules, mais 3 dossiers de décision par mois, et le tirage des génériques change) ;
+  (b) un second tirage, indépendant, pour des faits sans décision ; (c) injecter les faits de fond dans l'interface seulement (sans trace dans l'état).
+- **Choix** : (b). Nouveau `kind: "fond"` (données `data/events/fond.json`, 94 entrées `canon: "A"`, sans choix, sans personnage nommé) ; `fondTick` tire chaque mois
+  3 à 4 jours répartis en tranches égales (`fondDays`, graine + mois), choisit un événement de l'époque non repris depuis 360 jours (famille différente de la précédente si possible),
+  applique ses petits effets et l'inscrit à la chronique (aucune pause). `seedBackstory` inscrit 3 faits au premier jour. Plafond de la chronique 200 → 800 entrées.
+  Aucune règle existante ne change : sans `fond` dans l'équilibrage (anciennes données), rien ne se passe ; le tirage des génériques garde son flux d'aléa
+  (test `tests/sim/fond.test.ts` : chronique des génériques identique avec et sans fond). Réglage : `data/balance/events.json` (`fond`).
+- **Raison** : trois faits par mois sans pause, déterministes, testés ; chronique non vide dès le départ.
+- **Réversible** : oui (supprimer `fond` de l'équilibrage coupe tout ; le code reste inerte).

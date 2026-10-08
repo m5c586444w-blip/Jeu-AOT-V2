@@ -51,6 +51,8 @@ export interface ChronicleWorld {
   /** Événements canon jouables, dans l'ordre de leur code (E09, E10…). */
   canon: readonly EventDef[];
   generic: readonly EventDef[];
+  /** Événements de fond (CHR.2) : sans décision, tirés chaque mois. */
+  fond: readonly EventDef[];
   /** Successeurs directs dans le graphe (12 §3). */
   successors: ReadonlyMap<string, readonly string[]>;
 }
@@ -205,7 +207,7 @@ export function buildChronicle(events: readonly EventDef[], balance: EventsBalan
   const canon = playable.filter((e) => e.kind === "canon").sort((a, b) => (a.code ?? a.id).localeCompare(b.code ?? b.id));
   const successors = new Map<string, string[]>();
   for (const e of canon) for (const p of preds(e)) successors.set(p, [...(successors.get(p) ?? []), e.id]);
-  return { balance, mode, events: new Map(events.map((e) => [e.id, e])), canon, generic: playable.filter((e) => e.kind === "generic"), successors };
+  return { balance, mode, events: new Map(events.map((e) => [e.id, e])), canon, generic: playable.filter((e) => e.kind === "generic"), fond: playable.filter((e) => e.kind === "fond"), successors };
 }
 
 /** Un secret par personnage portant des champs `hidden` (D-36 : chargés en P2, jamais affichés avant révélation). */
