@@ -1059,3 +1059,20 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   bataille `dd7651fd`, sans monde `3c17ecdc`) : aucun scénario de l'autotest ne force la marche, ne vide le trésor ni ne bat en plaine
   avec un mur voisin.
 - **Réversible** : oui.
+
+## 2026-10-08 — D-130 Revue et fusion de PA : N1 terminé ; pushs de code concurrents
+- **PA** : revue indépendante sans bloquant ; une passe de correctifs (D-129 : ravitaillement dans « pourquoi ? », or plafonné,
+  marche forcée qui s'arrête à l'épuisement et pertes expliquées, canons de rempart limités aux murs). Branche principale
+  fusionnée dans `claude/v2-pa`, puis `npm run verify` code 0, 611/611 (`docs/reports/PA-verify-fusion.log`). Fusion.
+  **N1 (UX0, MAP, UI, AUD, CHR, PA) est terminé.** Réversible : oui (revert de la fusion).
+- **Pushs concurrents** : entre 16:26 et 21:37 UTC, la session CLI de Gabriel (`session_014pHhi7…`) a poussé 4 commits sur la
+  branche principale, dont du CODE (`66ccb15` : erreurs Pixi de smoke:tactique, dette n° 20 ; `4c81d37` : arbre de recherche
+  et barre du haut, dette n° 21). Fusionnés sans conflit ; verify ci-dessus passe sur le résultat. Ces correctifs sont utiles,
+  mais deux sessions de code écrivent sur le dépôt, contre la règle « une seule session de code à la fois ».
+  **À valider par Gabriel** : laquelle des deux sessions doit coder ; la direction continue sur ses propres branches et
+  fusionne toujours la branche principale avant chaque fusion.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| PA (sous-agent) | Opus | xhigh | ≈ 185 | arrêt de 4 h sans progrès, relancé |
+| Revue PA + correctifs + fusion | Opus | défaut | ≈ 75 | 1 passe |
