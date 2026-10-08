@@ -3,8 +3,8 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **PA en revue** sur `claude/v2-pa` (fichier 21 §7 + 23 §3.2) : rapport `docs/reports/PA.md`, CPA-01 à 10 OK. Direction autonome (D-107). |
-| Tâche | PA.1–PA.10 faites (simulation, données, rendu des batteries, registre « Armées », `smoke:pa`, 9 captures) ; D-124 à D-128 ; dettes n° 33–36 |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 606/606 (95 fichiers, `docs/reports/PA-verify-3.log`) ; `smoke:pa` code 0 (`docs/reports/PA-smoke.log`) |
+| Tâche | PA.1–PA.10 faites (simulation, données, rendu des batteries, registre « Armées », `smoke:pa`, 9 captures) ; D-124 à D-128 ; dettes n° 33–36 ; passe de revue (D-129, dette n° 37, `PA.md` § g) |
+| Dernier `npm run verify` | 2026-10-08 (passe de revue) : code 0 ; tests 611/611 (95 fichiers, `docs/reports/PA-verify-4.log`) ; `smoke:pa` code 0 (`docs/reports/PA-smoke-2.log`) |
 | Prochaine étape | PROCHAINE ACTION EXACTE : revue de PA par la direction (`docs/reports/PA.md`), puis fusion ou correctifs ; ensuite phase suivante de la feuille de route (fichier 24) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
