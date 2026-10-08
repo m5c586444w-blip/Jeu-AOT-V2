@@ -297,10 +297,16 @@ try {
     await page.mouse.move(Math.round(pass.w / 2), Math.round(pass.h / 2));
 
     // Phase UI (U9) : fil de notifications regroupé par jour, icône et catégorie, clic = aller sur le lieu ; historique.
-    await page.keyboard.press("Digit5");
-    await page.waitForSelector(".notifications:not([hidden]) .notification", { timeout: 60000 }).catch(() => undefined);
-    await page.keyboard.press("Space");
-    const feed = await page.evaluate(() => ({
+    // Page à part : le temps y avance (vitesse 5) sans fausser les contrôles suivants (humeur musicale « en paix »).
+    const fp = await newPage(browser, pass, errors);
+    await fp.goto(`${url}?scenario=scn_sandbox_850&dossiers=0`);
+    await fp.waitForSelector("html[data-ready='true']", { timeout: 90000 });
+    await fp.mouse.click(Math.round(pass.w / 2), Math.round(pass.h * 0.6));
+    await fp.keyboard.press("Escape");
+    await fp.keyboard.press("Digit5");
+    await fp.waitForSelector(".notifications:not([hidden]) .notification", { timeout: 60000 }).catch(() => undefined);
+    await fp.keyboard.press("Space");
+    const feed = await fp.evaluate(() => ({
       groups: document.querySelectorAll(".notifications__groupe").length,
       items: document.querySelectorAll(".notification").length,
       icons: document.querySelectorAll(".notification > svg.ico").length,
@@ -309,16 +315,17 @@ try {
     }));
     let opened = "";
     if (feed.places > 0) {
-      await page.locator("button.notification").first().click();
-      await page.waitForSelector(".dossier:visible", { timeout: 10000 }).catch(() => undefined);
-      opened = (await page.locator(".dossier__titre").first().innerText().catch(() => "")).trim();
-      await page.keyboard.press("Escape");
+      await fp.locator("button.notification").first().click();
+      await fp.waitForSelector(".dossier:visible", { timeout: 10000 }).catch(() => undefined);
+      opened = (await fp.locator(".dossier__titre").first().innerText().catch(() => "")).trim();
+      await fp.keyboard.press("Escape");
     }
     // Le clic sur une entrée qui nomme un lieu est contrôlé par smoke:expedition (départ d'une expédition, lieu = sa cible).
     expect(feed.groups >= 1 && feed.items >= 1 && feed.icons === feed.items && feed.cats === feed.items && (feed.places === 0 || opened.length > 0), `fil de notifications : ${feed.items} entrées en ${feed.groups} groupe(s), ${feed.icons} icônes, ${feed.cats} catégories ; ${feed.places} avec lieu${opened ? ` (clic → dossier « ${opened} »)` : ""}`);
-    await page.locator(".notifications__bouton").first().click();
-    expect((await page.locator(".registre-panneau:not([hidden])").getAttribute("data-panel")) === "journal", "historique du fil : le journal s'ouvre");
-    await page.keyboard.press("Escape");
+    await fp.locator(".notifications__bouton").first().click();
+    expect((await fp.locator(".registre-panneau:not([hidden])").getAttribute("data-panel")) === "journal", "historique du fil : le journal s'ouvre");
+    await fp.keyboard.press("Escape");
+    await fp.close();
 
     // Dossier de province (clic sur Trost, comme smoke:map).
     const box = await page.locator(".carte canvas").first().boundingBox();
