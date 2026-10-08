@@ -26,7 +26,7 @@ une ligne KO (2 erreurs de page, § Smoke). La bataille n'est plus recouverte (9
 | CUI-04 no-leaks | **OK après correctif de revue** | revue D-113 : « (débogage) » visible en Chancellerie, non détecté ; journal des IA réservé au mode auteur, motif « débogage » ajouté ; `tests/ui` 77/77 |
 | CUI-05 pas de grille de cartes | **OK** | `smoke:p8` « tout est conforme » : contrôle « grille de cartes » sur les 9 écrans U5, 4 passes |
 | CUI-06 ≥ 60 icônes | **OK** | `tests/ui/icons.test.ts` (90 icônes) |
-| CUI-07 lisible 1366 et 4K | **OK** | `smoke:p8` 4 passes (1366 et 3840, 100 et 125 %) : 171 OK, 0 KO ; captures 1366 et 4K |
+| CUI-07 lisible 1366 et 4K | **OK, dette n° 21** | `smoke:p8` 4 passes (1366 et 3840, 100 et 125 %) : 171 OK, 0 KO ; captures 1366 et 4K ; noms tronqués (ui-08, ui-05) et barre du haut à 9 éléments en dette n° 21 (revue D-113) |
 | CUI-08 écrans capturés et lus | **OK (12 captures)** | § Captures ; décrets, expéditions, journal, épilogue vus seulement par smoke:p8 (`p8-*.png`) |
 | CUI-09 contraste AA | **OK** | `tests/ui/contrast.test.ts` |
 
@@ -106,7 +106,7 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
 
 ## Ce qui reste
 1. `smoke:tactique` : erreurs Pixi `geometry` / `clear` après la fermeture de la planche des figures (dette n° 20).
-2. Dette n° 19 et défauts des captures : mention « (débogage) » de la chancellerie, fond 4K du menu, textes anglais,
+2. Dette n° 19 et défauts des captures : mention « (débogage) » de la chancellerie (corrigée ensuite, revue D-113), fond 4K du menu, textes anglais,
    légende de carte (dettes 13 et 14).
 
 ## Revue de la direction autonome (2026-10-08, D-113)
@@ -128,3 +128,23 @@ sim:selftest : OK (direct = worker : …, 850 avec une bataille jouée).
 ✓ built in 2.08s
 EXIT 0
 ```
+
+## Seconde relecture indépendante (2026-10-08, session de R1e)
+- `npm run verify` relancé sur la tête de la PR n° 3 (`a13fd36`, copie à part) : `Test Files 86 passed (86)`,
+  `Tests 530 passed (530)`, `✓ built in 2.14s`, `EXIT 0` ; `git diff 7146a98 a13fd36 --stat -- src/sim` : vide.
+- Les 12 captures relues une à une par un sous-agent neuf (recadrages à taille réelle en 4K) : **aucun bloquant non
+  couvert**. Le seul bloquant visible, « (débogage) » en ui-12, est corrigé dans `a13fd36` (`authorOnly`, `dip.ai_log`,
+  `leaks.ts`), mais la capture ui-12 n'a pas été refaite ; ui-01 et ui-05 précèdent aussi leurs correctifs.
+- CUI-05 confirmé (réserve : l'arbre de recherche reste une grille 2×3 de cases) ; CUI-07 : aucun texte illisible, mais des
+  troncatures (dette n° 21) ; CUI-08 confirmé (12 captures non vides, chacune montre son écran) ; le défaut cité pour
+  ui-04 (titre de groupe recouvert) n'est pas visible.
+- Défauts mineurs non cités jusqu'ici, à joindre à la dette n° 21 :
+  - menu : « 845, avant la brèche » contredit « Shiganshina vient de tomber » ; année répétée ;
+  - signes contradictoires dans l'infobulle de la nourriture (« −8 304 » au résumé, « +7 800 » et « +504 » en rouge au
+    détail ; pertes « −225 » / « +225 ») ;
+  - barre du haut : six valeurs à icône seule, sans étiquette ; « Cabinet » de la liste des personnages différent des sièges ;
+  - cabinet : « 2 abstention », colonne de nombres sans en-tête ;
+  - unité du capital variable (« 10 cap. », « 6 de capital ») ;
+  - « Hommes 12 000 » contre « Soldats (25 200) » en Économie ; aucune alerte pour la pierre épuisée en ≈ 12 jours ;
+  - onglets « Hizuru et Alliés » et « Armes modernes » visibles en 850 ; « 50 d'industrie » sans ressource affichée ;
+  - « réponse prévue : 43 » sans unité.
