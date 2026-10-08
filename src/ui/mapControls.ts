@@ -3,6 +3,8 @@ import type { StrategicMap } from "../render/strategicMap";
 export interface MapControlHandlers {
   hover(id: string | null, x: number, y: number): void;
   select(id: string | null): void;
+  /** Clic sur un étendard d'armée (PA.8) ; true = consommé. */
+  army?(id: string): boolean;
 }
 
 const DRAG_THRESHOLD = 4;
@@ -45,6 +47,8 @@ export function attachMapControls(host: HTMLElement, map: StrategicMap, on: MapC
     if (canvas.hasPointerCapture(ev.pointerId)) canvas.releasePointerCapture(ev.pointerId);
     if (wasDrag) return;
     const [x, y] = local(ev);
+    const army = map.armyAt(x, y);
+    if (army && on.army?.(army)) return;
     const id = map.provinceAt(x, y);
     map.setSelected(id);
     on.select(id);

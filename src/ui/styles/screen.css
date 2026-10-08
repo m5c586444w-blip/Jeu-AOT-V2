@@ -876,3 +876,15 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .epilogue__bilan { padding: 0.5rem 0.8rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); border-top: 2px solid var(--accent); }
 .epilogue__bilan .titre-section { margin-top: 0; }
 .epilogue__bilan .epilogue__chiffres { margin-top: 0.2rem; max-width: none; width: 100%; }
+
+/* ——— Armées (PA.8) ——— */
+.armee__tete h3 { margin: 0; }
+.armee__valeurs { display: grid; grid-template-columns: 1fr; gap: 0.4rem; margin: 0.5rem 0; }
+.armee__valeurs .valeur { white-space: nowrap; }
+.armee__regiments li { font-size: var(--t-s); }
+.armee__artillerie li { font-size: var(--t-s); margin-bottom: 0.35rem; }
+.armee__rencontre, .armee__succession { padding: 0.5rem 0.75rem; margin-bottom: 0.7rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--danger-plein); border-left-width: 4px; }
+.armee__succession { border-color: var(--accent); }
+.armee__rencontre h3, .armee__succession h3 { margin: 0 0 0.25rem; }
+.armee__journal, .armee__ia { margin-top: 0.8rem; font-size: var(--t-s); color: var(--texte-second); }
+.armee__journal summary, .armee__ia summary { cursor: pointer; }

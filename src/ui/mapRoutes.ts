@@ -1,5 +1,7 @@
 import type { MapData } from "../data/map";
-import type { MapRoutes } from "../render/strategicMap";
+import type { MapArmies, MapRoutes } from "../render/strategicMap";
+import { visibleProvinces } from "../sim/armies/armies";
+import { armiesWorld, armyMen, playerOf } from "../sim/armies/state";
 import type { GameState } from "../sim/core/state";
 import { edgeKm } from "../sim/military/routes";
 import type { Point } from "../sim/strategic/geometry";
@@ -22,6 +24,7 @@ export function buildMapRoutes(map: MapData, world: World, state: GameState, dra
   const out: MapRoutes = { routes: [], markers: [], depots: [] };
   const pts = (ids: readonly string[]): Point[] => ids.map((id) => map.provinces[id]?.anchor).filter((p): p is Point => !!p).map((p) => [p[0], p[1]]);
   if (draft && draft.length > 1) out.routes.push({ points: pts(draft), style: "plan" });
+  out.routes.push(...armyRoutes(map, world, state));
   const mil = state.military;
   if (!mil || !world.military) return out;
   for (const d of mil.depots) {
@@ -43,4 +46,71 @@ export function buildMapRoutes(map: MapData, world: World, state: GameState, dra
     if (pos) out.markers.push({ at: pos, kind: "convoi" });
   }
   return out;
+}
+
+const SIDE: Record<string, string> = { fac_paradis: "paradis", fac_marley: "marley", fac_allies: "allies", fac_hizuru: "hizuru" };
+
+/**
+ * Étendards d'armées, flottes et rencontres (PA.8) : armées du joueur toujours visibles ; armées et flottes étrangères
+ * seulement dans les provinces vues (brouillard) ou dans une mer de l'île. Plusieurs armées dans une province
+ * s'écartent (case), à côté du pion de garnison s'il y en a un.
+ */
+export function buildMapArmies(map: MapData, world: World, state: GameState, selected: string | null): MapArmies {
+  const out: MapArmies = { armies: [], fleets: [], clashes: [] };
+  const s = state.armies;
+  if (!s || !world.armies || !state.strategic) return out;
+  const aw = armiesWorld(world);
+  const me = playerOf(state.nations);
+  const seen = visibleProvinces({ world, aw, s, st: state.strategic }, me);
+  const slots = new Map<string, number>();
+  const [bx0, by0, bx1, by1] = map.bounds;
+  for (const a of s.armies) {
+    if (!a.province || a.fleet) continue;
+    if (a.faction !== me && !seen.has(a.province)) continue;
+    const pos = a.route.length ? along(map, world, [a.province, ...a.route], a.progress) : null;
+    const base = map.provinces[a.province]?.anchor;
+    if (!base) continue;
+    const garrison = (state.strategic.provinces[a.province]?.garrison?.soldiers ?? 0) > 0 ? 1 : 0;
+    const slot = pos ? 0 : (slots.get(a.province) ?? garrison);
+    if (!pos) slots.set(a.province, slot + 1);
+    const at: Point = pos ?? [base[0], base[1]];
+    out.armies.push({ id: a.id, at, slot, side: SIDE[a.faction] ?? "autre", insignia: a.insignia, morale: a.morale / 100, supply: a.supply / aw.balance.supply.max_days, selected: a.id === selected, marching: a.route.length > 0, men: formatCount(armyMen(aw, a)) });
+  }
+  for (const f of s.fleets) {
+    const sea = aw.seas.get(f.sea);
+    if (!sea || (f.faction !== me && sea.offmap)) continue;
+    const at: Point = [Math.max(bx0 + 30, Math.min(bx1 - 30, sea.x)), Math.max(by0 + 30, Math.min(by1 - 30, sea.y))];
+    out.fleets.push({ id: f.id, at, side: SIDE[f.faction] ?? "autre", selected: f.id === selected });
+  }
+  for (const e of s.encounters) {
+    if (e.status !== "attente") continue;
+    const at = map.provinces[e.province]?.anchor;
+    if (at) out.clashes.push([at[0], at[1] - 40]);
+  }
+  return out;
+}
+
+/** Trajets des armées du joueur en marche (trait plein, comme une expédition à l'aller). */
+export function armyRoutes(map: MapData, world: World, state: GameState): MapRoutes["routes"] {
+  const s = state.armies;
+  if (!s) return [];
+  const me = playerOf(state.nations);
+  const out: MapRoutes["routes"] = [];
+  for (const a of s.armies) {
+    if (a.faction !== me || !a.province || a.route.length === 0) continue;
+    const pos = along(map, world, [a.province, ...a.route], a.progress);
+    const pts: Point[] = [];
+    if (pos) pts.push(pos);
+    for (const id of a.route) {
+      const p = map.provinces[id]?.anchor;
+      if (p) pts.push([p[0], p[1]]);
+    }
+    out.push({ points: pts, style: a.stance === "retraite" ? "armee_retraite" : "armee" });
+  }
+  return out;
+}
+
+function formatCount(n: number): string {
+  const v = Math.round(n);
+  return v >= 10000 ? `${Math.round(v / 1000)} k` : v >= 1000 ? `${(v / 1000).toFixed(1).replace(".", ",")} k` : String(v);
 }

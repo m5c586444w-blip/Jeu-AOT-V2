@@ -13,4 +13,4 @@ if (errors.length > 0 || violations.length > 0) {
   process.exit(1);
 }
 const total = COLLECTION_NAMES.reduce((n, c) => n + raw[c].length, 0);
-console.log(`canon:check : « ${dir} » conforme (R1–R12, ${total} entrées).`);
+console.log(`canon:check : « ${dir} » conforme (R1–R13, ${total} entrées).`);

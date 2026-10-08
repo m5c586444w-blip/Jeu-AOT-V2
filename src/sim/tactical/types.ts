@@ -4,7 +4,7 @@ export const TACTICAL_ORDERS = ["tuer", "tenir", "repli", "couvrir"] as const;
 export type TacticalOrder = (typeof TACTICAL_ORDERS)[number];
 
 /** Causes de mort au combat (03 §9) ; « devore » = saisi et non secouru (03 §4.3). */
-export const BATTLE_DEATH_CAUSES = ["frappe", "devore", "chute", "hemorragie"] as const;
+export const BATTLE_DEATH_CAUSES = ["frappe", "devore", "chute", "hemorragie", "eclat"] as const;
 export type BattleDeathCause = (typeof BATTLE_DEATH_CAUSES)[number];
 
 export interface SoldierSpec {
@@ -37,6 +37,36 @@ export interface BattleSetup {
   thunderSpears?: boolean;
   /** Drapeaux de partie utiles au combat (contact royal pour le Fondateur, 02 §10). */
   flags?: string[];
+  /** Batteries d'artillerie (PA.5) : absentes des batailles antérieures (même hash). */
+  artillery?: BatterySpec[];
+}
+
+/** Batterie engagée (PA.5) : « allie » tire pour Paradis (Titans, contre-batterie), « ennemi » contre ses soldats. */
+export interface BatterySpec {
+  id: string;
+  piece: string;
+  munition: string;
+  side: "allie" | "ennemi";
+  count: number;
+}
+
+export interface BatteryUnit extends BatterySpec {
+  x: number;
+  y: number;
+  /** Pièces encore en état de tirer. */
+  alive: number;
+  reload: number;
+  shots: number;
+  /** Point visé du dernier coup (zone de danger affichée). */
+  aim: { x: number; y: number; r: number } | null;
+}
+
+export interface Impact {
+  t: number;
+  x: number;
+  y: number;
+  r: number;
+  side: "allie" | "ennemi";
 }
 
 /** Porteur engagé dans une bataille (P6). « allie » : au service de Paradis ; « ennemi » : contre lui. */
@@ -199,6 +229,8 @@ export interface BattleStats {
   cutsLanded?: number;
   /** R0 : Titans abattus par cause : lame, lance de foudre, porteur allié, Titan pur (contre un porteur). */
   killedBy?: Partial<Record<KillSource, number>>;
+  /** PA.5 : tirs, Titans touchés, soldats tués par éclats (dont tirs amis), pièces réduites au silence. */
+  artillery?: { shots: number; titanHits: number; soldierKills: number; friendlyKills: number; piecesSilenced: number };
 }
 
 export type KillSource = "lame" | "lance" | "porteur" | "pur";
@@ -221,6 +253,10 @@ export interface BattleState {
   wagon: { x: number; y: number } | null;
   /** Porteurs (P6). */
   shifters?: ShifterUnit[];
+  /** Batteries (PA.5), derniers impacts et tirage propre à l'artillerie (les batailles sans canon gardent leur suite de tirages). */
+  batteries?: BatteryUnit[];
+  impacts?: Impact[];
+  artRng?: number;
   log: BattleLogEntry[];
   signals: BattleSignal[];
   stats: BattleStats;

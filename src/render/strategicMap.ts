@@ -1,11 +1,11 @@
-import { Application, Container, Graphics } from "pixi.js";
+import { Application, Container, Graphics, Text } from "pixi.js";
 import type { Sprite } from "pixi.js";
 import type { MapData } from "../data/map";
 import type { TerrainData } from "../data/terrain";
 import { bearingOf, pointInPolygon } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
-import { drawDepot, drawExpeditionMarker, drawPawn, drawRoute } from "./atlasLayers";
-import type { ProvinceShape } from "./atlasLayers";
+import { drawArmyBanner, drawClash, drawDepot, drawExpeditionMarker, drawFleet, drawPawn, drawRoute } from "./atlasLayers";
+import type { ArmyBanner, ProvinceShape } from "./atlasLayers";
 import { flat } from "./ink";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
@@ -28,9 +28,17 @@ export interface MapDynamic {
 
 /** Itinéraires, positions et dépôts de la couche militaire (P3), en coordonnées de carte (km). */
 export interface MapRoutes {
-  routes: { points: Point[]; style: "plan" | "aller" | "retour" | "convoi" }[];
+  routes: { points: Point[]; style: "plan" | "aller" | "retour" | "convoi" | "armee" | "armee_retraite" }[];
   markers: { at: Point; kind: "expedition" | "convoi" }[];
   depots: { at: Point; radius: number }[];
+}
+
+/** Armées, flottes et rencontres à tracer (PA.8), en coordonnées de carte (km). */
+export interface MapArmies {
+  /** `slot` : rang de l'étendard dans sa province (0 = place du pion), décalé à l'écran pour ne pas se chevaucher. */
+  armies: (ArmyBanner & { id: string; men: string; slot: number })[];
+  fleets: { id: string; at: Point; side: string; selected: boolean }[];
+  clashes: Point[];
 }
 
 export interface MapFilters {
@@ -71,6 +79,10 @@ export class StrategicMap {
   private readonly gPawns = new Graphics();
   private readonly gRoutes = new Graphics();
   private readonly gHighlight = new Graphics();
+  private readonly gArmies = new Graphics();
+  private readonly armyText = new Container();
+  private armies: MapArmies = { armies: [], fleets: [], clashes: [] };
+  private shownArmies: { id: string; at: Point }[] = [];
   private readonly labels: LabelLayer;
   private zoom = 1;
   private fitZoom = 1;
@@ -107,7 +119,7 @@ export class StrategicMap {
     );
     drawOpenSea(this.gSea, terrain.bounds);
     this.terrainImage = terrainSprite(terrain);
-    this.world.addChild(this.gSea, this.terrainImage, this.gWash, this.gRivers, this.gBorders, this.gRoads, this.gWalls, this.gTowns, this.gFog, this.gPawns, this.gRoutes, this.gHighlight, this.labels.container);
+    this.world.addChild(this.gSea, this.terrainImage, this.gWash, this.gRivers, this.gBorders, this.gRoads, this.gWalls, this.gTowns, this.gFog, this.gPawns, this.gRoutes, this.gHighlight, this.labels.container, this.gArmies, this.armyText);
     app.stage.addChild(this.world);
   }
 
@@ -154,6 +166,9 @@ export class StrategicMap {
     if (this.filters.walls) for (const g of this.terrain.gates) pts.push([g.at[0], g.at[1], 7]);
     if (this.filters.pawns) {
       for (const p of this.provinces) if (this.dynamic.provinces[p.id]?.garrisonOrg) pts.push([...(this.terrain.provinces[p.id]?.pawn ?? p.anchor)]);
+      // Étendards d'armées (PA.8) : drapeau et socle ; les noms se posent à côté, pas dessous.
+      const px = this.uiScale / this.zoom;
+      for (const a of this.shownArmies) pts.push([a.at[0], a.at[1] - 20 * px, 15 * px], [a.at[0], a.at[1] + 8 * px, 14 * px]);
     }
     return pts;
   }
@@ -250,6 +265,44 @@ export class StrategicMap {
     for (const m of this.routes.markers) drawExpeditionMarker(this.gRoutes, m.at, px, m.kind);
   }
 
+  /** Étendards d'armées, flottes et rencontres (PA.8). */
+  setArmies(a: MapArmies): void {
+    const before = JSON.stringify(this.shownArmies);
+    this.armies = a;
+    this.drawArmiesLayer();
+    if (JSON.stringify(this.shownArmies.map((x) => ({ id: x.id, at: x.at }))) !== before) this.labels.update(this.zoom / this.uiScale, this.lod, this.filters.labels, this.iconPoints(), this.viewBox());
+  }
+
+  /** Armée sous un point de l'écran (clic sur un étendard). */
+  armyAt(screenX: number, screenY: number): string | null {
+    const [wx, wy] = this.toWorld(screenX, screenY);
+    const px = this.uiScale / this.zoom;
+    const hit = [...this.shownArmies].reverse().find((a) => Math.abs(wx - a.at[0]) < 14 * px && wy < a.at[1] + 12 * px && wy > a.at[1] - 32 * px);
+    return hit?.id ?? null;
+  }
+
+  private drawArmiesLayer(): void {
+    const px = this.uiScale / 2 ** (this.bucket / 2);
+    this.gArmies.clear();
+    for (const c of this.armies.clashes) drawClash(this.gArmies, c, px);
+    for (const f of this.armies.fleets) drawFleet(this.gArmies, f.at, f.side, px, f.selected);
+    const shown = this.armies.armies.map((a) => ({ ...a, at: [a.at[0] + a.slot * 26 * px, a.at[1]] as Point }));
+    this.shownArmies = shown.map((x) => ({ id: x.id, at: x.at }));
+    for (const a of shown) drawArmyBanner(this.gArmies, a, px);
+    // Effectifs écrits sous les jauges (texte à taille constante à l'écran).
+    const n = this.armies.armies.length;
+    while (this.armyText.children.length < n) this.armyText.addChild(new Text({ text: "", style: { fontFamily: "EB Garamond", fontSize: 13, fill: 0x1c1a17, fontWeight: "600", stroke: { color: 0xe8dcc0, width: 3 } }, resolution: 2 }));
+    this.armyText.children.forEach((c, i) => {
+      const a = shown[i];
+      c.visible = !!a;
+      if (!a || !(c instanceof Text)) return;
+      if (c.text !== a.men) c.text = a.men;
+      c.anchor.set(0.5, 0);
+      c.scale.set(px);
+      c.position.set(a.at[0], a.at[1] + 13 * px);
+    });
+  }
+
   /** Couleur d'overlay par province (null = lavis par région). */
   setOverlay(colors: ReadonlyMap<string, number> | null): void {
     this.overlay = colors;
@@ -260,6 +313,8 @@ export class StrategicMap {
     this.filters = f;
     this.gPawns.visible = f.pawns;
     this.gRoutes.visible = f.pawns;
+    this.gArmies.visible = f.pawns;
+    this.armyText.visible = f.pawns;
     this.gWalls.visible = f.walls;
     this.gFog.visible = f.fog;
     this.labels.update(this.zoom / this.uiScale, this.lod, f.labels, this.iconPoints(), this.viewBox());
@@ -306,6 +361,7 @@ export class StrategicMap {
       if (org) drawPawn(this.gPawns, this.terrain.provinces[p.id]?.pawn ?? p.anchor, org, px);
     }
     this.drawRoutesLayer();
+    this.drawArmiesLayer();
     this.drawHighlight();
   }
 

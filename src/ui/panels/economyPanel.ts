@@ -1,5 +1,5 @@
 import { t } from "../../i18n";
-import { planDay, planMonth, totals } from "../../sim/strategic/economy";
+import { planDay, planMonth, totals, withArmyDraws } from "../../sim/strategic/economy";
 import type { DayPlan, StrategicState } from "../../sim/strategic/economy";
 import { RATIONING_LEVELS } from "../../sim/strategic/resources";
 import type { RationingLevel, ResourceId } from "../../sim/strategic/resources";
@@ -29,7 +29,7 @@ export class EconomyPanel implements Panel {
     const st = state.strategic;
     if (!st) return noPolitics(root);
     if (arg && (ECONOMY_RESOURCES as readonly string[]).concat("population").includes(arg)) this.selected = arg as Selection;
-    const plan = planDay(this.ctx.world, st, state.date);
+    const plan = withArmyDraws(planDay(this.ctx.world, st, state.date), state.armies?.drawn);
     root.append(this.rationing(st));
     const md = h("div", "maitre-detail eco-vue");
     const master = h("div", "maitre");

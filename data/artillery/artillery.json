@@ -1,0 +1,440 @@
+[
+ {
+  "type": "piece",
+  "id": "art_canon_rempart",
+  "name_key": "art.canon_rempart",
+  "faction": "fac_paradis",
+  "kind": "rempart",
+  "mobile": false,
+  "range_m": 900,
+  "min_range_m": 40,
+  "rate_per_min": 1.0,
+  "dispersion_m": 22,
+  "blast_m": 6,
+  "crew": 5,
+  "vs_titan": 6,
+  "vs_soldier": 0.5,
+  "morale_hit": 6,
+  "wall_damage": 0,
+  "upkeep": 40,
+  "powder_per_day": 3,
+  "ammo": [
+   "mun_boulet",
+   "mun_mitraille",
+   "mun_chaine"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_wall_artillery"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "Existence : 10 E-P08/E-P20 et 11 §1 (artillerie de mur confirmée). Portée, cadence, dispersion et effets : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_canon_rail",
+  "name_key": "art.canon_rail",
+  "faction": "fac_paradis",
+  "kind": "rail",
+  "mobile": false,
+  "range_m": 950,
+  "min_range_m": 40,
+  "rate_per_min": 1.2,
+  "dispersion_m": 20,
+  "blast_m": 6,
+  "crew": 6,
+  "vs_titan": 6,
+  "vs_soldier": 0.5,
+  "morale_hit": 6,
+  "wall_damage": 0,
+  "upkeep": 50,
+  "powder_per_day": 3,
+  "ammo": [
+   "mun_boulet",
+   "mun_mitraille",
+   "mun_chaine"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_wall_artillery"
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "Canons sur rails du rempart de Trost : 21 §7 (PA.3, [C]) ; 11 §1 : artillerie de mur confirmée. Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_canon_campagne",
+  "name_key": "art.canon_campagne",
+  "faction": "fac_paradis",
+  "kind": "campagne",
+  "mobile": true,
+  "range_m": 800,
+  "min_range_m": 30,
+  "rate_per_min": 1.0,
+  "dispersion_m": 26,
+  "blast_m": 5,
+  "crew": 6,
+  "vs_titan": 5,
+  "vs_soldier": 0.45,
+  "morale_hit": 5,
+  "wall_damage": 1,
+  "upkeep": 45,
+  "powder_per_day": 2,
+  "ammo": [
+   "mun_boulet",
+   "mun_mitraille",
+   "mun_chaine"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_mobile_cannon"
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Chariot-canon (10 V-02) : canons mobiles « ? » selon 11 §1. Paramétrable (`enabled`). Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_mortier_paradis",
+  "name_key": "art.mortier_paradis",
+  "faction": "fac_paradis",
+  "kind": "mortier",
+  "mobile": true,
+  "range_m": 600,
+  "min_range_m": 100,
+  "rate_per_min": 0.8,
+  "dispersion_m": 35,
+  "blast_m": 8,
+  "crew": 4,
+  "vs_titan": 3,
+  "vs_soldier": 0.55,
+  "morale_hit": 7,
+  "wall_damage": 2,
+  "upkeep": 35,
+  "powder_per_day": 2,
+  "ammo": [
+   "mun_boulet",
+   "mun_obus_paradis"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_mobile_cannon"
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Mortier de Paradis : demandé par 21 §7 (PA.3) ; aucune source ne l'atteste → « ? », paramétrable. Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_campagne",
+  "name_key": "art.marley_campagne",
+  "faction": "fac_marley",
+  "kind": "campagne",
+  "mobile": true,
+  "range_m": 6000,
+  "min_range_m": 100,
+  "rate_per_min": 6,
+  "dispersion_m": 60,
+  "blast_m": 14,
+  "crew": 6,
+  "vs_titan": 8,
+  "vs_soldier": 0.6,
+  "morale_hit": 8,
+  "wall_damage": 2,
+  "upkeep": 4,
+  "powder_per_day": 2,
+  "ammo": [
+   "mun_obus",
+   "mun_shrapnel"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 U-M03 (batterie d'artillerie, A). Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_lourde",
+  "name_key": "art.marley_lourde",
+  "faction": "fac_marley",
+  "kind": "lourde",
+  "mobile": true,
+  "range_m": 12000,
+  "min_range_m": 500,
+  "rate_per_min": 1.5,
+  "dispersion_m": 120,
+  "blast_m": 22,
+  "crew": 10,
+  "vs_titan": 14,
+  "vs_soldier": 0.7,
+  "morale_hit": 12,
+  "wall_damage": 6,
+  "upkeep": 8,
+  "powder_per_day": 4,
+  "ammo": [
+   "mun_obus",
+   "mun_obus_perforant"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 E-M04 (artillerie lourde de siège, A). Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_obusier",
+  "name_key": "art.marley_obusier",
+  "faction": "fac_marley",
+  "kind": "obusier",
+  "mobile": true,
+  "range_m": 7000,
+  "min_range_m": 300,
+  "rate_per_min": 3,
+  "dispersion_m": 90,
+  "blast_m": 18,
+  "crew": 8,
+  "vs_titan": 10,
+  "vs_soldier": 0.65,
+  "morale_hit": 10,
+  "wall_damage": 4,
+  "upkeep": 6,
+  "powder_per_day": 3,
+  "ammo": [
+   "mun_obus",
+   "mun_shrapnel"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "10 E-M03 (mortier/obusier, A) : tir courbe, barrage. Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_cotiere",
+  "name_key": "art.marley_cotiere",
+  "faction": "fac_marley",
+  "kind": "cotiere",
+  "mobile": false,
+  "range_m": 14000,
+  "min_range_m": 500,
+  "rate_per_min": 1,
+  "dispersion_m": 140,
+  "blast_m": 24,
+  "crew": 12,
+  "vs_titan": 16,
+  "vs_soldier": 0.7,
+  "morale_hit": 12,
+  "wall_damage": 6,
+  "upkeep": 8,
+  "powder_per_day": 4,
+  "ammo": [
+   "mun_obus",
+   "mun_obus_perforant"
+  ],
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_heavy_artillery"
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Artillerie côtière (province wprov_artillerie_cotiere, A). Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_navale_cuirasse",
+  "name_key": "art.marley_navale_cuirasse",
+  "faction": "fac_marley",
+  "kind": "navale",
+  "mobile": false,
+  "range_m": 16000,
+  "min_range_m": 800,
+  "rate_per_min": 1,
+  "dispersion_m": 160,
+  "blast_m": 26,
+  "crew": 30,
+  "vs_titan": 18,
+  "vs_soldier": 0.75,
+  "morale_hit": 14,
+  "wall_damage": 8,
+  "upkeep": 10,
+  "powder_per_day": 6,
+  "ammo": [
+   "mun_obus",
+   "mun_obus_perforant"
+  ],
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Pièces des cuirassés (10 V-10, A ; flotte de cuirassés T-MOD-04 « ? »). Valeurs : A."
+ },
+ {
+  "type": "piece",
+  "id": "art_marley_navale_croiseur",
+  "name_key": "art.marley_navale_croiseur",
+  "faction": "fac_marley",
+  "kind": "navale",
+  "mobile": false,
+  "range_m": 11000,
+  "min_range_m": 400,
+  "rate_per_min": 3,
+  "dispersion_m": 110,
+  "blast_m": 16,
+  "crew": 12,
+  "vs_titan": 10,
+  "vs_soldier": 0.65,
+  "morale_hit": 9,
+  "wall_damage": 4,
+  "upkeep": 6,
+  "powder_per_day": 4,
+  "ammo": [
+   "mun_obus",
+   "mun_shrapnel"
+  ],
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Pièces des croiseurs (10 V-11, A). Valeurs : A."
+ },
+ {
+  "type": "munition",
+  "id": "mun_boulet",
+  "name_key": "mun.boulet",
+  "factions": [
+   "fac_paradis"
+  ],
+  "vs_titan_mult": 1,
+  "vs_soldier_mult": 0.6,
+  "blast_mult": 0.7,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "C",
+  "notes_canon": "Boulets des canons de mur (11 §1 : artillerie de mur). Multiplicateurs : A."
+ },
+ {
+  "type": "munition",
+  "id": "mun_mitraille",
+  "name_key": "mun.mitraille",
+  "factions": [
+   "fac_paradis"
+  ],
+  "vs_titan_mult": 0.5,
+  "vs_soldier_mult": 1.2,
+  "blast_mult": 1.6,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Mitraille : demandée par 21 §7 (PA.3) ; emploi canon non vérifié → « ? ». Valeurs : A."
+ },
+ {
+  "type": "munition",
+  "id": "mun_chaine",
+  "name_key": "mun.chaine",
+  "factions": [
+   "fac_paradis"
+  ],
+  "vs_titan_mult": 0.8,
+  "vs_soldier_mult": 0.3,
+  "blast_mult": 1.2,
+  "slow_s": 6,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Boulets ramés (chaînes) contre les Titans : demandés par 21 §7 (PA.3) ; non attestés → « ? », paramétrable."
+ },
+ {
+  "type": "munition",
+  "id": "mun_obus_paradis",
+  "name_key": "mun.obus_paradis",
+  "factions": [
+   "fac_paradis"
+  ],
+  "vs_titan_mult": 1.2,
+  "vs_soldier_mult": 1,
+  "blast_mult": 1.2,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845,
+   "tech": "tech_mobile_cannon"
+  },
+  "enabled": true,
+  "canon": "?",
+  "notes_canon": "Obus explosif de mortier pour Paradis : non attesté → « ? »."
+ },
+ {
+  "type": "munition",
+  "id": "mun_obus",
+  "name_key": "mun.obus",
+  "factions": [
+   "fac_marley"
+  ],
+  "vs_titan_mult": 1,
+  "vs_soldier_mult": 1,
+  "blast_mult": 1,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Obus explosif (artillerie moderne de Marley, 10 §2.2, A)."
+ },
+ {
+  "type": "munition",
+  "id": "mun_shrapnel",
+  "name_key": "mun.shrapnel",
+  "factions": [
+   "fac_marley"
+  ],
+  "vs_titan_mult": 0.4,
+  "vs_soldier_mult": 1.4,
+  "blast_mult": 1.5,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Shrapnel (A)."
+ },
+ {
+  "type": "munition",
+  "id": "mun_obus_perforant",
+  "name_key": "mun.obus_perforant",
+  "factions": [
+   "fac_marley"
+  ],
+  "vs_titan_mult": 1.5,
+  "vs_soldier_mult": 0.6,
+  "blast_mult": 0.8,
+  "slow_s": 0,
+  "requires": {
+   "min_year": 845
+  },
+  "enabled": true,
+  "canon": "A",
+  "notes_canon": "Obus perforant (contre les murs et les Titans cuirassés, A)."
+ }
+]

@@ -22,7 +22,7 @@ export interface PanelContext {
   openEvent?(id: string): void;
 }
 
-export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions" | "chronique" | "renseignement" | "recherche" | "porteurs" | "monde" | "diplomatie" | "gazette" | "archives" | "epilogue" | "economie";
+export type PanelId = "personnages" | "cabinet" | "decrets" | "organisations" | "conseil" | "journal" | "expeditions" | "chronique" | "renseignement" | "recherche" | "porteurs" | "monde" | "diplomatie" | "gazette" | "archives" | "epilogue" | "economie" | "armees";
 
 export interface Panel {
   readonly id: PanelId;

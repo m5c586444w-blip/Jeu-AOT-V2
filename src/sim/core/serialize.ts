@@ -149,5 +149,7 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (sh !== null && (typeof sh !== "object" || sh === undefined || !("titans" in sh) || !("serum" in sh))) problems.push("shifters");
   const na = raw["nations"];
   if (na !== null && (typeof na !== "object" || na === undefined || !("nations" in na) || !("forces" in na))) problems.push("nations");
+  const ar = raw["armies"];
+  if (ar !== undefined && (typeof ar !== "object" || ar === null || !("armies" in ar) || !("fleets" in ar))) problems.push("armies");
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

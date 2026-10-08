@@ -987,3 +987,92 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | CHR (sous-agent) | Sonnet | high | ≈ 105 | |
 | Revue CHR + correctifs + fusion | Opus / Sonnet | défaut | ≈ 50 | 1 passe |
+
+## 2026-10-08 — D-124 Couche des armées optionnelle dans l'état ; empreintes des scénarios (phase PA)
+- **Contexte** : PA ajoute armées, flottes, rencontres, sièges et succession (21 §7, 23 §3.2). L'état doit rester
+  rechargeable, et `src/sim` ne doit changer que par ajouts.
+- **Options** : (a) passer à la version de schéma 9 et migrer les vieilles sauvegardes en créant les armées ; (b) champ
+  facultatif `GameState.armies`, créé au départ d'un scénario qui a des armées (`data/armies/depart.json`), jamais
+  créé pour une vieille sauvegarde (commande journalisée `RaiseArmies` pour l'ajouter).
+- **Choix** : (b). La version de schéma reste 8. Une vieille sauvegarde garde son empreinte (test `armies.test.ts`).
+- **Empreintes du selftest** (après CHR → après PA) : 845 `08bedd60` → `59a9b1b2` ; 850 `86f2d847` → `7d032fb4` ;
+  854 `49e288fa` → `1aca7ab8` ; 854 Marley `028d6da4` → `c718bf0d` ; expédition `249d21e4` → `20cdd5ca` ;
+  bataille `5cbf06a3` → `dd7651fd`. « Sans monde » (`3c17ecdc`) inchangé. Cause : armées présentes dès le départ
+  (marche, ravitaillement puisé dans les stocks, IA de Marley quand elle est en guerre).
+- **Raison** : aucune migration forcée, comportement neuf seulement pour les parties neuves.
+- **Réversible** : oui (retirer `data/armies/depart.json` rend l'état identique à celui de CHR).
+
+## 2026-10-08 — D-125 Prélèvements des armées hors plan économique (phase PA)
+- **Contexte** : les armées de Paradis en territoire tenu puisent vivres et gaz dans les stocks nationaux ; les sièges
+  dépensent de la poudre ; l'entretien mensuel de l'or. Le test AC1-04 compare la variation des stocks au plan du jour.
+- **Options** : (a) faire entrer les armées dans `planDay` (toucher `strategic/economy.ts` et les quatre appels de l'UI) ;
+  (b) prélèvement à part, consigné dans `armies.drawn` (jour courant), ajouté par le test AC1-04.
+- **Choix** : (b). AC1-04 reste exact : variation réelle + prélèvements des armées = variation expliquée.
+- **Réversible** : oui. Dette : afficher ces prélèvements dans le « pourquoi ? » de l'économie.
+
+## 2026-10-08 — D-126 Pas de marine pour Paradis ; armes incertaines désactivables (phase PA)
+- **Contexte** : 23 §3.2 (pas de marine pour Paradis ; Marley, Alliés et Hizuru en ont une), 11 §8 (aucune arme
+  anachronique).
+- **Choix** : règle R13 de `canon:check` (aucun navire ni aucune flotte de Paradis ; lances foudroyantes liées à une
+  technique, 850 au plus tôt ; aucune unité de départ postérieure au scénario). Canons de rempart `C`, canons sur rail
+  `C` (21 §7, 11 §1) ; canons de campagne et mortiers de Paradis, mitraille, boulets ramés `?` avec `enabled`.
+  Matériel de Marley `A` (mention générale de l'artillerie, détails non canon). `tech_ports_navy` ne donne aucune flotte.
+- **Réversible** : oui (champ `enabled`, données).
+
+## 2026-10-08 — D-127 Bataille tactique centrée sur Paradis ; délai d'un test 3D (phase PA)
+- **Contexte** : la bataille tactique existante oppose soldats de Paradis et Titans.
+- **Choix** : « jouer » n'est proposé qu'à Paradis joué, si la rencontre a des Titans ou des batteries ennemies
+  (artillerie de Marley = batteries ennemies, tirs d'éclats). Le choc armée contre armée sans Titans se règle par le
+  modèle rapide, pondéré par le résultat tactique s'il est joué. Combat humain contre humain complet : R2 ou après (dette).
+- **Délai** : `tests/render/tactical3d/titans-r1c.test.ts` (dette n° 26) : `beforeAll` à 120 s ; il dépassait 10 s sous la
+  charge de `verify` (premier verify de PA : 1 échec, `docs/reports/PA-verify-1.log`).
+- **Réversible** : oui.
+
+## 2026-10-08 — D-128 Interface des armées : registre « Armées », alertes, canons de rempart en bataille (phase PA)
+- **Contexte** : PA.8 (ordre de mouvement, liste des unités en marche, alerte de rencontre, fiche d'artillerie) sans refonte de la carte ni
+  nouvel habillage.
+- **Choix** : registre latéral « Armées » (touche S, groupe Armée du menu) ; destination choisie au clic sur la carte (trajet en tirets,
+  puis trait cerné d'encre une fois l'ordre donné) ; étendards d'armées (insigne, effectif, jauges de moral et de vivres), flottes et
+  rencontres sur la carte, les noms de lieux s'écartent des étendards ; le registre s'ouvre de lui-même sur une rencontre ou une crise de
+  succession (jeu en pause) ; journal de raisonnement des IA en mode auteur seulement. En bataille, un segment de mur tenu et gardé, sur place
+  ou voisin, tire avec ses canons de rempart [C] (une pièce pour 400 hommes, règle du siège), seule artillerie de Paradis sans
+  `tech_mobile_cannon` [?].
+- **Réversible** : oui.
+
+## 2026-10-08 — D-129 Passe de revue PA : ravitaillement expliqué, solde plafonnée, marche forcée bornée, canons de rempart sur les murs
+- **Contexte** : revue indépendante de PA. (1) Les prélèvements des armées (`armies.drawn`) manquaient au « pourquoi ? » (dette n° 35) ;
+  le test AC1-04 les rajoutait à part. (2) L'entretien mensuel en or pouvait rendre le trésor négatif. (3) Armée du Sud 1 180 → 209 hommes
+  avant le contact (capture `pa-rencontre`). (4) Canons de rempart (« ne quittent pas les murs ») en bataille en plaine de Maria (850).
+- **Options** : (1) prédire les prélèvements dans `planDay` (rejouer la journée des armées) ou ajouter au plan les prélèvements consignés ;
+  (3) baisser l'usure, plafonner la durée, ou arrêter la marche forcée à l'épuisement ; (4) segment sur place seulement, ou aussi voisin.
+- **Choix** : (1) `withArmyDraws(plan, drawn)` (ajout dans `strategic/economy.ts`) : ligne « Ravitaillement des armées (dernier jour) »
+  (« Entretien des armées » pour l'or) dans la consommation et la variation nette ; bandeau et écran Économie l'affichent ; AC1-04 compare
+  la variation réelle à la variation expliquée, sans compensation. (2) Solde payée dans la limite du trésor ; le reste impayé : moral −3
+  (`starvation_morale`) et ligne « n'est pas payée » au registre. (3) Cause mesurée : marche forcée maintenue ≈ 85 jours (usure 0,8 %/jour
+  à fatigue 100, plus lente qu'une marche normale : 0,75 × au lieu de 1) puis bombardement côtier par la flotte de Marley (≤ 5 %/jour,
+  voulu). Correctif : une armée épuisée (fatigue 100) cesse d'elle-même la marche forcée ; pertes hors bataille cumulées par cause
+  (`marchLosses?`, facultatif) et ligne « Pertes en marche » de la fiche ; le registre chiffre chaque bombardement. (4) Canons de rempart en
+  bataille seulement si la rencontre a lieu sur un segment de mur (garnisons du segment et des segments voisins tenus) ; ailleurs ils
+  restent en garnison. Un district au pied du mur (Trost, Karanes) n'est pas un segment : pas de canons (aucune donnée ne les y place).
+- **Raison** : plus petit changement ; aucune règle nouvelle hors de l'équilibrage existant ; `src/sim` modifié par ajouts et gardes.
+- **Empreintes** : `sim:selftest` inchangé (845 `59a9b1b2`, 850 `7d032fb4`, 854 `1aca7ab8`, Marley `c718bf0d`, expédition `20cdd5ca`,
+  bataille `dd7651fd`, sans monde `3c17ecdc`) : aucun scénario de l'autotest ne force la marche, ne vide le trésor ni ne bat en plaine
+  avec un mur voisin.
+- **Réversible** : oui.
+
+## 2026-10-08 — D-130 Revue et fusion de PA : N1 terminé ; pushs de code concurrents
+- **PA** : revue indépendante sans bloquant ; une passe de correctifs (D-129 : ravitaillement dans « pourquoi ? », or plafonné,
+  marche forcée qui s'arrête à l'épuisement et pertes expliquées, canons de rempart limités aux murs). Branche principale
+  fusionnée dans `claude/v2-pa`, puis `npm run verify` code 0, 611/611 (`docs/reports/PA-verify-fusion.log`). Fusion.
+  **N1 (UX0, MAP, UI, AUD, CHR, PA) est terminé.** Réversible : oui (revert de la fusion).
+- **Pushs concurrents** : entre 16:26 et 21:37 UTC, la session CLI de Gabriel (`session_014pHhi7…`) a poussé 4 commits sur la
+  branche principale, dont du CODE (`66ccb15` : erreurs Pixi de smoke:tactique, dette n° 20 ; `4c81d37` : arbre de recherche
+  et barre du haut, dette n° 21). Fusionnés sans conflit ; verify ci-dessus passe sur le résultat. Ces correctifs sont utiles,
+  mais deux sessions de code écrivent sur le dépôt, contre la règle « une seule session de code à la fois ».
+  **À valider par Gabriel** : laquelle des deux sessions doit coder ; la direction continue sur ses propres branches et
+  fusionne toujours la branche principale avant chaque fusion.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| PA (sous-agent) | Opus | xhigh | ≈ 185 | arrêt de 4 h sans progrès, relancé |
+| Revue PA + correctifs + fusion | Opus | défaut | ≈ 75 | 1 passe |

@@ -26,6 +26,9 @@ import { weeklyWar } from "../world/war";
 import { monthlyAi, weeklyAi } from "../world/ai";
 import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
+import { createArmiesState } from "../armies/state";
+import type { ArmiesState } from "../armies/state";
+import { tickArmies } from "../armies/layer";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
 
@@ -53,6 +56,11 @@ export interface GameState {
   shifters: ShiftersState | null;
   /** Monde des nations (P7) ; null hors d'un scénario à couche `world`, ou juste après migration d'une sauvegarde v7. */
   nations: NationsState | null;
+  /**
+   * Armées, flottes et succession (PA) : facultatif. Absent d'une sauvegarde antérieure (son hash ne change pas) ;
+   * créé au départ d'un scénario qui a des armées, ou par la commande `RaiseArmies`.
+   */
+  armies?: ArmiesState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -74,6 +82,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     shifters: world ? createShiftersState(world) : null,
     nations: world ? createNationsState(world, world.scenario.start) : null,
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
+    ...(world?.armies ? { armies: createArmiesState(world, world.scenario.start) ?? undefined } : {}),
   });
 }
 
@@ -98,6 +107,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let intel = state.intel;
   let shifters = state.shifters;
   let nations = state.nations;
+  let armies = state.armies;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
@@ -163,6 +173,14 @@ export function tickDay(state: GameState, world?: World): GameState {
         monthlyAi({ world, date, ns: nations, sh: shifters, pol: politics, st: strategic });
       }
     }
+    // Armées (PA) : après le monde des nations (guerres de la semaine), avant les flux mensuels.
+    if (armies && world.armies) {
+      const r = tickArmies(world, state.seed, date, { st: strategic, pol: politics, ns: nations, research, events, armies });
+      strategic = r.st;
+      politics = r.pol;
+      nations = r.ns;
+      armies = r.armies;
+    }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -175,5 +193,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}) };
 }

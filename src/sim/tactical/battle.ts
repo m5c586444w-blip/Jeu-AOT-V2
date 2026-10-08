@@ -3,6 +3,7 @@ import { fnv1a } from "../core/hash";
 import { Rng } from "../core/rng";
 import type { ShifterWorld, TacticalWorld, World } from "../strategic/world";
 import { generateMap } from "./map";
+import { deployBatteries, enemyBatteriesActive, stepBatteries } from "./artillery";
 import type { TacticalWorldMap } from "./map";
 import { hookDelay, napeOf, pickAnchor, stepOdm } from "./odm";
 import { bodyName, cutShifter, deployShifters, enemyShifterStanding, stepLuredTitan, stepShifter, throwSpear } from "./shifters";
@@ -21,6 +22,8 @@ export interface Battle {
   state: BattleState;
   /** Titans-porteurs (P6) ; null sans données des Neuf. */
   shiftersWorld: ShifterWorld | null;
+  /** Monde complet quand la bataille a des batteries (PA.5 : pièces et munitions). */
+  artillery?: World;
 }
 
 export function tacticalWorld(world: World): TacticalWorld {
@@ -119,6 +122,8 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
   const wagon = setup.wagon ? { x: map.width / 2, y: map.height - 8 } : null;
   // Porteurs (P6) : tirés après le reste, pour que les batailles sans porteur restent identiques.
   const shifters = deployShifters({ world: tw, setup, map, state: null as unknown as BattleState, shiftersWorld: world.shifters ?? null }, rng);
+  // Batteries (PA.5) : tirage propre, après tout le reste.
+  const art = deployBatteries(world, setup, map.width, map.height);
   const state: BattleState = {
     setupHash: fnv1a(JSON.stringify(setup)),
     tick: 0,
@@ -128,13 +133,14 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
     squads,
     wagon,
     ...(shifters.length > 0 ? { shifters } : {}),
+    ...(art ? { batteries: art.batteries, artRng: art.artRng, impacts: [] } : {}),
     log: [],
     signals: [],
     stats: { cuts: 0, napes: 0, limbs: 0, misses: 0, bladesBroken: 0, gasUsed: 0, dodges: 0, grabs: 0, rescues: 0, falls: 0, deathsByCause: {}, titansKilled: {} },
     ended: null,
   };
   log(state, b, "battle.start", { map: def.name_key, soldiers: soldiers.length, titans: titans.length, light: setup.night ? "battle.night" : "battle.day" });
-  return { world: tw, setup, map, state, shiftersWorld: world.shifters ?? null };
+  return { world: tw, setup, map, state, shiftersWorld: world.shifters ?? null, ...(art ? { artillery: world } : {}) };
 }
 
 const alive = (s: SoldierUnit): boolean => s.mode !== "mort" && s.mode !== "fui";
@@ -492,12 +498,13 @@ export function stepBattle(bt: Battle, orders: readonly TimedOrder[] = []): void
     for (const u of st.shifters) stepShifter(bt, u, rng, dt, h);
   }
   for (const s of st.soldiers) if (alive(s)) stepSoldier(bt, s, rng, dt);
+  if (st.batteries && bt.artillery) stepBatteries(bt, bt.artillery, dt, { alive, kill: (s) => kill(bt, s, "eclat", null, rng), log: (key, params) => log(st, b, key, params) });
   st.tick += 1;
   st.rng = rng.serialize().state;
   const t = st.tick / b.tick_hz;
   const standing = st.soldiers.filter(alive).length;
   // Victoire : plus aucun Titan hostile debout (un porteur ennemi pas encore transformé compte).
-  if (st.titans.every((x) => !x.alive || x.ally) && !enemyShifterStanding(bt)) st.ended = { reason: "victoire", t };
+  if (st.titans.every((x) => !x.alive || x.ally) && !enemyShifterStanding(bt) && !enemyBatteriesActive(bt)) st.ended = { reason: "victoire", t };
   else if (standing === 0) st.ended = { reason: st.soldiers.some((s) => s.mode === "fui") ? "repli" : "defaite", t };
   else if (t >= b.battle.time_limit_s) st.ended = { reason: "temps", t };
   if (st.ended) log(st, b, `battle.end.${st.ended.reason}`, { dead: st.soldiers.filter((s) => s.mode === "mort").length, total: st.soldiers.length });

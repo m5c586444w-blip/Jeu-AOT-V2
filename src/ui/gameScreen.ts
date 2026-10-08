@@ -24,7 +24,8 @@ import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
 import { attachMapControls } from "./mapControls";
 import { buildLabels, buildMapProvinces, drawingMap, mapDynamic } from "./mapModel";
-import { buildMapRoutes } from "./mapRoutes";
+import { buildMapArmies, buildMapRoutes } from "./mapRoutes";
+import { pendingEncounter } from "./panels/armiesPanel";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
@@ -171,6 +172,15 @@ export async function bootGame(): Promise<void> {
       if (id) dossier.open(id, state);
       else dossier.close();
     },
+    army(id) {
+      // Étendard d'une armée du joueur : sa fiche s'ouvre dans le registre des armées (PA.8).
+      const a = state.armies?.armies.find((x) => x.id === id);
+      if (!registers?.armies || !a || a.faction !== (state.nations?.player ?? "fac_paradis")) return false;
+      bubble.hide();
+      registers.armies.selectArmy(id);
+      registers.open("armees", id);
+      return true;
+    },
   });
 
   const layers = new LayersPanel(host, () => applyOverlay(), { pawns: true, labels: true, walls: true, fog: true }, (f) => map.setFilters(f));
@@ -264,12 +274,22 @@ export async function bootGame(): Promise<void> {
     if ((ev.target as HTMLElement | null)?.closest?.("button, [role=button], select, summary")) audio.play("clic");
   });
 
+  let lastArmyPrompt: string | null = null;
   const refresh = (): void => {
     listen();
     hud.update(state, clock.speed);
     feed.update(state);
     registers?.refresh();
     map.setDynamic(mapDynamic(state));
+    map.setArmies(buildMapArmies(mapData, world, state, registers?.openId === "armees" ? (registers.armies?.selectedArmy ?? null) : null));
+    // Contact avec l'ennemi ou crise de succession (PA.8) : le registre des armées s'ouvre sur le choix à faire.
+    const enc = pendingEncounter(state);
+    const crisis = state.armies?.succession?.deceased ?? null;
+    const prompt = enc ? `rencontre:${enc.id}` : crisis ? `succession:${crisis}` : null;
+    if (prompt && prompt !== lastArmyPrompt && registers?.armies && !inBattle) {
+      lastArmyPrompt = prompt;
+      registers.open("armees");
+    }
     drawRoutes();
     if (layers.active) applyOverlay();
     dossier.refresh(state);
@@ -326,6 +346,7 @@ export async function bootGame(): Promise<void> {
     open_archives: () => registers?.toggle("archives"),
     open_epilogue: () => registers?.toggle("epilogue"),
     open_economy: () => registers?.toggle("economie"),
+    open_armies: () => registers?.toggle("armees"),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.

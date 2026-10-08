@@ -34,6 +34,8 @@ export function battleSummary(st: BattleState): SummaryRow[] {
     { key: "tac.sum.blades", value: s.bladesBroken, why: ["tac.sum.blades_why"] },
     { key: "tac.sum.gas", value: gas, why: gas === 0 && spears > 0 ? ["tac.sum.gas_why", "tac.sum.gas_zero_spears"] : ["tac.sum.gas_why"] },
   ];
+  const art = s.artillery;
+  if (art && art.shots > 0) rows.push({ key: "tac.sum.shells", value: art.shots, why: ["tac.sum.shells_why"], params: { shots: art.shots, titans: art.titanHits, soldiers: art.soldierKills, friendly: art.friendlyKills, silenced: art.piecesSilenced } });
   if (spears > 0) rows.splice(3, 0, { key: "tac.sum.spears", value: s.spears?.hits ?? 0, why: ["tac.sum.spears_why"], params: { hits: s.spears?.hits ?? 0, thrown: spears } });
   return rows;
 }

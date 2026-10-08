@@ -50,6 +50,7 @@
     "places:regenerer": "tsx src/tools/places-regenerer.ts",
     "smoke:chr": "tsx src/tools/smoke-chr.ts",
     "smoke:ux0": "tsx src/tools/smoke-ux0.ts",
+    "smoke:pa": "tsx src/tools/smoke-pa.ts",
     "map:terrain": "tsx src/tools/map-terrain.ts",
     "captures:map": "tsx src/tools/captures-map.ts"
   },

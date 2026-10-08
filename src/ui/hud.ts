@@ -2,7 +2,7 @@ import { hasKey, t } from "../i18n";
 import { stateHash } from "../sim/core/canonical";
 import type { GameState } from "../sim/core/state";
 import { fromAbsoluteDay, monthOf, seasonOf } from "../sim/core/time";
-import { planDay, planMonth, totals } from "../sim/strategic/economy";
+import { planDay, planMonth, totals, withArmyDraws } from "../sim/strategic/economy";
 import type { DayPlan, StrategicState } from "../sim/strategic/economy";
 import type { ResourceId } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
@@ -30,7 +30,7 @@ export interface HudActions {
 /** Menu de gestion (U2) : registres regroupés par domaine, dans l'ordre de lecture. */
 export const MANAGEMENT_GROUPS: readonly { id: string; panels: readonly string[] }[] = [
   { id: "gouvernement", panels: ["personnages", "cabinet", "decrets", "organisations", "conseil", "economie"] },
-  { id: "armee", panels: ["expeditions", "porteurs"] },
+  { id: "armee", panels: ["armees", "expeditions", "porteurs"] },
   { id: "recherche", panels: ["recherche"] },
   { id: "renseignement", panels: ["renseignement"] },
   { id: "diplomatie", panels: ["diplomatie"] },
@@ -163,7 +163,7 @@ export class Hud {
   /** Menu de gestion : groupes nommés, boutons à icône et étiquette courte ; nom complet et touche au survol. */
   private buildManagement(): void {
     this.gestion.setAttribute("aria-label", t("hud.registers"));
-    const present: Record<string, boolean> = { expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: !!this.world.politics };
+    const present: Record<string, boolean> = { expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: !!this.world.politics, armees: !!this.world.armies };
     for (const g of MANAGEMENT_GROUPS) {
       const ids = g.panels.filter((p) => present[p] ?? true);
       if (ids.length === 0) continue;
@@ -294,7 +294,7 @@ export class Hud {
       this.scheduleMeasure?.();
     }
     const st = this.strat();
-    this.plan = st ? planDay(this.world, st, state.date) : null;
+    this.plan = st ? withArmyDraws(planDay(this.world, st, state.date), state.armies?.drawn) : null;
     const d = state.date;
     this.set("date", t("date.format", { year: d.year, day: d.day }));
     this.set("season", `${t(`season.${seasonOf(d)}`)}, ${t("hud.month", { n: monthOf(d) })}`);

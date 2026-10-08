@@ -38,7 +38,8 @@ beforeAll(async () => {
   const buf = readFileSync("docs/art/assets/derives/humain.glb");
   t = await templateFromBuffer(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
   for (const spec of SPECS) titans.set(spec.id, buildHumanTitan(t, spec, 850));
-});
+  // Dette n° 26 : ≈ 9 s seul, au-delà de 10 s sous la charge de `verify` (PA, D-124).
+}, 120_000);
 
 describe("Titans sur le corps de base (R1c.3)", () => {
   it("hauteur debout mesurée à ±5 % : classes 3–15 m, variantes, Titan-Mur 50 m, Colossal 60 m, Rod Reiss 120 m", () => {
