@@ -99,7 +99,18 @@ export function masterDetail(root: HTMLElement, key: string, cls = ""): { master
   const md = el("div", `maitre-detail ${cls}`.trim());
   const master = el("div", "maitre");
   const detail = el("div", "detail");
-  master.addEventListener("scroll", () => masterScroll.set(key, master.scrollTop), { passive: true });
+  // Signe de défilement (CUI-07) : un fondu en bas de la liste tant qu'il reste des lignes cachées dessous.
+  const hint = (): void => {
+    master.dataset["suite"] = master.scrollTop + master.clientHeight < master.scrollHeight - 2 ? "1" : "0";
+  };
+  master.addEventListener(
+    "scroll",
+    () => {
+      masterScroll.set(key, master.scrollTop);
+      hint();
+    },
+    { passive: true },
+  );
   md.append(master, detail);
   return {
     master,
@@ -107,6 +118,7 @@ export function masterDetail(root: HTMLElement, key: string, cls = ""): { master
     done(): void {
       root.append(md);
       master.scrollTop = masterScroll.get(key) ?? 0;
+      requestAnimationFrame(hint);
     },
   };
 }

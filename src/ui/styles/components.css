@@ -99,6 +99,7 @@
 /* Maître-détail (U5) */
 .maitre-detail { display: grid; grid-template-columns: minmax(15rem, 2fr) minmax(0, 3fr); gap: 0 1.2rem; min-height: 0; }
 .maitre-detail > .maitre { min-width: 0; overflow: auto; max-height: var(--hauteur-utile, 70vh); padding-right: 0.3rem; }
+.maitre-detail > .maitre[data-suite="1"]::after { content: ""; position: sticky; bottom: 0; display: block; height: 2.2rem; margin-top: -2.2rem; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--panneau) 85%); }
 .maitre-detail > .detail { min-width: 0; overflow: auto; max-height: var(--hauteur-utile, 70vh); padding-left: 1.1rem; border-left: var(--filet-l) solid var(--filet-doux); }
 
 /* — Infobulles (U4) : bulle de carte et fiche « pourquoi ? » — */
