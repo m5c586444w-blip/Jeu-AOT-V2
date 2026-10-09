@@ -2076,7 +2076,12 @@
         "value": 0.97
       }
     ],
-    "canon": "A"
+    "canon": "A",
+    "requires": [
+      {
+        "fired": "evt_850_ocean"
+      }
+    ]
   },
   {
     "id": "mis_mon_releves_cote",
@@ -2124,7 +2129,7 @@
     ],
     "requires": [
       {
-        "fired": "evt_850_reiss_chapel"
+        "fired": "evt_850_yeager_basement"
       }
     ],
     "min_year": 850,
