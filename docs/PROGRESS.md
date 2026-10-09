@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **TUT terminée et fusionnée** (D-138). Direction autonome (D-107). Suivante : R2+ (N2). |
-| Tâche | Lancer R2+ (fichier 18 §1 + 23 §4) sur `claude/v2-r2` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 100 fichiers, 660 tests (`docs/reports/TUT-verify-final.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : R2+ sur `claude/v2-r2` (sous-agent neuf, Opus xhigh), puis N3 |
+| Phase | **R2+ en revue** (branche `claude/v2-r2`, D-139 à D-145 ; rapport `docs/reports/R2.md`). Direction autonome (D-107). |
+| Tâche | R2.1 à R2.7 faites (`c1c1ec2`, `cbba95e`, `f7267fb`, `510558a`, `a034d49`, R2.7) ; dettes n° 46 à 53 |
+| Dernier `npm run verify` | 2026-10-09 : code 0 ; 106 fichiers, 700 tests ; empreintes `sim:selftest` inchangées (`docs/reports/R2-verify.log`) ; `smoke:r2` code 0 (essai 8) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de R2+ par la direction (PR de `claude/v2-r2`), mesures GPU sur le PC de l'utilisateur (dette n° 49), puis N3 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
