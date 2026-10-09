@@ -8,6 +8,8 @@ import type { TacticalWorldMap } from "./map";
 import { hookDelay, napeOf, pickAnchor, stepOdm } from "./odm";
 import { bodyName, cutShifter, deployShifters, enemyShifterStanding, stepLuredTitan, stepShifter, throwSpear } from "./shifters";
 import type { ShifterHooks } from "./shifters";
+import { applyRtOrder, effectiveOrder, isRtOrder, soldierMarch, stepRealtime } from "./realtime";
+import { deployTroops, enemyTroopsStanding, alliedTroopsStanding, soldierVsTroops, stepTroops, troopHooksOf } from "./troops";
 import type { BattleDeathCause, BattleSetup, BattleState, SoldierUnit, SquadState, TimedOrder, TitanUnit } from "./types";
 
 /**
@@ -124,16 +126,19 @@ export function createBattle(world: World, setup: BattleSetup): Battle {
   const shifters = deployShifters({ world: tw, setup, map, state: null as unknown as BattleState, shiftersWorld: world.shifters ?? null }, rng);
   // Batteries (PA.5) : tirage propre, après tout le reste.
   const art = deployBatteries(world, setup, map.width, map.height);
+  // Troupes (R2+) : tirage propre (`trRng`), après les batteries ; sections ajoutées à la liste des escouades.
+  const troops = deployTroops(tw, setup, map);
   const state: BattleState = {
     setupHash: fnv1a(JSON.stringify(setup)),
     tick: 0,
     rng: rng.serialize().state,
     soldiers,
     titans,
-    squads,
+    squads: troops ? [...squads, ...troops.sections] : squads,
     wagon,
     ...(shifters.length > 0 ? { shifters } : {}),
     ...(art ? { batteries: art.batteries, artRng: art.artRng, impacts: [] } : {}),
+    ...(troops ? { rt: true, troops: troops.troops, trRng: troops.trRng } : {}),
     log: [],
     signals: [],
     stats: { cuts: 0, napes: 0, limbs: 0, misses: 0, bladesBroken: 0, gasUsed: 0, dodges: 0, grabs: 0, rescues: 0, falls: 0, deathsByCause: {}, titansKilled: {} },
@@ -165,8 +170,13 @@ function kill(bt: Battle, s: SoldierUnit, cause: BattleDeathCause, titan: TitanU
 /** Applique un ordre à une escouade (F-CMB-05) ; un repli lance une fusée verte (03 §7). */
 export function applyOrder(bt: Battle, o: Omit<TimedOrder, "tick">): void {
   const st = bt.state;
+  // R2+ : ordres temps réel (champs nouveaux, ou escouade déjà menée en temps réel).
+  if (isRtOrder(bt, o)) {
+    applyRtOrder(bt, o, (key, params) => log(st, bt.world.balance, key, params));
+    return;
+  }
   const sq = st.squads.find((x) => x.id === o.squad);
-  if (!sq) return;
+  if (!sq || o.order === "formation" || o.order === "tir_zone" || o.order === "cessez_feu" || o.order === "porteur" || o.order === "deplacer" || o.order === "suivre") return;
   sq.order = o.order;
   const leader = st.soldiers.find((s) => s.squad === sq.id && alive(s));
   if (o.target !== undefined) {
@@ -341,7 +351,7 @@ function chooseTarget(bt: Battle, s: SoldierUnit, sq: SquadState): TitanUnit | n
       best = t;
     }
   }
-  if (sq.order === "tenir" && best && bestD > 40) return null;
+  if ((sq.order === "tenir" || sq.order === "suivre" || sq.order === "deplacer") && best && bestD > 40) return null;
   s.target = best?.id ?? null;
   return best;
 }
@@ -416,6 +426,11 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
   if (s.mode === "saisi") return;
   if (s.changeTimer > 0) s.changeTimer -= dt;
   if (s.cutCooldown > 0) s.cutCooldown -= dt;
+  // R2+ : ordre propre du soldat, marche en formation (sans attaque pendant la marche).
+  const march = st.rt ? soldierMarch(bt, s, sq, dt) : null;
+  const order = st.rt ? effectiveOrder(s, sq) : sq.order;
+  const sqe: SquadState = order === sq.order ? sq : { ...sq, order };
+  if (march?.walked) return;
   // Chariot de soutien : gaz et lames au sol, à proximité (F-CMB-14).
   if (st.wagon && s.mode === "sol" && dist2(s.x, s.y, st.wagon.x, st.wagon.y) <= b.resupply.radius_m ** 2) {
     s.gas = Math.min(b.odm.tank, s.gas + b.resupply.gas_per_s * dt);
@@ -425,7 +440,7 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
   // Repli : vers le point de ralliement au sud, puis hors de la carte.
   // Réserve de gaz : en dessous, plus de nouveau crochet ; on se pose (descente freinée) puis on se replie.
   const lowGas = s.gas < b.soldiers.gas_reserve;
-  if (sq.order === "repli" || (lowGas && s.mode === "sol") || (s.pairs < 1 && s.mode === "sol")) {
+  if (sqe.order === "repli" || (lowGas && s.mode === "sol") || (s.pairs < 1 && s.mode === "sol")) {
     if (s.mode === "sol") {
       const dx = sq.rally.x - s.x;
       const dy = bt.map.height - s.y;
@@ -440,7 +455,9 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
       return;
     }
   }
-  const t = sq.order === "repli" ? null : chooseTarget(bt, s, sq);
+  const t = sqe.order === "repli" || march?.moving ? null : chooseTarget(bt, s, sqe);
+  // R2+ : sans Titan à frapper, un soldat s'en prend aux fantassins ennemis (mêlée).
+  if (!t && !march?.moving && st.troops && sqe.order !== "repli" && soldierVsTroops(bt, s, sqe, dt, troopHooksOf(bt, (key, params) => log(st, b, key, params)))) return;
   // Lance de foudre (T-ANT-08) : tirée à portée sur un porteur, avant toute coupe.
   if (t?.shifter !== undefined && (s.spears ?? 0) > 0 && s.cutCooldown <= 0 && s.changeTimer <= 0) throwSpear(bt, s, t, rng, hooks(bt, rng));
   if (s.mode === "sol" || s.mode === "vol") {
@@ -491,6 +508,7 @@ export function stepBattle(bt: Battle, orders: readonly TimedOrder[] = []): void
   const dt = 1 / b.tick_hz;
   for (const o of orders) if (o.tick === st.tick) applyOrder(bt, o);
   const rng = rngOf(st, bt.setup.seed);
+  if (st.rt) stepRealtime(bt, (key, params) => log(st, b, key, params));
   if (st.tick % 4 === 0) updateSquads(bt, rng);
   for (const t of st.titans) if (t.alive) stepTitan(bt, t, rng, dt);
   if (st.shifters) {
@@ -498,15 +516,18 @@ export function stepBattle(bt: Battle, orders: readonly TimedOrder[] = []): void
     for (const u of st.shifters) stepShifter(bt, u, rng, dt, h);
   }
   for (const s of st.soldiers) if (alive(s)) stepSoldier(bt, s, rng, dt);
+  if (st.troops) stepTroops(bt, dt, troopHooksOf(bt, (key, params) => log(st, b, key, params), (s, cause) => kill(bt, s, cause, null, rng)));
   if (st.batteries && bt.artillery) stepBatteries(bt, bt.artillery, dt, { alive, kill: (s) => kill(bt, s, "eclat", null, rng), log: (key, params) => log(st, b, key, params) });
   st.tick += 1;
   st.rng = rng.serialize().state;
   const t = st.tick / b.tick_hz;
-  const standing = st.soldiers.filter(alive).length;
+  // R2+ : les fantassins de Paradis comptent parmi les hommes debout ; les sections ennemies empêchent la victoire.
+  const standing = st.soldiers.filter(alive).length + (st.troops ? alliedTroopsStanding(bt) : 0);
+  const limit = bt.setup.timeLimit ?? b.battle.time_limit_s;
   // Victoire : plus aucun Titan hostile debout (un porteur ennemi pas encore transformé compte).
-  if (st.titans.every((x) => !x.alive || x.ally) && !enemyShifterStanding(bt) && !enemyBatteriesActive(bt)) st.ended = { reason: "victoire", t };
-  else if (standing === 0) st.ended = { reason: st.soldiers.some((s) => s.mode === "fui") ? "repli" : "defaite", t };
-  else if (t >= b.battle.time_limit_s) st.ended = { reason: "temps", t };
+  if (st.titans.every((x) => !x.alive || x.ally) && !enemyShifterStanding(bt) && !enemyBatteriesActive(bt) && !(st.troops && enemyTroopsStanding(bt))) st.ended = { reason: "victoire", t };
+  else if (standing === 0) st.ended = { reason: st.soldiers.some((s) => s.mode === "fui") || (st.troops ?? []).some((x) => x.side === "allie" && x.mode === "fui") ? "repli" : "defaite", t };
+  else if (t >= limit) st.ended = { reason: "temps", t };
   if (st.ended) log(st, b, `battle.end.${st.ended.reason}`, { dead: st.soldiers.filter((s) => s.mode === "mort").length, total: st.soldiers.length });
 }
 
@@ -521,7 +542,7 @@ export function runBattle(world: World, setup: BattleSetup, orders: readonly Tim
   const bt = createBattle(world, setup);
   const byTick = new Map<number, TimedOrder[]>();
   for (const o of orders) byTick.set(o.tick, [...(byTick.get(o.tick) ?? []), o]);
-  const limit = Math.ceil(bt.world.balance.battle.time_limit_s * bt.world.balance.tick_hz) + 1;
+  const limit = Math.ceil((setup.timeLimit ?? bt.world.balance.battle.time_limit_s) * bt.world.balance.tick_hz) + 1;
   for (let i = 0; i < limit && !bt.state.ended; i++) stepBattle(bt, byTick.get(bt.state.tick) ?? []);
   return { state: bt.state, dead: bt.state.soldiers.filter((s) => s.mode === "mort"), survivors: bt.state.soldiers.filter((s) => s.mode !== "mort") };
 }

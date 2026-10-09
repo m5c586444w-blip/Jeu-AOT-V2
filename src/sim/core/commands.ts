@@ -12,7 +12,7 @@ import type { DeathCause } from "../politics/characters";
 import { enactLaw, persuade, repealLaw, setBudget } from "../politics/politics";
 import { launchExpedition, recallExpedition, resolveBattle } from "../military/expedition";
 import type { TimedOrder } from "../tactical/types";
-import { TACTICAL_ORDERS } from "../tactical/types";
+import { validTimedOrder } from "../tactical/realtime";
 import type { MilCtx } from "../military/expedition";
 import { sendConvoy } from "../military/logistics";
 import type { ConvoyOrder } from "../military/logistics";
@@ -134,9 +134,8 @@ export function validateCommand(cmd: unknown): Validation {
       return typeof c["expedition"] === "string" && /^exp_\d+$/.test(c["expedition"]) ? { ok: true } : { ok: false, error: "RecallExpedition.expedition invalide" };
     case "ResolveBattle": {
       const orders = c["orders"];
-      const okOrders =
-        Array.isArray(orders) &&
-        orders.every((o) => typeof o === "object" && o !== null && Number.isInteger((o as Record<string, unknown>)["tick"]) && typeof (o as Record<string, unknown>)["squad"] === "string" && (TACTICAL_ORDERS as readonly string[]).includes(String((o as Record<string, unknown>)["order"])));
+      // R2+ : les ordres temps réel (champs facultatifs) sont reçus ; forme commune avec `ResolveEncounter`.
+      const okOrders = Array.isArray(orders) && orders.every(validTimedOrder);
       const ok = typeof c["expedition"] === "string" && (c["mode"] === "jouer" || c["mode"] === "auto") && okOrders;
       return ok ? { ok: true } : { ok: false, error: "ResolveBattle invalide" };
     }
@@ -184,7 +183,7 @@ export function validateCommand(cmd: unknown): Validation {
       return { ok: true };
     case "ResolveEncounter": {
       const orders = c["orders"];
-      const okOrders = Array.isArray(orders) && orders.every((o) => typeof o === "object" && o !== null && Number.isInteger((o as Record<string, unknown>)["tick"]) && typeof (o as Record<string, unknown>)["squad"] === "string" && (TACTICAL_ORDERS as readonly string[]).includes(String((o as Record<string, unknown>)["order"])));
+      const okOrders = Array.isArray(orders) && orders.every(validTimedOrder) && (c["rt"] === undefined || typeof c["rt"] === "boolean");
       return okOrders && validArmyCommand(c) ? { ok: true } : { ok: false, error: "ResolveEncounter invalide" };
     }
     default:

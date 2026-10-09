@@ -145,5 +145,77 @@
     "foret": 1,
     "ville": 1,
     "mur": 1
+  },
+  "rt": {
+    "canon": "A",
+    "notes_canon": "R2+ (amendement 23 §4) : bataille de compagnies, 100 à 400 unités. Toutes les valeurs sont des choix de jeu [A] : portées, cadences et précision des armes de Marley (fusils à répétition, mitrailleuses) et de Paradis, déroute, mêlée des soldats à équipement tridimensionnel ; aucune n'est donnée par l'œuvre.",
+    "weapons": {
+      "fusilier": {
+        "range_m": 300,
+        "reload_s": 3.0,
+        "hit": 0.12,
+        "lethal": 0.6,
+        "speed_m_s": 1.6,
+        "melee": 0.08,
+        "vs_titan": 0
+      },
+      "mitrailleur": {
+        "range_m": 420,
+        "reload_s": 0.7,
+        "hit": 0.05,
+        "lethal": 0.6,
+        "speed_m_s": 1.0,
+        "melee": 0.03,
+        "vs_titan": 0
+      },
+      "assaut": {
+        "range_m": 160,
+        "reload_s": 2.4,
+        "hit": 0.12,
+        "lethal": 0.6,
+        "speed_m_s": 2.4,
+        "melee": 0.3,
+        "vs_titan": 0
+      },
+      "cavalier": {
+        "range_m": 120,
+        "reload_s": 4.0,
+        "hit": 0.1,
+        "lethal": 0.6,
+        "speed_m_s": 6.0,
+        "melee": 0.32,
+        "vs_titan": 0
+      },
+      "antititan": {
+        "range_m": 380,
+        "reload_s": 6.0,
+        "hit": 0.2,
+        "lethal": 0.7,
+        "speed_m_s": 1.4,
+        "melee": 0.03,
+        "vs_titan": 8
+      }
+    },
+    "air_hit_mult": 0.25,
+    "wounded_hit_mult": 0.6,
+    "melee_reach_m": 2.5,
+    "melee_base": 0.35,
+    "melee_skill_k": 0.006,
+    "engage_share": 0.75,
+    "morale_loss_per_death": 3,
+    "rout_morale": 25,
+    "rout_losses_share": 0.6,
+    "spacing_m": 2.5,
+    "titan_vs_troop_kill": 0.7,
+    "time_limit_s": 600,
+    "encounter": {
+      "men_per_unit": 10,
+      "odm_max": 160,
+      "troops_max": 120,
+      "enemy_max": 180,
+      "titans_max": 6,
+      "total_max": 400,
+      "min_units": 100
+    }
   }
 }
