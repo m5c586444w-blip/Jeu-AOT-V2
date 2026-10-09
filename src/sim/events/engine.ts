@@ -371,6 +371,14 @@ export function applyEffect(ctx: EventCtx, f: Effect, subject: PendingEvent["sub
     case "world_hizuru":
       if (ctx.na) ctx.na.hizuruLean = clamp(ctx.na.hizuruLean + f.delta, -100, 100);
       return;
+    case "nation": {
+      const n = ctx.na?.nations[f.faction];
+      if (!n) return;
+      if (f.stat === "industry") n.industry = Math.max(0, n.industry + f.delta);
+      else if (f.stat === "manpower") n.manpower = Math.max(0, n.manpower + f.delta);
+      else n.stability = clamp(n.stability + f.delta, 0, 100);
+      return;
+    }
   }
 }
 
@@ -435,6 +443,17 @@ function checkBranch(ctx: EventCtx, day: number): void {
     chronicle(ctx.ev, { day, event: "branche", status: "bascule", choice: null, auto: false, divergence: 0, subject: {} });
     pushLog(ctx.st, ctx.date, "log.branch_divergent", { score: Math.round(ctx.ev.divergence * 100) / 100 }, true);
   }
+}
+
+/**
+ * Déclenche un événement non canon à la demande (missions, MIS.1) : effets, puis décision en attente s'il y a des choix.
+ * Un événement canon n'est jamais déclenché ainsi (les divergences passent par le graphe du fichier 12 §3).
+ */
+export function triggerEvent(ctx: EventCtx, eventId: string): boolean {
+  const e = ctx.world.chronicle?.events.get(eventId);
+  if (!e || e.kind === "canon") return false;
+  fire(ctx, e, toAbsoluteDay(ctx.date), {});
+  return true;
 }
 
 /** Choix du joueur (commande `ChooseEventOption`). Lève une erreur si le choix n'est pas offert. */

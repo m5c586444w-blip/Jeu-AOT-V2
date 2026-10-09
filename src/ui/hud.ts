@@ -29,7 +29,7 @@ export interface HudActions {
 
 /** Menu de gestion (U2) : registres regroupés par domaine, dans l'ordre de lecture. */
 export const MANAGEMENT_GROUPS: readonly { id: string; panels: readonly string[] }[] = [
-  { id: "gouvernement", panels: ["personnages", "cabinet", "decrets", "organisations", "conseil", "economie"] },
+  { id: "gouvernement", panels: ["personnages", "cabinet", "decrets", "organisations", "conseil", "economie", "missions"] },
   { id: "armee", panels: ["armees", "expeditions", "porteurs"] },
   { id: "recherche", panels: ["recherche"] },
   { id: "renseignement", panels: ["renseignement"] },
@@ -163,7 +163,7 @@ export class Hud {
   /** Menu de gestion : groupes nommés, boutons à icône et étiquette courte ; nom complet et touche au survol. */
   private buildManagement(): void {
     this.gestion.setAttribute("aria-label", t("hud.registers"));
-    const present: Record<string, boolean> = { expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: !!this.world.politics, armees: !!this.world.armies };
+    const present: Record<string, boolean> = { expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: !!this.world.politics, armees: !!this.world.armies, missions: !!this.world.missions };
     for (const g of MANAGEMENT_GROUPS) {
       const ids = g.panels.filter((p) => present[p] ?? true);
       if (ids.length === 0) continue;

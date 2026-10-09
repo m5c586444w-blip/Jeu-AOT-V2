@@ -76,6 +76,8 @@ export const EffectSchema = z.discriminatedUnion("op", [
   z.object({ op: z.literal("world_losses"), province: id("wprov"), faction: id("fac"), share: z.number().min(0).max(1) }).strict(),
   z.object({ op: z.literal("world_support"), faction: id("fac"), delta: z.number() }).strict(),
   z.object({ op: z.literal("world_hizuru"), delta: z.number() }).strict(),
+  /** MIS : grandeur agrégée d'une nation du monde (industrie, réserve d'hommes, stabilité), pour les missions de Marley. */
+  z.object({ op: z.literal("nation"), faction: id("fac"), stat: z.enum(["industry", "manpower", "stability"]), delta: z.number() }).strict(),
 ]);
 export type Effect = z.infer<typeof EffectSchema>;
 

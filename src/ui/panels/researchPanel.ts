@@ -212,8 +212,8 @@ export class ResearchPanel implements Panel {
 }
 
 /** Taille des nœuds et écarts de l'arbre, en rem. */
-const NODE_W = 13.5;
-const NODE_H = 6.3; // nom sur deux lignes, condition sur trois (CUI-07 : plus aucun texte coupé, 1366 et 4K)
+export const NODE_W = 13.5;
+export const NODE_H = 6.3; // nom sur deux lignes, condition sur trois (CUI-07 : plus aucun texte coupé, 1366 et 4K)
 const GAP_X = 3;
 const GAP_Y = 0.7;
 /** Position de lecture de l'arbre (gauche, haut), conservée quand le registre est redessiné. */

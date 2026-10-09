@@ -1,0 +1,2557 @@
+[
+  {
+    "id": "mis_mil_inventaire_garnisons",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 60,
+    "cost": {
+      "gold": 800
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "losses_mult:gas",
+        "value": -0.03
+      }
+    ],
+    "events": [
+      "evt_mis_revue_postes"
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_mil_reforme_armee",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 4000,
+      "manpower": 300
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_garrison",
+        "delta": 4
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": 4
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_training_corps",
+        "delta": 4
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "manpower_mult",
+        "value": 0.04
+      }
+    ],
+    "events": [
+      "evt_mis_dilemme_reforme"
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_mil_corps_instruction",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 2500,
+      "food": 20000
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_camp_entrainement",
+        "share": 0.06
+      },
+      {
+        "op": "org_influence",
+        "org": "org_training_corps",
+        "delta": 6
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "manpower_mult",
+        "value": 0.03
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_ecole_cadres",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 3500
+    },
+    "prereqs": [
+      "mis_mil_corps_instruction"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.96
+      }
+    ],
+    "events": [
+      "evt_mis_promotion_cadres"
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_manoeuvres_odm",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gas": 2500,
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_gas_odm_mult",
+        "value": 0.94
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_veille_nuit",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 1500
+    },
+    "prereqs": [
+      "mis_mil_manoeuvres_odm"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_night_loss_mult",
+        "value": 0.9
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_service_sanitaire",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_wound_death_mult",
+        "value": 0.9
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_ateliers_entretien",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "steel": 400,
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "steel",
+        "delta": 150
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "losses_mult:gas",
+        "value": -0.05
+      },
+      {
+        "target": "losses_mult:steel",
+        "value": -0.05
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_canons_rempart",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "steel": 800,
+      "powder": 600,
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "wall",
+        "province": "prov_maria_sud",
+        "value": 100
+      },
+      {
+        "op": "wall",
+        "province": "prov_rose_sud",
+        "value": 100
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_sud",
+        "delta": -0.03
+      }
+    ],
+    "events": [
+      "evt_mis_chantier_remparts"
+    ],
+    "canon": "A",
+    "notes_canon": "Les canons des murs existent dans le récit ; le programme, sa durée et son coût sont une adaptation de jeu."
+  },
+  {
+    "id": "mis_mil_batteries_mobiles",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 210,
+    "cost": {
+      "steel": 1000,
+      "powder": 800,
+      "horses": 400,
+      "gold": 4000
+    },
+    "prereqs": [
+      "mis_mil_canons_rempart"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.97
+      }
+    ],
+    "events": [
+      "evt_mis_dilemme_batteries"
+    ],
+    "canon": "?",
+    "notes_canon": "Existence, calibres et usage de l'artillerie mobile de Paradis : question ouverte Q11 (docs/lore/questions-ouvertes.md)."
+  },
+  {
+    "id": "mis_mil_postes_avances",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "steel": 600,
+      "gold": 3500
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_fort_avance_maria",
+        "share": 0.08
+      },
+      {
+        "op": "titans",
+        "province": "prov_fort_avance_maria",
+        "delta": -0.04
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_attrition_mult",
+        "value": 0.93
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_patrouilles_mur",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 90,
+    "cost": {
+      "gold": 1200,
+      "manpower": 150
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_sud",
+        "delta": -0.02
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_haras_relais",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 2000,
+      "food": 15000
+    },
+    "prereqs": [
+      "mis_mil_inventaire_garnisons"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "horses",
+        "delta": 200
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "production_mult:horses",
+        "value": 0.1
+      }
+    ],
+    "events": [
+      "evt_mis_convoi_arrive"
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_convois_escortes",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 1800,
+      "horses": 200
+    },
+    "prereqs": [
+      "mis_mil_haras_relais"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.9
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_defense_profondeur",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 210,
+    "cost": {
+      "gold": 4500,
+      "manpower": 400
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee",
+      "mis_mil_canons_rempart"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      },
+      {
+        "op": "garrison",
+        "province": "prov_rose_sud",
+        "share": 0.06
+      },
+      {
+        "op": "garrison",
+        "province": "prov_rose_est",
+        "share": 0.06
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.97
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_etude_anti_titan",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "gold": 5000,
+      "steel": 500
+    },
+    "prereqs": [
+      "mis_mil_ecole_cadres"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 80
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_eco_recensement_greniers",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 60,
+    "cost": {
+      "gold": 600
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 8000
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "consumption_mult:food",
+        "value": -0.01
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_eco_greniers_publics",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3500,
+      "food": 30000
+    },
+    "prereqs": [
+      "mis_eco_recensement_greniers"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "losses_mult:food",
+        "value": -0.08
+      }
+    ],
+    "events": [
+      "evt_mis_greniers_ouverts"
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_mines_forges",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 4000,
+      "manpower": 300
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "steel",
+        "delta": 200
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "production_mult:steel",
+        "value": 0.1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_fabriques_gaz",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 4000,
+      "steel": 400
+    },
+    "prereqs": [
+      "mis_eco_mines_forges"
+    ],
+    "min_year": 845,
+    "effects": [],
+    "modifiers": [
+      {
+        "target": "production_mult:gas",
+        "value": 0.1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_routes_marchandes",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "tax_mult",
+        "value": 0.05
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_rotation_cultures",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_eco_recensement_greniers"
+    ],
+    "min_year": 845,
+    "effects": [],
+    "modifiers": [
+      {
+        "target": "production_mult:food",
+        "value": 0.08
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_poudrieres",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "steel": 500,
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_eco_mines_forges"
+    ],
+    "min_year": 845,
+    "effects": [],
+    "modifiers": [
+      {
+        "target": "production_mult:powder",
+        "value": 0.12
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_audiences_districts",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 60,
+    "cost": {
+      "gold": 500
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 1
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "events": [
+      "evt_mis_audience_districts"
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_pol_reforme_cabinet",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_pol_audiences_districts"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "capital",
+        "delta": 3
+      },
+      {
+        "op": "org_influence",
+        "org": "org_cabinet",
+        "delta": 5
+      },
+      {
+        "op": "legitimacy",
+        "delta": 2
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_cabinet_de_guerre",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3500
+    },
+    "prereqs": [
+      "mis_pol_reforme_cabinet"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_garrison",
+        "delta": 4
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": 3
+      },
+      {
+        "op": "org_influence",
+        "org": "org_military_police",
+        "delta": -3
+      },
+      {
+        "op": "capital",
+        "delta": 2
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "manpower_mult",
+        "value": 0.02
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_reforme_fiscale",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_pol_reforme_cabinet"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_bourgeoisie",
+        "satisfaction": -2,
+        "radicalisation": 0
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": 2,
+        "radicalisation": 0
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "tax_mult",
+        "value": 0.06
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_tribunaux_civils",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_pol_audiences_districts"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_basfonds",
+        "satisfaction": 3,
+        "radicalisation": 0
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_police_reglee",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_pol_reforme_cabinet"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_military_police",
+        "delta": 4
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": 0,
+        "radicalisation": -2
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_rel_dialogue_culte",
+    "nation": "paradis",
+    "branch": "religion",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 90,
+    "cost": {
+      "gold": 800
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_culte",
+        "delta": 5
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_rel_eglise_des_murs",
+    "nation": "paradis",
+    "branch": "religion",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000,
+      "food": 20000
+    },
+    "prereqs": [
+      "mis_rel_dialogue_culte"
+    ],
+    "exclusive_with": [
+      "mis_rel_tolerance_courants"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_influence",
+        "org": "org_culte",
+        "delta": 8
+      },
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": 5
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_clerge",
+        "satisfaction": 5,
+        "radicalisation": 0
+      }
+    ],
+    "events": [
+      "evt_mis_procession_murs"
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_rel_sermons_ordre",
+    "nation": "paradis",
+    "branch": "religion",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 1500
+    },
+    "prereqs": [
+      "mis_rel_dialogue_culte"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_paysans",
+        "satisfaction": 0,
+        "radicalisation": -2
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_rel_tolerance_courants",
+    "nation": "paradis",
+    "branch": "religion",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 1500
+    },
+    "prereqs": [
+      "mis_rel_dialogue_culte"
+    ],
+    "exclusive_with": [
+      "mis_rel_eglise_des_murs"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_basfonds",
+        "satisfaction": 0,
+        "radicalisation": -3
+      },
+      {
+        "op": "cult",
+        "province": "all",
+        "delta": -3
+      },
+      {
+        "op": "org_influence",
+        "org": "org_culte",
+        "delta": -5
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_rel_hospices_charite",
+    "nation": "paradis",
+    "branch": "religion",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500,
+      "food": 15000
+    },
+    "prereqs": [
+      "mis_rel_dialogue_culte"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_refugies",
+        "satisfaction": 4,
+        "radicalisation": 0
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_culte",
+        "delta": 3
+      }
+    ],
+    "events": [
+      "evt_mis_dilemme_culte"
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_ren_reseau_informateurs",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 90,
+    "cost": {
+      "gold": 1000
+    },
+    "prereqs": [],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_trost"
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.97
+      }
+    ],
+    "events": [
+      "evt_mis_carte_reseau"
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_ren_contre_espionnage",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_ren_reseau_informateurs"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_military_police",
+        "delta": 3
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_ren_archives_police",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_ren_reseau_informateurs"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 30
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_ren_reseau_signaux",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_sandbox_845",
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_ren_reseau_informateurs"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.97
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_avant_pays_reconnaissance",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500,
+      "gas": 2000
+    },
+    "prereqs": [
+      "mis_mil_manoeuvres_odm"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "titans",
+        "province": "prov_plaines_meurtries",
+        "delta": -0.05
+      },
+      {
+        "op": "titans",
+        "province": "prov_ruines_premier_cordon",
+        "delta": -0.05
+      },
+      {
+        "op": "titans",
+        "province": "prov_riviere_des_cendres",
+        "delta": -0.05
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.97
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_premiere_reprise",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 270,
+    "cost": {
+      "gold": 6000,
+      "gas": 4000,
+      "manpower": 500
+    },
+    "prereqs": [
+      "mis_mil_avant_pays_reconnaissance",
+      "mis_mil_postes_avances"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "titans",
+        "province": "prov_plaines_meurtries",
+        "delta": -0.1
+      },
+      {
+        "op": "titans",
+        "province": "prov_ruines_premier_cordon",
+        "delta": -0.1
+      },
+      {
+        "op": "titans",
+        "province": "prov_riviere_des_cendres",
+        "delta": -0.1
+      },
+      {
+        "op": "titans",
+        "province": "prov_falaises_cote_sud",
+        "delta": -0.1
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_defrichement",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 210,
+    "cost": {
+      "gold": 3000,
+      "manpower": 400
+    },
+    "prereqs": [
+      "mis_eco_rotation_cultures"
+    ],
+    "min_year": 845,
+    "effects": [],
+    "modifiers": [
+      {
+        "target": "production_mult:food",
+        "value": 0.08
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_marche_central",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_eco_routes_marchandes"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "tax_mult",
+        "value": 0.04
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_entrepots_trost",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500,
+      "steel": 300
+    },
+    "prereqs": [
+      "mis_eco_greniers_publics"
+    ],
+    "min_year": 845,
+    "effects": [],
+    "modifiers": [
+      {
+        "target": "losses_mult:food",
+        "value": -0.04
+      },
+      {
+        "target": "losses_mult:gas",
+        "value": -0.03
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_vigie_tours",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_845"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 1800,
+      "steel": 200
+    },
+    "prereqs": [
+      "mis_mil_patrouilles_mur"
+    ],
+    "min_year": 845,
+    "effects": [
+      {
+        "op": "titans",
+        "province": "prov_maria_sud",
+        "delta": -0.02
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_est",
+        "delta": -0.02
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_preparatifs_reconquete",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 5000,
+      "gas": 3000,
+      "manpower": 500
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee",
+      "mis_mil_postes_avances",
+      "mis_mil_convois_escortes"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_trost",
+        "share": 0.05
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_attrition_mult",
+        "value": 0.93
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_reconquete_maria",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 360,
+    "cost": {
+      "gold": 9000,
+      "gas": 5000,
+      "manpower": 900,
+      "steel": 800,
+      "food": 40000
+    },
+    "prereqs": [
+      "mis_mil_preparatifs_reconquete",
+      "mis_mil_batteries_mobiles"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "titans",
+        "province": "prov_maria_sud",
+        "delta": -0.12
+      },
+      {
+        "op": "titans",
+        "province": "prov_plaines_interieures_maria_sud",
+        "delta": -0.12
+      },
+      {
+        "op": "titans",
+        "province": "prov_faubourgs_shiganshina",
+        "delta": -0.12
+      },
+      {
+        "op": "titans",
+        "province": "prov_bourg_minier_maria",
+        "delta": -0.12
+      },
+      {
+        "op": "titans",
+        "province": "prov_hameaux_ouest_maria",
+        "delta": -0.12
+      },
+      {
+        "op": "titans",
+        "province": "prov_foret_arbres_geants",
+        "delta": -0.12
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": 5
+      }
+    ],
+    "events": [
+      "evt_mis_dilemme_reconquete"
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu : il prépare le terrain mais ne reprend aucune province ; la reprise de Maria dans le récit passe par ses événements (12 §3)."
+  },
+  {
+    "id": "mis_mil_consolidation_maria",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "gold": 6000,
+      "manpower": 600,
+      "food": 30000
+    },
+    "prereqs": [
+      "mis_mil_reconquete_maria"
+    ],
+    "requires": [
+      {
+        "control": "prov_shiganshina",
+        "eq": "paradis"
+      }
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 4
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "legitimacy",
+        "delta": 2
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_ravitaillement_terres_reprises",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000,
+      "horses": 300
+    },
+    "prereqs": [
+      "mis_mil_convois_escortes"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "resource",
+        "resource": "food",
+        "delta": 6000
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_attrition_mult",
+        "value": 0.9
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_ordre_apres_crise",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_pol_audiences_districts"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "legitimacy",
+        "delta": 2
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_military_police",
+        "delta": 3
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_trost_remise_en_defense",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "steel": 700,
+      "gold": 3500
+    },
+    "prereqs": [
+      "mis_mil_canons_rempart"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_trost",
+        "share": 0.08
+      },
+      {
+        "op": "wall",
+        "province": "prov_rose_sud_est",
+        "value": 100
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_ren_chasse_infiltres",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_sandbox_850"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2800
+    },
+    "prereqs": [
+      "mis_ren_contre_espionnage"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_military_police",
+        "delta": 4
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      },
+      {
+        "op": "research",
+        "delta": 20
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Les infiltrations sont un fait du récit ; la mission est une adaptation de jeu et ne désigne personne."
+  },
+  {
+    "id": "mis_mil_lances_foudroyantes",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 270,
+    "cost": {
+      "steel": 1200,
+      "powder": 1000,
+      "gold": 6000
+    },
+    "prereqs": [
+      "mis_mil_etude_anti_titan"
+    ],
+    "requires": [
+      {
+        "tech": "tech_thunder_spear_prototype"
+      }
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.88
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "L'arme n'existe qu'à la fin de 850 (11 §1) : la mission exige la technologie, jamais l'inverse."
+  },
+  {
+    "id": "mis_mil_programme_capture",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 210,
+    "cost": {
+      "gold": 4500,
+      "manpower": 300
+    },
+    "prereqs": [
+      "mis_mil_etude_anti_titan"
+    ],
+    "requires": [
+      {
+        "tech": "tech_titan_capture"
+      }
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 100
+      }
+    ],
+    "canon": "A",
+    "notes_canon": "Objectif de jeu (adaptation) : le récit n'en donne ni durée ni coût."
+  },
+  {
+    "id": "mis_mil_scellement_breches",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "steel": 900,
+      "gold": 4500
+    },
+    "prereqs": [
+      "mis_mil_canons_rempart"
+    ],
+    "requires": [
+      {
+        "tech": "tech_hardening_seal"
+      }
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "wall",
+        "province": "prov_maria_sud_est",
+        "value": 100
+      },
+      {
+        "op": "wall",
+        "province": "prov_maria_sud_ouest",
+        "value": 100
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_eco_chantiers_refugies",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 2500,
+      "food": 20000
+    },
+    "prereqs": [
+      "mis_eco_greniers_publics"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "stratum",
+        "stratum": "str_refugies",
+        "satisfaction": 4,
+        "radicalisation": 0
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "manpower_mult",
+        "value": 0.04
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_commission_reconstruction",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_pol_reforme_cabinet"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 2
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "capital",
+        "delta": 2
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mon_veille_rivages",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 1500
+    },
+    "prereqs": [
+      "mis_ren_reseau_informateurs"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_cote_est"
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "log_interception_mult",
+        "value": 0.97
+      }
+    ],
+    "canon": "A",
+    "requires": [
+      {
+        "fired": "evt_850_ocean"
+      }
+    ]
+  },
+  {
+    "id": "mis_mon_releves_cote",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 2500,
+      "horses": 150
+    },
+    "prereqs": [
+      "mis_mon_veille_rivages"
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "observe",
+        "province": "prov_falaises_cote_sud"
+      },
+      {
+        "op": "research",
+        "delta": 20
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mon_archives_exterieur",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_sandbox_850",
+      "scn_854"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "gold": 3500
+    },
+    "prereqs": [
+      "mis_ren_archives_police"
+    ],
+    "requires": [
+      {
+        "fired": "evt_850_yeager_basement"
+      }
+    ],
+    "min_year": 850,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 60
+      }
+    ],
+    "canon": "?",
+    "notes_canon": "Ce que Paradis apprend du monde extérieur, et quand, dépend du récit (12, E34 et suivants) ; la mission n'en dit rien d'avance."
+  },
+  {
+    "id": "mis_mil_corps_expeditionnaire",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 300,
+    "cost": {
+      "gold": 8000,
+      "manpower": 800,
+      "steel": 1000
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee",
+      "mis_mil_batteries_mobiles",
+      "mis_mil_convois_escortes"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": 5
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "world_support",
+        "faction": "fac_paradis",
+        "delta": 4
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.95
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_defense_cote",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 210,
+    "cost": {
+      "steel": 900,
+      "powder": 600,
+      "gold": 4500
+    },
+    "prereqs": [
+      "mis_mil_canons_rempart"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "garrison",
+        "province": "prov_rose_sud_est",
+        "share": 0.08
+      },
+      {
+        "op": "garrison",
+        "province": "prov_rose_est",
+        "share": 0.08
+      },
+      {
+        "op": "wall",
+        "province": "prov_rose_sud_est",
+        "value": 100
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_lances_ameliorees",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "steel": 1200,
+      "powder": 900,
+      "gold": 5500
+    },
+    "prereqs": [
+      "mis_mil_lances_foudroyantes"
+    ],
+    "requires": [
+      {
+        "tech": "tech_thunder_spear_improved"
+      }
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 1
+      }
+    ],
+    "hooks": [
+      {
+        "hook": "exp_loss_mult",
+        "value": 0.92
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mil_invasion_marley",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 360,
+    "cost": {
+      "gold": 12000,
+      "manpower": 1000,
+      "steel": 1500,
+      "gas": 5000,
+      "food": 50000
+    },
+    "prereqs": [
+      "mis_mil_corps_expeditionnaire",
+      "mis_mon_garanties_hizuru",
+      "mis_ren_renseignement_marley"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 3
+      },
+      {
+        "op": "org_loyalty",
+        "org": "org_survey_corps",
+        "delta": 6
+      },
+      {
+        "op": "world_support",
+        "faction": "fac_paradis",
+        "delta": 6
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": -1
+      }
+    ],
+    "ai_weight": 2,
+    "canon": "?",
+    "notes_canon": "Objectif de jeu : il prépare la campagne mais ne déclenche aucun événement ; l'issue dans le récit passe par ses événements (12 §3)."
+  },
+  {
+    "id": "mis_mil_mobilisation_generale",
+    "nation": "paradis",
+    "branch": "militaire",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_mil_reforme_armee"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": -2
+      },
+      {
+        "op": "resource",
+        "resource": "manpower",
+        "delta": 400
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "manpower_mult",
+        "value": 0.08
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_mon_contact_hizuru",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 120,
+    "cost": {
+      "gold": 2000
+    },
+    "prereqs": [
+      "mis_mon_veille_rivages"
+    ],
+    "requires": [
+      {
+        "fired": "evt_851_hizuru_visit"
+      }
+    ],
+    "min_year": 851,
+    "effects": [
+      {
+        "op": "world_relation",
+        "from": "fac_paradis",
+        "to": "fac_hizuru",
+        "axis": "trust",
+        "delta": 10
+      },
+      {
+        "op": "world_hizuru",
+        "delta": 5
+      }
+    ],
+    "canon": "?",
+    "notes_canon": "Les relations avec Hizuru sont un fait du récit (12, E48, E51) ; leur forme exacte est une adaptation."
+  },
+  {
+    "id": "mis_mon_garanties_hizuru",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 4000
+    },
+    "prereqs": [
+      "mis_mon_contact_hizuru"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "world_hizuru",
+        "delta": 8
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_paradis",
+        "to": "fac_hizuru",
+        "axis": "interest",
+        "delta": 8
+      }
+    ],
+    "canon": "?",
+    "notes_canon": "Mesure de jeu fondée sur la diplomatie d'Hizuru (12, E48, E51)."
+  },
+  {
+    "id": "mis_mon_liaison_volontaires",
+    "nation": "paradis",
+    "branch": "monde",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 2500
+    },
+    "prereqs": [
+      "mis_mon_archives_exterieur"
+    ],
+    "requires": [
+      {
+        "fired": "evt_851_volunteers"
+      }
+    ],
+    "min_year": 851,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 40
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_paradis",
+        "to": "fac_allies",
+        "axis": "trust",
+        "delta": 6
+      }
+    ],
+    "canon": "?",
+    "notes_canon": "Les volontaires sont un fait du récit (12, E47) ; l'organisation du bureau est une adaptation."
+  },
+  {
+    "id": "mis_ren_renseignement_marley",
+    "nation": "paradis",
+    "branch": "renseignement",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 240,
+    "cost": {
+      "gold": 4500
+    },
+    "prereqs": [
+      "mis_mon_liaison_volontaires"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "research",
+        "delta": 80
+      },
+      {
+        "op": "world_relation",
+        "from": "fac_paradis",
+        "to": "fac_marley",
+        "axis": "fear",
+        "delta": -5
+      }
+    ],
+    "canon": "?",
+    "notes_canon": "Ce que Paradis sait de Marley en 854 est une adaptation fondée sur le récit (12, E47, E50)."
+  },
+  {
+    "id": "mis_eco_economie_de_guerre",
+    "nation": "paradis",
+    "branch": "economique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 180,
+    "cost": {
+      "gold": 4000,
+      "steel": 500
+    },
+    "prereqs": [
+      "mis_eco_mines_forges",
+      "mis_eco_fabriques_gaz"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": -1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "production_mult:steel",
+        "value": 0.06
+      },
+      {
+        "target": "production_mult:gas",
+        "value": 0.06
+      },
+      {
+        "target": "consumption_mult:food",
+        "value": 0.02
+      }
+    ],
+    "canon": "A"
+  },
+  {
+    "id": "mis_pol_union_nationale",
+    "nation": "paradis",
+    "branch": "politique",
+    "scenarios": [
+      "scn_854"
+    ],
+    "duration_days": 150,
+    "cost": {
+      "gold": 3000
+    },
+    "prereqs": [
+      "mis_pol_cabinet_de_guerre"
+    ],
+    "min_year": 854,
+    "effects": [
+      {
+        "op": "legitimacy",
+        "delta": 3
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      },
+      {
+        "op": "stratum",
+        "stratum": "str_militaires",
+        "satisfaction": 3,
+        "radicalisation": 0
+      }
+    ],
+    "canon": "A"
+  }
+]

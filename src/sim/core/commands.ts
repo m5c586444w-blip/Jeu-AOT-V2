@@ -21,7 +21,10 @@ import { FORMATIONS, OBJECTIVES } from "../military/vocabulary";
 import { chooseOption } from "../events/engine";
 import { assignAgent, assignProblem, INTEL_OPS, recallAgent, recruitAgent, recruitProblem } from "../intel/intel";
 import type { IntelOp } from "../intel/intel";
-import { lockOf, techMods } from "../research/research";
+import { lockOf } from "../research/research";
+import { techModsWithMissions } from "../missions/missions";
+import { applyMissionCommand, MISSION_COMMANDS, validMissionCommand } from "../missions/layer";
+import type { MissionCommand } from "../missions/layer";
 import { inherit, retireProblem } from "../shifters/shifters";
 import { buildProblem, moveForces, moveProblem, orderBuild } from "../world/nations";
 import { projectProblem, projectTitan, recallTitan } from "../world/war";
@@ -69,6 +72,7 @@ export type Command =
   | { type: "Embargo"; to: string; on: boolean }
   | { type: "GuaranteeHizuru" }
   | ArmyCommand
+  | MissionCommand
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -184,6 +188,7 @@ export function validateCommand(cmd: unknown): Validation {
       return okOrders && validArmyCommand(c) ? { ok: true } : { ok: false, error: "ResolveEncounter invalide" };
     }
     default:
+      if ((MISSION_COMMANDS as readonly string[]).includes(String(c["type"]))) return validMissionCommand(c) ? { ok: true } : { ok: false, error: `${String(c["type"])} invalide` };
       if ((ARMY_COMMANDS as readonly string[]).includes(String(c["type"]))) return validArmyCommand(c) ? { ok: true } : { ok: false, error: `${String(c["type"])} invalide` };
       return { ok: false, error: `type de commande inconnu : ${String(c["type"])}` };
   }
@@ -284,6 +289,10 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       break;
     case "Noop":
       break;
+    case "StartMission":
+    case "CancelMission":
+      next = applyMissionCommand(next, cmd, world);
+      break;
     default:
       next = applyArmyCommand(next, cmd, world);
       break;
@@ -347,7 +356,7 @@ function applyMilitary(state: GameState, cmd: MilitaryCommand, world?: World): G
     st: structuredClone(state.strategic),
     pol: state.politics ? structuredClone(state.politics) : null,
     mil: structuredClone(state.military),
-    tech: techMods(world, state.research),
+    tech: techModsWithMissions(world, state.research, state.missions),
   };
   if (cmd.type === "LaunchExpedition" && cmd.plan.objective === "capture" && !ctx.tech?.capture) throw new Error("plan.capture_locked");
   if (cmd.type === "LaunchExpedition") launchExpedition(ctx, cmd.plan);

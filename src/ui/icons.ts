@@ -31,6 +31,7 @@ export const ICONS: Readonly<Record<string, string>> = {
   organisations: "M5 21V4l5 2-5 2 M12 21V4l5 2-5 2 M19 21V8l2.5 1.2L19 10.4 M3 21h18",
   conseil: "M4 5h11v8H9l-3 3v-3H4Z M15 9h5v8h-2v3l-3-3h-4v-4",
   journal: "M3 5.5c3-1 6-1 9 .5v14c-3-1.5-6-1.5-9-.5Z M21 5.5c-3-1-6-1-9 .5v14c3-1.5 6-1.5 9-.5Z M5.5 9h4 M5.5 12h4 M14.5 9h4 M14.5 12h4",
+  missions: "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18Z M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z M12 11.2a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6Z M12 12l7-7 M16.5 5H19v2.5",
   armees: "M6 21V3 M6 4h12l-3 3.5 3 3.5H6 M3 21h6 M10 6.5h3",
   expeditions: "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18Z M15.5 8.5l-2 5-5 2 2-5Z",
   chronique: "M7 3h10 M7 21h10 M8 3c0 5 4 6 4 9s-4 4-4 9 M16 3c0 5-4 6-4 9s4 4 4 9",
@@ -131,6 +132,7 @@ export const EVENT_ICON: Readonly<Record<string, string>> = { civil: "recolte", 
 
 /** Icône d'une entrée de journal, d'après sa clé de texte. */
 export function alertIcon(key: string): string {
+  if (/mission/.test(key)) return "missions";
   if (/died|death|deces|mort/.test(key)) return "deuil";
   if (/breach|wall|mur|breche/.test(key)) return "breche";
   if (/titan/.test(key)) return "empreinte";

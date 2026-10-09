@@ -347,6 +347,7 @@ export async function bootGame(): Promise<void> {
     open_epilogue: () => registers?.toggle("epilogue"),
     open_economy: () => registers?.toggle("economie"),
     open_armies: () => registers?.toggle("armees"),
+    open_missions: () => (world.missions ? registers?.toggle("missions") : undefined),
   };
   window.addEventListener("keydown", (ev) => {
     // Pendant une bataille, l'écran tactique a ses propres touches.

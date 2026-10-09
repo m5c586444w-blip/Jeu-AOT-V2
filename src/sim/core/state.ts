@@ -16,7 +16,7 @@ import { createEventsState, dailyEvents } from "../events/engine";
 import type { EventsState } from "../events/engine";
 import { createIntelState, dailyIntel, monthlyCult } from "../intel/intel";
 import type { IntelState } from "../intel/intel";
-import { createResearchState, monthlyResearch, techHook, techMods } from "../research/research";
+import { createResearchState, monthlyResearch, techHook } from "../research/research";
 import type { ResearchState } from "../research/research";
 import { createShiftersState, dailyShifters } from "../shifters/shifters";
 import type { ShiftersState } from "../shifters/shifters";
@@ -29,6 +29,8 @@ import { pushLog } from "../strategic/economy";
 import { createArmiesState } from "../armies/state";
 import type { ArmiesState } from "../armies/state";
 import { tickArmies } from "../armies/layer";
+import { techModsWithMissions, tickMissions, withMissionMods } from "../missions/missions";
+import type { MissionsState } from "../missions/missions";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
 
@@ -61,6 +63,11 @@ export interface GameState {
    * créé au départ d'un scénario qui a des armées, ou par la commande `RaiseArmies`.
    */
   armies?: ArmiesState;
+  /**
+   * Missions nationales (MIS) : facultatif. Créé au premier lancement d'une mission (joueur) ou à la première décision de l'IA de
+   * Marley ; absent d'une sauvegarde antérieure ou d'une partie où rien n'a été lancé (son hash ne change pas).
+   */
+  missions?: MissionsState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -108,6 +115,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let shifters = state.shifters;
   let nations = state.nations;
   let armies = state.armies;
+  let missions = state.missions;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
@@ -119,7 +127,7 @@ export function tickDay(state: GameState, world?: World): GameState {
     if (shifters) shifters = structuredClone(shifters);
     if (!nations && world.nations) nations = createNationsState(world, state.date);
     if (nations) nations = structuredClone(nations);
-    const mods = politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS;
+    const mods = withMissionMods(world, missions, politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS);
     strategic = applyDay(world, strategic, planDay(world, strategic, state.date, mods));
     if (politics && world.politics) {
       politics = structuredClone(politics);
@@ -137,7 +145,7 @@ export function tickDay(state: GameState, world?: World): GameState {
     }
     if (military) {
       const reportsBefore = military.reports.length;
-      const r = dailyMilitary(world, state.seed, state.date, military, strategic, politics, techMods(world, research));
+      const r = dailyMilitary(world, state.seed, state.date, military, strategic, politics, techModsWithMissions(world, research, missions));
       military = r.mil;
       strategic = r.st;
       politics = r.pol;
@@ -181,6 +189,20 @@ export function tickDay(state: GameState, world?: World): GameState {
       nations = r.ns;
       armies = r.armies;
     }
+    // Missions (MIS) : accomplissements du jour, revue de l'IA des nations non jouées.
+    if (world.missions) {
+      const c = tickMissions(world, state.seed, date, { st: strategic, pol: politics, rs: research, intel, ev: events, mil: military, sh: shifters, ns: nations, armies, ms: missions });
+      if (c) {
+        strategic = c.st;
+        politics = c.pol;
+        research = c.rs;
+        intel = c.intel;
+        events = c.ev;
+        shifters = c.sh;
+        nations = c.ns;
+        missions = c.ms;
+      }
+    }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -193,5 +215,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}) };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}), ...(missions ? { missions } : {}) };
 }

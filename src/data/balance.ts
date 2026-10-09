@@ -1,5 +1,7 @@
 import { ArmiesBalanceSchema } from "./armySchemas";
 export type { ArmiesBalance } from "./armySchemas";
+import { MissionsBalanceSchema } from "./missionSchemas";
+export type { MissionsBalance } from "./missionSchemas";
 import { z } from "zod";
 import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
 import { FORMATIONS, WEATHERS } from "../sim/military/vocabulary";
@@ -389,6 +391,7 @@ export type TimeBalance = z.infer<typeof TimeBalanceSchema>;
 
 export const BALANCE_FILES = {
   armies: ArmiesBalanceSchema,
+  missions: MissionsBalanceSchema,
   economy: EconomyBalanceSchema,
   time: TimeBalanceSchema,
   politics: PoliticsBalanceSchema,

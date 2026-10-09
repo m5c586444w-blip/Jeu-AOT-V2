@@ -1,0 +1,13 @@
+{
+  "canon": "A",
+  "notes_canon": "Équilibrage des missions nationales (MIS) : adaptations sans source ; à régler au jeu.",
+  "slots": { "paradis": 2, "marley": 1 },
+  "refund_share": 0.5,
+  "log_cap": 120,
+  "ai": {
+    "review_every_days": 30,
+    "first_after_days": 60,
+    "reserve_share": 0.25,
+    "weights": { "base": 1, "at_war": 2, "branch_need": 1.5, "cheap": 0.5 }
+  }
+}

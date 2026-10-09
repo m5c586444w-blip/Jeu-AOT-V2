@@ -1076,3 +1076,30 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | PA (sous-agent) | Opus | xhigh | ≈ 185 | arrêt de 4 h sans progrès, relancé |
 | Revue PA + correctifs + fusion | Opus | défaut | ≈ 75 | 1 passe |
+
+## 2026-10-09 — D-131 MIS : modèle et moteur des missions nationales
+- **Contexte** : fichier 23 §5 ; arbre de missions façon « focus », sans jamais forcer un événement du récit.
+- **Options** : (a) missions = événements du moteur P5 ; (b) couche propre `missions?` dans `GameState`, qui réutilise `applyEffect` ; (c) moteur entièrement séparé.
+- **Choix** : (b). Effets ponctuels par `applyEffect` ; bonus durables par `withMissionMods` (économie) et `techModsWithMissions` (crochets d'expédition et de logistique) ; suites par `triggerEvent`, qui refuse tout événement canon. Nouvel effet `nation` (industrie, hommes, stabilité d'une nation du monde). Règle R14 de `canon:check` (aucun événement canon déclenché, effets interdits, références, cycles, années).
+- **Raison** : plus petit changement, déterminisme conservé, aucun doublon du moteur d'événements ; état créé paresseusement, donc empreintes inchangées tant qu'aucune mission n'est lancée.
+- **Réversible** : oui (couche facultative, données additives).
+
+## 2026-10-09 — D-132 MIS : Marley (branche simplifiée) et IA
+- **Choix** : 12 missions de Marley, coût en industrie et en hommes seulement, effets sur les grandeurs des nations seulement. L'IA ne conduit que Marley quand elle n'est pas jouée : revue tous les 30 jours après le jour 60, réserve de 25 %, utilité = poids de base + guerre + besoin de branche + coût, décision journalisée avec ses raisons. Paradis n'a pas d'IA de missions (le joueur est Paradis ; en jeu côté Marley, Paradis ne lance pas de mission).
+- **Empreintes** : seule celle du 854 change (`1aca7ab8` → `56dc43aa`), parce que l'IA de Marley lance des missions ; 845, 850, Marley jouée (`c718bf0d`), expédition, bataille et sans monde : inchangées.
+- **Réversible** : oui (`data/balance/missions.json`, `ai.first_after_days` très grand).
+
+## 2026-10-09 — D-133 MIS : interface
+- **Choix** : registre « Missions » (touche Z, groupe Gouvernement), calqué sur l'arbre de recherche (`treeLayout`, classes `arbre`, `planche`) ; infobulle d'effet par `why.bind` ; mission en cours en tête avec barre, temps restant et « Abandonner » (confirmation) ; frise : troisième onglet « Missions nationales » de la Chronologie ; pause et journal par l'alerte `alert.mission_done`. Le bac à sable 845 n'ayant aucun registre, ses missions ne sont couvertes que par les tests de simulation (dette).
+- **Écart de procédure** : un commit pour MIS.1 et MIS.2 (les tests de données dépendent du modèle), un pour MIS.3 et MIS.4 (la frise réutilise les textes de l'écran). **Réversible** : oui.
+
+## 2026-10-09 — D-134 MIS : revue et fusion
+- **Contexte** : revue par un sous-agent distinct (captures ouvertes, données, code) : aucun défaut bloquant ; une remarque de lore : en 850, « Veille des rivages » et « Relevés de la côte » supposent que Paradis connaît la mer avant l'arrivée à la mer ; « Archives de l'extérieur » dépendait de la chapelle Reiss et non du sous-sol.
+- **Options** : (a) laisser en dette ; (b) note `?` ; (c) conditions sur les événements du récit déjà au squelette.
+- **Choix** : (c). `mis_mon_veille_rivages` exige `evt_850_ocean` (« Relevés de la côte » suit par son prérequis) ; `mis_mon_archives_exterieur` exige `evt_850_yeager_basement`. Le moteur compte les événements « passe » comme survenus (`src/sim/events/engine.ts:196`). Compte de planches du rapport corrigé (14). Verify final code 0, 644/644 (`docs/reports/MIS-verify-final.log`).
+- **Réversible** : oui (données).
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| MIS (sous-agent) | Opus | high | ≈ 160 | arrêt de 3 h sans progrès, relancé |
+| Revue MIS + correctif + fusion | Opus | défaut | ≈ 40 | 1 passe |
