@@ -4,6 +4,7 @@ import { View2D } from "../../render/tactical/view2d";
 import type { World } from "../../sim/strategic/world";
 import { createBattle, stepBattle } from "../../sim/tactical/battle";
 import type { Battle } from "../../sim/tactical/battle";
+import { groundAt } from "../../sim/tactical/map";
 import { bodyName } from "../../sim/tactical/shifters";
 import { FORMATIONS, RESTRAINTS, SHIFTER_OBJECTIVES } from "../../sim/tactical/types";
 import type { BattleSetup, Restraint, ShifterObjective, SquadOrder, TimedOrder } from "../../sim/tactical/types";
@@ -447,6 +448,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
 
   // ——— Caméra : stratégique libre ↔ suivi (escouade, unité ou Titan) ———
   const prevCenter = new Map<string, { x: number; y: number; h: number }>();
+  const followLead = new Map<string, number>();
   const followTarget = (): { x: number; y: number; z: number; heading: number; height: number } | null => {
     const s = bt.state;
     if (focusTitan !== null && sel.squads.length === 0 && !sel.unit) {
@@ -459,14 +461,25 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     }
     const id = sel.squads[0] ?? C.commandable(s)[0]?.id;
     if (!id) return null;
+    const members = C.membersOf(s, id);
     const c = C.centerOf(s, id);
-    if (!c) return null;
+    if (!c || members.length === 0) return null;
+    // On suit un homme de l'escouade (le plus proche de son centre, gardé tant qu'il est debout et visible) : le centre
+    // d'une escouade dispersée tombe souvent dans une maison, et la simulation laisse les hommes à pied traverser les
+    // bâtiments (dette n° 53) : on préfère un homme qui n'est pas dans un volume.
+    const inside = (m: { x: number; y: number; z: number }): boolean => groundAt(bt.map, m.x, m.y) > m.z + 0.5;
+    let lead = members.find((m) => m.index === followLead.get(id) && !inside(m));
+    if (!lead) {
+      const seen = members.filter((m) => !inside(m));
+      lead = (seen.length > 0 ? seen : members).reduce((b, m) => (Math.hypot(m.x - c.x, m.y - c.y) < Math.hypot(b.x - c.x, b.y - c.y) ? m : b));
+      followLead.set(id, lead.index);
+    }
     const sq = s.squads.find((x) => x.id === id);
     const pc = prevCenter.get(id);
     let h = pc?.h ?? sq?.heading ?? -Math.PI / 2;
-    if (pc && Math.hypot(c.x - pc.x, c.y - pc.y) > 0.4) h = Math.atan2(c.y - pc.y, c.x - pc.x);
-    if (!pc || Math.hypot(c.x - pc.x, c.y - pc.y) > 0.4) prevCenter.set(id, { ...c, h });
-    return { x: c.x, y: c.y, z: 0, heading: h, height: 1.8 };
+    if (pc && Math.hypot(lead.x - pc.x, lead.y - pc.y) > 0.4) h = Math.atan2(lead.y - pc.y, lead.x - pc.x);
+    if (!pc || Math.hypot(lead.x - pc.x, lead.y - pc.y) > 0.4) prevCenter.set(id, { x: lead.x, y: lead.y, h });
+    return { x: lead.x, y: lead.y, z: lead.z, heading: h, height: 1.8 };
   };
   const toggleCamera = (): void => {
     const next = view.camera === "suivi" ? "strategique" : "suivi";
@@ -662,7 +675,19 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       if (!l) continue;
       const params: Record<string, string | number> = {};
       for (const [k, v] of Object.entries(l.params)) params[k] = (k === "squad" || k === "other") && typeof v === "string" ? unitName(v) : k === "battery" && typeof v === "string" ? batteryName(v) : label(v);
-      logList.prepend(el("li", l.key.startsWith("battle.death") ? "carnet-mort" : "", `${clock(l.t)} — ${t(l.key, params)}`));
+      // Ouverture d'une bataille de compagnies : les fantassins des deux camps comptent (la ligne de P4 ne compte que les soldats).
+      const titans = Number(l.params["titans"] ?? 0);
+      const opening = l.key === "battle.start" && (bt.state.troops?.length ?? 0) > 0;
+      // « L'escouade Escouade 19 » : le nom complet de l'unité porte déjà son genre (escouade ou section).
+      const tr = opening ? (bt.state.troops ?? []) : [];
+      const foes = tr.filter((x) => x.side === "ennemi").length;
+      const opener = foes === 0 ? "rt.start_titans_only" : titans > 0 ? "rt.start" : "rt.start_no_titans";
+      const key = opening ? opener : l.key === "battle.squad_retreats" ? "rt.squad_retreats" : l.key;
+      if (opening) {
+        params["ours"] = bt.state.soldiers.length + tr.filter((x) => x.side === "allie").length;
+        params["enemy"] = foes;
+      }
+      logList.prepend(el("li", l.key.startsWith("battle.death") ? "carnet-mort" : "", `${clock(l.t)} — ${t(key, params)}`));
     }
     while (logList.childElementCount > 40) logList.lastElementChild?.remove();
   };
@@ -705,7 +730,8 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
         return;
       }
       if (!tag) {
-        tag = el("span", "rt-etiquette rt-etiquette--titan", t("rt.titan_short"));
+        // Corps d'un porteur allié : étiquette aux couleurs de Paradis, distincte des Titans à abattre.
+        tag = el("span", `rt-etiquette ${ti.ally ? "rt-etiquette--titan-allie" : "rt-etiquette--titan"}`, t("rt.titan_short"));
         labels.append(tag);
         tags.set(key, tag);
       }
@@ -747,7 +773,10 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       const s = bt.state;
       box.append(el("h3", "", t(`battle.end_short.${s.ended?.reason ?? "temps"}`).toUpperCase()));
       const table = el("table", "registre-table");
-      for (const r of [...battleSummary(s), ...troopSummary(s)]) {
+      // Sans soldat à équipement tridimensionnel (bataille d'armées), les lignes propres aux soldats (coupes, gaz…) sont omises.
+      const ODM_ROWS = new Set(["tac.sum.dead", "tac.sum.cuts", "tac.sum.limbs", "tac.sum.dodges", "tac.sum.rescues", "tac.sum.blades", "tac.sum.gas"]);
+      const rows = [...battleSummary(s), ...troopSummary(s)].filter((r) => (s.soldiers.length > 0 || !ODM_ROWS.has(r.key)) && (r.key !== "tac.sum.napes" || s.titans.length > 0 || r.value > 0));
+      for (const r of rows) {
         const tr = el("tr");
         const td = el("td");
         const span = el("span", "valeur", formatNumber(r.value));
@@ -855,6 +884,12 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
         const sr = host.getBoundingClientRect();
         const br = subs.getBoundingClientRect();
         const obstacles = boxes.map((m) => ({ x0: m.x0 + sr.left, y0: m.y0 + sr.top, x1: m.x1 + sr.left, y1: m.y1 + sr.top }));
+        // Le bandeau de pause et le message de repli ne sont jamais recouverts par les sous-titres.
+        for (const e of [pauseBanner, message]) {
+          if (e.hidden) continue;
+          const r = e.getBoundingClientRect();
+          obstacles.push({ x0: r.left, y0: r.top, x1: r.right, y1: r.bottom });
+        }
         const place = placeSubtitles({ x0: sr.left, y0: sr.top, x1: sr.right, y1: sr.bottom }, { w: Math.max(br.width, 260), h: Math.max(br.height, 30) }, obstacles);
         document.documentElement.style.setProperty("--sous-titres-x", `${Math.round(place.rect.x0)}px`);
         document.documentElement.style.setProperty("--sous-titres-y", `${Math.round(place.rect.y0)}px`);

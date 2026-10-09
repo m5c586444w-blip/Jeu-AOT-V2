@@ -101,7 +101,8 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
   const footprints: Footprint[] = [];
   const by = (k: Structure["kind"]): Structure[] => m.structures.filter((s) => s.kind === k);
 
-  // Bâtiments : murs (boîte exacte) et toit à deux pans dans l'emprise (pas de débord : l'emprise rendue = celle de la simulation).
+  // Bâtiments : murs (boîte exacte, hauteur de la simulation : les crochets des façades y sont posés) et toit à deux pans
+  // au-dessus, dans l'emprise (pas de débord : l'emprise rendue = celle de la simulation).
   const houses = by("batiment");
   if (houses.length > 0) {
     const box = new BoxGeometry(1, 1, 1).translate(0, 0.5, 0);
@@ -110,8 +111,8 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     walls.name = "batiments";
     roofs.name = "toits";
     houses.forEach((s, i) => {
-      const roofH = Math.min(s.w, s.d) * range(rand, 0.28, 0.42);
-      const wallH = Math.max(2.5, s.h - roofH);
+      const roofH = Math.min(s.w, s.d) * range(rand, 0.22, 0.34);
+      const wallH = s.h;
       place(walls, i, s.x + s.w / 2, 0, s.y + s.d / 2, s.w, wallH, s.d);
       // Faîtage le long du grand côté.
       if (s.w >= s.d) place(roofs, i, s.x + s.w / 2, wallH, s.y + s.d / 2, s.w, roofH, s.d);

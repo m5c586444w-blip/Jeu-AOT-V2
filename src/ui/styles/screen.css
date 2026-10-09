@@ -746,10 +746,11 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .rt-etiquette--allie { border-color: var(--accent-fonce); }
 .rt-etiquette--ennemi { color: var(--danger-clair); border-color: var(--danger); }
 .rt-etiquette--titan { color: var(--texte-fort); background: var(--danger-plein); border-color: var(--danger); }
+.rt-etiquette--titan-allie { color: var(--texte-fort); background: var(--panneau); border-color: var(--accent); }
 .rt-etiquette--choisie { color: var(--accent-texte); background: var(--accent); }
 .rt-etiquette--repli { border-color: var(--danger-plein); }
 .rt-pause { position: absolute; z-index: 2; top: 0.5rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.15rem 0.8rem; font-size: var(--t-s); letter-spacing: 0.08em; color: var(--accent-clair); background: var(--voile-fort); pointer-events: none; }
-.rt-message { position: absolute; z-index: 2; left: 0.6rem; right: 0.6rem; bottom: 0.6rem; margin: 0; padding: 0.3rem 0.6rem; font-size: var(--t-s); color: var(--texte-fort); background: var(--voile-fort); border-left: 3px solid var(--accent); }
+.rt-message { position: absolute; z-index: 2; top: 2.6rem; left: 50%; transform: translateX(-50%); width: min(40rem, 90%); margin: 0; padding: 0.3rem 0.6rem; font-size: var(--t-s); color: var(--texte-fort); background: var(--voile-fort); border-left: 3px solid var(--accent); }
 .rt-options { position: absolute; z-index: 3; top: 0.5rem; right: 0.5rem; width: min(22rem, 90%); padding: 0.5rem 0.7rem; background: var(--panneau); border: var(--filet-l) solid var(--filet); }
 .rt-panneau { display: flex; flex-direction: column; gap: 0.35rem; }
 .rt-bloc { padding-bottom: 0.3rem; border-bottom: var(--filet-l) solid var(--filet-doux); }

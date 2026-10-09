@@ -1,0 +1,26 @@
+
+> murs-et-sang@0.0.1 smoke:pa
+> tsx src/tools/smoke-pa.ts
+
+[854, Paradis] 1366×768
+  OK  bandeau : registre « Armées » (touche S)
+  OK  registre des armées : 3 armées de Paradis (Sud, Est, Brigade)
+  OK  moral expliqué (« pourquoi ? »)
+  OK  registre des armées : 7 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  destination choisie au clic sur la carte : « Marcher vers Maria-Sud-Est »
+  OK  trajet affiché : « Trajet : Trost → Rose-Sud — porte de Trost → Plaines intérieures de Maria — Sud → Plaines céréalières du Sud → »
+  OK  flotte de Marley en vue ; corps débarqué (journal)
+  OK  ennemi en vue à intercepter : 1
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 300000ms exceeded.
+    at consoleLine (/home/claude/Jeu-AOT-V2/src/tools/smoke-pa.ts:39:14)
+    at async <anonymous> (/home/claude/Jeu-AOT-V2/src/tools/smoke-pa.ts:141:5) {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v22.22.0
+EXIT 1

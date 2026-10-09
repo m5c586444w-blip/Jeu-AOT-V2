@@ -3642,5 +3642,9 @@
   "exp.trial_enemy": "Fantassins adverses",
   "exp.trial_shifter": "Porteur allié",
   "exp.trial_shifter_name": "Porteur allié",
-  "rt.titan_short": "T"
+  "rt.titan_short": "T",
+  "rt.start": "Début de la bataille — {map} — {ours} hommes de Paradis contre {enemy} fantassins adverses et {titans} Titan(s) — {light}.",
+  "rt.start_titans_only": "Début de la bataille — {map} — {ours} hommes de Paradis contre {titans} Titan(s) — {light}.",
+  "rt.start_no_titans": "Début de la bataille — {map} — {ours} hommes de Paradis contre {enemy} fantassins adverses — {light}.",
+  "rt.squad_retreats": "{squad} a perdu la moitié de ses hommes : fusée verte, repli."
 }

@@ -29,14 +29,15 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
-import type { Object3D } from "three";
+import type { Object3D, Texture } from "three";
 import type { BattleView, CameraMode, PickHit, ViewOptions, ViewOverlay } from "../../battleView";
 import type { TacticalWorldMap } from "../../../sim/tactical/map";
 import type { BattleState, SoldierUnit, TitanUnit } from "../../../sim/tactical/types";
 import { QUALITY, effectivePixelRatio } from "../quality";
 import { buildSoldier, crowdGeometry, soldierMaterials } from "../soldier";
 import type { Soldier, SoldierMaterials, SoldierPose } from "../soldier";
-import { TITAN_LARGE, TITAN_SMALL, buildTitan } from "../titan";
+import { TITAN_LARGE, TITAN_SMALL, buildTitan, setSteamTexture } from "../titan";
+import { puffTexture, skinTexture } from "../textures";
 import type { Titan, TitanPose } from "../titan";
 import { photoUrl } from "../photoTextures";
 import { buildBattleWorld } from "./world";
@@ -68,6 +69,8 @@ function setInst(mesh: InstancedMesh, i: number, x: number, y: number, z: number
 
 /** Orientation d'une figure (modèle tourné vers +Z) pour un cap de la carte (rad, x vers l'est, y vers le sud). */
 const yawOf = (heading: number): number => Math.PI / 2 - heading;
+/** Azimuts essayés par la caméra de suivi quand la vue de derrière est masquée (du plus proche au plus éloigné). */
+const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, (3 * Math.PI) / 4, (-3 * Math.PI) / 4, Math.PI];
 
 interface UnitLayers {
   crowd: InstancedMesh;
@@ -107,6 +110,8 @@ export class View3D implements BattleView {
   private pitch = 0.95;
   private openDist = 300;
   private followGoal: { x: number; y: number; z: number; heading: number; height: number } | null = null;
+  /** Décalage d'azimut retenu pour la caméra de suivi (0 : derrière la cible). */
+  private followOff = 0;
   private readonly eye = new Vector3();
   private readonly look = new Vector3();
   private counts = { detail: 0, crowd: 0, markers: 0 };
@@ -115,6 +120,9 @@ export class View3D implements BattleView {
   private readonly groundPlane = new Plane(new Vector3(0, 1, 0), 0);
   private time = 0;
   private snapNext = false;
+  /** Peau des Titans et bouffées de vapeur (toiles procédurales de R1, créées au premier Titan). */
+  private skin: Texture | null = null;
+  private puff: Texture | null = null;
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
     this.opts = opts;
@@ -132,7 +140,7 @@ export class View3D implements BattleView {
     const sky = night ? 0x1b2333 : 0xaebfcc;
     this.scene.background = new Color(sky);
     this.scene.fog = new Fog(sky, night ? 120 : 450, night ? 700 : 2200);
-    this.hemi = new HemisphereLight(night ? 0x46557a : 0xdfe8f0, night ? 0x1c1a14 : 0x5b5340, night ? 0.45 : 1.1);
+    this.hemi = new HemisphereLight(night ? 0x46557a : 0xdfe8f0, night ? 0x1c1a14 : 0x6b6350, night ? 0.5 : 1.5);
     this.scene.add(this.hemi);
     this.sun = new DirectionalLight(night ? 0x9fb1d6 : 0xfff1dc, night ? 0.5 : 2.4);
     this.sun.castShadow = q.shadows;
@@ -273,7 +281,10 @@ export class View3D implements BattleView {
     let ti = this.titans.get(t.id);
     if (!ti) {
       const base = t.height < 8 ? TITAN_SMALL : TITAN_LARGE;
-      ti = buildTitan({ ...base, height: t.height, salt: base.salt + t.silhouette }, this.seed * 31 + t.id, null, false);
+      this.skin ??= skinTexture(this.seed);
+      this.puff ??= puffTexture();
+      ti = buildTitan({ ...base, height: t.height, salt: base.salt + t.silhouette }, this.seed * 31 + t.id, this.skin, false);
+      setSteamTexture(ti, this.puff);
       ti.group.traverse((o) => {
         o.castShadow = true;
       });
@@ -315,19 +326,48 @@ export class View3D implements BattleView {
     if (this.mode === "suivi" && this.followGoal) this.snapNext = false;
     if (this.mode === "suivi" && this.followGoal) {
       const g = this.followGoal;
-      const back = Math.max(14, g.height * 1.8);
-      const up = Math.max(7, g.height * 0.95);
-      const dx = Math.cos(g.heading);
-      const dz = Math.sin(g.heading);
+      const back = Math.max(16, g.height * 1.8);
+      const base = Math.max(9, g.height * 0.95);
+      // Ligne de vue dégagée : la caméra se place derrière la cible, ou de biais si un bâtiment la masque de là,
+      // assez haut pour voir par-dessus les toits (sans collision réelle : dette n° 50).
+      const need = (off: number): number => {
+        const a = g.heading + off;
+        return Math.max(base, this.sightHeight(g.x, g.y, g.z, g.x - Math.cos(a) * back, g.y - Math.sin(a) * back));
+      };
+      let off = this.followOff;
+      let up = need(off);
+      if (up > base + 0.5) {
+        for (const o of FOLLOW_OFFSETS) {
+          const h = need(o);
+          if (h < up - 3) {
+            up = h;
+            off = o;
+          }
+        }
+      } else if (off !== 0 && need(0) <= base + 0.5) {
+        off = 0;
+        up = base;
+      }
+      // Changement de côté : coupe franche (un fondu passerait à travers les maisons).
+      const cut = off !== this.followOff;
+      this.followOff = off;
+      up = Math.min(up, back * 3);
+      const dx = Math.cos(g.heading + off);
+      const dz = Math.sin(g.heading + off);
       const wantEye = new Vector3(g.x - dx * back, up + g.z, g.y - dz * back);
-      const wantLook = new Vector3(g.x + dx * back * 0.6, Math.max(1.5, g.z + g.height * 0.45), g.y + dz * back * 0.6);
-      if (snap) {
+      // Regard porté devant la cible quand la caméra est basse ; sur la cible quand elle a dû monter au-dessus des toits.
+      const ahead = back * 0.6 * Math.max(0, Math.min(1, 1 - (up - base) / (back * 1.5)));
+      const wantLook = new Vector3(g.x + dx * ahead, Math.max(1.5, g.z + g.height * 0.45), g.y + dz * ahead);
+      if (snap || cut) {
         this.eye.copy(wantEye);
         this.look.copy(wantLook);
       } else {
-        this.eye.lerp(wantEye, 0.12);
-        this.look.lerp(wantLook, 0.18);
+        this.eye.lerp(wantEye, 0.2);
+        this.look.lerp(wantLook, 0.25);
       }
+      // Pendant le fondu aussi, la caméra reste au-dessus de ce qui la sépare des hommes suivis.
+      const now = Math.min(back * 3, this.sightHeight(g.x, g.y, g.z, this.eye.x, this.eye.z));
+      if (now > this.eye.y - g.z) this.eye.y = g.z + now;
     } else {
       const cp = Math.cos(this.pitch);
       const wantEye = new Vector3(this.target.x + Math.sin(this.yaw) * cp * this.dist, Math.sin(this.pitch) * this.dist, this.target.z + Math.cos(this.yaw) * cp * this.dist);
@@ -344,6 +384,30 @@ export class View3D implements BattleView {
     this.cam.updateMatrixWorld();
   }
 
+  /**
+   * Hauteur de caméra (au-dessus de la cible) pour que la ligne de vue de la caméra, placée en (x1, y1), jusqu'aux hommes
+   * en (x0, y0, z0) passe au-dessus de chaque volume (bâtiment avec son toit, mur, rocher) qu'elle traverse.
+   */
+  private sightHeight(x0: number, y0: number, z0: number, x1: number, y1: number): number {
+    let up = 0;
+    for (const s of this.map?.structures ?? []) {
+      if (s.shape !== "box") continue;
+      const top = s.h + (s.kind === "batiment" ? Math.min(s.w, s.d) * 0.34 : 0) + 1;
+      if (top <= z0) continue;
+      for (let k = 1; k <= 12; k++) {
+        const f = k / 12;
+        const x = x0 + (x1 - x0) * f;
+        const y = y0 + (y1 - y0) * f;
+        if (x >= s.x - 1 && x <= s.x + s.w + 1 && y >= s.y - 1 && y <= s.y + s.d + 1) {
+          // Point de la ligne à la fraction f : z0 + 1 + (up − 1) · f ≥ sommet du volume (marge comprise).
+          up = Math.max(up, 1 + (top - z0 - 1) / f);
+          break;
+        }
+      }
+    }
+    return up;
+  }
+
   setCamera(mode: CameraMode): void {
     if (mode === "strategique" && this.mode === "suivi") {
       // Retour à la vue stratégique au-dessus de ce qu'on suivait.
@@ -352,6 +416,7 @@ export class View3D implements BattleView {
     }
     this.mode = mode;
     this.snapNext = true;
+    this.followOff = 0;
     if (mode === "strategique") {
       this.followGoal = null;
       this.placeCamera(true);
@@ -685,6 +750,8 @@ export class View3D implements BattleView {
       const mat = m.material as MeshStandardMaterial | MeshStandardMaterial[] | undefined;
       for (const x of mat ? (Array.isArray(mat) ? mat : [mat]) : []) x.dispose();
     });
+    this.skin?.dispose();
+    this.puff?.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.canvas.remove();
