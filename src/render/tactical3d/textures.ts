@@ -371,6 +371,53 @@ export function puffTexture(): Texture {
 }
 
 /** Peau de Titan : marbrures et veines très discrètes, en niveaux clairs (la teinte vient du matériau). */
+/**
+ * Peau de Titan de R3 (choix de design A) : la toile de R1, plus des marbrures (veines bleutées sous une peau pâle) ou des taches
+ * (plaques rougeâtres sur une peau rougeaude), d'intensité `marbling` (0–1). Jamais lisse : c'est ce qui éloigne du mannequin.
+ */
+export function titanSkinTexture(seed: number, skin: { id: "pale" | "rougeaude"; marbling: number }): Texture {
+  const rand = seeded(derive(seed, skin.id === "pale" ? 611 : 612));
+  const S = 256;
+  const [c, g] = canvas(S, S);
+  g.fillStyle = "rgb(236,236,236)";
+  g.fillRect(0, 0, S, S);
+  for (let i = 0; i < 70; i++) {
+    const v = 200 + rand() * 50;
+    g.fillStyle = rgb(v, v * 0.97, v * 0.95, 0.25);
+    g.beginPath();
+    g.ellipse(rand() * S, rand() * S, 6 + rand() * 26, 4 + rand() * 18, rand() * 3, 0, Math.PI * 2);
+    g.fill();
+  }
+  if (skin.id === "pale") {
+    // Veines ramifiées, bleu-violet, sous une peau cireuse.
+    g.lineCap = "round";
+    for (let i = 0; i < Math.round(40 * skin.marbling); i++) {
+      let x = rand() * S;
+      let y = rand() * S;
+      g.strokeStyle = rgb(120 + rand() * 30, 125 + rand() * 25, 165 + rand() * 30, 0.1 + 0.18 * skin.marbling);
+      g.lineWidth = 0.6 + rand() * 1.6;
+      g.beginPath();
+      g.moveTo(x, y);
+      for (let k = 0; k < 8; k++) {
+        x += range(rand, -14, 14);
+        y += range(rand, 3, 15);
+        g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+  } else {
+    // Plaques rougeâtres irrégulières et pores sombres.
+    for (let i = 0; i < Math.round(55 * (0.5 + skin.marbling)); i++) {
+      g.fillStyle = rgb(190 + rand() * 40, 110 + rand() * 40, 100 + rand() * 30, 0.08 + 0.12 * skin.marbling);
+      g.beginPath();
+      g.ellipse(rand() * S, rand() * S, 3 + rand() * 20, 2 + rand() * 14, rand() * 3, 0, Math.PI * 2);
+      g.fill();
+    }
+  }
+  speckle(g, rand, S, S, 3200, 0.035);
+  return tex(c);
+}
+
 export function skinTexture(seed: number): Texture {
   const rand = seeded(derive(seed, 600));
   const S = 256;

@@ -269,3 +269,61 @@ export const TitansFileSchema = z
     for (const [id, h] of [["titan_mur", 50], ["rod_reiss", 120], ["colossal", 60]] as const) if (!f.speciaux.some((x) => x.id === id && x.hauteur_m === h)) ctx.addIssue({ code: "custom", message: `${id} (${h} m) manquant` });
   });
 export type TitansFile = z.infer<typeof TitansFileSchema>;
+
+/** Figures de R3 (fichier 21 §8) : trois corps par classe de Titan, deux peaux, cinq tenues de soldat. Choix de design `A`. */
+const Expressions = Expression;
+const Unit = z.number().min(0).max(1);
+const TitanR3Variant = z
+  .object({
+    id: z.enum(["a", "b", "c"]),
+    nom: z.string().min(1),
+    modifs: z.partialRecord(z.enum(TITAN_PROPORTIONS), z.number()).refine((m) => Math.abs((m.legs ?? 0) + (m.torso ?? 0) + (m.neck ?? 0) + (m.head ?? 0)) < 1e-6, "les modifications de jambes, torse, cou et tête s'annulent"),
+    macro: z.object({ age: Unit.optional(), weight: Unit.optional(), muscle: Unit.optional() }).strict().optional(),
+    posture: z.object({ lean: z.number().optional(), drop: z.number().optional(), armOut: z.tuple([z.number(), z.number()]).optional(), kneeBend: z.number().min(0).optional(), headRoll: z.number().optional() }).strict().optional(),
+    demarche: z.object({ limp: Unit.optional(), sway: z.number().min(0).optional(), drag: Unit.optional(), jerk: Unit.optional() }).strict().optional(),
+    expression: Expressions.optional(),
+    cheveux: z.boolean().optional(),
+    dents: z.number().min(1).max(1.8).optional(),
+    yeux: z.tuple([z.number().min(0.7).max(1.4), z.number().min(0.7).max(1.4)]).optional(),
+  })
+  .strict();
+const UnitRange = z.tuple([Unit, Unit]).refine(([a, b]) => a <= b, "plage croissante");
+const Headgear = z.object({ forme: z.enum(["kepi", "casque", "casquette"]), teinte: Hex, bandeau: Hex.optional() }).strict();
+export const SOLDIER_OUTFIT_IDS = ["exploration", "garnison", "police", "marley_infanterie", "marley_officier"] as const;
+const Outfit = z
+  .object({
+    id: z.enum(SOLDIER_OUTFIT_IDS),
+    camp: z.enum(["paradis", "marley"]),
+    nom: z.string().min(1),
+    veste: Hex,
+    pantalon: Hex,
+    bottes: Hex,
+    molletieres: Hex.optional(),
+    cape: Hex.optional(),
+    echarpe: Hex.optional(),
+    manteau: z.object({ teinte: Hex, longueur: z.number().min(0.2).max(0.9) }).strict().optional(),
+    coiffe: Headgear.optional(),
+    odm: z.boolean(),
+    lames: z.enum(["mains", "fourreau"]).optional(),
+    fusil: z.enum(["dos", "mains"]).optional(),
+    sac: Hex.optional(),
+    baudrier: z.boolean().optional(),
+    etui: z.boolean().optional(),
+    corpulence: z.object({ age: UnitRange, muscle: UnitRange, weight: UnitRange }).strict(),
+  })
+  .strict();
+export const FiguresR3FileSchema = z
+  .object({
+    canon: CanonSchema,
+    note: z.string().min(1),
+    titans: z.array(z.object({ classe: z.string(), variantes: z.array(TitanR3Variant).length(3) }).strict()).length(5),
+    peaux: z.array(z.object({ id: z.enum(["pale", "rougeaude"]), nom: z.string().min(1), teinte: Hex, melange: Unit, marbrures: Unit, dents: Hex }).strict()).length(2),
+    soldats: z.array(Outfit).length(5),
+  })
+  .strict()
+  .superRefine((f, ctx) => {
+    const ids = new Set(f.soldats.map((s) => s.id));
+    if (ids.size !== f.soldats.length) ctx.addIssue({ code: "custom", message: "tenue en double" });
+    for (const t of f.titans) if (t.variantes.map((v) => v.id).join() !== "a,b,c") ctx.addIssue({ code: "custom", message: `${t.classe} : variantes a, b, c attendues dans l'ordre` });
+  });
+export type FiguresR3File = z.infer<typeof FiguresR3FileSchema>;

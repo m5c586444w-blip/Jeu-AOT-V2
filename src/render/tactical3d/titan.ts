@@ -13,7 +13,7 @@ import { joint, lathe, limb, measureBox, part, unitSphere } from "./rig";
  * Formes inventées pour le projet : aucun Titan de l'œuvre n'est reproduit (D-83). Pas de sang : un Titan abattu fume.
  * La marque rouge de la nuque est un repère de lisibilité du point faible (03 §4.2), pas un détail de l'œuvre.
  */
-export type TitanPose = "marche" | "saisie" | "abattu" | "debout" | "course" | "allonge" | "buste";
+export type TitanPose = "marche" | "saisie" | "abattu" | "debout" | "course" | "allonge" | "buste" | "attaque" | "effondre";
 /** Les trois poses de la planche de R1. */
 export const TITAN_POSES: readonly TitanPose[] = ["marche", "saisie", "abattu"];
 /** Toutes les poses (R1b) : debout (repos, pieds au sol), course (anormal), allongé (Titan qui ne tient pas debout), buste. */
@@ -61,6 +61,21 @@ export interface TitanSpec {
   headTilt: number;
   /** Vapeur permanente (chaleur du Colossal). */
   heat?: boolean;
+  /** R3 : corps individuel (`data/art/figures_r3.json`), lu par le Titan sur corps de base ; ignoré par les figures de R1. */
+  r3?: TitanR3;
+}
+
+/** R3 : corpulence, posture, démarche, dents, yeux et peau d'un Titan (choix de design A). */
+export interface TitanR3 {
+  variant: "a" | "b" | "c";
+  macro?: { age?: number; weight?: number; muscle?: number };
+  posture?: { lean?: number; drop?: number; armOut?: readonly [number, number]; kneeBend?: number; headRoll?: number };
+  demarche?: { limp?: number; sway?: number; drag?: number; jerk?: number };
+  /** Taille des dents (1 : humaine) ; taille de chaque œil [gauche, droit]. */
+  teeth?: number;
+  eyes?: readonly [number, number];
+  /** Peau : teinte mêlée à celle de la classe, marbrures (texture), couleur des dents. */
+  skin: { id: "pale" | "rougeaude"; tint: number; mix: number; marbling: number; teeth: number };
 }
 
 export const TITAN_SMALL: TitanSpec = {
@@ -141,7 +156,8 @@ export interface Titan {
   steam: Points;
   pose: TitanPose;
   /** Pose et temps d'animation (s) : la marche est un cycle, la saisie respire, l'abattu fume. */
-  setPose(p: TitanPose, t: number): void;
+  /** `clock` (s de bataille, R3) : fondu entre états sur le corps de base ; les figures de R1 l'ignorent. */
+  setPose(p: TitanPose, t: number, clock?: number): void;
   dispose(): void;
 }
 
@@ -336,8 +352,10 @@ export function buildTitan(spec: TitanSpec, seed: number, skinMap: Texture | nul
     nape,
     steam,
     pose: "marche",
-    setPose(p, t) {
-      titan.pose = p;
+    setPose(pose, t) {
+      titan.pose = pose;
+      // R3 : attaque et effondrement n'existent que sur le corps de base ; la figure de R1 montre la saisie et le corps abattu.
+      const p: TitanPose = pose === "attaque" ? "saisie" : pose === "effondre" ? "abattu" : pose;
       for (const [g, r] of rest) g.rotation.set(...r);
       body.rotation.set(0, 0, 0);
       body.position.set(0, 0, 0);

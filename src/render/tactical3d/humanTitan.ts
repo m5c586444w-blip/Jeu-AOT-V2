@@ -1,8 +1,8 @@
 import { Color, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
 import type { Material, Object3D, Texture } from "three";
-import { buildHumanBody } from "./humanBase";
+import { buildHumanBody, skinnedBounds } from "./humanBase";
 import type { HumanBody, HumanTemplate, Macro, Proportions } from "./humanBase";
-import { poseHuman } from "./humanAnim";
+import { PoseFader, poseHuman } from "./humanAnim";
 import type { Gait } from "./humanAnim";
 import { buildHairCap, paintHair } from "./humanSoldier";
 import { unitSphere } from "./rig";
@@ -196,8 +196,8 @@ function solve(b: TitanMeasures, T: Target): Proportions {
 
 /** Corpulence, musculature, ventre et visage d'un Titan (cibles de MakeHuman). */
 export function titanMacro(spec: TitanSpec): { macro: Macro; details: Record<string, number> } {
-  const weight = Math.max(0, Math.min(1, (spec.waist / spec.chest - 0.65) / 0.35));
-  const muscle = spec.heat ? 0.85 : 0.3;
+  const weight = spec.r3?.macro?.weight ?? Math.max(0, Math.min(1, (spec.waist / spec.chest - 0.65) / 0.35));
+  const muscle = spec.r3?.macro?.muscle ?? (spec.heat ? 0.85 : 0.3);
   const details: Record<string, number> = {};
   if (spec.belly > 0) details["stomach_pregnant_incr"] = Math.min(1.2, (spec.belly / 0.14) * 0.9);
   if (spec.expression === "rictus") {
@@ -209,7 +209,15 @@ export function titanMacro(spec: TitanSpec): { macro: Macro; details: Record<str
   } else {
     Object.assign(details, { eye_left_closure: 0.25, eye_right_closure: 0.25, mouth_depression: 0.6 });
   }
-  return { macro: { gender: 0.9, age: 0.55, muscle, weight }, details };
+  // R3 : yeux de tailles inégales (ouverture de chaque paupière).
+  const eyes = spec.r3?.eyes;
+  if (eyes) {
+    details["eye_left_opened_up"] = (details["eye_left_opened_up"] ?? 0) + Math.max(0, (eyes[0] - 1) * 4);
+    details["eye_right_opened_up"] = (details["eye_right_opened_up"] ?? 0) + Math.max(0, (eyes[1] - 1) * 4);
+    details["eye_left_closure"] = (details["eye_left_closure"] ?? 0) + Math.max(0, (1 - eyes[0]) * 3);
+    details["eye_right_closure"] = (details["eye_right_closure"] ?? 0) + Math.max(0, (1 - eyes[1]) * 3);
+  }
+  return { macro: { gender: 0.9, age: spec.r3?.macro?.age ?? 0.55, muscle, weight }, details };
 }
 
 /**
@@ -262,7 +270,32 @@ export function titanProportions(t: HumanTemplate, spec: TitanSpec): Proportions
 
 /** Allure de R1b, et bouche ouverte pour l'expression béante. */
 export function titanGait(spec: TitanSpec): Gait {
-  return { stride: spec.stride, walkRate: spec.walkRate, armSwing: spec.armSwing, shoulderOut: spec.shoulderOut, headTilt: spec.headTilt, hunch: spec.hunch, mouth: spec.expression === "beant" ? 1 : 0 };
+  const g: Gait = { stride: spec.stride, walkRate: spec.walkRate, armSwing: spec.armSwing, shoulderOut: spec.shoulderOut, headTilt: spec.headTilt, hunch: spec.hunch, mouth: spec.expression === "beant" ? 1 : 0 };
+  return spec.r3 ? { ...g, ...spec.r3.posture, ...spec.r3.demarche } : g;
+}
+
+/** Agrandit une primitive autour du centre de chaque côté (dents : une seule masse ; yeux : chaque œil à part). */
+function scalePrimitive(body: HumanBody, prim: string, k: (side: number) => number, split: boolean): void {
+  const m = body.meshes.get(prim);
+  if (!m) return;
+  const p = m.geometry.getAttribute("position");
+  const c = [new Vector3(), new Vector3()];
+  const n = [0, 0];
+  const sideOf = (i: number): number => (split && p.getX(i) < 0 ? 1 : 0);
+  for (let i = 0; i < p.count; i++) {
+    const s = sideOf(i);
+    (c[s] as Vector3).add(new Vector3(p.getX(i), p.getY(i), p.getZ(i)));
+    n[s] = (n[s] as number) + 1;
+  }
+  for (let s = 0; s < 2; s++) if ((n[s] as number) > 0) (c[s] as Vector3).divideScalar(n[s] as number);
+  for (let i = 0; i < p.count; i++) {
+    const s = sideOf(i);
+    const o = c[s] as Vector3;
+    const f = k(s);
+    p.setXYZ(i, o.x + (p.getX(i) - o.x) * f, o.y + (p.getY(i) - o.y) * f, o.z + (p.getZ(i) - o.z) * f);
+  }
+  p.needsUpdate = true;
+  m.geometry.computeBoundingSphere();
 }
 
 /** Titan de R1c : l'interface des Titans de R1, plus le corps de base qui le porte (mesures, tests). */
@@ -276,7 +309,12 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   const { macro, details } = titanMacro(spec);
   // Variation individuelle : surtout masculins (pas de sexe visible), âge, un peu de corpulence.
   const indiv: Macro = { gender: range(rand, 0.65, 1), age: range(rand, 0.5, 0.75), muscle: macro.muscle, weight: Math.max(0, Math.min(1, macro.weight + range(rand, -0.08, 0.08))) };
-  const skin = new MeshStandardMaterial({ color: new Color(spec.skin).multiplyScalar(range(rand, 0.94, 1.04)), map: opts.skinMap ?? null, roughness: 0.58, metalness: 0, emissive: new Color(MATERIALS.physiques.braise), emissiveIntensity: 0.025 });
+  const r3 = spec.r3;
+  if (r3?.macro?.age !== undefined) indiv.age = r3.macro.age;
+  const tone = new Color(spec.skin);
+  // R3 : peau pâle et marbrée, ou rougeaude et tachée (teinte mêlée à celle de la classe).
+  if (r3) tone.lerp(new Color(r3.skin.tint), r3.skin.mix);
+  const skin = new MeshStandardMaterial({ color: tone.multiplyScalar(range(rand, 0.94, 1.04)), map: opts.skinMap ?? null, roughness: 0.58, metalness: 0, emissive: new Color(MATERIALS.physiques.braise), emissiveIntensity: 0.025 });
   if (opts.skinNormal) {
     // Grain de peau : à l'échelle d'un Titan, pores et plis restent fins (même carte, répétée sur l'atlas).
     skin.normalMap = opts.skinNormal;
@@ -287,7 +325,8 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   head.vertexColors = spec.hair;
   const hollow = spec.expression === "creuse";
   const eyes = new MeshStandardMaterial({ map: hollow ? null : (opts.eyeMap ?? null), color: hollow ? new Color(MATERIALS.physiques.suie) : new Color(1, 1, 1), roughness: hollow ? 0.9 : 0.12 });
-  const teeth = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.cire), roughness: 0.35 });
+  // Dents : émail jauni (R3 : teinte de la peau choisie), un peu brillant ; gencives : la langue.
+  const teeth = new MeshStandardMaterial({ color: new Color(r3 ? r3.skin.teeth : MATERIALS.physiques.cire), roughness: r3 ? 0.28 : 0.35 });
   const tongue = new MeshStandardMaterial({ color: new Color(MATERIALS.accents[1] ?? MATERIALS.physiques.braise).multiplyScalar(0.7), roughness: 0.5 });
   const hairMat = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.ecorce).multiplyScalar(0.6), roughness: 0.85 });
   const napeMat = new MeshStandardMaterial({ color: new Color(MATERIALS.accents[1] ?? MATERIALS.physiques.braise).multiplyScalar(1.3), emissive: new Color(MATERIALS.accents[1] ?? MATERIALS.physiques.braise), emissiveIntensity: 0.55, roughness: 0.5 });
@@ -295,6 +334,8 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   const REGION: Record<string, Material> = { peau_tete: head, yeux: eyes, dents: teeth, langue: tongue };
   const body = buildHumanBody(t, { macro: indiv, details, proportions: titanProportions(t, spec), height: H }, (p) => REGION[p] ?? skin, (p) => p !== "pantalon");
   body.group.name = "corps";
+  if (r3?.teeth && r3.teeth !== 1) scalePrimitive(body, "dents", () => r3.teeth ?? 1, false);
+  if (r3?.eyes) scalePrimitive(body, "yeux", (side) => (side === 0 ? (r3.eyes?.[0] ?? 1) : (r3.eyes?.[1] ?? 1)), true);
   const group = new Group();
   group.name = `titan-${spec.id}`;
   group.add(body.group);
@@ -337,6 +378,14 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   group.add(vapour.points);
   const gait = titanGait(spec);
   const phase = rand() * 6;
+  if (r3) {
+    // R3 : chaque individu boite, roule ou heurte un peu à sa façon (démarche jamais uniforme d'un Titan à l'autre).
+    gait.limp = Math.min(1, (gait.limp ?? 0) + range(rand, 0, 0.25));
+    gait.jerk = Math.min(1, (gait.jerk ?? 0) + range(rand, 0.05, 0.3));
+    gait.sway = (gait.sway ?? 0) + range(rand, 0, 0.05);
+    gait.walkRate *= range(rand, 0.85, 1.15);
+  }
+  const fader = new PoseFader(body);
   const joints = Object.fromEntries(Object.entries(TITAN_BONES).map(([k, b]) => [k, body.bones[b] as Object3D])) as Record<JointName, Object3D>;
   const tmp = new Vector3();
   const inv = body.group.matrixWorld.clone();
@@ -350,11 +399,13 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
     nape,
     steam: vapour.points,
     pose: "marche",
-    setPose(p, time) {
+    setPose(p, time, clock) {
       titan.pose = p;
       vapour.points.visible = false;
-      napeMat.emissiveIntensity = p === "abattu" ? 0.1 : 0.55;
+      napeMat.emissiveIntensity = p === "abattu" || p === "effondre" ? 0.1 : 0.55;
+      fader.begin(p, clock);
       poseHuman(body, p, time, gait, phase);
+      fader.end(clock);
       if (p === "abattu") {
         // Étendue du corps couché, par ses articulations (repère du groupe).
         let z0 = Infinity;
@@ -379,5 +430,14 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
     },
   };
   titan.setPose("marche", 0);
+  if (r3) {
+    // Hauteur debout = hauteur de la classe, posture comprise (voussure, genoux fléchis, buste penché) : le corps est remis à
+    // l'échelle d'après sa pose de repos mesurée sur la peau.
+    titan.setPose("debout", 0);
+    const b = skinnedBounds(body);
+    const h = b.max.y - b.min.y;
+    if (h > 0) body.group.scale.multiplyScalar(H / h);
+    titan.setPose("marche", 0);
+  }
   return titan;
 }

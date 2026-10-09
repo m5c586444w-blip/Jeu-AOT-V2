@@ -1,0 +1,460 @@
+{
+  "canon": "A",
+  "note": "Figures de R3 (fichier 21 §8) : choix de design du projet, sans source dans l'œuvre. Aucun Titan, uniforme ni emblème de l'œuvre n'est reproduit (D-83). Les classes de 3 à 15 m et leurs paramètres de base sont ceux de data/art/titans.json ; la variante « a » de chaque classe garde les proportions de la classe (une posture propre au besoin).",
+  "titans": [
+    {
+      "classe": "classe_3",
+      "variantes": [
+        {
+          "id": "a",
+          "nom": "Nabot à grosse tête, de travers",
+          "modifs": {},
+          "posture": {
+            "armOut": [0.35, 0.05],
+            "headRoll": -0.2,
+            "lean": -0.12
+          }
+        },
+        {
+          "id": "b",
+          "nom": "Goitreux aux bras traînants",
+          "modifs": {
+            "legs": -0.03,
+            "head": 0.03,
+            "upperArm": 0.05,
+            "foreArm": 0.05,
+            "hunch": 0.2,
+            "headW": 0.06
+          },
+          "macro": {
+            "weight": 0.9
+          },
+          "posture": {
+            "lean": 0.2,
+            "headRoll": 0.25,
+            "kneeBend": 0.25
+          },
+          "demarche": {
+            "limp": 0.5,
+            "drag": 0.6
+          },
+          "expression": "beant",
+          "dents": 1.4,
+          "yeux": [1.15, 0.9]
+        },
+        {
+          "id": "c",
+          "nom": "Efflanqué",
+          "modifs": {
+            "legs": 0.06,
+            "torso": -0.04,
+            "neck": 0.03,
+            "head": -0.05,
+            "shoulder": -0.03,
+            "hip": -0.02,
+            "chest": -0.05,
+            "waist": -0.06,
+            "belly": -0.14,
+            "thighR": -0.03,
+            "armR": -0.02,
+            "neckR": -0.035
+          },
+          "macro": {
+            "weight": 0,
+            "muscle": 0,
+            "age": 0.95
+          },
+          "posture": {
+            "drop": 0.25,
+            "armOut": [0.25, 0]
+          },
+          "demarche": {
+            "sway": 0.1,
+            "jerk": 0.5
+          },
+          "expression": "neutre",
+          "yeux": [1, 1.12]
+        }
+      ]
+    },
+    {
+      "classe": "classe_5",
+      "variantes": [
+        {
+          "id": "a",
+          "nom": "Trapu voûté, genoux pliés",
+          "modifs": {},
+          "posture": {
+            "kneeBend": 0.35,
+            "lean": 0.1,
+            "armOut": [0.12, 0.12]
+          },
+          "demarche": {
+            "sway": 0.06
+          }
+        },
+        {
+          "id": "b",
+          "nom": "Large d'épaules",
+          "modifs": {
+            "shoulder": 0.05,
+            "chest": 0.03,
+            "armR": 0.015,
+            "thighR": 0.015,
+            "head": -0.03,
+            "neck": -0.015,
+            "torso": 0.03,
+            "legs": 0.015,
+            "hunch": 0.15
+          },
+          "macro": {
+            "muscle": 0.8,
+            "weight": 0.7
+          },
+          "posture": {
+            "armOut": [0.35, 0.35],
+            "kneeBend": 0.2
+          },
+          "demarche": {
+            "sway": 0.12,
+            "limp": 0.2
+          },
+          "expression": "neutre",
+          "dents": 1.25
+        },
+        {
+          "id": "c",
+          "nom": "Échassier ventru",
+          "modifs": {
+            "legs": 0.12,
+            "torso": -0.07,
+            "head": -0.05,
+            "thighR": -0.02,
+            "waist": 0.02,
+            "belly": 0.03
+          },
+          "posture": {
+            "headRoll": -0.3,
+            "lean": -0.1
+          },
+          "demarche": {
+            "limp": 0.3,
+            "jerk": 0.6
+          },
+          "expression": "beant",
+          "yeux": [0.9, 1.1]
+        }
+      ]
+    },
+    {
+      "classe": "classe_8",
+      "variantes": [
+        {
+          "id": "a",
+          "nom": "Chevelu au regard fixe",
+          "modifs": {}
+        },
+        {
+          "id": "b",
+          "nom": "Obèse",
+          "modifs": {
+            "belly": 0.1,
+            "waist": 0.06,
+            "chest": 0.03,
+            "hip": 0.03,
+            "thighR": 0.02,
+            "depth": 0.15,
+            "legs": -0.04,
+            "torso": 0.03,
+            "neck": -0.02,
+            "head": 0.03
+          },
+          "macro": {
+            "weight": 1
+          },
+          "posture": {
+            "lean": 0.08,
+            "armOut": [0.3, 0.3]
+          },
+          "demarche": {
+            "sway": 0.15
+          },
+          "expression": "rictus",
+          "cheveux": false,
+          "dents": 1.3
+        },
+        {
+          "id": "c",
+          "nom": "Long cou, tête basse",
+          "modifs": {
+            "neck": 0.05,
+            "head": -0.03,
+            "torso": -0.02,
+            "hunch": 0.35,
+            "upperArm": 0.04,
+            "foreArm": 0.04
+          },
+          "macro": {
+            "weight": 0.15,
+            "age": 0.9
+          },
+          "posture": {
+            "drop": 0.3,
+            "headRoll": 0.2
+          },
+          "demarche": {
+            "drag": 0.8,
+            "limp": 0.4
+          },
+          "expression": "beant",
+          "yeux": [1.2, 1]
+        }
+      ]
+    },
+    {
+      "classe": "classe_12",
+      "variantes": [
+        {
+          "id": "a",
+          "nom": "Grand au rictus",
+          "modifs": {}
+        },
+        {
+          "id": "b",
+          "nom": "Tête énorme",
+          "modifs": {
+            "head": 0.07,
+            "legs": -0.05,
+            "torso": -0.01,
+            "neck": -0.01,
+            "headW": 0.1,
+            "shoulder": 0.02
+          },
+          "posture": {
+            "headRoll": 0.35,
+            "kneeBend": 0.15
+          },
+          "demarche": {
+            "jerk": 0.5,
+            "limp": 0.2
+          },
+          "expression": "beant",
+          "dents": 1.5
+        },
+        {
+          "id": "c",
+          "nom": "Bossu",
+          "modifs": {
+            "hunch": 0.45,
+            "torso": 0.02,
+            "legs": -0.02,
+            "shoulder": 0.03,
+            "belly": 0.05
+          },
+          "posture": {
+            "armOut": [0, 0.45],
+            "drop": -0.25,
+            "lean": -0.15
+          },
+          "demarche": {
+            "limp": 0.7,
+            "sway": 0.12
+          },
+          "expression": "neutre",
+          "yeux": [0.85, 1.2]
+        }
+      ]
+    },
+    {
+      "classe": "classe_15",
+      "variantes": [
+        {
+          "id": "a",
+          "nom": "Filiforme béant, épaule basse",
+          "modifs": {},
+          "posture": {
+            "headRoll": 0.2,
+            "armOut": [0.12, 0.3],
+            "drop": 0.15
+          },
+          "demarche": {
+            "drag": 0.4
+          }
+        },
+        {
+          "id": "b",
+          "nom": "Massif",
+          "modifs": {
+            "shoulder": 0.04,
+            "chest": 0.05,
+            "waist": 0.04,
+            "armR": 0.015,
+            "thighR": 0.02,
+            "neckR": 0.03,
+            "neck": -0.04,
+            "legs": -0.03,
+            "torso": 0.04,
+            "head": 0.03
+          },
+          "macro": {
+            "muscle": 0.9
+          },
+          "posture": {
+            "armOut": [0.2, 0.2]
+          },
+          "demarche": {
+            "sway": 0.08
+          },
+          "expression": "rictus",
+          "dents": 1.3
+        },
+        {
+          "id": "c",
+          "nom": "Pantin désarticulé",
+          "modifs": {
+            "legs": 0.04,
+            "torso": -0.03,
+            "head": -0.01
+          },
+          "macro": {
+            "age": 1
+          },
+          "posture": {
+            "lean": 0.3,
+            "headRoll": -0.45,
+            "drop": 0.3,
+            "armOut": [0.5, -0.05],
+            "kneeBend": 0.15
+          },
+          "demarche": {
+            "jerk": 0.8,
+            "drag": 0.5
+          },
+          "expression": "creuse"
+        }
+      ]
+    }
+  ],
+  "peaux": [
+    {
+      "id": "pale",
+      "nom": "Pâle et marbrée",
+      "teinte": "#C7B9AC",
+      "melange": 0.55,
+      "marbrures": 0.8,
+      "dents": "#C9BE9A"
+    },
+    {
+      "id": "rougeaude",
+      "nom": "Rougeaude et tachée",
+      "teinte": "#C27D66",
+      "melange": 0.45,
+      "marbrures": 0.4,
+      "dents": "#B8A578"
+    }
+  ],
+  "soldats": [
+    {
+      "id": "exploration",
+      "camp": "paradis",
+      "nom": "Bataillon d'exploration",
+      "veste": "#6D6A60",
+      "pantalon": "#3A3730",
+      "bottes": "#241D17",
+      "cape": "#4F6B5A",
+      "odm": true,
+      "lames": "mains",
+      "corpulence": {
+        "age": [0.5, 0.62],
+        "muscle": [0.55, 0.85],
+        "weight": [0.35, 0.58]
+      }
+    },
+    {
+      "id": "garnison",
+      "camp": "paradis",
+      "nom": "Garnison",
+      "veste": "#5F6470",
+      "pantalon": "#3A3730",
+      "bottes": "#241D17",
+      "echarpe": "#8E2F2F",
+      "odm": true,
+      "lames": "fourreau",
+      "fusil": "dos",
+      "corpulence": {
+        "age": [0.55, 0.72],
+        "muscle": [0.4, 0.7],
+        "weight": [0.5, 0.7]
+      }
+    },
+    {
+      "id": "police",
+      "camp": "paradis",
+      "nom": "Police militaire",
+      "veste": "#2F3A33",
+      "pantalon": "#CFC7B4",
+      "bottes": "#1E1914",
+      "manteau": {
+        "teinte": "#26302B",
+        "longueur": 0.52
+      },
+      "coiffe": {
+        "forme": "kepi",
+        "teinte": "#1F2622"
+      },
+      "odm": true,
+      "lames": "fourreau",
+      "corpulence": {
+        "age": [0.5, 0.65],
+        "muscle": [0.4, 0.6],
+        "weight": [0.3, 0.45]
+      }
+    },
+    {
+      "id": "marley_infanterie",
+      "camp": "marley",
+      "nom": "Infanterie de Marley",
+      "veste": "#6B6247",
+      "pantalon": "#6B6247",
+      "bottes": "#2A2118",
+      "molletieres": "#5C5440",
+      "coiffe": {
+        "forme": "casque",
+        "teinte": "#4F5146"
+      },
+      "odm": false,
+      "fusil": "mains",
+      "sac": "#5A4A33",
+      "corpulence": {
+        "age": [0.48, 0.6],
+        "muscle": [0.5, 0.8],
+        "weight": [0.35, 0.55]
+      }
+    },
+    {
+      "id": "marley_officier",
+      "camp": "marley",
+      "nom": "Officier de Marley",
+      "veste": "#4E4A3A",
+      "pantalon": "#4E4A3A",
+      "bottes": "#1C1611",
+      "manteau": {
+        "teinte": "#5A5644",
+        "longueur": 0.7
+      },
+      "coiffe": {
+        "forme": "casquette",
+        "teinte": "#3B3A30",
+        "bandeau": "#7A2A24"
+      },
+      "odm": false,
+      "baudrier": true,
+      "etui": true,
+      "corpulence": {
+        "age": [0.65, 0.8],
+        "muscle": [0.4, 0.6],
+        "weight": [0.55, 0.75]
+      }
+    }
+  ]
+}
