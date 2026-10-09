@@ -83,9 +83,9 @@ infobulle (« valeur « −2 561 / jour », 4 sous-totaux, 10 facteurs dont 9 co
    la carte ; barre d'alertes presque vide (« Aucune alerte. ») ; zone droite vide au jour 1.
 4. `ui-04-gestion-touche-1366` — Infobulle du bouton Personnages, « Raccourci C ». Défauts : l'infobulle recouvre le
    titre de groupe ; groupe « Recherche » d'un seul bouton ; « Bureau d'études » sous « Recherche » redondant.
-5. `ui-05-personnages-1366` — Liste groupée avec portraits, fiche de Darius Zackly, touche C en tête. Défauts :
-   « pragmatique » en minuscule ; vide sous les traits ; liste coupée sans signe de défilement ; `kbd` encore en police
-   système (corrigé ensuite, dc09c21).
+5. `ui-05-personnages-1366` — refaite : liste groupée avec portraits, fiche de Darius Zackly ; la dernière ligne visible
+   s'estompe (signe de défilement, liste de 3 209 px pour 534 visibles). Défauts : « pragmatique » en minuscule ;
+   « 0 / Stress » répété sur chaque ligne ; fiche sans relations ni cursus.
 6. `ui-06-fil-1366` — Fil : groupe « Hier », entrée avec icône, catégorie « Dossier », infobulle du texte complet.
    Défauts : texte coupé à deux lignes ; infobulle qui masque la seconde entrée ; ligne de catégorie seule qui allonge.
 7. `ui-07-cabinet-1366` — Salle (sièges, billes vertes et grises) à gauche ; motion « Conscription étendue », vote prévu
@@ -136,12 +136,12 @@ EXIT 0
 - 12 captures relues une à une par un sous-agent neuf (4K à taille réelle) : **aucun bloquant non couvert** ; « (débogage) »
   (ui-12) corrigé dans `a13fd36`, capture ui-12 refaite sans la mention. CUI-05 et CUI-08 confirmés (réserve : arbre en
   grille 2×3) ; le défaut cité pour ui-04 n'est pas visible ; ui-01 et ui-05 précèdent leurs correctifs.
-- **Dette n° 20 corrigée** : cause mesurée, `Application.destroy(true, …)` (planche des figures, bataille, carte) appelle
-  `GlobalResourceRegistry.release()` de Pixi 8.22 et détruit la réserve de lots encore utilisée par les autres rendus ;
-  correctif `destroy({ removeView: true }, …)` (3 lignes). `smoke:tactique` « OK 0 erreur console », 32 OK ; map, p6 : EXIT 0.
+- **Dette n° 20 corrigée** : `Application.destroy(true, …)` appelait `GlobalResourceRegistry.release()` de Pixi 8.22 (réserve
+  de lots des autres rendus détruite) ; `destroy({ removeView: true }, …)` ; `smoke:tactique` « OK 0 erreur console », 32 OK.
 - **CUI-07 corrigé** : cases de l'arbre de 4,6 à 6,3 rem, nom sur 2 lignes et condition sur 3 au lieu d'une ligne coupée
   (0 texte coupé sur 50 cases, mesuré en 1366 et en 4K) ; barre du haut en deux groupes (U3 : 2 au premier niveau, puis 6
-  et 3). `smoke:p5` 22 OK, `smoke:r0` 32 OK (zone de jeu 93,1 % et 96,8 %), `smoke:p8` 171 OK, tous EXIT 0.
+  et 3) ; listes maître-détail : fondu en bas tant qu'il reste des lignes (ui-05). `smoke:p5` 22 OK, `smoke:r0` 32 OK,
+  `smoke:p8` 171 OK (deux passages), `smoke:politique` 30 OK, `smoke:p7` 15 OK, tous EXIT 0.
 - Défauts mineurs non cités jusqu'ici, à joindre à la dette n° 21 : menu (« 845, avant la brèche » contre « Shiganshina
   vient de tomber », année répétée) ; signes contradictoires dans l'infobulle de la nourriture (« −8 304 » au résumé,
   « +7 800 » et « +504 » en rouge au détail ; pertes « −225 » / « +225 ») ; six valeurs de la barre du haut sans étiquette ;
