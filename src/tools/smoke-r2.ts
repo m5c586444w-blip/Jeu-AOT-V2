@@ -1,5 +1,7 @@
 // npm run smoke:r2 — R2+ (CR2-04, CR2-07 à CR2-10) dans un vrai navigateur (Chromium, serveur de dev Vite) + captures
-// docs/screenshots/r2-*.png en 1366×768, 1920×1080 et 3840×2160.
+// r2-*.png en 1366×768, 1920×1080 et 3840×2160. Par défaut, les captures vont dans docs/screenshots/.smoke/ (ignoré par
+// git : un passage de contrôle ne réécrit pas les captures suivies) ; `npm run smoke:r2 -- --captures` les écrit dans
+// docs/screenshots/ (passage final d'une phase) ; `R2_CAPTURES=<dossier>` choisit un autre dossier.
 // Parcours : bataille de compagnie (≈ 340 unités : soldats, fantassins des deux camps, batteries, 4 Titans, porteur allié) en vue
 // 3D ; sélection (clic, Alt + clic, rectangle, groupes), ordres (clic droit, file avec Maj, formation, ordre d'unité, attaque
 // d'un Titan), pause active, caméra stratégique ↔ suivi (touche V), tir sur zone et cessez-le-feu, ordre général du porteur,
@@ -12,8 +14,9 @@ import { createServer } from "vite";
 import fr from "../i18n/fr.json";
 
 const executablePath = process.env["CHROMIUM_PATH"] ?? "/opt/pw-browsers/chromium";
-const OUT = "docs/screenshots";
+const OUT = process.argv.includes("--captures") ? "docs/screenshots" : (process.env["R2_CAPTURES"] ?? "docs/screenshots/.smoke");
 mkdirSync(OUT, { recursive: true });
+console.log(`Captures : ${OUT}/${OUT === "docs/screenshots" ? " (suivies par git, option --captures)" : " (hors git)"}`);
 const failures: string[] = [];
 const expect = (cond: boolean, label: string): void => {
   if (cond) console.log(`  OK  ${label}`);
@@ -31,7 +34,7 @@ const part = (n: string): boolean => parts.includes(n);
 
 type Probe = {
   view: { toScreen(x: number, y: number, z: number): [number, number] | null; pick(st: unknown, x: number, y: number): { kind: string; index: number } | null; camera: string; kind: string };
-  bt: { state: { tick: number; titans: { alive: boolean; ally?: boolean }[]; soldiers: { squad: string; x: number; y: number; z: number; mode: string }[]; squads: { id: string; order: string; queue?: unknown[]; formation?: string }[]; batteries?: { id: string; side: string; zone?: unknown; hold?: boolean; shots: number }[]; impacts?: unknown[]; log: { key: string }[]; shifters?: { directive?: { objective: string; restraint: string; zone: unknown } }[] } };
+  bt: { state: { tick: number; titans: { alive: boolean; ally?: boolean; x: number; y: number }[]; soldiers: { squad: string; x: number; y: number; z: number; mode: string }[]; squads: { id: string; order: string; queue?: unknown[]; formation?: string }[]; batteries?: { id: string; side: string; zone?: unknown; hold?: boolean; shots: number }[]; impacts?: unknown[]; log: { key: string }[]; shifters?: { directive?: { objective: string; restraint: string; zone: unknown } }[] } };
   orders: () => { tick: number; squad: string; order: string; unit?: number; target?: number; queue?: boolean; x?: number }[];
 };
 
@@ -254,10 +257,11 @@ try {
   // Artillerie : tir sur zone, puis cessez-le-feu.
   // Retour de la caméra de suivi : la vue est centrée sur ce qu'on suivait ; on recule à la molette, comme un joueur,
   // jusqu'à voir un Titan ennemi debout (sinon, la zone est désignée au sol, au centre de la vue).
+  // Point visé : les pieds du Titan (au sol), pour que le clic tombe sur la carte et non au-delà de son bord (essai 1 de
+  // la passe de correctifs : visée à mi-hauteur d'un Titan du bord nord, rayon hors de la carte, aucune zone).
   const foeTitan = async (): Promise<[number, number] | undefined> => {
-    const mm = await marks(page);
-    const alive = await probe(page, (p) => p.bt.state.titans.map((ti, i) => (ti.alive && !ti.ally ? i : -1)).filter((i) => i >= 0));
-    return alive.map((i) => mm[`titan:${i}`]).find((v) => v !== undefined);
+    const feet = await probe(page, (p) => p.bt.state.titans.map((ti) => (ti.alive && !ti.ally ? p.view.toScreen(ti.x, ti.y, 0) : null)));
+    return feet.find((v): v is [number, number] => v !== null && v[0] > 20 && v[1] > 20 && v[0] < box.width - 20 && v[1] < box.height - 20);
   };
   let t1 = await foeTitan();
   for (let i = 0; i < 8 && !t1; i++) {
@@ -268,7 +272,7 @@ try {
   }
   await page.locator('.rt-batterie [data-action="tir-zone"]').first().click();
   expect((await ds(page, "mode")) === "tir_zone", "tir sur zone : désignation au clic (curseur en croix)");
-  await page.mouse.click(box.x + (t1 ? t1[0] : box.width / 2), box.y + (t1 ? t1[1] + 15 : box.height / 2));
+  await page.mouse.click(box.x + (t1 ? t1[0] : box.width / 2), box.y + (t1 ? t1[1] : box.height / 2));
   await page.waitForTimeout(200);
   await runFor(page, "4", 600);
   const art = await probe(page, (p) => {

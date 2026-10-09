@@ -153,7 +153,8 @@ export function ordersFor(st: BattleState, sel: Selection, order: SquadOrder, ex
 export function defaultOrders(st: BattleState, sel: Selection, hit: PickHit | null, ground: { x: number; y: number } | null, queue: boolean): TimedOrder[] {
   if (hit?.kind === "titan") {
     const t = st.titans[hit.index];
-    if (t?.alive) return ordersFor(st, sel, "tuer", { target: hit.index, queue });
+    // Un porteur allié n'est pas une cible : le clic droit sur lui vaut un clic au sol.
+    if (t?.alive && !t.ally) return ordersFor(st, sel, "tuer", { target: hit.index, queue });
   }
   if (hit && hit.kind !== "titan") {
     const squad = squadOfHit(st, hit);

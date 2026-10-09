@@ -242,18 +242,42 @@ export function blockedAt(m: TacticalWorldMap, x: number, y: number, z = 0, marg
  * tous les `step` mètres, extrémités exclues (les arbres ne masquent pas le tir).
  */
 export function segmentBlocked(m: TacticalWorldMap, x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, step = 1.5): boolean {
+  // Tout le segment au-dessus du plus haut volume : rien ne le coupe.
+  if (Math.min(z0, z1) >= tallest(m)) return false;
+  const g = obstacleGrid(m);
   const n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0) / step));
+  let key = Number.NaN;
+  let list: readonly number[] = NONE;
   for (let k = 1; k < n; k++) {
     const f = k / n;
     const x = x0 + (x1 - x0) * f;
     const y = y0 + (y1 - y0) * f;
+    // Liste des volumes relue seulement en changeant de case (même résultat, moins de recherches).
+    const ck = cellKey(Math.floor(x / OBSTACLE_CELL), Math.floor(y / OBSTACLE_CELL));
+    if (ck !== key) {
+      key = ck;
+      list = g.get(ck) ?? NONE;
+    }
+    if (list.length === 0) continue;
     const z = z0 + (z1 - z0) * f;
-    for (const id of near(m, x, y)) {
+    for (const id of list) {
       const s = m.structures[id] as Structure;
       if (s.shape === "box" && s.h > z && inside(s, x, y, 0)) return true;
     }
   }
   return false;
+}
+
+/** Hauteur du plus haut volume de la carte (calculée une fois par carte). */
+const tallestOf = new WeakMap<TacticalWorldMap, number>();
+function tallest(m: TacticalWorldMap): number {
+  let h = tallestOf.get(m);
+  if (h === undefined) {
+    h = 0;
+    for (const s of m.structures) if (s.h > h) h = s.h;
+    tallestOf.set(m, h);
+  }
+  return h;
 }
 
 /**

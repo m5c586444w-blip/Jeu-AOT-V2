@@ -176,9 +176,15 @@ function clearShot(bt: Battle, tr: TroopUnit, p: { x: number; y: number; z: numb
  */
 function pickTarget(bt: Battle, tr: TroopUnit, preferSection: string | null): Target | null {
   const st = bt.state;
+  // Les SIGHT_TRIES plus proches, dans l'ordre d'un tri stable (à distance égale, l'ordre d'ajout) : même tirage d'une partie à l'autre.
   const cands: { t: Target; d: number }[] = [];
   const consider = (t: Target, x: number, y: number, bonus = 1): void => {
-    cands.push({ t, d: d2(tr.x, tr.y, x, y) * bonus });
+    const d = d2(tr.x, tr.y, x, y) * bonus;
+    let i = cands.length;
+    while (i > 0 && (cands[i - 1] as { d: number }).d > d) i--;
+    if (i >= SIGHT_TRIES) return;
+    cands.splice(i, 0, { t, d });
+    if (cands.length > SIGHT_TRIES) cands.pop();
   };
   for (const u of st.troops ?? []) {
     if (u.side === tr.side || !alive(u)) continue;
@@ -193,9 +199,7 @@ function pickTarget(bt: Battle, tr: TroopUnit, preferSection: string | null): Ta
     if (hostile) consider({ kind: "titan", index: t.id }, t.x, t.y, 0.5);
   }
   if (cands.length === 0) return null;
-  // Tri stable (ordre d'ajout à distance égale) : même tirage d'une partie à l'autre.
-  cands.sort((a, b) => a.d - b.d);
-  for (const c of cands.slice(0, SIGHT_TRIES)) {
+  for (const c of cands) {
     const p = posOf(bt, c.t);
     if (p && clearShot(bt, tr, p)) return c.t;
   }

@@ -81,6 +81,11 @@ describe("ordres", () => {
     expect(C.defaultOrders(st, sel, { kind: "soldat", index: other }, null, true)).toMatchObject([{ order: "suivre", follow: ids[1], queue: true }]);
     expect(C.defaultOrders(st, sel, null, { x: 50, y: 60 }, false)).toMatchObject([{ order: "deplacer" }]);
     expect(C.defaultOrders(st, C.EMPTY, null, { x: 50, y: 60 }, false)).toEqual([]);
+    // Porteur allié sous le curseur : pas d'« attaquer » ; le clic vaut un clic au sol (D-146).
+    const ally = st.titans[1];
+    if (ally) ally.ally = true;
+    expect(C.defaultOrders(st, sel, { kind: "titan", index: 1 }, { x: 50, y: 60 }, false)).toMatchObject([{ order: "deplacer" }]);
+    expect(C.defaultOrders(st, sel, { kind: "titan", index: 1 }, null, false)).toEqual([]);
   });
 
   it("artillerie et porteurs : seulement les alliés ; formation suivante en boucle", () => {

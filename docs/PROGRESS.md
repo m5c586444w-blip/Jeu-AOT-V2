@@ -2,9 +2,9 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R2+ en revue** (branche `claude/v2-r2`, D-139 à D-145 ; rapport `docs/reports/R2.md`). Direction autonome (D-107). |
-| Tâche | R2.1 à R2.7 faites (`c1c1ec2`, `cbba95e`, `f7267fb`, `510558a`, `a034d49`, R2.7) ; dettes n° 46 à 53 |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 106 fichiers, 700 tests ; empreintes `sim:selftest` inchangées (`docs/reports/R2-verify.log`) ; `smoke:r2` code 0 (essai 8) |
+| Phase | **R2+ en revue** (branche `claude/v2-r2`, D-139 à D-146 ; rapport `docs/reports/R2.md`). Direction autonome (D-107). |
+| Tâche | R2.1 à R2.7 faites (`c1c1ec2`, `cbba95e`, `f7267fb`, `510558a`, `a034d49`, `8ceb5c4`) ; passe de correctifs après revue indépendante (D-146 : `b4c9f9c` bâtiments et ligne de tir en temps réel, puis captures du smoke, interface, rapport) ; dettes n° 46 à 60 |
+| Dernier `npm run verify` | 2026-10-09 : code 0 ; 107 fichiers, 705 tests ; 8 empreintes `sim:selftest` inchangées (`docs/reports/R2-verify-correctifs.log`) ; `smoke:r2 -- --captures` code 0 (`R2-smoke-correctifs.log`, essai 2 de la passe) |
 | Prochaine étape | PROCHAINE ACTION EXACTE : revue de R2+ par la direction (PR de `claude/v2-r2`), mesures GPU sur le PC de l'utilisateur (dette n° 49), puis N3 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur

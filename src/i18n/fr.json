@@ -3567,6 +3567,7 @@
   "rt.options_note": "Ces réglages valent pour cette bataille ; les préférences durables sont dans Options.",
   "rt.paused": "Pause — donnez vos ordres (Espace pour reprendre)",
   "rt.no_webgl": "WebGL 2 indisponible sur ce poste : la bataille s'affiche en vue 2D (la vue 3D n'est pas chargée).",
+  "rt.end_retreat_ours": "repli de nos troupes",
   "rt.view3d_failed": "La vue 3D n'a pas pu démarrer ({msg}) : la bataille s'affiche en vue 2D.",
   "rt.view_3d": "3D",
   "rt.view_2d": "2D",

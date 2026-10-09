@@ -189,6 +189,36 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
   };
   setSpeed(0);
 
+  // ——— Bascule 3D ↔ 2D : la boucle ne dessine jamais sur une vue détruite (`switching`) ; une erreur de la vue 3D
+  // (perte du contexte WebGL, par exemple) bascule sur la 2D au lieu de figer l'écran. ———
+  let switching = false;
+  const switchView = (kind: BattleViewPref, reason: string | null): void => {
+    if (switching) return;
+    switching = true;
+    viewKind = kind;
+    const choice = root.querySelector<HTMLSelectElement>('select[data-rt-option="battleView"]');
+    if (choice) choice.value = kind;
+    try {
+      view.destroy();
+    } catch {
+      // Vue déjà hors d'usage : on la remplace quand même.
+    }
+    void mountView()
+      .then(() => {
+        view.setCamera("strategique");
+        if (reason) {
+          message.hidden = false;
+          message.textContent = reason;
+        }
+        switching = false;
+      })
+      .catch((e: unknown) => {
+        // Aucune vue n'a pu être montée : la bataille continue sans image (horloge, carnet et ordres restent actifs).
+        message.hidden = false;
+        message.textContent = t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) });
+      });
+  };
+
   // ——— Options de la bataille (vue, qualité, violence) : valent pour cette bataille ; les préférences durables sont dans Options. ———
   const optSelect = <V extends string>(label: string, key: string, values: readonly V[], current: () => V, apply: (v: V) => void): HTMLLabelElement => {
     const row = el("label", "options__ligne");
@@ -209,11 +239,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     return row;
   };
   optBox.append(
-    optSelect("options.battle_view", "battleView", BATTLE_VIEWS, () => viewKind, (v) => {
-      viewKind = v;
-      view.destroy();
-      void mountView().then(() => view.setCamera("strategique"));
-    }),
+    optSelect("options.battle_view", "battleView", BATTLE_VIEWS, () => viewKind, (v) => switchView(v, null)),
     optSelect("options.battle_quality", "battleQuality", BATTLE_QUALITIES, () => quality, (v) => {
       quality = v;
       view.setOptions({ quality, violence });
@@ -771,7 +797,9 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       pauseBanner.hidden = true;
       const box = el("section", "bilan");
       const s = bt.state;
-      box.append(el("h3", "", t(`battle.end_short.${s.ended?.reason ?? "temps"}`).toUpperCase()));
+      // « Repli » dit de quel camp : c'est le nôtre (plus aucun de nos hommes debout, certains ont quitté le champ).
+      const reason = s.ended?.reason ?? "temps";
+      box.append(el("h3", "", t(reason === "repli" ? "rt.end_retreat_ours" : `battle.end_short.${reason}`).toUpperCase()));
       const table = el("table", "registre-table");
       // Sans soldat à équipement tridimensionnel (bataille d'armées), les lignes propres aux soldats (coupes, gaz…) sont omises.
       const ODM_ROWS = new Set(["tac.sum.dead", "tac.sum.cuts", "tac.sum.limbs", "tac.sum.dodges", "tac.sum.rescues", "tac.sum.blades", "tac.sum.gas"]);
@@ -842,13 +870,36 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
         });
       });
       const t1 = performance.now();
-      if (view.camera === "suivi") {
-        const f = followTarget();
-        if (f) view.follow(f.x, f.y, f.z, f.heading, f.height);
+      // Vue en cours de remplacement : rien n'est dessiné (l'ancienne est détruite, la nouvelle pas encore montée).
+      if (switching) {
+        timer.textContent = clock(bt.state.tick / bt.world.balance.tick_hz);
+        requestAnimationFrame(frame);
+        return;
       }
-      view.draw(st(), prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), C.overlayOf(st(), sel));
+      try {
+        if (view.camera === "suivi") {
+          const f = followTarget();
+          if (f) view.follow(f.x, f.y, f.z, f.heading, f.height);
+        }
+        view.draw(st(), prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), C.overlayOf(st(), sel));
+      } catch (e) {
+        const msg = t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) });
+        if (view.kind === "3d") switchView("2d", msg);
+        else {
+          message.hidden = false;
+          message.textContent = msg;
+        }
+        requestAnimationFrame(frame);
+        return;
+      }
       const t2 = performance.now();
-      view.render();
+      try {
+        view.render();
+      } catch (e) {
+        if (view.kind === "3d") switchView("2d", t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) }));
+        requestAnimationFrame(frame);
+        return;
+      }
       const t3 = performance.now();
       frames++;
       const s = bt.state;
