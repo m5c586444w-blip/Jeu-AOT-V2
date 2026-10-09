@@ -1121,3 +1121,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Contexte** : TUT.2 : désactivable à tout moment, rejouable depuis les options, puis aides contextuelles une seule fois par élément ; les empreintes des parties ne doivent pas changer.
 - **Choix** : `Settings.tutorial = { done, disabled, hints, seen[] }` dans les préférences locales (`src/ui/settings.ts`, localStorage), jamais dans l'état de partie. Les aides s'activent à la fin du guide, terminé ou quitté ; une carte discrète (« Compris ») apparaît à la première ouverture de chaque registre, du dossier de province et de l'écran de bataille ; l'élément est noté « vu » à l'affichage. Une case des options coupe les aides ; un bouton rejoue le guide. Pas d'aide pendant le guide. Les anciennes préférences (sans guide) se chargent ; `src/sim` n'est pas modifié (test : aucune mention du guide dans `src/sim`).
 - **Raison** : les préférences d'interface sont déjà locales ; aucune aide pour qui n'a jamais lancé le guide (les captures et smoke:* ne changent pas). **Réversible** : oui.
+
+## 2026-10-09 — D-138 TUT : revue et fusion
+- **Contexte** : revue par un sous-agent distinct (15 captures ouvertes, code, textes) : deux défauts bloquants. (1) « Rejouer le guide » ne faisait rien en 845 et ouvrait « Bienvenue à Paradis » dans une partie de Marley ; (2) `?tutoriel=1` restait dans l'adresse, si bien qu'un rechargement relançait le guide. Il a aussi relevé que `smoke:tuto` avalait une erreur de Playwright (`uncheck(...).catch`).
+- **Choix** : (1) hors d'une partie de Paradis avec registres, « Rejouer » ouvre la partie accompagnée du menu (850) ; (2) le paramètre est retiré par `history.replaceState` au lancement ; le smoke clique la case et vérifie la préférence, sans `catch`, et contrôle les deux correctifs. Un guide rejoué garde le choix des aides fait dans les options (seule la première fin les active). Textes : domaine « monde extérieur » ajouté, « deux au plus » remplacé par « limité » (la limite dépend de la nation). Autres remarques : dette n° 45.
+- **Sorties** : `smoke:tuto` 94 OK, code 0 (`docs/reports/TUT-smoke-2.log`) ; verify code 0, 660/660 (`docs/reports/TUT-verify-final.log`).
+- **Réversible** : oui.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| TUT (sous-agent) | Sonnet | défaut | ≈ 110 | sans arrêt |
+| Revue TUT + correctifs + fusion | Opus | défaut | ≈ 35 | 1 passe |

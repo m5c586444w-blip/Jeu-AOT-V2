@@ -445,7 +445,8 @@ export async function bootGame(): Promise<void> {
     keyOf: (id) => (id === "temps" ? keyOf("speed_1") : keyOf(id)),
     finish: (how) => {
       const p = loadSettings(safeStorage()).tutorial;
-      savePrefs({ ...p, done: how === "done" ? true : p.done, disabled: how === "quit", hints: true });
+      // Première fin du guide : aides activées (D-137) ; un guide rejoué garde le choix fait dans les options.
+      savePrefs({ ...p, done: how === "done" ? true : p.done, disabled: how === "quit", hints: p.done || p.disabled ? p.hints : true });
       if (eventDossier) eventDossier.auto = autoDossiers;
       refresh();
     },
@@ -461,6 +462,11 @@ export async function bootGame(): Promise<void> {
   replayTutorial = () => {
     const p = loadSettings(safeStorage()).tutorial;
     savePrefs({ ...p, disabled: false });
+    // Le guide suit une partie de Paradis avec registres : ailleurs (845, Marley), il ouvre la partie accompagnée du menu.
+    if (!registers || (state.nations?.player ?? "fac_paradis") !== "fac_paradis") {
+      window.location.search = `?${new URLSearchParams({ scenario: "scn_sandbox_850", tutoriel: "1" }).toString()}`;
+      return;
+    }
     startTutorial();
   };
   actions.options = () => {
@@ -492,7 +498,13 @@ export async function bootGame(): Promise<void> {
   refresh();
   document.documentElement.dataset["ready"] = "true";
   // Partie accompagnée (menu principal, ou `?tutoriel=1`) : le guide commence dès que l'écran est prêt.
-  if (new URLSearchParams(window.location.search).get("tutoriel") === "1") startTutorial();
+  // Le paramètre est retiré de l'adresse : un rechargement ne relance pas le guide (TUT.2).
+  const query = new URLSearchParams(window.location.search);
+  if (query.get("tutoriel") === "1") {
+    query.delete("tutoriel");
+    window.history.replaceState(null, "", `${window.location.pathname}${query.size > 0 ? `?${query.toString()}` : ""}${window.location.hash}`);
+    startTutorial();
+  }
 }
 
 /** Dossier de choix de la nation (04 §5.2 ; habillage final en P8). */

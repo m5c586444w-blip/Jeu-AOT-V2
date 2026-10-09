@@ -61,3 +61,7 @@ Tests ajoutés : `tests/ui/tutorial.test.ts` (16 : étapes, machine d'états, pl
 
 ## Dettes (n° 41 à 44) et décisions
 Voir `docs/reports/dette.md` et `docs/DECISIONS.md` (D-135 à D-137). Aucun critère n'a échoué deux fois. Défauts de capture en reprise possible : aide recouvrant les calques ; dossier de province non refermé en quittant l'étape 3 (dette n° 43).
+
+## Revue de la direction (D-138)
+- Deux défauts bloquants corrigés : « Rejouer le guide » hors d'une partie de Paradis ouvre la partie accompagnée de 850 ; `?tutoriel=1` est retiré de l'adresse au lancement. `smoke:tuto` n'avale plus d'erreur (case des aides cliquée, préférence vérifiée).
+- `smoke:tuto` : 94 OK, code 0 (`docs/reports/TUT-smoke-2.log`) ; verify : code 0, 100 fichiers, 660 tests (`docs/reports/TUT-verify-final.log`). Captures régénérées par ce passage. Autres remarques : dette n° 45.

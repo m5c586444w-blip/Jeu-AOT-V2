@@ -127,6 +127,7 @@ try {
   await open(page, GAME, errors);
   await page.waitForSelector(TUTO, { timeout: 10000 });
   expect((await page.locator(".tuto-halo:not([hidden])").count()) === 1, "mise en évidence de l'élément montré");
+  expect(!page.url().includes("tutoriel"), "adresse sans « tutoriel » une fois le guide lancé (un rechargement ne le relance pas)");
   expect((await page.locator(".bandeau__vitesse[aria-pressed='true'], .bandeau__vitesse.actif").count()) >= 0, "départ avec le temps suspendu");
   const seen: string[] = [];
   for (const id of STEPS) {
@@ -201,9 +202,10 @@ try {
   expect((await page.locator(".options [data-action='rejouer-tuto']").count()) === 1 && (await page.locator(".options [data-setting='hints']").count()) === 1, "options : aides contextuelles et guide rejouable");
   await audit(page, ".options", "options");
   await page.screenshot({ path: `${OUT}/tuto-options-1366.png` });
-  await page.locator(".options [data-setting='hints']").uncheck({ timeout: 4000 }).catch((e) => console.log(String(e).slice(0, 1500)));
+  await page.locator(".options [data-setting='hints']").click();
   expect((await prefs(page))?.hints === false, "aides contextuelles désactivées dans les options");
-  await page.locator(".options [data-setting='hints']").check();
+  await page.locator(".options [data-setting='hints']").click();
+  expect((await prefs(page))?.hints === true, "aides contextuelles réactivées dans les options");
   await page.locator(".options [data-action='rejouer-tuto']").click();
   await waitStep(page, "accueil", "explain");
   expect(true, "guide rejoué depuis les options");
@@ -257,6 +259,11 @@ try {
   const sb = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   await open(sb, `${url}?scenario=scn_sandbox_845&tutoriel=1`, errors);
   expect((await sb.locator(".tuto").count()) === 0 || (await sb.locator(TUTO).count()) === 0, "845 : pas de guide (aucun registre dans le bac à sable économique)");
+  await sb.keyboard.press("F9");
+  await sb.waitForSelector(".options:not([hidden])");
+  await sb.locator(".options [data-action='rejouer-tuto']").click();
+  await sb.waitForSelector(TUTO, { timeout: 15000 });
+  expect(sb.url().includes("scn_sandbox_850") && !sb.url().includes("tutoriel"), "845 : « Rejouer le guide » ouvre la partie accompagnée de 850");
   await sb.close();
 
   expect(errors.length === 0, `0 erreur console${errors.length ? ` (${errors.slice(0, 3).join(" | ")})` : ""}`);

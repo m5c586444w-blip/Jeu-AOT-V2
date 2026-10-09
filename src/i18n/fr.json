@@ -3490,7 +3490,7 @@
   "tuto.recherche.corps": "Les technologies forment un arbre. Choisissez une étude : les points de recherche s'accumulent chaque mois, et l'étude suivante s'ouvre à l'achèvement de ses prérequis.",
   "tuto.missions.titre": "Les missions",
   "tuto.missions.action": "Ouvrez les Missions dans le menu du bas (touche {key}).",
-  "tuto.missions.corps": "Les missions sont des objectifs de plusieurs mois, par domaine : militaire, politique, économie, religion, renseignement. Chacune coûte des ressources au lancement et apporte ses bonus à l'accomplissement. Survolez une planche pour voir ses effets.",
+  "tuto.missions.corps": "Les missions sont des objectifs de plusieurs mois, par domaine : militaire, politique, économie, religion, renseignement, monde extérieur. Chacune coûte des ressources au lancement et apporte ses bonus à l'accomplissement. Survolez une planche pour voir ses effets.",
   "tuto.evenements.titre": "Les événements",
   "tuto.evenements.action": "Ouvrez la Chronologie dans le menu du bas (touche {key}).",
   "tuto.evenements.corps": "La chronologie réunit les événements passés, en cours et ceux que votre renseignement laisse prévoir. Quand une décision est attendue, un dossier s'ouvre : lisez-le, puis choisissez avant l'échéance.",
@@ -3529,5 +3529,5 @@
   "aide.epilogue": "Le bilan du règne, mis à jour au fil de la partie.",
   "aide.economie": "Chaque ressource a ses entrées, ses sorties et un solde. Surveillez les soldes négatifs avant la rupture.",
   "aide.armees": "Choisissez une armée, puis cliquez sur la carte pour la faire marcher. Le ravitaillement limite la durée de la marche.",
-  "aide.missions": "Une mission coûte des ressources au lancement et apporte ses bonus à l'accomplissement. Deux au plus peuvent courir en même temps."
+  "aide.missions": "Une mission coûte des ressources au lancement et apporte ses bonus à l'accomplissement. Le nombre de missions menées en même temps est limité."
 }
