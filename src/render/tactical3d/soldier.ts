@@ -33,6 +33,8 @@ export interface SoldierMaterials {
   steel: MeshStandardMaterial;
   hair: MeshStandardMaterial[];
   all: MeshStandardMaterial[];
+  /** R3 : couvre-chef (képi, casque, casquette) ; à défaut, la teinte des bottes. */
+  hat?: MeshStandardMaterial;
 }
 
 export function soldierMaterials(): SoldierMaterials {

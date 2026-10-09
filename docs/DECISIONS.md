@@ -1197,3 +1197,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | R2+ (sous-agent) | Opus | xhigh | ≈ 290 (avec correctifs) | arrêt de 3 h, relancé ; limite d'usage pendant la passe |
 | Revue R2+ + fusion | Opus | défaut | ≈ 40 | 1 passe |
+
+## 2026-10-09 — D-148 R3 : périmètre et ordre des tâches
+- **Contexte** : fichier 18 §2 (prompt complet) et 21 §8 (version courte, qui prime) ; objectif du 24 §6 : « Titans de 3 à 15 m avec variantes, soldats Paradis et Marley ».
+- **Options** : (a) prompt complet (8 types de soldats, cheval, câbles brisés, Titans spéciaux en bataille) ; (b) version courte, plus ce que la consigne de la direction ajoute (états lisibles : saisie, dévoration, chute, nuque tranchée, vapeur ; branchement sur R2+ et P4 ; niveaux de détail pour 400 unités).
+- **Choix** : (b). Hors périmètre écrit dans `docs/phases/R3.md`. Écart de procédure : un commit pour R3.1 à R3.4 (les tests des Titans, des tenues et des états dépendent du catalogue commun), puis un par tâche.
+- **Réversible** : oui.
+
+## 2026-10-09 — D-149 R3 : variantes de Titans sur le corps de base, traits de classe
+- **Contexte** : 21 §8 : 3 variantes de proportions et 2 de peau par taille, « jamais un mannequin lisse » ; 18 §2 : silhouettes distinctes (< 85 %) ; corps de base R1d sans retouche.
+- **Options** : (a) nouvelles figures en primitives ; (b) le corps de base MakeHuman de R1c déformé (`buildHumanTitan`), avec des variantes de données ; (c) modèles externes (exclus : aucun modèle de l'œuvre ou de fans ; MakeHuman et Poly Haven seulement).
+- **Choix** : (b). `data/art/figures.json` [A] : 3 variantes de proportions (trapu, échalas, difforme : modifications additives, boiterie, roulis, expression), 3 peaux (chair, cireuse, tannée : teinte, marbrures, veines, rougeurs, rugosité ; texture procédurale) et un trait par classe ajouté aux proportions de R1b (inchangées) : au premier essai, deux classes voisines de même variante se recouvraient à 91,6 % (3 m / 5 m, `classe_12` / `classe_15` à 90 %) ; avec les traits, pire paire 81 % (essai 2 : 87,5 % entre 8 et 12 m « trapu », trait de 12 m refait ; essai 3 OK). Hauteur debout étalonnée sur la peau posée (la voussure du « difforme » abaissait la tête de 6,7 %). Un Titan de la simulation prend la classe la plus proche de sa hauteur, une variante tirée de son type, de sa silhouette et de son identifiant (un anormal garde « échalas »), et la hauteur exacte de la simulation.
+- **Réversible** : oui (données).
+
+## 2026-10-09 — D-150 R3 : états montrés lus sur la simulation, fondus, tenues
+- **Contexte** : `src/sim` inchangé ; la simulation ne donne ni l'instant de la mort, ni le corps d'un soldat (Bataillon, Garnison, Brigades).
+- **Choix** : machine d'états pure (`figures/states.ts`) avec une petite mémoire par figure (état d'avant, instant de mort, dernier coup de lame, deux pas sans bouger avant « repos ») ; seuils [A] dans `figures.json` (`etats`) : dévoration pendant les 1,5 dernières secondes de la saisie (2,5 s, `grab_hold_s`), chute en 1,6 s par « à genoux », fondu de 0,35 s. Poses nouvelles du corps de base (dévoration, à genoux, rampant ; tir, mort, chute, saisi) et fondu par interpolation des os (`blendHuman`). Membres coupés : os du segment ramené à un moignon, vapeur ; nuque tranchée (mort par un soldat) : entaille sombre. Tenues : règle de rendu [A] (`regle_tenues`) : soldats à appareil → Bataillon ; fantassins de Paradis selon l'arme (fusiliers, mitrailleurs, anti-Titans → Garnison ; assaut → Brigades spéciales ; cavaliers → Bataillon) ; sections adverses → infanterie de Marley, le premier homme de chaque section en officier.
+- **Raison** : rien ne change dans la simulation ni dans les empreintes ; tout est paramétrable.
+- **Réversible** : oui.

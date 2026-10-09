@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, Group, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, SkinnedMesh, Vector3 } from "three";
+import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, Group, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, SkinnedMesh, SphereGeometry, TorusGeometry, Vector3 } from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import type { Material, Texture } from "three";
@@ -28,6 +28,20 @@ export interface HumanSoldier {
   dispose(): void;
 }
 
+/**
+ * R3 : tenue et équipement d'une figure (`data/art/figures.json`). Couleurs : veste, pantalon, et `cape` du jeu de matériaux
+ * pour la cape, le manteau ou l'écharpe ; `hat` pour le couvre-chef. Équipement : appareil et lames (odm), fusil (avec
+ * havresac), ou baudrier et pistolet (officier).
+ */
+export interface SoldierOutfit {
+  cape: boolean;
+  gear: "odm" | "fusil" | "officier";
+  headgear: "aucun" | "kepi" | "casque" | "casquette";
+  coat: boolean;
+  scarf: boolean;
+}
+export const BATTALION_OUTFIT: SoldierOutfit = { cape: true, gear: "odm", headgear: "aucun", coat: false, scarf: false };
+
 export interface SoldierLook {
   skin: Material;
   eyes: Material;
@@ -36,8 +50,10 @@ export interface SoldierLook {
 }
 
 /** Hauteur demandée par le banc (1,7 m) ou tirée de la graine. */
-export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number } = {}): HumanSoldier {
+export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: SoldierOutfit } = {}): HumanSoldier {
   const rand = seeded(derive(seed, 61));
+  const outfit = opts.outfit ?? BATTALION_OUTFIT;
+  const odm = outfit.gear === "odm";
   const female = opts.gender !== undefined ? opts.gender < 0.5 : rand() < 0.3;
   const gender = opts.gender ?? (female ? range(rand, 0, 0.2) : range(rand, 0.8, 1));
   const height = opts.height ?? (female ? range(rand, 1.58, 1.72) : range(rand, 1.68, 1.86));
@@ -147,18 +163,19 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
     seam("peau_bras", "peau_mains", 0.035, mats.jacket, 0.007, 0, s);
     seam("peau_jambes", "peau_cuisses", 0.045, mats.boots, 0.008, 0, s);
   }
-  // Réservoir de gaz au bas du dos, lanceurs aux hanches.
-  const tank = piece(gear("reservoir"), mats.steel, "reservoir");
-  attach("pelvis", tank, new Vector3(0, pelvis.y + 0.07 * k, back - 0.065 * k));
   const launcher = new Object3D();
   launcher.name = "lanceur";
   attach("pelvis", launcher, new Vector3(-hipHalf - 0.045 * k, pelvis.y + 0.01 * k, pelvis.z + 0.02 * k));
+  const blades: Object3D[] = [];
+  if (odm) {
+  // Réservoir de gaz au bas du dos, lanceurs aux hanches.
+  const tank = piece(gear("reservoir"), mats.steel, "reservoir");
+  attach("pelvis", tank, new Vector3(0, pelvis.y + 0.07 * k, back - 0.065 * k));
   launcher.add(piece(gear("lanceur"), mats.steel, "lanceur"));
   const left = piece(gear("lanceur"), mats.steel, "lanceur");
   left.scale.x *= -1;
   attach("pelvis", left, new Vector3(hipHalf + 0.045 * k, pelvis.y + 0.01 * k, pelvis.z + 0.02 * k));
   // Fourreaux de lames sur l'extérieur des cuisses ; lames dans le prolongement de l'avant-bras.
-  const blades: Object3D[] = [];
   for (const [side, s] of [
     ["l", 1],
     ["r", -1],
@@ -177,15 +194,100 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
     holder.add(piece(gear("lame"), mats.steel, "lame"));
     blades.push(holder);
   }
+  }
   // Cape drapée aux épaules : un pivot sous la nuque, qu'on tourne selon la pose (elle flotte en vol).
   const capePivot = new Object3D();
   capePivot.name = "cape";
   attach("spine_03", capePivot, new Vector3(0, neck.y - 0.01 * k, chestBack - 0.02 * k));
   const shoulderHalf = Math.max(Math.abs(J("upperarm_l").x), 0.15) + 0.04 * k;
-  const cape = new Mesh(capeGeometry(shoulderHalf, (neck.y - pelvis.y) * 1.55, 0.09 * k, seed), mats.cape);
-  cape.name = "cape";
-  cape.castShadow = true;
-  capePivot.add(cape);
+  const extras: BufferGeometry[] = [];
+  let cape: Mesh | null = null;
+  if (outfit.cape) {
+    cape = new Mesh(capeGeometry(shoulderHalf, (neck.y - pelvis.y) * 1.55, 0.09 * k, seed), mats.cape);
+    cape.name = "cape";
+    cape.castShadow = true;
+    capePivot.add(cape);
+  }
+  // R3 : couvre-chef, manteau, écharpe, fusil et havresac, baudrier et pistolet (pièces rigides portées par les os).
+  const headTop = bounds.get("peau_tete")?.maxY ?? J("head").y + 0.2 * k;
+  const headB = bounds.get("peau_tete");
+  const headHalfW = headB ? (headB.maxX - headB.minX) / 2 : 0.08 * k;
+  const headMidZ = headB ? (headB.maxZ + headB.minZ) / 2 : J("head").z;
+  const own = (g: BufferGeometry): BufferGeometry => {
+    extras.push(g);
+    return g;
+  };
+  const hatMat = mats.hat ?? mats.boots;
+  if (outfit.headgear !== "aucun") {
+    const hat = new Group();
+    hat.name = `couvre-chef-${outfit.headgear}`;
+    const r = headHalfW * 1.12;
+    if (outfit.headgear === "casque") {
+      // Casque d'acier : calotte et bord étroit.
+      const dome = new Mesh(own(new SphereGeometry(r * 1.05, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2)), hatMat);
+      dome.scale.set(1, 0.85, 1.12);
+      const brim = new Mesh(own(new CylinderGeometry(r * 1.32, r * 1.38, 0.012 * k, 18)), hatMat);
+      hat.add(dome, brim);
+      hat.position.set(0, headTop - 0.075 * k, headMidZ);
+    } else {
+      // Képi (haut, droit) ou casquette (plate, large) : fût, dessus, visière.
+      const kepi = outfit.headgear === "kepi";
+      const hH = kepi ? 0.1 * k : 0.06 * k;
+      const top = kepi ? r * 0.92 : r * 1.25;
+      const band = new Mesh(own(new CylinderGeometry(top, r * 1.02, hH, 18)), hatMat);
+      band.position.y = hH / 2;
+      const visor = new Mesh(own(new CylinderGeometry(r * 0.75, r * 0.75, 0.008 * k, 14, 1, false, -Math.PI / 2, Math.PI)), mats.leather);
+      visor.position.set(0, 0.006 * k, r * 0.55);
+      visor.scale.set(1, 1, 0.75);
+      hat.add(band, visor);
+      hat.position.set(0, headTop - 0.05 * k, headMidZ);
+    }
+    attach("head", hat, hat.position.clone());
+  }
+  if (outfit.coat) {
+    // Manteau long : pans ouverts de la taille aux genoux (au-dessus de la veste).
+    const hip = hipHalf + 0.03 * k;
+    const len = (pelvis.y - J("calf_l").y) * 1.05;
+    const coat = new Mesh(own(new CylinderGeometry(hip, hip * 1.45, len, 20, 1, true)), mats.cape);
+    coat.name = "manteau";
+    coat.material = mats.cape;
+    coat.castShadow = true;
+    attach("pelvis", coat, new Vector3(0, pelvis.y + 0.04 * k - len / 2, pelvis.z - 0.01 * k));
+  }
+  if (outfit.scarf) {
+    const scarf = new Mesh(own(new TorusGeometry(0.075 * k, 0.025 * k, 8, 18)), mats.cape);
+    scarf.name = "echarpe";
+    scarf.rotation.x = Math.PI / 2 - 0.25;
+    attach("neck_01", scarf, new Vector3(0, neck.y + 0.02 * k, neck.z + 0.01 * k));
+  }
+  const rifleHeld = new Group();
+  const rifleSlung = new Group();
+  if (outfit.gear === "fusil") {
+    // Fusil (crosse, fût, canon) : à la bretelle dans le dos, ou épaulé (orienté de la main droite vers la main gauche).
+    const rifle = (): BufferGeometry => merge([at(new BoxGeometry(0.045, 0.1, 0.32), 0, -0.02, -0.16), at(new BoxGeometry(0.04, 0.05, 0.55), 0, 0.01, 0.27), at(new CylinderGeometry(0.009, 0.009, 0.42, 8), 0, 0.03, 0.75, Math.PI / 2, 0, 0)]);
+    const g = own(rifle());
+    const held = new Mesh(g, mats.leather);
+    held.scale.setScalar(k);
+    rifleHeld.add(held);
+    rifleHeld.name = "fusil";
+    group.add(rifleHeld);
+    const slung = new Mesh(g, mats.leather);
+    slung.scale.setScalar(k);
+    slung.rotation.set(-Math.PI / 2 + 0.1, 0, 0.5);
+    rifleSlung.add(slung);
+    rifleSlung.name = "fusil-bretelle";
+    attach("spine_03", rifleSlung, new Vector3(0, J("spine_03").y, chestBack - 0.06 * k));
+    const pack = new Mesh(own(new RoundedBoxGeometry(0.3, 0.32, 0.14, 2, 0.03)), mats.leather);
+    pack.name = "havresac";
+    pack.scale.setScalar(k);
+    attach("spine_03", pack, new Vector3(0, J("spine_03").y - 0.04 * k, chestBack - 0.1 * k));
+  } else if (outfit.gear === "officier") {
+    band(["peau_torse"], new Vector3(0, (neck.y + pelvis.y) / 2 + 0.03 * k, 0), new Vector3(0.55, 1, 0).normalize(), 0.035);
+    const holster = new Mesh(own(new RoundedBoxGeometry(0.06, 0.14, 0.09, 2, 0.015)), mats.leather);
+    holster.name = "pistolet";
+    holster.scale.setScalar(k);
+    attach("pelvis", holster, new Vector3(-hipHalf - 0.02 * k, pelvis.y - 0.04 * k, pelvis.z + 0.04 * k));
+  }
   // Cheveux : couleur sur le crâne avec une lisière fondue, et une coque d'épaisseur au centre.
   paintHair(body, hair, skin);
   const hairMesh = buildHairCap(body, hair, 0.006 * k, 0.012);
@@ -201,17 +303,34 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       poseHuman(body, p, time, SOLDIER_GAIT, phase);
       const w = Math.sin(time * 3 + phase);
       // Le soldat regarde vers +z : la cape s'écarte vers l'arrière par une rotation positive autour de x.
-      capePivot.rotation.x = p === "vol" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
+      capePivot.rotation.x = p === "vol" || p === "chute" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
       // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt et en marche.
-      for (const b of blades) b.visible = p !== "attente" && p !== "marche";
+      for (const b of blades) b.visible = p !== "attente" && p !== "marche" && p !== "mort" && p !== "saisi";
       group.updateMatrixWorld(true);
+      if (outfit.gear === "fusil") {
+        const aim = p === "tir";
+        rifleHeld.visible = aim;
+        rifleSlung.visible = !aim;
+        if (aim) {
+          const r = body.bones["hand_r"]?.getWorldPosition(new Vector3());
+          const l = body.bones["hand_l"]?.getWorldPosition(new Vector3());
+          if (r && l) {
+            group.worldToLocal(r);
+            group.worldToLocal(l);
+            rifleHeld.position.copy(r);
+            rifleHeld.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), l.sub(r).normalize());
+            rifleHeld.updateMatrixWorld(true);
+          }
+        }
+      }
       // Matrices d'os à jour : les mesures sur la peau (boîtes englobantes) suivent la pose.
       body.skeleton.update();
     },
     dispose() {
       body.dispose();
       hairMesh?.geometry.dispose();
-      cape.geometry.dispose();
+      cape?.geometry.dispose();
+      for (const g of extras) g.dispose();
       for (const m of straps) m.geometry.dispose();
       for (const m of owned) m.dispose();
     },
