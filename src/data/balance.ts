@@ -220,6 +220,31 @@ export const TacticalBalanceSchema = z
     battle: z.object({ time_limit_s: pos, deploy_margin_m: pos }).strict(),
     coherence: z.array(z.object({ id: z.string(), map: z.string(), titan: z.string(), count: z.number().int().min(1), soldiers: z.number().int().min(1) }).strict()).min(1),
     terrain_mult: z.record(z.enum(["plaine", "foret", "ville", "mur"]), pos),
+    /** R2+ : bataille de compagnies (troupes d'infanterie, rencontres d'armées) ; facultatif. */
+    rt: z
+      .object({
+        canon: CanonSchema,
+        notes_canon: z.string().optional(),
+        weapons: z.record(
+          z.enum(["fusilier", "mitrailleur", "assaut", "cavalier", "antititan"]),
+          z.object({ range_m: pos, reload_s: pos, hit: prob, lethal: prob, speed_m_s: pos, melee: prob, vs_titan: z.number().min(0) }).strict(),
+        ),
+        air_hit_mult: prob,
+        wounded_hit_mult: prob,
+        melee_reach_m: pos,
+        melee_base: prob,
+        melee_skill_k: num,
+        engage_share: prob,
+        morale_loss_per_death: pos,
+        rout_morale: z.number().min(0).max(100),
+        rout_losses_share: prob,
+        spacing_m: pos,
+        titan_vs_troop_kill: prob,
+        time_limit_s: pos,
+        encounter: z.object({ men_per_unit: pos, odm_max: z.number().int().min(1), troops_max: z.number().int().min(0), enemy_max: z.number().int().min(0), titans_max: z.number().int().min(0), total_max: z.number().int().min(100), min_units: z.number().int().min(1) }).strict(),
+      })
+      .strict()
+      .optional(),
   })
   .strict();
 

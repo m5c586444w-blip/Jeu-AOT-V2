@@ -3,8 +3,40 @@
 export const TACTICAL_ORDERS = ["tuer", "tenir", "repli", "couvrir"] as const;
 export type TacticalOrder = (typeof TACTICAL_ORDERS)[number];
 
+/**
+ * R2+ : ordres du temps réel fin, journalisés comme les ordres classiques (même rejeu). « deplacer » (vers un point) et
+ * « suivre » (une escouade) sont des ordres d'escouade ou d'unité ; « formation » règle la disposition ; « tir_zone » et
+ * « cessez_feu » s'adressent à une batterie ; « porteur » donne un ordre général (objectif, zone, retenue) à un porteur allié.
+ */
+export const RT_ORDERS = ["deplacer", "suivre", "formation", "tir_zone", "cessez_feu", "porteur"] as const;
+export type RtOrder = (typeof RT_ORDERS)[number];
+export type BattleOrder = TacticalOrder | RtOrder;
+/** Ordre en cours d'une escouade ou d'une unité. */
+export type SquadOrder = TacticalOrder | "deplacer" | "suivre";
+/** Formations [A] : ligne (front large), colonne (deux de front), coin (pointe en avant), carré. */
+export const FORMATIONS = ["ligne", "colonne", "coin", "carre"] as const;
+export type Formation = (typeof FORMATIONS)[number];
+/** Ordres généraux d'un porteur [A] : l'IA le mène, le joueur ne fixe que l'objectif, la zone et la retenue. */
+export const SHIFTER_OBJECTIVES = ["libre", "titans", "troupes", "proteger"] as const;
+export type ShifterObjective = (typeof SHIFTER_OBJECTIVES)[number];
+export const RESTRAINTS = ["libre", "mesuree", "stricte"] as const;
+export type Restraint = (typeof RESTRAINTS)[number];
+export interface ShifterDirective {
+  objective: ShifterObjective;
+  zone: { x: number; y: number; r: number } | null;
+  restraint: Restraint;
+}
+/** Ordre propre à une unité (R2+) : il prime sur celui de son escouade jusqu'au prochain ordre d'escouade. */
+export interface UnitOrder {
+  order: SquadOrder;
+  x?: number;
+  y?: number;
+  target?: number;
+  foe?: number;
+}
+
 /** Causes de mort au combat (03 §9) ; « devore » = saisi et non secouru (03 §4.3). */
-export const BATTLE_DEATH_CAUSES = ["frappe", "devore", "chute", "hemorragie", "eclat"] as const;
+export const BATTLE_DEATH_CAUSES = ["frappe", "devore", "chute", "hemorragie", "eclat", "balle", "lame"] as const;
 export type BattleDeathCause = (typeof BATTLE_DEATH_CAUSES)[number];
 
 export interface SoldierSpec {
@@ -39,6 +71,47 @@ export interface BattleSetup {
   flags?: string[];
   /** Batteries d'artillerie (PA.5) : absentes des batailles antérieures (même hash). */
   artillery?: BatterySpec[];
+  /** R2+ : sections d'infanterie des deux camps (bataille d'armées) ; absentes des batailles antérieures. */
+  troops?: TroopSpec[];
+  /** R2+ : durée maximale propre (s) ; sinon celle de l'équilibrage. */
+  timeLimit?: number;
+}
+
+/** R2+ : armes des sections d'infanterie [A] (fusils à répétition, mitrailleuses, troupes d'assaut, cavalerie, fusils anti-Titans). */
+export const TROOP_KINDS = ["fusilier", "mitrailleur", "assaut", "cavalier", "antititan"] as const;
+export type TroopKind = (typeof TROOP_KINDS)[number];
+
+/** Section d'infanterie engagée (R2+). `faction` sert à l'uniforme et au bilan ; `count` hommes. */
+export interface TroopSpec {
+  id: string;
+  side: "allie" | "ennemi";
+  kind: TroopKind;
+  count: number;
+  faction: string;
+}
+
+/** Fantassin en bataille (R2+). */
+export interface TroopUnit {
+  id: number;
+  section: string;
+  side: "allie" | "ennemi";
+  kind: TroopKind;
+  faction: string;
+  x: number;
+  y: number;
+  mode: "ligne" | "marche" | "mort" | "fui";
+  /** Blessé : tire moins bien et ne court plus. */
+  wounded: boolean;
+  reload: number;
+  /** Cible : soldat (indice de `soldiers`), fantassin (indice de `troops`) ou Titan. */
+  target: { kind: "soldat" | "troupe" | "titan"; index: number } | null;
+  heading: number;
+  kills: number;
+  /** Dernier tir (pour l'affichage : lueur du coup). */
+  shot: number;
+  death: { t: number; cause: BattleDeathCause; x: number; y: number } | null;
+  /** Ordre propre (R2+). */
+  rt?: UnitOrder;
 }
 
 /** Batterie engagée (PA.5) : « allie » tire pour Paradis (Titans, contre-batterie), « ennemi » contre ses soldats. */
@@ -59,6 +132,9 @@ export interface BatteryUnit extends BatterySpec {
   shots: number;
   /** Point visé du dernier coup (zone de danger affichée). */
   aim: { x: number; y: number; r: number } | null;
+  /** R2+ : zone de tir imposée par le joueur ; cessez-le-feu. */
+  zone?: { x: number; y: number; r: number } | null;
+  hold?: boolean;
 }
 
 export interface Impact {
@@ -111,6 +187,8 @@ export interface ShifterUnit {
   rampage: number;
   attackCooldown: number;
   kills: number;
+  /** R2+ : ordre général du joueur (porteur allié seulement). */
+  directive?: ShifterDirective;
 }
 
 /** Mesure de chaque capacité : emplois et effet produit (unités propres à l'effet ; voir sim:shifters). */
@@ -146,6 +224,8 @@ export interface SoldierUnit extends SoldierSpec {
   death: { t: number; cause: BattleDeathCause; titan: number | null; x: number; y: number } | null;
   /** Lances de foudre restantes (P6, T-ANT-08). */
   spears?: number;
+  /** R2+ : ordre propre à ce soldat. */
+  rt?: UnitOrder;
 }
 
 export interface TitanUnit {
@@ -184,12 +264,28 @@ export interface TitanUnit {
 
 export interface SquadState {
   id: string;
-  order: TacticalOrder;
+  order: SquadOrder;
   /** Titans signalés à l'escouade (fusée vue ou contact). */
   known: number[];
   /** Point de repli (bord de déploiement). */
   rally: { x: number; y: number };
+  /** R2+ (temps réel) : destination, cap, escouade suivie, formation, ordre à reprendre à l'arrivée, file d'ordres. */
+  dest?: { x: number; y: number } | null;
+  heading?: number;
+  follow?: string | null;
+  formation?: Formation;
+  stance?: TacticalOrder;
+  queue?: QueuedOrder[];
+  /** Section ennemie visée (indice dans `troops`). */
+  foe?: number | null;
+  /** R2+ : section d'infanterie (troupes) d'un camp, et non escouade de soldats ; moral de la section (0–100) et effectif de départ. */
+  side?: "allie" | "ennemi";
+  morale?: number;
+  size?: number;
 }
+
+/** Ordre en file (R2+) : exécuté quand le précédent est accompli. */
+export type QueuedOrder = Omit<TimedOrder, "tick" | "queue">;
 
 export interface BattleLogEntry {
   t: number;
@@ -231,6 +327,8 @@ export interface BattleStats {
   killedBy?: Partial<Record<KillSource, number>>;
   /** PA.5 : tirs, Titans touchés, soldats tués par éclats (dont tirs amis), pièces réduites au silence. */
   artillery?: { shots: number; titanHits: number; soldierKills: number; friendlyKills: number; piecesSilenced: number };
+  /** R2+ : tirs et coups au but des fantassins, morts par camp, coups de lame des soldats sur les fantassins, déroutes. */
+  troops?: { shots: number; hits: number; deadAllied: number; deadEnemy: number; melee: number; routs: number; byTitans: number; byArtillery: number };
 }
 
 export type KillSource = "lame" | "lance" | "porteur" | "pur";
@@ -239,8 +337,20 @@ export type KillSource = "lame" | "lance" | "porteur" | "pur";
 export interface TimedOrder {
   tick: number;
   squad: string;
-  order: TacticalOrder;
+  order: BattleOrder;
   target?: number;
+  /** R2+ (facultatifs) : unité visée (ordre par unité), point (x, y) et rayon, escouade suivie, formation, ajout à la file,
+   * section ennemie visée, ordre général d'un porteur. */
+  unit?: number;
+  x?: number;
+  y?: number;
+  r?: number;
+  follow?: string;
+  formation?: Formation;
+  queue?: boolean;
+  troop?: number;
+  objective?: ShifterObjective;
+  restraint?: Restraint;
 }
 
 export interface BattleState {
@@ -257,6 +367,11 @@ export interface BattleState {
   batteries?: BatteryUnit[];
   impacts?: Impact[];
   artRng?: number;
+  /** R2+ : vrai dès qu'un ordre temps réel est donné ou que des troupes sont en scène (pas temps réel actif). */
+  rt?: boolean;
+  /** R2+ : sections d'infanterie des deux camps, et leur tirage propre. */
+  troops?: TroopUnit[];
+  trRng?: number;
   log: BattleLogEntry[];
   signals: BattleSignal[];
   stats: BattleStats;

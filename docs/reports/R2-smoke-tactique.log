@@ -1,0 +1,39 @@
+
+> murs-et-sang@0.0.1 smoke:tactique
+> tsx src/tools/smoke-tactique.ts
+
+[scénario 850] 1366×768
+  OK  planche : 10 silhouettes de Titans, 8 types de soldats, 7 états et signaux (25 légendes)
+  OK  carte Bataille d'essai — Ville des Murs : 4 cartes d'escouade, carnet tenu (155 pas)
+  OK  revue P4 : 4 cartes d'escouade entières dans la largeur (0 coupée(s))
+  OK  revue P4 : « ms/image · unités » masqué hors debug ; F2 l'affiche puis le masque (sans ouvrir la console de la carte)
+  OK  carte Bataille d'essai — Forêt des Arbres Géants : 4 cartes d'escouade, carnet tenu (159 pas)
+  OK  carte Bataille d'essai — Plaine hors-murs : 4 cartes d'escouade, carnet tenu (144 pas)
+  OK  carte Bataille d'essai — Mur (sommet et face) : 4 cartes d'escouade, carnet tenu (143 pas)
+  OK  écran de bataille : 12 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  pause active à l'ouverture : la bataille ne progresse pas (pas 0)
+  OK  ordre « tenir » donné en pause (affiché sur la carte d'escouade, bataille toujours arrêtée)
+  OK  l'ordre est consigné au carnet de combat
+  OK  vitesses : 5.0 pas/s à ×0,25, 40.5 pas/s à ×2
+  OK  Espace : pause ; les raccourcis de la carte sont neutralisés pendant la bataille
+  OK  touche J sans effet pendant la bataille
+  OK  sélection d'un soldat au clic (soldat:0) ; la caméra le suit (soldat:0)
+  OK  caméra : suivi de l'escouade 02
+  OK  caméra : zoom à la molette (3.53 puis 3.07 px/m)
+  OK  fiche « pourquoi ? » sur le gaz d'une escouade
+  OK  écran de bataille en cours : 12 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  bilan : 8 lignes chiffrées, 4 morts, 4 dossiers de morts (victoire)
+  OK  bilan : 16 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  revue P4 : vue d'ensemble (ensemble) avec 47 pastilles d'escouade et Titans agrandis ; le sol couvre 97 % de la scène (≥ 90 %)
+  OK  revue P4 : au-delà du seuil (5.71 px/m ≥ 4), figures détaillées, plus de pastilles
+  OK  revue P4 : 47 cartes d'escouade, barre à défilement horizontal
+  OK  300 unités : temps JS par image p95 7.30 ms < 8 ms (300 unités, 248 pas, 198 images ; p95 par poste : sim 1.60 · figures 1.50 · rendu 2.90 · interface 1.40)
+  OK  planificateur : « jouer les engagements » coché
+  OK  contact : la campagne attend (bataille en attente dans le registre, boutons Jouer / Auto-résoudre)
+  OK  la campagne reste en pause tant que la bataille n'est pas résolue
+  OK  écran de bataille lié : « Expédition n° 1 — bataille de Forêt des Arbres Géants »
+  OK  bataille liée : 36 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  bataille validée puis reportée dans la campagne : « J3 — Bataille jouée à Forêt des Arbres Géants : 1 morts, 1 Titans abattus (victoire). »
+  OK  0 erreur console
+smoke:tactique : tout est conforme.
+EXIT 0

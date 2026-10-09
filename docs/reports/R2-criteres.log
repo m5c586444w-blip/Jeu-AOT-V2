@@ -1,0 +1,20 @@
+$ npx vitest run tests/sim/rt-orders.test.ts tests/sim/tactical-combat.test.ts
+ Test Files  2 passed (2)
+      Tests  15 passed (15)
+EXIT 0
+$ npx vitest run tests/sim/rt-orders.test.ts
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+EXIT 0
+$ npx vitest run tests/sim/rt-troops.test.ts tests/sim/rt-campaign.test.ts
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+EXIT 0
+$ npx vitest run tests/render/tactical3d/battle3d.test.ts
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+EXIT 0
+$ npx vitest run tests/ui/rt-controls.test.ts
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+EXIT 0

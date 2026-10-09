@@ -2,7 +2,7 @@ import { t } from "../i18n";
 import { ACTIONS, keyLabel } from "./keymap";
 import type { Action, KeyMap } from "./keymap";
 import type { UserTrack } from "../audio/userTracks";
-import { MUSIC_SOURCES, UI_SCALES } from "./settings";
+import { BATTLE_QUALITIES, BATTLE_VIEWS, MUSIC_SOURCES, UI_SCALES, VIOLENCES } from "./settings";
 import type { Settings } from "./settings";
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: string): HTMLElementTagNameMap[K] {
@@ -189,6 +189,31 @@ export class OptionsPanel {
       guide.append(replay);
     }
 
+    // Bataille temps réel (R2+) : vue 3D ou 2D, violence montrée, qualité de la vue 3D.
+    const battle = el("fieldset", "options__son options__bataille");
+    battle.append(el("legend", "", t("options.battle")));
+    const pick = <V extends string>(label: string, key: "battleView" | "violence" | "battleQuality", values: readonly V[], current: V, apply: (v: V) => Settings): void => {
+      const row = el("label", "options__ligne");
+      row.append(el("span", "", t(label)));
+      const sel = el("select", "options__choix");
+      for (const v of values) {
+        const o = el("option", "", t(`options.${key}_${v}`));
+        o.value = v;
+        o.selected = current === v;
+        sel.append(o);
+      }
+      sel.dataset["setting"] = key;
+      sel.addEventListener("change", () => {
+        const v = values.find((x) => x === sel.value);
+        if (v) this.change(apply(v));
+      });
+      row.append(sel);
+      battle.append(row);
+    };
+    pick("options.battle_view", "battleView", BATTLE_VIEWS, this.settings.battleView, (v) => ({ ...this.settings, battleView: v }));
+    pick("options.battle_quality", "battleQuality", BATTLE_QUALITIES, this.settings.battleQuality, (v) => ({ ...this.settings, battleQuality: v }));
+    pick("options.violence", "violence", VIOLENCES, this.settings.violence, (v) => ({ ...this.settings, violence: v }));
+
     const keys = el("table", "options__touches");
     const caption = el("caption", "", t("options.keys"));
     keys.append(caption);
@@ -212,7 +237,7 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, sound, music, guide, author, keys, reset);
+    this.el.append(head, lang, scale, sound, music, battle, guide, author, keys, reset);
   }
 
   /** Préférences changées hors du dossier (touche F10). */

@@ -735,6 +735,42 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .bilan h3 { margin: 0 0 0.4rem; font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-clair); }
 .bilan-morts { font-size: var(--t-s); padding-left: 1.1rem; }
 @media (max-width: 700px) { .bataille { grid-template: "tete" auto "scene" 1fr "carnet" 8rem "escouades" auto / 1fr; } }
+
+/* ——— Bataille temps réel (R2+) ——— */
+.bataille--rt { grid-template: "tete tete" auto "scene carnet" 1fr "escouades escouades" auto / 1fr minmax(16rem, 23rem); }
+.rt-scene { cursor: default; touch-action: none; }
+.bataille--rt[data-mode="deplacer"] .rt-scene, .bataille--rt[data-mode="tuer"] .rt-scene, .bataille--rt[data-mode="suivre"] .rt-scene, .bataille--rt[data-mode="tir_zone"] .rt-scene, .bataille--rt[data-mode="zone_porteur"] .rt-scene { cursor: crosshair; }
+.rt-rect { position: absolute; z-index: 2; pointer-events: none; border: 1px solid var(--accent-clair); background: var(--voile); }
+.rt-etiquettes { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.rt-etiquette { position: absolute; left: 0; top: 0; min-width: 1.3rem; padding: 0 0.3rem; font-size: var(--t-xs); line-height: 1.3; text-align: center; color: var(--texte-fort); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); }
+.rt-etiquette--allie { border-color: var(--accent-fonce); }
+.rt-etiquette--ennemi { color: var(--danger-clair); border-color: var(--danger); }
+.rt-etiquette--titan { color: var(--texte-fort); background: var(--danger-plein); border-color: var(--danger); }
+.rt-etiquette--titan-allie { color: var(--texte-fort); background: var(--panneau); border-color: var(--accent); }
+.rt-etiquette--choisie { color: var(--accent-texte); background: var(--accent); }
+.rt-etiquette--repli { border-color: var(--danger-plein); }
+.rt-pause { position: absolute; z-index: 2; top: 0.5rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.15rem 0.8rem; font-size: var(--t-s); letter-spacing: 0.08em; color: var(--accent-clair); background: var(--voile-fort); pointer-events: none; }
+.rt-message { position: absolute; z-index: 2; top: 2.6rem; left: 50%; transform: translateX(-50%); width: min(40rem, 90%); margin: 0; padding: 0.3rem 0.6rem; font-size: var(--t-s); color: var(--texte-fort); background: var(--voile-fort); border-left: 3px solid var(--accent); }
+.rt-options { position: absolute; z-index: 3; top: 0.5rem; right: 0.5rem; width: min(22rem, 90%); padding: 0.5rem 0.7rem; background: var(--panneau); border: var(--filet-l) solid var(--filet); }
+.rt-panneau { display: flex; flex-direction: column; gap: 0.35rem; }
+.rt-bloc { padding-bottom: 0.3rem; border-bottom: var(--filet-l) solid var(--filet-doux); }
+.rt-bloc h3 { margin: 0.1rem 0 0.2rem; }
+.rt-nom { margin: 0.1rem 0; font-size: var(--t-m); color: var(--texte-fort); }
+.rt-cible { margin: 0.2rem 0; font-size: var(--t-s); color: var(--accent-clair); }
+.rt-file { margin: 0.1rem 0 0.2rem 1.1rem; padding: 0; font-size: var(--t-s); }
+.rt-batterie, .rt-porteur { margin: 0.2rem 0; font-size: var(--t-s); }
+.rt-aide { margin-top: auto; font-size: var(--t-xs); }
+.rt-unites { gap: 0.3rem; }
+.rt-unite { flex: 0 0 auto; display: grid; grid-template-columns: auto 1fr; column-gap: 0.35rem; min-width: 8.5rem; padding: 0.2rem 0.45rem; text-align: left; font-size: var(--t-xs); color: var(--texte); background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); border-top: 2px solid var(--accent); }
+.rt-unite strong { grid-column: 2; font-size: var(--t-s); }
+.rt-unite__groupe { grid-row: 1 / span 3; align-self: center; min-width: 0.7rem; font-weight: bold; color: var(--accent-clair); }
+.rt-unite__hommes, .rt-unite__ordre { grid-column: 2; }
+.rt-unite__ordre { text-transform: uppercase; letter-spacing: 0.05em; color: var(--succes-clair); }
+.rt-unite[aria-pressed="true"] { color: var(--accent-texte); background: var(--accent); }
+.rt-unite[aria-pressed="true"] .rt-unite__ordre, .rt-unite[aria-pressed="true"] .rt-unite__groupe { color: var(--accent-texte); }
+.rt-unite:disabled { opacity: 0.45; }
+.tactique__toile--3d { position: relative; z-index: 0; }
+@media (max-width: 700px) { .bataille--rt { grid-template: "tete" auto "scene" 1fr "carnet" 10rem "escouades" auto / 1fr; } }
 .planche-toile canvas { display: block; border: var(--filet-l) solid var(--filet); }
 .planche-legendes { display: grid; font-size: var(--t-xs); text-align: center; margin-top: 0.2rem; }
 body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(var(--z-fenetre) + 2); overflow: auto; padding: 0.6rem 1rem; background: var(--fond); }

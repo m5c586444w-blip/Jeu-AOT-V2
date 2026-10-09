@@ -53,7 +53,7 @@ export class Registers {
 
   private readonly stateOf: () => GameState;
 
-  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
+  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean, realtime?: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
     this.stateOf = state;
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");

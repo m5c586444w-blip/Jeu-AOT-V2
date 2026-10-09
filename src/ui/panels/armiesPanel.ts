@@ -1,6 +1,6 @@
 import { t } from "../../i18n";
 import { armyStrength } from "../../sim/armies/ai";
-import { canPlay, encounterSetup, fleetCapacity, orderProblem, visibleProvinces } from "../../sim/armies/armies";
+import { canPlay, encounterSetup, encounterSetupRt, fleetCapacity, orderProblem, visibleProvinces } from "../../sim/armies/armies";
 import type { ArmyCtx, ArmyOrder } from "../../sim/armies/armies";
 import { armiesWorld, armyMen, armyPieces, playerOf } from "../../sim/armies/state";
 import type { ArmiesState, ArmyState, Encounter, FleetState } from "../../sim/armies/state";
@@ -407,8 +407,10 @@ export class ArmiesPanel implements Panel {
       const auto = button(t("armies.resolve_auto"), () => void this.ctx.dispatch({ type: "ResolveEncounter", encounter: e.id, mode: "auto", orders: [] }), "registre-bouton petit principal");
       auto.dataset["action"] = "auto";
       row.append(auto, " ");
-      if (canPlay(c, e)) {
-        const play = button(t("armies.resolve_play"), () => void this.play(e.id), "registre-bouton petit");
+      // R2+ : la rencontre se joue en bataille de compagnies, temps réel (armées contre armées comprises, dette n° 33).
+      const rt = canPlay(c, e, true);
+      if (rt || canPlay(c, e)) {
+        const play = button(t("armies.resolve_play"), () => void this.play(e.id, rt), "registre-bouton petit");
         play.dataset["action"] = "jouer";
         row.append(play, " ");
       }
@@ -420,14 +422,14 @@ export class ArmiesPanel implements Panel {
     }
   }
 
-  private async play(id: string): Promise<void> {
+  private async play(id: string, rt: boolean): Promise<void> {
     const s = this.ctx.state();
     const c = armyCtxOf(this.ctx.world, s);
-    const setup = c ? encounterSetup(c, id) : null;
+    const setup = c ? (rt ? encounterSetupRt(c, id) : encounterSetup(c, id)) : null;
     const e = c?.s.encounters.find((x) => x.id === id);
     if (!setup || !e) return;
-    const orders = await this.ctx.playBattle(setup, t(`armies.encounter.${e.kind}`, { place: provinceName(this.ctx.world, e.province) }), true);
-    if (orders) await this.ctx.dispatch({ type: "ResolveEncounter", encounter: id, mode: "jouer", orders });
+    const orders = await this.ctx.playBattle(setup, t(`armies.encounter.${e.kind}`, { place: provinceName(this.ctx.world, e.province) }), true, rt);
+    if (orders) await this.ctx.dispatch({ type: "ResolveEncounter", encounter: id, mode: "jouer", orders, ...(rt ? { rt: true } : {}) });
   }
 
   private succession(root: HTMLElement, c: ArmyCtx): void {

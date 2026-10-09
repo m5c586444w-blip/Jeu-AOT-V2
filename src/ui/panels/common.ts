@@ -16,8 +16,8 @@ export interface PanelContext {
   /** Ouvre un autre registre (ex. Décrets → Cabinet avec une motion). */
   open(panel: PanelId, arg?: string): void;
   confirm(message: string): Promise<boolean>;
-  /** Ouvre l'écran de bataille (P4) ; renvoie les ordres d'une bataille liée validée, sinon null. */
-  playBattle(setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null>;
+  /** Ouvre l'écran de bataille (P4 ; temps réel R2+ si `realtime`) ; renvoie les ordres d'une bataille liée validée, sinon null. */
+  playBattle(setup: BattleSetup, title: string, linked: boolean, realtime?: boolean): Promise<TimedOrder[] | null>;
   /** Rouvre le dossier d'un événement en attente (P5). */
   openEvent?(id: string): void;
 }

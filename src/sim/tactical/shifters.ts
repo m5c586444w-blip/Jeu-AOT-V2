@@ -2,7 +2,8 @@ import type { ShiftersBalance } from "../../data/balance";
 import type { Shifter, ShifterAbility } from "../../data/schemas";
 import type { Rng } from "../core/rng";
 import type { Battle } from "./battle";
-import type { AbilityStat, ShifterUnit, SoldierUnit, TitanUnit } from "./types";
+import { killTroop } from "./troops";
+import type { AbilityStat, ShifterUnit, SoldierUnit, TitanUnit, TroopUnit } from "./types";
 
 /**
  * Titans-porteurs en bataille (P6 ; 03 §8) : transformation (délai, endurance, recharge), points de vie par zones,
@@ -211,7 +212,7 @@ export function throwSpear(bt: Battle, s: SoldierUnit, body: TitanUnit, rng: Rng
   return true;
 }
 
-type Foe = { kind: "soldat"; s: SoldierUnit } | { kind: "titan"; t: TitanUnit };
+type Foe = { kind: "soldat"; s: SoldierUnit } | { kind: "titan"; t: TitanUnit } | { kind: "troupe"; u: TroopUnit };
 
 /** Ennemis d'un porteur : soldats et corps alliés pour l'ennemi ; purs et corps ennemis pour l'allié. En rage : tout le monde. */
 function foes(bt: Battle, u: ShifterUnit): Foe[] {
@@ -225,10 +226,63 @@ function foes(bt: Battle, u: ShifterUnit): Foe[] {
     else if (u.side === "ennemi" && t.ally) out.push({ kind: "titan", t });
   }
   if (u.side === "ennemi" || rage) for (const s of st.soldiers) if (alive(s) && s.mode !== "saisi") out.push({ kind: "soldat", s });
+  // R2+ : fantassins du camp adverse (tous en rage).
+  if (st.troops) for (const x of st.troops) if (x.mode !== "mort" && x.mode !== "fui" && (rage || x.side !== u.side)) out.push({ kind: "troupe", u: x });
   return out;
 }
 
-const pos = (f: Foe): { x: number; y: number } => (f.kind === "soldat" ? f.s : f.t);
+const pos = (f: Foe): { x: number; y: number } => (f.kind === "soldat" ? f.s : f.kind === "troupe" ? f.u : f.t);
+
+/**
+ * Ordre général du joueur (R2+) : l'objectif et la zone restreignent les cibles ; l'IA garde la main. Sans cible dans
+ * l'objectif, le porteur prend la plus proche (sauf s'il doit protéger ou tenir une zone).
+ */
+function directedTarget(bt: Battle, u: ShifterUnit, body: TitanUnit, all: Foe[]): { f: Foe; d: number } | null {
+  const dir = u.directive;
+  if (!dir || u.rampage > 0) return nearest(all, body.x, body.y);
+  let list = all;
+  if (dir.objective === "titans") list = list.filter((f) => f.kind === "titan");
+  else if (dir.objective === "troupes") list = list.filter((f) => f.kind === "troupe");
+  const guard = dir.objective === "proteger" ? soldiersCenter(bt) : null;
+  if (guard) list = list.filter((f) => d2(pos(f).x, pos(f).y, guard.x, guard.y) <= 60 * 60);
+  if (dir.zone) {
+    const z = dir.zone;
+    list = list.filter((f) => d2(pos(f).x, pos(f).y, z.x, z.y) <= z.r * z.r);
+  }
+  if (dir.restraint === "stricte" && !dir.zone && !guard) {
+    const c = soldiersCenter(bt);
+    if (c) list = list.filter((f) => d2(pos(f).x, pos(f).y, c.x, c.y) <= 80 * 80);
+  }
+  if (list.length === 0 && !dir.zone && !guard && dir.restraint !== "stricte") list = all;
+  return nearest(list, body.x, body.y);
+}
+
+function soldiersCenter(bt: Battle): { x: number; y: number } | null {
+  let x = 0;
+  let y = 0;
+  let n = 0;
+  for (const s of bt.state.soldiers) if (alive(s)) {
+    x += s.x;
+    y += s.y;
+    n++;
+  }
+  for (const t of bt.state.troops ?? []) if (t.side === "allie" && t.mode !== "mort" && t.mode !== "fui") {
+    x += t.x;
+    y += t.y;
+    n++;
+  }
+  return n > 0 ? { x: x / n, y: y / n } : null;
+}
+
+/** Retenue (R2+) : une capacité de zone est-elle permise près des hommes de Paradis ? */
+function restrained(bt: Battle, u: ShifterUnit, a: ShifterAbility, x: number, y: number): boolean {
+  const dir = u.directive;
+  if (!dir || dir.restraint === "libre" || u.rampage > 0) return false;
+  if (!["charge", "projectiles", "spikes", "heat_wave"].includes(a.effect)) return false;
+  if (dir.restraint === "stricte") return true;
+  const r = Math.max(a.radius_m, 10) + 5;
+  return bt.state.soldiers.some((s) => alive(s) && d2(s.x, s.y, x, y) <= r * r) || (bt.state.troops ?? []).some((t) => t.side === "allie" && t.mode !== "mort" && d2(t.x, t.y, x, y) <= r * r);
+}
 
 function nearest(list: Foe[], x: number, y: number): { f: Foe; d: number } | null {
   let best: { f: Foe; d: number } | null = null;
@@ -244,6 +298,14 @@ function nearest(list: Foe[], x: number, y: number): { f: Foe; d: number } | nul
 function strike(bt: Battle, u: ShifterUnit, body: TitanUnit, f: Foe, killProb: number, rng: Rng, h: ShifterHooks): number {
   const sb = shiftersBalance(bt);
   if (!sb) return 0;
+  if (f.kind === "troupe") {
+    if (rng.next() < killProb) {
+      killTroop(bt, f.u, "frappe");
+      u.kills += 1;
+      return 1;
+    }
+    return 0;
+  }
   if (f.kind === "soldat") {
     if (rng.next() < killProb * (f.s.ackerman ? 0.3 : 1)) {
       h.killSoldier(f.s, body);
@@ -486,8 +548,13 @@ export function stepShifter(bt: Battle, u: ShifterUnit, rng: Rng, dt: number, h:
   const endur = ability(def, "endurance");
   if (endur) stat(bt, endur.id).effect += sb.endurance_drain_per_s * (1 - endur.power) * dt;
   // Cible : l'ennemi le plus proche ; on s'en approche à portée de bras.
-  const target = nearest(foes(bt, u), body.x, body.y);
+  const target = u.directive ? directedTarget(bt, u, body, foes(bt, u)) : nearest(foes(bt, u), body.x, body.y);
   const reach = body.height * sb.attack.reach_ratio;
+  // R2+ : retenue stricte : le porteur se retire (fin volontaire du corps) avant d'être trop entamé.
+  if (u.directive?.restraint === "stricte" && u.rampage <= 0 && lost >= 0.5) {
+    endBody(bt, u, "epuise", h);
+    return;
+  }
   // Charrette alliée (03 §8.2, transport) : quand le ravitaillement est prêt, elle rejoint le soldat le plus à court de gaz.
   const transport = ability(def, "transport");
   const needy = transport && u.side === "allie" && u.rampage <= 0 && (u.cd[transport.id] ?? 0) <= 0 ? bt.state.soldiers.filter((x) => alive(x) && x.gas < bt.world.balance.odm.tank * 0.5).sort((a, b) => a.gas - b.gas || a.id.localeCompare(b.id))[0] : undefined;
@@ -507,11 +574,22 @@ export function stepShifter(bt: Battle, u: ShifterUnit, rng: Rng, dt: number, h:
       body.x += Math.cos(body.heading) * v;
       body.y += Math.sin(body.heading) * v;
     }
+  } else if (u.directive && u.rampage <= 0 && body.legs === 0) {
+    // R2+ : sans cible, le porteur rejoint sa zone (ou les hommes qu'il protège).
+    const home = u.directive.zone ?? (u.directive.objective === "proteger" ? soldiersCenter(bt) : null);
+    const dh = home ? Math.hypot(home.x - body.x, home.y - body.y) : 0;
+    if (home && dh > 15) {
+      body.heading = Math.atan2(home.y - body.y, home.x - body.x);
+      const v = Math.min(body.speed * dt, dh);
+      body.x += Math.cos(body.heading) * v;
+      body.y += Math.sin(body.heading) * v;
+    }
   }
   // Capacités actives (déclencheur, endurance, recharge).
   for (const a of def.abilities) {
     if (a.passive || (u.cd[a.id] ?? 0) > 0 || u.endurance < a.cost) continue;
     if (!useAbility(bt, u, body, a, target)) continue;
+    if (u.directive && restrained(bt, u, a, target ? pos(target.f).x : body.x, target ? pos(target.f).y : body.y)) continue;
     u.cd[a.id] = a.cooldown_s;
     if (a.duration_s > 0) u.active[a.id] = a.duration_s;
     u.endurance -= a.cost;

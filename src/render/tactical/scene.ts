@@ -31,6 +31,8 @@ export class TacticalScene {
   private readonly titanLayer = new Container({ sortableChildren: true });
   private readonly soldierLayer = new Container();
   private readonly gOverlay = new Graphics();
+  /** Bataille temps réel (R2+) : fantassins, sélection, destinations et zones (vide sur l'écran classique). */
+  private readonly gRt = new Graphics();
   /** Flèches de bord vers les Titans hors champ (repère écran, au-dessus du monde). */
   private readonly gArrows = new Graphics();
   private readonly contexts = new Map<string, GraphicsContext>();
@@ -64,7 +66,7 @@ export class TacticalScene {
   selected: Set<number> = new Set();
 
   private constructor(private readonly app: Application) {
-    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.markerLayer);
+    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.gRt, this.markerLayer);
     app.stage.addChild(this.worldLayer, this.gArrows);
   }
 
@@ -143,6 +145,46 @@ export class TacticalScene {
   toScreen(x: number, y: number, z: number): [number, number] {
     const [px, py] = this.project(x, y, z);
     return [px * this.zoom + this.worldLayer.position.x, py * this.zoom + this.worldLayer.position.y];
+  }
+
+  /** Écran → point du sol de la carte (z = 0), ou null hors de la carte (R2+). */
+  groundAt(sx: number, sy: number): { x: number; y: number } | null {
+    if (!this.map) return null;
+    const x = (sx - this.worldLayer.position.x) / this.zoom;
+    const y = (sy - this.worldLayer.position.y) / this.zoom / TILT;
+    if (x < -20 || y < -20 || x > this.map.width + 20 || y > this.map.height + 20) return null;
+    return { x: Math.max(0, Math.min(this.map.width, x)), y: Math.max(0, Math.min(this.map.height, y)) };
+  }
+
+  /**
+   * Bataille temps réel (R2+) : fantassins des deux camps (pastille teintée, trait du fusil), anneaux de sélection,
+   * destinations et zones (tir sur zone, porteurs). Taille minimale à l'écran, comme les soldats.
+   */
+  drawRt(st: BattleState, overlay: { troops: ReadonlySet<number>; soldiers: ReadonlySet<number>; dests: readonly { x: number; y: number }[]; zones: readonly { x: number; y: number; r: number; kind: "tir" | "porteur" }[] }): void {
+    const g = this.gRt;
+    g.clear();
+    const r = Math.max(0.7, 4 / this.zoom);
+    for (const tr of st.troops ?? []) {
+      if (tr.mode === "fui") continue;
+      const [x, y] = this.project(tr.x, tr.y, 0);
+      const color = tr.side === "allie" ? 0x6b7f99 : 0x8a5a33;
+      if (tr.mode === "mort") {
+        g.circle(x, y, r * 0.6).fill({ color: INK, alpha: 0.35 });
+        continue;
+      }
+      g.moveTo(x, y - r).lineTo(x + Math.cos(tr.heading) * r * 2.2, y - r + Math.sin(tr.heading) * r * 2.2 * TILT).stroke({ width: Math.max(0.3, r * 0.3), color: INK, alpha: 0.8 });
+      g.circle(x, y - r, r).fill({ color, alpha: tr.wounded ? 0.6 : 1 }).stroke({ width: Math.max(0.2, r * 0.22), color: INK });
+      if (overlay.troops.has(tr.id)) g.circle(x, y - r, r * 1.8).stroke({ width: Math.max(0.3, r * 0.35), color: OCHRE });
+    }
+    for (const d of overlay.dests) {
+      const [x, y] = this.project(d.x, d.y, 0);
+      const k = Math.max(2, 7 / this.zoom);
+      g.ellipse(x, y, k, k * TILT).stroke({ width: Math.max(0.3, 1.5 / this.zoom), color: OCHRE }).moveTo(x - k, y).lineTo(x + k, y).moveTo(x, y - k * TILT).lineTo(x, y + k * TILT).stroke({ width: Math.max(0.3, 1.2 / this.zoom), color: OCHRE });
+    }
+    for (const z of overlay.zones) {
+      const [x, y] = this.project(z.x, z.y, 0);
+      g.ellipse(x, y, z.r, z.r * TILT).fill({ color: z.kind === "tir" ? 0x9e2b25 : 0x3f6f8f, alpha: 0.12 }).stroke({ width: Math.max(0.4, 1.6 / this.zoom), color: z.kind === "tir" ? 0x9e2b25 : 0x3f6f8f, alpha: 0.85 });
+    }
   }
 
   fit(): void {

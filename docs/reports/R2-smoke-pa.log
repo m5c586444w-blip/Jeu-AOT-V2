@@ -1,0 +1,31 @@
+
+> murs-et-sang@0.0.1 smoke:pa
+> tsx src/tools/smoke-pa.ts
+
+[854, Paradis] 1366×768
+  OK  bandeau : registre « Armées » (touche S)
+  OK  registre des armées : 3 armées de Paradis (Sud, Est, Brigade)
+  OK  moral expliqué (« pourquoi ? »)
+  OK  registre des armées : 7 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  destination choisie au clic sur la carte : « Marcher vers Maria-Sud-Est »
+  OK  trajet affiché : « Trajet : Trost → Rose-Sud — porte de Trost → Plaines intérieures de Maria — Sud → Plaines céréalières du Sud → »
+  OK  flotte de Marley en vue ; corps débarqué (journal)
+  OK  ennemi en vue à intercepter : 1
+  OK  contact : alerte, jeu en pause, registre ouvert sur la rencontre
+  OK  trois issues proposées : Résolution rapide / Livrer bataille / Se replier
+  OK  fiche de l'armée : « Pertes en marche 372 (bombardement côtier 318, marche forcée 54) »
+  OK  bilan : ligne « Obus tirés » (artillerie)
+  OK  bilan de bataille : 5 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  rencontre résolue après la bataille (ordres rejoués par la simulation)
+[854, Marley] 1366×768
+  OK  fiche d'artillerie du corps de Marley : 2 pièces (portée, cadence, souffle, munitions)
+  OK  registre des armées, fiche d'artillerie (Marley) : 5 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+  OK  flotte au mouillage au sud-est : débarquement proposé
+  OK  corps de Marley débarqué : « Corps expéditionnaire de Marley Côte Est 1 940 À L'ARRÊT »
+  OK  registre des armées (Marley) : 1 valeurs, toutes expliquées ; aucune clé ni identifiant brut
+[850, Paradis] 1366×768
+  OK  Titans rencontrés hors du mur Rose : alerte et choix
+  OK  canons de rempart restés en garnison : aucun « Obus tirés » en plaine
+  OK  0 erreur console
+smoke:pa : tout est conforme.
+EXIT 0

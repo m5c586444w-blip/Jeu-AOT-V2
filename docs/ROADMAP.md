@@ -12,7 +12,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 | N1 | PA | 21 §7 + 23 §3.2 | 200 | oui (revue par sous-agent, D-130) | terminée, fusionnée par sa PR (D-124 à D-130) |
 | N2 | MIS | 23 §5 | 150 | non | terminée, fusionnée par sa PR (D-131 à D-134) |
 | N2 | TUT | 23 §5 | 100 | non | terminée, fusionnée par sa PR (D-135 à D-138) |
-| N2 | R2+ | 18 §1 + 23 §4 | 300 | oui | à faire |
+| N2 | R2+ | 18 §1 + 23 §4 | 300 | oui | terminée, fusionnée par sa PR (D-139 à D-147 ; dettes n° 46 à 60 ; mesure GPU à faire, n° 49) |
 | N3 | R1e | 20 (§6, §8), périmètre 21 §3, districts 24 §3 | 200 | oui | terminée et acceptée (pilote Shiganshina + Maria) ; LC-B/C/D en N3 si quota |
 | N3 | R3 | 18 §2, version courte 21 §8 | 150 | non | à faire |
 | N3 | P9 | 18 §9 | 200 | oui | à faire |

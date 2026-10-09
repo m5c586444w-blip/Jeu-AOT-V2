@@ -3,6 +3,7 @@ import { Rng } from "../core/rng";
 import { gaussian } from "../military/random";
 import type { World } from "../strategic/world";
 import type { Battle } from "./battle";
+import { killTroop } from "./troops";
 import type { BatteryUnit, BattleSetup, SoldierUnit, TitanUnit } from "./types";
 
 /**
@@ -48,6 +49,12 @@ export function stepBatteries(bt: Battle, world: World, dt: number, h: Artillery
   const t = st.tick / bt.world.balance.tick_hz;
   for (const bat of list) {
     if (bat.alive <= 0) continue;
+    // R2+ : cessez-le-feu ordonné par le joueur.
+    if (bat.hold) {
+      bat.aim = null;
+      bat.reload = Math.max(bat.reload - dt, 0);
+      continue;
+    }
     bat.reload -= dt;
     if (bat.reload > 0) continue;
     const piece = aw.pieces.get(bat.piece);
@@ -56,19 +63,27 @@ export function stepBatteries(bt: Battle, world: World, dt: number, h: Artillery
     const range2 = piece.range_m ** 2;
     const min2 = piece.min_range_m ** 2;
     let aim: { x: number; y: number } | null = null;
-    if (bat.side === "allie") {
+    if (bat.side === "allie" && bat.zone) {
+      // R2+ : tir sur zone ordonné par le joueur (dans la portée de la pièce).
+      const dz = d2(bat.zone.x, bat.zone.y, bat.x, bat.y);
+      aim = dz <= range2 && dz >= min2 ? { x: bat.zone.x + (rng.next() - 0.5) * bat.zone.r, y: bat.zone.y + (rng.next() - 0.5) * bat.zone.r } : null;
+    } else if (bat.side === "allie") {
       // Titans hostiles à portée, le plus proche des soldats d'abord ; sinon contre-batterie.
       const titan = st.titans.filter((x) => x.alive && !x.ally && d2(x.x, x.y, bat.x, bat.y) <= range2 && d2(x.x, x.y, bat.x, bat.y) >= min2).sort((a, b) => a.y - b.y || a.id - b.id).at(-1);
       const enemy = list.find((x) => x.side === "ennemi" && x.alive > 0 && d2(x.x, x.y, bat.x, bat.y) <= range2);
-      aim = titan ? { x: titan.x, y: titan.y } : enemy ? { x: enemy.x, y: enemy.y } : null;
+      // R2+ : sans Titan ni batterie, les fantassins ennemis les plus avancés.
+      const foot = !titan && !enemy && st.troops ? st.troops.filter((x) => x.side === "ennemi" && x.mode !== "mort" && x.mode !== "fui" && d2(x.x, x.y, bat.x, bat.y) <= range2 && d2(x.x, x.y, bat.x, bat.y) >= min2).sort((a, b) => a.y - b.y || a.id - b.id).at(-1) : undefined;
+      aim = titan ? { x: titan.x, y: titan.y } : enemy ? { x: enemy.x, y: enemy.y } : foot ? { x: foot.x, y: foot.y } : null;
     } else {
       const own = list.filter((x) => x.side === "allie" && x.alive > 0);
-      const targets = st.soldiers.filter((s) => h.alive(s) && d2(s.x, s.y, bat.x, bat.y) >= min2);
+      const targets: { x: number; y: number }[] = st.soldiers.filter((s) => h.alive(s) && d2(s.x, s.y, bat.x, bat.y) >= min2);
+      // R2+ : les fantassins de Paradis sont aussi des cibles.
+      if (st.troops) for (const x of st.troops) if (x.side === "allie" && x.mode !== "mort" && x.mode !== "fui" && d2(x.x, x.y, bat.x, bat.y) >= min2) targets.push(x);
       if (own.length > 0 && rng.next() < 0.3) {
         const o = own[Math.floor(rng.next() * own.length)] as BatteryUnit;
         aim = { x: o.x, y: o.y };
       } else if (targets.length > 0) {
-        const s = targets[Math.floor(rng.next() * targets.length)] as SoldierUnit;
+        const s = targets[Math.floor(rng.next() * targets.length)] as { x: number; y: number };
         aim = { x: s.x, y: s.y };
       }
     }
@@ -109,6 +124,13 @@ export function stepBatteries(bt: Battle, world: World, dt: number, h: Artillery
         stats.soldierKills += 1;
         if (bat.side === "allie") stats.friendlyKills += 1;
       }
+    }
+    // R2+ : fantassins (des deux camps) dans le souffle.
+    if (st.troops) for (const x of st.troops) {
+      if (x.mode === "mort" || x.mode === "fui") continue;
+      const dd = d2(x.x, x.y, ix, iy);
+      if (dd > r * r) continue;
+      if (rng.next() < piece.vs_soldier * mun.vs_soldier_mult * (1 - Math.sqrt(dd) / r)) killTroop(bt, x, "eclat");
     }
     // Contre-batterie : une pièce adverse dans le souffle peut être réduite au silence.
     for (const other of list) {

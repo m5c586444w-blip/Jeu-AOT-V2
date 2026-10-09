@@ -18,7 +18,7 @@ import { chooseSuccessor, dailySuccession, successorProblem } from "./succession
 export type ArmyCommand =
   | { type: "RaiseArmies" }
   | ArmyOrder
-  | { type: "ResolveEncounter"; encounter: string; mode: "auto" | "jouer" | "retraite"; orders: TimedOrder[] }
+  | { type: "ResolveEncounter"; encounter: string; mode: "auto" | "jouer" | "retraite"; orders: TimedOrder[]; rt?: boolean }
   | { type: "ChooseSuccessor"; candidate: string };
 
 export const ARMY_COMMANDS = ["RaiseArmies", "ArmyMove", "ArmyHalt", "ArmyForcedMarch", "ArmyIntercept", "ArmyRetreat", "ArmyMerge", "ArmySplit", "ArmySetGeneral", "ArmyGarrison", "FleetMove", "FleetMission", "FleetEmbark", "FleetLand", "ResolveEncounter", "ChooseSuccessor"] as const;
@@ -70,8 +70,8 @@ export function applyArmyCommand(state: GameState, cmd: ArmyCommand, world?: Wor
   if (cmd.type === "ResolveEncounter") {
     const enc = ctx.s.encounters.find((e) => e.id === cmd.encounter);
     if (!enc || enc.status !== "attente" || !enc.sides.some((x) => x.faction === player)) throw new Error("army.err.no_encounter");
-    if (cmd.mode === "jouer" && !canPlay(ctx, enc)) throw new Error("army.err.cannot_play");
-    resolveEncounter(ctx, cmd.encounter, cmd.mode, cmd.orders);
+    if (cmd.mode === "jouer" && !canPlay(ctx, enc, cmd.rt === true)) throw new Error("army.err.cannot_play");
+    resolveEncounter(ctx, cmd.encounter, cmd.mode, cmd.orders, cmd.rt === true);
   } else if (cmd.type === "ChooseSuccessor") {
     const problem = successorProblem(ctx, cmd.candidate);
     if (problem) throw new Error(problem);

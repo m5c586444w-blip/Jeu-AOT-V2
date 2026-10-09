@@ -1,16 +1,14 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
 **Établi (sorties réelles)**
-- **N1 terminé** (MAP, UI, AUD, CHR, PA) ; **MIS et TUT fusionnées** (N2) : dernier verify code 0, 660/660 (`docs/reports/TUT-verify-final.log`).
-- MIS : arbre de missions nationales (touche Z), missions simultanées en nombre limité, bonus durables, IA de missions ; aucune mission ne déclenche un événement du récit ; les missions de la mer attendent l'arrivée à la mer, celles du monde extérieur le sous-sol.
-- TUT : guide de 14 étapes (menu principal « guide », ou Options > Rejouer), joué au début de 850 car le bac à sable 845 n'a pas de registres ; aides ensuite, une fois par élément.
-- Chaque phase relue par un sous-agent distinct, une passe de correctifs chacune.
-- UI (ta session CLI, D-130) : dette n° 20 corrigée (erreurs Pixi de `smoke:tactique`, `destroy(true)`) ; CUI-07 soldé (arbre de recherche sans texte coupé en 1366 et 4K, barre du haut en deux groupes U3, fondu de défilement des listes) ; smoke concernés OK ; phase UI : CUI-01 à 09 tous OK.
+- **N1 et N2 terminés** : MAP, UI, AUD, CHR, PA, MIS, TUT, R2+ fusionnées ; dernier verify code 0, 705/705, 8 empreintes inchangées (`docs/reports/R2-verify-fusion.log`).
+- R2+ : bataille de compagnies en temps réel (jusqu'à 400 unités) : sélection, groupes, ordres, formations, tir d'artillerie sur zone, pause avec file d'ordres, caméra du dessus ou de suivi (V), porteurs commandés par ordres généraux ; les rencontres d'armées se jouent puis sont reportées dans la campagne ; repli 2D sans WebGL 2. Les hommes ne traversent plus les maisons ni ne tirent à travers.
+- TUT : guide de 14 étapes (menu principal, ou Options > Rejouer), en 850. MIS : arbre de missions (touche Z).
 
-**En dette** : n° 13–15 (carte), 21 (UI), 22–27 (audio), 28–32 (CHR), 33–37 (PA), 38–40 (MIS), 41–45 (TUT : guide en 850, textes anglais absents, petits restes d'écran ouverts).
+**En dette** : n° 13–15, 21, 22–27, 28–32, 34–40, 41–45 (TUT), 46–60 (R2+ : expéditions encore en 2D, équilibre de l'infanterie, Titans qui traversent encore les maisons, textes anglais).
 
-**À valider par Gabriel** : écouter la musique ; D-114 (domaines de musique) ; D-122, D-124, D-132 (hash des parties changés) ; D-130 (ta session CLI pousse aussi du code sur la branche principale).
+**À valider par Gabriel** : **mesurer R2+ sur ton PC (RTX 3050)** : rendu logiciel seulement ici (« prêt » 4,5 à 12,8 s contre 3 s visés) ; écouter la musique ; D-114 ; D-122/D-124/D-132 (hash) ; D-130 (deux sessions de code) ; D-147 (CLAUDE.md : `src/sim` hors `map.ts` en R2+).
 
-**Prochaine action** : N2, phase R2+ (batailles 3D, fichier 18 §1 + 23 §4) sur `claude/v2-r2`.
+**Prochaine action** : N3, phase R3 (figures de Titans et de soldats) sur `claude/v2-r3`, puis P9, P10, PACK.
 
-**Quota** : non mesuré (aucun % fourni) ; ≈ 1 200 tours depuis hier matin (tableaux de DECISIONS).
+**Quota** : non mesuré (aucun % fourni) ; ≈ 1 550 tours depuis le 2026-10-08 matin (tableaux de DECISIONS).
