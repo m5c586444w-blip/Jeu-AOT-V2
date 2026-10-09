@@ -1,0 +1,85 @@
+{
+  "fins": [
+    {
+      "scenario": "scn_sandbox_845",
+      "camp": "fac_paradis",
+      "adversaire": "titans",
+      "terme_jours": 1825,
+      "objectifs": [
+        { "id": "tenir", "cle": "fin.obj.tenir_850", "cond": { "type": "terme" } },
+        { "id": "nourrir", "cle": "fin.obj.nourrir", "cond": { "type": "moral_min", "seuil": 40 } },
+        { "id": "ordre", "cle": "fin.obj.ordre", "cond": { "type": "stabilite_min", "seuil": 40 } },
+        { "id": "rose", "cle": "fin.obj.rose_tenue", "cond": { "type": "region_min", "regions": ["anneau_rose", "mur_rose"], "seuil": 0.9 } }
+      ],
+      "victoire": { "min_objectifs": 3, "anticipee": false },
+      "defaites": [
+        { "id": "famine", "cle": "fin.def.famine", "cond": { "type": "famine", "moral": 20 } },
+        { "id": "desordre", "cle": "fin.def.desordre", "cond": { "type": "stabilite_max", "seuil": 12 } },
+        { "id": "rose_perdue", "cle": "fin.def.rose_perdue", "cond": { "type": "region_max", "regions": ["anneau_rose", "mur_rose"], "seuil": 0.5 } }
+      ],
+      "canon": "A",
+      "note": "02 §13 (objectifs de survie) ; 845 : tenir cinq ans derrière Rose après la chute de Maria. Seuils de jeu (A)."
+    },
+    {
+      "scenario": "scn_sandbox_850",
+      "camp": "fac_paradis",
+      "adversaire": "titans",
+      "terme_jours": 1825,
+      "objectifs": [
+        { "id": "tenir", "cle": "fin.obj.tenir_5_ans", "cond": { "type": "terme" } },
+        { "id": "maria", "cle": "fin.obj.maria", "cond": { "type": "region_min", "regions": ["anneau_maria", "mur_maria"], "seuil": 0.6 } },
+        { "id": "verite", "cle": "fin.obj.verite", "cond": { "type": "evenement", "evenements": ["evt_850_yeager_basement"] } },
+        { "id": "dehors", "cle": "fin.obj.dehors", "cond": { "type": "evenement", "evenements": ["evt_850_ocean", "evt_851_hizuru_visit"] } }
+      ],
+      "victoire": { "min_objectifs": 3, "anticipee": false },
+      "defaites": [
+        { "id": "effondrement", "cle": "fin.def.effondrement", "cond": { "type": "legitimite_max", "seuil": 5 } },
+        { "id": "desordre", "cle": "fin.def.desordre", "cond": { "type": "stabilite_max", "seuil": 12 } },
+        { "id": "famine", "cle": "fin.def.famine", "cond": { "type": "famine", "moral": 20 } },
+        { "id": "rose_perdue", "cle": "fin.def.rose_perdue", "cond": { "type": "region_max", "regions": ["anneau_rose", "mur_rose"], "seuil": 0.5 } }
+      ],
+      "canon": "A",
+      "note": "02 §13 : Paradis (850) : survivre 5 ans ; sécuriser Wall Maria ; découvrir la vérité ; obtenir un contact extérieur. Seuils (A)."
+    },
+    {
+      "scenario": "scn_854",
+      "camp": "fac_paradis",
+      "adversaire": "fac_marley",
+      "terme_jours": 730,
+      "objectifs": [
+        { "id": "tenir", "cle": "fin.obj.tenir_2_ans", "cond": { "type": "terme" } },
+        { "id": "fondateur", "cle": "fin.obj.fondateur_garde", "cond": { "type": "fondateur", "camp": "paradis" } },
+        { "id": "ile", "cle": "fin.obj.ile_tenue", "cond": { "type": "controle", "province": "wprov_paradis", "faction": "fac_paradis" } },
+        { "id": "hizuru", "cle": "fin.obj.accord_hizuru", "cond": { "type": "traite", "avec": "fac_hizuru" } },
+        { "id": "paix", "cle": "fin.obj.paix_marley", "cond": { "type": "paix", "avec": "fac_marley" } }
+      ],
+      "victoire": { "min_objectifs": 3, "anticipee": false },
+      "defaites": [
+        { "id": "fondateur_perdu", "cle": "fin.def.fondateur_perdu", "cond": { "type": "fondateur", "camp": "marley" } },
+        { "id": "ile_perdue", "cle": "fin.def.ile_perdue", "cond": { "type": "controle", "province": "wprov_paradis", "faction": "fac_marley" } },
+        { "id": "effondrement", "cle": "fin.def.effondrement", "cond": { "type": "legitimite_max", "seuil": 5 } }
+      ],
+      "canon": "A",
+      "note": "02 §13 et §11 : Paradis face à Marley ; garder le Fondateur, tenir l'île, trouver un accord extérieur. Seuils (A)."
+    },
+    {
+      "scenario": "scn_854",
+      "camp": "fac_marley",
+      "adversaire": "fac_paradis",
+      "terme_jours": 730,
+      "objectifs": [
+        { "id": "fondateur", "cle": "fin.obj.fondateur_repris", "cond": { "type": "fondateur", "camp": "marley" } },
+        { "id": "paradis", "cle": "fin.obj.paradis_neutralise", "cond": { "type": "controle", "province": "wprov_paradis", "faction": "fac_marley" } },
+        { "id": "empire", "cle": "fin.obj.empire_stable", "cond": { "type": "nation_stabilite_min", "faction": "fac_marley", "seuil": 40 } },
+        { "id": "tenir", "cle": "fin.obj.tenir_2_ans", "cond": { "type": "terme" } }
+      ],
+      "victoire": { "min_objectifs": 3, "anticipee": true },
+      "defaites": [
+        { "id": "empire_effondre", "cle": "fin.def.empire_effondre", "cond": { "type": "nation_stabilite_max", "faction": "fac_marley", "seuil": 10 } },
+        { "id": "liberio", "cle": "fin.def.liberio_perdu", "cond": { "type": "controle", "province": "wprov_liberio", "faction": "fac_paradis" } }
+      ],
+      "canon": "A",
+      "note": "02 §13 : Marley (854) : récupérer le Fondateur ; neutraliser Paradis ; stabiliser l'empire. Seuils (A)."
+    }
+  ]
+}

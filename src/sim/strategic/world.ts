@@ -3,6 +3,8 @@ import type { GeoData, GeoZone } from "../../data/geo";
 import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
 import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Faction, Formation, Scenario, Shifter, Stratum, TacticalMap, WorldProvince, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
+import type { DifficultyBalance, DifficultyId, EndingRules, EndingsBalance } from "../../data/endingSchemas";
+import { applyDifficulty } from "./difficulty";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
 export interface World {
@@ -32,6 +34,10 @@ export interface World {
   armies?: ArmiesWorld | null;
   /** Missions nationales (MIS) : absentes sans équilibrage ou sans mission pour le scénario. */
   missions?: MissionsWorld | null;
+  /** P9 : objectifs et défaites du scénario, par camp joué (absents : pas de fin de partie). */
+  endings?: readonly EndingRules[];
+  /** P9 : difficulté appliquée (absente : « normal », monde des données). */
+  difficulty?: DifficultyId;
 }
 
 export interface MissionsWorld {
@@ -137,6 +143,9 @@ export interface PoliticsWorld {
 }
 
 export interface WorldSource {
+  /** P9 : fins de partie et difficultés (`data/balance/endings.json`, `difficulty.json`). */
+  endings?: EndingsBalance;
+  difficulty?: DifficultyBalance;
   provinces: readonly Province[];
   buildings: readonly Building[];
   scenarios: readonly Scenario[];
@@ -212,7 +221,10 @@ export function buildGeo(g: GeoData): GeoGraph {
   return { nodes: new Map(Object.entries(g.provinces)), adj, gates: new Set(g.gates) };
 }
 
-export function buildWorld(src: WorldSource, scenarioId: string): World {
+export function buildWorld(source: WorldSource, scenarioId: string, opts: { difficulty?: DifficultyId } = {}): World {
+  // P9.3 : la difficulté transforme une copie de la source ; « normal » la laisse telle quelle.
+  const level: DifficultyId = opts.difficulty ?? "normal";
+  const src = applyDifficulty(source, scenarioId, level);
   const scenario = src.scenarios.find((s) => s.id === scenarioId);
   if (!scenario) throw new Error(`Scénario inconnu : ${scenarioId}`);
   let politics: PoliticsWorld | null = null;
@@ -235,9 +247,12 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
       : null;
   const armies = buildArmiesWorld(src, scenarioId, military !== null);
   const missions = buildMissionsWorld(src, scenarioId);
+  const endings = (src.endings?.fins ?? []).filter((r) => r.scenario === scenarioId);
   return {
     ...(armies ? { armies } : {}),
     ...(missions ? { missions } : {}),
+    ...(endings.length > 0 ? { endings } : {}),
+    ...(level !== "normal" ? { difficulty: level } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),

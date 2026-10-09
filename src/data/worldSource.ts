@@ -66,6 +66,8 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
       ...(balance.world ? { worldBalance: balance.world as WorldSource["worldBalance"] } : {}),
       ...(balance.armies ? { armiesBalance: balance.armies as WorldSource["armiesBalance"] } : {}),
       ...(balance.missions ? { missionsBalance: balance.missions as WorldSource["missionsBalance"] } : {}),
+      ...(balance.endings ? { endings: balance.endings as WorldSource["endings"] } : {}),
+      ...(balance.difficulty ? { difficulty: balance.difficulty as WorldSource["difficulty"] } : {}),
       events: data.events,
       techs: data.techs,
       titanTypes: data.titan_types,

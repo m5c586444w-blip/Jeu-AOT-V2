@@ -36,6 +36,7 @@ import { EventDossier } from "./eventDossier";
 import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
+import { evaluateEnding } from "../sim/ending/ending";
 import { OptionsPanel } from "./optionsPanel";
 import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 import type { TutorialPrefs } from "./settings";
@@ -288,6 +289,8 @@ export async function bootGame(): Promise<void> {
 
   let replayTutorial: () => void = () => undefined;
   let lastArmyPrompt: string | null = null;
+  // P9.1 : verdict de fin de partie déjà montré (une sauvegarde déjà terminée ne rouvre pas l'épilogue au chargement).
+  let shownVerdict: string = evaluateEnding(world, state)?.state ?? "en_cours";
   const refresh = (): void => {
     listen();
     hud.update(state, clock.speed);
@@ -302,6 +305,16 @@ export async function bootGame(): Promise<void> {
     if (prompt && prompt !== lastArmyPrompt && registers?.armies && !inBattle) {
       lastArmyPrompt = prompt;
       registers.open("armees");
+    }
+    // Fin de partie (P9.1) : victoire, défaite ou terme : le temps s'arrête et l'épilogue s'ouvre, une fois par verdict ; le
+    // joueur peut ensuite reprendre le temps (partie libre).
+    const end = evaluateEnding(world, state);
+    if (end && end.state !== "en_cours" && end.state !== shownVerdict && !inBattle) {
+      shownVerdict = end.state;
+      clock.setSpeed(0);
+      registers?.open("epilogue");
+      document.body.dataset["fin"] = end.state;
+      notice.show(t(`fin.notice.${end.state}`));
     }
     drawRoutes();
     if (layers.active) applyOverlay();

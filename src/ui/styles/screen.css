@@ -952,3 +952,14 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .menu-guide:hover { border-color: var(--accent); }
 .menu-guide__titre { color: var(--texte-fort); }
 .menu-guide__resume { font-size: var(--t-s); color: var(--texte-second); }
+
+/* P9.1 : objectifs et verdict de fin de partie dans l'épilogue. */
+.epilogue__fin { margin: 0 0 0.8rem; padding: 0.5rem 0.75rem; border: var(--filet-l) solid var(--filet); background: var(--panneau-creux); }
+.epilogue__fin--victoire { border-color: var(--succes); }
+.epilogue__fin--defaite { border-color: var(--danger); }
+.epilogue__verdict { margin: 0.2rem 0 0.4rem; }
+.epilogue__objectifs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 0.15rem 1rem; }
+.objectif { display: flex; gap: 0.45rem; align-items: baseline; }
+.objectif__marque { width: 1rem; text-align: center; }
+.objectif--atteint .objectif__nom { font-weight: 600; }
+.objectif__avance { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--texte-second); }

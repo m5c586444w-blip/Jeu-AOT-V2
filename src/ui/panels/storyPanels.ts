@@ -6,6 +6,7 @@ import type { World } from "../../sim/strategic/world";
 import { SIDE_TO_FACTION } from "../../sim/world/war";
 import { isDomestic } from "../../sim/politics/vocabulary";
 import { epilogue, gazette } from "../narrative";
+import { evaluateEnding } from "../../sim/ending/ending";
 import { emblem } from "../icons";
 import { button, displayName, el, stamp, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
@@ -121,6 +122,22 @@ export class EpiloguePanel implements Panel {
     blason.setAttribute("aria-hidden", "true");
     head.append(blason, el("h3", "epilogue__titre", e.title));
     sheet.append(head);
+    // P9.1 : objectifs du scénario pour le camp joué et verdict (02 §13) ; bilan provisoire tant que la partie est en cours.
+    const end = evaluateEnding(this.ctx.world, this.ctx.state());
+    if (end) {
+      const box = el("section", `epilogue__fin epilogue__fin--${end.state}`);
+      box.append(el("h4", "titre-section", t(`fin.verdict.${end.state}`)));
+      box.append(el("p", "epilogue__verdict", t(end.defeat ? "fin.verdict.defaite_par" : `fin.verdict.${end.state}_texte`, { cause: end.defeat ? t(end.defeat.cle) : "", n: end.met, m: end.needed, jours: Math.max(0, end.term - end.day) })));
+      const list = el("ul", "epilogue__objectifs");
+      for (const o of end.objectives) {
+        const li = el("li", o.met ? "objectif objectif--atteint" : "objectif");
+        li.append(el("span", "objectif__marque", o.met ? "✔" : "·"), el("span", "objectif__nom", t(o.cle)));
+        if (!o.met && o.progress > 0 && o.progress < 1) li.append(el("span", "objectif__avance", `${Math.round(o.progress * 100)} %`));
+        list.append(li);
+      }
+      box.append(list);
+      sheet.append(box);
+    }
     const cols = el("div", "epilogue__colonnes");
     const story = el("div", "epilogue__recit");
     for (const l of e.lines) story.append(el("p", "", l));

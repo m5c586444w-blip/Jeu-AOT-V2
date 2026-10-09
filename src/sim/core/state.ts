@@ -31,6 +31,7 @@ import type { ArmiesState } from "../armies/state";
 import { tickArmies } from "../armies/layer";
 import { techModsWithMissions, tickMissions, withMissionMods } from "../missions/missions";
 import type { MissionsState } from "../missions/missions";
+import type { RumblingState } from "../crisis/rumbling";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
 
@@ -68,6 +69,8 @@ export interface GameState {
    * Marley ; absent d'une sauvegarde antérieure ou d'une partie où rien n'a été lancé (son hash ne change pas).
    */
   missions?: MissionsState;
+  /** Grondement (P9.4) : facultatif, créé au départ du scénario du Grondement seulement (ailleurs : hash inchangé). */
+  rumbling?: RumblingState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {

@@ -1,0 +1,10 @@
+{
+  "canon": "A",
+  "note": "Difficultés de P9.3 (18 §9) : choix de jeu, sans source dans l'œuvre. « Normal » est le monde des données, inchangé.",
+  "niveaux": [
+    { "id": "recit", "cle": "diff.recit", "production": 1.25, "titans": 0.7, "ia_attaque": 0.7, "pertes": 0.7, "moral": 10, "stabilite": 10 },
+    { "id": "normal", "cle": "diff.normal", "production": 1, "titans": 1, "ia_attaque": 1, "pertes": 1, "moral": 0, "stabilite": 0 },
+    { "id": "rude", "cle": "diff.rude", "production": 0.88, "titans": 1.2, "ia_attaque": 1.2, "pertes": 1.2, "moral": -5, "stabilite": -5 },
+    { "id": "breche", "cle": "diff.breche", "production": 0.75, "titans": 1.45, "ia_attaque": 1.45, "pertes": 1.45, "moral": -12, "stabilite": -12 }
+  ]
+}
