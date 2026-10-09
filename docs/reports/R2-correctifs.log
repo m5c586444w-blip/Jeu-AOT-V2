@@ -1,0 +1,55 @@
+ RUN  v5.0.3 /home/claude/Jeu-AOT-V2
+ ✓ tests/sim/rt-obstacles.test.ts > Temps réel : bâtiments infranchissables et ligne de tir (D-146) > ligne de tir : une maison entre le tireur et la cible bloque le segment ; à découvert, il est libre 17ms
+ ✓ tests/sim/rt-obstacles.test.ts > Temps réel : bâtiments infranchissables et ligne de tir (D-146) > un fantassin ne tire pas à travers une maison ; à découvert, il tire 24ms
+ ✓ tests/sim/rt-obstacles.test.ts > Temps réel : bâtiments infranchissables et ligne de tir (D-146) > pas de marche, de place ni d'ordre dans un bâtiment : contournement, glissement, place repoussée dans la rue 11ms
+ ✓ tests/sim/rt-obstacles.test.ts > Temps réel : bâtiments infranchissables et ligne de tir (D-146) > aucun fantassin ni soldat à pied dans un bâtiment pendant une bataille de ville (60 s d'ordres temps réel) 4134ms
+ ✓ tests/sim/rt-obstacles.test.ts > Temps réel : bâtiments infranchissables et ligne de tir (D-146) > empreintes inchangées : une bataille d'avant R2 en ville ne passe jamais en temps réel 486ms
+ ✓ tests/sim/rt-troops.test.ts > Sections et compagnies > découpe en sections d'au plus 30 hommes, identifiants stables, effectifs conservés 6ms
+ ✓ tests/sim/rt-troops.test.ts > Sections et compagnies > 100 à 400 unités en scène ; le pas de simulation tient dans le budget du fil de l'interface 5148ms
+ ✓ tests/sim/rt-orders.test.ts > Forme des ordres (validTimedOrder) > accepte les ordres classiques et temps réel, refuse les formes fausses 2ms
+ ✓ tests/sim/rt-orders.test.ts > Formations > chaque formation donne des places distinctes, centrées, à l'écart voulu 3ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > déplacer : l'escouade marche en formation, arrive, puis tient 98ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > par unité : un seul soldat part, son escouade reste ; un ordre d'escouade efface l'ordre propre 87ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > file d'ordres : deux déplacements enchaînés (Maj), le second part à l'arrivée du premier 120ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > suivre : l'escouade suit celle qu'on déplace 142ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > attaquer, tenir, couvrir, replier : la posture est prise ; le repli lance la fusée verte 16ms
+ ✓ tests/sim/rt-orders.test.ts > Ordres temps réel (CR2-04) > déterminisme : même graine et mêmes ordres temps réel = même hash ; rejeu par runBattle identique au pas à pas 1506ms
+ ✓ tests/sim/rt-orders.test.ts > Artillerie sur zone et ordres de porteur (CR2-04) > tir sur zone : les impacts tombent autour du point désigné ; cessez-le-feu : plus aucun tir 231ms
+ ✓ tests/sim/rt-orders.test.ts > Artillerie sur zone et ordres de porteur (CR2-04) > porteur allié : la zone et l'objectif restreignent ses cibles ; il rejoint sa zone 105ms
+ ✓ tests/sim/rt-orders.test.ts > Artillerie sur zone et ordres de porteur (CR2-04) > un ordre de porteur à un porteur ennemi est sans effet (l'IA ennemie n'obéit pas au joueur) 1ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > plaine-moyen 336ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > ville-ordres 253ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > foret-nuit-chariot 35ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > mur-grand 114ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > artillerie 121ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > porteur-allie 79ms
+ ✓ tests/sim/rt-legacy.test.ts > Batailles d'avant R2 inchangées (CR2-03) > porteur-ennemi-lances 47ms
+ ✓ tests/sim/rt-troops.test.ts > Bataille d'armées sans Titans (CR2-05, dette n° 33) > les deux camps tirent et tombent ; mêlée des soldats ; déroutes ; fin de bataille 6344ms
+ ✓ tests/sim/rt-campaign.test.ts > Rencontre d'armées jouée en bataille de compagnies (CR2-05) > armée contre armée sans Titans : jouable ; 100 à 400 unités ; fantassins des deux camps en scène 43ms
+ ✓ tests/sim/rt-campaign.test.ts > Rencontre d'armées jouée en bataille de compagnies (CR2-05) > jouée puis reportée : pertes des deux camps, bilan, journal ; même graine et mêmes ordres = même état 13841ms
+ ✓ tests/sim/rt-campaign.test.ts > Rencontre d'armées jouée en bataille de compagnies (CR2-05) > rencontre de Titans en bataille de compagnies : 6 Titans au plus, fantassins de Paradis 882ms
+ ✓ tests/sim/rt-campaign.test.ts > Rencontre d'armées jouée en bataille de compagnies (CR2-05) > forme des commandes : ordres temps réel reçus, `rt` booléen, ordres mal formés refusés 1ms
+ ✓ tests/sim/rt-troops.test.ts > Bataille d'armées sans Titans (CR2-05, dette n° 33) > déterminisme : même graine et mêmes ordres = même hash ; graine différente = autre bataille 6818ms
+ ✓ tests/sim/rt-troops.test.ts > Bataille d'armées sans Titans (CR2-05, dette n° 33) > les sections de Paradis obéissent aux ordres (section entière et fantassin seul) 328ms
+ ✓ tests/sim/rt-troops.test.ts > Bataille d'armées sans Titans (CR2-05, dette n° 33) > un porteur allié dont l'objectif est « les fantassins » frappe les sections ennemies 116ms
+ Test Files  5 passed (5)
+      Tests  33 passed (33)
+   Start at  11:32:00
+   Duration  20.64s (tests 85%, import 8%, transform 7%)
+vitest exit=0
+
+=== npm run sim:selftest ===
+
+> murs-et-sang@0.0.1 sim:selftest
+> tsx src/tools/sim-selftest.ts
+
+[sans monde] direct : 3c17ecdc | worker : 3c17ecdc | date an 847, jour 281
+[scn_sandbox_845] direct : 59a9b1b2 | worker : 59a9b1b2 | date an 847, jour 281
+[scn_sandbox_850] direct : 7d032fb4 | worker : 7d032fb4 | date an 852, jour 281 | événements : 34 canon survenus, divergence 0, 5 technologies | porteurs (P6) : Colossal → char_armin_arlert, 1 héritage(s), sérum 0
+[scn_854] direct : 56dc43aa | worker : 56dc43aa | date an 856, jour 281 | événements : 6 canon survenus, divergence 0, 5 technologies | porteurs (P6) : Colossal → char_armin_arlert, 5 héritage(s), sérum 0
+[scn_854, Marley] direct : c718bf0d | worker : c718bf0d | date an 854, jour 181 | guerres : fac_marley|fac_paradis | Marteau → char_eren_yeager
+[scn_sandbox_850 + expédition] direct : 20cdd5ca | worker : 20cdd5ca | date an 850, jour 168 | rapport : 72 morts / 103
+[scn_sandbox_850 + bataille jouée] direct : dd7651fd | worker : dd7651fd | date an 850, jour 129 | 7 commandes | bataille reportée
+[scn_sandbox_845 + missions] direct : bc4e5fd0 | worker : bc4e5fd0 | date an 845, jour 291 | missions accomplies : mis_eco_recensement_greniers, mis_mil_inventaire_garnisons, mis_mil_reforme_armee
+sim:selftest : OK (direct = worker : sans monde, bac à sable 845, bac à sable politique 850, 854, 854 mené par Marley, 850 avec une expédition, 850 avec une bataille jouée, 845 avec des missions).
+exit=0

@@ -8,7 +8,7 @@ import type { TacticalWorldMap } from "./map";
 import { hookDelay, napeOf, pickAnchor, stepOdm } from "./odm";
 import { bodyName, cutShifter, deployShifters, enemyShifterStanding, stepLuredTitan, stepShifter, throwSpear } from "./shifters";
 import type { ShifterHooks } from "./shifters";
-import { applyRtOrder, effectiveOrder, isRtOrder, soldierMarch, stepRealtime } from "./realtime";
+import { applyRtOrder, effectiveOrder, isRtOrder, soldierMarch, stepRealtime, walkSoldier } from "./realtime";
 import { deployTroops, enemyTroopsStanding, alliedTroopsStanding, soldierVsTroops, stepTroops, troopHooksOf } from "./troops";
 import type { BattleDeathCause, BattleSetup, BattleState, SoldierUnit, SquadState, TimedOrder, TitanUnit } from "./types";
 
@@ -446,9 +446,17 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
       const dy = bt.map.height - s.y;
       const d = Math.hypot(dx, dy) || 1;
       const v = b.squads.flee_speed * dt;
-      s.x += (dx / d) * Math.min(v, d);
-      s.y += (dy / d) * Math.min(v, d);
-      if (s.y >= bt.map.height - 1) {
+      let stuck = false;
+      if (st.rt) {
+        // R2+ : par les rues (contournement des bâtiments, glissement le long des murs).
+        const [x0, y0] = [s.x, s.y];
+        walkSoldier(bt, s, sq.rally.x, bt.map.height, Math.min(v, d));
+        stuck = s.x === x0 && s.y === y0 && bt.map.height - s.y < 40;
+      } else {
+        s.x += (dx / d) * Math.min(v, d);
+        s.y += (dy / d) * Math.min(v, d);
+      }
+      if (s.y >= bt.map.height - 1 || stuck) {
         s.mode = "fui";
         log(st, b, "battle.fled", { name: s.name });
       }
@@ -470,8 +478,11 @@ function stepSoldier(bt: Battle, s: SoldierUnit, rng: Rng, dt: number): void {
         const dx = t.x - s.x;
         const dy = t.y - s.y;
         const d = Math.hypot(dx, dy) || 1;
-        s.x += (dx / d) * b.squads.flee_speed * dt;
-        s.y += (dy / d) * b.squads.flee_speed * dt;
+        if (st.rt) walkSoldier(bt, s, t.x, t.y, b.squads.flee_speed * dt);
+        else {
+          s.x += (dx / d) * b.squads.flee_speed * dt;
+          s.y += (dy / d) * b.squads.flee_speed * dt;
+        }
       } else {
         const a = pickAnchor(s, bt.map, b, nape, t);
         if (a) {

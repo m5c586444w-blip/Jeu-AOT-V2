@@ -1,4 +1,5 @@
 import type { Battle } from "./battle";
+import { freeSpot, groundAt, walkStep } from "./map";
 import { FORMATIONS, RESTRAINTS, RT_ORDERS, SHIFTER_OBJECTIVES, TACTICAL_ORDERS } from "./types";
 import type { Formation, QueuedOrder, SoldierUnit, SquadOrder, SquadState, TacticalOrder, TimedOrder, TroopUnit, UnitOrder } from "./types";
 
@@ -217,7 +218,9 @@ export function applyRtOrder(bt: Battle, o: Omit<TimedOrder, "tick">, log: Log):
     const u: UnitOrder = { order };
     if (order === "deplacer") {
       if (o.x === undefined || o.y === undefined) return;
-      const p = clampTo(bt, o.x, o.y);
+      // Un point tombé dans une maison est repoussé dans la rue la plus proche (R2+).
+      const c = clampTo(bt, o.x, o.y);
+      const p = freeSpot(bt.map, c.x, c.y);
       u.x = p.x;
       u.y = p.y;
     }
@@ -275,7 +278,7 @@ export function stepRealtime(bt: Battle, log: Log): void {
       const heading = sq.heading ?? -Math.PI / 2;
       let arrived = 0;
       members.forEach((m, k) => {
-        const slot = formationSlot(f, k, members.length, sq.dest as { x: number; y: number }, heading);
+        const slot = slotAt(bt, f, k, members.length, sq.dest as { x: number; y: number }, heading);
         if (Math.hypot(m.x - slot.x, m.y - slot.y) <= ARRIVAL_M + ("z" in m ? m.z : 0)) arrived++;
       });
       // Arrivée : tous les hommes libres à leur place (un homme saisi par un Titan ne bloque pas la file).
@@ -320,7 +323,28 @@ export function destinationOf(bt: Battle, m: SoldierUnit | TroopUnit, sq: SquadS
   const members = squadMembers(bt, sq).filter((x) => !x.rt);
   const k = members.indexOf(m);
   if (k < 0) return null;
-  return formationSlot(sq.formation ?? "carre", k, members.length, sq.dest, sq.heading ?? -Math.PI / 2);
+  return slotAt(bt, sq.formation ?? "carre", k, members.length, sq.dest, sq.heading ?? -Math.PI / 2);
+}
+
+/** Place de formation hors des bâtiments (R2+) : une place tombée dans une maison est repoussée dans la rue. */
+function slotAt(bt: Battle, f: Formation, k: number, n: number, c: { x: number; y: number }, heading: number): { x: number; y: number } {
+  const p = formationSlot(f, k, n, c, heading);
+  return freeSpot(bt.map, p.x, p.y);
+}
+
+/**
+ * Pas d'un soldat à pied vers un point (R2+, temps réel seulement) : il contourne les bâtiments et glisse le long des
+ * murs ; en quittant un toit, il redescend au sol.
+ */
+export function walkSoldier(bt: Battle, s: SoldierUnit, tx: number, ty: number, v: number): void {
+  const p = walkStep(bt.map, s.x, s.y, s.z, tx, ty, v);
+  s.x = p.x;
+  s.y = p.y;
+  const g = groundAt(bt.map, s.x, s.y);
+  if (s.z > g) {
+    s.z = g;
+    s.apex = g;
+  }
 }
 
 /**
@@ -342,7 +366,6 @@ export function soldierMarch(bt: Battle, s: SoldierUnit, sq: SquadState, dt: num
     return { moving: true, walked: false };
   }
   const v = Math.min(bt.world.balance.squads.flee_speed * dt * (s.wound === "aucune" ? 1 : 0.5), d);
-  s.x += (dx / d) * v;
-  s.y += (dy / d) * v;
+  walkSoldier(bt, s, dest.x, dest.y, v);
   return { moving: true, walked: true };
 }

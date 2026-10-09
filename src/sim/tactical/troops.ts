@@ -4,8 +4,9 @@ import { Rng } from "../core/rng";
 import type { TacticalWorld } from "../strategic/world";
 import type { Battle } from "./battle";
 import type { TacticalWorldMap } from "./map";
+import { segmentBlocked, walkStep } from "./map";
 import { hookDelay, pickAnchor } from "./odm";
-import { destinationOf, effectiveOrder, formationSlot } from "./realtime";
+import { destinationOf, effectiveOrder, formationSlot, walkSoldier } from "./realtime";
 import type { BattleDeathCause, BattleSetup, SoldierUnit, SquadState, TitanUnit, TroopUnit } from "./types";
 
 /**
@@ -158,17 +159,26 @@ function posOf(bt: Battle, t: Target): { x: number; y: number; z: number; up: bo
   return ti ? { x: ti.x, y: ti.y, z: ti.height * 0.6, up: ti.alive } : null;
 }
 
-/** Cible la plus proche d'un fantassin : soldats et fantassins adverses ; Titans pour les fusils anti-Titans. */
+/** Hauteur de tir d'un fantassin (épaule) et hauteur visée sur un homme debout (m). */
+const SHOOTER_Z = 1.5;
+const CHEST_Z = 1.2;
+/** Nombre de cibles proches essayées pour trouver une ligne de tir dégagée. */
+const SIGHT_TRIES = 6;
+
+/** Ligne de tir dégagée entre un fantassin et un point visé (aucun bâtiment, mur ni rocher entre eux). */
+function clearShot(bt: Battle, tr: TroopUnit, p: { x: number; y: number; z: number }): boolean {
+  return !segmentBlocked(bt.map, tr.x, tr.y, SHOOTER_Z, p.x, p.y, p.z + CHEST_Z);
+}
+
+/**
+ * Cible d'un fantassin : soldats et fantassins adverses ; Titans pour les fusils anti-Titans. La plus proche qu'il voit
+ * (parmi les plus proches) ; s'il n'en voit aucune, la plus proche (il marche vers elle quand il attaque).
+ */
 function pickTarget(bt: Battle, tr: TroopUnit, preferSection: string | null): Target | null {
   const st = bt.state;
-  let best: Target | null = null;
-  let bd = Infinity;
+  const cands: { t: Target; d: number }[] = [];
   const consider = (t: Target, x: number, y: number, bonus = 1): void => {
-    const d = d2(tr.x, tr.y, x, y) * bonus;
-    if (d < bd) {
-      bd = d;
-      best = t;
-    }
+    cands.push({ t, d: d2(tr.x, tr.y, x, y) * bonus });
   };
   for (const u of st.troops ?? []) {
     if (u.side === tr.side || !alive(u)) continue;
@@ -182,17 +192,24 @@ function pickTarget(bt: Battle, tr: TroopUnit, preferSection: string | null): Ta
     const hostile = tr.side === "allie" ? !t.ally && (t.commanded ?? 0) <= 0 : t.ally === true || t.shifter === undefined;
     if (hostile) consider({ kind: "titan", index: t.id }, t.x, t.y, 0.5);
   }
-  return best;
+  if (cands.length === 0) return null;
+  // Tri stable (ordre d'ajout à distance égale) : même tirage d'une partie à l'autre.
+  cands.sort((a, b) => a.d - b.d);
+  for (const c of cands.slice(0, SIGHT_TRIES)) {
+    const p = posOf(bt, c.t);
+    if (p && clearShot(bt, tr, p)) return c.t;
+  }
+  return (cands[0] as { t: Target }).t;
 }
 
-function moveToward(tr: TroopUnit, x: number, y: number, v: number): void {
-  const dx = x - tr.x;
-  const dy = y - tr.y;
-  const d = Math.hypot(dx, dy);
-  if (d < 1e-6) return;
-  const k = Math.min(v, d) / d;
-  tr.x += dx * k;
-  tr.y += dy * k;
+/** Pas d'un fantassin vers un point : il contourne les bâtiments et glisse le long des murs (`walkStep`). */
+function moveToward(bt: Battle, tr: TroopUnit, x: number, y: number, v: number): void {
+  const p = walkStep(bt.map, tr.x, tr.y, 0, x, y, v);
+  const dx = p.x - tr.x;
+  const dy = p.y - tr.y;
+  if (Math.abs(dx) + Math.abs(dy) < 1e-9) return;
+  tr.x = p.x;
+  tr.y = p.y;
   tr.heading = Math.atan2(dy, dx);
 }
 
@@ -219,9 +236,11 @@ function titansOnTroops(bt: Battle, rng: Rng, dt: number, rb: RtBalance): void {
     t.heading = Math.atan2(best.y - t.y, best.x - t.x);
     const reach = t.height * b.titans.reach_ratio + 2;
     if (d > reach * 0.8 && t.legs === 0) {
+      // Par les rues : un Titan contourne les maisons (marge à la mesure de sa carrure).
       const v = Math.min(t.speed * activity * dt, d);
-      t.x += Math.cos(t.heading) * v;
-      t.y += Math.sin(t.heading) * v;
+      const p = walkStep(bt.map, t.x, t.y, 0, best.x, best.y, v, Math.min(1.8, Math.max(1, t.height * 0.12)));
+      t.x = p.x;
+      t.y = p.y;
     }
     t.attackCooldown -= dt;
     if (d <= reach && t.attackCooldown <= 0 && (t.armL === 0 || t.armR === 0)) {
@@ -274,14 +293,17 @@ export function stepTroops(bt: Battle, dt: number, h: TroopHooks): void {
     tr.reload -= dt;
     if (order === "repli") {
       tr.mode = "marche";
-      moveToward(tr, tr.x, sq.rally.y, speed * 1.3 * dt);
-      if (Math.abs(tr.y - sq.rally.y) <= 1) tr.mode = "fui";
+      const [x0, y0] = [tr.x, tr.y];
+      moveToward(bt, tr, tr.x, sq.rally.y, speed * 1.3 * dt);
+      // Arrivé au bord, ou arrêté par un mur tout près du bord (carte du mur) : hors du champ de bataille.
+      const stuck = tr.x === x0 && tr.y === y0;
+      if (Math.abs(tr.y - sq.rally.y) <= 1 || (stuck && Math.abs(tr.y - sq.rally.y) < 40)) tr.mode = "fui";
       continue;
     }
     const dest = destinationOf(bt, tr, sq);
     if (dest && Math.hypot(dest.x - tr.x, dest.y - tr.y) > 1) {
       tr.mode = "marche";
-      moveToward(tr, dest.x, dest.y, speed * dt);
+      moveToward(bt, tr, dest.x, dest.y, speed * dt);
       continue;
     }
     const prefer = order === "tuer" ? (tr.rt?.foe !== undefined ? (st.troops?.[tr.rt.foe]?.section ?? null) : sq.foe !== null && sq.foe !== undefined ? (st.troops?.[sq.foe]?.section ?? null) : null) : null;
@@ -292,7 +314,7 @@ export function stepTroops(bt: Battle, dt: number, h: TroopHooks): void {
       // Sans cible : l'ennemi avance vers le bord de Paradis ; Paradis tient.
       if (tr.side === "ennemi" && order === "tuer") {
         tr.mode = "marche";
-        moveToward(tr, tr.x, bt.map.height - 2, speed * 0.5 * dt);
+        moveToward(bt, tr, tr.x, bt.map.height - 2, speed * 0.5 * dt);
       } else tr.mode = "ligne";
       continue;
     }
@@ -300,12 +322,15 @@ export function stepTroops(bt: Battle, dt: number, h: TroopHooks): void {
     tr.heading = Math.atan2(p.y - tr.y, p.x - tr.x);
     const melee = d <= rb.melee_reach_m;
     const engage = w.range_m * rb.engage_share;
+    // Pas de tir à travers une maison, un mur ou un rocher : on attend, ou on va chercher la ligne de tir.
+    const sight = melee || clearShot(bt, tr, p);
     // « Attaquer » : marcher à portée de tir (ou au contact pour l'assaut et la cavalerie) ; « tenir », « couvrir » : sur place.
-    const closeIn = order === "tuer" && (d > engage || ((tr.kind === "assaut" || tr.kind === "cavalier") && !melee));
+    const closeIn = order === "tuer" && (d > engage || !sight || ((tr.kind === "assaut" || tr.kind === "cavalier") && !melee));
     if (closeIn) {
       tr.mode = "marche";
-      moveToward(tr, p.x, p.y, speed * dt);
+      moveToward(bt, tr, p.x, p.y, speed * dt);
     } else tr.mode = "ligne";
+    if (!sight) continue;
     if (tr.reload > 0 || (closeIn && !melee && tr.kind !== "assaut")) continue;
     if (d > w.range_m && !melee) continue;
     tr.reload = w.reload_s * (0.85 + 0.3 * rng.next());
@@ -384,8 +409,7 @@ export function soldierVsTroops(bt: Battle, s: SoldierUnit, sq: SquadState, dt: 
       }
     }
     const v = Math.min(b.squads.flee_speed * dt * (s.wound === "aucune" ? 1 : 0.5), d - rb.melee_reach_m * 0.5);
-    s.x += ((best.x - s.x) / d) * v;
-    s.y += ((best.y - s.y) / d) * v;
+    walkSoldier(bt, s, best.x, best.y, v);
     return true;
   }
   if (s.cutCooldown > 0 || s.changeTimer > 0 || s.pairs < 1) return s.mode === "sol";

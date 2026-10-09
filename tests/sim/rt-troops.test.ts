@@ -42,9 +42,11 @@ describe("Sections et compagnies", () => {
     const bt = createBattle(w854, setup);
     expect(bt.state.troops?.length).toBe(210);
     expect(bt.state.squads.filter((x) => x.side).length).toBe(7);
+    // 75 s (D-146) : avec la ligne de tir et les rues, les sections ennemies mettent plus d'une minute à entrer sous la mitraille.
     const t0 = performance.now();
-    for (let i = 0; i < 30 * hz && !bt.state.ended; i++) stepBattle(bt);
-    const perTick = (performance.now() - t0) / (30 * hz);
+    let ticks = 0;
+    for (; ticks < 75 * hz && !bt.state.ended; ticks++) stepBattle(bt);
+    const perTick = (performance.now() - t0) / ticks;
     // Mesure sur la machine de test (valeur indicative) : bien en deçà des 50 ms d'un pas à 20 Hz.
     expect(perTick).toBeLessThan(10);
     const tr = bt.state.stats.troops;
@@ -83,7 +85,8 @@ describe("Bataille d'armées sans Titans (CR2-05, dette n° 33)", () => {
   });
 
   it("les sections de Paradis obéissent aux ordres (section entière et fantassin seul)", () => {
-    const bt = createBattle(w854, companySetup(w854, { map: "tmap_plaine", seed: 3, soldiers: 12, allied: [{ kind: "fusilier", count: 20 }], enemy: [{ kind: "fusilier", count: 10 }] }));
+    // Graine 2 (D-146) : avec la ligne de tir, un rocher masque la ligne ennemie de la graine 3 et la bataille finit avant l'arrivée.
+    const bt = createBattle(w854, companySetup(w854, { map: "tmap_plaine", seed: 2, soldiers: 12, allied: [{ kind: "fusilier", count: 20 }], enemy: [{ kind: "fusilier", count: 10 }] }));
     const sec = bt.state.squads.find((x) => x.id === "sec_a01");
     expect(sec?.order).toBe("tenir");
     const lone = bt.state.troops?.find((t) => t.section === "sec_a01");
@@ -92,6 +95,8 @@ describe("Bataille d'armées sans Titans (CR2-05, dette n° 33)", () => {
       { tick: 1, squad: "sec_a01", order: "deplacer" as const, unit: lone?.id ?? 0, x: 60, y: 260 },
     ];
     for (let i = 0; i < 90 * hz && !bt.state.ended; i++) stepBattle(bt, orders.filter((o) => o.tick === bt.state.tick));
+    // La bataille dure assez pour que la marche se termine (sinon l'essai ne mesure rien).
+    expect(bt.state.ended).toBeNull();
     const up = squadMembers(bt, sec as NonNullable<typeof sec>).filter((m) => m !== lone);
     if (up.length > 3) {
       const c = centroid(up) ?? { x: 0, y: 0 };
