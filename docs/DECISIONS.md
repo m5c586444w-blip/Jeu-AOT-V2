@@ -1103,3 +1103,32 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | MIS (sous-agent) | Opus | high | ≈ 160 | arrêt de 3 h sans progrès, relancé |
 | Revue MIS + correctif + fusion | Opus | défaut | ≈ 40 | 1 passe |
+
+## 2026-10-09 — D-135 TUT : scénario du guide (le bac à sable 845 n'a aucun registre)
+- **Contexte** : fichier 23 §5 demande un « premier mois de 845 » qui montre cabinet, recherche, missions, événements et bataille. Le bac à sable 845 n'a pas de couche politique : ni cabinet, ni recherche, ni chronologie, ni barre de gestion (dette n° 39). Les registres naissent de `world.politics` (monde construit par le simulateur) ; les ouvrir côté interface exigerait d'ajouter `politics` à `data/scenarios/sandbox_845.json`, donc de changer la simulation et l'empreinte `59a9b1b2`.
+- **Options** : (a) ouvrir les registres de 845 côté interface seulement ; (b) donner une couche politique au 845 (change l'empreinte, hors « src/sim inchangé ») ; (c) prendre le scénario jouable le plus ancien qui a les registres : le bac à sable 850.
+- **Choix** : (c). Le guide se joue au premier mois du bac à sable 850 (an 850, jour 1 : cabinet, Bureau d'études, 53 missions, chronologie, expéditions et bataille d'essai, armées). Le texte n'écrit aucune année. Le guide n'est pas proposé en 845 (aucune bulle, vérifié par `smoke:tuto`).
+- **Raison** : (a) n'est pas possible sans la couche politique ; (b) change les empreintes. (c) ne touche ni `src/sim` ni les données. **Réversible** : oui (une constante du menu : `scn_sandbox_850`).
+
+## 2026-10-09 — D-136 TUT : forme du guide
+- **Contexte** : TUT.1 demande 10 à 14 étapes, chacune avec bulle ancrée, mise en évidence et condition de passage.
+- **Options** : (a) une étape = une bulle, passage par « Suivant » seul ; (b) une étape en deux temps : ACTION demandée (bulle et halo sur le bouton à utiliser), puis EXPLICATION (bulle ancrée à ce qui vient de s'ouvrir), passage par « Suivant » ; (c) passage automatique dès l'action faite.
+- **Choix** : (b). 14 étapes (accueil, carte, province, ressources, temps, économie, armées, cabinet, recherche, missions, événements, expéditions, bataille, fin). Condition de passage = l'action (étape à action) puis « Suivant » ; « Suivant » reste verrouillé à l'étape de la bataille tant que l'écran de bataille est ouvert. « Passer l'étape » et « Quitter le guide » restent disponibles à tout moment. Une étape facultative dont l'élément est absent est sautée. Le registre ouvert pour une étape est refermé en passant à la suivante. Le temps est suspendu au départ et à l'explication de l'étape du temps ; les dossiers d'événements ne s'ouvrent pas d'eux-mêmes pendant le guide (`EventDossier.auto`) et reprennent à la fin.
+- **Démarrage** : jamais automatique (les smoke:* et les parties existantes restent intacts) : bouton du menu principal, `?tutoriel=1`, ou « Rejouer » dans les options (en place si l'on est déjà en jeu, par navigation depuis le menu).
+- **Raison** : (c) ôte au joueur le temps de lire ; (a) n'apprend pas à se servir de l'interface. Logique pure et testée (`src/ui/tutorial/steps.ts`, `placement.ts`) ; le DOM est dans `controller.ts`. **Réversible** : oui.
+
+## 2026-10-09 — D-137 TUT : préférences et aides contextuelles
+- **Contexte** : TUT.2 : désactivable à tout moment, rejouable depuis les options, puis aides contextuelles une seule fois par élément ; les empreintes des parties ne doivent pas changer.
+- **Choix** : `Settings.tutorial = { done, disabled, hints, seen[] }` dans les préférences locales (`src/ui/settings.ts`, localStorage), jamais dans l'état de partie. Les aides s'activent à la fin du guide, terminé ou quitté ; une carte discrète (« Compris ») apparaît à la première ouverture de chaque registre, du dossier de province et de l'écran de bataille ; l'élément est noté « vu » à l'affichage. Une case des options coupe les aides ; un bouton rejoue le guide. Pas d'aide pendant le guide. Les anciennes préférences (sans guide) se chargent ; `src/sim` n'est pas modifié (test : aucune mention du guide dans `src/sim`).
+- **Raison** : les préférences d'interface sont déjà locales ; aucune aide pour qui n'a jamais lancé le guide (les captures et smoke:* ne changent pas). **Réversible** : oui.
+
+## 2026-10-09 — D-138 TUT : revue et fusion
+- **Contexte** : revue par un sous-agent distinct (15 captures ouvertes, code, textes) : deux défauts bloquants. (1) « Rejouer le guide » ne faisait rien en 845 et ouvrait « Bienvenue à Paradis » dans une partie de Marley ; (2) `?tutoriel=1` restait dans l'adresse, si bien qu'un rechargement relançait le guide. Il a aussi relevé que `smoke:tuto` avalait une erreur de Playwright (`uncheck(...).catch`).
+- **Choix** : (1) hors d'une partie de Paradis avec registres, « Rejouer » ouvre la partie accompagnée du menu (850) ; (2) le paramètre est retiré par `history.replaceState` au lancement ; le smoke clique la case et vérifie la préférence, sans `catch`, et contrôle les deux correctifs. Un guide rejoué garde le choix des aides fait dans les options (seule la première fin les active). Textes : domaine « monde extérieur » ajouté, « deux au plus » remplacé par « limité » (la limite dépend de la nation). Autres remarques : dette n° 45.
+- **Sorties** : `smoke:tuto` 94 OK, code 0 (`docs/reports/TUT-smoke-2.log`) ; verify code 0, 660/660 (`docs/reports/TUT-verify-final.log`).
+- **Réversible** : oui.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| TUT (sous-agent) | Sonnet | défaut | ≈ 110 | sans arrêt |
+| Revue TUT + correctifs + fusion | Opus | défaut | ≈ 35 | 1 passe |

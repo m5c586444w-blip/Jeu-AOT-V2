@@ -111,7 +111,7 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
         syncLibrary(audio, s);
         applyUiScale(s.uiScale);
         if (s.locale !== settings.locale) window.location.reload();
-      }, userTracks);
+      }, userTracks, () => go({ scenario: "scn_sandbox_850", tutoriel: "1" }));
       options.toggle();
       audio.play(options.isOpen ? "ouvrir" : "fermer");
     }),
@@ -161,7 +161,13 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
     });
     list.append(b);
   }
-  panel.append(list, nations);
+  // Partie accompagnée (TUT.1) : premier mois à Paradis, étapes courtes et bulles ancrées aux éléments à utiliser.
+  const guide = el("button", "menu-guide");
+  guide.type = "button";
+  guide.dataset["entree"] = "guide";
+  guide.append(el("strong", "menu-guide__titre", t("menu.tutorial")), el("span", "menu-guide__resume", t("menu.tutorial_why")));
+  guide.addEventListener("click", () => go({ scenario: "scn_sandbox_850", tutoriel: "1" }));
+  panel.append(list, nations, guide);
   root.append(bg, veil, col, panel);
   app.append(root);
   document.title = t("app.title");

@@ -29,7 +29,7 @@ export class EventDossier {
     private readonly world: World,
     private readonly why: WhyTooltip,
     private readonly dispatch: (cmd: Command) => Promise<void>,
-    private readonly auto = true,
+    public auto = true,
   ) {
     this.root.hidden = true;
     this.root.setAttribute("role", "dialog");

@@ -25,9 +25,20 @@ export interface Settings {
   userTracks: Record<string, Mood | "off">;
   /** Mode auteur (E-UX-1) : statuts canon et codes internes visibles ; désactivé par défaut. */
   authorMode: boolean;
+  /** Tutoriel guidé et aides contextuelles (TUT.2) : préférences locales, jamais dans l'état de partie. */
+  tutorial: TutorialPrefs;
   /** Révision de la musique : des préférences antérieures à la musique d'AUD reprennent le volume de musique par défaut. */
   audioRev?: number;
 }
+
+/** Tutoriel : terminé ou quitté (`done`), désactivé à la demande (`disabled`), aides contextuelles actives (`hints`), éléments déjà expliqués (`seen`). */
+export interface TutorialPrefs {
+  done: boolean;
+  disabled: boolean;
+  hints: boolean;
+  seen: string[];
+}
+export const DEFAULT_TUTORIAL: TutorialPrefs = { done: false, disabled: false, hints: false, seen: [] };
 
 const KEY = "murs-et-sang:preferences";
 /** Révision 2 : musique d'AUD (D-117). Les anciennes préférences gardaient 60 % de musique, soit un gain de 0,42 > 0,35. */
@@ -35,7 +46,7 @@ export const AUDIO_REV = 2;
 /** Volumes par défaut : musique 0,70 × 0,45 = 0,315 (≤ 0,35, E-UX-4 et fichier 24 §2.4). */
 export const DEFAULT_SETTINGS: Settings = {
   locale: "fr", uiScale: 100, volMaster: 70, volMusic: 45, volAmbient: 50, volSfx: 80, volUi: 60, subtitles: true,
-  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, audioRev: AUDIO_REV,
+  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, tutorial: DEFAULT_TUTORIAL, audioRev: AUDIO_REV,
 };
 export const MUSIC_SOURCES = ["synthese", "mixte", "perso"] as const;
 export type MusicSource = (typeof MUSIC_SOURCES)[number];
@@ -65,10 +76,17 @@ function userTracksOf(v: unknown): Record<string, Mood | "off"> {
   return out;
 }
 
+function tutorialOf(v: unknown): TutorialPrefs {
+  if (!v || typeof v !== "object") return { ...DEFAULT_TUTORIAL, seen: [] };
+  const r = v as Record<string, unknown>;
+  const seen = Array.isArray(r["seen"]) ? [...new Set(r["seen"].filter((x): x is string => typeof x === "string" && x.length <= 40))].slice(0, 60) : [];
+  return { done: r["done"] === true, disabled: r["disabled"] === true, hints: r["hints"] === true, seen };
+}
+
 export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings {
   try {
     const raw = storage?.getItem(KEY);
-    if (!raw) return { ...DEFAULT_SETTINGS };
+    if (!raw) return { ...DEFAULT_SETTINGS, tutorial: { ...DEFAULT_TUTORIAL, seen: [] } };
     const s = JSON.parse(raw) as Partial<Settings>;
     return {
       locale: s.locale === "en" ? "en" : "fr",
@@ -83,10 +101,11 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       musicSource: MUSIC_SOURCES.includes(s.musicSource as MusicSource) ? (s.musicSource as MusicSource) : DEFAULT_SETTINGS.musicSource,
       userTracks: userTracksOf(s.userTracks),
       authorMode: s.authorMode === true,
+      tutorial: tutorialOf(s.tutorial),
       audioRev: AUDIO_REV,
     };
   } catch {
-    return { ...DEFAULT_SETTINGS };
+    return { ...DEFAULT_SETTINGS, tutorial: { ...DEFAULT_TUTORIAL, seen: [] } };
   }
 }
 

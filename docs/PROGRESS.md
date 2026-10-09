@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **MIS terminée et fusionnée** (D-134). Direction autonome (D-107). Suivante : TUT (N2). |
-| Tâche | Lancer TUT (fichier 23 §5) sur `claude/v2-tut` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 99 fichiers, 644 tests (`docs/reports/MIS-verify-final.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : TUT sur `claude/v2-tut` (sous-agent neuf), puis R2+ |
+| Phase | **TUT terminée et fusionnée** (D-138). Direction autonome (D-107). Suivante : R2+ (N2). |
+| Tâche | Lancer R2+ (fichier 18 §1 + 23 §4) sur `claude/v2-r2` |
+| Dernier `npm run verify` | 2026-10-09 : code 0 ; 100 fichiers, 660 tests (`docs/reports/TUT-verify-final.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : R2+ sur `claude/v2-r2` (sous-agent neuf, Opus xhigh), puis N3 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

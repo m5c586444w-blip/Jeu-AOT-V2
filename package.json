@@ -52,6 +52,7 @@
     "smoke:ux0": "tsx src/tools/smoke-ux0.ts",
     "smoke:pa": "tsx src/tools/smoke-pa.ts",
     "smoke:mis": "tsx src/tools/smoke-mis.ts",
+    "smoke:tuto": "tsx src/tools/smoke-tuto.ts",
     "map:terrain": "tsx src/tools/map-terrain.ts",
     "captures:map": "tsx src/tools/captures-map.ts"
   },
