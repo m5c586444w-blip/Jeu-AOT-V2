@@ -850,6 +850,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     const frameClock: BattleClock = { acc: 0 };
     let last = performance.now();
     let frames = 0;
+    const opened = performance.now();
     let lastTickUi = -10;
     let ended = false;
     let boxes: { x0: number; y0: number; x1: number; y1: number }[] = [];
@@ -958,6 +959,9 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       root.dataset["tick"] = String(s.tick);
       const vs = view.stats();
       root.dataset["stats"] = `appels ${vs.calls} · triangles ${vs.triangles} · détail ${vs.detail} · foule ${vs.crowd} · repères ${vs.markers}`;
+      // R3 : second temps (corps de base des Titans et des figures proches), mesuré depuis l'ouverture de la bataille.
+      if (vs.corps !== undefined) root.dataset["corps"] = vs.corps;
+      if (vs.corpsDone && root.dataset["corpsS"] === undefined) root.dataset["corpsS"] = ((performance.now() - opened) / 1000).toFixed(2);
       perf.textContent = t("tac.perf", { ms: formatNumber(total), n: Number(root.dataset["unites"] ?? 0) });
       requestAnimationFrame(frame);
     };

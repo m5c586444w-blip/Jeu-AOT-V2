@@ -89,7 +89,7 @@ describe("Titans de R3 : tailles, corps, peaux (R3.1)", () => {
     console.log(`silhouettes de Titans : ${n} paires, recouvrement maximal ${worst.v.toFixed(3)} (${worst.pair}), moyen ${(sum / n).toFixed(3)}`);
   });
 
-  it("deux peaux par taille : même corps, teinte différente ; dents agrandies et jaunies, yeux de tailles inégales", () => {
+  it("deux peaux par taille : même corps, teinte différente ; émail ivoire des dents, yeux de tailles inégales", () => {
     for (const cls of R3_CLASS_IDS) {
       for (const v of ["a", "b", "c"] as const) {
         const pale = titans.get(key(`${cls}_r3${v}`, "pale")) as HumanTitan;
@@ -104,22 +104,16 @@ describe("Titans de R3 : tailles, corps, peaux (R3.1)", () => {
         expect(Math.abs(height(pale) - height(red)), `${cls} ${v} : même corps`).toBeLessThan(0.01 * titanSpec(cls).height);
       }
     }
-    // Dents : la variante « b » de 12 m (×1,5) a des dents plus grandes, relativement à la tête, que la « a ».
-    const teethSpan = (ti: HumanTitan): number => {
-      const g = ti.human.meshes.get("dents")?.geometry;
-      g?.computeBoundingBox();
-      const b = g?.boundingBox;
-      return b ? b.max.x - b.min.x : 0;
-    };
-    const headSpan = (ti: HumanTitan): number => {
-      const g = ti.human.meshes.get("peau_tete")?.geometry;
-      g?.computeBoundingBox();
-      const b = g?.boundingBox;
-      return b ? b.max.x - b.min.x : 1;
-    };
-    const a = titans.get(key("classe_12_r3a", "pale")) as HumanTitan;
-    const b = titans.get(key("classe_12_r3b", "pale")) as HumanTitan;
-    expect(teethSpan(b) / headSpan(b)).toBeGreaterThan((teethSpan(a) / headSpan(a)) * 1.3);
+    // Dents : émail ivoire propre à chaque peau (clair, un peu jaune : rouge ≥ vert ≥ bleu), dans la tête.
+    const enamel = (ti: HumanTitan): { r: number; g: number; b: number } => (ti.human.meshes.get("dents")?.material as unknown as { color: { r: number; g: number; b: number } }).color;
+    const ep = enamel(titans.get(key("classe_12_r3b", "pale")) as HumanTitan);
+    const er = enamel(titans.get(key("classe_12_r3b", "rougeaude")) as HumanTitan);
+    for (const e of [ep, er]) {
+      expect(e.r).toBeGreaterThanOrEqual(e.g);
+      expect(e.g).toBeGreaterThanOrEqual(e.b);
+      expect(e.b).toBeGreaterThan(0.3);
+    }
+    expect(Math.abs(ep.b - er.b)).toBeGreaterThan(0.02);
     // Yeux : la variante « c » de 12 m a l'œil droit plus grand que le gauche (0,85 / 1,2).
     const c = titans.get(key("classe_12_r3c", "pale")) as HumanTitan;
     const eye = c.human.meshes.get("yeux")?.geometry.getAttribute("position");

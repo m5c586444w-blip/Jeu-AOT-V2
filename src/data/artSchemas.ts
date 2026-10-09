@@ -283,7 +283,6 @@ const TitanR3Variant = z
     demarche: z.object({ limp: Unit.optional(), sway: z.number().min(0).optional(), drag: Unit.optional(), jerk: Unit.optional() }).strict().optional(),
     expression: Expressions.optional(),
     cheveux: z.boolean().optional(),
-    dents: z.number().min(1).max(1.8).optional(),
     yeux: z.tuple([z.number().min(0.7).max(1.4), z.number().min(0.7).max(1.4)]).optional(),
   })
   .strict();

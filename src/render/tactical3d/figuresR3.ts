@@ -39,7 +39,6 @@ export function r3TitanSpec(cls: string, variant: TitanVariantId, skin: SkinId):
   if (v.macro) r3.macro = v.macro;
   if (v.posture) r3.posture = v.posture;
   if (v.demarche) r3.demarche = v.demarche;
-  if (v.dents) r3.teeth = v.dents;
   if (v.yeux) r3.eyes = v.yeux;
   out.r3 = r3;
   return out;

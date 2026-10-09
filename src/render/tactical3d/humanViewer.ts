@@ -20,6 +20,8 @@ import { createPost } from "./post";
 import type { PostChain } from "./post";
 import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
+import { R3_SHEETS, buildR3Sheet } from "./r3Sheets";
+import type { R3Sheet } from "./r3Sheets";
 
 /**
  * Page de contrôle du corps de base de R1c (`?proto3d=humain`) : le corps MakeHuman CC0 façonné par paramètres, en rang.
@@ -126,6 +128,15 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
       titans.push(ti);
     });
   }
+  // R3 : planches des Titans à l'échelle, des visages, des tenues et des poses (étiquettes projetées à l'écran).
+  let r3: R3Sheet | null = null;
+  if ((R3_SHEETS as readonly string[]).includes(sheet)) {
+    r3 = buildR3Sheet(sheet, scene, template, eyeTex, detail, t);
+    soldiers.push(...r3.soldiers);
+    titans.push(...r3.titans);
+    ground.scale.setScalar(r3.ground / 60);
+    for (const b of r3.bodies) state.bodies.push({ ...b, minY: 0, buildMs: 0 });
+  }
   const anatomy = q.get("vue") === "anatomie";
   // Contrôle anatomique (R1d) : homme, Titan le plus féminin du jeu (sexe 0,65), femme, corpulence lourde.
   const ANATOMY: { id: string; shape: HumanShape }[] = [
@@ -148,7 +159,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   });
   const camera = new PerspectiveCamera(32, 1, 0.1, 4000);
   const close = q.get("vue") === "visage";
-  const wide = titans.length > 8;
+  const wide = titans.length > 8 && !r3;
   camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : wide ? 26 : 11);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(close ? -0.0 : 0, close ? 1.55 : 1.0, 0);
@@ -160,7 +171,11 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     camera.position.set(x, y, num("recul", 2.3));
     controls.target.set(x, y, 0);
   }
-  if (close && titans.length > 0) {
+  if (r3) {
+    camera.fov = r3.fov;
+    camera.position.copy(r3.eye);
+    controls.target.copy(r3.target);
+  } else if (close && titans.length > 0) {
     // Visages de Titans : deux têtes côte à côte, à partir de `&cadre=` (indice), de trois quarts.
     const f = Math.max(0, Math.min(titans.length - 2, Number(q.get("cadre") ?? "0") || 0));
     const head = (i: number): Vector3 => titans[i]?.joints.tete.getWorldPosition(new Vector3()) ?? new Vector3();
@@ -173,7 +188,15 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     controls.target.x = (1 - (LINEUP.length - 1) / 2) * 1.25;
   }
   controls.update();
-  const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: new Vector3(0, 0, 0), shadowExtent: 20, fogScale: 0.2 });
+  const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: r3 ? r3.target.clone().setY(0) : new Vector3(0, 0, 0), shadowExtent: r3 && sheet === "r3-titans" ? 70 : 20, fogScale: r3 && sheet === "r3-titans" ? 1 : 0.2 });
+  // Étiquettes des planches de R3 : points 3D projetés à l'écran à chaque image.
+  const tags = (r3?.labels ?? []).map((l) => {
+    const el = document.createElement("div");
+    el.className = "p3d-etiquette";
+    el.textContent = l.text;
+    host.append(el);
+    return { el, at: l.at };
+  });
   lighting.useEnvironment(renderer);
   lighting.apply("jour");
   lighting.setShadow(true, 2048);
@@ -204,6 +227,11 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     renderer.toneMappingExposure = lighting.exposure;
     const size = renderer.getDrawingBufferSize(new Vector2());
     post.render(renderer, size.x, size.y);
+    for (const tag of tags) {
+      const v = tag.at.clone().project(camera);
+      tag.el.style.left = `${((v.x + 1) / 2) * host.clientWidth}px`;
+      tag.el.style.top = `${((1 - v.y) / 2) * host.clientHeight}px`;
+    }
     requestAnimationFrame(loop);
   };
   window.__humain3d = state;

@@ -110,6 +110,10 @@ describe("soldats de R3 : cinq tenues (R3.2)", () => {
     const tip = worldPoint(rifle).clone();
     (rifle as unknown as { localToWorld(v: typeof tip): typeof tip }).localToWorld(tip.set(0, 0.5, 0));
     expect(tip.distanceTo(l)).toBeLessThan(p.distanceTo(l));
+    // L'arme vise droit devant (cap de l'unité : +z), à ±15° près, presque à l'horizontale.
+    const dir = tip.clone().sub(p).normalize();
+    expect(Math.abs((Math.atan2(dir.x, dir.z) * 180) / Math.PI), "azimut du tir").toBeLessThan(15);
+    expect(Math.abs((Math.asin(dir.y) * 180) / Math.PI), "hausse du tir").toBeLessThan(20);
     const b = skinnedBounds(s.body);
     expect(Math.abs(b.min.y)).toBeLessThanOrEqual(0.02);
     // Hors du tir et du port d'arme, il retourne à l'épaule.

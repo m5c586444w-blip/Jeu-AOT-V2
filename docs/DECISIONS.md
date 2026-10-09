@@ -1197,3 +1197,36 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | R2+ (sous-agent) | Opus | xhigh | ≈ 290 (avec correctifs) | arrêt de 3 h, relancé ; limite d'usage pendant la passe |
 | Revue R2+ + fusion | Opus | défaut | ≈ 40 | 1 passe |
+
+## 2026-10-09 — D-148 Mandat autonome de trois jours, reprise automatique, conduite des phases
+- **Contexte** : consigne de l'utilisateur (2026-10-09) : continuer trois jours sans intervention, d'après les documents et ses
+  décisions, en reprenant seul au renouvellement de la limite d'usage ; résumé final (images, mécanismes) au bout des trois jours.
+- **Choix** : un déclencheur horaire relance la session si elle s'est arrêtée (`trig_018nKtAKz4veEiUmN3TAaAhJ`, jusqu'au
+  2026-10-12T19:33Z) ; un message unique le 2026-10-12 à 19:35 UTC déclenche le résumé final (`docs/reports/RESUME-3-JOURS.md`
+  et une page publiée). Travail sur la branche imposée à la session, `claude/intelligent-feynman-8ekib4` (poussée après chaque
+  tâche), au lieu de `claude/v2-<phase>` : la session code elle-même les phases (écart à D-107, qui prévoyait un sous-agent par
+  phase) ; les arrêts de revue restent tenus (P9 : revue indépendante avant de continuer, D-106).
+- **Ordre** : R3 → P9 → P10 → PACK (ROADMAP), puis dettes. Un critère qui échoue deux fois passe en dette (24 §4).
+- **Réversible** : oui (supprimer le déclencheur).
+
+## 2026-10-09 — D-149 R3 : périmètre court (21 §8) et choix de figures
+- **Périmètre** : le fichier 21 §8 prime sur le 18 §2 (« garder uniquement ») : Titans de 3 à 15 m, 3 corps × 2 peaux par
+  taille, dents et yeux crédibles, démarche non uniforme ; soldats de Paradis (exploration, Garnison, Police militaire) et de
+  Marley (infanterie, officier) ; poses marche, course, chute, mort, attaque. Hors périmètre : câbles et traînées nouveaux, lames
+  brisées, cheval, huit rôles de soldats, Titans spéciaux nouveaux.
+- **Choix A** (`data/art/figures_r3.json`, `docs/art/REFERENCE.md`) : la variante « a » garde les proportions de sa classe ;
+  la hauteur debout est mesurée sur la peau, posture comprise, et le corps est remis à l'échelle de sa classe ; dents à taille
+  humaine (agrandies, elles perçaient les lèvres : essai écarté après la revue des captures) ; attitude de repos propre à chaque
+  tenue. En bataille : soldats à équipement tridimensionnel = Bataillon d'exploration ; fantassins de Paradis = Garnison ;
+  fantassins des autres factions = infanterie de Marley ; le premier homme de chaque section ennemie = officier.
+- **Mesure des silhouettes** : rendu logiciel face + profil (96 × 176 chacun), à hauteur égale pour les Titans, recouvrement =
+  intersection / union.
+- **Réversible** : oui.
+
+## 2026-10-09 — D-150 R3 : la vue 3D ne doit jamais écrire dans l'état de la simulation
+- **Constat** (lecture du code de R2+) : `posOf` renvoyait l'objet soldat de la simulation quand la position précédente manquait
+  (première image, ou soldat mort) ; la branche « saisi » déplaçait ensuite ce point : la vue pouvait écrire la position d'un
+  soldat saisi dans l'état simulé.
+- **Choix** : `posOf` renvoie toujours une copie. Aucun effet sur les empreintes (la simulation n'est pas modifiée ; le test
+  `r3-etats` vérifie que la bataille lue par le directeur d'états reste identique à la bataille témoin).
+- **Réversible** : non (correctif).

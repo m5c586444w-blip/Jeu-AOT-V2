@@ -274,7 +274,7 @@ export function titanGait(spec: TitanSpec): Gait {
   return spec.r3 ? { ...g, ...spec.r3.posture, ...spec.r3.demarche } : g;
 }
 
-/** Agrandit une primitive autour du centre de chaque côté (dents : une seule masse ; yeux : chaque œil à part). */
+/** Agrandit une primitive autour du centre de chaque côté (yeux : chaque œil à part ; sinon une seule masse). */
 function scalePrimitive(body: HumanBody, prim: string, k: (side: number) => number, split: boolean): void {
   const m = body.meshes.get(prim);
   if (!m) return;
@@ -325,7 +325,7 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   head.vertexColors = spec.hair;
   const hollow = spec.expression === "creuse";
   const eyes = new MeshStandardMaterial({ map: hollow ? null : (opts.eyeMap ?? null), color: hollow ? new Color(MATERIALS.physiques.suie) : new Color(1, 1, 1), roughness: hollow ? 0.9 : 0.12 });
-  // Dents : émail jauni (R3 : teinte de la peau choisie), un peu brillant ; gencives : la langue.
+  // Dents : émail ivoire (R3 : teinte liée à la peau), un peu brillant ; taille humaine (agrandies, elles perçaient les lèvres).
   const teeth = new MeshStandardMaterial({ color: new Color(r3 ? r3.skin.teeth : MATERIALS.physiques.cire), roughness: r3 ? 0.28 : 0.35 });
   const tongue = new MeshStandardMaterial({ color: new Color(MATERIALS.accents[1] ?? MATERIALS.physiques.braise).multiplyScalar(0.7), roughness: 0.5 });
   const hairMat = new MeshStandardMaterial({ color: new Color(MATERIALS.physiques.ecorce).multiplyScalar(0.6), roughness: 0.85 });
@@ -334,7 +334,6 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   const REGION: Record<string, Material> = { peau_tete: head, yeux: eyes, dents: teeth, langue: tongue };
   const body = buildHumanBody(t, { macro: indiv, details, proportions: titanProportions(t, spec), height: H }, (p) => REGION[p] ?? skin, (p) => p !== "pantalon");
   body.group.name = "corps";
-  if (r3?.teeth && r3.teeth !== 1) scalePrimitive(body, "dents", () => r3.teeth ?? 1, false);
   if (r3?.eyes) scalePrimitive(body, "yeux", (side) => (side === 0 ? (r3.eyes?.[0] ?? 1) : (r3.eyes?.[1] ?? 1)), true);
   const group = new Group();
   group.name = `titan-${spec.id}`;

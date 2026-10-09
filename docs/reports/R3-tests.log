@@ -1,0 +1,59 @@
+
+ RUN  v5.0.3 /home/user/Jeu-AOT-V2
+
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > expédition en ville : à chaque pas, pour chaque soldat, fantassin et Titan
+expédition en ville : 1600 pas, 46400 états vérifiés ; soldat:absent 5884, soldat:accroche 21, soldat:course 12336, soldat:garde 691, soldat:marche 1836, soldat:mort 3779, soldat:saisi 153, soldat:vol 13700, titan:attaque 72, titan:debout 5195, titan:marche 2580, titan:saisie 153
+
+ ✓ tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > expédition en ville : à chaque pas, pour chaque soldat, fantassin et Titan 866ms
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > compagnie : à chaque pas, pour chaque soldat, fantassin et Titan
+compagnie : 1200 pas, 220800 états vérifiés ; fantassin:absent 5889, fantassin:attente 49369, fantassin:course 241, fantassin:marche 22887, fantassin:mort 64688, fantassin:tir 926, soldat:accroche 187, soldat:attaque 810, soldat:chute 242, soldat:course 25052, soldat:garde 18392, soldat:marche 2266, soldat:mort 8237, soldat:saisi 188, soldat:vol 16626, titan:attaque 487, titan:chute 128, titan:debout 56, titan:marche 1158, titan:mort 2709, titan:rampe 74, titan:saisie 188
+
+ ✓ tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > compagnie : à chaque pas, pour chaque soldat, fantassin et Titan 3759ms
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > porteur ennemi : à chaque pas, pour chaque soldat, fantassin et Titan
+porteur ennemi : 226 pas, 5625 états vérifiés ; soldat:attaque 1, soldat:course 4740, soldat:garde 683, titan:chute 1, titan:course 199, titan:debout 1
+
+ ✓ tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > porteur ennemi : à chaque pas, pour chaque soldat, fantassin et Titan 128ms
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > couverture : sur les trois batailles, on voit marche, course, chute, mort et attaque
+états vus : fantassin:absent, fantassin:attente, fantassin:course, fantassin:marche, fantassin:mort, fantassin:tir, soldat:absent, soldat:accroche, soldat:attaque, soldat:chute, soldat:course, soldat:garde, soldat:marche, soldat:mort, soldat:saisi, soldat:vol, titan:attaque, titan:chute, titan:course, titan:debout, titan:marche, titan:mort, titan:rampe, titan:saisie
+
+ ✓ tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > couverture : sur les trois batailles, on voit marche, course, chute, mort et attaque 578ms
+ ✓ tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation (R3.3, CR3-07) > chaque état montré a une pose du corps de base 1ms
+stdout | tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > silhouettes distinctes : recouvrement (face + profil, même corps, repos de la tenue) < 85 % deux à deux
+silhouettes de soldats : maximum 0.819 ; exploration/garnison 0.73 | exploration/police 0.82 | exploration/marley_infanterie 0.61 | exploration/marley_officier 0.63 | garnison/police 0.71 | garnison/marley_infanterie 0.60 | garnison/marley_officier 0.60 | police/marley_infanterie 0.60 | police/marley_officier 0.75 | marley_infanterie/marley_officier 0.58
+
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > cinq tenues : trois de Paradis, deux de Marley 2ms
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > silhouettes distinctes : recouvrement (face + profil, même corps, repos de la tenue) < 85 % deux à deux 247ms
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > taille 1,7 m ± 5 % pour chaque tenue (peau mesurée, coiffe exclue) ; pieds au sol à ±2 cm au repos 47ms
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > équipement porté par les os : coiffe à la tête, fusil et sac au dos, manteau au bassin et aux cuisses, étui à la hanche 3ms
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > au tir, le fusil est dans les mains (crosse à la main droite, canon vers la main gauche) ; pieds au sol 9ms
+ ✓ tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : cinq tenues (R3.2) > même graine, même soldat ; sans tenue, le soldat de R1c (cape verte, équipement tridimensionnel) 474ms
+stdout | tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > 30 Titans : 5 classes de 3 à 15 m, 3 corps, 2 peaux ; hauteur debout mesurée à ±5 %, pieds au sol
+hauteurs debout (m) : classe_3_r3a/pale 3.00 | classe_3_r3a/rougeaude 3.00 | classe_3_r3b/pale 3.00 | classe_3_r3b/rougeaude 3.00 | classe_3_r3c/pale 3.00 | classe_3_r3c/rougeaude 3.00 | classe_5_r3a/pale 5.00 | classe_5_r3a/rougeaude 5.00 | classe_5_r3b/pale 5.00 | classe_5_r3b/rougeaude 5.00 | classe_5_r3c/pale 5.00 | classe_5_r3c/rougeaude 5.00 | classe_8_r3a/pale 8.00 | classe_8_r3a/rougeaude 8.00 | classe_8_r3b/pale 8.00 | classe_8_r3b/rougeaude 8.00 | classe_8_r3c/pale 8.00 | classe_8_r3c/rougeaude 8.00 | classe_12_r3a/pale 12.00 | classe_12_r3a/rougeaude 12.00 | classe_12_r3b/pale 12.00 | classe_12_r3b/rougeaude 12.00 | classe_12_r3c/pale 12.00 | classe_12_r3c/rougeaude 12.00 | classe_15_r3a/pale 15.00 | classe_15_r3a/rougeaude 15.00 | classe_15_r3b/pale 15.00 | classe_15_r3b/rougeaude 15.00 | classe_15_r3c/pale 15.00 | classe_15_r3c/rougeaude 15.00
+
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > 30 Titans : 5 classes de 3 à 15 m, 3 corps, 2 peaux ; hauteur debout mesurée à ±5 %, pieds au sol 446ms
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > hauteurs relatives conformes (±5 %) : rapport de chaque Titan au 15 m de même corps 118ms
+stdout | tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > soldats des cinq tenues : attente, marche, course, coupe et tir les pieds au sol (±2 cm)
+soldats, écart maximal au sol (m) : attente 0.0025, marche 0.0032, course 0.0025, frappe 0.0038, tir 0.0064
+
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > soldats des cinq tenues : attente, marche, course, coupe et tir les pieds au sol (±2 cm) 1425ms
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > soldat mort : couché sur le dos, posé au sol, moins de 45 cm de haut ; chute : en l'air, rien sous l'origine 303ms
+stdout | tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > silhouettes distinctes : recouvrement (intersection / union, face + profil, à hauteur égale) < 85 % deux à deux sur les 15 corps
+silhouettes de Titans : 105 paires, recouvrement maximal 0.804 (classe_3_r3a / classe_5_r3a), moyen 0.607
+
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > silhouettes distinctes : recouvrement (intersection / union, face + profil, à hauteur égale) < 85 % deux à deux sur les 15 corps 397ms
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > deux peaux par taille : même corps, teinte différente ; émail ivoire des dents, yeux de tailles inégales 208ms
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > démarche non uniforme : deux individus du même corps marchent différemment ; la boiterie rend le pas dissymétrique 185ms
+ ✓ tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : tailles, corps, peaux (R3.1) > Titan de la simulation : classe la plus proche de sa hauteur, corps et peau tirés de sa silhouette et de son numéro 1ms
+stdout | tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > Titans des 15 corps : debout, marche, course et attaque les pieds au sol (±0,5 % de la hauteur)
+Titans, écart maximal au sol (fraction de la hauteur) : debout 0.106 %, marche 0.261 %, course 0.233 %, attaque 0.035 %
+
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > Titans des 15 corps : debout, marche, course et attaque les pieds au sol (±0,5 % de la hauteur) 3308ms
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > Titan abattu : il s'effondre en 1,6 s (de debout à couché), toujours posé au sol, puis reste à terre 651ms
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > fondu entre états : la nouvelle pose s'installe en 0,3 s d'horloge de bataille ; sans horloge, d'un coup 10ms
+ ✓ tests/render/tactical3d/r3-poses.test.ts > poses de R3 et contact au sol (R3.3, CR3-06) > listes des poses de R3 : marche, course, chute, mort, attaque pour les soldats et les Titans 2ms
+
+ Test Files  4 passed (4)
+      Tests  23 passed (23)
+   Start at  21:04:43
+   Duration  14.27s (tests 92%, transform 6%, import 2%)
+

@@ -48,8 +48,11 @@ function at(x: number, y: number, z: number, s: [number, number, number] = [1, 1
 /**
  * Fantassin (foule instanciée) : uniforme en blanc cassé (teinté par instance : la couleur du camp), peau, bottes, casque ou
  * képi sombre, fusil porté. Aucun uniforme de l'œuvre n'est reproduit : teintes de jeu [A].
+ * R3 : deux silhouettes au loin, comme les tenues de près — Paradis (Garnison : coiffe souple, écharpe rouge, sans sac) et
+ * Marley (casque à bord, sac, bandes molletières claires).
  */
-export function troopGeometry(): BufferGeometry {
+export function troopGeometry(style: "paradis" | "marley" = "marley"): BufferGeometry {
+  if (style === "paradis") return paradisTroop();
   const fb = new FaceBuilder();
   const S = unitSphere(8);
   const cloth = new Color(0xeeeeee);
@@ -93,6 +96,15 @@ export function cannonGeometry(): BufferGeometry {
   return fb.build();
 }
 
+/**
+ * Couleurs de la foule des fantassins (R3) : celles des tenues vues de près (veste de la Garnison, vareuse olive de Marley), pour
+ * que le passage d'une figure en tenue à la foule ne se voie pas dans un rang. Les repères lointains gardent les couleurs de camp.
+ */
+export const UNIFORM_COLORS = {
+  paradis: new Color(0x6a7080),
+  marley: new Color(0x6b6247),
+} as const;
+
 /** Couleurs de camp (teintes de jeu [A]) : Paradis (soldats, fantassins), adversaire, morts. */
 export const SIDE_COLORS = {
   soldat: new Color(0x5f7f63),
@@ -101,3 +113,24 @@ export const SIDE_COLORS = {
   titan: new Color(0xb5786a),
   mort: new Color(0x4a4440),
 } as const;
+
+function paradisTroop(): BufferGeometry {
+  const fb = new FaceBuilder();
+  const S = unitSphere(8);
+  const cloth = new Color(0xeeeeee);
+  const dark = new Color(0x3a352e);
+  const skin = new Color(0xd9b49a);
+  const sash = new Color(0x8e2f2f);
+  for (const s of [1, -1]) {
+    fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), cloth);
+    fb.geometry(new CylinderGeometry(0.06, 0.06, 0.22, 6), at(s * 0.09, 0.11, 0.02), dark);
+    fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), cloth);
+  }
+  fb.geometry(new CylinderGeometry(0.16, 0.14, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.72]), cloth);
+  fb.geometry(new CylinderGeometry(0.165, 0.165, 0.08, 8), at(0, LEG + 0.06, 0, [1, 1, 0.74]), sash);
+  fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), skin);
+  // Coiffe souple, sans bord ; fusil porté à l'épaule.
+  fb.geometry(new CylinderGeometry(0.1, 0.105, 0.07, 8), at(0, LEG + TORSO + NECK + HEAD * 0.92, 0), dark);
+  fb.geometry(new BoxGeometry(0.035, 1.0, 0.035), at(-0.12, LEG + TORSO * 0.75, -0.13, [1, 1, 1], 0.1, 0.35), dark);
+  return fb.build();
+}

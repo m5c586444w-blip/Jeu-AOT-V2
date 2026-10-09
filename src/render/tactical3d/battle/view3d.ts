@@ -32,7 +32,7 @@ import {
 import type { Object3D, Texture } from "three";
 import type { BattleView, CameraMode, PickHit, ViewOptions, ViewOverlay } from "../../battleView";
 import type { TacticalWorldMap } from "../../../sim/tactical/map";
-import type { BattleState, SoldierUnit, TitanUnit } from "../../../sim/tactical/types";
+import type { BattleState, SoldierUnit, TitanUnit, TroopUnit } from "../../../sim/tactical/types";
 import { QUALITY, effectivePixelRatio } from "../quality";
 import { buildSoldier, crowdGeometry, soldierMaterials } from "../soldier";
 import type { Soldier, SoldierMaterials, SoldierPose } from "../soldier";
@@ -42,7 +42,18 @@ import type { Titan, TitanPose } from "../titan";
 import { photoUrl } from "../photoTextures";
 import { buildBattleWorld } from "./world";
 import type { BattleWorld } from "./world";
-import { LOD, SIDE_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "./units";
+import { LOD, SIDE_COLORS, UNIFORM_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "./units";
+import { FigureDirector, SOLDIER_POSE, TITAN_POSE, TROOP_POSE } from "./figureState";
+import { dressMaterials, loadBodyKit } from "../bodies";
+import type { BodyKit } from "../bodies";
+import { buildHumanSoldier } from "../humanSoldier";
+import type { HumanSoldier } from "../humanSoldier";
+import { buildHumanTitan } from "../humanTitan";
+import type { HumanTitan } from "../humanTitan";
+import type { HumanPose } from "../humanAnim";
+import { outfit, outfitForFaction, r3TitanForUnit } from "../figuresR3";
+import type { OutfitId } from "../figuresR3";
+import { titanSkinTexture } from "../textures";
 
 /**
  * Vue 3D de la bataille réelle (R2+). Lecture seule de l'état de la simulation : décor dérivé de la carte (`world.ts`),
@@ -50,7 +61,14 @@ import { LOD, SIDE_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry
  * procédurales de R1 à la taille de la simulation), batteries, impacts, câbles des crochets, sang (violence réaliste).
  * Caméras : stratégique libre (orbite au-dessus du champ de bataille, zoom jusqu'aux soldats) et suivi à la troisième
  * personne. Chargée à la demande (three.js hors du bundle principal).
+ * R3 : un directeur d'états (`figureState.ts`) lit la simulation à chaque pas ; « prêt » montre les figures de R1, puis le corps
+ * de base (MakeHuman, CC0) est chargé : Titans de R3 (classe la plus proche de la hauteur simulée, corps et peau tirés de la
+ * silhouette), soldats en tenue du Bataillon d'exploration, fantassins en tenue de leur faction (officier en tête de section).
+ * Les figures sont construites au fil des images (pas de gel), réattribuées aux unités les plus proches, avec un fondu d'état.
  */
+/** Figures de R3 construites par image (second temps). */
+const BUILD_SOLDIERS_PER_FRAME = 2;
+const BUILD_TITANS_PER_FRAME = 1;
 
 const UP = new Vector3(0, 1, 0);
 const tmpM = new Matrix4();
@@ -75,6 +93,8 @@ const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2,
 interface UnitLayers {
   crowd: InstancedMesh;
   troops: InstancedMesh | null;
+  /** R3 : fantassins de Paradis (silhouette de la Garnison) ; `troops` garde l'autre camp. */
+  troopsA: InstancedMesh | null;
   markers: InstancedMesh;
   blood: InstancedMesh;
   rings: InstancedMesh;
@@ -123,6 +143,18 @@ export class View3D implements BattleView {
   /** Peau des Titans et bouffées de vapeur (toiles procédurales de R1, créées au premier Titan). */
   private skin: Texture | null = null;
   private puff: Texture | null = null;
+  /** R3 : états montrés, corps de base (second temps), Titans et figures en tenue. */
+  private readonly director = new FigureDirector();
+  private kit: BodyKit | null = null;
+  private kitState: "reperes" | "chargement" | "corps" | "repli" = "reperes";
+  private readonly humanTitans = new Map<number, HumanTitan>();
+  private readonly figs = new Map<string, HumanSoldier>();
+  private readonly freeFigs = new Map<OutfitId, HumanSoldier[]>();
+  private readonly skins = new Map<string, Texture>();
+  private officers = new Set<number>();
+  private builtFigs = 0;
+  /** Pour les contrôles (smoke) : pose montrée par figure et état du directeur, au dernier dessin. */
+  private shownLog: { key: string; state: string; pose: string; r3: boolean }[] = [];
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
     this.opts = opts;
@@ -230,11 +262,20 @@ export class View3D implements BattleView {
     const crowd = new InstancedMesh(crowdGeometry(), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
     crowd.name = "foule";
     crowd.castShadow = true;
-    const troops = nT > 0 ? new InstancedMesh(troopGeometry(), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
+    const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
     if (troops) {
       troops.name = "fantassins";
       troops.castShadow = true;
     }
+    const troopsA = nT > 0 ? new InstancedMesh(troopGeometry("paradis"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
+    if (troopsA) {
+      troopsA.name = "fantassins-paradis";
+      troopsA.castShadow = true;
+    }
+    // Officier figuré : le premier homme de chaque section (choix de rendu A).
+    const first = new Map<string, number>();
+    for (const t of st.troops ?? []) if (!first.has(t.section) || t.id < (first.get(t.section) as number)) first.set(t.section, t.id);
+    this.officers = new Set(first.values());
     const nM = nS + nT + st.titans.length + 8;
     const markers = new InstancedMesh(markerGeometry(), new MeshStandardMaterial({ vertexColors: true, roughness: 0.6, emissive: 0x222222 }), nM);
     markers.name = "reperes";
@@ -269,11 +310,12 @@ export class View3D implements BattleView {
     }
     const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, ...smoke, ...goals];
     if (troops) list.push(troops);
+    if (troopsA) list.push(troopsA);
     if (flashes) list.push(flashes);
     if (cannons) list.push(cannons);
     for (const o of list) o.frustumCulled = false;
     this.scene.add(...list);
-    this.layers = { crowd, troops, markers, blood, rings, flashes, cannons, craters, cables, smoke, goals };
+    this.layers = { crowd, troops, troopsA, markers, blood, rings, flashes, cannons, craters, cables, smoke, goals };
     return this.layers;
   }
 
@@ -292,6 +334,75 @@ export class View3D implements BattleView {
       this.titans.set(t.id, ti);
     }
     return ti;
+  }
+
+  /** Second temps (R3) : corps de base chargé après la première image ; repli sur les figures de R1 s'il manque. */
+  private startBodies(): void {
+    if (this.kitState !== "reperes") return;
+    this.kitState = "chargement";
+    void loadBodyKit(window.location.search).then((kit) => {
+      if (!kit.template) {
+        this.kitState = "repli";
+        return;
+      }
+      if (kit.detail) dressMaterials(this.mats, kit.detail);
+      this.kit = kit;
+      this.kitState = "corps";
+    });
+  }
+
+  private humanTitanOf(t: TitanUnit, budget: { titans: number }): HumanTitan | null {
+    const hit = this.humanTitans.get(t.id);
+    if (hit || !this.kit?.template || budget.titans <= 0) return hit ?? null;
+    budget.titans--;
+    const spec = r3TitanForUnit(t.height, t.silhouette, t.id);
+    const sk = spec.r3?.skin;
+    let map = sk ? this.skins.get(sk.id) : undefined;
+    if (sk && !map) {
+      map = titanSkinTexture(this.seed, sk);
+      this.skins.set(sk.id, map);
+    }
+    const ti = buildHumanTitan(this.kit.template, spec, this.seed * 31 + t.id, { skinMap: map ?? null, eyeMap: this.kit.eyeMap, skinNormal: this.kit.detail?.skin ?? null });
+    this.puff ??= puffTexture();
+    setSteamTexture(ti, this.puff);
+    ti.group.traverse((o) => {
+      o.castShadow = true;
+    });
+    this.scene.add(ti.group);
+    this.humanTitans.set(t.id, ti);
+    // La figure de R1 laisse la place.
+    const old = this.titans.get(t.id);
+    if (old) {
+      this.scene.remove(old.group);
+      old.dispose();
+      this.titans.delete(t.id);
+    }
+    return ti;
+  }
+
+  /** Figure en tenue pour une unité (réattribuée d'une image à l'autre ; construite au fil des images). */
+  private figureFor(key: string, id: OutfitId, budget: { soldiers: number }): HumanSoldier | null {
+    const hit = this.figs.get(key);
+    if (hit) return hit;
+    const free = this.freeFigs.get(id)?.pop();
+    if (free) {
+      this.figs.set(key, free);
+      return free;
+    }
+    if (!this.kit?.template || budget.soldiers <= 0) return null;
+    budget.soldiers--;
+    const fig = buildHumanSoldier(this.kit.template, this.seed + 101 * this.builtFigs++, this.mats, { eyeMap: this.kit.eyeMap, outfit: outfit(id) });
+    fig.group.traverse((o) => {
+      o.castShadow = true;
+    });
+    this.scene.add(fig.group);
+    this.figs.set(key, fig);
+    return fig;
+  }
+
+  /** Pour les contrôles : pose montrée par chaque figure et état du directeur (dernier dessin), corps de base chargé ou non. */
+  figures(): { corps: string; list: { key: string; state: string; pose: string; r3: boolean }[] } {
+    return { corps: this.kitState, list: this.shownLog };
   }
 
   frame(points: readonly { x: number; y: number; z: number }[]): void {
@@ -517,16 +628,21 @@ export class View3D implements BattleView {
     const lod = LOD[this.opts.quality];
     const realistic = this.opts.violence === "realiste";
     this.time = st.tick / 20 + alpha / 20;
+    this.director.update(st);
+    this.startBodies();
+    const r3 = this.kitState === "corps";
+    const budget = { soldiers: BUILD_SOLDIERS_PER_FRAME, titans: BUILD_TITANS_PER_FRAME };
+    const log: { key: string; state: string; pose: string; r3: boolean }[] = [];
     if (this.mode === "suivi") this.placeCamera(false);
     const camPos = this.cam.position;
     let crowdN = 0;
     let markerN = 0;
     let bloodN = 0;
     let ringN = 0;
-    const want: { i: number; d: number }[] = [];
+    // Toujours une copie : la vue ne doit jamais écrire dans l'état de la simulation (la branche « saisi » déplace le point).
     const posOf = (s: SoldierUnit, i: number): { x: number; y: number; z: number } => {
       const p = prev?.[i];
-      if (!p || s.mode === "mort") return s;
+      if (!p || s.mode === "mort") return { x: s.x, y: s.y, z: s.z };
       return { x: p.x + (s.x - p.x) * alpha, y: p.y + (s.y - p.y) * alpha, z: p.z + (s.z - p.z) * alpha };
     };
     const headingOf = (key: number, dx: number, dy: number): number => {
@@ -537,15 +653,12 @@ export class View3D implements BattleView {
       return h;
     };
     // Soldats : figures complètes pour les plus proches (plafond par qualité), foule instanciée, repères au loin.
+    // R3 : les fantassins proches deviennent aussi des figures (en tenue de leur faction) une fois le corps de base chargé.
+    type Want = { key: string; d: number; dead: boolean; x: number; y: number; z: number; yaw: number; soldier: number; troop: TroopUnit | null };
+    const want: Want[] = [];
     st.soldiers.forEach((s, i) => {
       const p = posOf(s, i);
       if (s.mode === "fui") return;
-      if (s.mode === "mort") {
-        setInst(L.crowd, crowdN, p.x, 0, p.y, yawOf(this.headings.get(i) ?? 0), 1, true);
-        L.crowd.setColorAt(crowdN++, SIDE_COLORS.mort);
-        if (realistic) setInst(L.blood, bloodN++, p.x + 0.3, 0.02, p.y, 0, 0.9);
-        return;
-      }
       if (s.mode === "saisi" && s.grabbedBy !== null) {
         const t = st.titans[s.grabbedBy];
         if (t) {
@@ -554,11 +667,22 @@ export class View3D implements BattleView {
           p.z = t.height * 0.62;
         }
       }
+      const dead = s.mode === "mort";
       const d = camPos.distanceTo(tmpP.set(p.x, p.z, p.y));
       const tier = tierOf(d, this.opts.quality);
-      if (tier === "detail") want.push({ i, d });
+      if (dead) {
+        if (r3 && tier === "detail") want.push({ key: `s${i}`, d, dead, x: p.x, y: p.y, z: 0, yaw: yawOf(this.headings.get(i) ?? 0), soldier: i, troop: null });
+        else {
+          setInst(L.crowd, crowdN, p.x, 0, p.y, yawOf(this.headings.get(i) ?? 0), 1, true);
+          L.crowd.setColorAt(crowdN++, SIDE_COLORS.mort);
+        }
+        if (realistic) setInst(L.blood, bloodN++, p.x + 0.3, 0.02, p.y, 0, 0.9);
+        return;
+      }
+      const yaw = yawOf(headingOf(i, s.vx, s.vy));
+      if (tier === "detail") want.push({ key: `s${i}`, d, dead, x: p.x, y: p.y, z: p.z, yaw, soldier: i, troop: null });
       else if (tier === "foule") {
-        setInst(L.crowd, crowdN, p.x, p.z, p.y, yawOf(headingOf(i, s.vx, s.vy)));
+        setInst(L.crowd, crowdN, p.x, p.z, p.y, yaw);
         L.crowd.setColorAt(crowdN++, s.wound === "grave" && realistic ? new Color(0xc79a8c) : new Color(1, 1, 1));
       } else {
         setInst(L.markers, markerN, p.x, p.z, p.y, 0, Math.min(3, d / 160));
@@ -567,89 +691,143 @@ export class View3D implements BattleView {
       if (overlay.soldiers.has(i)) setInst(L.rings, ringN++, p.x, Math.max(0.05, p.z - 0) + 0.05, p.y, 0, 1);
       if (realistic && s.wound === "grave") setInst(L.blood, bloodN++, p.x, 0.02, p.y, 0, 0.35);
     });
-    want.sort((a, b) => a.d - b.d);
-    const nDetail = Math.min(lod.detailMax, want.length);
-    while (this.detail.length < nDetail) {
-      const fig = buildSoldier(this.seed + this.detail.length * 7, this.mats);
-      fig.group.traverse((o) => {
-        o.castShadow = true;
-      });
-      this.scene.add(fig.group);
-      this.detail.push(fig);
-    }
-    for (let k = 0; k < this.detail.length; k++) {
-      const fig = this.detail[k] as Soldier;
-      const w = want[k];
-      if (!w || k >= nDetail) {
-        fig.group.visible = false;
-        continue;
-      }
-      const s = st.soldiers[w.i] as SoldierUnit;
-      const p = posOf(s, w.i);
-      if (s.mode === "saisi" && s.grabbedBy !== null) {
-        const t = st.titans[s.grabbedBy];
-        if (t) {
-          p.x = t.x + Math.cos(t.heading) * t.height * 0.12;
-          p.y = t.y + Math.sin(t.heading) * t.height * 0.12;
-          p.z = t.height * 0.62;
-        }
-      }
-      fig.group.visible = true;
-      fig.group.position.set(p.x, p.z, p.y);
-      fig.group.rotation.set(0, yawOf(headingOf(w.i, s.vx, s.vy)), 0);
-      const pose: SoldierPose = s.mode === "sol" ? "sol" : s.mode === "crochet" ? "accroche" : "vol";
-      fig.setPose(pose, this.time + w.i * 0.37);
-    }
-    // Les unités sans figure complète au-delà du plafond passent dans la foule.
-    for (let k = nDetail; k < want.length; k++) {
-      const w = want[k] as { i: number; d: number };
-      const s = st.soldiers[w.i] as SoldierUnit;
-      const p = posOf(s, w.i);
-      setInst(L.crowd, crowdN, p.x, p.z, p.y, yawOf(headingOf(w.i, s.vx, s.vy)));
-      L.crowd.setColorAt(crowdN++, new Color(1, 1, 1));
-    }
-    // Fantassins : foule instanciée teintée par camp, repères au loin, lueur des tirs.
+    // Fantassins : foule instanciée teintée par camp, repères au loin, lueur des tirs ; figures en tenue au plus près (R3).
     let troopN = 0;
+    let troopAN = 0;
     let flashN = 0;
+    const troopInst = (t: TroopUnit): void => {
+      const paradis = t.faction === "fac_paradis";
+      const mesh = paradis ? L.troopsA : L.troops;
+      if (!mesh) return;
+      const n = paradis ? troopAN++ : troopN++;
+      const color = paradis ? UNIFORM_COLORS.paradis : UNIFORM_COLORS.marley;
+      if (t.mode === "mort") {
+        setInst(mesh, n, t.x, 0, t.y, yawOf(t.heading), 1, true);
+        mesh.setColorAt(n, color.clone().multiplyScalar(0.55));
+      } else {
+        setInst(mesh, n, t.x, 0, t.y, yawOf(t.heading));
+        mesh.setColorAt(n, t.wounded && realistic ? color.clone().lerp(new Color(0x8a2a22), 0.3) : color);
+      }
+    };
     if (L.troops && st.troops) {
       for (const t of st.troops) {
         if (t.mode === "fui") continue;
         const color = t.side === "allie" ? SIDE_COLORS.allie : SIDE_COLORS.ennemi;
+        const d = camPos.distanceTo(tmpP.set(t.x, 0, t.y));
         if (t.mode === "mort") {
-          setInst(L.troops, troopN, t.x, 0, t.y, yawOf(t.heading), 1, true);
-          L.troops.setColorAt(troopN++, color.clone().multiplyScalar(0.55));
           if (realistic) setInst(L.blood, bloodN++, t.x + 0.3, 0.02, t.y, 0, 0.85);
+          if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: true, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
+          else troopInst(t);
           continue;
         }
-        const d = camPos.distanceTo(tmpP.set(t.x, 0, t.y));
         if (d > lod.markerM) {
           setInst(L.markers, markerN, t.x, 0, t.y, 0, Math.min(3, d / 160));
           L.markers.setColorAt(markerN++, color);
-        } else {
-          setInst(L.troops, troopN, t.x, 0, t.y, yawOf(t.heading));
-          L.troops.setColorAt(troopN++, t.wounded && realistic ? color.clone().lerp(new Color(0x8a2a22), 0.3) : color);
-        }
+        } else if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: false, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
+        else troopInst(t);
         if (L.flashes && t.shot >= 0 && st.tick - t.shot <= 1) setInst(L.flashes, flashN++, t.x + Math.cos(t.heading) * 0.9, 1.45, t.y + Math.sin(t.heading) * 0.9, 0, 1);
         if (overlay.troops.has(t.id)) setInst(L.rings, ringN++, t.x, 0.05, t.y, 0, 1);
       }
-      L.troops.count = troopN;
-      L.troops.instanceMatrix.needsUpdate = true;
-      if (L.troops.instanceColor) L.troops.instanceColor.needsUpdate = true;
+    }
+    // Figures complètes : les vivants d'abord, puis les plus proches, dans la limite de la qualité.
+    want.sort((a, b) => Number(a.dead) - Number(b.dead) || a.d - b.d);
+    const nDetail = Math.min(lod.detailMax, want.length);
+    const chosen = want.slice(0, nDetail);
+    const overflow = want.slice(nDetail);
+    let shown = 0;
+    const toCrowd = (w: Want): void => {
+      if (w.troop) troopInst(w.troop);
+      else if (w.dead) {
+        setInst(L.crowd, crowdN, w.x, 0, w.y, w.yaw, 1, true);
+        L.crowd.setColorAt(crowdN++, SIDE_COLORS.mort);
+      } else {
+        setInst(L.crowd, crowdN, w.x, w.z, w.y, w.yaw);
+        L.crowd.setColorAt(crowdN++, new Color(1, 1, 1));
+      }
+    };
+    if (r3) {
+      // Figures en tenue : celles des unités sorties du lot retournent à la réserve de leur tenue.
+      const keep = new Set(chosen.map((w) => w.key));
+      for (const [key, fig] of this.figs) {
+        if (keep.has(key)) continue;
+        fig.group.visible = false;
+        this.figs.delete(key);
+        const id = fig.outfit?.id ?? "exploration";
+        this.freeFigs.set(id, [...(this.freeFigs.get(id) ?? []), fig]);
+      }
+      for (const fig of this.detail) fig.group.visible = false;
+      for (const w of chosen) {
+        const officer = w.troop ? this.officers.has(w.troop.id) : false;
+        const id: OutfitId = w.troop ? outfitForFaction(w.troop.faction, officer) : "exploration";
+        const fig = this.figureFor(w.key, id, budget);
+        if (!fig) {
+          toCrowd(w);
+          continue;
+        }
+        const sh = w.troop ? this.director.troop(w.troop.id) : this.director.soldier(w.soldier);
+        const pose = (w.troop ? TROOP_POSE[sh.state as keyof typeof TROOP_POSE] : SOLDIER_POSE[sh.state as keyof typeof SOLDIER_POSE]) as HumanPose | null;
+        if (!pose) {
+          fig.group.visible = false;
+          continue;
+        }
+        fig.group.visible = true;
+        fig.group.position.set(w.x, w.z, w.y);
+        fig.group.rotation.set(0, w.yaw, 0);
+        const phase = (w.troop ? w.troop.id : w.soldier) * 0.37;
+        fig.setPose(pose, this.time + phase, this.time);
+        log.push({ key: w.key, state: sh.state, pose: fig.pose, r3: true });
+        shown++;
+      }
+      for (const w of overflow) toCrowd(w);
+    } else {
+      // Premier temps : figures de R1 pour les soldats (les fantassins restent instanciés).
+      const soldiersWanted = chosen.filter((w) => !w.troop);
+      while (this.detail.length < soldiersWanted.length) {
+        const fig = buildSoldier(this.seed + this.detail.length * 7, this.mats);
+        fig.group.traverse((o) => {
+          o.castShadow = true;
+        });
+        this.scene.add(fig.group);
+        this.detail.push(fig);
+      }
+      for (let k = 0; k < this.detail.length; k++) {
+        const fig = this.detail[k] as Soldier;
+        const w = soldiersWanted[k];
+        if (!w) {
+          fig.group.visible = false;
+          continue;
+        }
+        const s = st.soldiers[w.soldier] as SoldierUnit;
+        fig.group.visible = true;
+        fig.group.position.set(w.x, w.z, w.y);
+        fig.group.rotation.set(0, w.yaw, 0);
+        const pose: SoldierPose = s.mode === "sol" ? "sol" : s.mode === "crochet" ? "accroche" : "vol";
+        fig.setPose(pose, this.time + w.soldier * 0.37);
+        log.push({ key: w.key, state: this.director.soldier(w.soldier).state, pose, r3: false });
+        shown++;
+      }
+      for (const w of [...chosen.filter((x) => x.troop), ...overflow]) toCrowd(w);
+    }
+    for (const [mesh, n] of [[L.troops, troopN], [L.troopsA, troopAN]] as const) {
+      if (!mesh) continue;
+      mesh.count = n;
+      mesh.instanceMatrix.needsUpdate = true;
+      if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     }
     if (L.flashes) {
       L.flashes.count = flashN;
       L.flashes.instanceMatrix.needsUpdate = true;
     }
-    // Titans : figure procédurale à la hauteur de la simulation ; pose selon l'état ; vapeur des corps abattus.
+    // Titans : figure à la hauteur de la simulation (R1 au « prêt », puis corps de base de R3) ; pose selon l'état montré.
     for (const t of st.titans) {
-      const ti = this.titanOf(t);
-      const pr = this.titanPrev.get(t.id);
-      const moving = !!pr && Math.hypot(pr.x - t.x, pr.y - t.y) > 0.01;
-      this.titanPrev.set(t.id, { x: t.x, y: t.y });
+      const sh = this.director.titan(t.id);
+      const human = r3 ? this.humanTitanOf(t, budget) : null;
+      const ti: Titan = human ?? this.titanOf(t);
       ti.group.position.set(t.x, 0, t.y);
       ti.group.rotation.set(0, yawOf(t.heading), 0);
-      const pose: TitanPose = !t.alive ? "abattu" : t.grabbing !== null ? "saisie" : moving ? "marche" : "debout";
-      ti.setPose(pose, this.time + t.id);
+      const pose = TITAN_POSE[sh.state] as TitanPose;
+      ti.setPose(pose, sh.state === "chute" ? sh.since : this.time + t.id, this.time);
+      log.push({ key: `T${t.id}`, state: sh.state, pose: ti.pose, r3: human !== null });
       const d = camPos.distanceTo(tmpP.set(t.x, t.height / 2, t.y));
       if (t.alive && d > lod.markerM * 0.9) {
         setInst(L.markers, markerN, t.x, t.height + 2, t.y, 0, Math.min(5, d / 120));
@@ -657,6 +835,7 @@ export class View3D implements BattleView {
       }
       if (realistic && !t.alive) setInst(L.blood, bloodN++, t.x, 0.02, t.y, 0, t.height * 0.18);
     }
+    this.shownLog = log;
     // Batteries : une pièce par canon, en ligne ; les pièces réduites au silence sont renversées.
     if (L.cannons && st.batteries) {
       let n = 0;
@@ -727,7 +906,7 @@ export class View3D implements BattleView {
       if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     }
     L.blood.visible = realistic;
-    this.counts = { detail: nDetail, crowd: crowdN + troopN, markers: markerN };
+    this.counts = { detail: shown, crowd: crowdN + troopN + troopAN, markers: markerN };
   }
 
   render(): void {
@@ -735,9 +914,12 @@ export class View3D implements BattleView {
     this.renderer.render(this.scene, this.cam);
   }
 
-  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number } {
+  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number; corps: string; corpsDone: boolean } {
     const r = this.renderer.info.render;
-    return { calls: r.calls, triangles: r.triangles, ...this.counts };
+    // Second temps (R3) : repères simplifiés, chargement du corps de base, puis Titans et figures en tenue construits.
+    const nT = this.layers ? this.titans.size + this.humanTitans.size : 0;
+    const corps = this.kitState === "corps" ? `corps de base · Titans ${this.humanTitans.size}/${nT} · figures ${this.figs.size}` : this.kitState === "repli" ? "figures de R1 (repli)" : this.kitState === "chargement" ? "chargement du corps de base" : "repères";
+    return { calls: r.calls, triangles: r.triangles, ...this.counts, corps, corpsDone: this.kitState === "corps" && this.humanTitans.size === nT };
   }
 
   destroy(): void {

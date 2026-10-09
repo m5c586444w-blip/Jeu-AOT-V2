@@ -221,8 +221,9 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
       fingers(p, body, "r", 1.0);
       fingers(p, body, "l", 1.0);
     } else {
-      arm(p, body, "l", -0.4, 0.18, 1.35, 0.4);
-      arm(p, body, "r", -0.4, 0.18, 1.35, 0.4);
+      // Bras rentrés (rotation interne) : la flexion du coude ramène les avant-bras derrière le dos, vers l'axe du corps.
+      arm(p, body, "l", -0.75, 0.04, 1.35, -1.3);
+      arm(p, body, "r", -0.75, 0.04, 1.35, -1.3);
       fingers(p, body, "l", 0.6);
       fingers(p, body, "r", 0.6);
       p.turn("spine_02", X, -0.04);
@@ -320,12 +321,14 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     p.turn("neck_01", Y, 0.7);
     p.lay(qa(X, -Math.PI / 2));
   } else if (pose === "tir") {
-    // Tireur debout, fusil épaulé : jambe gauche en avant, buste de trois quarts, main droite à la joue, gauche sous le canon.
+    // Tireur debout, fusil épaulé : jambe gauche en avant, main droite à la joue, gauche sous le canon. Le corps se tourne de
+    // trois quarts sur le bassin (épaule gauche en avant) pour que l'arme vise droit devant, dans le cap de l'unité.
+    p.turn("pelvis", Y, -0.85);
     legs(p, "l", 0.25, 0.18, 0.05, 0.08);
     legs(p, "r", -0.18, 0.1, -0.08, 0.12);
-    p.turn("spine_02", Y, -0.35).turn("spine_01", X, 0.06);
-    arm(p, body, "r", 1.05, 0.55, 2.1);
-    arm(p, body, "l", 1.35, -0.05, 0.55);
+    p.turn("spine_02", Y, -0.2).turn("spine_01", X, 0.06);
+    arm(p, body, "r", 1.35, 0.15, 2.3);
+    arm(p, body, "l", 0.9, -0.35, 0.45);
     fingers(p, body, "l", 0.9);
     fingers(p, body, "r", 1.0);
     p.turn("head", Y, 0.3).turn("head", X, 0.12).turn("head", Z, -0.12);

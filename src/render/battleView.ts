@@ -56,7 +56,7 @@ export interface BattleView {
   follow(x: number, y: number, z: number, heading: number, height: number): void;
   setOptions(o: ViewOptions): void;
   /** Mesures : appels de dessin, triangles, unités par niveau de détail. */
-  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number };
+  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number; corps?: string; corpsDone?: boolean };
   /** Zoom (1 = cadrage d'ouverture), pour l'affichage et les contrôles. */
   readonly zoomLevel: number;
   destroy(): void;

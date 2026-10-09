@@ -133,3 +133,17 @@
 .p3d-carte img, .p3d-carte .p3d-vide { width: 100%; aspect-ratio: 16 / 9; display: block; background: #2a2723; }
 .p3d-carte p { margin: 0.25rem 0 0; font-family: var(--f-machine); font-size: 0.75rem; }
 .p3d-tampon { display: inline-block; border: 2px solid #8a3b2a; color: #8a3b2a; padding: 0 0.3rem; transform: rotate(-3deg); font-family: var(--f-machine); font-size: 0.7rem; text-transform: uppercase; }
+
+/* R3 : étiquettes des planches de figures (centrées sous le point 3D ; `.p3d` est fixe, donc leur repère). */
+.p3d-etiquette {
+  position: absolute;
+  transform: translate(-50%, 0);
+  padding: 0.1rem 0.35rem;
+  font: 600 0.8rem/1.2 var(--police-texte, serif);
+  color: #f3ead8;
+  background: rgba(30, 26, 20, 0.62);
+  border-radius: 2px;
+  white-space: pre;
+  text-align: center;
+  pointer-events: none;
+}

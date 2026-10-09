@@ -71,8 +71,7 @@ export interface TitanR3 {
   macro?: { age?: number; weight?: number; muscle?: number };
   posture?: { lean?: number; drop?: number; armOut?: readonly [number, number]; kneeBend?: number; headRoll?: number };
   demarche?: { limp?: number; sway?: number; drag?: number; jerk?: number };
-  /** Taille des dents (1 : humaine) ; taille de chaque œil [gauche, droit]. */
-  teeth?: number;
+  /** Taille de chaque œil [gauche, droit] (1 : humaine). */
   eyes?: readonly [number, number];
   /** Peau : teinte mêlée à celle de la classe, marbrures (texture), couleur des dents. */
   skin: { id: "pale" | "rougeaude"; tint: number; mix: number; marbling: number; teeth: number };
