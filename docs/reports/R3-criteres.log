@@ -1,0 +1,37 @@
+
+ RUN  v5.0.3 /home/claude/Jeu-AOT-V2
+
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation, à chaque pas > P4, ville, 4 Titans dont un anormal
+P4, ville, 4 Titans dont un anormal : 2400 pas, 18 unités, lots de foule au plus 4 (figures complètes au plus 48)
+
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation, à chaque pas > P4, forêt, grands Titans
+P4, forêt, grands Titans : 2156 pas, 24 unités, lots de foule au plus 3 (figures complètes au plus 48)
+
+stdout | tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : tenues et poses > foule : 5 tenues distinctes deux à deux (silhouette colorée < 85 %), dans chaque pose
+foule, recouvrement coloré (%) : bataillon~garnison 4 (forme 36) | bataillon~brigade 4 (forme 35) | bataillon~marley_infanterie 4 (forme 36) | bataillon~marley_officier 6 (forme 41) | garnison~brigade 20 (forme 69) | garnison~marley_infanterie 35 (forme 97) | garnison~marley_officier 26 (forme 69) | brigade~marley_infanterie 22 (forme 69) | brigade~marley_officier 11 (forme 64) | marley_infanterie~marley_officier 28 (forme 69) ; pire, toutes poses : 37.5 %
+
+stdout | tests/render/tactical3d/r3-soldats.test.ts > soldats de R3 : tenues et poses > figures complètes : pièces de chaque tenue ; 5 tenues distinctes (silhouette colorée < 85 %)
+figures complètes, recouvrement coloré (%) : bataillon~garnison 8 | bataillon~brigade 9 | bataillon~marley_infanterie 8 | bataillon~marley_officier 16 | garnison~brigade 31 | garnison~marley_infanterie 41 | garnison~marley_officier 14 | brigade~marley_infanterie 31 | brigade~marley_officier 6 | marley_infanterie~marley_officier 18
+
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation, à chaque pas > R2+, compagnies (≈ 400 unités)
+R2+, compagnies (≈ 400 unités) : 1330 pas, 390 unités, lots de foule au plus 15 (figures complètes au plus 48)
+
+stdout | tests/render/tactical3d/r3-etats.test.ts > états montrés = états de la simulation, à chaque pas > chaque état principal apparaît dans l'échantillon
+Titans : repos, course, marche, saisie, devore, rampant, chute, abattu ; soldats : course, mort, saisi, accroche, vol, marche, garde, chute, coupe ; fantassins : tir, marche, attente, mort
+
+stdout | tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : catalogue et variantes > hauteur debout mesurée sur la peau à ±5 % : 15 corps aux hauteurs des classes, et à une hauteur de simulation (6,4 m)
+hauteurs : classe_3_trapu 3.00/3 | classe_3_echalas 3.00/3 | classe_3_difforme 3.00/3 | classe_5_trapu 5.00/5 | classe_5_echalas 5.00/5 | classe_5_difforme 5.00/5 | classe_8_trapu 8.00/8 | classe_8_echalas 8.00/8 | classe_8_difforme 8.00/8 | classe_12_trapu 12.00/12 | classe_12_echalas 12.00/12 | classe_12_difforme 12.00/12 | classe_15_trapu 15.00/15 | classe_15_echalas 15.00/15 | classe_15_difforme 15.00/15
+
+stdout | tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : catalogue et variantes > silhouettes distinctes (< 85 %) : chaque paire de variantes d'une classe, chaque paire de classes d'une même variante
+recouvrements (%) : classe_3_trapu~classe_3_echalas 64 | classe_3_trapu~classe_3_difforme 74 | classe_3_echalas~classe_3_difforme 57 | classe_5_trapu~classe_5_echalas 59 | classe_5_trapu~classe_5_difforme 71 | classe_5_echalas~classe_5_difforme 51 | classe_8_trapu~classe_8_echalas 56 | classe_8_trapu~classe_8_difforme 72 | classe_8_echalas~classe_8_difforme 50 | classe_12_trapu~classe_12_echalas 48 | classe_12_trapu~classe_12_difforme 62 | classe_12_echalas~classe_12_difforme 40 | classe_15_trapu~classe_15_echalas 44 | classe_15_trapu~classe_15_difforme 63 | classe_15_echalas~classe_15_difforme 39 | classe_3_trapu~classe_5_trapu 81 | classe_3_trapu~classe_8_trapu 66 | classe_3_trapu~classe_12_trapu 62 | classe_3_trapu~classe_15_trapu 53 | classe_5_trapu~classe_8_trapu 78 | classe_5_trapu~classe_12_trapu 73 | classe_5_trapu~classe_15_trapu 62 | classe_8_trapu~classe_12_trapu 84 | classe_8_trapu~classe_15_trapu 76 | classe_12_trapu~classe_15_trapu 76 | classe_3_echalas~classe_5_echalas 70 | classe_3_echalas~classe_8_echalas 51 | classe_3_echalas~classe_12_echalas 46 | classe_3_echalas~classe_15_echalas 36 | classe_5_echalas~classe_8_echalas 64 | classe_5_echalas~classe_12_echalas 63 | classe_5_echalas~classe_15_echalas 41 | classe_8_echalas~classe_12_echalas 66 | classe_8_echalas~classe_15_echalas 60 | classe_12_echalas~classe_15_echalas 57 | classe_3_difforme~classe_5_difforme 77 | classe_3_difforme~classe_8_difforme 61 | classe_3_difforme~classe_12_difforme 53 | classe_3_difforme~classe_15_difforme 44 | classe_5_difforme~classe_8_difforme 72 | classe_5_difforme~classe_12_difforme 65 | classe_5_difforme~classe_15_difforme 50 | classe_8_difforme~classe_12_difforme 71 | classe_8_difforme~classe_15_difforme 68 | classe_12_difforme~classe_15_difforme 61 ; pire 84.3 %
+
+stdout | tests/render/tactical3d/r3-titans.test.ts > Titans de R3 : catalogue et variantes > dévoration : la main droite monte à la bouche ; nuque tranchée : entaille sombre ; moignons ; vapeur
+main → tête : marche 4.10 m, dévoration 1.39 m (hauteur 8 m)
+
+
+ Test Files  3 passed (3)
+      Tests  14 passed (14)
+   Start at  16:30:12
+   Duration  11.89s (tests 83%, transform 12%, import 4%)
+
+code 0
