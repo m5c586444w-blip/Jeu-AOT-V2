@@ -1,6 +1,7 @@
 import { Quaternion, Vector3 } from "three";
 import type { Bone, SkinnedMesh } from "three";
 import type { HumanBody } from "./humanBase";
+import { TITAN_FALL_S } from "./battle/figureState";
 
 /**
  * Animations de R1c, écrites par le projet sur le squelette CC0 de MakeHuman (aucune animation externe : MakeHuman ne
@@ -37,8 +38,7 @@ export const TITAN_ANIMS: readonly HumanPose[] = ["marche", "course", "debout", 
  */
 export const R3_SOLDIER_POSES: readonly HumanPose[] = ["attente", "marche", "course", "chute", "mort", "frappe", "tir"];
 export const R3_TITAN_POSES: readonly HumanPose[] = ["debout", "marche", "course", "attaque", "effondre", "abattu"];
-/** Durée de l'effondrement d'un Titan abattu (s). */
-export const TITAN_FALL_S = 1.6;
+export { TITAN_FALL_S };
 
 /** Allure (radians, radians par seconde) ; les valeurs des Titans viennent de `data/art/titans.json`. */
 export interface Gait {
@@ -64,6 +64,8 @@ export interface Gait {
   sway?: number;
   drag?: number;
   jerk?: number;
+  /** R3, soldats : attitude au repos (bras le long du corps, arme au pied, port d'arme, mains dans le dos). */
+  stance?: "bras" | "arme" | "port" | "dos";
 }
 
 export const SOLDIER_GAIT: Gait = { stride: 0.42, walkRate: 5.4, armSwing: 0.38, shoulderOut: 0.12, headTilt: 0, hunch: 0, mouth: 0 };
@@ -186,23 +188,49 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
   const w = Math.sin(t * 2.2 + phase);
   // Voussure (Titans) : pas pour un corps couché, qu'elle soulèverait du sol.
   const lying = pose === "abattu" || pose === "allonge" || pose === "mort";
-  const hunch = lying ? 0 : g.hunch;
+  // Effondrement : la voussure et la posture s'effacent à mesure que le corps bascule (fin : à plat, comme « abattu »).
+  const fallTip = pose === "effondre" ? Math.max(0, Math.min(1, (t / TITAN_FALL_S - 0.3) / 0.7)) : 0;
+  const upright = lying ? 0 : 1 - fallTip;
+  const hunch = g.hunch * upright;
   p.turn("spine_01", X, hunch * 0.4).turn("spine_02", X, hunch * 0.35).turn("spine_03", X, hunch * 0.25);
   p.turn("neck_01", X, -hunch * 0.5);
   p.turn("jaw", X, 0.42 * g.mouth);
   // Posture individuelle (R3) : buste penché sur le côté, épaule tombante, tête de travers ; pas pour un corps couché.
   const [outL, outR] = g.armOut ?? [0, 0];
-  if (!lying) {
-    const lean = g.lean ?? 0;
+  if (upright > 0) {
+    const lean = (g.lean ?? 0) * upright;
     p.turn("spine_01", Z, lean * 0.45).turn("spine_02", Z, lean * 0.35).turn("neck_01", Z, -lean * 0.4);
-    const drop = g.drop ?? 0;
+    const drop = (g.drop ?? 0) * upright;
     if (drop > 0) p.turn("clavicle_l", Z, -drop);
     else if (drop < 0) p.turn("clavicle_r", Z, -drop);
-    p.turn("head", Z, g.headRoll ?? 0);
+    p.turn("head", Z, (g.headRoll ?? 0) * upright);
   }
   const kb = g.kneeBend ?? 0;
   let ground = true;
-  if (pose === "attente" || pose === "debout" || pose === "buste") {
+  if (pose === "attente" && g.stance && g.stance !== "bras") {
+    // Repos d'un soldat en tenue (R3) : arme au pied (main droite sur le canon), port d'arme (fusil en travers de la poitrine),
+    // mains dans le dos (officier).
+    if (g.stance === "arme") {
+      arm(p, body, "r", 0.12, 0.32, 0.55);
+      arm(p, body, "l", 0.05, g.shoulderOut * 0.5, 0.35 + 0.02 * w);
+      fingers(p, body, "r", 1.0);
+      fingers(p, body, "l", 0.35);
+    } else if (g.stance === "port") {
+      arm(p, body, "r", 0.35, 0.12, 1.05);
+      arm(p, body, "l", 0.75, -0.42, 1.95);
+      fingers(p, body, "r", 1.0);
+      fingers(p, body, "l", 1.0);
+    } else {
+      arm(p, body, "l", -0.4, 0.18, 1.35, 0.4);
+      arm(p, body, "r", -0.4, 0.18, 1.35, 0.4);
+      fingers(p, body, "l", 0.6);
+      fingers(p, body, "r", 0.6);
+      p.turn("spine_02", X, -0.04);
+    }
+    p.turn("spine_03", X, 0.015 * w);
+    legs(p, "l", 0, 0.03, 0.01, g.stance === "dos" ? 0.08 : 0.04);
+    legs(p, "r", 0, 0.03, 0.01, g.stance === "dos" ? 0.08 : 0.04);
+  } else if (pose === "attente" || pose === "debout" || pose === "buste") {
     // Repos : bras le long du corps, coudes souples, respiration ; la tête suit son inclinaison.
     arm(p, body, "l", 0.05, g.shoulderOut * 0.5 + outL, 0.35 + 0.02 * w);
     arm(p, body, "r", 0.05, g.shoulderOut * 0.5 + outR, 0.35 - 0.02 * w);
@@ -257,14 +285,15 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     // Titan abattu qui tombe : genoux qui cèdent, buste qui plonge, puis le corps bascule face contre terre (t : s depuis le coup).
     ground = false;
     const u = Math.max(0, Math.min(1, t / TITAN_FALL_S));
-    const knees = Math.min(1, u * 1.8);
-    legs(p, "l", 0.55 * knees, 1.25 * knees, 0.6 * knees);
-    legs(p, "r", 0.45 * knees, 1.1 * knees, 0.55 * knees);
-    p.turn("spine_01", X, 0.35 * knees);
-    arm(p, body, "l", 0.4 * u, 0.4 * u, 0.3);
-    arm(p, body, "r", 0.3 * u, 0.6 * u, 0.25);
-    p.turn("neck_01", Y, 0.6 * u).turn("jaw", X, 0.3 * u);
     const tip = Math.max(0, Math.min(1, (u - 0.3) / 0.7));
+    // Les genoux cèdent d'abord, puis les jambes se tendent pendant que le corps bascule (fin : la pose « abattu »).
+    const knees = Math.min(1, u * 1.8) * (1 - tip);
+    legs(p, "l", 0.55 * knees + 0.05 * tip, 1.25 * knees + 0.15 * tip, 0.6 * knees - 1.2 * tip, 0.18 * tip);
+    legs(p, "r", 0.45 * knees - 0.02 * tip, 1.1 * knees + 0.05 * tip, 0.55 * knees - 1.2 * tip, 0.1 * tip);
+    p.turn("spine_01", X, 0.35 * knees);
+    arm(p, body, "l", 0.4 * u * (1 - tip), 0.4 * u + 0.7 * tip, 0.3 - 0.2 * tip);
+    arm(p, body, "r", 0.3 * u * (1 - tip), 0.6 * u + 1.9 * tip, 0.25 - 0.15 * tip);
+    p.turn("neck_01", Y, 0.6 * u + 0.4 * tip).turn("jaw", X, 0.3 * u);
     p.lay(qa(X, (Math.PI / 2) * tip * tip * (3 - 2 * tip)));
   } else if (pose === "chute") {
     // Soldat qui tombe (câble perdu, gaz vide) ou tenu par un Titan : membres battants, dos cambré, tête rejetée.

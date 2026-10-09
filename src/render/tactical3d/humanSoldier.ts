@@ -4,8 +4,10 @@ import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js
 import type { Material, Texture } from "three";
 import { buildHumanBody } from "./humanBase";
 import type { HumanBody, HumanTemplate } from "./humanBase";
-import { SOLDIER_GAIT, poseHuman } from "./humanAnim";
+import { PoseFader, SOLDIER_GAIT, poseHuman } from "./humanAnim";
 import type { HumanPose } from "./humanAnim";
+import type { Outfit } from "./figuresR3";
+import { coatPanel, outfitGear, outfitMaterials } from "./humanOutfit";
 import { derive, range, seeded } from "./rng";
 import type { SoldierMaterials } from "./soldier";
 
@@ -17,6 +19,8 @@ import type { SoldierMaterials } from "./soldier";
  * - Équipement de R1 : réservoir de gaz au bas du dos, lanceurs aux hanches (le droit est le départ du câble), fourreaux de
  *   lames aux cuisses, bretelles et ceinture, lames tenues en main, cape aux épaules (elle flotte en vol).
  * Aucun uniforme ni emblème de l'œuvre n'est reproduit.
+ * R3 : `opts.outfit` habille le soldat d'une des cinq tenues (`data/art/figures_r3.json`) : couleurs, cape ou manteau, coiffe,
+ * équipement tridimensionnel ou fusil, sac, écharpe, baudrier, étui. Sans tenue, le soldat de R1c est inchangé.
  */
 export interface HumanSoldier {
   group: Group;
@@ -24,7 +28,10 @@ export interface HumanSoldier {
   /** Départ du câble (lanceur de la hanche droite). */
   launcher: Object3D;
   pose: HumanPose;
-  setPose(p: HumanPose, t: number): void;
+  /** Tenue de R3 (absente : soldat de R1c). */
+  outfit: Outfit | null;
+  /** `clock` (s de bataille, R3) : fondu entre états. */
+  setPose(p: HumanPose, t: number, clock?: number): void;
   dispose(): void;
 }
 
@@ -36,7 +43,10 @@ export interface SoldierLook {
 }
 
 /** Hauteur demandée par le banc (1,7 m) ou tirée de la graine. */
-export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number } = {}): HumanSoldier {
+export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: Outfit } = {}): HumanSoldier {
+  const outfit = opts.outfit ?? null;
+  const om = outfit ? outfitMaterials(mats, outfit) : null;
+  const odm = outfit ? outfit.odm : true;
   const rand = seeded(derive(seed, 61));
   const female = opts.gender !== undefined ? opts.gender < 0.5 : rand() < 0.3;
   const gender = opts.gender ?? (female ? range(rand, 0, 0.2) : range(rand, 0.8, 1));
@@ -54,15 +64,18 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   const head = skin.clone();
   head.vertexColors = true;
   owned.push(head);
+  const jacket = om ? (om.coat ?? om.jacket) : mats.jacket;
+  const trousers = om ? om.trousers : mats.trousers;
+  const boots = om ? om.boots : mats.boots;
   const REGION: Record<string, Material> = {
     peau_tete: head,
     peau_mains: skin,
-    peau_torse: mats.jacket,
-    peau_bras: mats.jacket,
-    peau_bassin: mats.trousers,
-    peau_cuisses: mats.trousers,
-    peau_jambes: mats.boots,
-    peau_pieds: mats.boots,
+    peau_torse: jacket,
+    peau_bras: jacket,
+    peau_bassin: trousers,
+    peau_cuisses: trousers,
+    peau_jambes: om?.puttees ?? boots,
+    peau_pieds: boots,
     yeux: eyes,
     dents: teeth,
     langue: skin,
@@ -70,7 +83,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   const body = buildHumanBody(
     t,
     {
-      macro: { gender, age: range(rand, 0.5, 0.62), muscle: range(rand, 0.55, 0.85), weight: range(rand, 0.35, 0.58) },
+      macro: { gender, age: range(rand, ...(outfit?.corpulence.age ?? [0.5, 0.62])), muscle: range(rand, ...(outfit?.corpulence.muscle ?? [0.55, 0.85])), weight: range(rand, ...(outfit?.corpulence.weight ?? [0.35, 0.58])) },
       height,
       // Bottes : orteils fondus, tige un peu plus épaisse que la jambe.
       // Vêtements : le relief anatomique s'estompe sous l'étoffe (bords de région fixes : pas de fente).
@@ -123,14 +136,29 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   };
   const torsoPrims = ["peau_torse", "peau_bassin"];
   band(torsoPrims, new Vector3(0, pelvis.y + 0.03 * k, 0), new Vector3(0, 1, 0), 0.045);
-  band(["peau_torse"], new Vector3(0, J("spine_03").y - 0.02 * k, 0), new Vector3(0, 1, 0), 0.035);
-  for (const s of [1, -1]) band(["peau_torse"], new Vector3(s * 0.08 * k, (neck.y + pelvis.y) / 2 + 0.06 * k, 0), new Vector3(s * 0.62, 1, 0).normalize(), 0.032);
-  for (const [side, s] of [
-    ["l", 1],
-    ["r", -1],
-  ] as const) {
-    const hip = J(`thigh_${side}`);
-    for (const dy of [0.1, 0.24]) band(["peau_cuisses"], new Vector3(hip.x, hip.y - dy * k, hip.z), new Vector3(0, 1, 0), 0.028, s);
+  if (odm) {
+    band(["peau_torse"], new Vector3(0, J("spine_03").y - 0.02 * k, 0), new Vector3(0, 1, 0), 0.035);
+    for (const s of [1, -1]) band(["peau_torse"], new Vector3(s * 0.08 * k, (neck.y + pelvis.y) / 2 + 0.06 * k, 0), new Vector3(s * 0.62, 1, 0).normalize(), 0.032);
+    for (const [side, s] of [
+      ["l", 1],
+      ["r", -1],
+    ] as const) {
+      const hip = J(`thigh_${side}`);
+      for (const dy of [0.1, 0.24]) band(["peau_cuisses"], new Vector3(hip.x, hip.y - dy * k, hip.z), new Vector3(0, 1, 0), 0.028, s);
+    }
+  } else if (outfit?.sac) {
+    // Bretelles du sac (infanterie de Marley).
+    for (const s of [1, -1]) band(["peau_torse"], new Vector3(s * 0.08 * k, (neck.y + pelvis.y) / 2 + 0.06 * k, 0), new Vector3(s * 0.62, 1, 0).normalize(), 0.03);
+  }
+  // Baudrier (officier) : de l'épaule gauche à la hanche droite.
+  if (outfit?.baudrier) band(["peau_torse"], new Vector3(0.06 * k, (neck.y + pelvis.y) / 2 + 0.05 * k, 0), new Vector3(0.62, 1, 0).normalize(), 0.034);
+  // Écharpe (Garnison) : large bande d'étoffe sous la ceinture de l'équipement.
+  if (om?.sash) {
+    const m = bodyBand(body, torsoPrims, new Vector3(0, pelvis.y + 0.1 * k, 0), new Vector3(0, 1, 0), 0.075 * k, 0.012 * k, om.sash);
+    if (m) {
+      body.group.add(m);
+      straps.push(m);
+    }
   }
   // Col, poignets, revers des bottes, ourlet de la veste : bandes posées sur la couture entre deux régions (elles couvrent le
   // raccord en dents de scie des triangles).
@@ -141,28 +169,32 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       straps.push(m);
     }
   };
-  seam("peau_torse", "peau_tete", 0.035, mats.jacket, 0.009, 0.004);
-  seam("peau_torse", "peau_bassin", 0.03, mats.jacket, 0.008, 0);
+  seam("peau_torse", "peau_tete", 0.035, jacket, 0.009, 0.004);
+  seam("peau_torse", "peau_bassin", 0.03, jacket, 0.008, 0);
   for (const s of [1, -1]) {
-    seam("peau_bras", "peau_mains", 0.035, mats.jacket, 0.007, 0, s);
-    seam("peau_jambes", "peau_cuisses", 0.045, mats.boots, 0.008, 0, s);
+    seam("peau_bras", "peau_mains", 0.035, jacket, 0.007, 0, s);
+    seam("peau_jambes", "peau_cuisses", 0.045, om?.puttees ?? boots, 0.008, 0, s);
   }
   // Réservoir de gaz au bas du dos, lanceurs aux hanches.
-  const tank = piece(gear("reservoir"), mats.steel, "reservoir");
-  attach("pelvis", tank, new Vector3(0, pelvis.y + 0.07 * k, back - 0.065 * k));
   const launcher = new Object3D();
   launcher.name = "lanceur";
   attach("pelvis", launcher, new Vector3(-hipHalf - 0.045 * k, pelvis.y + 0.01 * k, pelvis.z + 0.02 * k));
-  launcher.add(piece(gear("lanceur"), mats.steel, "lanceur"));
-  const left = piece(gear("lanceur"), mats.steel, "lanceur");
-  left.scale.x *= -1;
-  attach("pelvis", left, new Vector3(hipHalf + 0.045 * k, pelvis.y + 0.01 * k, pelvis.z + 0.02 * k));
+  if (odm) {
+    const tank = piece(gear("reservoir"), mats.steel, "reservoir");
+    attach("pelvis", tank, new Vector3(0, pelvis.y + 0.07 * k, back - 0.065 * k));
+    launcher.add(piece(gear("lanceur"), mats.steel, "lanceur"));
+    const left = piece(gear("lanceur"), mats.steel, "lanceur");
+    left.scale.x *= -1;
+    attach("pelvis", left, new Vector3(hipHalf + 0.045 * k, pelvis.y + 0.01 * k, pelvis.z + 0.02 * k));
+  }
   // Fourreaux de lames sur l'extérieur des cuisses ; lames dans le prolongement de l'avant-bras.
   const blades: Object3D[] = [];
-  for (const [side, s] of [
-    ["l", 1],
-    ["r", -1],
-  ] as const) {
+  for (const [side, s] of odm
+    ? ([
+        ["l", 1],
+        ["r", -1],
+      ] as const)
+    : []) {
     const hip = J(`thigh_${side}`);
     const thighHalf = Math.abs((bounds.get("peau_cuisses")?.maxX ?? 0.2) - Math.abs(hip.x));
     const sh = piece(gear("fourreau"), mats.leather, "fourreau");
@@ -182,36 +214,140 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   capePivot.name = "cape";
   attach("spine_03", capePivot, new Vector3(0, neck.y - 0.01 * k, chestBack - 0.02 * k));
   const shoulderHalf = Math.max(Math.abs(J("upperarm_l").x), 0.15) + 0.04 * k;
-  const cape = new Mesh(capeGeometry(shoulderHalf, (neck.y - pelvis.y) * 1.55, 0.09 * k, seed), mats.cape);
-  cape.name = "cape";
-  cape.castShadow = true;
-  capePivot.add(cape);
-  // Cheveux : couleur sur le crâne avec une lisière fondue, et une coque d'épaisseur au centre.
+  const capeMat = outfit ? om?.cape : mats.cape;
+  const cape = capeMat ? new Mesh(capeGeometry(shoulderHalf, (neck.y - pelvis.y) * 1.55, 0.09 * k, seed), capeMat) : null;
+  if (cape) {
+    cape.name = "cape";
+    cape.castShadow = true;
+    capePivot.add(cape);
+  }
+  const extra: BufferGeometry[] = [];
+  // R3 : pans de manteau (Police militaire, officier de Marley) : dos au bassin, devants aux cuisses (ils suivent les jambes).
+  if (outfit?.manteau && om?.coat) {
+    const waist = pelvis.y + 0.06 * k;
+    const len = waist * outfit.manteau.longueur;
+    const rx = hipHalf + 0.035 * k;
+    const rz = Math.max(0.12 * k, (bounds.get("peau_bassin")?.maxZ ?? 0.1) - (bounds.get("peau_bassin")?.minZ ?? -0.1)) * 0.5 + 0.035 * k;
+    const cz = ((bounds.get("peau_bassin")?.maxZ ?? 0.1) + (bounds.get("peau_bassin")?.minZ ?? -0.1)) / 2;
+    const panels: [string, number, number][] = [
+      ["pelvis", Math.PI * 0.55, Math.PI * 1.45],
+      ["thigh_l", Math.PI * 0.12, Math.PI * 0.58],
+      ["thigh_r", Math.PI * 1.42, Math.PI * 1.88],
+    ];
+    for (const [bone, a0, a1] of panels) {
+      const g = coatPanel(rx, rz, len, a0, a1, 1.3);
+      extra.push(g);
+      const m = new Mesh(g, om.coat);
+      m.name = "manteau";
+      m.castShadow = true;
+      attach(bone, m, new Vector3(0, waist, cz));
+    }
+  }
+  // R3 : coiffe posée sur le crâne (portée par l'os de la tête).
+  const headB = bounds.get("peau_tete");
+  if (outfit?.coiffe && om?.hat && headB) {
+    const top = headB.maxY;
+    const cz = (headB.maxZ + headB.minZ) / 2;
+    const width = (headB.maxX - headB.minX) / 2;
+    const f = outfit.coiffe.forme;
+    // La coiffe épouse le crâne : son rayon (≈ 0,1 m au gabarit) suit la demi-largeur de la tête.
+    const hk = (width + 0.012 * k) / 0.098;
+    const sink = f === "casque" ? 0.075 : f === "casquette" ? 0.06 : 0.055;
+    const hat = piece(outfitGear(f), om.hat, "coiffe", hk);
+    hat.rotation.x = f === "kepi" ? -0.08 : 0;
+    attach("head", hat, new Vector3(0, top - sink * k, cz - 0.004 * k));
+    if (om.band) {
+      const b = piece(outfitGear("bandeau"), om.band, "bandeau", hk * 1.02);
+      attach("head", b, new Vector3(0, top - sink * k, cz - 0.004 * k));
+    }
+  }
+  // R3 : sac au dos, étui à la hanche droite.
+  if (outfit?.sac && om?.pack) attach("spine_03", piece(outfitGear("sac"), om.pack, "sac"), new Vector3(0, (J("spine_03").y + pelvis.y) / 2 + 0.12 * k, chestBack - 0.02 * k));
+  if (outfit?.etui) attach("pelvis", piece(outfitGear("etui"), mats.leather, "etui"), new Vector3(-hipHalf - 0.03 * k, pelvis.y - 0.02 * k, pelvis.z + 0.03 * k));
+  if (om?.sash) attach("pelvis", piece(outfitGear("noeud"), om.sash, "noeud"), new Vector3(hipHalf + 0.02 * k, pelvis.y + 0.08 * k, pelvis.z + 0.02 * k));
+  // R3 : fusil à l'épaule (dans le dos, canon au-dessus de l'épaule droite) ; l'infanterie l'épaule pour tirer.
+  const slung = new Object3D();
+  slung.name = "fusil-dos";
+  const inHands = new Object3D();
+  inHands.name = "fusil-mains";
+  const pistol = new Object3D();
+  pistol.name = "pistolet";
+  if (outfit?.fusil && om) {
+    const kind = outfit.fusil === "mains" ? "fusil_baionnette" : "fusil";
+    slung.add(piece(outfitGear(kind), om.wood, "fusil"));
+    slung.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), new Vector3(-0.42, 1, -0.06).normalize());
+    attach("spine_03", slung, new Vector3(0.02 * k, (J("spine_03").y + pelvis.y) / 2 + 0.05 * k, chestBack - 0.07 * k));
+    if (outfit.fusil === "mains") {
+      inHands.add(piece(outfitGear(kind), om.wood, "fusil"));
+      group.add(inHands);
+    }
+  }
+  if (outfit?.etui) {
+    pistol.add(piece(outfitGear("pistolet"), mats.steel, "pistolet"));
+    group.add(pistol);
+  }
+  inHands.visible = false;
+  pistol.visible = false;
+  // Cheveux : couleur sur le crâne avec une lisière fondue, et une coque d'épaisseur au centre (pas sous une coiffe).
   paintHair(body, hair, skin);
-  const hairMesh = buildHairCap(body, hair, 0.006 * k, 0.012);
+  const hairMesh = outfit?.coiffe ? null : buildHairCap(body, hair, 0.006 * k, 0.012);
   if (hairMesh) body.group.add(hairMesh);
   const phase = rand() * 6;
+  const fader = new PoseFader(body);
+  const gait = outfit ? { ...SOLDIER_GAIT, stance: outfit.repos } : SOLDIER_GAIT;
+  const hand = new Vector3();
+  const other = new Vector3();
   const soldier: HumanSoldier = {
     group,
     body,
     launcher,
     pose: "sol",
-    setPose(p, time) {
+    outfit,
+    setPose(p, time, clock) {
       soldier.pose = p;
-      poseHuman(body, p, time, SOLDIER_GAIT, phase);
+      fader.begin(p, clock);
+      poseHuman(body, p, time, gait, phase);
+      fader.end(clock);
       const w = Math.sin(time * 3 + phase);
       // Le soldat regarde vers +z : la cape s'écarte vers l'arrière par une rotation positive autour de x.
-      capePivot.rotation.x = p === "vol" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
-      // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt et en marche.
-      for (const b of blades) b.visible = p !== "attente" && p !== "marche";
+      capePivot.rotation.x = p === "vol" || p === "chute" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
+      // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt, en marche, au tir et à terre.
+      for (const b of blades) b.visible = p !== "attente" && p !== "marche" && p !== "tir" && p !== "mort";
       group.updateMatrixWorld(true);
       // Matrices d'os à jour : les mesures sur la peau (boîtes englobantes) suivent la pose.
       body.skeleton.update();
+      // Arme en main : épaulée au tir (de la main droite vers la gauche), en travers au port d'arme, au pied (crosse au sol) ;
+      // le pistolet de l'officier, tendu au tir. Sinon, le fusil reste à l'épaule.
+      const aim = p === "tir";
+      const rest = p === "attente" ? outfit?.repos : undefined;
+      const hasRifle = slung.children.length > 0;
+      const held = hasRifle && (aim || rest === "port" || rest === "arme") && (outfit?.fusil === "mains" || rest === "arme");
+      if (held && inHands.children.length === 0) inHands.add(piece(outfitGear(outfit?.fusil === "mains" ? "fusil_baionnette" : "fusil"), om?.wood ?? mats.leather, "fusil"));
+      if (held && !inHands.parent) group.add(inHands);
+      slung.visible = hasRifle && !held;
+      inHands.visible = held;
+      pistol.visible = aim && pistol.children.length > 0 && !held;
+      if (held || pistol.visible) {
+        const inv = group.matrixWorld.clone().invert();
+        body.bones["hand_r"]?.getWorldPosition(hand).applyMatrix4(inv);
+        body.bones["hand_l"]?.getWorldPosition(other).applyMatrix4(inv);
+        const dir = rest === "arme" ? new Vector3(0, 1, 0) : other.clone().sub(hand);
+        if (dir.lengthSq() < 1e-6) dir.set(0, 0, 1);
+        dir.normalize();
+        for (const o of [inHands, pistol]) {
+          o.position.copy(hand).addScaledVector(dir, 0.04 * k);
+          o.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), dir);
+        }
+        // Arme au pied : la crosse touche le sol à côté du pied droit, la main tient le canon.
+        if (rest === "arme") inHands.position.set(hand.x - 0.02 * k, 0.4 * k, hand.z + 0.04 * k);
+        group.updateMatrixWorld(true);
+      }
     },
     dispose() {
       body.dispose();
       hairMesh?.geometry.dispose();
-      cape.geometry.dispose();
+      cape?.geometry.dispose();
+      for (const g of extra) g.dispose();
       for (const m of straps) m.geometry.dispose();
       for (const m of owned) m.dispose();
     },

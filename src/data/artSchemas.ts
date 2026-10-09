@@ -309,6 +309,8 @@ const Outfit = z
     sac: Hex.optional(),
     baudrier: z.boolean().optional(),
     etui: z.boolean().optional(),
+    /** Attitude au repos : bras le long du corps, arme au pied, port d'arme, mains dans le dos. */
+    repos: z.enum(["bras", "arme", "port", "dos"]),
     corpulence: z.object({ age: UnitRange, muscle: UnitRange, weight: UnitRange }).strict(),
   })
   .strict();

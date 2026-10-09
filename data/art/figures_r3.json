@@ -368,7 +368,8 @@
         "age": [0.5, 0.62],
         "muscle": [0.55, 0.85],
         "weight": [0.35, 0.58]
-      }
+      },
+      "repos": "bras"
     },
     {
       "id": "garnison",
@@ -385,7 +386,8 @@
         "age": [0.55, 0.72],
         "muscle": [0.4, 0.7],
         "weight": [0.5, 0.7]
-      }
+      },
+      "repos": "arme"
     },
     {
       "id": "police",
@@ -408,7 +410,8 @@
         "age": [0.5, 0.65],
         "muscle": [0.4, 0.6],
         "weight": [0.3, 0.45]
-      }
+      },
+      "repos": "bras"
     },
     {
       "id": "marley_infanterie",
@@ -429,7 +432,8 @@
         "age": [0.48, 0.6],
         "muscle": [0.5, 0.8],
         "weight": [0.35, 0.55]
-      }
+      },
+      "repos": "port"
     },
     {
       "id": "marley_officier",
@@ -454,7 +458,8 @@
         "age": [0.65, 0.8],
         "muscle": [0.4, 0.6],
         "weight": [0.55, 0.75]
-      }
+      },
+      "repos": "dos"
     }
   ]
 }
