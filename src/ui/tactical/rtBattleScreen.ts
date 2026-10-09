@@ -957,7 +957,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       root.dataset["frames"] = String(frames);
       root.dataset["tick"] = String(s.tick);
       const vs = view.stats();
-      root.dataset["stats"] = `appels ${vs.calls} · triangles ${vs.triangles} · détail ${vs.detail} · foule ${vs.crowd} · repères ${vs.markers}`;
+      root.dataset["stats"] = `appels ${vs.calls} · triangles ${vs.triangles} · détail ${vs.detail} · foule ${vs.crowd} · repères ${vs.markers}${vs.bodies ? ` · ${vs.bodies}` : ""}`;
       perf.textContent = t("tac.perf", { ms: formatNumber(total), n: Number(root.dataset["unites"] ?? 0) });
       requestAnimationFrame(frame);
     };

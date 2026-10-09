@@ -139,14 +139,17 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   };
   const torsoPrims = ["peau_torse", "peau_bassin"];
   band(torsoPrims, new Vector3(0, pelvis.y + 0.03 * k, 0), new Vector3(0, 1, 0), 0.045);
-  band(["peau_torse"], new Vector3(0, J("spine_03").y - 0.02 * k, 0), new Vector3(0, 1, 0), 0.035);
-  for (const s of [1, -1]) band(["peau_torse"], new Vector3(s * 0.08 * k, (neck.y + pelvis.y) / 2 + 0.06 * k, 0), new Vector3(s * 0.62, 1, 0).normalize(), 0.032);
-  for (const [side, s] of [
-    ["l", 1],
-    ["r", -1],
-  ] as const) {
-    const hip = J(`thigh_${side}`);
-    for (const dy of [0.1, 0.24]) band(["peau_cuisses"], new Vector3(hip.x, hip.y - dy * k, hip.z), new Vector3(0, 1, 0), 0.028, s);
+  // Harnais de l'appareil (poitrine, bretelles croisées, cuisses) : soldats à équipement tridimensionnel seulement (R3).
+  if (odm) {
+    band(["peau_torse"], new Vector3(0, J("spine_03").y - 0.02 * k, 0), new Vector3(0, 1, 0), 0.035);
+    for (const s of [1, -1]) band(["peau_torse"], new Vector3(s * 0.08 * k, (neck.y + pelvis.y) / 2 + 0.06 * k, 0), new Vector3(s * 0.62, 1, 0).normalize(), 0.032);
+    for (const [side, s] of [
+      ["l", 1],
+      ["r", -1],
+    ] as const) {
+      const hip = J(`thigh_${side}`);
+      for (const dy of [0.1, 0.24]) band(["peau_cuisses"], new Vector3(hip.x, hip.y - dy * k, hip.z), new Vector3(0, 1, 0), 0.028, s);
+    }
   }
   // Col, poignets, revers des bottes, ourlet de la veste : bandes posées sur la couture entre deux régions (elles couvrent le
   // raccord en dents de scie des triangles).

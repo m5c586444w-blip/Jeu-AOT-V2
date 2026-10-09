@@ -1215,3 +1215,15 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Choix** : machine d'états pure (`figures/states.ts`) avec une petite mémoire par figure (état d'avant, instant de mort, dernier coup de lame, deux pas sans bouger avant « repos ») ; seuils [A] dans `figures.json` (`etats`) : dévoration pendant les 1,5 dernières secondes de la saisie (2,5 s, `grab_hold_s`), chute en 1,6 s par « à genoux », fondu de 0,35 s. Poses nouvelles du corps de base (dévoration, à genoux, rampant ; tir, mort, chute, saisi) et fondu par interpolation des os (`blendHuman`). Membres coupés : os du segment ramené à un moignon, vapeur ; nuque tranchée (mort par un soldat) : entaille sombre. Tenues : règle de rendu [A] (`regle_tenues`) : soldats à appareil → Bataillon ; fantassins de Paradis selon l'arme (fusiliers, mitrailleurs, anti-Titans → Garnison ; assaut → Brigades spéciales ; cavaliers → Bataillon) ; sections adverses → infanterie de Marley, le premier homme de chaque section en officier.
 - **Raison** : rien ne change dans la simulation ni dans les empreintes ; tout est paramétrable.
 - **Réversible** : oui.
+
+## 2026-10-09 — D-151 R3 : branchement sur les vues de bataille
+- **Contexte** : R3 doit être visible dans la bataille temps réel de R2+ et dans la bataille P4, avec des niveaux de détail qui tiennent 400 unités ; l'image « prête » (R1d) ne doit pas attendre les corps de base.
+- **Options** : (a) charger le corps de base avant la première image ; (b) première image en repères et figures en primitives, corps de base chargé ensuite (deux instants mesurés) ; pour P4 : (c) vue 3D par défaut, (d) bouton « Vue 3D » facultatif, 2D (Pixi) d'ouverture.
+- **Choix** : (b) et (d). Vue 3D de R2+ : Titans de R3 (variante tirée de la simulation, refaits un par image quand le corps de base arrive), figures complètes habillées pour les plus proches (au plus `detailMax`, deux montées par image), foule par lots `tenue × équipement × pose` (au plus 35 lots), repères au loin ; `data-stats` ajoute « corps de base x s, Titans h/n, lots k ». P4 : bouton `data-action="vue-3d"` qui monte la même vue 3D (import dynamique) dans la scène, sans sélection à la souris en 3D (molette seulement ; ordres par les cartes) ; `data-vue3d`, `data-stats3d`.
+- **Raison** : la latence « prête » de R1d reste la même ; P4 garde son écran et ses contrôles (smoke:tactique inchangé).
+- **Réversible** : oui.
+
+## 2026-10-09 — D-152 R3 : contrôle visuel (planches, smoke:r3)
+- **Contexte** : 24 §4 (12 captures au plus par phase) ; D-146 (captures du smoke hors git par défaut).
+- **Choix** : planches `?proto3d=figures&planche=titans|soldats|poses` (5 classes × 3 variantes, 5 tenues, 8 états de Titan et 8 de soldat) ; `npm run smoke:r3` (planches, compagnie en 1366/1920/3840 avec gros plan, P4 en vue 3D ; `R3_PARTIES`, `R3_TAILLES`) ; captures dans `docs/screenshots/.smoke/`, `-- --captures` pour le passage final. Le gros plan place la caméra stratégique par la sonde de développement (`__batailleRt`) sur le Titan vivant le plus entouré, du côté le plus dégagé (les rues de la Ville des Murs masquent les Titans en plongée basse).
+- **Réversible** : oui.

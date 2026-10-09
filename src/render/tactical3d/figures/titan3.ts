@@ -1,5 +1,5 @@
 import { CanvasTexture, Color, SRGBColorSpace, Vector3 } from "three";
-import type { MeshStandardMaterial, Object3D, Texture } from "three";
+import type { MeshStandardMaterial, Object3D, PointsMaterial, Texture } from "three";
 import { skinnedBounds } from "../humanBase";
 import type { HumanTemplate } from "../humanBase";
 import { blendHuman } from "../humanAnim";
@@ -7,7 +7,7 @@ import type { Gait, HumanPose } from "../humanAnim";
 import { buildHumanTitan, titanGait } from "../humanTitan";
 import type { HumanTitan } from "../humanTitan";
 import { derive, range, seeded } from "../rng";
-import { buildTitan, titanSteam } from "../titan";
+import { buildTitan, setSteamTexture, titanSteam } from "../titan";
 import type { Titan, TitanPose, TitanSteam } from "../titan";
 import { FIGURES } from "./catalog";
 import type { R3TitanSpec } from "./catalog";
@@ -28,6 +28,8 @@ export interface FigureTitan {
   show(mem: ShowMemory<TitanShow>, time: number, cuts: { armL: number; armR: number; legs: number }, napeCut: boolean): void;
   /** Main droite (dans le monde) : un homme saisi y est tenu. */
   hand(out?: Vector3): Vector3;
+  /** Texture des bouffées de vapeur (DOM requis), posée après coup. */
+  setSteamMap(map: Texture): void;
   dispose(): void;
 }
 
@@ -157,7 +159,7 @@ export function buildFigureTitan(spec: R3TitanSpec, seed: number, kit: { templat
       }
       // Vapeur : le corps abattu se dissout ; un Titan blessé fume de ses moignons (régénération).
       inner.steam.visible = false;
-      if (dead) {
+      if (dead || st === "rampant") {
         inner.group.updateMatrixWorld(true);
         steam.fall(time, -spec.height * 0.15, spec.height * 0.95);
       } else if (cuts.armL > 0 || cuts.armR > 0 || cuts.legs > 0) steam.heat(time);
@@ -168,6 +170,12 @@ export function buildFigureTitan(spec: R3TitanSpec, seed: number, kit: { templat
       if (h) return h.getWorldPosition(out);
       const j = inner.joints.poignetD;
       return j.getWorldPosition(out);
+    },
+    setSteamMap(map) {
+      setSteamTexture(inner, map);
+      const m = steam.points.material as PointsMaterial;
+      m.map = map;
+      m.needsUpdate = true;
     },
     dispose() {
       steam.dispose();

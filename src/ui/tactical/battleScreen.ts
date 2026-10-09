@@ -18,6 +18,8 @@ import { TACTICAL_ORDERS } from "../../sim/tactical/types";
 import { el } from "../panels/common";
 import { formatNumber } from "../why";
 import type { WhyTooltip } from "../why";
+import type { BattleView, ViewOverlay } from "../../render/battleView";
+import { webgl2Available } from "./rtBattleScreen";
 
 const SPEEDS = [0, 0.25, 0.5, 1, 2] as const;
 
@@ -77,8 +79,14 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   // Mesure de performance : affichée seulement en mode debug (F2), comme la console de service.
   const perf = el("span", "bataille-perf");
   perf.hidden = !document.querySelector(".debug-console:not([hidden])");
-  head.append(title, timer, speeds, perf);
+  // Vue 3D (R3) : bouton facultatif ; la vue 2D (Pixi) reste celle d'ouverture. three.js est chargé à la demande.
+  const view3dBtn = el("button", "registre-bouton petit", t("tac.view_3d"));
+  view3dBtn.type = "button";
+  view3dBtn.dataset["action"] = "vue-3d";
+  view3dBtn.setAttribute("aria-pressed", "false");
+  head.append(title, timer, speeds, view3dBtn, perf);
   root.append(head, host, side, bar);
+  root.dataset["vue3d"] = "off";
   document.body.append(root);
   document.body.dataset["tactique"] = "1";
 
@@ -93,6 +101,55 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
   });
   scene.setShifterReach(reaches);
   scene.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0, own: true })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })), ...(bt.state.shifters ?? []).map((u, k) => ({ x: u.x, y: u.y, z: 0, reach: reaches[k] ?? 15 })), ...(bt.state.batteries ?? []).map((b) => ({ x: b.x, y: b.y, z: 0 }))]);
+  let view3d: BattleView | null = null;
+  let view3dLoading = false;
+  const NO_OVERLAY: ViewOverlay = { soldiers: new Set<number>(), troops: new Set<number>(), dests: [], zones: [] };
+  const toggleView3d = async (): Promise<void> => {
+    if (view3dLoading) return;
+    if (view3d) {
+      view3d.destroy();
+      view3d = null;
+      scene.canvas.style.display = "";
+      root.dataset["vue3d"] = "off";
+      view3dBtn.setAttribute("aria-pressed", "false");
+      view3dBtn.textContent = t("tac.view_3d");
+      return;
+    }
+    if (!webgl2Available()) {
+      view3dBtn.title = t("rt.no_webgl");
+      return;
+    }
+    view3dLoading = true;
+    root.dataset["vue3d"] = "chargement";
+    try {
+      const m = await import("../../render/tactical3d/battle/view3d");
+      const prefs = loadSettings(storage());
+      const v = m.createView3d(host, { quality: prefs.battleQuality, violence: prefs.violence }, o.setup.seed, o.setup.night);
+      host.prepend(v.canvas);
+      v.setMap(bt.map);
+      v.frame([...bt.state.soldiers.map((s) => ({ x: s.x, y: s.y, z: 0 })), ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height }))]);
+      v.canvas.addEventListener(
+        "wheel",
+        (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          v.zoomAt(ev.offsetX, ev.offsetY, ev.deltaY < 0 ? 1.15 : 0.87);
+        },
+        { passive: false },
+      );
+      scene.canvas.style.display = "none";
+      view3d = v;
+      root.dataset["vue3d"] = "on";
+      view3dBtn.setAttribute("aria-pressed", "true");
+      view3dBtn.textContent = t("tac.view_2d");
+    } catch (e) {
+      root.dataset["vue3d"] = "off";
+      view3dBtn.title = t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) });
+    } finally {
+      view3dLoading = false;
+    }
+  };
+  view3dBtn.addEventListener("click", () => void toggleView3d());
   let seenFlashes = 0;
   const orders: TimedOrder[] = [];
   battleProbe.markers = () => scene.markerBoxes;
@@ -284,6 +341,8 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       delete document.body.dataset["tactique"];
+      view3d?.destroy();
+      view3d = null;
       scene.destroy();
       root.remove();
       resolve(value);
@@ -378,9 +437,20 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
         const s = bt.state.soldiers[following.index];
         if (s && s.mode !== "mort") scene.follow(s.x, s.y, s.z);
       }
-      scene.draw(bt.state, prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), lookOf);
-      const t2 = performance.now();
-      scene.render();
+      let t2: number;
+      if (view3d) {
+        view3d.draw(bt.state, prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), NO_OVERLAY);
+        t2 = performance.now();
+        view3d.render();
+        if (Number(root.dataset["frames"] ?? "0") % 10 === 0) {
+          const vs = view3d.stats();
+          root.dataset["stats3d"] = `appels ${vs.calls} · triangles ${vs.triangles} · détail ${vs.detail} · foule ${vs.crowd} · repères ${vs.markers}${vs.bodies ? ` · ${vs.bodies}` : ""}`;
+        }
+      } else {
+        scene.draw(bt.state, prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), lookOf);
+        t2 = performance.now();
+        scene.render();
+      }
       const t3 = performance.now();
       setText(timer, clock(bt.state.tick / bt.world.balance.tick_hz));
       if (bt.state.ended && !ended) renderCards();
