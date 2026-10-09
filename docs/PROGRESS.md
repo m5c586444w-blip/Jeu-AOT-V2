@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **PA terminée et fusionnée (D-130) : N1 terminé.** Prochaine phase : MIS (fichier 23 §5, N2). Direction autonome (D-107). |
-| Tâche | Revue de PA et passe de correctifs (D-129) ; fusion de la branche principale (pushs de la session CLI) |
-| Dernier `npm run verify` | 2026-10-08 : code 0 ; tests 611/611 (95 fichiers, `docs/reports/PA-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : écrire `docs/phases/MIS.md` puis exécuter MIS sur `claude/v2-mis` (critères CMIS-01 à 06) |
+| Phase | **MIS en revue** (branche `claude/v2-mis`, commits MIS.1+2 puis MIS.3+4, MIS.5+6 inclus). Direction autonome (D-107). |
+| Tâche | MIS terminée : rapport `docs/reports/MIS.md` ; la direction revoit puis fusionne |
+| Dernier `npm run verify` | 2026-10-09 : code 0 ; 99 fichiers, 644 tests (`docs/reports/MIS-verify-2.log`) ; smoke:mis et smoke:ux0 code 0 |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de MIS par la direction (hachage 854 `56dc43aa`, D-132), fusion de `claude/v2-mis`, puis TUT |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

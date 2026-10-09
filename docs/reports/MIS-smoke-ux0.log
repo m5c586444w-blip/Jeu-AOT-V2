@@ -1,0 +1,169 @@
+
+> murs-et-sang@0.0.1 smoke:ux0
+> tsx src/tools/smoke-ux0.ts
+
+  OK  menu principal : aucune mention interne
+  OK  845 · bandeau et carte : aucune mention interne
+  OK  845 · dossier de province : aucune mention interne
+  OK  845 · dossier de province › Population : aucune mention interne
+  OK  845 · dossier de province › Économie : aucune mention interne
+  OK  845 · dossier de province › Garnison : aucune mention interne
+  OK  845 · dossier de province › Bâtiments : aucune mention interne
+  OK  845 · dossier de province › Renseignement : aucune mention interne
+  OK  845 · options : aucune mention interne
+  OK  850 · bandeau et carte : aucune mention interne
+  OK  850 · dossier de province : aucune mention interne
+  OK  850 · dossier de province › Population : aucune mention interne
+  OK  850 · dossier de province › Économie : aucune mention interne
+  OK  850 · dossier de province › Garnison : aucune mention interne
+  OK  850 · dossier de province › Bâtiments : aucune mention interne
+  OK  850 · dossier de province › Renseignement : aucune mention interne
+  OK  850 · registre personnages : aucune mention interne
+  OK  850 · registre personnages › Vivants : aucune mention interne
+  OK  850 · registre personnages › Morts : aucune mention interne
+  OK  850 · registre personnages › Tous : aucune mention interne
+  OK  850 · registre cabinet : aucune mention interne
+  OK  850 · registre decrets : aucune mention interne
+  OK  850 · registre decrets › Militaire : aucune mention interne
+  OK  850 · registre decrets › Économie : aucune mention interne
+  OK  850 · registre decrets › Ordre : aucune mention interne
+  OK  850 · registre decrets › Religion : aucune mention interne
+  OK  850 · registre decrets › Information : aucune mention interne
+  OK  850 · registre decrets › Société : aucune mention interne
+  OK  850 · registre organisations : aucune mention interne
+  OK  850 · registre conseil : aucune mention interne
+  OK  850 · registre economie : aucune mention interne
+  OK  850 · registre missions : aucune mention interne
+  OK  850 · registre missions › Militaire 0/24 : aucune mention interne
+  OK  850 · registre missions › Politique 0/8 : aucune mention interne
+  OK  850 · registre missions › Économie 0/8 : aucune mention interne
+  OK  850 · registre missions › Religion 0/5 : aucune mention interne
+  OK  850 · registre missions › Renseignement 0/5 : aucune mention interne
+  OK  850 · registre missions › Monde extérieur 0/3 : aucune mention interne
+  OK  850 · registre armees : aucune mention interne
+  OK  850 · registre expeditions : aucune mention interne
+  OK  850 · registre porteurs : aucune mention interne
+  OK  850 · registre recherche : aucune mention interne
+  OK  850 · registre recherche › Manœuvre et équipement : aucune mention interne
+  OK  850 · registre recherche › Anti-Titan : aucune mention interne
+  OK  850 · registre recherche › Médecine et biologie : aucune mention interne
+  OK  850 · registre recherche › Logistique : aucune mention interne
+  OK  850 · registre recherche › Fortification : aucune mention interne
+  OK  850 · registre recherche › Renseignement : aucune mention interne
+  OK  850 · registre recherche › Administration : aucune mention interne
+  OK  850 · registre recherche › Armes modernes : aucune mention interne
+  OK  850 · registre recherche › Hizuru et Alliés : aucune mention interne
+  OK  850 · registre recherche › Doctrines : aucune mention interne
+  OK  850 · registre renseignement : aucune mention interne
+  OK  850 · registre chronique : aucune mention interne
+  OK  850 · registre chronique › Tous : aucune mention interne
+  OK  850 · registre chronique › Politique : aucune mention interne
+  OK  850 · registre chronique › Militaire : aucune mention interne
+  OK  850 · registre chronique › Titans : aucune mention interne
+  OK  850 · registre chronique › Famille : aucune mention interne
+  OK  850 · registre chronique › Monde : aucune mention interne
+  OK  850 · registre journal : aucune mention interne
+  OK  850 · registre gazette : aucune mention interne
+  OK  850 · registre archives : aucune mention interne
+  OK  850 · registre archives › Personnages : aucune mention interne
+  OK  850 · registre archives › Titans : aucune mention interne
+  OK  850 · registre archives › Lieux : aucune mention interne
+  OK  850 · registre archives › Événements : aucune mention interne
+  OK  850 · registre epilogue : aucune mention interne
+  OK  850 · options : aucune mention interne
+  OK  854 Paradis · bandeau et carte : aucune mention interne
+  OK  854 Paradis · dossier de province : aucune mention interne
+  OK  854 Paradis · dossier de province › Population : aucune mention interne
+  OK  854 Paradis · dossier de province › Économie : aucune mention interne
+  OK  854 Paradis · dossier de province › Garnison : aucune mention interne
+  OK  854 Paradis · dossier de province › Bâtiments : aucune mention interne
+  OK  854 Paradis · dossier de province › Renseignement : aucune mention interne
+  OK  854 Paradis · registre personnages : aucune mention interne
+  OK  854 Paradis · registre personnages › Vivants : aucune mention interne
+  OK  854 Paradis · registre personnages › Morts : aucune mention interne
+  OK  854 Paradis · registre personnages › Tous : aucune mention interne
+  OK  854 Paradis · registre cabinet : aucune mention interne
+  OK  854 Paradis · registre decrets : aucune mention interne
+  OK  854 Paradis · registre decrets › Militaire : aucune mention interne
+  OK  854 Paradis · registre decrets › Économie : aucune mention interne
+  OK  854 Paradis · registre decrets › Ordre : aucune mention interne
+  OK  854 Paradis · registre decrets › Religion : aucune mention interne
+  OK  854 Paradis · registre decrets › Information : aucune mention interne
+  OK  854 Paradis · registre decrets › Société : aucune mention interne
+  OK  854 Paradis · registre organisations : aucune mention interne
+  OK  854 Paradis · registre conseil : aucune mention interne
+  OK  854 Paradis · registre economie : aucune mention interne
+  OK  854 Paradis · registre missions : aucune mention interne
+  OK  854 Paradis · registre missions › Militaire 0/24 : aucune mention interne
+  OK  854 Paradis · registre missions › Politique 0/8 : aucune mention interne
+  OK  854 Paradis · registre missions › Économie 0/9 : aucune mention interne
+  OK  854 Paradis · registre missions › Religion 0/5 : aucune mention interne
+  OK  854 Paradis · registre missions › Renseignement 0/5 : aucune mention interne
+  OK  854 Paradis · registre missions › Monde extérieur 0/6 : aucune mention interne
+  OK  854 Paradis · registre armees : aucune mention interne
+  OK  854 Paradis · registre expeditions : aucune mention interne
+  OK  854 Paradis · registre porteurs : aucune mention interne
+  OK  854 Paradis · registre recherche : aucune mention interne
+  OK  854 Paradis · registre recherche › Manœuvre et équipement : aucune mention interne
+  OK  854 Paradis · registre recherche › Anti-Titan : aucune mention interne
+  OK  854 Paradis · registre recherche › Médecine et biologie : aucune mention interne
+  OK  854 Paradis · registre recherche › Logistique : aucune mention interne
+  OK  854 Paradis · registre recherche › Fortification : aucune mention interne
+  OK  854 Paradis · registre recherche › Renseignement : aucune mention interne
+  OK  854 Paradis · registre recherche › Administration : aucune mention interne
+  OK  854 Paradis · registre recherche › Armes modernes : aucune mention interne
+  OK  854 Paradis · registre recherche › Hizuru et Alliés : aucune mention interne
+  OK  854 Paradis · registre recherche › Doctrines : aucune mention interne
+  OK  854 Paradis · registre renseignement : aucune mention interne
+  OK  854 Paradis · registre diplomatie : aucune mention interne
+  OK  854 Paradis · registre monde : aucune mention interne
+  OK  854 Paradis · registre chronique : aucune mention interne
+  OK  854 Paradis · registre chronique › Tous : aucune mention interne
+  OK  854 Paradis · registre chronique › Politique : aucune mention interne
+  OK  854 Paradis · registre chronique › Militaire : aucune mention interne
+  OK  854 Paradis · registre chronique › Titans : aucune mention interne
+  OK  854 Paradis · registre chronique › Famille : aucune mention interne
+  OK  854 Paradis · registre chronique › Monde : aucune mention interne
+  OK  854 Paradis · registre journal : aucune mention interne
+  OK  854 Paradis · registre gazette : aucune mention interne
+  OK  854 Paradis · registre archives : aucune mention interne
+  OK  854 Paradis · registre archives › Personnages : aucune mention interne
+  OK  854 Paradis · registre archives › Titans : aucune mention interne
+  OK  854 Paradis · registre archives › Lieux : aucune mention interne
+  OK  854 Paradis · registre archives › Événements : aucune mention interne
+  OK  854 Paradis · registre archives › Nations : aucune mention interne
+  OK  854 Paradis · registre epilogue : aucune mention interne
+  OK  854 Paradis · options : aucune mention interne
+  OK  854 Marley · bandeau et carte : aucune mention interne
+  OK  854 Marley · registre missions : aucune mention interne
+  OK  854 Marley · registre missions › Militaire 0/4 : aucune mention interne
+  OK  854 Marley · registre missions › Politique 0/2 : aucune mention interne
+  OK  854 Marley · registre missions › Économie 0/2 : aucune mention interne
+  OK  854 Marley · registre missions › Renseignement 0/2 : aucune mention interne
+  OK  854 Marley · registre missions › Monde extérieur 0/2 : aucune mention interne
+  OK  854 Marley · registre armees : aucune mention interne
+  OK  854 Marley · registre porteurs : aucune mention interne
+  OK  854 Marley · registre diplomatie : aucune mention interne
+  OK  854 Marley · registre monde : aucune mention interne
+  OK  854 Marley · registre chronique : aucune mention interne
+  OK  854 Marley · registre chronique › Tous : aucune mention interne
+  OK  854 Marley · registre chronique › Politique : aucune mention interne
+  OK  854 Marley · registre chronique › Militaire : aucune mention interne
+  OK  854 Marley · registre chronique › Titans : aucune mention interne
+  OK  854 Marley · registre chronique › Famille : aucune mention interne
+  OK  854 Marley · registre chronique › Monde : aucune mention interne
+  OK  854 Marley · registre journal : aucune mention interne
+  OK  854 Marley · registre gazette : aucune mention interne
+  OK  854 Marley · registre archives : aucune mention interne
+  OK  854 Marley · registre archives › Personnages : aucune mention interne
+  OK  854 Marley · registre archives › Titans : aucune mention interne
+  OK  854 Marley · registre archives › Lieux : aucune mention interne
+  OK  854 Marley · registre archives › Événements : aucune mention interne
+  OK  854 Marley · registre archives › Nations : aucune mention interne
+  OK  854 Marley · registre epilogue : aucune mention interne
+  OK  854 Marley · options : aucune mention interne
+  OK  F10 : mentions auteur visibles 0 → 35 (statuts, codes, années) ; planches 6 → 10
+  OK  F10 de nouveau : mentions masquées ; préférence enregistrée
+  OK  aucune erreur de page
+160 écrans contrôlés ; 0 échec(s).
+EXIT 0
