@@ -24,6 +24,8 @@ export class OptionsPanel {
     private readonly onSettings: (s: Settings) => void,
     /** Pistes présentes dans `assets_user/musique/` (AUD.4), lues au moment de l'affichage. */
     private readonly tracks: () => readonly UserTrack[] = () => [],
+    /** Rejouer le guide de prise en main (TUT.2) ; absent : le bouton n'est pas proposé. */
+    private readonly replayTutorial: (() => void) | null = null,
   ) {
     this.el.hidden = true;
     this.el.setAttribute("aria-label", t("options.title"));
@@ -168,6 +170,25 @@ export class OptionsPanel {
     ab.addEventListener("change", () => this.change({ ...this.settings, authorMode: ab.checked }));
     author.append(el("span", "", t("options.author_mode")), ab);
 
+    // Guide de prise en main (TUT.2) : aides contextuelles coupables, guide rejouable.
+    const guide = el("fieldset", "options__son options__guide");
+    guide.append(el("legend", "", t("options.tutorial")));
+    const hintsRow = el("label", "options__ligne");
+    const hintsBox = el("input", "options__case");
+    hintsBox.type = "checkbox";
+    hintsBox.checked = this.settings.tutorial.hints;
+    hintsBox.dataset["setting"] = "hints";
+    hintsBox.addEventListener("change", () => this.change({ ...this.settings, tutorial: { ...this.settings.tutorial, hints: hintsBox.checked } }));
+    hintsRow.append(el("span", "", t("options.hints")), hintsBox);
+    guide.append(hintsRow);
+    if (this.replayTutorial) {
+      const replay = el("button", "options__remise", t("options.tutorial_replay"));
+      replay.type = "button";
+      replay.dataset["action"] = "rejouer-tuto";
+      replay.addEventListener("click", () => this.replayTutorial?.());
+      guide.append(replay);
+    }
+
     const keys = el("table", "options__touches");
     const caption = el("caption", "", t("options.keys"));
     keys.append(caption);
@@ -191,7 +212,7 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, sound, music, author, keys, reset);
+    this.el.append(head, lang, scale, sound, music, guide, author, keys, reset);
   }
 
   /** Préférences changées hors du dossier (touche F10). */

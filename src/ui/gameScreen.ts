@@ -37,9 +37,13 @@ import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { OptionsPanel } from "./optionsPanel";
 import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
+import type { TutorialPrefs } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
 import { setLocale } from "../i18n";
+import { toAbsoluteDay } from "../sim/core/time";
+import { Hints } from "./tutorial/hints";
+import { Tutorial } from "./tutorial/controller";
 
 /** Scénario par défaut (P2 : bac à sable politique de 850) ; `?scenario=` pour en choisir un autre. */
 export const DEFAULT_SCENARIO = "scn_sandbox_850";
@@ -105,6 +109,8 @@ export async function bootGame(): Promise<void> {
     }
   }
 
+  // Aides contextuelles (TUT.2) : créées plus bas ; les ouvertures de registre et de dossier les appellent.
+  let hints: Hints | null = null;
   const clock = new GameClock(world.time.ms_per_day);
   const why = new WhyTooltip();
   const screen = document.createElement("div");
@@ -169,8 +175,10 @@ export async function bootGame(): Promise<void> {
       bubble.hide();
       // Planificateur ouvert : le clic prolonge l'itinéraire au lieu d'ouvrir le dossier.
       if (id && registers?.mapClick(id)) return;
-      if (id) dossier.open(id, state);
-      else dossier.close();
+      if (id) {
+        dossier.open(id, state);
+        hints?.show("province", document.querySelector(".dossier:not([hidden])"));
+      } else dossier.close();
     },
     army(id) {
       // Étendard d'une armée du joueur : sa fiche s'ouvre dans le registre des armées (PA.8).
@@ -209,6 +217,7 @@ export async function bootGame(): Promise<void> {
     // La carte stratégique est masquée : son rendu est suspendu pour laisser l'image à la bataille.
     map.setSuspended(true);
     try {
+      window.setTimeout(() => hints?.show("bataille", null), 700);
       return await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
@@ -231,7 +240,8 @@ export async function bootGame(): Promise<void> {
       if (id) {
         dossier.close();
         map.setSelected(null);
-      }
+        hints?.show(id, document.querySelector(".registre-panneau:not([hidden])"));
+      } else hints?.hide();
     };
   }
   // Fil de notifications (U9) : un clic sur une entrée qui nomme un lieu centre la carte et ouvre son dossier.
@@ -274,6 +284,7 @@ export async function bootGame(): Promise<void> {
     if ((ev.target as HTMLElement | null)?.closest?.("button, [role=button], select, summary")) audio.play("clic");
   });
 
+  let replayTutorial: () => void = () => undefined;
   let lastArmyPrompt: string | null = null;
   const refresh = (): void => {
     listen();
@@ -415,8 +426,43 @@ export async function bootGame(): Promise<void> {
       setAuthorMode(s.authorMode);
       refresh();
     }
-  }, userTracks);
+  }, userTracks, () => replayTutorial());
   onUserTracks(() => options.sync(loadSettings(safeStorage())));
+  // Tutoriel guidé (TUT.1, TUT.2) : préférences locales seulement (jamais dans l'état de partie).
+  const savePrefs = (p: TutorialPrefs): void => {
+    const next = { ...loadSettings(safeStorage()), tutorial: p };
+    saveSettings(safeStorage(), next);
+    options.sync(next);
+  };
+  const tutorial = new Tutorial(document.body, {
+    panel: () => registers?.openId ?? null,
+    day: () => toAbsoluteDay(state.date),
+    closePanel: () => registers?.close(),
+    pause: () => {
+      clock.setSpeed(0);
+      refresh();
+    },
+    keyOf: (id) => (id === "temps" ? keyOf("speed_1") : keyOf(id)),
+    finish: (how) => {
+      const p = loadSettings(safeStorage()).tutorial;
+      savePrefs({ ...p, done: how === "done" ? true : p.done, disabled: how === "quit", hints: true });
+      if (eventDossier) eventDossier.auto = autoDossiers;
+      refresh();
+    },
+  });
+  hints = new Hints(document.body, { prefs: () => loadSettings(safeStorage()).tutorial, save: savePrefs, busy: () => tutorial.running });
+  const startTutorial = (): void => {
+    if (!registers || tutorial.running) return;
+    registers.close();
+    if (options.isOpen) options.toggle();
+    if (eventDossier) eventDossier.auto = false;
+    tutorial.start();
+  };
+  replayTutorial = () => {
+    const p = loadSettings(safeStorage()).tutorial;
+    savePrefs({ ...p, disabled: false });
+    startTutorial();
+  };
   actions.options = () => {
     options.toggle();
     audio.play(options.isOpen ? "ouvrir" : "fermer");
@@ -445,6 +491,8 @@ export async function bootGame(): Promise<void> {
   }
   refresh();
   document.documentElement.dataset["ready"] = "true";
+  // Partie accompagnée (menu principal, ou `?tutoriel=1`) : le guide commence dès que l'écran est prêt.
+  if (new URLSearchParams(window.location.search).get("tutoriel") === "1") startTutorial();
 }
 
 /** Dossier de choix de la nation (04 §5.2 ; habillage final en P8). */

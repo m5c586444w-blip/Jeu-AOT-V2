@@ -888,3 +888,31 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .armee__rencontre h3, .armee__succession h3 { margin: 0 0 0.25rem; }
 .armee__journal, .armee__ia { margin-top: 0.8rem; font-size: var(--t-s); color: var(--texte-second); }
 .armee__journal summary, .armee__ia summary { cursor: pointer; }
+
+/* ——— Guide de prise en main (TUT) : bulle ancrée, mise en évidence, aides contextuelles ——— */
+.tuto-halo { position: fixed; z-index: 49; pointer-events: none; border: 2px solid var(--accent-clair); border-radius: var(--rayon); box-shadow: 0 0 0 3px var(--accent-fond); }
+.tuto-halo::after { content: ""; position: absolute; inset: -8px; border: 2px solid var(--accent); border-radius: var(--rayon); opacity: 0; animation: tuto-halo 1.8s ease-in-out infinite; }
+.tuto-halo[hidden] { display: none; }
+@keyframes tuto-halo { 0%, 100% { opacity: 0; } 50% { opacity: 0.9; } }
+@media (prefers-reduced-motion: reduce) { .tuto-halo::after { animation: none; opacity: 0.6; } }
+.tuto { position: fixed; z-index: 50; width: min(23rem, calc(100vw - 1rem)); padding: 0 0.9rem 0.8rem; color: var(--texte); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 3px solid var(--accent); box-shadow: 0 6px 0 var(--ombre); }
+.tuto[hidden] { display: none; }
+.tuto__tete { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin: 0 -0.9rem 0.4rem; padding: 0.35rem 0.9rem; background: var(--panneau-creux); border-bottom: var(--filet-l) solid var(--filet-doux); }
+.tuto__progres { font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-clair); }
+.tuto__quitter { padding: 0 0.2rem; font-size: var(--t-xs); color: var(--texte-discret); background: none; border: none; text-decoration: underline; cursor: pointer; }
+.tuto__quitter:hover { color: var(--texte-fort); }
+.tuto__titre { margin: 0 0 0.3rem; font-size: var(--t-l); color: var(--texte-fort); }
+.tuto__texte, .tuto__action, .tuto__attente { margin: 0 0 0.5rem; font-size: var(--t-m); line-height: 1.45; }
+.tuto__action { padding: 0.35rem 0.6rem; color: var(--texte-fort); background: var(--accent-fond); border-left: 3px solid var(--accent); }
+.tuto__attente { color: var(--texte-second); font-size: var(--t-s); }
+.tuto__pied { display: flex; justify-content: flex-end; gap: 0.5rem; }
+.tuto__passer { padding: 0.2rem 0.7rem; color: var(--texte-second); background: transparent; border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); cursor: pointer; }
+.tuto__suivant:disabled { opacity: 0.5; cursor: not-allowed; }
+.aide-ctx { position: fixed; z-index: 48; width: min(19rem, calc(100vw - 1rem)); padding: 0.5rem 0.7rem 0.55rem; color: var(--texte); background: var(--fond-profond); border: var(--filet-l) solid var(--filet); border-left: 3px solid var(--accent); box-shadow: 0 4px 0 var(--ombre); }
+.aide-ctx[hidden] { display: none; }
+.aide-ctx__texte { margin: 0 0 0.35rem; font-size: var(--t-s); line-height: 1.4; }
+.aide-ctx__ok { padding: 0.1rem 0.6rem; font-size: var(--t-xs); color: var(--texte-fort); background: var(--panneau-haut); border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); cursor: pointer; }
+.menu-guide { display: flex; flex-direction: column; gap: 0.15rem; width: calc(100% - 1.8rem); margin: 0.6rem 0.9rem 0; padding: 0.55rem 0.8rem; text-align: left; color: var(--texte); background: var(--accent-fond); border: var(--filet-l) solid var(--accent-fonce); border-left: 3px solid var(--accent); cursor: pointer; }
+.menu-guide:hover { border-color: var(--accent); }
+.menu-guide__titre { color: var(--texte-fort); }
+.menu-guide__resume { font-size: var(--t-s); color: var(--texte-second); }

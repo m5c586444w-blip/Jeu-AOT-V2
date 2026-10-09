@@ -1,0 +1,102 @@
+
+> murs-et-sang@0.0.1 smoke:tuto
+> tsx src/tools/smoke-tuto.ts
+
+[menu] 1366×768
+  OK  menu principal : entrée « guide de prise en main »
+  OK  menu principal : aucune clé, identifiant ni mention interne
+[850, guide] 1366×768
+  OK  mise en évidence de l'élément montré
+  OK  départ avec le temps suspendu
+  OK  étape 1/14 : « accueil »
+  OK  « accueil », explication : aucune clé, identifiant ni mention interne
+  OK  « accueil », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  étape 2/14 : « carte »
+  OK  « carte », action : aucune clé, identifiant ni mention interne
+  OK  « carte », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « dedans »)
+  OK  « carte », explication : aucune clé, identifiant ni mention interne
+  OK  « carte », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « dedans »)
+  OK  étape 3/14 : « province »
+  OK  « province », action : aucune clé, identifiant ni mention interne
+  OK  « province », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « dedans »)
+  OK  un clic sur une province ouvre son dossier
+  OK  « province », explication : aucune clé, identifiant ni mention interne
+  OK  « province », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « droite »)
+  OK  étape 4/14 : « ressources »
+  OK  « ressources », explication : aucune clé, identifiant ni mention interne
+  OK  « ressources », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  étape 5/14 : « temps »
+  OK  « temps », action : aucune clé, identifiant ni mention interne
+  OK  « temps », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  « temps », explication : aucune clé, identifiant ni mention interne
+  OK  « temps », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  temps remis en pause à l'explication
+  OK  étape 6/14 : « economie »
+  OK  « economie », action : aucune clé, identifiant ni mention interne
+  OK  « economie », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « economie », explication : aucune clé, identifiant ni mention interne
+  OK  « economie », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 7/14 : « armees »
+  OK  « armees », action : aucune clé, identifiant ni mention interne
+  OK  « armees », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « armees », explication : aucune clé, identifiant ni mention interne
+  OK  « armees », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « droite »)
+  OK  étape 8/14 : « cabinet »
+  OK  « cabinet », action : aucune clé, identifiant ni mention interne
+  OK  « cabinet », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « cabinet », explication : aucune clé, identifiant ni mention interne
+  OK  « cabinet », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 9/14 : « recherche »
+  OK  « recherche », action : aucune clé, identifiant ni mention interne
+  OK  « recherche », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « recherche », explication : aucune clé, identifiant ni mention interne
+  OK  « recherche », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 10/14 : « missions »
+  OK  « missions », action : aucune clé, identifiant ni mention interne
+  OK  « missions », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « missions », explication : aucune clé, identifiant ni mention interne
+  OK  « missions », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 11/14 : « evenements »
+  OK  « evenements », action : aucune clé, identifiant ni mention interne
+  OK  « evenements », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « evenements », explication : aucune clé, identifiant ni mention interne
+  OK  « evenements », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 12/14 : « expeditions »
+  OK  « expeditions », action : aucune clé, identifiant ni mention interne
+  OK  « expeditions », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « haut »)
+  OK  « expeditions », explication : aucune clé, identifiant ni mention interne
+  OK  « expeditions », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord »)
+  OK  étape 13/14 : « bataille »
+  OK  « bataille », action : aucune clé, identifiant ni mention interne
+  OK  « bataille », action : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  bataille : « Suivant » verrouillé tant que la bataille est ouverte
+  OK  « bataille », explication : aucune clé, identifiant ni mention interne
+  OK  « bataille », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « dedans »)
+  OK  bataille quittée : « Suivant » déverrouillé
+  OK  étape 14/14 : « fin »
+  OK  « fin », explication : aucune clé, identifiant ni mention interne
+  OK  « fin », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bas »)
+  OK  14 étapes parcourues dans l'ordre, jusqu'à la fin
+  OK  préférences locales : guide terminé, aides activées ({"done":true,"disabled":false,"hints":true,"seen":[]})
+  OK  aide contextuelle à la première ouverture (« Un décret engage le pays dans la durée. Il est soumis au vote du cabinet. Compri »)
+  OK  aide contextuelle : aucune clé, identifiant ni mention interne
+  OK  aide contextuelle : pas une seconde fois pour le même élément
+  OK  éléments déjà expliqués conservés (decrets)
+  OK  options : aides contextuelles et guide rejouable
+  OK  options : aucune clé, identifiant ni mention interne
+  OK  aides contextuelles désactivées dans les options
+  OK  guide rejoué depuis les options
+  OK  guide quitté à l'étape 2 : désactivé, aides activées ({"done":true,"disabled":true,"hints":true,"seen":["decrets"]})
+[850, guide] 1920×1080
+  OK  1920×1080 : arrivé à l'étape « recherche »
+  OK  1920×1080 « recherche » : aucune clé, identifiant ni mention interne
+  OK  1920×1080 « recherche » : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « droite »)
+[850, guide] 3840×2160
+  OK  3840×2160 : arrivé à l'étape « recherche »
+  OK  3840×2160 « recherche » : aucune clé, identifiant ni mention interne
+  OK  3840×2160 « recherche » : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « droite »)
+[845]
+  OK  845 : pas de guide (aucun registre dans le bac à sable économique)
+  OK  0 erreur console
+smoke:tuto : tout est conforme.
+EXIT 0
