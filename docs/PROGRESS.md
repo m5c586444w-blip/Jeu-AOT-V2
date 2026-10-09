@@ -2,10 +2,15 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R2+ terminée et fusionnée** (D-147) : **N2 terminé**. Direction autonome (D-107). Suivante : R3 (N3). |
-| Tâche | Lancer R3 (fichier 18 §2, version courte 21 §8) sur `claude/v2-r3` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 107 fichiers, 705 tests ; 8 empreintes inchangées (`docs/reports/R2-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : R3 sur `claude/v2-r3` (sous-agent neuf), puis P9, P10, PACK ; mesure GPU de R2+ sur le PC de Gabriel (dette n° 49) |
+| Phase | **R3 terminée** (figures : Titans de 3 à 15 m, soldats de Paradis et de Marley, poses et états ; D-148 à D-150). Suivante : **P9** (N3, arrêt de revue). |
+| Tâche | Ouvrir P9 (fichier 18 §9) : `docs/phases/P9.md` |
+| Dernier `npm run verify` | 2026-10-09 : code 0 ; 111 fichiers, 728 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-4.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : P9 sur `claude/intelligent-feynman-8ekib4` (mandat autonome de trois jours, D-148), puis P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49, 64) |
+
+## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
+- Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
+  renouvellement de la limite d'usage (déclencheur horaire) ; résumé final avec images et mécanismes le 2026-10-12 (19:35 UTC).
+- R3 terminée le 2026-10-09 (`docs/reports/R3.md`) : commits `b5d1abe`, `a0acf0d`, `d89dada` et le commit de fin de phase.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

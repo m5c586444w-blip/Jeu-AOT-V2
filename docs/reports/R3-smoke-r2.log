@@ -1,0 +1,56 @@
+
+> murs-et-sang@0.0.1 smoke:r2
+> tsx src/tools/smoke-r2.ts
+
+Captures : docs/screenshots/.smoke/ (hors git)
+[850, essai de compagnie] 1366×768
+  OK  carte stratégique : three.js et la vue 3D de bataille non chargés
+  OK  vue 3D chargée à la demande (three.js téléchargé à l'ouverture de la bataille), prête en 4.0 s
+  OK  compagnies : 341 unités en scène (100 à 400), 4 Titans
+  OK  ouverture en pause active (bandeau « Pause — donnez vos ordres »)
+  OK  clic sur un homme : son escouade est sélectionnée (« esc_03 »)
+  OK  Alt + clic : un seul homme sélectionné (« soldat:12 »)
+  OK  rectangle de sélection : 6 unités (esc_01, esc_02, esc_03, esc_04, esc_05, sec_a01)
+  OK  groupe numéroté : Ctrl + 1 enregistre, 1 rappelle (« esc_01,esc_02,esc_03,esc_04,esc_05,sec_a01 »)
+  OK  clic droit au sol : « se déplacer » pour chaque unité sélectionnée (6 ordres journalisés)
+  OK  Maj + clic droit : ordre mis en file (1 en attente, panneau « File d'ordres »)
+  OK  formation « colonne » donnée (bouton)
+  OK  pause active : la bataille n'avance pas pendant les ordres (pas 65)
+  OK  ordres appliqués à la reprise (carnet : 18 lignes de marche, file, formation ; 6 unités en marche)
+  OK  ordre d'unité : un homme seul envoyé ailleurs (Alt + clic, D, clic)
+  OK  clic droit sur un Titan : « attaquer » ce Titan
+  OK  touche V : caméra de suivi à la troisième personne (escouade sélectionnée)
+  OK  touche V : retour à la vue stratégique
+  OK  tir sur zone : désignation au clic (curseur en croix)
+  OK  batterie : zone imposée sur un Titan ennemi, 3 coups, 19 impacts récents
+  OK  cessez-le-feu : la batterie se tait
+  OK  porteur : objectif « les Titans », retenue stricte, zone ; ordre au carnet
+  OK  option de violence : sobre (sans sang) ; réaliste par défaut
+  ..  1366×768, 3D qualité moyenne : prêt 4.0 s · 341 unités · temps JS p95 38.60 ms (sim 25.80 · figures 7.40 · rendu 10.20 · interface 6.00) · appels 153 · triangles 568642 · détail 0 · foule 316 · repères 0
+  OK  aucune clé brute à l'écran
+[854, Paradis] contact d'armées, 1366×768
+  OK  contact d'armées : alerte et choix (auto, jouer, repli)
+  OK  « Contact à Plateau du Nord » jouée sur l'écran temps réel : 244 unités (vue 3d)
+  OK  ordre donné pendant la bataille de campagne (1 au journal)
+  OK  bilan : fantassins tombés de chaque camp, sections débandées
+  OK  bilan : chaque valeur a son « pourquoi ? »
+  OK  rencontre reportée à la campagne (ordres rejoués par la simulation, dette n° 33)
+[850] sans WebGL 2, 1366×768
+  OK  repli 2D avec message : « WebGL 2 indisponible sur ce poste : la bataille s'affiche en vue 2D (la vue 3D n'est pas c »
+  OK  repli 2D : three.js et la vue 3D jamais téléchargés
+  OK  vue 2D : sélection, ordre, bataille qui avance
+[850, essai de compagnie] 1920×1080
+  OK  1920×1080 : vues stratégique et suivi rendues (83 images)
+  ..  1920×1080, 3D qualité moyenne : prêt 4.6 s · 341 unités · temps JS p95 279.70 ms (sim 23.40 · figures 218.30 · rendu 61.30 · interface 5.20) · appels 144 · triangles 577100 · détail 0 · foule 325 · repères 0
+[850, essai de compagnie] 3840×2160
+  OK  3840×2160 : vues stratégique et suivi rendues (85 images)
+  ..  3840×2160, 3D qualité moyenne : prêt 9.5 s · 341 unités · temps JS p95 263.70 ms (sim 36.40 · figures 209.60 · rendu 46.30 · interface 6.40) · appels 144 · triangles 552960 · détail 0 · foule 296 · repères 26
+  OK  bundle principal assets/index-CQ-pfYys.js sans three.js ; vue 3D de bataille en morceau à part (view3d-b9u4paWK.js)
+  ..  repli 2D (WebGL 1 simulé) : 51 avertissements de Pixi « texParameter: invalid parameter name »
+  OK  0 erreur console
+Mesures (rendu logiciel SwiftShader, sans GPU ; à vérifier sur le PC de l'utilisateur) :
+  1366×768, 3D qualité moyenne : prêt 4.0 s · 341 unités · temps JS p95 38.60 ms (sim 25.80 · figures 7.40 · rendu 10.20 · interface 6.00) · appels 153 · triangles 568642 · détail 0 · foule 316 · repères 0
+  1920×1080, 3D qualité moyenne : prêt 4.6 s · 341 unités · temps JS p95 279.70 ms (sim 23.40 · figures 218.30 · rendu 61.30 · interface 5.20) · appels 144 · triangles 577100 · détail 0 · foule 325 · repères 0
+  3840×2160, 3D qualité moyenne : prêt 9.5 s · 341 unités · temps JS p95 263.70 ms (sim 36.40 · figures 209.60 · rendu 46.30 · interface 6.40) · appels 144 · triangles 552960 · détail 0 · foule 296 · repères 26
+smoke:r2 : tout est conforme.
+EXIT 0

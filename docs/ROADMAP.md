@@ -14,7 +14,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 | N2 | TUT | 23 §5 | 100 | non | terminée, fusionnée par sa PR (D-135 à D-138) |
 | N2 | R2+ | 18 §1 + 23 §4 | 300 | oui | terminée, fusionnée par sa PR (D-139 à D-147 ; dettes n° 46 à 60 ; mesure GPU à faire, n° 49) |
 | N3 | R1e | 20 (§6, §8), périmètre 21 §3, districts 24 §3 | 200 | oui | terminée et acceptée (pilote Shiganshina + Maria) ; LC-B/C/D en N3 si quota |
-| N3 | R3 | 18 §2, version courte 21 §8 | 150 | non | à faire |
+| N3 | R3 | 18 §2, version courte 21 §8 | 150 | non | terminée (D-148, D-149 ; dettes n° 61 à 65 ; `docs/reports/R3.md`) |
 | N3 | P9 | 18 §9 | 200 | oui | à faire |
 | N3 | P10 | 18 §10 | 120 | non | à faire |
 | N3 | PACK | 23 §6 | 100 | non | à faire |
@@ -22,3 +22,4 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 Règle de coupe (fichier 24 §5.3) : lieux faits main au-delà de Shiganshina et des districts de Maria → R3 → TUT → MIS → P10 → R2+ → jamais N1.
 
 Depuis le 2026-10-08, les arrêts de revue sont tenus par la direction autonome (revue par un sous-agent distinct, `docs/DECISIONS.md` D-106) ; Gabriel relit au retour (`docs/MORNING.md`).
+Du 2026-10-09 au 2026-10-12 : mandat autonome de trois jours (D-148), branche `claude/intelligent-feynman-8ekib4`, reprise automatique.

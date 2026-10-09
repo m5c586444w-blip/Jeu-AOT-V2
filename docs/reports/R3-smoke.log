@@ -4,25 +4,25 @@
 
 Captures : docs/screenshots/
   OK  r3-titans : 15 corps à l'échelle, hauteurs mesurées à 0.31 % au plus (±5 %)
-  OK  r3-titans : planche prête en 30.5 s, 16 étiquettes
-  OK  r3-visages : planche prête en 32.0 s, 6 étiquettes
-  OK  r3-soldats : planche prête en 31.9 s, 7 étiquettes
-  OK  r3-poses : planche prête en 33.9 s, 11 étiquettes
+  OK  r3-titans : planche prête en 32.3 s, 16 étiquettes
+  OK  r3-visages : planche prête en 32.4 s, 6 étiquettes
+  OK  r3-soldats : planche prête en 33.5 s, 7 étiquettes
+  OK  r3-poses : planche prête en 34.6 s, 11 étiquettes
 [850, essai de compagnie] 1366×768
-  OK  vue 3D prête en 3.7 s (premier temps : chargement)
+  OK  vue 3D prête en 3.8 s (premier temps : chargement)
   OK  zoom sur une section ennemie
   OK  vue rapprochée (Marley, à l'ouverture) : 28 figures, pose = état de la simulation pour chacune (0 écart)
-  OK  second temps à 4.28 s : corps de base · Titans 4/4 · figures 24 ; 24 fantassins de Marley en tenue, 4/4 Titans de R3
+  OK  second temps à 4.68 s : corps de base · Titans 4/4 · figures 24 ; 24 fantassins de Marley en tenue, 4/4 Titans de R3
   OK  zoom sur une section alliée
   OK  vue rapprochée (Paradis) : 28 figures, pose = état de la simulation pour chacune (0 écart)
   OK  fantassins de la Garnison en tenue : 7 (et 17 soldats du Bataillon d'exploration)
   OK  caméra de suivi : 28 figures, pose = état de la simulation pour chacune (0 écart)
   OK  soldats du Bataillon d'exploration en tenue (suivi) : 24
-  ..  mesures (rendu logiciel) : prêt 3.7 s · corps 4.28 s · appels 1614 · triangles 2067618 · détail 24 · foule 306 · repères 0 · temps JS p95 213.20 ms
+  ..  mesures (rendu logiciel) : prêt 3.8 s · corps 4.68 s · appels 1613 · triangles 2067514 · détail 24 · foule 306 · repères 0 · temps JS p95 227.20 ms
 [850, essai de compagnie] 3840×2160
   OK  3840 : zoom sur une section alliée
   OK  3840×2160 : 28 figures, pose = état de la simulation pour chacune (0 écart)
-  OK  bundle principal assets/index-47SVd0Ve.js sans three.js ni figures de R3 ; vue 3D en morceau à part (view3d-EtVX9-Eu.js)
+  OK  bundle principal assets/index-CQ-pfYys.js sans three.js ni figures de R3 ; vue 3D en morceau à part (view3d-b9u4paWK.js)
   OK  0 erreur console
 smoke:r3 : tout est conforme.
 EXIT 0

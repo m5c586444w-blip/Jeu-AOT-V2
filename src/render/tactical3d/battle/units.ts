@@ -121,8 +121,10 @@ function paradisTroop(): BufferGeometry {
   const dark = new Color(0x3a352e);
   const skin = new Color(0xd9b49a);
   const sash = new Color(0x8e2f2f);
+  // Pantalon sombre, comme la tenue de près (la couleur d'instance multiplie : ce gris-brun en ressort presque noir).
+  const trousers = new Color(0x7a6f5e);
   for (const s of [1, -1]) {
-    fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), cloth);
+    fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), trousers);
     fb.geometry(new CylinderGeometry(0.06, 0.06, 0.22, 6), at(s * 0.09, 0.11, 0.02), dark);
     fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), cloth);
   }
