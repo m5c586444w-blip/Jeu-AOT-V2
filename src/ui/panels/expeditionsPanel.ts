@@ -7,7 +7,8 @@ import { defaultSupplies, estimatePlan, planCapitalCost, planHeadcount, planProb
 import { routeKm, routeProblem, shortestRoute, supplyAt } from "../../sim/military/routes";
 import type { DeadRecord, Expedition, ExpeditionPlan, ExpeditionReport, MilitaryState } from "../../sim/military/state";
 import { readyMembers, soldierName } from "../../sim/military/state";
-import { skirmishSetup } from "../../sim/tactical/setup";
+import { companySetup, skirmishSetup } from "../../sim/tactical/setup";
+import type { BatterySpec, ShifterSpec } from "../../sim/tactical/types";
 import { FORMATIONS, OBJECTIVES, RETREAT_CONDITIONS } from "../../sim/military/vocabulary";
 import { techMods } from "../../sim/research/research";
 import type { Formation, Objective } from "../../sim/military/vocabulary";
@@ -215,7 +216,30 @@ export class ExpeditionsPanel implements Panel {
       lab.append(`${t(key)} `, input);
       return lab;
     };
-    form.append(el("p", "registre-note", t("exp.trial_note")), l("exp.trial_map", map), l("exp.trial_type", type), l("exp.trial_count", count), l("exp.trial_men", men), nightLab, go);
+    // R2+ : bataille de compagnies en temps réel (soldats, fantassins des deux camps, batteries, porteur allié facultatif).
+    const enemy = num("enemy", 90, 0, 180);
+    const shifter = el("input");
+    shifter.type = "checkbox";
+    shifter.dataset["trial"] = "shifter";
+    const shifterLab = el("label", "plan-case");
+    shifterLab.append(shifter, ` ${t("exp.trial_shifter")}`);
+    const company = button(t("exp.trial_company"), () => {
+      const w = this.ctx.world;
+      const n = Math.max(6, Math.min(160, Math.round(Number(men.value) || 12)));
+      const c = Math.max(0, Math.min(6, Math.round(Number(count.value) || 1)));
+      const e = Math.max(0, Math.min(180, Math.round(Number(enemy.value) || 0)));
+      const seed = (fnv1a(`compagnie:${this.ctx.state().seed}:${this.trials++}`) % 2 ** 30) + 1;
+      const has = (id: string): boolean => !!w.armies?.pieces.get(id)?.enabled;
+      const artillery: BatterySpec[] = [];
+      if (has("art_canon_campagne")) artillery.push({ id: "bat_a1", piece: "art_canon_campagne", munition: "mun_mitraille", side: "allie", count: 4 });
+      if (e > 0 && has("art_marley_campagne")) artillery.push({ id: "bat_e1", piece: "art_marley_campagne", munition: "mun_shrapnel", side: "ennemi", count: 3 });
+      const shifters: ShifterSpec[] = shifter.checked && w.shifters?.defs.has("shifter_assaillant") ? [{ shifter: "shifter_assaillant", side: "allie", name: t("exp.trial_shifter_name"), character: null, stress: 20 }] : [];
+      const enemyList = e > 0 ? [{ kind: "fusilier" as const, count: Math.round(e * 0.6) }, { kind: "mitrailleur" as const, count: Math.round(e * 0.15) }, { kind: "assaut" as const, count: e - Math.round(e * 0.6) - Math.round(e * 0.15) }] : [];
+      const setup = companySetup(w, { map: map.value, seed, soldiers: n, allied: [{ kind: "fusilier", count: 60 }], enemy: enemyList.filter((x) => x.count > 0), titans: c > 0 ? [{ type: type.value, count: c }] : [], artillery, shifters, night: night.checked });
+      void this.ctx.playBattle(setup, t("exp.trial_company_title", { map: map.selectedOptions[0]?.textContent ?? map.value }), false, true);
+    }, "registre-bouton");
+    company.dataset["action"] = "essai-compagnie";
+    form.append(el("p", "registre-note", t("exp.trial_note")), l("exp.trial_map", map), l("exp.trial_type", type), l("exp.trial_count", count), l("exp.trial_men", men), nightLab, go, el("p", "registre-note", t("exp.trial_company_note")), l("exp.trial_enemy", enemy), shifterLab, company);
     return [head, form];
   }
 

@@ -184,6 +184,12 @@ describe("Artillerie sur zone et ordres de porteur (CR2-04)", () => {
     const bt2 = run(artSetup(), [{ tick: 1, squad: "bat_a", order: "cessez_feu" }], 40 * hz, w854);
     expect(bt2.state.batteries?.[0]?.shots).toBe(0);
     expect(bt2.state.log.some((l) => l.key === "battle.rt.cease_fire")).toBe(true);
+    // Feu libre (tir sur zone sans point) : la batterie reprend ses cibles.
+    const bt3 = run(artSetup(), [{ tick: 1, squad: "bat_a", order: "cessez_feu" }, { tick: 2, squad: "bat_a", order: "tir_zone" }], 90 * hz, w854);
+    expect(bt3.state.batteries?.[0]?.hold).toBe(false);
+    expect(bt3.state.batteries?.[0]?.zone ?? null).toBeNull();
+    expect(bt3.state.log.some((l) => l.key === "battle.rt.free_fire")).toBe(true);
+    expect(bt3.state.batteries?.[0]?.shots ?? 0).toBeGreaterThan(0);
   });
 
   it("porteur allié : la zone et l'objectif restreignent ses cibles ; il rejoint sa zone", () => {

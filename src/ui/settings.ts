@@ -27,6 +27,10 @@ export interface Settings {
   authorMode: boolean;
   /** Tutoriel guidé et aides contextuelles (TUT.2) : préférences locales, jamais dans l'état de partie. */
   tutorial: TutorialPrefs;
+  /** Bataille temps réel (R2+) : vue 3D (repli 2D sans WebGL) ou 2D, violence montrée, qualité de la vue 3D. */
+  battleView: BattleViewPref;
+  violence: ViolencePref;
+  battleQuality: BattleQualityPref;
   /** Révision de la musique : des préférences antérieures à la musique d'AUD reprennent le volume de musique par défaut. */
   audioRev?: number;
 }
@@ -38,6 +42,12 @@ export interface TutorialPrefs {
   hints: boolean;
   seen: string[];
 }
+export const BATTLE_VIEWS = ["3d", "2d"] as const;
+export type BattleViewPref = (typeof BATTLE_VIEWS)[number];
+export const VIOLENCES = ["realiste", "sobre"] as const;
+export type ViolencePref = (typeof VIOLENCES)[number];
+export const BATTLE_QUALITIES = ["bas", "moyen", "haut"] as const;
+export type BattleQualityPref = (typeof BATTLE_QUALITIES)[number];
 export const DEFAULT_TUTORIAL: TutorialPrefs = { done: false, disabled: false, hints: false, seen: [] };
 
 const KEY = "murs-et-sang:preferences";
@@ -46,7 +56,8 @@ export const AUDIO_REV = 2;
 /** Volumes par défaut : musique 0,70 × 0,45 = 0,315 (≤ 0,35, E-UX-4 et fichier 24 §2.4). */
 export const DEFAULT_SETTINGS: Settings = {
   locale: "fr", uiScale: 100, volMaster: 70, volMusic: 45, volAmbient: 50, volSfx: 80, volUi: 60, subtitles: true,
-  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, tutorial: DEFAULT_TUTORIAL, audioRev: AUDIO_REV,
+  musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, tutorial: DEFAULT_TUTORIAL,
+  battleView: "3d", violence: "realiste", battleQuality: "moyen", audioRev: AUDIO_REV,
 };
 export const MUSIC_SOURCES = ["synthese", "mixte", "perso"] as const;
 export type MusicSource = (typeof MUSIC_SOURCES)[number];
@@ -102,6 +113,9 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       userTracks: userTracksOf(s.userTracks),
       authorMode: s.authorMode === true,
       tutorial: tutorialOf(s.tutorial),
+      battleView: BATTLE_VIEWS.find((v) => v === s.battleView) ?? DEFAULT_SETTINGS.battleView,
+      violence: VIOLENCES.find((v) => v === s.violence) ?? DEFAULT_SETTINGS.violence,
+      battleQuality: BATTLE_QUALITIES.find((v) => v === s.battleQuality) ?? DEFAULT_SETTINGS.battleQuality,
       audioRev: AUDIO_REV,
     };
   } catch {

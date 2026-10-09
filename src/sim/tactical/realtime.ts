@@ -189,6 +189,11 @@ export function applyRtOrder(bt: Battle, o: Omit<TimedOrder, "tick">, log: Log):
       const p = clampTo(bt, o.x, o.y);
       bat.zone = { x: p.x, y: p.y, r: Math.max(5, Math.min(120, o.r ?? FIRE_ZONE_R)) };
       log("battle.rt.fire_zone", { battery: bat.id });
+    } else {
+      // Tir sur zone sans point : feu libre (la batterie reprend ses cibles).
+      bat.hold = false;
+      bat.zone = null;
+      log("battle.rt.free_fire", { battery: bat.id });
     }
     return;
   }

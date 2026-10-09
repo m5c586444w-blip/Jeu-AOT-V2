@@ -31,6 +31,7 @@ import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
 import { Registers } from "./registers";
 import { openBattleScreen } from "./tactical/battleScreen";
+import { openRtBattleScreen } from "./tactical/rtBattleScreen";
 import { EventDossier } from "./eventDossier";
 import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
@@ -211,14 +212,15 @@ export async function bootGame(): Promise<void> {
   const notice = new Notice(document.body);
   // Écran de bataille (P4) : le temps stratégique est suspendu tant qu'il est ouvert.
   let inBattle = false;
-  const playBattle = async (setup: BattleSetup, title: string, linked: boolean): Promise<TimedOrder[] | null> => {
+  const playBattle = async (setup: BattleSetup, title: string, linked: boolean, realtime = false): Promise<TimedOrder[] | null> => {
     inBattle = true;
     bubble.hide();
     // La carte stratégique est masquée : son rendu est suspendu pour laisser l'image à la bataille.
     map.setSuspended(true);
     try {
       window.setTimeout(() => hints?.show("bataille", null), 700);
-      return await openBattleScreen({ world, why, setup, title, linked });
+      // R2+ : rencontres d'armées et batailles de compagnie sur l'écran temps réel ; expéditions et essais sur l'écran de P4.
+      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked }) : await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
       map.setSuspended(false);

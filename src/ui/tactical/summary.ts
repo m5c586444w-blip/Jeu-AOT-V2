@@ -39,3 +39,20 @@ export function battleSummary(st: BattleState): SummaryRow[] {
   if (spears > 0) rows.splice(3, 0, { key: "tac.sum.spears", value: s.spears?.hits ?? 0, why: ["tac.sum.spears_why"], params: { hits: s.spears?.hits ?? 0, thrown: spears } });
   return rows;
 }
+
+/**
+ * Lignes du bilan propres aux fantassins (R2+) : hommes tombés de chaque camp, déroutes, coups de feu. Vide sans fantassins.
+ * Chaque valeur a son « pourquoi ? » (causes : feu, corps à corps, artillerie, Titans).
+ */
+export function troopSummary(st: BattleState): SummaryRow[] {
+  const s = st.stats.troops;
+  if (!s || !st.troops || st.troops.length === 0) return [];
+  const allied = st.troops.filter((x) => x.side === "allie").length;
+  const enemy = st.troops.length - allied;
+  const rows: SummaryRow[] = [];
+  if (allied > 0) rows.push({ key: "tac.sum.troops_lost", value: s.deadAllied, why: ["tac.sum.troops_lost_why"], params: { n: allied } });
+  if (enemy > 0) rows.push({ key: "tac.sum.troops_killed", value: s.deadEnemy, why: ["tac.sum.troops_killed_why", "tac.sum.troops_causes"], params: { n: enemy, melee: s.melee, artillery: s.byArtillery, titans: s.byTitans } });
+  rows.push({ key: "tac.sum.routs", value: s.routs, why: ["tac.sum.routs_why"] });
+  rows.push({ key: "tac.sum.troops_shots", value: s.shots, why: ["tac.sum.troops_shots_why"], params: { hits: s.hits, shots: s.shots } });
+  return rows;
+}
