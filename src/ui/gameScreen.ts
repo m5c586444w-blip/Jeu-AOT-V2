@@ -37,6 +37,8 @@ import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { evaluateEnding } from "../sim/ending/ending";
+import { DIFFICULTY_IDS } from "../data/endingSchemas";
+import type { DifficultyId } from "../data/endingSchemas";
 import { OptionsPanel } from "./optionsPanel";
 import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 import type { TutorialPrefs } from "./settings";
@@ -53,6 +55,11 @@ export const DEFAULT_SCENARIO = "scn_sandbox_850";
 function scenarioFromUrl(): string {
   const raw = new URLSearchParams(window.location.search).get("scenario");
   return raw && /^scn_[a-z0-9_]+$/.test(raw) ? raw : DEFAULT_SCENARIO;
+}
+/** Difficulté (P9.3) : `?difficulte=` (recit, normal, rude, breche) ; « normal » par défaut. */
+function difficultyFromUrl(): DifficultyId {
+  const raw = new URLSearchParams(window.location.search).get("difficulte");
+  return (DIFFICULTY_IDS as readonly string[]).includes(raw ?? "") ? (raw as DifficultyId) : "normal";
 }
 const DEFAULT_SEED = 42;
 /** Au plus quelques jours par lot, pour que l'affichage suive même à la vitesse 5. */
@@ -91,25 +98,29 @@ export async function bootGame(): Promise<void> {
     onMessage: (h) => worker.addEventListener("message", (ev: MessageEvent<SimResponse>) => h(ev.data)),
   });
   const scenario = scenarioFromUrl();
-  const first = await sim.init(seedFromUrl(), scenario);
-  if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
-  const world = buildWorld(first.source, scenario);
-  let state: GameState = first.state;
   const storePromise = SaveStore.open(indexedDB, () => Date.now());
-  // « Continuer » (menu principal, U8) : reprend la sauvegarde automatique la plus récente de ce scénario, s'il y en a une.
+  // « Continuer » (menu principal, U8) : reprend la sauvegarde automatique la plus récente de ce scénario, s'il y en a une ; le
+  // monde est construit avec la difficulté de cette sauvegarde (P9.3).
+  let resumed: GameState | null = null;
   if (new URLSearchParams(window.location.search).get("reprendre") === "1") {
     try {
       const store = await storePromise;
       for (const s of (await store.list()).filter((x) => x.slot.startsWith("auto-"))) {
         const saved = await store.load(s.slot);
         if (saved.strategic?.scenario !== scenario) continue;
-        state = (await sim.load(saved)).state;
+        resumed = saved;
         break;
       }
     } catch {
       // Aucune sauvegarde lisible : la partie commence au début du scénario.
     }
   }
+  const difficulty: DifficultyId = resumed ? (resumed.difficulty ?? "normal") : difficultyFromUrl();
+  const first = await sim.init(seedFromUrl(), scenario, difficulty);
+  if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
+  const world = buildWorld(first.source, scenario, { difficulty });
+  let state: GameState = first.state;
+  if (resumed) state = (await sim.load(resumed)).state;
 
   // Aides contextuelles (TUT.2) : créées plus bas ; les ouvertures de registre et de dossier les appellent.
   let hints: Hints | null = null;
@@ -506,7 +517,7 @@ export async function bootGame(): Promise<void> {
   }
   // Dernière partie (scénario, nation) : l'entrée « Continuer » du menu principal la reprend.
   try {
-    safeStorage()?.setItem(LAST_GAME_KEY, JSON.stringify({ scenario, ...(state.nations ? { faction: state.nations.player } : {}), reprendre: "1" }));
+    safeStorage()?.setItem(LAST_GAME_KEY, JSON.stringify({ scenario, ...(state.nations ? { faction: state.nations.player } : {}), ...(state.difficulty ? { difficulte: state.difficulty } : {}), reprendre: "1" }));
   } catch {
     // Stockage refusé : « Continuer » restera indisponible.
   }

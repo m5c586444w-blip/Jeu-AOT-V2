@@ -963,3 +963,11 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .objectif__marque { width: 1rem; text-align: center; }
 .objectif--atteint .objectif__nom { font-weight: 600; }
 .objectif__avance { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--texte-second); }
+
+/* P9.3 : choix de la difficulté au menu principal. */
+.menu-difficulte { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0 0 0.25rem; }
+.menu-difficulte__titre { margin-right: 0.4rem; color: var(--texte-second); font-size: var(--t-s); text-transform: uppercase; letter-spacing: 0.06em; }
+.menu-difficulte__niveau { padding: 0.2rem 0.65rem; border: var(--filet-l) solid var(--filet); background: var(--panneau-creux); color: var(--texte); font: inherit; cursor: pointer; }
+.menu-difficulte__niveau[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-fond); color: var(--texte-fort); }
+.menu-difficulte__niveau:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.menu-difficulte__note { margin: 0 0 0.6rem; color: var(--texte-second); font-size: var(--t-s); }

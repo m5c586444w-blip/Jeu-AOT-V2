@@ -7,6 +7,8 @@ import { safeStorage } from "./gameScreen";
 import { sharedAudio } from "./audio";
 import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
 import { applyUiScale, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
+import { DIFFICULTY_IDS } from "../data/endingSchemas";
+import type { DifficultyId } from "../data/endingSchemas";
 
 /**
  * Menu principal (U8, phase UI) : plein écran ; en fond, les murs au crépuscule (capture de la scène 3D du projet,
@@ -36,8 +38,13 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls = "", text?: stri
   return e;
 }
 
+/** Difficulté choisie au menu (P9.3), gardée pour la prochaine visite ; « normal » n'apparaît pas dans l'adresse. */
+const DIFFICULTY_KEY = "murs-et-sang.difficulte";
+let difficulty: DifficultyId = "normal";
+
 function go(params: Record<string, string>): void {
   const q = new URLSearchParams(params);
+  if (difficulty !== "normal" && !q.has("tutoriel") && !q.has("reprendre")) q.set("difficulte", difficulty);
   window.location.search = `?${q.toString()}`;
 }
 
@@ -126,6 +133,28 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
 
   // Panneau de droite : scénarios (illustration, année, titre, résumé), puis nations pour 854.
   panel.append(el("h2", "menu-scenarios__titre", t("menu.scenarios")));
+  // Difficulté (P9.3) : quatre niveaux, expliqués en une ligne ; le choix vaut pour la partie lancée ensuite.
+  const stored = safeStorage()?.getItem(DIFFICULTY_KEY) ?? "normal";
+  difficulty = (DIFFICULTY_IDS as readonly string[]).includes(stored) ? (stored as DifficultyId) : "normal";
+  const diff = el("div", "menu-difficulte");
+  diff.setAttribute("role", "group");
+  diff.setAttribute("aria-label", t("menu.difficulty"));
+  const diffNote = el("p", "menu-difficulte__note", t(`diff.${difficulty}_why`));
+  diff.append(el("span", "menu-difficulte__titre", t("menu.difficulty")));
+  for (const id of DIFFICULTY_IDS) {
+    const b = el("button", "menu-difficulte__niveau", t(`diff.${id}`));
+    b.type = "button";
+    b.dataset["difficulte"] = id;
+    b.setAttribute("aria-pressed", String(id === difficulty));
+    b.addEventListener("click", () => {
+      difficulty = id;
+      safeStorage()?.setItem(DIFFICULTY_KEY, id);
+      for (const o of diff.querySelectorAll("button")) o.setAttribute("aria-pressed", String(o === b));
+      diffNote.textContent = t(`diff.${id}_why`);
+    });
+    diff.append(b);
+  }
+  panel.append(diff, diffNote);
   const list = el("div", "menu-scenarios__liste");
   const nations = el("section", "choix-nation-menu");
   nations.hidden = true;

@@ -5,6 +5,7 @@ import { createInitialState } from "./core/state";
 import type { GameState } from "./core/state";
 import { buildWorld } from "./strategic/world";
 import type { World, WorldSource } from "./strategic/world";
+import type { DifficultyId } from "../data/endingSchemas";
 
 /** Simulation autonome : seul point d'entrée pour faire évoluer l'état (direct ou dans un Worker). */
 export interface Sim {
@@ -43,7 +44,7 @@ export function createSim(seed: number, world?: World): Sim {
 
 /** Protocole de messages entre l'UI et une simulation distante (Worker navigateur ou worker_threads). */
 export type SimRequest =
-  | { id: number; op: "init"; seed: number; scenario: string | null }
+  | { id: number; op: "init"; seed: number; scenario: string | null; difficulty?: DifficultyId }
   | { id: number; op: "dispatch"; cmd: Command }
   | { id: number; op: "reset"; seed: number }
   | { id: number; op: "load"; state: GameState }
@@ -67,7 +68,7 @@ export function createSimEndpoint(loadSource: () => WorldSource): (req: SimReque
           if (req.scenario === null) sim = createSim(req.seed);
           else {
             source = loadSource();
-            sim = createSim(req.seed, buildWorld(source, req.scenario));
+            sim = createSim(req.seed, buildWorld(source, req.scenario, req.difficulty ? { difficulty: req.difficulty } : {}));
           }
           break;
         }

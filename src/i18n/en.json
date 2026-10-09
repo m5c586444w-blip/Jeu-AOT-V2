@@ -79,5 +79,14 @@
   "fin.def.fondateur_perdu": "the Founder is in Marley's hands",
   "fin.def.ile_perdue": "the island is occupied by Marley",
   "fin.def.empire_effondre": "the empire collapses",
-  "fin.def.liberio_perdu": "Liberio is lost"
+  "fin.def.liberio_perdu": "Liberio is lost",
+  "menu.difficulty": "Difficulty",
+  "diff.recit": "Story",
+  "diff.normal": "Normal",
+  "diff.rude": "Hard",
+  "diff.breche": "Breach",
+  "diff.recit_why": "To follow the story: stronger production, fewer Titans, less enterprising enemies.",
+  "diff.normal_why": "The world as the data describes it.",
+  "diff.rude_why": "Less food, more Titans, more aggressive enemies and heavier losses.",
+  "diff.breche_why": "Everything is scarce: production down a quarter, far more Titans, relentless enemies."
 }

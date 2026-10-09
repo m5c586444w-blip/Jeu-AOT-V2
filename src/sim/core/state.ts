@@ -32,6 +32,7 @@ import { tickArmies } from "../armies/layer";
 import { techModsWithMissions, tickMissions, withMissionMods } from "../missions/missions";
 import type { MissionsState } from "../missions/missions";
 import type { RumblingState } from "../crisis/rumbling";
+import type { DifficultyId } from "../../data/endingSchemas";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
 
@@ -71,6 +72,8 @@ export interface GameState {
   missions?: MissionsState;
   /** Grondement (P9.4) : facultatif, créé au départ du scénario du Grondement seulement (ailleurs : hash inchangé). */
   rumbling?: RumblingState;
+  /** Difficulté (P9.3) : absente en « normal » (hash inchangé) ; sinon le monde est reconstruit avec elle au chargement. */
+  difficulty?: DifficultyId;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -93,6 +96,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     nations: world ? createNationsState(world, world.scenario.start) : null,
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
     ...(world?.armies ? { armies: createArmiesState(world, world.scenario.start) ?? undefined } : {}),
+    ...(world?.difficulty ? { difficulty: world.difficulty } : {}),
   });
 }
 
