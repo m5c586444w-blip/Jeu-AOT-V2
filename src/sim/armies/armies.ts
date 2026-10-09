@@ -14,8 +14,8 @@ import type { StrategicState } from "../strategic/economy";
 import { pushLog } from "../strategic/economy";
 import type { ArmiesWorld, GeoGraph, World } from "../strategic/world";
 import { runBattle } from "../tactical/battle";
-import { skirmishSetup } from "../tactical/setup";
-import type { BatterySpec, BattleSetup, TimedOrder } from "../tactical/types";
+import { sectionsOf, skirmishSetup } from "../tactical/setup";
+import type { BatterySpec, BattleSetup, TimedOrder, TroopKind } from "../tactical/types";
 import type { NationsState } from "../world/nations";
 import { armyBaseSpeed, armyMen, armyPieces, ENCOUNTER_CAP, hostile, isStatic, playerOf, pushArmyLog, regimentOf, requiresMet } from "./state";
 import type { ArmiesState, ArmyState, Encounter, EncounterKind, EncounterResult, EncounterSide, FleetMission, FleetState } from "./state";
@@ -545,11 +545,15 @@ function trimEncounters(s: ArmiesState): void {
   }
 }
 
-/** Le joueur peut-il jouer cette rencontre en bataille tactique (soldats de Paradis contre Titans ou batteries) ? */
-export function canPlay(ctx: Pick<ArmyCtx, "aw" | "s" | "ns" | "world">, enc: Encounter): boolean {
+/**
+ * Le joueur peut-il jouer cette rencontre en bataille tactique (soldats de Paradis contre Titans ou batteries) ?
+ * R2+ (`rt`) : toute rencontre d'armées avec des Titans ou une armée adverse se joue dans la bataille de compagnies.
+ */
+export function canPlay(ctx: Pick<ArmyCtx, "aw" | "s" | "ns" | "world">, enc: Encounter, rt = false): boolean {
   if (!ctx.world.tactical || enc.status !== "attente" || playerOf(ctx.ns) !== "fac_paradis") return false;
   const para = enc.sides.find((x) => x.faction === "fac_paradis");
   if (!para) return false;
+  if (rt) return !!ctx.world.tactical.balance.rt && (enc.titans > 0 || enc.sides.some((x) => x.faction !== "fac_paradis" && x.armies.some((id) => !!findArmy(ctx.s, id))));
   if (enc.kind === "titans") return enc.titans > 0;
   return enc.sides.some((x) => x.faction !== "fac_paradis" && x.armies.some((id) => {
     const a = findArmy(ctx.s, id);
@@ -605,6 +609,136 @@ export function encounterSetup(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed">
   }));
   const spears = ours.some((a) => a.regiments.some((r) => ctx.aw.regiments.get(r.regiment)?.kind === "lances"));
   return { ...setup, ...(batteries.length > 0 ? { artillery: batteries } : {}), ...(spears ? { thunderSpears: true } : {}) };
+}
+
+/** R2+ : arme des fantassins d'un régiment en bataille de compagnies [A] ; null : soldats à équipement tridimensionnel ou aucun. */
+const TROOP_OF_KIND: Record<string, TroopKind | "odm" | null> = {
+  odm: "odm",
+  lances: "odm",
+  police: "odm",
+  infanterie: "fusilier",
+  milice: "fusilier",
+  genie: "fusilier",
+  cavalerie: "cavalier",
+  assaut: "assaut",
+  mitrailleurs: "mitrailleur",
+  anti_titan: "antititan",
+  artillerie: null,
+  convoi: null,
+};
+
+/**
+ * Bataille de compagnies d'une rencontre (R2+, dette n° 33) : 100 à 400 unités. Soldats à équipement tridimensionnel et
+ * fantassins de Paradis, fantassins et batteries de l'adversaire (armée contre armée, avec ou sans Titans), Titans
+ * rencontrés (6 au plus), canons de rempart sur un segment de mur. Échelle : un homme en scène pour `men_per_unit` hommes,
+ * relevée jusqu'à `min_units` et plafonnée par arme et au total.
+ */
+export function encounterSetupRt(ctx: Pick<ArmyCtx, "world" | "aw" | "s" | "seed"> & { st?: StrategicState }, encId: string): BattleSetup | null {
+  const enc = ctx.s.encounters.find((e) => e.id === encId);
+  const tw = ctx.world.tactical;
+  const rb = tw?.balance.rt;
+  if (!enc || !tw || !rb) return null;
+  const para = enc.sides.find((x) => x.faction === "fac_paradis");
+  if (!para) return null;
+  const E = rb.encounter;
+  const armiesOf = (ids: readonly string[]): ArmyState[] => ids.map((id) => findArmy(ctx.s, id)).filter((a): a is ArmyState => !!a);
+  const ours = armiesOf(para.armies);
+  const foes = enc.sides.filter((x) => x.faction !== "fac_paradis").flatMap((x) => armiesOf(x.armies).map((a) => ({ a, faction: x.faction })));
+  // Hommes par arme, de chaque camp.
+  const menOf = (a: ArmyState, want: (k: TroopKind | "odm" | null) => boolean): Map<string, number> => {
+    const out = new Map<string, number>();
+    for (const r of a.regiments) {
+      const d = ctx.aw.regiments.get(r.regiment);
+      const k = d ? (TROOP_OF_KIND[d.kind] ?? null) : null;
+      if (!d || !want(k) || k === null) continue;
+      out.set(k, (out.get(k) ?? 0) + d.men * r.count * r.strength);
+    }
+    return out;
+  };
+  const sum = (maps: Map<string, number>[]): Map<string, number> => {
+    const out = new Map<string, number>();
+    for (const m of maps) for (const [k, v] of m) out.set(k, (out.get(k) ?? 0) + v);
+    return out;
+  };
+  const oursMen = sum(ours.map((a) => menOf(a, () => true)));
+  const enemyFaction = foes[0]?.faction ?? "fac_marley";
+  const theirsMen = sum(foes.map((f) => menOf(f.a, (k) => k !== "odm")));
+  // Les soldats tridimensionnels adverses (rare) combattent en fusiliers.
+  for (const f of foes) for (const [k, v] of menOf(f.a, (k2) => k2 === "odm")) if (k === "odm") theirsMen.set("fusilier", (theirsMen.get("fusilier") ?? 0) + v);
+  const titansN = Math.min(enc.titans, E.titans_max);
+  const per = E.men_per_unit;
+  const raw = (m: Map<string, number>, k: string): number => (m.get(k) ?? 0) / per;
+  let odm = raw(oursMen, "odm");
+  const alliedKinds = ["fusilier", "cavalier"] as const;
+  const enemyKinds = ["fusilier", "mitrailleur", "assaut", "cavalier", "antititan"] as const;
+  let allied = alliedKinds.map((k) => raw(oursMen, k));
+  let enemy = enemyKinds.map((k) => raw(theirsMen, k));
+  const total = (): number => odm + allied.reduce((a, b) => a + b, 0) + enemy.reduce((a, b) => a + b, 0) + titansN;
+  // Relève jusqu'au minimum, puis plafonds par camp et au total (proportionnels).
+  const t0 = total() - titansN;
+  if (t0 > 0 && total() < E.min_units) {
+    const k = (E.min_units - titansN) / t0;
+    odm *= k;
+    allied = allied.map((v) => v * k);
+    enemy = enemy.map((v) => v * k);
+  }
+  const cap = (list: number[], max: number): number[] => {
+    const s0 = list.reduce((a, b) => a + b, 0);
+    return s0 > max ? list.map((v) => (v * max) / s0) : list;
+  };
+  odm = Math.min(odm, E.odm_max);
+  allied = cap(allied, E.troops_max);
+  enemy = cap(enemy, E.enemy_max);
+  const over = total() - E.total_max;
+  if (over > 0) {
+    const k = (E.total_max - titansN) / (total() - titansN);
+    odm *= k;
+    allied = allied.map((v) => v * k);
+    enemy = enemy.map((v) => v * k);
+  }
+  // Sans soldat ni fantassin de Paradis en état de combattre (convois seuls), une escorte de deux escouades [A].
+  const nOdm = Math.floor(odm) > 0 || allied.some((v) => Math.floor(v) > 0) ? Math.floor(odm) : 12;
+  const seed = fnv1a(`${ctx.seed}:${enc.id}:rt`);
+  const rng = new Rng(seed);
+  const types = [...tw.titanTypes.values()].filter((t) => t.weight > 0).sort((a, b) => a.id.localeCompare(b.id));
+  const titans: { type: string; count: number }[] = [];
+  for (let i = 0; i < titansN; i++) {
+    const tot = types.reduce((x, t) => x + t.weight, 0);
+    let r = rng.next() * tot;
+    const pick = types.find((t) => (r -= t.weight) <= 0) ?? types[0];
+    if (!pick) break;
+    const cur = titans.find((x) => x.type === pick.id);
+    if (cur) cur.count += 1;
+    else titans.push({ type: pick.id, count: 1 });
+  }
+  const map = TERRAIN_MAP[terrainOf(ctx.world, enc.province)] ?? "tmap_plaine";
+  const base = skirmishSetup(ctx.world, tw.maps.has(map) ? map : "tmap_plaine", titans, nOdm, seed);
+  const troops = [
+    ...sectionsOf("allie", alliedKinds.map((k, i) => ({ kind: k, count: Math.floor(allied[i] ?? 0) })).filter((x) => x.count > 0), "fac_paradis"),
+    ...sectionsOf("ennemi", enemyKinds.map((k, i) => ({ kind: k, count: Math.floor(enemy[i] ?? 0) })).filter((x) => x.count > 0), enemyFaction),
+  ];
+  const batteries: BatterySpec[] = [];
+  const add = (side: "allie" | "ennemi", list: readonly { piece: string; count: number }[]): void => {
+    for (const p of list) {
+      const d = ctx.aw.pieces.get(p.piece);
+      if (!d) continue;
+      const mun = d.ammo.find((m) => ctx.aw.munitions.get(m)?.enabled) ?? d.ammo[0] ?? "";
+      batteries.push({ id: `${side}_${batteries.length + 1}`, piece: p.piece, munition: mun, side, count: Math.max(1, Math.min(6, p.count)) });
+    }
+  };
+  add("allie", ours.flatMap((a) => armyPieces(ctx.aw, a)));
+  const onWall = isWallProvince(geoOf(ctx.world), enc.province);
+  const wall = ctx.st && onWall ? wallGunsNear(ctx.world, ctx.st, enc.province) : 0;
+  if (wall > 0 && ctx.aw.pieces.get("art_canon_rempart")?.enabled) add("allie", [{ piece: "art_canon_rempart", count: wall }]);
+  add("ennemi", foes.flatMap((f) => armyPieces(ctx.aw, f.a)));
+  const spears = ours.some((a) => a.regiments.some((r) => ctx.aw.regiments.get(r.regiment)?.kind === "lances"));
+  return {
+    ...base,
+    ...(batteries.length > 0 ? { artillery: batteries } : {}),
+    ...(spears ? { thunderSpears: true } : {}),
+    ...(troops.length > 0 ? { troops } : {}),
+    timeLimit: rb.time_limit_s,
+  };
 }
 
 /** Pièces de rempart en état de tirer près d'une province : segment tenu, une pièce servie par 400 hommes de garnison. */
@@ -672,7 +806,7 @@ export function generalFalls(ctx: ArmyCtx, a: ArmyState, circumstances: string):
  * Résolution d'une rencontre : « auto » (calcul rapide), « jouer » (bataille tactique rejouée avec les ordres, puis calcul
  * pondéré par son issue) ou « retraite » (le camp du joueur se replie, poursuivi).
  */
-export function resolveEncounter(ctx: ArmyCtx, encId: string, mode: "auto" | "jouer" | "retraite", orders: readonly TimedOrder[]): EncounterResult {
+export function resolveEncounter(ctx: ArmyCtx, encId: string, mode: "auto" | "jouer" | "retraite", orders: readonly TimedOrder[], rt = false): EncounterResult {
   const enc = ctx.s.encounters.find((e) => e.id === encId);
   if (!enc || enc.status !== "attente") throw new Error("army.err.no_encounter");
   const b = ctx.aw.balance;
@@ -686,11 +820,22 @@ export function resolveEncounter(ctx: ArmyCtx, encId: string, mode: "auto" | "jo
   const player = playerOf(ctx.ns);
   let tacticalShare: number | null = null;
   let tacticalWin = false;
+  /** R2+ : pertes de l'adversaire dans la bataille de compagnies, et issue franche (défaite ou repli de Paradis). */
+  let enemyShare: number | null = null;
+  let tacticalLoss = false;
   if (mode === "jouer") {
-    const setup = encounterSetup(ctx, enc.id);
-    if (!setup || !canPlay(ctx, enc)) throw new Error("army.err.cannot_play");
+    const setup = rt ? encounterSetupRt(ctx, enc.id) : encounterSetup(ctx, enc.id);
+    if (!setup || !canPlay(ctx, enc, rt)) throw new Error("army.err.cannot_play");
     const r = runBattle(ctx.world, setup, orders);
     tacticalShare = r.dead.length / Math.max(1, setup.soldiers.length);
+    if (rt) {
+      const tr = r.state.troops ?? [];
+      const alliedN = setup.soldiers.length + tr.filter((x) => x.side === "allie").length;
+      const enemyN = tr.filter((x) => x.side === "ennemi").length;
+      tacticalShare = (r.dead.length + tr.filter((x) => x.side === "allie" && x.mode === "mort").length) / Math.max(1, alliedN);
+      enemyShare = enemyN > 0 ? tr.filter((x) => x.side === "ennemi" && x.mode === "mort").length / enemyN : null;
+      tacticalLoss = r.state.ended?.reason === "defaite" || r.state.ended?.reason === "repli";
+    }
     tacticalWin = r.state.ended?.reason === "victoire";
     result.titansKilled = r.state.titans.filter((t) => !t.alive && !t.ally).length;
     const silenced = (r.state.batteries ?? []).filter((x) => x.side === "ennemi").reduce((n, x) => n + (x.count - x.alive), 0);
@@ -733,7 +878,8 @@ export function resolveEncounter(ctx: ArmyCtx, encId: string, mode: "auto" | "jo
     let d = Math.max(0.1, def.value);
     if (tacticalShare !== null) {
       // Bataille jouée : l'issue du duel d'artillerie et des Titans pèse sur le calcul (camp de Paradis).
-      const k = tacticalWin ? 1.25 : 0.8;
+      // R2+ : la bataille de compagnies pèse davantage (victoire ×1,5, défaite ou repli ×0,6, temps écoulé ×1).
+      const k = rt ? (tacticalWin ? 1.5 : tacticalLoss ? 0.6 : 1) : tacticalWin ? 1.25 : 0.8;
       if (attSide.faction === "fac_paradis") a *= k;
       else d *= k;
     }
@@ -746,8 +892,15 @@ export function resolveEncounter(ctx: ArmyCtx, encId: string, mode: "auto" | "jo
     } else {
       const la = Math.min(0.6, b.combat.base_losses * Math.sqrt(d / a) / noise);
       const ld = Math.min(0.6, b.combat.base_losses * Math.sqrt(a / d) * noise);
-      loss(attSide, tacticalShare !== null && attSide.faction === "fac_paradis" ? (la + tacticalShare * 0.3) / 1.3 : la);
-      loss(defSide, tacticalShare !== null && defSide.faction === "fac_paradis" ? (ld + tacticalShare * 0.3) / 1.3 : ld);
+      // R2+ : pertes à parts égales entre le calcul et la bataille, pour les deux camps.
+      const blend = (sd: EncounterSide, l: number): number => {
+        if (tacticalShare === null) return l;
+        if (!rt) return sd.faction === "fac_paradis" ? (l + tacticalShare * 0.3) / 1.3 : l;
+        const share = sd.faction === "fac_paradis" ? tacticalShare : enemyShare;
+        return share === null ? l : Math.min(0.9, (l + share) / 2);
+      };
+      loss(attSide, blend(attSide, la));
+      loss(defSide, blend(defSide, ld));
       const attWins = a * noise > d;
       const winner = attWins ? attSide : defSide;
       const loser = attWins ? defSide : attSide;
