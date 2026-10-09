@@ -12,6 +12,7 @@ export interface EffectLine {
   tone: "cout" | "gain" | "neutre";
 }
 
+const facName = (id: string): string => t(id.replace(/^fac_/, "fac."));
 const tone = (v: number, goodIfPositive = true): EffectLine["tone"] => (v === 0 ? "neutre" : v > 0 === goodIfPositive ? "gain" : "cout");
 
 function where(world: World, p: string, subject: PendingEvent["subject"]): string {
@@ -86,6 +87,18 @@ export function effectLines(world: World, effects: readonly Effect[], subject: P
         break;
       case "observe":
         out.push({ text: t("eff.observe", { where: where(world, f.province, subject) }), tone: "neutre" });
+        break;
+      case "world_relation":
+        out.push({ text: t("eff.world_relation", { from: facName(f.from), to: facName(f.to), axis: t(`dip.axis.${f.axis}`), delta: formatSigned(f.delta) }), tone: f.axis === "fear" ? "neutre" : tone(f.delta) });
+        break;
+      case "world_support":
+        out.push({ text: t("eff.world_support", { faction: facName(f.faction), delta: formatSigned(f.delta) }), tone: "neutre" });
+        break;
+      case "world_hizuru":
+        out.push({ text: t(f.delta >= 0 ? "eff.world_hizuru_paradis" : "eff.world_hizuru_marley", { delta: formatSigned(f.delta) }), tone: "neutre" });
+        break;
+      case "nation":
+        out.push({ text: t(`eff.nation_${f.stat}`, { faction: facName(f.faction), delta: formatSigned(f.delta) }), tone: tone(f.delta) });
         break;
       case "flag":
       case "schedule":

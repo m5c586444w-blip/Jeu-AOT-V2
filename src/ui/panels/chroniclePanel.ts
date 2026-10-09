@@ -25,7 +25,7 @@ const THEME_ICON: Readonly<Record<EventTheme, string>> = { politique: "politique
  */
 export class ChroniclePanel implements Panel {
   readonly id = "chronique" as const;
-  private tab: "recit" | "quotidien" = "recit";
+  private tab: "recit" | "quotidien" | "mission" = "recit";
   private theme: EventTheme | null = null;
   private selected: string | null = null;
 
@@ -88,6 +88,7 @@ export class ChroniclePanel implements Panel {
         [
           { id: "recit" as const, label: t("chrono.tab.recit") },
           { id: "quotidien" as const, label: t("chrono.tab.quotidien") },
+          ...(this.ctx.world.missions ? [{ id: "mission" as const, label: t("chrono.tab.mission") }] : []),
         ],
         this.tab,
         (id) => {
@@ -99,8 +100,8 @@ export class ChroniclePanel implements Panel {
       this.themeFilter(),
     );
     root.append(top);
-    const shown = filterItems(items, this.theme, this.tab === "recit" ? "canon" : "quotidien");
-    if (this.tab === "recit") root.append(this.axis(items, s.date.year, shown));
+    const shown = filterItems(items, this.theme, this.tab === "recit" ? "canon" : this.tab);
+    if (this.tab !== "quotidien") root.append(this.axis(items, s.date.year, shown, this.tab === "recit" ? "canon" : "mission"));
 
     const current = shown.find((i) => key(i) === this.selected) ?? this.defaultSelection(shown);
     const md = h("div", "maitre-detail frise-vue");
@@ -142,12 +143,12 @@ export class ChroniclePanel implements Panel {
   }
 
   /** Axe 845 à 854+ : un segment par année, un repère par événement du récit (plein = passé, trait = annoncé, barré = évité). */
-  private axis(all: readonly TimelineItem[], currentYear: number, shown: readonly TimelineItem[]): HTMLElement {
+  private axis(all: readonly TimelineItem[], currentYear: number, shown: readonly TimelineItem[], group: TimelineItem["group"]): HTMLElement {
     const visible = new Set(shown.map(key));
     const wrap = h("div", "frise");
     wrap.setAttribute("role", "list");
     wrap.setAttribute("aria-label", t("chrono.axis"));
-    for (const seg of axisYears(all.filter((i) => i.group === "canon"), currentYear)) {
+    for (const seg of axisYears(all.filter((i) => i.group === group), currentYear)) {
       const box = h("div", `frise__annee${seg.year === currentYear ? " frise__annee--courante" : ""}`);
       box.style.flexGrow = String(seg.weight);
       box.setAttribute("role", "listitem");
@@ -169,7 +170,7 @@ export class ChroniclePanel implements Panel {
       box.append(marks, h("span", "frise__annee-nom", seg.year === 854 && currentYear > 854 ? t("chrono.year_plus", { year: seg.year }) : String(seg.year)));
       wrap.append(box);
     }
-    wrap.append(this.legend());
+    if (group === "canon") wrap.append(this.legend());
     return wrap;
   }
 
@@ -239,7 +240,7 @@ export class ChroniclePanel implements Panel {
     head.append(art, h("h3", "frise-fiche__titre", i.title));
     box.append(head);
     const tags = h("p", "frise-fiche__etiquettes");
-    tags.append(tag(t(`chrono.status.${i.status}`), STATUS_TONE[i.status]), tag(t(`chrono.theme.${i.theme}`)), h("span", "frise-fiche__date", dateLabel(i)));
+    tags.append(tag(i.group === "mission" && i.status === "passe" ? t("mission.state.done") : t(`chrono.status.${i.status}`), STATUS_TONE[i.status]), tag(t(`chrono.theme.${i.theme}`)), h("span", "frise-fiche__date", dateLabel(i)));
     if (i.status === "annonce" && i.foresight) tags.append(tag(t(`chrono.foresight.${i.foresight}`), "info"));
     box.append(tags);
     box.append(h("p", "frise-fiche__resume", i.summary));

@@ -6,6 +6,7 @@ import type { GameState } from "../sim/core/state";
 import { fromAbsoluteDay, toAbsoluteDay } from "../sim/core/time";
 import type { IntelState } from "../sim/intel/intel";
 import type { World } from "../sim/strategic/world";
+import { playerNation, sideOf } from "../sim/missions/missions";
 import { predecessorsOf } from "../sim/strategic/world";
 import { eventBody } from "./eventText";
 
@@ -24,8 +25,8 @@ export interface TimelineItem {
   id: string;
   /** Code E01–E60 (usage interne : jamais affiché). */
   code: string | null;
-  /** « canon » : événements du récit ; « quotidien » : faits de fond et événements génériques. */
-  group: "canon" | "quotidien";
+  /** « canon » : événements du récit ; « quotidien » : faits de fond et événements génériques ; « mission » : missions nationales (MIS.4). */
+  group: "canon" | "quotidien" | "mission";
   theme: EventTheme;
   title: string;
   summary: string;
@@ -195,9 +196,51 @@ export function buildTimeline(world: World, state: GameState): TimelineItem[] {
     if (c.status === "en_attente" && !pending) continue;
     items.push({ ...base(e, "quotidien", c.subject), year: fromAbsoluteDay(c.day).year, sort: c.day, status: pending ? "en_cours" : "passe", foresight: null, day: c.day, dayApprox: null, gap: 0, conform: null, choice: c.choice, pending });
   }
+  items.push(...missionItems(world, state));
   // Pas de spoiler : tant qu'un événement n'est pas résolu, ni résumé d'issue ni effets (le panneau les masque aussi).
-  for (const i of items) if (i.status === "en_cours" || (i.status === "annonce" && i.foresight !== "rumeur")) i.summary = t("chrono.hook_summary");
+  for (const i of items) if (i.group !== "mission" && (i.status === "en_cours" || (i.status === "annonce" && i.foresight !== "rumeur"))) i.summary = t("chrono.hook_summary");
   return items.sort((a, b) => a.sort - b.sort || a.id.localeCompare(b.id));
+}
+
+const BRANCH_THEME: Readonly<Record<string, EventTheme>> = { militaire: "militaire", politique: "politique", economique: "politique", religion: "politique", renseignement: "monde", monde: "monde" };
+
+/** Missions de la nation jouée : accomplies (à leur date) et en cours (à leur date d'accomplissement prévue), MIS.4. */
+export function missionItems(world: World, state: GameState): TimelineItem[] {
+  const mw = world.missions;
+  if (!mw || !state.missions) return [];
+  const side = sideOf(state.missions, playerNation(state.nations));
+  const out: TimelineItem[] = [];
+  const make = (id: string, day: number, status: "passe" | "en_cours"): void => {
+    const m = mw.byId.get(id);
+    if (!m) return;
+    const def: EventDef = { id: `evt_${id}`, kind: "fond", theme: BRANCH_THEME[m.branch] ?? "monde", playable: false, year_min: fromAbsoluteDay(day).year, window: { after: null }, conditions: [], effects: m.effects, choices: [], form: "rapport", text_key: `mission.${id}`, canon: m.canon };
+    out.push({
+      id,
+      code: null,
+      group: "mission",
+      theme: BRANCH_THEME[m.branch] ?? "monde",
+      title: t(`mission.${id}`),
+      summary: t(`mission.${id}.desc`),
+      status,
+      foresight: null,
+      year: fromAbsoluteDay(day).year,
+      yearMax: null,
+      approx: false,
+      day,
+      dayApprox: null,
+      gap: 0,
+      conform: null,
+      choice: null,
+      playable: false,
+      pending: false,
+      def,
+      subject: {},
+      sort: day,
+    });
+  };
+  for (const id of side.done) make(id, side.doneDay[id] ?? 0, "passe");
+  for (const run of side.current) make(run.id, run.end, "en_cours");
+  return out;
 }
 
 export const filterItems = (items: readonly TimelineItem[], theme: EventTheme | null, group: TimelineItem["group"]): TimelineItem[] => items.filter((i) => i.group === group && (theme === null || i.theme === theme));
