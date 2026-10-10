@@ -2,7 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import fr from "../../src/i18n/fr.json";
-import { createTranslator, interpolate, setLocale, t } from "../../src/i18n";
+import { contractFr, createTranslator, interpolate, setLocale, t } from "../../src/i18n";
 
 /** Clés littérales utilisées dans src/ : appels t("…") / t('…'). */
 const KEY_CALL = /\bt\(\s*["'`]([a-z0-9_.]+)["'`]/g;
@@ -45,5 +45,16 @@ describe("i18n (AC-14)", () => {
     expect(t("app.title")).toBe("Walls and Blood");
     setLocale("fr");
     expect(t("app.title")).toBe("Murs et Sang");
+  });
+
+  it("toponymes à nom commun : « au », « aux », « à la », « du », « des » (dette n° 31) ; noms de ville inchangés", () => {
+    expect(t("field.depot_built", { province: t("prov.plateau_du_nord") })).toBe("Dépôt avancé installé au Plateau du Nord.");
+    expect(t("field.depot_built", { province: t("prov.foret_morte") })).toBe("Dépôt avancé installé à la Forêt Morte.");
+    expect(t("field.depot_built", { province: t("prov.hameaux_est") })).toBe("Dépôt avancé installé aux Hameaux de l'Est.");
+    expect(t("field.depot_built", { province: t("prov.trost") })).toBe(`Dépôt avancé installé à ${t("prov.trost")}.`);
+    expect(contractFr("Le convoi part de Camp d'entraînement.", ["Camp d'entraînement"], new Map([["Camp d'entraînement", "le"]]))).toBe("Le convoi part du Camp d'entraînement.");
+    expect(contractFr("Retour de Collines minières.", ["Collines minières"], new Map([["Collines minières", "les"]]))).toBe("Retour des Collines minières.");
+    // Un nom non inséré par paramètre n'est pas touché.
+    expect(contractFr("à Forêt Morte", [], new Map([["Forêt Morte", "la"]]))).toBe("à Forêt Morte");
   });
 });

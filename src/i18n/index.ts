@@ -12,11 +12,46 @@ export function interpolate(template: string, params: Params = {}): string {
   return template.replace(/\{(\w+)\}/g, (whole, name: string) => (name in params ? String(params[name]) : whole));
 }
 
+/**
+ * Articles des toponymes à nom commun (dette n° 31) : `prov.<id>.article` (« le », « la », « les », « l' ») donne, pour le nom
+ * `prov.<id>`, la forme contractée après « à » et « de » (« au Plateau du Nord », « des Hameaux de l'Est », « à la Forêt Morte »).
+ */
+function articlesOf(d: Dictionary): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const [k, v] of Object.entries(d)) {
+    if (!k.endsWith(".article")) continue;
+    const name = d[k.slice(0, -".article".length)];
+    if (name) out.set(name, v);
+  }
+  return out;
+}
+
+const escapeRe = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** Contractions françaises « à le » → « au », « de les » → « des »… pour les noms insérés qui ont un article. */
+export function contractFr(text: string, inserted: readonly string[], articles: ReadonlyMap<string, string>): string {
+  let out = text;
+  for (const name of new Set(inserted)) {
+    const a = articles.get(name);
+    if (!a) continue;
+    const sep = a.endsWith("'") ? "" : " ";
+    const at = a === "le" ? "au " : a === "les" ? "aux " : `à ${a}${sep}`;
+    const of = a === "le" ? "du " : a === "les" ? "des " : `de ${a}${sep}`;
+    const n = escapeRe(name);
+    out = out.replace(new RegExp(`(^|[\\s(«])à ${n}`, "g"), `$1${at}${name}`).replace(new RegExp(`(^|[\\s(«])de ${n}`, "g"), `$1${of}${name}`);
+  }
+  return out;
+}
+
 /** Traducteur : la langue demandée, puis le français (langue de référence), puis la clé elle-même. */
 export function createTranslator(locale: Locale, dictionaries: Record<Locale, Dictionary> = DICTIONARIES) {
+  const articles = articlesOf(dictionaries.fr);
   return (key: string, params?: Params): string => {
-    const template = dictionaries[locale][key] ?? dictionaries.fr[key] ?? key;
-    return interpolate(template, params);
+    const own = dictionaries[locale][key];
+    const template = own ?? dictionaries.fr[key] ?? key;
+    const text = interpolate(template, params);
+    if ((locale !== "fr" && own !== undefined) || !params || articles.size === 0) return text;
+    return contractFr(text, Object.values(params).filter((v): v is string => typeof v === "string"), articles);
   };
 }
 
