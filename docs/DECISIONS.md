@@ -1278,3 +1278,18 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Empreinte** : seule celle du 850 de `sim:selftest` (1 000 jours, au-delà du sérum) change ; anciennes et nouvelles valeurs
   consignées au commit de P9.8.
 - **Réversible** : oui (données).
+- **Empreintes (D-154, commit `c0370f1`)** : 850 de `sim:selftest` 7d032fb4 → 75767aea ; les sept autres inchangées.
+
+## 2026-10-10 — D-155 P9.2 : invasion amphibie de l'IA (complément ; report vers P9)
+- **Constat** (essais de P9.2) : l'IA des nations n'attaquait que par la terre ; Paradis étant une île, Marley ne l'envahissait
+  jamais (854 : victoire de Paradis acquise sans jouer ; 02 §14 et 18 §9 demandent l'invasion amphibie).
+- **Choix** (`src/sim/world/ai.ts`, ajout seulement) : une nation attirée par le Fondateur, en guerre avec la nation qui le
+  détient, vise l'île de celle-ci ; port d'embarquement = son port le plus proche par la mer ; levées mensuelles au port
+  (troupes d'assaut, transports) ; embarquement quand la puissance des troupes (au moins la moitié de l'effort) et des Titans
+  libres dépasse la défense de l'île × seuil de prise × marge × prudence ; puis une zone de mer par semaine, débarquement, et
+  les Titans projetés sur le front par la règle existante. Règles de mouvement inchangées (transports, mer tenue). Paramètres
+  `A` : `data/balance/world.json` (`ai.invasion` : marge 1,15, garnison 25 %, levée 4 par mois). Chaque pas est consigné dans
+  le journal de raisonnement, avec ses raisons traduites.
+- **Effet** : contre un Paradis qui ne défend pas l'île, Marley la prend dans l'année ; un joueur qui lève des troupes et
+  projette ses Titans la tient. Empreinte 854 de `sim:selftest` : nouvelle valeur consignée au commit de P9.2.
+- **Réversible** : oui (retirer `ai.invasion` des données désactive le comportement).

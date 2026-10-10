@@ -115,6 +115,7 @@
       }
     },
     "attractor_bonus": 20,
-    "min_reserve_industry": 50
+    "min_reserve_industry": 50,
+    "invasion": { "marge": 1.15, "garnison": 0.25, "levee_max": 4 }
   }
 }

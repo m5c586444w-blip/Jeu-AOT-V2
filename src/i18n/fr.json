@@ -3771,5 +3771,11 @@
   "evt.851.marley_ships_lost.choice.couler": "Couler les navires",
   "evt.851.marley_ships_lost.choice.ignorer": "Les laisser repartir",
   "fin.obj.confiance": "Gouverner sans perdre la confiance (légitimité 50 au terme)",
-  "fin.obj.alliance_hizuru": "Conclure une alliance avec Hizuru"
+  "fin.obj.alliance_hizuru": "Conclure une alliance avec Hizuru",
+  "ai.invasion_staging": "Port d'embarquement de l'invasion",
+  "ai.invasion_landing": "Formations débarquées",
+  "ai.invasion_route": "Zone de mer franchie",
+  "ai.invasion_troops": "Puissance des troupes embarquables",
+  "ai.invasion_titans": "Puissance des Titans disponibles",
+  "ai.invasion_need": "Puissance exigée (défense × seuil de prise × marge)"
 }

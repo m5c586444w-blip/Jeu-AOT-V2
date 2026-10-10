@@ -396,6 +396,8 @@ export const WorldBalanceSchema = z
         personality: z.record(z.string(), z.object({ attack: num, build: num, diplomacy: num, caution: num }).strict()),
         attractor_bonus: num,
         min_reserve_industry: num,
+        /** Invasion amphibie (P9.2) : marge de puissance exigée au-delà du seuil de prise, part laissée en garnison au port. */
+        invasion: z.object({ marge: num, garnison: prob, levee_max: num }).strict().optional(),
       })
       .strict(),
   })
