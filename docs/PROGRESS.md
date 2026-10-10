@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P10 terminée** (finitions, accessibilité, documentation ; fichier 18 §10 ; D-158 à D-163 ; dettes n° 69 à 73). Suivante : **PACK** (application Windows, fichier 23 §6). |
-| Tâche | Ouvrir PACK : `docs/phases/PACK.md` (préparé : `git stash` « PACK et brouillons P10 ») |
-| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 761 tests ; 8 empreintes inchangées (`docs/reports/P10-verify-p107d.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : PACK sur `claude/intelligent-feynman-8ekib4` (mandat autonome, D-148), puis dette n° 72 (tenues des soldats, demande de l'utilisateur, D-163) et contrôle de conformité de la 3D demandé par l'utilisateur ; puis dettes. À la revue : Gabriel lit `docs/reports/P9.md`, `P10.md`, `P9-balance.html` ; mesures GPU (dettes n° 49, 64, 71, 73) |
+| Phase | **PACK terminée** (application Windows Electron : `npm run package:win`, `smoke:pack` ; D-164). Feuille de route V2 achevée (N1 à N3). Suite : dette n° 72 (tenues des soldats, demande de l'utilisateur) et contrôle de conformité de la 3D, puis dettes. |
+| Tâche | Dette n° 72 : tenues des soldats selon `CLAUDE.md` § Style des soldats (D-163) |
+| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 761 tests (`docs/reports/PACK-verify.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : dette n° 72 (tenues), puis contrôle de conformité de la 3D (réponse à l'utilisateur), puis dettes, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
@@ -14,6 +14,7 @@
 - P9 terminée le 2026-10-10 (`docs/reports/P9.md`) : commits `e801995`, `d2b3744`, `db0a4d7`, `c0370f1`, `3e28416`, `9d8ec31` et le commit de fin de phase. Arrêt de revue : revue indépendante par un sous-agent (« acceptable après corrections », toutes traitées, D-156) ; la revue de Gabriel reste due à son retour.
 - P9 close le 2026-10-10 : équilibrage final (5 000 parties en quatre lots fusionnés) : 845 64,3 %, 850 53,8 %, 854 Paradis 57,1 % (Marley IA 31,5 %), 854 Marley joué 0 % (dette n° 66), Grondement 31,5 % ; mortalité d'expédition 26,5 % ; CP9-03 à CP9-06 OK.
 - P10 terminée le 2026-10-10 (`docs/reports/P10.md`) : commits `ef2c66a` (P10.1), `7fa8d15` (P10.2), `a309bd0` (P10.4–P10.5), `5f17fb0` (CONFORMITE), `8d8b75e`, `7152b0b`, `e7d14e7` (P10.7).
+- PACK terminée le 2026-10-10 (`docs/reports/PACK.md`) : commits `32e9d3a`, `d03b882` et le commit de fin de phase ; Windows construit depuis Linux, non lancé.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
