@@ -213,12 +213,21 @@ try {
   // Ordres en pause : clic droit (se déplacer), Maj + clic droit (file), formation, ordre d'unité, attaque d'un Titan.
   const tick0 = await num(page, "tick");
   const n0 = await probe(page, (p) => p.orders().length);
-  const centerX = box.x + box.width * 0.45;
-  const centerY = box.y + box.height * 0.45;
+  // Un point de sol sans unité dessous, près du centre (un clic droit sur un allié vaut « suivre », sur un ennemi « attaquer »).
+  const free = (await page.evaluate(`(() => { const p = window.__batailleRt; const w = ${box.width}, h = ${box.height};
+    for (let r = 0; r < 12; r++) for (let a = 0; a < 8; a++) {
+      const x = w * 0.45 + Math.cos(a * Math.PI / 4) * r * 22, y = h * 0.45 + Math.sin(a * Math.PI / 4) * r * 22;
+      if (!p.view.pick(p.bt.state, x, y) && p.view.groundAt(x, y)) return [x, y];
+    }
+    return [w * 0.45, h * 0.45]; })()`)) as [number, number];
+  const centerX = box.x + free[0];
+  const centerY = box.y + free[1];
+  const aim = await page.evaluate(`(() => { const p = window.__batailleRt; const x = ${free[0]}, y = ${free[1]}; return { hit: p.view.pick(p.bt.state, x, y), ground: p.view.groundAt(x, y) }; })()`);
   await page.mouse.click(centerX, centerY, { button: "right" });
   await page.waitForTimeout(200);
   const moved = await probe(page, (p) => p.orders().filter((o) => o.order === "deplacer").length);
-  expect(moved >= rect.length && (await probe(page, (p) => p.orders().length)) === n0 + rect.length, `clic droit au sol : « se déplacer » pour chaque unité sélectionnée (${moved} ordres journalisés)`);
+  const kinds = await probe(page, (p) => p.orders().map((o) => o.order).join(","));
+  expect(moved >= rect.length && (await probe(page, (p) => p.orders().length)) === n0 + rect.length, `clic droit au sol : « se déplacer » pour chaque unité sélectionnée (${moved} ordres journalisés ; ordres : ${kinds || "aucun"} ; visée : ${JSON.stringify(aim)})`);
   await page.keyboard.down("Shift");
   await page.mouse.click(centerX + 120, centerY - 40, { button: "right" });
   await page.keyboard.up("Shift");

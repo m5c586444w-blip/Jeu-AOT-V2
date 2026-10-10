@@ -110,6 +110,17 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
   const pauseBanner = el("p", "rt-pause", t("rt.paused"));
   const message = el("p", "rt-message");
   message.hidden = true;
+  // Dette n° 58 : le message de repli se retire seul après 10 s (ou au clic) pour ne pas masquer d'unités ; il reste en
+  // infobulle sur l'indicateur de vue.
+  let messageTimer = 0;
+  const showMessage = (text: string): void => {
+    message.textContent = text;
+    message.hidden = false;
+    viewLabel.title = text;
+    window.clearTimeout(messageTimer);
+    messageTimer = window.setTimeout(() => (message.hidden = true), 10_000);
+  };
+  message.addEventListener("click", () => (message.hidden = true));
   const optBox = el("div", "rt-options");
   optBox.hidden = true;
   host.append(rect, labels, pauseBanner, message, optBox);
@@ -133,8 +144,8 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     host.prepend(view.canvas);
     view.setMap(bt.map);
     view.frame(framePoints());
-    message.hidden = !made.fallback;
-    message.textContent = made.fallback ?? "";
+    if (made.fallback) showMessage(made.fallback);
+    else message.hidden = true;
     root.dataset["vue"] = view.kind;
     // Sonde des contrôles (smoke:r2), serveur de développement seulement : vue et bataille en lecture.
     if (import.meta.env.DEV) (window as unknown as Record<string, unknown>)["__batailleRt"] = { view, bt, orders: () => orders };
@@ -206,16 +217,12 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     void mountView()
       .then(() => {
         view.setCamera("strategique");
-        if (reason) {
-          message.hidden = false;
-          message.textContent = reason;
-        }
+        if (reason) showMessage(reason);
         switching = false;
       })
       .catch((e: unknown) => {
         // Aucune vue n'a pu être montée : la bataille continue sans image (horloge, carnet et ordres restent actifs).
-        message.hidden = false;
-        message.textContent = t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) });
+        showMessage(t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) }));
       });
   };
 
@@ -441,6 +448,16 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     bar.append(b);
     chips.set(sq.id, { b, men, ord, grp });
   }
+  // Dette n° 56 : la molette fait défiler la bande horizontalement (barre de défilement visible, `screen.css`).
+  bar.addEventListener(
+    "wheel",
+    (ev) => {
+      if (Math.abs(ev.deltaY) <= Math.abs(ev.deltaX) || bar.scrollWidth <= bar.clientWidth) return;
+      bar.scrollLeft += ev.deltaY;
+      ev.preventDefault();
+    },
+    { passive: false },
+  );
   const renderChips = (): void => {
     for (const [id, c] of chips) {
       const sq = bt.state.squads.find((x) => x.id === id);
@@ -462,6 +479,15 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     root.dataset["selection"] = sel.unit ? `${sel.unit.troop ? "troupe" : "soldat"}:${sel.unit.index}` : sel.squads.join(",");
     renderPanel();
     renderChips();
+    // Dette n° 56 : la pastille de la première unité choisie est amenée dans la bande (vingt escouades n'y tiennent pas).
+    const first = sel.squads[0];
+    const chip = first ? chips.get(first)?.b : undefined;
+    // Défilement de la bande seule (jamais de la page : `scrollIntoView` déplacerait la scène).
+    if (chip) {
+      const l = chip.offsetLeft - bar.offsetLeft;
+      if (l < bar.scrollLeft) bar.scrollLeft = l - 8;
+      else if (l + chip.offsetWidth > bar.scrollLeft + bar.clientWidth) bar.scrollLeft = l + chip.offsetWidth - bar.clientWidth + 8;
+    }
   };
   const assignGroup = (n: number): void => {
     if (sel.squads.length === 0) return;
@@ -826,6 +852,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
   return new Promise<TimedOrder[] | null>((resolve) => {
     const finish = (value: TimedOrder[] | null): void => {
       done = true;
+      window.clearTimeout(messageTimer);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
@@ -941,10 +968,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       } catch (e) {
         const msg = t("rt.view3d_failed", { msg: e instanceof Error ? e.message : String(e) });
         if (view.kind === "3d") switchView("2d", msg);
-        else {
-          message.hidden = false;
-          message.textContent = msg;
-        }
+        else showMessage(msg);
         requestAnimationFrame(frame);
         return;
       }

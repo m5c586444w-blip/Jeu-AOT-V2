@@ -739,7 +739,7 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .carnet-lignes { list-style: none; margin: 0; padding: 0; font-size: var(--t-s); }
 .carnet-lignes li { padding: 0.15rem 0; border-bottom: var(--filet-l) solid var(--filet-doux); }
 .carnet-mort { color: var(--danger-clair); }
-.bataille-escouades { grid-area: escouades; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.45rem 0.6rem 0.5rem; background: var(--panneau); border-top: var(--filet-l) solid var(--filet); }
+.bataille-escouades { grid-area: escouades; display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.45rem 0.6rem 0.5rem; background: var(--panneau); border-top: var(--filet-l) solid var(--filet); scrollbar-width: thin; scrollbar-color: var(--accent) var(--panneau-creux); }
 .carte-escouade { flex: 0 0 calc((100% - 1.5rem) / 4); min-width: 12rem; padding: 0.3rem 0.5rem 0.4rem; font-size: var(--t-s); background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); border-top: 2px solid var(--accent); }
 .carte-escouade h4 { margin: 0; font-size: var(--t-m); }
 .carte-escouade-ordres { display: flex; flex-wrap: wrap; gap: 0.15rem; }

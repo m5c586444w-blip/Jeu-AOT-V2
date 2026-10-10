@@ -489,6 +489,47 @@ export class View3D implements BattleView {
     const vfov = (this.cam.fov * Math.PI) / 180;
     const hfov = 2 * Math.atan(Math.tan(vfov / 2) * this.cam.aspect);
     this.dist = Math.min(1200, Math.max(40, (span / 2 / Math.tan(Math.min(vfov, hfov) / 2)) * 1.05));
+    // Dette n° 57 : ajustement exact sur les unités projetées (pieds et têtes dans 88 % de l'image), puis recentrage du
+    // cadre projeté ; l'estimation ci-dessus (champ le plus étroit pour les deux axes) laissait 40 à 50 % de sol vide.
+    const pts = points.flatMap((p) => [new Vector3(p.x, 0, p.y), new Vector3(p.x, Math.max(2, p.z), p.y)]);
+    const probe = this.cam.clone();
+    const ndc = new Vector3();
+    const bounds = (d: number): { ok: boolean; cx: number; cy: number } => {
+      const cp = Math.cos(this.pitch);
+      probe.position.set(this.target.x + Math.sin(this.yaw) * cp * d, Math.sin(this.pitch) * d, this.target.z + Math.cos(this.yaw) * cp * d);
+      probe.lookAt(this.target);
+      probe.updateMatrixWorld();
+      let [a, b, c, e] = [Infinity, -Infinity, Infinity, -Infinity];
+      for (const q of pts) {
+        ndc.copy(q).project(probe);
+        if (ndc.z >= 1) return { ok: false, cx: 0, cy: 0 };
+        a = Math.min(a, ndc.x);
+        b = Math.max(b, ndc.x);
+        c = Math.min(c, ndc.y);
+        e = Math.max(e, ndc.y);
+      }
+      return { ok: a >= -0.88 && b <= 0.88 && c >= -0.88 && e <= 0.88, cx: (a + b) / 2, cy: (c + e) / 2 };
+    };
+    const fit = (): void => {
+      let lo = 40;
+      let hi = Math.max(this.dist, 60) * 1.5;
+      if (!bounds(hi).ok) return;
+      for (let k = 0; k < 20; k++) {
+        const mid = (lo + hi) / 2;
+        if (bounds(mid).ok) hi = mid;
+        else lo = mid;
+      }
+      this.dist = Math.min(1200, hi);
+    };
+    fit();
+    for (let k = 0; k < 3; k++) {
+      const { cx, cy } = bounds(this.dist);
+      this.raycaster.setFromCamera(new Vector2(cx, cy), probe);
+      const hit = this.raycaster.ray.intersectPlane(this.groundPlane, new Vector3());
+      if (!hit) break;
+      this.target.set(hit.x, 0, hit.z);
+      fit();
+    }
     this.openDist = this.dist;
     this.mode = "strategique";
     this.followGoal = null;

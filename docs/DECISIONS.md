@@ -4,7 +4,7 @@
 
 ## Index
 
-168 décisions, de D-01 (2026-10-02) à D-168 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+169 décisions, de D-01 (2026-10-02) à D-169 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -174,6 +174,7 @@
 - **D-166** (10-10) — Dette n° 74 : décor de la bataille habillé par les profils de style
 - **D-167** (10-10) — Dette n° 75 : bâtiments translucides devant les unités choisies, jauges au-dessus des escouades
 - **D-168** (10-10) — Dette n° 55 (décor) : mur d'enceinte en toile de fond de la ville de bataille
+- **D-169** (10-10) — Dettes n° 56 à 58 : interface de la bataille temps réel
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1649,4 +1650,17 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   motif répété de R1e. Rendu seul : la simulation ne le connaît pas (une emprise par structure de la carte, test).
 - **Reste** (dette n° 55) : nom du lieu au carnet d'après la carte tactique ; camp des obus au bilan.
 - **Réversible** : oui (`battle/world.ts`).
+
+## 2026-10-10 — D-169 Dettes n° 56 à 58 : interface de la bataille temps réel
+- **n° 57, cadrage d'ouverture** : la distance n'était plus estimée avec le champ le plus étroit pour les deux axes (40 à 50 %
+  de sol vide), mais ajustée exactement : la plus courte où toutes les unités (pieds et têtes) tiennent dans 88 % de l'image,
+  puis le cadre projeté est recentré (trois passes). Conséquence : l'image est plus serrée, et le point central tombe parfois
+  sur un homme ; `smoke:r2` cherche désormais un point de sol libre pour le contrôle « clic droit au sol » (un clic droit sur
+  un allié vaut « suivre », règle du jeu inchangée ; cause établie par le message enrichi du contrôle).
+- **n° 56, bande des unités** : barre de défilement fine et visible, molette convertie en défilement horizontal, pastille de
+  la première unité choisie amenée dans la bande (défilement de la bande seule, jamais de la page).
+- **n° 58, message de repli 2D** : retiré au bout de 10 s ou au clic ; il reste en infobulle sur l'indicateur « 2D ».
+- **n° 59** : la garde existe depuis R2.5 (touches ignorées quand le focus est dans un champ, une liste ou une zone de texte) ;
+  non reproduit, laissé ouvert.
+- **Réversible** : oui.
 
