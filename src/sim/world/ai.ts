@@ -166,7 +166,7 @@ export interface InvasionPlan {
 const isSea = (ctx: AiCtx, id: string): boolean => nationsWorld(ctx.world).provinces.get(id)?.faction === "mer";
 
 /** Route de mer la plus courte d'une province (port ou zone) vers une zone voisine de la cible ; null sans route. */
-function seaPath(ctx: AiCtx, from: string, target: string): string[] | null {
+export function seaPath(ctx: AiCtx, from: string, target: string): string[] | null {
   const nw = nationsWorld(ctx.world);
   const goal = new Set((nw.provinces.get(target)?.adjacent ?? []).filter((a) => isSea(ctx, a)));
   if (goal.size === 0) return null;
