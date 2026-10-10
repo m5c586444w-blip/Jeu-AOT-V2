@@ -19,7 +19,7 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls: string, text?: s
 }
 
 export class ManualPanel {
-  readonly el = el("aside", "options manuel");
+  readonly el = el("aside", "manuel");
   private section: (typeof MANUAL_SECTIONS)[number] = "but";
 
   constructor(

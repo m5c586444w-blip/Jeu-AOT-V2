@@ -123,7 +123,7 @@ try {
   await game.keyboard.press("Escape");
   expect(await game.locator(".manuel").isHidden(), "manuel : Échap le ferme");
   await game.keyboard.press("F9");
-  await game.waitForSelector(".options:not([hidden]):not(.manuel)");
+  await game.waitForSelector(".options:not([hidden])");
   for (const k of ["colorblind", "readingAid"]) await game.locator(`.options__acces input[data-setting="${k}"]`).check();
   await game.waitForTimeout(300);
   const attrs = await game.evaluate(() => [document.documentElement.dataset["daltonien"], document.documentElement.dataset["lecture"]]);

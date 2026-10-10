@@ -320,7 +320,7 @@ button.notification:hover { background: var(--reflet-fort); }
 body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--sous-titres-y, 4rem); bottom: auto; transform: none; align-items: flex-start; }
 
 /* ——— Options ——— */
-.options {
+.options, .manuel {
   position: fixed;
   z-index: 40;
   top: 50%;
@@ -335,7 +335,7 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
   border-top: 2px solid var(--accent);
   box-shadow: 0 0 0 100vmax var(--voile);
 }
-.options[hidden] { display: none; }
+.options[hidden], .manuel[hidden] { display: none; }
 .options__tete { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; margin: 0 -1rem 0.4rem; padding: 0.5rem 1rem; background: linear-gradient(var(--reflet-fort), transparent) var(--panneau); border-bottom: var(--filet-l) solid var(--filet-doux); }
 .options__titre { margin: 0; font-size: var(--t-xl); }
 .options__ligne { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; padding: 0.3rem 0; border-bottom: var(--filet-l) solid var(--filet-doux); }
@@ -355,7 +355,6 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 /* Manuel (P10.4) : sommaire à gauche, texte à droite ; une colonne sur un écran étroit. */
 .manuel { width: min(52rem, 94vw); height: min(40rem, 86vh); align-content: start; display: grid; grid-template-columns: 12rem minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); column-gap: 1rem; }
 .manuel > .options__tete { grid-column: 1 / -1; }
-.manuel[hidden] { display: none; }
 .manuel__sommaire { display: flex; flex-direction: column; gap: 0.15rem; align-self: start; position: sticky; top: 3rem; }
 .manuel__onglet { padding: 0.25rem 0.5rem; text-align: left; font-size: var(--t-s); color: var(--texte-second); background: transparent; border: var(--filet-l) solid transparent; border-left: 3px solid transparent; }
 .manuel__onglet:hover, .manuel__onglet[aria-current="true"] { color: var(--texte-fort); background: var(--voile); border-left-color: var(--accent); }

@@ -420,7 +420,7 @@ export async function bootGame(): Promise<void> {
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
   // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre ouverte (registre, dossier, options…) la recouvre ;
   // une fenêtre qui ne la touche pas la laisse utilisable. Masquée par `visibility`, elle garde sa place : on peut mesurer.
-  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .choix-nation";
+  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .manuel:not([hidden]), .choix-nation";
   const syncLegend = (): void => {
     const a = layers.el.getBoundingClientRect();
     const covered = [...document.querySelectorAll(WINDOWS)].some((w) => {

@@ -70,8 +70,10 @@ try {
   await page.waitForTimeout(400);
   console.log("[scénario 850] 1366×768");
 
-  // 6 registres de P2 + « Expéditions » (P3) + « Chronique », « Renseignement », « Bureau d'études » (P5).
-  expect((await page.locator(".bandeau__registre-bouton").count()) === 15, "menu de gestion : 15 registres (P2 + Expéditions + P5 + Porteurs + Gazette, Archives, Épilogue + Économie)");
+  // 6 registres de P2 + « Expéditions » (P3) + « Chronique », « Renseignement », « Bureau d'études » (P5) + « Porteurs » (P6)
+  // + « Gazette », « Archives », « Épilogue » (P8) + « Économie » (UI) + « Armées » (PA) + « Missions » (MIS).
+  const registers = await page.locator(".bandeau__registre-bouton").count();
+  expect(registers === 17, `menu de gestion : 17 registres (P2 + Expéditions + P5 + Porteurs + Gazette, Archives, Épilogue + Économie + Armées + Missions) : ${registers}`);
   await page.screenshot({ path: `${OUT}/p2-ecran.png` });
 
   // Un mois passe : capital, propositions du conseil, entrées de journal.
