@@ -30,7 +30,8 @@ function who(world: World, c: string, subject: PendingEvent["subject"]): string 
  * Lignes lisibles des effets. Les morts ne sont jamais nommées d'avance (aucun spoiler de chronique) : un choix
  * qui expose des officiers nommés l'annonce sans dire lesquels. Drapeaux et programmations internes sont omis.
  */
-export function effectLines(world: World, effects: readonly Effect[], subject: PendingEvent["subject"] = {}): EffectLine[] {
+/** `past` (dette n° 31) : effets déjà appliqués (conséquences d'un événement survenu), écrits au passé. */
+export function effectLines(world: World, effects: readonly Effect[], subject: PendingEvent["subject"] = {}, past = false): EffectLine[] {
   const out: EffectLine[] = [];
   let kills = 0;
   for (const f of effects) {
@@ -106,7 +107,7 @@ export function effectLines(world: World, effects: readonly Effect[], subject: P
         break;
     }
   }
-  if (kills > 0) out.push({ text: t("eff.officers_exposed"), tone: "cout" });
+  if (kills > 0) out.push({ text: t(past ? "eff.officers_exposed_past" : "eff.officers_exposed"), tone: "cout" });
   return out;
 }
 

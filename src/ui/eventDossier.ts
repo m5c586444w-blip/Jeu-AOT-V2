@@ -66,7 +66,7 @@ export class EventDossier {
     art.innerHTML = archetypeSvg(archetypeOf(e));
     art.setAttribute("role", "presentation");
     paper.append(head, art, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
-    const happened = effectLines(this.world, e.effects, p.subject);
+    const happened = effectLines(this.world, e.effects, p.subject, true);
     if (happened.length > 0) {
       paper.append(el("h3", "dossier-evenement__intertitre", t("evt.consequences")));
       paper.append(this.lines(happened));

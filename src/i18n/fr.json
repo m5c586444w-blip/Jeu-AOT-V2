@@ -1914,6 +1914,7 @@
   "eff.observe": "Observation directe : {where}",
   "eff.everywhere": "tout le territoire",
   "eff.officers_exposed": "Des officiers nommés seront exposés",
+  "eff.officers_exposed_past": "Des officiers nommés ont été exposés",
   "chron.closed": "La chronique n'est pas tenue dans ce scénario.",
   "chron.divergence": "Divergence",
   "chron.divergence_why": "Somme des écarts à la chronique connue : choix non historiques (part du poids de l'événement) et événements évités (leur poids entier). Au-delà de {threshold}, l'histoire bascule en branche divergente.",
