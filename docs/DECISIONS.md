@@ -4,7 +4,7 @@
 
 ## Index
 
-166 décisions, de D-01 (2026-10-02) à D-166 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+167 décisions, de D-01 (2026-10-02) à D-167 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -172,6 +172,7 @@
 - **D-164** (10-10) — PACK.1 : Electron plutôt que Tauri
 - **D-165** (10-10) — Dette n° 72 : uniformes des soldats selon l'œuvre, critère de silhouette par famille
 - **D-166** (10-10) — Dette n° 74 : décor de la bataille habillé par les profils de style
+- **D-167** (10-10) — Dette n° 75 : bâtiments translucides devant les unités choisies, jauges au-dessus des escouades
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1622,4 +1623,20 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   optimisation pour le rendu logiciel (consigne R1e).
 - **Reste** : pas de mur autour de la « Ville des Murs » (dette n° 55) ; lieux faits main non raccordés (n° 7).
 - **Réversible** : oui (`src/render/tactical3d/battle/world.ts`, `view3d.ts`).
+
+## 2026-10-10 — D-167 Dette n° 75 : bâtiments translucides devant les unités choisies, jauges au-dessus des escouades
+- **Constat** (contrôle de conformité de la 3D) : 15 C-06 et 18 R4.4 (« un bâtiment qui cache une unité devient translucide
+  au survol ou à la sélection ») et 04 §4, 15 C-17 (« icônes au-dessus des têtes : gaz, lames, stress ») absents de la 3D.
+- **Décision** :
+  - chaque sommet du décor bâti porte l'indice de sa maison ; à chaque image, les maisons coupées par le segment
+    caméra → poitrine des unités choisies (24 au plus) sont listées (les plus proches d'abord, 8 au plus) et rendues en
+    trame de pixels (deux sur trois écartés) : pas de tri de transparence, les faces fusionnées par matière restent un appel
+    de dessin ; les ombres sont inchangées ;
+  - sélection seulement (l'interface de bataille n'a pas de survol d'unité) ;
+  - sous le numéro de chaque escouade de manœuvre (3D) : trois pictogrammes dessinés par le projet (bonbonne, lame, éclair
+    brisé) avec un niveau (moyenne des hommes debout : gaz / réservoir, paires de lames / 2, stress / 100), en rouge sous un
+    quart de gaz, sans paire de rechange ou au-delà de 70 de stress ; valeurs exactes en infobulle. Les trois jauges pour
+    les escouades choisies, seulement celles en alerte pour les autres (vingt escouades côte à côte se chevauchaient sinon :
+    première capture de `smoke:r2`). Le DOM n'est retouché que quand un niveau change d'un dixième.
+- **Réversible** : oui (`battle/world.ts`, `battle/view3d.ts`, `rtBattleScreen.ts`, `screen.css`).
 

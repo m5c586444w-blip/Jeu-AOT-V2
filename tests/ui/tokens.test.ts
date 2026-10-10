@@ -10,7 +10,7 @@ const sources = files(ROOT).filter((f) => /\.(css|ts)$/.test(f) && f.replace(/\\
 /** Couleur littérale : #rgb à #rrggbbaa (hors entités HTML), rgb()/rgba()/hsl()/hsla(), 0xRRGGBB. */
 const COLOR = /(?<![&\w])#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|\b0x[0-9a-fA-F]{6}\b/g;
 /** Variables posées par le code à l'exécution (textures, hauteurs mesurées, position des sous-titres). */
-const RUNTIME = new Set(["--grain-fond", "--grain-cadre", "--fibres", "--masque-tampon", "--taches", "--bandeau-h", "--gestion-h", "--hauteur-utile", "--sous-titres-x", "--sous-titres-y", "--ui-echelle"]);
+const RUNTIME = new Set(["--grain-fond", "--grain-cadre", "--fibres", "--masque-tampon", "--taches", "--bandeau-h", "--gestion-h", "--hauteur-utile", "--sous-titres-x", "--sous-titres-y", "--ui-echelle", "--jauge-niveau"]);
 
 describe("jetons de style (UI.1, U1)", () => {
   const tokens = readFileSync(TOKENS, "utf8");

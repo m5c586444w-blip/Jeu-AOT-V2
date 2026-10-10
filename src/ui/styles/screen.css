@@ -764,6 +764,15 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .rt-etiquette--titan-allie { color: var(--texte-fort); background: var(--panneau); border-color: var(--accent); }
 .rt-etiquette--choisie { color: var(--accent-texte); background: var(--accent); }
 .rt-etiquette--repli { border-color: var(--danger-plein); }
+/* Dette n° 75 : pictogrammes gaz, lames, stress sous le numéro d'escouade (3D) ; niveau en barre verticale. */
+.rt-jauges { display: flex; gap: 0.15rem; justify-content: center; margin-top: 0.05rem; color: var(--texte); }
+.rt-jauge { display: inline-flex; align-items: flex-end; gap: 1px; }
+.rt-jauge svg { display: block; }
+.rt-jauge__niveau { position: relative; width: 3px; height: 9px; }
+.rt-jauge__niveau::before { content: ""; position: absolute; inset: 0; background: currentColor; opacity: 0.25; }
+.rt-jauge__niveau::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--jauge-niveau, 0) * 100%); background: currentColor; }
+.rt-jauge--alerte { color: var(--danger-clair); }
+.rt-jauges[hidden], .rt-jauge[hidden] { display: none; }
 .rt-pause { position: absolute; z-index: 2; top: 0.5rem; left: 50%; transform: translateX(-50%); margin: 0; padding: 0.15rem 0.8rem; font-size: var(--t-s); letter-spacing: 0.08em; color: var(--accent-clair); background: var(--voile-fort); pointer-events: none; }
 .rt-message { position: absolute; z-index: 2; top: 2.6rem; left: 50%; transform: translateX(-50%); width: min(40rem, 90%); margin: 0; padding: 0.3rem 0.6rem; font-size: var(--t-s); color: var(--texte-fort); background: var(--voile-fort); border-left: 3px solid var(--accent); }
 .rt-options { position: absolute; z-index: 3; top: 0.5rem; right: 0.5rem; width: min(22rem, 90%); padding: 0.5rem 0.7rem; background: var(--panneau); border: var(--filet-l) solid var(--filet); }

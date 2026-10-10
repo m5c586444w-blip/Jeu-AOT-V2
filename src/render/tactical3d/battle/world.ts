@@ -1,4 +1,4 @@
-import { Box3, BoxGeometry, Color, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
+import { Box3, BoxGeometry, BufferAttribute, Color, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
 import type { BufferGeometry, Material, Object3D, Texture } from "three";
 import type { Structure, TacticalWorldMap } from "../../../sim/tactical/map";
 import { derive, range, seeded } from "../rng";
@@ -64,7 +64,45 @@ export interface BattleWorld {
   windows: MeshStandardMaterial[];
   /** Profil de style des bâtiments. */
   profile: StyleProfile;
+  /** Volumes des bâtiments rendus (toit compris), dans l'ordre des bâtiments de la carte : tests de ligne de vue. */
+  houses: HouseBox[];
+  /**
+   * Dette n° 75 (15 C-06, 18 R4.4) : bâtiments (indices de `houses`, 8 au plus) rendus translucides parce qu'ils cachent
+   * une unité choisie : trame de pixels (deux sur trois écartés), sans tri de transparence.
+   */
+  setOccluders(indices: readonly number[]): void;
+  /** Bâtiments translucides en ce moment (indices de `houses`). */
+  occluders(): number[];
   dispose(): void;
+}
+
+export interface HouseBox {
+  id: number;
+  x0: number;
+  x1: number;
+  y0: number;
+  y1: number;
+  /** Faîtage (m). */
+  top: number;
+}
+
+export const MAX_OCCLUDERS = 8;
+
+/** Rend translucide (trame de pixels) les fragments des bâtiments listés dans `uCaches` (indice + 1 ; −1 : vide). */
+function patchOcclusion(mat: MeshStandardMaterial, caches: { value: Float32Array }): void {
+  mat.onBeforeCompile = (sh) => {
+    sh.uniforms["uCaches"] = caches;
+    sh.vertexShader = sh.vertexShader
+      .replace("#include <common>", "#include <common>\nattribute float batiment;\nvarying float vBatiment;")
+      .replace("#include <begin_vertex>", "#include <begin_vertex>\nvBatiment = batiment;");
+    sh.fragmentShader = sh.fragmentShader
+      .replace("#include <common>", `#include <common>\nvarying float vBatiment;\nuniform float uCaches[${MAX_OCCLUDERS}];`)
+      .replace(
+        "void main() {",
+        `void main() {\n  for (int i = 0; i < ${MAX_OCCLUDERS}; i++) {\n    if (vBatiment > 0.5 && abs(vBatiment - uCaches[i]) < 0.5) {\n      vec2 q = floor(gl_FragCoord.xy);\n      if (mod(q.x + 2.0 * q.y, 3.0) > 0.5) discard;\n    }\n  }`,
+      );
+  };
+  mat.customProgramCacheKey = (): string => "occlusion-batiments";
 }
 
 const M = new Matrix4();
@@ -121,6 +159,9 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
   const windows: MeshStandardMaterial[] = [];
   const style = opts.profile ?? battleProfile(m);
   const tx = opts.textures ?? null;
+  const caches = { value: new Float32Array(MAX_OCCLUDERS).fill(-1) };
+  const houseMeshes: Mesh[] = [];
+  const houseBoxes: HouseBox[] = [];
 
   // Bâtiments (dette n° 74) : maisons du profil de style, murs à l'emprise et à la hauteur de la simulation ; toit au-dessus
   // (débord d'avant-toit de 0,45 m). L'emprise retenue est mesurée sur les sommets des façades rendues.
@@ -182,12 +223,14 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     }
     const add = (fb: FaceBuilder | undefined, mat: MeshStandardMaterial, name: string): void => {
       decorMats.push(mat);
+      patchOcclusion(mat, caches);
       if (!fb || fb.pos.length === 0) return;
       const mesh = new Mesh(fb.build(), mat);
       mesh.name = name;
       mesh.castShadow = true;
       mesh.receiveShadow = true;
       group.add(mesh);
+      houseMeshes.push(mesh);
     };
     const walls = new Set<WallMaterial>([...out.ground.keys(), ...out.upper.keys(), ...out.plain.keys()]);
     for (const wm of [...walls].sort()) {
@@ -207,6 +250,35 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     }
     add(out.stone, new MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: DoubleSide }), "cheminees");
     add(out.wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), "bois");
+  }
+  // Chaque sommet du décor bâti porte l'indice de sa maison (+ 1) : emprise élargie de 0,7 m (avant-toits), grille de 8 m.
+  if (houses.length > 0) {
+    const fps = footprints.filter((f) => f.kind === "batiment");
+    const cell = 8;
+    const grid = new Map<string, number[]>();
+    fps.forEach((f, i) => {
+      houseBoxes.push({ id: f.id, x0: f.x0, x1: f.x1, y0: f.y0, y1: f.y1, top: f.h });
+      for (let gx = Math.floor((f.x0 - 0.7) / cell); gx <= Math.floor((f.x1 + 0.7) / cell); gx++)
+        for (let gy = Math.floor((f.y0 - 0.7) / cell); gy <= Math.floor((f.y1 + 0.7) / cell); gy++) grid.set(`${gx},${gy}`, [...(grid.get(`${gx},${gy}`) ?? []), i]);
+    });
+    for (const mesh of houseMeshes) {
+      const pos = mesh.geometry.getAttribute("position");
+      const ids = new Float32Array(pos.count);
+      for (let v = 0; v < pos.count; v++) {
+        const x = pos.getX(v);
+        const z = pos.getZ(v);
+        for (const i of grid.get(`${Math.floor(x / cell)},${Math.floor(z / cell)}`) ?? []) {
+          const f = fps[i] as Footprint;
+          if (x >= f.x0 - 0.7 && x <= f.x1 + 0.7 && z >= f.y0 - 0.7 && z <= f.y1 + 0.7) {
+            ids[v] = i + 1;
+            const hb = houseBoxes[i] as HouseBox;
+            hb.top = Math.max(hb.top, pos.getY(v));
+            break;
+          }
+        }
+      }
+      mesh.geometry.setAttribute("batiment", new BufferAttribute(ids, 1));
+    }
   }
   // Mur (et autres boîtes de maçonnerie) : parement de pierre.
   for (const s of by("mur")) {
@@ -271,6 +343,14 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     materials: { ground: groundMat, stone: stoneMat },
     windows,
     profile: style,
+    houses: houseBoxes,
+    setOccluders(indices: readonly number[]): void {
+      caches.value.fill(-1);
+      indices.slice(0, MAX_OCCLUDERS).forEach((i, k) => (caches.value[k] = i + 1));
+    },
+    occluders(): number[] {
+      return [...caches.value].filter((v) => v > 0).map((v) => v - 1);
+    },
     dispose(): void {
       group.traverse((o) => {
         const g = (o as Mesh).geometry as BufferGeometry | undefined;
@@ -279,6 +359,41 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
       for (const x of mats) x.dispose();
     },
   };
+}
+
+/**
+ * Bâtiments qui cachent des unités à la caméra (dette n° 75) : segment caméra → poitrine de chaque unité (repère de la scène :
+ * x, hauteur, y de la carte), contre le volume de chaque maison (toit compris) ; les plus proches de la caméra d'abord,
+ * `MAX_OCCLUDERS` au plus. Fonction pure (tests).
+ */
+export function occludersFor(houses: readonly HouseBox[], cam: { x: number; y: number; z: number }, targets: readonly { x: number; y: number; z: number }[]): number[] {
+  const hits = new Map<number, number>();
+  for (const t of targets) {
+    const d = [t.x - cam.x, t.y - cam.y, t.z - cam.z];
+    houses.forEach((h, i) => {
+      let t0 = 0;
+      let t1 = 0.97;
+      const lo = [h.x0, 0, h.y0];
+      const hi = [h.x1, h.top, h.y1];
+      const o = [cam.x, cam.y, cam.z];
+      for (let a = 0; a < 3; a++) {
+        const da = d[a] as number;
+        const oa = o[a] as number;
+        if (Math.abs(da) < 1e-9) {
+          if (oa < (lo[a] as number) || oa > (hi[a] as number)) return;
+          continue;
+        }
+        let u = ((lo[a] as number) - oa) / da;
+        let v = ((hi[a] as number) - oa) / da;
+        if (u > v) [u, v] = [v, u];
+        t0 = Math.max(t0, u);
+        t1 = Math.min(t1, v);
+        if (t0 > t1) return;
+      }
+      hits.set(i, Math.min(hits.get(i) ?? Infinity, t0));
+    });
+  }
+  return [...hits.entries()].sort((a, b) => a[1] - b[1] || a[0] - b[0]).slice(0, MAX_OCCLUDERS).map(([i]) => i);
 }
 
 /** Emprise rendue d'une instance (boîte englobante de sa matrice sur la géométrie unité) : contrôle d'emprise. */

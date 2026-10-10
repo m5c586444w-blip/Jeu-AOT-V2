@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createBattle } from "../../../src/sim/tactical/battle";
 import { companySetup } from "../../../src/sim/tactical/setup";
-import { anchorAt, buildBattleWorld, instanceFootprint, objectBox, partsNamed } from "../../../src/render/tactical3d/battle/world";
+import { MAX_OCCLUDERS, anchorAt, buildBattleWorld, instanceFootprint, objectBox, occludersFor, partsNamed } from "../../../src/render/tactical3d/battle/world";
 import { LOD, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "../../../src/render/tactical3d/battle/units";
 import { w854 } from "../../sim/legacy-cases";
 
@@ -107,6 +107,47 @@ describe("décor 3D habillé par les profils de style (dette n° 74)", () => {
     expect(buildBattleWorld(battleOn("tmap_mur").map, 11).profile.id).toBe("E02");
     expect(["E11", "E02"]).toContain(buildBattleWorld(battleOn("tmap_plaine").map, 11).profile.id);
     expect(["E15", "E02"]).toContain(buildBattleWorld(battleOn("tmap_foret").map, 11).profile.id);
+  });
+});
+
+describe("bâtiments translucides devant les unités choisies (dette n° 75)", () => {
+  it("chaque sommet bâti porte l'indice de sa maison ; volumes toit compris", () => {
+    const w = buildBattleWorld(battleOn("tmap_ville").map, 11);
+    expect(w.houses.length).toBeGreaterThan(10);
+    let tagged = 0;
+    let total = 0;
+    for (const o of w.group.children) {
+      if (!/^(facades|murs-aveugles|toits|cheminees)/.test(o.name)) continue;
+      const g = (o as unknown as { geometry: { getAttribute(n: string): { count: number; getX(i: number): number } | undefined } }).geometry;
+      const a = g.getAttribute("batiment");
+      expect(a, o.name).toBeDefined();
+      for (let i = 0; i < (a?.count ?? 0); i++) {
+        total++;
+        if ((a?.getX(i) ?? 0) > 0.5) tagged++;
+      }
+    }
+    expect(tagged / total).toBeGreaterThan(0.99);
+    for (const h of w.houses) expect(h.top).toBeGreaterThan(0);
+    w.dispose();
+  });
+
+  it("segment caméra → unité : la maison entre les deux est retenue, pas celle d'à côté ; 8 au plus ; état transmis", () => {
+    const houses = [
+      { id: 1, x0: 10, x1: 20, y0: -5, y1: 5, top: 15 },
+      { id: 2, x0: 10, x1: 20, y0: 30, y1: 40, top: 15 },
+    ];
+    // Caméra à l'ouest, à 6 m de haut ; unité à l'est derrière la maison 1.
+    expect(occludersFor(houses, { x: 0, y: 6, z: 0 }, [{ x: 30, y: 1.2, z: 0 }])).toEqual([0]);
+    // Caméra au-dessus des toits, regard plongeant : aucune maison entre la caméra et l'unité.
+    expect(occludersFor(houses, { x: 25, y: 60, z: 0 }, [{ x: 30, y: 1.2, z: 0 }])).toEqual([]);
+    const many = Array.from({ length: 20 }, (_, i) => ({ id: i, x0: 10 + i * 3, x1: 11 + i * 3, y0: -5, y1: 5, top: 10 }));
+    expect(occludersFor(many, { x: 0, y: 2, z: 0 }, [{ x: 200, y: 1.2, z: 0 }])).toHaveLength(MAX_OCCLUDERS);
+    const w = buildBattleWorld(battleOn("tmap_ville").map, 11);
+    w.setOccluders([3, 1]);
+    expect(w.occluders().sort()).toEqual([1, 3]);
+    w.setOccluders([]);
+    expect(w.occluders()).toEqual([]);
+    w.dispose();
   });
 });
 

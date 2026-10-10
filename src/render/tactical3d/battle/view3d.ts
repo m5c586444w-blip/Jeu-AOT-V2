@@ -41,7 +41,7 @@ import { TITAN_LARGE, TITAN_SMALL, buildTitan, setSteamTexture } from "../titan"
 import { puffTexture, skinTexture } from "../textures";
 import type { Titan, TitanPose } from "../titan";
 import { PHOTO_MATIERES, photoUrl } from "../photoTextures";
-import { battleProfile, buildBattleWorld } from "./world";
+import { battleProfile, buildBattleWorld, occludersFor } from "./world";
 import type { BattleDecorTextures, BattleWorld } from "./world";
 import { facadeSet, normalOf, roofTex } from "../texturesEnv";
 import type { RoofMaterial, WallMaterial } from "../styles";
@@ -964,6 +964,17 @@ export class View3D implements BattleView {
     }
     L.blood.visible = realistic;
     this.counts = { detail: shown, crowd: crowdN + troopN + troopAN, markers: markerN };
+    // Dette n° 75 (15 C-06, 18 R4.4) : les bâtiments qui cachent les unités choisies deviennent translucides (24 unités au
+    // plus, réparties dans la sélection).
+    if (this.world) {
+      const targets: { x: number; y: number; z: number }[] = [];
+      st.soldiers.forEach((s, i) => {
+        if (overlay.soldiers.has(i) && s.mode !== "mort" && s.mode !== "fui") targets.push({ x: s.x, y: s.z + 1.2, z: s.y });
+      });
+      for (const t of st.troops ?? []) if (overlay.troops.has(t.id) && t.mode !== "mort" && t.mode !== "fui") targets.push({ x: t.x, y: 1.2, z: t.y });
+      const step = Math.max(1, Math.ceil(targets.length / 24));
+      this.world.setOccluders(targets.length ? occludersFor(this.world.houses, camPos, targets.filter((_, k) => k % step === 0)) : []);
+    }
   }
 
   render(): void {
@@ -971,12 +982,12 @@ export class View3D implements BattleView {
     this.renderer.render(this.scene, this.cam);
   }
 
-  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number; corps: string; corpsDone: boolean } {
+  stats(): { calls: number; triangles: number; detail: number; crowd: number; markers: number; corps: string; corpsDone: boolean; translucides: number } {
     const r = this.renderer.info.render;
     // Second temps (R3) : repères simplifiés, chargement du corps de base, puis Titans et figures en tenue construits.
     const nT = this.layers ? this.titans.size + this.humanTitans.size : 0;
     const corps = this.kitState === "corps" ? `corps de base · Titans ${this.humanTitans.size}/${nT} · figures ${this.figs.size}` : this.kitState === "repli" ? "figures de R1 (repli)" : this.kitState === "chargement" ? "chargement du corps de base" : "repères";
-    return { calls: r.calls, triangles: r.triangles, ...this.counts, corps, corpsDone: this.kitState === "corps" && this.humanTitans.size === nT };
+    return { calls: r.calls, triangles: r.triangles, ...this.counts, corps, corpsDone: this.kitState === "corps" && this.humanTitans.size === nT, translucides: this.world?.occluders().length ?? 0 };
   }
 
   destroy(): void {

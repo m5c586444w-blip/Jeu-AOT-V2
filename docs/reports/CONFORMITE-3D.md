@@ -62,3 +62,13 @@ cheminées) ; pavés dans la ville. `npm run verify` : « Tests  765 passed (765
 - **`r3-bataille-marley-1366.png`** : ligne de l'infanterie de Marley sur une grande place pavée, une façade au bord gauche.
   - Défauts : pavés en carreaux qui se répètent au loin ; place vide (ni fontaine ni étal) ; horizon coupé net par le brouillard.
 
+## Suite : dette n° 75 corrigée (D-167)
+Bâtiments qui cachent les unités choisies rendus en trame translucide ; jauges gaz, lames et stress sous le numéro des
+escouades choisies (ou en alerte). `smoke:r2 -- --captures` : « tout est conforme », 0 erreur console.
+- **`r2-strategique-1920.png`** : la ville vue de haut, vingt numéros d'escouade au sud, Titans « T » et sections « E » au nord.
+  Les toits sont variés (tuile, ardoise, chaume) et les façades à fenêtres.
+  - Défauts : aucun mur autour de la ville ; près de la moitié de l'image est du sol vide ; numéros serrés (1 à 3, 13 à 15).
+- **`r2-suivi-1366.png`** : vue plongeante sur l'escouade 02 choisie (anneaux, numéro et trois jauges). Le bâtiment au-dessus
+  d'elle est tramé et laisse voir les hommes.
+  - Défauts : la trame dessine un grand rectangle hachuré ; caméra très haute (dette n° 50) ; numéros 5 et 6 posés sur des ombres.
+

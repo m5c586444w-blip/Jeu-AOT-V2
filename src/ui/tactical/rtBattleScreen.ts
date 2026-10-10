@@ -7,7 +7,7 @@ import type { Battle } from "../../sim/tactical/battle";
 import { groundAt } from "../../sim/tactical/map";
 import { bodyName } from "../../sim/tactical/shifters";
 import { FORMATIONS, RESTRAINTS, SHIFTER_OBJECTIVES } from "../../sim/tactical/types";
-import type { BattleSetup, Restraint, ShifterObjective, SquadOrder, TimedOrder } from "../../sim/tactical/types";
+import type { BattleSetup, Restraint, ShifterObjective, SoldierUnit, SquadOrder, TimedOrder } from "../../sim/tactical/types";
 import { letterFor } from "../narrative";
 import { battleCues, cueSnapshot, sharedAudio } from "../audio";
 import { BATTLE_QUALITIES, BATTLE_VIEWS, VIOLENCES, loadSettings, volumesOf } from "../settings";
@@ -720,10 +720,39 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
 
   // ——— Étiquettes (pastilles) des escouades et sections, au-dessus des hommes ———
   const tags = new Map<string, HTMLSpanElement>();
+  // Dette n° 75 (04 §4, 15 C-17) : en 3D, pictogrammes gaz, lames et stress sous le numéro des escouades de manœuvre, avec
+  // un niveau (moyenne des hommes debout) ; rouge sous un quart de gaz, sans lame de rechange ou au-delà de 70 de stress.
+  const gauges = new Map<string, { root: HTMLSpanElement; bars: HTMLSpanElement[]; last: string }>();
+  const PICTOS = [
+    // bonbonne (gaz), lame, éclair brisé (stress) : traits irréguliers, dessin du projet
+    "M4 2.5h3.2M3.6 3.6c-.9.5-1.1 1.4-1.1 2.6v4.6c0 .7.4 1.1 1.2 1.1h4c.7 0 1.1-.4 1.1-1.1V6.1c0-1.1-.3-2-1.2-2.5",
+    "M2.4 10.8 9.6 2.2l.5.6-6.4 8.6M2.1 11.2l-.6.9",
+    "M2 6.4 4.1 4.2l1.6 3.1 1.9-3.4 1.5 2.9 1.4-1.6",
+  ];
+  const gaugeOf = (id: string): { root: HTMLSpanElement; bars: HTMLSpanElement[]; last: string } => {
+    let g = gauges.get(id);
+    if (!g) {
+      const root = el("span", "rt-jauges");
+      const bars: HTMLSpanElement[] = [];
+      for (const d of PICTOS) {
+        const item = el("span", "rt-jauge");
+        item.innerHTML = `<svg viewBox="0 0 12 13" width="9" height="10" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const bar = el("span", "rt-jauge__niveau");
+        item.append(bar);
+        root.append(item);
+        bars.push(bar);
+      }
+      g = { root, bars, last: "" };
+      gauges.set(id, g);
+    }
+    return g;
+  };
   const renderLabels = (): { x0: number; y0: number; x1: number; y1: number }[] => {
     const boxes: { x0: number; y0: number; x1: number; y1: number }[] = [];
     const w = host.clientWidth;
     const h = host.clientHeight;
+    const up = new Map<string, SoldierUnit[]>();
+    if (view.kind === "3d") for (const s of bt.state.soldiers) if (s.mode !== "mort" && s.mode !== "fui") up.set(s.squad, [...(up.get(s.squad) ?? []), s]);
     for (const sq of bt.state.squads) {
       // En 2D, la scène dessine déjà les pastilles des escouades de soldats.
       const show = sq.side !== undefined || view.kind === "3d";
@@ -744,7 +773,33 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       tag.classList.toggle("rt-etiquette--choisie", sel.squads.includes(sq.id));
       tag.classList.toggle("rt-etiquette--repli", sq.order === "repli");
       tag.style.transform = `translate(${Math.round(p[0])}px, ${Math.round(p[1])}px) translate(-50%, -100%)`;
-      boxes.push({ x0: p[0] - 12, y0: p[1] - 24, x1: p[0] + 12, y1: p[1] });
+      const men = sq.side === undefined ? up.get(sq.id) : undefined;
+      if (men && men.length > 0) {
+        const avg = (f: (s: SoldierUnit) => number): number => men.reduce((a, s) => a + f(s), 0) / men.length;
+        const gas = avg((s) => s.gas) / bt.world.balance.odm.tank;
+        const pairs = avg((s) => s.pairs);
+        const stress = avg((s) => s.stress) / 100;
+        const levels = [Math.min(1, gas), Math.min(1, pairs / 2), Math.min(1, stress)].map((v) => Math.round(Math.max(0, v) * 10) / 10);
+        const g = gaugeOf(sq.id);
+        if (!g.root.parentElement) tag.append(g.root);
+        // Toutes les jauges pour une escouade choisie ; sinon, seulement celles en alerte (lecture des lignes gardée).
+        const chosen = sel.squads.includes(sq.id);
+        const low = [gas < 0.25, pairs < 1, stress > 0.7];
+        const key = `${levels.join(",")}|${chosen ? 1 : 0}|${low.join(",")}`;
+        if (key !== g.last) {
+          g.last = key;
+          g.bars.forEach((b, i) => {
+            b.style.setProperty("--jauge-niveau", String(levels[i] ?? 0));
+            const item = b.parentElement;
+            item?.classList.toggle("rt-jauge--alerte", low[i] ?? false);
+            if (item) item.hidden = !chosen && !(low[i] ?? false);
+          });
+          g.root.hidden = !chosen && !low.some(Boolean);
+          g.root.title = `${t("tac.gas")} ${Math.round(gas * 100)} % · ${t("tac.blades")} ${formatNumber(pairs)} · ${t("tac.stress")} ${Math.round(stress * 100)}`;
+        }
+      }
+      const tall = men !== undefined && men.length > 0 && !(gauges.get(sq.id)?.root.hidden ?? true);
+      boxes.push({ x0: p[0] - (tall ? 22 : 12), y0: p[1] - (tall ? 36 : 24), x1: p[0] + (tall ? 22 : 12), y1: p[1] });
     }
     // Titans debout : étiquette rouge au-dessus de la tête (lisibles en vue stratégique, même cachés par les toits).
     bt.state.titans.forEach((ti, i) => {
