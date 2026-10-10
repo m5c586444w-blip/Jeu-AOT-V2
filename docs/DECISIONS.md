@@ -4,7 +4,7 @@
 
 ## Index
 
-163 décisions, de D-01 (2026-10-02) à D-163 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+164 décisions, de D-01 (2026-10-02) à D-164 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -169,6 +169,7 @@
 - **D-161** (10-10) — P10.4 : fonctions P2 du fichier 09 non faites, report confirmé (CONFORMITE)
 - **D-162** (10-10) — P10.3 : tick de 854 hors budget, longueurs de route mémorisées
 - **D-163** (10-10) — Style des soldats fidèle à l'univers (décision de l'utilisateur)
+- **D-164** (10-10) — PACK.1 : Electron plutôt que Tauri
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1568,3 +1569,15 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   redessinés par le projet, usage personnel ». Application aux tenues de la bataille 3D : dette n° 72, après PACK ; détails
   incertains : Q18.
 - **Réversible** : oui.
+
+## 2026-10-10 — D-164 PACK.1 : Electron plutôt que Tauri
+- **Critères du prompt** (23 §6) : simplicité de la construction sous Windows, taille, WebGL, IndexedDB, Worker.
+- **Electron** : un seul outil à installer (Node, déjà requis par le projet) ; Chromium embarqué, donc WebGL 2, IndexedDB et les
+  Workers se comportent comme dans le navigateur où le jeu est testé (Chromium des smokes) ; taille ≈ 100 Mo par plateforme.
+  **Tauri** : exécutable plus léger, mais chaîne Rust et outils de compilation Microsoft à installer, et rendu par WebView2
+  (moteur proche mais distinct de celui des essais).
+- **Décision** : Electron 44.4.5 (publié le 2026-09-23) et `@electron/packager` 20.3.0, téléchargés à la construction par `npx`
+  (rien n'est ajouté aux dépendances du dépôt : `npm ci` reste inchangé). Le jeu construit est servi par un protocole local
+  `jeu://` (chemins absolus, modules, Worker et IndexedDB comme en http), sans serveur ; toute requête hors de ce protocole est
+  refusée ; sauvegardes dans le profil de l'utilisateur.
+- **Réversible** : oui (`electron/` et `src/tools/package-win.ts` seulement ; le jeu n'en dépend pas).
