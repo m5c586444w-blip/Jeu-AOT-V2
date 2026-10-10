@@ -4,7 +4,7 @@
 
 ## Index
 
-162 décisions, de D-01 (2026-10-02) à D-162 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+163 décisions, de D-01 (2026-10-02) à D-163 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -168,6 +168,7 @@
 - **D-160** (10-10) — P10.4–P10.5 : manuel en jeu et lancement local
 - **D-161** (10-10) — P10.4 : fonctions P2 du fichier 09 non faites, report confirmé (CONFORMITE)
 - **D-162** (10-10) — P10.3 : tick de 854 hors budget, longueurs de route mémorisées
+- **D-163** (10-10) — Style des soldats fidèle à l'univers (décision de l'utilisateur)
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1555,4 +1556,15 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   chargement et jamais modifié, le résultat est donc identique. Seule modification de `src/sim` en P10 (le plan l'autorise pour
   ce qu'exige une tâche).
 - **Résultat** : p95 5,04 ms, pointe 17,6 ms ; `sim:world` conforme ; les huit empreintes de `sim:selftest` inchangées.
+- **Réversible** : oui.
+
+## 2026-10-10 — D-163 Style des soldats fidèle à l'univers (décision de l'utilisateur)
+- **Demande de l'utilisateur** (2026-10-10) : modifier CLAUDE.md pour que les soldats collent à l'univers de L'Attaque des
+  Titans : mêmes uniformes, emblèmes, tenues de pluie, cérémonies, équipement, en détail.
+- **Décision** : nouvelle section « Style des soldats » de CLAUDE.md : uniforme commun, emblèmes des quatre corps, cape du Corps
+  de Reconnaissance, équipement de manœuvre tridimensionnelle, salut et cérémonies, 854 et Marley, chaque élément avec son
+  statut (C, A, ?) ; tout est redessiné par le projet (aucun fichier ni décalque de l'œuvre ou de fans, règle inchangée) ; la
+  mention « aucun élément de l'œuvre n'est reproduit » devient « aucun fichier de l'œuvre n'est repris ; uniformes et emblèmes
+  redessinés par le projet, usage personnel ». Application aux tenues de la bataille 3D : dette n° 72, après PACK ; détails
+  incertains : Q18.
 - **Réversible** : oui.
