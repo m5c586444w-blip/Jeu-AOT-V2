@@ -1,8 +1,9 @@
 # Murs et Sang (titre de travail)
 
 Jeu de grande stratégie **personnel et non commercial** situé dans l'univers de *L'Attaque des Titans*. Il se joue dans un
-navigateur, sur l'ordinateur, sans connexion : rien n'est publié en ligne. Aucun élément de l'œuvre originale (images, sons,
-polices, modèles) n'est reproduit ; les rares ressources externes sont libres (CC0) et listées dans
+navigateur, sur l'ordinateur, sans connexion : rien n'est publié en ligne. Aucun fichier de l'œuvre originale (images, sons,
+polices, modèles) n'est repris ; uniformes et emblèmes des soldats sont redessinés par le projet d'après les descriptions de
+l'œuvre (usage personnel, D-163) ; les rares ressources externes sont libres (CC0) et listées dans
 [`docs/ASSETS_LICENSES.md`](docs/ASSETS_LICENSES.md).
 
 - Spécifications : [`docs/spec/`](docs/spec/) (fichiers 00 à 24) et les errata [`ERRATA.md`](docs/spec/ERRATA.md) et

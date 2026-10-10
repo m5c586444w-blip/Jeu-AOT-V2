@@ -7,7 +7,8 @@ import type { TitanR3, TitanSpec } from "./titan";
  * Figures de R3 (fichier 21 §8), lues dans `data/art/figures_r3.json` (choix de design A) :
  * - Titans : pour chaque classe de 3, 5, 8, 12 et 15 m, trois corps (a : la classe de R1b ; b et c : proportions, corpulence,
  *   posture et démarche propres) et deux peaux (pâle et marbrée, rougeaude et tachée) : 30 Titans ;
- * - soldats : cinq tenues, Paradis (Bataillon d'exploration, Garnison, Police militaire) et Marley (infanterie, officier).
+ * - soldats : six tenues, Paradis (Corps de Reconnaissance, Garnison, Brigade Militaire, Corps d'Entraînement : uniforme commun,
+ *   dette n° 72) et Marley (infanterie, officier).
  */
 export const FIGURES_R3 = figuresJson as unknown as FiguresR3File;
 export type TitanVariantId = "a" | "b" | "c";

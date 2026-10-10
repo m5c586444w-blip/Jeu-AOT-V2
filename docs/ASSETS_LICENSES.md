@@ -250,3 +250,13 @@ responsabilité de l'utilisateur (notice `assets_user/musique/LISEZ-MOI.md`).
 |---|---|---|
 | Icône de l'application (`electron/icone.png` 256 px, `electron/icone.ico` 16/32/48/256 px) | Rendue depuis `public/favicon.svg` (trois anneaux dessinés pour le projet) | Création originale du projet |
 | Electron 44.4.5 et `@electron/packager` 20.3.0 | Téléchargés par `npx` à la construction (`npm run package:win`), hors du dépôt | MIT (Electron embarque Chromium : licences jointes dans le dossier construit, `LICENSES.chromium.html`) |
+
+## Ajouts de la dette n° 72 (uniformes des soldats, D-163, D-165)
+
+| Élément | Origine | Licence |
+|---|---|---|
+| Emblèmes des quatre corps (Ailes de la liberté, deux roses, tête de licorne, épées croisées) et étoile du brassard | Formes vectorielles dessinées dans le code (`src/render/tactical3d/emblems.ts`) d'après les descriptions de l'œuvre ; aucun fichier, aucune image, aucun décalque de l'œuvre ou de fans | Création originale du projet (usage personnel) |
+| Uniformes, cape, capuche, salut | Géométries et teintes du projet (`data/art/figures_r3.json`, `src/render/tactical3d/humanSoldier.ts`) sur le corps MakeHuman déjà listé | Création originale du projet |
+
+Aucune ressource externe nouvelle ; `npm run assets:check` inchangé.
+

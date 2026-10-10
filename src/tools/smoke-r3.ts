@@ -1,5 +1,5 @@
 // npm run smoke:r3 — R3 (CR3-08, CR3-09) dans un vrai navigateur (Chromium, serveur de développement Vite).
-// 1. Planches `?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses` (1920×1080) : hauteurs mesurées des Titans.
+// 1. Planches `?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses|r3-uniformes|r3-ceremonie` (1920×1080) : hauteurs mesurées des Titans.
 // 2. Bataille de compagnie en 3D (1366×768) : « prêt » en figures de R1, puis second temps (corps de base : Titans de R3 et
 //    figures en tenue) ; chaque figure montre la pose de l'état lu dans la simulation ; vues rapprochées (Paradis, Marley), suivi.
 // 3. 3840×2160 : vue rapprochée. 4. three.js hors du bundle principal (dist/). 0 erreur console.
@@ -114,7 +114,7 @@ const browser: Browser = await chromium.launch({ executablePath });
 
 try {
   // ——— 1. Planches (`R3_PLANCHES=0` : sautées, mise au point de la bataille) ———
-  for (const sheet of process.env["R3_PLANCHES"] === "0" ? [] : ["r3-titans", "r3-visages", "r3-soldats", "r3-poses"]) {
+  for (const sheet of process.env["R3_PLANCHES"] === "0" ? [] : ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie"]) {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
     watch(page, `[${sheet}] `);
     const t0 = Date.now();
@@ -162,7 +162,7 @@ try {
   const near = await figures(page);
   if (process.env["R3_DEBUG"]) console.log(JSON.stringify(near.list.slice(0, 12)), await ds(page, "stats"));
   const nA = checkPoses(near.list, "vue rapprochée (Paradis)");
-  expect(nA.troops > 0, `fantassins de la Garnison en tenue : ${nA.troops} (et ${nA.soldiers} soldats du Bataillon d'exploration)`);
+  expect(nA.troops > 0, `fantassins de la Garnison en tenue : ${nA.troops} (et ${nA.soldiers} soldats du Corps de Reconnaissance)`);
   await page.screenshot({ path: `${OUT}/r3-bataille-paradis-1366.png` });
   // Suivi d'une escouade (troisième personne), la bataille avance : soldats en vol, en tenue.
   await page.locator(".rt-unite[data-squad='esc_05']").click();
@@ -170,7 +170,7 @@ try {
   await runFor(page, 40);
   const follow = await figures(page);
   const nF = checkPoses(follow.list, "caméra de suivi");
-  expect(nF.soldiers > 0, `soldats du Bataillon d'exploration en tenue (suivi) : ${nF.soldiers}`);
+  expect(nF.soldiers > 0, `soldats du Corps de Reconnaissance en tenue (suivi) : ${nF.soldiers}`);
   await page.screenshot({ path: `${OUT}/r3-bataille-suivi-1366.png` });
   console.log(`  ..  mesures (rendu logiciel) : prêt ${(ready / 1000).toFixed(1)} s · corps ${corpsS} s · ${await ds(page, "stats")} · temps JS p95 ${await ds(page, "js-p95")} ms`);
   await page.close();

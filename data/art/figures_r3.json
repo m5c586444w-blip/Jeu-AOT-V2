@@ -1,6 +1,6 @@
 {
   "canon": "A",
-  "note": "Figures de R3 (fichier 21 §8) : choix de design du projet, sans source dans l'œuvre. Aucun Titan, uniforme ni emblème de l'œuvre n'est reproduit (D-83). Les classes de 3 à 15 m et leurs paramètres de base sont ceux de data/art/titans.json ; la variante « a » de chaque classe garde les proportions de la classe (une posture propre au besoin).",
+  "note": "Figures de R3 (fichier 21 §8) : choix de design du projet, sans source dans l'œuvre. Aucun Titan de l'œuvre n'est reproduit (D-83) ; les uniformes et emblèmes des corps de Paradis suivent l'œuvre, redessinés par le projet (dette n° 72, D-163). Les classes de 3 à 15 m et leurs paramètres de base sont ceux de data/art/titans.json ; la variante « a » de chaque classe garde les proportions de la classe (une posture propre au besoin).",
   "titans": [
     {
       "classe": "classe_3",
@@ -352,13 +352,16 @@
     {
       "id": "exploration",
       "camp": "paradis",
-      "nom": "Bataillon d'exploration",
-      "veste": "#6D6A60",
-      "pantalon": "#3A3730",
-      "bottes": "#241D17",
-      "cape": "#4F6B5A",
+      "nom": "Corps de Reconnaissance",
+      "veste": "#A07C52",
+      "pantalon": "#E4DECF",
+      "bottes": "#4B3322",
+      "cape": "#355A3C",
+      "embleme": "ailes",
       "odm": true,
       "lames": "mains",
+      "canon": "C",
+      "note": "Uniforme commun des corps de Paradis (C : veste courte brun clair, chemise claire, pantalon blanc, hautes bottes de cuir, harnais de sangles) ; teintes exactes A (Q18) ; emblème redessiné par le projet (D-163). Cape verte à capuche, Ailes de la liberté au dos (C).",
       "corpulence": {
         "age": [0.5, 0.62],
         "muscle": [0.55, 0.85],
@@ -370,41 +373,58 @@
       "id": "garnison",
       "camp": "paradis",
       "nom": "Garnison",
-      "veste": "#5F6470",
-      "pantalon": "#3A3730",
-      "bottes": "#241D17",
-      "echarpe": "#8E2F2F",
+      "veste": "#A07C52",
+      "pantalon": "#E4DECF",
+      "bottes": "#4B3322",
+      "embleme": "roses",
       "odm": true,
       "lames": "fourreau",
-      "fusil": "dos",
+      "canon": "C",
+      "note": "Uniforme commun des corps de Paradis (C : veste courte brun clair, chemise claire, pantalon blanc, hautes bottes de cuir, harnais de sangles) ; teintes exactes A (Q18) ; emblème redessiné par le projet (D-163). Deux roses (C) ; sans cape (capes de la Garnison : ?) ; fusil à l'épaule, arme au pied au repos et en joue au tir : choix du projet (A), les fantassins de Paradis de la bataille portent cette tenue.",
       "corpulence": {
         "age": [0.55, 0.72],
         "muscle": [0.4, 0.7],
         "weight": [0.5, 0.7]
       },
-      "repos": "arme"
+      "repos": "arme",
+      "fusil": "dos"
     },
     {
       "id": "police",
       "camp": "paradis",
-      "nom": "Police militaire",
-      "veste": "#2F3A33",
-      "pantalon": "#CFC7B4",
-      "bottes": "#1E1914",
-      "manteau": {
-        "teinte": "#26302B",
-        "longueur": 0.52
-      },
-      "coiffe": {
-        "forme": "kepi",
-        "teinte": "#1F2622"
-      },
+      "nom": "Brigade Militaire",
+      "veste": "#A07C52",
+      "pantalon": "#E4DECF",
+      "bottes": "#4B3322",
+      "embleme": "licorne",
       "odm": true,
       "lames": "fourreau",
+      "fusil": "dos",
+      "canon": "C",
+      "note": "Uniforme commun des corps de Paradis (C : veste courte brun clair, chemise claire, pantalon blanc, hautes bottes de cuir, harnais de sangles) ; teintes exactes A (Q18) ; emblème redessiné par le projet (D-163). Tête de licorne (C) ; fusil à l'épaule, arme au pied au repos : choix du projet (A).",
       "corpulence": {
         "age": [0.5, 0.65],
         "muscle": [0.4, 0.6],
         "weight": [0.3, 0.45]
+      },
+      "repos": "arme"
+    },
+    {
+      "id": "recrues",
+      "camp": "paradis",
+      "nom": "Corps d'Entraînement",
+      "veste": "#A07C52",
+      "pantalon": "#E4DECF",
+      "bottes": "#4B3322",
+      "embleme": "epees",
+      "odm": true,
+      "lames": "fourreau",
+      "canon": "C",
+      "note": "Uniforme commun des corps de Paradis (C : veste courte brun clair, chemise claire, pantalon blanc, hautes bottes de cuir, harnais de sangles) ; teintes exactes A (Q18) ; emblème redessiné par le projet (D-163). Deux épées croisées (C) ; recrues plus jeunes (A).",
+      "corpulence": {
+        "age": [0.4, 0.48],
+        "muscle": [0.45, 0.7],
+        "weight": [0.3, 0.5]
       },
       "repos": "bras"
     },
@@ -423,6 +443,9 @@
       "odm": false,
       "fusil": "mains",
       "sac": "#5A4A33",
+      "brassard": "#D3B45C",
+      "canon": "A",
+      "note": "Uniforme de l'armée de Marley : forme et teintes choisies par le projet (A ; Q18). Brassard des Eldiens à étoile à neuf branches (C) ; couleur et bras : ?.",
       "corpulence": {
         "age": [0.48, 0.6],
         "muscle": [0.5, 0.8],
@@ -449,6 +472,8 @@
       "odm": false,
       "baudrier": true,
       "etui": true,
+      "canon": "A",
+      "note": "Officier de Marley : tenue choisie par le projet (A ; Q18).",
       "corpulence": {
         "age": [0.65, 0.8],
         "muscle": [0.4, 0.6],

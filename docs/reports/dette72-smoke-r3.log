@@ -1,0 +1,26 @@
+Captures : docs/screenshots/
+  OK  r3-titans : 15 corps à l'échelle, hauteurs mesurées à 0.31 % au plus (±5 %)
+  OK  r3-titans : planche prête en 34.5 s, 16 étiquettes
+  OK  r3-visages : planche prête en 34.5 s, 6 étiquettes
+  OK  r3-soldats : planche prête en 33.9 s, 8 étiquettes
+  OK  r3-poses : planche prête en 36.5 s, 11 étiquettes
+  OK  r3-uniformes : planche prête en 34.5 s, 5 étiquettes
+  OK  r3-ceremonie : planche prête en 41.0 s, 1 étiquettes
+[850, essai de compagnie] 1366×768
+  OK  vue 3D prête en 4.5 s (premier temps : chargement)
+  OK  zoom sur une section ennemie
+  OK  vue rapprochée (Marley, à l'ouverture) : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  second temps à 4.87 s : corps de base · Titans 4/4 · figures 24 ; 24 fantassins de Marley en tenue, 4/4 Titans de R3
+  OK  zoom sur une section alliée
+  OK  vue rapprochée (Paradis) : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  fantassins de la Garnison en tenue : 7 (et 17 soldats du Bataillon d'exploration)
+  OK  caméra de suivi : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  soldats du Bataillon d'exploration en tenue (suivi) : 24
+  ..  mesures (rendu logiciel) : prêt 4.5 s · corps 4.87 s · appels 2326 · triangles 2134010 · détail 24 · foule 306 · repères 0 · temps JS p95 256.30 ms
+[850, essai de compagnie] 3840×2160
+  OK  3840 : zoom sur une section alliée
+  OK  3840×2160 : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  bundle principal assets/index-DBiz2Du2.js sans three.js ni figures de R3 ; vue 3D en morceau à part (view3d-BHHd3pM8.js)
+  OK  0 erreur console
+smoke:r3 : tout est conforme.
+EXIT=0

@@ -13,6 +13,7 @@ import { TITAN_FALL_S } from "./battle/figureState";
  */
 export type HumanPose =
   | "attente"
+  | "salut"
   | "marche"
   | "course"
   | "sol"
@@ -174,6 +175,9 @@ function arm(p: PoseBuilder, body: HumanBody, side: "l" | "r", forward: number, 
   p.bend(`lowerarm_${side}`, elbowAxis(body, side), elbow - restElbow(body, side));
 }
 
+/** Bras droit du salut : réglé pour que le poing touche la poitrine à gauche du sternum (`tests/render/tactical3d/r3-poses.test.ts`). */
+export const SALUTE = { forward: 0.1, out: -0.6, elbow: 1.6, twist: -0.6 };
+
 function fingers(p: PoseBuilder, body: HumanBody, side: "l" | "r", curl: number): void {
   const ax = elbowAxis(body, side);
   for (const f of ["index", "middle", "ring", "pinky"]) for (const k of ["01", "02", "03"]) p.bend(`${f}_${k}_${side}`, ax, curl * (k === "01" ? 0.7 : 1));
@@ -207,7 +211,16 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
   }
   const kb = g.kneeBend ?? 0;
   let ground = true;
-  if (pose === "attente" && g.stance && g.stance !== "bras") {
+  if (pose === "salut") {
+    // Salut des soldats de Paradis (dette n° 72, C) : poing droit fermé sur le cœur, main gauche dans le dos, au garde-à-vous.
+    arm(p, body, "r", SALUTE.forward, SALUTE.out, SALUTE.elbow, SALUTE.twist);
+    fingers(p, body, "r", 1.15);
+    arm(p, body, "l", -0.75, 0.04, 1.35, -1.3);
+    fingers(p, body, "l", 0.6);
+    p.turn("spine_03", X, 0.01 * w);
+    legs(p, "l", 0, 0.02, 0.01, 0.02);
+    legs(p, "r", 0, 0.02, 0.01, 0.02);
+  } else if (pose === "attente" && g.stance && g.stance !== "bras") {
     // Repos d'un soldat en tenue (R3) : arme au pied (main droite sur le canon), port d'arme (fusil en travers de la poitrine),
     // mains dans le dos (officier).
     if (g.stance === "arme") {

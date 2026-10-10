@@ -212,23 +212,36 @@ export function buildSoldier(seed: number, mats: SoldierMaterials): Soldier {
   return soldier;
 }
 
+/** Couleurs d'une tenue pour la foule (dette n° 72 : uniforme commun du Corps de Reconnaissance dans la bataille). */
+export interface CrowdColors {
+  veste: string;
+  pantalon: string;
+  bottes: string;
+  cape: string;
+}
+
 /**
  * Soldat simplifié pour l'instanciation (R1.5, 300 soldats) : une seule géométrie à couleurs de sommet,
- * debout, même hauteur (1,80 m).
+ * debout, même hauteur (1,80 m). Sans `colors` : palette de R1 (prototype) ; avec : celle de la tenue donnée.
  */
-export function crowdGeometry(): BufferGeometry {
+export function crowdGeometry(colors?: CrowdColors): BufferGeometry {
   const fb = new FaceBuilder();
   const at = (x: number, y: number, z: number, s: [number, number, number] = [1, 1, 1], rx = 0): Matrix4 => new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), rx), new Vector3(...s));
   const S = unitSphere(8);
-  const c = (h: number): Color => new Color(h);
+  const c = (h: number | string): Color => new Color(h);
+  const jacket = c(colors?.veste ?? 0x6d6a60);
   for (const s of [1, -1]) {
-    fb.geometry(new CylinderGeometry(0.065, 0.05, LEG, 6), at(s * 0.09, LEG / 2, 0), c(0x3a3730));
-    fb.geometry(new CylinderGeometry(0.05, 0.038, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.03, [1, 1, 1], -0.3), c(0x6d6a60));
+    if (colors) {
+      // Uniforme commun (dette n° 72) : pantalon clair, hautes bottes jusqu'au genou.
+      fb.geometry(new CylinderGeometry(0.065, 0.057, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), c(colors.pantalon));
+      fb.geometry(new CylinderGeometry(0.058, 0.05, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.004), c(colors.bottes));
+    } else fb.geometry(new CylinderGeometry(0.065, 0.05, LEG, 6), at(s * 0.09, LEG / 2, 0), c(0x3a3730));
+    fb.geometry(new CylinderGeometry(0.05, 0.038, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.03, [1, 1, 1], -0.3), jacket);
   }
-  fb.geometry(new CylinderGeometry(0.15, 0.13, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.7]), c(0x6d6a60));
+  fb.geometry(new CylinderGeometry(0.15, 0.13, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.7]), jacket);
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), c(0xd9b49a));
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), c(0x3b2c20));
-  fb.geometry(new BoxGeometry(0.6, 0.75, 0.04), at(0, LEG + TORSO - 0.38, -0.14), c(0x4f6b5a));
+  fb.geometry(new BoxGeometry(0.6, 0.75, 0.04), at(0, LEG + TORSO - 0.38, -0.14), c(colors?.cape ?? 0x4f6b5a));
   fb.geometry(new CylinderGeometry(0.075, 0.075, 0.42, 6), at(0, LEG + 0.1, -0.15, [1, 1, 1]).multiply(new Matrix4().makeRotationZ(Math.PI / 2)), c(0xa9b0b3));
   return fb.build();
 }

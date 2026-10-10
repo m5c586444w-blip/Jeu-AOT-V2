@@ -4,7 +4,7 @@
 
 ## Index
 
-164 décisions, de D-01 (2026-10-02) à D-164 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+165 décisions, de D-01 (2026-10-02) à D-165 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -170,6 +170,7 @@
 - **D-162** (10-10) — P10.3 : tick de 854 hors budget, longueurs de route mémorisées
 - **D-163** (10-10) — Style des soldats fidèle à l'univers (décision de l'utilisateur)
 - **D-164** (10-10) — PACK.1 : Electron plutôt que Tauri
+- **D-165** (10-10) — Dette n° 72 : uniformes des soldats selon l'œuvre, critère de silhouette par famille
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1581,3 +1582,28 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   `jeu://` (chemins absolus, modules, Worker et IndexedDB comme en http), sans serveur ; toute requête hors de ce protocole est
   refusée ; sauvegardes dans le profil de l'utilisateur.
 - **Réversible** : oui (`electron/` et `src/tools/package-win.ts` seulement ; le jeu n'en dépend pas).
+
+## 2026-10-10 — D-165 Dette n° 72 : uniformes des soldats selon l'œuvre, critère de silhouette par famille
+- **Contexte** : application de D-163 (`CLAUDE.md` § Style des soldats) aux soldats de la bataille 3D. Les tenues de R3 (veste
+  gris pierre, écharpe rouge de la Garnison, manteau et képi de la Police) étaient des inventions du projet ; le critère CR3-05
+  exigeait des silhouettes distinctes deux à deux (recouvrement < 85 %).
+- **Décision** :
+  - six tenues : Corps de Reconnaissance, Garnison, Brigade Militaire, Corps d'Entraînement (uniforme commun : veste brun clair,
+    pantalon clair, hautes bottes, harnais ; C, teintes A) ; infanterie et officier de Marley (A, Q18) ;
+  - emblèmes vectoriels redessinés par le projet (`src/render/tactical3d/emblems.ts` : écu, Ailes de la liberté, deux roses,
+    tête de licorne, épées croisées), portés au dos (sur la cape pour le Corps de Reconnaissance), aux deux manches et à la poche
+    de poitrine (emplacements A) ; brassard à étoile à neuf branches au bras gauche de l'infanterie de Marley (C ; bras et
+    couleurs ?) ;
+  - cape verte à capuche jusqu'au-dessus du genou (C ; longueur A), capuche levée sous la pluie (option `pluie`, A) ;
+    équipement de manœuvre avec bonbonne de gaz sur chaque boîtier ; salut (poing droit sur le cœur, main gauche dans le dos,
+    C) ; planches `r3-uniformes` et `r3-ceremonie` (mise en scène A) ;
+  - Garnison et Brigade Militaire : fusil à l'épaule, arme au pied au repos (A) ; tout porteur de fusil le prend en main pour
+    tirer (les fantassins de Paradis de la bataille portent la tenue de la Garnison) ;
+  - foule et figures du premier temps de la bataille aux couleurs de l'uniforme commun (passage sans saut de couleur) ;
+  - **critère de silhouette par famille** : l'uniforme étant commun dans l'œuvre, la Garnison et la Brigade Militaire (même
+    uniforme, même fusil) ne se distinguent que par l'emblème ; CR3-05 s'applique entre familles (cape ; uniforme et fusil ;
+    uniforme seul ; infanterie de Marley ; officier de Marley) : maximum mesuré 0,83 (Corps de Reconnaissance et Corps
+    d'Entraînement) ; Garnison et Brigade Militaire : 0,96 (emblème seul).
+- **Reste ouvert** (dette n° 72) : tenues sombres de 854, équipement anti-personnel et lances de foudre, cérémonies en jeu
+  (hors planche), capuche liée à une météo de bataille (la bataille n'en a pas), semelles et talons des bottes.
+- **Réversible** : oui (`data/art/figures_r3.json`, `src/render/tactical3d/`).

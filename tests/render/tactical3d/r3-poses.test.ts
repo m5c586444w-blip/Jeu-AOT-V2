@@ -36,10 +36,10 @@ beforeAll(async () => {
 const low = (b: { min: { y: number } }): number => b.min.y;
 
 describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
-  it("soldats des cinq tenues : attente, marche, course, coupe et tir les pieds au sol (±2 cm)", () => {
+  it("soldats des six tenues : attente, marche, course, coupe, tir et salut les pieds au sol (±2 cm)", () => {
     const worst: Record<string, number> = {};
     for (const s of soldiers) {
-      for (const p of ["attente", "marche", "course", "frappe", "tir"] as const) {
+      for (const p of ["attente", "marche", "course", "frappe", "tir", "salut"] as const) {
         for (const time of TIMES) {
           s.setPose(p, time);
           const y = low(skinnedBounds(s.body));
@@ -49,6 +49,37 @@ describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
       }
     }
     console.log(`soldats, écart maximal au sol (m) : ${Object.entries(worst).map(([k, v]) => `${k} ${v.toFixed(4)}`).join(", ")}`);
+  });
+
+  it("salut (C) : poing droit sur le cœur, devant la poitrine à gauche du sternum ; main gauche dans le dos ; lames rangées", () => {
+    for (const s of soldiers) {
+      s.setPose("salut", 0.4);
+      s.group.updateMatrixWorld(true);
+      const at = (name: string): { x: number; y: number; z: number } => {
+        const b = s.body.bones[name];
+        const v = s.body.joints.get(name)?.clone();
+        if (!b || !v) throw new Error(name);
+        return b.getWorldPosition(v);
+      };
+      const hand = at("hand_r");
+      const chest = at("spine_03");
+      const neck = at("neck_01");
+      const left = at("hand_l");
+      const msg = `${s.outfit?.id} main droite (${hand.x.toFixed(3)}, ${hand.y.toFixed(3)}, ${hand.z.toFixed(3)})`;
+      // Le soldat regarde vers +z ; son côté gauche est vers +x.
+      expect(hand.x, msg).toBeGreaterThan(0);
+      expect(hand.x, msg).toBeLessThan(0.16);
+      expect(hand.y, msg).toBeGreaterThan(chest.y - 0.05);
+      expect(hand.y, msg).toBeLessThan(neck.y);
+      expect(hand.z, msg).toBeGreaterThan(chest.z + 0.08);
+      expect(hand.z, msg).toBeLessThan(chest.z + 0.3);
+      expect(left.z, `${s.outfit?.id} main gauche`).toBeLessThan(chest.z - 0.05);
+      let shown = 0;
+      s.group.traverse((o) => {
+        if (o.name === "lame" && o.visible && o.parent?.visible) shown++;
+      });
+      expect(shown, `${s.outfit?.id} lames`).toBe(0);
+    }
   });
 
   it("soldat mort : couché sur le dos, posé au sol, moins de 45 cm de haut ; chute : en l'air, rien sous l'origine", () => {

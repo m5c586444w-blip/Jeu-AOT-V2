@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, Group, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, SkinnedMesh, Vector3 } from "three";
+import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, Group, LatheGeometry, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, SkinnedMesh, Vector2, Vector3 } from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import type { Material, Texture } from "three";
@@ -7,6 +7,7 @@ import type { HumanBody, HumanTemplate } from "./humanBase";
 import { PoseFader, SOLDIER_GAIT, poseHuman } from "./humanAnim";
 import type { HumanPose } from "./humanAnim";
 import type { Outfit } from "./figuresR3";
+import { buildEmblem, buildStar } from "./emblems";
 import { coatPanel, outfitGear, outfitMaterials } from "./humanOutfit";
 import { derive, range, seeded } from "./rng";
 import type { SoldierMaterials } from "./soldier";
@@ -43,7 +44,7 @@ export interface SoldierLook {
 }
 
 /** Hauteur demandée par le banc (1,7 m) ou tirée de la graine. */
-export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: Outfit } = {}): HumanSoldier {
+export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: Outfit; pluie?: boolean } = {}): HumanSoldier {
   const outfit = opts.outfit ?? null;
   const om = outfit ? outfitMaterials(mats, outfit) : null;
   const odm = outfit ? outfit.odm : true;
@@ -199,6 +200,8 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
     const thighHalf = Math.abs((bounds.get("peau_cuisses")?.maxX ?? 0.2) - Math.abs(hip.x));
     const sh = piece(gear("fourreau"), mats.leather, "fourreau");
     sh.rotation.set(0.18, 0, s * 0.06);
+    // Dette n° 72 : bonbonne de gaz fixée au boîtier, côté dos (équipement de manœuvre de l'œuvre : C ; dimensions : ?).
+    sh.add(piece(gear("bonbonne"), mats.steel, "bonbonne", 1));
     attach(`thigh_${side}`, sh, new Vector3(hip.x + s * (thighHalf + 0.035 * k), hip.y - 0.22 * k, hip.z - 0.01 * k));
     const hand = J(`hand_${side}`);
     const dir = hand.clone().sub(J(`lowerarm_${side}`)).normalize();
@@ -215,11 +218,75 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   attach("spine_03", capePivot, new Vector3(0, neck.y - 0.01 * k, chestBack - 0.02 * k));
   const shoulderHalf = Math.max(Math.abs(J("upperarm_l").x), 0.15) + 0.04 * k;
   const capeMat = outfit ? om?.cape : mats.cape;
-  const cape = capeMat ? new Mesh(capeGeometry(shoulderHalf, (neck.y - pelvis.y) * 1.55, 0.09 * k, seed), capeMat) : null;
+  // Dette n° 72 : la cape recouvre l'équipement de manœuvre (bouteilles au bas du dos) : plus ample quand il est porté.
+  const capeDepth = (odm ? 0.145 : 0.09) * k;
+  // Cape du Corps de Reconnaissance (dette n° 72) : jusqu'au-dessus du genou (longueur : A) ; cape de R1c inchangée.
+  const capeLength = (neck.y - pelvis.y) * (outfit ? 1.75 : 1.55);
+  // Sous la pluie (`opts.pluie`, A) : capuche rabattue sur la tête au lieu d'être roulée au col.
+  const headRegion = bounds.get("peau_tete");
+  const hoodUp = Boolean(opts.pluie && outfit && capeMat && headRegion);
+  const cape = capeMat ? new Mesh(capeGeometry(shoulderHalf, capeLength, capeDepth, seed, !hoodUp), capeMat) : null;
   if (cape) {
     cape.name = "cape";
     cape.castShadow = true;
     capePivot.add(cape);
+  }
+  let hoodGeo: BufferGeometry | null = null;
+  if (hoodUp && capeMat && headRegion) {
+    const r = Math.max(headRegion.maxX - headRegion.minX, headRegion.maxZ - headRegion.minZ) / 2 + 0.02 * k;
+    hoodGeo = raisedHoodGeometry(r);
+    const hood = new Mesh(hoodGeo, capeMat);
+    hood.name = "capuche";
+    hood.castShadow = true;
+    attach("head", hood, new Vector3((headRegion.minX + headRegion.maxX) / 2, headRegion.maxY + 0.025 * k - r * 1.18, (headRegion.minZ + headRegion.maxZ) / 2 - 0.012 * k));
+  }
+  // Dette n° 72 (D-163) : emblème du corps, redessiné par le projet : au dos (sur la cape si le corps en porte une), en haut des
+  // deux manches et sur la poche de poitrine gauche (emplacements : A ; Q18).
+  if (outfit?.embleme) {
+    const id = outfit.embleme;
+    const s3 = J("spine_03");
+    const chestFront = bounds.get("peau_torse")?.maxZ ?? 0.12;
+    const backEmblem = buildEmblem(id, (cape ? 0.2 : 0.16) * k);
+    backEmblem.rotation.y = Math.PI;
+    if (cape) {
+      backEmblem.position.set(0, -0.27 * capeLength, -capeDepth * 0.88 - 0.022 * k);
+      capePivot.add(backEmblem);
+    } else attach("spine_03", backEmblem, new Vector3(0, s3.y + 0.02 * k, chestBack - 0.012 * k));
+    attach("spine_03", buildEmblem(id, 0.055 * k), new Vector3(0.085 * k, s3.y + 0.06 * k, chestFront + 0.008 * k));
+    for (const [side, sgn] of [
+      ["l", 1],
+      ["r", -1],
+    ] as const) {
+      const u = J(`upperarm_${side}`);
+      const d = J(`lowerarm_${side}`).sub(u).normalize();
+      // Face extérieure du bras : perpendiculaire à l'axe du bras dans le plan frontal, tournée vers l'extérieur.
+      const out = new Vector3().crossVectors(d, new Vector3(0, 0, 1)).normalize();
+      if (out.x * sgn < 0) out.negate();
+      const up = d.clone().negate();
+      const right = new Vector3().crossVectors(up, out).normalize();
+      const sleeve = buildEmblem(id, 0.07 * k);
+      sleeve.quaternion.setFromRotationMatrix(new Matrix4().makeBasis(right, up, out));
+      attach(`upperarm_${side}`, sleeve, u.clone().addScaledVector(d, 0.1 * k).addScaledVector(out, 0.056 * k));
+    }
+  }
+  // Dette n° 72 : brassard des Eldiens de Marley au bras gauche, étoile à neuf branches sur la face extérieure (C ; couleurs ?).
+  if (outfit?.brassard) {
+    const armMat = new MeshStandardMaterial({ color: new Color(outfit.brassard), roughness: 0.85 });
+    owned.push(armMat);
+    const u = J("upperarm_l");
+    const d = J("lowerarm_l").sub(u).normalize();
+    const spot = u.clone().addScaledVector(d, 0.11 * k);
+    const m = bodyBand(body, ["peau_bras"], spot, d, 0.07 * k, 0.006 * k, armMat, 1);
+    if (m) {
+      body.group.add(m);
+      straps.push(m);
+    }
+    const out = new Vector3().crossVectors(d, new Vector3(0, 0, 1)).normalize();
+    if (out.x < 0) out.negate();
+    const star = buildStar(0.05 * k, "#1E2A4A");
+    const up = d.clone().negate();
+    star.quaternion.setFromRotationMatrix(new Matrix4().makeBasis(new Vector3().crossVectors(up, out).normalize(), up, out));
+    attach("upperarm_l", star, spot.clone().addScaledVector(out, 0.058 * k));
   }
   const extra: BufferGeometry[] = [];
   // R3 : pans de manteau (Police militaire, officier de Marley) : dos au bassin, devants aux cuisses (ils suivent les jambes).
@@ -312,7 +379,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       // Le soldat regarde vers +z : la cape s'écarte vers l'arrière par une rotation positive autour de x.
       capePivot.rotation.x = p === "vol" || p === "chute" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
       // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt, en marche, au tir et à terre.
-      for (const b of blades) b.visible = p !== "attente" && p !== "marche" && p !== "tir" && p !== "mort";
+      for (const b of blades) b.visible = p !== "attente" && p !== "salut" && p !== "marche" && p !== "tir" && p !== "mort";
       group.updateMatrixWorld(true);
       // Matrices d'os à jour : les mesures sur la peau (boîtes englobantes) suivent la pose.
       body.skeleton.update();
@@ -321,7 +388,8 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       const aim = p === "tir";
       const rest = p === "attente" ? outfit?.repos : undefined;
       const hasRifle = slung.children.length > 0;
-      const held = hasRifle && (aim || rest === "port" || rest === "arme") && (outfit?.fusil === "mains" || rest === "arme");
+      // Dette n° 72 : tout porteur de fusil (Garnison, Brigade Militaire) le prend en main pour tirer.
+      const held = hasRifle && (aim || rest === "port" || rest === "arme");
       if (held && inHands.children.length === 0) inHands.add(piece(outfitGear(outfit?.fusil === "mains" ? "fusil_baionnette" : "fusil"), om?.wood ?? mats.leather, "fusil"));
       if (held && !inHands.parent) group.add(inHands);
       slung.visible = hasRifle && !held;
@@ -347,6 +415,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       body.dispose();
       hairMesh?.geometry.dispose();
       cape?.geometry.dispose();
+      hoodGeo?.dispose();
       for (const g of extra) g.dispose();
       for (const m of straps) m.geometry.dispose();
       for (const m of owned) m.dispose();
@@ -461,7 +530,7 @@ export function buildHairCap(body: HumanBody, mat: Material, thickness: number, 
 
 // ——— Équipement du projet (formes de R1, refaites plus fines) ———
 
-type Gear = "reservoir" | "lanceur" | "fourreau" | "lame";
+type Gear = "reservoir" | "lanceur" | "fourreau" | "lame" | "bonbonne";
 const gearCache = new Map<Gear, BufferGeometry>();
 const at = (g: BufferGeometry, x: number, y: number, z: number, rx = 0, ry = 0, rz = 0): BufferGeometry =>
   g.applyMatrix4(new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromEuler(new Euler(rx, ry, rz)), new Vector3(1, 1, 1)));
@@ -497,6 +566,10 @@ export function gear(k: Gear): BufferGeometry {
       // Étui à lames : boîte longue, arêtes adoucies, poignées en tête.
       g = merge([new RoundedBoxGeometry(0.075, 0.44, 0.15, 3, 0.015), at(new BoxGeometry(0.03, 0.08, 0.04), 0, 0.25, 0.03), at(new BoxGeometry(0.03, 0.08, 0.04), 0, 0.25, -0.03)]);
       break;
+    case "bonbonne":
+      // Bonbonne de gaz couchée le long du boîtier, côté dos, tenue par deux colliers (dette n° 72).
+      g = merge([at(new CapsuleGeometry(0.028, 0.3, 4, 12), 0, 0.01, -0.11), at(new CylinderGeometry(0.033, 0.033, 0.018, 12), 0, 0.12, -0.11), at(new CylinderGeometry(0.033, 0.033, 0.018, 12), 0, -0.1, -0.11)]);
+      break;
     case "lame": {
       // Lame mince à pointe oblique, montée sur une poignée.
       const blade = new PlaneGeometry(0.034, 0.86, 1, 8);
@@ -518,7 +591,7 @@ export function gear(k: Gear): BufferGeometry {
  * Cape : demi-cylindre souple accroché sous la nuque, qui tombe jusqu'aux cuisses en s'évasant ; plis le long de la chute et
  * capuche roulée au col. Repère : le pivot (sous la nuque, dans le dos), le soldat regardant vers +z.
  */
-export function capeGeometry(halfWidth: number, length: number, depth: number, seed: number): BufferGeometry {
+export function capeGeometry(halfWidth: number, length: number, depth: number, seed: number, rolledHood = true): BufferGeometry {
   const rand = seeded(derive(seed, 62));
   const nu = 18;
   const nv = 14;
@@ -546,12 +619,42 @@ export function capeGeometry(halfWidth: number, length: number, depth: number, s
   const sheet = new BufferGeometry();
   sheet.setAttribute("position", new BufferAttribute(new Float32Array(pos), 3));
   sheet.setIndex(idx);
-  // Capuche roulée au col.
-  const hood = new CapsuleGeometry(0.05, halfWidth * 1.2, 4, 10);
+  // Capuche roulée au col (absente quand elle est levée sur la tête).
+  const flat = sheet.index ? sheet.toNonIndexed() : sheet;
+  if (!rolledHood) {
+    flat.computeVertexNormals();
+    return flat;
+  }
+  const hood = new CapsuleGeometry(0.045, halfWidth * 0.85, 4, 10);
   hood.rotateZ(Math.PI / 2);
   hood.scale(1, 0.8, 1.1);
-  hood.translate(0, 0.0, -depth * 0.9);
-  const g = merge([sheet.index ? sheet.toNonIndexed() : sheet, hood.toNonIndexed()]);
+  hood.translate(0, 0.0, -depth * 0.65);
+  const g = merge([flat, hood.toNonIndexed()]);
+  g.computeVertexNormals();
+  return g;
+}
+
+/**
+ * Capuche levée (pluie ; dette n° 72, forme : A) : coque tournée autour du crâne, ouverte sur le visage (vers +z), pointe tirée
+ * vers l'arrière, qui descend sur la nuque et s'évase sur les épaules où elle rejoint la cape. Repère : centre du crâne.
+ */
+export function raisedHoodGeometry(radius: number): BufferGeometry {
+  const open = 0.9;
+  // Profil (rayon, hauteur) en rayons de crâne, du sommet aux épaules.
+  const profile: [number, number][] = [
+    [0.04, 1.22],
+    [0.5, 1.14],
+    [0.82, 0.92],
+    [1.0, 0.5],
+    [1.04, 0.05],
+    [0.98, -0.38],
+    [0.98, -0.72],
+    [1.25, -1.05],
+    [1.6, -1.3],
+  ];
+  const g = new LatheGeometry(profile.map(([x, y]) => new Vector2(x * radius, y * radius)), 22, open, Math.PI * 2 - 2 * open);
+  const p = g.getAttribute("position");
+  for (let i = 0; i < p.count; i++) p.setZ(i, p.getZ(i) * 1.12 - Math.max(0, p.getY(i) - 0.5 * radius) * 0.35);
   g.computeVertexNormals();
   return g;
 }

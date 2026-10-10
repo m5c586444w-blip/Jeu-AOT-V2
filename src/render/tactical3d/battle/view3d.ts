@@ -64,7 +64,7 @@ import { titanSkinTexture } from "../textures";
  * personne. Chargée à la demande (three.js hors du bundle principal).
  * R3 : un directeur d'états (`figureState.ts`) lit la simulation à chaque pas ; « prêt » montre les figures de R1, puis le corps
  * de base (MakeHuman, CC0) est chargé : Titans de R3 (classe la plus proche de la hauteur simulée, corps et peau tirés de la
- * silhouette), soldats en tenue du Bataillon d'exploration, fantassins en tenue de leur faction (officier en tête de section).
+ * silhouette), soldats en tenue du Corps de Reconnaissance, fantassins en tenue de leur faction (officier en tête de section).
  * Les figures sont construites au fil des images (pas de gel), réattribuées aux unités les plus proches, avec un fondu d'état.
  */
 /** Figures de R3 construites par image (second temps). */
@@ -107,6 +107,20 @@ interface UnitLayers {
   goals: Mesh[];
 }
 
+/**
+ * Matériaux des soldats de la bataille (dette n° 72) : les figures du premier temps (avant les corps détaillés) portent les
+ * couleurs de l'uniforme commun du Corps de Reconnaissance ; les tenues de R3 teignent leurs propres copies.
+ */
+function battleMaterials(): SoldierMaterials {
+  const m = soldierMaterials();
+  const ex = outfit("exploration");
+  m.jacket.color.set(ex.veste);
+  m.trousers.color.set(ex.pantalon);
+  m.boots.color.set(ex.bottes);
+  if (ex.cape) m.cape.color.set(ex.cape);
+  return m;
+}
+
 export class View3D implements BattleView {
   readonly kind = "3d" as const;
   readonly renderer: WebGLRenderer;
@@ -117,7 +131,7 @@ export class View3D implements BattleView {
   private map: TacticalWorldMap | null = null;
   private world: BattleWorld | null = null;
   private layers: UnitLayers | null = null;
-  private readonly mats: SoldierMaterials = soldierMaterials();
+  private readonly mats: SoldierMaterials = battleMaterials();
   private readonly detail: Soldier[] = [];
   private readonly titans = new Map<number, Titan>();
   private readonly titanPrev = new Map<number, { x: number; y: number }>();
@@ -260,7 +274,8 @@ export class View3D implements BattleView {
     if (this.layers) return this.layers;
     const nS = Math.max(1, st.soldiers.length);
     const nT = st.troops?.length ?? 0;
-    const crowd = new InstancedMesh(crowdGeometry(), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
+    const ex = outfit("exploration");
+    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, cape: ex.cape ?? "#355A3C" }), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
     crowd.name = "foule";
     crowd.castShadow = true;
     const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;

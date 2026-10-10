@@ -288,7 +288,7 @@ const TitanR3Variant = z
   .strict();
 const UnitRange = z.tuple([Unit, Unit]).refine(([a, b]) => a <= b, "plage croissante");
 const Headgear = z.object({ forme: z.enum(["kepi", "casque", "casquette"]), teinte: Hex, bandeau: Hex.optional() }).strict();
-export const SOLDIER_OUTFIT_IDS = ["exploration", "garnison", "police", "marley_infanterie", "marley_officier"] as const;
+export const SOLDIER_OUTFIT_IDS = ["exploration", "garnison", "police", "recrues", "marley_infanterie", "marley_officier"] as const;
 const Outfit = z
   .object({
     id: z.enum(SOLDIER_OUTFIT_IDS),
@@ -306,6 +306,13 @@ const Outfit = z
     lames: z.enum(["mains", "fourreau"]).optional(),
     fusil: z.enum(["dos", "mains"]).optional(),
     sac: Hex.optional(),
+    /** Emblème du corps (dette n° 72) : dos, haut des manches, poche de poitrine ; sur la cape au dos si elle en a une. */
+    embleme: z.enum(["ailes", "roses", "licorne", "epees"]).optional(),
+    /** Brassard au bras gauche (Eldiens de Marley ; couleur ?). */
+    brassard: Hex.optional(),
+    /** Statut de la tenue (C : uniforme de l'œuvre ; A : choix du projet ; ? : incertain) et sa note. */
+    canon: CanonSchema.optional(),
+    note: z.string().min(1).optional(),
     baudrier: z.boolean().optional(),
     etui: z.boolean().optional(),
     /** Attitude au repos : bras le long du corps, arme au pied, port d'arme, mains dans le dos. */
@@ -319,7 +326,7 @@ export const FiguresR3FileSchema = z
     note: z.string().min(1),
     titans: z.array(z.object({ classe: z.string(), variantes: z.array(TitanR3Variant).length(3) }).strict()).length(5),
     peaux: z.array(z.object({ id: z.enum(["pale", "rougeaude"]), nom: z.string().min(1), teinte: Hex, melange: Unit, marbrures: Unit, dents: Hex }).strict()).length(2),
-    soldats: z.array(Outfit).length(5),
+    soldats: z.array(Outfit).length(6),
   })
   .strict()
   .superRefine((f, ctx) => {

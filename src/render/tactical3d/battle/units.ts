@@ -2,6 +2,7 @@ import { BoxGeometry, Color, ConeGeometry, CylinderGeometry, Matrix4, Quaternion
 import type { BufferGeometry } from "three";
 import { FaceBuilder } from "../townMesh";
 import { unitSphere } from "../rig";
+import { outfit } from "../figuresR3";
 import type { ViewQuality } from "../../battleView";
 
 /**
@@ -97,11 +98,12 @@ export function cannonGeometry(): BufferGeometry {
 }
 
 /**
- * Couleurs de la foule des fantassins (R3) : celles des tenues vues de près (veste de la Garnison, vareuse olive de Marley), pour
- * que le passage d'une figure en tenue à la foule ne se voie pas dans un rang. Les repères lointains gardent les couleurs de camp.
+ * Couleurs de la foule des fantassins (R3) : celles des tenues vues de près, pour que le passage d'une figure en tenue à la foule
+ * ne se voie pas dans un rang. Paradis : blanc (l'uniforme commun est dans les couleurs de sommet, dette n° 72) ; Marley : vareuse
+ * olive. Les repères lointains gardent les couleurs de camp.
  */
 export const UNIFORM_COLORS = {
-  paradis: new Color(0x6a7080),
+  paradis: new Color(0xffffff),
   marley: new Color(0x6b6247),
 } as const;
 
@@ -115,24 +117,28 @@ export const SIDE_COLORS = {
 } as const;
 
 function paradisTroop(): BufferGeometry {
+  // Dette n° 72 : uniforme commun de la tenue vue de près (Garnison, `data/art/figures_r3.json`) : veste brun clair, pantalon
+  // clair, hautes bottes, harnais ; tête nue ; fusil à l'épaule. Couleurs de sommet (la couleur d'instance est blanche).
+  const o = outfit("garnison");
   const fb = new FaceBuilder();
   const S = unitSphere(8);
-  const cloth = new Color(0xeeeeee);
+  const jacket = new Color(o.veste);
+  const trousers = new Color(o.pantalon);
+  const boots = new Color(o.bottes);
+  const leather = new Color(0x4b3322);
   const dark = new Color(0x3a352e);
   const skin = new Color(0xd9b49a);
-  const sash = new Color(0x8e2f2f);
-  // Pantalon sombre, comme la tenue de près (la couleur d'instance multiplie : ce gris-brun en ressort presque noir).
-  const trousers = new Color(0x7a6f5e);
+  const hair = new Color(0x3b2c20);
   for (const s of [1, -1]) {
-    fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), trousers);
-    fb.geometry(new CylinderGeometry(0.06, 0.06, 0.22, 6), at(s * 0.09, 0.11, 0.02), dark);
-    fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), cloth);
+    fb.geometry(new CylinderGeometry(0.068, 0.058, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), trousers);
+    fb.geometry(new CylinderGeometry(0.06, 0.052, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.005), boots);
+    fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), jacket);
   }
-  fb.geometry(new CylinderGeometry(0.16, 0.14, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.72]), cloth);
-  fb.geometry(new CylinderGeometry(0.165, 0.165, 0.08, 8), at(0, LEG + 0.06, 0, [1, 1, 0.74]), sash);
+  fb.geometry(new CylinderGeometry(0.16, 0.14, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.72]), jacket);
+  fb.geometry(new CylinderGeometry(0.15, 0.15, 0.1, 8), at(0, LEG + 0.03, 0, [1, 1, 0.74]), trousers);
+  fb.geometry(new CylinderGeometry(0.165, 0.165, 0.035, 8), at(0, LEG + 0.09, 0, [1, 1, 0.74]), leather);
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), skin);
-  // Coiffe souple, sans bord ; fusil porté à l'épaule.
-  fb.geometry(new CylinderGeometry(0.1, 0.105, 0.07, 8), at(0, LEG + TORSO + NECK + HEAD * 0.92, 0), dark);
+  fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), hair);
   fb.geometry(new BoxGeometry(0.035, 1.0, 0.035), at(-0.12, LEG + TORSO * 0.75, -0.13, [1, 1, 1], 0.1, 0.35), dark);
   return fb.build();
 }

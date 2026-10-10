@@ -208,3 +208,19 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
   aucune autre valeur. Les `?` sont paramétrables dans `data/` ; leurs questions sont dans `docs/lore/questions-ouvertes.md`
   (Q1 à Q17). Les trois listes (sourcé, interprété, non confirmé) sont dans `docs/reports/P10.md`.
 - P10 n'ajoute aucun fait de lore (manuel, accessibilité, outils, documentation).
+
+## Faits utilisés pour les uniformes (dette n° 72, D-163, D-165)
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Uniforme commun des corps de Paradis : veste courte brun clair, pantalon clair, hautes bottes, harnais de sangles | C (éléments) ; teintes exactes, coupe, boutons A ou ? | `data/art/figures_r3.json` (`soldats`) | Q18 |
+| Emblèmes : Ailes de la liberté (une aile bleue, une blanche), deux roses (rouge et blanche), tête de licorne, deux épées croisées | C (motifs) ; tracé, fond, contour, emplacements A ou ? | `src/render/tactical3d/emblems.ts` | redessinés par le projet ; Q18 |
+| Cape verte à capuche du Corps de Reconnaissance, emblème au dos | C ; longueur A ; capuche levée sous la pluie A | `humanSoldier.ts` | Q18 |
+| Équipement de manœuvre (boîtiers aux hanches, bonbonnes, corps au bas du dos, lames) | C (éléments) ; dimensions, nombre de lames ? | `humanSoldier.ts` | Q18 |
+| Salut : poing droit fermé sur le cœur, main gauche dans le dos | C | `humanAnim.ts` (`salut`) | mise en scène de la planche `r3-ceremonie` : A |
+| Brassard des Eldiens de Marley à étoile à neuf branches | C ; bras et couleurs ? | `data/art/figures_r3.json` (`marley_infanterie`) | Q18 |
+| Uniformes de l'armée de Marley, fusils de la Garnison et de la Brigade Militaire | A | idem | choix de jeu, jamais présentés comme canon |
+
+`canon:check` : « « data » conforme (R1–R14, 845 entrées). » Statuts portés par `data/` : 360 C, 1 348 A, 117 ? (+4 C pour les
+tenues de Paradis, +2 A pour celles de Marley).
+

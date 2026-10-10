@@ -2,6 +2,8 @@ import { Vector3 } from "three";
 import type { PointsMaterial, Scene, Texture } from "three";
 import { skinnedBounds } from "./humanBase";
 import type { HumanTemplate } from "./humanBase";
+import { buildEmblem } from "./emblems";
+import type { EmblemId } from "./emblems";
 import { buildHumanSoldier } from "./humanSoldier";
 import type { HumanSoldier } from "./humanSoldier";
 import { buildHumanTitan } from "./humanTitan";
@@ -19,7 +21,10 @@ import { puffTexture, titanSkinTexture } from "./textures";
  * Planches de contrôle de R3 (`?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses`) :
  * - r3-titans : les 15 corps à l'échelle (3 à 15 m), peaux alternées, un soldat de 1,7 m pour l'échelle ;
  * - r3-visages : six têtes de Titans de près (dents, yeux, expressions, deux peaux) ;
- * - r3-soldats : les cinq tenues de face, puis de dos ;
+ * - r3-soldats : les six tenues de face, puis de dos ;
+ * - r3-uniformes (dette n° 72) : les quatre corps de Paradis de dos et de trois quarts, emblèmes agrandis au-dessus, et la
+ *   cape sous la pluie (capuche levée) ;
+ * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
  * - r3-poses : soldats (marche, course, chute, coupe, tir, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
  *   effondrement, abattu).
  * Les étiquettes sont des points 3D que la page projette à l'écran.
@@ -35,7 +40,7 @@ export interface R3Sheet {
   bodies: { id: string; nominal: number; measured: number }[];
 }
 
-export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses"] as const;
+export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie"] as const;
 
 export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeMap: Texture | null, detail: { skin: Texture; cloth: Texture } | null, time: number): R3Sheet {
   const out: R3Sheet = { soldiers: [], titans: [], labels: [], eye: new Vector3(0, 2, 10), target: new Vector3(0, 1, 0), fov: 32, ground: 60, bodies: [] };
@@ -59,8 +64,8 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.titans.push(ti);
     return ti;
   };
-  const soldier = (id: (typeof OUTFIT_IDS)[number], seed: number, height?: number): HumanSoldier => {
-    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: outfit(id), ...(height ? { height, gender: 1 } : {}) });
+  const soldier = (id: (typeof OUTFIT_IDS)[number], seed: number, height?: number, pluie = false): HumanSoldier => {
+    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: outfit(id), pluie, ...(height ? { height, gender: 1 } : {}) });
     s.group.traverse((o) => {
       o.castShadow = true;
     });
@@ -125,21 +130,75 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.eye.set(0, 2.05, 4.2);
     out.fov = 42;
   } else if (sheet === "r3-soldats") {
-    // Cinq tenues de face, puis les mêmes de dos.
+    // Six tenues de face, puis les mêmes de dos.
     OUTFIT_IDS.forEach((id, i) => {
       for (const back of [false, true]) {
         const s = soldier(id, 40 + i, 1.7);
-        const x = back ? 0.82 + i * 0.82 : -4.1 + i * 0.82;
+        const x = back ? 0.8 + i * 0.82 : -4.9 + i * 0.82;
         s.group.position.set(x, 0, 0);
         s.group.rotation.y = back ? Math.PI : 0;
         s.setPose("attente", time);
         if (!back) out.labels.push({ text: outfit(id).nom.replace(" de ", "\nde ").replace(" d'", "\nd'").replace(" militaire", "\nmilitaire"), at: new Vector3(x, -0.12, 0) });
       }
     });
-    out.labels.push({ text: "de face", at: new Vector3(-2.95, 2.05, 0) }, { text: "de dos", at: new Vector3(2.95, 2.05, 0) });
+    out.labels.push({ text: "de face", at: new Vector3(-2.85, 2.05, 0) }, { text: "de dos", at: new Vector3(2.85, 2.05, 0) });
     out.target.set(0, 1.0, 0);
-    out.eye.set(0, 1.2, 7.6);
+    out.eye.set(0, 1.2, 9.8);
     out.fov = 38;
+  } else if (sheet === "r3-uniformes") {
+    // Quatre corps de Paradis : de dos (emblème au dos ou sur la cape) puis de trois quarts (manche, poitrine) ; emblèmes agrandis.
+    const corps: [(typeof OUTFIT_IDS)[number], EmblemId][] = [
+      ["exploration", "ailes"],
+      ["garnison", "roses"],
+      ["police", "licorne"],
+      ["recrues", "epees"],
+    ];
+    corps.forEach(([id, em], i) => {
+      const x = -3 + i * 1.5;
+      const backView = soldier(id, 60 + i, 1.7);
+      backView.group.position.set(x - 0.32, 0, 0);
+      backView.group.rotation.y = Math.PI;
+      backView.setPose("attente", time);
+      const three = soldier(id, 60 + i, 1.7);
+      three.group.position.set(x + 0.32, 0, 0);
+      three.group.rotation.y = 0.7;
+      three.setPose("attente", time);
+      const big = buildEmblem(em, 0.5);
+      big.position.set(x, 2.25, 0);
+      scene.add(big);
+      out.labels.push({ text: outfit(id).nom.replace(" de ", "\nde ").replace(" d'", "\nd'"), at: new Vector3(x, -0.12, 0) });
+    });
+    // Sous la pluie : la capuche de la cape rabattue sur la tête (A), de dos et de face.
+    for (const [dx, ry] of [
+      [-0.32, Math.PI * 0.8],
+      [0.32, 0.35],
+    ] as const) {
+      const s = soldier("exploration", 70, 1.7, true);
+      s.group.position.set(3 + dx, 0, 0);
+      s.group.rotation.y = ry;
+      s.setPose("attente", time);
+    }
+    out.labels.push({ text: "sous la pluie\n(capuche levée)", at: new Vector3(3, -0.12, 0) });
+    out.target.set(0, 1.3, 0);
+    out.eye.set(0, 1.5, 6.8);
+    out.fov = 40;
+  } else if (sheet === "r3-ceremonie") {
+    // Remise des diplômes : trois rangs de recrues au salut, un instructeur du Corps de Reconnaissance face à elles (mise en
+    // scène : A ; salut : C).
+    for (let r = 0; r < 3; r++)
+      for (let c = 0; c < 7; c++) {
+        const s = soldier("recrues", 100 + r * 7 + c);
+        s.group.position.set((c - 3) * 0.75, 0, -r * 0.9);
+        s.setPose("salut", time + c * 0.17);
+      }
+    const chief = soldier("exploration", 99, 1.78);
+    chief.group.position.set(0, 0, 2.4);
+    chief.group.rotation.y = Math.PI;
+    chief.setPose("salut", time);
+    out.labels.push({ text: "Corps d'Entraînement : salut, poing droit sur le cœur", at: new Vector3(0, 2.15, -0.9) });
+    out.target.set(0, 1.0, 0);
+    out.eye.set(2.2, 2.0, 6.4);
+    out.fov = 42;
   } else if (sheet === "r3-poses") {
     // Rangée de devant : soldats ; rangée du fond : Titans ramenés à 2,4 m (le corps abattu couché vers la caméra).
     const sPoses: [(typeof OUTFIT_IDS)[number], HumanPose, string][] = [
