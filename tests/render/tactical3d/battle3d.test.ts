@@ -103,6 +103,25 @@ describe("décor 3D habillé par les profils de style (dette n° 74)", () => {
     w.dispose();
   });
 
+  it("ville (E02, district adossé au mur) : mur de 50 m en toile de fond, au nord, hors de la zone de combat ; pas en plaine", () => {
+    const b = battleOn("tmap_ville");
+    const w = buildBattleWorld(b.map, 11);
+    const wall = partsNamed(w, "mur-de-fond")[0];
+    expect(wall).toBeDefined();
+    const bb = objectBox(wall as NonNullable<typeof wall>);
+    expect(bb.h).toBeGreaterThanOrEqual(50);
+    expect(bb.h).toBeLessThan(54);
+    expect(bb.y1).toBeLessThan(0);
+    expect(bb.x0).toBeLessThan(0);
+    expect(bb.x1).toBeGreaterThan(b.map.width);
+    // La simulation ne le connaît pas : une emprise par structure de la carte, rien de plus.
+    expect(w.footprints.length).toBe(b.map.structures.length);
+    w.dispose();
+    const p = buildBattleWorld(battleOn("tmap_plaine").map, 11);
+    expect(partsNamed(p, "mur-de-fond")).toHaveLength(0);
+    p.dispose();
+  });
+
   it("profils par carte : plaine → village agricole, forêt → bois (ou repli), mur → district", () => {
     expect(buildBattleWorld(battleOn("tmap_mur").map, 11).profile.id).toBe("E02");
     expect(["E11", "E02"]).toContain(buildBattleWorld(battleOn("tmap_plaine").map, 11).profile.id);

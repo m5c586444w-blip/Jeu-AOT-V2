@@ -43,7 +43,8 @@ import type { Titan, TitanPose } from "../titan";
 import { PHOTO_MATIERES, photoUrl } from "../photoTextures";
 import { battleProfile, buildBattleWorld, occludersFor } from "./world";
 import type { BattleDecorTextures, BattleWorld } from "./world";
-import { facadeSet, normalOf, roofTex } from "../texturesEnv";
+import { facadeSet, normalOf, roofTex, wallStoneTex } from "../texturesEnv";
+import { parementTextures } from "../parement";
 import type { RoofMaterial, WallMaterial } from "../styles";
 import { LOD, SIDE_COLORS, UNIFORM_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "./units";
 import { FigureDirector, SOLDIER_POSE, TITAN_POSE, TROOP_POSE } from "./figureState";
@@ -271,6 +272,12 @@ export class View3D implements BattleView {
         if (this.opts.quality === "bas") return null;
         const n = normalOf(t, k);
         return n ? keep(n) : null;
+      },
+      wallStone: () => keep(wallStoneTex(this.seed)),
+      parement: () => {
+        const p = parementTextures(this.seed);
+        for (const t of [p.A, p.B, p.C]) keep(t);
+        return p;
       },
     };
     this.world = buildBattleWorld(m, this.seed, { profile: style, textures, night: this.night });

@@ -4,7 +4,7 @@
 
 ## Index
 
-167 décisions, de D-01 (2026-10-02) à D-167 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+168 décisions, de D-01 (2026-10-02) à D-168 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -173,6 +173,7 @@
 - **D-165** (10-10) — Dette n° 72 : uniformes des soldats selon l'œuvre, critère de silhouette par famille
 - **D-166** (10-10) — Dette n° 74 : décor de la bataille habillé par les profils de style
 - **D-167** (10-10) — Dette n° 75 : bâtiments translucides devant les unités choisies, jauges au-dessus des escouades
+- **D-168** (10-10) — Dette n° 55 (décor) : mur d'enceinte en toile de fond de la ville de bataille
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1639,4 +1640,13 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
     les escouades choisies, seulement celles en alerte pour les autres (vingt escouades côte à côte se chevauchaient sinon :
     première capture de `smoke:r2`). Le DOM n'est retouché que quand un niveau change d'un dixième.
 - **Réversible** : oui (`battle/world.ts`, `battle/view3d.ts`, `rtBattleScreen.ts`, `screen.css`).
+
+## 2026-10-10 — D-168 Dette n° 55 (décor) : mur d'enceinte en toile de fond de la ville de bataille
+- **Constat** : la « Ville des Murs » de la bataille n'avait aucun mur, alors que son profil de style (E02, district adossé
+  au Mur Rose) déclare le mur visible (`mur_visible.visible`, `?`).
+- **Décision** : pour la carte « ville », un pan de mur droit (hauteur 50 m, C ; épaisseur, teinte et parement de
+  `data/art/murs.json`, `?`) est rendu au nord, 60 m au-delà du bord de la carte (A), extérieur au nord, avec le parement sans
+  motif répété de R1e. Rendu seul : la simulation ne le connaît pas (une emprise par structure de la carte, test).
+- **Reste** (dette n° 55) : nom du lieu au carnet d'après la carte tactique ; camp des obus au bilan.
+- **Réversible** : oui (`battle/world.ts`).
 

@@ -9,6 +9,9 @@ import { facadeColor, profile as styleProfile, roofColor } from "../styles";
 import type { RoofMaterial, StyleProfile, WallMaterial } from "../styles";
 import { pickWeighted, roofShape } from "../styling";
 import type { FaceBuilder } from "../townMesh";
+import { straightWall, translatePaths, wallLayout } from "../envWall";
+import { buildWallMeshes } from "../meshWall";
+import type { ParementTextures } from "../parement";
 
 /**
  * Décor de la bataille 3D (R2+), DÉRIVÉ de la carte de la simulation (jamais l'inverse) : chaque structure (bâtiment,
@@ -25,7 +28,13 @@ export interface BattleDecorTextures {
   facade(m: WallMaterial): { upper: Texture; upperLit: Texture; ground: Texture; groundLit: Texture; plain: Texture };
   roof(c: RoofMaterial): Texture;
   normal(t: Texture | null, strength: number): Texture | null;
+  /** Mur de fond : pierre et parement sans motif répété (R1e). */
+  wallStone?(): Texture;
+  parement?(): ParementTextures;
 }
+
+/** Recul du mur de fond derrière le bord nord de la carte (m, A) : hors de la zone de combat. */
+export const BACKDROP_WALL_GAP = 60;
 
 /**
  * Profil de style du décor selon la carte (A) : ville et mur → district planifié du mur Rose (E02) ; plaine → village
@@ -280,6 +289,22 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
       mesh.geometry.setAttribute("batiment", new BufferAttribute(ids, 1));
     }
   }
+  // Dette n° 55 (décor) : mur d'enceinte en toile de fond quand le profil le montre (E02 : district adossé au Mur Rose, 50 m,
+  // C) ; pan droit au nord de la carte, extérieur au nord, hors de la zone de combat : la simulation ne le connaît pas.
+  let backdrop: { dispose(): void } | null = null;
+  if (terrain === "ville" && style.mur_visible.visible) {
+    const layout = wallLayout(translatePaths([straightWall(m.width / 2 + 700, -BACKDROP_WALL_GAP, -1, [])], m.width / 2, 0));
+    const wm = buildWallMeshes(layout, () => 0, tx?.wallStone?.() ?? null, seed, tx?.parement?.() ?? null);
+    const g = new Group();
+    g.name = "mur-de-fond";
+    for (const x of wm.meshes) {
+      x.castShadow = true;
+      x.receiveShadow = true;
+      g.add(x);
+    }
+    group.add(g);
+    backdrop = wm;
+  }
   // Mur (et autres boîtes de maçonnerie) : parement de pierre.
   for (const s of by("mur")) {
     const wall = new Mesh(new BoxGeometry(s.w, s.h, s.d).translate(s.x + s.w / 2, s.h / 2, s.y + s.d / 2), stoneMat);
@@ -352,6 +377,7 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
       return [...caches.value].filter((v) => v > 0).map((v) => v - 1);
     },
     dispose(): void {
+      backdrop?.dispose();
       group.traverse((o) => {
         const g = (o as Mesh).geometry as BufferGeometry | undefined;
         g?.dispose();
