@@ -197,6 +197,7 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Durée, allure du front, ordre des terres, morts et évacués, chance d'un assaut contre le Fondateur | ? (modèle de jeu paramétrable) | `data/balance/rumbling.json` | Q14 ; aucun chiffre officiel retenu |
 | Gouvernement de Paradis au départ du Grondement (Historia reine ; postes tenus par des vivants) | C (Historia) ; titulaires des autres postes A | `scn_grondement.json` (`politics`) | règle R12 (aucun poste tenu par un mort), D-156 |
 | Mort de Sasha, Mâchoire passée à Falco, camp de Zeke pendant la crise | ? | `scn_grondement.json` (`deceased`, `shifter_holders`) | Q17 ; 11 §3–§4 (seconde main) |
+| « Sourire figé » des silhouettes et des visages de Titans | A | `src/render/tactical/figures.ts`, `src/render/tactical3d/titan.ts` | détail de design, jamais présenté comme canon (15 C-26) |
 | Malédiction d'Ymir (treize ans après l'héritage) | C | `src/sim/shifters` (fin des porteurs) | 11 §4 |
 | Objectifs, défaites et termes des scénarios ; niveaux de difficulté | A | `data/balance/endings.json`, `data/balance/difficulty.json` | choix de jeu (D-151, D-152, D-157) |
 

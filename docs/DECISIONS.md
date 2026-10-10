@@ -4,7 +4,7 @@
 
 ## Index
 
-160 décisions, de D-01 (2026-10-02) à D-160 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+161 décisions, de D-01 (2026-10-02) à D-161 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -166,6 +166,7 @@
 - **D-158** (10-10) — P10.1 : accessibilité (09 §20)
 - **D-159** (10-10) — P10.2 : parcours de cinq ans par commandes enregistrées
 - **D-160** (10-10) — P10.4–P10.5 : manuel en jeu et lancement local
+- **D-161** (10-10) — P10.4 : fonctions P2 du fichier 09 non faites, report confirmé (CONFORMITE)
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1525,3 +1526,21 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   `dist/index.html` n'est pas pris en charge : le navigateur refuse les modules et le Worker en `file://`. `npm run smoke:local`
   sert le build et refuse toute requête vers un autre ordinateur (aucune ne doit partir).
 - **Réversible** : oui.
+
+## 2026-10-10 — D-161 P10.4 : fonctions P2 du fichier 09 non faites, report confirmé (CONFORMITE)
+- **Contexte** : l'audit `docs/CONFORMITE.md` (15 §5, 18 §10) relève 52 fonctions ou lignes ABSENT. Onze n'avaient aucune
+  justification (F-LOG-10 sabotage de lignes, F-POL-15 réformes constitutionnelles, F-TEC-05 espionnage technologique,
+  F-TIT-10 observation de comportement, F-EXP-19 missions conjointes, F-CMB-20 capacités de commandement, F-EVT-05
+  événements selon traits et relations, F-EVT-14 et F-DEV-03 éditeurs d'événements, F-SYS-06 distinctions, F-DEV-04 éditeur
+  de personnages) ; trente-quatre avaient été reportées par un plan de phase sans être reprises (F-STR-09, 10, 11, 19 ;
+  F-ECO-17 ; F-LOG-06 ; F-POP-08, 12, 18 ; F-POL-07, 09 ; F-ADV-04, 05, 09 ; F-INT-05 à 09 ; F-TEC-04, 06, 09, 10 ; F-CHR-08,
+  11, 15, 19 ; F-EXP-08 ; F-CMB-12, 17 ; F-UIX-05, 06, 22 ; F-DEV-02).
+- **Décision** : toutes sont des fonctions de priorité P2 du fichier 09 (le plus bas de la hiérarchie après 04 et 05) ; P10
+  exclut tout nouveau contenu de jeu (plan de phase, hors-périmètre) et les fonctions P1 sont toutes faites. Leur report après la
+  V1 est confirmé, en une seule dette (n° 69). Les éditeurs (F-EVT-14, F-DEV-03, F-DEV-04) sont remplacés pour l'usage
+  personnel par les données JSON validées (`data:validate`, `canon:check`, `places:valider`). Les cinq fonctions économiques
+  écartées par la décision « économie moyenne, sans marchés complexes » (23 §1 ; F-ECO-06, 08, 10, 11, 13) et les effets de
+  bataille renvoyés en V2 (F-CMB-11, C-10 ; 21 §6) gardent leur justification. Les écarts partiels P2 et P3 de l'audit (ordres
+  diversion, évacuer, incendier ; code de la Garnison ; menu au clic droit ; aube et crépuscule en bataille ; anglais ; overlays
+  de debug tactiques ; difficulté dans la bataille tactique ; bâtiments) forment la dette n° 70.
+- **Réversible** : oui (chaque fonction peut être reprise ; aucune n'est écartée définitivement).
