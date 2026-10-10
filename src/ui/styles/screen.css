@@ -352,6 +352,18 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .options__note { margin: 0.4rem 0 0; font-size: var(--t-s); color: var(--texte-second); }
 .options__sous-titre { margin: 0.5rem 0 0.1rem; font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--texte-second); }
 .options__piste > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+/* Manuel (P10.4) : sommaire à gauche, texte à droite ; une colonne sur un écran étroit. */
+.manuel { width: min(52rem, 94vw); height: min(40rem, 86vh); align-content: start; display: grid; grid-template-columns: 12rem minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); column-gap: 1rem; }
+.manuel > .options__tete { grid-column: 1 / -1; }
+.manuel[hidden] { display: none; }
+.manuel__sommaire { display: flex; flex-direction: column; gap: 0.15rem; align-self: start; position: sticky; top: 3rem; }
+.manuel__onglet { padding: 0.25rem 0.5rem; text-align: left; font-size: var(--t-s); color: var(--texte-second); background: transparent; border: var(--filet-l) solid transparent; border-left: 3px solid transparent; }
+.manuel__onglet:hover, .manuel__onglet[aria-current="true"] { color: var(--texte-fort); background: var(--voile); border-left-color: var(--accent); }
+.manuel__texte { line-height: 1.5; }
+.manuel__texte p { margin: 0 0 0.6rem; }
+.manuel__titre { margin: 0.2rem 0 0.5rem; font-size: var(--t-l); color: var(--accent-clair); }
+.manuel__touches { padding: 0.35rem 0.5rem; font-size: var(--t-s); background: var(--voile); border-left: 3px solid var(--filet); }
+@media (max-width: 640px) { .manuel { grid-template-columns: 1fr; } .manuel__sommaire { position: static; flex-flow: row wrap; } }
 
 /* ——— Personnages (maître-détail) ——— */
 .perso-ligne { grid-template-columns: 2.2rem minmax(0, 1fr) auto; }

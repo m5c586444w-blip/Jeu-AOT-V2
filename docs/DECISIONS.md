@@ -2,6 +2,171 @@
 
 > Modèle du fichier 05 §10. Les décisions D-01 à D-15 sont les « choix par défaut » validés par l'utilisateur le 2026-10-02 ; les errata Q1–Q4 sont dans `docs/spec/ERRATA.md`.
 
+## Index
+
+160 décisions, de D-01 (2026-10-02) à D-160 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+
+- **D-01** (10-02) — Format des identifiants d'événements
+- **D-02** (10-02) — Identifiants de provinces
+- **D-03** (10-02) — Fenêtre d'un événement
+- **D-04** (10-02) — Années floues
+- **D-05** (10-02) — Valeurs « C ? » du fichier 13
+- **D-06** (10-02) — Déblocage par plusieurs événements
+- **D-07** (10-02) — Année de naissance facultative
+- **D-08** (10-02) — `active_from` par défaut
+- **D-09** (10-02) — Morts des personnages de la graine
+- **D-10** (10-02) — Positionnements (règle R5)
+- **D-11** (10-02) — Priorité du fichier 14
+- **D-12** (10-02) — Incohérences notées sans correction
+- **D-13** (10-02) — Pas de Pixi en P0
+- **D-14** (10-02) — Horloge des sauvegardes
+- **D-15** (10-02) — Faux positifs possibles d'AC-17
+- **D-16** (10-02) — Calendrier
+- **D-17** (10-02) — Graine aléatoire et fork
+- **D-18** (10-02) — Hash d'état
+- **D-19** (10-02) — Données hors de `src/`
+- **D-20** (10-02) — canon:check indépendant de Zod
+- **D-21** (10-02) — Worker
+- **D-22** (10-02) — Dépendances
+- **D-23** (10-02) — Événement E19
+- **D-24** (10-03) — Réserve nationale unique
+- **D-25** (10-03) — Géométrie en anneaux concentriques
+- **D-26** (10-03) — Répartition de la population
+- **D-27** (10-03) — Catalogue des bâtiments
+- **D-28** (10-03) — Données validées dans le Worker
+- **D-29** (10-03) — Rendu : traits en pixels, texte à taille constante
+- **D-30** (10-03) — Overlays sans données
+- **D-31** (10-03) — Overlay « Gaz »
+- **D-32** (10-03) — Saisons
+- **D-33** (10-03) — Tolérance d'arrondi
+- **D-34** (10-03) — Bruit du pilote WebGL en test
+- **D-35** (10-03) — Raccourcis
+- **D-36** (10-03) — Écran de jeu
+- **D-37** (10-03) — Anglais partiel
+- **D-38** (10-03) — Équilibrage initial ajusté
+- **D-39** (10-03) — Dépendance ajoutée
+- **D-40** (10-03) — Commits groupés en P2
+- **D-41** (10-03) — Ville-usine exploitée dans le scénario 850
+- **D-42** (10-03) — Production agricole du scénario 850
+- **D-43** (10-03) — Morts en P2
+- **D-44** (10-03) — Secrets jamais affichés
+- **D-45** (10-03) — Divergence assumée
+- **D-46** (10-03) — Scénario par défaut
+- **D-47** (10-03) — Confirmation des décisions
+- **D-48** (10-03) — Critère AC2-11 révisé (accord de l'utilisateur)
+- **D-49** (10-03) — Statut de localisation et de rattachement (demande de l'utilisateur)
+- **D-50** (10-04) — Périmètre de P3
+- **D-51** (10-04) — Densité de Titans propre au scénario
+- **D-52** (10-04) — Graphe de routage et franchissement des murs
+- **D-53** (10-04) — Unités de gaz
+- **D-54** (10-04) — Logistique : escortes, retours, commit groupé
+- **D-55** (10-04) — Modèle d'auto-résolution v1
+- **D-56** (10-04) — Calibrage des expéditions (T3.7)
+- **D-57** (10-04) — Interface des expéditions (T3.8–T3.9)
+- **D-58** (10-04) — Correctif de la règle des portes (D-52)
+- **D-59** (10-04) — Architecture de P4
+- **D-60** (10-04) — Calibrage du combat tactique et taille d'échantillon d'AC4-08
+- **D-61** (10-04) — Interface tactique et mesure de performance
+- **D-62** (10-04) — Revue de P4 : sens du calibrage et contrôle de réalisme indépendant
+- **D-63** (10-04) — Revue de P4 : lisibilité de l'écran de bataille
+- **D-64** (10-04) — Données de P5 : événements, technologies
+- **D-65** (10-04) — Mort d'Erwin : E42 plutôt qu'E41
+- **D-66** (10-04) — Forme canonique de l'état après chaque commande
+- **D-67** (10-04) — Fenêtres des événements de 850 resserrées
+- **D-68** (10-04) — Titans-porteurs : état, héritage, horloge (P6)
+- **D-69** (10-04) — Porteurs en bataille tactique (P6)
+- **D-70** (10-04) — Échelle du monde : des nations, pas un second Paradis (P7)
+- **D-71** (10-04) — Guerre moderne et Titans stratégiques (P7)
+- **D-72** (10-04) — Diplomatie, Hizuru, IA (P7)
+- **D-73** (10-04) — Événements de 854 (P7)
+- **D-74** (10-04) — Menu principal et bandeau (P8)
+- **D-75** (10-04) — Audio par synthèse (P8)
+- **D-76** (10-04) — Revue automatique par écran (P8)
+- **D-77** (10-05) — R-gaz : gaz par classe de Titan (options c + a, décision de l'utilisateur)
+- **D-78** (10-05) — Zone de jeu ≥ 85 % : définition de la mesure et correctif 4K (R0.3)
+- **D-79** (10-06) — AC3-06 : délai du test relevé, assertions inchangées (décision de l'utilisateur)
+- **D-80** (10-06) — Cadrage d'ouverture de bataille et flèches de bord (critère f, décision de l'utilisateur)
+- **D-81** (10-06) — three.js pour l'essai de rendu 3D (R1, consigne de l'utilisateur)
+- **D-82** (10-06) — Ville irrégulière : comment on mesure l'irrégularité (R1.2)
+- **D-83** (10-06) — Titans 3D : anatomies, nuque, poses (R1.4)
+- **D-84** (10-06) — Caméras et qualité de l'essai 3D (R1.6)
+- **D-85** (10-06) — Critère f rouvert : cadrer ce qui est DESSINÉ pour le porteur, avec une marge haute (revue de R0)
+- **D-86** (10-06) — Environnements de R1b : choix de rendu non couverts par les spécifications
+- **D-87** (10-06) — Titans et soldats sur le corps de base (R1c.2–R1c.3) : choix non couverts par les spécifications
+- **D-88** (10-06) — Rendu réaliste (R1c.4) : choix non couverts par les spécifications
+- **D-89** (10-06) — Districts d'après l'animé (R1c.5) : choix non couverts par les spécifications
+- **D-90** (10-07) — Latence de R1c : mesure par type de page, carte d'environnement réduite (R1c.6)
+- **D-91** (10-07) — Revue de R1c : décisions de l'utilisateur appliquées en R1d
+- **D-92** (10-07) — Teintes : éclairage d'image corrigé (R1d.2, corrige D-88)
+- **D-93** (10-07) — Latence en deux temps et qualité basse allégée (R1d.1)
+- **D-94** (10-07) — Corps de base sans détail anatomique (R1d.3)
+- **D-95** (10-07) — Arbres réalistes dans la scène tactique (R1d.4)
+- **D-96** (10-07) — Textures de Poly Haven (R1d.5)
+- **D-97** (10-07) — Ombres de jour approfondies ; mesure de R1d fiabilisée (R1d.6)
+- **D-98** (10-07) — Correctifs de R1d (R1e.2, consigne §6)
+- **D-99** (10-07) — Murailles et portes (R1e.3)
+- **D-100** (10-07) — Shiganshina et la visionneuse des lieux (R1e.4)
+- **D-101** (10-07) — Trois autres districts du mur Maria (R1e.5)
+- **D-102** (10-07) — Mémoire des lieux (R1e.6, consigne §4)
+- **D-103** (10-07) — Décisions de l'utilisateur après l'arrêt n° 1 (R1e)
+- **D-104** (10-07) — Noms des districts de Maria, ouvrages du rempart, sol des lieux (R1e.4–R1e.5)
+- **D-105** (10-07) — Captures des lieux : sol, ciel des états, points de vue (R1e.7)
+- **D-106** (10-08) — Direction autonome : reprise et fusion de MAP
+- **D-107** (10-08) — Gouvernance de la direction autonome
+- **D-108** (10-08) — Part de la carte mesurée entre la barre supérieure et le menu de gestion (phase UI)
+- **D-109** (10-08) — Menu de gestion en bas, regroupé, mode compact (phase UI)
+- **D-110** (10-08) — Fond du menu principal : rendu de la scène 3D du projet (phase UI)
+- **D-111** (10-08) — Infobulles à trois niveaux et raccourcis (phase UI)
+- **D-112** (10-08) — Plans d'affichage : bataille au-dessus des registres ; smoke:p5 aligné sur UX0 (phase UI)
+- **D-113** (10-08) — Revue et fusion de la phase UI (direction autonome)
+- **D-114** (10-08) — Musique synthétisée, aucun enregistrement téléchargé (phase AUD)
+- **D-115** (10-08) — Répertoire : transcrire ce qui est sûr, composer le reste (phase AUD)
+- **D-116** (10-08) — Un état audible à la fois ; filtre et niveau par état ; volume par défaut 0,315 (phase AUD)
+- **D-117** (10-08) — Revue et fusion de la phase AUD (direction autonome)
+- **D-118** (10-08) — Événements de fond : extension additive de `src/sim/events/engine.ts` (phase CHR)
+- **D-119** (10-08) — La frise remplace le registre « Chronique » (même identifiant), sans nouvel écran (phase CHR)
+- **D-120** (10-08) — Niveau de renseignement et annonces de la frise (E-UX-6) (phase CHR)
+- **D-121** (10-08) — Le bac à sable 845 n'a pas de chronologie (phase CHR)
+- **D-122** (10-08) — Faits de fond actifs par défaut : effets sur les empreintes, sauvegardes, plafond de chronique (phase CHR, complète D-118)
+- **D-123** (10-08) — Revue et fusion de CHR ; push concurrent sur la branche principale
+- **D-124** (10-08) — Couche des armées optionnelle dans l'état ; empreintes des scénarios (phase PA)
+- **D-125** (10-08) — Prélèvements des armées hors plan économique (phase PA)
+- **D-126** (10-08) — Pas de marine pour Paradis ; armes incertaines désactivables (phase PA)
+- **D-127** (10-08) — Bataille tactique centrée sur Paradis ; délai d'un test 3D (phase PA)
+- **D-128** (10-08) — Interface des armées : registre « Armées », alertes, canons de rempart en bataille (phase PA)
+- **D-129** (10-08) — Passe de revue PA : ravitaillement expliqué, solde plafonnée, marche forcée bornée, canons de rempart sur les murs
+- **D-130** (10-08) — Revue et fusion de PA : N1 terminé ; pushs de code concurrents
+- **D-131** (10-09) — MIS : modèle et moteur des missions nationales
+- **D-132** (10-09) — MIS : Marley (branche simplifiée) et IA
+- **D-133** (10-09) — MIS : interface
+- **D-134** (10-09) — MIS : revue et fusion
+- **D-135** (10-09) — TUT : scénario du guide (le bac à sable 845 n'a aucun registre)
+- **D-136** (10-09) — TUT : forme du guide
+- **D-137** (10-09) — TUT : préférences et aides contextuelles
+- **D-138** (10-09) — TUT : revue et fusion
+- **D-139** (10-09) — R2+ : ordres temps réel dans le journal d'ordres existant
+- **D-140** (10-09) — R2+ : fantassins (bataille d'armées sans Titans, dette n° 33)
+- **D-141** (10-09) — R2+ : rencontre d'armées jouée en bataille de compagnies
+- **D-142** (10-09) — R2+ : vue 3D de la bataille réelle derrière une interface commune, repli 2D
+- **D-143** (10-09) — R2+ : écran de bataille temps réel, routage et commandes
+- **D-144** (10-09) — R2+ : violence montrée, qualité par défaut
+- **D-145** (10-09) — R2+ : contrôle (smoke:r2) et corrections après la revue des captures
+- **D-146** (10-09) — R2+ : revue indépendante et correctifs (bâtiments, ligne de tir, captures du smoke)
+- **D-147** (10-09) — R2+ : revue de la direction et fusion
+- **D-148** (10-09) — Mandat autonome de trois jours, reprise automatique, conduite des phases
+- **D-149** (10-09) — R3 : périmètre court (21 §8) et choix de figures
+- **D-150** (10-09) — R3 : la vue 3D ne doit jamais écrire dans l'état de la simulation
+- **D-151** (10-10) — P9 : fins de partie et difficultés lues ou appliquées hors de l'état
+- **D-152** (10-10) — P9.4 : le Grondement, crise systémique et non « mode ultime »
+- **D-153** (10-10) — P9.8 : un 845 jouable, distinct du bac à sable des tests
+- **D-154** (10-10) — P9.8 : E43–E52 jouables (report vers P9)
+- **D-155** (10-10) — P9.2 : invasion amphibie de l'IA (complément ; report vers P9)
+- **D-156** (10-10) — P9.7 : corrections après la revue indépendante (D-106)
+- **D-157** (10-10) — P9.6 : réglages d'équilibre (données seulement)
+- **D-158** (10-10) — P10.1 : accessibilité (09 §20)
+- **D-159** (10-10) — P10.2 : parcours de cinq ans par commandes enregistrées
+- **D-160** (10-10) — P10.4–P10.5 : manuel en jeu et lancement local
+
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
 - Décision : `evt_<année>_<nom>` + champ `code: "E37"`.
@@ -1340,4 +1505,23 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   lueurs de tir retirées en 3D) ; aide à la lecture (polices décoratives remplacées par le texte courant, espacement accru :
   aucune police nouvelle, CLAUDE.md) ; difficulté personnalisée (F-ACC-08) : six réglages au menu, bornés, portés par l'URL, le
   Worker, l'état et la sauvegarde (« Normal » : monde et empreintes inchangés).
+- **Réversible** : oui.
+
+## 2026-10-10 — D-159 P10.2 : parcours de cinq ans par commandes enregistrées
+- **Contexte** : 18 §10 demande cinq ans du scénario 850 joués par commandes enregistrées, avec sauvegarde, chargement et
+  migration vérifiés chaque année, et la même empreinte qu'en continu.
+- **Décision** : les commandes sont produites par le pilote de `sim:balance` (profil militaire, première graine qui le tire :
+  11), le plus riche en ordres (lois, recherche, propositions, événements, expéditions) ; les ordres refusés par la simulation
+  sont rejoués tels quels (ils doivent être refusés de nouveau). Migration : aucune sauvegarde complète d'une version ancienne
+  n'existe (les couches sont apparues phase après phase) ; la chaîne v4 → v8 est rejouée sur chaque sauvegarde annuelle et doit
+  la rendre inchangée, la chaîne complète v0 → v8 restant prouvée par `tests/sim/core/state.test.ts`.
+- **Réversible** : oui (outil seulement ; `src/sim` inchangé).
+
+## 2026-10-10 — D-160 P10.4–P10.5 : manuel en jeu et lancement local
+- **Manuel** : F1 en partie (touche réassignable) et entrée « Manuel » du menu principal ; quatorze sections courtes ; les
+  touches citées suivent les réglages. Les statuts C / A / ? n'y sont pas expliqués : ils ne sont montrés qu'en mode auteur
+  (E-UX-1, `tests/ui/no-leaks.test.ts`).
+- **Lancement local** : `npm run jouer` (build puis `vite preview --open`), `npm run preview` ensuite. Le double-clic sur
+  `dist/index.html` n'est pas pris en charge : le navigateur refuse les modules et le Worker en `file://`. `npm run smoke:local`
+  sert le build et refuse toute requête vers un autre ordinateur (aucune ne doit partir).
 - **Réversible** : oui.

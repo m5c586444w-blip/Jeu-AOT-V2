@@ -235,3 +235,11 @@ thèmes n'ont pas pu être restitués avec assez de fidélité de mémoire ; les
 
 Pistes de l'utilisateur (AUD.4) : `assets_user/musique/` (mp3, ogg), hors dépôt (`.gitignore`) ; la licence de chaque fichier est de la
 responsabilité de l'utilisateur (notice `assets_user/musique/LISEZ-MOI.md`).
+
+## Vérification de P10 (2026-10-10)
+
+- `npm run assets:check` : « 102 entrées, 102 fichiers ; licences, sources et empreintes conformes. »
+- Dépendances d'exécution (`package.json`) : quatre polices `@fontsource` (EB Garamond, IM Fell English, UnifrakturMaguntia :
+  OFL 1.1 ; Special Elite : Apache 2.0), pixi.js 8.22 (MIT), three 0.186 (MIT), zod 4.6 (MIT) — toutes listées ci-dessus.
+- P10 n'ajoute aucune ressource externe : l'aide à la lecture se sert des polices du système, le manuel est du texte.
+- Le build (`dist/`) ne charge rien d'un autre ordinateur : `npm run smoke:local` refuse et compte toute requête sortante (0).

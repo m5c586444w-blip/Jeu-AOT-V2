@@ -6,7 +6,7 @@ export const ACTIONS = [
   "pause", "speed_1", "speed_2", "speed_3", "speed_4", "speed_5",
   "zoom_in", "zoom_out", "pan_up", "pan_down", "pan_left", "pan_right",
   "lod_monde", "lod_region", "lod_province", "fit",
-  "overlay_next", "overlay_off", "close", "console", "options", "author_mode",
+  "overlay_next", "overlay_off", "close", "console", "options", "manual", "author_mode",
   "open_characters", "open_cabinet", "open_laws", "open_orgs", "open_council", "open_journal", "open_expeditions",
   "open_chronicle", "open_intel", "open_research", "open_shifters", "open_world", "open_diplomacy", "open_gazette", "open_archives", "open_epilogue", "open_economy", "open_armies", "open_missions",
 ] as const;
@@ -19,7 +19,7 @@ export const DEFAULT_BINDINGS: Readonly<Record<Action, string>> = {
   pan_up: "ArrowUp", pan_down: "ArrowDown", pan_left: "ArrowLeft", pan_right: "ArrowRight",
   lod_monde: "KeyM", lod_region: "KeyR", lod_province: "KeyP", fit: "KeyF",
   overlay_next: "KeyO", overlay_off: "KeyX",
-  close: "Escape", console: "F2", options: "F9", author_mode: "F10",
+  close: "Escape", console: "F2", options: "F9", manual: "F1", author_mode: "F10",
   open_characters: "KeyC", open_cabinet: "KeyK", open_laws: "KeyL", open_orgs: "KeyG", open_council: "KeyA", open_journal: "KeyJ", open_expeditions: "KeyE",
   open_chronicle: "KeyH", open_intel: "KeyI", open_research: "KeyB", open_shifters: "KeyT", open_world: "KeyW", open_diplomacy: "KeyD", open_gazette: "KeyN", open_archives: "KeyY", open_epilogue: "KeyU", open_economy: "KeyV", open_armies: "KeyS", open_missions: "KeyZ",
 };

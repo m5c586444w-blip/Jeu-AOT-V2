@@ -184,3 +184,26 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Zackly assassiné (Yeageristes) ; Pixis et Nile morts à Shiganshina | C | E57, E58 | 11 §3, 12 E57–E58 |
 | Mort de Sasha en 854 | ? (non portée) | — | 11 §3 « non vérifié » |
 | Alliance mondiale anti-Eldia après Liberio | ? | peur et idéologie (E55) | 11 §5 |
+
+## Faits utilisés en P9 (scénarios, fins, Grondement)
+
+| Fait | Statut | Où | Note |
+|---|---|---|---|
+| Sous-sol des Yeager après Shiganshina (E43), nettoyage de Maria ≈ 9 mois (E44), découverte de l'océan (E45) | C (ordre) ; date de E45 `?` | `data/events/canon_851.json` | 12 E43–E45 ; Q16 (12 et 13 en tension sur la date) |
+| Flotte de reconnaissance de Marley et Volontaires (E46, E47), visite d'Hizuru (E48), départ d'Eren (E49), guerre du Moyen-Orient (E50), refus d'Hizuru (E51), navires perdus (E52) | C (existence, ordre) ; années `?` (fourchettes 851–854) | idem | 12 E46–E52 ; année maximale de E49 ramenée à 853 (A, D-154) |
+| Choix proposés au joueur dans ces dossiers et leurs effets chiffrés | A | idem | jeu ; l'option par défaut suit le canon |
+| Après la chute de Maria (845) : repli derrière Rose, réfugiés, disette | C (faits) ; jour de la chute, population, part des réfugiés, production `?` / `A` | `data/scenarios/scn_845.json` | 01, 11 §2 ; Q15 |
+| Grondement (854) : les Titans des murs en marche, choix d'arrêter, ralentir ou laisser faire | C (fait, E59–E60) | `data/scenarios/scn_grondement.json`, `src/sim/crisis/rumbling.ts` | 12 E59, E60 |
+| Durée, allure du front, ordre des terres, morts et évacués, chance d'un assaut contre le Fondateur | ? (modèle de jeu paramétrable) | `data/balance/rumbling.json` | Q14 ; aucun chiffre officiel retenu |
+| Gouvernement de Paradis au départ du Grondement (Historia reine ; postes tenus par des vivants) | C (Historia) ; titulaires des autres postes A | `scn_grondement.json` (`politics`) | règle R12 (aucun poste tenu par un mort), D-156 |
+| Mort de Sasha, Mâchoire passée à Falco, camp de Zeke pendant la crise | ? | `scn_grondement.json` (`deceased`, `shifter_holders`) | Q17 ; 11 §3–§4 (seconde main) |
+| Malédiction d'Ymir (treize ans après l'héritage) | C | `src/sim/shifters` (fin des porteurs) | 11 §4 |
+| Objectifs, défaites et termes des scénarios ; niveaux de difficulté | A | `data/balance/endings.json`, `data/balance/difficulty.json` | choix de jeu (D-151, D-152, D-157) |
+
+## Contrôle final (P10, 2026-10-10)
+
+- `npm run canon:check` : « « data » conforme (R1–R14, 845 entrées) » (journal `docs/reports/P10-verify-p102.log`).
+- Statuts portés par les données (`canon` sur chaque entrée, 71 fichiers JSON de `data/`) : **356 C**, **1 346 A**, **117 ?**,
+  aucune autre valeur. Les `?` sont paramétrables dans `data/` ; leurs questions sont dans `docs/lore/questions-ouvertes.md`
+  (Q1 à Q17). Les trois listes (sourcé, interprété, non confirmé) sont dans `docs/reports/P10.md`.
+- P10 n'ajoute aucun fait de lore (manuel, accessibilité, outils, documentation).

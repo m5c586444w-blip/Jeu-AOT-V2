@@ -2,6 +2,7 @@ import { t } from "../i18n";
 import { emblem, icon } from "./icons";
 import { KeyMap } from "./keymap";
 import { OptionsPanel } from "./optionsPanel";
+import { ManualPanel } from "./manual";
 import { applyPaperTextures } from "./paper";
 import { safeStorage } from "./gameScreen";
 import { sharedAudio } from "./audio";
@@ -111,6 +112,7 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   syncLibrary(audio, settings);
   void loadUserTracks().then(() => syncLibrary(audio, loadSettings(safeStorage())));
   let options: OptionsPanel | null = null;
+  let manual: ManualPanel | null = null;
   onUserTracks(() => options?.sync(loadSettings(safeStorage())));
   const quitNote = el("p", "menu-principal__note");
   quitNote.hidden = true;
@@ -131,6 +133,11 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
       }, userTracks, () => go({ scenario: "scn_sandbox_850", tutoriel: "1" }));
       options.toggle();
       audio.play(options.isOpen ? "ouvrir" : "fermer");
+    }),
+    entry("manuel", "journal", t("menu.manual"), () => {
+      manual ??= new ManualPanel(document.body, new KeyMap(safeStorage()));
+      manual.toggle();
+      audio.play(manual.isOpen ? "ouvrir" : "fermer");
     }),
     entry("quitter", "quitter", t("menu.quit"), () => {
       // Un onglet ouvert par l'utilisateur ne peut pas être fermé par la page : on le dit.

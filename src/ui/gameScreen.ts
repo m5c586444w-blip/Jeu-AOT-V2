@@ -17,6 +17,7 @@ import { GameClock } from "./clock";
 import type { ConsoleHost } from "./debugConsole";
 import { mountDebugOverlay } from "./debugOverlay";
 import { Dossier } from "./dossier";
+import { ManualPanel } from "./manual";
 import { Hud } from "./hud";
 import { ACTIONS, KeyMap, keyLabel, PANEL_ACTION } from "./keymap";
 import { NotificationFeed } from "./notifications";
@@ -349,6 +350,8 @@ export async function bootGame(): Promise<void> {
     clock.setSpeed(s);
     refresh();
   };
+  // Manuel (P10.4) : créé avec les options, fermé par Échap avant toute autre fenêtre.
+  let manual: ManualPanel | null = null;
   const actions: Partial<Record<Action, () => void>> = {
     pause: () => {
       clock.togglePause();
@@ -372,6 +375,7 @@ export async function bootGame(): Promise<void> {
     overlay_next: () => layers.next(),
     overlay_off: () => layers.select(null),
     close: () => {
+      if (manual?.isOpen) return manual.toggle();
       if (eventDossier?.openId) return eventDossier.close();
       if (registers?.openId) return registers.close();
       dossier.close();
@@ -510,6 +514,12 @@ export async function bootGame(): Promise<void> {
   actions.options = () => {
     options.toggle();
     audio.play(options.isOpen ? "ouvrir" : "fermer");
+  };
+  const manualPanel = new ManualPanel(document.body, keymap);
+  manual = manualPanel;
+  actions.manual = () => {
+    manualPanel.toggle();
+    audio.play(manualPanel.isOpen ? "ouvrir" : "fermer");
   };
   // Mode auteur (E-UX-1) : F10 bascule l'affichage des statuts du lore et des codes internes.
   actions.author_mode = () => {
