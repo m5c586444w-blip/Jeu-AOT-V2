@@ -16,7 +16,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 | N3 | R1e | 20 (§6, §8), périmètre 21 §3, districts 24 §3 | 200 | oui | terminée et acceptée (pilote Shiganshina + Maria) ; LC-B/C/D en N3 si quota |
 | N3 | R3 | 18 §2, version courte 21 §8 | 150 | non | terminée (D-148, D-149 ; dettes n° 61 à 65 ; `docs/reports/R3.md`) |
 | N3 | P9 | 18 §9 | 200 | oui | terminée, arrêt de revue tenu par une revue indépendante (D-106, D-148) ; D-151 à D-157 ; dettes n° 66 à 68 ; `docs/reports/P9.md` |
-| N3 | P10 | 18 §10 | 120 | non | à faire |
+| N3 | P10 | 18 §10 | 120 | non | terminée (D-158 à D-163 ; dettes n° 69 à 73 ; `docs/reports/P10.md`) |
 | N3 | PACK | 23 §6 | 100 | non | à faire |
 
 Règle de coupe (fichier 24 §5.3) : lieux faits main au-delà de Shiganshina et des districts de Maria → R3 → TUT → MIS → P10 → R2+ → jamais N1.

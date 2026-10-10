@@ -1,0 +1,34 @@
+
+> murs-et-sang@0.0.1 smoke:mis
+> tsx src/tools/smoke-mis.ts
+
+[854, Paradis] 1366×768
+  OK  bandeau : registre « Missions » (touche Z)
+  OK  6 branches (militaire, politique, économie, religion, renseignement, monde extérieur) : 6
+  OK  branche militaire : 24 planches, 26 liens
+  OK  aucune mission en cours au départ (texte d'attente)
+  OK  écran Missions 1366 : 3 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+  OK  1366 : aucun texte débordant des planches (0)
+  OK  infobulle d'effet : coût, durée, effets (« Inventaire des garnisons COÛT Or 60 000 / 800 DURÉE 2 mois EFFETS À L'ACCOMPLISSEMENT Moral (tout le territoir… »)
+  OK  infobulle : aucune mention interne
+  OK  mission verrouillée : raison en langage de jeu (« Exige : Inventaire des garnisons. »)
+  OK  mission en cours avec temps restant (« Missions en cours 1 / 2 · 0 accomplies sur 57 En cours : Inventaire des garnisons · environ 2 mois Abandonner »)
+  OK  barre d'avancement de la mission en cours
+  OK  mission en cours : 4 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+  OK  notifications après le lancement : 0 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+  OK  mission accomplie marquée dans l'arbre
+  OK  journal : « Mission accomplie »
+  OK  frise : 1 repère(s) de mission sur l'axe
+  OK  frise des missions : 1 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+  OK  mission abandonnée : la place est libérée
+[854, Paradis] 3840×2160
+  OK  écran Missions 3840 : 3 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+  OK  3840 : aucun texte débordant des planches (0)
+[854, Marley]
+  OK  Marley : 5 branches, 4 planches dans la première
+  OK  Marley : coûts en industrie et en hommes
+  OK  missions de Marley : 3 valeurs, toutes expliquées ; aucune clé, identifiant ni mention interne
+[845]
+  OK  845 : pas de registres dans le bac à sable économique (les missions y sont couvertes par les tests de simulation)
+  OK  0 erreur console
+smoke:mis : tout est conforme.

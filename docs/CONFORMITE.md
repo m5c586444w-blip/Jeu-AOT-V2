@@ -81,7 +81,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 | 05 §5 P7 | Marley jouable ; Hizuru change de camp ; Titans comme armes. | FAIT | AC7-02 à AC7-04 (`tests/sim/diplomacy.test.ts`, `tests/sim/war.test.ts`, `sim:world`). |
 | 05 §5 P8 | Checklist 04 §2 sur chaque écran ; revue sans « template look ». | FAIT | AC8-01 à AC8-08 ; revue humaine de P8 (D-77) ; revue UI (D-113). |
 | 05 §5 P9 | 1 000 parties par scénario ; aucune faction au-dessus de 70 % ; durée cohérente. | FAIT | `docs/reports/P9.md` § équilibrage (sortie collée), `docs/reports/P9-balance.html` et `.json` : 5 000 parties, maximum 64,3 %, mortalité d'expédition 26,5 %, CP9-03 à CP9-06 OK (traité après l'audit). |
-| 05 §5 P10 | Parcours 850 sans bug bloquant ; tests verts ; performances conformes. | PARTIEL | `npm run sim:parcours` : OK (`docs/reports/P10-verify-p102.log`, 758 tests) ; P10.3 à P10.7 pas encore commités. |
+| 05 §5 P10 | Parcours 850 sans bug bloquant ; tests verts ; performances conformes. | PARTIEL | `npm run sim:parcours` : OK ; verify code 0 (761 tests) ; latences au rendu logiciel : chargement 2,72 s, scène tactique basse 2,99 s, tick de 854 5,04 ms (D-162) ; bataille réelle en qualité basse 4,5 s (dette n° 71) et qualités moyenne et haute : GPU réel requis (`docs/reports/P10.md`). |
 
 ## 4. Fichier 09 — fonctions P1
 
@@ -414,7 +414,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 
 **P2**
 3. **Consigné** : C-08 (diversion, évacuer, incendier) : report par D-161 (dette n° 70).
-4. E-09 : mesurer « prêt » de la bataille temps réel en qualité basse (P10.3). Critère : < 3 s collé dans `docs/reports/P10.md` avec sa commande, sinon une dette.
+4. **Mesuré** : E-09 : « prêt » de la bataille temps réel en qualité basse : 4,5 s (`R2_PARTIES=1 R2_QUALITE=bas npm run smoke:r2`), au-dessus de 3 s : dette n° 71.
 5. E-11 : trancher le quota de bâtiments (25 ou 60, 15 §6.4). Critère : `npm run data:validate` donne ≥ 25 bâtiments, ou une décision D-xx revoit le quota.
 6. E-03 et C-09 : batailles d'expédition sur l'écran temps réel, ou écart consigné. Critère : `npm run smoke:r2` couvre une bataille d'expédition, ou une décision D-xx.
 7. **Traité** : J-REP : les 34 reports sont confirmés par D-161, qui cite chaque Id (dette n° 69).

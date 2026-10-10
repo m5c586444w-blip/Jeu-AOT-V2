@@ -1,0 +1,25 @@
+
+> murs-et-sang@0.0.1 smoke:chr
+> tsx src/tools/smoke-chr.ts
+
+  OK  845 (bac à sable économique) : pas de chronologie, comme il n'a pas d'événements
+  OK  850 : l'axe compte 10 années (845 à 854)
+  OK  850 : 26 repères sur la frise
+  OK  850 : la liste montre les événements survenus
+  OK  850 : légende avec l'écart au récit connu
+  OK  850 : une fiche est ouverte
+  OK  850 · chronologie : aucune mention interne
+  OK  850 : choisir une ligne change la fiche (« Titans dans Wall Rose » → « Repli vers Wall Rose »)
+  OK  850 : filtre Titans, 13 lignes sur 26, aucune d'un autre thème
+  OK  850 : 23 faits de la vie du royaume en 4 mois
+  OK  850 · vie du royaume : aucune mention interne
+  OK  dossier : 2 choix, une illustration d'archétype
+  OK  850 · dossier d'événement : aucune mention interne
+  OK  dossier : l'infobulle d'un choix liste tous ses effets
+  OK  854 au départ : 56 repères (52 passés, E53 daté et les suivants annoncés)
+  OK  854 après 300 jours : les 60 événements du récit sont sur la frise (60 attendus)
+  OK  854 · 1366×768 : aucun défilement horizontal de la page
+  OK  854 · chronologie 1366 : aucune mention interne
+  OK  854 · 3840×2160 : 60 repères
+  OK  0 erreur de page
+smoke:chr : OK.

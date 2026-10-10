@@ -1,0 +1,27 @@
+
+> murs-et-sang@0.0.1 smoke:local
+> tsx src/tools/smoke-local.ts
+
+[build statique]
+  OK  index.html : aucune ressource externe (aucune)
+  OK  feuilles de style : aucune police ni image distante (2 fichier(s))
+[menu]
+  OK  menu : quatre scénarios au moins
+  OK  menu : réglages fins de la difficulté personnalisée
+  OK  menu : entrée « Manuel » ouvre le manuel
+[partie 850]
+  OK  partie : le temps avance (console « advance 30 »)
+  OK  partie : sauvegarde dans un créneau (IndexedDB du navigateur)
+  OK  partie : rechargement du créneau
+  OK  manuel (F1) : registres et touches listés
+  OK  manuel : Échap le ferme
+  OK  options : palette pour daltoniens et aide à la lecture appliquées (1, aide)
+[854, palette pour daltoniens]
+  OK  854 : préférence daltonien relue au lancement
+[scène tactique 3D]
+  OK  scène 3D : « prêt » hors réseau (pret, 2.4 s, rendu logiciel)
+[réseau et erreurs]
+  OK  aucune requête sortante (0)
+  OK  aucun fichier manquant (0)
+  OK  aucune erreur de page (0)
+smoke:local : OK

@@ -1,0 +1,36 @@
+
+> murs-et-sang@0.0.1 smoke:p9
+> tsx src/tools/smoke-p9.ts
+
+[menu]
+  OK  cartes du menu : scn_845, scn_sandbox_850, scn_854, scn_grondement
+  OK  difficulté choisie : rude
+  OK  la difficulté choisie se dit en une phrase
+[grondement]
+  OK  trois postures proposées
+  OK  assaut refusé tant qu'il n'est pas prêt (bouton désactivé, raison affichée)
+  OK  aucune clé brute dans la table de guerre
+  OK  assaut prêt après quarante jours de préparation
+  OK  part du monde ravagée affichée
+  OK  assaut lancé : crise arrêtée, ou tentative comptée
+[objectifs]
+  OK  scn_sandbox_850 : 5 objectif(s) suivis dans l'épilogue (attendu 5)
+  OK  scn_sandbox_850 : aucune clé brute dans l'épilogue
+  OK  scn_845 : 4 objectif(s) suivis dans l'épilogue (attendu 4)
+  OK  scn_845 : aucune clé brute dans l'épilogue
+  OK  845 : registres proposés (dont l'économie, où l'on rationne) : economie, missions, armees, expeditions, journal, gazette, archives, epilogue
+  OK  845 : registre « economie » ouvert, sans clé brute
+  OK  845 : registre « missions » ouvert, sans clé brute
+  OK  845 : registre « armees » ouvert, sans clé brute
+  OK  845 : registre « expeditions » ouvert, sans clé brute
+  OK  845 : registre « journal » ouvert, sans clé brute
+  OK  845 : registre « gazette » ouvert, sans clé brute
+  OK  845 : registre « archives » ouvert, sans clé brute
+  OK  845 : registre « epilogue » ouvert, sans clé brute
+  OK  845 : aucun registre n'émet d'erreur (0)
+[fin]
+  OK  verdict de fin : defaite
+  OK  épilogue ouvert à la fin de partie
+  OK  cause de la défaite dite en clair
+  OK  aucune erreur de console (0)
+smoke:p9 : OK.
