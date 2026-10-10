@@ -47,6 +47,11 @@ describe("canon:check (AC-13)", () => {
 });
 
 describe("règles : cas limites", () => {
+  it("R12 : un mort ne tient ni le joueur, ni un poste, ni une organisation au départ (revue de P9)", () => {
+    const sc = { file: "f", id: "scn_x", v: { id: "scn_x", start: { year: 854, day: 300 }, deceased: ["char_mort"], politics: { player: "char_mort", roles: { role_stratege: "char_mort", role_diplomate: null }, org_leaders: { org_cabinet: "char_vivant" } }, canon: "A" } };
+    const msgs = checkCanon({ ...emptyRaw(), scenarios: [sc] }).map((x) => `${x.rule} ${x.message}`);
+    expect(msgs).toEqual(["R12 char_mort tient « joueur » au départ mais est déclaré mort", "R12 char_mort tient « role_stratege » au départ mais est déclaré mort"]);
+  });
   const ev = (id: string, year: number, after: string | null) => ({ file: "f", id, v: { id, year_min: year, window: { after }, canon: "C" } });
   it("R4 : prédécesseur inconnu et année antérieure", () => {
     const v = checkCanon({ ...emptyRaw(), events: [ev("evt_a", 851, null), ev("evt_b", 850, "evt_a"), ev("evt_c", 850, "evt_x")] });

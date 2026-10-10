@@ -2,15 +2,16 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R3 terminée** (figures : Titans de 3 à 15 m, soldats de Paradis et de Marley, poses et états ; D-148 à D-150). Suivante : **P9** (N3, arrêt de revue). |
-| Tâche | Ouvrir P9 (fichier 18 §9) : `docs/phases/P9.md` |
+| Phase | **P9 terminée — arrêt de revue** (fins de partie, difficultés, Grondement, invasion amphibie de l'IA, E43–E52, 845 jouable, `sim:balance` ; D-151 à D-157). Revue indépendante faite (D-106) ; pendant le mandat autonome, la phase suivante est ouverte (D-148). Suivante : **P10**. |
+| Tâche | Ouvrir P10 (fichier 18 §10) : `docs/phases/P10.md` |
 | Dernier `npm run verify` | 2026-10-09 : code 0 ; 111 fichiers, 728 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-4.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : P9 sur `claude/intelligent-feynman-8ekib4` (mandat autonome de trois jours, D-148), puis P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49, 64) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : P10 sur `claude/intelligent-feynman-8ekib4` (mandat autonome, D-148), puis PACK. À la revue de P9 : Gabriel joue un scénario complet (845, 850, 854 ou Grondement) et lit `docs/reports/P9.md` et `P9-balance.html` ; mesures GPU de R2+ et R3 (dettes n° 49, 64) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
   renouvellement de la limite d'usage (déclencheur horaire) ; résumé final avec images et mécanismes le 2026-10-12 (19:35 UTC).
 - R3 terminée le 2026-10-09 (`docs/reports/R3.md`) : commits `b5d1abe`, `a0acf0d`, `d89dada` et le commit de fin de phase.
+- P9 terminée le 2026-10-10 (`docs/reports/P9.md`) : commits `e801995`, `d2b3744`, `db0a4d7`, `c0370f1`, `3e28416`, `9d8ec31` et le commit de fin de phase. Arrêt de revue : revue indépendante par un sous-agent (« acceptable après corrections », toutes traitées, D-156) ; la revue de Gabriel reste due à son retour.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

@@ -131,7 +131,7 @@ export class Hud {
     foot.append(this.alert, this.chips, seed, hash);
     this.el.append(head, ledger, time, foot);
 
-    if (world.politics && actions.openPanel) this.buildManagement();
+    if ((world.politics || world.endings) && actions.openPanel) this.buildManagement();
     else this.gestion.hidden = true;
 
     // Hauteurs réelles des barres (selon l'échelle et la définition) : les registres s'ouvrent entre les deux (P8, U2).
@@ -163,7 +163,8 @@ export class Hud {
   /** Menu de gestion : groupes nommés, boutons à icône et étiquette courte ; nom complet et touche au survol. */
   private buildManagement(): void {
     this.gestion.setAttribute("aria-label", t("hud.registers"));
-    const present: Record<string, boolean> = { expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: !!this.world.politics, armees: !!this.world.armies, missions: !!this.world.missions };
+    const pol = !!this.world.politics;
+    const present: Record<string, boolean> = { personnages: pol, cabinet: pol, decrets: pol, organisations: pol, conseil: pol, expeditions: !!this.world.military, chronique: !!this.world.chronicle, renseignement: !!this.world.intel, recherche: !!this.world.research, porteurs: !!this.world.shifters, monde: !!this.world.nations, diplomatie: !!this.world.nations, economie: pol || !!this.world.endings, armees: !!this.world.armies, missions: !!this.world.missions };
     for (const g of MANAGEMENT_GROUPS) {
       const ids = g.panels.filter((p) => present[p] ?? true);
       if (ids.length === 0) continue;

@@ -47,7 +47,7 @@ function section(s: ScenarioStats): string {
 <h2>${esc(s.scenario)} — joué par ${esc(s.camp)} (${s.games} parties)</h2>
 <p>Durée (jours) : moyenne ${s.duration.mean.toFixed(0)} · p10 ${s.duration.p10} · médiane ${s.duration.p50} · p90 ${s.duration.p90}. Ordres refusés par la simulation : ${s.ordersRefused}.${s.errors.length ? ` <strong>Erreurs :</strong> ${s.errors.map(esc).join(" ; ")}` : ""}</p>
 <h3>Issues par camp</h3>
-${table(["Camp", "Répartition", "Victoire", "Au terme", "Défaite", "Causes de défaite", "Par profil du pilote"], camps)}
+${table(["Camp", "Répartition", "Victoire", "Au terme", "Défaite", "Causes de défaite", "Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)"], camps)}
 <h3>Objectifs atteints (camp joué)</h3>
 ${table(["Objectif", "Parties"], obj)}
 <h3>Causes de mort (toutes parties)</h3>
@@ -56,7 +56,7 @@ ${table(["Cause", "Total", "Par partie"], deaths)}
 <h3>Ressources limitantes</h3>
 ${table(["Ressource", "Parties", "Part"], lim)}
 <h3>Cas dégénérés</h3>
-<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : ${s.degenerate.famine.n} (${pct(s.degenerate.famine.share)}) · spirale de mort (île dépeuplée d'un cinquième, moral sous 25) : ${s.degenerate.spiral.n} (${pct(s.degenerate.spiral.share)}).</p>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : ${s.degenerate.famine.n} (${pct(s.degenerate.famine.share)}) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : ${s.degenerate.spiral.n} (${pct(s.degenerate.spiral.share)}). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
 ${s.degenerate.explained.length ? `<ul>${s.degenerate.explained.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
 </section>`;
 }

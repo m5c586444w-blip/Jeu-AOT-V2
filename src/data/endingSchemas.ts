@@ -89,7 +89,7 @@ const Level = z
   .object({
     id: z.enum(DIFFICULTY_IDS),
     cle: z.string().min(1),
-    /** Multiplicateurs (1 = inchangé) : production de Paradis, densité de Titans, agressivité des IA ennemies, pertes de combat. */
+    /** Multiplicateurs (1 = inchangé) : production de Paradis, densité de Titans, agressivité de toutes les IA (personnalités), pertes de combat. */
     production: z.number().positive(),
     titans: z.number().positive(),
     ia_attaque: z.number().positive(),
@@ -128,7 +128,6 @@ export const RumblingBalanceSchema = z
     /** Part de l'industrie et des effectifs perdue par la nation qui tenait une province ravagée (pondérée par son poids). */
     ruine_nation: frac,
     paradis: z.object({ legitimite_par_jour_laisser: num, stabilite_par_jour_empecher: num }).strict(),
-    terme_jours: z.number().int().positive(),
   })
   .strict();
 export type RumblingBalance = z.infer<typeof RumblingBalanceSchema>;

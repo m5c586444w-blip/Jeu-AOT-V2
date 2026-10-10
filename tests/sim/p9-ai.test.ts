@@ -29,7 +29,9 @@ describe("IA des factions (P9.2)", () => {
     const plan = s0.nations ? invasionPlan({ world: w, date: s0.date, ns: s0.nations, sh: s0.shifters, pol: s0.politics, st: s0.strategic }, "fac_marley") : null;
     expect(plan?.target).toBe("wprov_paradis");
     expect(plan?.seas.length).toBeGreaterThan(0);
-    for (const step of ["embarquer:", "naviguer:", "debarquer:wprov_paradis"]) expect(marley.some((d) => d.action.startsWith(step)), step).toBe(true);
+    for (const step of ["embarquer:", "naviguer:"]) expect(marley.some((d) => d.action.startsWith(step)), step).toBe(true);
+    // Débarquement réel : au moins une formation posée sur l'île.
+    expect(marley.some((d) => /^debarquer:wprov_paradis:[1-9]/.test(d.action))).toBe(true);
     expect((run.nations?.fronts ?? []).some((f) => f.province === "wprov_paradis" && f.attacker === "fac_marley")).toBe(true);
   });
 

@@ -98,7 +98,8 @@ export function playGame(w: World, camp: string, seed: number): GameResult {
   const deaths: Record<string, number> = {};
   const startYear = w.scenario.start;
   for (const c of Object.values(s.politics?.characters ?? {})) {
-    if (c.alive || !c.death) continue;
+    // Morts de la partie seulement (les morts d'avant le départ sont datées du départ, cause « inconnue »).
+    if (c.alive || !c.death || c.death.circumstances === "death.before_scenario") continue;
     const d = c.death.date;
     if (d.year < startYear.year || (d.year === startYear.year && d.day < startYear.day)) continue;
     const k = `nomme:${c.death.cause}`;

@@ -208,12 +208,15 @@
       "char_gunther",
       "char_hannes",
       "char_kenny_ackerman",
+      "char_lara_tybur",
       "char_mike_zacharias",
       "char_nanaba",
       "char_nile_dok",
       "char_oluo",
       "char_petra",
+      "char_porco_galliard",
       "char_rod_reiss",
+      "char_sasha_blouse",
       "char_willy_tybur",
       "char_ymir"
     ],
@@ -250,14 +253,14 @@
       },
       "shifter_bestial": {
         "character": "char_zeke_yeager",
-        "faction": "marley",
+        "faction": "inconnu",
         "since": 842,
         "since_canon": "C"
       },
       "shifter_machoire": {
-        "character": "char_porco_galliard",
-        "faction": "marley",
-        "since": 850,
+        "character": "char_falco_grice",
+        "faction": "inconnu",
+        "since": 854,
         "since_canon": "?"
       },
       "shifter_charrette": {
@@ -448,7 +451,7 @@
       "wars": [
         [
           "fac_marley",
-          "fac_allies"
+          "fac_paradis"
         ]
       ],
       "treaties": [
@@ -461,15 +464,15 @@
       "hizuru_lean": 15
     },
     "politics": {
-      "player": "char_darius_zackly",
+      "player": "char_historia_reiss",
       "legitimacy": 58,
       "political_capital": 40,
       "roles": {
-        "role_stratege": "char_dot_pixis",
+        "role_stratege": null,
         "role_intendant": "char_elise_brandt",
         "role_renseignement": "char_kaspar_lind",
         "role_tresorier": "char_conrad_vehl",
-        "role_ordre": "char_nile_dok",
+        "role_ordre": "char_aldric_vane",
         "role_religieux": "char_pasteur_nick",
         "role_scientifique": "char_hange_zoe",
         "role_medecin": "char_ilse_kruger_moll",
@@ -486,11 +489,11 @@
       },
       "org_leaders": {
         "org_survey_corps": "char_hange_zoe",
-        "org_garrison": "char_dot_pixis",
-        "org_military_police": "char_nile_dok",
+        "org_garrison": "char_brune_aldous",
+        "org_military_police": "char_aldric_vane",
         "org_training_corps": "char_keith_shadis",
         "org_culte": "char_pasteur_nick",
-        "org_cabinet": "char_darius_zackly",
+        "org_cabinet": "char_friedrich_amsel",
         "org_cour": "char_historia_reiss",
         "org_guildes": "char_conrad_vehl"
       },
@@ -516,6 +519,6 @@
       }
     },
     "canon": "A",
-    "notes_canon": "Scénario de crise (02 §13, 05 §5, 12 E59–E60) : départ après E58 (contre-attaque de Marley à Shiganshina). C : Titans-Murs libérés (E59), morts de Zackly, Pixis, Nile Dok (11 §3) et de Willy Tybur ; Eren porte le Marteau (E55). ? : jour de départ (300), durées et chiffres de la crise (data/balance/rumbling.json ; 01 §2 : durée « jusqu'en 857 » de seconde main). A : la chronique canon s'arrête (mode « aucun ») ; la crise et ses fins remplacent E59–E60."
+    "notes_canon": "Scénario de crise (02 §13, 05 §5, 12 E59–E60) : départ après E58 (contre-attaque de Marley à Shiganshina). C : Titans-Murs libérés (E59), morts de Zackly, Pixis, Nile Dok (11 §3) et de Willy Tybur ; Eren porte le Marteau (E55). Guerre entre Marley et Paradis depuis l'attaque de Liberio (E55, C) ; celle de Marley et des Alliés close à Fort Slava (E53, C). ? : jour de départ (300), durées et chiffres de la crise (data/balance/rumbling.json ; 01 §2 : durée « jusqu'en 857 » de seconde main). A : la chronique canon s'arrête (mode « aucun ») ; la crise et ses fins remplacent E59–E60. Après le coup (E57) et la contre-attaque (E58) : Zackly, Pixis et Nile morts (C) ; la reine Historia tient le gouvernement dans le jeu (A) ; Garnison, Police militaire et cabinet confiés à des officiers de remplissage (A). Lara Tybur mangée par Eren (E55, C) ; la Mâchoire passe de Porco à Falco en 854 (11 §4 ; date ?) ; Zeke, gardé par Paradis puis lié à Eren (E56, C), n'est projetable par aucun camp ; mort de Sasha : 854 (11 : ?), Q17."
   }
 ]

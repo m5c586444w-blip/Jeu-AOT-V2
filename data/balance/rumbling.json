@@ -8,7 +8,7 @@
     "laisser": 1.15
   },
   "assaut": {
-    "par_jour": 1.6,
+    "par_jour": 2.5,
     "bonus_traite": 0.5,
     "chance": 0.35,
     "chance_par_echec": 0.15,
@@ -21,6 +21,5 @@
   "paradis": {
     "legitimite_par_jour_laisser": -0.08,
     "stabilite_par_jour_empecher": -0.04
-  },
-  "terme_jours": 150
+  }
 }

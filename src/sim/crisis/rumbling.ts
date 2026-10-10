@@ -125,7 +125,7 @@ export function tickRumbling(ctx: RumblingCtx): void {
     const allied = (ctx.ns?.treaties ?? []).some((t) => t.a === "fac_paradis" || t.b === "fac_paradis");
     rb.assault = Math.min(100, rb.assault + b.assaut.par_jour * (1 + (allied ? b.assaut.bonus_traite : 0)));
     for (const p of Object.values(ctx.st.provinces)) if (p.control === "paradis") p.stability = Math.max(0, p.stability + b.paradis.stabilite_par_jour_empecher);
-  } else if (rb.stance === "retarder") rb.evacuated += b.evacues_par_jour;
+  } else if (rb.stance === "retarder" && rb.provinces.length < rw.order.length) rb.evacuated += b.evacues_par_jour;
   else if (rb.stance === "laisser" && ctx.pol) ctx.pol.legitimacy = Math.max(0, ctx.pol.legitimacy + b.paradis.legitimite_par_jour_laisser);
 }
 

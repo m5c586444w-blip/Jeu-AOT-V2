@@ -15,6 +15,8 @@ export interface AtlasProvince {
   tokens: { color: string; count: number }[];
   front: boolean;
   titan: boolean;
+  /** Terre ravagée par le Grondement (P9.4) : hachures d'encre en travers. */
+  ravaged?: boolean;
   /** Toponyme toujours affiché (mers, capitales, lieux canon) ; les autres au survol ou à la sélection. */
   major: boolean;
 }
@@ -173,6 +175,26 @@ export function drawWorldAtlas(canvas: HTMLCanvasElement, provinces: readonly At
     ctx.fillStyle = p.fill;
     ctx.fill();
     ctx.globalAlpha = 1;
+    if (p.ravaged) {
+      // Terre ravagée : lavis sombre et hachures obliques serrées, comme une rature à l'encre.
+      ctx.save();
+      path(ctx, pts);
+      ctx.clip();
+      ctx.fillStyle = "rgba(20,16,12,0.45)";
+      ctx.fill();
+      ctx.strokeStyle = INK;
+      ctx.lineWidth = 1;
+      const r = v.radius * 2;
+      for (let d = -r; d < r; d += 3.5) {
+        ctx.beginPath();
+        ctx.moveTo(cx + d - r, cy - r);
+        ctx.lineTo(cx + d + r, cy + r);
+        ctx.stroke();
+      }
+      ctx.restore();
+      // Les hachures ont remplacé le chemin courant : on retrace le contour avant le cerne.
+      path(ctx, pts);
+    }
     ctx.strokeStyle = INK;
     ctx.lineWidth = p.id === selected ? 2.5 : 0.9;
     ctx.stroke();

@@ -152,7 +152,7 @@ export class EpiloguePanel implements Panel {
       table.append(tr);
     }
     const side = el("aside", "epilogue__bilan");
-    side.append(el("h4", "titre-section", t("narr.epi.stats")), table, el("p", "registre-note", t("narr.epi.note")));
+    side.append(el("h4", "titre-section", t("narr.epi.stats")), table, el("p", "registre-note", t(end && end.state !== "en_cours" ? "narr.epi.note_fin" : "narr.epi.note")));
     cols.append(story, side);
     sheet.append(cols);
     root.append(sheet);

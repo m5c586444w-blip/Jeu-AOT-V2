@@ -48,6 +48,8 @@ export function formatNumber(n: number): string {
 
 export function formatSigned(n: number): string {
   const s = formatNumber(n);
+  // Une valeur arrondie à zéro ne porte pas de signe (« −0 » relevé sur la capture de fin, P9.7).
+  if (Number(s.replace(/\D/g, "")) === 0) return s.replace("-", "");
   return n > 0 ? `+${s}` : s.replace("-", "−");
 }
 

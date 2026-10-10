@@ -43,7 +43,7 @@
         }
       ],
       "victoire": {
-        "min_objectifs": 3,
+        "min_objectifs": 4,
         "anticipee": false
       },
       "defaites": [
@@ -80,12 +80,12 @@
           "cle": "fin.def.depeuplement",
           "cond": {
             "type": "population_max",
-            "part": 0.9
+            "part": 0.95
           }
         }
       ],
       "canon": "A",
-      "note": "02 §13 (objectifs de survie) ; 845 : tenir derrière Rose jusqu'en 850 après la chute de Maria ; la disette (12 E05, E07) peut dépeupler l'île (défaite sous 90 % de la population de départ). Seuils de jeu (A)."
+      "note": "02 §13 (objectifs de survie) ; 845 : tenir derrière Rose jusqu'en 850 après la chute de Maria ; la disette (12 E05, E07) peut dépeupler l'île (défaite sous 95 % de la population de départ). Seuils de jeu (A). Victoire : les quatre objectifs (P9.6 : la survie seule ne suffit pas)."
     },
     {
       "scenario": "scn_sandbox_850",
@@ -132,10 +132,18 @@
               "evt_851_hizuru_visit"
             ]
           }
+        },
+        {
+          "id": "ordre",
+          "cle": "fin.obj.ordre_850",
+          "cond": {
+            "type": "stabilite_min",
+            "seuil": 68
+          }
         }
       ],
       "victoire": {
-        "min_objectifs": 3,
+        "min_objectifs": 5,
         "anticipee": false
       },
       "defaites": [
@@ -177,7 +185,7 @@
         }
       ],
       "canon": "A",
-      "note": "02 §13 : Paradis (850) : survivre 5 ans ; sécuriser Wall Maria ; découvrir la vérité ; obtenir un contact extérieur. Seuils (A)."
+      "note": "02 §13 : Paradis (850) : survivre 5 ans ; sécuriser Wall Maria ; découvrir la vérité ; obtenir un contact extérieur. La chronique canon (E43–E48) les apporte d'elle-même : la victoire exige en plus de bien gouverner : un royaume en ordre au terme (stabilité moyenne 68 ; P9.6 : la légitimité finale, entre 49 et 54 pour tous les joueurs, ne distinguait pas la gestion). Seuils (A)."
     },
     {
       "scenario": "scn_854",
@@ -211,10 +219,11 @@
         },
         {
           "id": "hizuru",
-          "cle": "fin.obj.accord_hizuru",
+          "cle": "fin.obj.alliance_hizuru",
           "cond": {
             "type": "traite",
-            "avec": "fac_hizuru"
+            "avec": "fac_hizuru",
+            "traite": "alliance"
           }
         },
         {
@@ -227,7 +236,7 @@
         }
       ],
       "victoire": {
-        "min_objectifs": 3,
+        "min_objectifs": 4,
         "anticipee": false
       },
       "defaites": [
@@ -258,7 +267,7 @@
         }
       ],
       "canon": "A",
-      "note": "02 §13 et §11 : Paradis face à Marley ; garder le Fondateur, tenir l'île, trouver un accord extérieur. Seuils (A)."
+      "note": "02 §13 et §11 : Paradis face à Marley ; garder le Fondateur, tenir l'île, trouver un accord extérieur. Seuils (A). L'accord extérieur est une alliance avec Hizuru (le traité de commerce du départ ne suffit pas) ; quatre objectifs sur cinq (P9.6)."
     },
     {
       "scenario": "scn_854",
@@ -291,17 +300,10 @@
             "faction": "fac_marley",
             "seuil": 40
           }
-        },
-        {
-          "id": "tenir",
-          "cle": "fin.obj.tenir_2_ans",
-          "cond": {
-            "type": "terme"
-          }
         }
       ],
       "victoire": {
-        "min_objectifs": 3,
+        "min_objectifs": 2,
         "anticipee": true
       },
       "defaites": [
@@ -325,7 +327,7 @@
         }
       ],
       "canon": "A",
-      "note": "02 §13 : Marley (854) : récupérer le Fondateur ; neutraliser Paradis ; stabiliser l'empire. Seuils (A)."
+      "note": "02 §13 : Marley (854) : récupérer le Fondateur ; neutraliser Paradis ; stabiliser l'empire. Seuils (A). Victoire dès que deux des trois buts de 02 §13 sont tenus (Fondateur, Paradis neutralisé, empire stable) ; durer seul ne suffit pas (P9.6)."
     },
     {
       "scenario": "scn_grondement",

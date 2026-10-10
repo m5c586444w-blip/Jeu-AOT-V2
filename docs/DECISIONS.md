@@ -1293,3 +1293,41 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Effet** : contre un Paradis qui ne défend pas l'île, Marley la prend dans l'année ; un joueur qui lève des troupes et
   projette ses Titans la tient. Empreinte 854 de `sim:selftest` : nouvelle valeur consignée au commit de P9.2.
 - **Réversible** : oui (retirer `ai.invasion` des données désactive le comportement).
+- **Empreinte (D-155, commit `3e28416`)** : 854 de `sim:selftest` 56dc43aa → 32f0cda1 ; les sept autres inchangées.
+
+## 2026-10-10 — D-156 P9.7 : corrections après la revue indépendante (D-106)
+- **Grondement, gouvernement de départ** : le joueur et plusieurs postes étaient tenus par des morts (Zackly, Pixis, Nile).
+  Correction (données) : la reine Historia tient le gouvernement dans le jeu (A) ; Garnison, Police militaire et cabinet confiés
+  à des officiers de remplissage (A) ; Lara Tybur et Porco morts, la Mâchoire à Falco (11 §4, date `?`), Zeke projetable par
+  aucun camp (E56), mort de Sasha en 854 (11 : `?`, Q17). Guerre Marley–Paradis au départ (E55, C) ; celle de Marley et des
+  Alliés close (E53, C). R12 de `canon:check` interdit désormais qu'un mort tienne le joueur, un poste ou une organisation.
+- **845 jouable** : le registre « Économie » (rationnement, levier central de D-153) est proposé dès qu'il y a des fins ; les
+  raccourcis des registres politiques ne s'ouvrent qu'avec la couche politique.
+- **Fins** : le premier verdict est gardé (pas d'arrêt du temps à chaque bascule d'un objectif après le terme) ; une défaite
+  survenue ensuite reste signalée une fois. L'épilogue ne compte plus les morts d'avant le départ ; « Bilan de fin de partie »
+  à la fin ; « −0 » retiré de l'affichage des variations.
+- **IA d'invasion** : les troupes restées en mer (débarquement refusé, ou plus de plan après une paix) rentrent au port.
+- **Outil** : morts d'avant le départ exclus des causes de mort ; « spirale de mort » redéfinie (un vingtième de la population,
+  moral sous 30) ; victoires par profil affichées ; le tri « expliqué » est dit automatique.
+- **Atlas du monde** : terres ravagées par le Grondement rayées d'encre (légende dans la section de crise).
+- **Réversible** : oui.
+
+## 2026-10-10 — D-157 P9.6 : réglages d'équilibre (données seulement)
+- **Mesure** : `sim:balance` (P9.5), pilote tiré de la graine (passif, gestionnaire, militaire, aléatoire, un quart chacun).
+  Avant réglage (40 à 80 parties) : 845 72,5 % de victoires (la survie seule suffisait), 850 0 % (objectifs portés par des
+  squelettes, avant D-154) puis 70–82 % (la chronique canon les apporte d'elle-même), 854 Paradis 85–100 % (Marley n'envahissait
+  pas, avant D-155), Grondement 0–10 % (assaut prêt trop tard).
+- **Diff** (`data/balance`) :
+  - `endings.json` : 845 → victoire à 4 objectifs sur 4, défaite sous 95 % de la population de départ (au lieu de 3 sur 4,
+    90 %) ; 850 → objectif ajouté « un royaume en ordre » (stabilité moyenne 68 au terme), victoire à 5 sur 5 (la légitimité
+    finale, entre 49 et 54 pour tous les profils, jouait à pile ou face et a été écartée) ; 854 Paradis → l'accord extérieur
+    est une alliance avec Hizuru (le commerce du départ ne compte plus), 4 objectifs sur 5 ; 854 Marley → « durer » retiré,
+    victoire dès deux des trois buts de 02 §13.
+  - `rumbling.json` : préparation de l'assaut 1,6 → 2,5 par jour ; `terme_jours` (inutilisé) retiré.
+  - `world.json` : `ai.invasion.marge` 1,15 → 1,0 (essai de levées à 6 par mois écarté : moins d'invasions, l'entretien
+    bloquant les levées).
+- **Hors `data/balance`** (corrections de scénario, D-156) : guerre Marley–Paradis au départ du Grondement ; aucune incidence
+  sur les empreintes.
+- **Empreintes** : la marge d'invasion change l'empreinte du 854 de `sim:selftest` : 32f0cda1 → 6dd61cc9 ; les sept autres
+  sont inchangées (les fins sont lues, jamais écrites ; le Grondement n'est pas dans l'auto-test).
+- **Réversible** : oui (données).

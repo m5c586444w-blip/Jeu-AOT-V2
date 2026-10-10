@@ -73,6 +73,12 @@ describe("récits (AC8-07, 04 §5.10, §5.12, §5.15)", () => {
     expect(start.stats.find((x) => x.key === "narr.stat.legitimacy")?.value).toBe(52);
   });
 
+  it("P9.7 : l'épilogue ne compte pas les morts d'avant le départ (854 : Erwin, Zackly…) parmi les morts de la partie", () => {
+    const e = epilogue(w854, createInitialState(42, w854));
+    expect(e.lines.join(" ")).not.toMatch(/Erwin|Zackly/);
+    expect(e.stats.find((x) => x.key === "narr.stat.named_dead")?.value).toBe("—");
+  });
+
   it("P9.4 : l'épilogue du Grondement dit l'issue de la crise, la posture et la part du monde ravagée", () => {
     const wg = loadWorld("data", "scn_grondement");
     const s0 = createInitialState(4, wg);

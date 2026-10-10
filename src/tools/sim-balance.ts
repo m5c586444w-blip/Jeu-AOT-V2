@@ -96,6 +96,8 @@ for (const b of BATCHES) {
   const camps = s.camps.map((c) => `${c.camp} : victoire ${((c.outcomes["victoire"]?.share ?? 0) * 100).toFixed(1)} %, terme ${((c.outcomes["terme"]?.share ?? 0) * 100).toFixed(1)} %, défaite ${((c.outcomes["defaite"]?.share ?? 0) * 100).toFixed(1)} %`).join(" | ");
   console.log(`[${b.scenario} / ${camp}] ${games.length} parties · durée moyenne ${s.duration.mean.toFixed(0)} j · ${camps}`);
   console.log(`  expéditions : ${s.expeditions.launched} · mortalité ${s.expeditions.mortality === null ? "—" : `${(s.expeditions.mortality * 100).toFixed(1)} %`} · famine systématique ${s.degenerate.famine.n} · spirale ${s.degenerate.spiral.n} · limitante : ${Object.entries(s.limiting).slice(0, 3).map(([k, v]) => `${k} ${(v.share * 100).toFixed(0)} %`).join(", ")}`);
+  const bp = s.camps[0]?.byProfile ?? {};
+  console.log(`  par profil (${camp}) : ${Object.entries(bp).filter(([, v]) => v.games > 0).map(([p, v]) => `${p} ${((v.victoire / v.games) * 100).toFixed(0)} % de victoires (${v.games})`).join(" · ")}`);
   for (const x of s.degenerate.explained) console.log(`  ${x}`);
   if (s.errors.length) console.log(`  erreurs : ${s.errors.join(" ; ")}`);
 }

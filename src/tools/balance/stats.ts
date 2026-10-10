@@ -47,8 +47,9 @@ export function isFamine(g: GameResult): boolean {
   return g.days > 0 && (g.zeroDays["food"] ?? 0) >= g.days * 0.5;
 }
 
+/** Spirale de mort : l'île perd au moins un vingtième de sa population et le moral tombe sous 30 (avant toute défaite). */
 export function isSpiral(g: GameResult): boolean {
-  return g.end.populationShare < 0.8 && g.minMorale < 25;
+  return g.end.populationShare < 0.95 && g.minMorale < 30;
 }
 
 /** Ressource limitante d'une partie : celle restée épuisée le plus longtemps, si plus d'un dixième de la partie. */

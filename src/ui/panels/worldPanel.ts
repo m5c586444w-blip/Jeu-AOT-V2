@@ -86,12 +86,15 @@ export class WorldPanel implements Panel {
     box.dataset["stopped"] = String(rb.stopped);
     box.append(el("h3", "registre-intertitre", t("rumbling.title")));
     const head = el("p", "registre-champ");
-    head.append(
-      `${t("rumbling.ravaged")} `,
-      valueEl(this.ctx, `${Math.round(rb.ravaged * 100)} %`, () => ({ title: t("rumbling.ravaged"), sections: [{ text: t("rumbling.ravaged_why") }] })),
-      ` · ${t("rumbling.provinces", { n: rb.provinces.length, m: rw.order.length })}`,
-    );
-    box.append(head);
+    // Aucun « 0 » par défaut (R0.2g) : avant la première terre touchée, la crise se dit en toutes lettres.
+    if (rb.provinces.length === 0) head.append(t("rumbling.none_yet", { m: rw.order.length }));
+    else
+      head.append(
+        `${t("rumbling.ravaged")} `,
+        valueEl(this.ctx, `${Math.round(rb.ravaged * 100)} %`, () => ({ title: t("rumbling.ravaged"), sections: [{ text: t("rumbling.ravaged_why") }] })),
+        ` · ${t("rumbling.provinces", { n: rb.provinces.length, m: rw.order.length })}`,
+      );
+    box.append(head, el("p", "registre-note", t("rumbling.legend")));
     const next = rw.order[rb.provinces.length];
     if (rb.stopped) box.append(el("p", "registre-note crise-grondement__fin", t("rumbling.stopped")));
     else box.append(el("p", "registre-note", next ? t("rumbling.next", { province: t(rw.label.get(next) ?? next) }) : t("rumbling.done")));
@@ -155,6 +158,7 @@ export class WorldPanel implements Panel {
         tokens: [...by].sort(([a], [b]) => a.localeCompare(b)).map(([f, count]) => ({ color: nationColor(f), count })),
         front: ns.fronts.some((f) => f.province === p.id && f.day >= day - 7),
         titan: ns.projections.some((x) => x.province === p.id && x.restUntil === null),
+        ravaged: s.rumbling?.provinces.includes(p.id) ?? false,
         major: p.faction === "mer" || p.canon === "C" || p.code.endsWith("01") || p.id === "wprov_fort_slava",
       };
     });

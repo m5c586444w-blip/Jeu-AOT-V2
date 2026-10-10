@@ -79,14 +79,15 @@ export function epilogue(world: World, s: GameState): Epilogue {
   const start = world.scenario.start;
   const days = (s.date.year - start.year) * 360 + (s.date.day - start.day);
   const pol = s.politics;
-  const dead = Object.entries(pol?.characters ?? {}).filter(([, c]) => !c.alive && c.death && (c.death.date.year > start.year || (c.death.date.year === start.year && c.death.date.day >= start.day)));
+  // Morts de la partie seulement : celles d'avant le départ (marquées « death.before_scenario ») ne sont pas du récit joué.
+  const dead = Object.entries(pol?.characters ?? {}).filter(([, c]) => !c.alive && c.death && c.death.circumstances !== "death.before_scenario" && (c.death.date.year > start.year || (c.death.date.year === start.year && c.death.date.day >= start.day)));
   const ev = s.events;
   const happened = Object.values(ev?.history ?? {}).filter((r) => r.status === "survenu").length;
   const avoided = Object.values(ev?.history ?? {}).filter((r) => r.status === "evite").length;
   const lines: string[] = [];
   // Aucun « 0 » dans le récit (R0.2g) : rien encore d'arrivé, ou rien d'évité, se dit en toutes lettres.
   const branch = ev?.branch === "divergente" ? "divergent" : "canon";
-  if (ev && happened + avoided === 0) lines.push(t("narr.epi.nothing_yet"));
+  if (ev && happened + avoided === 0) lines.push(t(days > 0 ? "narr.epi.no_canon" : "narr.epi.nothing_yet"));
   else if (ev) lines.push(t(avoided === 0 ? `narr.epi.${branch}_none_avoided` : `narr.epi.${branch}`, { n: happened, a: avoided }));
   for (const [id, c] of dead.slice(0, 6)) lines.push(t("narr.epi.death", { name: world.politics?.characters.get(id)?.name ?? id, year: c.death?.date.year ?? "", cause: t(`death.cause.${c.death?.cause ?? "inconnue"}`) }));
   const sh = s.shifters;

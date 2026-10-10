@@ -61,13 +61,12 @@
   "fin.obj.tenir_2_ans": "Hold for two years",
   "fin.obj.nourrir": "Keep morale high enough (40)",
   "fin.obj.ordre": "Keep order (stability 40)",
-  "fin.obj.rose_tenue": "Hold all of Wall Rose",
-  "fin.obj.maria": "Retake Wall Maria (six provinces out of ten)",
+  "fin.obj.rose_tenue": "Hold Wall Rose (nine provinces out of ten)",
+  "fin.obj.maria": "Retake Wall Maria (60% of its provinces)",
   "fin.obj.verite": "Discover the truth (the basement)",
   "fin.obj.dehors": "See the outside world (the sea, or an embassy)",
   "fin.obj.fondateur_garde": "Keep the Founder",
   "fin.obj.ile_tenue": "Hold the island",
-  "fin.obj.accord_hizuru": "Sign a treaty with Hizuru",
   "fin.obj.paix_marley": "Be at peace with Marley",
   "fin.obj.fondateur_repris": "Recover the Founder",
   "fin.obj.paradis_neutralise": "Neutralise Paradis (hold the island)",
@@ -95,7 +94,7 @@
   "fin.obj.grondement_arrete": "Stop the Rumbling",
   "fin.obj.grondement_limite": "Limit the devastation (under 30% of the world)",
   "fin.def.monde_ravage": "the world is ravaged",
-  "fin.def.depeuplement": "famine has depopulated the island",
-  "fin.obj.confiance": "Govern without losing trust (legitimacy 50 at the term)",
-  "fin.obj.alliance_hizuru": "Sign an alliance with Hizuru"
+  "fin.def.depeuplement": "the island has been depopulated (famine or lost lands)",
+  "fin.obj.alliance_hizuru": "Sign an alliance with Hizuru",
+  "fin.obj.ordre_850": "Govern a kingdom in order (stability 68 at the term)"
 }

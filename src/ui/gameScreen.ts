@@ -154,7 +154,7 @@ export async function bootGame(): Promise<void> {
       refresh();
     },
     keyOf,
-    ...(world.politics ? { openPanel: (id: string) => registers?.toggle(id as PanelId) } : {}),
+    ...(world.politics || world.endings ? { openPanel: (id: string) => registers?.toggle(id as PanelId) } : {}),
   });
   const host = document.createElement("div");
   host.className = "carte";
@@ -245,7 +245,9 @@ export async function bootGame(): Promise<void> {
   const autoDossiers = new URLSearchParams(window.location.search).get("dossiers") !== "0";
   const eventDossier = world.chronicle ? new EventDossier(document.body, world, why, safeDispatch, autoDossiers) : null;
   const openEvent = (id: string): void => eventDossier?.open(state, id);
-  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle, openEvent);
+  // Registres : avec la couche politique, ou dès que le scénario a des fins de partie (845 jouable : épilogue, journal,
+  // missions, armées) ; le bac à sable économique de 845 reste sans registre.
+  if (world.politics || world.endings) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle, openEvent);
   if (registers) {
     registers.keyOf = keyOf;
     // Un registre ouvert referme le dossier de province (même côté de l'écran) ; son bouton reste enfoncé.
@@ -317,10 +319,12 @@ export async function bootGame(): Promise<void> {
       lastArmyPrompt = prompt;
       registers.open("armees");
     }
-    // Fin de partie (P9.1) : victoire, défaite ou terme : le temps s'arrête et l'épilogue s'ouvre, une fois par verdict ; le
-    // joueur peut ensuite reprendre le temps (partie libre).
+    // Fin de partie (P9.1) : victoire, défaite ou terme : le temps s'arrête et l'épilogue s'ouvre ; le joueur peut ensuite
+    // reprendre le temps (partie libre). Le premier verdict est gardé (revue de P9 : pas d'arrêt à chaque bascule d'un objectif
+    // après le terme) ; seule une défaite survenue ensuite est encore signalée, une fois.
     const end = evaluateEnding(world, state);
-    if (end && end.state !== "en_cours" && end.state !== shownVerdict && !inBattle) {
+    const fresh = end !== null && end.state !== "en_cours" && (shownVerdict === "en_cours" || (end.state === "defaite" && shownVerdict !== "defaite"));
+    if (end && fresh && !inBattle) {
       shownVerdict = end.state;
       clock.setSpeed(0);
       registers?.open("epilogue");
@@ -366,11 +370,11 @@ export async function bootGame(): Promise<void> {
       dossier.close();
       map.setSelected(null);
     },
-    open_characters: () => registers?.toggle("personnages"),
-    open_cabinet: () => registers?.toggle("cabinet"),
-    open_laws: () => registers?.toggle("decrets"),
-    open_orgs: () => registers?.toggle("organisations"),
-    open_council: () => registers?.toggle("conseil"),
+    open_characters: () => (world.politics ? registers?.toggle("personnages") : undefined),
+    open_cabinet: () => (world.politics ? registers?.toggle("cabinet") : undefined),
+    open_laws: () => (world.politics ? registers?.toggle("decrets") : undefined),
+    open_orgs: () => (world.politics ? registers?.toggle("organisations") : undefined),
+    open_council: () => (world.politics ? registers?.toggle("conseil") : undefined),
     open_journal: () => registers?.toggle("journal"),
     open_expeditions: () => (world.military ? registers?.toggle("expeditions") : undefined),
     open_chronicle: () => (world.chronicle ? registers?.toggle("chronique") : undefined),
@@ -383,7 +387,7 @@ export async function bootGame(): Promise<void> {
     open_archives: () => registers?.toggle("archives"),
     open_epilogue: () => registers?.toggle("epilogue"),
     open_economy: () => registers?.toggle("economie"),
-    open_armies: () => registers?.toggle("armees"),
+    open_armies: () => (world.armies ? registers?.toggle("armees") : undefined),
     open_missions: () => (world.missions ? registers?.toggle("missions") : undefined),
   };
   window.addEventListener("keydown", (ev) => {

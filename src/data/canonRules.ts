@@ -255,7 +255,7 @@ function checkWeapons(data: RawData, eventYear: (id: string) => number | undefin
 /**
  * R12 — départ d'un scénario (P7) : tout personnage dont l'événement de mort est antérieur à l'année du scénario
  * est déclaré mort au départ, et aucun autre canon ne l'est sans raison ; chaque porteur de départ figure dans
- * la chaîne de son Titan (11 §4), à une époque compatible.
+ * la chaîne de son Titan (11 §4), à une époque compatible ; aucun mort ne tient le gouvernement de départ.
  */
 function checkScenarioStart(data: RawData, push: (rule: RuleId, e: RawEntry, message: string) => void): void {
   const events = new Map(data.events.map((e) => [e.id, e]));
@@ -277,6 +277,10 @@ function checkScenarioStart(data: RawData, push: (rule: RuleId, e: RawEntry, mes
       else if ((num(link["to"]) ?? 9999) < y) push("R12", sc, `${who} porte ${sh} au départ alors que sa chaîne l'arrête en ${String(link["to"])}`);
       if (deceased.has(who)) push("R12", sc, `${who} porte ${sh} au départ mais est déclaré mort`);
     }
+    // Gouvernement de départ (revue de P9) : ni le joueur, ni un poste, ni un chef d'organisation tenu par un mort.
+    const pol = (sc.v["politics"] ?? {}) as Obj;
+    const seats: [string, unknown][] = [["joueur", pol["player"]], ...Object.entries((pol["roles"] ?? {}) as Obj), ...Object.entries((pol["org_leaders"] ?? {}) as Obj)];
+    for (const [seat, who] of seats) if (typeof who === "string" && deceased.has(who)) push("R12", sc, `${who} tient « ${seat} » au départ mais est déclaré mort`);
   }
 }
 

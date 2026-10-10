@@ -15,7 +15,7 @@ Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; p
 | N2 | R2+ | 18 §1 + 23 §4 | 300 | oui | terminée, fusionnée par sa PR (D-139 à D-147 ; dettes n° 46 à 60 ; mesure GPU à faire, n° 49) |
 | N3 | R1e | 20 (§6, §8), périmètre 21 §3, districts 24 §3 | 200 | oui | terminée et acceptée (pilote Shiganshina + Maria) ; LC-B/C/D en N3 si quota |
 | N3 | R3 | 18 §2, version courte 21 §8 | 150 | non | terminée (D-148, D-149 ; dettes n° 61 à 65 ; `docs/reports/R3.md`) |
-| N3 | P9 | 18 §9 | 200 | oui | à faire |
+| N3 | P9 | 18 §9 | 200 | oui | terminée, arrêt de revue tenu par une revue indépendante (D-106, D-148) ; D-151 à D-157 ; dettes n° 66 à 68 ; `docs/reports/P9.md` |
 | N3 | P10 | 18 §10 | 120 | non | à faire |
 | N3 | PACK | 23 §6 | 100 | non | à faire |
 

@@ -274,20 +274,48 @@ function moveAll(ctx: AiCtx, faction: string, from: string, to: string, domain: 
  * Semaine d'une invasion : les troupes déjà en mer avancent d'une zone (puis débarquent) ; sinon, au port, on embarque quand la
  * puissance d'assaut (Titans libres compris) dépasse la défense de l'île × seuil de prise × marge. Chaque pas est consigné.
  */
+/** Retour au plus proche port tenu (débarquement refusé, ou plus d'invasion à mener) : une zone par semaine, puis à quai. */
+function returnHome(ctx: AiCtx, faction: string, sea: string, day: number): void {
+  const nw = nationsWorld(ctx.world);
+  const ports = nw.order.filter((p) => p.coastal && ctx.ns.control[p.id] === faction).map((p) => p.id);
+  const quay = ports.find((p) => nw.provinces.get(p)?.adjacent.includes(sea));
+  if (quay) {
+    const n = moveAll(ctx, faction, sea, quay, "terre", 1);
+    moveAll(ctx, faction, sea, quay, "mer", 1);
+    pushAi(ctx.ns, { day, faction, action: `rentrer:${quay}:${n}`, utility: n, reasons: [{ key: "ai.invasion_return", value: n }] });
+    return;
+  }
+  const routes = ports.map((p) => seaPath(ctx, sea, p)).filter((r): r is string[] => r !== null && r.length > 0).sort((a, b) => a.length - b.length);
+  const next = routes[0]?.[0];
+  if (!next) return;
+  moveAll(ctx, faction, sea, next, "terre", 1);
+  moveAll(ctx, faction, sea, next, "mer", 1);
+  pushAi(ctx.ns, { day, faction, action: `rentrer:${next}`, utility: 1, reasons: [{ key: "ai.invasion_return", value: 1 }] });
+}
+
 function amphibious(ctx: AiCtx, faction: string, caution: number, day: number): void {
   const nw = nationsWorld(ctx.world);
   const inv = nw.balance.ai.invasion;
-  const plan = inv ? invasionPlan(ctx, faction) : null;
-  if (!inv || !plan) return;
+  if (!inv) return;
+  const plan = invasionPlan(ctx, faction);
   const afloat = nw.order.filter((p) => p.faction === "mer" && Object.entries(ctx.ns.forces[p.id] ?? {}).some(([id, x]) => x.count > 0 && ownerOf(ctx.world, id) === faction && nw.formations.get(id)?.domain === "terre"));
+  if (!plan) {
+    // Plus d'invasion à mener (paix, cible prise…) : les troupes en mer rentrent.
+    for (const sea of afloat) returnHome(ctx, faction, sea.id, day);
+    return;
+  }
   for (const sea of afloat) {
     if ((nw.provinces.get(plan.target)?.adjacent ?? []).includes(sea.id)) {
       const n = moveAll(ctx, faction, sea.id, plan.target, "terre", 1);
-      pushAi(ctx.ns, { day, faction, action: `debarquer:${plan.target}:${n}`, utility: n, reasons: [{ key: "ai.invasion_landing", value: n }] });
+      if (n > 0) pushAi(ctx.ns, { day, faction, action: `debarquer:${plan.target}:${n}`, utility: n, reasons: [{ key: "ai.invasion_landing", value: n }] });
+      else returnHome(ctx, faction, sea.id, day);
       continue;
     }
     const next = seaPath(ctx, sea.id, plan.target)?.[0];
-    if (!next) continue;
+    if (!next) {
+      returnHome(ctx, faction, sea.id, day);
+      continue;
+    }
     moveAll(ctx, faction, sea.id, next, "terre", 1);
     moveAll(ctx, faction, sea.id, next, "mer", 1);
     pushAi(ctx.ns, { day, faction, action: `naviguer:${next}`, utility: 1, reasons: [{ key: "ai.invasion_route", value: 1 }] });

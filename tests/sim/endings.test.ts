@@ -31,20 +31,27 @@ describe("fins de partie (P9.1)", () => {
     expect(w854.endings?.map((r) => r.camp).sort()).toEqual(["fac_marley", "fac_paradis"]);
   });
 
-  it("850 : victoire au terme avec trois objectifs (tenir, vérité, monde extérieur) ; « au terme » avec deux", () => {
+  it("850 : victoire au terme avec les cinq objectifs (tenir, Maria, vérité, monde extérieur, ordre) ; « au terme » sinon", () => {
     const s0 = createInitialState(3, w850);
     const s = at(s0, 1825);
     const events = structuredClone(s.events);
-    expect(events).not.toBeNull();
-    if (!events) return;
+    const pol = structuredClone(s.politics);
+    const st = structuredClone(s.strategic);
+    if (!events || !pol || !st) throw new Error("couches attendues");
+    for (const p of w850.provinces) if (p.region === "anneau_maria" || p.region === "mur_maria") (st.provinces[p.id] as { control: string }).control = "paradis";
     events.history["evt_850_yeager_basement"] = { status: "survenu", day: 0, choice: null } as unknown as (typeof events.history)[string];
-    expect(evaluateEnding(w850, { ...s, events })?.state).toBe("terme");
     events.history["evt_850_ocean"] = { status: "survenu", day: 0, choice: null } as unknown as (typeof events.history)[string];
-    const e = evaluateEnding(w850, { ...s, events });
+    for (const p of Object.values(st.provinces)) p.stability = 60;
+    // La chronique a tout apporté, mais le royaume n'est pas en ordre : issue mitigée.
+    const mixed = evaluateEnding(w850, { ...s, events, politics: pol, strategic: st });
+    expect(mixed?.state).toBe("terme");
+    expect(mixed?.objectives.filter((o) => !o.met).map((o) => o.id)).toEqual(["ordre"]);
+    for (const p of Object.values(st.provinces)) p.stability = 72;
+    const e = evaluateEnding(w850, { ...s, events, politics: pol, strategic: st });
     expect(e?.state).toBe("victoire");
-    expect(e?.objectives.filter((o) => o.met).map((o) => o.id).sort()).toEqual(["dehors", "tenir", "verite"]);
+    expect(e?.objectives.filter((o) => o.met).map((o) => o.id).sort()).toEqual(["dehors", "maria", "ordre", "tenir", "verite"]);
     // Avant le terme : en cours, même avec ces objectifs.
-    expect(evaluateEnding(w850, { ...s0, events })?.state).toBe("en_cours");
+    expect(evaluateEnding(w850, { ...s0, events, politics: pol, strategic: st })?.state).toBe("en_cours");
   });
 
   it("défaites : légitimité effondrée (850), Rose perdue, famine (845)", () => {

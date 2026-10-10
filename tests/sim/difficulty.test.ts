@@ -41,6 +41,10 @@ describe("difficultés (P9.3)", () => {
     const w854 = loadWorld("data", "scn_854", "rude");
     const b854 = loadWorld("data", "scn_854");
     expect(w854.nations?.balance.ai.personality["agressif"]?.attack).toBeCloseTo((b854.nations?.balance.ai.personality["agressif"]?.attack ?? 0) * 1.2, 6);
+    // Rude (revue de P9) : production et Titans aussi, pas seulement l'agressivité.
+    const rude = loadWorld("data", "scn_sandbox_850", "rude");
+    expect(pm(rude)).toBeCloseTo(pm(base) * 0.88, 6);
+    expect(dens(rude)).toBeGreaterThan(dens(base));
   });
 
   it("la difficulté est gardée dans l'état ; même graine et même difficulté = même hash ; Brèche plus dure que Récit", () => {
