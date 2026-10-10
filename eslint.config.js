@@ -12,7 +12,7 @@ const PIXI_ONLY_RENDER = { group: PIXI, message: "Pixi uniquement dans src/rende
 const THREE_ONLY_3D = { group: ["three", "three/*", "three/**"], message: "three.js uniquement dans src/render/tactical3d." };
 
 export default tseslint.config(
-  { ignores: ["dist/**", "node_modules/**", "coverage/**", "tests/fixtures/**", ".probe.*"] },
+  { ignores: ["dist/**", "release/**", "node_modules/**", "coverage/**", "tests/fixtures/**", ".probe.*"] },
   js.configs.recommended,
   ...tseslint.configs.strict,
   {

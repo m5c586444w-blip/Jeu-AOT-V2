@@ -2,7 +2,9 @@
 // qui ne passe que des commandes ; rapport : durée, victoires par camp, causes de mort, ressources limitantes, cas dégénérés.
 // Options : --parties N (1000), --scenarios a,b:camp (les quatre du menu, 854 mené par Paradis puis par Marley), --fils K,
 // --graine G (première graine, 1), --sortie chemin (docs/reports/P9-balance : .json et .html).
-import { writeFileSync } from "node:fs";
+// --fusion a.json,b.json… : aucun nouveau jeu ; réunit des rapports partiels (un scénario par processus, par exemple) en un
+// seul rapport, critères recalculés sur l'ensemble.
+import { readFileSync, writeFileSync } from "node:fs";
 import { availableParallelism } from "node:os";
 import { Worker } from "node:worker_threads";
 import { loadWorld } from "../data/worldNode";
@@ -84,7 +86,20 @@ function explain(s: ScenarioStats, games: readonly GameResult[]): void {
 
 const allStats: ScenarioStats[] = [];
 let failures = 0;
-for (const b of BATCHES) {
+const FUSION = opt("fusion", "");
+let parties = PARTIES;
+let seedBase = SEED0;
+if (FUSION) {
+  for (const f of FUSION.split(",")) {
+    const r = JSON.parse(readFileSync(f, "utf8")) as BalanceReport;
+    if (allStats.length > 0 && (r.parties !== parties || r.seedBase !== seedBase)) throw new Error(`${f} : ${r.parties} parties dès la graine ${r.seedBase}, autres rapports : ${parties} dès ${seedBase}`);
+    parties = r.parties;
+    seedBase = r.seedBase;
+    allStats.push(...r.scenarios);
+    console.log(`fusion : ${f} (${r.scenarios.map((x) => `${x.scenario}/${x.camp}`).join(", ")})`);
+  }
+}
+for (const b of FUSION ? [] : BATCHES) {
   const w = loadWorld(DIR, b.scenario);
   const camp = b.camp ?? (w.scenario.faction.startsWith("fac_") ? w.scenario.faction : `fac_${w.scenario.faction}`);
   const empty = new Set(Object.entries(w.scenario.stocks).filter(([, v]) => v <= 0).map(([k]) => k));
@@ -120,7 +135,7 @@ for (const c of criteria) {
   console.log(`${c.ok ? "OK" : "KO"}  ${c.id} ${c.label} : ${c.detail}`);
   if (!c.ok) failures++;
 }
-const report: BalanceReport = { generated: new Date().toISOString().slice(0, 10), parties: PARTIES, seedBase: SEED0, difficulty: "normal", scenarios: allStats, criteria };
+const report: BalanceReport = { generated: new Date().toISOString().slice(0, 10), parties, seedBase, difficulty: "normal", scenarios: allStats, criteria };
 writeFileSync(`${OUT}.json`, JSON.stringify(report, null, 1) + "\n");
 writeFileSync(`${OUT}.html`, renderHtml(report));
 console.log(`sim:balance : rapport ${OUT}.html et ${OUT}.json ; ${failures === 0 ? "tous les critères OK" : `${failures} critère(s) KO`}.`);

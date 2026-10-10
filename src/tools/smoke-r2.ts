@@ -7,6 +7,7 @@
 // d'un Titan), pause active, caméra stratégique ↔ suivi (touche V), tir sur zone et cessez-le-feu, ordre général du porteur,
 // violence sobre ; bataille de campagne (854 : contact d'armées) jouée en temps réel, bilan, rencontre reportée ; repli 2D sans
 // WebGL 2 (three.js non téléchargé) ; three.js hors du bundle principal ; mesures (logiciel : à vérifier sur le PC de l'utilisateur).
+// `R2_PARTIES=1,4` ne joue que ces parties ; `R2_QUALITE=bas` mesure la bataille en qualité basse (P10.3).
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import type { Browser, Page } from "playwright-core";
@@ -30,6 +31,9 @@ const MAP = JSON.parse(readFileSync("data/map/paradis.json", "utf8")) as { bound
 const measures: string[] = [];
 /** `R2_PARTIES=3,5` : ne jouer que certaines parties (mise au point) ; par défaut, toutes. */
 const parts = (process.env["R2_PARTIES"] ?? "1,2,3,4,5").split(",");
+/** Qualité de la bataille 3D (P10.3 : « prêt » en qualité basse) : `R2_QUALITE=bas|moyen|haut`, moyenne par défaut. */
+const QUALITE = ["bas", "moyen", "haut"].includes(process.env["R2_QUALITE"] ?? "") ? (process.env["R2_QUALITE"] as string) : "moyen";
+const QUALITE_LIBELLE = { bas: "basse", moyen: "moyenne", haut: "haute" }[QUALITE] ?? "moyenne";
 const part = (n: string): boolean => parts.includes(n);
 
 type Probe = {
@@ -43,6 +47,12 @@ async function open(page: Page, url: string, errors: string[], label = ""): Prom
     if ((m.type() === "error" || m.type() === "warning") && !isDriverNoise(m.text())) errors.push(`${label}${m.type()}: ${m.text()}`);
   });
   page.on("pageerror", (e) => errors.push(`${label}pageerror: ${e.message}`));
+  if (QUALITE !== "moyen")
+    await page.addInitScript((q) => {
+      const k = "murs-et-sang:preferences";
+      const cur = JSON.parse(localStorage.getItem(k) ?? "{}") as Record<string, unknown>;
+      localStorage.setItem(k, JSON.stringify({ ...cur, battleQuality: q }));
+    }, QUALITE);
   await page.goto(url);
   await page.waitForSelector("html[data-ready='true']", { timeout: 120000 });
   await page.waitForTimeout(600);
@@ -303,7 +313,7 @@ try {
   await page.selectOption('.rt-options select[data-rt-option="violence"]', "sobre");
   await page.keyboard.press("Escape");
   expect((await ds(page, "violence")) === "sobre", "option de violence : sobre (sans sang) ; réaliste par défaut");
-  await measure(page, "1366×768, 3D qualité moyenne", ready);
+  await measure(page, `1366×768, 3D qualité ${QUALITE_LIBELLE}`, ready);
   const raw = (await page.locator(".bataille").innerText()).match(/\b(battle|rt|tac|order|formation)\.[a-z_]+(\.[a-z_]+)*/g) ?? [];
   expect(raw.length === 0, `aucune clé brute à l'écran${raw.length ? ` (${raw.slice(0, 4).join(", ")})` : ""}`);
   await close(page);
@@ -417,7 +427,7 @@ try {
     await pg.screenshot({ path: `${OUT}/r2-suivi-${w}.png` });
     expect((await ds(pg, "camera")) === "suivi" && (await num(pg, "frames")) >= 4, `${w}×${h} : vues stratégique et suivi rendues (${await ds(pg, "frames")} images)`);
     await pg.keyboard.press("KeyV");
-    await measure(pg, `${w}×${h}, 3D qualité moyenne`, r);
+    await measure(pg, `${w}×${h}, 3D qualité ${QUALITE_LIBELLE}`, r);
     await close(pg);
     await pg.close();
   }
