@@ -27,7 +27,7 @@ function untilPending(s: GameState, id: string, max = 400): GameState {
 const canonYear = run(createInitialState(42, world), { type: "AdvanceDays", n: 360 });
 
 describe("moteur d'événements : Canon fidèle (AC5-02)", () => {
-  it("E09 → E42 surviennent en 850, chacun après son prédécesseur et dans sa fenêtre ; aucune divergence", () => {
+  it("E09 → E43 surviennent en 850, chacun après son prédécesseur et dans sa fenêtre ; aucune divergence", () => {
     const h = ev(canonYear).history;
     for (const e of (cw?.canon ?? []).filter((e) => e.year_min === 850)) {
       const r = h[e.id];

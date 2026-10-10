@@ -5,6 +5,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -39,6 +40,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -91,6 +93,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -134,6 +137,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -169,6 +173,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -202,6 +207,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -234,6 +240,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -266,6 +273,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -303,6 +311,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -345,6 +354,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -384,6 +394,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -422,6 +433,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -460,6 +472,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -496,6 +509,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -529,6 +543,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -578,6 +593,7 @@
     "branch": "militaire",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -616,6 +632,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -647,6 +664,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -683,6 +701,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -714,6 +733,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -741,6 +761,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -771,6 +792,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -797,6 +819,7 @@
     "branch": "economique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -824,6 +847,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -856,6 +880,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -895,6 +920,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -946,6 +972,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -990,6 +1017,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1022,6 +1050,7 @@
     "branch": "politique",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1059,6 +1088,7 @@
     "branch": "religion",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1089,6 +1119,7 @@
     "branch": "religion",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1138,6 +1169,7 @@
     "branch": "religion",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1175,6 +1207,7 @@
     "branch": "religion",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1220,6 +1253,7 @@
     "branch": "religion",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1261,6 +1295,7 @@
     "branch": "renseignement",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1294,6 +1329,7 @@
     "branch": "renseignement",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1326,6 +1362,7 @@
     "branch": "renseignement",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1356,6 +1393,7 @@
     "branch": "renseignement",
     "scenarios": [
       "scn_sandbox_845",
+      "scn_845",
       "scn_sandbox_850",
       "scn_854"
     ],
@@ -1387,7 +1425,8 @@
     "nation": "paradis",
     "branch": "militaire",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 150,
     "cost": {
@@ -1428,7 +1467,8 @@
     "nation": "paradis",
     "branch": "militaire",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 270,
     "cost": {
@@ -1475,7 +1515,8 @@
     "nation": "paradis",
     "branch": "economique",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 210,
     "cost": {
@@ -1500,7 +1541,8 @@
     "nation": "paradis",
     "branch": "economique",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 150,
     "cost": {
@@ -1530,7 +1572,8 @@
     "nation": "paradis",
     "branch": "economique",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 150,
     "cost": {
@@ -1559,7 +1602,8 @@
     "nation": "paradis",
     "branch": "militaire",
     "scenarios": [
-      "scn_sandbox_845"
+      "scn_sandbox_845",
+      "scn_845"
     ],
     "duration_days": 120,
     "cost": {
@@ -2063,7 +2107,7 @@
     "prereqs": [
       "mis_ren_reseau_informateurs"
     ],
-    "min_year": 850,
+    "min_year": 851,
     "effects": [
       {
         "op": "observe",

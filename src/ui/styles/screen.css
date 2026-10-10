@@ -807,9 +807,10 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .chemise { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; column-gap: 0.8rem; width: 100%; padding: 0.6rem 0.9rem; text-align: left; color: var(--texte); background: transparent; border: none; border-bottom: var(--filet-l) solid var(--filet-doux); border-left: 3px solid transparent; }
 .chemise:hover, .chemise:focus-visible, .chemise[aria-pressed="true"] { background: var(--reflet-fort); border-left-color: var(--accent); }
 .chemise__couverture { display: flex; align-items: center; justify-content: center; width: 5.5rem; height: 3.6rem; overflow: hidden; color: var(--texte-fort); background: var(--panneau-creux) url("/menu/murs-crepuscule.jpg") no-repeat; background-size: 520%; border: var(--filet-l) solid var(--filet-doux); }
-.chemise[data-scenario="scn_sandbox_845"] .chemise__couverture { background-position: 14% 72%; }
+.chemise[data-scenario="scn_845"] .chemise__couverture { background-position: 14% 72%; }
 .chemise[data-scenario="scn_sandbox_850"] .chemise__couverture { background-position: 50% 60%; }
 .chemise[data-scenario="scn_854"] .chemise__couverture { background-position: 72% 64%; }
+.chemise[data-scenario="scn_grondement"] .chemise__couverture { background-position: 88% 40%; }
 .chemise__texte { display: flex; flex-direction: column; min-width: 0; }
 .chemise__couverture svg { width: 2.6rem; height: 2.6rem; display: block; filter: drop-shadow(0 1px 0 var(--ombre)); }
 .chemise--nation .chemise__couverture { display: flex; align-items: center; justify-content: center; }

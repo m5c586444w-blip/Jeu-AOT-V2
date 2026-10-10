@@ -76,6 +76,81 @@
  },
  {
   "type": "army",
+  "id": "army_845b_sud",
+  "scenario": "scn_845",
+  "faction": "fac_paradis",
+  "name_key": "army.sud",
+  "insignia": "garnison",
+  "general": null,
+  "general_key": "army.general.garnison_sud",
+  "province": "prov_trost",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 4
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   },
+   {
+    "regiment": "rgt_convoi",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_845b_est",
+  "scenario": "scn_845",
+  "faction": "fac_paradis",
+  "name_key": "army.est",
+  "insignia": "garnison",
+  "general": null,
+  "general_key": "army.general.garnison_est",
+  "province": "prov_karanes",
+  "regiments": [
+   {
+    "regiment": "rgt_garnison",
+    "count": 3
+   },
+   {
+    "regiment": "rgt_cavalerie",
+    "count": 1
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
+  "id": "army_845b_brigade",
+  "scenario": "scn_845",
+  "faction": "fac_paradis",
+  "name_key": "army.brigade",
+  "insignia": "brigade",
+  "general": null,
+  "general_key": "army.general.brigade",
+  "province": "prov_mitras",
+  "regiments": [
+   {
+    "regiment": "rgt_brigade",
+    "count": 3
+   }
+  ],
+  "morale": 70,
+  "supply_days": 20,
+  "canon": "A",
+  "notes_canon": "Composition, effectifs et emplacement : A."
+ },
+ {
+  "type": "army",
   "id": "army_850_sud",
   "scenario": "scn_sandbox_850",
   "faction": "fac_paradis",

@@ -1250,3 +1250,31 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Aucun chiffre de l'œuvre** : durée, morts et allures sont des ordres de grandeur de réglage, dits comme tels dans l'interface.
 - **Fins** : victoire si arrêté avec moins de 30 % du monde ravagé et l'île tenue ; défaite à 80 % ; issue mitigée au terme.
 - **Réversible** : oui (données ; la couche est facultative).
+
+## 2026-10-10 — D-153 P9.8 : un 845 jouable, distinct du bac à sable des tests
+- **Constat** (`sim:balance`, P9.5) : la carte « 845 » du menu ouvrait `scn_sandbox_845`, bac à sable de P1 « avant la brèche,
+  tous les murs intacts », sans événement : rien ne s'y passe, et la victoire était acquise sans jouer, à l'inverse du résumé
+  affiché (« Shiganshina vient de tomber… »).
+- **Choix** : nouveau scénario `scn_845` (données seulement), après la chute de Shiganshina et le repli derrière Rose (12 E01–E04
+  passés au départ, C) : Maria perdue comme au départ de 850 ; population 1 030 000 (A : 780 000 en 850 + environ 250 000 envoyés
+  en 846, 01 `?`) ; terres de Rose pas encore mises en culture (vivres par habitant inférieurs à 850, A) ; armées et missions
+  reprises du bac à sable. La disette (E05, E07) passe par l'économie : rations normales → famine et dépeuplement ; rations
+  réduites ou strictes et missions agricoles → l'île tient. Défaite ajoutée : population sous 90 % du départ (A). Le bac à sable
+  reste tel quel pour les tests et les outils (empreintes inchangées) et n'a plus de fin (partie libre). Date de départ : `?` (Q15).
+- **Réversible** : oui (données ; la carte du menu peut revenir au bac à sable).
+
+## 2026-10-10 — D-154 P9.8 : E43–E52 jouables (report vers P9)
+- **Contexte** : PROGRESS (reports vers P9) et 18 §9 : « événements E43–E52 jouables ». Squelettes jusqu'ici : la chronique de
+  850 s'arrêtait au choix du sérum ; le sous-sol, l'océan et Hizuru n'arrivaient jamais (objectifs de 850 inatteignables, missions
+  « monde » jamais ouvertes).
+- **Choix** (`data/events/canon_851.json`) : choix du fichier 12 (E43 lire / copier / détruire ; E44 villes / routes / ports ;
+  E45 port / explorer ; E46 saisir / accueillir / refuser ; E47 accepter / interner / expulser ; E48 commerce / monopole / refus ;
+  E49 laisser / retenir ; E50 neutre / soutenir / profiter ; E51 négocier / passer outre ; E52 capturer / couler / ignorer),
+  effets `A` modestes (drapeaux, recherche, légitimité, or), historiques `C` quand l'œuvre tranche, `?` sinon. E44 marque la fin
+  du nettoyage (≈ 9 mois, 12) : l'anneau de Maria repasse à Paradis. Délais `?` choisis pour que Fort Slava, Liberio et la
+  contre-attaque tombent en 854. Années maximales d'E49, E50, E52 ramenées à 853 : le scénario 854 les trouve passés (inchangé).
+  L'océan passe en 851 (12 : nettoyage ≈ 9 mois après la bataille) ; le fichier 13 le plaçait « fin 850 » : date minimale de
+  `tech_ports_navy` portée à 851, mission des rivages à 851 (Q16).
+- **Empreinte** : seule celle du 850 de `sim:selftest` (1 000 jours, au-delà du sérum) change ; anciennes et nouvelles valeurs
+  consignées au commit de P9.8.
+- **Réversible** : oui (données).

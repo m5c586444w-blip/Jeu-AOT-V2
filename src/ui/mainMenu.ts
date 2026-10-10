@@ -23,7 +23,7 @@ interface ScenarioCover {
 }
 
 const SCENARIOS: readonly ScenarioCover[] = [
-  { id: "scn_sandbox_845", year: 845, emblem: "fac_paradis", nations: [] },
+  { id: "scn_845", year: 845, emblem: "fac_paradis", nations: [] },
   { id: "scn_sandbox_850", year: 850, emblem: "fac_paradis", nations: [] },
   { id: "scn_854", year: 854, emblem: "fac_marley", nations: ["fac_paradis", "fac_marley"] },
   { id: "scn_grondement", year: 854, emblem: "fac_paradis", nations: [] },

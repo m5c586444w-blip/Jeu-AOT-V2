@@ -1,10 +1,10 @@
 {
   "fins": [
     {
-      "scenario": "scn_sandbox_845",
+      "scenario": "scn_845",
       "camp": "fac_paradis",
       "adversaire": "titans",
-      "terme_jours": 1825,
+      "terme_jours": 1621,
       "objectifs": [
         {
           "id": "tenir",
@@ -74,10 +74,18 @@
             ],
             "seuil": 0.5
           }
+        },
+        {
+          "id": "depeuplement",
+          "cle": "fin.def.depeuplement",
+          "cond": {
+            "type": "population_max",
+            "part": 0.9
+          }
         }
       ],
       "canon": "A",
-      "note": "02 §13 (objectifs de survie) ; 845 : tenir cinq ans derrière Rose après la chute de Maria. Seuils de jeu (A)."
+      "note": "02 §13 (objectifs de survie) ; 845 : tenir derrière Rose jusqu'en 850 après la chute de Maria ; la disette (12 E05, E07) peut dépeupler l'île (défaite sous 90 % de la population de départ). Seuils de jeu (A)."
     },
     {
       "scenario": "scn_sandbox_850",

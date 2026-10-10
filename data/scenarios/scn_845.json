@@ -1,0 +1,265 @@
+[
+  {
+    "id": "scn_845",
+    "name_key": "scn.845",
+    "faction": "paradis",
+    "start": {
+      "year": 845,
+      "day": 180
+    },
+    "default_control": "paradis",
+    "control": {
+      "prov_plaines_meurtries": "titans",
+      "prov_ruines_premier_cordon": "titans",
+      "prov_riviere_des_cendres": "titans",
+      "prov_falaises_cote_sud": "titans",
+      "prov_marais_brumeux": "titans",
+      "prov_foret_morte": "titans",
+      "prov_steppe_orientale": "titans",
+      "prov_cote_est": "titans",
+      "prov_plateau_du_nord": "titans",
+      "prov_vallee_oubliee": "titans",
+      "prov_maria_nord": "perdu",
+      "prov_maria_nord_est": "perdu",
+      "prov_maria_est": "perdu",
+      "prov_maria_sud_est": "perdu",
+      "prov_maria_sud": "perdu",
+      "prov_maria_sud_ouest": "perdu",
+      "prov_maria_ouest": "perdu",
+      "prov_maria_nord_ouest": "perdu",
+      "prov_shiganshina": "perdu",
+      "prov_faubourgs_shiganshina": "perdu",
+      "prov_plaines_interieures_maria_sud": "perdu",
+      "prov_bourg_minier_maria": "perdu",
+      "prov_hameaux_ouest_maria": "perdu",
+      "prov_foret_arbres_geants": "perdu",
+      "prov_plaines_cerealieres_sud": "perdu",
+      "prov_plaines_du_nord": "perdu",
+      "prov_collines_minieres": "perdu",
+      "prov_ville_usine": "paradis",
+      "prov_haras_maria": "perdu",
+      "prov_vallee_du_moulin": "perdu",
+      "prov_carrefour_du_sud": "perdu",
+      "prov_lac_des_reflets": "perdu",
+      "prov_fort_avance_maria": "perdu",
+      "prov_hameaux_est": "perdu",
+      "prov_monts_brumeux": "perdu",
+      "prov_gorge_du_silence": "perdu",
+      "prov_vergers_ouest": "perdu",
+      "prov_relais_poste_maria": "perdu"
+    },
+    "control_canon": {
+      "prov_ville_usine": "A"
+    },
+    "titan_density": {
+      "prov_bourg_minier_maria": 0.5,
+      "prov_carrefour_du_sud": 0.5,
+      "prov_collines_minieres": 0.5,
+      "prov_faubourgs_shiganshina": 0.8,
+      "prov_foret_arbres_geants": 0.65,
+      "prov_fort_avance_maria": 0.5,
+      "prov_gorge_du_silence": 0.6,
+      "prov_hameaux_est": 0.5,
+      "prov_hameaux_ouest_maria": 0.5,
+      "prov_haras_maria": 0.5,
+      "prov_lac_des_reflets": 0.5,
+      "prov_maria_est": 0.35,
+      "prov_maria_nord": 0.35,
+      "prov_maria_nord_est": 0.35,
+      "prov_maria_nord_ouest": 0.35,
+      "prov_maria_ouest": 0.35,
+      "prov_maria_sud": 0.8,
+      "prov_maria_sud_est": 0.35,
+      "prov_maria_sud_ouest": 0.35,
+      "prov_monts_brumeux": 0.5,
+      "prov_plaines_cerealieres_sud": 0.5,
+      "prov_plaines_du_nord": 0.5,
+      "prov_plaines_interieures_maria_sud": 0.7,
+      "prov_relais_poste_maria": 0.5,
+      "prov_shiganshina": 0.85,
+      "prov_vallee_du_moulin": 0.5,
+      "prov_vergers_ouest": 0.5,
+      "prov_ville_usine": 0.5
+    },
+    "expedition_base": "prov_karanes",
+    "events_mode": "aucun",
+    "garrisons": {
+      "prov_rose_nord": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_est": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_est": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_sud": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_sud_ouest": {
+        "org": "garrison",
+        "soldiers": 1600
+      },
+      "prov_rose_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_rose_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1400
+      },
+      "prov_sina_nord": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_est": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_est": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_sud": {
+        "org": "garrison",
+        "soldiers": 1300
+      },
+      "prov_sina_ouest": {
+        "org": "garrison",
+        "soldiers": 1200
+      },
+      "prov_sina_nord_ouest": {
+        "org": "garrison",
+        "soldiers": 1000
+      },
+      "prov_trost": {
+        "org": "garrison",
+        "soldiers": 2500
+      },
+      "prov_stohess": {
+        "org": "military_police",
+        "soldiers": 1500
+      },
+      "prov_mitras": {
+        "org": "military_police",
+        "soldiers": 1000
+      },
+      "prov_palais_royal": {
+        "org": "military_police",
+        "soldiers": 500
+      },
+      "prov_qg_corps": {
+        "org": "survey_corps",
+        "soldiers": 300
+      },
+      "prov_camp_entrainement": {
+        "org": "training_corps",
+        "soldiers": 400
+      }
+    },
+    "buildings": {
+      "prov_shiganshina": [
+        "bld_grenier",
+        "bld_marche"
+      ],
+      "prov_plaines_interieures_maria_sud": [
+        "bld_ferme"
+      ],
+      "prov_bourg_minier_maria": [
+        "bld_mine_fer",
+        "bld_forge"
+      ],
+      "prov_hameaux_ouest_maria": [
+        "bld_ferme"
+      ],
+      "prov_plaines_cerealieres_sud": [
+        "bld_ferme",
+        "bld_grenier"
+      ],
+      "prov_plaines_du_nord": [
+        "bld_ferme"
+      ],
+      "prov_collines_minieres": [
+        "bld_mine_fer"
+      ],
+      "prov_ville_usine": [
+        "bld_mine_glace",
+        "bld_fabrique_gaz"
+      ],
+      "prov_haras_maria": [
+        "bld_haras"
+      ],
+      "prov_vallee_du_moulin": [
+        "bld_ferme"
+      ],
+      "prov_fort_avance_maria": [
+        "bld_depot_gaz"
+      ],
+      "prov_hameaux_est": [
+        "bld_ferme"
+      ],
+      "prov_vergers_ouest": [
+        "bld_ferme"
+      ],
+      "prov_trost": [
+        "bld_grenier",
+        "bld_depot_gaz",
+        "bld_marche"
+      ],
+      "prov_karanes": [
+        "bld_marche"
+      ],
+      "prov_champs_du_centre": [
+        "bld_ferme",
+        "bld_grenier"
+      ],
+      "prov_forges_rose": [
+        "bld_forge",
+        "bld_atelier_odm"
+      ],
+      "prov_poudriere_rose": [
+        "bld_poudriere"
+      ],
+      "prov_mitras": [
+        "bld_grenier",
+        "bld_marche"
+      ],
+      "prov_stohess": [
+        "bld_marche"
+      ]
+    },
+    "stocks": {
+      "food": 300000,
+      "gas": 30000,
+      "steel": 6000,
+      "iceburst": 5000,
+      "powder": 3000,
+      "horses": 8000,
+      "manpower": 12000,
+      "coal": 0,
+      "gold": 40000
+    },
+    "rationing": "normal",
+    "morale": 45,
+    "stability": 50,
+    "population_total": 1030000,
+    "production_mult": {
+      "food": 3
+    },
+    "production_note_key": "scn.845.production",
+    "refugee_share": {
+      "anneau_rose": 0.3,
+      "interieur_sina": 0.08
+    },
+    "canon": "A",
+    "notes_canon": "Scénario jouable de 845 (P9) : après la chute de Shiganshina et le repli derrière Rose (12 E01–E04 passés au départ, C). Maria aux Titans comme au départ de 850 (C). Date de départ dans l'année : ? (aucun mois officiel). Population : 780 000 (850, A) + environ 250 000 envoyés en 846 (01 : ~250 000, ?) = 1 030 000 (A). Réfugiés entassés dans Rose ; terres intérieures pas encore mises en culture : production de vivres par habitant plus faible qu'en 850 (A). Crise des réfugiés et disette (E05, E07) : jouées par l'économie (rationnement, missions), sans événement scripté ; l'opération de 846 (E06) reste un squelette (Q15)."
+  }
+]

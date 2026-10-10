@@ -110,12 +110,14 @@ describe("une année de jeu", () => {
     expect(items.every((i) => i.group === "canon" || i.code === null)).toBe(true);
   });
 
-  it("les squelettes suivent le récit : E43 passé, périodes en cours (E50), E51 pas encore", () => {
+  it("la suite du récit s'annonce (E43–E52 jouables, P9.8) : E43 passé, E44 programmé, E45 prévu ; squelettes de 845–847 passés", () => {
     const by = new Map(items.map((i) => [i.code, i]));
     expect(by.get("E43")?.status).toBe("passe");
-    expect(by.get("E50")?.status).toBe("en_cours");
-    expect(by.get("E51")?.status).toBe("annonce");
-    expect(by.get("E51")?.foresight).toBe("prevision");
+    expect(by.get("E44")?.status).toBe("annonce");
+    expect(by.get("E44")?.foresight).toBe("certitude");
+    expect(by.get("E45")?.status).toBe("annonce");
+    expect(by.get("E45")?.foresight).toBe("prevision");
+    expect(by.get("E08")?.status).toBe("passe");
   });
 
   it("pas de spoiler : en cours et annoncé (hors rumeur) n'affichent aucun résumé d'issue", () => {

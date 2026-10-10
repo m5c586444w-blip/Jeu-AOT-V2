@@ -8,10 +8,10 @@ const dict = fr as Record<string, string>;
 const chronicle = world.chronicle;
 
 describe("événements de P5 (AC5-01)", () => {
-  it("34 événements canon jouables E09 → E42, dans l'ordre du graphe ; textes et choix en français", () => {
+  it("35 événements canon jouables en 850, E09 → E43, dans l'ordre du graphe ; textes et choix en français", () => {
     expect(chronicle).not.toBeNull();
     const canon = (chronicle?.canon ?? []).filter((e) => e.year_min === 850);
-    expect(canon.map((e) => e.code)).toEqual(Array.from({ length: 34 }, (_, i) => `E${String(i + 9).padStart(2, "0")}`));
+    expect(canon.map((e) => e.code)).toEqual(Array.from({ length: 35 }, (_, i) => `E${String(i + 9).padStart(2, "0")}`));
     for (const e of canon) {
       expect(dict[e.text_key], e.id).toBeTruthy();
       expect(dict[`${e.text_key}.body`], e.id).toBeTruthy();

@@ -66,9 +66,9 @@ describe("couverture des 60 événements du fichier 12 (CCHR-03)", () => {
     }
   });
 
-  it("jouable ou texte seul : 40 jouables, 20 textes seuls (squelettes E01–E08, E43–E52, E59–E60)", () => {
+  it("jouable ou texte seul : 50 jouables, 10 textes seuls (squelettes E01–E08, E59–E60 ; E43–E52 jouables depuis P9)", () => {
     const solo = events.filter((e) => e.code && !e.playable).map((e) => e.code).sort();
-    expect(solo).toEqual(["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E43", "E44", "E45", "E46", "E47", "E48", "E49", "E50", "E51", "E52", "E59", "E60"]);
-    expect(events.filter((e) => e.code && e.playable)).toHaveLength(40);
+    expect(solo).toEqual(["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E59", "E60"]);
+    expect(events.filter((e) => e.code && e.playable)).toHaveLength(50);
   });
 });

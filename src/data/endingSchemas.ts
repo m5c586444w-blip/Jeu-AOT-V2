@@ -24,8 +24,9 @@ export const EndingConditionSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("stabilite_min"), seuil: num }).strict(),
   z.object({ type: z.literal("stabilite_max"), seuil: num }).strict(),
   z.object({ type: z.literal("moral_min"), seuil: num }).strict(),
-  /** Légitimité du gouvernement sous `seuil` (couche politique). */
+  /** Légitimité du gouvernement sous `seuil` (couche politique) ; au moins `seuil` (objectif de gouvernement). */
   z.object({ type: z.literal("legitimite_max"), seuil: num }).strict(),
+  z.object({ type: z.literal("legitimite_min"), seuil: num }).strict(),
   /** Vivres épuisés et moral moyen sous `moral` : famine. */
   z.object({ type: z.literal("famine"), moral: num }).strict(),
   /** Population tenue sous `part` de celle du départ. */

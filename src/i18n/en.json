@@ -94,5 +94,8 @@
   "alert.rumbling_assault_failed": "The assault on the Founder failed (attempt {n}); losses are heavy.",
   "fin.obj.grondement_arrete": "Stop the Rumbling",
   "fin.obj.grondement_limite": "Limit the devastation (under 30% of the world)",
-  "fin.def.monde_ravage": "the world is ravaged"
+  "fin.def.monde_ravage": "the world is ravaged",
+  "fin.def.depeuplement": "famine has depopulated the island",
+  "fin.obj.confiance": "Govern without losing trust (legitimacy 50 at the term)",
+  "fin.obj.alliance_hizuru": "Sign an alliance with Hizuru"
 }

@@ -111,6 +111,10 @@ export function condition(world: World, s: GameState, c: EndingCondition, camp: 
       const l = s.politics?.legitimacy;
       return { met: l !== undefined && l < c.seuil, progress: l !== undefined && l < c.seuil ? 1 : 0 };
     }
+    case "legitimite_min": {
+      const l = s.politics?.legitimacy;
+      return { met: l !== undefined && l >= c.seuil, progress: l === undefined ? 0 : ratio(l, c.seuil) };
+    }
     case "famine": {
       const met = s.strategic !== null && s.strategic.stocks.food <= 0 && isl.morale <= c.moral;
       return { met, progress: met ? 1 : 0 };

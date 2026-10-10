@@ -4,13 +4,15 @@ import { stateHash } from "../../src/sim/core/canonical";
 import { createInitialState, tickDay } from "../../src/sim/core/state";
 import type { GameState } from "../../src/sim/core/state";
 import { advance } from "../../src/sim/core/time";
+import { applyCommand } from "../../src/sim/core/commands";
 import { evaluateEnding } from "../../src/sim/ending/ending";
 
 /**
  * P9.1 (CP9-03, CP9-07) : fins de partie par objectifs (02 §13), lues sur l'état sans l'écrire. États construits pour chaque
  * issue (victoire au terme, défaite, victoire anticipée de Marley) ; un 845 joué jusqu'au terme ; même état, même verdict.
+ * 845 jouable : `scn_845` (après la chute de Maria) ; le bac à sable `scn_sandbox_845` des tests n'a pas de fin (partie libre).
  */
-const w845 = loadWorld("data", "scn_sandbox_845");
+const w845 = loadWorld("data", "scn_845");
 const w850 = loadWorld("data", "scn_sandbox_850");
 const w854 = loadWorld("data", "scn_854");
 const at = (s: GameState, days: number): GameState => ({ ...s, date: advance(s.date, days) });
@@ -83,20 +85,25 @@ describe("fins de partie (P9.1)", () => {
     expect(["fondateur_perdu", "ile_perdue"]).toContain(asParadis?.defeat?.id);
   });
 
-  it("845 joué jusqu'au terme sans commande : une issue (victoire, terme ou défaite), déterministe", () => {
-    const run = (): { state: string; hash: string; day: number } => {
+  it("845 joué jusqu'au terme : rations normales → disette et dépeuplement ; rations strictes → l'île tient ; déterministe", () => {
+    expect(evaluateEnding(loadWorld("data", "scn_sandbox_845"), createInitialState(7, loadWorld("data", "scn_sandbox_845")))).toBeNull();
+    const run = (level: "normal" | "strict"): { state: string; hash: string; day: number; defeat: string | null } => {
       let s = createInitialState(7, w845);
+      if (level !== "normal") s = applyCommand(s, { type: "SetRationing", level }, undefined, w845);
       let e = evaluateEnding(w845, s);
       while (e && e.state === "en_cours") {
         s = tickDay(s, w845);
         e = evaluateEnding(w845, s);
       }
-      return { state: e?.state ?? "", hash: stateHash(s), day: e?.day ?? 0 };
+      return { state: e?.state ?? "", hash: stateHash(s), day: e?.day ?? 0, defeat: e?.defeat?.id ?? null };
     };
-    const a = run();
-    const b = run();
-    expect(["victoire", "terme", "defaite"]).toContain(a.state);
-    expect(a).toEqual(b);
-    console.log(`845 sans commande : ${a.state} au jour ${a.day}`);
-  }, 120_000);
+    const normal = run("normal");
+    expect(normal.state).toBe("defaite");
+    expect(normal.defeat).toBe("depeuplement");
+    const strict = run("strict");
+    expect(strict.state).toBe("victoire");
+    expect(strict.day).toBe(1621);
+    expect(run("strict")).toEqual(strict);
+    console.log(`845 : rations normales → ${normal.state} (${normal.defeat}) au jour ${normal.day} ; strictes → ${strict.state} au jour ${strict.day}`);
+  }, 180_000);
 });

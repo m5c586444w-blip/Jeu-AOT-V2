@@ -1,0 +1,933 @@
+[
+  {
+    "id": "evt_850_yeager_basement",
+    "code": "E43",
+    "year_min": 850,
+    "window": {
+      "after": "evt_850_serum_choice",
+      "within_days": [
+        1,
+        4
+      ]
+    },
+    "location": "prov_shiganshina",
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "basement_opened",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "lire",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 40
+          },
+          {
+            "op": "flag",
+            "key": "basement_read",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "copier",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 60
+          },
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -2
+          },
+          {
+            "op": "flag",
+            "key": "basement_copied",
+            "value": true
+          }
+        ],
+        "divergence": 0.2
+      },
+      {
+        "id": "detruire",
+        "effects": [
+          {
+            "op": "legitimacy",
+            "delta": 2
+          },
+          {
+            "op": "flag",
+            "key": "basement_destroyed",
+            "value": true
+          }
+        ],
+        "divergence": 0.8
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.850.yeager_basement",
+    "canon": "C",
+    "notes_canon": "Sous-sol des Yeager après la bataille de Shiganshina : C (12 E43). Choix (lire, copier, détruire) et effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "famille"
+  },
+  {
+    "id": "evt_850_wall_maria_cleanup",
+    "code": "E44",
+    "year_min": 851,
+    "year_max": 851,
+    "date_approx": true,
+    "window": {
+      "after": "evt_850_yeager_basement",
+      "within_days": [
+        255,
+        285
+      ]
+    },
+    "location": "prov_shiganshina",
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "control",
+        "province": "prov_maria_nord",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_nord_est",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_est",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_sud_est",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_sud",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_sud_ouest",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_ouest",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_maria_nord_ouest",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_shiganshina",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_faubourgs_shiganshina",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_plaines_interieures_maria_sud",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_bourg_minier_maria",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_hameaux_ouest_maria",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_foret_arbres_geants",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_plaines_cerealieres_sud",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_plaines_du_nord",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_collines_minieres",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_haras_maria",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_vallee_du_moulin",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_carrefour_du_sud",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_lac_des_reflets",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_fort_avance_maria",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_hameaux_est",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_monts_brumeux",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_gorge_du_silence",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_vergers_ouest",
+        "value": "paradis"
+      },
+      {
+        "op": "control",
+        "province": "prov_relais_poste_maria",
+        "value": "paradis"
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_nord",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_nord_est",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_est",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_sud_est",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_sud",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_sud_ouest",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_ouest",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_maria_nord_ouest",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_shiganshina",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_faubourgs_shiganshina",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_plaines_interieures_maria_sud",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_bourg_minier_maria",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_hameaux_ouest_maria",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_foret_arbres_geants",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_plaines_cerealieres_sud",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_plaines_du_nord",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_collines_minieres",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_haras_maria",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_vallee_du_moulin",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_carrefour_du_sud",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_lac_des_reflets",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_fort_avance_maria",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_hameaux_est",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_monts_brumeux",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_gorge_du_silence",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_vergers_ouest",
+        "delta": -0.6
+      },
+      {
+        "op": "titans",
+        "province": "prov_relais_poste_maria",
+        "delta": -0.6
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 4
+      },
+      {
+        "op": "stability",
+        "province": "all",
+        "delta": 2
+      }
+    ],
+    "choices": [
+      {
+        "id": "villes",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": 2
+          }
+        ],
+        "historical": true,
+        "canon": "?"
+      },
+      {
+        "id": "routes",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "food",
+            "delta": 20000
+          }
+        ],
+        "divergence": 0.1
+      },
+      {
+        "id": "ports",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "ports_first",
+            "value": true
+          }
+        ],
+        "divergence": 0.2
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.850.wall_maria_cleanup",
+    "canon": "C",
+    "notes_canon": "Nettoyage de Wall Maria, environ neuf mois après le sous-sol : C (12 E44 ; durée ≈ 9 mois). L'événement marque la fin de l'opération : l'anneau de Maria repasse à Paradis (ville-usine comprise, déjà tenue) ; Titans de Maria réduits (A). Priorité choisie (villes, routes, ports) : A ; choix historique inconnu (?). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_850_ocean",
+    "code": "E45",
+    "year_min": 851,
+    "year_max": 851,
+    "date_approx": true,
+    "window": {
+      "after": "evt_850_wall_maria_cleanup",
+      "within_days": [
+        20,
+        40
+      ]
+    },
+    "divergence_weight": 0.3,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "ocean_seen",
+        "value": true
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": 3
+      }
+    ],
+    "choices": [
+      {
+        "id": "fonder_port",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -2000
+          },
+          {
+            "op": "flag",
+            "key": "port_founded",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "?"
+      },
+      {
+        "id": "explorer",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 20
+          }
+        ],
+        "divergence": 0.1
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.850.ocean",
+    "canon": "C",
+    "notes_canon": "Découverte de l'océan après le nettoyage de Maria : C (12 E45). Choix (fonder un port, explorer) et effets : A ; choix historique incertain (?). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_851_marley_fleet",
+    "code": "E46",
+    "year_min": 851,
+    "window": {
+      "after": "evt_850_ocean",
+      "within_days": [
+        40,
+        60
+      ]
+    },
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "marley_fleet_seen",
+        "value": true
+      },
+      {
+        "op": "morale",
+        "province": "all",
+        "delta": -2
+      }
+    ],
+    "choices": [
+      {
+        "id": "saisir",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 20
+          },
+          {
+            "op": "flag",
+            "key": "marley_ships_seized",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "accueillir",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "marley_fleet_welcomed",
+            "value": true
+          }
+        ],
+        "divergence": 0.5
+      },
+      {
+        "id": "refuser",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "marley_fleet_refused",
+            "value": true
+          }
+        ],
+        "divergence": 0.3
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.851.marley_fleet",
+    "canon": "C",
+    "notes_canon": "Première flotte de reconnaissance de Marley, Volontaires à bord : C (12 E46). Navires saisis par Paradis : C. Effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_851_volunteers",
+    "code": "E47",
+    "year_min": 851,
+    "year_max": 852,
+    "date_approx": true,
+    "window": {
+      "after": "evt_851_marley_fleet",
+      "within_days": [
+        0,
+        15
+      ]
+    },
+    "divergence_weight": 0.6,
+    "effects": [],
+    "choices": [
+      {
+        "id": "accepter",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 40
+          },
+          {
+            "op": "legitimacy",
+            "delta": -1
+          },
+          {
+            "op": "flag",
+            "key": "volunteers_allied",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "interner",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "volunteers_interned",
+            "value": true
+          }
+        ],
+        "divergence": 0.4
+      },
+      {
+        "id": "expulser",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "volunteers_expelled",
+            "value": true
+          }
+        ],
+        "divergence": 0.7
+      }
+    ],
+    "form": "proces_verbal",
+    "text_key": "evt.851.volunteers",
+    "canon": "C",
+    "notes_canon": "Volontaires anti-Marleyens (Yelena, Onyankopon) : C (12 E47). Alliance acceptée : C. Effets (savoirs, défiance) : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_851_hizuru_visit",
+    "code": "E48",
+    "year_min": 851,
+    "year_max": 852,
+    "date_approx": true,
+    "window": {
+      "after": "evt_851_volunteers",
+      "within_days": [
+        100,
+        160
+      ]
+    },
+    "divergence_weight": 0.5,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "hizuru_contact",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "commerce",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": 4000
+          },
+          {
+            "op": "flag",
+            "key": "railway_started",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "?"
+      },
+      {
+        "id": "monopole",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": 8000
+          },
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -2
+          },
+          {
+            "op": "flag",
+            "key": "hizuru_monopoly",
+            "value": true
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "refus",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "hizuru_refused",
+            "value": true
+          }
+        ],
+        "divergence": 0.8
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.851.hizuru_visit",
+    "canon": "C",
+    "notes_canon": "Visite d'Hizuru et chantier du chemin de fer : C (12 E48 ; 851–852 ?). Choix (commerce, monopole, refus) et effets : A ; choix historique incertain (?). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_851_eren_departure",
+    "code": "E49",
+    "year_min": 851,
+    "year_max": 853,
+    "date_approx": true,
+    "window": {
+      "after": "evt_851_hizuru_visit",
+      "within_days": [
+        520,
+        580
+      ]
+    },
+    "divergence_weight": 0.7,
+    "effects": [],
+    "choices": [
+      {
+        "id": "laisser",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "eren_departed",
+            "value": true
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "retenir",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "eren_held",
+            "value": true
+          },
+          {
+            "op": "legitimacy",
+            "delta": -2
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "rapport",
+    "text_key": "evt.851.eren_departure",
+    "canon": "C",
+    "notes_canon": "Départ d'Eren pour Marley : C (12 E49 ; 851–854 ?). Année maximale ramenée à 853 (A) : la décision précède l'attaque de Liberio (854), et le scénario 854 la trouve passée. Effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "titans"
+  },
+  {
+    "id": "evt_851_middle_east_war",
+    "code": "E50",
+    "year_min": 851,
+    "year_max": 853,
+    "date_approx": true,
+    "window": {
+      "after": "evt_851_eren_departure",
+      "within_days": [
+        150,
+        170
+      ]
+    },
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "middle_east_war_known",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "neutre",
+        "effects": [],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "soutenir",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": -3000
+          },
+          {
+            "op": "flag",
+            "key": "support_allies",
+            "value": true
+          }
+        ],
+        "divergence": 0.5
+      },
+      {
+        "id": "profiter",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": 3000
+          },
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -1
+          },
+          {
+            "op": "flag",
+            "key": "profit_war",
+            "value": true
+          }
+        ],
+        "divergence": 0.6
+      }
+    ],
+    "form": "article",
+    "text_key": "evt.851.middle_east_war",
+    "canon": "C",
+    "notes_canon": "Guerre du Moyen-Orient entre Marley et les Forces Alliées : C (12 E50 ; 851–854). Paradis n'y prend pas part : C. La décision est placée avant la chute de Fort Slava (854) ; année maximale 853 (A). Effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_853_hizuru_refusal",
+    "code": "E51",
+    "year_min": 853,
+    "window": {
+      "after": "evt_851_hizuru_visit",
+      "within_days": [
+        450,
+        520
+      ]
+    },
+    "divergence_weight": 0.4,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "hizuru_closed_trade",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "negocier",
+        "effects": [
+          {
+            "op": "resource",
+            "resource": "gold",
+            "delta": 2000
+          }
+        ],
+        "historical": true,
+        "canon": "?"
+      },
+      {
+        "id": "passer_outre",
+        "effects": [
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -1
+          },
+          {
+            "op": "flag",
+            "key": "hizuru_bypassed",
+            "value": true
+          }
+        ],
+        "divergence": 0.4
+      }
+    ],
+    "form": "lettre",
+    "text_key": "evt.853.hizuru_refusal",
+    "canon": "C",
+    "notes_canon": "Refus d'Hizuru d'un commerce ouvert, monopole sur les ressources de Paradis : C (12 E51 ; 853). Choix et effets : A ; choix historique incertain (?). Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  },
+  {
+    "id": "evt_851_marley_ships_lost",
+    "code": "E52",
+    "year_min": 851,
+    "year_max": 853,
+    "date_approx": true,
+    "window": {
+      "after": "evt_851_marley_fleet",
+      "within_days": [
+        200,
+        330
+      ]
+    },
+    "divergence_weight": 0.3,
+    "effects": [
+      {
+        "op": "flag",
+        "key": "marley_knows_titans",
+        "value": true
+      }
+    ],
+    "choices": [
+      {
+        "id": "capturer",
+        "effects": [
+          {
+            "op": "research",
+            "delta": 10
+          }
+        ],
+        "historical": true,
+        "canon": "C"
+      },
+      {
+        "id": "couler",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "marley_ships_sunk",
+            "value": true
+          }
+        ],
+        "divergence": 0.3
+      },
+      {
+        "id": "ignorer",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "marley_ships_ignored",
+            "value": true
+          }
+        ],
+        "divergence": 0.5
+      }
+    ],
+    "form": "telegramme",
+    "text_key": "evt.851.marley_ships_lost",
+    "canon": "C",
+    "notes_canon": "Perte des navires de reconnaissance de Marley ; Marley comprend que Paradis détient au moins deux Titans : C (12 E52 ; ≈ 851–854). Année maximale 853 (A). Effets : A. Fenêtre (délai en jours après le prédécesseur) : ? (12 : mois toujours « ? »).",
+    "theme": "monde"
+  }
+]

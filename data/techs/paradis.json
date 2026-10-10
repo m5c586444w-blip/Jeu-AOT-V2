@@ -502,10 +502,10 @@
     "tree": "logistique",
     "cost": 180,
     "unlock_event": "evt_850_ocean",
-    "min_year": 850,
+    "min_year": 851,
     "mechanic_phase": "P9",
     "canon": "?",
-    "notes_canon": "Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?."
+    "notes_canon": "Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Fichier 13 : coût 180 ; prérequis — ; déblocage **E45** (océan découvert) ; effets Navires côtiers ; accès extérieur ; date min 850 (fin) ; canon C ?. Date minimale portée à 851 (P9) : l'océan (E45) suit le nettoyage de Maria, environ neuf mois après la bataille de Shiganshina (12 E44) ; question ouverte Q16."
   },
   {
     "id": "tech_convoy_optimisation",
