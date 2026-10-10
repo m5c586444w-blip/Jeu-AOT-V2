@@ -4,6 +4,7 @@ import type { ArmyCtx } from "./armies";
 import { applyOrder, findArmy, geoOf, orderProblem, visibleProvinces } from "./armies";
 import { armyMen, armyPieces, hostile, playerOf } from "./state";
 import type { ArmyAiDecision, ArmyState, FleetState } from "./state";
+import type { GeoGraph } from "../strategic/world";
 
 /**
  * IA des armées (PA.7) : règles simples, chaque décision consignée avec ses raisons (journal de raisonnement, mode auteur).
@@ -45,8 +46,27 @@ function order(ctx: ArmyCtx, faction: string, o: Parameters<typeof applyOrder>[1
   return true;
 }
 
+/**
+ * Longueurs de route mémorisées par graphe (P10.3) : le graphe de routage est construit au chargement du monde et jamais
+ * modifié, la longueur d'un trajet ne change donc pas d'un jour à l'autre ; chaque paire n'est calculée qu'une fois. Même
+ * résultat qu'un calcul à chaque appel (empreintes inchangées) ; le tick de 854 repasse sous le budget de 8 ms.
+ */
+const ROUTE_LENGTHS = new WeakMap<GeoGraph, Map<string, number>>();
+
 function routeLength(ctx: ArmyCtx, from: string, to: string): number {
-  return shortestRoute(geoOf(ctx.world), from, to)?.length ?? 999;
+  const g = geoOf(ctx.world);
+  let known = ROUTE_LENGTHS.get(g);
+  if (!known) {
+    known = new Map();
+    ROUTE_LENGTHS.set(g, known);
+  }
+  const k = `${from}>${to}`;
+  let v = known.get(k);
+  if (v === undefined) {
+    v = shortestRoute(g, from, to)?.length ?? 999;
+    known.set(k, v);
+  }
+  return v;
 }
 
 /** Province d'où assiéger le segment de mur de Paradis le plus proche (voisine du segment, hors mur). */

@@ -1,0 +1,22 @@
+
+> murs-et-sang@0.0.1 sim:world
+> tsx src/tools/sim-world.ts
+
+(1) Partie jouée côté Marley (AC7-02), graine 1, un an
+  OK  un an joué comme Marley sans erreur (10 décisions du joueur)
+  OK  les décisions changent l'issue : provinces tenues par Marley 31 contre 30 (passif) ; Hizuru neutre contre neutre
+(2) Hizuru change de camp selon les décisions (AC7-03)
+  OK  fac_paradis : neutre sans décision (neutre) ; après 3 garanties, Hizuru s'allie (fac_paradis), journal « 1 bascule(s) »
+  OK  fac_marley : neutre sans décision (neutre) ; après 6 garanties, Hizuru s'allie (fac_marley), journal « 1 bascule(s) »
+(3) 20 parties d'un an (AC7-07)
+  OK  20/20 parties d'un an sans erreur
+  OK  pas de cycle guerre–paix : au plus 1 déclarations ou paix par partie (20 en tout)
+  OK  Marley consigne son attracteur (le Fondateur) ; chaque décision d'IA porte ses raisons ; comptes finis et positifs
+  KO  tick du scénario 854 : p95 24.16 ms, max 107.36 ms (budget 8 ms)
+  issues (provinces tenues à la fin de l'année) :
+    10 × fac_marley: Marley 30, Alliés 14, Paradis 1, Hizuru neutre
+    8 × fac_paradis: Marley 31, Alliés 13, Paradis 1, Hizuru neutre
+    1 × fac_paradis: Marley 31, Alliés 14, Paradis 0, Hizuru neutre
+    1 × fac_paradis: Marley 33, Alliés 11, Paradis 1, Hizuru neutre
+sim:world : ÉCHEC (1)
+EXIT=1

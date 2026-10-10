@@ -1,0 +1,36 @@
+
+> murs-et-sang@0.0.1 smoke:r2
+> tsx src/tools/smoke-r2.ts
+
+Captures : docs/screenshots/.smoke/ (hors git)
+[850, essai de compagnie] 1366×768
+  OK  carte stratégique : three.js et la vue 3D de bataille non chargés
+  OK  vue 3D chargée à la demande (three.js téléchargé à l'ouverture de la bataille), prête en 4.5 s
+  OK  compagnies : 341 unités en scène (100 à 400), 4 Titans
+  OK  ouverture en pause active (bandeau « Pause — donnez vos ordres »)
+  OK  clic sur un homme : son escouade est sélectionnée (« esc_03 »)
+  OK  Alt + clic : un seul homme sélectionné (« soldat:12 »)
+  OK  rectangle de sélection : 6 unités (esc_01, esc_02, esc_03, esc_04, esc_05, sec_a01)
+  OK  groupe numéroté : Ctrl + 1 enregistre, 1 rappelle (« esc_01,esc_02,esc_03,esc_04,esc_05,sec_a01 »)
+  OK  clic droit au sol : « se déplacer » pour chaque unité sélectionnée (6 ordres journalisés)
+  OK  Maj + clic droit : ordre mis en file (1 en attente, panneau « File d'ordres »)
+  OK  formation « colonne » donnée (bouton)
+  OK  pause active : la bataille n'avance pas pendant les ordres (pas 25)
+  OK  ordres appliqués à la reprise (carnet : 18 lignes de marche, file, formation ; 6 unités en marche)
+  OK  ordre d'unité : un homme seul envoyé ailleurs (Alt + clic, D, clic)
+  OK  clic droit sur un Titan : « attaquer » ce Titan
+  OK  touche V : caméra de suivi à la troisième personne (escouade sélectionnée)
+  OK  touche V : retour à la vue stratégique
+  OK  tir sur zone : désignation au clic (curseur en croix)
+  OK  batterie : zone imposée sur un Titan ennemi, 3 coups, 14 impacts récents
+  OK  cessez-le-feu : la batterie se tait
+  OK  porteur : objectif « les Titans », retenue stricte, zone ; ordre au carnet
+  OK  option de violence : sobre (sans sang) ; réaliste par défaut
+  ..  1366×768, 3D qualité basse : prêt 4.5 s · 341 unités · temps JS p95 20.10 ms (sim 11.00 · figures 5.60 · rendu 2.80 · interface 5.00) · appels 82 · triangles 243864 · détail 0 · foule 163 · repères 149
+  OK  aucune clé brute à l'écran
+(partie 5 non jouée)
+  OK  0 erreur console
+Mesures (rendu logiciel SwiftShader, sans GPU ; à vérifier sur le PC de l'utilisateur) :
+  1366×768, 3D qualité basse : prêt 4.5 s · 341 unités · temps JS p95 20.10 ms (sim 11.00 · figures 5.60 · rendu 2.80 · interface 5.00) · appels 82 · triangles 243864 · détail 0 · foule 163 · repères 149
+smoke:r2 : tout est conforme.
+EXIT=0

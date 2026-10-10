@@ -4,7 +4,7 @@
 
 ## Index
 
-161 décisions, de D-01 (2026-10-02) à D-161 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+162 décisions, de D-01 (2026-10-02) à D-162 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -167,6 +167,7 @@
 - **D-159** (10-10) — P10.2 : parcours de cinq ans par commandes enregistrées
 - **D-160** (10-10) — P10.4–P10.5 : manuel en jeu et lancement local
 - **D-161** (10-10) — P10.4 : fonctions P2 du fichier 09 non faites, report confirmé (CONFORMITE)
+- **D-162** (10-10) — P10.3 : tick de 854 hors budget, longueurs de route mémorisées
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1544,3 +1545,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   diversion, évacuer, incendier ; code de la Garnison ; menu au clic droit ; aube et crépuscule en bataille ; anglais ; overlays
   de debug tactiques ; difficulté dans la bataille tactique ; bâtiments) forment la dette n° 70.
 - **Réversible** : oui (chaque fonction peut être reprise ; aucune n'est écartée définitivement).
+
+## 2026-10-10 — D-162 P10.3 : tick de 854 hors budget, longueurs de route mémorisées
+- **Constat** (`npm run sim:world`) : tick du scénario 854 à p95 24,16 ms, pointe 107 ms (budget 8 ms, 00 §6.8) ; 2,51 ms en
+  P8. Profil : 67 % du temps dans l'IA des armées de PA (`invaderAi` → `siegeSpot` → `routeLength` → `shortestRoute`), qui
+  recalculait chaque jour, pour chaque armée, les plus courts chemins vers tous les segments de mur. La mesure n'avait pas été
+  refaite depuis P8.
+- **Décision** : mémoriser les longueurs de route par graphe (`src/sim/armies/ai.ts`) : le graphe de routage est construit au
+  chargement et jamais modifié, le résultat est donc identique. Seule modification de `src/sim` en P10 (le plan l'autorise pour
+  ce qu'exige une tâche).
+- **Résultat** : p95 5,04 ms, pointe 17,6 ms ; `sim:world` conforme ; les huit empreintes de `sim:selftest` inchangées.
+- **Réversible** : oui.
