@@ -5,6 +5,7 @@ import type { Province } from "../data/schemas";
 import { t } from "../i18n";
 import { Explainer } from "../sim/core/explain";
 import type { GameState } from "../sim/core/state";
+import { dayEconomyMods } from "../sim/core/state";
 import { capacity, planDay, provinceProduction } from "../sim/strategic/economy";
 import { provinceComposition } from "../sim/politics/society";
 import type { StrategicState } from "../sim/strategic/economy";
@@ -167,7 +168,7 @@ export class Dossier {
   private population(body: HTMLElement, p: Province, st: StrategicState): void {
     const ps = st.provinces[p.id];
     if (!ps || !this.state) return;
-    const plan = planDay(this.world, st, this.state.date);
+    const plan = planDay(this.world, st, this.state.date, dayEconomyMods(this.state, this.world));
     const weights = this.world.economy.population.level_weights;
     this.row(body, t("dossier.population"), formatNumber(ps.population), () => ({
       title: t("dossier.population"),

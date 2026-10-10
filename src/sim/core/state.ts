@@ -3,7 +3,7 @@ import { canonicalClone } from "./canonical";
 import { advance, DAYS_PER_MONTH, START_DATE, toAbsoluteDay } from "./time";
 import type { GameDate } from "./time";
 import { applyDay, applyMonth, createStrategicState, NO_MODS, planDay, planMonth } from "../strategic/economy";
-import type { StrategicState } from "../strategic/economy";
+import type { EconomyMods, StrategicState } from "../strategic/economy";
 import { economyMods } from "../politics/politics";
 import { createPoliticalState } from "../politics/state";
 import type { PoliticalState } from "../politics/state";
@@ -115,6 +115,14 @@ function p5Layers(world: World, seed: number, date: GameDate): Pick<GameState, "
  * Avance d'un jour. Un tirage du RNG par jour alimente `world.noise` (système témoin de P0) ;
  * si un monde est chargé, l'économie du jour est appliquée, puis les flux mensuels au 1er du mois.
  */
+/**
+ * Modificateurs d'économie du jour (lois, décrets, missions), tels que `tickDay` les applique : l'interface (barre
+ * supérieure, écran « Économie », dossier de province) affiche ainsi les mêmes chiffres que la simulation (dette n° 38).
+ */
+export function dayEconomyMods(state: Pick<GameState, "politics" | "missions" | "strategic">, world: World): EconomyMods {
+  return withMissionMods(world, state.missions, state.politics && world.politics && state.strategic ? economyMods(world, state.politics, state.strategic) : NO_MODS);
+}
+
 export function tickDay(state: GameState, world?: World): GameState {
   const rng = Rng.fromState({ seed: state.seed, state: state.rng.state });
   const noise = rng.next();
@@ -140,7 +148,7 @@ export function tickDay(state: GameState, world?: World): GameState {
     if (shifters) shifters = structuredClone(shifters);
     if (!nations && world.nations) nations = createNationsState(world, state.date);
     if (nations) nations = structuredClone(nations);
-    const mods = withMissionMods(world, missions, politics && world.politics ? economyMods(world, politics, strategic) : NO_MODS);
+    const mods = dayEconomyMods({ politics, missions, strategic }, world);
     strategic = applyDay(world, strategic, planDay(world, strategic, state.date, mods));
     if (politics && world.politics) {
       politics = structuredClone(politics);

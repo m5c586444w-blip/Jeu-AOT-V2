@@ -2,8 +2,9 @@ import { hasKey, t } from "../i18n";
 import { stateHash } from "../sim/core/canonical";
 import type { GameState } from "../sim/core/state";
 import { fromAbsoluteDay, monthOf, seasonOf } from "../sim/core/time";
-import { planDay, planMonth, totals, withArmyDraws } from "../sim/strategic/economy";
-import type { DayPlan, StrategicState } from "../sim/strategic/economy";
+import { NO_MODS, planDay, planMonth, totals, withArmyDraws } from "../sim/strategic/economy";
+import type { DayPlan, EconomyMods, StrategicState } from "../sim/strategic/economy";
+import { dayEconomyMods } from "../sim/core/state";
 import type { ResourceId } from "../sim/strategic/resources";
 import type { World } from "../sim/strategic/world";
 import { nationIncome, nationUpkeep } from "../sim/world/nations";
@@ -61,6 +62,7 @@ export class Hud {
   readonly gestion = el("nav", "gestion");
   private state: GameState;
   private plan: DayPlan | null = null;
+  private mods: EconomyMods = NO_MODS;
   private readonly values = new Map<string, HTMLElement>();
   private readonly speedButtons: HTMLButtonElement[] = [];
   private readonly panelButtons = new Map<string, HTMLButtonElement>();
@@ -295,7 +297,8 @@ export class Hud {
       this.scheduleMeasure?.();
     }
     const st = this.strat();
-    this.plan = st ? withArmyDraws(planDay(this.world, st, state.date), state.armies?.drawn) : null;
+    this.mods = dayEconomyMods(state, this.world);
+    this.plan = st ? withArmyDraws(planDay(this.world, st, state.date, this.mods), state.armies?.drawn) : null;
     const d = state.date;
     this.set("date", t("date.format", { year: d.year, day: d.day }));
     this.set("season", `${t(`season.${seasonOf(d)}`)}, ${t("hud.month", { n: monthOf(d) })}`);
@@ -388,7 +391,7 @@ export class Hud {
   }
 
   deltaWhy(r: ResourceId): WhyContent {
-    return resourceDeltaWhy(this.world, this.plan, this.strat(), r);
+    return resourceDeltaWhy(this.world, this.plan, this.strat(), r, this.mods);
   }
 
   private moraleWhy(): WhyContent {
@@ -404,7 +407,7 @@ export class Hud {
 }
 
 /** Fiche « pourquoi cette variation » d'une ressource (barre supérieure et écran « Économie »). */
-export function resourceDeltaWhy(world: World, plan: DayPlan | null, st: StrategicState | null, r: ResourceId): WhyContent {
+export function resourceDeltaWhy(world: World, plan: DayPlan | null, st: StrategicState | null, r: ResourceId, mods: EconomyMods = NO_MODS): WhyContent {
   const day = plan?.resources[r];
   if (!day || !st) return { title: t(`res.${r}`), sections: [] };
   const sections: WhyContent["sections"] = [
@@ -416,7 +419,7 @@ export function resourceDeltaWhy(world: World, plan: DayPlan | null, st: Strateg
   if (day.overflow > 0) sections.push({ text: t("hud.overflow", { n: formatNumber(day.overflow) }) });
   if (day.shortfall > 0) sections.push({ text: t("hud.shortfall", { n: formatNumber(day.shortfall) }) });
   if (r === "gold" || r === "manpower") {
-    const m = planMonth(world, st);
+    const m = planMonth(world, st, mods);
     if (r === "gold") sections.push({ label: t("hud.month_taxes"), explained: m.taxes }, { label: t("hud.month_upkeep"), explained: m.upkeep, cost: true });
     else sections.push({ label: t("hud.month_manpower"), explained: m.manpower });
   }

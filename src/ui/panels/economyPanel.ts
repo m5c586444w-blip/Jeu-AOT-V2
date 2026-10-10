@@ -1,6 +1,7 @@
 import { t } from "../../i18n";
-import { planDay, planMonth, totals, withArmyDraws } from "../../sim/strategic/economy";
-import type { DayPlan, StrategicState } from "../../sim/strategic/economy";
+import { NO_MODS, planDay, planMonth, totals, withArmyDraws } from "../../sim/strategic/economy";
+import type { DayPlan, EconomyMods, StrategicState } from "../../sim/strategic/economy";
+import { dayEconomyMods } from "../../sim/core/state";
 import { RATIONING_LEVELS } from "../../sim/strategic/resources";
 import type { RationingLevel, ResourceId } from "../../sim/strategic/resources";
 import { resourceDeltaWhy, nationalMorale } from "../hud";
@@ -29,7 +30,8 @@ export class EconomyPanel implements Panel {
     const st = state.strategic;
     if (!st) return noPolitics(root);
     if (arg && (ECONOMY_RESOURCES as readonly string[]).concat("population").includes(arg)) this.selected = arg as Selection;
-    const plan = withArmyDraws(planDay(this.ctx.world, st, state.date), state.armies?.drawn);
+    const mods = dayEconomyMods(state, this.ctx.world);
+    const plan = withArmyDraws(planDay(this.ctx.world, st, state.date, mods), state.armies?.drawn);
     root.append(this.rationing(st));
     const md = h("div", "maitre-detail eco-vue");
     const master = h("div", "maitre");
@@ -43,7 +45,7 @@ export class EconomyPanel implements Panel {
       const trail = h("span", "eco-queue");
       trail.append(valueEl(this.ctx, formatNumber(st.stocks[r]), () => ({ title: t("hud.stock_title", { resource: t(`res.${r}`) }), sections: [{ label: t("hud.capacity"), explained: day.capacity }] }), "eco-stock"));
       const v = variation(formatSigned(diff), day.shortfall > 0 ? "rupture" : diff < 0 ? "baisse" : diff > 0 ? "hausse" : "stable");
-      this.ctx.why.bind(v, () => resourceDeltaWhy(this.ctx.world, plan, st, r));
+      this.ctx.why.bind(v, () => resourceDeltaWhy(this.ctx.world, plan, st, r, mods));
       trail.append(v);
       const item = listItem({ title: t(`res.${r}`), lead: resourceIcon(r), trail, selected: this.selected === r, onSelect: () => this.select(r) });
       item.dataset["resource"] = r;
@@ -57,7 +59,7 @@ export class EconomyPanel implements Panel {
     master.append(list);
     const detail = h("div", "detail");
     if (this.selected === "population") this.population(detail, st);
-    else this.resource(detail, st, plan, this.selected);
+    else this.resource(detail, st, plan, this.selected, mods);
     md.append(master, detail);
     root.append(md);
   }
@@ -92,7 +94,7 @@ export class EconomyPanel implements Panel {
     return box;
   }
 
-  private resource(root: HTMLElement, st: StrategicState, plan: DayPlan, r: ResourceId): void {
+  private resource(root: HTMLElement, st: StrategicState, plan: DayPlan, r: ResourceId, mods: EconomyMods = NO_MODS): void {
     const day = plan.resources[r];
     const head = h("div", "eco-detail__tete");
     head.insertAdjacentHTML("afterbegin", resourceIcon(r).replace('class="ico icone"', 'class="ico ico--l"'));
@@ -101,7 +103,7 @@ export class EconomyPanel implements Panel {
     const cap = Math.max(1, day.capacity.value);
     const stock = valueEl(this.ctx, `${formatNumber(st.stocks[r])} / ${formatNumber(day.capacity.value)}`, () => ({ title: t("hud.stock_title", { resource: t(`res.${r}`) }), sections: [{ text: t("hud.stock_text", { stock: formatNumber(st.stocks[r]), cap: formatNumber(day.capacity.value) }) }, { label: t("hud.capacity"), explained: day.capacity }] }));
     root.append(gauge(t("eco.stock"), stock, st.stocks[r] / cap, { tone: day.shortfall > 0 ? "danger" : "accent" }));
-    const net = valueEl(this.ctx, formatSigned(day.net.value), () => resourceDeltaWhy(this.ctx.world, plan, st, r), "eco-net");
+    const net = valueEl(this.ctx, formatSigned(day.net.value), () => resourceDeltaWhy(this.ctx.world, plan, st, r, mods), "eco-net");
     net.dataset["sign"] = day.shortfall > 0 ? "rupture" : day.net.value < 0 ? "baisse" : day.net.value > 0 ? "hausse" : "stable";
     const line = h("div", "kv");
     line.append(h("span", "kv__cle", t("hud.net")), net);
@@ -118,7 +120,7 @@ export class EconomyPanel implements Panel {
       root.append(explainedTable(x, { cost }));
     }
     if (r === "gold" || r === "manpower") {
-      const m = planMonth(this.ctx.world, st);
+      const m = planMonth(this.ctx.world, st, mods);
       const monthly: [string, typeof m.taxes, boolean][] = r === "gold" ? [[t("hud.month_taxes"), m.taxes, false], [t("hud.month_upkeep"), m.upkeep, true]] : [[t("hud.month_manpower"), m.manpower, false]];
       for (const [label, x, cost] of monthly) {
         root.append(sep(label));
