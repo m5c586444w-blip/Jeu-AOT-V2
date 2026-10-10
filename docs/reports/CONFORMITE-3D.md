@@ -51,3 +51,14 @@ Il reste des écarts :
 ## À faire sur ton PC (GPU réel)
 - `npm run mesure:r1d -- scenes`, `R2_PARTIES=1 npm run smoke:r2` : latences en qualités moyenne et haute.
 - Budget de 400 unités et 4 à 6 Titans sur RTX 3050 (23 §4). Mémoire < 2 Go (04 §9).
+
+## Suite : dette n° 74 corrigée (D-166)
+Bâtiments de la bataille habillés par les profils de style (façades à fenêtres et volets, enduit, pierre, brique, toits,
+cheminées) ; pavés dans la ville. `npm run verify` : « Tests  765 passed (765) », `EXIT=0` (`dette74-verify.log`) ;
+`smoke:r2` : « tout est conforme », « prêt » 5,1 s en qualité moyenne ; `smoke:r3` : « tout est conforme ».
+- **`r3-bataille-suivi-1366.png`** : caméra derrière l'escouade 05, dans une rue pavée bordée de façades à quatre étages
+  (enduit à volets ocre, pierre de taille, moellons, brique). Les capes vertes et les emblèmes se lisent.
+  - Défauts : enduit à grosses taches répétées ; repères « E » vus à travers les façades ; ciel réduit à une bande en haut.
+- **`r3-bataille-marley-1366.png`** : ligne de l'infanterie de Marley sur une grande place pavée, une façade au bord gauche.
+  - Défauts : pavés en carreaux qui se répètent au loin ; place vide (ni fontaine ni étal) ; horizon coupé net par le brouillard.
+

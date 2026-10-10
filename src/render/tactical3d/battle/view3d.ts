@@ -40,9 +40,11 @@ import type { Soldier, SoldierMaterials, SoldierPose } from "../soldier";
 import { TITAN_LARGE, TITAN_SMALL, buildTitan, setSteamTexture } from "../titan";
 import { puffTexture, skinTexture } from "../textures";
 import type { Titan, TitanPose } from "../titan";
-import { photoUrl } from "../photoTextures";
-import { buildBattleWorld } from "./world";
-import type { BattleWorld } from "./world";
+import { PHOTO_MATIERES, photoUrl } from "../photoTextures";
+import { battleProfile, buildBattleWorld } from "./world";
+import type { BattleDecorTextures, BattleWorld } from "./world";
+import { facadeSet, normalOf, roofTex } from "../texturesEnv";
+import type { RoofMaterial, WallMaterial } from "../styles";
 import { LOD, SIDE_COLORS, UNIFORM_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "./units";
 import { FigureDirector, SOLDIER_POSE, TITAN_POSE, TROOP_POSE } from "./figureState";
 import { dressMaterials, loadBodyKit } from "../bodies";
@@ -132,6 +134,8 @@ export class View3D implements BattleView {
   private world: BattleWorld | null = null;
   private layers: UnitLayers | null = null;
   private readonly mats: SoldierMaterials = battleMaterials();
+  /** Textures des façades et des toits du décor (dette n° 74), libérées au changement de carte. */
+  private readonly decorTextures: Texture[] = [];
   private readonly detail: Soldier[] = [];
   private readonly titans = new Map<number, Titan>();
   private readonly titanPrev = new Map<number, { x: number; y: number }>();
@@ -235,7 +239,41 @@ export class View3D implements BattleView {
     this.map = m;
     this.world?.dispose();
     if (this.world) this.scene.remove(this.world.group);
-    this.world = buildBattleWorld(m, this.seed);
+    // Dette n° 74 : bâtiments habillés selon le profil de style de la carte (façades à fenêtres, toits, cheminées) ; sans
+    // relief en qualité basse allégée (comme les environnements, R1d).
+    for (const t of this.decorTextures.splice(0)) t.dispose();
+    const style = battleProfile(m);
+    const facades = new Map<WallMaterial, ReturnType<typeof facadeSet>>();
+    const roofs = new Map<RoofMaterial, Texture>();
+    const keep = (t: Texture): Texture => {
+      this.decorTextures.push(t);
+      return t;
+    };
+    const textures: BattleDecorTextures = {
+      facade: (wm) => {
+        let f = facades.get(wm);
+        if (!f) {
+          f = facadeSet(this.seed, wm, style);
+          for (const t of Object.values(f)) keep(t);
+          facades.set(wm, f);
+        }
+        return f;
+      },
+      roof: (c) => {
+        let t = roofs.get(c);
+        if (!t) {
+          t = keep(roofTex(this.seed, c));
+          roofs.set(c, t);
+        }
+        return t;
+      },
+      normal: (t, k) => {
+        if (this.opts.quality === "bas") return null;
+        const n = normalOf(t, k);
+        return n ? keep(n) : null;
+      },
+    };
+    this.world = buildBattleWorld(m, this.seed, { profile: style, textures, night: this.night });
     this.scene.add(this.world.group);
     // Soleil oblique (matin, sud-est), ombre sur toute la carte.
     const c = new Vector3(m.width / 2, 0, m.height / 2);
@@ -252,8 +290,11 @@ export class View3D implements BattleView {
     sc.updateProjectionMatrix();
     this.target.copy(c);
     // Texture de sol (photo CC0 de Poly Haven), chargée après la première image ; la teinte procédurale reste le repli.
+    // Dette n° 74 : pavés dans la ville (2,5 m par carreau), terre et herbe ailleurs (4 m).
     const world = this.world;
-    new TextureLoader().load(photoUrl("forrest_ground_01", "diff"), (tex) => {
+    const paved = m.terrain === "ville";
+    const tile = paved ? 2.5 : 4;
+    new TextureLoader().load(photoUrl(paved ? PHOTO_MATIERES.pave.id : PHOTO_MATIERES.sol.id, "diff"), (tex) => {
       if (this.world !== world) {
         tex.dispose();
         return;
@@ -261,7 +302,7 @@ export class View3D implements BattleView {
       tex.colorSpace = SRGBColorSpace;
       tex.wrapS = RepeatWrapping;
       tex.wrapT = RepeatWrapping;
-      tex.repeat.set((m.width + 800) / 4, (m.height + 800) / 4);
+      tex.repeat.set((m.width + 800) / tile, (m.height + 800) / tile);
       tex.anisotropy = QUALITY[this.opts.quality].anisotropy;
       world.materials.ground.map = tex;
       world.materials.ground.color.multiplyScalar(1.6);
@@ -941,6 +982,7 @@ export class View3D implements BattleView {
   destroy(): void {
     this.ro.disconnect();
     this.world?.dispose();
+    for (const t of this.decorTextures.splice(0)) t.dispose();
     for (const t of this.titans.values()) t.dispose();
     this.scene.traverse((o) => {
       const m = o as Mesh;

@@ -35,8 +35,16 @@ describe("décor 3D dérivé de la carte de la simulation", () => {
         const k = s.kind === "arbre_geant" ? "arbre" : s.kind;
         const i = counters[k] ?? 0;
         counters[k] = i + 1;
-        if (s.kind === "batiment" || s.kind === "rocher") {
-          const mesh = byName(s.kind === "batiment" ? "batiments" : "rochers");
+        if (s.kind === "batiment") {
+          // Dette n° 74 : façades du profil de style ; emprise et hauteur mesurées sur les sommets des façades rendues.
+          const r = f as NonNullable<typeof f>;
+          expect(Math.abs(r.x0 - s.x)).toBeLessThanOrEqual(TOL);
+          expect(Math.abs(r.x1 - (s.x + s.w))).toBeLessThanOrEqual(TOL);
+          expect(Math.abs(r.y0 - s.y)).toBeLessThanOrEqual(TOL);
+          expect(Math.abs(r.y1 - (s.y + s.d))).toBeLessThanOrEqual(TOL);
+          expect(Math.abs(r.h - s.h)).toBeLessThanOrEqual(TOL);
+        } else if (s.kind === "rocher") {
+          const mesh = byName("rochers");
           const r = instanceFootprint(mesh, i);
           expect(Math.abs(r.x0 - s.x)).toBeLessThanOrEqual(TOL);
           expect(Math.abs(r.x1 - (s.x + s.w))).toBeLessThanOrEqual(TOL);
@@ -75,6 +83,31 @@ describe("décor 3D dérivé de la carte de la simulation", () => {
       w.dispose();
     });
   }
+});
+
+describe("décor 3D habillé par les profils de style (dette n° 74)", () => {
+  it("ville : façades à fenêtres par matière, toits par couverture, cheminées ; profil E02 ; teintes du profil", () => {
+    const b = battleOn("tmap_ville");
+    const w = buildBattleWorld(b.map, 11);
+    expect(w.profile.id).toBe("E02");
+    const names = w.group.children.map((o) => o.name);
+    expect(names.some((n) => n.startsWith("facades-etages-")), names.join(",")).toBe(true);
+    expect(names.some((n) => n.startsWith("facades-rdc-"))).toBe(true);
+    expect(names.some((n) => n.startsWith("toits-"))).toBe(true);
+    expect(names).toContain("cheminees");
+    // Plus de boîtes unies : aucune pièce « batiments » ni « toits » instanciée.
+    expect(names).not.toContain("batiments");
+    // Au moins deux matières de façade et deux couvertures dans une ville de compagnie (variété du profil).
+    expect(new Set(names.filter((n) => n.startsWith("facades-")).map((n) => n.split("-").pop())).size).toBeGreaterThanOrEqual(2);
+    expect(names.filter((n) => n.startsWith("toits-")).length).toBeGreaterThanOrEqual(2);
+    w.dispose();
+  });
+
+  it("profils par carte : plaine → village agricole, forêt → bois (ou repli), mur → district", () => {
+    expect(buildBattleWorld(battleOn("tmap_mur").map, 11).profile.id).toBe("E02");
+    expect(["E11", "E02"]).toContain(buildBattleWorld(battleOn("tmap_plaine").map, 11).profile.id);
+    expect(["E15", "E02"]).toContain(buildBattleWorld(battleOn("tmap_foret").map, 11).profile.id);
+  });
 });
 
 describe("unités : géométries et niveaux de détail", () => {

@@ -4,7 +4,7 @@
 
 ## Index
 
-165 décisions, de D-01 (2026-10-02) à D-165 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+166 décisions, de D-01 (2026-10-02) à D-166 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -171,6 +171,7 @@
 - **D-163** (10-10) — Style des soldats fidèle à l'univers (décision de l'utilisateur)
 - **D-164** (10-10) — PACK.1 : Electron plutôt que Tauri
 - **D-165** (10-10) — Dette n° 72 : uniformes des soldats selon l'œuvre, critère de silhouette par famille
+- **D-166** (10-10) — Dette n° 74 : décor de la bataille habillé par les profils de style
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1607,3 +1608,18 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Reste ouvert** (dette n° 72) : tenues sombres de 854, équipement anti-personnel et lances de foudre, cérémonies en jeu
   (hors planche), capuche liée à une météo de bataille (la bataille n'en a pas), semelles et talons des bottes.
 - **Réversible** : oui (`data/art/figures_r3.json`, `src/render/tactical3d/`).
+
+## 2026-10-10 — D-166 Dette n° 74 : décor de la bataille habillé par les profils de style
+- **Constat** (contrôle de conformité de la 3D) : les bâtiments de la bataille temps réel étaient des boîtes unies à toit à
+  deux pans, loin de la priorité « scènes et environnements réalistes et travaillés » (CLAUDE.md, R1c).
+- **Décision** : chaque bâtiment de la carte de la simulation est habillé par les générateurs des environnements (R1b–R1d) :
+  matière et teinte de façade, fenêtres par étage (allumées la nuit), couverture et forme du toit, cheminées, d'après un
+  profil de `data/art/styles.json` choisi par la carte (A) : ville et mur → E02 (district planifié du mur Rose), plaine →
+  E11 (village agricole), forêt → E15 (repli E02 sans matières). Murs à l'emprise et à la hauteur exactes de la simulation
+  (mesurées sur les sommets rendus, ± 0,1 m, test) ; avant-toit de 0,45 m ; faces fusionnées par matière. Sol de la ville :
+  pavés (photo CC0 de Poly Haven déjà au manifeste, 2,5 m par carreau). Sans relief en qualité basse allégée.
+- **Mesure** (rendu logiciel, `smoke:r2`) : « prêt » 5,1 s en qualité moyenne à 1366×768, 191 appels de dessin ; aucune
+  optimisation pour le rendu logiciel (consigne R1e).
+- **Reste** : pas de mur autour de la « Ville des Murs » (dette n° 55) ; lieux faits main non raccordés (n° 7).
+- **Réversible** : oui (`src/render/tactical3d/battle/world.ts`, `view3d.ts`).
+

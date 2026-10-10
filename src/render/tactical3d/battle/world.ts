@@ -1,14 +1,44 @@
-import { Box3, BoxGeometry, BufferAttribute, BufferGeometry, Color, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
-import type { Material, Object3D, Texture } from "three";
+import { Box3, BoxGeometry, Color, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
+import type { BufferGeometry, Material, Object3D, Texture } from "three";
 import type { Structure, TacticalWorldMap } from "../../../sim/tactical/map";
 import { derive, range, seeded } from "../rng";
+import { addBuilding, emptyBuilders } from "../meshBuildings";
+import type { BuildingBuilders } from "../meshBuildings";
+import type { StyledBuilding } from "../envTypes";
+import { facadeColor, profile as styleProfile, roofColor } from "../styles";
+import type { RoofMaterial, StyleProfile, WallMaterial } from "../styles";
+import { pickWeighted, roofShape } from "../styling";
+import type { FaceBuilder } from "../townMesh";
 
 /**
  * Décor de la bataille 3D (R2+), DÉRIVÉ de la carte de la simulation (jamais l'inverse) : chaque structure (bâtiment,
  * arbre, arbre géant, rocher, mur) devient une géométrie de même emprise au sol ; chaque ancrage est un crochet visible.
  * Repère : x de la carte → X, y de la carte → Z (vers le sud), hauteur → Y.
  * Instanciation : une instance par structure dans un maillage par genre (peu d'appels de dessin, quelle que soit la ville).
+ * Dette n° 74 : les bâtiments sont habillés par les générateurs des environnements (R1b–R1d) selon un profil de style
+ * (`data/art/styles.json`) : matière et teinte des façades, fenêtres par étage, couverture et forme du toit, cheminées ; murs
+ * à l'emprise et à la hauteur exactes de la simulation (les crochets des façades y restent posés). Faces fusionnées par matière.
  */
+
+/** Textures des façades et des toits (navigateur) ; absentes sous Node, les teintes passent par les sommets. */
+export interface BattleDecorTextures {
+  facade(m: WallMaterial): { upper: Texture; upperLit: Texture; ground: Texture; groundLit: Texture; plain: Texture };
+  roof(c: RoofMaterial): Texture;
+  normal(t: Texture | null, strength: number): Texture | null;
+}
+
+/**
+ * Profil de style du décor selon la carte (A) : ville et mur → district planifié du mur Rose (E02) ; plaine → village
+ * agricole (E11) ; forêt → bois et forêts ordinaires (E15) ; repli sur E02 si le profil n'a ni matières ni toits.
+ */
+export function battleProfile(m: Pick<TacticalWorldMap, "terrain">): StyleProfile {
+  const id = m.terrain === "plaine" ? "E11" : m.terrain === "foret" ? "E15" : "E02";
+  const p = styleProfile(id);
+  const has = (w: Partial<Record<string, number>>): boolean => Object.entries(w).some(([k, v]) => (v ?? 0) > 0 && k !== "aucun" && k !== "toile");
+  return has(p.materiaux) && has(p.toits) ? p : styleProfile("E02");
+}
+
+const LEGACY: Record<WallMaterial, 0 | 1 | 2> = { colombage: 0, enduit: 0, bois: 0, pierre_taillee: 1, pierre_brute: 1, brique: 2 };
 
 export interface Footprint {
   id: number;
@@ -29,23 +59,12 @@ export interface BattleWorld {
   /** Maillage des crochets (une instance par ancrage de la simulation). */
   anchors: InstancedMesh;
   ground: Mesh;
-  materials: { ground: MeshStandardMaterial; wall: MeshStandardMaterial; roof: MeshStandardMaterial; stone: MeshStandardMaterial };
+  materials: { ground: MeshStandardMaterial; stone: MeshStandardMaterial };
+  /** Matériaux des fenêtres (carte d'émission : allumées la nuit). */
+  windows: MeshStandardMaterial[];
+  /** Profil de style des bâtiments. */
+  profile: StyleProfile;
   dispose(): void;
-}
-
-/** Prisme de toit à deux pans : base 1 × 1 (centrée), faîtage le long de X, hauteur 1, posé sur y = 0. */
-function roofGeometry(): BufferGeometry {
-  const p = [
-    // pan sud et pan nord
-    -0.5, 0, 0.5, 0.5, 0, 0.5, 0.5, 1, 0, -0.5, 0, 0.5, 0.5, 1, 0, -0.5, 1, 0,
-    0.5, 0, -0.5, -0.5, 0, -0.5, -0.5, 1, 0, 0.5, 0, -0.5, -0.5, 1, 0, 0.5, 1, 0,
-    // pignons
-    -0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 1, 0, 0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 1, 0,
-  ];
-  const g = new BufferGeometry();
-  g.setAttribute("position", new BufferAttribute(new Float32Array(p), 3));
-  g.computeVertexNormals();
-  return g;
 }
 
 const M = new Matrix4();
@@ -61,7 +80,7 @@ function place(mesh: InstancedMesh, i: number, x: number, y: number, z: number, 
 }
 
 /** Construit le décor d'une carte. `ground` : texture de sol facultative (photo), répétée tous les `tile` m. */
-export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { groundTex?: Texture | null; tile?: number; night?: boolean } = {}): BattleWorld {
+export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { groundTex?: Texture | null; tile?: number; night?: boolean; profile?: StyleProfile; textures?: BattleDecorTextures | null } = {}): BattleWorld {
   const rand = seeded(derive(seed, 2041));
   const group = new Group();
   group.name = "decor-bataille";
@@ -92,42 +111,102 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     group.add(e);
   }
 
-  const wallMat = new MeshStandardMaterial({ color: 0xb8ab90, roughness: 0.9, vertexColors: false });
-  const roofMat = new MeshStandardMaterial({ color: 0x8a4b36, roughness: 0.8, side: DoubleSide });
   const stoneMat = new MeshStandardMaterial({ color: 0x9a968a, roughness: 0.95 });
   const barkMat = new MeshStandardMaterial({ color: 0x4e3b2a, roughness: 1 });
   const leafMat = new MeshStandardMaterial({ color: terrain === "foret" ? 0x3b5a2c : 0x4a6b33, roughness: 0.9, flatShading: true });
   const rockMat = new MeshStandardMaterial({ color: 0x7d7a72, roughness: 1, flatShading: true });
   const footprints: Footprint[] = [];
   const by = (k: Structure["kind"]): Structure[] => m.structures.filter((s) => s.kind === k);
+  const decorMats: Material[] = [];
+  const windows: MeshStandardMaterial[] = [];
+  const style = opts.profile ?? battleProfile(m);
+  const tx = opts.textures ?? null;
 
-  // Bâtiments : murs (boîte exacte, hauteur de la simulation : les crochets des façades y sont posés) et toit à deux pans
-  // au-dessus, dans l'emprise (pas de débord : l'emprise rendue = celle de la simulation).
+  // Bâtiments (dette n° 74) : maisons du profil de style, murs à l'emprise et à la hauteur de la simulation ; toit au-dessus
+  // (débord d'avant-toit de 0,45 m). L'emprise retenue est mesurée sur les sommets des façades rendues.
   const houses = by("batiment");
   if (houses.length > 0) {
-    const box = new BoxGeometry(1, 1, 1).translate(0, 0.5, 0);
-    const walls = new InstancedMesh(box, wallMat, houses.length);
-    const roofs = new InstancedMesh(roofGeometry(), roofMat, houses.length);
-    walls.name = "batiments";
-    roofs.name = "toits";
-    houses.forEach((s, i) => {
-      const roofH = Math.min(s.w, s.d) * range(rand, 0.22, 0.34);
-      const wallH = s.h;
-      place(walls, i, s.x + s.w / 2, 0, s.y + s.d / 2, s.w, wallH, s.d);
-      // Faîtage le long du grand côté.
-      if (s.w >= s.d) place(roofs, i, s.x + s.w / 2, wallH, s.y + s.d / 2, s.w, roofH, s.d);
-      else place(roofs, i, s.x + s.w / 2, wallH, s.y + s.d / 2, s.d, roofH, s.w, Math.PI / 2);
-      const c = new Color().setHSL(0.09 + rand() * 0.04, 0.18 + rand() * 0.1, 0.62 + rand() * 0.12);
-      walls.setColorAt(i, c);
-      roofs.setColorAt(i, new Color().setHSL(0.03 + rand() * 0.03, 0.35 + rand() * 0.15, 0.32 + rand() * 0.1));
-      footprints.push({ id: s.id, kind: s.kind, x0: s.x, x1: s.x + s.w, y0: s.y, y1: s.y + s.d, r: 0, h: s.h });
-    });
-    for (const x of [walls, roofs]) {
-      x.castShadow = true;
-      x.receiveShadow = true;
-      x.instanceMatrix.needsUpdate = true;
-      group.add(x);
+    const out: BuildingBuilders = emptyBuilders();
+    const textured = tx !== null;
+    for (const s of houses) {
+      const material = pickWeighted<WallMaterial>(rand, style.materiaux);
+      const cover = pickWeighted<RoofMaterial>(rand, style.toits, ["aucun", "toile"]);
+      const shape = roofShape(rand, cover);
+      const floors = Math.max(1, Math.round(s.h / 3.2));
+      const b: StyledBuilding = {
+        id: s.id,
+        block: 0,
+        x: s.x + s.w / 2,
+        y: s.y + s.d / 2,
+        angle: 0,
+        width: s.w,
+        depth: s.d,
+        floors,
+        floorHeight: s.h / floors,
+        roof: shape.roof,
+        pitch: shape.pitch,
+        ridgeAlongFront: s.w >= s.d,
+        wall: LEGACY[material],
+        roofColor: 0,
+        tint: range(rand, 0.84, 1),
+        chimneys: rand() < 0.7 ? [{ u: range(rand, -0.3, 0.3) * s.w, v: range(rand, -0.15, 0.15) * s.d, height: range(rand, 0.8, 1.6) }] : [],
+        bays: Math.max(1, Math.round(s.w / 3.2)),
+        sideBays: Math.max(1, Math.round(s.d / 3.2)),
+        material,
+        cover,
+        wallHex: facadeColor(style, material),
+        roofHex: roofColor(style, cover),
+        trimHex: style.palette.bois,
+        stoneHex: style.palette.pierre,
+        ruin: 0,
+        base: 0,
+        plinth: 0,
+      };
+      const facades = (): FaceBuilder[] => [out.ground.get(material), out.upper.get(material)].filter((f): f is FaceBuilder => f !== undefined);
+      const before = new Map(facades().map((f) => [f, f.pos.length]));
+      addBuilding(out, b, textured, seed);
+      const box = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity, h: 0 };
+      for (const f of facades()) {
+        for (let i = before.get(f) ?? 0; i < f.pos.length; i += 3) {
+          const x = f.pos[i] as number;
+          const y = f.pos[i + 1] as number;
+          const z = f.pos[i + 2] as number;
+          box.x0 = Math.min(box.x0, x);
+          box.x1 = Math.max(box.x1, x);
+          box.y0 = Math.min(box.y0, z);
+          box.y1 = Math.max(box.y1, z);
+          box.h = Math.max(box.h, y);
+        }
+      }
+      footprints.push({ id: s.id, kind: s.kind, x0: box.x0, x1: box.x1, y0: box.y0, y1: box.y1, r: 0, h: box.h });
     }
+    const add = (fb: FaceBuilder | undefined, mat: MeshStandardMaterial, name: string): void => {
+      decorMats.push(mat);
+      if (!fb || fb.pos.length === 0) return;
+      const mesh = new Mesh(fb.build(), mat);
+      mesh.name = name;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      group.add(mesh);
+    };
+    const walls = new Set<WallMaterial>([...out.ground.keys(), ...out.upper.keys(), ...out.plain.keys()]);
+    for (const wm of [...walls].sort()) {
+      const set = tx?.facade(wm) ?? null;
+      const mk = (map: Texture | null, lit: Texture | null): MeshStandardMaterial =>
+        new MeshStandardMaterial({ map, normalMap: tx?.normal(map, 1.6) ?? null, emissiveMap: lit, emissive: lit ? new Color(1, 1, 1) : new Color(0, 0, 0), emissiveIntensity: lit && opts.night ? 0.85 : 0, vertexColors: true, roughness: 0.9 });
+      const up = mk(set?.upper ?? null, set?.upperLit ?? null);
+      const gr = mk(set?.ground ?? null, set?.groundLit ?? null);
+      if (set) windows.push(up, gr);
+      add(out.upper.get(wm), up, `facades-etages-${wm}`);
+      add(out.ground.get(wm), gr, `facades-rdc-${wm}`);
+      add(out.plain.get(wm), new MeshStandardMaterial({ map: set?.plain ?? null, normalMap: tx?.normal(set?.plain ?? null, 1.6) ?? null, vertexColors: true, roughness: 0.92 }), `murs-aveugles-${wm}`);
+    }
+    for (const [c, fb] of [...out.roofs.entries()].sort((x, y) => x[0].localeCompare(y[0]))) {
+      const map = tx?.roof(c) ?? null;
+      add(fb, new MeshStandardMaterial({ map, normalMap: tx?.normal(map, 2.4) ?? null, vertexColors: true, roughness: c === "ardoise" ? 0.6 : 0.85, side: DoubleSide }), `toits-${c}`);
+    }
+    add(out.stone, new MeshStandardMaterial({ vertexColors: true, roughness: 0.95, side: DoubleSide }), "cheminees");
+    add(out.wood, new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), "bois");
   }
   // Mur (et autres boîtes de maçonnerie) : parement de pierre.
   for (const s of by("mur")) {
@@ -183,13 +262,15 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
   m.anchors.forEach((a, i) => place(anchors, i, a.x, a.z, a.y, 1, 1, 1));
   anchors.instanceMatrix.needsUpdate = true;
   group.add(anchors);
-  const mats: Material[] = [groundMat, edgeMat, wallMat, roofMat, stoneMat, barkMat, leafMat, rockMat, anchorMat];
+  const mats: Material[] = [groundMat, edgeMat, stoneMat, barkMat, leafMat, rockMat, anchorMat, ...decorMats];
   return {
     group,
     footprints,
     anchors,
     ground,
-    materials: { ground: groundMat, wall: wallMat, roof: roofMat, stone: stoneMat },
+    materials: { ground: groundMat, stone: stoneMat },
+    windows,
+    profile: style,
     dispose(): void {
       group.traverse((o) => {
         const g = (o as Mesh).geometry as BufferGeometry | undefined;

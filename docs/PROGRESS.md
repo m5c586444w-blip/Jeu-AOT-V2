@@ -4,8 +4,8 @@
 |---|---|
 | Phase | **PACK terminée** (application Windows Electron : `npm run package:win`, `smoke:pack` ; D-164). Feuille de route V2 achevée (N1 à N3). Suite : dette n° 72 (tenues des soldats, demande de l'utilisateur) et contrôle de conformité de la 3D, puis dettes. |
 | Tâche | Contrôle de conformité de la 3D fait (`docs/reports/CONFORMITE-3D.md` : non conforme en entier ; écarts en dettes n° 74 et 75) ; dettes |
-| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 763 tests (`docs/reports/dette72-verify.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : dette n° 74 (décor de la bataille habillé par les générateurs de R1b–R1d), puis n° 75, puis autres dettes, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
+| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 765 tests (`docs/reports/dette74-verify.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : dette n° 75 (bâtiment translucide au survol, icônes au-dessus des escouades), puis autres dettes, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
