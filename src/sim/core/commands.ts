@@ -34,6 +34,8 @@ import { atWar } from "../world/nations";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
 import type { ArmyCommand } from "../armies/layer";
+import { assaultProblem, launchAssault, setStance } from "../crisis/rumbling";
+import type { RumblingStance } from "../crisis/rumbling";
 
 export const MAX_ADVANCE_DAYS = 3650;
 
@@ -71,6 +73,8 @@ export type Command =
   | { type: "Ultimatum"; to: string; province: string }
   | { type: "Embargo"; to: string; on: boolean }
   | { type: "GuaranteeHizuru" }
+  | { type: "RumblingStance"; stance: RumblingStance }
+  | { type: "RumblingAssault" }
   | ArmyCommand
   | MissionCommand
   | { type: "Noop" };
@@ -178,6 +182,10 @@ export function validateCommand(cmd: unknown): Validation {
     case "Embargo":
       return typeof c["to"] === "string" && typeof c["on"] === "boolean" ? { ok: true } : { ok: false, error: "Embargo invalide" };
     case "GuaranteeHizuru":
+      return { ok: true };
+    case "RumblingStance":
+      return c["stance"] === "empecher" || c["stance"] === "retarder" || c["stance"] === "laisser" ? { ok: true } : { ok: false, error: "RumblingStance.stance doit valoir empecher, retarder ou laisser" };
+    case "RumblingAssault":
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -288,6 +296,23 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       break;
     case "Noop":
       break;
+    case "RumblingStance":
+    case "RumblingAssault": {
+      // Grondement (P9.4) : posture du joueur (E59) ; assaut contre le Fondateur quand la préparation est complète.
+      if (!next.rumbling || !world?.rumbling || !next.strategic) throw new Error("rumbling.absent");
+      const rb = structuredClone(next.rumbling);
+      if (cmd.type === "RumblingStance") {
+        setStance(rb, cmd.stance);
+        next = { ...next, rumbling: rb };
+      } else {
+        const problem = assaultProblem(rb);
+        if (problem) throw new Error(problem);
+        const st = structuredClone(next.strategic);
+        launchAssault(world.rumbling, rb, st, next.seed, next.date);
+        next = { ...next, rumbling: rb, strategic: st };
+      }
+      break;
+    }
     case "StartMission":
     case "CancelMission":
       next = applyMissionCommand(next, cmd, world);

@@ -31,6 +31,7 @@ import type { ArmiesState } from "../armies/state";
 import { tickArmies } from "../armies/layer";
 import { techModsWithMissions, tickMissions, withMissionMods } from "../missions/missions";
 import type { MissionsState } from "../missions/missions";
+import { createRumblingState, tickRumbling } from "../crisis/rumbling";
 import type { RumblingState } from "../crisis/rumbling";
 import type { DifficultyId } from "../../data/endingSchemas";
 
@@ -97,6 +98,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
     ...(world?.armies ? { armies: createArmiesState(world, world.scenario.start) ?? undefined } : {}),
     ...(world?.difficulty ? { difficulty: world.difficulty } : {}),
+    ...(world?.rumbling ? { rumbling: createRumblingState() } : {}),
   });
 }
 
@@ -123,6 +125,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let nations = state.nations;
   let armies = state.armies;
   let missions = state.missions;
+  let rumbling = state.rumbling;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
@@ -210,6 +213,14 @@ export function tickDay(state: GameState, world?: World): GameState {
         missions = c.ms;
       }
     }
+    // Grondement (P9.4) : couche facultative, présente seulement dans son scénario.
+    if (rumbling && world.rumbling) {
+      rumbling = structuredClone(rumbling);
+      strategic = structuredClone(strategic);
+      if (politics) politics = structuredClone(politics);
+      if (nations) nations = structuredClone(nations);
+      tickRumbling({ rw: world.rumbling, rb: rumbling, ns: nations, st: strategic, pol: politics, date });
+    }
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -222,5 +233,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}), ...(missions ? { missions } : {}) };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}), ...(missions ? { missions } : {}), ...(rumbling ? { rumbling } : {}) };
 }

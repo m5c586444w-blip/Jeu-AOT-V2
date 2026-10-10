@@ -1,0 +1,26 @@
+{
+  "canon": "?",
+  "note": "Grondement (P9.4) : aucune durée ni aucun chiffre officiel sûr (01 §2 : « jusqu'en 857 » de seconde main ; 11 §9) : paramètres de jeu, à valider. Poids d'une province = industrie + vivres + effectifs (A).",
+  "jours_par_province": 2.5,
+  "posture": {
+    "empecher": 1.0,
+    "retarder": 0.6,
+    "laisser": 1.15
+  },
+  "assaut": {
+    "par_jour": 1.6,
+    "bonus_traite": 0.5,
+    "chance": 0.35,
+    "chance_par_echec": 0.15,
+    "recul_echec": 45,
+    "effectifs_perdus_echec": 0.04
+  },
+  "morts_par_poids": 40000,
+  "evacues_par_jour": 15000,
+  "ruine_nation": 0.25,
+  "paradis": {
+    "legitimite_par_jour_laisser": -0.08,
+    "stabilite_par_jour_empecher": -0.04
+  },
+  "terme_jours": 150
+}

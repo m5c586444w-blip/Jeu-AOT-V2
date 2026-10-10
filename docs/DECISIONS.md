@@ -1230,3 +1230,23 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Choix** : `posOf` renvoie toujours une copie. Aucun effet sur les empreintes (la simulation n'est pas modifiée ; le test
   `r3-etats` vérifie que la bataille lue par le directeur d'états reste identique à la bataille témoin).
 - **Réversible** : non (correctif).
+
+## 2026-10-10 — D-151 P9 : fins de partie et difficultés lues ou appliquées hors de l'état
+- **Fins (P9.1)** : objectifs et défaites par scénario et par camp (`data/balance/endings.json`, `A`) ; l'évaluation lit l'état
+  sans jamais l'écrire (`src/sim/ending/ending.ts`) : aucune empreinte ne bouge. Un événement ne compte que s'il est « survenu ».
+  À la fin, l'interface arrête le temps et ouvre l'épilogue ; la partie peut continuer librement.
+- **Difficultés (P9.3)** : quatre niveaux (`data/balance/difficulty.json`, `A`) appliqués sur une copie de la source du monde au
+  chargement ; « normal » rend la source inchangée (empreintes identiques). Choisie au menu, gardée dans la sauvegarde.
+- **Réversible** : oui (données).
+
+## 2026-10-10 — D-152 P9.4 : le Grondement, crise systémique et non « mode ultime »
+- **Cadre** : 01 §9 (crise à conséquences réelles), 03 §8 (pas de bataille classique), 12 E59–E60 (empêcher, retarder,
+  laisser). Scénario `scn_grondement` (854, Paradis seul jouable, `A`) ; couche d'état facultative `rumbling` absente ailleurs.
+- **Modèle `?`** (`data/balance/rumbling.json`, question ouverte Q14) : le front parcourt les provinces de terre du monde hors de
+  Paradis en largeur depuis l'île (ordre fixe, mers traversées sans être comptées) ; part ravagée pondérée par industrie + vivres
+  + effectifs ; la nation qui tenait la province perd industrie et effectifs. Posture : empêcher (prépare l'assaut, inquiète
+  l'île), retarder (front ralenti, évacuations, pas d'assaut), laisser (front plus rapide, légitimité qui s'érode). Assaut :
+  tirage déterministe (graine, jour, tentative), chance croissante après chaque échec, échec coûteux.
+- **Aucun chiffre de l'œuvre** : durée, morts et allures sont des ordres de grandeur de réglage, dits comme tels dans l'interface.
+- **Fins** : victoire si arrêté avec moins de 30 % du monde ravagé et l'île tenue ; défaite à 80 % ; issue mitigée au terme.
+- **Réversible** : oui (données ; la couche est facultative).

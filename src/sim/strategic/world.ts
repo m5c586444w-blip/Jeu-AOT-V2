@@ -3,7 +3,9 @@ import type { GeoData, GeoZone } from "../../data/geo";
 import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
 import type { Building, Character, EventDef, Law, NameList, Organisation, Province, Role, Faction, Formation, Scenario, Shifter, Stratum, TacticalMap, WorldProvince, Tech, TitanClass, TitanType, Trait, Unit } from "../../data/schemas";
-import type { DifficultyBalance, DifficultyId, EndingRules, EndingsBalance } from "../../data/endingSchemas";
+import type { DifficultyBalance, DifficultyId, EndingRules, EndingsBalance, RumblingBalance } from "../../data/endingSchemas";
+import { rumblingWorld } from "../crisis/rumbling";
+import type { RumblingWorld } from "../crisis/rumbling";
 import { applyDifficulty } from "./difficulty";
 
 /** Monde statique (données validées) : ne fait pas partie de la sauvegarde, il est rechargé depuis /data. */
@@ -38,6 +40,8 @@ export interface World {
   endings?: readonly EndingRules[];
   /** P9 : difficulté appliquée (absente : « normal », monde des données). */
   difficulty?: DifficultyId;
+  /** P9.4 : Grondement (scénario au drapeau `grondement`, avec la couche des nations). */
+  rumbling?: RumblingWorld;
 }
 
 export interface MissionsWorld {
@@ -146,6 +150,7 @@ export interface WorldSource {
   /** P9 : fins de partie et difficultés (`data/balance/endings.json`, `difficulty.json`). */
   endings?: EndingsBalance;
   difficulty?: DifficultyBalance;
+  rumblingBalance?: RumblingBalance;
   provinces: readonly Province[];
   buildings: readonly Building[];
   scenarios: readonly Scenario[];
@@ -248,7 +253,7 @@ export function buildWorld(source: WorldSource, scenarioId: string, opts: { diff
   const armies = buildArmiesWorld(src, scenarioId, military !== null);
   const missions = buildMissionsWorld(src, scenarioId);
   const endings = (src.endings?.fins ?? []).filter((r) => r.scenario === scenarioId);
-  return {
+  const built: World = {
     ...(armies ? { armies } : {}),
     ...(missions ? { missions } : {}),
     ...(endings.length > 0 ? { endings } : {}),
@@ -274,6 +279,9 @@ export function buildWorld(source: WorldSource, scenarioId: string, opts: { diff
         ? { balance: src.worldBalance, provinces: new Map(src.worldProvinces.map((p) => [p.id, p])), order: src.worldProvinces, factions: new Map(src.factions.map((f) => [f.id, f])), formations: new Map((src.formations ?? []).map((f) => [f.id, f])) }
         : null,
   };
+  // P9.4 : le Grondement n'existe que dans un scénario qui le déclare (drapeau `grondement`) et qui a la couche des nations.
+  const rw = scenario.flags?.["grondement"] && src.rumblingBalance ? rumblingWorld(built, src.rumblingBalance) : null;
+  return rw ? { ...built, rumbling: rw } : built;
 }
 
 const preds = (e: EventDef): string[] => (e.window.after === null ? [] : Array.isArray(e.window.after) ? e.window.after : [e.window.after]);

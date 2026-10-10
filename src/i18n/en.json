@@ -88,5 +88,11 @@
   "diff.recit_why": "To follow the story: stronger production, fewer Titans, less enterprising enemies.",
   "diff.normal_why": "The world as the data describes it.",
   "diff.rude_why": "Less food, more Titans, more aggressive enemies and heavier losses.",
-  "diff.breche_why": "Everything is scarce: production down a quarter, far more Titans, relentless enemies."
+  "diff.breche_why": "Everything is scarce: production down a quarter, far more Titans, relentless enemies.",
+  "alert.rumbling_province": "The Rumbling ravages {province} ({part}% of the world struck).",
+  "alert.rumbling_stopped": "The Founder is neutralised: the Rumbling stops ({part}% of the world ravaged).",
+  "alert.rumbling_assault_failed": "The assault on the Founder failed (attempt {n}); losses are heavy.",
+  "fin.obj.grondement_arrete": "Stop the Rumbling",
+  "fin.obj.grondement_limite": "Limit the devastation (under 30% of the world)",
+  "fin.def.monde_ravage": "the world is ravaged"
 }

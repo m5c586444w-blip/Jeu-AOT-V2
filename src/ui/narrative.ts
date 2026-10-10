@@ -3,6 +3,7 @@ import type { GameState } from "../sim/core/state";
 import { fromAbsoluteDay } from "../sim/core/time";
 import type { World } from "../sim/strategic/world";
 import type { BattleState, SoldierUnit } from "../sim/tactical/types";
+import { formatNumber } from "./why";
 
 /**
  * Récits tirés de l'état (P8 ; 04 §5.10, §5.12, §5.15) : gazette de la nation jouée, lettres aux familles, épilogue.
@@ -95,6 +96,14 @@ export function epilogue(world: World, s: GameState): Epilogue {
     lines.push(t(`narr.epi.hizuru.${ns.hizuruSide}`));
     for (const w of ns.wars) lines.push(t("narr.epi.war", { a: t(world.nations?.factions.get(w.split("|")[0] ?? "")?.name_key ?? ""), b: t(world.nations?.factions.get(w.split("|")[1] ?? "")?.name_key ?? "") }));
   }
+  // Grondement (P9.4) : issue de la crise et posture choisie.
+  const rb = s.rumbling;
+  if (rb) {
+    const part = Math.round(rb.ravaged * 100);
+    if (rb.stopped) lines.push(t("narr.epi.rumbling_stopped", { n: rb.attempts, part }));
+    else lines.push(part === 0 ? t("narr.epi.rumbling_started") : t("narr.epi.rumbling_running", { part }));
+    if (rb.stance) lines.push(t(`narr.epi.rumbling_stance.${rb.stance}`));
+  }
   // Aucun « 0 » par défaut (R0.2g) : une donnée dont la couche manque est masquée ; un compte encore nul s'affiche « — ».
   const count = (n: number): number | string => (n === 0 ? "—" : n);
   const stats: Epilogue["stats"] = [{ key: "narr.stat.days", value: count(days) }];
@@ -107,5 +116,10 @@ export function epilogue(world: World, s: GameState): Epilogue {
     stats.push({ key: "narr.stat.divergence", value: count(Math.round(ev.divergence * 100) / 100) });
   }
   if (s.military) stats.push({ key: "narr.stat.expeditions", value: count(s.military.reports.length) });
+  if (rb) {
+    stats.push({ key: "narr.stat.ravaged", value: count(Math.round(rb.ravaged * 100)) });
+    stats.push({ key: "narr.stat.rumbling_dead", value: rb.dead > 0 ? formatNumber(rb.dead) : "—" });
+    if (rb.evacuated > 0) stats.push({ key: "narr.stat.evacuated", value: formatNumber(rb.evacuated) });
+  }
   return { title: t("narr.epi.title", { year: s.date.year }), lines, stats };
 }

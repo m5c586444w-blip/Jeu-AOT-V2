@@ -72,4 +72,23 @@ describe("récits (AC8-07, 04 §5.10, §5.12, §5.15)", () => {
     expect(start.stats.find((x) => x.key === "narr.stat.events")?.value).toBe("—");
     expect(start.stats.find((x) => x.key === "narr.stat.legitimacy")?.value).toBe(52);
   });
+
+  it("P9.4 : l'épilogue du Grondement dit l'issue de la crise, la posture et la part du monde ravagée", () => {
+    const wg = loadWorld("data", "scn_grondement");
+    const s0 = createInitialState(4, wg);
+    const first = epilogue(wg, s0);
+    expect(first.lines).toContain(fr["narr.epi.rumbling_started"]);
+    expect(first.stats.find((x) => x.key === "narr.stat.ravaged")?.value).toBe("—");
+    let s = applyCommand(s0, { type: "RumblingStance", stance: "retarder" }, undefined, wg);
+    s = applyCommand(s, { type: "AdvanceDays", n: 30 }, undefined, wg);
+    const e = epilogue(wg, s);
+    const text = e.lines.join(" ");
+    expect(text).toContain(fr["narr.epi.rumbling_stance.retarder"]);
+    expect(noRawKey(text)).toEqual([]);
+    const part = Math.round((s.rumbling?.ravaged ?? 0) * 100);
+    expect(part).toBeGreaterThan(0);
+    expect(e.stats.find((x) => x.key === "narr.stat.ravaged")?.value).toBe(part);
+    expect(e.stats.find((x) => x.key === "narr.stat.evacuated")).toBeDefined();
+    for (const x of e.stats) expect(String(x.value), x.key).not.toBe("0");
+  });
 });

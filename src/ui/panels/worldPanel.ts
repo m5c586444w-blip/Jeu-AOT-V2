@@ -6,6 +6,8 @@ import { fromAbsoluteDay } from "../../sim/core/time";
 import { nationIncome, nationUpkeep, ownerOf } from "../../sim/world/nations";
 import type { NationsState } from "../../sim/world/nations";
 import { projectProblem, SIDE_TO_FACTION } from "../../sim/world/war";
+import { assaultProblem } from "../../sim/crisis/rumbling";
+import type { RumblingStance } from "../../sim/crisis/rumbling";
 import { button, el, valueEl } from "./common";
 import type { Panel, PanelContext } from "./common";
 import { formatNumber } from "../why";
@@ -67,10 +69,69 @@ export class WorldPanel implements Panel {
       this.view = drawWorldAtlas(canvas, this.atlas, this.selected);
       canvas.dataset["drawn"] = String(this.atlas.length);
     });
-    // Colonne de droite (R0.2d) : la province choisie, puis les Titans, les fronts et le journal, à côté de l'atlas.
+    // Colonne de droite (R0.2d) : la crise du Grondement s'il y en a une, la province choisie, puis les Titans, les fronts et le
+    // journal, à côté de l'atlas.
+    side.append(...this.rumbling(s));
     if (this.selected) side.append(...this.province(s, ns, me, this.selected));
     else side.append(el("p", "registre-note", t("world.pick_province")));
     side.append(...this.titans(s, ns, me), ...this.fronts(ns), ...this.log(ns));
+  }
+
+  /** Crise du Grondement (P9.4 ; E59–E60) : part du monde ravagée, posture, préparation et lancement de l'assaut. */
+  private rumbling(s: GameState): HTMLElement[] {
+    const rb = s.rumbling;
+    const rw = this.ctx.world.rumbling;
+    if (!rb || !rw) return [];
+    const box = el("section", "crise-grondement");
+    box.dataset["stopped"] = String(rb.stopped);
+    box.append(el("h3", "registre-intertitre", t("rumbling.title")));
+    const head = el("p", "registre-champ");
+    head.append(
+      `${t("rumbling.ravaged")} `,
+      valueEl(this.ctx, `${Math.round(rb.ravaged * 100)} %`, () => ({ title: t("rumbling.ravaged"), sections: [{ text: t("rumbling.ravaged_why") }] })),
+      ` · ${t("rumbling.provinces", { n: rb.provinces.length, m: rw.order.length })}`,
+    );
+    box.append(head);
+    const next = rw.order[rb.provinces.length];
+    if (rb.stopped) box.append(el("p", "registre-note crise-grondement__fin", t("rumbling.stopped")));
+    else box.append(el("p", "registre-note", next ? t("rumbling.next", { province: t(rw.label.get(next) ?? next) }) : t("rumbling.done")));
+    const toll = el("p", "registre-note");
+    toll.append(
+      `${t("rumbling.dead")} `,
+      valueEl(this.ctx, rb.dead > 0 ? formatNumber(rb.dead) : "—", () => ({ title: t("rumbling.dead"), sections: [{ text: t("rumbling.estimate_why") }] })),
+    );
+    if (rb.evacuated > 0) toll.append(` · ${t("rumbling.evacuated")} `, valueEl(this.ctx, formatNumber(rb.evacuated), () => ({ title: t("rumbling.evacuated"), sections: [{ text: t("rumbling.estimate_why") }] })));
+    box.append(toll);
+    if (rb.stopped) return [box];
+    // Posture : trois choix, l'actuel marqué ; chacun dit son effet.
+    const bar = el("div", "registre-filtres crise-grondement__postures");
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", t("rumbling.stance"));
+    for (const st of ["empecher", "retarder", "laisser"] as const satisfies readonly RumblingStance[]) {
+      const b = button(t(`rumbling.stance.${st}`), () => void this.ctx.dispatch({ type: "RumblingStance", stance: st }), "registre-onglet");
+      b.dataset["stance"] = st;
+      b.title = t(`rumbling.stance.${st}_why`);
+      b.setAttribute("aria-pressed", String(rb.stance === st));
+      bar.append(b);
+    }
+    box.append(bar, el("p", "registre-note", rb.stance ? t(`rumbling.stance.${rb.stance}_why`) : t("rumbling.stance.none")));
+    if (rb.stance === "empecher") {
+      const line = el("p", "registre-champ");
+      line.append(`${t("rumbling.assault")} `, valueEl(this.ctx, `${Math.round(rb.assault)} %`, () => ({ title: t("rumbling.assault"), sections: [{ text: t("rumbling.assault_why") }] })));
+      if (rb.attempts > 0) line.append(` · ${t("rumbling.attempts", { n: rb.attempts })}`);
+      const problem = assaultProblem(rb);
+      const go = button(t("rumbling.launch"), () => {
+        void this.ctx.confirm(t("rumbling.launch_confirm")).then((ok) => {
+          if (ok) void this.ctx.dispatch({ type: "RumblingAssault" });
+        });
+      }, "registre-bouton petit principal");
+      go.dataset["action"] = "assaut-fondateur";
+      go.disabled = problem !== null;
+      line.append(" ", go);
+      if (problem) line.append(" ", el("span", "plan-probleme", t(problem)));
+      box.append(line);
+    }
+    return [box];
   }
 
   private model(s: GameState, ns: NationsState): AtlasProvince[] {

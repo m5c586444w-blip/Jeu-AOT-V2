@@ -620,6 +620,10 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .table-guerre { display: grid; grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr); gap: 0.8rem; align-items: start; }
 .atlas-monde { width: 100%; height: min(30rem, calc(var(--hauteur-utile, 60vh) - 3rem)); border: var(--filet-l) solid var(--filet); background: var(--fond-profond); cursor: crosshair; }
 .table-guerre__dossier { max-height: min(30rem, calc(var(--hauteur-utile, 60vh) - 3rem)); overflow-y: auto; font-size: var(--t-s); }
+/* Crise du Grondement (P9.4) : encadré en tête du dossier, filet rouge tant qu'elle dure. */
+.crise-grondement { margin: 0 0 0.6rem; padding: 0.4rem 0.6rem; border-left: var(--filet-l) solid var(--danger); background: var(--panneau-creux); }
+.crise-grondement[data-stopped="true"] { border-left-color: var(--succes); }
+.crise-grondement .registre-intertitre { margin-top: 0; }
 .table-guerre__comptes { padding: 0.35rem 0.6rem; background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); }
 .force { padding-left: 0.4rem; border-left: 3px solid var(--nation-neutre); margin: 0.15rem 0; }
 .force--fac_marley { border-left-color: var(--nation-marley); }

@@ -26,6 +26,7 @@ const SCENARIOS: readonly ScenarioCover[] = [
   { id: "scn_sandbox_845", year: 845, emblem: "fac_paradis", nations: [] },
   { id: "scn_sandbox_850", year: 850, emblem: "fac_paradis", nations: [] },
   { id: "scn_854", year: 854, emblem: "fac_marley", nations: ["fac_paradis", "fac_marley"] },
+  { id: "scn_grondement", year: 854, emblem: "fac_paradis", nations: [] },
 ];
 
 /** Image de fond : rendu de la scène 3D de Shiganshina au crépuscule (D-110). */

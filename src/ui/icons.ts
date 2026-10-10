@@ -135,7 +135,7 @@ export function alertIcon(key: string): string {
   if (/mission/.test(key)) return "missions";
   if (/died|death|deces|mort/.test(key)) return "deuil";
   if (/breach|wall|mur|breche/.test(key)) return "breche";
-  if (/titan/.test(key)) return "empreinte";
+  if (/titan|rumbling/.test(key)) return "empreinte";
   if (/shortage|famine|food|ration/.test(key)) return "nourriture";
   if (/gas/.test(key)) return "gaz";
   if (/law|decree|vote|cabinet/.test(key)) return "politique";

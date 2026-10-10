@@ -108,3 +108,26 @@ export const DifficultyBalanceSchema = z
     if (new Set(f.niveaux.map((l) => l.id)).size !== 4) ctx.addIssue({ code: "custom", message: "quatre niveaux distincts attendus" });
   });
 export type DifficultyBalance = z.infer<typeof DifficultyBalanceSchema>;
+
+/** Grondement (P9.4, `data/balance/rumbling.json`) : paramètres `?` (aucune durée ni aucun chiffre officiel sûr). */
+const pos = z.number().positive();
+const frac = z.number().min(0).max(1);
+export const RumblingBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    note: z.string().min(1),
+    /** Jours pour ravager une province, à l'allure de base. */
+    jours_par_province: pos,
+    /** Allure selon la posture du joueur. */
+    posture: z.object({ empecher: pos, retarder: pos, laisser: pos }).strict(),
+    assaut: z.object({ par_jour: pos, bonus_traite: z.number().min(0), chance: frac, chance_par_echec: frac, recul_echec: z.number().min(0).max(100), effectifs_perdus_echec: frac }).strict(),
+    /** Morts estimés par point de poids d'une province ravagée ; évacués par jour en posture « retarder ». */
+    morts_par_poids: z.number().min(0),
+    evacues_par_jour: z.number().min(0),
+    /** Part de l'industrie et des effectifs perdue par la nation qui tenait une province ravagée (pondérée par son poids). */
+    ruine_nation: frac,
+    paradis: z.object({ legitimite_par_jour_laisser: num, stabilite_par_jour_empecher: num }).strict(),
+    terme_jours: z.number().int().positive(),
+  })
+  .strict();
+export type RumblingBalance = z.infer<typeof RumblingBalanceSchema>;

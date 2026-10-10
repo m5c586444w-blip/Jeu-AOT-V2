@@ -6,7 +6,7 @@ import { z } from "zod";
 import { KEY_RESOURCES, RATIONING_LEVELS, RESOURCE_IDS } from "../sim/strategic/resources";
 import { FORMATIONS, WEATHERS } from "../sim/military/vocabulary";
 import { CanonSchema } from "./schemas";
-import { DifficultyBalanceSchema, EndingsBalanceSchema } from "./endingSchemas";
+import { DifficultyBalanceSchema, EndingsBalanceSchema, RumblingBalanceSchema } from "./endingSchemas";
 
 const res = z.partialRecord(z.enum(RESOURCE_IDS), z.number());
 const rationingEffect = z.object({ consumption: z.number(), morale: z.number(), productivity: z.number() }).strict();
@@ -418,6 +418,7 @@ export type TimeBalance = z.infer<typeof TimeBalanceSchema>;
 export const BALANCE_FILES = {
   endings: EndingsBalanceSchema,
   difficulty: DifficultyBalanceSchema,
+  rumbling: RumblingBalanceSchema,
   armies: ArmiesBalanceSchema,
   missions: MissionsBalanceSchema,
   economy: EconomyBalanceSchema,
