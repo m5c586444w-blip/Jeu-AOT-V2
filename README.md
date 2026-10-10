@@ -39,6 +39,13 @@ menu principal ; `http://localhost:4173/` ouvre directement une nouvelle partie 
 `npm run smoke:local` vérifie le build hors réseau (toute requête sortante refusée et comptée) : menu, partie, sauvegarde et
 rechargement, manuel, options, scène 3D.
 
+## Application Windows (double-clic)
+
+Sur un PC Windows, après `npm ci` : `npm run package:win` construit `release\Murs et Sang-win32-x64\Murs et Sang.exe` (Electron,
+téléchargé une fois). L'application s'ouvre sans navigateur ni réseau ; sauvegardes dans `%APPDATA%\Murs et Sang` ; F11 : plein
+écran. Pas à pas : [`docs/LANCER_SUR_WINDOWS.md`](docs/LANCER_SUR_WINDOWS.md). Le même emballage pour Linux
+(`npm run package:win -- --plateforme linux`) est contrôlé par `npm run smoke:pack`.
+
 ## Développer
 
 ```bash
@@ -64,6 +71,7 @@ npm run verify     # typecheck, lint, tests, données, assets, canon, autotest d
 | `sim:balance` | Équilibrage : 1 000 parties par scénario menées par un pilote automatique ; rapport `docs/reports/P9-balance.html` |
 | `sim:year` / `sim:world` / `sim:events` / `sim:shifters` / `sim:expeditions` / `sim:tactical` | Simulations sans interface d'un système (un an de jeu, monde, chronique, porteurs, expéditions, combat), invariants vérifiés |
 | `smoke:local` | Build hors réseau dans Chromium (voir plus haut) ; captures `docs/screenshots/p10-*` |
+| `package:win` / `smoke:pack` | Application de bureau Electron (Windows ; `-- --plateforme linux` pour le contrôle) ; lancement contrôlé sous Xvfb |
 | `smoke:*` | Parcours dans un vrai navigateur, un par phase (`smoke:map`, `smoke:p9`, `smoke:tuto`…), avec captures `docs/screenshots/` |
 | `mesure:r1` … `mesure:r1d` | Mesures de latence et de rendu de la scène 3D (rendu logiciel ; bornes basses) |
 | `map:generate` / `map:terrain` / `captures:map` | Régénération de la carte de Paradis et de son relief ; captures de la carte |

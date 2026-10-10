@@ -1,0 +1,10 @@
+
+> murs-et-sang@0.0.1 package:win
+> tsx src/tools/package-win.ts --sans-build
+
+Note : construction croisée depuis un autre système ; l'icône de l'exécutable n'est posée que sous Windows.
+> npx --yes @electron/packager@20.3.0 "release/app" "Murs et Sang" --platform=win32 --arch=x64 --electron-version=44.4.5 --out=release --overwrite --asar --app-version=0.0.1 --app-copyright="Usage personnel et non commercial"
+Packaging app for platform win32 x64 using electron v44.4.5
+Wrote new app to: release/Murs et Sang-win32-x64
+package:win : application prête dans « release/Murs et Sang-win32-x64 » (Murs et Sang.exe).
+EXIT=0

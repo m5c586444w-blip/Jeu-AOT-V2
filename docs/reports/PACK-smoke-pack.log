@@ -1,0 +1,16 @@
+
+> murs-et-sang@0.0.1 smoke:pack
+> tsx src/tools/smoke-pack.ts
+
+  OK  fenêtre : « Murs et Sang »
+  OK  jeu servi par le protocole local (jeu://local/?menu=1)
+  OK  menu principal : 4 scénarios
+  OK  partie ouverte dans l'application (/?scenario=scn_sandbox_850)
+  OK  partie : le temps avance
+  OK  sauvegarde dans le profil (IndexedDB)
+  OK  rechargement de la sauvegarde
+  OK  manuel (F1)
+  OK  aucune requête hors du protocole local (21 requêtes)
+  OK  aucune erreur de page (0)
+smoke:pack : OK
+EXIT=0

@@ -12,6 +12,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "jouer": "npm run build && vite preview --open",
+    "package:win": "tsx src/tools/package-win.ts",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest run",
@@ -59,6 +60,7 @@
     "smoke:mis": "tsx src/tools/smoke-mis.ts",
     "smoke:tuto": "tsx src/tools/smoke-tuto.ts",
     "smoke:local": "tsx src/tools/smoke-local.ts",
+    "smoke:pack": "tsx src/tools/smoke-pack.ts",
     "map:terrain": "tsx src/tools/map-terrain.ts",
     "captures:map": "tsx src/tools/captures-map.ts"
   },

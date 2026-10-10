@@ -243,3 +243,10 @@ responsabilité de l'utilisateur (notice `assets_user/musique/LISEZ-MOI.md`).
   OFL 1.1 ; Special Elite : Apache 2.0), pixi.js 8.22 (MIT), three 0.186 (MIT), zod 4.6 (MIT) — toutes listées ci-dessus.
 - P10 n'ajoute aucune ressource externe : l'aide à la lecture se sert des polices du système, le manuel est du texte.
 - Le build (`dist/`) ne charge rien d'un autre ordinateur : `npm run smoke:local` refuse et compte toute requête sortante (0).
+
+## Ajouts de PACK (application de bureau)
+
+| Élément | Origine | Licence |
+|---|---|---|
+| Icône de l'application (`electron/icone.png` 256 px, `electron/icone.ico` 16/32/48/256 px) | Rendue depuis `public/favicon.svg` (trois anneaux dessinés pour le projet) | Création originale du projet |
+| Electron 44.4.5 et `@electron/packager` 20.3.0 | Téléchargés par `npx` à la construction (`npm run package:win`), hors du dépôt | MIT (Electron embarque Chromium : licences jointes dans le dossier construit, `LICENSES.chromium.html`) |
