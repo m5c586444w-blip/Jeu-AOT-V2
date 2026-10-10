@@ -6,9 +6,10 @@ import { applyPaperTextures } from "./paper";
 import { safeStorage } from "./gameScreen";
 import { sharedAudio } from "./audio";
 import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
-import { applyUiScale, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
-import { DIFFICULTY_IDS } from "../data/endingSchemas";
-import type { DifficultyId } from "../data/endingSchemas";
+import { applyAccessibility, applyUiScale, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
+import { CUSTOM_DIFFICULTY_KEYS, DIFFICULTY_IDS } from "../data/endingSchemas";
+import type { CustomDifficulty, DifficultyId } from "../data/endingSchemas";
+import { customDifficultyParam, DEFAULT_CUSTOM, parseCustomDifficulty } from "./customDifficulty";
 
 /**
  * Menu principal (U8, phase UI) : plein écran ; en fond, les murs au crépuscule (capture de la scène 3D du projet,
@@ -41,11 +42,17 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls = "", text?: stri
 
 /** Difficulté choisie au menu (P9.3), gardée pour la prochaine visite ; « normal » n'apparaît pas dans l'adresse. */
 const DIFFICULTY_KEY = "murs-et-sang.difficulte";
-let difficulty: DifficultyId = "normal";
+/** Réglages de la difficulté personnalisée (P10.1), gardés d'une visite à l'autre. */
+const CUSTOM_KEY = "murs-et-sang.difficulte-perso";
+let difficulty: DifficultyId | "personnalise" = "normal";
+let custom: CustomDifficulty = { ...DEFAULT_CUSTOM };
 
 function go(params: Record<string, string>): void {
   const q = new URLSearchParams(params);
-  if (difficulty !== "normal" && !q.has("tutoriel") && !q.has("reprendre")) q.set("difficulte", difficulty);
+  if (difficulty !== "normal" && !q.has("tutoriel") && !q.has("reprendre")) {
+    q.set("difficulte", difficulty);
+    if (difficulty === "personnalise") q.set("dp", customDifficultyParam(custom));
+  }
   window.location.search = `?${q.toString()}`;
 }
 
@@ -73,6 +80,7 @@ function entry(id: string, iconId: string, label: string, onClick: () => void): 
 export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   applyPaperTextures(document.documentElement);
   applyUiScale(uiScale);
+  applyAccessibility(loadSettings(safeStorage()));
   const root = el("main", "menu-principal");
   root.setAttribute("aria-label", t("menu.title"));
   const bg = el("img", "menu-principal__fond");
@@ -118,6 +126,7 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
         audio.setVolumes(volumesOf(s));
         syncLibrary(audio, s);
         applyUiScale(s.uiScale);
+        applyAccessibility(s);
         if (s.locale !== settings.locale) window.location.reload();
       }, userTracks, () => go({ scenario: "scn_sandbox_850", tutoriel: "1" }));
       options.toggle();
@@ -136,13 +145,38 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
   panel.append(el("h2", "menu-scenarios__titre", t("menu.scenarios")));
   // Difficulté (P9.3) : quatre niveaux, expliqués en une ligne ; le choix vaut pour la partie lancée ensuite.
   const stored = safeStorage()?.getItem(DIFFICULTY_KEY) ?? "normal";
-  difficulty = (DIFFICULTY_IDS as readonly string[]).includes(stored) ? (stored as DifficultyId) : "normal";
+  difficulty = stored === "personnalise" ? "personnalise" : (DIFFICULTY_IDS as readonly string[]).includes(stored) ? (stored as DifficultyId) : "normal";
+  custom = parseCustomDifficulty(safeStorage()?.getItem(CUSTOM_KEY) ?? null) ?? { ...DEFAULT_CUSTOM };
   const diff = el("div", "menu-difficulte");
   diff.setAttribute("role", "group");
   diff.setAttribute("aria-label", t("menu.difficulty"));
   const diffNote = el("p", "menu-difficulte__note", t(`diff.${difficulty}_why`));
   diff.append(el("span", "menu-difficulte__titre", t("menu.difficulty")));
-  for (const id of DIFFICULTY_IDS) {
+  // Personnalisée (P10.1, F-ACC-08) : six curseurs, ouverts seulement quand ce choix est fait.
+  const fine = el("fieldset", "menu-difficulte__fine");
+  fine.append(el("legend", "", t("diff.custom_title")));
+  for (const k of CUSTOM_DIFFICULTY_KEYS) {
+    const offset = k === "moral" || k === "stabilite";
+    const row = el("label", "menu-difficulte__curseur");
+    const r = el("input", "options__curseur");
+    r.type = "range";
+    r.min = offset ? "-20" : "0.5";
+    r.max = offset ? "20" : "1.5";
+    r.step = offset ? "5" : "0.05";
+    r.value = String(custom[k]);
+    r.dataset["perso"] = k;
+    const fmt = (v: number): string => (offset ? `${v > 0 ? "+" : ""}${v}` : `× ${v.toFixed(2)}`);
+    const out = el("output", "options__valeur", fmt(custom[k]));
+    r.addEventListener("input", () => {
+      custom = { ...custom, [k]: Number(r.value) };
+      out.textContent = fmt(custom[k]);
+      safeStorage()?.setItem(CUSTOM_KEY, customDifficultyParam(custom));
+    });
+    row.append(el("span", "", t(`diff.custom_${k}`)), r, out);
+    fine.append(row);
+  }
+  fine.hidden = difficulty !== "personnalise";
+  for (const id of [...DIFFICULTY_IDS, "personnalise"] as const) {
     const b = el("button", "menu-difficulte__niveau", t(`diff.${id}`));
     b.type = "button";
     b.dataset["difficulte"] = id;
@@ -152,10 +186,11 @@ export function mountMainMenu(app: HTMLElement, uiScale = 100): void {
       safeStorage()?.setItem(DIFFICULTY_KEY, id);
       for (const o of diff.querySelectorAll("button")) o.setAttribute("aria-pressed", String(o === b));
       diffNote.textContent = t(`diff.${id}_why`);
+      fine.hidden = id !== "personnalise";
     });
     diff.append(b);
   }
-  panel.append(diff, diffNote);
+  panel.append(diff, diffNote, fine);
   const list = el("div", "menu-scenarios__liste");
   const nations = el("section", "choix-nation-menu");
   nations.hidden = true;

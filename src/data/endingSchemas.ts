@@ -110,6 +110,27 @@ export const DifficultyBalanceSchema = z
   });
 export type DifficultyBalance = z.infer<typeof DifficultyBalanceSchema>;
 
+/**
+ * Difficulté personnalisée (P10.1, F-ACC-08 : options de difficulté fines) : les mêmes six réglages que les niveaux, choisis par
+ * le joueur dans des bornes raisonnables ; gardée dans l'état (et la sauvegarde) pour reconstruire le même monde.
+ */
+export const CustomDifficultySchema = z
+  .object({
+    production: z.number().min(0.5).max(1.5),
+    titans: z.number().min(0.5).max(1.5),
+    ia_attaque: z.number().min(0.5).max(1.5),
+    pertes: z.number().min(0.5).max(1.5),
+    moral: z.number().min(-20).max(20),
+    stabilite: z.number().min(-20).max(20),
+  })
+  .strict();
+export type CustomDifficulty = z.infer<typeof CustomDifficultySchema>;
+/** Choix de difficulté : un niveau des données, ou des réglages personnalisés. */
+export type DifficultySetting = DifficultyId | CustomDifficulty;
+/** Étiquette gardée dans le monde et l'état. */
+export type DifficultyLabel = DifficultyId | "personnalise";
+export const CUSTOM_DIFFICULTY_KEYS = ["production", "titans", "ia_attaque", "pertes", "moral", "stabilite"] as const;
+
 /** Grondement (P9.4, `data/balance/rumbling.json`) : paramètres `?` (aucune durée ni aucun chiffre officiel sûr). */
 const pos = z.number().positive();
 const frac = z.number().min(0).max(1);

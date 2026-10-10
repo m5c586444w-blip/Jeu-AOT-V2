@@ -1,3 +1,4 @@
+import { reducedMotion } from "../motion";
 import { Application, Container, Graphics, GraphicsContext, Text, TilingSprite } from "pixi.js";
 import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
@@ -352,7 +353,8 @@ export class TacticalScene {
     (st.shifters ?? []).forEach((u, k) => {
       const [x, y] = this.project(u.x, u.y, 0);
       if (u.phase === "transformation") {
-        drawTransformFlash(o.context, x, y, (t * 40) % 6, drawnTitanHeight(this.shifterReach[k] ?? 15, this.zoom, this.app.screen.width, this.app.screen.height));
+        // Mouvements réduits (P10.1) : halo fixe, sans scintillement.
+        drawTransformFlash(o.context, x, y, reducedMotion() ? 0 : (t * 40) % 6, drawnTitanHeight(this.shifterReach[k] ?? 15, this.zoom, this.app.screen.width, this.app.screen.height));
         flashes++;
       } else if (u.phase === "titan" && u.body !== null) {
         const b = st.titans[u.body];
@@ -364,7 +366,7 @@ export class TacticalScene {
           if (!this.bodySince.has(k)) this.bodySince.set(k, st.tick);
           if (since < FLASH_AFTERGLOW_TICKS) {
             const fade = 1 - since / FLASH_AFTERGLOW_TICKS;
-            drawBodyFlash(o.context, bx, by, drawnTitanHeight(b.height, this.zoom, this.app.screen.width, this.app.screen.height), fade);
+            drawBodyFlash(o.context, bx, by, drawnTitanHeight(b.height, this.zoom, this.app.screen.width, this.app.screen.height), reducedMotion() ? fade * 0.4 : fade);
             flashes++;
           }
         }

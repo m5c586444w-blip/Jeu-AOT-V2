@@ -38,9 +38,10 @@ import type { PanelId } from "./panels/common";
 import { Notice } from "./notice";
 import { evaluateEnding } from "../sim/ending/ending";
 import { DIFFICULTY_IDS } from "../data/endingSchemas";
-import type { DifficultyId } from "../data/endingSchemas";
+import type { DifficultyId, DifficultySetting } from "../data/endingSchemas";
+import { customDifficultyParam, parseCustomDifficulty } from "./customDifficulty";
 import { OptionsPanel } from "./optionsPanel";
-import { applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
+import { applyAccessibility, applyUiScale, crossesAutosave, LAST_GAME_KEY, loadSettings, saveSettings, volumesOf } from "./settings";
 import type { TutorialPrefs } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
@@ -56,9 +57,14 @@ function scenarioFromUrl(): string {
   const raw = new URLSearchParams(window.location.search).get("scenario");
   return raw && /^scn_[a-z0-9_]+$/.test(raw) ? raw : DEFAULT_SCENARIO;
 }
-/** Difficulté (P9.3) : `?difficulte=` (recit, normal, rude, breche) ; « normal » par défaut. */
-function difficultyFromUrl(): DifficultyId {
-  const raw = new URLSearchParams(window.location.search).get("difficulte");
+/**
+ * Difficulté (P9.3) : `?difficulte=` (recit, normal, rude, breche) ; « normal » par défaut. P10.1 : `difficulte=personnalise`
+ * avec `dp=` (six réglages séparés par des virgules, dans l'ordre de CUSTOM_DIFFICULTY_KEYS), validés ; sinon « normal ».
+ */
+function difficultyFromUrl(): DifficultySetting {
+  const q = new URLSearchParams(window.location.search);
+  const raw = q.get("difficulte");
+  if (raw === "personnalise") return parseCustomDifficulty(q.get("dp")) ?? "normal";
   return (DIFFICULTY_IDS as readonly string[]).includes(raw ?? "") ? (raw as DifficultyId) : "normal";
 }
 const DEFAULT_SEED = 42;
@@ -89,6 +95,7 @@ export async function bootGame(): Promise<void> {
   setLocale(settings.locale);
   document.documentElement.lang = settings.locale;
   applyUiScale(settings.uiScale);
+  applyAccessibility(settings);
   setAuthorMode(settings.authorMode);
   await document.fonts.ready;
 
@@ -115,7 +122,7 @@ export async function bootGame(): Promise<void> {
       // Aucune sauvegarde lisible : la partie commence au début du scénario.
     }
   }
-  const difficulty: DifficultyId = resumed ? (resumed.difficulty ?? "normal") : difficultyFromUrl();
+  const difficulty: DifficultySetting = resumed ? (resumed.difficulty === "personnalise" ? (resumed.difficultyCustom ?? "normal") : (resumed.difficulty ?? "normal")) : difficultyFromUrl();
   const first = await sim.init(seedFromUrl(), scenario, difficulty);
   if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
   const world = buildWorld(first.source, scenario, { difficulty });
@@ -452,6 +459,7 @@ export async function bootGame(): Promise<void> {
     syncLibrary(audio, s);
     if (s.locale !== settings.locale) window.location.reload();
     applyUiScale(s.uiScale);
+    applyAccessibility(s);
     if (s.authorMode !== isAuthorMode()) {
       setAuthorMode(s.authorMode);
       refresh();
@@ -521,7 +529,7 @@ export async function bootGame(): Promise<void> {
   }
   // Dernière partie (scénario, nation) : l'entrée « Continuer » du menu principal la reprend.
   try {
-    safeStorage()?.setItem(LAST_GAME_KEY, JSON.stringify({ scenario, ...(state.nations ? { faction: state.nations.player } : {}), ...(state.difficulty ? { difficulte: state.difficulty } : {}), reprendre: "1" }));
+    safeStorage()?.setItem(LAST_GAME_KEY, JSON.stringify({ scenario, ...(state.nations ? { faction: state.nations.player } : {}), ...(state.difficulty ? { difficulte: state.difficulty } : {}), ...(state.difficultyCustom ? { dp: customDifficultyParam(state.difficultyCustom) } : {}), reprendre: "1" }));
   } catch {
     // Stockage refusé : « Continuer » restera indisponible.
   }

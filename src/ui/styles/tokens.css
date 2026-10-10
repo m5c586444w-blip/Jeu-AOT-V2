@@ -189,3 +189,33 @@
   --lueur-laiton-forte: rgba(127, 157, 214, 0.32);
 }
 :root[data-faction="fac_allies"] { --accent: var(--nation-allies); }
+
+/* P10.1 — accessibilité (09 §20). Couleurs pour daltoniens : palette d'Okabe et Ito (nations et états distinguables sans le
+   rouge ni le vert) ; mouvements réduits : aucune transition ni animation ; aide à la lecture : polices décoratives remplacées
+   par le texte courant, espacement et interlignage accrus (aucune police nouvelle). */
+:root[data-daltonien="1"] {
+  --nation-paradis: #e69f00;
+  --nation-marley: #0072b2;
+  --nation-hizuru: #009e73;
+  --nation-allies: #cc79a7;
+  --danger: #d55e00;
+  --succes: #56b4e9;
+  --alerte: #f0e442;
+}
+:root[data-mouvement="reduit"] *,
+:root[data-mouvement="reduit"] *::before,
+:root[data-mouvement="reduit"] *::after {
+  transition: none !important;
+  animation: none !important;
+  scroll-behavior: auto !important;
+}
+:root[data-lecture="aide"] {
+  --f-machine: "EB Garamond", serif;
+  --f-orne: "EB Garamond", serif;
+  --f-marley: "EB Garamond", serif;
+}
+:root[data-lecture="aide"] body {
+  letter-spacing: 0.02em;
+  word-spacing: 0.08em;
+  line-height: 1.6;
+}

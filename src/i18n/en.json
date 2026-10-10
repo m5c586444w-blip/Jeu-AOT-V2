@@ -96,5 +96,19 @@
   "fin.def.monde_ravage": "the world is ravaged",
   "fin.def.depeuplement": "the island has been depopulated (famine or lost lands)",
   "fin.obj.alliance_hizuru": "Sign an alliance with Hizuru",
-  "fin.obj.ordre_850": "Govern a kingdom in order (stability 68 at the term)"
+  "fin.obj.ordre_850": "Govern a kingdom in order (stability 68 at the term)",
+  "diff.personnalise": "Custom",
+  "diff.personnalise_why": "Your own settings: production, Titans, other nations' aggressiveness, losses, starting morale and order.",
+  "diff.custom_title": "Custom difficulty settings",
+  "diff.custom_production": "Paradis production",
+  "diff.custom_titans": "Titan density",
+  "diff.custom_ia_attaque": "Other nations' aggressiveness",
+  "diff.custom_pertes": "Combat losses",
+  "diff.custom_moral": "Starting morale",
+  "diff.custom_stabilite": "Starting order (stability)",
+  "options.access": "Accessibility",
+  "options.colorblind": "Colour-blind friendly colours",
+  "options.reduceMotion": "Reduce motion and flashes",
+  "options.readingAid": "Reading aid (plain fonts, spaced text)",
+  "options.access_note": "Text size follows the interface scale; subtitles for important sounds are in the Sound section; every action has a key (list below)."
 }

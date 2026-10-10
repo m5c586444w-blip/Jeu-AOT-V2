@@ -31,6 +31,10 @@ export interface Settings {
   battleView: BattleViewPref;
   violence: ViolencePref;
   battleQuality: BattleQualityPref;
+  /** Accessibilité (P10.1, 09 §20) : couleurs pour daltoniens, mouvements et flashs réduits, aide à la lecture. */
+  colorblind: boolean;
+  reduceMotion: boolean;
+  readingAid: boolean;
   /** Révision de la musique : des préférences antérieures à la musique d'AUD reprennent le volume de musique par défaut. */
   audioRev?: number;
 }
@@ -58,6 +62,7 @@ export const DEFAULT_SETTINGS: Settings = {
   locale: "fr", uiScale: 100, volMaster: 70, volMusic: 45, volAmbient: 50, volSfx: 80, volUi: 60, subtitles: true,
   musicCombatOnly: false, musicSource: "mixte", userTracks: {}, authorMode: false, tutorial: DEFAULT_TUTORIAL,
   battleView: "3d", violence: "realiste", battleQuality: "moyen", audioRev: AUDIO_REV,
+  colorblind: false, reduceMotion: false, readingAid: false,
 };
 export const MUSIC_SOURCES = ["synthese", "mixte", "perso"] as const;
 export type MusicSource = (typeof MUSIC_SOURCES)[number];
@@ -117,6 +122,9 @@ export function loadSettings(storage: Pick<Storage, "getItem"> | null): Settings
       violence: VIOLENCES.find((v) => v === s.violence) ?? DEFAULT_SETTINGS.violence,
       battleQuality: BATTLE_QUALITIES.find((v) => v === s.battleQuality) ?? DEFAULT_SETTINGS.battleQuality,
       audioRev: AUDIO_REV,
+      colorblind: s.colorblind === true,
+      reduceMotion: s.reduceMotion === true,
+      readingAid: s.readingAid === true,
     };
   } catch {
     return { ...DEFAULT_SETTINGS, tutorial: { ...DEFAULT_TUTORIAL, seen: [] } };
@@ -140,6 +148,19 @@ export function crossesAutosave(before: GameDate, after: GameDate, everyDays: nu
  * Échelle d'interface (100 à 200 %) : `--ui-echelle` règle la taille de base (base.css), multipliée par le facteur de
  * hauteur d'écran (tokens.css). Le style en ligne `font-size` reste posé pour les contrôles existants (AC1-14).
  */
+/** Accessibilité (P10.1) : attributs de la racine lus par les feuilles de style et les vues (`render/motion.ts`). */
+export function applyAccessibility(s: Pick<Settings, "colorblind" | "reduceMotion" | "readingAid">): void {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  const set = (attr: string, on: boolean, v: string): void => {
+    if (on) root.setAttribute(attr, v);
+    else root.removeAttribute(attr);
+  };
+  set("data-daltonien", s.colorblind, "1");
+  set("data-mouvement", s.reduceMotion, "reduit");
+  set("data-lecture", s.readingAid, "aide");
+}
+
 export function applyUiScale(percent: number): void {
   if (typeof document === "undefined") return;
   const root = document.documentElement;

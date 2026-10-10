@@ -3781,5 +3781,19 @@
   "narr.epi.no_canon": "Aucun événement du récit n'a été consigné dans la chronique de cette partie.",
   "narr.epi.note_fin": "Bilan de fin de partie ; la partie peut se poursuivre librement.",
   "fin.obj.ordre_850": "Gouverner un royaume en ordre (stabilité 68 au terme)",
-  "ai.invasion_return": "Formations rentrées au port"
+  "ai.invasion_return": "Formations rentrées au port",
+  "diff.personnalise": "Personnalisée",
+  "diff.personnalise_why": "Vos propres réglages : production, Titans, agressivité des autres nations, pertes, moral et ordre de départ.",
+  "diff.custom_title": "Réglages de la difficulté personnalisée",
+  "diff.custom_production": "Production de Paradis",
+  "diff.custom_titans": "Densité de Titans",
+  "diff.custom_ia_attaque": "Agressivité des autres nations",
+  "diff.custom_pertes": "Pertes au combat",
+  "diff.custom_moral": "Moral de départ",
+  "diff.custom_stabilite": "Ordre de départ (stabilité)",
+  "options.access": "Accessibilité",
+  "options.colorblind": "Couleurs pour daltoniens",
+  "options.reduceMotion": "Réduire les mouvements et les flashs",
+  "options.readingAid": "Aide à la lecture (polices simples, texte espacé)",
+  "options.access_note": "La taille du texte se règle avec l'échelle de l'interface ; les sous-titres des sons importants sont dans la partie Son ; toutes les actions ont une touche (liste ci-dessous)."
 }

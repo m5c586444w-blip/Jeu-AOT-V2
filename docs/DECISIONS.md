@@ -1331,3 +1331,13 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Empreintes** : la marge d'invasion change l'empreinte du 854 de `sim:selftest` : 32f0cda1 → 6dd61cc9 ; les sept autres
   sont inchangées (les fins sont lues, jamais écrites ; le Grondement n'est pas dans l'auto-test).
 - **Réversible** : oui (données).
+
+## 2026-10-10 — D-158 P10.1 : accessibilité (09 §20)
+- **Existant vérifié** : taille de l'interface 100–200 % (F-ACC-01), contrastes AA testés (F-ACC-02), sous-titres des sons
+  importants (F-ACC-04), toutes les actions au clavier, touches réassignables (F-ACC-05), pause et cinq vitesses (F-ACC-06).
+- **Ajouts** : couleurs pour daltoniens (palette d'Okabe et Ito pour les nations et les états ; distance vérifiée pour un
+  deutéranope) ; mouvements et flashs réduits (transitions et animations coupées, éclair de transformation sans scintillement,
+  lueurs de tir retirées en 3D) ; aide à la lecture (polices décoratives remplacées par le texte courant, espacement accru :
+  aucune police nouvelle, CLAUDE.md) ; difficulté personnalisée (F-ACC-08) : six réglages au menu, bornés, portés par l'URL, le
+  Worker, l'état et la sauvegarde (« Normal » : monde et empreintes inchangés).
+- **Réversible** : oui.

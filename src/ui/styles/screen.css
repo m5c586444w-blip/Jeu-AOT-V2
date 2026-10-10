@@ -976,3 +976,7 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .menu-difficulte__niveau[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-fond); color: var(--texte-fort); }
 .menu-difficulte__niveau:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .menu-difficulte__note { margin: 0 0 0.6rem; padding: 0 0.75rem; color: var(--texte-second); font-size: var(--t-s); }
+/* P10.1 : difficulté personnalisée, six curseurs sous les niveaux. */
+.menu-difficulte__fine { margin: 0 0.75rem 0.6rem; padding: 0.35rem 0.6rem; border: var(--filet-l) solid var(--filet); background: var(--panneau-creux); font-size: var(--t-s); }
+.menu-difficulte__fine legend { color: var(--texte-second); padding: 0 0.3rem; }
+.menu-difficulte__curseur { display: grid; grid-template-columns: 1fr 8rem 3.5rem; align-items: center; gap: 0.5rem; }

@@ -162,6 +162,21 @@ export class OptionsPanel {
       }
     }
 
+    // Accessibilité (P10.1, 09 §20) : couleurs pour daltoniens, mouvements et flashs réduits, aide à la lecture.
+    const access = el("fieldset", "options__son options__acces");
+    access.append(el("legend", "", t("options.access")));
+    for (const k of ["colorblind", "reduceMotion", "readingAid"] as const) {
+      const line = el("label", "options__ligne");
+      const box = el("input", "options__case");
+      box.type = "checkbox";
+      box.checked = this.settings[k];
+      box.dataset["setting"] = k;
+      box.addEventListener("change", () => this.change({ ...this.settings, [k]: box.checked }));
+      line.append(el("span", "", t(`options.${k}`)), box);
+      access.append(line);
+    }
+    access.append(el("p", "options__note", t("options.access_note")));
+
     const author = el("label", "options__ligne");
     const ab = el("input", "options__case");
     ab.type = "checkbox";
@@ -237,7 +252,7 @@ export class OptionsPanel {
       this.keymap.reset();
       this.render();
     });
-    this.el.append(head, lang, scale, sound, music, battle, guide, author, keys, reset);
+    this.el.append(head, lang, scale, access, sound, music, battle, guide, author, keys, reset);
   }
 
   /** Préférences changées hors du dossier (touche F10). */

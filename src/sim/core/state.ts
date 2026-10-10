@@ -33,7 +33,7 @@ import { techModsWithMissions, tickMissions, withMissionMods } from "../missions
 import type { MissionsState } from "../missions/missions";
 import { createRumblingState, tickRumbling } from "../crisis/rumbling";
 import type { RumblingState } from "../crisis/rumbling";
-import type { DifficultyId } from "../../data/endingSchemas";
+import type { CustomDifficulty, DifficultyLabel } from "../../data/endingSchemas";
 
 export const CURRENT_SCHEMA_VERSION = 8 as const;
 
@@ -74,7 +74,9 @@ export interface GameState {
   /** Grondement (P9.4) : facultatif, créé au départ du scénario du Grondement seulement (ailleurs : hash inchangé). */
   rumbling?: RumblingState;
   /** Difficulté (P9.3) : absente en « normal » (hash inchangé) ; sinon le monde est reconstruit avec elle au chargement. */
-  difficulty?: DifficultyId;
+  difficulty?: DifficultyLabel;
+  /** P10.1 : réglages de la difficulté personnalisée (présents seulement avec `difficulty: "personnalise"`). */
+  difficultyCustom?: CustomDifficulty;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -98,6 +100,7 @@ export function createInitialState(seed: number, world?: World): GameState {
     ...(world ? p5Layers(world, s, world.scenario.start) : {}),
     ...(world?.armies ? { armies: createArmiesState(world, world.scenario.start) ?? undefined } : {}),
     ...(world?.difficulty ? { difficulty: world.difficulty } : {}),
+    ...(world?.difficultyCustom ? { difficultyCustom: { ...world.difficultyCustom } } : {}),
     ...(world?.rumbling ? { rumbling: createRumblingState() } : {}),
   });
 }

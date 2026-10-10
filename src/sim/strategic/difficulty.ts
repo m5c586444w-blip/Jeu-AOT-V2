@@ -1,4 +1,4 @@
-import type { DifficultyBalance, DifficultyId } from "../../data/endingSchemas";
+import type { CustomDifficulty, DifficultyBalance, DifficultyId, DifficultySetting } from "../../data/endingSchemas";
 import { RESOURCE_IDS } from "./resources";
 import type { WorldSource } from "./world";
 
@@ -10,6 +10,7 @@ import type { WorldSource } from "./world";
  * - IA ennemies : poids d'attaque de chaque personnalité (couche des nations) ;
  * - pertes : morts de base d'un engagement d'expédition ;
  * - moral et stabilité de départ : décalés (bornés à 0–100).
+ * Une difficulté personnalisée (P10.1) porte directement ces six réglages.
  */
 export function difficultyLevel(table: DifficultyBalance | undefined, id: DifficultyId): DifficultyBalance["niveaux"][number] | null {
   return table?.niveaux.find((l) => l.id === id) ?? null;
@@ -18,9 +19,10 @@ export function difficultyLevel(table: DifficultyBalance | undefined, id: Diffic
 const unit = (v: number): number => Math.max(0, Math.min(1, v));
 const pct = (v: number): number => Math.max(0, Math.min(100, v));
 
-export function applyDifficulty(src: WorldSource, scenarioId: string, id: DifficultyId): WorldSource {
-  const d = difficultyLevel(src.difficulty, id);
-  if (!d || id === "normal") return src;
+export function applyDifficulty(src: WorldSource, scenarioId: string, setting: DifficultySetting): WorldSource {
+  if (setting === "normal") return src;
+  const d: CustomDifficulty | null = typeof setting === "string" ? difficultyLevel(src.difficulty, setting) : setting;
+  if (!d) return src;
   const scenarios = src.scenarios.map((sc) => {
     if (sc.id !== scenarioId) return sc;
     const pm: Partial<Record<(typeof RESOURCE_IDS)[number], number>> = {};

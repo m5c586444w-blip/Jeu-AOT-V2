@@ -2,7 +2,7 @@ import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
 import type { SimRequest, SimResponse } from "../sim/sim";
 import type { WorldSource } from "../sim/strategic/world";
-import type { DifficultyId } from "../data/endingSchemas";
+import type { DifficultySetting } from "../data/endingSchemas";
 
 /** Canal minimal commun au Worker navigateur et à worker_threads. */
 export interface SimPort {
@@ -42,7 +42,7 @@ export class SimClient {
   }
 
   /** Démarre une partie : `scenario` null = simulation sans monde (fondations). */
-  init(seed: number, scenario: string | null, difficulty?: DifficultyId) {
+  init(seed: number, scenario: string | null, difficulty?: DifficultySetting) {
     return this.call({ op: "init", seed, scenario, ...(difficulty && difficulty !== "normal" ? { difficulty } : {}) });
   }
   dispatch(cmd: Command) {

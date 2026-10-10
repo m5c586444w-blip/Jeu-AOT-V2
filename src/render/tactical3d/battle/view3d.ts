@@ -1,3 +1,4 @@
+import { reducedMotion } from "../../motion";
 import {
   ACESFilmicToneMapping,
   BufferAttribute,
@@ -725,7 +726,7 @@ export class View3D implements BattleView {
           L.markers.setColorAt(markerN++, color);
         } else if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: false, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
         else troopInst(t);
-        if (L.flashes && t.shot >= 0 && st.tick - t.shot <= 1) setInst(L.flashes, flashN++, t.x + Math.cos(t.heading) * 0.9, 1.45, t.y + Math.sin(t.heading) * 0.9, 0, 1);
+        if (L.flashes && !reducedMotion() && t.shot >= 0 && st.tick - t.shot <= 1) setInst(L.flashes, flashN++, t.x + Math.cos(t.heading) * 0.9, 1.45, t.y + Math.sin(t.heading) * 0.9, 0, 1);
         if (overlay.troops.has(t.id)) setInst(L.rings, ringN++, t.x, 0.05, t.y, 0, 1);
       }
     }
