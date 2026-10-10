@@ -1,0 +1,818 @@
+{
+ "generated": "2026-10-10",
+ "parties": 1000,
+ "seedBase": 1,
+ "difficulty": "normal",
+ "scenarios": [
+  {
+   "scenario": "scn_845",
+   "camp": "fac_paradis",
+   "games": 1000,
+   "errors": [],
+   "duration": {
+    "mean": 1362.45,
+    "p10": 730,
+    "p50": 1630,
+    "p90": 1630
+   },
+   "camps": [
+    {
+     "camp": "fac_paradis",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 643,
+       "share": 0.643
+      },
+      "defaite": {
+       "n": 336,
+       "share": 0.336
+      },
+      "terme": {
+       "n": 21,
+       "share": 0.021
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {
+      "depeuplement": 336
+     },
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 250,
+       "terme": 0
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 260,
+       "defaite": 0,
+       "terme": 0
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 247,
+       "defaite": 0,
+       "terme": 0
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 136,
+       "defaite": 86,
+       "terme": 21
+      }
+     }
+    }
+   ],
+   "deaths": {
+    "population:disette_et_pertes": {
+     "total": 42282298.80565596,
+     "perGame": 42282.29880565596
+    },
+    "expedition:titan": {
+     "total": 48990,
+     "perGame": 48.99
+    },
+    "expedition:anormal": {
+     "total": 21341,
+     "perGame": 21.341
+    },
+    "expedition:hemorragie": {
+     "total": 3134,
+     "perGame": 3.134
+    },
+    "expedition:infection": {
+     "total": 2091,
+     "perGame": 2.091
+    },
+    "expedition:epuisement": {
+     "total": 89,
+     "perGame": 0.089
+    }
+   },
+   "expeditions": {
+    "launched": 3164,
+    "departed": 219816,
+    "dead": 75645,
+    "mortality": 0.3441287258434327,
+    "perGameMean": 0.3644450264906192
+   },
+   "limiting": {
+    "iceburst": {
+     "n": 989,
+     "share": 0.989
+    },
+    "food": {
+     "n": 8,
+     "share": 0.008
+    },
+    "aucune": {
+     "n": 3,
+     "share": 0.003
+    }
+   },
+   "degenerate": {
+    "famine": {
+     "n": 307,
+     "share": 0.307
+    },
+    "spiral": {
+     "n": 26,
+     "share": 0.026
+    },
+    "explained": [
+     "famine systématique : 307 partie(s) (passif 250, aleatoire 57) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite",
+     "spirale de mort : 26 partie(s) (aleatoire 26) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite"
+    ]
+   },
+   "ordersRefused": 0,
+   "objectives": {
+    "ordre": {
+     "n": 1000,
+     "share": 1
+    },
+    "rose": {
+     "n": 1000,
+     "share": 1
+    },
+    "tenir": {
+     "n": 666,
+     "share": 0.666
+    },
+    "nourrir": {
+     "n": 646,
+     "share": 0.646
+    }
+   }
+  },
+  {
+   "scenario": "scn_sandbox_850",
+   "camp": "fac_paradis",
+   "games": 1000,
+   "errors": [],
+   "duration": {
+    "mean": 1828.97,
+    "p10": 1830,
+    "p50": 1830,
+    "p90": 1830
+   },
+   "camps": [
+    {
+     "camp": "fac_paradis",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 538,
+       "share": 0.538
+      },
+      "defaite": {
+       "n": 1,
+       "share": 0.001
+      },
+      "terme": {
+       "n": 461,
+       "share": 0.461
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {
+      "famine": 1
+     },
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 250
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 241,
+       "defaite": 0,
+       "terme": 19
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 238,
+       "defaite": 0,
+       "terme": 9
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 59,
+       "defaite": 1,
+       "terme": 183
+      }
+     }
+    }
+   ],
+   "deaths": {
+    "population:disette_et_pertes": {
+     "total": 19016506.749153323,
+     "perGame": 19016.506749153323
+    },
+    "expedition:titan": {
+     "total": 36997,
+     "perGame": 36.997
+    },
+    "expedition:anormal": {
+     "total": 17634,
+     "perGame": 17.634
+    },
+    "nomme:combat": {
+     "total": 12026,
+     "perGame": 12.026
+    },
+    "expedition:hemorragie": {
+     "total": 2574,
+     "perGame": 2.574
+    },
+    "nomme:devore": {
+     "total": 1662,
+     "perGame": 1.662
+    },
+    "expedition:infection": {
+     "total": 1659,
+     "perGame": 1.659
+    },
+    "nomme:malediction": {
+     "total": 999,
+     "perGame": 0.999
+    },
+    "nomme:assassinat": {
+     "total": 831,
+     "perGame": 0.831
+    },
+    "expedition:epuisement": {
+     "total": 51,
+     "perGame": 0.051
+    }
+   },
+   "expeditions": {
+    "launched": 4393,
+    "departed": 287883,
+    "dead": 58915,
+    "mortality": 0.2046491109235349,
+    "perGameMean": 0.21876908475105963
+   },
+   "limiting": {
+    "iceburst": {
+     "n": 864,
+     "share": 0.864
+    },
+    "aucune": {
+     "n": 128,
+     "share": 0.128
+    },
+    "food": {
+     "n": 8,
+     "share": 0.008
+    }
+   },
+   "degenerate": {
+    "famine": {
+     "n": 38,
+     "share": 0.038
+    },
+    "spiral": {
+     "n": 61,
+     "share": 0.061
+    },
+    "explained": [
+     "famine systématique : 38 partie(s) (aleatoire 38) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite",
+     "spirale de mort : 61 partie(s) (aleatoire 61) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite"
+    ]
+   },
+   "ordersRefused": 44020,
+   "objectives": {
+    "tenir": {
+     "n": 999,
+     "share": 0.999
+    },
+    "maria": {
+     "n": 831,
+     "share": 0.831
+    },
+    "verite": {
+     "n": 831,
+     "share": 0.831
+    },
+    "dehors": {
+     "n": 831,
+     "share": 0.831
+    },
+    "ordre": {
+     "n": 664,
+     "share": 0.664
+    }
+   }
+  },
+  {
+   "scenario": "scn_854",
+   "camp": "fac_paradis",
+   "games": 1000,
+   "errors": [],
+   "duration": {
+    "mean": 645.79,
+    "p10": 440,
+    "p50": 730,
+    "p90": 730
+   },
+   "camps": [
+    {
+     "camp": "fac_paradis",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 571,
+       "share": 0.571
+      },
+      "defaite": {
+       "n": 315,
+       "share": 0.315
+      },
+      "terme": {
+       "n": 114,
+       "share": 0.114
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {
+      "ile_perdue": 315
+     },
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 250,
+       "terme": 0
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 138,
+       "defaite": 51,
+       "terme": 71
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 238,
+       "defaite": 1,
+       "terme": 8
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 195,
+       "defaite": 13,
+       "terme": 35
+      }
+     }
+    },
+    {
+     "camp": "fac_marley",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 315,
+       "share": 0.315
+      },
+      "defaite": {
+       "n": 0,
+       "share": 0
+      },
+      "terme": {
+       "n": 685,
+       "share": 0.685
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {},
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 250,
+       "defaite": 0,
+       "terme": 0
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 51,
+       "defaite": 0,
+       "terme": 209
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 1,
+       "defaite": 0,
+       "terme": 246
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 13,
+       "defaite": 0,
+       "terme": 230
+      }
+     }
+    }
+   ],
+   "deaths": {
+    "population:disette_et_pertes": {
+     "total": 217565,
+     "perGame": 217.565
+    },
+    "nomme:combat": {
+     "total": 3500,
+     "perGame": 3.5
+    },
+    "nomme:malediction": {
+     "total": 2914,
+     "perGame": 2.914
+    },
+    "nomme:assassinat": {
+     "total": 1000,
+     "perGame": 1
+    },
+    "nomme:devore": {
+     "total": 999,
+     "perGame": 0.999
+    }
+   },
+   "expeditions": {
+    "launched": 0,
+    "departed": 0,
+    "dead": 0,
+    "mortality": null,
+    "perGameMean": null
+   },
+   "limiting": {
+    "iceburst": {
+     "n": 873,
+     "share": 0.873
+    },
+    "aucune": {
+     "n": 127,
+     "share": 0.127
+    }
+   },
+   "degenerate": {
+    "famine": {
+     "n": 0,
+     "share": 0
+    },
+    "spiral": {
+     "n": 0,
+     "share": 0
+    },
+    "explained": []
+   },
+   "ordersRefused": 123056,
+   "objectives": {
+    "fondateur": {
+     "n": 829,
+     "share": 0.829
+    },
+    "tenir": {
+     "n": 688,
+     "share": 0.688
+    },
+    "ile": {
+     "n": 685,
+     "share": 0.685
+    },
+    "hizuru": {
+     "n": 738,
+     "share": 0.738
+    }
+   }
+  },
+  {
+   "scenario": "scn_854",
+   "camp": "fac_marley",
+   "games": 1000,
+   "errors": [],
+   "duration": {
+    "mean": 730,
+    "p10": 730,
+    "p50": 730,
+    "p90": 730
+   },
+   "camps": [
+    {
+     "camp": "fac_marley",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 0,
+       "share": 0
+      },
+      "defaite": {
+       "n": 0,
+       "share": 0
+      },
+      "terme": {
+       "n": 1000,
+       "share": 1
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {},
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 250
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 260
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 247
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 243
+      }
+     }
+    },
+    {
+     "camp": "fac_paradis",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 0,
+       "share": 0
+      },
+      "defaite": {
+       "n": 0,
+       "share": 0
+      },
+      "terme": {
+       "n": 1000,
+       "share": 1
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {},
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 250
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 260
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 247
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 0,
+       "defaite": 0,
+       "terme": 243
+      }
+     }
+    }
+   ],
+   "deaths": {
+    "population:disette_et_pertes": {
+     "total": 245948,
+     "perGame": 245.948
+    },
+    "nomme:combat": {
+     "total": 4265,
+     "perGame": 4.265
+    },
+    "nomme:malediction": {
+     "total": 3425,
+     "perGame": 3.425
+    },
+    "nomme:assassinat": {
+     "total": 1000,
+     "perGame": 1
+    },
+    "nomme:devore": {
+     "total": 1000,
+     "perGame": 1
+    }
+   },
+   "expeditions": {
+    "launched": 0,
+    "departed": 0,
+    "dead": 0,
+    "mortality": null,
+    "perGameMean": null
+   },
+   "limiting": {
+    "iceburst": {
+     "n": 879,
+     "share": 0.879
+    },
+    "aucune": {
+     "n": 121,
+     "share": 0.121
+    }
+   },
+   "degenerate": {
+    "famine": {
+     "n": 0,
+     "share": 0
+    },
+    "spiral": {
+     "n": 0,
+     "share": 0
+    },
+    "explained": []
+   },
+   "ordersRefused": 153511,
+   "objectives": {
+    "empire": {
+     "n": 988,
+     "share": 0.988
+    }
+   }
+  },
+  {
+   "scenario": "scn_grondement",
+   "camp": "fac_paradis",
+   "games": 1000,
+   "errors": [],
+   "duration": {
+    "mean": 100.09,
+    "p10": 30,
+    "p50": 110,
+    "p90": 150
+   },
+   "camps": [
+    {
+     "camp": "fac_paradis",
+     "games": 1000,
+     "outcomes": {
+      "victoire": {
+       "n": 315,
+       "share": 0.315
+      },
+      "defaite": {
+       "n": 370,
+       "share": 0.37
+      },
+      "terme": {
+       "n": 315,
+       "share": 0.315
+      },
+      "en_cours": {
+       "n": 0,
+       "share": 0
+      }
+     },
+     "defeats": {
+      "monde_ravage": 370
+     },
+     "byProfile": {
+      "passif": {
+       "games": 250,
+       "victoire": 0,
+       "defaite": 250,
+       "terme": 0
+      },
+      "gestionnaire": {
+       "games": 260,
+       "victoire": 117,
+       "defaite": 0,
+       "terme": 143
+      },
+      "militaire": {
+       "games": 247,
+       "victoire": 158,
+       "defaite": 0,
+       "terme": 89
+      },
+      "aleatoire": {
+       "games": 243,
+       "victoire": 40,
+       "defaite": 120,
+       "terme": 83
+      }
+     }
+    }
+   ],
+   "deaths": {
+    "monde:grondement": {
+     "total": 24763360000,
+     "perGame": 24763360
+    },
+    "population:disette_et_pertes": {
+     "total": 45493,
+     "perGame": 45.493
+    },
+    "nomme:malediction": {
+     "total": 685,
+     "perGame": 0.685
+    }
+   },
+   "expeditions": {
+    "launched": 0,
+    "departed": 0,
+    "dead": 0,
+    "mortality": null,
+    "perGameMean": null
+   },
+   "limiting": {
+    "iceburst": {
+     "n": 552,
+     "share": 0.552
+    },
+    "aucune": {
+     "n": 448,
+     "share": 0.448
+    }
+   },
+   "degenerate": {
+    "famine": {
+     "n": 0,
+     "share": 0
+    },
+    "spiral": {
+     "n": 0,
+     "share": 0
+    },
+    "explained": []
+   },
+   "ordersRefused": 12071,
+   "objectives": {
+    "ile": {
+     "n": 1000,
+     "share": 1
+    },
+    "arrete": {
+     "n": 519,
+     "share": 0.519
+    },
+    "limite": {
+     "n": 315,
+     "share": 0.315
+    }
+   }
+  }
+ ],
+ "criteria": [
+  {
+   "id": "CP9-03",
+   "label": "chaque partie atteint une fin, sans erreur",
+   "ok": true,
+   "detail": "0 partie(s) inachevée(s), 0 erreur(s)"
+  },
+  {
+   "id": "CP9-04",
+   "label": "aucune faction au-dessus de 70 % de victoires",
+   "ok": true,
+   "detail": "toutes ≤ 70 %"
+  },
+  {
+   "id": "CP9-05",
+   "label": "aucun cycle dégénéré non expliqué",
+   "ok": true,
+   "detail": "aucun, ou tous expliqués"
+  },
+  {
+   "id": "CP9-06",
+   "label": "mortalité d'expédition 25–40 %",
+   "ok": true,
+   "detail": "26.5 % (134560 morts sur 507699 partis)"
+  }
+ ]
+}

@@ -2,16 +2,18 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **P9 terminée — arrêt de revue** (fins de partie, difficultés, Grondement, invasion amphibie de l'IA, E43–E52, 845 jouable, `sim:balance` ; D-151 à D-157). Revue indépendante faite (D-106) ; pendant le mandat autonome, la phase suivante est ouverte (D-148). Suivante : **P10**. |
-| Tâche | Ouvrir P10 (fichier 18 §10) : `docs/phases/P10.md` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 111 fichiers, 728 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-4.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : P10 sur `claude/intelligent-feynman-8ekib4` (mandat autonome, D-148), puis PACK. À la revue de P9 : Gabriel joue un scénario complet (845, 850, 854 ou Grondement) et lit `docs/reports/P9.md` et `P9-balance.html` ; mesures GPU de R2+ et R3 (dettes n° 49, 64) |
+| Phase | **P10 en cours** (finitions, accessibilité, documentation ; fichier 18 §10). Faites : P10.1 (accessibilité, difficulté personnalisée), P10.2 (`sim:parcours`), P10.4 (manuel, README, CONFORMITE, index des décisions), P10.5 (`npm run jouer`, `smoke:local`). P9 close : équilibrage final de 1 000 parties par scénario, tous les critères OK (`docs/reports/P9.md`, `P9-balance.html`). |
+| Tâche | P10.3 (latences au rendu logiciel), P10.6 (audit canon), P10.7 (tous les `smoke:*`, captures, `docs/reports/P10.md`) |
+| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 761 tests (`docs/reports/P10-verify-p107c.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : P10.3, P10.6, P10.7 sur `claude/intelligent-feynman-8ekib4` (mandat autonome, D-148), puis PACK (préparé : `git stash` « PACK et brouillons P10 »). À la revue de P9 : Gabriel joue un scénario complet et lit `docs/reports/P9.md` et `P9-balance.html` ; mesures GPU de R2+ et R3 (dettes n° 49, 64) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
   renouvellement de la limite d'usage (déclencheur horaire) ; résumé final avec images et mécanismes le 2026-10-12 (19:35 UTC).
 - R3 terminée le 2026-10-09 (`docs/reports/R3.md`) : commits `b5d1abe`, `a0acf0d`, `d89dada` et le commit de fin de phase.
 - P9 terminée le 2026-10-10 (`docs/reports/P9.md`) : commits `e801995`, `d2b3744`, `db0a4d7`, `c0370f1`, `3e28416`, `9d8ec31` et le commit de fin de phase. Arrêt de revue : revue indépendante par un sous-agent (« acceptable après corrections », toutes traitées, D-156) ; la revue de Gabriel reste due à son retour.
+- P9 close le 2026-10-10 : équilibrage final (5 000 parties en quatre lots fusionnés) : 845 64,3 %, 850 53,8 %, 854 Paradis 57,1 % (Marley IA 31,5 %), 854 Marley joué 0 % (dette n° 66), Grondement 31,5 % ; mortalité d'expédition 26,5 % ; CP9-03 à CP9-06 OK.
+- P10 en cours (`docs/phases/P10.md`) : commits `ef2c66a` (P10.1), `7fa8d15` (P10.2), `a309bd0` (P10.4–P10.5), `5f17fb0` (CONFORMITE), `8d8b75e`, `7152b0b`, `e7d14e7` (P10.7).
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

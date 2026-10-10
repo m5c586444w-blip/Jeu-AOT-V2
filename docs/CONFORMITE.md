@@ -80,7 +80,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 | 05 §5 P6 | Mort et héritage d'un porteur ; coûts ; toutes les capacités de 03 §8. | FAIT | AC6-03 à AC6-05 (`docs/reports/P6.md`). |
 | 05 §5 P7 | Marley jouable ; Hizuru change de camp ; Titans comme armes. | FAIT | AC7-02 à AC7-04 (`tests/sim/diplomacy.test.ts`, `tests/sim/war.test.ts`, `sim:world`). |
 | 05 §5 P8 | Checklist 04 §2 sur chaque écran ; revue sans « template look ». | FAIT | AC8-01 à AC8-08 ; revue humaine de P8 (D-77) ; revue UI (D-113). |
-| 05 §5 P9 | 1 000 parties par scénario ; aucune faction au-dessus de 70 % ; durée cohérente. | NON VÉRIFIÉ | `docs/reports/P9.md` garde 6 « [À REMPLIR] » (CP9-01, CP9-03 à 06, § équilibrage) ; `docs/reports/P9-balance.html` et `.json` absents du dépôt. |
+| 05 §5 P9 | 1 000 parties par scénario ; aucune faction au-dessus de 70 % ; durée cohérente. | FAIT | `docs/reports/P9.md` § équilibrage (sortie collée), `docs/reports/P9-balance.html` et `.json` : 5 000 parties, maximum 64,3 %, mortalité d'expédition 26,5 %, CP9-03 à CP9-06 OK (traité après l'audit). |
 | 05 §5 P10 | Parcours 850 sans bug bloquant ; tests verts ; performances conformes. | PARTIEL | `npm run sim:parcours` : OK (`docs/reports/P10-verify-p102.log`, 758 tests) ; P10.3 à P10.7 pas encore commités. |
 
 ## 4. Fichier 09 — fonctions P1
@@ -391,7 +391,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 
 ## 7. Écarts trouvés hors des listes
 
-- **E-01** : `docs/reports/P9.md` garde 6 « [À REMPLIR] » (CP9-01, CP9-03 à 06, § équilibrage). `P9-balance.html` et `.json`, cités par CP9-10, manquent au dépôt ; PROGRESS dit pourtant « P9 terminée ».
+- **E-01** (traité depuis) : `docs/reports/P9.md` gardait 6 « [À REMPLIR] » et `P9-balance.html` et `.json` manquaient ; sortie collée et rapports commités à la clôture de P9.
 - **E-02** : la bataille réelle se joue sur une ville en grille (`src/sim/tactical/map.ts:110-117`) ; l'irrégularité de D-82 reste dans le prototype.
 - **E-03** : les batailles d'expédition, la bataille d'essai et le guide restent sur l'écran 2D de P4 (dette n° 46) : ni ciblage, ni groupes, ni file d'ordres.
 - **E-04** : le code des fusées de la Garnison (vert, rouge, jaune ; 03 §7) n'existe pas.
@@ -407,8 +407,8 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 ## 8. Écarts classés, avec un critère de correction vérifiable
 
 **P1**
-1. E-01 : lancer `npm run sim:balance`, coller sa sortie dans `docs/reports/P9.md` et commiter `P9-balance.html` et `.json`. Critères :
-   `grep -c "À REMPLIR" docs/reports/P9.md` → 0 ; `git ls-files docs/reports/P9-balance.*` → 2 lignes ; chaque faction ≤ 70 %, mortalité d'expédition 25–40 %.
+1. **Traité** : E-01 : sortie de `npm run sim:balance` collée dans `docs/reports/P9.md` (0 « À REMPLIR »), `P9-balance.html` et `.json`
+   commités ; chaque faction ≤ 70 % (maximum 64,3 %), mortalité d'expédition 26,5 %.
 2. **Traité** : les 11 ABSENT sans justification (F-LOG-10, F-POL-15, F-TEC-05, F-TIT-10, F-EXP-19, F-CMB-20, F-EVT-05, F-EVT-14,
    F-SYS-06, F-DEV-03, F-DEV-04) sont reportés par D-161 (dette n° 69). Critère tenu : aucun ABSENT sans justification.
 
@@ -438,11 +438,11 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 |---|---|---|---|---|---|---|
 | 03 §1–§14 | 6 | 8 | 0 | 0 | 0 | 14 |
 | 04 §2–§9 | 4 | 4 | 0 | 0 | 0 | 8 |
-| 05 §3 et §5 | 19 | 5 | 0 | 0 | 1 | 25 |
+| 05 §3 et §5 | 20 | 5 | 0 | 0 | 0 | 25 |
 | 09, fonctions P1 | 43 | 0 | 0 | 0 | 0 | 43 |
 | 09, fonctions P2 | 110 | 60 | 51 | 0 | 0 | 221 |
 | C-01 à C-27 | 13 | 11 | 1 | 2 | 0 | 27 |
-| **Total** | **195** | **88** | **52** | **2** | **1** | **338** |
+| **Total** | **196** | **88** | **52** | **2** | **0** | **338** |
 
 Les 52 ABSENT : J-ERR seule 1 (F-ECO-06) ; J-ERR et J-REP 4 (F-ECO-08, 10, 11, 13) ; J-V2 2 (F-CMB-11, avec J-REP, et C-10) ; J-REP seule 34 et sans justification 11, tous reportés par D-161 (dette n° 69). Aucun ABSENT n'est sans justification.
 Toutes les fonctions P1 de 09 sont faites. Les écarts tiennent à trois causes : des fonctions P2 reportées puis oubliées, les effets

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Équilibrage P9</title>
+<style>
+:root { --fond: #f4efe4; --texte: #1f1a14; --filet: #b9ab8f; --victoire: #3f6b3a; --terme: #b08a2e; --defaite: #8e2f25; --encours: #777; }
+@media (prefers-color-scheme: dark) { :root { --fond: #1b1814; --texte: #ece4d4; --filet: #5a5040; } }
+body { background: var(--fond); color: var(--texte); font: 15px/1.45 Georgia, serif; margin: 0 auto; max-width: 72rem; padding: 1rem; }
+table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 1rem; font-size: 0.9rem; }
+th, td { border-bottom: 1px solid var(--filet); padding: 0.25rem 0.4rem; text-align: left; vertical-align: top; }
+.barre { display: flex; width: 12rem; height: 0.9rem; border: 1px solid var(--filet); }
+.seg--victoire { background: var(--victoire); } .seg--terme { background: var(--terme); } .seg--defaite { background: var(--defaite); } .seg--en_cours { background: var(--encours); }
+.ok { color: var(--victoire); font-weight: bold; } .ko { color: var(--defaite); font-weight: bold; }
+section { border-top: 2px solid var(--filet); margin-top: 1.5rem; }
+</style></head><body>
+<h1>Murs et Sang — équilibrage (P9, sim:balance)</h1>
+<p>1000 parties par scénario, graines 1 à 1000, difficulté normal, pilote automatique par commandes (profils passif, gestionnaire, militaire, aléatoire tirés de la graine). Généré le 2026-10-10.</p>
+<h2>Critères</h2>
+<table><thead><tr><th>Critère</th><th>Statut</th><th>Détail</th></tr></thead><tbody><tr><td>CP9-03 chaque partie atteint une fin, sans erreur</td><td><span class="ok">OK</span></td><td>0 partie(s) inachevée(s), 0 erreur(s)</td></tr><tr><td>CP9-04 aucune faction au-dessus de 70 % de victoires</td><td><span class="ok">OK</span></td><td>toutes ≤ 70 %</td></tr><tr><td>CP9-05 aucun cycle dégénéré non expliqué</td><td><span class="ok">OK</span></td><td>aucun, ou tous expliqués</td></tr><tr><td>CP9-06 mortalité d'expédition 25–40 %</td><td><span class="ok">OK</span></td><td>26.5 % (134560 morts sur 507699 partis)</td></tr></tbody></table>
+<section>
+<h2>scn_845 — joué par fac_paradis (1000 parties)</h2>
+<p>Durée (jours) : moyenne 1362 · p10 730 · médiane 1630 · p90 1630. Ordres refusés par la simulation : 0.</p>
+<h3>Issues par camp</h3>
+<table><thead><tr><th>Camp</th><th>Répartition</th><th>Victoire</th><th>Au terme</th><th>Défaite</th><th>Causes de défaite</th><th>Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)</th></tr></thead><tbody><tr><td>fac_paradis</td><td><div class="barre"><span class="seg seg--victoire" style="width:64.30%" title="victoire 64.3 %"></span><span class="seg seg--terme" style="width:2.10%" title="au terme 2.1 %"></span><span class="seg seg--defaite" style="width:33.60%" title="défaite 33.6 %"></span></div></td><td>64.3 %</td><td>2.1 %</td><td>33.6 %</td><td>depeuplement 336</td><td>passif : 0/250 victoires, 250 défaites · gestionnaire : 260/260 victoires, 0 défaites · militaire : 247/247 victoires, 0 défaites · aleatoire : 136/243 victoires, 86 défaites</td></tr></tbody></table>
+<h3>Objectifs atteints (camp joué)</h3>
+<table><thead><tr><th>Objectif</th><th>Parties</th></tr></thead><tbody><tr><td>ordre</td><td>100.0 %</td></tr><tr><td>rose</td><td>100.0 %</td></tr><tr><td>tenir</td><td>66.6 %</td></tr><tr><td>nourrir</td><td>64.6 %</td></tr></tbody></table>
+<h3>Causes de mort (toutes parties)</h3>
+<table><thead><tr><th>Cause</th><th>Total</th><th>Par partie</th></tr></thead><tbody><tr><td>population:disette_et_pertes</td><td>42 282 299</td><td>42282.3</td></tr><tr><td>expedition:titan</td><td>48 990</td><td>49.0</td></tr><tr><td>expedition:anormal</td><td>21 341</td><td>21.3</td></tr><tr><td>expedition:hemorragie</td><td>3 134</td><td>3.1</td></tr><tr><td>expedition:infection</td><td>2 091</td><td>2.1</td></tr><tr><td>expedition:epuisement</td><td>89</td><td>0.1</td></tr></tbody></table>
+<p>Expéditions : 3164 lancées, 219 816 partis, 75 645 morts — mortalité 34.4 % (moyenne par partie 36.4 %).</p>
+<h3>Ressources limitantes</h3>
+<table><thead><tr><th>Ressource</th><th>Parties</th><th>Part</th></tr></thead><tbody><tr><td>iceburst</td><td>989</td><td>98.9 %</td></tr><tr><td>food</td><td>8</td><td>0.8 %</td></tr><tr><td>aucune</td><td>3</td><td>0.3 %</td></tr></tbody></table>
+<h3>Cas dégénérés</h3>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : 307 (30.7 %) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : 26 (2.6 %). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
+<ul><li>famine systématique : 307 partie(s) (passif 250, aleatoire 57) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite</li><li>spirale de mort : 26 partie(s) (aleatoire 26) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite</li></ul>
+</section>
+<section>
+<h2>scn_sandbox_850 — joué par fac_paradis (1000 parties)</h2>
+<p>Durée (jours) : moyenne 1829 · p10 1830 · médiane 1830 · p90 1830. Ordres refusés par la simulation : 44020.</p>
+<h3>Issues par camp</h3>
+<table><thead><tr><th>Camp</th><th>Répartition</th><th>Victoire</th><th>Au terme</th><th>Défaite</th><th>Causes de défaite</th><th>Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)</th></tr></thead><tbody><tr><td>fac_paradis</td><td><div class="barre"><span class="seg seg--victoire" style="width:53.80%" title="victoire 53.8 %"></span><span class="seg seg--terme" style="width:46.10%" title="au terme 46.1 %"></span><span class="seg seg--defaite" style="width:0.10%" title="défaite 0.1 %"></span></div></td><td>53.8 %</td><td>46.1 %</td><td>0.1 %</td><td>famine 1</td><td>passif : 0/250 victoires, 0 défaites · gestionnaire : 241/260 victoires, 0 défaites · militaire : 238/247 victoires, 0 défaites · aleatoire : 59/243 victoires, 1 défaites</td></tr></tbody></table>
+<h3>Objectifs atteints (camp joué)</h3>
+<table><thead><tr><th>Objectif</th><th>Parties</th></tr></thead><tbody><tr><td>tenir</td><td>99.9 %</td></tr><tr><td>maria</td><td>83.1 %</td></tr><tr><td>verite</td><td>83.1 %</td></tr><tr><td>dehors</td><td>83.1 %</td></tr><tr><td>ordre</td><td>66.4 %</td></tr></tbody></table>
+<h3>Causes de mort (toutes parties)</h3>
+<table><thead><tr><th>Cause</th><th>Total</th><th>Par partie</th></tr></thead><tbody><tr><td>population:disette_et_pertes</td><td>19 016 507</td><td>19016.5</td></tr><tr><td>expedition:titan</td><td>36 997</td><td>37.0</td></tr><tr><td>expedition:anormal</td><td>17 634</td><td>17.6</td></tr><tr><td>nomme:combat</td><td>12 026</td><td>12.0</td></tr><tr><td>expedition:hemorragie</td><td>2 574</td><td>2.6</td></tr><tr><td>nomme:devore</td><td>1 662</td><td>1.7</td></tr><tr><td>expedition:infection</td><td>1 659</td><td>1.7</td></tr><tr><td>nomme:malediction</td><td>999</td><td>1.0</td></tr><tr><td>nomme:assassinat</td><td>831</td><td>0.8</td></tr><tr><td>expedition:epuisement</td><td>51</td><td>0.1</td></tr></tbody></table>
+<p>Expéditions : 4393 lancées, 287 883 partis, 58 915 morts — mortalité 20.5 % (moyenne par partie 21.9 %).</p>
+<h3>Ressources limitantes</h3>
+<table><thead><tr><th>Ressource</th><th>Parties</th><th>Part</th></tr></thead><tbody><tr><td>iceburst</td><td>864</td><td>86.4 %</td></tr><tr><td>aucune</td><td>128</td><td>12.8 %</td></tr><tr><td>food</td><td>8</td><td>0.8 %</td></tr></tbody></table>
+<h3>Cas dégénérés</h3>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : 38 (3.8 %) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : 61 (6.1 %). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
+<ul><li>famine systématique : 38 partie(s) (aleatoire 38) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite</li><li>spirale de mort : 61 partie(s) (aleatoire 61) — expliqué : profils qui négligent le levier (aucun rationnement, ordres au hasard) ; un joueur attentif l'évite</li></ul>
+</section>
+<section>
+<h2>scn_854 — joué par fac_paradis (1000 parties)</h2>
+<p>Durée (jours) : moyenne 646 · p10 440 · médiane 730 · p90 730. Ordres refusés par la simulation : 123056.</p>
+<h3>Issues par camp</h3>
+<table><thead><tr><th>Camp</th><th>Répartition</th><th>Victoire</th><th>Au terme</th><th>Défaite</th><th>Causes de défaite</th><th>Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)</th></tr></thead><tbody><tr><td>fac_paradis</td><td><div class="barre"><span class="seg seg--victoire" style="width:57.10%" title="victoire 57.1 %"></span><span class="seg seg--terme" style="width:11.40%" title="au terme 11.4 %"></span><span class="seg seg--defaite" style="width:31.50%" title="défaite 31.5 %"></span></div></td><td>57.1 %</td><td>11.4 %</td><td>31.5 %</td><td>ile_perdue 315</td><td>passif : 0/250 victoires, 250 défaites · gestionnaire : 138/260 victoires, 51 défaites · militaire : 238/247 victoires, 1 défaites · aleatoire : 195/243 victoires, 13 défaites</td></tr><tr><td>fac_marley</td><td><div class="barre"><span class="seg seg--victoire" style="width:31.50%" title="victoire 31.5 %"></span><span class="seg seg--terme" style="width:68.50%" title="au terme 68.5 %"></span></div></td><td>31.5 %</td><td>68.5 %</td><td>0.0 %</td><td>—</td><td>passif : 250/250 victoires, 0 défaites · gestionnaire : 51/260 victoires, 0 défaites · militaire : 1/247 victoires, 0 défaites · aleatoire : 13/243 victoires, 0 défaites</td></tr></tbody></table>
+<h3>Objectifs atteints (camp joué)</h3>
+<table><thead><tr><th>Objectif</th><th>Parties</th></tr></thead><tbody><tr><td>fondateur</td><td>82.9 %</td></tr><tr><td>tenir</td><td>68.8 %</td></tr><tr><td>ile</td><td>68.5 %</td></tr><tr><td>hizuru</td><td>73.8 %</td></tr></tbody></table>
+<h3>Causes de mort (toutes parties)</h3>
+<table><thead><tr><th>Cause</th><th>Total</th><th>Par partie</th></tr></thead><tbody><tr><td>population:disette_et_pertes</td><td>217 565</td><td>217.6</td></tr><tr><td>nomme:combat</td><td>3 500</td><td>3.5</td></tr><tr><td>nomme:malediction</td><td>2 914</td><td>2.9</td></tr><tr><td>nomme:assassinat</td><td>1 000</td><td>1.0</td></tr><tr><td>nomme:devore</td><td>999</td><td>1.0</td></tr></tbody></table>
+<p>Expéditions : 0 lancées, 0 partis, 0 morts — mortalité — (moyenne par partie —).</p>
+<h3>Ressources limitantes</h3>
+<table><thead><tr><th>Ressource</th><th>Parties</th><th>Part</th></tr></thead><tbody><tr><td>iceburst</td><td>873</td><td>87.3 %</td></tr><tr><td>aucune</td><td>127</td><td>12.7 %</td></tr></tbody></table>
+<h3>Cas dégénérés</h3>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : 0 (0.0 %) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : 0 (0.0 %). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
+
+</section>
+<section>
+<h2>scn_854 — joué par fac_marley (1000 parties)</h2>
+<p>Durée (jours) : moyenne 730 · p10 730 · médiane 730 · p90 730. Ordres refusés par la simulation : 153511.</p>
+<h3>Issues par camp</h3>
+<table><thead><tr><th>Camp</th><th>Répartition</th><th>Victoire</th><th>Au terme</th><th>Défaite</th><th>Causes de défaite</th><th>Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)</th></tr></thead><tbody><tr><td>fac_marley</td><td><div class="barre"><span class="seg seg--terme" style="width:100.00%" title="au terme 100.0 %"></span></div></td><td>0.0 %</td><td>100.0 %</td><td>0.0 %</td><td>—</td><td>passif : 0/250 victoires, 0 défaites · gestionnaire : 0/260 victoires, 0 défaites · militaire : 0/247 victoires, 0 défaites · aleatoire : 0/243 victoires, 0 défaites</td></tr><tr><td>fac_paradis</td><td><div class="barre"><span class="seg seg--terme" style="width:100.00%" title="au terme 100.0 %"></span></div></td><td>0.0 %</td><td>100.0 %</td><td>0.0 %</td><td>—</td><td>passif : 0/250 victoires, 0 défaites · gestionnaire : 0/260 victoires, 0 défaites · militaire : 0/247 victoires, 0 défaites · aleatoire : 0/243 victoires, 0 défaites</td></tr></tbody></table>
+<h3>Objectifs atteints (camp joué)</h3>
+<table><thead><tr><th>Objectif</th><th>Parties</th></tr></thead><tbody><tr><td>empire</td><td>98.8 %</td></tr></tbody></table>
+<h3>Causes de mort (toutes parties)</h3>
+<table><thead><tr><th>Cause</th><th>Total</th><th>Par partie</th></tr></thead><tbody><tr><td>population:disette_et_pertes</td><td>245 948</td><td>245.9</td></tr><tr><td>nomme:combat</td><td>4 265</td><td>4.3</td></tr><tr><td>nomme:malediction</td><td>3 425</td><td>3.4</td></tr><tr><td>nomme:assassinat</td><td>1 000</td><td>1.0</td></tr><tr><td>nomme:devore</td><td>1 000</td><td>1.0</td></tr></tbody></table>
+<p>Expéditions : 0 lancées, 0 partis, 0 morts — mortalité — (moyenne par partie —).</p>
+<h3>Ressources limitantes</h3>
+<table><thead><tr><th>Ressource</th><th>Parties</th><th>Part</th></tr></thead><tbody><tr><td>iceburst</td><td>879</td><td>87.9 %</td></tr><tr><td>aucune</td><td>121</td><td>12.1 %</td></tr></tbody></table>
+<h3>Cas dégénérés</h3>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : 0 (0.0 %) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : 0 (0.0 %). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
+
+</section>
+<section>
+<h2>scn_grondement — joué par fac_paradis (1000 parties)</h2>
+<p>Durée (jours) : moyenne 100 · p10 30 · médiane 110 · p90 150. Ordres refusés par la simulation : 12071.</p>
+<h3>Issues par camp</h3>
+<table><thead><tr><th>Camp</th><th>Répartition</th><th>Victoire</th><th>Au terme</th><th>Défaite</th><th>Causes de défaite</th><th>Par profil du pilote (pour un camp mené par l'IA : profil du joueur adverse)</th></tr></thead><tbody><tr><td>fac_paradis</td><td><div class="barre"><span class="seg seg--victoire" style="width:31.50%" title="victoire 31.5 %"></span><span class="seg seg--terme" style="width:31.50%" title="au terme 31.5 %"></span><span class="seg seg--defaite" style="width:37.00%" title="défaite 37.0 %"></span></div></td><td>31.5 %</td><td>31.5 %</td><td>37.0 %</td><td>monde_ravage 370</td><td>passif : 0/250 victoires, 250 défaites · gestionnaire : 117/260 victoires, 0 défaites · militaire : 158/247 victoires, 0 défaites · aleatoire : 40/243 victoires, 120 défaites</td></tr></tbody></table>
+<h3>Objectifs atteints (camp joué)</h3>
+<table><thead><tr><th>Objectif</th><th>Parties</th></tr></thead><tbody><tr><td>ile</td><td>100.0 %</td></tr><tr><td>arrete</td><td>51.9 %</td></tr><tr><td>limite</td><td>31.5 %</td></tr></tbody></table>
+<h3>Causes de mort (toutes parties)</h3>
+<table><thead><tr><th>Cause</th><th>Total</th><th>Par partie</th></tr></thead><tbody><tr><td>monde:grondement</td><td>24 763 360 000</td><td>24763360.0</td></tr><tr><td>population:disette_et_pertes</td><td>45 493</td><td>45.5</td></tr><tr><td>nomme:malediction</td><td>685</td><td>0.7</td></tr></tbody></table>
+<p>Expéditions : 0 lancées, 0 partis, 0 morts — mortalité — (moyenne par partie —).</p>
+<h3>Ressources limitantes</h3>
+<table><thead><tr><th>Ressource</th><th>Parties</th><th>Part</th></tr></thead><tbody><tr><td>iceburst</td><td>552</td><td>55.2 %</td></tr><tr><td>aucune</td><td>448</td><td>44.8 %</td></tr></tbody></table>
+<h3>Cas dégénérés</h3>
+<p>Famine systématique (vivres épuisés plus de la moitié de la partie) : 0 (0.0 %) · spirale de mort (île dépeuplée d'un vingtième, moral sous 30) : 0 (0.0 %). « Expliqué » est un tri automatique (au moins 80 % des cas chez les profils qui négligent le levier) ; l'analyse est dans docs/reports/P9.md.</p>
+
+</section>
+</body></html>
