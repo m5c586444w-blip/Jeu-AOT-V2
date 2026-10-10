@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **PACK terminée** (application Windows Electron : `npm run package:win`, `smoke:pack` ; D-164). Feuille de route V2 achevée (N1 à N3). Suite : dette n° 72 (tenues des soldats, demande de l'utilisateur) et contrôle de conformité de la 3D, puis dettes. |
-| Tâche | Dette n° 72 faite pour l'essentiel (D-165, `docs/reports/dette-72.md`) ; contrôle de conformité de la 3D aux documents |
+| Tâche | Contrôle de conformité de la 3D fait (`docs/reports/CONFORMITE-3D.md` : non conforme en entier ; écarts en dettes n° 74 et 75) ; dettes |
 | Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 763 tests (`docs/reports/dette72-verify.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : contrôle de conformité de la 3D (réponse à l'utilisateur), puis dettes, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : dette n° 74 (décor de la bataille habillé par les générateurs de R1b–R1d), puis n° 75, puis autres dettes, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
@@ -16,6 +16,7 @@
 - P10 terminée le 2026-10-10 (`docs/reports/P10.md`) : commits `ef2c66a` (P10.1), `7fa8d15` (P10.2), `a309bd0` (P10.4–P10.5), `5f17fb0` (CONFORMITE), `8d8b75e`, `7152b0b`, `e7d14e7` (P10.7).
 - PACK terminée le 2026-10-10 (`docs/reports/PACK.md`) : commits `32e9d3a`, `d03b882` et le commit de fin de phase ; Windows construit depuis Linux, non lancé.
 - Dette n° 72 (uniformes fidèles à l'univers) faite pour l'essentiel le 2026-10-10 (`docs/reports/dette-72.md`, D-165) ; restent les tenues de 854, l'équipement anti-personnel, les cérémonies en jeu.
+- Contrôle de conformité de la 3D le 2026-10-10 (`docs/reports/CONFORMITE-3D.md`) : conforme pour l'architecture, les licences, les soldats, les environnements et le droit d'auteur ; partiel pour la latence (GPU réel jamais mesuré), les lieux, les Titans et le décor de la bataille.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
