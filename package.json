@@ -18,6 +18,7 @@
     "canon:check": "tsx src/tools/canon-check.ts",
     "sim:selftest": "tsx src/tools/sim-selftest.ts",
     "sim:balance": "tsx src/tools/sim-balance.ts",
+    "sim:parcours": "tsx src/tools/sim-parcours.ts",
     "verify": "npm run typecheck && npm run lint && npm run test && npm run data:validate && npm run assets:check && npm run canon:check && npm run sim:selftest && npm run build",
     "smoke:page": "npm run smoke:map",
     "map:generate": "tsx src/tools/map-generate.ts",
