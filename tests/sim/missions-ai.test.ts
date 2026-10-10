@@ -56,7 +56,8 @@ describe("IA de Marley : missions cohérentes (MIS.6, CMIS-08)", () => {
       expect(done.indexOf("mis_marley_flotte_transport")).toBeLessThan(k);
     }
     expect(stateHash(days(createInitialState(11, w854), 720))).toBe(stateHash(s));
-  });
+    // 720 jours de 854 rejoués : délai explicite (le défaut de 30 s est frôlé quand la machine est chargée).
+  }, 120_000);
 
   it("quand Marley est jouée, l'IA ne lance rien pour elle : ses missions viennent des commandes du joueur", () => {
     let m = run(createInitialState(11, w854), { type: "SetPlayerFaction", faction: "fac_marley" });

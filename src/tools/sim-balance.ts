@@ -3,7 +3,7 @@
 // Options : --parties N (1000), --scenarios a,b:camp (les quatre du menu, 854 mené par Paradis puis par Marley), --fils K,
 // --graine G (première graine, 1), --sortie chemin (docs/reports/P9-balance : .json et .html).
 // --fusion a.json,b.json… : aucun nouveau jeu ; réunit des rapports partiels (un scénario par processus, par exemple) en un
-// seul rapport, critères recalculés sur l'ensemble.
+// seul rapport, critères recalculés sur l'ensemble. --brut préfixe : écrit les parties (JSONL) ; --fusion-brut : voir plus bas.
 import { readFileSync, writeFileSync } from "node:fs";
 import { availableParallelism } from "node:os";
 import { Worker } from "node:worker_threads";
@@ -99,22 +99,54 @@ if (FUSION) {
     console.log(`fusion : ${f} (${r.scenarios.map((x) => `${x.scenario}/${x.camp}`).join(", ")})`);
   }
 }
-for (const b of FUSION ? [] : BATCHES) {
-  const w = loadWorld(DIR, b.scenario);
-  const camp = b.camp ?? (w.scenario.faction.startsWith("fac_") ? w.scenario.faction : `fac_${w.scenario.faction}`);
+/** Agrégats d'un lot de parties (scénario, camp), lignes de console comprises. */
+function summarize(scenario: string, camp: string, games: readonly GameResult[]): void {
+  const w = loadWorld(DIR, scenario);
   const empty = new Set(Object.entries(w.scenario.stocks).filter(([, v]) => v <= 0).map(([k]) => k));
-  const games = await runBatch(b.scenario, camp);
-  if (RAW) writeFileSync(`${RAW}-${b.scenario}-${camp}.jsonl`, games.map((g) => JSON.stringify(g)).join("\n") + "\n");
-  const s = aggregate(games, empty);
+  const s = aggregate([...games], empty);
   explain(s, games);
   allStats.push(s);
   const camps = s.camps.map((c) => `${c.camp} : victoire ${((c.outcomes["victoire"]?.share ?? 0) * 100).toFixed(1)} %, terme ${((c.outcomes["terme"]?.share ?? 0) * 100).toFixed(1)} %, défaite ${((c.outcomes["defaite"]?.share ?? 0) * 100).toFixed(1)} %`).join(" | ");
-  console.log(`[${b.scenario} / ${camp}] ${games.length} parties · durée moyenne ${s.duration.mean.toFixed(0)} j · ${camps}`);
+  console.log(`[${scenario} / ${camp}] ${games.length} parties · durée moyenne ${s.duration.mean.toFixed(0)} j · ${camps}`);
   console.log(`  expéditions : ${s.expeditions.launched} · mortalité ${s.expeditions.mortality === null ? "—" : `${(s.expeditions.mortality * 100).toFixed(1)} %`} · famine systématique ${s.degenerate.famine.n} · spirale ${s.degenerate.spiral.n} · limitante : ${Object.entries(s.limiting).slice(0, 3).map(([k, v]) => `${k} ${(v.share * 100).toFixed(0)} %`).join(", ")}`);
   const bp = s.camps[0]?.byProfile ?? {};
   console.log(`  par profil (${camp}) : ${Object.entries(bp).filter(([, v]) => v.games > 0).map(([p, v]) => `${p} ${((v.victoire / v.games) * 100).toFixed(0)} % de victoires (${v.games})`).join(" · ")}`);
   for (const x of s.degenerate.explained) console.log(`  ${x}`);
   if (s.errors.length) console.log(`  erreurs : ${s.errors.join(" ; ")}`);
+}
+
+// --fusion-brut a.jsonl,b.jsonl… : parties brutes (`--brut`) de plusieurs processus, regroupées par scénario et camp, puis
+// agrégées exactement comme d'un seul passage (un scénario long peut ainsi être joué en tranches de graines).
+const FUSION_RAW = opt("fusion-brut", "");
+if (FUSION_RAW) {
+  const groups = new Map<string, GameResult[]>();
+  for (const f of FUSION_RAW.split(",")) {
+    const lines = readFileSync(f, "utf8").split("\n").filter((l) => l.trim().length > 0);
+    for (const l of lines) {
+      const g = JSON.parse(l) as GameResult;
+      const k = `${g.scenario}|${g.camp}`;
+      groups.set(k, [...(groups.get(k) ?? []), g]);
+    }
+    console.log(`fusion brute : ${f} (${lines.length} parties)`);
+  }
+  const sizes = new Set([...groups.values()].map((g) => g.length));
+  if (sizes.size > 1) throw new Error(`fusion brute : lots de tailles différentes (${[...sizes].join(", ")})`);
+  for (const [k, games] of groups) {
+    games.sort((a, b) => a.seed - b.seed);
+    const seeds = new Set(games.map((g) => g.seed));
+    if (seeds.size !== games.length) throw new Error(`fusion brute : graines en double dans ${k}`);
+    parties = games.length;
+    seedBase = games[0]?.seed ?? SEED0;
+    const [scenario, camp] = k.split("|") as [string, string];
+    summarize(scenario, camp, games);
+  }
+}
+for (const b of FUSION || FUSION_RAW ? [] : BATCHES) {
+  const w = loadWorld(DIR, b.scenario);
+  const camp = b.camp ?? (w.scenario.faction.startsWith("fac_") ? w.scenario.faction : `fac_${w.scenario.faction}`);
+  const games = await runBatch(b.scenario, camp);
+  if (RAW) writeFileSync(`${RAW}-${b.scenario}-${camp}.jsonl`, games.map((g) => JSON.stringify(g)).join("\n") + "\n");
+  summarize(b.scenario, camp, games);
 }
 
 // Critères (P9 : CP9-03 à CP9-06).

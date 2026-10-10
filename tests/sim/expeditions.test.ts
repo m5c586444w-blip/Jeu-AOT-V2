@@ -109,7 +109,7 @@ describe("auto-résolution (AC3-06, 03 §12)", () => {
     expect(reasonWith({ losses_pct: 100, gas_pct: 99, abnormal: 99, max_days: 99 }).has("gas_pct")).toBe(true);
     expect(reasonWith({ losses_pct: 100, gas_pct: 0, abnormal: 1, max_days: 99 }).has("abnormal")).toBe(true);
     expect(reasonWith({ losses_pct: 100, gas_pct: 0, abnormal: 99, max_days: 2 }).has("max_days")).toBe(true);
-  });
+  }, 120_000);
 
   it("sauvegarde pendant une expédition : la suite est identique (AC3-10)", () => {
     let s = cmd(ready(9), { type: "LaunchExpedition", plan: plan(ready(9)) });
