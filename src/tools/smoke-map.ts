@@ -143,7 +143,7 @@ try {
   await page.locator('button[data-action="pause"]').click();
   await page.keyboard.press("KeyB");
   expect((await page.locator('button[data-action="pause"]').innerText()) === "B", "raccourci « pause » réassigné à B (AC1-14)");
-  await page.locator(".options__remise").click();
+  await page.locator(".options__remise:not([data-action])").click();
   await page.selectOption('select[data-setting="uiScale"]', "100");
   await page.keyboard.press("F9");
 

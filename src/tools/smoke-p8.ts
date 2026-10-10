@@ -238,7 +238,8 @@ try {
     await menu.goto(`${url}?menu=1`);
     await menu.waitForSelector(".menu-principal", { timeout: 60000 });
     await menu.evaluate(() => document.fonts.ready);
-    // Phase UI (U8) : plein écran sur le rendu des murs au crépuscule, 4 entrées, scénarios illustrés à droite, aucun tampon.
+    // Phase UI (U8) : plein écran sur le rendu des murs au crépuscule, 5 entrées (Manuel : P10.4), quatre scénarios illustrés à droite
+    // (845 : P9.8), aucun tampon.
     await menu.waitForFunction(() => {
       const i = document.querySelector<HTMLImageElement>(".menu-principal__fond");
       return !!i && i.complete && i.naturalWidth > 0;
@@ -247,7 +248,7 @@ try {
     const entries = await menu.locator(".menu-entree").allInnerTexts();
     const stamps = await menu.locator(".menu-principal .tampon").count();
     const full = await menu.$eval(".menu-principal__fond", (i) => { const r = i.getBoundingClientRect(); return r.width >= window.innerWidth - 1 && r.height >= window.innerHeight - 1; });
-    expect(covers === 3 && entries.length === 4 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
+    expect(covers === 4 && entries.length === 5 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
     await review(menu, pass, "menu principal", ".menu-principal");
     await shot(menu, pass, "menu");
     await menu.locator('.chemise[data-scenario="scn_854"]').click();
@@ -273,7 +274,8 @@ try {
     // HUD (AC8-04) : registres sur une seule ligne, tous visibles.
     const tops = await page.$$eval(".bandeau__registre-bouton", (bs) => bs.filter((b) => (b as HTMLElement).offsetParent !== null).map((b) => Math.round(b.getBoundingClientRect().top)));
     const bandH = await page.$eval(".bandeau", (b) => b.getBoundingClientRect().height);
-    expect(tops.length === 15 && Math.max(...tops) - Math.min(...tops) <= 2, `menu de gestion : ${tops.length} registres sur une seule ligne (hauteur du bandeau ${Math.round(bandH)} px)`);
+    // 17 registres en 850 : les 15 de P8, plus Armées (PA) et Missions (MIS).
+    expect(tops.length === 17 && Math.max(...tops) - Math.min(...tops) <= 2, `menu de gestion : ${tops.length} registres sur une seule ligne (écart vertical ${Math.max(...tops) - Math.min(...tops)} px ; hauteur du bandeau ${Math.round(bandH)} px)`);
     await review(page, pass, "HUD stratégique", ".bandeau");
     await review(page, pass, "menu de gestion", ".gestion");
     await shot(page, pass, "hud");
@@ -468,7 +470,7 @@ try {
       await m.waitForTimeout(400);
       const alert = await m.locator(".bandeau__alerte").innerText();
       const mtops = await m.$$eval(".bandeau__registre-bouton", (bs) => bs.filter((b) => (b as HTMLElement).offsetParent !== null).map((b) => Math.round(b.getBoundingClientRect().top)));
-      expect(alert.length > 0 && alert !== fr["hud.no_alert"] && mtops.length === 8 && Math.max(...mtops) - Math.min(...mtops) <= 2, `Marley : alerte de la nation jouée « ${alert.slice(0, 70)} » ; ${mtops.length} registres sur une ligne`);
+      expect(alert.length > 0 && alert !== fr["hud.no_alert"] && mtops.length === 10 && Math.max(...mtops) - Math.min(...mtops) <= 2, `Marley : alerte de la nation jouée « ${alert.slice(0, 70)} » ; ${mtops.length} registres sur une ligne (écart vertical ${Math.max(...mtops) - Math.min(...mtops)} px)`);
       await m.keyboard.press("KeyW");
       await m.waitForSelector('.registre-panneau[data-panel="monde"]:not([hidden])');
       expect((await m.getAttribute(".registre-panneau:not([hidden])", "data-bloc")) === "marley", "esthétique de Marley sur la table de guerre");

@@ -36,7 +36,14 @@ async function newPage(browser: Browser, w: number, h: number, errors: string[])
   return page;
 }
 
-const ready3d = (page: Page): Promise<unknown> => page.waitForFunction(() => document.documentElement.dataset["proto3d"] === "pret", undefined, { timeout: 300000 });
+/**
+ * « Prêt » (premier temps), puis fin du second temps (R1d : corps détaillés puis textures, `data-photo3d` posé en dernier) : au
+ * rendu logiciel, la page reste trop occupée pour qu'un clic aboutisse pendant ce chargement.
+ */
+const ready3d = async (page: Page): Promise<void> => {
+  await page.waitForFunction(() => document.documentElement.dataset["proto3d"] === "pret", undefined, { timeout: 300000 });
+  await page.waitForFunction(() => document.documentElement.dataset["photo3d"] !== undefined, undefined, { timeout: 300000 }).catch(() => undefined);
+};
 const stats = (page: Page): Promise<NonNullable<Window["__proto3d"]> extends { stats(): infer S } ? S : never> => page.evaluate(() => (window.__proto3d as NonNullable<Window["__proto3d"]>).stats());
 const frames = async (page: Page, n: number): Promise<void> => {
   for (let i = 0; i < n; i++) await page.evaluate(() => (window.__proto3d as NonNullable<Window["__proto3d"]>).frame());
@@ -63,26 +70,28 @@ try {
   expect((await page.locator("canvas[data-moteur='three']").count()) === 1 && (await page.getAttribute("html", "data-webgl")) === "webgl2", `page /proto3d chargée, WebGL 2 : ${renderer}`);
 
   // ——— Réglages ———
+  // Boutons du panneau : événement « click » envoyé directement (au rendu logiciel, la scène de R3 prend près de 2 s par image
+  // et Playwright n'obtient jamais un bouton « stable » pour un clic de souris ; l'effet attendu est le même).
   console.log("[réglages] 1366×768");
   for (const l of ["crepuscule", "nuit", "jour"]) {
-    await page.locator(`[data-groupe="lumiere"] button[data-choix="${l}"]`).click();
+    await page.locator(`[data-groupe="lumiere"] button[data-choix="${l}"]`).dispatchEvent("click");
     expect((await page.getAttribute("html", "data-lumiere")) === l && (await page.locator(`[data-groupe="lumiere"] button[data-choix="${l}"]`).getAttribute("aria-pressed")) === "true", `lumière « ${l} »`);
   }
-  await page.locator('[data-groupe="qualite"] button[data-choix="bas"]').click();
+  await page.locator('[data-groupe="qualite"] button[data-choix="bas"]').dispatchEvent("click");
   await frames(page, 2);
   const sBas = await stats(page);
   // 1366 × 0,75 = 1024,5 : three.js arrondit à l'entier inférieur.
   expect(!sBas.shadows && !sBas.antialias && sBas.pixelRatio === 0.75 && sBas.width === Math.floor(1366 * 0.75), `qualité basse : sans ombres, sans MSAA, résolution interne 75 % (${sBas.width}×${sBas.height})`);
-  await page.locator('[data-groupe="qualite"] button[data-choix="haut"]').click();
+  await page.locator('[data-groupe="qualite"] button[data-choix="haut"]').dispatchEvent("click");
   await frames(page, 2);
   const sHaut = await stats(page);
   expect(sHaut.shadows && sHaut.antialias && sHaut.lamps === 8 && (await page.locator("canvas[data-moteur='three']").count()) === 1, `qualité haute : ombres, MSAA (moteur recréé, un seul canevas), 8 réverbères`);
-  await page.locator('[data-groupe="qualite"] button[data-choix="moyen"]').click();
+  await page.locator('[data-groupe="qualite"] button[data-choix="moyen"]').dispatchEvent("click");
   await frames(page, 2);
   const sMoy = await stats(page);
   expect(sMoy.shadows && !sMoy.antialias && sMoy.pixelRatio === 1, `qualité moyenne : ombres, sans MSAA, 100 %`);
   // Suivi d'escouade : la cible rejoint le centre de l'escouade, puis la suit pendant qu'elle se balance.
-  await page.locator('[data-groupe="escouade"] button[data-choix="1"]').click();
+  await page.locator('[data-groupe="escouade"] button[data-choix="1"]').dispatchEvent("click");
   await page.waitForTimeout(3000);
   const v1 = await page.evaluate(() => window.__proto3d?.view());
   await page.waitForTimeout(3000);
@@ -93,20 +102,21 @@ try {
   await page.waitForTimeout(500);
   expect((await page.getAttribute("html", "data-camera")) === "suivi4", "touche 4 : suivi de l'escouade 4");
   for (const c of ["titan", "dessus", "planche", "libre"]) {
-    await page.locator(`[data-groupe="camera"] button[data-choix="${c}"]`).click();
+    await page.locator(`[data-groupe="camera"] button[data-choix="${c}"]`).dispatchEvent("click");
     expect((await page.getAttribute("html", "data-camera")) === c, `caméra « ${c} »`);
   }
   for (const [g, pose, which] of [["titan0", "saisie", 0], ["titan1", "abattu", 1]] as const) {
-    await page.locator(`[data-groupe="${g}"] button[data-choix="${pose}"]`).click();
+    await page.locator(`[data-groupe="${g}"] button[data-choix="${pose}"]`).dispatchEvent("click");
     expect((await page.evaluate((w) => window.__proto3d?.titanPoses[w], which)) === pose, `Titan ${which === 0 ? "de 5 m" : "de 15 m"} : pose « ${pose} »`);
   }
-  await page.locator('[data-groupe="soldats"] button[data-choix="vol"]').click();
+  await page.locator('[data-groupe="soldats"] button[data-choix="vol"]').dispatchEvent("click");
   expect((await page.evaluate(() => window.__proto3d?.soldierPose)) === "vol", "soldats : pose « vol » imposée");
-  await page.locator('[data-groupe="foule"] button[data-choix="non"]').click();
+  await page.locator('[data-groupe="foule"] button[data-choix="non"]').dispatchEvent("click");
   expect((await page.evaluate(() => window.__proto3d?.crowd)) === false, "foule de 300 masquée puis réaffichée");
-  await page.locator('[data-groupe="foule"] button[data-choix="oui"]').click();
+  await page.locator('[data-groupe="foule"] button[data-choix="oui"]').dispatchEvent("click");
   await page.keyboard.press("KeyL");
-  expect((await page.getAttribute("html", "data-lumiere")) === "crepuscule", "touche L : lumière suivante");
+  // Depuis R1b, quatre lumières : jour → aube → crépuscule → nuit ; après « jour », la suivante est l'aube.
+  expect((await page.getAttribute("html", "data-lumiere")) === "aube", "touche L : lumière suivante (aube)");
   await page.goto(`${url}?proto3d&sanswebgl`);
   await page.waitForFunction(() => document.documentElement.dataset["proto3d"] === "sans-webgl");
   expect((await page.locator("[data-action='retour-2d']").count()) === 1, "repli forcé (?sanswebgl) : message et bouton de retour");
