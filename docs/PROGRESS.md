@@ -3,8 +3,8 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **PACK terminée** (application Windows Electron : `npm run package:win`, `smoke:pack` ; D-164). Feuille de route V2 achevée (N1 à N3). Suite : dette n° 72 (tenues des soldats, demande de l'utilisateur) et contrôle de conformité de la 3D, puis dettes. |
-| Tâche | Dettes n° 74, 75, 55 (décor), 56, 57, 58 corrigées (D-166 à D-169) ; dettes suivantes |
-| Dernier `npm run verify` | 2026-10-10 : code 0 ; 119 fichiers, 768 tests (`docs/reports/dette56-verify.log`) |
+| Tâche | Dettes n° 74, 75, 55 (décor), 56, 57, 58, 11 corrigées (D-166 à D-169) ; dettes suivantes |
+| Dernier `npm run verify` | 2026-10-11 : code 0 ; 119 fichiers, 768 tests (`docs/reports/dette11-verify.log`) |
 | Prochaine étape | PROCHAINE ACTION EXACTE : dettes restantes par gravité (hors `src/sim`, figé depuis R2), puis résumé final des 3 jours le 2026-10-12 vers 19:35 UTC, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)

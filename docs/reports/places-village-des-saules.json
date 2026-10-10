@@ -1,7 +1,7 @@
 {
  "shots": {
   "ensemble": {
-   "file": "docs/places/village-des-saules/vue-ensemble.png",
+   "file": "/tmp/claude-0/-home-user-Jeu-AOT-V2/73b3a71d-4d0c-5397-85ee-b9e6373e831d/scratchpad/caps11/vue-ensemble.png",
    "stats": {
     "calls": 84,
     "triangles": 23681,
@@ -13,9 +13,9 @@
     }
    },
    "rgb": [
-    139.48121527777778,
-    143.7395138888889,
-    110.4156467013889
+    138.8046527777778,
+    142.81446180555557,
+    109.5225390625
    ]
   }
  },

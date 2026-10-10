@@ -151,7 +151,21 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
   group.name = "sol";
   const textures: Texture[] = [];
   const materials: Material[] = [];
+  // Dette n° 11 : chaque couche posée sur la prairie est tirée vers la caméra en profondeur (décalage de polygone croissant
+  // avec sa hauteur) : plus de rayures de loin, quelques centimètres ne suffisant pas à 1,5 km en qualité moyenne.
+  const LAYER: [RegExp, number][] = [
+    [/^champs-/, 1],
+    [/^cours-/, 2],
+    [/^(parcs|potagers)$/, 3],
+    [/^chaussee-/, 4],
+  ];
   const add3 = (g: BufferGeometry | null, mat: MeshStandardMaterial, name: string, receive = true): void => {
+    const k = LAYER.find(([re]) => re.test(name))?.[1] ?? 0;
+    if (k > 0) {
+      mat.polygonOffset = true;
+      mat.polygonOffsetFactor = -k;
+      mat.polygonOffsetUnits = -2 * k;
+    }
     materials.push(mat);
     if (!g) return;
     const m = new Mesh(g, mat);
