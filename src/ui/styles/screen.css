@@ -609,7 +609,8 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .planche__phase { margin: 0; font-size: var(--t-xs); color: var(--texte-discret); }
 .planche__etat { margin: 0; font-size: var(--t-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--succes-clair); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .planche .plan-probleme { margin: 0; padding: 0 0.3rem; font-size: var(--t-xs); line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
-.planche .registre-note { margin: 0; font-size: var(--t-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Dette n° 40 : coût et durée sur deux lignes au plus (quatre ressources ne sont plus coupées par des points de suspension). */
+.planche .registre-note { margin: 0; font-size: var(--t-xs); line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .planche .registre-bouton { align-self: flex-start; margin: 0.1rem 0 0; }
 .rech-detail h3 { margin: 0 0 0.3rem; font-size: var(--t-xl); }
 .planches { display: flex; flex-direction: column; gap: 0.4rem; }

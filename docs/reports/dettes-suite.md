@@ -222,3 +222,12 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   sa droite l'étendard rouge à étoile de Marley, « 1,9 k ».
   - Défauts : le cercle de contact (rouge) reste sous l'étendard de Paradis seul ; les deux effectifs sont proches du bord
     de l'île ; aucune flèche ne relie les deux armées.
+
+## Dette n° 40 (en partie) : coût des planches de mission
+- La ligne « coût · durée » d'une planche passe sur deux lignes au plus au lieu d'être coupée par des points de suspension.
+- `npm run verify` (`dette40-verify.log`) : « Tests  795 passed (795) », `EXIT=0` ; `smoke:mis` (`dette40-smoke-mis.log`) :
+  « smoke:mis : tout est conforme. », `EXIT=0`.
+- **`mis-ecran-1366.png`** : registre des missions, arbre militaire ; « Acier 800, Poudre 600, Or 3 000 · 6 mois » lisible
+  en entier sur la planche « Canons des remparts ».
+  - Défauts : troisième colonne coupée par la zone de défilement de l'arbre (il faut faire défiler) ; lignes de liaison
+    serrées entre colonnes ; fiche de détail qui masque une partie de l'arbre.
