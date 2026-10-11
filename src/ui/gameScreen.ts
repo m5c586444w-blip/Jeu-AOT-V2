@@ -232,7 +232,7 @@ export async function bootGame(): Promise<void> {
   const notice = new Notice(document.body);
   // Écran de bataille (P4) : le temps stratégique est suspendu tant qu'il est ouvert.
   let inBattle = false;
-  const playBattle = async (setup: BattleSetup, title: string, linked: boolean, realtime = false): Promise<TimedOrder[] | null> => {
+  const playBattle = async (setup: BattleSetup, title: string, linked: boolean, realtime = false, province?: string): Promise<TimedOrder[] | null> => {
     inBattle = true;
     bubble.hide();
     // La carte stratégique est masquée : son rendu est suspendu pour laisser l'image à la bataille.
@@ -240,7 +240,9 @@ export async function bootGame(): Promise<void> {
     try {
       window.setTimeout(() => hints?.show("bataille", null), 700);
       // R2+ : rencontres d'armées et batailles de compagnie sur l'écran temps réel ; expéditions et essais sur l'écran de P4.
-      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked, year: state.date.year }) : await openBattleScreen({ world, why, setup, title, linked });
+      // Dette n° 62 : la région de la province donne la tenue des fantassins de Paradis (Brigade Militaire dans Sina).
+      const region = province ? world.provinces.find((p) => p.id === province)?.region : undefined;
+      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked, year: state.date.year, ...(region ? { region } : {}) }) : await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
       map.setSuspended(false);

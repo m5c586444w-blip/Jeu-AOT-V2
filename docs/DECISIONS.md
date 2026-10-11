@@ -4,7 +4,7 @@
 
 ## Index
 
-170 décisions, de D-01 (2026-10-02) à D-170 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
+171 décisions, de D-01 (2026-10-02) à D-171 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -176,6 +176,7 @@
 - **D-168** (10-10) — Dette n° 55 (décor) : mur d'enceinte en toile de fond de la ville de bataille
 - **D-169** (10-10) — Dettes n° 56 à 58 : interface de la bataille temps réel
 - **D-170** (10-11) — Dette n° 72 (suite) : tenue sombre de 854, lances de foudre, critère de silhouette en bataille
+- **D-171** (10-11) — Dette n° 62 : officiers de Paradis, Brigade Militaire dans Sina, Alliés et Hizuru en bataille
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1679,3 +1680,16 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Reste** (dette n° 72) : équipement anti-personnel de 854 (forme `?`), cérémonies en jeu.
 - **Réversible** : oui.
 
+
+## 2026-10-11 — D-171 Dette n° 62 : officiers de Paradis, Brigade Militaire dans Sina, Alliés et Hizuru en bataille
+- **Officier de Paradis** (premier homme de chaque section, comme pour Marley) : uniforme et emblème de ses hommes (C),
+  équipement de manœuvre, sans fusil ; pistolet au tir, mains dans le dos au repos (A). Variante `officier_paradis` de
+  `data/art/figures_r3.json`.
+- **Brigade Militaire** : elle tient l'intérieur du mur Sina (C) ; une rencontre d'armées dans une province des régions
+  `interieur_sina` ou `mur_sina` habille les fantassins de Paradis en Brigade Militaire (licorne), ailleurs en Garnison
+  (règle de rendu A, `fantassins_paradis`). La vue reçoit la région de la province ; la simulation n'est pas touchée.
+- **Alliés et Hizuru** : coupe de l'infanterie et de l'officier de Marley, teintes propres (sable, bleu nuit), sans brassard
+  ni bandeau de Marley ; uniformes réels non établis (`?`, Q18). Foule instanciée aux mêmes teintes.
+- Le critère de silhouette (D-170) couvre aussi la Brigade Militaire face à Marley (0,59 et 0,60).
+- Planche de contrôle `r3-fantassins`.
+- **Réversible** : oui.

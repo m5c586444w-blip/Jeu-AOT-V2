@@ -1,5 +1,5 @@
 // npm run smoke:r3 — R3 (CR3-08, CR3-09) dans un vrai navigateur (Chromium, serveur de développement Vite).
-// 1. Planches `?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses|r3-uniformes|r3-ceremonie|r3-discours` (1920×1080) : hauteurs mesurées des Titans.
+// 1. Planches `?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses|r3-uniformes|r3-ceremonie|r3-discours|r3-fantassins` (1920×1080) : hauteurs mesurées des Titans.
 // 2. Bataille de compagnie en 3D (1366×768) : « prêt » en figures de R1, puis second temps (corps de base : Titans de R3 et
 //    figures en tenue) ; chaque figure montre la pose de l'état lu dans la simulation ; vues rapprochées (Paradis, Marley), suivi.
 // 3. 3840×2160 : vue rapprochée. 4. three.js hors du bundle principal (dist/). 0 erreur console.
@@ -114,7 +114,10 @@ const browser: Browser = await chromium.launch({ executablePath });
 
 try {
   // ——— 1. Planches (`R3_PLANCHES=0` : sautées, mise au point de la bataille) ———
-  for (const sheet of process.env["R3_PLANCHES"] === "0" ? [] : ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours"]) {
+  // `R3_PLANCHES=0` : aucune planche ; `R3_PLANCHES=r3-fantassins,r3-soldats` : ces planches seulement.
+  const allSheets = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins"];
+  const pick = process.env["R3_PLANCHES"];
+  for (const sheet of pick === "0" ? [] : pick ? allSheets.filter((x) => pick.split(",").includes(x)) : allSheets) {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
     watch(page, `[${sheet}] `);
     const t0 = Date.now();

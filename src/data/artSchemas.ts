@@ -320,6 +320,27 @@ const Outfit = z
     corpulence: z.object({ age: UnitRange, muscle: UnitRange, weight: UnitRange }).strict(),
   })
   .strict();
+const OutfitVariant = z
+  .object({
+    id: z.string().regex(/^[a-z_]+$/),
+    /** Officier en tête de section de Paradis (sur la tenue de ses hommes). */
+    officier: z.boolean().optional(),
+    sans_fusil: z.boolean().optional(),
+    etui: z.boolean().optional(),
+    repos: z.enum(["bras", "arme", "port", "dos"]).optional(),
+    /** Fantassins d'une autre nation : tenue de base recolorée. */
+    faction: z.string().regex(/^fac_[a-z_]+$/).optional(),
+    base: z.enum(SOLDIER_OUTFIT_IDS).optional(),
+    veste: Hex.optional(),
+    pantalon: Hex.optional(),
+    molletieres: Hex.optional(),
+    coiffe: Hex.optional(),
+    sans_brassard: z.boolean().optional(),
+    canon: CanonSchema,
+    note: z.string().min(1),
+  })
+  .strict()
+  .refine((v) => Boolean(v.officier) !== Boolean(v.faction && v.base), "variante : officier, ou faction et tenue de base");
 export const FiguresR3FileSchema = z
   .object({
     canon: CanonSchema,
@@ -327,6 +348,12 @@ export const FiguresR3FileSchema = z
     titans: z.array(z.object({ classe: z.string(), variantes: z.array(TitanR3Variant).length(3) }).strict()).length(5),
     peaux: z.array(z.object({ id: z.enum(["pale", "rougeaude"]), nom: z.string().min(1), teinte: Hex, melange: Unit, marbrures: Unit, dents: Hex }).strict()).length(2),
     soldats: z.array(Outfit).length(7),
+    /** Dette n° 62 : tenue des fantassins de Paradis selon la région de la bataille (Brigade Militaire dans Sina). */
+    fantassins_paradis: z
+      .object({ defaut: z.enum(SOLDIER_OUTFIT_IDS), par_region: z.record(z.string().min(1), z.enum(SOLDIER_OUTFIT_IDS)), canon: CanonSchema, note: z.string().min(1) })
+      .strict(),
+    /** Dette n° 62 : officier de Paradis (tenue de ses hommes, sans fusil) ; fantassins d'autres nations (base recolorée). */
+    variantes: z.array(OutfitVariant).min(1),
   })
   .strict()
   .superRefine((f, ctx) => {

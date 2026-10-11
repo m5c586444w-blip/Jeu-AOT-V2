@@ -10,8 +10,8 @@ import type { HumanSoldier } from "./humanSoldier";
 import { buildHumanTitan } from "./humanTitan";
 import type { HumanTitan } from "./humanTitan";
 import type { HumanPose } from "./humanAnim";
-import { FIGURES_R3, OUTFIT_IDS, R3_CLASS_IDS, outfit, r3TitanSpec } from "./figuresR3";
-import type { SkinId, TitanVariantId } from "./figuresR3";
+import { FIGURES_R3, OUTFIT_IDS, R3_CLASS_IDS, outfit, r3TitanSpec, troopLook } from "./figuresR3";
+import type { Outfit, SkinId, TitanVariantId } from "./figuresR3";
 import { dressMaterials } from "./bodies";
 import { soldierMaterials } from "./soldier";
 import { setSteamTexture } from "./titan";
@@ -26,6 +26,7 @@ import { puffTexture, titanSkinTexture } from "./textures";
  * - r3-uniformes (dette n° 72) : les quatre corps de Paradis de dos et de trois quarts, emblèmes agrandis au-dessus, et la
  *   cape sous la pluie (capuche levée) et les lances de foudre ;
  * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
+ * - r3-fantassins (dette n° 62) : officiers de Paradis (Garnison, Brigade Militaire), Marley, Alliés et Hizuru ;
  * - r3-poses : soldats (marche, course, chute, coupe, tir, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
  *   effondrement, abattu).
  * Les étiquettes sont des points 3D que la page projette à l'écran.
@@ -48,7 +49,7 @@ export interface R3Sheet {
   backdrop?: { env: string; at: { x: number; y: number } };
 }
 
-export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours"] as const;
+export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins"] as const;
 
 export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeMap: Texture | null, detail: { skin: Texture; cloth: Texture } | null, time: number): R3Sheet {
   const out: R3Sheet = { soldiers: [], titans: [], labels: [], eye: new Vector3(0, 2, 10), target: new Vector3(0, 1, 0), fov: 32, ground: 60, bodies: [] };
@@ -72,8 +73,8 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.titans.push(ti);
     return ti;
   };
-  const soldier = (id: (typeof OUTFIT_IDS)[number], seed: number, height?: number, pluie = false): HumanSoldier => {
-    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: outfit(id), pluie, ...(height ? { height, gender: 1 } : {}) });
+  const soldier = (id: (typeof OUTFIT_IDS)[number] | Outfit, seed: number, height?: number, pluie = false): HumanSoldier => {
+    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: typeof id === "string" ? outfit(id) : id, pluie, ...(height ? { height, gender: 1 } : {}) });
     s.group.traverse((o) => {
       o.castShadow = true;
     });
@@ -152,6 +153,29 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.labels.push({ text: "de face", at: new Vector3(-2.94, 2.05, 0) }, { text: "de dos", at: new Vector3(2.94, 2.05, 0) });
     out.target.set(0, 1.0, 0);
     out.eye.set(0, 1.2, 10.8);
+    out.fov = 38;
+  } else if (sheet === "r3-fantassins") {
+    // Dette n° 62 : fantassins tels que la bataille les habille (`troopLook`) ; l'officier de la Garnison au tir (pistolet).
+    const row: [string, boolean, string | undefined, string, HumanPose][] = [
+      ["fac_paradis", true, undefined, "Officier\nde la Garnison", "tir"],
+      ["fac_paradis", true, "interieur_sina", "Officier de la\nBrigade Militaire", "attente"],
+      ["fac_paradis", false, "interieur_sina", "Brigade Militaire\n(Sina)", "attente"],
+      ["fac_marley", false, undefined, "Infanterie\nde Marley", "attente"],
+      ["fac_allies", false, undefined, "Fantassin\nallié", "attente"],
+      ["fac_allies", true, undefined, "Officier\nallié", "attente"],
+      ["fac_hizuru", false, undefined, "Garde\nd'Hizuru", "attente"],
+      ["fac_hizuru", true, undefined, "Officier\nd'Hizuru", "attente"],
+    ];
+    row.forEach(([faction, officer, region, text, pose], i) => {
+      const s = soldier(troopLook(faction, officer, region).outfit, 60 + i, 1.7);
+      const x = -4.9 + i * 1.4;
+      s.group.position.set(x, 0, 0);
+      s.group.rotation.y = pose === "tir" ? -0.6 : 0.25;
+      s.setPose(pose, time);
+      out.labels.push({ text, at: new Vector3(x, -0.12, 0) });
+    });
+    out.target.set(0, 0.95, 0);
+    out.eye.set(0, 1.25, 9.6);
     out.fov = 38;
   } else if (sheet === "r3-uniformes") {
     // Quatre corps de Paradis : de dos (emblème au dos ou sur la cape) puis de trois quarts (manche, poitrine) ; emblèmes agrandis.

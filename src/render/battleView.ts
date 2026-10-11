@@ -31,6 +31,8 @@ export interface ViewOptions {
   violence: Violence;
   /** Année de la bataille (dette n° 72) : à partir de 854, tenue sombre du Corps de Reconnaissance (3D). */
   year?: number;
+  /** Région de la province de la bataille (dette n° 62) : la Brigade Militaire figure les fantassins de Paradis dans Sina. */
+  region?: string;
 }
 
 export interface BattleView {

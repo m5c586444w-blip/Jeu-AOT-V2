@@ -428,7 +428,7 @@ export class ArmiesPanel implements Panel {
     const setup = c ? (rt ? encounterSetupRt(c, id) : encounterSetup(c, id)) : null;
     const e = c?.s.encounters.find((x) => x.id === id);
     if (!setup || !e) return;
-    const orders = await this.ctx.playBattle(setup, t(`armies.encounter.${e.kind}`, { place: provinceName(this.ctx.world, e.province) }), true, rt);
+    const orders = await this.ctx.playBattle(setup, t(`armies.encounter.${e.kind}`, { place: provinceName(this.ctx.world, e.province) }), true, rt, e.province);
     if (orders) await this.ctx.dispatch({ type: "ResolveEncounter", encounter: id, mode: "jouer", orders, ...(rt ? { rt: true } : {}) });
   }
 

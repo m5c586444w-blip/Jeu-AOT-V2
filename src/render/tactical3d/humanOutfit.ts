@@ -1,6 +1,6 @@
 import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, DoubleSide, Euler, LatheGeometry, Matrix4, MeshStandardMaterial, Quaternion, SphereGeometry, Vector2, Vector3 } from "three";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import type { Outfit, OutfitId } from "./figuresR3";
+import type { Outfit } from "./figuresR3";
 import type { SoldierMaterials } from "./soldier";
 
 /**
@@ -127,7 +127,7 @@ export interface OutfitMaterials {
   wood: MeshStandardMaterial;
 }
 
-const byMats = new WeakMap<SoldierMaterials, Map<OutfitId, OutfitMaterials>>();
+const byMats = new WeakMap<SoldierMaterials, Map<string, OutfitMaterials>>();
 
 export function outfitMaterials(mats: SoldierMaterials, o: Outfit): OutfitMaterials {
   let m = byMats.get(mats);
@@ -135,7 +135,9 @@ export function outfitMaterials(mats: SoldierMaterials, o: Outfit): OutfitMateri
     m = new Map();
     byMats.set(mats, m);
   }
-  const hit = m.get(o.id);
+  // Clé : la tenue entière (dette n° 62 : les variantes recolorées gardent l'identifiant de leur tenue de base).
+  const key = JSON.stringify(o);
+  const hit = m.get(key);
   if (hit) return hit;
   const tint = (base: MeshStandardMaterial, hex: string): MeshStandardMaterial => {
     const x = base.clone();
@@ -161,7 +163,7 @@ export function outfitMaterials(mats: SoldierMaterials, o: Outfit): OutfitMateri
     pack: o.sac ? cloth(o.sac, 0.85) : null,
     wood: new MeshStandardMaterial({ color: new Color(0x5a3f26), roughness: 0.6 }),
   };
-  m.set(o.id, out);
+  m.set(key, out);
   mats.all.push(...([out.jacket, out.trousers, out.boots, out.puttees, out.cape, out.coat, out.hat, out.band, out.sash, out.pack, out.wood].filter((x) => x !== null) as MeshStandardMaterial[]));
   return out;
 }

@@ -1,7 +1,6 @@
 import { t } from "../i18n";
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
-import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { World } from "../sim/strategic/world";
 import { CabinetPanel } from "./panels/cabinetPanel";
 import { CharactersPanel } from "./panels/charactersPanel";
@@ -53,7 +52,7 @@ export class Registers {
 
   private readonly stateOf: () => GameState;
 
-  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean, realtime?: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
+  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: PanelContext["playBattle"], openEvent?: (id: string) => void) {
     this.stateOf = state;
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");

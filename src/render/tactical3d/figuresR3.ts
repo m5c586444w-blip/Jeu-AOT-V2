@@ -78,11 +78,55 @@ export function outfit(id: OutfitId): Outfit {
   return o;
 }
 
+/** Tenue d'un fantassin et sa clé de réserve (une figure ne change pas de tenue). */
+export interface TroopLook {
+  key: string;
+  outfit: Outfit;
+}
+
+type Variant = FiguresR3File["variantes"][number];
+const officerVariant = FIGURES_R3.variantes.find((v) => v.officier) as Variant | undefined;
+
+/** Officier de Paradis (dette n° 62) : la tenue de ses hommes, sans fusil, pistolet au tir, attitude propre (A). */
+function officerOf(o: Outfit, v: Variant): Outfit {
+  const out: Outfit = { ...o, repos: v.repos ?? o.repos };
+  if (v.sans_fusil) delete out.fusil;
+  if (v.etui) out.etui = true;
+  return out;
+}
+
+/** Fantassins d'une autre nation (dette n° 62) : tenue de base recolorée, sans le brassard des Eldiens de Marley. */
+function recolor(o: Outfit, v: Variant): Outfit {
+  const out: Outfit = { ...o };
+  if (v.veste) out.veste = v.veste;
+  if (v.pantalon) out.pantalon = v.pantalon;
+  if (v.molletieres) out.molletieres = v.molletieres;
+  if (v.coiffe && o.coiffe) out.coiffe = { forme: o.coiffe.forme, teinte: v.coiffe };
+  if (v.veste && o.manteau) out.manteau = { ...o.manteau, teinte: v.veste };
+  if (v.sans_brassard) delete out.brassard;
+  return out;
+}
+
 /**
- * Tenue d'un fantassin de la simulation selon sa faction [A] : Paradis → Garnison (la Police militaire reste à l'intérieur des
- * murs, hors des batailles de compagnie) ; les autres → infanterie de Marley, et l'officier en tête de section.
+ * Tenue d'un fantassin de la simulation (lecture seule) selon sa faction, son rang et la région de la bataille [A] :
+ * Paradis → Garnison, ou Brigade Militaire dans Sina (`fantassins_paradis`), l'officier en tête de section sans fusil ;
+ * Alliés et Hizuru → leur variante (officier compris) ; les autres → infanterie de Marley, et l'officier.
  */
-export function outfitForFaction(faction: string, officer: boolean): OutfitId {
-  if (faction === "fac_paradis") return "garnison";
-  return officer ? "marley_officier" : "marley_infanterie";
+export function troopLook(faction: string, officer: boolean, region?: string): TroopLook {
+  if (faction === "fac_paradis") {
+    const rule = FIGURES_R3.fantassins_paradis;
+    const id = (region && rule.par_region[region]) || rule.defaut;
+    if (officer && officerVariant) return { key: `${id}+${officerVariant.id}`, outfit: officerOf(outfit(id), officerVariant) };
+    return { key: id, outfit: outfit(id) };
+  }
+  const id: OutfitId = officer ? "marley_officier" : "marley_infanterie";
+  const v = FIGURES_R3.variantes.find((x) => x.faction === faction);
+  // L'officier d'une autre nation garde la coupe de l'officier, aux couleurs de sa variante (sans le bandeau de Marley).
+  if (v?.base) return { key: officer ? `${v.id}+officier` : v.id, outfit: recolor(outfit(officer ? id : v.base), v) };
+  return { key: id, outfit: outfit(id) };
+}
+
+/** Teinte de la foule instanciée d'une faction (veste de sa tenue de fantassin). */
+export function troopTint(faction: string, region?: string): string {
+  return troopLook(faction, false, region).outfit.veste;
 }

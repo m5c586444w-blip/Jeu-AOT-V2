@@ -500,5 +500,46 @@
       },
       "repos": "dos"
     }
+  ],
+  "fantassins_paradis": {
+    "defaut": "garnison",
+    "par_region": { "interieur_sina": "police", "mur_sina": "police" },
+    "canon": "A",
+    "note": "Fantassins de Paradis en bataille (dette n° 62) : la Brigade Militaire tient l'intérieur du mur Sina (C) ; une bataille dans une province de Sina la montre (choix de rendu A) ; ailleurs, la Garnison."
+  },
+  "variantes": [
+    {
+      "id": "officier_paradis",
+      "officier": true,
+      "sans_fusil": true,
+      "etui": true,
+      "repos": "dos",
+      "canon": "A",
+      "note": "Officier en tête d'une section de Paradis : uniforme et emblème de ses hommes (C : uniforme commun), équipement de manœuvre ; sans fusil, pistolet au tir, mains dans le dos au repos : choix du projet (A)."
+    },
+    {
+      "id": "allies",
+      "faction": "fac_allies",
+      "base": "marley_infanterie",
+      "veste": "#8C7A55",
+      "pantalon": "#7D6C4B",
+      "molletieres": "#5E5240",
+      "coiffe": "#7A6A48",
+      "sans_brassard": true,
+      "canon": "?",
+      "note": "Forces alliées : coupe et teintes de leur uniforme non établies (?, Q18) ; teinte sable choisie par le projet pour ne pas les confondre avec Marley ; aucun brassard (celui des Eldiens de Marley, C)."
+    },
+    {
+      "id": "hizuru",
+      "faction": "fac_hizuru",
+      "base": "marley_infanterie",
+      "veste": "#2F3A4A",
+      "pantalon": "#2A3240",
+      "molletieres": "#20262F",
+      "coiffe": "#2B3443",
+      "sans_brassard": true,
+      "canon": "?",
+      "note": "Garde d'Hizuru : jamais montrée en armes (?, Q18) ; bleu nuit choisi par le projet ; aucun brassard."
+    }
   ]
 }

@@ -55,7 +55,8 @@ import type { HumanSoldier } from "../humanSoldier";
 import { buildHumanTitan } from "../humanTitan";
 import type { HumanTitan } from "../humanTitan";
 import type { HumanPose } from "../humanAnim";
-import { outfit, outfitForFaction, r3TitanForUnit } from "../figuresR3";
+import { outfit, r3TitanForUnit, troopLook, troopTint } from "../figuresR3";
+import type { TroopLook } from "../figuresR3";
 import type { OutfitId } from "../figuresR3";
 import { titanSkinTexture } from "../textures";
 
@@ -174,7 +175,10 @@ export class View3D implements BattleView {
   private kitState: "reperes" | "chargement" | "corps" | "repli" = "reperes";
   private readonly humanTitans = new Map<number, HumanTitan>();
   private readonly figs = new Map<string, HumanSoldier>();
-  private readonly freeFigs = new Map<OutfitId, HumanSoldier[]>();
+  /** Réserve de figures par tenue (clé de `TroopLook`) ; la clé de chaque figure construite. */
+  private readonly freeFigs = new Map<string, HumanSoldier[]>();
+  private readonly figKey = new Map<HumanSoldier, string>();
+  private readonly troopTints = new Map<string, Color>();
   private readonly skins = new Map<string, Texture>();
   private officers = new Set<number>();
   private builtFigs = 0;
@@ -450,18 +454,35 @@ export class View3D implements BattleView {
     return ti;
   }
 
+  /** Tenue des soldats de manœuvre (année de la bataille). */
+  private get odmLook(): TroopLook {
+    const id = odmOutfitFor(this.opts.year);
+    return { key: id, outfit: outfit(id) };
+  }
+
+  /** Teinte de la foule des fantassins d'une faction autre que Paradis (dette n° 62 : Alliés, Hizuru, Marley). */
+  private tintOf(faction: string): Color {
+    let c = this.troopTints.get(faction);
+    if (!c) {
+      c = new Color(troopTint(faction));
+      this.troopTints.set(faction, c);
+    }
+    return c;
+  }
+
   /** Figure en tenue pour une unité (réattribuée d'une image à l'autre ; construite au fil des images). */
-  private figureFor(key: string, id: OutfitId, budget: { soldiers: number }): HumanSoldier | null {
+  private figureFor(key: string, look: TroopLook, budget: { soldiers: number }): HumanSoldier | null {
     const hit = this.figs.get(key);
     if (hit) return hit;
-    const free = this.freeFigs.get(id)?.pop();
+    const free = this.freeFigs.get(look.key)?.pop();
     if (free) {
       this.figs.set(key, free);
       return free;
     }
     if (!this.kit?.template || budget.soldiers <= 0) return null;
     budget.soldiers--;
-    const fig = buildHumanSoldier(this.kit.template, this.seed + 101 * this.builtFigs++, this.mats, { eyeMap: this.kit.eyeMap, outfit: outfit(id) });
+    const fig = buildHumanSoldier(this.kit.template, this.seed + 101 * this.builtFigs++, this.mats, { eyeMap: this.kit.eyeMap, outfit: look.outfit });
+    this.figKey.set(fig, look.key);
     fig.group.traverse((o) => {
       o.castShadow = true;
     });
@@ -811,7 +832,7 @@ export class View3D implements BattleView {
       const mesh = paradis ? L.troopsA : L.troops;
       if (!mesh) return;
       const n = paradis ? troopAN++ : troopN++;
-      const color = paradis ? UNIFORM_COLORS.paradis : UNIFORM_COLORS.marley;
+      const color = paradis ? UNIFORM_COLORS.paradis : this.tintOf(t.faction);
       if (t.mode === "mort") {
         setInst(mesh, n, t.x, 0, t.y, yawOf(t.heading), 1, true);
         mesh.setColorAt(n, color.clone().multiplyScalar(0.55));
@@ -863,14 +884,14 @@ export class View3D implements BattleView {
         if (keep.has(key)) continue;
         fig.group.visible = false;
         this.figs.delete(key);
-        const id = fig.outfit?.id ?? "exploration";
+        const id = this.figKey.get(fig) ?? fig.outfit?.id ?? "exploration";
         this.freeFigs.set(id, [...(this.freeFigs.get(id) ?? []), fig]);
       }
       for (const fig of this.detail) fig.group.visible = false;
       for (const w of chosen) {
         const officer = w.troop ? this.officers.has(w.troop.id) : false;
-        const id: OutfitId = w.troop ? outfitForFaction(w.troop.faction, officer) : odmOutfitFor(this.opts.year);
-        const fig = this.figureFor(w.key, id, budget);
+        const look: TroopLook = w.troop ? troopLook(w.troop.faction, officer, this.opts.region) : this.odmLook;
+        const fig = this.figureFor(w.key, look, budget);
         if (!fig) {
           toCrowd(w);
           continue;

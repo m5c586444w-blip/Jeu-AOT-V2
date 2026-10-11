@@ -4,7 +4,7 @@ import { skinnedBounds, templateFromBuffer } from "../../../src/render/tactical3
 import type { HumanTemplate } from "../../../src/render/tactical3d/humanBase";
 import { buildHumanSoldier } from "../../../src/render/tactical3d/humanSoldier";
 import type { HumanSoldier } from "../../../src/render/tactical3d/humanSoldier";
-import { OUTFIT_IDS, outfit, outfitForFaction } from "../../../src/render/tactical3d/figuresR3";
+import { OUTFIT_IDS, outfit, troopLook, troopTint } from "../../../src/render/tactical3d/figuresR3";
 import type { OutfitId } from "../../../src/render/tactical3d/figuresR3";
 import { worldPoint } from "../../../src/render/tactical3d/rig";
 import { coverage, overlap, silhouettePair } from "../../../src/render/tactical3d/silhouette";
@@ -24,11 +24,14 @@ import { soldierMaterials } from "../../../src/render/tactical3d/soldier";
 const FAMILY: Record<OutfitId, string> = { exploration: "reconnaissance", exploration_854: "reconnaissance", garnison: "uniforme-fusil", police: "uniforme-fusil", recrues: "uniforme", marley_infanterie: "marley", marley_officier: "marley-officier" };
 /**
  * D-170 : tenues qui peuvent se rencontrer dans une même bataille (soldats de manœuvre de l'époque, fantassins de Paradis,
- * infanterie et officiers de Marley) ; la Brigade Militaire et les recrues ne paraissent pas en bataille (dette n° 62).
+ * infanterie et officiers de Marley) ; la Brigade Militaire tient les batailles dans Sina (dette n° 62, D-171) ; les recrues
+ * ne paraissent pas en bataille.
  */
 const BATTLE_SETS: readonly OutfitId[][] = [
   ["exploration", "garnison", "marley_infanterie", "marley_officier"],
   ["exploration_854", "garnison", "marley_infanterie", "marley_officier"],
+  ["exploration", "police", "marley_infanterie", "marley_officier"],
+  ["exploration_854", "police", "marley_infanterie", "marley_officier"],
 ];
 let t: HumanTemplate;
 const mats = soldierMaterials();
@@ -72,9 +75,47 @@ describe("soldats de R3 : sept tenues (R3.2, dette n° 72)", () => {
     }
     expect(paradis.map((o) => o.embleme)).toEqual(["ailes", "roses", "licorne", "epees"]);
     expect(outfit("exploration").cape).toBeDefined();
-    expect(outfitForFaction("fac_paradis", false)).toBe("garnison");
-    expect(outfitForFaction("fac_marley", false)).toBe("marley_infanterie");
-    expect(outfitForFaction("fac_marley", true)).toBe("marley_officier");
+    expect(troopLook("fac_paradis", false).key).toBe("garnison");
+    expect(troopLook("fac_marley", false).key).toBe("marley_infanterie");
+    expect(troopLook("fac_marley", true).key).toBe("marley_officier");
+  });
+
+  it("dette n° 62 : Brigade Militaire dans Sina, officier de Paradis sans fusil, Alliés et Hizuru hors de la tenue de Marley", () => {
+    // Fantassins de Paradis : Garnison ailleurs, Brigade Militaire (licorne) à l'intérieur du mur Sina.
+    expect(troopLook("fac_paradis", false, "anneau_rose").outfit.embleme).toBe("roses");
+    expect(troopLook("fac_paradis", false, "interieur_sina").outfit.embleme).toBe("licorne");
+    expect(troopLook("fac_paradis", false, "mur_sina").key).toBe("police");
+    // Officier en tête de section : même uniforme et même emblème, sans fusil, pistolet ; clé de réserve propre.
+    const off = troopLook("fac_paradis", true, "interieur_sina");
+    expect([off.key, off.outfit.embleme, off.outfit.fusil, off.outfit.etui, off.outfit.repos]).toEqual(["police+officier_paradis", "licorne", undefined, true, "dos"]);
+    expect([off.outfit.veste, off.outfit.odm]).toEqual([outfit("police").veste, true]);
+    expect(outfit("police").fusil).toBe("dos");
+    // Alliés et Hizuru : coupe de l'infanterie (ou de l'officier) de Marley, teintes propres, aucun brassard des Eldiens.
+    const marley = troopLook("fac_marley", false).outfit;
+    for (const f of ["fac_allies", "fac_hizuru"]) {
+      const man = troopLook(f, false).outfit;
+      const officer = troopLook(f, true).outfit;
+      expect(man.veste, f).not.toBe(marley.veste);
+      expect(man.brassard, f).toBeUndefined();
+      expect(man.coiffe?.forme, f).toBe(marley.coiffe?.forme);
+      expect(officer.manteau?.teinte, f).toBe(man.veste);
+      expect(officer.coiffe?.bandeau, f).toBeUndefined();
+      expect(troopTint(f), f).toBe(man.veste);
+    }
+    expect(troopTint("fac_marley")).toBe(marley.veste);
+    expect(marley.brassard).toBeDefined();
+  });
+
+  it("dette n° 62 : l'officier de Paradis tient le pistolet au tir, sans fusil ni à l'épaule ni en main", () => {
+    const fig = buildHumanSoldier(t, 7, mats, { outfit: troopLook("fac_paradis", true).outfit });
+    for (const pose of ["attente", "tir"] as const) {
+      fig.setPose(pose, 0.4);
+      const shown = named(fig, "fusil").filter((o) => (o as unknown as { visible: boolean }).visible);
+      expect(shown.length, pose).toBe(0);
+    }
+    fig.setPose("tir", 0.4);
+    expect(named(fig, "pistolet").some((o) => (o as unknown as { visible: boolean }).visible)).toBe(true);
+    fig.dispose();
   });
 
   it("silhouettes distinctes entre tenues qui se rencontrent en bataille (D-165, D-170) : recouvrement (face + profil, même corps, repos) < 85 %", () => {

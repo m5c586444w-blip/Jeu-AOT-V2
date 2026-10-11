@@ -64,6 +64,8 @@ export interface RtBattleOptions {
   linked: boolean;
   /** Année de la partie (tenues de la vue 3D, dette n° 72). */
   year?: number;
+  /** Région de la province de la bataille (tenue des fantassins de Paradis, dette n° 62). */
+  region?: string;
 }
 
 type Targeting = { kind: "deplacer" | "tuer" | "suivre"; queue: boolean } | { kind: "tir_zone"; battery: string } | { kind: "zone_porteur"; shifter: number };
@@ -141,7 +143,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })),
   ];
   const mountView = async (): Promise<void> => {
-    const made = await createView(host, viewKind, { quality, violence, ...(o.year !== undefined ? { year: o.year } : {}) }, o.setup.seed, o.setup.night);
+    const made = await createView(host, viewKind, { quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) }, o.setup.seed, o.setup.night);
     view = made.view;
     host.prepend(view.canvas);
     view.setMap(bt.map);
@@ -251,11 +253,11 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     optSelect("options.battle_view", "battleView", BATTLE_VIEWS, () => viewKind, (v) => switchView(v, null)),
     optSelect("options.battle_quality", "battleQuality", BATTLE_QUALITIES, () => quality, (v) => {
       quality = v;
-      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}) });
+      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) });
     }),
     optSelect("options.violence", "violence", VIOLENCES, () => violence, (v) => {
       violence = v;
-      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}) });
+      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) });
       root.dataset["violence"] = v;
     }),
     el("p", "registre-note", t("rt.options_note")),
