@@ -72,3 +72,16 @@ escouades choisies (ou en alerte). `smoke:r2 -- --captures` : « tout est confor
   d'elle est tramé et laisse voir les hommes.
   - Défauts : la trame dessine un grand rectangle hachuré ; caméra très haute (dette n° 50) ; numéros 5 et 6 posés sur des ombres.
 
+
+## Suite : corrections de la 3D du 2026-10-11 (détail et captures dans `dettes-suite.md`)
+- **Soldats** : officiers de Paradis (sans fusil, pistolet, commandement), Brigade Militaire dans Sina, Alliés et Hizuru
+  hors de la tenue de Marley (D-171) ; recul, rechargement ; semelles, talons et bouts des bottes ; équipement
+  anti-personnel de 854 ; remise des médailles par la reine Historia (planche et dossier de E43).
+- **Titans** : sourire de Titan et dents visibles (n° 63, en partie).
+- **Bataille** : fusées de signal en fumée colorée (03 §7) ; foule instanciée qui marche et court (n° 61) ; étiquettes
+  estompées derrière les bâtiments (n° 50).
+- **Lieux** : habitants (n° 6), étals de marché et péniches (n° 12), herbe des rues abandonnées en 850 (n° 9), vue
+  d'ensemble lisible sous la fumée de 845 (n° 10).
+- Restent hors de portée sans décision de l'utilisateur : visages sculptés de Titans (T1), Titans qui traversent les
+  maisons (n° 60 : écraser ou enjamber, empreintes des batailles de référence), lieux faits main au-delà de Maria, mesures
+  sur GPU réel.
