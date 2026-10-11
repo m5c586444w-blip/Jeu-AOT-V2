@@ -3,6 +3,7 @@ import type { Graphics } from "pixi.js";
 import type { TerrainData } from "../data/terrain";
 import type { Point } from "../sim/strategic/geometry";
 import { flat } from "./ink";
+import { VEIL } from "./palette";
 import { renderTerrain } from "./terrainRaster";
 import type { TerrainImage } from "./terrainRaster";
 
@@ -194,7 +195,7 @@ export function drawTowns(g: Graphics, t: TerrainData, px: number, minSize: numb
 
 /** Brouillard de guerre (E-UX-3) : voile léger, sans mention ; l'inconnu est voilé et perd son détail. */
 export function drawVeil(g: Graphics, polygon: readonly Point[], level: "inexplore" | "partielle"): void {
-  g.poly(flat(polygon)).fill({ color: 0xdde3e6, alpha: level === "inexplore" ? 0.42 : 0.2 });
+  g.poly(flat(polygon)).fill({ color: VEIL.color, alpha: VEIL[level] });
 }
 
 /** Rayon de la ligne médiane d'un mur au relèvement donné (étiquettes courbes). */

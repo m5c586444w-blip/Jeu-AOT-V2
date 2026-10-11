@@ -9,7 +9,7 @@ import type { ArmyBanner, ProvinceShape } from "./atlasLayers";
 import { flat } from "./ink";
 import { LabelLayer, LOD_ORDER } from "./labels";
 import type { LabelSpec, Lod } from "./labels";
-import { BRICK, UNKNOWN } from "./palette";
+import { BRICK, OVERLAY_ALPHA, OVERLAY_UNKNOWN_ALPHA, OVERLAY_VEIL, UNKNOWN } from "./palette";
 import type { TerrainImage } from "./terrainRaster";
 import { drawCoast, drawOpenSea, drawRivers, drawRoads, drawTowns, drawVeil, drawWalls, MAP_INK, TERRAIN_TEXTURE_FINE, terrainSprite, terrainTexture, wallRadiusAt } from "./terrainLayers";
 
@@ -367,12 +367,15 @@ export class StrategicMap {
 
   private drawWashLayer(): void {
     this.gWash.clear();
+    // Dette n° 14 : sous un calque, le brouillard est atténué pour que les teintes restent celles de la légende.
+    this.gFog.alpha = this.overlay ? OVERLAY_VEIL : 1;
     for (const p of this.provinces) {
       if (p.kind === "segment") continue;
       // Calque actif : aplat transparent par province, le relief reste lisible ; sans valeur, gris « inconnu » de la légende.
       if (!this.overlay) continue;
       const value = this.overlay.get(p.id);
-      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: value === undefined ? 0.45 : 0.64 });
+      const unknown = value === undefined || value === UNKNOWN;
+      this.gWash.poly(flat(p.polygon)).fill({ color: value ?? UNKNOWN, alpha: unknown ? OVERLAY_UNKNOWN_ALPHA : OVERLAY_ALPHA });
     }
   }
 

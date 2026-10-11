@@ -12,6 +12,17 @@ export const SEA = 0xc9c6b0;
 export const PLUM = 0x5b4a6b;
 export const INK_SOFT = 0x3a352d;
 
+/** Voile du brouillard sur les provinces mal connues (F-STR-16) : teinte et opacité par niveau de connaissance. */
+export const VEIL = { color: 0xdde3e6, inexplore: 0.42, partielle: 0.2 } as const;
+/**
+ * Calque actif (dette n° 14) : aplat un peu plus léger pour laisser lire le relief, et voile du brouillard atténué pour que
+ * la teinte d'une province mal connue reste celle de la légende (« aux Titans » ne pâlit plus en rose voisin de « perdue »).
+ * Sans valeur, le gris « inconnu » est plus couvrant : le vert des champs ne doit pas se lire comme une valeur.
+ */
+export const OVERLAY_ALPHA = 0.58;
+export const OVERLAY_UNKNOWN_ALPHA = 0.72;
+export const OVERLAY_VEIL = 0.35;
+
 /** Teinte d'aquarelle par région (lavis de base, avant overlays). */
 export const REGION_WASH: Record<string, number> = {
   outre_murs: 0xa49a7a,

@@ -1,0 +1,15 @@
+
+> murs-et-sang@0.0.1 captures:map
+> tsx src/tools/captures-map.ts --rapide
+
+[1366×768] carte prête en 6.65 s (chargement de la page compris)
+  première image de la carte : 1.72 s (terrain, image du relief, couches)
+  image fine du relief (worker) prête 7.72 s après le début de la carte
+  capture docs/screenshots/map-1366-ile.png (lod monde)
+  capture docs/screenshots/map-1366-region.png (lod region)
+  capture docs/screenshots/map-1366-province.png (lod province)
+  capture docs/screenshots/map-1366-calque-politique.png (lod monde)
+  capture docs/screenshots/map-1366-calque-nourriture.png (lod monde)
+  capture docs/screenshots/map-1366-calque-titans.png (lod monde)
+Aucune erreur console.
+EXIT=0

@@ -14,3 +14,21 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   2 500 puis « hors du territoire tenu ».
   - Défauts : intérieur de Sina presque de la teinte « 0 » (faible production, peu lisible) ; gris « hors du territoire »
     proche du voile de brouillard ; seconde notification coupée en haut à droite ; « Mitras » chevauché par les pions.
+
+## Dette n° 14 : calque politique sous le brouillard
+- Le voile du brouillard passait au-dessus de l'aplat du calque : la brique « aux Titans » de Maria pâlissait en rose,
+  plus proche du gris « perdue » (ΔE 10) que de sa propre case (ΔE 23). Sous un calque, le voile est réduit à 35 % ;
+  l'aplat passe de 64 à 58 % (relief plus lisible) ; le gris « inconnu » couvre à 72 % (le vert des champs ne se lit plus
+  comme une valeur).
+- `npm run verify` (`dette14-verify.log`) : « Tests  775 passed (775) », `EXIT=0` ; `captures:map -- --rapide` : « Aucune erreur
+  console. », `EXIT=0` (`dette14-captures-map.log`).
+- `tests/ui/overlays.test.ts` (ΔE en Lab) : voile entier, la brique voilée tire vers « perdue » (état d'avant, vérifié) ;
+  voile réduit, elle reste à moins de 10 de sa case et à plus du double de « perdue ».
+- **`map-1366-calque-politique.png`** : île entière ; Sina et Rose en vert « tenue », l'anneau de Maria et l'outre-murs
+  en brique « aux Titans », le relief (forêts, champs) visible sous l'aplat. Légende tenue / aux Titans / perdue.
+  - Défauts : Maria et l'outre-murs ont désormais la même teinte (le brouillard ne se lit presque plus sous un calque) ;
+    brique de la carte plus orangée que la case de la légende (mélange avec le papier) ; « Mitras » et « Trost » chevauchés
+    par les pions ; bouton « Religion » en surbrillance (survol de la souris laissé par la capture).
+- **`map-1366-calque-titans.png`** : Rose et Sina en papier (0 Titan observé), Maria et l'outre-murs en gris « inconnu ».
+  - Défauts : gris encore teinté de vert sur les forêts ; aucune province entre 0,25 et 1 en 850 (échelle peu utile à cette
+    date) ; texte d'aide long (cinq lignes) au-dessus de la légende.
