@@ -195,8 +195,11 @@ try {
   const nF = checkPoses(follow.list, "caméra de suivi");
   expect(nF.soldiers > 0, `soldats du Corps de Reconnaissance en tenue (suivi) : ${nF.soldiers}`);
   await page.screenshot({ path: `${OUT}/r3-bataille-suivi-1366.png` });
-  const shards = (await page.evaluate(`(() => { const p = window.__batailleRt; const m = p.view.scene.getObjectByName("lames-brisees"); return { broken: p.bt.state.stats.bladesBroken, shown: m ? m.count : -1 }; })()`)) as { broken: number; shown: number };
+  const shards = (await page.evaluate(`(() => { const p = window.__batailleRt; const m = p.view.scene.getObjectByName("lames-brisees"); const g = p.view.scene.getObjectByName("jets-de-gaz"); return { broken: p.bt.state.stats.bladesBroken, shown: m ? m.count : -1, puffs: g ? g.count : -1, gas: p.bt.state.stats.gasUsed }; })()`)) as { broken: number; shown: number; puffs: number; gas: number };
   expect(shards.shown >= 0, `lames brisées : couche présente ; ${shards.broken} paires usées depuis le début, ${shards.shown} lames en train de tomber ou au sol`);
+  // Les jets de gaz ne paraissent que pendant une dépense (élan sur le câble) : ligne d'information, contrôlés par les tests.
+  console.log(`  ..  jets de gaz : ${shards.puffs} bouffées visibles (gaz dépensé depuis le début : ${Math.round(shards.gas)})`);
+  expect(shards.puffs >= 0, "jets de gaz : couche présente");
   // Pluie sur l'escouade suivie : traits de pluie, capuches des capes levées.
   const wet = await ambiance("jour", "oui");
   expect((await ds(page, "pluie")) === "oui" && wet.rain && wet.hoods > 0, `pluie : traits de pluie, ${wet.hoods} capuches levées`);

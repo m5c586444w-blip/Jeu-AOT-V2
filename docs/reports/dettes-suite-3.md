@@ -129,3 +129,14 @@ Sommaire et méthode : `dettes-suite.md`.
   colonne de fumée rouge d'une fusée ; dans le recadrage, deux lames posées à plat dans l'herbe, fines bandes claires.
   - Défauts : lames presque invisibles à cette distance (vraie taille) ; crénelage en pointillés ; la fumée rouge couvre le
     tiers droit de la vue ; aucune animation de changement de lames sur la figure.
+
+## Soldats (CLAUDE.md § Style) : jets de gaz de l'équipement de manœuvre
+- Quand la simulation dépense du gaz pour un soldat (élan sur le câble), une bouffée part du bas du dos, au plus toutes
+  les 0,12 s ; elle grossit et se dissipe en 1,2 s (`battle/gasJets.ts`) ; émission claire pour rester blanchâtre à l'ombre.
+- `smoke:r3` (`gaz-smoke-r3.log`) : « jets de gaz : 0 bouffées visibles (gaz dépensé depuis le début : 0) » (aucun élan
+  dans cette séquence, d'où une ligne d'information ; un premier contrôle exigeant des bouffées y était donc mal posé, KO),
+  « smoke:r3 : tout est conforme. », `EXIT=0` ; `npm run verify` (`gaz-verify.log`) : « Tests  811 passed (811) », `EXIT=0`.
+- **`bataille-jets-de-gaz.png`** : essai contre quatre Titans dans la Ville des Murs, caméra de suivi plongeante sur
+  l'escouade 01 au pied d'un Titan ; derrière elle, une file de bouffées claires sur la chaussée ; maisons à fenêtres.
+  - Défauts : vue plongeante (rue masquée) qui écrase le relief ; bouffées petites à cette distance ; bâtiment translucide
+    hachuré au centre ; cratère sombre pris pour une bouffée au premier coup d'œil.

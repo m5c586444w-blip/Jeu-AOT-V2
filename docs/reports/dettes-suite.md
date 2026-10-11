@@ -40,3 +40,4 @@ décrit ses captures (trois lignes et au moins trois défauts).
 - Conformité 3D : Arbres Géants de la bataille (03 §2)
 - Dette n° 65 (reste) : chevaux et cavaliers (fichier 18, R3.6)
 - Soldats (CLAUDE.md § Style) : lames cassables et remplaçables
+- Soldats (CLAUDE.md § Style) : jets de gaz de l'équipement de manœuvre

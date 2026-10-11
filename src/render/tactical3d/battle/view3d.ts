@@ -67,6 +67,8 @@ import { RAIN_BOX, RAIN_PARTICLES, battleAmbiance } from "./ambiance";
 import { COATS, HORSE, gaitParams, horseGeometry, patchHorse, riderGeometry } from "./horses";
 import { SHARDS_PER_BREAK, SHARD_LIFE_S, shardsAt } from "./shards";
 import type { BladeBreak } from "./shards";
+import { puffLook, trailStep } from "./gasJets";
+import type { GasPuff } from "./gasJets";
 import { createWeather } from "../weather";
 import type { WeatherRig } from "../weather";
 
@@ -107,6 +109,8 @@ const yawOf = (heading: number): number => Math.PI / 2 - heading;
 const MAX_FLARES = 24;
 /** Casses de lames montrées à la fois (les plus récentes). */
 const MAX_BREAKS = 32;
+/** Bouffées de gaz montrées à la fois. */
+const MAX_PUFFS = 1200;
 
 const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, (3 * Math.PI) / 4, (-3 * Math.PI) / 4, Math.PI];
 
@@ -130,6 +134,8 @@ interface UnitLayers {
   ridersA: InstancedMesh | null;
   /** Lames brisées qui tombent (CLAUDE.md § Style des soldats). */
   shards: InstancedMesh;
+  /** Jets de gaz de l'équipement de manœuvre (bouffées au bas du dos quand le gaz est dépensé). */
+  gas: InstancedMesh;
   markers: InstancedMesh;
   blood: InstancedMesh;
   rings: InstancedMesh;
@@ -227,6 +233,9 @@ export class View3D implements BattleView {
   private readonly pairsSeen = new Map<number, number>();
   private breaks: BladeBreak[] = [];
   private lastTick = -1;
+  /** Jets de gaz : gaz vu au dernier dessin et bouffées récentes, par soldat. */
+  private readonly gasSeen = new Map<number, number>();
+  private readonly trails = new Map<number, GasPuff[]>();
   private windowGlow = 0;
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
@@ -507,7 +516,11 @@ export class View3D implements BattleView {
     const shards = new InstancedMesh(new BoxGeometry(0.04, 0.86, 0.008), new MeshStandardMaterial({ color: 0xd4d9dc, roughness: 0.2, metalness: 0.85, emissive: 0x3a3e42 }), MAX_BREAKS * SHARDS_PER_BREAK);
     shards.name = "lames-brisees";
     shards.count = 0;
-    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, shards, ...smoke, ...goals];
+    // Émission claire : le gaz reste blanchâtre dans l'ombre des maisons.
+    const gas = new InstancedMesh(new SphereGeometry(1, 8, 6), new MeshStandardMaterial({ color: 0xe4e7ea, emissive: 0x7a7e82, roughness: 1, transparent: true, opacity: 0.3, depthWrite: false }), MAX_PUFFS);
+    gas.name = "jets-de-gaz";
+    gas.count = 0;
+    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, shards, gas, ...smoke, ...goals];
     if (troops) list.push(troops);
     if (troopsA) list.push(troopsA);
     for (const x of [horses, riders, ridersA]) if (x) list.push(x);
@@ -515,7 +528,7 @@ export class View3D implements BattleView {
     if (cannons) list.push(cannons);
     for (const o of list) o.frustumCulled = false;
     this.scene.add(...list);
-    this.layers = { crowd, troops, troopsA, horses, riders, ridersA, shards, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
+    this.layers = { crowd, troops, troopsA, horses, riders, ridersA, shards, gas, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
     return this.layers;
   }
 
@@ -977,13 +990,36 @@ export class View3D implements BattleView {
     if (st.tick < this.lastTick) {
       this.pairsSeen.clear();
       this.breaks = [];
+      this.gasSeen.clear();
+      this.trails.clear();
     }
     this.lastTick = st.tick;
     st.soldiers.forEach((s, i) => {
       const before = this.pairsSeen.get(i);
       if (before !== undefined && s.pairs <= before - 1 + 1e-6 && s.mode !== "mort") this.breaks.push({ t: this.time, x: s.x, y: s.y, z: s.z, heading: this.headings.get(i) ?? 0, seed: i * 131 + st.tick });
       this.pairsSeen.set(i, s.pairs);
+      // Jets de gaz : une bouffée quand le gaz a baissé depuis le dernier dessin (rien en mouvements réduits).
+      const g0 = this.gasSeen.get(i);
+      this.gasSeen.set(i, s.gas);
+      if (s.mode === "mort" || s.mode === "fui") this.trails.delete(i);
+      else {
+        const tr = trailStep(this.trails.get(i) ?? [], !calm && g0 !== undefined && s.gas < g0 - 1e-6, this.time, s.x, s.y, s.z);
+        if (tr.length) this.trails.set(i, tr);
+        else this.trails.delete(i);
+      }
     });
+    let puffN = 0;
+    for (const tr of this.trails.values())
+      for (const pf of tr) {
+        if (puffN >= MAX_PUFFS) break;
+        const look = puffLook(this.time - pf.t);
+        // La bouffée s'efface en rétrécissant sur la fin de sa vie (opacité commune à toutes les bouffées).
+        const r = look.r * Math.min(1, look.fade / 0.3);
+        tmpM.compose(tmpP.set(pf.x, pf.z, pf.y), tmpQ.identity(), tmpS.set(r, r, r));
+        L.gas.setMatrixAt(puffN++, tmpM);
+      }
+    L.gas.count = puffN;
+    L.gas.instanceMatrix.needsUpdate = true;
     this.breaks = this.breaks.filter((b) => this.time - b.t <= SHARD_LIFE_S).slice(-MAX_BREAKS);
     let shardN = 0;
     for (const b of this.breaks)
