@@ -452,11 +452,11 @@ try {
     expect(!!main && (text.match(/THREE\./g) ?? []).length === 0 && !!view3d, `bundle principal ${main} sans three.js ; vue 3D de bataille en morceau à part (${view3d ?? "morceau introuvable"})`);
   } else expect(false, "dist/ absent : lancer `npm run build` avant smoke:r2");
 
-  // Sans WebGL 2 simulé, Pixi passe en WebGL 1 et le pilote signale des paramètres de texture propres à WebGL 2 (avertissements
-  // de Pixi, pas du jeu) : comptés à part (dette n° 47) ; toute autre erreur ou alerte fait échouer.
+  // Sans WebGL 2 simulé, Pixi passe en WebGL 1 ; il réglait des paramètres de texture propres à WebGL 2 (« INVALID_ENUM:
+  // texParameter ») : garde locale depuis la dette n° 47 (`pixiCompat.ts`), plus aucun avertissement attendu.
   const webgl1 = errors.filter((e) => e.startsWith("[repli 2D]") && /INVALID_ENUM: texParameter/.test(e));
+  expect(webgl1.length === 0, `repli 2D (WebGL 1 simulé) : ${webgl1.length} avertissement « texParameter: invalid parameter name »`);
   const others = errors.filter((e) => !webgl1.includes(e));
-  if (webgl1.length) console.log(`  ..  repli 2D (WebGL 1 simulé) : ${webgl1.length} avertissements de Pixi « texParameter: invalid parameter name »`);
   expect(others.length === 0, `0 erreur console${others.length ? ` (${others.slice(0, 3).join(" | ")})` : ""}`);
 } finally {
   await browser.close();
