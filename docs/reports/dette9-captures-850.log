@@ -1,0 +1,8 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts shiganshina --vues grand-rue,marche --etat 850-reprise --sans-portes --sans-etats --sortie /tmp/claude-0/-home-user-Jeu-AOT-V2/73b3a71d-4d0c-5397-85ee-b9e6373e831d/scratchpad/p850
+
+  /tmp/claude-0/-home-user-Jeu-AOT-V2/73b3a71d-4d0c-5397-85ee-b9e6373e831d/scratchpad/p850/vue-grand-rue.png : 275 appels, 1813 k triangles, tronçons 475/987
+  /tmp/claude-0/-home-user-Jeu-AOT-V2/73b3a71d-4d0c-5397-85ee-b9e6373e831d/scratchpad/p850/vue-marche.png : 235 appels, 1431 k triangles, tronçons 119/987
+places:captures : shiganshina capturés.
+EXIT=0

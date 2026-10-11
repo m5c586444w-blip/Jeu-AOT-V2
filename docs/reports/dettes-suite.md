@@ -190,3 +190,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   la route et les faubourgs à gauche.
   - Défauts : teinte brun-gris uniforme (aucun foyer d'incendie visible de si haut) ; horizon toujours noyé ; la brèche de
     la porte extérieure ne se voit pas à cette distance.
+
+## Dette n° 9 (en partie) : l'abandon de 850 se voit dans la rue
+- Au niveau de la rue, Shiganshina en 850 ressemblait à 845 (la friche n'était semée que dans les îlots). Désormais, selon
+  `abandon` : couche d'herbe en transparence sur chaussées et places (plaques dans les joints), touffes d'herbe
+  instanciées (au plus 15 000), chaussées légèrement verdies (A). Le ΔE de la vue d'ensemble ne bouge pas (brume).
+- `npm run verify` (`dette9-verify.log`) : « Test Files  127 passed (127) », « Tests  793 passed (793) », `EXIT=0` ;
+  captures (`dette9-captures-etats.log`) : « ΔE 3.3 < 6 : etat-845-avant | etat-850-reprise », « ΔE 18.0 ≥ 6 :
+  etat-845-avant | etat-845-breche », `EXIT=0`.
+- **`etat-850-reprise-grand-rue.png`** : la grand-rue en 850, pavés envahis de plaques d'herbe verte, quelques touffes,
+  aucun habitant, aucun étal.
+  - Défauts : maisons et arbres d'alignement intacts (aucune ruine dans cette rue) ; ciel bleu au lieu du ciel brumeux de
+    l'état (`--etat` ne règle que le plan) ; plaques d'herbe répétées par la tuile ; herbe plate sans relief de près.

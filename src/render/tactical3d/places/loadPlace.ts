@@ -21,6 +21,7 @@ import type { ExtrasResult } from "./extras";
 import { frozenLayout, frozenPlace } from "./frozen";
 import { buildInhabitants, inhabitantSpots } from "./inhabitants";
 import { boatSpots, buildMarketProps, stallSpots } from "./market";
+import { buildWeeds, weedSpots } from "./weeds";
 
 /**
  * Chargeur unique des lieux N1 (R1e, consigne §2.3) : `loadPlace(id)` lit le plan validé (`/places3d/<id>.json`, servi hors du
@@ -210,6 +211,9 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
   // Dette n° 12 : étals sur les places de marché, barques le long des quais (ville habitée seulement).
   const props = buildMarketProps(stallSpots(place, layout.trees, share, opts.seed), boatSpots(place, share, opts.seed));
   group.add(props.group);
+  // Dette n° 9 : herbes des rues abandonnées (champ `abandon` de l'état).
+  const weeds = buildWeeds(opts.frozen ? [] : weedSpots(place, layout.state.abandon, opts.seed));
+  group.add(weeds.group);
   const textures: Texture[] = [leaves];
   let wallMesh: Mesh | null = null;
   if (ring) {
@@ -259,6 +263,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
     const eye = camera.position;
     people.group.visible = eye.y < PEOPLE_MAX_ALT_M;
     props.group.visible = eye.y < PEOPLE_MAX_ALT_M;
+    weeds.group.visible = eye.y < PEOPLE_MAX_ALT_M;
     for (const [ck, box] of chunkBoxes) {
       if (!frustum.intersectsBox(box)) {
         states.set(ck, 0);
@@ -311,6 +316,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
       ground.dispose();
       people.dispose();
       props.dispose();
+      weeds.dispose();
       wallMesh?.geometry.dispose();
       mats.dispose();
       for (const m of extraMats) m.dispose();

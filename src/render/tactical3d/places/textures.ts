@@ -500,3 +500,39 @@ export function pavingTexture(kind: "paves" | "dalles" | "terre" | "gravier", se
   mottle(g, r, S, S, 60, 0.12, 0.05);
   return tex(c, true);
 }
+
+/**
+ * Dette n° 9 : herbe des rues abandonnées, posée en transparence sur pavés et dalles : touffes serrées en plaques (les
+ * joints envahis), brins plus clairs ; fond transparent. Une tuile se répète tous les `PAVE_M` mètres (A).
+ */
+export function grassPatchTexture(seed: number): Texture {
+  const r = seeded(seed * 31 + 909);
+  const S = 512;
+  const [c, g] = canvas(S, S);
+  g.clearRect(0, 0, S, S);
+  // Plaques : centres semés, touffes autour (le motif se répète : coordonnées repliées sur la tuile).
+  for (let k = 0; k < 26; k++) {
+    const cx = r() * S;
+    const cy = r() * S;
+    const rad = 20 + r() * 60;
+    for (let i = 0; i < 260; i++) {
+      const a = r() * Math.PI * 2;
+      const d = rad * Math.sqrt(r());
+      const x = (cx + Math.cos(a) * d + S) % S;
+      const y = (cy + Math.sin(a) * d + S) % S;
+      const v = r();
+      g.fillStyle = rgb(70 + v * 40, 95 + v * 45, 45 + v * 25, 0.55 + 0.4 * r());
+      g.beginPath();
+      g.ellipse(x, y, 2 + r() * 4, 1.5 + r() * 3, r() * Math.PI, 0, Math.PI * 2);
+      g.fill();
+    }
+  }
+  // Brins isolés entre les plaques.
+  for (let i = 0; i < 2600; i++) {
+    const v = r();
+    g.fillStyle = rgb(90 + v * 50, 115 + v * 45, 55 + v * 30, 0.7);
+    g.fillRect(r() * S, r() * S, 1.5, 3 + r() * 4);
+  }
+  return tex(c, true);
+}
+

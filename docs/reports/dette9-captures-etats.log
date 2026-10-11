@@ -1,0 +1,13 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts shiganshina --vues ensemble --sans-portes
+
+  docs/places/shiganshina/vue-ensemble.png : 217 appels, 1054 k triangles, tronçons 986/986
+  docs/places/shiganshina/etat-845-avant.png
+  docs/places/shiganshina/etat-845-breche.png
+  docs/places/shiganshina/etat-850-reprise.png
+  ΔE 18.0 ≥ 6 : etat-845-avant | etat-845-breche
+  ΔE 3.3 < 6 : etat-845-avant | etat-850-reprise
+  ΔE 17.8 ≥ 6 : etat-845-breche | etat-850-reprise
+places:captures : shiganshina capturés.
+EXIT=0

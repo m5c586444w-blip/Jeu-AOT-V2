@@ -7,7 +7,7 @@ import { waterNormalTex } from "../texturesEnv";
 import type { P2, Poly2 } from "./geom";
 import { add, along, left, mul, polylineLength, rad, sub, unit } from "./geom";
 import type { PlaceLayout } from "./layout";
-import { pavingTexture } from "./textures";
+import { grassPatchTexture, pavingTexture } from "./textures";
 
 /**
  * Sol d'un lieu (R1e) : prairie autour, chaussées (rubans le long des rues, par revêtement), places, cours d'îlots (pelouse,
@@ -34,6 +34,10 @@ function clipAxis(poly: P2[], axis: 0 | 1, v: number, side: 1 | -1): P2[] {
   }
   return out;
 }
+
+/** Herbe des rues abandonnées (dette n° 9) : teinte et part de mélange à l'abandon complet (A). */
+export const ABANDON_MOSS = 0x7d8c55;
+export const ABANDON_TINT = 0.3;
 
 /** Niveau de l'eau des canaux (m, sous le sol des rues). */
 export const CANAL_WATER_Y = -1.7;
@@ -161,6 +165,7 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
     [/^cours-/, 2],
     [/^(parcs|potagers)$/, 3],
     [/^chaussee-/, 4],
+    [/^herbe-des-rues$/, 5],
   ];
   const add3 = (g: BufferGeometry | null, mat: MeshStandardMaterial, name: string, receive = true): void => {
     const k = LAYER.find(([re]) => re.test(name))?.[1] ?? 0;
@@ -236,7 +241,18 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
     const tex = pavingTexture(kind, seed);
     if (kind === "paves") tagPhoto(tex, "pave", PAVE_M);
     textures.push(tex);
-    add3(t.build(), new MeshStandardMaterial({ map: tex, roughness: 0.95, color: kind === "terre" ? 0xc8b08a : 0xffffff }), `chaussee-${kind}`);
+    // Dette n° 9 : après des années d'abandon, l'herbe envahit pavés et dalles ; teinte verte selon `abandon` (lisible de haut).
+    const color = new Color(kind === "terre" ? 0xc8b08a : 0xffffff).lerp(new Color(ABANDON_MOSS), ABANDON_TINT * L.state.abandon);
+    add3(t.build(), new MeshStandardMaterial({ map: tex, roughness: 0.95, color }), `chaussee-${kind}`);
+  }
+  // Dette n° 9 : herbe entre les pavés d'une ville abandonnée (transparence selon `abandon`), sur toutes les chaussées et places.
+  if (L.state.abandon > 0) {
+    const t = new Tris(PAVE_M * 1.7);
+    for (const r of place.rues) t.flat(ribbon(r.trace, r.largeur_m), PAV_Y[r.revetement] + 0.004);
+    for (const s of place.places_publiques) t.flat(s.polygone, PAV_Y[s.revetement] + 0.014);
+    const grass = grassPatchTexture(seed);
+    textures.push(grass);
+    add3(t.build(), new MeshStandardMaterial({ map: grass, roughness: 1, transparent: true, opacity: Math.min(1, 1.15 * L.state.abandon), depthWrite: false }), "herbe-des-rues");
   }
   // Canaux : eau en creux, quais de pierre (parement vertical et margelle), fond.
   const water = new Tris(20);
