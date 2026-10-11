@@ -321,3 +321,17 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   province sur un mur.
   - Défauts : « 1,2 k » de l'armée collé au nom du segment « Rose-Sud — porte de Trost » ; relief peu marqué ; grands aplats
     de prairie sans nom au sud.
+
+## Dette n° 12 (suite) : halles de Quinta distinctes
+- La halle aux draps (plan d'auteur de Quinta) reçoit un étage fermé en pan de bois au-dessus de la halle ouverte, en
+  encorbellement, et un beffroi sur le faîtage (paramètres `etage` et `beffroi` de l'archétype « halle », A) ; sa couverture
+  d'ardoise est enfin rendue (toutes les halles prenaient la teinte des tuiles). La grande halle reste basse et ouverte.
+- `places:regenerer -- maria-district-4` : seule l'entrée de la halle change dans le JSON ; `places:valider`
+  (`dette12-places-valider.log`) : « places:valider : 4 lieu(x) N1 et 1 plan(s) figé(s) valides. » ; `npm run verify`
+  (`dette12-verify.log`) : « Tests  801 passed (801) », `EXIT=0`.
+- **`vue-marche-aux-draps.png`** : place pavée couverte d'étals ; au fond, la halle aux draps à toit d'ardoise, étage à
+  colombages sur poteaux de bois, beffroi à flèche ; maisons à pignons autour.
+  - Défauts : beffroi un peu grêle pour la masse du toit ; fenêtres de l'étage en simple bandeau sombre ; étals tous
+    alignés, identiques d'une rangée à l'autre ; habitants très petits.
+- **`vue-grand-marche.png`** : la grande halle basse, ouverte, toit de tuiles brun clair, et un grand arbre à droite.
+  - Défauts : toit de la halle uniforme, sans tuiles visibles ; poteaux serrés vus de loin ; ciel identique à l'autre vue.

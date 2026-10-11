@@ -11649,8 +11649,8 @@
     22
    ],
    "angle_deg": 33,
-   "hauteur_m": 12,
-   "etages": 1,
+   "hauteur_m": 18,
+   "etages": 2,
    "toit": "croupe",
    "couverture": "ardoise",
    "facade": "bois",
@@ -11658,7 +11658,9 @@
    "reperes_canon": [],
    "params": {
     "piliers": 8,
-    "pente": 44
+    "pente": 44,
+    "etage": true,
+    "beffroi": true
    }
   },
   {

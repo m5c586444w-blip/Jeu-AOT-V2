@@ -57,9 +57,9 @@
   "marche-aux-draps": {
    "file": "docs/places/maria-district-4/vue-marche-aux-draps.png",
    "stats": {
-    "calls": 222,
-    "triangles": 503044,
-    "instances": 12037,
+    "calls": 250,
+    "triangles": 1891084,
+    "instances": 15109,
     "chunks": {
      "total": 897,
      "visible": 299,
@@ -67,9 +67,9 @@
     }
    },
    "rgb": [
-    194.8174826388889,
-    199.31097222222223,
-    200.65507378472222
+    187.50473958333333,
+    190.23864149305555,
+    190.47311197916667
    ]
   },
   "port": {

@@ -281,7 +281,11 @@ function hall(k: Kit, b: Building, rand: Rand): void {
   const n = typeof P["piliers"] === "number" ? P["piliers"] : 8;
   const pente = ((typeof P["pente"] === "number" ? P["pente"] : 40) * Math.PI) / 180;
   const eave = 4.6;
-  const rise = Math.min((D / 2) * Math.tan(pente), b.hauteur_m - eave);
+  // Dette n° 12 : halle à étage (`etage` : magasin fermé en pan de bois au-dessus de la halle ouverte, comme une halle aux
+  // draps) et `beffroi` (lanterne à cloche sur le faîtage) ; formes et proportions : choix de rendu (A).
+  const upper = P["etage"] === true ? 4.2 : 0;
+  const roofY = eave + 0.9 + upper;
+  const rise = Math.min((D / 2) * Math.tan(pente), b.hauteur_m - roofY);
   const ruin = (b as Building & { ruin?: number }).ruin ?? 0;
   const stone = new Color(0xb9b0a2);
   box(k, k.stone, -W / 2 - 0.6, W / 2 + 0.6, -D / 2 - 0.6, D / 2 + 0.6, 0, 0.35, stone);
@@ -313,7 +317,41 @@ function hall(k: Kit, b: Building, rand: Rand): void {
         g.dispose();
       }
     }
-  hip(k, k.roof, -W / 2, W / 2, -D / 2, D / 2, eave + 0.9, rise, new Color(b.teinte).lerp(new Color(0xa0644a), 0.55), 1.4);
+  if (upper > 0) {
+    // Étage en encorbellement (0,5 m) : remplissage clair, poteaux et décharges de bois, fenêtres basses en bandeau.
+    const o = 0.5;
+    const y0 = eave + 0.9;
+    const fill = new Color(b.teinte).lerp(new Color(0xe6dcc6), 0.5);
+    box(k, k.stone, -W / 2 - o, W / 2 + o, -D / 2 - o, D / 2 + o, y0, y0 + upper, fill, false);
+    const studs = Math.max(4, Math.round(W / 2.2));
+    for (let i = 0; i <= studs; i++) {
+      const u = -W / 2 - o + (i * (W + 2 * o)) / studs;
+      for (const v of [-D / 2 - o - 0.06, D / 2 + o + 0.06]) box(k, k.wood, u - 0.16, u + 0.16, v - 0.06, v + 0.06, y0, y0 + upper, OAK);
+      if (i < studs && i % 2 === 0)
+        for (const v of [-D / 2 - o - 0.09, D / 2 + o + 0.09]) {
+          const wx = (W + 2 * o) / studs;
+          box(k, k.dark, u + wx * 0.25, u + wx * 0.75, v - 0.04, v + 0.04, y0 + upper * 0.45, y0 + upper * 0.8, GLASS);
+        }
+    }
+    for (const yy of [y0, y0 + upper * 0.4, y0 + upper]) for (const v of [-D / 2 - o - 0.07, D / 2 + o + 0.07]) box(k, k.wood, -W / 2 - o, W / 2 + o, v - 0.07, v + 0.07, yy - 0.12, yy + 0.12, OAK);
+    for (const u of [-W / 2 - o - 0.07, W / 2 + o + 0.07]) {
+      box(k, k.wood, u - 0.07, u + 0.07, -D / 2 - o, D / 2 + o, y0 - 0.12, y0 + 0.12, OAK);
+      box(k, k.wood, u - 0.07, u + 0.07, -D / 2 - o, D / 2 + o, y0 + upper - 0.12, y0 + upper + 0.12, OAK);
+      for (let j = 0; j <= 4; j++) box(k, k.wood, u - 0.06, u + 0.06, -D / 2 - o + (j * (D + 2 * o)) / 4 - 0.16, -D / 2 - o + (j * (D + 2 * o)) / 4 + 0.16, y0, y0 + upper, OAK);
+    }
+  }
+  // Couverture du plan : ardoise grise, sinon tuile plate (teinte de la halle tirée vers le rouge des tuiles).
+  const roofColor = b.couverture === "ardoise" ? SLATE.clone().lerp(new Color(b.teinte), 0.12) : new Color(b.teinte).lerp(new Color(0xa0644a), 0.55);
+  hip(k, k.roof, -W / 2 - (upper ? 0.5 : 0), W / 2 + (upper ? 0.5 : 0), -D / 2 - (upper ? 0.5 : 0), D / 2 + (upper ? 0.5 : 0), roofY, rise, roofColor, 1.4);
+  if (P["beffroi"] === true) {
+    // Lanterne carrée sur le milieu du faîtage : socle, baies ouvertes (cloche), flèche pyramidale.
+    const s = Math.min(D * 0.18, 3.2);
+    const yb = roofY + rise - 0.6;
+    box(k, k.wood, -s, s, -s, s, yb, yb + 2.2, OAK.clone().multiplyScalar(0.9));
+    for (const [u, v] of [[-s, -s], [s, -s], [s, s], [-s, s]] as const) box(k, k.wood, u - 0.22, u + 0.22, v - 0.22, v + 0.22, yb + 2.2, yb + 4.6, OAK);
+    box(k, k.iron, -0.7, 0.7, -0.7, 0.7, yb + 2.6, yb + 3.9, IRON);
+    hip(k, k.roof, -s, s, -s, s, yb + 4.6, s * 2.6, roofColor.clone().lerp(SLATE, 0.6), 0.5);
+  }
   // Sacs et caisses sous la halle (échelle humaine).
   for (let i = 0; i < 14; i++) {
     const u = -W / 2 + 3 + rand() * (W - 6);
