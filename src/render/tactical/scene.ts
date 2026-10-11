@@ -1,5 +1,5 @@
 import { reducedMotion } from "../motion";
-import { guardWebGl1 } from "../pixiCompat";
+import { guardedCanvas } from "../pixiCompat";
 import { Application, Container, Graphics, GraphicsContext, Text, TilingSprite } from "pixi.js";
 import type { TacticalWorldMap } from "../../sim/tactical/map";
 import type { BattleState, SoldierUnit } from "../../sim/tactical/types";
@@ -74,8 +74,7 @@ export class TacticalScene {
 
   static async create(host: HTMLElement): Promise<TacticalScene> {
     const app = new Application();
-    await app.init({ autoStart: false, resizeTo: host, background: PAPER, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl" });
-    guardWebGl1(app.renderer);
+    await app.init({ autoStart: false, resizeTo: host, background: PAPER, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl", canvas: guardedCanvas() });
     app.canvas.classList.add("tactique__toile");
     host.append(app.canvas);
     const scene = new TacticalScene(app);

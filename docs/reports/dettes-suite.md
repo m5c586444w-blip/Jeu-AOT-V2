@@ -41,3 +41,6 @@ décrit ses captures (trois lignes et au moins trois défauts).
 - Dette n° 65 (reste) : chevaux et cavaliers (fichier 18, R3.6)
 - Soldats (CLAUDE.md § Style) : lames cassables et remplaçables
 - Soldats (CLAUDE.md § Style) : jets de gaz de l'équipement de manœuvre
+
+## Partie 4 (`dettes-suite-4.md`)
+- Dette n° 47 : avertissements WebGL du repli 2D

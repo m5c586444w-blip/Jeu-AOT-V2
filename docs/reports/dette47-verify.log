@@ -20,8 +20,8 @@
 
  Test Files  134 passed (134)
       Tests  812 passed (812)
-   Start at  11:20:47
-   Duration  170.19s (tests 86%, import 12%, transform 2%)
+   Start at  11:57:43
+   Duration  154.04s (tests 85%, import 13%, transform 2%)
 
 
 > murs-et-sang@0.0.1 data:validate
@@ -99,7 +99,7 @@ dist/assets/sim.worker-CIy6tIKc.js                                875.02 kB
 dist/assets3d/derives/humain.glb                                5,886.10 kB
 dist/assets/entry-BPj6Pi9m.css                                      3.85 kB │ gzip:   1.24 kB
 dist/assets/index-CW03mHb5.css                                     92.78 kB │ gzip:  17.45 kB
-dist/assets/webworkerAll-6VJQC7VP.js                                0.05 kB │ gzip:   0.06 kB
+dist/assets/webworkerAll-B0c5-Nxm.js                                0.05 kB │ gzip:   0.06 kB
 dist/assets/getTextureBatchBindGroup-B7fcsu1p.js                    0.34 kB │ gzip:   0.27 kB
 dist/assets/quality-pPWwSpff.js                                     0.60 kB │ gzip:   0.31 kB
 dist/assets/classes-DEhXJjxY.js                                     0.69 kB │ gzip:   0.32 kB
@@ -116,17 +116,17 @@ dist/assets/sandbox_845-DwBxihrf.js                                 3.08 kB │ 
 dist/assets/canon_skeletons-CPrYngS2.js                             3.14 kB │ gzip:   0.59 kB
 dist/assets/doctrines-DrORN3bC.js                                   3.19 kB │ gzip:   0.50 kB
 dist/assets/roles-Bw86WKOT.js                                       3.33 kB │ gzip:   0.77 kB
-dist/assets/gallery-B-pd5Bvi.js                                     3.49 kB │ gzip:   1.68 kB
+dist/assets/gallery-B9rn8rlI.js                                     3.49 kB │ gzip:   1.68 kB
 dist/assets/marley-CGixRDFT.js                                      4.65 kB │ gzip:   0.82 kB
 dist/assets/weather-e55A4u8K.js                                     4.78 kB │ gzip:   2.26 kB
 dist/assets/scn_845-CGl1LxAU.js                                     4.84 kB │ gzip:   1.58 kB
-dist/assets/bench-DTHX-FnB.js                                       5.13 kB │ gzip:   2.58 kB
+dist/assets/bench-BWN1UPRL.js                                       5.13 kB │ gzip:   2.59 kB
 dist/assets/depart-se8U4QCj.js                                      5.47 kB │ gzip:   0.84 kB
 dist/assets/traits-DkeYJPZ9.js                                      5.59 kB │ gzip:   1.40 kB
 dist/assets/sandbox_850-BGioyvzc.js                                 5.60 kB │ gzip:   2.01 kB
 dist/assets/parement-C9GKq8Ji.js                                    5.73 kB │ gzip:   2.61 kB
 dist/assets/canvasUtils-XYxewFj2.js                                 6.05 kB │ gzip:   2.05 kB
-dist/assets/entry-CNeYOoK4.js                                       6.15 kB │ gzip:   2.82 kB
+dist/assets/entry-BYRzsmF5.js                                       6.15 kB │ gzip:   2.82 kB
 dist/assets/canon_854-CC851Fo-.js                                   6.51 kB │ gzip:   1.60 kB
 dist/assets/missions-CFd-gKUG.js                                    6.76 kB │ gzip:   0.96 kB
 dist/assets/artillery-BBIs4fCz.js                                   6.76 kB │ gzip:   1.56 kB
@@ -141,10 +141,10 @@ dist/assets/meshBuildings-j6QZcAYZ.js                              11.53 kB │ 
 dist/assets/catalogue-KZJfwfPk.js                                  12.30 kB │ gzip:   2.45 kB
 dist/assets/paradis-BZO7jAA3.js                                    12.80 kB │ gzip:   2.46 kB
 dist/assets/canon_851-CaSCE7u3.js                                  13.05 kB │ gzip:   2.57 kB
-dist/assets/init-uGLFnjh2.js                                       14.86 kB │ gzip:   4.62 kB
-dist/assets/humanViewer-YZb5TKrq.js                                16.24 kB │ gzip:   6.47 kB
+dist/assets/init-CIVvV9KI.js                                       14.86 kB │ gzip:   4.62 kB
+dist/assets/humanViewer-BmDW20o8.js                                16.24 kB │ gzip:   6.47 kB
 dist/assets/generic-Cvy5m8dR.js                                    16.72 kB │ gzip:   2.23 kB
-dist/assets/proto-CJ3dcgBF.js                                      20.56 kB │ gzip:   8.41 kB
+dist/assets/proto-BZskhaRi.js                                      20.56 kB │ gzip:   8.41 kB
 dist/assets/meshWall-ELE54yd4.js                                   21.10 kB │ gzip:   8.40 kB
 dist/assets/paradis-UPtl3Ka_.js                                    23.01 kB │ gzip:   2.61 kB
 dist/assets/world-D64zYQ6T.js                                      23.23 kB │ gzip:   2.85 kB
@@ -153,24 +153,24 @@ dist/assets/paradis-JFFfBWC-.js                                    31.16 kB │ 
 dist/assets/paradis-BK6GNPE_.js                                    35.05 kB │ gzip:   5.19 kB
 dist/assets/canon_850-CgLZKR3v.js                                  35.95 kB │ gzip:   5.84 kB
 dist/assets/fond-91nU0eNr.js                                       42.46 kB │ gzip:   2.37 kB
-dist/assets/browserAll-CAZkzEeE.js                                 43.48 kB │ gzip:  11.28 kB
+dist/assets/browserAll-G8cT24CO.js                                 43.48 kB │ gzip:  11.29 kB
 dist/assets/paradis-B8xvPXWE.js                                    43.89 kB │ gzip:   4.67 kB
 dist/assets/GLTFLoader-BKwDh4Dz.js                                 44.30 kB │ gzip:  13.18 kB
-dist/assets/view3d-ClY03Pv-.js                                     47.61 kB │ gzip:  17.82 kB
+dist/assets/view3d-BWUjcBqH.js                                     47.61 kB │ gzip:  17.82 kB
 dist/assets/post-BhcUx0Cf.js                                       68.61 kB │ gzip:  18.50 kB
-dist/assets/envViewer-BOhKoMyV.js                                  72.25 kB │ gzip:  26.88 kB
+dist/assets/envViewer-CEYC0rYV.js                                  72.25 kB │ gzip:  26.88 kB
 dist/assets/RenderTargetSystem-D6eF_o2J.js                         78.15 kB │ gzip:  22.10 kB
-dist/assets/bodies-C7Z9s_SL.js                                     84.06 kB │ gzip:  29.86 kB
-dist/assets/placeViewer-DjcCY2NA.js                               105.72 kB │ gzip:  39.05 kB
+dist/assets/bodies-DAFdNkqa.js                                     84.06 kB │ gzip:  29.86 kB
+dist/assets/placeViewer-PWJo6cOX.js                               105.72 kB │ gzip:  39.05 kB
 dist/assets/CanvasPool-ADgchDYy.js                                113.07 kB │ gzip:  34.46 kB
 dist/assets/lighting-4GST0Bnt.js                                  764.47 kB │ gzip: 204.39 kB
 dist/assets/paradis-C0j7h9Kk.js                                   953.43 kB │ gzip: 257.33 kB
-dist/assets/index-KsAO2Vuw.js                                   1,279.26 kB │ gzip: 393.29 kB
+dist/assets/index-BDWpUuHW.js                                   1,279.50 kB │ gzip: 393.38 kB
 
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 2.02s
+✓ built in 2.26s
 EXIT=0

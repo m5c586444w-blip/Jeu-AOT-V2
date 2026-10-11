@@ -1,4 +1,4 @@
-# Dettes corrigées après la dette n° 72 — partie 3 sur 3
+# Dettes corrigées après la dette n° 72 — partie 3 sur 4
 
 Sommaire et méthode : `dettes-suite.md`.
 

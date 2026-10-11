@@ -1,0 +1,19 @@
+
+> murs-et-sang@0.0.1 smoke:r2
+> tsx src/tools/smoke-r2.ts
+
+Captures : docs/screenshots/.smoke/ (hors git)
+[850, essai de compagnie] 1920×1080
+  OK  1920×1080 : vues stratégique et suivi rendues (82 images)
+  ..  1920×1080, 3D qualité moyenne : prêt 9.4 s · 341 unités · temps JS p95 324.20 ms (sim 32.90 · figures 257.10 · rendu 72.50 · interface 10.90) · appels 199 · triangles 601652 · détail 0 · foule 300 · repères 22
+[850, essai de compagnie] 3840×2160
+  OK  3840×2160 : vues stratégique et suivi rendues (83 images)
+  ..  3840×2160, 3D qualité moyenne : prêt 21.3 s · 341 unités · temps JS p95 363.30 ms (sim 42.50 · figures 305.10 · rendu 61.30 · interface 8.00) · appels 192 · triangles 603134 · détail 0 · foule 293 · repères 25
+(partie 5 non jouée)
+  OK  repli 2D (WebGL 1 simulé) : 0 avertissement « texParameter: invalid parameter name »
+  OK  0 erreur console
+Mesures (rendu logiciel SwiftShader, sans GPU ; à vérifier sur le PC de l'utilisateur) :
+  1920×1080, 3D qualité moyenne : prêt 9.4 s · 341 unités · temps JS p95 324.20 ms (sim 32.90 · figures 257.10 · rendu 72.50 · interface 10.90) · appels 199 · triangles 601652 · détail 0 · foule 300 · repères 22
+  3840×2160, 3D qualité moyenne : prêt 21.3 s · 341 unités · temps JS p95 363.30 ms (sim 42.50 · figures 305.10 · rendu 61.30 · interface 8.00) · appels 192 · triangles 603134 · détail 0 · foule 293 · repères 25
+smoke:r2 : tout est conforme.
+EXIT=0

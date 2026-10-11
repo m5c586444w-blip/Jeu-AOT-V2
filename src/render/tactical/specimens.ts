@@ -1,4 +1,5 @@
 import { Application, Graphics } from "pixi.js";
+import { guardedCanvas } from "../pixiCompat";
 import { PAPER } from "../palette";
 import { drawFlare, drawSoldier, drawTitan } from "./figures";
 import type { SoldierLook } from "./figures";
@@ -10,7 +11,7 @@ const C = SPECIMEN_CELL;
 
 async function strip(host: HTMLElement, height: number, draw: (g: Graphics) => void): Promise<Application> {
   const app = new Application();
-  await app.init({ width: C * 10, height, background: PAPER, antialias: true, preference: "webgl" });
+  await app.init({ width: C * 10, height, background: PAPER, antialias: true, preference: "webgl", canvas: guardedCanvas() });
   host.append(app.canvas);
   const g = new Graphics();
   app.stage.addChild(g);

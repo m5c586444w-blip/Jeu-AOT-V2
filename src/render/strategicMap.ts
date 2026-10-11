@@ -1,5 +1,5 @@
 import { Application, Container, Graphics, Text } from "pixi.js";
-import { guardWebGl1 } from "./pixiCompat";
+import { guardedCanvas } from "./pixiCompat";
 import type { Sprite } from "pixi.js";
 import type { MapData } from "../data/map";
 import type { TerrainData } from "../data/terrain";
@@ -129,8 +129,7 @@ export class StrategicMap {
 
   static async create(host: HTMLElement, map: MapData, provinces: readonly MapProvince[], labels: readonly LabelSpec[], terrain: TerrainData): Promise<StrategicMap> {
     const app = new Application();
-    await app.init({ resizeTo: host, backgroundAlpha: 0, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl" });
-    guardWebGl1(app.renderer);
+    await app.init({ resizeTo: host, backgroundAlpha: 0, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl", canvas: guardedCanvas() });
     app.canvas.classList.add("carte__toile");
     app.canvas.setAttribute("role", "img");
     host.append(app.canvas);

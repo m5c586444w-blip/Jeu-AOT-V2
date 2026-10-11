@@ -1,0 +1,15 @@
+
+> murs-et-sang@0.0.1 smoke:r2
+> tsx src/tools/smoke-r2.ts
+
+Captures : docs/screenshots/.smoke/ (hors git)
+[850] sans WebGL 2, 1366×768
+  OK  repli 2D avec message : « WebGL 2 indisponible sur ce poste : la bataille s'affiche en vue 2D (la vue 3D n'est pas c »
+  OK  repli 2D : three.js et la vue 3D jamais téléchargés
+  OK  vue 2D : sélection, ordre, bataille qui avance
+(partie 5 non jouée)
+  OK  repli 2D (WebGL 1 simulé) : 0 avertissement « texParameter: invalid parameter name »
+  OK  0 erreur console
+Mesures (rendu logiciel SwiftShader, sans GPU ; à vérifier sur le PC de l'utilisateur) :
+smoke:r2 : tout est conforme.
+EXIT=0

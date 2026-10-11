@@ -455,7 +455,7 @@ try {
   // Sans WebGL 2 simulé, Pixi passe en WebGL 1 ; il réglait des paramètres de texture propres à WebGL 2 (« INVALID_ENUM:
   // texParameter ») : garde locale depuis la dette n° 47 (`pixiCompat.ts`), plus aucun avertissement attendu.
   const webgl1 = errors.filter((e) => e.startsWith("[repli 2D]") && /INVALID_ENUM: texParameter/.test(e));
-  expect(webgl1.length === 0, `repli 2D (WebGL 1 simulé) : ${webgl1.length} avertissement « texParameter: invalid parameter name »`);
+  expect(webgl1.length === 0, `repli 2D (WebGL 1 simulé) : ${webgl1.length} avertissement « texParameter: invalid parameter name »${webgl1.length ? ` (${webgl1.slice(0, 2).join(" | ")})` : ""}`);
   const others = errors.filter((e) => !webgl1.includes(e));
   expect(others.length === 0, `0 erreur console${others.length ? ` (${others.slice(0, 3).join(" | ")})` : ""}`);
 } finally {
