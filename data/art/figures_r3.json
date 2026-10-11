@@ -508,6 +508,13 @@
     "canon": "A",
     "note": "Fantassins de Paradis en bataille (dette n° 62) : la Brigade Militaire tient l'intérieur du mur Sina (C) ; une bataille dans une province de Sina la montre (choix de rendu A) ; ailleurs, la Garnison."
   },
+  "visage_titans": {
+    "sourire": 0.9,
+    "retraction": 1.3,
+    "ouverture": 0.15,
+    "canon": "A",
+    "note": "Visages des Titans de R3 (dette n° 63) : bouche étirée en large sourire, lèvres retroussées sur les dents, quelle que soit l'expression ; traits inspirés des descriptions de l'œuvre, intensités choisies par le projet (A), aucun visage de l'œuvre reproduit."
+  },
   "ceremonie_medailles": {
     "reine": {
       "taille": 1.45,

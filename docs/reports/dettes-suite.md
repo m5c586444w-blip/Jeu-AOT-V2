@@ -105,3 +105,14 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   profil, poing sur le cœur ; la reine en robe ivoire et cape bleue au milieu ; deux grandes bannières rouges.
   - Défauts : cheveux de la reine en calotte courte (lecture presque chauve) ; garde de gauche caché par les soldats ;
     médailles invisibles à cette distance ; murs unis sans fenêtres ni moulures ; trône en blocs.
+
+## Dette n° 63 (en partie) : visages des Titans
+- Tous les Titans de R3 : bouche étirée en large sourire, lèvres retroussées sur les dents, quelle que soit l'expression
+  (cibles de bouche poussées au-delà du visage humain ; intensités `visage_titans`, A). Coque de cheveux deux fois plus
+  mince. Reste : visage sculpté propre aux Titans (T1, V2), lisière des cheveux, pli du cou du 15 m « massif ».
+- `npm run verify` (`dette63-verify.log`) : « Tests  782 passed (782) », `EXIT=0` ; planches (`dette63-planches.log`) :
+  « OK  r3-titans : 15 corps à l'échelle, hauteurs mesurées à 0.32 % au plus (±5 %) », « OK  r3-visages », `EXIT=0`.
+- **`r3-visages.png`** : six Titans de près ; tous sourient d'une oreille à l'autre, rangée de dents visible chez le 5 m
+  et le 12 m, bouche béante rouge chez le 3 m.
+  - Défauts : plis étirés aux coins de la bouche ; cheveux encore en calotte avec une lisière claire ; étiquettes sur
+    les torses ; corps lisses, presque humains (T1 reporté).

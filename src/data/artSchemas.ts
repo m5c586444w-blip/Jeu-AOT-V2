@@ -354,6 +354,8 @@ export const FiguresR3FileSchema = z
     fantassins_paradis: z
       .object({ defaut: z.enum(SOLDIER_OUTFIT_IDS), par_region: z.record(z.string().min(1), z.enum(SOLDIER_OUTFIT_IDS)), canon: CanonSchema, note: z.string().min(1) })
       .strict(),
+    /** Dette n° 63 : sourire de Titan ajouté aux cibles de bouche (au-delà du visage humain), pour tous les Titans de R3. */
+    visage_titans: z.object({ sourire: z.number().min(0).max(2), retraction: z.number().min(0).max(2), ouverture: z.number().min(0).max(1), canon: CanonSchema, note: z.string().min(1) }).strict(),
     /** Dette n° 72 : remise des médailles par la reine Historia (planche `r3-medailles`). */
     ceremonie_medailles: z
       .object({

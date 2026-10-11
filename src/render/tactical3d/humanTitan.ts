@@ -8,6 +8,7 @@ import { buildHairCap, paintHair } from "./humanSoldier";
 import { unitSphere } from "./rig";
 import { derive, range, seeded } from "./rng";
 import { MATERIALS } from "./styles";
+import { FIGURES_R3 } from "./figuresR3";
 import { TITAN_LARGE, titanSteam } from "./titan";
 import type { JointName, Titan, TitanSpec } from "./titan";
 
@@ -209,6 +210,15 @@ export function titanMacro(spec: TitanSpec): { macro: Macro; details: Record<str
   } else {
     Object.assign(details, { eye_left_closure: 0.25, eye_right_closure: 0.25, mouth_depression: 0.6 });
   }
+  // Dette n° 63 : visage de Titan, pas d'homme : bouche étirée en large sourire, lèvres retroussées sur les dents (Titans
+  // de R3, en plus de l'expression ; intensités dans `data/art/figures_r3.json`, A).
+  if (spec.r3) {
+    const f = FIGURES_R3.visage_titans;
+    details["mouth_corner_puller"] = (details["mouth_corner_puller"] ?? 0) + f.sourire;
+    details["mouth_retraction"] = (details["mouth_retraction"] ?? 0) + f.retraction;
+    details["mouth_open"] = (details["mouth_open"] ?? 0) + f.ouverture;
+    delete details["mouth_depression"];
+  }
   // R3 : yeux de tailles inégales (ouverture de chaque paupière).
   const eyes = spec.r3?.eyes;
   if (eyes) {
@@ -345,7 +355,8 @@ export function buildHumanTitan(t: HumanTemplate, spec: TitanSpec, seed: number,
   let hair: Mesh | null = null;
   if (spec.hair) {
     paintHair(body, hairMat, skin, headScale);
-    hair = buildHairCap(body, hairMat, 0.012 * headScale, 0.008, 0, headScale);
+    // Dette n° 63 : coque plus mince (bord moins net, moins d'effet de calotte).
+    hair = buildHairCap(body, hairMat, 0.006 * headScale, 0.008, 0, headScale);
     if (hair) body.group.add(hair);
   }
 
