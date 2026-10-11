@@ -33,6 +33,9 @@ export interface ViewOptions {
   year?: number;
   /** Région de la province de la bataille (dette n° 62) : la Brigade Militaire figure les fantassins de Paradis dans Sina. */
   region?: string;
+  /** Dettes n° 70 et 72 : heure (aube, jour, crépuscule) et pluie de la vue 3D ; rendu seul (la nuit vient de la bataille). */
+  light?: "jour" | "aube" | "crepuscule";
+  rain?: boolean;
 }
 
 export interface BattleView {

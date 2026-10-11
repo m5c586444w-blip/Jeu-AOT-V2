@@ -4,7 +4,7 @@
 
 ## Index
 
-171 décisions, de D-01 (2026-10-02) à D-171 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
+172 décisions, de D-01 (2026-10-02) à D-172 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -177,6 +177,7 @@
 - **D-169** (10-10) — Dettes n° 56 à 58 : interface de la bataille temps réel
 - **D-170** (10-11) — Dette n° 72 (suite) : tenue sombre de 854, lances de foudre, critère de silhouette en bataille
 - **D-171** (10-11) — Dette n° 62 : officiers de Paradis, Brigade Militaire dans Sina, Alliés et Hizuru en bataille
+- **D-172** (10-11) — Dettes n° 70 et 72 : aube, crépuscule et pluie en bataille 3D, capuches levées
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1692,4 +1693,18 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
   ni bandeau de Marley ; uniformes réels non établis (`?`, Q18). Foule instanciée aux mêmes teintes.
 - Le critère de silhouette (D-170) couvre aussi la Brigade Militaire face à Marley (0,59 et 0,60).
 - Planche de contrôle `r3-fantassins`.
+- **Réversible** : oui.
+
+## 2026-10-11 — D-172 Dettes n° 70 et 72 : aube, crépuscule et pluie en bataille 3D, capuches levées
+- **Heure** : la nuit reste une donnée de la bataille (`setup.night`, vision des Titans et des signaux). L'aube et le
+  crépuscule (04 §4 : « ambiance lumineuse (aube, jour, crépuscule, nuit) ») sont un choix d'affichage de la bataille, dans
+  ses options (« Heure (vue 3D) » : jour par défaut ; absent d'une bataille de nuit) : astre bas à l'est ou à l'ouest,
+  teintes des heures de l'essai 3D, fenêtres faiblement allumées. Aucun effet sur la simulation ni sur les empreintes.
+- **Pluie** : option « Pluie (vue 3D) » (non par défaut) : traits de pluie autour de la caméra, ciel gris et bas, brume
+  rapprochée, soleil voilé ; les soldats du Corps de Reconnaissance rabattent la capuche de leur cape (C : cape à capuche ;
+  A : capuche levée sous la pluie), figures détaillées et foule instanciée. Rendu seul.
+- **Pourquoi des options** : la simulation n'a ni météo ni heure de bataille hors la nuit (F-EXP-05 « Météo et jour/nuit »
+  reste P2/P3) ; en tirer une du calendrier serait une règle de jeu non spécifiée.
+- Intensités (A) : au crépuscule, l'hémisphère éclaire deux fois plus que l'heure de l'essai 3D ramenée à la bataille, pour
+  garder environ 40 % de l'éclairement du jour au sol (lisibilité).
 - **Réversible** : oui.

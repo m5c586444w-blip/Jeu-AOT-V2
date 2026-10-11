@@ -255,3 +255,23 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   gauche dans la brume ; à droite, une file de canons sur plates-formes de bois, le premier avec roues, flasques et fût.
   - Défauts : plate-forme de bois unie, d'un orange trop vif ; ciel uniforme sans nuages ; canon d'un brun rouge trop
     saturé ; parapet extérieur flou au loin ; aucun soldat sur le chemin de ronde.
+
+## Dettes n° 70 et 72 (en partie) : aube, crépuscule et pluie en bataille 3D (D-172)
+- Options de la bataille : « Heure (vue 3D) » (jour, aube, crépuscule ; absente d'une bataille de nuit) et « Pluie (vue
+  3D) ». Rendu seul (`battle/ambiance.ts`) : astre bas, teintes des heures de l'essai 3D, fenêtres allumées au crépuscule ;
+  pluie : traits autour de la caméra, ciel gris, brume rapprochée, soleil voilé ; capuches des capes du Corps levées (figures
+  détaillées et foule). Jour et nuit gardent exactement leurs réglages d'avant (test).
+- Premier essai trop sombre (crépuscule pluvieux pris pour la nuit, pluie presque invisible) : hémisphère doublée à l'aube
+  et au crépuscule, lumière diffuse accrue sous la pluie, boîte de pluie resserrée (40 m) et traits plus longs.
+- `npm run verify` (`dette70-verify.log`) : « Test Files  129 passed (129) », « Tests  800 passed (800) », `EXIT=0` ;
+  `smoke:r3` (`dette70-smoke-r3.log`, bataille seule) : « crépuscule sans pluie : capuches roulées au col », « pluie : traits
+  de pluie, 24 capuches levées », « retour au temps sec : ni pluie ni capuche levée », « smoke:r3 : tout est conforme. »,
+  `EXIT=0`.
+- **`r3-bataille-crepuscule-1366.png`** : rue pavée de la Ville des Murs au couchant ; façades de gauche éclairées en
+  orangé, fenêtres allumées ; une section de la Garnison de dos, emblème aux deux roses.
+  - Défauts : ciel hors du cadre (l'heure se lit surtout aux façades) ; pavés sombres, peu de contraste au premier plan ;
+    étiquette « S1 » seule au milieu de la rue.
+- **`r3-bataille-pluie-1366.png`** : caméra de suivi de l'escouade 05, ruelle sous un ciel couvert ; traits de pluie ; quatre
+  soldats en cape verte, capuche levée, Ailes de la liberté au dos.
+  - Défauts : traits de pluie tous parallèles et réguliers ; sol sec (ni flaques ni reflets) ; bâtiment translucide à droite
+    zébré de hachures ; soldats petits dans le cadre.

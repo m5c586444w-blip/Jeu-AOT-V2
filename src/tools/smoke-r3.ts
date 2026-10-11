@@ -1,7 +1,8 @@
 // npm run smoke:r3 — R3 (CR3-08, CR3-09) dans un vrai navigateur (Chromium, serveur de développement Vite).
 // 1. Planches `?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses|r3-uniformes|r3-ceremonie|r3-discours|r3-fantassins` (1920×1080) : hauteurs mesurées des Titans.
 // 2. Bataille de compagnie en 3D (1366×768) : « prêt » en figures de R1, puis second temps (corps de base : Titans de R3 et
-//    figures en tenue) ; chaque figure montre la pose de l'état lu dans la simulation ; vues rapprochées (Paradis, Marley), suivi.
+//    figures en tenue) ; chaque figure montre la pose de l'état lu dans la simulation ; vues rapprochées (Paradis, Marley), suivi ;
+//    crépuscule et pluie (options de la bataille) avec capuches levées.
 // 3. 3840×2160 : vue rapprochée. 4. three.js hors du bundle principal (dist/). 0 erreur console.
 // Captures : docs/screenshots/.smoke/ par défaut (hors git) ; `-- --captures` : docs/screenshots/ (passage final).
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
@@ -168,6 +169,24 @@ try {
   const nA = checkPoses(near.list, "vue rapprochée (Paradis)");
   expect(nA.troops > 0, `fantassins de la Garnison en tenue : ${nA.troops} (et ${nA.soldiers} soldats du Corps de Reconnaissance)`);
   await page.screenshot({ path: `${OUT}/r3-bataille-paradis-1366.png` });
+  // Dettes n° 70 et 72 : crépuscule et pluie (options de la bataille, rendu seul) ; capuches levées du Corps de Reconnaissance.
+  const ambiance = async (light: string, rain: string): Promise<{ rain: boolean; hoods: number }> => {
+    await page.locator('[data-action="options-bataille"]').click();
+    await page.selectOption('select[data-rt-option="battleLight"]', light);
+    await page.selectOption('select[data-rt-option="battleRain"]', rain);
+    await page.locator('[data-action="options-bataille"]').click();
+    await page.waitForTimeout(8000);
+    return (await page.evaluate(`(() => {
+      const sc = window.__batailleRt.view.scene;
+      let hoods = 0;
+      sc.traverse((o) => { if (o.name === "capuche" && o.parent && o.visible) hoods++; });
+      return { rain: !!sc.getObjectByName("pluie"), hoods };
+    })()`)) as { rain: boolean; hoods: number };
+  };
+  const dusk = await ambiance("crepuscule", "non");
+  expect((await ds(page, "heure")) === "crepuscule" && !dusk.rain && dusk.hoods === 0, "crépuscule sans pluie : capuches roulées au col");
+  await page.screenshot({ path: `${OUT}/r3-bataille-crepuscule-1366.png` });
+  await ambiance("jour", "non");
   // Suivi d'une escouade (troisième personne), la bataille avance : soldats en vol, en tenue.
   await page.locator(".rt-unite[data-squad='esc_05']").click();
   await page.keyboard.press("KeyV");
@@ -176,6 +195,12 @@ try {
   const nF = checkPoses(follow.list, "caméra de suivi");
   expect(nF.soldiers > 0, `soldats du Corps de Reconnaissance en tenue (suivi) : ${nF.soldiers}`);
   await page.screenshot({ path: `${OUT}/r3-bataille-suivi-1366.png` });
+  // Pluie sur l'escouade suivie : traits de pluie, capuches des capes levées.
+  const wet = await ambiance("jour", "oui");
+  expect((await ds(page, "pluie")) === "oui" && wet.rain && wet.hoods > 0, `pluie : traits de pluie, ${wet.hoods} capuches levées`);
+  await page.screenshot({ path: `${OUT}/r3-bataille-pluie-1366.png` });
+  const dry = await ambiance("jour", "non");
+  expect(!dry.rain && dry.hoods === 0, "retour au temps sec : ni pluie ni capuche levée");
   console.log(`  ..  mesures (rendu logiciel) : prêt ${(ready / 1000).toFixed(1)} s · corps ${corpsS} s · ${await ds(page, "stats")} · temps JS p95 ${await ds(page, "js-p95")} ms`);
   await page.close();
 

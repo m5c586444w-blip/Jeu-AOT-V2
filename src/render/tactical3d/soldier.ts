@@ -223,6 +223,8 @@ export interface CrowdColors {
   bottes: string;
   /** Absente : pas de cape (tenue sombre de 854). */
   cape?: string;
+  /** Sous la pluie (dettes n° 70 et 72) : capuche de la cape levée sur la tête, à la place des cheveux. */
+  capuche?: boolean;
 }
 
 /**
@@ -249,7 +251,8 @@ export function crowdGeometry(colors?: CrowdColors): BufferGeometry {
   }
   fb.geometry(new CylinderGeometry(0.15, 0.13, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.7]), jacket);
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), c(0xd9b49a));
-  fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), c(0x3b2c20));
+  if (colors?.cape && colors.capuche) fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.62, -0.04, [0.122, HEAD * 0.54, 0.13]), c(colors.cape));
+  else fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), c(0x3b2c20));
   if (!colors || colors.cape) fb.geometry(new BoxGeometry(0.6, 0.75, 0.04), at(0, LEG + TORSO - 0.38, -0.14), c(colors?.cape ?? 0x4f6b5a));
   fb.geometry(new CylinderGeometry(0.075, 0.075, 0.42, 6), at(0, LEG + 0.1, -0.15, [1, 1, 1]).multiply(new Matrix4().makeRotationZ(Math.PI / 2)), c(0xa9b0b3));
   return marks.apply(fb.build());

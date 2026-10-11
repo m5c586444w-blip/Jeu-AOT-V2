@@ -62,6 +62,9 @@ import { outfit, r3TitanForUnit, troopLook, troopTint } from "../figuresR3";
 import type { TroopLook } from "../figuresR3";
 import type { OutfitId } from "../figuresR3";
 import { titanSkinTexture } from "../textures";
+import { RAIN_BOX, RAIN_PARTICLES, battleAmbiance } from "./ambiance";
+import { createWeather } from "../weather";
+import type { WeatherRig } from "../weather";
 
 /**
  * Vue 3D de la bataille réelle (R2+). Lecture seule de l'état de la simulation : décor dérivé de la carte (`world.ts`),
@@ -204,6 +207,11 @@ export class View3D implements BattleView {
   private builtFigs = 0;
   /** Pour les contrôles (smoke) : pose montrée par figure et état du directeur, au dernier dessin. */
   private shownLog: ShownFigure[] = [];
+  /** Dettes n° 70 et 72 : pluie montrée (traits autour de la caméra), capuches levées des figures. */
+  private rain: WeatherRig | null = null;
+  private rainShown = false;
+  private readonly sunOffset = new Vector3(260, 420, 180);
+  private windowGlow = 0;
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
     this.opts = opts;
@@ -212,22 +220,21 @@ export class View3D implements BattleView {
     this.renderer = new WebGLRenderer({ antialias: q.antialias, powerPreference: "high-performance" });
     this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.toneMapping = ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = night ? 0.7 : 1.05;
     this.renderer.shadowMap.enabled = q.shadows;
     this.renderer.shadowMap.type = PCFShadowMap;
     this.renderer.setPixelRatio(effectivePixelRatio(opts.quality, window.devicePixelRatio || 1));
     const canvas = this.renderer.domElement;
     canvas.className = "tactique__toile tactique__toile--3d";
     host.append(canvas);
-    const sky = night ? 0x1b2333 : 0xaebfcc;
-    this.scene.background = new Color(sky);
-    this.scene.fog = new Fog(sky, night ? 120 : 450, night ? 700 : 2200);
-    this.hemi = new HemisphereLight(night ? 0x46557a : 0xdfe8f0, night ? 0x1c1a14 : 0x6b6350, night ? 0.5 : 1.5);
+    this.scene.background = new Color();
+    this.scene.fog = new Fog(0xffffff, 1, 2);
+    this.hemi = new HemisphereLight();
     this.scene.add(this.hemi);
-    this.sun = new DirectionalLight(night ? 0x9fb1d6 : 0xfff1dc, night ? 0.5 : 2.4);
+    this.sun = new DirectionalLight();
     this.sun.castShadow = q.shadows;
     this.sun.shadow.mapSize.set(q.shadowMap * 2, q.shadowMap * 2);
     this.scene.add(this.sun, this.sun.target);
+    this.applyAmbiance();
     this.cam.up.copy(UP);
     this.resize();
     this.ro = new ResizeObserver(() => this.resize());
@@ -262,8 +269,58 @@ export class View3D implements BattleView {
     if (o.quality !== this.opts.quality) {
       for (const s of this.detail.splice(0)) this.scene.remove(s.group);
     }
+    const ambianceChanged = o.light !== this.opts.light || Boolean(o.rain) !== Boolean(this.opts.rain);
     this.opts = o;
+    if (ambianceChanged) this.applyAmbiance();
     this.resize();
+  }
+
+  /** Heure et pluie (dettes n° 70 et 72) : ciel, brume, lumières, fenêtres ; traits de pluie et capuches levées. */
+  private applyAmbiance(): void {
+    const a = battleAmbiance(this.opts.light ?? "jour", this.night, Boolean(this.opts.rain));
+    (this.scene.background as Color).set(a.sky);
+    const fog = this.scene.fog as Fog;
+    fog.color.set(a.sky);
+    fog.near = a.fogNear;
+    fog.far = a.fogFar;
+    this.hemi.color.set(a.hemiSky);
+    this.hemi.groundColor.set(a.hemiGround);
+    this.hemi.intensity = a.hemiIntensity;
+    this.sun.color.set(a.sunColor);
+    this.sun.intensity = a.sunIntensity;
+    this.renderer.toneMappingExposure = a.exposure;
+    this.sunOffset.set(...a.sunOffset);
+    this.sun.position.copy(this.sun.target.position).add(this.sunOffset);
+    for (const w of this.world?.windows ?? []) w.emissiveIntensity = a.windows;
+    this.windowGlow = a.windows;
+    if (a.rain !== this.rainShown) {
+      this.rainShown = a.rain;
+      this.rain?.dispose();
+      this.rain = a.rain ? createWeather(this.scene, "pluie", { seed: this.seed, particles: RAIN_PARTICLES[this.opts.quality], mistMap: null, groundY: 0, size: 0, ...RAIN_BOX }) : null;
+      this.dropFigures();
+      if (this.layers) {
+        this.layers.crowd.geometry.dispose();
+        this.layers.crowd.geometry = this.crowdGeo();
+      }
+    }
+  }
+
+  /** Foule des soldats de manœuvre : uniforme de l'année, capuche levée sous la pluie. */
+  private crowdGeo(): BufferGeometry {
+    const ex = outfit(odmOutfitFor(this.opts.year));
+    return crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, ...(ex.cape ? { cape: ex.cape, capuche: this.rainShown } : {}) });
+  }
+
+  /** Figures en tenue retirées (capuche levée ou roulée) : reconstruites au fil des images. */
+  private dropFigures(): void {
+    const all = new Set<HumanSoldier>([...this.figs.values(), ...[...this.freeFigs.values()].flat()]);
+    for (const f of all) {
+      this.scene.remove(f.group);
+      f.dispose();
+    }
+    this.figs.clear();
+    this.freeFigs.clear();
+    this.figKey.clear();
   }
 
   setMap(m: TacticalWorldMap): void {
@@ -312,10 +369,11 @@ export class View3D implements BattleView {
     };
     this.world = buildBattleWorld(m, this.seed, { profile: style, textures, night: this.night });
     this.scene.add(this.world.group);
-    // Soleil oblique (matin, sud-est), ombre sur toute la carte.
+    // Soleil oblique (de jour : matin, sud-est ; aube et crépuscule : astre bas, dette n° 70), ombre sur toute la carte.
     const c = new Vector3(m.width / 2, 0, m.height / 2);
-    this.sun.position.set(c.x + 260, 420, c.z + 180);
     this.sun.target.position.copy(c);
+    this.sun.position.copy(c).add(this.sunOffset);
+    for (const w of this.world.windows) w.emissiveIntensity = this.windowGlow;
     const ext = Math.max(m.width, m.height) * 0.75;
     const sc = this.sun.shadow.camera;
     sc.left = -ext;
@@ -352,14 +410,13 @@ export class View3D implements BattleView {
     if (this.layers) return this.layers;
     const nS = Math.max(1, st.soldiers.length);
     const nT = st.troops?.length ?? 0;
-    const ex = outfit(odmOutfitFor(this.opts.year));
     // Dette n° 61 : la foule marche et court (membres pivotés dans le shader, pas d'instance dans `aWalk`).
     const walkMat = (): MeshStandardMaterial => {
       const m = new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 });
       patchWalk(m, this.walkTime, CROWD_HIP, CROWD_SHOULDER);
       return m;
     };
-    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, ...(ex.cape ? { cape: ex.cape } : {}) }), walkMat(), nS);
+    const crowd = new InstancedMesh(this.crowdGeo(), walkMat(), nS);
     crowd.name = "foule";
     crowd.castShadow = true;
     const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), walkMat(), nT) : null;
@@ -523,7 +580,7 @@ export class View3D implements BattleView {
     }
     if (!this.kit?.template || budget.soldiers <= 0) return null;
     budget.soldiers--;
-    const fig = buildHumanSoldier(this.kit.template, this.seed + 101 * this.builtFigs++, this.mats, { eyeMap: this.kit.eyeMap, outfit: look.outfit });
+    const fig = buildHumanSoldier(this.kit.template, this.seed + 101 * this.builtFigs++, this.mats, { eyeMap: this.kit.eyeMap, outfit: look.outfit, pluie: this.rainShown });
     this.figKey.set(fig, look.key);
     fig.group.traverse((o) => {
       o.castShadow = true;
@@ -1139,6 +1196,10 @@ export class View3D implements BattleView {
 
   render(): void {
     if (this.mode === "strategique") this.placeCamera(false);
+    if (this.rain) {
+      this.cam.updateMatrixWorld();
+      this.rain.update(this.time, this.cam.position, this.cam.matrixWorldInverse);
+    }
     this.renderer.render(this.scene, this.cam);
   }
 
@@ -1152,6 +1213,8 @@ export class View3D implements BattleView {
 
   destroy(): void {
     this.ro.disconnect();
+    this.rain?.dispose();
+    this.dropFigures();
     this.world?.dispose();
     for (const t of this.decorTextures.splice(0)) t.dispose();
     for (const t of this.titans.values()) t.dispose();

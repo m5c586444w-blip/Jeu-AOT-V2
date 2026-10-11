@@ -68,6 +68,10 @@ export interface RtBattleOptions {
   region?: string;
 }
 
+/** Heures et pluie proposées dans les options de la bataille (vue 3D ; dettes n° 70 et 72). */
+const BATTLE_LIGHTS = ["jour", "aube", "crepuscule"] as const;
+const BATTLE_RAIN = ["non", "oui"] as const;
+
 type Targeting = { kind: "deplacer" | "tuer" | "suivre"; queue: boolean } | { kind: "tir_zone"; battery: string } | { kind: "zone_porteur"; shifter: number };
 
 /** Vue de bataille : 3D si demandée et possible, sinon 2D (avec la raison du repli). */
@@ -89,6 +93,10 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
   let viewKind: BattleViewPref = prefs.battleView;
   let quality: BattleQualityPref = prefs.battleQuality;
   let violence: ViolencePref = prefs.violence;
+  // Dettes n° 70 et 72 : heure et pluie de la vue 3D, choisies pour cette bataille (rendu seul ; la nuit vient de la bataille).
+  let light: (typeof BATTLE_LIGHTS)[number] = "jour";
+  let rain: (typeof BATTLE_RAIN)[number] = "non";
+  const viewOpts = (): ViewOptions => ({ quality, violence, light, rain: rain === "oui", ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) });
   const root = el("section", "bataille bataille--rt");
   root.setAttribute("role", "dialog");
   root.setAttribute("aria-label", o.title);
@@ -143,7 +151,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     ...bt.state.titans.map((x) => ({ x: x.x, y: x.y, z: x.height })),
   ];
   const mountView = async (): Promise<void> => {
-    const made = await createView(host, viewKind, { quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) }, o.setup.seed, o.setup.night);
+    const made = await createView(host, viewKind, viewOpts(), o.setup.seed, o.setup.night);
     view = made.view;
     host.prepend(view.canvas);
     view.setMap(bt.map);
@@ -253,15 +261,31 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
     optSelect("options.battle_view", "battleView", BATTLE_VIEWS, () => viewKind, (v) => switchView(v, null)),
     optSelect("options.battle_quality", "battleQuality", BATTLE_QUALITIES, () => quality, (v) => {
       quality = v;
-      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) });
+      view.setOptions(viewOpts());
     }),
     optSelect("options.violence", "violence", VIOLENCES, () => violence, (v) => {
       violence = v;
-      view.setOptions({ quality, violence, ...(o.year !== undefined ? { year: o.year } : {}), ...(o.region ? { region: o.region } : {}) });
+      view.setOptions(viewOpts());
       root.dataset["violence"] = v;
+    }),
+    ...(o.setup.night
+      ? []
+      : [
+          optSelect("options.battle_light", "battleLight", BATTLE_LIGHTS, () => light, (v) => {
+            light = v;
+            view.setOptions(viewOpts());
+            root.dataset["heure"] = v;
+          }),
+        ]),
+    optSelect("options.battle_rain", "battleRain", BATTLE_RAIN, () => rain, (v) => {
+      rain = v;
+      view.setOptions(viewOpts());
+      root.dataset["pluie"] = v;
     }),
     el("p", "registre-note", t("rt.options_note")),
   );
+  root.dataset["heure"] = o.setup.night ? "nuit" : light;
+  root.dataset["pluie"] = rain;
   root.dataset["violence"] = violence;
 
   // ——— Ordres ———

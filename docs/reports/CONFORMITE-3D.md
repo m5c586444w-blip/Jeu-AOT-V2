@@ -79,7 +79,8 @@ escouades choisies (ou en alerte). `smoke:r2 -- --captures` : « tout est confor
   anti-personnel de 854 ; remise des médailles par la reine Historia (planche et dossier de E43).
 - **Titans** : sourire de Titan et dents visibles (n° 63, en partie).
 - **Bataille** : fusées de signal en fumée colorée (03 §7) ; foule instanciée qui marche et court (n° 61) ; étiquettes
-  estompées derrière les bâtiments (n° 50).
+  estompées derrière les bâtiments (n° 50) ; aube, crépuscule et pluie au choix dans les options de la bataille, capuches
+  du Corps levées sous la pluie (D-172) ; fond du menu en rendu natif 4K, canon des remparts détaillé (n° 19).
 - **Lieux** : habitants (n° 6), étals de marché et péniches (n° 12), herbe des rues abandonnées en 850 (n° 9), vue
   d'ensemble lisible sous la fumée de 845 (n° 10).
 - Restent hors de portée sans décision de l'utilisateur : visages sculptés de Titans (T1), Titans qui traversent les

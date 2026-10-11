@@ -64,14 +64,19 @@ function snowCover(root: Object3D, amount: number): { update(viewInv: Matrix4): 
   };
 }
 
-export function createWeather(scene: Group | Object3D, kind: WeatherKind, opts: { seed: number; particles: number; mistMap: Texture | null; groundY: number; size: number }): WeatherRig {
+/**
+ * `radius` et `height` : boîte de particules autour de la caméra (m) ; `streak` : longueur d'un trait de pluie (m) ; `opacity` :
+ * opacité des traits. Défauts : ceux des environnements de R1b ; la bataille 3D resserre la boîte (pluie lisible de près).
+ */
+export function createWeather(scene: Group | Object3D, kind: WeatherKind, opts: { seed: number; particles: number; mistMap: Texture | null; groundY: number; size: number; radius?: number; height?: number; streak?: number; opacity?: number }): WeatherRig {
   const group = new Group();
   group.name = `meteo-${kind}`;
   scene.add(group);
   const disposables: { dispose(): void }[] = [];
   const rand = seeded(derive(opts.seed, 4000));
-  const R = 140;
-  const Hh = 90;
+  const R = opts.radius ?? 140;
+  const Hh = opts.height ?? 90;
+  const streak = opts.streak ?? 1.1;
   let update: WeatherRig["update"] = () => undefined;
   let fogBoost = 1;
   let sunFactor = 1;
@@ -102,7 +107,7 @@ export function createWeather(scene: Group | Object3D, kind: WeatherKind, opts: 
     const pos = new Float32Array(n * 6);
     const g = new BufferGeometry();
     g.setAttribute("position", new BufferAttribute(pos, 3));
-    const mat = new LineBasicMaterial({ color: phys("fumee").multiplyScalar(1.5), transparent: true, opacity: 0.38, depthWrite: false });
+    const mat = new LineBasicMaterial({ color: phys("fumee").multiplyScalar(1.5), transparent: true, opacity: opts.opacity ?? 0.38, depthWrite: false });
     const lines = new LineSegments(g, mat);
     lines.frustumCulled = false;
     lines.name = "pluie";
@@ -115,7 +120,7 @@ export function createWeather(scene: Group | Object3D, kind: WeatherKind, opts: 
         const x = cam.x + (base[i * 3] as number) + yy * 0.12;
         const z = cam.z + (base[i * 3 + 2] as number);
         const y0 = cam.y - Hh * 0.4 + yy;
-        pos.set([x, y0, z, x - 0.12, y0 - 1.1, z], i * 6);
+        pos.set([x, y0, z, x - 0.11 * streak, y0 - streak, z], i * 6);
       }
       (g.getAttribute("position") as BufferAttribute).needsUpdate = true;
     };
