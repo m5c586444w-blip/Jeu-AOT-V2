@@ -19,6 +19,7 @@ import { boxGeometry, chimneyGeometry, dormerGeometry, dormerRoofGeometry, gable
 import { buildWallGeometry } from "./wall3d";
 import type { ExtrasResult } from "./extras";
 import { frozenLayout, frozenPlace } from "./frozen";
+import { buildInhabitants, inhabitantSpots } from "./inhabitants";
 
 /**
  * Chargeur unique des lieux N1 (R1e, consigne §2.3) : `loadPlace(id)` lit le plan validé (`/places3d/<id>.json`, servi hors du
@@ -56,6 +57,9 @@ export interface PlaceScene {
   chunkStats(): { total: number; visible: number; near: number };
   dispose(): void;
 }
+
+/** Altitude de caméra (m) au-dessus de laquelle les habitants ne sont plus dessinés (vues d'ensemble : figures invisibles). */
+const PEOPLE_MAX_ALT_M = 250;
 
 export const viewOf = (v: PlaceView): SceneView => ({ eye: [v.oeil[0], v.oeil[2], v.oeil[1]], target: [v.cible[0], v.cible[2], v.cible[1]], fov: v.fov });
 
@@ -197,6 +201,10 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
   // Statique : sol, eau, murailles.
   const ground: GroundMeshes = buildGround(place, layout, opts.seed, opts.frozen?.champs.map((c) => ({ polygone: c.polygone.map(([x, y]) => [x / 10, y / 10] as [number, number]), culture: c.culture })) ?? []);
   group.add(ground.group);
+  // Dette n° 6 : habitants de l'état affiché (part de la population de 845), montrés aux vues basses seulement.
+  const shown = place.etats.find((x) => x.id === (opts.state ?? place.etat_defaut));
+  const people = buildInhabitants(opts.frozen ? [] : inhabitantSpots(place, shown?.habitants ?? 0, opts.seed));
+  group.add(people.group);
   const textures: Texture[] = [leaves];
   let wallMesh: Mesh | null = null;
   if (ring) {
@@ -244,6 +252,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
     last.copy(pv);
     frustum.setFromProjectionMatrix(pv);
     const eye = camera.position;
+    people.group.visible = eye.y < PEOPLE_MAX_ALT_M;
     for (const [ck, box] of chunkBoxes) {
       if (!frustum.intersectsBox(box)) {
         states.set(ck, 0);
@@ -294,6 +303,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
       extras?.dispose();
       layer.dispose();
       ground.dispose();
+      people.dispose();
       wallMesh?.geometry.dispose();
       mats.dispose();
       for (const m of extraMats) m.dispose();

@@ -151,3 +151,18 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
 - **`r2-suivi-1366.png`** : l'escouade 02 en cape verte sur une place pavée, un soldat de la foule au loin à gauche.
   - Défauts : le balancement ne se voit pas sur une capture fixe (contrôlé par les tests et l'absence d'erreur de
     shader) ; ombres de la foule figées (matériau d'ombre non modifié) ; numéros d'escouade estompés serrés au fond.
+
+## Dette n° 6 : habitants des lieux
+- Figures civiles instanciées (six tenues : chemise ou corsage, pantalon ou jupe longue, fichu ou cheveux ; A), debout le
+  long des rues (une tous les 4 m sur une voie principale, 9 m dans une rue, 20 m dans une ruelle) et sur les places (une
+  pour 22 m² au marché, 70 m² ailleurs), multipliées par la part présente de l'état ; au plus 2 500 ; aucune dans
+  Shiganshina en 850 ; cachées au-dessus de 250 m d'altitude de caméra (vues d'ensemble).
+- `npm run verify` (`dette6-verify.log`) : « Test Files  125 passed (125) », « Tests  789 passed (789) », `EXIT=0` ;
+  `tests/places/habitants.test.ts` : « habitants de Shiganshina par état : {"845-avant":2500,"845-breche":2500,
+  "850-reprise":0} ». `places:captures` (`dette6-captures.log`) : `EXIT=0`, vue de la grand-rue 2 168 k triangles
+  (1 723 k sans les habitants).
+- **`docs/places/shiganshina/vue-marche.png`** : la grande place pavée du marché, sa halle et ses arbres, des dizaines de
+  passants dispersés ; le mur Maria au fond. **`vue-grand-rue.png`** : rue pavée bordée d'arbres et de maisons à
+  colombages, cinq à six passants dont une femme en jupe rouge.
+  - Défauts : place encore sans étals (dette n° 12) ; passants immobiles, sans ombre portée visible de loin ; répartition
+    uniforme (aucun attroupement) ; +445 k triangles dans les vues de rue.

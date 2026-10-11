@@ -1,0 +1,9 @@
+
+> murs-et-sang@0.0.1 places:captures
+> tsx src/tools/places-captures.ts shiganshina --vues marche,grand-rue,place-centrale --sans-portes --sans-etats
+
+  docs/places/shiganshina/vue-grand-rue.png : 271 appels, 2168 k triangles, tronçons 492/986
+  docs/places/shiganshina/vue-place-centrale.png : 247 appels, 2201 k triangles, tronçons 308/986
+  docs/places/shiganshina/vue-marche.png : 231 appels, 1846 k triangles, tronçons 119/986
+places:captures : shiganshina capturés.
+EXIT=0
