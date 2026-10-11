@@ -43,6 +43,12 @@ export function drawPawn(g: Graphics, at: Point, org: string, px: number): void 
 }
 
 /** Itinéraire tracé à l'encre (P3) : tirets pour un plan, trait plein pour une expédition en route. */
+/** F-STR-08 : cône d'incertitude d'une expédition (polygone de carte) : aplat vert-de-gris translucide, bord d'encre discret. */
+export function drawCone(g: Graphics, poly: readonly Point[], px: number): void {
+  if (poly.length < 3) return;
+  g.poly(poly.flatMap((p) => [p[0], p[1]])).fill({ color: VERDIGRIS, alpha: 0.26 }).stroke({ width: 1 * px, color: INK, alpha: 0.4 });
+}
+
 export function drawRoute(g: Graphics, points: readonly Point[], px: number, style: "plan" | "aller" | "retour" | "convoi" | "armee" | "armee_retraite"): void {
   if (points.length < 2) return;
   if (style === "armee" || style === "armee_retraite") {

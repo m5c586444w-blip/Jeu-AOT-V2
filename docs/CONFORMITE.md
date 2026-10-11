@@ -138,7 +138,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 | F-STR-05 | 09 §1 : murs en coupe, état visible. | PARTIEL | Murs en relief (MAP) ; murs en bande plate (dette n° 15). |
 | F-STR-06 | 09 §1 : brouillard daté (voile léger, E-UX-3). | FAIT | AC5-06 ; MAP. |
 | F-STR-07 | 09 §1 : pions avec insignes. | FAIT | `pa-pions-1366.png` (CPA-04). |
-| F-STR-08 | 09 §1 : tracés d'expédition avec cône d'incertitude. | PARTIEL | Tracés (`src/ui/mapRoutes.ts`) ; aucun cône. |
+| F-STR-08 | 09 §1 : tracés d'expédition avec cône d'incertitude. | FAIT (2026-10-11) | Tracés et cône d'incertitude le long du trajet restant (`uncertaintyCone`, `src/ui/mapRoutes.ts` ; `tests/ui/map-cone.test.ts` ; `p3-carte-expedition.png`). |
 | F-STR-09 | 09 §1 : notes du joueur sur la carte. | ABSENT | J-REP : P1.md §3 et P2.md §0 vers P3, jamais repris ; report confirmé par D-161 (dette n° 69). |
 | F-STR-10 | 09 §1 : épingles et fils entre lieux. | ABSENT | J-REP : P2.md §0 vers P3 ; report confirmé par D-161 (dette n° 69). |
 | F-STR-11 | 09 §1 : règle, compas, jours de marche. | ABSENT | J-REP : P2.md §0 vers P3 ; report confirmé par D-161 (dette n° 69). |

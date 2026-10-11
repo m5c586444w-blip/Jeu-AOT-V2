@@ -20,9 +20,39 @@ function along(map: MapData, world: World, path: readonly string[], progressKm: 
   return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
 }
 
+/** Demi-largeur (unités de carte, km) du cône au départ et sa croissance par km parcouru (F-STR-08, choix de rendu A). */
+export const CONE_START = 1.5;
+export const CONE_SPREAD = 0.14;
+
+/**
+ * F-STR-08 (09 §1) : cône d'incertitude de la position d'une expédition hors des murs, le long du trajet qui lui reste :
+ * étroit à la dernière position connue, il s'élargit avec la distance à parcourir. Polygone : bord gauche à l'aller, bord
+ * droit au retour. Vide pour moins de deux points.
+ */
+export function uncertaintyCone(points: readonly Point[], start = CONE_START, spread = CONE_SPREAD): Point[] {
+  if (points.length < 2) return [];
+  const left: Point[] = [];
+  const right: Point[] = [];
+  let dist = 0;
+  for (let i = 0; i < points.length; i++) {
+    const p = points[i] as Point;
+    if (i > 0) dist += Math.hypot(p[0] - (points[i - 1] as Point)[0], p[1] - (points[i - 1] as Point)[1]);
+    // Normale : moyenne des segments voisins (coudes adoucis).
+    const a = points[Math.max(0, i - 1)] as Point;
+    const b = points[Math.min(points.length - 1, i + 1)] as Point;
+    const dx = b[0] - a[0];
+    const dy = b[1] - a[1];
+    const len = Math.hypot(dx, dy) || 1;
+    const w = start + spread * dist;
+    left.push([p[0] - (dy / len) * w, p[1] + (dx / len) * w]);
+    right.push([p[0] + (dy / len) * w, p[1] - (dx / len) * w]);
+  }
+  return [...left, ...right.reverse()];
+}
+
 /** Itinéraires, fanions et dépôts à tracer (P3), plus l'itinéraire en préparation du planificateur. */
 export function buildMapRoutes(map: MapData, world: World, state: GameState, draft: readonly string[] | null): MapRoutes {
-  const out: MapRoutes = { routes: [], markers: [], depots: [] };
+  const out: MapRoutes = { routes: [], markers: [], depots: [], cones: [] };
   const pts = (ids: readonly string[]): Point[] => ids.map((id) => map.provinces[id]?.anchor).filter((p): p is Point => !!p).map((p) => [p[0], p[1]]);
   if (draft && draft.length > 1) out.routes.push({ points: pts(draft), style: "plan" });
   out.routes.push(...armyRoutes(map, world, state));
@@ -38,6 +68,11 @@ export function buildMapRoutes(map: MapData, world: World, state: GameState, dra
     else {
       out.routes.push({ points: pts(e.trail), style: "aller" });
       out.routes.push({ points: pts(e.path), style: "plan" });
+      // Position incertaine hors des murs (F-STR-08) : cône depuis la dernière position, le long du trajet restant.
+      if (pos) {
+        const cone = uncertaintyCone([pos, ...pts(e.path.slice(1))]);
+        if (cone.length) out.cones?.push(cone);
+      }
     }
     if (pos) out.markers.push({ at: pos, kind: "expedition" });
   }

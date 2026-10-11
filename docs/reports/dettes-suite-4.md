@@ -78,3 +78,14 @@ Sommaire et méthode : `dettes-suite.md`.
 - Complément : signe « % » (« 70 % » en français, « 70% » en anglais) et format court des étendards (« 1,2 k » / « 1.2k »)
   suivent la langue (12 endroits du code). `npm run verify` (`anglais2-verify.log`) : « Tests  815 passed (815) »,
   `EXIT=0` ; `smoke:pa` (`anglais2-smoke-pa.log`) : « smoke:pa : tout est conforme. », `EXIT=0`.
+
+## F-STR-08 (09 §1) : cône d'incertitude des expéditions
+- Hors des murs, la position d'une expédition en marche est entourée d'un cône qui part de sa dernière position (1,5 km de
+  demi-largeur) et s'élargit le long du trajet qui lui reste (+0,14 km par km ; choix de rendu A) : aplat vert-de-gris
+  translucide, bord d'encre. Premier rendu trop pâle sur la campagne verte (aplat 0,16) : porté à 0,26 avec un bord.
+- `smoke:expedition` (`cone-smoke-expedition.log`) : « smoke:expedition : OK (captures dans docs/screenshots/). »,
+  `EXIT=0` ; `npm run verify` (`cone-verify.log`) : `EXIT=0`.
+- **`p3-carte-expedition.png`** : carte de 850 au niveau région, expédition n° 1 partie de la Forêt des Arbres Géants vers
+  Maria-Est ; tracé en tirets et cône translucide jusqu'au point d'arrivée, au-delà de l'anneau de Rose.
+  - Défauts : cône encore discret sur la forêt sombre ; il passe sous l'anneau du mur ; bulle « Expédition n° 1 partie… »
+    qui couvre le coin haut droit ; étiquette « Forêt des Arbres Géants » coupée par le fanion.

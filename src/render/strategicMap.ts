@@ -5,7 +5,7 @@ import type { MapData } from "../data/map";
 import type { TerrainData } from "../data/terrain";
 import { bearingOf, pointInPolygon } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
-import { drawArmyBanner, drawClash, drawDepot, drawExpeditionMarker, drawFleet, drawPawn, drawRoute } from "./atlasLayers";
+import { drawArmyBanner, drawClash, drawDepot, drawExpeditionMarker, drawFleet, drawPawn, drawRoute, drawCone } from "./atlasLayers";
 import type { ArmyBanner, ProvinceShape } from "./atlasLayers";
 import { flat } from "./ink";
 import { LabelLayer, LOD_ORDER } from "./labels";
@@ -35,6 +35,8 @@ export interface MapRoutes {
   routes: { points: Point[]; style: "plan" | "aller" | "retour" | "convoi" | "armee" | "armee_retraite" }[];
   markers: { at: Point; kind: "expedition" | "convoi" }[];
   depots: { at: Point; radius: number }[];
+  /** F-STR-08 : cônes d'incertitude des expéditions (polygones en coordonnées de carte), facultatifs. */
+  cones?: Point[][];
 }
 
 /** Armées, flottes et rencontres à tracer (PA.8), en coordonnées de carte (km). */
@@ -266,6 +268,7 @@ export class StrategicMap {
   private drawRoutesLayer(): void {
     const px = this.uiScale / 2 ** (this.bucket / 2);
     this.gRoutes.clear();
+    for (const c of this.routes.cones ?? []) drawCone(this.gRoutes, c, px);
     for (const d of this.routes.depots) drawDepot(this.gRoutes, d.at, d.radius, px);
     for (const r of this.routes.routes) drawRoute(this.gRoutes, r.points, px, r.style);
     for (const m of this.routes.markers) drawExpeditionMarker(this.gRoutes, m.at, px, m.kind);
