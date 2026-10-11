@@ -2,7 +2,7 @@ import { Container, Text } from "pixi.js";
 import type { TextStyleOptions } from "pixi.js";
 import { polar } from "../sim/strategic/geometry";
 import type { Point } from "../sim/strategic/geometry";
-import { INK } from "./palette";
+import { INK, PAPER } from "./palette";
 
 /** Niveaux de détail de la carte (F-STR-01). */
 export type Lod = "monde" | "region" | "province";
@@ -24,8 +24,9 @@ export interface LabelSpec {
 const STYLES: Record<LabelSpec["style"], TextStyleOptions> = {
   capitale: { fontFamily: "IM Fell English", fontSize: 19, fill: INK, letterSpacing: 1.5 },
   district: { fontFamily: "IM Fell English", fontSize: 15, fill: INK, letterSpacing: 1 },
-  province: { fontFamily: "EB Garamond", fontSize: 12.5, fill: INK, fontVariant: "small-caps", letterSpacing: 0.8 },
-  outre: { fontFamily: "EB Garamond", fontSize: 12.5, fill: 0x4a4339, fontStyle: "italic", letterSpacing: 0.6 },
+  // Dette n° 15 : liseré couleur papier sous les noms de provinces, lisibles même quand ils touchent un mur, une route ou une rivière.
+  province: { fontFamily: "EB Garamond", fontSize: 12.5, fill: INK, fontVariant: "small-caps", letterSpacing: 0.8, stroke: { color: PAPER, width: 3, alpha: 0.75, join: "round" } },
+  outre: { fontFamily: "EB Garamond", fontSize: 12.5, fill: 0x4a4339, fontStyle: "italic", letterSpacing: 0.6, stroke: { color: PAPER, width: 3, alpha: 0.6, join: "round" } },
 };
 
 /**
@@ -136,6 +137,14 @@ export class LabelLayer {
       for (const fx of [0, 0.5, 1]) for (const fy of [0, 0.5, 1]) if (this.onWall(x0 + (x1 - x0) * fx, y0 + (y1 - y0) * fy)) return true;
       return false;
     };
+    // Dette n° 15 : test fin, un point par demi-hauteur de texte sur la longueur (avec trois points, la bande d'un mur
+    // passait entre deux et le nom s'y posait). Il sert aux petits déplacements près de la place du nom ; à défaut, le test
+    // à neuf points garde le comportement d'avant (aucun nom ne disparaît pour autant).
+    const crossesWallFine = ([x0, y0, x1, y1]: Box): boolean => {
+      const nx = Math.min(41, Math.max(3, Math.ceil(((x1 - x0) / Math.max(1e-9, y1 - y0)) * 2) + 1));
+      for (let i = 0; i < nx; i++) for (const fy of [0, 0.5, 1]) if (this.onWall(x0 + ((x1 - x0) * i) / (nx - 1), y0 + (y1 - y0) * fy)) return true;
+      return false;
+    };
     // Noms de segments dans la bande de leur mur : lus de gauche à droite (sens inversé sur la moitié sud de l'anneau),
     // glissés le long du mur jusqu'à ne couvrir ni porte, ni pion, ni autre nom ; cachés s'ils ne tiennent pas.
     for (const { spec, letters } of this.bands) {
@@ -200,7 +209,13 @@ export class LabelLayer {
       // Hors des murs d'abord ; une ville posée sur un mur (district, porte) garde son nom même s'il le touche.
       const onWallTown = spec.style === "district" || spec.style === "capitale";
       const inView = ([x0, y0, x1, y1]: Box): boolean => !view || (x0 >= view[0] && y0 >= view[1] && x1 <= view[2] && y1 <= view[3]);
+      // Petits déplacements : la place d'origine, au-dessus, au-dessous, et le long du rayon de l'île (les murs sont des anneaux :
+      // un pas vers le centre ou vers la côte sort le nom de la bande).
+      const len = Math.hypot(spec.at[0], spec.at[1]) || 1;
+      const [ux, uy] = [spec.at[0] / len, spec.at[1] / len];
+      const near: Point[] = [base, [0, -19], [0, 17], ...[16, -16, 28, -28].map((k): Point => [base[0] + ux * k, base[1] + uy * k])];
       const free =
+        near.find((o) => clear(boxAt(o)) && !crossesWallFine(boxAt(o)) && inView(boxAt(o))) ??
         tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o)) && inView(boxAt(o))) ??
         tries.find((o) => clear(boxAt(o)) && !crossesWall(boxAt(o))) ??
         (onWallTown ? tries.find((o) => clear(boxAt(o))) : undefined);

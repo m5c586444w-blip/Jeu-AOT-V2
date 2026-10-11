@@ -305,3 +305,19 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   « Début de la bataille — Plaines intérieures de Maria — Sud — 109 hommes de Paradis contre 3 Titans — de jour. ».
   - Défauts : titre « Titans en vue à Plaines… » (article absent, corrigé ensuite) ; tiret du nom de province confondu avec
     les tirets de la phrase ; plaine uniforme presque vide ; sections réduites à des traits au sol à cette distance.
+
+## Dette n° 15 (en partie) : noms de la carte sur les murs
+- Le test « le nom touche-t-il un mur ? » ne regardait que trois points sur la longueur : la bande d'un mur passait entre deux.
+  Un test fin (un point par demi-hauteur de texte) choisit d'abord parmi de petits décalages (au-dessus, au-dessous, le long
+  du rayon de l'île) ; à défaut, l'ancien choix reste (aucun nom ne disparaît : un premier essai, test fin partout, en
+  cachait neuf et poussait « Rivière des Cendres » sur la mer). Liseré couleur papier sous les noms de provinces et d'outre-mur.
+- `npm run verify` (`dette15-verify.log`) : « Tests  801 passed (801) », `EXIT=0` ; `smoke:map` (`dette15-smoke-map.log`) :
+  « smoke:map : OK (captures dans docs/screenshots/). », `EXIT=0`.
+- **`map-1366-region.png`** : moitié sud de l'île, trois anneaux de murs, Trost et Shiganshina au centre ; « Fort avancé de
+  Maria » descendu sous « Forêt des Arbres Géants », entre les anneaux ; « Plaines céréalières du Sud » rentrée dans l'anneau.
+  - Défauts : « Hameaux de l'Ouest de Maria » et « Plaines intérieures de Maria — Sud » chevauchent encore l'anneau de Maria
+    (lisibles grâce au liseré) ; « Rivière des Cendres » mord sur la côte ; « Collines minières » coupé au bord haut.
+- **`map-1366-province.png`** : niveau province autour de Trost ; noms de segments de murs dans les bandes, aucun nom de
+  province sur un mur.
+  - Défauts : « 1,2 k » de l'armée collé au nom du segment « Rose-Sud — porte de Trost » ; relief peu marqué ; grands aplats
+    de prairie sans nom au sud.
