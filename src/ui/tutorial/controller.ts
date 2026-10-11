@@ -217,9 +217,13 @@ export class Tutorial {
       const b = bar.getBoundingClientRect();
       if (b.width > 0 && b.height > 0) avoid.push({ left: b.left, top: b.top, width: b.width, height: b.height });
     }
+    // Mesure à la largeur naturelle (une largeur imposée au placement précédent fausserait le choix : oscillation).
+    this.bubble.style.width = "";
     const placed = placeBubble(box, { width: this.bubble.offsetWidth, height: this.bubble.offsetHeight }, { width: window.innerWidth, height: window.innerHeight }, 14, 8, avoid, acting ? null : (step.dock ?? null));
     this.bubble.style.left = `${placed.left}px`;
     this.bubble.style.top = `${placed.top}px`;
+    // Dette n° 43 : bulle rétrécie à côté d'un registre large ; sinon, sa largeur de feuille de style.
+    this.bubble.style.width = placed.width ? `${placed.width}px` : "";
     this.bubble.dataset["cote"] = placed.side;
   }
 }

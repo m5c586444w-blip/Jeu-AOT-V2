@@ -231,3 +231,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   en entier sur la planche « Canons des remparts ».
   - Défauts : troisième colonne coupée par la zone de défilement de l'arbre (il faut faire défiler) ; lignes de liaison
     serrées entre colonnes ; fiche de détail qui masque une partie de l'arbre.
+
+## Dette n° 43 (en partie) : bulle du guide à côté d'un registre large
+- Quand un registre occupe presque toute la largeur, la bulle se rétrécit pour tenir dans la colonne libre à sa droite
+  (au moins 230 px) au lieu de mordre de 50 px sur le registre ; elle est mesurée à sa largeur naturelle avant chaque
+  placement (sans cela, elle oscillait entre deux largeurs : premier `smoke:tuto` en échec, bouton « Suivant » instable).
+- `npm run verify` (`dette43-verify.log`) : « Tests  796 passed (796) », `EXIT=0` ; `smoke:tuto` (`dette43-smoke-tuto.log`) :
+  « « economie », explication : bulle dans la fenêtre, sans recouvrir l'élément montré (côté « bord ») », « smoke:tuto :
+  tout est conforme. », `EXIT=0`.
+- **`tuto-economie-1366.png`** : registre de l'économie (nourriture, production, consommation, pertes) ; la bulle « Étape 6
+  sur 14 — L'économie » à sa droite, sans le recouvrir.
+  - Défauts : la bulle couvre la colonne des notifications ; infobulle « Économie — Raccourci V » restée sous le registre ;
+    bulle plus haute (texte sur plus de lignes).

@@ -12,7 +12,12 @@ export interface Placed {
   left: number;
   top: number;
   side: Side;
+  /** Largeur imposée à la bulle (rétrécie pour tenir à côté d'un registre large, dette n° 43). */
+  width?: number;
 }
+
+/** Largeur minimale (px) d'une bulle rétrécie à côté d'un registre large. */
+export const MIN_BUBBLE_WIDTH = 230;
 
 const overlaps = (a: Box, b: Box): boolean => a.left < b.left + b.width && b.left < a.left + a.width && a.top < b.top + b.height && b.top < a.top + a.height;
 const within = (b: Box, vp: { width: number; height: number }, m: number): boolean => b.left >= m && b.top >= m && b.left + b.width <= vp.width - m && b.top + b.height <= vp.height - m;
@@ -36,8 +41,17 @@ export function placeBubble(anchor: Box, bubble: { width: number; height: number
     const box: Box = { left: c.left, top: c.top, width: bubble.width, height: bubble.height };
     if (within(box, vp, margin) && !overlaps(box, anchor) && !avoid.some((a) => overlaps(box, a))) return { left: Math.round(c.left), top: Math.round(c.top), side: c.side };
   }
-  // Registre large : la bulle se range contre le bord de la fenêtre, en ne mordant que sur une petite part de l'élément
-  // (colonne de notifications ou de calques à droite, marge à gauche), plutôt que de masquer son contenu.
+  // Dette n° 43 : registre large : la bulle, rétrécie, tient dans la colonne libre à sa droite (sans mordre sur le registre)
+  // quand cette colonne fait au moins 230 px ; sa hauteur croît d'autant.
+  const freeRight = vp.width - (anchor.left + anchor.width) - gap / 2 - margin;
+  if (freeRight >= MIN_BUBBLE_WIDTH && freeRight < bubble.width) {
+    const w = Math.floor(freeRight);
+    const h = Math.ceil((bubble.height * bubble.width) / w);
+    const box: Box = { left: anchor.left + anchor.width + gap / 2, top: Math.max(margin, Math.min(vp.height - h - margin, anchor.top + 64)), width: w, height: h };
+    if (!avoid.some((a) => overlaps(box, a))) return { left: Math.round(box.left), top: Math.round(box.top), side: "bord", width: w };
+  }
+  // Sinon, la bulle se range contre le bord de la fenêtre, en ne mordant que sur une petite part de l'élément (colonne de
+  // notifications ou de calques à droite, marge à gauche), plutôt que de masquer son contenu.
   const small = (b: Box): boolean => {
     const w = Math.max(0, Math.min(b.left + b.width, anchor.left + anchor.width) - Math.max(b.left, anchor.left));
     return w <= bubble.width * 0.25;

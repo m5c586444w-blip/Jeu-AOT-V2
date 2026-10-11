@@ -3,7 +3,7 @@ import fr from "../../src/i18n/fr.json";
 import { PANEL_IDS } from "../../src/ui/registers";
 import { DEFAULT_SETTINGS, DEFAULT_TUTORIAL, loadSettings, saveSettings } from "../../src/ui/settings";
 import { HINT_IDS } from "../../src/ui/tutorial/hints";
-import { placeBubble } from "../../src/ui/tutorial/placement";
+import { MIN_BUBBLE_WIDTH, placeBubble } from "../../src/ui/tutorial/placement";
 import { canContinue, enter, isFinished, next, resolveAnchor, settle, TUTORIAL_STEPS } from "../../src/ui/tutorial/steps";
 import type { TutorialFacts } from "../../src/ui/tutorial/steps";
 
@@ -114,9 +114,23 @@ describe("TUT.1 : placement de la bulle", () => {
     const panel = { left: 10, top: 82, width: 1030, height: 604 };
     const p = placeBubble(panel, bubble, vp);
     expect(p.side).toBe("bord");
-    expect(p.left + bubble.width).toBeLessThanOrEqual(vp.width - 8);
-    const hidden = Math.max(0, Math.min(p.left + bubble.width, panel.left + panel.width) - Math.max(p.left, panel.left));
+    const w = p.width ?? bubble.width;
+    expect(p.left + w).toBeLessThanOrEqual(vp.width - 8);
+    const hidden = Math.max(0, Math.min(p.left + w, panel.left + panel.width) - Math.max(p.left, panel.left));
     expect(hidden).toBeLessThanOrEqual(bubble.width * 0.25);
+  });
+
+  it("dette n° 43 : à côté d'un registre large, la bulle rétrécie tient dans la colonne libre sans mordre dessus", () => {
+    const panel = { left: 10, top: 82, width: 1030, height: 604 };
+    const wide = { width: 340, height: 160 };
+    const p = placeBubble(panel, wide, vp);
+    expect(p.side).toBe("bord");
+    expect(p.width).toBeGreaterThanOrEqual(MIN_BUBBLE_WIDTH);
+    expect(p.left).toBeGreaterThanOrEqual(panel.left + panel.width);
+    expect(p.left + (p.width ?? 0)).toBeLessThanOrEqual(vp.width - 8);
+    // Colonne trop étroite (registre presque plein écran) : la bulle garde sa largeur et mord au plus d'un quart.
+    const full = placeBubble({ left: 10, top: 82, width: 1200, height: 604 }, wide, vp);
+    expect(full.width).toBeUndefined();
   });
 
   it("élément plein écran : la bulle se pose dedans, ou dans le coin demandé", () => {
