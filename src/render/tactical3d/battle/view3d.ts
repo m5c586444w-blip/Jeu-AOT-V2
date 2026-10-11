@@ -716,6 +716,11 @@ export class View3D implements BattleView {
     this.placeCamera(true);
   }
 
+  behindWall(x: number, y: number, z: number): boolean {
+    if (!this.world || this.world.houses.length === 0) return false;
+    return occludersFor(this.world.houses, this.cam.position, [{ x, y: z, z: y }]).length > 0;
+  }
+
   toScreen(x: number, y: number, z: number): [number, number] | null {
     const v = new Vector3(x, z, y).project(this.cam);
     if (v.z > 1 || v.z < -1) return null;

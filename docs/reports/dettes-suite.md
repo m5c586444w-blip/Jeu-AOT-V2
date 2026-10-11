@@ -116,3 +116,14 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   et le 12 m, bouche béante rouge chez le 3 m.
   - Défauts : plis étirés aux coins de la bouche ; cheveux encore en calotte avec une lisière claire ; étiquettes sur
     les torses ; corps lisses, presque humains (T1 reporté).
+
+## Dette n° 50 (en partie) : étiquettes d'escouade derrière les bâtiments
+- Une escouade cachée par un bâtiment, vue de la caméra (même test de rayon que la trame translucide de la dette n° 75),
+  a son étiquette estompée, bord en tirets : l'information tactique reste, la profondeur se lit. Reste de la dette :
+  collision réelle de la caméra de suivi.
+- `npm run verify` (`dette50-verify.log`) : « Tests  782 passed (782) », `EXIT=0` ; `smoke:r2 -- --captures`
+  (`dette50-smoke-r2.log`) : « smoke:r2 : tout est conforme. », « 0 erreur console », `EXIT=0`.
+- **`r2-strategique-1920.png`** : la ville de haut ; numéros 2, 3, 4, 5, 7, 11, 13, 15, 17, 19, 20 estompés (escouades
+  derrière une maison), 6, 8, 9, 10, 12, 14, 16, 18 pleins ; deux « E » estompés au nord.
+  - Défauts : numéros encore serrés en rang ; étiquettes « T » des Titans toujours pleines (voulu : lisibles même cachés) ;
+    près d'un tiers de l'image en sol vide ; mur d'enceinte coupé en haut.

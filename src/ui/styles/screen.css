@@ -764,6 +764,8 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .rt-etiquette--titan-allie { color: var(--texte-fort); background: var(--panneau); border-color: var(--accent); }
 .rt-etiquette--choisie { color: var(--accent-texte); background: var(--accent); }
 .rt-etiquette--repli { border-color: var(--danger-plein); }
+/* Dette n° 50 : escouade derrière un bâtiment, vue de la caméra : étiquette estompée, bord en tirets. */
+.rt-etiquette--cachee { opacity: 0.45; border-style: dashed; }
 /* Dette n° 75 : pictogrammes gaz, lames, stress sous le numéro d'escouade (3D) ; niveau en barre verticale. */
 .rt-jauges { display: flex; gap: 0.15rem; justify-content: center; margin-top: 0.05rem; color: var(--texte); }
 .rt-jauge { display: inline-flex; align-items: flex-end; gap: 1px; }

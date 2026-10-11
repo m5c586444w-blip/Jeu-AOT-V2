@@ -802,6 +802,10 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
       tag.hidden = false;
       tag.classList.toggle("rt-etiquette--choisie", sel.squads.includes(sq.id));
       tag.classList.toggle("rt-etiquette--repli", sq.order === "repli");
+      // Dette n° 50 : escouade cachée par un bâtiment : étiquette estompée (l'information reste, la profondeur se lit).
+      const men0 = sq.side === undefined ? up.get(sq.id) : undefined;
+      const alt = men0 && men0.length > 0 ? men0.reduce((a, s) => a + s.z, 0) / men0.length : 0;
+      tag.classList.toggle("rt-etiquette--cachee", c !== null && (view.behindWall?.(c.x, c.y, alt + 1.6) ?? false));
       tag.style.transform = `translate(${Math.round(p[0])}px, ${Math.round(p[1])}px) translate(-50%, -100%)`;
       const men = sq.side === undefined ? up.get(sq.id) : undefined;
       if (men && men.length > 0) {

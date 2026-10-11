@@ -47,6 +47,8 @@ export interface BattleView {
   render(): void;
   /** Point de la carte → pixel de la toile (null : derrière la caméra). */
   toScreen(x: number, y: number, z: number): [number, number] | null;
+  /** Dette n° 50 : point de la carte caché par un bâtiment, vu de la caméra (3D ; la 2D n'en cache aucun). */
+  behindWall?(x: number, y: number, z: number): boolean;
   /** Pixel de la toile → point du sol de la carte (null : hors du sol). */
   groundAt(sx: number, sy: number): { x: number; y: number } | null;
   /** Unité sous un pixel. */
