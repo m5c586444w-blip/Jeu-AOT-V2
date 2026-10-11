@@ -91,7 +91,7 @@ export class WorldPanel implements Panel {
     else
       head.append(
         `${t("rumbling.ravaged")} `,
-        valueEl(this.ctx, `${Math.round(rb.ravaged * 100)} %`, () => ({ title: t("rumbling.ravaged"), sections: [{ text: t("rumbling.ravaged_why") }] })),
+        valueEl(this.ctx, `${Math.round(rb.ravaged * 100)}${t("punct.percent")}`, () => ({ title: t("rumbling.ravaged"), sections: [{ text: t("rumbling.ravaged_why") }] })),
         ` · ${t("rumbling.provinces", { n: rb.provinces.length, m: rw.order.length })}`,
       );
     box.append(head, el("p", "registre-note", t("rumbling.legend")));
@@ -120,7 +120,7 @@ export class WorldPanel implements Panel {
     box.append(bar, el("p", "registre-note", rb.stance ? t(`rumbling.stance.${rb.stance}_why`) : t("rumbling.stance.none")));
     if (rb.stance === "empecher") {
       const line = el("p", "registre-champ");
-      line.append(`${t("rumbling.assault")} `, valueEl(this.ctx, `${Math.round(rb.assault)} %`, () => ({ title: t("rumbling.assault"), sections: [{ text: t("rumbling.assault_why") }] })));
+      line.append(`${t("rumbling.assault")} `, valueEl(this.ctx, `${Math.round(rb.assault)}${t("punct.percent")}`, () => ({ title: t("rumbling.assault"), sections: [{ text: t("rumbling.assault_why") }] })));
       if (rb.attempts > 0) line.append(` · ${t("rumbling.attempts", { n: rb.attempts })}`);
       const problem = assaultProblem(rb);
       const go = button(t("rumbling.launch"), () => {
@@ -206,7 +206,7 @@ export class WorldPanel implements Panel {
       if (!f || st.count <= 0) continue;
       const li = el("li", `force force--${f.faction}`);
       li.dataset["formation"] = fid;
-      li.append(`${st.count} × ${t(f.name_key)} (${t(nw.factions.get(f.faction)?.name_key ?? f.faction)}) · `, valueEl(this.ctx, `${Math.round(st.strength * 100)} %`, () => ({ title: t("world.strength"), sections: [{ text: t("world.strength_why") }] })));
+      li.append(`${st.count} × ${t(f.name_key)} (${t(nw.factions.get(f.faction)?.name_key ?? f.faction)}) · `, valueEl(this.ctx, `${Math.round(st.strength * 100)}${t("punct.percent")}`, () => ({ title: t("world.strength"), sections: [{ text: t("world.strength_why") }] })));
       if (f.faction === me && st.moves > 0) {
         const dest = el("select", "plan-choix");
         dest.dataset["move"] = fid;

@@ -3884,5 +3884,6 @@
   "punct.colon": ": ",
   "map.wall.maria": "WALL MARIA",
   "map.wall.rose": "WALL ROSE",
-  "map.wall.sina": "WALL SINA"
+  "map.wall.sina": "WALL SINA",
+  "punct.percent": "%"
 }

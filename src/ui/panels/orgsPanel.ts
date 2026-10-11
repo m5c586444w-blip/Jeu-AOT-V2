@@ -56,7 +56,7 @@ export class OrgsPanel implements Panel {
         const plus = button("+", () => this.step(root, draft, id, 5), "registre-bouton petit");
         minus.setAttribute("aria-label", t("orgs.budget_less", { org: t(def.name_key) }));
         plus.setAttribute("aria-label", t("orgs.budget_more", { org: t(def.name_key) }));
-        tdB.append(minus, valueEl(this.ctx, `${formatNumber(draft[id] ?? 0)} %`, () => ({ title: t("orgs.col.budget"), sections: [{ text: t("orgs.budget_why", { ref: world.scenario.politics?.budget[id] ?? 0 }) }] })), plus);
+        tdB.append(minus, valueEl(this.ctx, `${formatNumber(draft[id] ?? 0)}${t("punct.percent")}`, () => ({ title: t("orgs.col.budget"), sections: [{ text: t("orgs.budget_why", { ref: world.scenario.politics?.budget[id] ?? 0 }) }] })), plus);
       }
       tr.append(tdL, tdI, tdB);
       table.append(tr);

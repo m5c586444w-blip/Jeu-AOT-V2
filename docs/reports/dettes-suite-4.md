@@ -75,3 +75,6 @@ Sommaire et méthode : `dettes-suite.md`.
   Steel, Ice Burst Stone… » au format anglais (« 450,000 », « +12.2 »), détail « Civilians (780,000) ».
   - Défauts : « 0.05 % per day » garde l'espace avant « % » ; libellés du rationnement serrés sur une ligne ; « Today's
     change » en tête du détail, terme à relire ; colonne de droite du registre vide sous les totaux.
+- Complément : signe « % » (« 70 % » en français, « 70% » en anglais) et format court des étendards (« 1,2 k » / « 1.2k »)
+  suivent la langue (12 endroits du code). `npm run verify` (`anglais2-verify.log`) : « Tests  815 passed (815) »,
+  `EXIT=0` ; `smoke:pa` (`anglais2-smoke-pa.log`) : « smoke:pa : tout est conforme. », `EXIT=0`.

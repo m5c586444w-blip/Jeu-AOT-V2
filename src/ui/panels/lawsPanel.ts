@@ -11,7 +11,7 @@ const CATEGORIES = ["militaire", "economie", "ordre", "religion", "information",
 /** Lecture humaine d'un modificateur de décret. */
 export function describeModifier(m: Modifier): string {
   const [kind, arg] = m.target.split(":") as [string, string | undefined];
-  const pct = (v: number): string => `${formatSigned(v * 100)} %`;
+  const pct = (v: number): string => `${formatSigned(v * 100)}${t("punct.percent")}`;
   switch (kind) {
     case "production_mult":
       return t("mod.production", { resource: t(`res.${arg}`), v: pct(m.value) });

@@ -27,7 +27,7 @@ export function pendingEncounter(s: GameState): Encounter | null {
   return a.encounters.find((e) => e.status === "attente" && e.sides.some((x) => x.faction === me)) ?? null;
 }
 
-const pct = (v: number): string => `${formatNumber(Math.round(v))} %`;
+const pct = (v: number): string => `${formatNumber(Math.round(v))}${t("punct.percent")}`;
 
 /**
  * Registre des armées (PA.8) : piles du joueur et flottes, ordres (marche par clic sur la carte, marche forcée, halte,

@@ -80,7 +80,7 @@ export class OptionsPanel {
     scale.append(el("span", "", t("options.scale")));
     const sc = el("select", "options__choix");
     for (const v of UI_SCALES) {
-      const o = el("option", "", `${v} %`);
+      const o = el("option", "", `${v}${t("punct.percent")}`);
       o.value = String(v);
       o.selected = this.settings.uiScale === v;
       sc.append(o);
@@ -102,9 +102,9 @@ export class OptionsPanel {
       r.step = "5";
       r.value = String(this.settings[k]);
       r.dataset["setting"] = k;
-      const out = el("output", "options__valeur", `${this.settings[k]} %`);
+      const out = el("output", "options__valeur", `${this.settings[k]}${t("punct.percent")}`);
       r.addEventListener("input", () => {
-        out.textContent = `${r.value} %`;
+        out.textContent = `${r.value}${t("punct.percent")}`;
         this.change({ ...this.settings, [k]: Number(r.value) });
       });
       row.append(r, out);

@@ -132,7 +132,7 @@ export class EpiloguePanel implements Panel {
       for (const o of end.objectives) {
         const li = el("li", o.met ? "objectif objectif--atteint" : "objectif");
         li.append(el("span", "objectif__marque", o.met ? "✔" : "·"), el("span", "objectif__nom", t(o.cle)));
-        if (!o.met && o.progress > 0 && o.progress < 1) li.append(el("span", "objectif__avance", `${Math.round(o.progress * 100)} %`));
+        if (!o.met && o.progress > 0 && o.progress < 1) li.append(el("span", "objectif__avance", `${Math.round(o.progress * 100)}${t("punct.percent")}`));
         list.append(li);
       }
       box.append(list);

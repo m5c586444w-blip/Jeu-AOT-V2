@@ -59,7 +59,7 @@ export function formatSigned(n: number): string {
 function resolveParams(params: Factor["params"]): Record<string, string | number> {
   const out: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(params ?? {})) {
-    if (typeof v === "number" && k === "rate") out[k] = `${new Intl.NumberFormat(numberLocale(), { maximumFractionDigits: 3 }).format(v * 100)} %`;
+    if (typeof v === "number" && k === "rate") out[k] = `${new Intl.NumberFormat(numberLocale(), { maximumFractionDigits: 3 }).format(v * 100)}${t("punct.percent")}`;
     else if (typeof v === "number") out[k] = formatNumber(v);
     else if (k === "resource") out[k] = (RESOURCE_IDS as readonly string[]).includes(v) ? t(`res.${v}`) : t(`key.${v}`);
     else if (k === "level" && hasKey(`rationing.${v}`)) out[k] = t(`rationing.${v}`);

@@ -1,3 +1,4 @@
+import { getLocale } from "../i18n";
 import type { MapData } from "../data/map";
 import type { MapArmies, MapRoutes } from "../render/strategicMap";
 import { visibleProvinces } from "../sim/armies/armies";
@@ -127,5 +128,8 @@ export function armyRoutes(map: MapData, world: World, state: GameState): MapRou
 
 function formatCount(n: number): string {
   const v = Math.round(n);
-  return v >= 10000 ? `${Math.round(v / 1000)} k` : v >= 1000 ? `${(v / 1000).toFixed(1).replace(".", ",")} k` : String(v);
+  // Format court selon la langue (E-07) : « 1,2 k » en français, « 1.2k » en anglais.
+  const en = getLocale() === "en";
+  const k = en ? "k" : " k";
+  return v >= 10000 ? `${Math.round(v / 1000)}${k}` : v >= 1000 ? `${en ? (v / 1000).toFixed(1) : (v / 1000).toFixed(1).replace(".", ",")}${k}` : String(v);
 }

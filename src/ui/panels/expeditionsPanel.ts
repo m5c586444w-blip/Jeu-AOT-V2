@@ -260,7 +260,7 @@ export class ExpeditionsPanel implements Panel {
       " · ",
       valueEl(this.ctx, `${alive} / ${e.stats.departed}`, () => ({ title: t("exp.headcount"), sections: [{ text: t("exp.headcount_why", { dead: e.dead.length + e.namedDead.length }) }] })),
       ` ${t("exp.men")} · ${t("exp.gas")} `,
-      valueEl(this.ctx, `${formatNumber(gasPct)} %`, () => ({ title: t("exp.gas"), sections: [{ text: t("exp.gas_why", { odm: Math.round(e.gasOdm), start: Math.round(e.gasOdmStart) }) }] })),
+      valueEl(this.ctx, `${formatNumber(gasPct)}${t("punct.percent")}`, () => ({ title: t("exp.gas"), sections: [{ text: t("exp.gas_why", { odm: Math.round(e.gasOdm), start: Math.round(e.gasOdmStart) }) }] })),
       ` · ${t("exp.morale")} `,
       valueEl(this.ctx, formatNumber(e.morale), () => ({ title: t("exp.morale"), sections: [{ text: t("exp.morale_why") }] })),
     );
