@@ -33,6 +33,12 @@ export class TacticalScene {
   private readonly titanLayer = new Container({ sortableChildren: true });
   private readonly soldierLayer = new Container();
   private readonly gOverlay = new Graphics();
+  /** E-08 (03 §14, F-DEV-07) : surimpressions de débogage (portées, ancrages, câbles, signaux, trajectoires), F2. */
+  private readonly gDebug = new Graphics();
+  /** Ancrages (statiques) : dessinés une fois à l'allumage, pas à chaque image. */
+  private readonly gDebugStatic = new Graphics();
+  private debug: { vision: number; signal: number } | null = null;
+  private debugCounts = { ancrages: 0, portees: 0, cables: 0, signaux: 0, trajectoires: 0 };
   /** Bataille temps réel (R2+) : fantassins, sélection, destinations et zones (vide sur l'écran classique). */
   private readonly gRt = new Graphics();
   /** Flèches de bord vers les Titans hors champ (repère écran, au-dessus du monde). */
@@ -68,7 +74,7 @@ export class TacticalScene {
   selected: Set<number> = new Set();
 
   private constructor(private readonly app: Application) {
-    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.gRt, this.markerLayer);
+    this.worldLayer.addChild(this.gGround, this.gStatic, this.gDynamic, this.titanLayer, this.soldierLayer, this.gOverlay, this.gDebugStatic, this.gDebug, this.gRt, this.markerLayer);
     app.stage.addChild(this.worldLayer, this.gArrows);
   }
 
@@ -303,6 +309,82 @@ export class TacticalScene {
     this.fit();
   }
 
+  /**
+   * Débogage (E-08) : `vision` (m) des Titans et `signal` (m) de visibilité des fusées, ou null pour masquer. Montre les
+   * portées de vue des Titans, chaque ancrage, le câble de chaque soldat accroché, la portée des fusées récentes et la
+   * trajectoire balistique de chaque batterie qui vise.
+   */
+  setDebug(ranges: { vision: number; signal: number } | null): void {
+    this.debug = ranges;
+    this.gDebugStatic.clear();
+    this.debugAnchors = 0;
+    if (!ranges) {
+      this.gDebug.clear();
+      this.debugCounts = { ancrages: 0, portees: 0, cables: 0, signaux: 0, trajectoires: 0 };
+      return;
+    }
+    if (!this.map) return;
+    for (const a of this.map.anchors) {
+      const [x, y] = this.project(a.x, a.y, a.z);
+      this.gDebugStatic.circle(x, y, 1.4).stroke({ width: 0.5, color: 0xd9a03a, alpha: 0.9 });
+      this.debugAnchors++;
+    }
+  }
+  private debugAnchors = 0;
+
+  /** Éléments dessinés par la surimpression de débogage au dernier dessin (contrôles). */
+  debugStats(): { ancrages: number; portees: number; cables: number; signaux: number; trajectoires: number } {
+    return { ...this.debugCounts };
+  }
+
+  private drawDebug(st: BattleState): void {
+    const d = this.debug;
+    // Éteinte : rien à refaire (la couche a été vidée par `setDebug(null)`).
+    if (!d || !this.map) return;
+    const g = this.gDebug;
+    g.clear();
+    const c = { ancrages: this.debugAnchors, portees: 0, cables: 0, signaux: 0, trajectoires: 0 };
+    const w = Math.max(0.4, 1.2 / this.zoom);
+    for (const tt of st.titans) {
+      if (!tt.alive) continue;
+      const [x, y] = this.project(tt.x, tt.y, 0);
+      g.ellipse(x, y, d.vision, d.vision * TILT).stroke({ width: w, color: 0x9e2b25, alpha: 0.7 });
+      c.portees++;
+    }
+    for (const s of st.soldiers) {
+      if (s.mode !== "rail" && s.mode !== "crochet") continue;
+      const a = s.anchor;
+      const end = !a ? null : a.kind === "fixe" ? a : st.titans[a.titan] ? { x: st.titans[a.titan]?.x ?? 0, y: st.titans[a.titan]?.y ?? 0, z: (st.titans[a.titan]?.height ?? 0) * 0.85 } : null;
+      if (!end) continue;
+      const [x0, y0] = this.project(s.x, s.y, s.z);
+      const [x1, y1] = this.project(end.x, end.y, end.z);
+      g.moveTo(x0, y0).lineTo(x1, y1).stroke({ width: w, color: 0x2f5d8a, alpha: 0.85 });
+      c.cables++;
+    }
+    const t = st.tick / 20;
+    for (const f of st.signals) {
+      if (t - f.t < 0 || t - f.t > 8) continue;
+      const [x, y] = this.project(f.x, f.y, 0);
+      g.ellipse(x, y, d.signal, d.signal * TILT).stroke({ width: w, color: 0x4f6b5a, alpha: 0.6 });
+      c.signaux++;
+    }
+    for (const b of st.batteries ?? []) {
+      if (!b.aim || b.alive <= 0) continue;
+      // Trajectoire tendue tracée en arc (hauteur au sommet : un quart de la portée, plafonnée), du canon au point visé.
+      const dist = Math.hypot(b.aim.x - b.x, b.aim.y - b.y);
+      const top = Math.min(120, dist / 4);
+      for (let k = 0; k <= 16; k++) {
+        const u = k / 16;
+        const [x, y] = this.project(b.x + (b.aim.x - b.x) * u, b.y + (b.aim.y - b.y) * u, 4 * top * u * (1 - u));
+        if (k === 0) g.moveTo(x, y);
+        else g.lineTo(x, y);
+      }
+      g.stroke({ width: w, color: b.side === "ennemi" ? 0x9e2b25 : 0x2f5d8a, alpha: 0.8 });
+      c.trajectoires++;
+    }
+    this.debugCounts = c;
+  }
+
   /** Unités interpolées entre l'état précédent (`prev`) et l'état courant, avec câbles, traînées et fusées. */
   draw(st: BattleState, prev: readonly UnitPose[] | null, alpha: number, look: (s: SoldierUnit) => SoldierLook): void {
     const g = this.gDynamic;
@@ -334,6 +416,7 @@ export class TacticalScene {
       f.scale.set(drawnTitanHeight(tt.height, this.zoom, this.app.screen.width, this.app.screen.height) / 100);
       f.zIndex = tt.y;
     });
+    this.drawDebug(st);
     const o = this.gOverlay;
     o.clear();
     let occluded = 0;

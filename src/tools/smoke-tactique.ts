@@ -128,6 +128,12 @@ try {
       const hiddenByDefault = await page.locator(".bataille-perf").isHidden();
       await page.keyboard.press("F2");
       const shownByF2 = await page.locator(".bataille-perf").isVisible();
+      // E-08 (03 §14, F-DEV-07) : en mode debug, ancrages et portées de vue des Titans dessinés sur la scène.
+      await page.waitForFunction(() => Number(document.querySelector<HTMLElement>(".bataille")?.dataset["debugAncrages"] ?? "0") > 0, undefined, { timeout: 30000 }).catch(() => undefined);
+      const dbgA = Number((await page.getAttribute(".bataille", "data-debug-ancrages")) ?? "0");
+      const dbgP = Number((await page.getAttribute(".bataille", "data-debug-portees")) ?? "0");
+      expect(dbgA > 0 && dbgP > 0, `F2 : surimpressions de débogage — ${dbgA} ancrages, ${dbgP} portées de vue de Titans (03 §14, E-08)`);
+      await page.screenshot({ path: `${OUT}/p4-debug.png` });
       await page.keyboard.press("F2");
       expect(hiddenByDefault && shownByF2 && (await page.locator(".bataille-perf").isHidden()) && !(await page.locator(".debug-console:not([hidden])").count()), "revue P4 : « ms/image · unités » masqué hors debug ; F2 l'affiche puis le masque (sans ouvrir la console de la carte)");
     }
@@ -233,13 +239,16 @@ try {
   const zoom1 = await page.getAttribute(".bataille", "data-zoom");
   expect(vue1 === "detail" && (await page.getAttribute(".bataille", "data-pastilles")) === "0", `revue P4 : au-delà du seuil (${zoom1} px/m ≥ 4), figures détaillées, plus de pastilles`);
   await page.screenshot({ path: `${OUT}/p4-vue-detail.png` });
+  // F2 montre le compte d'unités ; la mesure se fait ensuite hors du mode debug (jeu normal, sans les surimpressions
+  // de débogage d'E-08), le temps par image étant relevé en permanence.
+  await page.keyboard.press("F2");
+  const units = (await page.locator(".bataille-perf").innerText()).match(/(\d+) unités/)?.[1];
   await page.keyboard.press("F2");
   const scrollable = await page.$eval(".bataille-escouades", (e) => e.scrollWidth > e.clientWidth && getComputedStyle(e).overflowX === "auto");
   expect(scrollable, `revue P4 : ${await page.locator(".carte-escouade").count()} cartes d'escouade, barre à défilement horizontal`);
   await speed(page, "1");
   await page.waitForTimeout(12000);
   const p95 = Number(await page.getAttribute(".bataille", "data-js-p95"));
-  const units = (await page.locator(".bataille-perf").innerText()).match(/(\d+) unités/)?.[1];
   expect(units === "300" && p95 > 0 && p95 < 8, `300 unités : temps JS par image p95 ${p95.toFixed(2)} ms < 8 ms (${units ?? "?"} unités, ${await tick(page)} pas, ${await page.getAttribute(".bataille", "data-frames")} images ; p95 par poste : ${await page.getAttribute(".bataille", "data-js-parts")})`);
   await page.screenshot({ path: `${OUT}/p4-300-unites.png` });
   await close(page);

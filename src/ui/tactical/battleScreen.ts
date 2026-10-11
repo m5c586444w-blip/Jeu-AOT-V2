@@ -268,6 +268,9 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       ev.preventDefault();
       perf.hidden = !perf.hidden;
       root.dataset["debug"] = String(!perf.hidden);
+      // E-08 (03 §14) : portées, ancrages, câbles, signaux et trajectoires dessinés sur la scène en mode debug.
+      const b = bt.world.balance;
+      scene.setDebug(perf.hidden ? null : { vision: o.setup.night ? b.titans.vision_night_m : b.titans.vision_day_m, signal: b.signals.visibility_m });
       return;
     }
     if (ev.code === "Space") {
@@ -381,6 +384,12 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
         if (s && s.mode !== "mort") scene.follow(s.x, s.y, s.z);
       }
       scene.draw(bt.state, prev, Math.min(1, frameClock.acc * bt.world.balance.tick_hz), lookOf);
+      if (root.dataset["debug"] === "true") {
+        const dbg = scene.debugStats();
+        root.dataset["debugAncrages"] = String(dbg.ancrages);
+        root.dataset["debugPortees"] = String(dbg.portees);
+        root.dataset["debugCables"] = String(dbg.cables);
+      }
       const t2 = performance.now();
       scene.render();
       const t3 = performance.now();
