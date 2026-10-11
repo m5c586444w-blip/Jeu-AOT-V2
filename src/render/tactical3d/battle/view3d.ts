@@ -35,7 +35,8 @@ import type { BattleView, CameraMode, PickHit, ViewOptions, ViewOverlay } from "
 import type { TacticalWorldMap } from "../../../sim/tactical/map";
 import type { BattleState, SoldierUnit, TitanUnit, TroopUnit } from "../../../sim/tactical/types";
 import { QUALITY, effectivePixelRatio } from "../quality";
-import { buildSoldier, crowdGeometry, soldierMaterials } from "../soldier";
+import { CROWD_HIP, CROWD_SHOULDER, buildSoldier, crowdGeometry, soldierMaterials } from "../soldier";
+import { patchWalk, walkAttribute, walkParams } from "../crowdWalk";
 import type { Soldier, SoldierMaterials, SoldierPose } from "../soldier";
 import { TITAN_LARGE, TITAN_SMALL, buildTitan, setSteamTexture } from "../titan";
 import { puffTexture, skinTexture } from "../textures";
@@ -196,6 +197,8 @@ export class View3D implements BattleView {
   private readonly freeFigs = new Map<string, HumanSoldier[]>();
   private readonly figKey = new Map<HumanSoldier, string>();
   private readonly troopTints = new Map<string, Color>();
+  /** Horloge du shader de marche de la foule (dette n° 61). */
+  private readonly walkTime = { value: 0 };
   private readonly skins = new Map<string, Texture>();
   private officers = new Set<number>();
   private builtFigs = 0;
@@ -350,15 +353,21 @@ export class View3D implements BattleView {
     const nS = Math.max(1, st.soldiers.length);
     const nT = st.troops?.length ?? 0;
     const ex = outfit(odmOutfitFor(this.opts.year));
-    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, ...(ex.cape ? { cape: ex.cape } : {}) }), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
+    // Dette n° 61 : la foule marche et court (membres pivotés dans le shader, pas d'instance dans `aWalk`).
+    const walkMat = (): MeshStandardMaterial => {
+      const m = new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 });
+      patchWalk(m, this.walkTime, CROWD_HIP, CROWD_SHOULDER);
+      return m;
+    };
+    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, ...(ex.cape ? { cape: ex.cape } : {}) }), walkMat(), nS);
     crowd.name = "foule";
     crowd.castShadow = true;
-    const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
+    const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), walkMat(), nT) : null;
     if (troops) {
       troops.name = "fantassins";
       troops.castShadow = true;
     }
-    const troopsA = nT > 0 ? new InstancedMesh(troopGeometry("paradis"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
+    const troopsA = nT > 0 ? new InstancedMesh(troopGeometry("paradis"), walkMat(), nT) : null;
     if (troopsA) {
       troopsA.name = "fantassins-paradis";
       troopsA.castShadow = true;
@@ -798,6 +807,7 @@ export class View3D implements BattleView {
     const lod = LOD[this.opts.quality];
     const realistic = this.opts.violence === "realiste";
     this.time = st.tick / 20 + alpha / 20;
+    this.walkTime.value = this.time;
     this.director.update(st);
     this.startBodies();
     const r3 = this.kitState === "corps";
@@ -824,6 +834,12 @@ export class View3D implements BattleView {
     };
     // Soldats : figures complètes pour les plus proches (plafond par qualité), foule instanciée, repères au loin.
     // R3 : les fantassins proches deviennent aussi des figures (en tenue de leur faction) une fois le corps de base chargé.
+    // Dette n° 61 : pas de chaque instance de foule (phase propre à l'unité, amplitude et cadence de son état montré).
+    const calm = reducedMotion();
+    const walk = (mesh: InstancedMesh, i: number, state: string, phase: number): void => {
+      const w = calm ? { amp: 0, rate: 0 } : walkParams(state);
+      walkAttribute(mesh).setXYZ(i, phase, w.amp, w.rate);
+    };
     type Want = { key: string; d: number; dead: boolean; x: number; y: number; z: number; yaw: number; soldier: number; troop: TroopUnit | null };
     const want: Want[] = [];
     st.soldiers.forEach((s, i) => {
@@ -844,6 +860,7 @@ export class View3D implements BattleView {
         if (r3 && tier === "detail") want.push({ key: `s${i}`, d, dead, x: p.x, y: p.y, z: 0, yaw: yawOf(this.headings.get(i) ?? 0), soldier: i, troop: null });
         else {
           setInst(L.crowd, crowdN, p.x, 0, p.y, yawOf(this.headings.get(i) ?? 0), 1, true);
+          walk(L.crowd, crowdN, "mort", 0);
           L.crowd.setColorAt(crowdN++, SIDE_COLORS.mort);
         }
         if (realistic) setInst(L.blood, bloodN++, p.x + 0.3, 0.02, p.y, 0, 0.9);
@@ -853,6 +870,7 @@ export class View3D implements BattleView {
       if (tier === "detail") want.push({ key: `s${i}`, d, dead, x: p.x, y: p.y, z: p.z, yaw, soldier: i, troop: null });
       else if (tier === "foule") {
         setInst(L.crowd, crowdN, p.x, p.z, p.y, yaw);
+        walk(L.crowd, crowdN, this.director.soldier(i).state, i * 1.37);
         L.crowd.setColorAt(crowdN++, s.wound === "grave" && realistic ? new Color(0xc79a8c) : new Color(1, 1, 1));
       } else {
         setInst(L.markers, markerN, p.x, p.z, p.y, 0, Math.min(3, d / 160));
@@ -870,6 +888,7 @@ export class View3D implements BattleView {
       const mesh = paradis ? L.troopsA : L.troops;
       if (!mesh) return;
       const n = paradis ? troopAN++ : troopN++;
+      walk(mesh, n, t.mode === "mort" ? "mort" : this.director.troop(t.id).state, t.id * 1.37);
       const color = paradis ? UNIFORM_COLORS.paradis : this.tintOf(t.faction);
       if (t.mode === "mort") {
         setInst(mesh, n, t.x, 0, t.y, yawOf(t.heading), 1, true);
@@ -909,9 +928,11 @@ export class View3D implements BattleView {
       if (w.troop) troopInst(w.troop);
       else if (w.dead) {
         setInst(L.crowd, crowdN, w.x, 0, w.y, w.yaw, 1, true);
+        walk(L.crowd, crowdN, "mort", 0);
         L.crowd.setColorAt(crowdN++, SIDE_COLORS.mort);
       } else {
         setInst(L.crowd, crowdN, w.x, w.z, w.y, w.yaw);
+        walk(L.crowd, crowdN, this.director.soldier(w.soldier).state, w.soldier * 1.37);
         L.crowd.setColorAt(crowdN++, new Color(1, 1, 1));
       }
     };
@@ -1098,6 +1119,10 @@ export class View3D implements BattleView {
       if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     }
     L.blood.visible = realistic;
+    for (const mesh of [L.crowd, L.troops, L.troopsA]) {
+      const a = mesh?.geometry.getAttribute("aWalk");
+      if (a) a.needsUpdate = true;
+    }
     this.counts = { detail: shown, crowd: crowdN + troopN + troopAN, markers: markerN };
     // Dette n° 75 (15 C-06, 18 R4.4) : les bâtiments qui cachent les unités choisies deviennent translucides (24 unités au
     // plus, réparties dans la sélection).

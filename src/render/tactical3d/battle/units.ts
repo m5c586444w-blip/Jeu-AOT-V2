@@ -1,6 +1,7 @@
 import { BoxGeometry, Color, ConeGeometry, CylinderGeometry, Matrix4, Quaternion, Vector3 } from "three";
 import type { BufferGeometry } from "three";
 import { FaceBuilder } from "../townMesh";
+import { LimbMarks } from "../crowdWalk";
 import { unitSphere } from "../rig";
 import { outfit } from "../figuresR3";
 import type { ViewQuality } from "../../battleView";
@@ -59,10 +60,14 @@ export function troopGeometry(style: "paradis" | "marley" = "marley"): BufferGeo
   const cloth = new Color(0xeeeeee);
   const dark = new Color(0x3a352e);
   const skin = new Color(0xd9b49a);
-  for (const s of [1, -1]) {
-    fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), cloth);
-    fb.geometry(new CylinderGeometry(0.06, 0.06, 0.18, 6), at(s * 0.09, 0.09, 0.02), dark);
-    fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), cloth);
+  // Dette n° 61 : membres marqués pour la marche de la foule (gauche : +x).
+  const marks = new LimbMarks();
+  for (const s of [1, -1] as const) {
+    marks.mark(fb, s, () => {
+      fb.geometry(new CylinderGeometry(0.068, 0.052, LEG, 6), at(s * 0.09, LEG / 2, 0), cloth);
+      fb.geometry(new CylinderGeometry(0.06, 0.06, 0.18, 6), at(s * 0.09, 0.09, 0.02), dark);
+    });
+    marks.mark(fb, s === 1 ? 2 : -2, () => fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), cloth));
   }
   fb.geometry(new CylinderGeometry(0.16, 0.14, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.72]), cloth);
   fb.geometry(new BoxGeometry(0.34, 0.06, 0.24), at(0, LEG + 0.02, 0), dark);
@@ -72,7 +77,7 @@ export function troopGeometry(style: "paradis" | "marley" = "marley"): BufferGeo
   fb.geometry(new BoxGeometry(0.26, 0.3, 0.12), at(0, LEG + TORSO * 0.62, -0.17), dark);
   // Fusil tenu en travers (crosse à la hanche, canon vers l'avant-haut).
   fb.geometry(new BoxGeometry(0.035, 0.035, 1.05), at(0.12, LEG + TORSO * 0.55, 0.25, [1, 1, 1], -0.55), dark);
-  return fb.build();
+  return marks.apply(fb.build());
 }
 
 /** Repère lointain : pastille au sol et fanion vertical (couleur du camp par instance). */
@@ -129,10 +134,13 @@ function paradisTroop(): BufferGeometry {
   const dark = new Color(0x3a352e);
   const skin = new Color(0xd9b49a);
   const hair = new Color(0x3b2c20);
-  for (const s of [1, -1]) {
-    fb.geometry(new CylinderGeometry(0.068, 0.058, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), trousers);
-    fb.geometry(new CylinderGeometry(0.06, 0.052, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.005), boots);
-    fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), jacket);
+  const marks = new LimbMarks();
+  for (const s of [1, -1] as const) {
+    marks.mark(fb, s, () => {
+      fb.geometry(new CylinderGeometry(0.068, 0.058, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), trousers);
+      fb.geometry(new CylinderGeometry(0.06, 0.052, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.005), boots);
+    });
+    marks.mark(fb, s === 1 ? 2 : -2, () => fb.geometry(new CylinderGeometry(0.05, 0.04, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.05, [1, 1, 1], -0.5), jacket));
   }
   fb.geometry(new CylinderGeometry(0.16, 0.14, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.72]), jacket);
   fb.geometry(new CylinderGeometry(0.15, 0.15, 0.1, 8), at(0, LEG + 0.03, 0, [1, 1, 0.74]), trousers);
@@ -140,5 +148,5 @@ function paradisTroop(): BufferGeometry {
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), skin);
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), hair);
   fb.geometry(new BoxGeometry(0.035, 1.0, 0.035), at(-0.12, LEG + TORSO * 0.75, -0.13, [1, 1, 1], 0.1, 0.35), dark);
-  return fb.build();
+  return marks.apply(fb.build());
 }

@@ -139,3 +139,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   un Titan ; la plus ancienne plus large et plus haute.
   - Défauts : vue d'en haut, la colonne verticale se lit en oblique ; bouffées à bord net (sphères, pas de texture de
     fumée) ; pas d'ombre au sol ; la fusée vient de l'escouade, loin de l'étiquette « S1 » des fantassins.
+
+## Dette n° 61 (en partie) : la foule instanciée marche et court
+- Au-delà de la distance de détail, soldats et fantassins instanciés balancent jambes et bras (bras opposés aux jambes)
+  selon l'état montré par le directeur : marche (0,42 rad, 6,5 rad/s) ou course (0,75 rad, 11 rad/s) ; immobiles à
+  l'arrêt, en vol, morts, et en mouvements réduits. Membres marqués à la construction (`aLimb`), pas par instance (`aWalk`),
+  pivot dans le shader (`crowdWalk.ts`). Reste : primitives au lieu de corps.
+- `npm run verify` (`dette61-verify.log`) : « Test Files  124 passed (124) », « Tests  787 passed (787) », `EXIT=0` ;
+  `smoke:r2 -- --captures` (`dette61-smoke-r2.log`) : « 0 erreur console » (shader compilé), « tout est conforme. »,
+  `EXIT=0`.
+- **`r2-suivi-1366.png`** : l'escouade 02 en cape verte sur une place pavée, un soldat de la foule au loin à gauche.
+  - Défauts : le balancement ne se voit pas sur une capture fixe (contrôlé par les tests et l'absence d'erreur de
+    shader) ; ombres de la foule figées (matériau d'ombre non modifié) ; numéros d'escouade estompés serrés au fond.

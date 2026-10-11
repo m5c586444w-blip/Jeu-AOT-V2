@@ -1,6 +1,7 @@
 import { BoxGeometry, Color, CylinderGeometry, DoubleSide, Group, Matrix4, MeshStandardMaterial, PlaneGeometry, Quaternion, Vector3 } from "three";
 import type { BufferGeometry, Mesh, Object3D } from "three";
 import { FaceBuilder } from "./townMesh";
+import { LimbMarks } from "./crowdWalk";
 import { joint, limb, measureHeight, part, unitSphere } from "./rig";
 import { derive, range, seeded } from "./rng";
 
@@ -22,6 +23,9 @@ const ANKLE = 0.08 * LEG;
 const TORSO = 0.3 * H;
 const NECK = 0.05 * H;
 const HEAD = 0.13 * H;
+/** Pivots de la marche de la foule (dette n° 61) : hanche et épaule des figures instanciées (soldats et fantassins). */
+export const CROWD_HIP = LEG;
+export const CROWD_SHOULDER = LEG + TORSO - 0.02;
 
 export interface SoldierMaterials {
   jacket: MeshStandardMaterial;
@@ -231,20 +235,24 @@ export function crowdGeometry(colors?: CrowdColors): BufferGeometry {
   const S = unitSphere(8);
   const c = (h: number | string): Color => new Color(h);
   const jacket = c(colors?.veste ?? 0x6d6a60);
-  for (const s of [1, -1]) {
-    if (colors) {
-      // Uniforme commun (dette n° 72) : pantalon clair, hautes bottes jusqu'au genou.
-      fb.geometry(new CylinderGeometry(0.065, 0.057, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), c(colors.pantalon));
-      fb.geometry(new CylinderGeometry(0.058, 0.05, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.004), c(colors.bottes));
-    } else fb.geometry(new CylinderGeometry(0.065, 0.05, LEG, 6), at(s * 0.09, LEG / 2, 0), c(0x3a3730));
-    fb.geometry(new CylinderGeometry(0.05, 0.038, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.03, [1, 1, 1], -0.3), jacket);
+  // Dette n° 61 : jambes et bras marqués (gauche : +x), pour la marche calculée dans le shader.
+  const marks = new LimbMarks();
+  for (const s of [1, -1] as const) {
+    marks.mark(fb, s, () => {
+      if (colors) {
+        // Uniforme commun (dette n° 72) : pantalon clair, hautes bottes jusqu'au genou.
+        fb.geometry(new CylinderGeometry(0.065, 0.057, LEG * 0.5, 6), at(s * 0.09, LEG * 0.75, 0), c(colors.pantalon));
+        fb.geometry(new CylinderGeometry(0.058, 0.05, LEG * 0.52, 6), at(s * 0.09, LEG * 0.26, 0.004), c(colors.bottes));
+      } else fb.geometry(new CylinderGeometry(0.065, 0.05, LEG, 6), at(s * 0.09, LEG / 2, 0), c(0x3a3730));
+    });
+    marks.mark(fb, s === 1 ? 2 : -2, () => fb.geometry(new CylinderGeometry(0.05, 0.038, 0.56, 6), at(s * 0.2, LEG + TORSO - 0.3, 0.03, [1, 1, 1], -0.3), jacket));
   }
   fb.geometry(new CylinderGeometry(0.15, 0.13, TORSO, 8), at(0, LEG + TORSO / 2, 0, [1, 1, 0.7]), jacket);
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.5, 0.01, [0.095, HEAD * 0.5, 0.11]), c(0xd9b49a));
   fb.geometry(S, at(0, LEG + TORSO + NECK + HEAD * 0.66, -0.015, [0.1, HEAD * 0.4, 0.115]), c(0x3b2c20));
   if (!colors || colors.cape) fb.geometry(new BoxGeometry(0.6, 0.75, 0.04), at(0, LEG + TORSO - 0.38, -0.14), c(colors?.cape ?? 0x4f6b5a));
   fb.geometry(new CylinderGeometry(0.075, 0.075, 0.42, 6), at(0, LEG + 0.1, -0.15, [1, 1, 1]).multiply(new Matrix4().makeRotationZ(Math.PI / 2)), c(0xa9b0b3));
-  return fb.build();
+  return marks.apply(fb.build());
 }
 
 /** Variation de teinte d'un soldat de la foule (graine). */
