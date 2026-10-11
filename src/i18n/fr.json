@@ -1875,6 +1875,7 @@
   "overlay.legitimite.why": "Légitimité perçue dans la province : légitimité du régime, corrigée du moral, de la stabilité et de l'influence du Culte.",
   "overlay.renseignement.why": "Âge de ce que l'on sait de chaque province : à jour sur le territoire tenu, de plus en plus ancien ailleurs.",
   "overlay.unknown": "inconnu",
+  "overlay.outside": "hors du territoire tenu",
   "overlay.renseignement.fresh": "à jour",
   "overlay.renseignement.days": "{n} jours",
   "objective.capture": "Capture d'un Titan vivant",

@@ -27,8 +27,27 @@ describe("overlays (AC1-13, F-STR-02)", () => {
     expect(pol?.values.get("prov_plaines_meurtries")).toBe(0);
     expect(pol?.values.get("prov_trost")).toBe(1);
   });
-  it("légendes à 5 échelons pour les échelles continues", () => {
-    for (const id of ["moral", "nourriture", "gaz", "titans", "population"] as const) expect(computeOverlay(id, world, state, fmt, label)?.legend).toHaveLength(5);
+  it("légendes à 5 échelons pour les échelles continues (plus les cases « hors du territoire » et « inconnu », dette n° 13)", () => {
+    for (const id of ["moral", "nourriture", "gaz", "titans", "population"] as const) {
+      const lg = computeOverlay(id, world, state, fmt, label)?.legend ?? [];
+      expect(lg.slice(5).every((x) => x.label === "overlay.outside" || x.label === "overlay.unknown"), id).toBe(true);
+      expect(lg.length - lg.slice(5).length, id).toBe(5);
+    }
+  });
+  it("dette n° 13 : chaque province a une teinte de la légende (nourriture, gaz, Titans) ; seuils ronds", () => {
+    const w850 = loadWorld("data", "scn_sandbox_850");
+    const s850 = createInitialState(42, w850);
+    const provinces = w850.provinces.filter((p) => p.kind !== "segment");
+    for (const id of ["nourriture", "gaz", "titans"] as const) {
+      const o = computeOverlay(id, w850, s850, fmt, label);
+      const bare = provinces.filter((p) => !o?.colors.has(p.id)).map((p) => p.id);
+      expect(bare, id).toEqual([]);
+      const legendColors = new Set(o?.legend.map((x) => x.color));
+      // Les teintes des provinces sont prises sur l'échelle continue ou sur une case nommée de la légende.
+      expect(legendColors.size, id).toBeGreaterThanOrEqual(5);
+    }
+    const top = computeOverlay("nourriture", w850, s850, (n) => String(n), label)?.legend[4]?.label ?? "";
+    expect(Number(top) / 10 ** Math.floor(Math.log10(Number(top)))).toSatisfy((m: number) => [1, 2, 2.5, 5, 10].includes(m));
   });
 });
 

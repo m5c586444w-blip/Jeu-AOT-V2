@@ -37,6 +37,8 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
   const provinces: readonly Province[] = world.provinces.filter((p) => p.kind !== "segment");
   const scale = (tint: number, max: number, unit: (n: number) => string): OverlayResult["legend"] =>
     [0, 0.25, 0.5, 0.75, 1].map((k) => ({ label: unit(max * k), color: sequential(tint, k) }));
+  // Dette n° 13 : hors du territoire tenu (aucune production comptée), une teinte propre et sa case de légende.
+  const outside = { label: label("overlay.outside"), color: STONE };
 
   switch (id) {
     case "politique": {
@@ -59,20 +61,32 @@ export function computeOverlay(id: OverlayId, world: World, state: GameState, fm
     case "nourriture":
     case "gaz": {
       const r = id === "nourriture" ? "food" : "gas";
+      const tint = id === "nourriture" ? OCHRE : VERDIGRIS;
+      let out = false;
       for (const p of provinces) {
         const v = id === "nourriture" ? provinceProduction(world, st, state.date, p.id, r).value : gasHolding(world, state, p.id);
-        if (v > 0) values.set(p.id, v);
+        // Dette n° 13 : chaque province a une case de la légende : 0 sur le territoire tenu, « hors du territoire » ailleurs.
+        if (v > 0 || st.provinces[p.id]?.control === "paradis") values.set(p.id, Math.max(0, v));
+        else {
+          colors.set(p.id, STONE);
+          out = true;
+        }
       }
-      const max = Math.max(1, ...values.values());
-      for (const [pid, v] of values) colors.set(pid, sequential(id === "nourriture" ? OCHRE : VERDIGRIS, v / max));
-      return { colors, values, legend: scale(id === "nourriture" ? OCHRE : VERDIGRIS, max, fmt) };
+      // Seuils ronds (1, 2, 2,5 ou 5 × 10ⁿ) plutôt que le maximum exact.
+      const max = niceCeil(Math.max(1, ...values.values()));
+      for (const [pid, v] of values) colors.set(pid, sequential(tint, v / max));
+      return { colors, values, legend: [...scale(tint, max, fmt), ...(out ? [outside] : [])] };
     }
     case "titans": {
       // Brouillard de guerre (P5, F-INT-01) : on montre ce que l'on sait, daté ; une province jamais observée reste inconnue.
       const today = toAbsoluteDay(state.date);
       for (const p of provinces) {
         const k = state.intel ? knownTitans(state.intel, p.id, today) : { value: titanDensity(world, p.id, st), age: 0 };
-        if (!k) continue;
+        // Dette n° 13 : une province jamais observée prend la teinte « inconnu » de la légende (plus de carte nue).
+        if (!k) {
+          colors.set(p.id, UNKNOWN);
+          continue;
+        }
         values.set(p.id, k.value);
         colors.set(p.id, sequential(BRICK, k.value));
       }
@@ -146,3 +160,12 @@ function gasHolding(world: World, state: GameState, provinceId: string): number 
   const onlyThis = { ...world, provinces: world.provinces.filter((p) => p.id === provinceId) };
   return capacity(onlyThis, single, "gas").value;
 }
+
+/** Plus petit nombre rond (1, 2, 2,5 ou 5 × 10ⁿ) supérieur ou égal à `x` : seuils lisibles de légende (dette n° 13). */
+export function niceCeil(x: number): number {
+  if (!(x > 0)) return 1;
+  const e = 10 ** Math.floor(Math.log10(x));
+  for (const m of [1, 2, 2.5, 5, 10]) if (m * e >= x - 1e-9) return m * e;
+  return 10 * e;
+}
+

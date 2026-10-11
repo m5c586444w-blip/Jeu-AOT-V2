@@ -127,7 +127,10 @@ try {
   expect(overlays === 10 && closed === expectedClosed && 10 - closed >= 6, `10 calques déclarés, ${10 - closed} ouverts, ${closed} non ouverts (AC1-13)`);
   await page.locator('button[data-overlay="nourriture"]').click();
   await page.waitForTimeout(200);
-  expect((await page.locator(".calques__case").count()) === 5, "calque Nourriture : légende à 5 échelons (AC1-13)");
+  // Dette n° 13 : 5 échelons, plus la case « hors du territoire tenu » quand des provinces ne sont pas tenues.
+  const cases = await page.locator(".calques__case").count();
+  const outsideCase = await page.locator(".calques__legende", { hasText: "hors du territoire tenu" }).count();
+  expect(cases === 5 + outsideCase, `calque Nourriture : légende à 5 échelons${outsideCase ? " et « hors du territoire tenu »" : ""} (AC1-13)`);
   await page.locator(".carte").screenshot({ path: `${OUT}/p1-calque-nourriture.png` });
   await page.locator('input[data-filter="pawns"]').uncheck();
   expect((await page.locator("input[data-filter]").count()) === 4 && !(await page.locator('input[data-filter="pawns"]').isChecked()), "filtres (pions, toponymes, murs, brouillard) (F-STR-16)");
