@@ -156,7 +156,8 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       return v;
     };
     const refs: CardRefs = { men: val(t("tac.men_why")), gas: val(t("tac.gas_why")), blades: val(t("tac.blades_why")), stress: val(t("tac.stress_why", { panic: bt.world.balance.soldiers.panic_threshold })), order: el("p", "carte-escouade-ordre"), buttons: [], follow: el("button", "registre-bouton petit", t("tac.follow")) };
-    line.append(refs.men, ` ${t("tac.gas")} `, refs.gas, ` ${t("tac.blades")} `, refs.blades, ` ${t("tac.stress")} `, refs.stress);
+    // Dette n° 21 : chaque chiffre porte son libellé (« 6/6 debout · gaz 100 · lames 2 · stress 0/100 »).
+    line.append(refs.men, ` ${t("tac.standing")} · ${t("tac.gas")} `, refs.gas, ` · ${t("tac.blades")} `, refs.blades, ` · ${t("tac.stress")} `, refs.stress, t("tac.stress_scale"));
     card.append(line, refs.order);
     const btns = el("div", "carte-escouade-ordres");
     for (const ord of TACTICAL_ORDERS) {

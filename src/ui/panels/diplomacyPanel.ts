@@ -13,6 +13,11 @@ import { formatNumber } from "../why";
  * Chancellerie (P7 ; 02 §11, 09 DIP) : relations à quatre axes avec chaque nation, traités, guerre et paix, embargo ;
  * chaque proposition montre l'utilité prévue de l'autre partie ; neutralité d'Hizuru ; journal de raisonnement des IA.
  */
+/** Mot d'échelle d'un axe de relation (−100 à 100 ; la peur va de 0 à 100) : dette n° 21. */
+export function axisLevel(v: number): "tres_bas" | "bas" | "neutre" | "haut" | "tres_haut" {
+  return v <= -50 ? "tres_bas" : v < -15 ? "bas" : v <= 15 ? "neutre" : v < 50 ? "haut" : "tres_haut";
+}
+
 export class DiplomacyPanel implements Panel {
   readonly id = "diplomatie" as const;
   private kind = new Map<string, TreatyKind>();
@@ -96,7 +101,9 @@ export class DiplomacyPanel implements Panel {
         const axes = el("div", "chancellerie__axes");
         for (const axis of ["trust", "interest", "fear", "ideology"] as const) {
           const kv = el("div", "kv");
-          kv.append(el("span", "kv__cle", t(`dip.axis.${axis}`)), valueEl(this.ctx, formatNumber(Math.round(r[axis])), () => ({ title: t(`dip.axis.${axis}`), sections: [{ text: t(`dip.axis.${axis}_why`) }] }), "kv__valeur"));
+          // Dette n° 21 : le chiffre brut porte un mot d'échelle (« 0 · neutre », « 62 · élevée »).
+          const v = Math.round(r[axis]);
+          kv.append(el("span", "kv__cle", t(`dip.axis.${axis}`)), valueEl(this.ctx, `${formatNumber(v)} · ${t(`dip.level.${axisLevel(v)}`)}`, () => ({ title: t(`dip.axis.${axis}`), sections: [{ text: t(`dip.axis.${axis}_why`) }] }), "kv__valeur"));
           axes.append(kv);
         }
         detail.append(axes);

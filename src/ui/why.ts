@@ -74,7 +74,10 @@ export function displayedFactors(x: Explained): Factor[] {
 
 /** Ligne d'un facteur : libellé, valeur (base, ajout signé ou coefficient) et sens (bonus ou malus). */
 export function factorLine(f: Factor, cost = false): WhyRow {
-  const value = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : f.op === "base" ? formatNumber(f.value) : formatSigned(f.value);
+  // Dette n° 21 : dans une dépense, un poste qui s'ajoute s'écrit comme un montant (« 7 800 », en rouge), non « +7 800 » :
+  // le signe « + » contredisait le « −8 304 » de la consommation au solde. Une réduction de dépense garde son « − ».
+  const amount = f.op === "base" || (cost && f.op === "add" && f.value > 0);
+  const value = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : amount ? formatNumber(f.value) : formatSigned(f.value);
   // Bonus et malus colorés (U4) : un ajout positif ou un multiplicateur > 1 est un bonus ; la base reste neutre ;
   // pour une dépense (consommation, pertes), le sens est inversé.
   const sign = f.op === "base" ? 0 : f.op === "mul" ? Math.sign(f.value - 1) : Math.sign(f.value);

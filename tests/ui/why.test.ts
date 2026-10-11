@@ -26,6 +26,10 @@ describe("infobulles de calcul (U4, U10)", () => {
     expect(m.sections[0]?.rows.map((r) => r.sign)).toEqual([undefined, "plus", "moins"]);
     expect(m.sections[1]?.rows.map((r) => r.sign)).toEqual([undefined, "moins"]);
     expect(m.sections[0]?.rows.map((r) => r.value)).toEqual(["100", "+20", "×0,8"]);
+    // Dette n° 21 : un poste de dépense s'écrit comme un montant (sans « + »), en rouge ; une réduction garde son « − ».
+    expect(m.sections[1]?.rows.map((r) => r.value)).toEqual(["50", "10"]);
+    const saved = whyModel({ title: "x", sections: [{ explained: new Explainer().base("why.base", 50).add("why.season", -5).done(), cost: true }] });
+    expect(saved.sections[0]?.rows.map((r) => [r.value, r.sign])).toEqual([["50", undefined], ["−5", "plus"]]);
   });
 
   it("sous-total signé et unité", () => {

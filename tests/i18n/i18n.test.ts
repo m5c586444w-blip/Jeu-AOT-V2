@@ -36,6 +36,20 @@ describe("i18n (AC-14)", () => {
     expect(t("date.format", { year: 850, day: 12 })).toBe("an 850, jour 12");
     expect(interpolate("{a} et {b}", { a: 1 })).toBe("1 et {b}");
   });
+  it("accord en nombre (dette n° 21) : singulier pour 0 et 1 en français, pour 1 seulement en anglais ; chiffres formatés lus", () => {
+    expect(t("rt.start_titans_only", { map: "Trost", ours: 12, titans: 1, light: "de jour" })).toContain("contre 1 Titan — de jour");
+    expect(t("rt.start_titans_only", { map: "Trost", ours: 12, titans: 4, light: "de jour" })).toContain("contre 4 Titans —");
+    expect(t("lesson.abnormal", { n: 2 })).toMatch(/^2 Titans anormaux rencontrés :/);
+    expect(t("lesson.abnormal", { n: 1 })).toMatch(/^1 Titan anormal rencontré :/);
+    expect(interpolate("{n} {n|homme|hommes}", { n: "1 900" })).toBe("1 900 hommes");
+    expect(interpolate("{n} {n|homme|hommes}", { n: 0 })).toBe("0 homme");
+    expect(interpolate("{n} {n|man|men}", { n: 0 }, "en")).toBe("0 men");
+    expect(interpolate("{x|a|b}", {})).toBe("{x|a|b}");
+    const tr = createTranslator("en");
+    expect(tr("fin.verdict.terme_texte", { n: 1, m: 3 })).toContain("with 1 objective out of the 3");
+    // Plus aucune forme « (s) » dans les textes.
+    expect(Object.entries(fr).filter(([, v]) => /\(s\)/.test(v)).map(([k]) => k)).toEqual([]);
+  });
   it("repli : en → fr → clé", () => {
     const tr = createTranslator("en", { fr: { a: "A-fr", b: "B-fr" }, en: { a: "A-en" } });
     expect(tr("a")).toBe("A-en");

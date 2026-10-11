@@ -275,3 +275,20 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   soldats en cape verte, capuche levée, Ailes de la liberté au dos.
   - Défauts : traits de pluie tous parallèles et réguliers ; sol sec (ni flaques ni reflets) ; bâtiment translucide à droite
     zébré de hachures ; soldats petits dans le cadre.
+
+## Dette n° 21 (en partie) : chiffres sans libellé, pluriels, signes des dépenses
+- Accord en nombre dans les textes (`{n|singulier|pluriel}`, singulier pour 0 et 1 en français, pour 1 en anglais) : les
+  21 formes « (s) » réécrites (« 4 Titans », « 1 Titan », « 2 abstentions », « 1 objectif atteint »…).
+- Cartes d'escouade de la bataille 2D : « 6/6 debout · gaz 100 · lames 2 · stress 13,4/100 » au lieu de « 6/6 gaz 100
+  lames 2 stress 13,4 ». Chancellerie : chaque axe de relation porte un mot d'échelle (« 0 · neutre », « 62 · élevée »).
+- Infobulles : dans une dépense (consommation, pertes, entretien), un poste qui s'ajoute s'écrit comme un montant
+  (« 7 800 », en rouge) et non « +7 800 », qui contredisait le « −8 304 » du solde ; une réduction garde son « − ».
+- `npm run verify` (`dette21-verify.log`) : « Test Files  129 passed (129) », « Tests  801 passed (801) », `EXIT=0`.
+- `smoke:tactique` : premier passage (`dette21-smoke-tactique.log`) KO sur « 300 unités : temps JS par image p95 8.00 ms
+  < 8 ms » (simulation, que ce lot ne touche pas, à 1,90 ms contre 1,0 à 2,1 ms aux passages antérieurs : charge de la
+  machine) ; second passage (`dette21-smoke-tactique-2.log`) : « p95 7.60 ms < 8 ms », « revue P4 : 4 cartes d'escouade
+  entières dans la largeur (0 coupée(s)) », « smoke:tactique : tout est conforme. », `EXIT=0`. Marge mince : à surveiller.
+- **`p4-carte-ville.png`** (bas de l'écran) : quatre cartes d'escouade sur une ligne, « Escouade 01 » à « 04 », ligne
+  « 6/6 debout · gaz 100 · lames 2 · stress 13,4/100 », ordre « ATTAQUER », boutons d'ordres.
+  - Défauts : stress à une décimale (13,4) quand les autres valeurs sont entières ; boutons d'ordres sur deux lignes ; carte
+    du terrain vide au-dessus (fond uni beige) ; « gaz 100 » sans unité.

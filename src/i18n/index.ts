@@ -7,9 +7,24 @@ export type Params = Readonly<Record<string, string | number>>;
 
 const DICTIONARIES: Record<Locale, Dictionary> = { fr, en };
 
-/** Remplace `{nom}` par la valeur du paramètre ; un paramètre absent reste visible pour être repéré. */
-export function interpolate(template: string, params: Params = {}): string {
-  return template.replace(/\{(\w+)\}/g, (whole, name: string) => (name in params ? String(params[name]) : whole));
+/** Valeur numérique d'un paramètre, chiffres formatés compris (« 1 900 », « 2,5 ») ; NaN sinon. */
+function numberOf(v: string | number): number {
+  return typeof v === "number" ? v : Number(v.replace(/[\s\u00a0\u202f]/g, "").replace(",", "."));
+}
+
+/**
+ * Remplace `{nom}` par la valeur du paramètre ; un paramètre absent reste visible pour être repéré. Accord en nombre
+ * (dette n° 21) : `{nom|singulier|pluriel}` choisit la forme selon la valeur du paramètre : en français, singulier pour 0 et 1
+ * (« 0 Titan », « 1 Titan », « 4 Titans ») ; en anglais, pour 1 seulement.
+ */
+export function interpolate(template: string, params: Params = {}, locale: Locale = "fr"): string {
+  return template
+    .replace(/\{(\w+)\|([^|{}]*)\|([^|{}]*)\}/g, (whole, name: string, one: string, many: string) => {
+      if (!(name in params)) return whole;
+      const n = Math.abs(numberOf(params[name] as string | number));
+      return (locale === "fr" ? n < 2 : n === 1) ? one : many;
+    })
+    .replace(/\{(\w+)\}/g, (whole, name: string) => (name in params ? String(params[name]) : whole));
 }
 
 /**
@@ -49,7 +64,7 @@ export function createTranslator(locale: Locale, dictionaries: Record<Locale, Di
   return (key: string, params?: Params): string => {
     const own = dictionaries[locale][key];
     const template = own ?? dictionaries.fr[key] ?? key;
-    const text = interpolate(template, params);
+    const text = interpolate(template, params, own !== undefined ? locale : "fr");
     if ((locale !== "fr" && own !== undefined) || !params || articles.size === 0) return text;
     return contractFr(text, Object.values(params).filter((v): v is string => typeof v === "string"), articles);
   };
