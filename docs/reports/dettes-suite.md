@@ -211,3 +211,14 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
 - **`vue-ensemble.png`** : Shiganshina de haut, horizon droit.
   - Défauts : bord net entre la prairie voilée et le ciel blanc ; ciel uniforme sans nuages ni bleu dans cette vue ; la
     route et les faubourgs se perdent dans la brume à gauche.
+
+## Dette n° 36 (en partie) : étendards au contact sur la carte
+- Une armée en marche arrêtée au contact d'une autre gardait la case 0 et se dessinait sous l'étendard adverse (« 808 »
+  caché sous « 1,9 k ») : les cases sont désormais réparties entre étendards proches (`spreadSlots`), et l'écart entre
+  deux cases passe de 26 à 38 px.
+- `npm run verify` (`dette36-verify.log`) : « Test Files  128 passed (128) », « Tests  795 passed (795) », `EXIT=0` ;
+  `smoke:pa` (`dette36-smoke-pa.log`) : « smoke:pa : tout est conforme. », `EXIT=0`.
+- **`pa-rencontre.png`** (recadré au Plateau du Nord) : l'étendard vert de l'Armée du Sud, cerclé (choisi), « 808 », et à
+  sa droite l'étendard rouge à étoile de Marley, « 1,9 k ».
+  - Défauts : le cercle de contact (rouge) reste sous l'étendard de Paradis seul ; les deux effectifs sont proches du bord
+    de l'île ; aucune flèche ne relie les deux armées.

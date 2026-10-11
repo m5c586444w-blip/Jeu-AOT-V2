@@ -55,6 +55,20 @@ const SIDE: Record<string, string> = { fac_paradis: "paradis", fac_marley: "marl
  * seulement dans les provinces vues (brouillard) ou dans une mer de l'île. Plusieurs armées dans une province
  * s'écartent (case), à côté du pion de garnison s'il y en a un.
  */
+/** Distance (unités de la carte) sous laquelle deux étendards se chevaucheraient à l'écran. */
+const BANNER_NEAR = 8;
+
+/**
+ * Dette n° 36 : deux étendards proches (une armée en marche arrêtée au contact d'une autre, ou dans la province d'une autre)
+ * ne partagent pas la même case : chacun prend la première case libre à son emplacement (ordre de la liste).
+ */
+export function spreadSlots(list: { at: Point; slot: number }[]): void {
+  list.forEach((a, i) => {
+    const near = list.slice(0, i).filter((b) => Math.hypot(a.at[0] - b.at[0], a.at[1] - b.at[1]) < BANNER_NEAR);
+    while (near.some((b) => b.slot === a.slot)) a.slot++;
+  });
+}
+
 export function buildMapArmies(map: MapData, world: World, state: GameState, selected: string | null): MapArmies {
   const out: MapArmies = { armies: [], fleets: [], clashes: [] };
   const s = state.armies;
@@ -76,6 +90,7 @@ export function buildMapArmies(map: MapData, world: World, state: GameState, sel
     const at: Point = pos ?? [base[0], base[1]];
     out.armies.push({ id: a.id, at, slot, side: SIDE[a.faction] ?? "autre", insignia: a.insignia, morale: a.morale / 100, supply: a.supply / aw.balance.supply.max_days, selected: a.id === selected, marching: a.route.length > 0, men: formatCount(armyMen(aw, a)) });
   }
+  spreadSlots(out.armies);
   for (const f of s.fleets) {
     const sea = aw.seas.get(f.sea);
     if (!sea || (f.faction !== me && sea.offmap)) continue;

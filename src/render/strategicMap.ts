@@ -13,6 +13,9 @@ import { BRICK, OVERLAY_ALPHA, OVERLAY_UNKNOWN_ALPHA, OVERLAY_VEIL, UNKNOWN } fr
 import type { TerrainImage } from "./terrainRaster";
 import { drawCoast, drawOpenSea, drawRivers, drawRoads, drawTowns, drawVeil, drawWalls, MAP_INK, TERRAIN_TEXTURE_FINE, terrainSprite, terrainTexture, wallRadiusAt } from "./terrainLayers";
 
+/** Écart à l'écran (px) entre deux étendards d'une même province (dette n° 36). */
+export const BANNER_GAP_PX = 38;
+
 export type { Lod } from "./labels";
 
 export interface MapProvince extends ProvinceShape {
@@ -286,7 +289,8 @@ export class StrategicMap {
     this.gArmies.clear();
     for (const c of this.armies.clashes) drawClash(this.gArmies, c, px);
     for (const f of this.armies.fleets) drawFleet(this.gArmies, f.at, f.side, px, f.selected);
-    const shown = this.armies.armies.map((a) => ({ ...a, at: [a.at[0] + a.slot * 26 * px, a.at[1]] as Point }));
+    // Dette n° 36 : écart de 38 px entre étendards d'une même province (« 1,9 k » sous le premier ne touche plus le second).
+    const shown = this.armies.armies.map((a) => ({ ...a, at: [a.at[0] + a.slot * BANNER_GAP_PX * px, a.at[1]] as Point }));
     this.shownArmies = shown.map((x) => ({ id: x.id, at: x.at }));
     for (const a of shown) drawArmyBanner(this.gArmies, a, px);
     // Effectifs écrits sous les jauges (texte à taille constante à l'écran).
