@@ -1,5 +1,6 @@
-import { Vector3 } from "three";
+import { BoxGeometry, Color, CylinderGeometry, Mesh, MeshStandardMaterial, PointLight, Vector3 } from "three";
 import type { PointsMaterial, Scene, Texture } from "three";
+import type { LightPreset } from "./lighting";
 import { skinnedBounds } from "./humanBase";
 import type { HumanTemplate } from "./humanBase";
 import { buildEmblem } from "./emblems";
@@ -38,9 +39,11 @@ export interface R3Sheet {
   fov: number;
   ground: number;
   bodies: { id: string; nominal: number; measured: number }[];
+  /** Heure de la scène (cérémonies : discours de nuit) ; jour par défaut. */
+  preset?: LightPreset;
 }
 
-export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie"] as const;
+export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours"] as const;
 
 export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeMap: Texture | null, detail: { skin: Texture; cloth: Texture } | null, time: number): R3Sheet {
   const out: R3Sheet = { soldiers: [], titans: [], labels: [], eye: new Vector3(0, 2, 10), target: new Vector3(0, 1, 0), fov: 32, ground: 60, bodies: [] };
@@ -211,6 +214,51 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.target.set(0, 1.0, 0);
     out.eye.set(2.2, 2.0, 6.4);
     out.fov = 42;
+  } else if (sheet === "r3-discours") {
+    // Choix du corps après l'assemblée d'Erwin (C) : de nuit, Erwin sur une estrade entre deux officiers, éclairé par des
+    // torches ; les recrues en rangs face à lui, celles du premier rang au salut (mise en scène : A).
+    const wood = new MeshStandardMaterial({ color: new Color("#5A4632"), roughness: 0.9 });
+    const stage = new Mesh(new BoxGeometry(6, 1.2, 2.6).translate(0, 0.6, 0), wood);
+    stage.position.set(0, 0, 4.2);
+    stage.receiveShadow = true;
+    stage.castShadow = true;
+    scene.add(stage);
+    const erwin = soldier("exploration", 120, 1.86);
+    erwin.group.position.set(0, 1.2, 4.0);
+    erwin.group.rotation.y = Math.PI;
+    erwin.setPose("attente", time);
+    for (const [x, seed] of [
+      [-1.6, 121],
+      [1.6, 122],
+    ] as const) {
+      const o = soldier("exploration", seed, 1.76);
+      o.group.position.set(x, 1.2, 4.4);
+      o.group.rotation.y = Math.PI;
+      o.setPose("attente", time);
+    }
+    const flameMat = new MeshStandardMaterial({ color: new Color("#E8742A"), emissive: new Color("#D9581A"), emissiveIntensity: 1.1 });
+    for (const x of [-3.6, 3.6]) {
+      const post = new Mesh(new CylinderGeometry(0.05, 0.06, 2.6, 8).translate(0, 1.3, 0), wood);
+      post.position.set(x, 0, 3.4);
+      scene.add(post);
+      const flame = new Mesh(new CylinderGeometry(0.0, 0.12, 0.35, 8).translate(0, 2.8, 0), flameMat);
+      flame.position.set(x, 0, 3.4);
+      scene.add(flame);
+      const light = new PointLight(new Color("#FF9A48"), 14, 18, 1.6);
+      light.position.set(x, 2.9, 3.4);
+      scene.add(light);
+    }
+    for (let r = 0; r < 4; r++)
+      for (let c = 0; c < 8; c++) {
+        const s = soldier("recrues", 130 + r * 8 + c);
+        s.group.position.set((c - 3.5) * 0.8, 0, -r * 0.95);
+        s.setPose(r === 0 ? "salut" : "attente", time + c * 0.13);
+      }
+    out.labels.push({ text: "assemblée d'Erwin : choix du corps", at: new Vector3(0, 3.6, 4.2) });
+    out.target.set(0, 1.2, 1.6);
+    out.eye.set(-2.6, 3.0, -6.6);
+    out.fov = 42;
+    out.preset = "nuit";
   } else if (sheet === "r3-poses") {
     // Rangée de devant : soldats ; rangée du fond : Titans ramenés à 2,4 m (le corps abattu couché vers la caméra).
     const sPoses: [(typeof OUTFIT_IDS)[number], HumanPose, string][] = [

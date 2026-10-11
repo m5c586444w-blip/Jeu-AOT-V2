@@ -199,7 +199,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     return { el, at: l.at };
   });
   lighting.useEnvironment(renderer);
-  lighting.apply("jour");
+  lighting.apply(r3?.preset ?? "jour");
   lighting.setShadow(true, 2048);
   // Occlusion ambiante (R1c) : plis du corps, aisselles, dessous du menton.
   const post = createPost(scene, camera, "haut") as PostChain;

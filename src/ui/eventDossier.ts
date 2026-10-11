@@ -132,7 +132,7 @@ export class EventDossier {
 }
 
 /** Événements dont la cérémonie a une scène 3D (planche de `src/render/tactical3d/r3Sheets.ts`). */
-const CEREMONIES: Readonly<Record<string, string>> = { evt_850_104th_graduation: "r3-ceremonie" };
+const CEREMONIES: Readonly<Record<string, string>> = { evt_850_104th_graduation: "r3-ceremonie", evt_850_branch_choice: "r3-discours" };
 
 /**
  * Scène 3D d'une cérémonie dans une fenêtre : la visionneuse est une page à part (`?proto3d=humain&planche=…`), chargée dans
