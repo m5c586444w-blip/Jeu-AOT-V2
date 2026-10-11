@@ -42,6 +42,7 @@ import { puffTexture, skinTexture } from "../textures";
 import type { Titan, TitanPose } from "../titan";
 import { PHOTO_MATIERES, photoUrl } from "../photoTextures";
 import { battleProfile, buildBattleWorld, occludersFor } from "./world";
+import { FLARE_COLORS, FLARE_PUFFS, flarePuffs } from "./flares";
 import type { BattleDecorTextures, BattleWorld } from "./world";
 import { facadeSet, normalOf, roofTex, wallStoneTex } from "../texturesEnv";
 import { parementTextures } from "../parement";
@@ -94,6 +95,9 @@ function setInst(mesh: InstancedMesh, i: number, x: number, y: number, z: number
 /** Orientation d'une figure (modèle tourné vers +Z) pour un cap de la carte (rad, x vers l'est, y vers le sud). */
 const yawOf = (heading: number): number => Math.PI / 2 - heading;
 /** Azimuts essayés par la caméra de suivi quand la vue de derrière est masquée (du plus proche au plus éloigné). */
+/** Fusées montrées à la fois (les plus récentes). */
+const MAX_FLARES = 24;
+
 const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, (3 * Math.PI) / 4, (-3 * Math.PI) / 4, Math.PI];
 
 /** Figure montrée au dernier dessin (contrôles) : état du directeur, pose, figure de R3 ou non, officier de section. */
@@ -114,6 +118,9 @@ interface UnitLayers {
   blood: InstancedMesh;
   rings: InstancedMesh;
   flashes: InstancedMesh | null;
+  /** Fusées de signal (03 §7) : bouffées de fumée colorée et tête lumineuse pendant la montée. */
+  flares: InstancedMesh;
+  flareHeads: InstancedMesh;
   cannons: InstancedMesh | null;
   craters: InstancedMesh;
   cables: LineSegments;
@@ -368,6 +375,12 @@ export class View3D implements BattleView {
     const rings = new InstancedMesh(new RingGeometry(0.75, 1.0, 20).rotateX(-Math.PI / 2), new MeshBasicMaterial({ color: 0xf2d06b, transparent: true, opacity: 0.9, depthWrite: false }), nS + nT);
     rings.name = "selection";
     const flashes = nT > 0 ? new InstancedMesh(new SphereGeometry(0.22, 6, 4), new MeshBasicMaterial({ color: 0xffd27a }), nT) : null;
+    const flares = new InstancedMesh(new SphereGeometry(1, 8, 6), new MeshStandardMaterial({ roughness: 1, transparent: true, opacity: 0.6, depthWrite: false }), MAX_FLARES * (FLARE_PUFFS + 1));
+    flares.name = "fusees";
+    flares.count = 0;
+    const flareHeads = new InstancedMesh(new SphereGeometry(1, 8, 6), new MeshBasicMaterial({ color: 0xffe9b8 }), MAX_FLARES);
+    flareHeads.name = "fusees-tetes";
+    flareHeads.count = 0;
     const pieces = (st.batteries ?? []).reduce((n, b) => n + b.count, 0);
     const cannons = pieces > 0 ? new InstancedMesh(cannonGeometry(), new MeshStandardMaterial({ vertexColors: true, roughness: 0.6, metalness: 0.3 }), pieces) : null;
     if (cannons) {
@@ -392,14 +405,14 @@ export class View3D implements BattleView {
       m.visible = false;
       goals.push(m);
     }
-    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, ...smoke, ...goals];
+    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, ...smoke, ...goals];
     if (troops) list.push(troops);
     if (troopsA) list.push(troopsA);
     if (flashes) list.push(flashes);
     if (cannons) list.push(cannons);
     for (const o of list) o.frustumCulled = false;
     this.scene.add(...list);
-    this.layers = { crowd, troops, troopsA, markers, blood, rings, flashes, cannons, craters, cables, smoke, goals };
+    this.layers = { crowd, troops, troopsA, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
     return this.layers;
   }
 
@@ -468,6 +481,16 @@ export class View3D implements BattleView {
   private get odmLook(): TroopLook {
     const id = odmOutfitFor(this.opts.year);
     return { key: id, outfit: outfit(id) };
+  }
+
+  private readonly flareColors = new Map<string, Color>();
+  private flareColor(c: keyof typeof FLARE_COLORS): Color {
+    let col = this.flareColors.get(c);
+    if (!col) {
+      col = new Color(FLARE_COLORS[c]);
+      this.flareColors.set(c, col);
+    }
+    return col;
   }
 
   /** Teinte de la foule des fantassins d'une faction autre que Paradis (dette n° 62 : Alliés, Hizuru, Marley). */
@@ -968,6 +991,25 @@ export class View3D implements BattleView {
       L.flashes.count = flashN;
       L.flashes.instanceMatrix.needsUpdate = true;
     }
+    // Fusées de signal (03 §7) : traînées de fumée colorée, les plus récentes d'abord dans la limite de la couche.
+    let flareN = 0;
+    let headN = 0;
+    const still = reducedMotion();
+    for (const sg of st.signals.slice(-MAX_FLARES)) {
+      for (const p of flarePuffs(sg, this.time, still)) {
+        if (p.head) {
+          if (headN < MAX_FLARES) setInst(L.flareHeads, headN++, p.x, p.z, p.y, 0, p.r);
+        } else if (flareN < MAX_FLARES * (FLARE_PUFFS + 1)) {
+          setInst(L.flares, flareN, p.x, p.z, p.y, 0, p.r);
+          L.flares.setColorAt(flareN++, this.flareColor(sg.color));
+        }
+      }
+    }
+    L.flares.count = flareN;
+    L.flares.instanceMatrix.needsUpdate = true;
+    if (L.flares.instanceColor) L.flares.instanceColor.needsUpdate = true;
+    L.flareHeads.count = headN;
+    L.flareHeads.instanceMatrix.needsUpdate = true;
     // Titans : figure à la hauteur de la simulation (R1 au « prêt », puis corps de base de R3) ; pose selon l'état montré.
     for (const t of st.titans) {
       const sh = this.director.titan(t.id);

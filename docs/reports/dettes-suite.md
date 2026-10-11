@@ -127,3 +127,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   derrière une maison), 6, 8, 9, 10, 12, 14, 16, 18 pleins ; deux « E » estompés au nord.
   - Défauts : numéros encore serrés en rang ; étiquettes « T » des Titans toujours pleines (voulu : lisibles même cachés) ;
     près d'un tiers de l'image en sol vide ; mur d'enceinte coupé en haut.
+
+## Dette n° 70 (en partie) : fusées de signal en 3D
+- La simulation lançait déjà les fusées du code du Corps (03 §7, C : rouge = Titan repéré, noire = anormal, verte =
+  changement de direction ou repli) et la 2D les dessinait ; la 3D ne les montrait pas. Désormais : traînée de fumée
+  colorée qui monte à environ 42 m en 1,6 s, dérive et s'efface en 10 s (hauteurs, durées, teintes : A) ; traînée
+  entière et immobile en mouvements réduits. Reste : code de la Garnison (missions).
+- `npm run verify` (`fusees3d-verify.log`) : « Test Files  123 passed (123) », « Tests  785 passed (785) », `EXIT=0` ;
+  `smoke:r2 -- --captures` (`fusees3d-smoke-r2.log`) : « smoke:r2 : tout est conforme. », `EXIT=0`.
+- **`r2-strategique-1920.png`** (00:06) : deux colonnes de fumée rouge au sud-ouest, tirées par une escouade qui a repéré
+  un Titan ; la plus ancienne plus large et plus haute.
+  - Défauts : vue d'en haut, la colonne verticale se lit en oblique ; bouffées à bord net (sphères, pas de texture de
+    fumée) ; pas d'ombre au sol ; la fusée vient de l'escouade, loin de l'étiquette « S1 » des fantassins.
