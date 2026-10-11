@@ -166,3 +166,16 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   colombages, cinq à six passants dont une femme en jupe rouge.
   - Défauts : place encore sans étals (dette n° 12) ; passants immobiles, sans ombre portée visible de loin ; répartition
     uniforme (aucun attroupement) ; +445 k triangles dans les vues de rue.
+
+## Dette n° 12 (en partie) : étals de marché et péniches
+- Places de marché : étals en rangées décalées (table sur tréteaux, quatre montants, auvent de toile de quatre teintes,
+  caisses de denrées), à 5 m des bords, loin des arbres, des fontaines et des bâtiments repères, une place sur cinq
+  laissée libre. Canaux à quais : péniches de 8 m amarrées tous les 22 à 34 m, côtés alternés, loin des ponts, une sur
+  deux bâchée. Ville habitée seulement ; formes et teintes A.
+- `npm run verify` (`dette12-verify.log`) : « Test Files  126 passed (126) », « Tests  791 passed (791) », `EXIT=0` ;
+  `tests/places/marche.test.ts` : « étals de Shiganshina : 65 sur place-du-marche », « barques de Shiganshina : 38 ».
+- **`vue-marche.png`** : la place du marché garnie de rangées d'étals aux auvents rouges, verts, gris et sable, des
+  passants entre eux, la halle et les arbres au fond. **`vue-canal.png`** : le canal entre deux quais pavés, une péniche
+  bâchée amarrée sous la roue du moulin, d'autres plus loin.
+  - Défauts : auvents plats (sans plis ni rayures) ; une péniche presque sous la roue du moulin ; étals tous orientés
+    de la même façon par rangée ; aucun chaland ni marchandise sur les quais.

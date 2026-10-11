@@ -20,6 +20,7 @@ import { buildWallGeometry } from "./wall3d";
 import type { ExtrasResult } from "./extras";
 import { frozenLayout, frozenPlace } from "./frozen";
 import { buildInhabitants, inhabitantSpots } from "./inhabitants";
+import { boatSpots, buildMarketProps, stallSpots } from "./market";
 
 /**
  * Chargeur unique des lieux N1 (R1e, consigne §2.3) : `loadPlace(id)` lit le plan validé (`/places3d/<id>.json`, servi hors du
@@ -203,8 +204,12 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
   group.add(ground.group);
   // Dette n° 6 : habitants de l'état affiché (part de la population de 845), montrés aux vues basses seulement.
   const shown = place.etats.find((x) => x.id === (opts.state ?? place.etat_defaut));
-  const people = buildInhabitants(opts.frozen ? [] : inhabitantSpots(place, shown?.habitants ?? 0, opts.seed));
+  const share = opts.frozen ? 0 : (shown?.habitants ?? 0);
+  const people = buildInhabitants(inhabitantSpots(place, share, opts.seed));
   group.add(people.group);
+  // Dette n° 12 : étals sur les places de marché, barques le long des quais (ville habitée seulement).
+  const props = buildMarketProps(stallSpots(place, layout.trees, share, opts.seed), boatSpots(place, share, opts.seed));
+  group.add(props.group);
   const textures: Texture[] = [leaves];
   let wallMesh: Mesh | null = null;
   if (ring) {
@@ -253,6 +258,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
     frustum.setFromProjectionMatrix(pv);
     const eye = camera.position;
     people.group.visible = eye.y < PEOPLE_MAX_ALT_M;
+    props.group.visible = eye.y < PEOPLE_MAX_ALT_M;
     for (const [ck, box] of chunkBoxes) {
       if (!frustum.intersectsBox(box)) {
         states.set(ck, 0);
@@ -304,6 +310,7 @@ export function buildPlaceScene(place: Place, walls: WallsParams, opts: BuildOpt
       layer.dispose();
       ground.dispose();
       people.dispose();
+      props.dispose();
       wallMesh?.geometry.dispose();
       mats.dispose();
       for (const m of extraMats) m.dispose();

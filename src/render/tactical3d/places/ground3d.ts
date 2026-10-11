@@ -35,6 +35,9 @@ function clipAxis(poly: P2[], axis: 0 | 1, v: number, side: 1 | -1): P2[] {
   return out;
 }
 
+/** Niveau de l'eau des canaux (m, sous le sol des rues). */
+export const CANAL_WATER_Y = -1.7;
+
 /** Morceaux (polygones convexes) d'un triangle dans chaque case de la grille qu'il touche. */
 function clipToGrid(tri: P2[], cell: number): P2[][] {
   const xs = tri.map((p) => p[0]);
@@ -238,7 +241,7 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
   // Canaux : eau en creux, quais de pierre (parement vertical et margelle), fond.
   const water = new Tris(20);
   const quay = new Tris(1);
-  const WATER_Y = -1.7;
+  const WATER_Y = CANAL_WATER_Y;
   for (const w of place.eau.voies) {
     const n = Math.max(2, Math.ceil(polylineLength(w.trace) / 6));
     const Ltot = polylineLength(w.trace);
