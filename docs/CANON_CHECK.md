@@ -220,6 +220,7 @@ Voir 11 §9 et 01 §10 : dates de mort d'Eld, Gunther, Oluo, Petra, Moblit, Past
 | Salut : poing droit fermé sur le cœur, main gauche dans le dos | C | `humanAnim.ts` (`salut`) | mise en scène de la planche `r3-ceremonie` : A |
 | Brassard des Eldiens de Marley à étoile à neuf branches | C ; bras et couleurs ? | `data/art/figures_r3.json` (`marley_infanterie`) | Q18 |
 | Uniformes de l'armée de Marley, fusils de la Garnison et de la Brigade Militaire | A | idem | choix de jeu, jamais présentés comme canon |
+| Tenues sombres du Corps en 854 ; lances de foudre | C (présence) ; coupe, teintes, absence de cape `?` ; forme des lances A | `data/art/figures_r3.json` (`exploration_854`), `humanSoldier.ts` | D-170 ; Q18 |
 
 `canon:check` : « « data » conforme (R1–R14, 845 entrées). » Statuts portés par `data/` : 360 C, 1 348 A, 117 ? (+4 C pour les
 tenues de Paradis, +2 A pour celles de Marley).

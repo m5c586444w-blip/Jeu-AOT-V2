@@ -429,6 +429,25 @@
       "repos": "bras"
     },
     {
+      "id": "exploration_854",
+      "camp": "paradis",
+      "nom": "Corps de Reconnaissance (854)",
+      "veste": "#2C2B2D",
+      "pantalon": "#3A3836",
+      "bottes": "#1E1A17",
+      "embleme": "ailes",
+      "odm": true,
+      "lames": "mains",
+      "canon": "?",
+      "note": "Tenues sombres du Corps en 854, opération de Liberio comprise (présence : C ; coupe et teintes : ?, Q18) ; sans cape (?) ; Ailes de la liberté redessinées par le projet (D-163). Choisie pour les soldats de manœuvre des batailles à partir de 854 (A).",
+      "corpulence": {
+        "age": [0.5, 0.62],
+        "muscle": [0.55, 0.85],
+        "weight": [0.35, 0.58]
+      },
+      "repos": "bras"
+    },
+    {
       "id": "marley_infanterie",
       "camp": "marley",
       "nom": "Infanterie de Marley",

@@ -114,9 +114,14 @@ interface UnitLayers {
  * Matériaux des soldats de la bataille (dette n° 72) : les figures du premier temps (avant les corps détaillés) portent les
  * couleurs de l'uniforme commun du Corps de Reconnaissance ; les tenues de R3 teignent leurs propres copies.
  */
-function battleMaterials(): SoldierMaterials {
+/** Tenue des soldats de manœuvre selon l'année (dette n° 72) : tenue sombre à partir de 854. */
+export function odmOutfitFor(year: number | undefined): OutfitId {
+  return (year ?? 850) >= 854 ? "exploration_854" : "exploration";
+}
+
+function battleMaterials(year?: number): SoldierMaterials {
   const m = soldierMaterials();
-  const ex = outfit("exploration");
+  const ex = outfit(odmOutfitFor(year));
   m.jacket.color.set(ex.veste);
   m.trousers.color.set(ex.pantalon);
   m.boots.color.set(ex.bottes);
@@ -134,7 +139,7 @@ export class View3D implements BattleView {
   private map: TacticalWorldMap | null = null;
   private world: BattleWorld | null = null;
   private layers: UnitLayers | null = null;
-  private readonly mats: SoldierMaterials = battleMaterials();
+  private readonly mats: SoldierMaterials;
   /** Textures des façades et des toits du décor (dette n° 74), libérées au changement de carte. */
   private readonly decorTextures: Texture[] = [];
   private readonly detail: Soldier[] = [];
@@ -178,6 +183,7 @@ export class View3D implements BattleView {
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
     this.opts = opts;
+    this.mats = battleMaterials(opts.year);
     const q = QUALITY[opts.quality];
     this.renderer = new WebGLRenderer({ antialias: q.antialias, powerPreference: "high-performance" });
     this.renderer.outputColorSpace = SRGBColorSpace;
@@ -322,8 +328,8 @@ export class View3D implements BattleView {
     if (this.layers) return this.layers;
     const nS = Math.max(1, st.soldiers.length);
     const nT = st.troops?.length ?? 0;
-    const ex = outfit("exploration");
-    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, cape: ex.cape ?? "#355A3C" }), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
+    const ex = outfit(odmOutfitFor(this.opts.year));
+    const crowd = new InstancedMesh(crowdGeometry({ veste: ex.veste, pantalon: ex.pantalon, bottes: ex.bottes, ...(ex.cape ? { cape: ex.cape } : {}) }), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nS);
     crowd.name = "foule";
     crowd.castShadow = true;
     const troops = nT > 0 ? new InstancedMesh(troopGeometry("marley"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nT) : null;
@@ -863,7 +869,7 @@ export class View3D implements BattleView {
       for (const fig of this.detail) fig.group.visible = false;
       for (const w of chosen) {
         const officer = w.troop ? this.officers.has(w.troop.id) : false;
-        const id: OutfitId = w.troop ? outfitForFaction(w.troop.faction, officer) : "exploration";
+        const id: OutfitId = w.troop ? outfitForFaction(w.troop.faction, officer) : odmOutfitFor(this.opts.year);
         const fig = this.figureFor(w.key, id, budget);
         if (!fig) {
           toCrowd(w);

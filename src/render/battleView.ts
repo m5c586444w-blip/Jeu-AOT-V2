@@ -29,6 +29,8 @@ export type Violence = "sobre" | "realiste";
 export interface ViewOptions {
   quality: ViewQuality;
   violence: Violence;
+  /** Année de la bataille (dette n° 72) : à partir de 854, tenue sombre du Corps de Reconnaissance (3D). */
+  year?: number;
 }
 
 export interface BattleView {

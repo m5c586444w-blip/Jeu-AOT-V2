@@ -240,7 +240,7 @@ export async function bootGame(): Promise<void> {
     try {
       window.setTimeout(() => hints?.show("bataille", null), 700);
       // R2+ : rencontres d'armées et batailles de compagnie sur l'écran temps réel ; expéditions et essais sur l'écran de P4.
-      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked }) : await openBattleScreen({ world, why, setup, title, linked });
+      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked, year: state.date.year }) : await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
       map.setSuspended(false);

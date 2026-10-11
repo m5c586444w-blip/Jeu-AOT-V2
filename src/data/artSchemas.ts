@@ -288,7 +288,7 @@ const TitanR3Variant = z
   .strict();
 const UnitRange = z.tuple([Unit, Unit]).refine(([a, b]) => a <= b, "plage croissante");
 const Headgear = z.object({ forme: z.enum(["kepi", "casque", "casquette"]), teinte: Hex, bandeau: Hex.optional() }).strict();
-export const SOLDIER_OUTFIT_IDS = ["exploration", "garnison", "police", "recrues", "marley_infanterie", "marley_officier"] as const;
+export const SOLDIER_OUTFIT_IDS = ["exploration", "garnison", "police", "recrues", "exploration_854", "marley_infanterie", "marley_officier"] as const;
 const Outfit = z
   .object({
     id: z.enum(SOLDIER_OUTFIT_IDS),
@@ -326,7 +326,7 @@ export const FiguresR3FileSchema = z
     note: z.string().min(1),
     titans: z.array(z.object({ classe: z.string(), variantes: z.array(TitanR3Variant).length(3) }).strict()).length(5),
     peaux: z.array(z.object({ id: z.enum(["pale", "rougeaude"]), nom: z.string().min(1), teinte: Hex, melange: Unit, marbrures: Unit, dents: Hex }).strict()).length(2),
-    soldats: z.array(Outfit).length(6),
+    soldats: z.array(Outfit).length(7),
   })
   .strict()
   .superRefine((f, ctx) => {

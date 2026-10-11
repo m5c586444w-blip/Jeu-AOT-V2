@@ -4,7 +4,7 @@
 
 ## Index
 
-169 décisions, de D-01 (2026-10-02) à D-169 (2026-10-10). Une ligne par décision, dans l'ordre du journal.
+170 décisions, de D-01 (2026-10-02) à D-170 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -175,6 +175,7 @@
 - **D-167** (10-10) — Dette n° 75 : bâtiments translucides devant les unités choisies, jauges au-dessus des escouades
 - **D-168** (10-10) — Dette n° 55 (décor) : mur d'enceinte en toile de fond de la ville de bataille
 - **D-169** (10-10) — Dettes n° 56 à 58 : interface de la bataille temps réel
+- **D-170** (10-11) — Dette n° 72 (suite) : tenue sombre de 854, lances de foudre, critère de silhouette en bataille
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1662,5 +1663,19 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **n° 58, message de repli 2D** : retiré au bout de 10 s ou au clic ; il reste en infobulle sur l'indicateur « 2D ».
 - **n° 59** : la garde existe depuis R2.5 (touches ignorées quand le focus est dans un champ, une liste ou une zone de texte) ;
   non reproduit, laissé ouvert.
+- **Réversible** : oui.
+
+## 2026-10-11 — D-170 Dette n° 72 (suite) : tenue sombre de 854, lances de foudre, critère de silhouette en bataille
+- **Tenue « Corps de Reconnaissance (854) »** (`exploration_854`) : tenues sombres du Corps en 854 (présence : C, CLAUDE.md ;
+  coupe et teintes : `?`, Q18) : veste et pantalon presque noirs, hautes bottes, harnais, Ailes de la liberté, sans cape
+  (`?`). Choisie pour les soldats de manœuvre des batailles à partir de 854 (A : la vue reçoit l'année de la partie) ; foule
+  et figures du premier temps aux mêmes couleurs, sans cape.
+- **Lances de foudre** (présence : C ; forme redessinée : A) le long des avant-bras, montrées selon le nombre que le soldat
+  porte dans la simulation.
+- **Critère de silhouette** : la tenue de 854 a la coupe de l'uniforme commun, donc la silhouette des recrues (0,97) ; elles
+  ne se croisent jamais en bataille (les recrues et la Brigade Militaire n'y paraissent pas, dette n° 62). CR3-05 s'applique
+  désormais entre les tenues qui peuvent se rencontrer dans une même bataille (soldats de manœuvre de l'époque, Garnison,
+  infanterie et officier de Marley) : maximum 0,79 (tenue de 854 et Garnison) ; les autres paires sont consignées.
+- **Reste** (dette n° 72) : équipement anti-personnel de 854 (forme `?`), cérémonies en jeu.
 - **Réversible** : oui.
 

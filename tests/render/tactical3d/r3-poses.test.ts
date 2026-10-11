@@ -36,7 +36,7 @@ beforeAll(async () => {
 const low = (b: { min: { y: number } }): number => b.min.y;
 
 describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
-  it("soldats des six tenues : attente, marche, course, coupe, tir et salut les pieds au sol (±2 cm)", () => {
+  it("soldats des sept tenues : attente, marche, course, coupe, tir et salut les pieds au sol (±2 cm)", () => {
     const worst: Record<string, number> = {};
     for (const s of soldiers) {
       for (const p of ["attente", "marche", "course", "frappe", "tir", "salut"] as const) {

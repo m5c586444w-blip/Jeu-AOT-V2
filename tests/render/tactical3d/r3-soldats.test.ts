@@ -11,13 +11,25 @@ import { coverage, overlap, silhouettePair } from "../../../src/render/tactical3
 import { soldierMaterials } from "../../../src/render/tactical3d/soldier";
 
 /**
- * Soldats de R3 (CR3-05 ; fichier 21 §8), revus par la dette n° 72 (D-163, D-165) : six tenues sur le corps de base de R1c —
+ * Soldats de R3 (CR3-05 ; fichier 21 §8), revus par la dette n° 72 (D-163, D-165) : sept tenues sur le corps de base de R1c —
  * Paradis (Corps de Reconnaissance, Garnison, Brigade Militaire, Corps d'Entraînement : l'uniforme commun de l'œuvre, distingués
  * par l'emblème et la cape) et Marley (infanterie, officier). Silhouettes distinctes entre familles de tenues (D-165), taille
  * 1,7 m ± 5 %, équipement porté par les os, emblèmes au dos, aux manches et à la poitrine, arme dans les mains au tir.
  */
 /** Familles de silhouettes (D-165) : même uniforme et même équipement visibles de loin. */
-const FAMILY: Record<OutfitId, string> = { exploration: "cape", garnison: "uniforme-fusil", police: "uniforme-fusil", recrues: "uniforme", marley_infanterie: "marley", marley_officier: "marley-officier" };
+/**
+ * Familles de silhouettes (D-165) : même uniforme et même équipement visibles de loin ; les deux tenues du Corps de
+ * Reconnaissance (850, 854) ne se croisent jamais (la tenue suit l'année de la bataille).
+ */
+const FAMILY: Record<OutfitId, string> = { exploration: "reconnaissance", exploration_854: "reconnaissance", garnison: "uniforme-fusil", police: "uniforme-fusil", recrues: "uniforme", marley_infanterie: "marley", marley_officier: "marley-officier" };
+/**
+ * D-170 : tenues qui peuvent se rencontrer dans une même bataille (soldats de manœuvre de l'époque, fantassins de Paradis,
+ * infanterie et officiers de Marley) ; la Brigade Militaire et les recrues ne paraissent pas en bataille (dette n° 62).
+ */
+const BATTLE_SETS: readonly OutfitId[][] = [
+  ["exploration", "garnison", "marley_infanterie", "marley_officier"],
+  ["exploration_854", "garnison", "marley_infanterie", "marley_officier"],
+];
 let t: HumanTemplate;
 const mats = soldierMaterials();
 const soldiers = new Map<OutfitId, HumanSoldier>();
@@ -41,10 +53,16 @@ beforeAll(async () => {
   for (const id of OUTFIT_IDS) soldiers.set(id, buildHumanSoldier(t, 7, mats, { outfit: outfit(id), height: 1.7, gender: 1 }));
 }, 120_000);
 
-describe("soldats de R3 : six tenues (R3.2, dette n° 72)", () => {
-  it("six tenues : quatre corps de Paradis (uniforme commun de l'œuvre), deux de Marley", () => {
-    expect(OUTFIT_IDS).toEqual(["exploration", "garnison", "police", "recrues", "marley_infanterie", "marley_officier"]);
-    expect(OUTFIT_IDS.map((id) => outfit(id).camp)).toEqual(["paradis", "paradis", "paradis", "paradis", "marley", "marley"]);
+describe("soldats de R3 : sept tenues (R3.2, dette n° 72)", () => {
+  it("sept tenues : quatre corps de Paradis (uniforme commun de l'œuvre), la tenue sombre de 854, deux de Marley", () => {
+    expect(OUTFIT_IDS).toEqual(["exploration", "garnison", "police", "recrues", "exploration_854", "marley_infanterie", "marley_officier"]);
+    expect(OUTFIT_IDS.map((id) => outfit(id).camp)).toEqual(["paradis", "paradis", "paradis", "paradis", "paradis", "marley", "marley"]);
+    // Tenue sombre de 854 (présence C ; coupe et teintes ?) : même équipement, Ailes de la liberté, sans cape (?).
+    const t854 = outfit("exploration_854");
+    expect([t854.canon, t854.embleme, t854.cape, t854.odm]).toEqual(["?", "ailes", undefined, true]);
+    const lum = (hex: string): number => [1, 3, 5].reduce((a, i) => a + parseInt(hex.slice(i, i + 2), 16), 0) / (3 * 255);
+    expect(lum(t854.veste)).toBeLessThan(0.25);
+    expect(lum(t854.veste)).toBeLessThan(lum(outfit("exploration").veste) / 2);
     // Uniforme commun (C) : même veste, même pantalon, mêmes bottes ; un emblème par corps ; plus d'écharpe, de manteau ni de képi.
     const paradis = (["exploration", "garnison", "police", "recrues"] as const).map(outfit);
     for (const o of paradis) {
@@ -59,7 +77,7 @@ describe("soldats de R3 : six tenues (R3.2, dette n° 72)", () => {
     expect(outfitForFaction("fac_marley", true)).toBe("marley_officier");
   });
 
-  it("silhouettes distinctes entre familles (D-165) : recouvrement (face + profil, même corps, repos de la tenue) < 85 %", () => {
+  it("silhouettes distinctes entre tenues qui se rencontrent en bataille (D-165, D-170) : recouvrement (face + profil, même corps, repos) < 85 %", () => {
     const masks = OUTFIT_IDS.map((id) => {
       const s = soldiers.get(id) as HumanSoldier;
       s.setPose("attente", 0.6);
@@ -74,9 +92,11 @@ describe("soldats de R3 : six tenues (R3.2, dette n° 72)", () => {
         const o = overlap(masks[i] as ReturnType<typeof silhouettePair>, masks[j] as ReturnType<typeof silhouettePair>);
         worst = Math.max(worst, o);
         lines.push(`${OUTFIT_IDS[i]}/${OUTFIT_IDS[j]} ${o.toFixed(2)}`);
+        const [a, b] = [OUTFIT_IDS[i] as OutfitId, OUTFIT_IDS[j] as OutfitId];
         // Garnison et Brigade Militaire portent le même uniforme dans l'œuvre (et ici le même fusil) : seul l'emblème les distingue (D-165).
-        if (FAMILY[OUTFIT_IDS[i] as OutfitId] === FAMILY[OUTFIT_IDS[j] as OutfitId]) continue;
-        expect(o, `${OUTFIT_IDS[i]} / ${OUTFIT_IDS[j]}`).toBeLessThan(0.85);
+        if (FAMILY[a] === FAMILY[b]) continue;
+        // Entre tenues qui se rencontrent en bataille : < 85 % ; les autres paires (recrues, Brigade) sont seulement consignées (D-170).
+        if (BATTLE_SETS.some((set) => set.includes(a) && set.includes(b))) expect(o, `${a} / ${b}`).toBeLessThan(0.85);
       }
     console.log(`silhouettes de soldats : maximum ${worst.toFixed(3)} ; ${lines.join(" | ")}`);
   });

@@ -21,7 +21,7 @@ import { puffTexture, titanSkinTexture } from "./textures";
  * Planches de contrôle de R3 (`?proto3d=humain&planche=r3-titans|r3-visages|r3-soldats|r3-poses`) :
  * - r3-titans : les 15 corps à l'échelle (3 à 15 m), peaux alternées, un soldat de 1,7 m pour l'échelle ;
  * - r3-visages : six têtes de Titans de près (dents, yeux, expressions, deux peaux) ;
- * - r3-soldats : les six tenues de face, puis de dos ;
+ * - r3-soldats : les sept tenues de face, puis de dos ;
  * - r3-uniformes (dette n° 72) : les quatre corps de Paradis de dos et de trois quarts, emblèmes agrandis au-dessus, et la
  *   cape sous la pluie (capuche levée) et les lances de foudre ;
  * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
@@ -130,20 +130,20 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.eye.set(0, 2.05, 4.2);
     out.fov = 42;
   } else if (sheet === "r3-soldats") {
-    // Six tenues de face, puis les mêmes de dos.
+    // Sept tenues de face, puis les mêmes de dos.
     OUTFIT_IDS.forEach((id, i) => {
       for (const back of [false, true]) {
         const s = soldier(id, 40 + i, 1.7);
-        const x = back ? 0.8 + i * 0.82 : -4.9 + i * 0.82;
+        const x = back ? 0.48 + i * 0.82 : -5.4 + i * 0.82;
         s.group.position.set(x, 0, 0);
         s.group.rotation.y = back ? Math.PI : 0;
         s.setPose("attente", time);
-        if (!back) out.labels.push({ text: outfit(id).nom.replace(" de ", "\nde ").replace(" d'", "\nd'").replace(" militaire", "\nmilitaire"), at: new Vector3(x, -0.12, 0) });
+        if (!back) out.labels.push({ text: outfit(id).nom.replace(" de ", "\nde ").replace(" d'", "\nd'").replace(" militaire", "\nmilitaire").replace(" (", "\n("), at: new Vector3(x, -0.12, 0) });
       }
     });
-    out.labels.push({ text: "de face", at: new Vector3(-2.85, 2.05, 0) }, { text: "de dos", at: new Vector3(2.85, 2.05, 0) });
+    out.labels.push({ text: "de face", at: new Vector3(-2.94, 2.05, 0) }, { text: "de dos", at: new Vector3(2.94, 2.05, 0) });
     out.target.set(0, 1.0, 0);
-    out.eye.set(0, 1.2, 9.8);
+    out.eye.set(0, 1.2, 10.8);
     out.fov = 38;
   } else if (sheet === "r3-uniformes") {
     // Quatre corps de Paradis : de dos (emblème au dos ou sur la cape) puis de trois quarts (manche, poitrine) ; emblèmes agrandis.
