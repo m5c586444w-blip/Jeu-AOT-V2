@@ -21,6 +21,11 @@ import type { PostChain } from "./post";
 import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
 import { R3_SHEETS, buildR3Sheet } from "./r3Sheets";
+import { generateEnvironment } from "./environment";
+import { buildEnvironmentMeshes } from "./envMesh";
+import type { EnvScene } from "./envMesh";
+import { envTextures } from "./envViewer";
+import { heightAt } from "./terrain";
 import type { R3Sheet } from "./r3Sheets";
 
 /**
@@ -188,7 +193,24 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
     controls.target.x = (1 - (LINEUP.length - 1) / 2) * 1.25;
   }
   controls.update();
-  const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: r3 ? r3.target.clone().setY(0) : new Vector3(0, 0, 0), shadowExtent: r3 && sheet === "r3-titans" ? 70 : 20, fogScale: r3 && sheet === "r3-titans" ? 1 : 0.2 });
+  // Décor des cérémonies (dette n° 72) : l'environnement est décalé pour que son point `at` soit à l'origine de la planche.
+  let decor: EnvScene | null = null;
+  if (r3?.backdrop) {
+    const env = generateEnvironment(r3.backdrop.env, 850);
+    decor = buildEnvironmentMeshes(env, { quality: "moyen", textures: envTextures(env, "moyen") });
+    const { x, y } = r3.backdrop.at;
+    decor.group.position.set(-x, -(env.terrain ? heightAt(env.terrain.heights, x, y) : 0), -y);
+    scene.add(decor.group);
+    ground.visible = false;
+  }
+  const lighting = createLighting(scene, 850, {
+    windowMaterials: decor?.windowMaterials ?? [],
+    lanternMaterial: decor?.lanternMaterial ?? new MeshStandardMaterial(),
+    lamps: decor?.lamps ?? [],
+    center: r3 ? r3.target.clone().setY(0) : new Vector3(0, 0, 0),
+    shadowExtent: r3 && sheet === "r3-titans" ? 70 : 20,
+    fogScale: (r3 && sheet === "r3-titans") || decor ? 1 : 0.2,
+  });
   // Étiquettes des planches de R3 : points 3D projetés à l'écran à chaque image.
   // `etiquettes=0` : scène sans étiquettes (cérémonie vue depuis le jeu, dette n° 72).
   const tags = (q.get("etiquettes") === "0" ? [] : (r3?.labels ?? [])).map((l) => {

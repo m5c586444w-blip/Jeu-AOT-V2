@@ -1,0 +1,12 @@
+Captures : docs/screenshots/
+  OK  r3-titans : 15 corps à l'échelle, hauteurs mesurées à 0.31 % au plus (±5 %)
+  OK  r3-titans : planche prête en 37.5 s, 16 étiquettes
+  OK  r3-visages : planche prête en 33.5 s, 6 étiquettes
+  OK  r3-soldats : planche prête en 34.2 s, 9 étiquettes
+  OK  r3-poses : planche prête en 36.3 s, 11 étiquettes
+  OK  r3-uniformes : planche prête en 35.4 s, 6 étiquettes
+  OK  r3-ceremonie : planche prête en 62.1 s, 1 étiquettes
+  OK  r3-discours : planche prête en 76.4 s, 1 étiquettes
+(bataille non jouée : R3_BATAILLE=0)
+smoke:r3 : tout est conforme.
+EXIT=0

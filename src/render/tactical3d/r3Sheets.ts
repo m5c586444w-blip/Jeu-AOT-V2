@@ -41,6 +41,11 @@ export interface R3Sheet {
   bodies: { id: string; nominal: number; measured: number }[];
   /** Heure de la scène (cérémonies : discours de nuit) ; jour par défaut. */
   preset?: LightPreset;
+  /**
+   * Décor (cérémonies, dette n° 72) : environnement de `data/art/styles.json` construit autour de la scène ; `at` est le point
+   * de l'environnement (x, y au sol) placé à l'origine de la planche.
+   */
+  backdrop?: { env: string; at: { x: number; y: number } };
 }
 
 export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours"] as const;
@@ -214,6 +219,8 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.target.set(0, 1.0, 0);
     out.eye.set(2.2, 2.0, 6.4);
     out.fov = 42;
+    // Sur la place d'armes d'un camp militaire (E24, A) : drapeau derrière les rangs, donjon et caserne au loin.
+    out.backdrop = { env: "E24", at: { x: 0, y: -20 } };
   } else if (sheet === "r3-discours") {
     // Choix du corps après l'assemblée d'Erwin (C) : de nuit, Erwin sur une estrade entre deux officiers, éclairé par des
     // torches ; les recrues en rangs face à lui, celles du premier rang au salut (mise en scène : A).
@@ -259,6 +266,7 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.eye.set(-2.6, 3.0, -6.6);
     out.fov = 42;
     out.preset = "nuit";
+    out.backdrop = { env: "E24", at: { x: 0, y: -14 } };
   } else if (sheet === "r3-poses") {
     // Rangée de devant : soldats ; rangée du fond : Titans ramenés à 2,4 m (le corps abattu couché vers la caméra).
     const sPoses: [(typeof OUTFIT_IDS)[number], HumanPose, string][] = [
