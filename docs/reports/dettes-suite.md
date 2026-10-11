@@ -70,3 +70,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
 - **`r3-bataille-3840.png`** : ligne de la Garnison de dos sur la place, à 00:00 en pause.
   - Défauts : capture prise en pause à l'ouverture, aucune recharge ni recul visible (contrôlés par les tests et la
     planche) ; repère « S1 » flottant ; bras repliés à hauteur des épaules au repos, vus de dos.
+
+## Dette n° 72 (suite) : semelles, talons et bouts des bottes
+- Semelle débordante de 12 mm (l'avant suit l'os de la plante, l'arrière celui du pied), talon et bout de botte arrondi
+  qui couvre les orteils du corps de base ; cuir foncé (forme A). Pour tous les soldats.
+- `npm run verify` (`dette72s-verify.log`) : « Tests  779 passed (779) », `EXIT=0` ; test « semelles et talons sous les
+  bottes, posés au sol au repos, qui suivent le pied en marche » (4 semelles, 2 talons par soldat, sept tenues).
+- Planches (`dette72s-planches.log`) : « OK  r3-soldats », « OK  r3-poses », « OK  r3-uniformes », « OK  r3-fantassins »,
+  `EXIT=0`.
+- **`r3-uniformes.png`** (recadré sur les pieds) : hautes bottes brunes à semelle sombre débordante, talon visible de dos,
+  bout arrondi de face ; plus d'orteils lisibles.
+  - Défauts : bout de botte un peu gonflé (forme de sabot) ; semelle plate sans cambrure ; jointure nette entre la
+    semelle avant et la semelle arrière quand le pied plie ; quelques points de peau qui percent encore sur un pied.

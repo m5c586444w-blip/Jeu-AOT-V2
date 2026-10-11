@@ -63,4 +63,5 @@ EXIT=0
 
 ## Reste (dette n° 72, moyenne)
 Tenues sombres de 854 (Liberio), équipement anti-personnel et lances de foudre, cérémonies en jeu (hors planche), capuche
-liée à une météo de bataille (la bataille n'a pas de météo), semelles et talons des bottes.
+liée à une météo de bataille (la bataille n'a pas de météo). Semelles, talons et bouts des bottes : faits le 2026-10-11
+(`dettes-suite.md`) ; lances de foudre, tenue de 854 et cérémonies : faites (D-170, `CONFORMITE-3D.md`).

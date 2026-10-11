@@ -117,6 +117,36 @@ describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
     expect(visible("lame")).toBe(false);
   });
 
+  it("dette n° 72 : semelles et talons sous les bottes, posés au sol au repos, qui suivent le pied en marche", () => {
+    for (const s of soldiers) {
+      const parts: { name: string; minY: () => number }[] = [];
+      s.group.traverse((o) => {
+        const m = o as unknown as { name: string; geometry?: { getAttribute(n: string): { count: number; getX(i: number): number; getY(i: number): number; getZ(i: number): number } }; position: { clone(): { set(x: number, y: number, z: number): unknown } }; localToWorld(v: unknown): { y: number } };
+        if ((m.name !== "semelle" && m.name !== "talon") || !m.geometry) return;
+        const pos = m.geometry.getAttribute("position");
+        const v = m.position.clone();
+        parts.push({
+          name: m.name,
+          minY: () => {
+            let y = Infinity;
+            for (let i = 0; i < pos.count; i++) y = Math.min(y, m.localToWorld(v.set(pos.getX(i), pos.getY(i), pos.getZ(i)) as never).y);
+            return y;
+          },
+        });
+      });
+      expect(parts.filter((p) => p.name === "semelle").length, s.outfit?.id).toBe(4);
+      expect(parts.filter((p) => p.name === "talon").length, s.outfit?.id).toBe(2);
+      s.setPose("attente", 0.3);
+      s.group.updateMatrixWorld(true);
+      for (const p of parts) expect(Math.abs(p.minY()), `${s.outfit?.id} ${p.name} au repos`).toBeLessThan(0.012);
+      for (const time of TIMES) {
+        s.setPose("marche", time);
+        s.group.updateMatrixWorld(true);
+        for (const p of parts) expect(p.minY(), `${s.outfit?.id} ${p.name} marche t=${time}`).toBeGreaterThan(-0.035);
+      }
+    }
+  });
+
   it("soldat mort : couché sur le dos, posé au sol, moins de 45 cm de haut ; chute : en l'air, rien sous l'origine", () => {
     for (const s of soldiers) {
       s.setPose("mort", 0.5);

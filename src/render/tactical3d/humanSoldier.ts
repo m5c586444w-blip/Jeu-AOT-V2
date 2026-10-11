@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, Group, LatheGeometry, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, SkinnedMesh, Vector2, Vector3 } from "three";
+import { BoxGeometry, BufferAttribute, BufferGeometry, CapsuleGeometry, Color, CylinderGeometry, Euler, ExtrudeGeometry, Group, LatheGeometry, Matrix4, Mesh, MeshStandardMaterial, Object3D, PlaneGeometry, Quaternion, Shape, SkinnedMesh, SphereGeometry, Vector2, Vector3 } from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import type { Material, Texture } from "three";
@@ -344,6 +344,26 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   if (outfit?.sac && om?.pack) attach("spine_03", piece(outfitGear("sac"), om.pack, "sac"), new Vector3(0, (J("spine_03").y + pelvis.y) / 2 + 0.12 * k, chestBack - 0.02 * k));
   if (outfit?.etui) attach("pelvis", piece(outfitGear("etui"), mats.leather, "etui"), new Vector3(-hipHalf - 0.03 * k, pelvis.y - 0.02 * k, pelvis.z + 0.03 * k));
   if (om?.sash) attach("pelvis", piece(outfitGear("noeud"), om.sash, "noeud"), new Vector3(hipHalf + 0.02 * k, pelvis.y + 0.08 * k, pelvis.z + 0.02 * k));
+  // Dette n° 72 : semelle débordante (l'avant suit l'os de la plante, l'arrière celui du pied) et talon, en cuir foncé : de
+  // près, la botte ne se lit plus comme un pied nu (forme A).
+  const bootColor = boots instanceof MeshStandardMaterial ? boots.color.clone() : new Color(0x4b3322);
+  const soleMat = new MeshStandardMaterial({ color: bootColor.multiplyScalar(0.45), roughness: 0.85 });
+  owned.push(soleMat);
+  for (const side of ["l", "r"] as const) {
+    const ball = J(`ball_${side}`);
+    for (const part of ["arriere", "avant"] as const) {
+      const g = soleGeometry(part, ball.z / k);
+      extra.push(g);
+      attach(part === "avant" ? `ball_${side}` : `foot_${side}`, piece(g, soleMat, "semelle"), new Vector3(ball.x, 0, 0));
+    }
+    const heel = new BoxGeometry(0.072, 0.03, 0.07).translate(0, 0.014, -0.016);
+    extra.push(heel);
+    attach(`foot_${side}`, piece(heel, soleMat, "talon"), new Vector3(ball.x, 0, 0));
+    // Bout de la botte : coque arrondie sur l'avant du pied, qui couvre les orteils du corps de base.
+    const cap = new SphereGeometry(1, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2).scale(0.057, 0.053, 0.085).translate(0, 0.008, 0.142);
+    extra.push(cap);
+    attach(`ball_${side}`, piece(cap, boots, "bout-botte"), new Vector3(ball.x, 0, 0));
+  }
   // R3 : fusil à l'épaule (dans le dos, canon au-dessus de l'épaule droite) ; l'infanterie l'épaule pour tirer.
   const slung = new Object3D();
   slung.name = "fusil-dos";
@@ -441,6 +461,30 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   };
   soldier.setPose("sol", 0);
   return soldier;
+}
+
+/** Contour de la semelle (x, z) pour un homme de 1,80 m, centré sur l'axe du pied : talon en z < 0, pointe vers +z (A). */
+const SOLE_OUTLINE: readonly [number, number][] = [
+  [0, -0.05], [0.034, -0.043], [0.042, -0.015], [0.044, 0.04], [0.054, 0.1], [0.058, 0.14], [0.052, 0.19], [0.032, 0.217], [0, 0.225],
+  [-0.032, 0.217], [-0.052, 0.19], [-0.056, 0.14], [-0.05, 0.1], [-0.042, 0.04], [-0.042, -0.015], [-0.034, -0.043],
+];
+
+/** Semelle de 12 mm (dessus à 11 mm du sol), coupée à la plante `zBall` : partie arrière ou avant. */
+function soleGeometry(part: "arriere" | "avant", zBall: number): BufferGeometry {
+  // Découpe du contour par le plan z = zBall (Sutherland–Hodgman sur une seule arête).
+  const keep = (z: number): boolean => (part === "arriere" ? z <= zBall : z >= zBall);
+  const pts: [number, number][] = [];
+  SOLE_OUTLINE.forEach((a, i) => {
+    const b = SOLE_OUTLINE[(i + 1) % SOLE_OUTLINE.length] as [number, number];
+    if (keep(a[1])) pts.push(a);
+    if (keep(a[1]) !== keep(b[1])) {
+      const u = (zBall - a[1]) / (b[1] - a[1]);
+      pts.push([a[0] + (b[0] - a[0]) * u, zBall]);
+    }
+  });
+  const shape = new Shape(pts.map(([x, z]) => new Vector2(x, z)));
+  // Contour dans le plan (x, z) : extrudé vers −y, puis relevé pour que le dessus soit à 11 mm.
+  return new ExtrudeGeometry(shape, { depth: 0.012, bevelEnabled: false }).rotateX(Math.PI / 2).translate(0, 0.011, 0);
 }
 
 /** Étendue (repos) des sommets de chaque primitive de peau. */
