@@ -388,3 +388,18 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   cavalier assis, bras tendus vers les rênes, botte le long du flanc.
   - Défauts : pas de rênes ni de bride ; bras du cavalier trop droits ; tronc du cheval en trois boules visibles ;
     oreilles à peine marquées.
+
+## Soldats (CLAUDE.md § Style) : lames cassables et remplaçables
+- Quand la simulation retire une paire de lames à un soldat (usure), la vue 3D lâche les deux lames : elles partent des
+  mains vers l'extérieur, tournoient, retombent et restent à plat au sol quatre secondes (`battle/shards.ts`, trajectoires
+  tirées de l'événement ; mouvements réduits : posées d'emblée). Longueur des lames tenues en main (0,86 m), reflet discret.
+- `smoke:r2` (`controle-smoke-r2.log`, après ambiance, arbres et chevaux) : « smoke:r2 : tout est conforme. », `EXIT=0` ;
+  `smoke:r3` (`lames-smoke-r3.log`) : « lames brisées : couche présente ; 0 paires usées depuis le début, 0 lames en train de
+  tomber ou au sol », « smoke:r3 : tout est conforme. », `EXIT=0` ; `npm run verify` (`lames-verify.log`) : « Test Files
+  132 passed (132) », « Tests  808 passed (808) », `EXIT=0`.
+- Aucune casse en dix minutes de bataille au rendu logiciel : la capture provoque une casse par la sonde de développement
+  (une paire retirée au soldat 0 d'un essai, sans effet sur la partie).
+- **`bataille-lames-brisees.png`** et son recadrage agrandi **`bataille-lames-brisees-x4.png`** : plaine, escouade 01 suivie ;
+  colonne de fumée rouge d'une fusée ; dans le recadrage, deux lames posées à plat dans l'herbe, fines bandes claires.
+  - Défauts : lames presque invisibles à cette distance (vraie taille) ; crénelage en pointillés ; la fumée rouge couvre le
+    tiers droit de la vue ; aucune animation de changement de lames sur la figure.

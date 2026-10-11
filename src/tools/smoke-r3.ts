@@ -195,6 +195,8 @@ try {
   const nF = checkPoses(follow.list, "caméra de suivi");
   expect(nF.soldiers > 0, `soldats du Corps de Reconnaissance en tenue (suivi) : ${nF.soldiers}`);
   await page.screenshot({ path: `${OUT}/r3-bataille-suivi-1366.png` });
+  const shards = (await page.evaluate(`(() => { const p = window.__batailleRt; const m = p.view.scene.getObjectByName("lames-brisees"); return { broken: p.bt.state.stats.bladesBroken, shown: m ? m.count : -1 }; })()`)) as { broken: number; shown: number };
+  expect(shards.shown >= 0, `lames brisées : couche présente ; ${shards.broken} paires usées depuis le début, ${shards.shown} lames en train de tomber ou au sol`);
   // Pluie sur l'escouade suivie : traits de pluie, capuches des capes levées.
   const wet = await ambiance("jour", "oui");
   expect((await ds(page, "pluie")) === "oui" && wet.rain && wet.hoods > 0, `pluie : traits de pluie, ${wet.hoods} capuches levées`);

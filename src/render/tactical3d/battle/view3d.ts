@@ -1,6 +1,7 @@
 import { reducedMotion } from "../../motion";
 import {
   ACESFilmicToneMapping,
+  BoxGeometry,
   BufferAttribute,
   BufferGeometry,
   CircleGeometry,
@@ -64,6 +65,8 @@ import type { OutfitId } from "../figuresR3";
 import { titanSkinTexture } from "../textures";
 import { RAIN_BOX, RAIN_PARTICLES, battleAmbiance } from "./ambiance";
 import { COATS, HORSE, gaitParams, horseGeometry, patchHorse, riderGeometry } from "./horses";
+import { SHARDS_PER_BREAK, SHARD_LIFE_S, shardsAt } from "./shards";
+import type { BladeBreak } from "./shards";
 import { createWeather } from "../weather";
 import type { WeatherRig } from "../weather";
 
@@ -102,6 +105,8 @@ const yawOf = (heading: number): number => Math.PI / 2 - heading;
 /** Azimuts essayés par la caméra de suivi quand la vue de derrière est masquée (du plus proche au plus éloigné). */
 /** Fusées montrées à la fois (les plus récentes). */
 const MAX_FLARES = 24;
+/** Casses de lames montrées à la fois (les plus récentes). */
+const MAX_BREAKS = 32;
 
 const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, (3 * Math.PI) / 4, (-3 * Math.PI) / 4, Math.PI];
 
@@ -123,6 +128,8 @@ interface UnitLayers {
   horses: InstancedMesh | null;
   riders: InstancedMesh | null;
   ridersA: InstancedMesh | null;
+  /** Lames brisées qui tombent (CLAUDE.md § Style des soldats). */
+  shards: InstancedMesh;
   markers: InstancedMesh;
   blood: InstancedMesh;
   rings: InstancedMesh;
@@ -216,6 +223,10 @@ export class View3D implements BattleView {
   private rain: WeatherRig | null = null;
   private rainShown = false;
   private readonly sunOffset = new Vector3(260, 420, 180);
+  /** Lames brisées : paires vues au dernier dessin, casses récentes, pas du dernier dessin (retour en arrière : remise à zéro). */
+  private readonly pairsSeen = new Map<number, number>();
+  private breaks: BladeBreak[] = [];
+  private lastTick = -1;
   private windowGlow = 0;
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
@@ -492,7 +503,11 @@ export class View3D implements BattleView {
       ridersA.name = "cavaliers-paradis";
       for (const x of [horses, riders, ridersA]) x.castShadow = true;
     }
-    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, ...smoke, ...goals];
+    // Lame entière lâchée (longueur des lames tenues en main, `humanSoldier.ts`), reflet discret pour rester lisible de loin.
+    const shards = new InstancedMesh(new BoxGeometry(0.04, 0.86, 0.008), new MeshStandardMaterial({ color: 0xd4d9dc, roughness: 0.2, metalness: 0.85, emissive: 0x3a3e42 }), MAX_BREAKS * SHARDS_PER_BREAK);
+    shards.name = "lames-brisees";
+    shards.count = 0;
+    const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, shards, ...smoke, ...goals];
     if (troops) list.push(troops);
     if (troopsA) list.push(troopsA);
     for (const x of [horses, riders, ridersA]) if (x) list.push(x);
@@ -500,7 +515,7 @@ export class View3D implements BattleView {
     if (cannons) list.push(cannons);
     for (const o of list) o.frustumCulled = false;
     this.scene.add(...list);
-    this.layers = { crowd, troops, troopsA, horses, riders, ridersA, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
+    this.layers = { crowd, troops, troopsA, horses, riders, ridersA, shards, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
     return this.layers;
   }
 
@@ -958,6 +973,27 @@ export class View3D implements BattleView {
       if (overlay.soldiers.has(i)) setInst(L.rings, ringN++, p.x, Math.max(0.05, p.z - 0) + 0.05, p.y, 0, 1);
       if (realistic && s.wound === "grave") setInst(L.blood, bloodN++, p.x, 0.02, p.y, 0, 0.35);
     });
+    // Lames brisées : une paire retirée par la simulation depuis le dernier dessin lâche ses deux lames.
+    if (st.tick < this.lastTick) {
+      this.pairsSeen.clear();
+      this.breaks = [];
+    }
+    this.lastTick = st.tick;
+    st.soldiers.forEach((s, i) => {
+      const before = this.pairsSeen.get(i);
+      if (before !== undefined && s.pairs <= before - 1 + 1e-6 && s.mode !== "mort") this.breaks.push({ t: this.time, x: s.x, y: s.y, z: s.z, heading: this.headings.get(i) ?? 0, seed: i * 131 + st.tick });
+      this.pairsSeen.set(i, s.pairs);
+    });
+    this.breaks = this.breaks.filter((b) => this.time - b.t <= SHARD_LIFE_S).slice(-MAX_BREAKS);
+    let shardN = 0;
+    for (const b of this.breaks)
+      for (const sh of shardsAt(b, this.time, calm)) {
+        tmpQ.setFromAxisAngle(UP, sh.spin).multiply(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), sh.tilt));
+        tmpM.compose(tmpP.set(sh.x, sh.z, sh.y), tmpQ, tmpS.set(1, 1, 1));
+        L.shards.setMatrixAt(shardN++, tmpM);
+      }
+    L.shards.count = shardN;
+    L.shards.instanceMatrix.needsUpdate = true;
     // Fantassins : foule instanciée teintée par camp, repères au loin, lueur des tirs ; figures en tenue au plus près (R3).
     let troopN = 0;
     let troopAN = 0;
