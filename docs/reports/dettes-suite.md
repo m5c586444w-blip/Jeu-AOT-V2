@@ -243,3 +243,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   sur 14 — L'économie » à sa droite, sans le recouvrir.
   - Défauts : la bulle couvre la colonne des notifications ; infobulle « Économie — Raccourci V » restée sous le registre ;
     bulle plus haute (texte sur plus de lignes).
+
+## Dette n° 19 (en partie) : fond du menu
+- Le canon des remparts (`meshProps.ts`, accessoire « canons ») est redessiné : affût à deux flasques avec gradins, essieux
+  et quatre roues pleines, fût conique avec bourrelet de bouche, plate-bande de culasse et bouton, tourillons, coin de mire.
+- `public/menu/murs-crepuscule.jpg` est remplacé par un rendu natif 3840×2160 du chemin de ronde de Shiganshina au
+  crépuscule (`?proto3d&lieu=shiganshina&lumiere=crepuscule&vue=rempart&qualite=haut&panneau=0`), au lieu d'un
+  1920×1080 agrandi. Le journal de raisonnement des IA était déjà réservé au mode auteur (E-UX-1).
+- `npm run verify` (`dette19-verify.log`) : « Test Files  128 passed (128) », « Tests  796 passed (796) », `EXIT=0`.
+- **`murs-crepuscule.jpg`** : chemin de ronde pavé qui file vers une tour de porte ; ville aux toits rouges et ardoise à
+  gauche dans la brume ; à droite, une file de canons sur plates-formes de bois, le premier avec roues, flasques et fût.
+  - Défauts : plate-forme de bois unie, d'un orange trop vif ; ciel uniforme sans nuages ; canon d'un brun rouge trop
+    saturé ; parapet extérieur flou au loin ; aucun soldat sur le chemin de ronde.

@@ -1025,7 +1025,7 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Contexte** : U8 veut les murs au crépuscule en arrière-plan ; aucun asset externe nouveau n'est permis.
 - **Options** : (a) scène 3D en direct derrière le menu (three.js dans le bundle principal, chargement > 8 s en rendu
   logiciel) ; (b) image tirée une fois de la scène existante (`?proto3d&lieu=shiganshina&lumiere=crepuscule&vue=rempart`).
-- **Choix** : (b), `public/menu/murs-crepuscule.jpg` (1920 × 1080), aussi utilisée en vignette des scénarios ; attribution
+- **Choix** : (b), `public/menu/murs-crepuscule.jpg` (1920 × 1080, puis 3840 × 2160 depuis la dette n° 19), aussi utilisée en vignette des scénarios ; attribution
   dans `docs/ASSETS_LICENSES.md` (rendu du projet ; textures CC0 de Poly Haven visibles).
 - **Réversible** : oui.
 
