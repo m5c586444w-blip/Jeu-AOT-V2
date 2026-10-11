@@ -880,6 +880,7 @@ export class View3D implements BattleView {
         fig.group.rotation.set(0, w.yaw, 0);
         const phase = (w.troop ? w.troop.id : w.soldier) * 0.37;
         fig.setPose(pose, this.time + phase, this.time);
+        fig.setSpears(w.troop ? 0 : (st.soldiers[w.soldier]?.spears ?? 0));
         log.push({ key: w.key, state: sh.state, pose: fig.pose, r3: true });
         shown++;
       }

@@ -154,6 +154,22 @@ describe("soldats de R3 : six tenues (R3.2, dette n° 72)", () => {
     plain.dispose();
   });
 
+  it("lances de foudre (dette n° 72) : une le long de chaque avant-bras, cachées par défaut, montrées selon le nombre porté", () => {
+    const s = soldiers.get("exploration") as HumanSoldier;
+    const list = named(s, "lance-foudre") as unknown as { visible: boolean; parent: unknown }[];
+    expect(list.map(carrier).sort()).toEqual(["lowerarm_l", "lowerarm_r"]);
+    expect(list.every((o) => !o.visible)).toBe(true);
+    const vis = (): string[] => (named(s, "lance-foudre") as unknown as { visible: boolean; parent: unknown }[]).filter((o) => o.visible).map(carrier).sort();
+    s.setSpears(1);
+    expect(vis()).toEqual(["lowerarm_r"]);
+    s.setSpears(4);
+    expect(vis()).toEqual(["lowerarm_l", "lowerarm_r"]);
+    s.setSpears(0);
+    expect(vis()).toEqual([]);
+    // Pas d'équipement de manœuvre, pas de lance (Marley).
+    expect(named(soldiers.get("marley_infanterie") as HumanSoldier, "lance-foudre")).toHaveLength(0);
+  });
+
   it("au tir, le fusil est dans les mains (crosse à la main droite, canon vers la main gauche) ; pieds au sol", () => {
     // Fantassins de Paradis (Garnison, dette n° 72) : le fusil passe du dos aux mains pour tirer.
     const g = soldiers.get("garnison") as HumanSoldier;

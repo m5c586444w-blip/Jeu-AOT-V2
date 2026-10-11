@@ -33,6 +33,8 @@ export interface HumanSoldier {
   outfit: Outfit | null;
   /** `clock` (s de bataille, R3) : fondu entre états. */
   setPose(p: HumanPose, t: number, clock?: number): void;
+  /** Lances de foudre portées (dette n° 72) : la droite dès une, la gauche dès deux ; aucune sans équipement de manœuvre. */
+  setSpears(n: number): void;
   dispose(): void;
 }
 
@@ -190,6 +192,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   }
   // Fourreaux de lames sur l'extérieur des cuisses ; lames dans le prolongement de l'avant-bras.
   const blades: Object3D[] = [];
+  const spears = new Map<"l" | "r", Object3D>();
   for (const [side, s] of odm
     ? ([
         ["l", 1],
@@ -211,6 +214,15 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
     attach(`hand_${side}`, holder, hand.clone().addScaledVector(dir, 0.07 * k));
     holder.add(piece(gear("lame"), mats.steel, "lame"));
     blades.push(holder);
+    // Dette n° 72 : lance de foudre le long de l'avant-bras (cachée tant que le soldat n'en porte pas : `setSpears`).
+    const elbow = J(`lowerarm_${side}`);
+    const spear = new Object3D();
+    spear.name = "lance-foudre";
+    spear.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), dir);
+    attach(`lowerarm_${side}`, spear, elbow.clone().addScaledVector(dir, 0.02 * k).add(new Vector3(s * 0.05 * k, 0.015 * k, 0)));
+    spear.add(piece(gear("lance"), mats.steel, "lance"));
+    spear.visible = false;
+    spears.set(side, spear);
   }
   // Cape drapée aux épaules : un pivot sous la nuque, qu'on tourne selon la pose (elle flotte en vol).
   const capePivot = new Object3D();
@@ -411,6 +423,12 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
         group.updateMatrixWorld(true);
       }
     },
+    setSpears(n) {
+      const r = spears.get("r");
+      const l = spears.get("l");
+      if (r) r.visible = n >= 1;
+      if (l) l.visible = n >= 2;
+    },
     dispose() {
       body.dispose();
       hairMesh?.geometry.dispose();
@@ -530,7 +548,7 @@ export function buildHairCap(body: HumanBody, mat: Material, thickness: number, 
 
 // ——— Équipement du projet (formes de R1, refaites plus fines) ———
 
-type Gear = "reservoir" | "lanceur" | "fourreau" | "lame" | "bonbonne";
+type Gear = "reservoir" | "lanceur" | "fourreau" | "lame" | "bonbonne" | "lance";
 const gearCache = new Map<Gear, BufferGeometry>();
 const at = (g: BufferGeometry, x: number, y: number, z: number, rx = 0, ry = 0, rz = 0): BufferGeometry =>
   g.applyMatrix4(new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromEuler(new Euler(rx, ry, rz)), new Vector3(1, 1, 1)));
@@ -569,6 +587,18 @@ export function gear(k: Gear): BufferGeometry {
     case "bonbonne":
       // Bonbonne de gaz couchée le long du boîtier, côté dos, tenue par deux colliers (dette n° 72).
       g = merge([at(new CapsuleGeometry(0.028, 0.3, 4, 12), 0, 0.01, -0.11), at(new CylinderGeometry(0.033, 0.033, 0.018, 12), 0, 0.12, -0.11), at(new CylinderGeometry(0.033, 0.033, 0.018, 12), 0, -0.1, -0.11)]);
+      break;
+    case "lance":
+      // Lance de foudre (dette n° 72 ; présence : C, forme redessinée par le projet : A) : hampe fine, charge cylindrique et
+      // pointe vers l'avant, trois ailettes à l'arrière ; le long de l'avant-bras, pointe vers la main.
+      g = merge([
+        at(new CylinderGeometry(0.011, 0.011, 0.62, 8), 0, 0.31, 0),
+        at(new CylinderGeometry(0.03, 0.03, 0.2, 12), 0, 0.68, 0),
+        at(new CylinderGeometry(0.0, 0.03, 0.09, 12), 0, 0.825, 0),
+        at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, 0.02),
+        at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, -0.02, 0, (2 * Math.PI) / 3, 0),
+        at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, -0.02, 0, (-2 * Math.PI) / 3, 0),
+      ]);
       break;
     case "lame": {
       // Lame mince à pointe oblique, montée sur une poignée.

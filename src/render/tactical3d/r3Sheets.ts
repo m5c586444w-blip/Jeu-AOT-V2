@@ -23,7 +23,7 @@ import { puffTexture, titanSkinTexture } from "./textures";
  * - r3-visages : six têtes de Titans de près (dents, yeux, expressions, deux peaux) ;
  * - r3-soldats : les six tenues de face, puis de dos ;
  * - r3-uniformes (dette n° 72) : les quatre corps de Paradis de dos et de trois quarts, emblèmes agrandis au-dessus, et la
- *   cape sous la pluie (capuche levée) ;
+ *   cape sous la pluie (capuche levée) et les lances de foudre ;
  * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
  * - r3-poses : soldats (marche, course, chute, coupe, tir, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
  *   effondrement, abattu).
@@ -154,7 +154,7 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
       ["recrues", "epees"],
     ];
     corps.forEach(([id, em], i) => {
-      const x = -3 + i * 1.5;
+      const x = -3.75 + i * 1.5;
       const backView = soldier(id, 60 + i, 1.7);
       backView.group.position.set(x - 0.32, 0, 0);
       backView.group.rotation.y = Math.PI;
@@ -174,13 +174,25 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
       [0.32, 0.35],
     ] as const) {
       const s = soldier("exploration", 70, 1.7, true);
-      s.group.position.set(3 + dx, 0, 0);
+      s.group.position.set(2.25 + dx, 0, 0);
       s.group.rotation.y = ry;
       s.setPose("attente", time);
     }
-    out.labels.push({ text: "sous la pluie\n(capuche levée)", at: new Vector3(3, -0.12, 0) });
+    out.labels.push({ text: "sous la pluie\n(capuche levée)", at: new Vector3(2.25, -0.12, 0) });
+    // Lances de foudre le long des avant-bras (dette n° 72), de trois quarts et en vol.
+    for (const [dx, ry, pose] of [
+      [-0.32, 0.6, "attente"],
+      [0.32, -0.5, "frappe"],
+    ] as const) {
+      const s = soldier("exploration", 71, 1.7);
+      s.group.position.set(3.75 + dx, 0, 0);
+      s.group.rotation.y = ry;
+      s.setPose(pose, time);
+      s.setSpears(2);
+    }
+    out.labels.push({ text: "lances de foudre", at: new Vector3(3.75, -0.12, 0) });
     out.target.set(0, 1.3, 0);
-    out.eye.set(0, 1.5, 6.8);
+    out.eye.set(0, 1.5, 7.6);
     out.fov = 40;
   } else if (sheet === "r3-ceremonie") {
     // Remise des diplômes : trois rangs de recrues au salut, un instructeur du Corps de Reconnaissance face à elles (mise en
