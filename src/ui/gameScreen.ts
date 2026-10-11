@@ -176,7 +176,7 @@ export async function bootGame(): Promise<void> {
   performance.mark("carte:debut");
   const terrain = (await import("../../data/map/terrain/paradis.json")).default as unknown as TerrainData;
   const mapData = drawingMap(mapJson as unknown as MapData, terrain);
-  const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces, terrain), terrain);
+  const map = await StrategicMap.create(host, mapData, buildMapProvinces(mapData, world.provinces), buildLabels(mapData, world.provinces, terrain), terrain, { maria: t("map.wall.maria"), rose: t("map.wall.rose"), sina: t("map.wall.sina") });
   const byId = new Map(world.provinces.map((p) => [p.id, p]));
   map.onCamera = () => {
     host.dataset["lod"] = map.lod;

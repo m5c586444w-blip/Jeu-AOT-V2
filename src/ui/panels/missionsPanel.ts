@@ -321,7 +321,7 @@ export class MissionsPanel implements Panel {
       root.append(sep(t("mission.lasting")));
       for (const e of x.lasting) root.append(el("p", `registre-note effet--${e.tone}`, e.text));
     }
-    if (x.follow.length) root.append(el("p", "registre-note", `${t("mission.follow")} : ${x.follow.join(", ")}`));
+    if (x.follow.length) root.append(el("p", "registre-note", `${t("mission.follow")}${t("punct.colon")}${x.follow.join(", ")}`));
     if (m.exclusive_with.length) root.append(el("p", "registre-note", t("mission.excludes", { missions: m.exclusive_with.map((e) => t(`mission.${e}`)).join(t("mission.or")) })));
     if (done || run) return;
     const go = button(t("mission.start"), () => void this.ctx.dispatch({ type: "StartMission", mission: m.id }), "registre-bouton principal");

@@ -164,7 +164,7 @@ export class ArmiesPanel implements Panel {
   private armyDetail(d: HTMLElement, c: ArmyCtx, a: ArmyState, me: string): void {
     const general = a.general ? displayName(this.ctx.world.politics?.characters.get(a.general)) : t(a.general_key);
     const head = el("header", "armee__tete");
-    head.append(el("h3", "", t(a.name_key)), el("p", "registre-note", `${t("armies.general")} : ${general}${a.interim && a.general ? ` (${t("army.general.interim")})` : ""}`));
+    head.append(el("h3", "", t(a.name_key)), el("p", "registre-note", `${t("armies.general")}${t("punct.colon")}${general}${a.interim && a.general ? ` (${t("army.general.interim")})` : ""}`));
     d.append(head);
     const men = armyMen(c.aw, a);
     const kv = el("div", "armee__valeurs");
@@ -176,7 +176,7 @@ export class ArmiesPanel implements Panel {
     );
     d.append(kv);
     const strength = armyStrength(c, a);
-    d.append(el("p", "registre-note", `${t("armies.strength")} : ${formatNumber(Math.round(strength))}`));
+    d.append(el("p", "registre-note", `${t("armies.strength")}${t("punct.colon")}${formatNumber(Math.round(strength))}`));
     // Pertes hors bataille, par cause (D-129) : la fiche explique toute baisse d'effectif avant le contact.
     const lost = Object.entries(a.marchLosses ?? {}).filter(([, n]) => Math.round(n) > 0).sort(([x], [y]) => x.localeCompare(y));
     if (lost.length) {
@@ -187,7 +187,7 @@ export class ArmiesPanel implements Panel {
       d.append(row);
     }
     // Trajet.
-    if (a.route.length) d.append(el("p", "plan-ligne", `${t("armies.route")} : ${[a.province ?? "", ...a.route].map((p) => provinceName(this.ctx.world, p)).join(" → ")}${a.forced ? ` · ${t("armies.forced")}` : ""}`));
+    if (a.route.length) d.append(el("p", "plan-ligne", `${t("armies.route")}${t("punct.colon")}${[a.province ?? "", ...a.route].map((p) => provinceName(this.ctx.world, p)).join(" → ")}${a.forced ? ` · ${t("armies.forced")}` : ""}`));
     // Régiments et fiche d'artillerie.
     d.append(sep(t("armies.regiments")));
     const ul = el("ul", "registre-liste armee__regiments");
@@ -344,7 +344,7 @@ export class ArmiesPanel implements Panel {
     const ul = el("ul", "registre-liste");
     for (const sh of f.ships) ul.append(el("li", "", `${t(c.aw.ships.get(sh.ship)?.name_key ?? sh.ship)} × ${sh.count}`));
     d.append(ul);
-    if (f.embarked.length) d.append(el("p", "plan-ligne", `${t("armies.embarked")} : ${f.embarked.map((id) => t(c.s.armies.find((a) => a.id === id)?.name_key ?? id)).join(", ")}`));
+    if (f.embarked.length) d.append(el("p", "plan-ligne", `${t("armies.embarked")}${t("punct.colon")}${f.embarked.map((id) => t(c.s.armies.find((a) => a.id === id)?.name_key ?? id)).join(", ")}`));
     d.append(sep(t("armies.orders")));
     const seaSel = el("select", "plan-choix");
     for (const sea of c.aw.seas.values()) {
@@ -399,7 +399,7 @@ export class ArmiesPanel implements Panel {
           const a = c.s.armies.find((x) => x.id === id);
           return n + (a ? armyMen(c.aw, a) : 0);
         }, 0);
-        return `${nationName(s.faction)} : ${formatNumber(Math.round(men))}`;
+        return `${nationName(s.faction)}${t("punct.colon")}${formatNumber(Math.round(men))}`;
       });
       if (e.titans > 0) sides.push(t("armies.titans", { n: formatNumber(e.titans) }));
       box.append(el("p", "registre-note", sides.join(" · ")));
@@ -490,7 +490,7 @@ export class ArmiesPanel implements Panel {
     const ai = authorOnly(el("details", "armee__ia"));
     ai.append(el("summary", "", t("armies.ai_log")));
     const ul = el("ul", "registre-liste");
-    for (const d of [...s.ai].reverse().slice(0, 15)) ul.append(el("li", "", `${d.faction} · ${d.army} — ${d.action} : ${d.reasons.map((r) => `${t(r.key)} ${formatNumber(r.value)}`).join(" ; ")}`));
+    for (const d of [...s.ai].reverse().slice(0, 15)) ul.append(el("li", "", `${d.faction} · ${d.army} — ${d.action}${t("punct.colon")}${d.reasons.map((r) => `${t(r.key)} ${formatNumber(r.value)}`).join(" ; ")}`));
     ai.append(ul);
     root.append(ai);
   }

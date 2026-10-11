@@ -107,13 +107,14 @@ export class StrategicMap {
     private readonly provinces: readonly MapProvince[],
     labelSpecs: readonly LabelSpec[],
     private readonly terrain: TerrainData,
+    wallNames: Readonly<Record<string, string>> = {},
   ) {
     this.byId = new Map(provinces.map((p) => [p.id, p]));
     this.labels = new LabelLayer(
       labelSpecs,
       terrain.walls.map((w) => {
         const bearing = WALL_LABELS[w.wall]?.bearing ?? 0;
-        return { name: WALL_LABELS[w.wall]?.name ?? w.wall, radius: wallRadiusAt(terrain, w.wall, bearing) + w.band_km / 2, bearing };
+        return { name: wallNames[w.wall] ?? WALL_LABELS[w.wall]?.name ?? w.wall, radius: wallRadiusAt(terrain, w.wall, bearing) + w.band_km / 2, bearing };
       }),
       (x, y) => {
         const r = Math.hypot(x, y);
@@ -127,13 +128,14 @@ export class StrategicMap {
     app.stage.addChild(this.world);
   }
 
-  static async create(host: HTMLElement, map: MapData, provinces: readonly MapProvince[], labels: readonly LabelSpec[], terrain: TerrainData): Promise<StrategicMap> {
+  /** `wallNames` : noms des anneaux de murs dans la langue de l'interface (par défaut, ceux de `WALL_LABELS`). */
+  static async create(host: HTMLElement, map: MapData, provinces: readonly MapProvince[], labels: readonly LabelSpec[], terrain: TerrainData, wallNames: Readonly<Record<string, string>> = {}): Promise<StrategicMap> {
     const app = new Application();
     await app.init({ resizeTo: host, backgroundAlpha: 0, antialias: true, autoDensity: true, resolution: Math.min(2, window.devicePixelRatio || 1), preference: "webgl", canvas: guardedCanvas() });
     app.canvas.classList.add("carte__toile");
     app.canvas.setAttribute("role", "img");
     host.append(app.canvas);
-    const m = new StrategicMap(app, map, provinces, labels, terrain);
+    const m = new StrategicMap(app, map, provinces, labels, terrain, wallNames);
     m.fit();
     m.refineTerrain();
     // Les tailles des noms changent quand les polices auto-hébergées finissent de charger : on replace les noms.

@@ -3880,5 +3880,9 @@
   "manual.accessibilite.title": "Accessibilité",
   "manual.accessibilite.body": "Les options (F9, ou l'entrée du menu principal) règlent l'échelle de l'interface (de 100 à 200 %), les sous-titres des sons importants et toutes les touches du clavier.\nCouleurs pour daltoniens : les couleurs des nations et des alertes sont remplacées par une palette distinguable sans le rouge et le vert. Réduire les mouvements et les flashs : animations, secousses et éclairs atténués. Aide à la lecture : polices simples, texte plus espacé.\nCes préférences restent dans ce navigateur ; elles ne changent jamais la partie.",
   "manual.sauvegarde.title": "Sauvegarder",
-  "manual.sauvegarde.body": "La partie est sauvegardée automatiquement tous les trente jours de jeu, dans trois emplacements tournants ; « Continuer » au menu principal reprend la plus récente.\nLa console (F2) sauvegarde et recharge à la demande dans un créneau nommé : « save nom », « load nom ».\nUne sauvegarde ancienne est mise à jour au chargement (migration de version) ; une sauvegarde abîmée est refusée avec un message clair, sans toucher la partie en cours."
+  "manual.sauvegarde.body": "La partie est sauvegardée automatiquement tous les trente jours de jeu, dans trois emplacements tournants ; « Continuer » au menu principal reprend la plus récente.\nLa console (F2) sauvegarde et recharge à la demande dans un créneau nommé : « save nom », « load nom ».\nUne sauvegarde ancienne est mise à jour au chargement (migration de version) ; une sauvegarde abîmée est refusée avec un message clair, sans toucher la partie en cours.",
+  "punct.colon": " : ",
+  "map.wall.maria": "MUR MARIA",
+  "map.wall.rose": "MUR ROSE",
+  "map.wall.sina": "MUR SINA"
 }

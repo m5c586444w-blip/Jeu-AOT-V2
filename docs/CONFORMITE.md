@@ -397,7 +397,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 - **E-04** : le code des fusées de la Garnison (vert, rouge, jaune ; 03 §7) n'existe pas.
 - **E-05** : la carte stratégique n'a aucun menu au clic droit (04 §3). **Fait** le 2026-10-11 (menu contextuel : dossier, centrer, armées du joueur, expédition ; contrôle « clic droit » de `smoke:map`).
 - **E-06** : la bataille réelle n'a que deux lumières, jour et nuit (`src/render/tactical3d/battle/view3d.ts:160-178`) ; 03 §1 et 04 §4 en demandent quatre. **Fait** le 2026-10-11 (D-172 : aube et crépuscule au choix, `tests/render/tactical3d/battle-ambiance.test.ts` couvre les quatre).
-- **E-07** : l'anglais est partiel (112 clés, 3 797 en français) alors que 24 §2.5 le demande en second (dettes n° 19, 25, 35, 40, 42, 51).
+- **E-07** : l'anglais est partiel (112 clés, 3 797 en français) alors que 24 §2.5 le demande en second (dettes n° 19, 25, 35, 40, 42, 51). **Fait** le 2026-10-11 : 3 886 clés sur 3 886 (`tests/i18n/en-coverage.test.ts` exige ≥ 90 % et les mêmes paramètres) ; noms des murs, deux-points et format des nombres suivent la langue.
 - **E-08** : aucun overlay de debug pour les portées, les ancrages ou les trajectoires (03 §14, F-DEV-07). **Fait** le 2026-10-11 sur l'écran 2D (F2 : ancrages, portées de vue des Titans, câbles, portées des fusées, trajectoires balistiques ; contrôle F2 de `smoke:tactique`).
 - **E-09** : « prêt » de la bataille temps réel jamais mesuré en qualité basse allégée ; R2 l'a mesuré en qualité moyenne (4,5 à 13 s).
 - **E-10** : le réglage de difficulté « pertes » n'agit pas sur la bataille tactique (`src/sim/strategic/difficulty.ts:39`).

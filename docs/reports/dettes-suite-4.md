@@ -56,3 +56,22 @@ Sommaire et méthode : `dettes-suite.md`.
   donnée (nourriture, moral, Titans…) ») », « éléments déjà expliqués conservés (decrets, calques) », « smoke:tuto : tout est
   conforme. », `EXIT=0` ; `npm run verify` (`dette44-verify.log`) : « Tests  813 passed (813) », `EXIT=0`.
 - Pas de capture nouvelle : l'aide utilise la carte d'aide existante (`tuto-aide-1366.png`).
+
+## Dettes n° 19, 35, 42, 51 (anglais) et E-07 : le jeu en anglais (24 §2.5)
+- 3 768 textes traduits en huit lots par des agents, sur une consigne commune (glossaire des noms anglais de l'œuvre :
+  Survey Corps, Garrison, Military Police, Wall Maria, ODM gear, thunder spears… ; paramètres et accords gardés), puis
+  fusionnés après un contrôle automatique des paramètres (0 rejet) ; deux aides ajoutées ensuite traduites à la main :
+  3 886 clés sur 3 886. Noms des murs de la carte, deux-points (« : » / « : ») et format des nombres suivent la langue.
+- `tests/i18n/en-coverage.test.ts` : au moins 90 % des clés, mêmes paramètres que le français, aucune clé inconnue.
+- `npm run verify` (`anglais-verify.log`) : « Test Files  136 passed (136) », `EXIT=0` ; `smoke:map`
+  (`anglais-smoke-map.log`) : « OK  langue EN : titre traduit (F-UIX-18) », « smoke:map : OK », `EXIT=0`. Relevé des lignes
+  visibles en anglais (écran principal, économie, armées) : aucune ligne aux mots-outils français.
+- **`en-armees-1366.png`** : registre « Armies » en anglais, « Army of the South », « Command: Dot Pixis », « 1,180 »,
+  carte avec « WALL MARIA », « WALL ROSE », « WALL SINA », calques « Political », « Food »…
+  - Défauts : « 70 % » et « 100 % » gardent l'espace française (écrite dans le code) ; « 1,2 k » sur l'étendard (format
+    court français) ; « Brigade Reserve » cohabite avec « Military Police » ailleurs ; traduction relue par échantillons
+    seulement (à relire par un anglophone).
+- **`en-economie-1366.png`** : registre « Economy », rationnement « Normal / Reduced / Strict », ressources « Food, Gas,
+  Steel, Ice Burst Stone… » au format anglais (« 450,000 », « +12.2 »), détail « Civilians (780,000) ».
+  - Défauts : « 0.05 % per day » garde l'espace avant « % » ; libellés du rationnement serrés sur une ligne ; « Today's
+    change » en tête du détail, terme à relire ; colonne de droite du registre vide sous les totaux.

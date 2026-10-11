@@ -401,7 +401,7 @@ export class Hud {
     return {
       title: t("hud.morale"),
       ...(st ? { value: formatNumber(nationalMorale(st)) } : {}),
-      sections: [{ text: t("hud.morale_why") }, ...(target ? [{ label: t("hud.morale_target"), explained: target }] : []), { text: `${t("hud.population")} : ${formatNumber(pop)}` }],
+      sections: [{ text: t("hud.morale_why") }, ...(target ? [{ label: t("hud.morale_target"), explained: target }] : []), { text: `${t("hud.population")}${t("punct.colon")}${formatNumber(pop)}` }],
     };
   }
 }

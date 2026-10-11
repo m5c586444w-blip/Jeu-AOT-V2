@@ -128,7 +128,7 @@ export class CharactersPanel implements Panel {
       const d = cs.death;
       const box = el("section", "fiche-deces");
       box.append(el("h4", "", t("characters.death_title", { year: d.date.year, day: d.date.day })));
-      box.append(el("p", "", `${t("characters.cause")} : ${t(`death.cause.${d.cause}`)}. ${t(d.circumstances)}`));
+      box.append(el("p", "", `${t("characters.cause")}${t("punct.colon")}${t(`death.cause.${d.cause}`)}. ${t(d.circumstances)}`));
       const ul = el("ul");
       for (const x of d.consequences) {
         const params: Record<string, string | number> = {};
@@ -232,7 +232,7 @@ function traitSummary(tr: { name_key: string; attributes: Record<string, number 
   for (const [a, v] of Object.entries(tr.attributes)) if (v) parts.push(`${t(`attr.${a}`)} ${v > 0 ? "+" : "−"}${Math.abs(v)}`);
   if (tr.stress_gain !== 1) parts.push(t("characters.trait_stress", { k: formatNumber(tr.stress_gain) }));
   if (tr.advice_bias) parts.push(t(`bias.${tr.advice_bias}`));
-  return `${t(tr.name_key)} : ${parts.join(" ; ") || t("characters.trait_vote_only")}${tr.notes_canon && isAuthorMode() ? ` — ${tr.notes_canon}` : ""}`;
+  return `${t(tr.name_key)}${t("punct.colon")}${parts.join(" ; ") || t("characters.trait_vote_only")}${tr.notes_canon && isAuthorMode() ? ` — ${tr.notes_canon}` : ""}`;
 }
 
 function escapeXml(s: string): string {

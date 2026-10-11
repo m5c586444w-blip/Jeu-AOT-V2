@@ -1,6 +1,6 @@
 import type { Explained, Factor } from "../sim/core/explain";
 import { RESOURCE_IDS } from "../sim/strategic/resources";
-import { hasKey, t } from "../i18n";
+import { getLocale, hasKey, t } from "../i18n";
 
 /**
  * Contenu d'une infobulle de calcul (U4), sur trois niveaux au plus : (1) titre et valeur ; (2) sections, chacune avec son
@@ -39,7 +39,9 @@ export interface WhyModel {
   keyLabel?: string;
 }
 
-const nf = (digits: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
+/** Format des nombres de la langue de l'interface (E-07) : espace fine et virgule en français, virgule et point en anglais. */
+export const numberLocale = (): string => (getLocale() === "en" ? "en-GB" : "fr-FR");
+const nf = (digits: number) => new Intl.NumberFormat(numberLocale(), { maximumFractionDigits: digits, minimumFractionDigits: 0 });
 
 export function formatNumber(n: number): string {
   const a = Math.abs(n);
@@ -57,7 +59,7 @@ export function formatSigned(n: number): string {
 function resolveParams(params: Factor["params"]): Record<string, string | number> {
   const out: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(params ?? {})) {
-    if (typeof v === "number" && k === "rate") out[k] = `${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(v * 100)} %`;
+    if (typeof v === "number" && k === "rate") out[k] = `${new Intl.NumberFormat(numberLocale(), { maximumFractionDigits: 3 }).format(v * 100)} %`;
     else if (typeof v === "number") out[k] = formatNumber(v);
     else if (k === "resource") out[k] = (RESOURCE_IDS as readonly string[]).includes(v) ? t(`res.${v}`) : t(`key.${v}`);
     else if (k === "level" && hasKey(`rationing.${v}`)) out[k] = t(`rationing.${v}`);
@@ -77,7 +79,7 @@ export function factorLine(f: Factor, cost = false): WhyRow {
   // Dette n° 21 : dans une dépense, un poste qui s'ajoute s'écrit comme un montant (« 7 800 », en rouge), non « +7 800 » :
   // le signe « + » contredisait le « −8 304 » de la consommation au solde. Une réduction de dépense garde son « − ».
   const amount = f.op === "base" || (cost && f.op === "add" && f.value > 0);
-  const value = f.op === "mul" ? `×${new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 }).format(f.value)}` : amount ? formatNumber(f.value) : formatSigned(f.value);
+  const value = f.op === "mul" ? `×${new Intl.NumberFormat(numberLocale(), { maximumFractionDigits: 3 }).format(f.value)}` : amount ? formatNumber(f.value) : formatSigned(f.value);
   // Bonus et malus colorés (U4) : un ajout positif ou un multiplicateur > 1 est un bonus ; la base reste neutre ;
   // pour une dépense (consommation, pertes), le sens est inversé.
   const sign = f.op === "base" ? 0 : f.op === "mul" ? Math.sign(f.value - 1) : Math.sign(f.value);

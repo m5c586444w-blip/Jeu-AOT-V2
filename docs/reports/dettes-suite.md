@@ -47,3 +47,4 @@ décrit ses captures (trois lignes et au moins trois défauts).
 - Dette n° 70 (en partie) et E-05 : menu contextuel de la carte (04 §3)
 - Dette n° 70 (en partie) et E-08 : surimpressions de débogage tactiques (03 §14, F-DEV-07)
 - Dette n° 44 (en partie) : aides contextuelles des calques et des notifications
+- Dettes n° 19, 35, 42, 51 (anglais) et E-07 : le jeu en anglais (24 §2.5)
