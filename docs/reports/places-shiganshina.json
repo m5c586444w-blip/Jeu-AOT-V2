@@ -13,9 +13,9 @@
     }
    },
    "rgb": [
-    148.842734375,
-    150.86991753472222,
-    118.97906684027778
+    147.93103298611112,
+    150.02860677083333,
+    118.07145399305556
    ]
   },
   "grand-rue": {
@@ -771,8 +771,8 @@
   "porte-riviere-maria-passage | porte-riviere-maria-echelle": 39.51097550999278,
   "porte-riviere-maria-haut | porte-riviere-maria-echelle": 31.958619477116997,
   "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.625250926349636,
-  "etat-845-avant | etat-845-breche": 18.039938777620474,
-  "etat-845-avant | etat-850-reprise": 3.2885398260651066,
-  "etat-845-breche | etat-850-reprise": 17.84390226956273
+  "etat-845-avant | etat-845-breche": 17.888349488098232,
+  "etat-845-avant | etat-850-reprise": 3.307759480803622,
+  "etat-845-breche | etat-850-reprise": 17.70742000875545
  }
 }

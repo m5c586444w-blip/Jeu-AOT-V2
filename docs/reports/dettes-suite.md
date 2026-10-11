@@ -202,3 +202,12 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   aucun habitant, aucun étal.
   - Défauts : maisons et arbres d'alignement intacts (aucune ruine dans cette rue) ; ciel bleu au lieu du ciel brumeux de
     l'état (`--etat` ne règle que le plan) ; plaques d'herbe répétées par la tuile ; herbe plate sans relief de près.
+
+## Dette n° 5 (en partie) : horizon des vues d'ensemble
+- Le triangle bleu ne se reproduit pas sur la vue d'ensemble actuelle. Défaut voisin corrigé : la prairie s'arrêtait en
+  carré à 9 km, avant le plan lointain des caméras (12 km), et ses coins découpaient l'horizon ; elle va désormais à 16 km.
+- `npm run verify` (`dette5-verify.log`) : « Tests  793 passed (793) », `EXIT=0` ; `places:captures` (`dette5-captures.log`) :
+  `EXIT=0`, ΔE des états inchangés (17,9 ; 3,3 ; 17,7).
+- **`vue-ensemble.png`** : Shiganshina de haut, horizon droit.
+  - Défauts : bord net entre la prairie voilée et le ciel blanc ; ciel uniforme sans nuages ni bleu dans cette vue ; la
+    route et les faubourgs se perdent dans la brume à gauche.

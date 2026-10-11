@@ -185,7 +185,8 @@ export function buildGround(place: Place, L: PlaceLayout, seed: number, fields: 
   // d'ensemble), 25 cm plus bas : ses triangles de plusieurs kilomètres n'ont pas la précision de profondeur voulue pour
   // passer sous les chaussées (+6 cm) en qualité moyenne.
   const E = place.etendue_m * 0.8;
-  const EF = Math.max(E * 1.5, 9000);
+  // Dette n° 5 : au-delà du plan lointain des caméras de lieu (12 km) : l'horizon est coupé droit, sans les coins du carré.
+  const EF = Math.max(E * 1.5, 16000);
   const canals = place.eau.voies.map((w) => ribbon(w.trace, w.largeur_m));
   const grass = grassTexture(seed);
   tagPhoto(grass, "sol", 8);
