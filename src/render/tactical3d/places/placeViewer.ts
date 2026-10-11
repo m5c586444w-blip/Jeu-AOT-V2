@@ -155,7 +155,9 @@ export async function startPlaceViewer(root: HTMLElement, probe: WebGLProbe): Pr
   // transmission), les tronçons ne sont plus dessinés.
   const viewFog = (d: SceneView): void => {
     const dist = new Vector3(...d.eye).distanceTo(new Vector3(...d.target));
-    lighting.setFogBoost(Math.min(1, Math.max(0.12, 450 / Math.max(1, dist))));
+    // Dette n° 10 : sous un ciel enfumé, la vue d'ensemble (au-delà de 1 200 m) garde la ville lisible : voile divisé par deux.
+    const smokeFar = sky === "enfume" && dist > 1200 ? 0.45 : 1;
+    lighting.setFogBoost(Math.min(1, Math.max(0.12, 450 / Math.max(1, dist))) * smokeFar);
     const fogD = (scene.fog as { density?: number } | null)?.density ?? 0;
     scene3.setFarLimit(fogD > 0 ? 1.98 / fogD : Infinity);
   };

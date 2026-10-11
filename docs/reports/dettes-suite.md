@@ -179,3 +179,14 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   bâchée amarrée sous la roue du moulin, d'autres plus loin.
   - Défauts : auvents plats (sans plis ni rayures) ; une péniche presque sous la roue du moulin ; étals tous orientés
     de la même façon par rangée ; aucun chaland ni marchandise sur les quais.
+
+## Dette n° 10 : vue d'ensemble de 845-brèche sous la fumée
+- Sous un ciel enfumé, le voile est divisé par deux pour les vues à plus de 1 200 m (vue d'ensemble) ; les vues de rue
+  gardent leur fumée.
+- `npm run verify` (`dette10-verify.log`) : « Tests  791 passed (791) », `EXIT=0` ; `places:captures -- shiganshina
+  --vues ensemble --sans-portes` (`dette10-captures.log`) : « ΔE 18.0 ≥ 6 : etat-845-avant | etat-845-breche »,
+  « ΔE 3.4 < 6 : etat-845-avant | etat-850-reprise » (dette n° 9, inchangée), `EXIT=0`. Rapport des vues fusionné.
+- **`etat-845-breche.png`** : Shiganshina de haut sous un ciel brun ; rues rayonnantes, toits, places et mur lisibles,
+  la route et les faubourgs à gauche.
+  - Défauts : teinte brun-gris uniforme (aucun foyer d'incendie visible de si haut) ; horizon toujours noyé ; la brèche de
+    la porte extérieure ne se voit pas à cette distance.
