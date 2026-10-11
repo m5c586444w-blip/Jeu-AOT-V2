@@ -96,6 +96,11 @@ export class Registers {
     return this.current?.id ?? null;
   }
 
+  /** Registre présent dans ce scénario. */
+  has(id: PanelId): boolean {
+    return this.panels.has(id);
+  }
+
   open(id: PanelId, arg?: string): void {
     const sameView = this.current?.id === id && this.current.arg === arg;
     this.current = arg === undefined ? { id } : { id, arg };

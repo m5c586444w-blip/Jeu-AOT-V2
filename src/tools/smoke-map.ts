@@ -79,6 +79,20 @@ try {
   await page.keyboard.press("Escape");
   expect(!(await page.locator(".dossier").isVisible()), "Échap ferme le dossier");
 
+  // Clic droit (04 §3, E-05) : menu contextuel sobre ; « Ouvrir le dossier » ouvre le dossier ; Échap referme le menu.
+  await page.mouse.click(trostX, trostY, { button: "right" });
+  await page.waitForTimeout(150);
+  const ctxItems = await page.locator(".menu-carte:not([hidden]) [role='menuitem']").allInnerTexts();
+  const ctxTitle = (await page.locator(".menu-carte__titre").innerText()).trim();
+  expect(ctxItems.length >= 2 && ctxTitle.toLowerCase() === "trost", `clic droit → menu contextuel « ${ctxTitle} » : ${ctxItems.join(" · ")} (04 §3)`);
+  await page.screenshot({ path: `${OUT}/p1-menu-contextuel.png` });
+  await page.keyboard.press("Escape");
+  expect(!(await page.locator(".menu-carte").isVisible()) && !(await page.locator(".dossier").isVisible()), "Échap ferme le menu contextuel (sans rien ouvrir)");
+  await page.mouse.click(trostX, trostY, { button: "right" });
+  await page.locator(".menu-carte [data-ctx='dossier']").click();
+  await page.waitForTimeout(150);
+  expect((await page.locator(".dossier").isVisible()) && !(await page.locator(".menu-carte").isVisible()), "menu contextuel : « Ouvrir le dossier » ouvre le dossier de Trost");
+  await page.keyboard.press("Escape");
   await page.mouse.dblclick(trostX, trostY);
   await page.waitForTimeout(200);
   const lod1 = await page.getAttribute(".carte", "data-lod");

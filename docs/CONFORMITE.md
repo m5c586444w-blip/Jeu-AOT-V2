@@ -395,7 +395,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 - **E-02** : la bataille réelle se joue sur une ville en grille (`src/sim/tactical/map.ts:110-117`) ; l'irrégularité de D-82 reste dans le prototype.
 - **E-03** : les batailles d'expédition, la bataille d'essai et le guide restent sur l'écran 2D de P4 (dette n° 46) : ni ciblage, ni groupes, ni file d'ordres.
 - **E-04** : le code des fusées de la Garnison (vert, rouge, jaune ; 03 §7) n'existe pas.
-- **E-05** : la carte stratégique n'a aucun menu au clic droit (04 §3).
+- **E-05** : la carte stratégique n'a aucun menu au clic droit (04 §3). **Fait** le 2026-10-11 (menu contextuel : dossier, centrer, armées du joueur, expédition ; contrôle « clic droit » de `smoke:map`).
 - **E-06** : la bataille réelle n'a que deux lumières, jour et nuit (`src/render/tactical3d/battle/view3d.ts:160-178`) ; 03 §1 et 04 §4 en demandent quatre.
 - **E-07** : l'anglais est partiel (112 clés, 3 797 en français) alors que 24 §2.5 le demande en second (dettes n° 19, 25, 35, 40, 42, 51).
 - **E-08** : aucun overlay de debug pour les portées, les ancrages ou les trajectoires (03 §14, F-DEV-07).

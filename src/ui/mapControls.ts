@@ -5,11 +5,13 @@ export interface MapControlHandlers {
   select(id: string | null): void;
   /** Clic sur un étendard d'armée (PA.8) ; true = consommé. */
   army?(id: string): boolean;
+  /** Clic droit (04 §3) : menu contextuel de la province sous le curseur (null : hors de toute province). */
+  context?(id: string | null, x: number, y: number): void;
 }
 
 const DRAG_THRESHOLD = 4;
 
-/** Souris sur la carte : glisser = déplacer, molette = zoom, survol = bulle, clic = dossier, double-clic = centrer (F-STR-03). */
+/** Souris sur la carte : glisser = déplacer, molette = zoom, survol = bulle, clic = dossier, double-clic = centrer (F-STR-03), clic droit = menu. */
 export function attachMapControls(host: HTMLElement, map: StrategicMap, on: MapControlHandlers): void {
   const canvas = map.canvas;
   let drag: { x: number; y: number; moved: boolean } | null = null;
@@ -56,6 +58,11 @@ export function attachMapControls(host: HTMLElement, map: StrategicMap, on: MapC
   canvas.addEventListener("pointerleave", () => {
     map.setHover(null);
     on.hover(null, 0, 0);
+  });
+  canvas.addEventListener("contextmenu", (ev) => {
+    ev.preventDefault();
+    const [x, y] = local(ev);
+    on.context?.(map.provinceAt(x, y), ev.clientX, ev.clientY);
   });
   canvas.addEventListener("dblclick", (ev) => {
     const [x, y] = local(ev);

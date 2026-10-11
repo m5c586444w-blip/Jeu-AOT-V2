@@ -24,6 +24,7 @@ import { NotificationFeed } from "./notifications";
 import type { Action } from "./keymap";
 import { LayersPanel } from "./layersPanel";
 import { attachMapControls } from "./mapControls";
+import { MapContextMenu, mapContextItems } from "./mapContextMenu";
 import { buildLabels, buildMapProvinces, drawingMap, mapDynamic } from "./mapModel";
 import { buildMapArmies, buildMapRoutes } from "./mapRoutes";
 import { pendingEncounter } from "./panels/armiesPanel";
@@ -187,8 +188,10 @@ export async function bootGame(): Promise<void> {
     map.setSelected(null);
   });
   const bubble = new Bubble(document.body);
+  const contextMenu = new MapContextMenu(document.body);
   attachMapControls(host, map, {
     hover(id, x, y) {
+      if (contextMenu.open) return;
       const p = id ? byId.get(id) : undefined;
       if (p) bubble.show(p, state, x, y);
       else bubble.hide();
@@ -210,6 +213,29 @@ export async function bootGame(): Promise<void> {
       registers.armies.selectArmy(id);
       registers.open("armees", id);
       return true;
+    },
+    context(id, x, y) {
+      bubble.hide();
+      if (!id) return contextMenu.hide();
+      const player = state.nations?.player ?? "fac_paradis";
+      const items = mapContextItems(id, {
+        openDossier: (p) => {
+          map.setSelected(p);
+          dossier.open(p, state);
+        },
+        center: (p) => map.centerOn(p),
+        playerArmies: (p) => (state.armies?.armies ?? []).filter((a) => a.province === p && a.faction === player).map((a) => ({ id: a.id, name: t(a.name_key) })),
+        ...(registers?.armies
+          ? {
+              openArmy: (a: string) => {
+                registers?.armies?.selectArmy(a);
+                registers?.open("armees", a);
+              },
+            }
+          : {}),
+        ...(registers?.has("expeditions") ? { openExpeditions: () => registers?.open("expeditions") } : {}),
+      });
+      contextMenu.show(provinceName(world, id), items, x, y);
     },
   });
 

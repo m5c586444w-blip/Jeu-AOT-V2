@@ -44,3 +44,4 @@ décrit ses captures (trois lignes et au moins trois défauts).
 
 ## Partie 4 (`dettes-suite-4.md`)
 - Dette n° 47 : avertissements WebGL du repli 2D
+- Dette n° 70 (en partie) et E-05 : menu contextuel de la carte (04 §3)

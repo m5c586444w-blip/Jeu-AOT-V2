@@ -1011,3 +1011,9 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .ceremonie__note { margin: 0; flex: 1; font-size: var(--t-s); color: var(--texte); }
 .ceremonie__scene { width: 100%; height: 100%; border: 0; background: var(--panneau-creux); }
 
+/* Menu contextuel de la carte (04 §3 : clic droit, menu sobre). */
+.menu-carte { position: fixed; z-index: calc(var(--z-fenetre) + 1); min-width: 13rem; padding: 0.35rem 0; color: var(--texte); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 2px solid var(--accent); box-shadow: 3px 3px 0 var(--ombre); font-size: var(--t-s); }
+.menu-carte[hidden] { display: none; }
+.menu-carte__titre { margin: 0 0 0.25rem; padding: 0.1rem 0.8rem 0.3rem; font-variant-caps: all-small-caps; letter-spacing: 0.04em; color: var(--accent-clair); border-bottom: var(--filet-l) solid var(--filet-doux); }
+.menu-carte__choix { display: block; width: 100%; padding: 0.3rem 0.8rem; text-align: left; color: inherit; font: inherit; background: none; border: 0; cursor: pointer; }
+.menu-carte__choix:hover, .menu-carte__choix:focus-visible { background: var(--panneau-haut); outline: none; color: var(--accent-clair); }

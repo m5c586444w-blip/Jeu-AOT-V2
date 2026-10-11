@@ -19,3 +19,16 @@ Sommaire et méthode : `dettes-suite.md`.
   pause, la date ne bouge plus (AC1-12) », « smoke:map : OK », `EXIT=0`. À surveiller.
 - `npm run verify` (`dette47-verify.log`) : « Test Files  134 passed (134) », « Tests  812 passed (812) », `EXIT=0`.
 - Pas de capture : le correctif ne change pas l'image (il retire des appels sans effet en WebGL 1).
+
+## Dette n° 70 (en partie) et E-05 : menu contextuel de la carte (04 §3)
+- Clic droit sur une province : menu sobre au curseur (retourné s'il déborderait de la fenêtre) avec « Ouvrir le dossier »,
+  « Centrer la vue ici », la fiche de chaque armée du joueur présente (trois au plus) et « Préparer une expédition » quand ces
+  registres existent ; fermé par Échap, un clic ailleurs, la molette ou un choix (`src/ui/mapContextMenu.ts`).
+- `smoke:map` (`menu-carte-smoke-map.log`) : « clic droit → menu contextuel « Trost » : Ouvrir le dossier · Centrer la vue ici
+  · Armée du Sud : ouvrir la fiche · Préparer une expédition (04 §3) », « Échap ferme le menu contextuel (sans rien
+  ouvrir) », « menu contextuel : « Ouvrir le dossier » ouvre le dossier de Trost », « smoke:map : OK », `EXIT=0` ;
+  `npm run verify` (`menu-carte-verify.log`) : « Test Files  135 passed (135) », « Tests  813 passed (813) », `EXIT=0`.
+- **`p1-menu-contextuel.png`** : île entière en 850, menu ouvert sous Trost, titre « TROST » en petites capitales et quatre
+  entrées, la première surlignée.
+  - Défauts : le menu cache Shiganshina et le bas de l'anneau de Rose ; titre petit et pâle ; étendard d'armée posé sur le
+    nom de Trost ; « Mitras » à moitié couvert par un étendard.
