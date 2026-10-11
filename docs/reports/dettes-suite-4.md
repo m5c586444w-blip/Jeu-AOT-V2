@@ -48,3 +48,11 @@ Sommaire et méthode : `dettes-suite.md`.
   rouges des portées de vue de trois Titans, escouades 1 à 4 dans les rues, « 4,9 ms/image · 27 unités ».
   - Défauts : cercles d'ancrage serrés qui chargent l'image ; aucun câble au départ (soldats au sol) ; arcs coupés par le
     bord du cadre ; pas de légende des couleurs.
+
+## Dette n° 44 (en partie) : aides contextuelles des calques et des notifications
+- Deux aides de plus, une seule fois chacune : au premier calque affiché (« Un calque teint la carte selon une donnée… »)
+  et au premier clic sur une entrée du fil des notifications. Le bandeau reste sans aide propre (le guide le présente).
+- `smoke:tuto` (`dette44-smoke-tuto.log`) : « aide des calques au premier calque affiché (« Un calque teint la carte selon une
+  donnée (nourriture, moral, Titans…) ») », « éléments déjà expliqués conservés (decrets, calques) », « smoke:tuto : tout est
+  conforme. », `EXIT=0` ; `npm run verify` (`dette44-verify.log`) : « Tests  813 passed (813) », `EXIT=0`.
+- Pas de capture nouvelle : l'aide utilise la carte d'aide existante (`tuto-aide-1366.png`).

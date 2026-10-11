@@ -193,6 +193,13 @@ try {
   await page.waitForTimeout(400);
   expect((await page.locator(".aide-ctx:not([hidden])").count()) === 0, "aide contextuelle : pas une seconde fois pour le même élément");
   await page.keyboard.press("Escape");
+  // Dette n° 44 : aide des calques au premier calque affiché, puis plus jamais.
+  await page.locator(".calques__calque:not([disabled]) >> nth=0").click();
+  await page.waitForSelector(".aide-ctx[data-aide='calques']:not([hidden])", { timeout: 5000 }).catch(() => undefined);
+  const layerHint = (await page.locator(".aide-ctx[data-aide='calques']:not([hidden])").count()) === 1;
+  expect(layerHint, `aide des calques au premier calque affiché (« ${(await page.locator(".aide-ctx").innerText()).replace(/\s+/g, " ").slice(0, 70)} »)`);
+  await page.locator("[data-aide='compris']").click();
+  await page.locator(".calques__calque:not([disabled]) >> nth=0").click();
   const p2 = await prefs(page);
   expect(!!p2 && p2.seen.length >= 1, `éléments déjà expliqués conservés (${p2?.seen.join(", ")})`);
 

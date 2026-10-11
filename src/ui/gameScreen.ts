@@ -242,6 +242,7 @@ export async function bootGame(): Promise<void> {
   const layers = new LayersPanel(host, () => applyOverlay(), { pawns: true, labels: true, walls: true, fog: true }, (f) => map.setFilters(f));
   const applyOverlay = (): void => {
     const id = layers.active;
+    if (id) hints?.show("calques", document.querySelector(".calques"));
     const result = id ? computeOverlay(id, world, state, formatNumber, t) : null;
     map.setOverlay(result?.colors ?? null);
     layers.showLegend(result);
@@ -308,6 +309,7 @@ export async function bootGame(): Promise<void> {
       map.centerOn(province);
       map.setSelected(province);
       dossier.open(province, state);
+      hints?.show("notifications", document.querySelector(".notifications"));
     },
     () => registers?.open("journal"),
     keyOf("journal"),

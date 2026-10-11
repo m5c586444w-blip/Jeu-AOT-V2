@@ -46,3 +46,4 @@ décrit ses captures (trois lignes et au moins trois défauts).
 - Dette n° 47 : avertissements WebGL du repli 2D
 - Dette n° 70 (en partie) et E-05 : menu contextuel de la carte (04 §3)
 - Dette n° 70 (en partie) et E-08 : surimpressions de débogage tactiques (03 §14, F-DEV-07)
+- Dette n° 44 (en partie) : aides contextuelles des calques et des notifications

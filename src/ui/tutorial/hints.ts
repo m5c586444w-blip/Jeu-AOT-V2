@@ -6,6 +6,9 @@ import { placeBubble } from "./placement";
 export const HINT_IDS: readonly string[] = [
   "province",
   "bataille",
+  // Dette n° 44 : calques de la carte (premier calque affiché) et fil des notifications (premier clic sur une entrée).
+  "calques",
+  "notifications",
   "personnages", "cabinet", "decrets", "organisations", "conseil", "journal", "expeditions", "chronique", "renseignement", "recherche", "porteurs", "monde", "diplomatie", "gazette", "archives", "epilogue", "economie", "armees", "missions",
 ];
 

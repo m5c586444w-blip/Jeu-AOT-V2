@@ -3552,6 +3552,8 @@
   "aide.ok": "Compris",
   "aide.province": "Le dossier d'une province donne sa population, sa garnison et ses bâtiments. Survolez un chiffre pour connaître son origine.",
   "aide.bataille": "Mettez en pause pour réfléchir : choisissez une escouade, puis donnez un ordre sur la carte.",
+  "aide.calques": "Un calque teint la carte selon une donnée (nourriture, moral, Titans…). La légende donne l'échelle ; un nouveau clic sur le calque le retire.",
+  "aide.notifications": "Le fil des notifications garde les derniers faits marquants. Une entrée qui nomme un lieu centre la carte sur lui et ouvre son dossier.",
   "aide.personnages": "Les fiches des personnages. Un clic ouvre le dossier d'un personnage.",
   "aide.cabinet": "Soumettez un décret au vote. La prévision et les raisons de chaque ministre s'affichent avant la décision.",
   "aide.decrets": "Un décret engage le pays dans la durée. Il est soumis au vote du cabinet.",
