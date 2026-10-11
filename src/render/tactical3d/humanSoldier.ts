@@ -391,7 +391,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       // Le soldat regarde vers +z : la cape s'écarte vers l'arrière par une rotation positive autour de x.
       capePivot.rotation.x = p === "vol" || p === "chute" ? 0.95 + 0.12 * w : p === "accroche" ? 0.3 + 0.05 * w : p === "course" ? 0.5 + 0.08 * w : 0.06 + 0.02 * w;
       // Lames tirées pour le combat et le vol ; au fourreau à l'arrêt, en marche, au tir et à terre.
-      for (const b of blades) b.visible = p !== "attente" && p !== "salut" && p !== "marche" && p !== "tir" && p !== "mort";
+      for (const b of blades) b.visible = p !== "attente" && p !== "salut" && p !== "marche" && p !== "tir" && p !== "recharge" && p !== "commandement" && p !== "mort";
       group.updateMatrixWorld(true);
       // Matrices d'os à jour : les mesures sur la peau (boîtes englobantes) suivent la pose.
       body.skeleton.update();
@@ -401,7 +401,7 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
       const rest = p === "attente" ? outfit?.repos : undefined;
       const hasRifle = slung.children.length > 0;
       // Dette n° 72 : tout porteur de fusil (Garnison, Brigade Militaire) le prend en main pour tirer.
-      const held = hasRifle && (aim || rest === "port" || rest === "arme");
+      const held = hasRifle && (aim || p === "recharge" || rest === "port" || rest === "arme");
       if (held && inHands.children.length === 0) inHands.add(piece(outfitGear(outfit?.fusil === "mains" ? "fusil_baionnette" : "fusil"), om?.wood ?? mats.leather, "fusil"));
       if (held && !inHands.parent) group.add(inHands);
       slung.visible = hasRifle && !held;

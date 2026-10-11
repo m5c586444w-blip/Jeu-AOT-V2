@@ -27,7 +27,7 @@ import { puffTexture, titanSkinTexture } from "./textures";
  *   cape sous la pluie (capuche levée) et les lances de foudre ;
  * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
  * - r3-fantassins (dette n° 62) : officiers de Paradis (Garnison, Brigade Militaire), Marley, Alliés et Hizuru ;
- * - r3-poses : soldats (marche, course, chute, coupe, tir, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
+ * - r3-poses : soldats (marche, course, chute, coupe, tir, recharge, commandement, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
  *   effondrement, abattu).
  * Les étiquettes sont des points 3D que la page projette à l'écran.
  */
@@ -299,14 +299,18 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
       ["exploration", "chute", "chute"],
       ["exploration", "frappe", "attaque (coupe)"],
       ["marley_infanterie", "tir", "attaque (tir)"],
+      ["garnison", "recharge", "recharge"],
+      ["marley_officier", "commandement", "commandement"],
       ["garnison", "mort", "mort"],
     ];
     sPoses.forEach(([id, pose, label], i) => {
       const s = soldier(id, 60 + i);
-      const x = (i - 2.5) * 1.25;
+      const x = (i - 3.5) * 1.1;
       s.group.position.set(x, pose === "chute" ? 0.6 : 0, 1.6);
-      // Le tireur, de trois quarts : face à la caméra, le fusil ne se verrait que de bout.
+      // Tireur, soldat qui recharge et officier, de trois quarts : de face, le fusil ou le bras levé se verraient de bout.
       if (pose === "tir") s.group.rotation.y = -1.0;
+      if (pose === "recharge") s.group.rotation.y = -0.7;
+      if (pose === "commandement") s.group.rotation.y = 0.9;
       s.setPose(pose, time);
       out.labels.push({ text: label, at: new Vector3(x, -0.05, 2.3) });
     });

@@ -28,16 +28,21 @@ export type HumanPose =
   | "chute"
   | "mort"
   | "tir"
+  | "recharge"
+  | "commandement"
   | "attaque"
   | "effondre";
 export const SOLDIER_ANIMS: readonly HumanPose[] = ["attente", "marche", "course", "sol", "vol", "accroche", "frappe"];
 export const TITAN_ANIMS: readonly HumanPose[] = ["marche", "course", "debout", "saisie", "abattu", "allonge", "buste"];
 /**
  * R3 (fichier 21 §8) : poses et états montrés en bataille. Soldats : chute (en l'air, membres battants), mort (couché sur le
- * dos), tir (fusil épaulé), attaque (coupe : « frappe »). Titans : attaque (fente, bras tendus, bouche ouverte), effondre
+ * dos), tir (fusil épaulé, recul au départ du coup), attaque (coupe : « frappe »), recharge (culasse manœuvrée, arme à la
+ * taille) et commandement (officier, bras levé) : dette n° 65. Titans : attaque (fente, bras tendus, bouche ouverte), effondre
  * (chute du corps abattu : `t` = secondes depuis le coup, 1,6 s jusqu'au sol), mort (« abattu »).
  */
-export const R3_SOLDIER_POSES: readonly HumanPose[] = ["attente", "marche", "course", "chute", "mort", "frappe", "tir"];
+export const R3_SOLDIER_POSES: readonly HumanPose[] = ["attente", "marche", "course", "chute", "mort", "frappe", "tir", "recharge", "commandement"];
+/** Durée du recul d'un tir (s) : `t` de la pose « tir » compte depuis le départ du coup en bataille (A). */
+export const RECOIL_S = 0.15;
 export const R3_TITAN_POSES: readonly HumanPose[] = ["debout", "marche", "course", "attaque", "effondre", "abattu"];
 export { TITAN_FALL_S };
 
@@ -336,15 +341,41 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
   } else if (pose === "tir") {
     // Tireur debout, fusil épaulé : jambe gauche en avant, main droite à la joue, gauche sous le canon. Le corps se tourne de
     // trois quarts sur le bassin (épaule gauche en avant) pour que l'arme vise droit devant, dans le cap de l'unité.
+    // Dette n° 65 : au départ du coup, le recul repousse l'épaule et relève le canon, puis l'arme revient en joue.
+    const kick = t >= 0 && t < RECOIL_S ? 1 - t / RECOIL_S : 0;
     p.turn("pelvis", Y, -0.85);
     legs(p, "l", 0.25, 0.18, 0.05, 0.08);
     legs(p, "r", -0.18, 0.1, -0.08, 0.12);
-    p.turn("spine_02", Y, -0.2).turn("spine_01", X, 0.06);
-    arm(p, body, "r", 1.35, 0.15, 2.3);
-    arm(p, body, "l", 0.9, -0.35, 0.45);
+    p.turn("spine_02", Y, -0.2).turn("spine_01", X, 0.06 - 0.1 * kick);
+    arm(p, body, "r", 1.35 + 0.2 * kick, 0.15, 2.3);
+    arm(p, body, "l", 0.9 + 0.22 * kick, -0.35, 0.45);
     fingers(p, body, "l", 0.9);
     fingers(p, body, "r", 1.0);
-    p.turn("head", Y, 0.3).turn("head", X, 0.12).turn("head", Z, -0.12);
+    p.turn("head", Y, 0.3).turn("head", X, 0.12 - 0.08 * kick).turn("head", Z, -0.12);
+  } else if (pose === "recharge") {
+    // Dette n° 65 : rechargement d'un fusil à verrou (A) : arme abaissée en travers du corps, canon vers le haut, main gauche
+    // sous le fût, main droite qui manœuvre la culasse ; regard sur l'arme.
+    const bolt = Math.sin(t * 7 + phase);
+    p.turn("pelvis", Y, -0.45);
+    legs(p, "l", 0.2, 0.15, 0.04, 0.08);
+    legs(p, "r", -0.12, 0.1, -0.06, 0.1);
+    p.turn("spine_01", X, 0.08);
+    arm(p, body, "l", 0.85, -0.3, 1.35);
+    arm(p, body, "r", 0.3 + 0.1 * bolt, 0.08, 1.25 + 0.2 * bolt);
+    fingers(p, body, "l", 0.9);
+    fingers(p, body, "r", 0.7);
+    p.turn("head", X, 0.35).turn("head", Y, 0.15);
+  } else if (pose === "commandement") {
+    // Dette n° 65 : officier qui commande le feu (A) : bras droit levé vers l'avant, main ouverte, qui scande l'ordre ; main
+    // gauche dans le dos.
+    const beat = Math.max(0, Math.sin(t * 2.5 + phase));
+    arm(p, body, "r", 1.95 + 0.25 * beat, 0.45, 0.2);
+    arm(p, body, "l", -0.75, 0.04, 1.35, -1.3);
+    fingers(p, body, "r", 0.1);
+    fingers(p, body, "l", 0.6);
+    legs(p, "l", 0.15, 0.08, 0.03, 0.08);
+    legs(p, "r", -0.08, 0.05, -0.03, 0.08);
+    p.turn("head", X, -0.05);
   } else if (pose === "sol") {
     // En garde : genoux souples, pied gauche devant, lames tirées vers l'avant.
     legs(p, "l", 0.3, 0.42, 0.12, 0.08);

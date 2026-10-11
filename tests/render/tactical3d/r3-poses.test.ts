@@ -36,10 +36,10 @@ beforeAll(async () => {
 const low = (b: { min: { y: number } }): number => b.min.y;
 
 describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
-  it("soldats des sept tenues : attente, marche, course, coupe, tir et salut les pieds au sol (±2 cm)", () => {
+  it("soldats des sept tenues : attente, marche, course, coupe, tir (et recul), recharge, commandement et salut les pieds au sol (±2 cm)", () => {
     const worst: Record<string, number> = {};
     for (const s of soldiers) {
-      for (const p of ["attente", "marche", "course", "frappe", "tir", "salut"] as const) {
+      for (const p of ["attente", "marche", "course", "frappe", "tir", "recharge", "commandement", "salut"] as const) {
         for (const time of TIMES) {
           s.setPose(p, time);
           const y = low(skinnedBounds(s.body));
@@ -80,6 +80,41 @@ describe("poses de R3 et contact au sol (R3.3, CR3-06)", () => {
       });
       expect(shown, `${s.outfit?.id} lames`).toBe(0);
     }
+  });
+
+  it("dette n° 65 : recul au départ du coup, rechargement (fusil en main, canon vers le haut), commandement (bras levé)", () => {
+    const s = soldiers.find((x) => x.outfit?.id === "garnison") as HumanSoldier;
+    const at = (name: string): { x: number; y: number; z: number } => {
+      const b = s.body.bones[name];
+      const v = s.body.joints.get(name)?.clone();
+      if (!b || !v) throw new Error(name);
+      return b.getWorldPosition(v);
+    };
+    const visible = (name: string): boolean => {
+      let on = false;
+      s.group.traverse((o) => {
+        if (o.name === name && o.visible && o.parent?.visible !== false) on = true;
+      });
+      return on;
+    };
+    // Recul : au départ du coup, les deux mains (donc l'arme) sont plus hautes qu'une fois l'arme revenue en joue.
+    s.setPose("tir", 0);
+    const kickL = at("hand_l").y;
+    const kickR = at("hand_r").y;
+    s.setPose("tir", 0.6);
+    expect(kickL - at("hand_l").y).toBeGreaterThan(0.02);
+    expect(kickR - at("hand_r").y).toBeGreaterThan(0.01);
+    // Rechargement : fusil en main (plus à l'épaule), canon vers le haut (main gauche sous le fût, plus haut que la droite).
+    for (const time of TIMES) {
+      s.setPose("recharge", time);
+      expect(visible("fusil-mains") && !visible("fusil-dos"), `recharge t=${time}`).toBe(true);
+      expect(at("hand_l").y - at("hand_r").y, `recharge t=${time}`).toBeGreaterThan(0.05);
+    }
+    // Commandement : main droite au-dessus de la tête, main gauche dans le dos, lames rangées.
+    s.setPose("commandement", 0.4);
+    expect(at("hand_r").y).toBeGreaterThan(at("head").y);
+    expect(at("hand_l").z).toBeLessThan(at("spine_03").z - 0.05);
+    expect(visible("lame")).toBe(false);
   });
 
   it("soldat mort : couché sur le dos, posé au sol, moins de 45 cm de haut ; chute : en l'air, rien sous l'origine", () => {

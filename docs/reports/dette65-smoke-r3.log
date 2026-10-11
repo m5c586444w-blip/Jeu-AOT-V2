@@ -1,0 +1,23 @@
+
+> murs-et-sang@0.0.1 smoke:r3
+> tsx src/tools/smoke-r3.ts --captures
+
+Captures : docs/screenshots/
+[850, essai de compagnie] 1366×768
+  OK  vue 3D prête en 5.5 s (premier temps : chargement)
+  OK  zoom sur une section ennemie
+  OK  vue rapprochée (Marley, à l'ouverture) : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  second temps à 5.81 s : corps de base · Titans 4/4 · figures 24 ; 24 fantassins de Marley en tenue, 4/4 Titans de R3
+  OK  zoom sur une section alliée
+  OK  vue rapprochée (Paradis) : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  fantassins de la Garnison en tenue : 21 (et 3 soldats du Corps de Reconnaissance)
+  OK  caméra de suivi : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  soldats du Corps de Reconnaissance en tenue (suivi) : 24
+  ..  mesures (rendu logiciel) : prêt 5.5 s · corps 5.81 s · appels 2313 · triangles 2135452 · détail 24 · foule 306 · repères 0 · temps JS p95 252.10 ms
+[850, essai de compagnie] 3840×2160
+  OK  3840 : zoom sur une section alliée
+  OK  3840×2160 : 28 figures, pose = état de la simulation pour chacune (0 écart)
+  OK  bundle principal assets/index-DtyjwkQ-.js sans three.js ni figures de R3 ; vue 3D en morceau à part (view3d-CvAyTULC.js)
+  OK  0 erreur console
+smoke:r3 : tout est conforme.
+EXIT=0

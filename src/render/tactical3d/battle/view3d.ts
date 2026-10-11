@@ -47,7 +47,8 @@ import { facadeSet, normalOf, roofTex, wallStoneTex } from "../texturesEnv";
 import { parementTextures } from "../parement";
 import type { RoofMaterial, WallMaterial } from "../styles";
 import { LOD, SIDE_COLORS, UNIFORM_COLORS, cannonGeometry, markerGeometry, tierOf, troopGeometry } from "./units";
-import { FigureDirector, SOLDIER_POSE, TITAN_POSE, TROOP_POSE } from "./figureState";
+import { FigureDirector, SOLDIER_POSE, TICK_S, TITAN_POSE, troopPose } from "./figureState";
+import type { TroopShown } from "./figureState";
 import { dressMaterials, loadBodyKit } from "../bodies";
 import type { BodyKit } from "../bodies";
 import { buildHumanSoldier } from "../humanSoldier";
@@ -94,6 +95,15 @@ function setInst(mesh: InstancedMesh, i: number, x: number, y: number, z: number
 const yawOf = (heading: number): number => Math.PI / 2 - heading;
 /** Azimuts essayés par la caméra de suivi quand la vue de derrière est masquée (du plus proche au plus éloigné). */
 const FOLLOW_OFFSETS = [0, Math.PI / 4, -Math.PI / 4, Math.PI / 2, -Math.PI / 2, (3 * Math.PI) / 4, (-3 * Math.PI) / 4, Math.PI];
+
+/** Figure montrée au dernier dessin (contrôles) : état du directeur, pose, figure de R3 ou non, officier de section. */
+export interface ShownFigure {
+  key: string;
+  state: string;
+  pose: string;
+  r3: boolean;
+  officer?: boolean;
+}
 
 interface UnitLayers {
   crowd: InstancedMesh;
@@ -183,7 +193,7 @@ export class View3D implements BattleView {
   private officers = new Set<number>();
   private builtFigs = 0;
   /** Pour les contrôles (smoke) : pose montrée par figure et état du directeur, au dernier dessin. */
-  private shownLog: { key: string; state: string; pose: string; r3: boolean }[] = [];
+  private shownLog: ShownFigure[] = [];
 
   constructor(private readonly host: HTMLElement, opts: ViewOptions, private readonly seed: number, private readonly night: boolean) {
     this.opts = opts;
@@ -492,7 +502,7 @@ export class View3D implements BattleView {
   }
 
   /** Pour les contrôles : pose montrée par chaque figure et état du directeur (dernier dessin), corps de base chargé ou non. */
-  figures(): { corps: string; list: { key: string; state: string; pose: string; r3: boolean }[] } {
+  figures(): { corps: string; list: ShownFigure[] } {
     return { corps: this.kitState, list: this.shownLog };
   }
 
@@ -764,7 +774,7 @@ export class View3D implements BattleView {
     this.startBodies();
     const r3 = this.kitState === "corps";
     const budget = { soldiers: BUILD_SOLDIERS_PER_FRAME, titans: BUILD_TITANS_PER_FRAME };
-    const log: { key: string; state: string; pose: string; r3: boolean }[] = [];
+    const log: ShownFigure[] = [];
     if (this.mode === "suivi") this.placeCamera(false);
     const camPos = this.cam.position;
     let crowdN = 0;
@@ -897,7 +907,7 @@ export class View3D implements BattleView {
           continue;
         }
         const sh = w.troop ? this.director.troop(w.troop.id) : this.director.soldier(w.soldier);
-        const pose = (w.troop ? TROOP_POSE[sh.state as keyof typeof TROOP_POSE] : SOLDIER_POSE[sh.state as keyof typeof SOLDIER_POSE]) as HumanPose | null;
+        const pose = (w.troop ? troopPose(sh.state as TroopShown, officer) : SOLDIER_POSE[sh.state as keyof typeof SOLDIER_POSE]) as HumanPose | null;
         if (!pose) {
           fig.group.visible = false;
           continue;
@@ -906,9 +916,11 @@ export class View3D implements BattleView {
         fig.group.position.set(w.x, w.z, w.y);
         fig.group.rotation.set(0, w.yaw, 0);
         const phase = (w.troop ? w.troop.id : w.soldier) * 0.37;
-        fig.setPose(pose, this.time + phase, this.time);
+        // Dette n° 65 : le tir compte depuis le départ du coup (recul) ; les autres poses suivent l'horloge de la vue.
+        const fired = w.troop && pose === "tir" && w.troop.shot >= 0 ? (st.tick - w.troop.shot) * TICK_S + alpha * TICK_S : null;
+        fig.setPose(pose, fired ?? this.time + phase, this.time);
         fig.setSpears(w.troop ? 0 : (st.soldiers[w.soldier]?.spears ?? 0));
-        log.push({ key: w.key, state: sh.state, pose: fig.pose, r3: true });
+        log.push({ key: w.key, state: sh.state, pose: fig.pose, r3: true, ...(officer ? { officer } : {}) });
         shown++;
       }
       for (const w of overflow) toCrowd(w);

@@ -3,7 +3,7 @@ import { createBattle, stepBattle } from "../../../src/sim/tactical/battle";
 import { companySetup } from "../../../src/sim/tactical/setup";
 import type { BattleSetup, BattleState } from "../../../src/sim/tactical/types";
 import type { World } from "../../../src/sim/strategic/world";
-import { CUT_SHOWN_S, FigureDirector, SOLDIER_POSE, TICK_S, TITAN_ATTACK_SHOWN_S, TITAN_FALL_S, TITAN_POSE, TROOP_FIRE_SHOWN_S, TROOP_POSE } from "../../../src/render/tactical3d/battle/figureState";
+import { CUT_SHOWN_S, FigureDirector, OFFICER_POSE, SOLDIER_POSE, TICK_S, TITAN_ATTACK_SHOWN_S, TITAN_FALL_S, TITAN_POSE, TROOP_FIRE_SHOWN_S, TROOP_POSE, TROOP_RELOAD_SHOWN_S, troopPose } from "../../../src/render/tactical3d/battle/figureState";
 import { R3_SOLDIER_POSES, R3_TITAN_POSES } from "../../../src/render/tactical3d/humanAnim";
 import { LEGACY_CASES, w854 } from "../../sim/legacy-cases";
 
@@ -84,6 +84,8 @@ describe("états montrés = états de la simulation (R3.3, CR3-07)", () => {
           if (t.mode === "fui") expect(shown).toBe("absent");
           else if (t.mode === "mort") expect(shown).toBe("mort");
           else if (t.shot >= 0 && (st.tick - t.shot) * TICK_S < TROOP_FIRE_SHOWN_S) expect(shown).toBe("tir");
+          // Dette n° 65 : à l'arrêt en ligne après un tir, il recharge tant que le coup suivant est à plus de 0,6 s.
+          else if (shown === "recharge") expect([t.mode, t.shot >= 0, t.reload > TROOP_RELOAD_SHOWN_S]).toEqual(["ligne", true, true]);
           else expect(["attente", "marche", "course"]).toContain(shown);
         }
         for (const t of st.titans) {
@@ -124,13 +126,16 @@ describe("états montrés = états de la simulation (R3.3, CR3-07)", () => {
         for (const t of bt.state.titans) seen.add(`titan:${dir.titan(t.id).state}`);
       }
     }
-    for (const k of ["soldat:marche", "soldat:chute", "soldat:mort", "soldat:attaque", "fantassin:marche", "fantassin:tir", "fantassin:mort", "titan:marche", "titan:attaque", "titan:chute", "titan:mort"]) expect(seen, k).toContain(k);
+    for (const k of ["soldat:marche", "soldat:chute", "soldat:mort", "soldat:attaque", "fantassin:marche", "fantassin:tir", "fantassin:recharge", "fantassin:mort", "titan:marche", "titan:attaque", "titan:chute", "titan:mort"]) expect(seen, k).toContain(k);
     console.log(`états vus : ${[...seen].sort().join(", ")}`);
   });
 
   it("chaque état montré a une pose du corps de base", () => {
     for (const p of Object.values(SOLDIER_POSE)) if (p !== null) expect([...R3_SOLDIER_POSES, "sol", "vol", "accroche"]).toContain(p);
     for (const p of Object.values(TROOP_POSE)) if (p !== null) expect(R3_SOLDIER_POSES).toContain(p);
+    for (const p of Object.values(OFFICER_POSE)) expect(R3_SOLDIER_POSES).toContain(p);
+    // L'officier commande le feu pendant que ses hommes rechargent ; ailleurs, la pose de son état.
+    expect([troopPose("recharge", true), troopPose("recharge", false), troopPose("tir", true)]).toEqual(["commandement", "recharge", "tir"]);
     for (const p of Object.values(TITAN_POSE)) expect([...R3_TITAN_POSES, "saisie", "allonge"]).toContain(p);
   });
 });

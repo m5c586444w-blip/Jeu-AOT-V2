@@ -7,7 +7,7 @@ import type { BattleState, SoldierUnit, TitanUnit, TroopUnit } from "../../../si
  * Module pur (aucun three.js, aucun DOM) : il sert à la vue 3D et aux tests.
  */
 export type SoldierShown = "garde" | "marche" | "course" | "vol" | "accroche" | "chute" | "attaque" | "saisi" | "mort" | "absent";
-export type TroopShown = "attente" | "marche" | "course" | "tir" | "mort" | "absent";
+export type TroopShown = "attente" | "marche" | "course" | "tir" | "recharge" | "mort" | "absent";
 export type TitanShown = "debout" | "marche" | "course" | "attaque" | "saisie" | "chute" | "mort" | "rampe";
 
 export interface Shown<S> {
@@ -22,6 +22,8 @@ export const TICK_S = 1 / 20;
 export const CUT_SHOWN_S = 0.4;
 export const TITAN_ATTACK_SHOWN_S = 0.8;
 export const TROOP_FIRE_SHOWN_S = 0.5;
+/** Dette n° 65 : un fantassin en ligne qui a tiré recharge tant qu'il lui reste plus que ce temps avant le coup suivant (s, A). */
+export const TROOP_RELOAD_SHOWN_S = 0.6;
 /** Durée de l'effondrement d'un Titan abattu (s) : de debout à face contre terre. */
 export const TITAN_FALL_S = 1.6;
 /** Seuils de vitesse (m/s) : marche, course (soldat à pied, fantassin) ; chute libre (vitesse verticale). */
@@ -71,7 +73,9 @@ export function troopShown(t: TroopUnit, m: Mem<TroopShown> | undefined, tick: n
   if (t.mode === "mort") return "mort";
   if (t.shot >= 0 && (tick - t.shot) * TICK_S < TROOP_FIRE_SHOWN_S) return "tir";
   const v = groundSpeed(m, t.x, t.y, tick);
-  return v > TROOP_RUN_MS ? "course" : v > WALK_MS ? "marche" : "attente";
+  if (v > TROOP_RUN_MS) return "course";
+  if (v > WALK_MS) return "marche";
+  return t.mode === "ligne" && t.shot >= 0 && t.reload > TROOP_RELOAD_SHOWN_S ? "recharge" : "attente";
 }
 
 export function titanShown(t: TitanUnit, m: Mem<TitanShown> | undefined, tick: number): { state: TitanShown; death: number | null; hit: number } {
@@ -169,5 +173,12 @@ export const SOLDIER_POSE: Record<SoldierShown, string | null> = {
   mort: "mort",
   absent: null,
 };
-export const TROOP_POSE: Record<TroopShown, string | null> = { attente: "attente", marche: "marche", course: "course", tir: "tir", mort: "mort", absent: null };
+export const TROOP_POSE: Record<TroopShown, string | null> = { attente: "attente", marche: "marche", course: "course", tir: "tir", recharge: "recharge", mort: "mort", absent: null };
+/** Dette n° 65 : l'officier en tête de section commande le feu pendant que ses hommes rechargent (A). */
+export const OFFICER_POSE: Partial<Record<TroopShown, string>> = { recharge: "commandement" };
+
+/** Pose montrée d'un fantassin : celle de son état, ou celle de l'officier pour les états qu'il joue autrement. */
+export function troopPose(state: TroopShown, officer: boolean): string | null {
+  return (officer ? OFFICER_POSE[state] : undefined) ?? TROOP_POSE[state];
+}
 export const TITAN_POSE: Record<TitanShown, string> = { debout: "debout", marche: "marche", course: "course", attaque: "attaque", saisie: "saisie", chute: "effondre", mort: "abattu", rampe: "allonge" };

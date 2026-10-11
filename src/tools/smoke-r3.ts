@@ -8,7 +8,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import type { Browser, Page } from "playwright-core";
 import { createServer } from "vite";
-import { SOLDIER_POSE, TITAN_POSE, TROOP_POSE } from "../render/tactical3d/battle/figureState";
+import { SOLDIER_POSE, TITAN_POSE, troopPose } from "../render/tactical3d/battle/figureState";
+import type { TroopShown } from "../render/tactical3d/battle/figureState";
 
 const executablePath = process.env["CHROMIUM_PATH"] ?? "/opt/pw-browsers/chromium";
 const OUT = process.argv.includes("--captures") ? "docs/screenshots" : "docs/screenshots/.smoke";
@@ -32,7 +33,7 @@ const watch = (page: Page, label: string): void => {
 };
 const ds = async (page: Page, key: string): Promise<string> => (await page.getAttribute(".bataille", `data-${key}`)) ?? "";
 
-type Fig = { key: string; state: string; pose: string; r3: boolean };
+type Fig = { key: string; state: string; pose: string; r3: boolean; officer?: boolean };
 async function figures(page: Page): Promise<{ corps: string; list: Fig[] }> {
   return (await page.evaluate("window.__batailleRt.view.figures()")) as { corps: string; list: Fig[] };
 }
@@ -94,7 +95,7 @@ function checkPoses(list: Fig[], label: string): { soldiers: number; troops: num
   let bad = 0;
   const n = { soldiers: 0, troops: 0, titans: 0, r3Titans: 0 };
   for (const f of list) {
-    const want = f.key.startsWith("T") ? TITAN_POSE[f.state as keyof typeof TITAN_POSE] : f.key.startsWith("t") ? TROOP_POSE[f.state as keyof typeof TROOP_POSE] : SOLDIER_POSE[f.state as keyof typeof SOLDIER_POSE];
+    const want = f.key.startsWith("T") ? TITAN_POSE[f.state as keyof typeof TITAN_POSE] : f.key.startsWith("t") ? troopPose(f.state as TroopShown, f.officer === true) : SOLDIER_POSE[f.state as keyof typeof SOLDIER_POSE];
     // Figures de R1 (premier temps) : poses de R1 ; seules les figures de R3 sont comparées pose pour pose.
     if (f.r3 && want !== f.pose) bad++;
     if (f.key.startsWith("T")) {

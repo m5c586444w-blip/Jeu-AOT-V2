@@ -51,3 +51,22 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
 - **`r3-bataille-paradis-1366.png`** : ligne de la Garnison vue de dos sur une place pavée, roses au dos, fusils au pied.
   - Défauts : l'officier ne se distingue pas de dos (même uniforme, voulu) ; bras repliés devant la poitrine au repos ;
     bandeau « Pause » sur les façades ; repère « S1 » flottant au-dessus de la place.
+
+## Dette n° 65 : recul, rechargement, commandement
+- Recul : la pose « tir » compte depuis le départ du coup (`shot` de la simulation, lu seulement) ; pendant 0,15 s,
+  l'épaule recule et le canon se relève. État montré « recharge » (A) : fantassin à l'arrêt en ligne, qui a tiré, dont le
+  coup suivant est à plus de 0,6 s ; arme en travers du corps, main droite à la culasse. L'officier de section joue
+  « commandement » (bras droit levé, main gauche dans le dos) quand ses hommes rechargent. Cheval : hors périmètre.
+- `npm run verify` (`dette65-verify.log`) : « Tests  778 passed (778) », `EXIT=0`. Sorties des tests (verbose) :
+  « compagnie : 1200 pas, 220800 états vérifiés ; … fantassin:recharge 1042, fantassin:tir 926 … » ; « soldats, écart
+  maximal au sol (m) : … tir 0.0065, recharge 0.0044, commandement 0.0023, salut 0.0016 ».
+- `smoke:r3` (bataille, `dette65-smoke-r3.log`) : « pose = état de la simulation pour chacune (0 écart) » à chaque vue,
+  « 0 erreur console », « tout est conforme. », `EXIT=0` ; planche (`dette65-planche.log`) : « OK  r3-poses ».
+- **`r3-poses.png`** : huit soldats devant cinq Titans ramenés à 2,4 m ; « recharge » : soldat de la Garnison de trois
+  quarts, fusil en travers, tête baissée vers la culasse ; « commandement » : officier de Marley, bras droit tendu vers
+  l'avant, main ouverte.
+  - Défauts : rangée de soldats qui chevauche les Titans du fond ; fusil de « recharge » presque vertical ; vapeur blanche
+    du Titan abattu derrière l'officier ; Titan « chute » caché par les figures.
+- **`r3-bataille-3840.png`** : ligne de la Garnison de dos sur la place, à 00:00 en pause.
+  - Défauts : capture prise en pause à l'ouverture, aucune recharge ni recul visible (contrôlés par les tests et la
+    planche) ; repère « S1 » flottant ; bras repliés à hauteur des épaules au repos, vus de dos.
