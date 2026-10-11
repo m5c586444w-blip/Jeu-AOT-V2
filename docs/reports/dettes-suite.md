@@ -368,3 +368,23 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   troncs géants côtelés au fond, contreforts visibles au pied, ciel bleu pâle.
   - Défauts : herbe absente (sol lisse) ; un petit arbre isolé en boule noire au loin ; étiquette « 1 » de l'escouade posée
     sur un tronc ; lisière nette de la forêt contre la plaine.
+
+## Dette n° 65 (reste) : chevaux et cavaliers (fichier 18, R3.6)
+- Les hommes des sections de type « cavalier » (simulation) montent un cheval dans la bataille 3D : foule instanciée d'un
+  cheval (tronc, encolure, tête à 45°, crinière, queue, quatre pattes ; cinq robes) et d'un cavalier en selle (cuisses à 35°,
+  jambes le long des flancs, fusil en travers du dos ; uniforme commun pour Paradis). Allures dans le shader : chaque patte
+  pivote autour de son épaule ou de sa hanche, galop rassemblé, tronc qui monte et descend ; arrêt à l'arrêt, immobiles en
+  mouvements réduits. Mort : cheval couché sur le flanc. Pas de figure détaillée de cavalier (foule à toute distance). A.
+- Premier rendu de profil : cuisses à l'horizontale (posture de chaise), queue en pointe vers l'arrière, tête trop haute ;
+  angles repris, puis queue rentrée sous la croupe.
+- `smoke:pa` (`cavaliers-smoke-pa.log`) : « cavaliers : 11 chevaux pour 11 hommes des sections de cavaliers », « smoke:pa :
+  tout est conforme. », `EXIT=0` ; `npm run verify` (`cavaliers-verify.log`) : « Test Files  131 passed (131) », « Tests  805
+  passed (805) », `EXIT=0`.
+- **`pa-cavaliers.png`** : la section 5 (cavaliers) vue de dos, onze chevaux en ligne (bai, alezan, noir, gris, isabelle),
+  cavaliers en selle, un rocher gris derrière.
+  - Défauts : cavaliers petits et raides ; selles en boîtes ; chevaux à l'arrêt (section en « tenir la position ») ; herbe
+    lisse.
+- **`pa-cavaliers-profil.png`** : la même ligne de profil ; encolure et tête inclinées, crinière sombre, queue pendante,
+  cavalier assis, bras tendus vers les rênes, botte le long du flanc.
+  - Défauts : pas de rênes ni de bride ; bras du cavalier trop droits ; tronc du cheval en trois boules visibles ;
+    oreilles à peine marquées.

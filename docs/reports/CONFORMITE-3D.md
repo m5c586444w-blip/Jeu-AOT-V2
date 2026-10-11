@@ -81,7 +81,8 @@ escouades choisies (ou en alerte). `smoke:r2 -- --captures` : « tout est confor
 - **Bataille** : fusées de signal en fumée colorée (03 §7) ; foule instanciée qui marche et court (n° 61) ; étiquettes
   estompées derrière les bâtiments (n° 50) ; aube, crépuscule et pluie au choix dans les options de la bataille, capuches
   du Corps levées sous la pluie (D-172) ; fond du menu en rendu natif 4K, canon des remparts détaillé (n° 19) ; batailles
-  d'expédition en 3D (D-173) ; Arbres Géants à contreforts, branches et houppier en masses.
+  d'expédition en 3D (D-173) ; Arbres Géants à contreforts, branches et houppier en masses ; chevaux et cavaliers des
+  sections de cavaliers (fichier 18, R3.6 : marche et galop dans le shader).
 - **Lieux** : habitants (n° 6), étals de marché et péniches (n° 12), herbe des rues abandonnées en 850 (n° 9), vue
   d'ensemble lisible sous la fumée de 845 (n° 10).
 - Restent hors de portée sans décision de l'utilisateur : visages sculptés de Titans (T1), Titans qui traversent les

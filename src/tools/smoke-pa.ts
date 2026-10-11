@@ -234,6 +234,28 @@ try {
     await p8.locator('[data-speed="2"]').click();
     await p8.waitForTimeout(12000);
     await p8.screenshot({ path: `${OUT}/pa-artillerie-rempart.png` });
+    // Cavaliers (fichier 18, R3.6) : un cheval par homme des sections de cavaliers, allure lue de l'état montré.
+    await p8.locator('[data-speed="0"]').click();
+    const cav = (await p8.evaluate(`(() => {
+      const p = window.__batailleRt;
+      const men = (p.bt.state.troops || []).filter((t) => t.kind === "cavalier" && t.mode !== "fui");
+      const alive = men.filter((t) => t.mode !== "mort");
+      if (alive.length) p.view.frame(alive.map((t) => ({ x: t.x, y: t.y, z: 0 })));
+      const h = p.view.scene.getObjectByName("chevaux");
+      return { men: men.length, horses: h ? h.count : 0 };
+    })()`)) as { men: number; horses: number };
+    expect(cav.men > 0 && cav.horses === cav.men, `cavaliers : ${cav.horses} chevaux pour ${cav.men} hommes des sections de cavaliers`);
+    const sc = await p8.locator(".bataille-scene").boundingBox();
+    if (sc) {
+      await p8.mouse.move(sc.x + sc.width / 2, sc.y + sc.height / 2);
+      for (let i = 0; i < 6; i++) await p8.mouse.wheel(0, -200);
+    }
+    await p8.waitForTimeout(3000);
+    await p8.screenshot({ path: `${OUT}/pa-cavaliers.png` });
+    // De profil : caméra tournée d'un quart de tour.
+    await p8.evaluate("window.__batailleRt.view.rotateBy(Math.PI / 2)");
+    await p8.waitForTimeout(2500);
+    await p8.screenshot({ path: `${OUT}/pa-cavaliers-profil.png` });
     await p8.locator('[data-action="quitter"]').click();
     await p8.waitForSelector(".bilan", { timeout: 120000 });
     const b8 = await p8.locator(".bilan").innerText();

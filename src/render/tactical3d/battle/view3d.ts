@@ -63,6 +63,7 @@ import type { TroopLook } from "../figuresR3";
 import type { OutfitId } from "../figuresR3";
 import { titanSkinTexture } from "../textures";
 import { RAIN_BOX, RAIN_PARTICLES, battleAmbiance } from "./ambiance";
+import { COATS, HORSE, gaitParams, horseGeometry, patchHorse, riderGeometry } from "./horses";
 import { createWeather } from "../weather";
 import type { WeatherRig } from "../weather";
 
@@ -118,6 +119,10 @@ interface UnitLayers {
   troops: InstancedMesh | null;
   /** R3 : fantassins de Paradis (silhouette de la Garnison) ; `troops` garde l'autre camp. */
   troopsA: InstancedMesh | null;
+  /** Cavaliers (fichier 18, R3.6) : chevaux animés et cavaliers assis (Paradis, autres camps). */
+  horses: InstancedMesh | null;
+  riders: InstancedMesh | null;
+  ridersA: InstancedMesh | null;
   markers: InstancedMesh;
   blood: InstancedMesh;
   rings: InstancedMesh;
@@ -471,14 +476,31 @@ export class View3D implements BattleView {
       m.visible = false;
       goals.push(m);
     }
+    // Cavaliers : un cheval et un cavalier par homme des sections de type « cavalier ».
+    const nC = (st.troops ?? []).filter((x) => x.kind === "cavalier").length;
+    let horses: InstancedMesh | null = null;
+    let riders: InstancedMesh | null = null;
+    let ridersA: InstancedMesh | null = null;
+    if (nC > 0) {
+      const hm = new MeshStandardMaterial({ vertexColors: true, roughness: 0.75 });
+      patchHorse(hm, this.walkTime);
+      horses = new InstancedMesh(horseGeometry(), hm, nC);
+      horses.name = "chevaux";
+      riders = new InstancedMesh(riderGeometry("marley"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nC);
+      riders.name = "cavaliers";
+      ridersA = new InstancedMesh(riderGeometry("paradis"), new MeshStandardMaterial({ vertexColors: true, roughness: 0.85 }), nC);
+      ridersA.name = "cavaliers-paradis";
+      for (const x of [horses, riders, ridersA]) x.castShadow = true;
+    }
     const list: Object3D[] = [crowd, markers, blood, rings, craters, cables, flares, flareHeads, ...smoke, ...goals];
     if (troops) list.push(troops);
     if (troopsA) list.push(troopsA);
+    for (const x of [horses, riders, ridersA]) if (x) list.push(x);
     if (flashes) list.push(flashes);
     if (cannons) list.push(cannons);
     for (const o of list) o.frustumCulled = false;
     this.scene.add(...list);
-    this.layers = { crowd, troops, troopsA, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
+    this.layers = { crowd, troops, troopsA, horses, riders, ridersA, markers, blood, rings, flashes, flares, flareHeads, cannons, craters, cables, smoke, goals };
     return this.layers;
   }
 
@@ -940,6 +962,37 @@ export class View3D implements BattleView {
     let troopN = 0;
     let troopAN = 0;
     let flashN = 0;
+    let horseN = 0;
+    let riderN = 0;
+    let riderAN = 0;
+    // Cavalier : cheval (robe tirée de l'identifiant, allure de l'état montré) et cavalier en selle ; à terre une fois mort
+    // (le cheval couché sur le flanc, l'homme comme un fantassin tombé).
+    const cavalryInst = (t: TroopUnit): void => {
+      if (!L.horses || !L.riders || !L.ridersA) return;
+      const h = horseN++;
+      const coat = new Color(COATS[t.id % COATS.length] as number);
+      if (t.mode === "mort") {
+        tmpQ.setFromAxisAngle(UP, yawOf(t.heading)).multiply(new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), Math.PI / 2));
+        tmpM.compose(tmpP.set(t.x + 1.1, 0.3, t.y), tmpQ, tmpS.set(1, 1, 1));
+        L.horses.setMatrixAt(h, tmpM);
+        walkAttribute(L.horses).setXYZ(h, 0, 0, 0);
+        L.horses.setColorAt(h, coat.multiplyScalar(0.7));
+        troopInst(t);
+        return;
+      }
+      const state = this.director.troop(t.id).state;
+      const g = calm ? { amp: 0, rate: 0 } : gaitParams(state);
+      setInst(L.horses, h, t.x, 0, t.y, yawOf(t.heading));
+      walkAttribute(L.horses).setXYZ(h, t.id * 1.37, g.amp, g.rate);
+      L.horses.setColorAt(h, coat);
+      const paradis = t.faction === "fac_paradis";
+      const mesh = paradis ? L.ridersA : L.riders;
+      const n = paradis ? riderAN++ : riderN++;
+      // Le cavalier suit le mouvement du dos au galop (même hauteur que le tronc, sans le balancement des pattes).
+      setInst(mesh, n, t.x, 0, t.y, yawOf(t.heading));
+      const color = paradis ? UNIFORM_COLORS.paradis : this.tintOf(t.faction);
+      mesh.setColorAt(n, t.wounded && realistic ? color.clone().lerp(new Color(0x8a2a22), 0.3) : color);
+    };
     const troopInst = (t: TroopUnit): void => {
       const paradis = t.faction === "fac_paradis";
       const mesh = paradis ? L.troopsA : L.troops;
@@ -960,18 +1013,21 @@ export class View3D implements BattleView {
         if (t.mode === "fui") continue;
         const color = t.side === "allie" ? SIDE_COLORS.allie : SIDE_COLORS.ennemi;
         const d = camPos.distanceTo(tmpP.set(t.x, 0, t.y));
+        const mounted = t.kind === "cavalier" && !!L.horses;
         if (t.mode === "mort") {
           if (realistic) setInst(L.blood, bloodN++, t.x + 0.3, 0.02, t.y, 0, 0.85);
-          if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: true, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
+          if (mounted) cavalryInst(t);
+          else if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: true, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
           else troopInst(t);
           continue;
         }
         if (d > lod.markerM) {
           setInst(L.markers, markerN, t.x, 0, t.y, 0, Math.min(3, d / 160));
           L.markers.setColorAt(markerN++, color);
-        } else if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: false, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
+        } else if (mounted) cavalryInst(t);
+        else if (r3 && d <= lod.detailM) want.push({ key: `t${t.id}`, d, dead: false, x: t.x, y: t.y, z: 0, yaw: yawOf(t.heading), soldier: -1, troop: t });
         else troopInst(t);
-        if (L.flashes && !reducedMotion() && t.shot >= 0 && st.tick - t.shot <= 1) setInst(L.flashes, flashN++, t.x + Math.cos(t.heading) * 0.9, 1.45, t.y + Math.sin(t.heading) * 0.9, 0, 1);
+        if (L.flashes && !reducedMotion() && t.shot >= 0 && st.tick - t.shot <= 1) setInst(L.flashes, flashN++, t.x + Math.cos(t.heading) * 0.9, mounted ? HORSE.saddleY + 0.75 : 1.45, t.y + Math.sin(t.heading) * 0.9, 0, 1);
         if (overlay.troops.has(t.id)) setInst(L.rings, ringN++, t.x, 0.05, t.y, 0, 1);
       }
     }
@@ -1059,7 +1115,7 @@ export class View3D implements BattleView {
       }
       for (const w of [...chosen.filter((x) => x.troop), ...overflow]) toCrowd(w);
     }
-    for (const [mesh, n] of [[L.troops, troopN], [L.troopsA, troopAN]] as const) {
+    for (const [mesh, n] of [[L.troops, troopN], [L.troopsA, troopAN], [L.horses, horseN], [L.riders, riderN], [L.ridersA, riderAN]] as const) {
       if (!mesh) continue;
       mesh.count = n;
       mesh.instanceMatrix.needsUpdate = true;
@@ -1176,11 +1232,11 @@ export class View3D implements BattleView {
       if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     }
     L.blood.visible = realistic;
-    for (const mesh of [L.crowd, L.troops, L.troopsA]) {
+    for (const mesh of [L.crowd, L.troops, L.troopsA, L.horses]) {
       const a = mesh?.geometry.getAttribute("aWalk");
       if (a) a.needsUpdate = true;
     }
-    this.counts = { detail: shown, crowd: crowdN + troopN + troopAN, markers: markerN };
+    this.counts = { detail: shown, crowd: crowdN + troopN + troopAN + horseN, markers: markerN };
     // Dette n° 75 (15 C-06, 18 R4.4) : les bâtiments qui cachent les unités choisies deviennent translucides (24 unités au
     // plus, réparties dans la sélection).
     if (this.world) {
