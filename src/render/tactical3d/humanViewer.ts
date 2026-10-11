@@ -190,7 +190,8 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   controls.update();
   const lighting = createLighting(scene, 850, { windowMaterials: [], lanternMaterial: new MeshStandardMaterial(), lamps: [], center: r3 ? r3.target.clone().setY(0) : new Vector3(0, 0, 0), shadowExtent: r3 && sheet === "r3-titans" ? 70 : 20, fogScale: r3 && sheet === "r3-titans" ? 1 : 0.2 });
   // Étiquettes des planches de R3 : points 3D projetés à l'écran à chaque image.
-  const tags = (r3?.labels ?? []).map((l) => {
+  // `etiquettes=0` : scène sans étiquettes (cérémonie vue depuis le jeu, dette n° 72).
+  const tags = (q.get("etiquettes") === "0" ? [] : (r3?.labels ?? [])).map((l) => {
     const el = document.createElement("div");
     el.className = "p3d-etiquette";
     el.textContent = l.text;

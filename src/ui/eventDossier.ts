@@ -66,6 +66,13 @@ export class EventDossier {
     art.innerHTML = archetypeSvg(archetypeOf(e));
     art.setAttribute("role", "presentation");
     paper.append(head, art, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
+    // Dette n° 72 : cérémonie de l'œuvre mise en scène en 3D (recrues de la 104ᵉ promotion au salut), chargée à la demande.
+    const sheet = CEREMONIES[e.id];
+    if (sheet) {
+      const see = button(t("evt.see_ceremony"), () => openCeremony(sheet, t(e.text_key)), "registre-bouton");
+      see.dataset["action"] = "ceremonie";
+      paper.append(see);
+    }
     const happened = effectLines(this.world, e.effects, p.subject, true);
     if (happened.length > 0) {
       paper.append(el("h3", "dossier-evenement__intertitre", t("evt.consequences")));
@@ -122,6 +129,39 @@ export class EventDossier {
     for (const l of lines) ul.append(el("li", `effet effet--${l.tone}`, l.text));
     return ul;
   }
+}
+
+/** Événements dont la cérémonie a une scène 3D (planche de `src/render/tactical3d/r3Sheets.ts`). */
+const CEREMONIES: Readonly<Record<string, string>> = { evt_850_104th_graduation: "r3-ceremonie" };
+
+/**
+ * Scène 3D d'une cérémonie dans une fenêtre : la visionneuse est une page à part (`?proto3d=humain&planche=…`), chargée dans
+ * un cadre ; three.js n'entre donc jamais dans le programme principal. Échap ou « Fermer » referme la fenêtre.
+ */
+export function openCeremony(sheet: string, title: string): HTMLElement {
+  document.querySelector(".ceremonie")?.remove();
+  const box = el("div", "ceremonie");
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-label", title);
+  const head = el("header", "ceremonie__tete");
+  const close = button(t("evt.ceremony_close"), () => shut(), "registre-bouton");
+  close.dataset["action"] = "fermer-ceremonie";
+  head.append(el("h2", "ceremonie__titre", title), el("p", "ceremonie__note", t("evt.ceremony_note")), close);
+  const frame = document.createElement("iframe");
+  frame.className = "ceremonie__scene";
+  frame.title = title;
+  frame.src = `?${new URLSearchParams({ proto3d: "humain", planche: sheet, etiquettes: "0" }).toString()}`;
+  box.append(head, frame);
+  const onKey = (ev: KeyboardEvent): void => {
+    if (ev.key === "Escape") shut();
+  };
+  const shut = (): void => {
+    window.removeEventListener("keydown", onKey);
+    box.remove();
+  };
+  window.addEventListener("keydown", onKey);
+  document.body.append(box);
+  return box;
 }
 
 /** Effets montrés sous le libellé d'un choix ; le reste est dans l'infobulle. */

@@ -95,6 +95,18 @@ try {
   expect(paused === 0, "une décision due met le temps en pause");
   await audit(page, ".dossier-evenement", "dossier d'événement");
   await page.locator(".dossier-evenement__papier").screenshot({ path: `${OUT}/p5-dossier.png` });
+  // Dette n° 72 : la remise des diplômes en 3D depuis le dossier (page de la visionneuse dans un cadre, chargée à la demande).
+  await page.locator('.dossier-evenement [data-action="ceremonie"]').click();
+  await page.waitForSelector(".ceremonie iframe", { timeout: 5000 });
+  const cerSrc = (await page.getAttribute(".ceremonie iframe", "src")) ?? "";
+  const t0 = Date.now();
+  await page.frameLocator(".ceremonie iframe").locator("html[data-proto3d='pret']").waitFor({ state: "attached", timeout: 240000 });
+  const cerMs = Date.now() - t0;
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: `${OUT}/ceremonie-jeu.png`, timeout: 120000 });
+  await page.locator('.ceremonie [data-action="fermer-ceremonie"]').click();
+  const cerClosed = (await page.locator(".ceremonie").count()) === 0 && !(await page.locator(".dossier-evenement").isHidden());
+  expect(cerSrc.includes("planche=r3-ceremonie") && cerClosed, `cérémonie de la 104ᵉ promotion en 3D : scène prête en ${(cerMs / 1000).toFixed(1)} s, fenêtre refermée, dossier toujours ouvert`);
   await page.locator('.dossier-evenement [data-action="differer"]').click();
   await page.waitForTimeout(200);
   expect(await page.locator(".dossier-evenement").isHidden(), "« Différer » referme le dossier sans décider");
