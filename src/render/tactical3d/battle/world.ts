@@ -1,4 +1,5 @@
-import { Box3, BoxGeometry, BufferAttribute, Color, CylinderGeometry, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
+import { Box3, BoxGeometry, BufferAttribute, Color, DoubleSide, Group, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, PlaneGeometry, Quaternion, RepeatWrapping, SphereGeometry, Vector3 } from "three";
+import { branchGeometry, buttressGeometry, treeParts, trunkGeometry } from "./trees";
 import type { BufferGeometry, Material, Object3D, Texture } from "three";
 import type { Structure, TacticalWorldMap } from "../../../sim/tactical/map";
 import { derive, range, seeded } from "../rng";
@@ -159,7 +160,7 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
   }
 
   const stoneMat = new MeshStandardMaterial({ color: 0x9a968a, roughness: 0.95 });
-  const barkMat = new MeshStandardMaterial({ color: 0x4e3b2a, roughness: 1 });
+  const barkMat = new MeshStandardMaterial({ color: 0x5a4430, roughness: 1, vertexColors: true });
   const leafMat = new MeshStandardMaterial({ color: terrain === "foret" ? 0x3b5a2c : 0x4a6b33, roughness: 0.9, flatShading: true });
   const rockMat = new MeshStandardMaterial({ color: 0x7d7a72, roughness: 1, flatShading: true });
   const footprints: Footprint[] = [];
@@ -328,23 +329,41 @@ export function buildBattleWorld(m: TacticalWorldMap, seed: number, opts: { grou
     rm.instanceMatrix.needsUpdate = true;
     group.add(rm);
   }
-  // Arbres et arbres géants : fût de même rayon que la simulation, houppier au-dessus.
+  // Arbres et arbres géants : fût de même rayon que la simulation au pied (effilé, côtes d'écorce), houppier au-dessus ;
+  // arbres géants : contreforts, branches maîtresses, houppier en plusieurs masses (`trees.ts`).
   const trees = [...by("arbre"), ...by("arbre_geant")];
   if (trees.length > 0) {
-    const trunk = new InstancedMesh(new CylinderGeometry(1, 1, 1, 12).translate(0, 0.5, 0), barkMat, trees.length);
-    const crown = new InstancedMesh(new IcosahedronGeometry(1, 1), leafMat, trees.length);
+    const trunk = new InstancedMesh(trunkGeometry(), barkMat, trees.length);
     trunk.name = "futs";
-    crown.name = "houppiers";
+    const parts = trees.map((s) => treeParts(s.x, s.y, s.r, s.h, s.kind === "arbre_geant", rand));
     trees.forEach((s, i) => {
       const giant = s.kind === "arbre_geant";
-      const crownR = giant ? Math.max(s.r * 2.4, 12) : Math.max(s.r * 4, 2.6);
-      const trunkH = giant ? s.h * 0.85 : s.h * 0.62;
-      place(trunk, i, s.x, 0, s.y, s.r, trunkH, s.r);
-      place(crown, i, s.x, trunkH + crownR * (giant ? 0.35 : 0.6), s.y, crownR, crownR * (giant ? 0.55 : 0.95), crownR, rand() * Math.PI);
-      crown.setColorAt(i, new Color().setHSL(0.24 + rand() * 0.06, 0.35 + rand() * 0.15, 0.22 + rand() * 0.1));
+      place(trunk, i, s.x, 0, s.y, s.r, giant ? s.h * 0.9 : s.h * 0.62, s.r);
       footprints.push({ id: s.id, kind: s.kind, x0: s.x - s.r, x1: s.x + s.r, y0: s.y - s.r, y1: s.y + s.r, r: s.r, h: s.h });
     });
-    for (const x of [trunk, crown]) {
+    const crowns = parts.flatMap((p) => p.crowns);
+    const crown = new InstancedMesh(new IcosahedronGeometry(1, 1), leafMat, crowns.length);
+    crown.name = "houppiers";
+    crowns.forEach((c, i) => {
+      crown.setMatrixAt(i, c.m);
+      crown.setColorAt(i, c.color);
+    });
+    const meshes = [trunk, crown];
+    const roots = parts.flatMap((p) => p.roots);
+    const branches = parts.flatMap((p) => p.branches);
+    if (roots.length > 0) {
+      const rm = new InstancedMesh(buttressGeometry(), barkMat, roots.length);
+      rm.name = "racines";
+      roots.forEach((x, i) => rm.setMatrixAt(i, x));
+      meshes.push(rm);
+    }
+    if (branches.length > 0) {
+      const bm = new InstancedMesh(branchGeometry(), barkMat, branches.length);
+      bm.name = "branches";
+      branches.forEach((x, i) => bm.setMatrixAt(i, x));
+      meshes.push(bm);
+    }
+    for (const x of meshes) {
       x.castShadow = true;
       x.receiveShadow = true;
       x.instanceMatrix.needsUpdate = true;

@@ -353,3 +353,18 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   — de jour. ».
   - Défauts : arbres en sucettes (tronc lisse, boule de feuillage), bien moins hauts que 80 m à l'œil ; sol olive uniforme ;
     trace rouge isolée à gauche ; « 1 morts » au journal de l'expédition (corrigé ensuite : accord en nombre dans dix textes de pertes).
+
+## Conformité 3D : Arbres Géants de la bataille (03 §2)
+- Constat (capture de la bataille d'expédition, dette n° 46) : arbres « en sucettes », fût lisse et boule de feuillage.
+- Fût effilé à sept côtes d'écorce, sillons plus sombres ; pour les arbres géants (70 à 90 m) : six contreforts au pied,
+  cinq à sept branches maîtresses entre 55 et 80 % de la hauteur, houppier en quatre ou cinq masses (`battle/trees.ts`, A).
+  Le pied du fût garde le rayon de la simulation (emprise testée à ± 0,1 m : premier essai à 18 côtés refusé, 20 côtés).
+- `npm run verify` (`arbres-verify.log`) : « Test Files  130 passed (130) », « Tests  803 passed (803) », `EXIT=0`.
+- **`bataille-foret-strategique.png`** : essai de compagnie dans la Forêt des Arbres Géants, vue haute ; troncs bruns
+  obliques, houppiers en grappes, ombres longues ; escouades 1 à 10 au sud, Titans et sections ennemies au nord.
+  - Défauts : houppiers encore en facettes ; sol olive uniforme ; petits arbres réduits à une boule sombre ; pastilles
+    « S1 », « S2 » et numéros d'escouades serrés sur la même ligne.
+- **`bataille-foret-suivi.png`** : caméra de suivi de l'escouade 01 au sol ; trois soldats en cape verte au premier plan,
+  troncs géants côtelés au fond, contreforts visibles au pied, ciel bleu pâle.
+  - Défauts : herbe absente (sol lisse) ; un petit arbre isolé en boule noire au loin ; étiquette « 1 » de l'escouade posée
+    sur un tronc ; lisière nette de la forêt contre la plaine.
