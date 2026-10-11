@@ -66,6 +66,8 @@ export interface RtBattleOptions {
   year?: number;
   /** Région de la province de la bataille (tenue des fantassins de Paradis, dette n° 62). */
   region?: string;
+  /** Nom de la province de la rencontre (dette n° 55) : le carnet le donne au lieu du type de carte tactique. */
+  place?: string;
 }
 
 /** Heures et pluie proposées dans les options de la bataille (vue 3D ; dettes n° 70 et 72). */
@@ -767,6 +769,7 @@ export async function openRtBattleScreen(o: RtBattleOptions): Promise<TimedOrder
         params["ours"] = bt.state.soldiers.length + tr.filter((x) => x.side === "allie").length;
         params["enemy"] = foes;
       }
+      if (l.key === "battle.start" && o.place) params["map"] = o.place;
       logList.prepend(el("li", l.key.startsWith("battle.death") ? "carnet-mort" : "", `${clock(l.t)} — ${t(key, params)}`));
     }
     while (logList.childElementCount > 40) logList.lastElementChild?.remove();

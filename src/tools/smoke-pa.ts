@@ -226,6 +226,11 @@ try {
   if (titans) {
     await p8.locator('.armee__rencontre [data-action="jouer"]').click();
     await p8.waitForSelector("body[data-tactique='1']", { timeout: 60000 });
+    // Dette n° 55 : le carnet nomme la province de la rencontre, non le type de carte (« Plaine hors-murs »).
+    await p8.waitForSelector(".carnet-lignes li", { timeout: 60000 });
+    const opening = (await p8.locator(".carnet-lignes li").last().innerText()).replace(/\s+/g, " ");
+    const where = fr["prov.plaines_interieures_maria_sud"] ?? "";
+    expect(opening.includes(where) && !opening.includes(fr["tmap.plaine"] ?? "Plaine hors-murs"), `carnet : « ${opening.slice(0, 110)} »`);
     await p8.locator('[data-speed="2"]').click();
     await p8.waitForTimeout(12000);
     await p8.screenshot({ path: `${OUT}/pa-artillerie-rempart.png` });

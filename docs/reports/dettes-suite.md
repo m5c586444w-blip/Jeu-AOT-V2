@@ -292,3 +292,16 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   « 6/6 debout · gaz 100 · lames 2 · stress 13,4/100 », ordre « ATTAQUER », boutons d'ordres.
   - Défauts : stress à une décimale (13,4) quand les autres valeurs sont entières ; boutons d'ordres sur deux lignes ; carte
     du terrain vide au-dessus (fond uni beige) ; « gaz 100 » sans unité.
+
+## Dette n° 55 (en partie) : nom du lieu au carnet de bataille
+- Une rencontre d'armées ouvre son carnet sur le nom de la province (« Plaines intérieures de Maria — Sud ») au lieu du type
+  de carte tactique (« Plaine hors-murs »). Les quatre provinces « Plaines » reçoivent leur article : « Titans en vue aux
+  Plaines intérieures… » au lieu de « à Plaines… ». Reste le camp des obus au bilan : la simulation ne compte pas les tirs
+  par camp (`src/sim`, figé depuis R2).
+- `npm run verify` (`dette55-verify.log`) : « Tests  801 passed (801) », `EXIT=0` ; `smoke:pa` (`dette55-smoke-pa.log`) :
+  « carnet : « 00:00 — Début de la bataille — Plaines intérieures de Maria — Sud — 109 hommes de Paradis contre 3 Titans —
+  de » », « smoke:pa : tout est conforme. », `EXIT=0` (capture prise avant l'ajout des articles).
+- **`pa-artillerie-rempart.png`** : plaine vue de haut, cinq sections au sud (S1 à S5), trois Titans au nord ; carnet
+  « Début de la bataille — Plaines intérieures de Maria — Sud — 109 hommes de Paradis contre 3 Titans — de jour. ».
+  - Défauts : titre « Titans en vue à Plaines… » (article absent, corrigé ensuite) ; tiret du nom de province confondu avec
+    les tirets de la phrase ; plaine uniforme presque vide ; sections réduites à des traits au sol à cette distance.

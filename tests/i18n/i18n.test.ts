@@ -66,6 +66,8 @@ describe("i18n (AC-14)", () => {
     expect(t("field.depot_built", { province: t("prov.foret_morte") })).toBe("Dépôt avancé installé à la Forêt Morte.");
     expect(t("field.depot_built", { province: t("prov.hameaux_est") })).toBe("Dépôt avancé installé aux Hameaux de l'Est.");
     expect(t("field.depot_built", { province: t("prov.trost") })).toBe(`Dépôt avancé installé à ${t("prov.trost")}.`);
+    // Dette n° 55 (titre de la rencontre) : « aux Plaines intérieures de Maria — Sud ».
+    expect(t("field.depot_built", { province: t("prov.plaines_interieures_maria_sud") })).toBe("Dépôt avancé installé aux Plaines intérieures de Maria — Sud.");
     expect(contractFr("Le convoi part de Camp d'entraînement.", ["Camp d'entraînement"], new Map([["Camp d'entraînement", "le"]]))).toBe("Le convoi part du Camp d'entraînement.");
     expect(contractFr("Retour de Collines minières.", ["Collines minières"], new Map([["Collines minières", "les"]]))).toBe("Retour des Collines minières.");
     // Un nom non inséré par paramètre n'est pas touché.

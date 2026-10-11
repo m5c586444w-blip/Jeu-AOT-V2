@@ -36,6 +36,7 @@ import { openRtBattleScreen } from "./tactical/rtBattleScreen";
 import { EventDossier } from "./eventDossier";
 import type { BattleSetup, TimedOrder } from "../sim/tactical/types";
 import type { PanelId } from "./panels/common";
+import { provinceName } from "./panels/common";
 import { Notice } from "./notice";
 import { evaluateEnding } from "../sim/ending/ending";
 import { DIFFICULTY_IDS } from "../data/endingSchemas";
@@ -242,7 +243,9 @@ export async function bootGame(): Promise<void> {
       // R2+ : rencontres d'armées et batailles de compagnie sur l'écran temps réel ; expéditions et essais sur l'écran de P4.
       // Dette n° 62 : la région de la province donne la tenue des fantassins de Paradis (Brigade Militaire dans Sina).
       const region = province ? world.provinces.find((p) => p.id === province)?.region : undefined;
-      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked, year: state.date.year, ...(region ? { region } : {}) }) : await openBattleScreen({ world, why, setup, title, linked });
+      // Dette n° 55 : le carnet nomme la province de la rencontre, non le type de carte tactique (« Plaine hors-murs »).
+      const place = province ? provinceName(world, province) : undefined;
+      return realtime ? await openRtBattleScreen({ world, why, setup, title, linked, year: state.date.year, ...(region ? { region } : {}), ...(place ? { place } : {}) }) : await openBattleScreen({ world, why, setup, title, linked });
     } finally {
       inBattle = false;
       map.setSuspended(false);
