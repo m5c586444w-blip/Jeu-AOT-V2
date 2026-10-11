@@ -1,11 +1,11 @@
-import { BoxGeometry, Color, CylinderGeometry, Mesh, MeshStandardMaterial, PointLight, Vector3 } from "three";
+import { BoxGeometry, Color, CylinderGeometry, Group, Mesh, MeshStandardMaterial, PointLight, Vector3 } from "three";
 import type { PointsMaterial, Scene, Texture } from "three";
 import type { LightPreset } from "./lighting";
 import { skinnedBounds } from "./humanBase";
 import type { HumanTemplate } from "./humanBase";
 import { buildEmblem } from "./emblems";
 import type { EmblemId } from "./emblems";
-import { buildHumanSoldier } from "./humanSoldier";
+import { buildHumanSoldier, regionBounds } from "./humanSoldier";
 import type { HumanSoldier } from "./humanSoldier";
 import { buildHumanTitan } from "./humanTitan";
 import type { HumanTitan } from "./humanTitan";
@@ -27,6 +27,7 @@ import { puffTexture, titanSkinTexture } from "./textures";
  *   cape sous la pluie (capuche levée), et la tenue de 854 (lances de foudre, équipement anti-personnel) ;
  * - r3-ceremonie (dette n° 72) : recrues en rangs au salut, un instructeur face à elles ;
  * - r3-fantassins (dette n° 62) : officiers de Paradis (Garnison, Brigade Militaire), Marley, Alliés et Hizuru ;
+ * - r3-medailles (dette n° 72) : remise des médailles par la reine Historia dans la salle d'audience du palais ;
  * - r3-poses : soldats (marche, course, chute, coupe, tir, recharge, commandement, mort) et Titans ramenés à 2,4 m (marche, course, attaque,
  *   effondrement, abattu).
  * Les étiquettes sont des points 3D que la page projette à l'écran.
@@ -49,7 +50,141 @@ export interface R3Sheet {
   backdrop?: { env: string; at: { x: number; y: number } };
 }
 
-export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins"] as const;
+export const R3_SHEETS = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins", "r3-medailles"] as const;
+
+type SoldierMaker = (id: (typeof OUTFIT_IDS)[number] | Outfit, seed: number, height?: number, pluie?: boolean, extra?: { gender?: number; hair?: string }) => HumanSoldier;
+
+/**
+ * Remise des médailles par la reine Historia (dette n° 72 ; fait : C ; mise en scène : A, `ceremonie_medailles`) : salle
+ * d'audience du palais (sol de pierre, tapis, colonnes, trône sur une estrade, bannières sans armoiries), éclairée par des
+ * chandeliers ; les survivants du Corps de part et d'autre du tapis, au salut, la médaille sur la poitrine ; la reine devant
+ * l'un d'eux ; deux gardes de la Brigade Militaire au pied de l'estrade.
+ */
+function buildMedalCeremony(scene: Scene, soldier: SoldierMaker, time: number, out: R3Sheet): void {
+  const cfg = FIGURES_R3.ceremonie_medailles;
+  const mat = (hex: string, rough = 0.85, emissive?: string): MeshStandardMaterial =>
+    new MeshStandardMaterial({ color: new Color(hex), roughness: rough, ...(emissive ? { emissive: new Color(emissive), emissiveIntensity: 1.1 } : {}) });
+  const stone = mat("#8C877C", 0.9);
+  const wall = mat("#B3AA98", 0.95);
+  const gold = mat("#B8923A", 0.45);
+  const red = mat("#7A1C1C", 0.9);
+  const box = (w: number, h: number, d: number, m: MeshStandardMaterial, x: number, y: number, z: number, cast = true): Mesh => {
+    const b = new Mesh(new BoxGeometry(w, h, d), m);
+    b.position.set(x, y, z);
+    b.castShadow = cast;
+    b.receiveShadow = true;
+    scene.add(b);
+    return b;
+  };
+  // Salle : sol, murs et plafond (sans ombre portée, pour que les chandeliers éclairent), tapis, estrade et trône.
+  box(9.6, 0.1, 18, stone, 0, -0.048, -1.5, false);
+  box(0.4, 8, 18, wall, -4.6, 4, -1.5, false);
+  box(0.4, 8, 18, wall, 4.6, 4, -1.5, false);
+  box(9.6, 8, 0.4, wall, 0, 4, -8, false);
+  box(9.6, 0.3, 18, mat("#4A3A2A"), 0, 8.1, -1.5, false);
+  box(1.8, 0.012, 13, red, 0, 0.008, -1.2, false);
+  box(4.4, 0.42, 2.4, stone, 0, 0.21, -6.6);
+  box(4.8, 0.2, 0.6, stone, 0, 0.1, -5.15);
+  box(1.0, 0.5, 0.8, gold, 0, 0.67, -7.0);
+  box(0.9, 0.12, 0.7, red, 0, 0.98, -6.98);
+  box(1.0, 2.0, 0.16, gold, 0, 1.42, -7.42);
+  for (const x of [-3.4, 3.4])
+    for (const z of [1.5, -1.5, -4.5]) {
+      const col = new Mesh(new CylinderGeometry(0.28, 0.32, 8, 16).translate(0, 4, 0), wall);
+      col.position.set(x, 0, z);
+      col.receiveShadow = true;
+      scene.add(col);
+    }
+  for (const x of [-2.6, 2.6]) {
+    box(1.1, 3.2, 0.03, red, x, 4.6, -7.78, false);
+    box(1.1, 0.12, 0.05, gold, x, 6.2, -7.76, false);
+  }
+  // Chandeliers : couronne dorée, flammes, lumière chaude.
+  const flame = mat("#E8742A", 0.5, "#D9581A");
+  for (const z of [0.5, -3.0]) {
+    const ring = new Mesh(new CylinderGeometry(0.7, 0.7, 0.08, 20, 1, true), gold);
+    ring.position.set(0, 5.2, z);
+    scene.add(ring);
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      const f = new Mesh(new CylinderGeometry(0.0, 0.05, 0.16, 6), flame);
+      f.position.set(Math.cos(a) * 0.7, 5.33, z + Math.sin(a) * 0.7);
+      scene.add(f);
+    }
+    const light = new PointLight(new Color("#FFE2BE"), 24, 16, 1.4);
+    light.position.set(0, 5.0, z);
+    light.castShadow = z > 0;
+    scene.add(light);
+  }
+  for (const x of [-1.9, 1.9]) {
+    const stand = new Mesh(new CylinderGeometry(0.04, 0.08, 1.6, 8).translate(0, 0.8 + 0.42, 0), gold);
+    stand.position.set(x, 0, -6.0);
+    scene.add(stand);
+    const f = new Mesh(new CylinderGeometry(0.0, 0.07, 0.2, 8), flame);
+    f.position.set(x, 2.15, -6.0);
+    scene.add(f);
+    const light = new PointLight(new Color("#FFCF9A"), 8, 9, 1.6);
+    light.position.set(x, 2.3, -6.0);
+    scene.add(light);
+  }
+  // Médaille ronde à ruban sur la poitrine, côté gauche (A).
+  const medalGeo = new CylinderGeometry(0.022, 0.022, 0.006, 16).rotateX(Math.PI / 2);
+  const ribbonGeo = new BoxGeometry(0.03, 0.04, 0.004);
+  const ribbon = mat("#2E4E8A", 0.8);
+  const pin = (s: HumanSoldier): void => {
+    const bone = s.body.bones["spine_03"];
+    const j = s.body.joints.get("spine_03");
+    const front = regionBounds(s.body).get("peau_torse")?.maxZ;
+    if (!bone || !j || front === undefined) return;
+    const k = s.body.height / 1.8;
+    const medal = new Group();
+    medal.name = "medaille";
+    const disc = new Mesh(medalGeo, gold);
+    const band = new Mesh(ribbonGeo, ribbon);
+    band.position.y = 0.035;
+    medal.add(disc, band);
+    medal.scale.setScalar(k);
+    medal.position.set(0.075 * k, -0.03 * k, front - j.z + 0.006);
+    bone.add(medal);
+  };
+  // Survivants du Corps : cinq à gauche du tapis, quatre à droite, tournés vers le tapis, au salut.
+  const zs = [-0.6, -1.7, -2.8, -3.9, -5.0];
+  zs.forEach((z, i) => {
+    const s = soldier("exploration", 180 + i);
+    s.group.position.set(-1.45, 0, z);
+    s.group.rotation.y = Math.PI / 2;
+    s.setPose("salut", time + i * 0.11);
+    pin(s);
+  });
+  zs.slice(0, 4).forEach((z, i) => {
+    const s = soldier("exploration", 190 + i);
+    s.group.position.set(1.45, 0, z);
+    s.group.rotation.y = -Math.PI / 2;
+    s.setPose("salut", time + i * 0.13);
+    pin(s);
+  });
+  // La reine, devant le troisième soldat de droite (robe longue, cape de cérémonie, cheveux blonds : `?`).
+  const q = cfg.reine;
+  const queen = soldier({ ...outfit("recrues"), nom: "Reine Historia", veste: q.robe, pantalon: q.robe, bottes: q.souliers, cape: q.cape, manteau: { teinte: q.robe, longueur: 0.9 }, odm: false, repos: "bras", corpulence: { age: [0.2, 0.3], muscle: [0.3, 0.4], weight: [0.3, 0.4] } }, 200, q.taille, false, { gender: 0, hair: q.cheveux });
+  queen.group.position.set(0.55, 0, -2.8);
+  queen.group.rotation.y = Math.PI / 2;
+  queen.setPose("attente", time);
+  // Gardes de la Brigade Militaire au pied de l'estrade, arme au pied.
+  for (const [x, seed] of [
+    [-2.3, 210],
+    [2.3, 211],
+  ] as const) {
+    const g = soldier("police", seed);
+    g.group.position.set(x, 0, -5.3);
+    g.setPose("attente", time);
+  }
+  out.labels.push({ text: "remise des médailles par la reine Historia", at: new Vector3(0, 3.2, -6.6) });
+  out.target.set(0, 1.15, -3.2);
+  out.eye.set(0.4, 2.1, 5.2);
+  out.fov = 42;
+  out.ground = 30;
+  out.preset = "nuit";
+}
 
 export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeMap: Texture | null, detail: { skin: Texture; cloth: Texture } | null, time: number): R3Sheet {
   const out: R3Sheet = { soldiers: [], titans: [], labels: [], eye: new Vector3(0, 2, 10), target: new Vector3(0, 1, 0), fov: 32, ground: 60, bodies: [] };
@@ -73,8 +208,8 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.titans.push(ti);
     return ti;
   };
-  const soldier = (id: (typeof OUTFIT_IDS)[number] | Outfit, seed: number, height?: number, pluie = false): HumanSoldier => {
-    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: typeof id === "string" ? outfit(id) : id, pluie, ...(height ? { height, gender: 1 } : {}) });
+  const soldier = (id: (typeof OUTFIT_IDS)[number] | Outfit, seed: number, height?: number, pluie = false, extra: { gender?: number; hair?: string } = {}): HumanSoldier => {
+    const s = buildHumanSoldier(t, seed, mats, { eyeMap, outfit: typeof id === "string" ? outfit(id) : id, pluie, ...(height ? { height, gender: 1 } : {}), ...extra });
     s.group.traverse((o) => {
       o.castShadow = true;
     });
@@ -177,6 +312,8 @@ export function buildR3Sheet(sheet: string, scene: Scene, t: HumanTemplate, eyeM
     out.target.set(0, 0.95, 0);
     out.eye.set(0, 1.25, 9.6);
     out.fov = 38;
+  } else if (sheet === "r3-medailles") {
+    buildMedalCeremony(scene, soldier, time, out);
   } else if (sheet === "r3-uniformes") {
     // Quatre corps de Paradis : de dos (emblème au dos ou sur la cape) puis de trois quarts (manche, poitrine) ; emblèmes agrandis.
     const corps: [(typeof OUTFIT_IDS)[number], EmblemId][] = [

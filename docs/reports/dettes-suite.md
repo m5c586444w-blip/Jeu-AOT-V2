@@ -93,3 +93,15 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   poitrine, lances le long des avant-bras, petits canons noirs aux poignées.
   - Défauts : canons très petits à cette distance ; pointes des lances qui pendent sous les mains ; lames peu lisibles
     sur le fond clair ; bouteilles de gaz qui dépassent des hanches.
+
+## Dette n° 72 (suite) : remise des médailles par la reine Historia
+- Planche `r3-medailles` : salle d'audience du palais (sol de pierre, tapis, colonnes, trône sur une estrade, bannières
+  sans armoiries, chandeliers), survivants du Corps au salut de part et d'autre du tapis, médaille à ruban sur la poitrine,
+  la reine (blonde, petite : C ; taille, robe, cape : `?`) devant l'un d'eux, deux gardes de la Brigade Militaire. Dans le
+  jeu : bouton « Voir la cérémonie (3D) » dans le dossier de E43, seulement si Historia a été couronnée (drapeau de E36).
+- `npm run verify` (`dette72m-verify.log`) : « Test Files  122 passed (122) », « Tests  782 passed (782) », `EXIT=0` ;
+  planche (`dette72m-planche.log`) : « OK  r3-medailles : planche prête en 59.7 s » (premier essai), `EXIT=0`.
+- **`r3-medailles.png`** : vue dans l'axe du tapis rouge vers le trône doré ; cinq soldats à gauche, quatre à droite, de
+  profil, poing sur le cœur ; la reine en robe ivoire et cape bleue au milieu ; deux grandes bannières rouges.
+  - Défauts : cheveux de la reine en calotte courte (lecture presque chauve) ; garde de gauche caché par les soldats ;
+    médailles invisibles à cette distance ; murs unis sans fenêtres ni moulures ; trône en blocs.

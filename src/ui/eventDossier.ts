@@ -67,9 +67,10 @@ export class EventDossier {
     art.setAttribute("role", "presentation");
     paper.append(head, art, el("h2", "dossier-evenement__titre", t(e.text_key)), el("p", "dossier-evenement__corps", eventBody(this.world, e, p.subject)));
     // Dette n° 72 : cérémonie de l'œuvre mise en scène en 3D (recrues de la 104ᵉ promotion au salut), chargée à la demande.
-    const sheet = CEREMONIES[e.id];
-    if (sheet) {
-      const see = button(t("evt.see_ceremony"), () => openCeremony(sheet, t(e.text_key)), "registre-bouton");
+    const cer = ceremonyFor(e.id, state.events?.flags);
+    if (cer) {
+      const title = t(cer.title ?? e.text_key);
+      const see = button(t("evt.see_ceremony"), () => openCeremony(cer.sheet, title), "registre-bouton");
       see.dataset["action"] = "ceremonie";
       paper.append(see);
     }
@@ -132,7 +133,23 @@ export class EventDossier {
 }
 
 /** Événements dont la cérémonie a une scène 3D (planche de `src/render/tactical3d/r3Sheets.ts`). */
-const CEREMONIES: Readonly<Record<string, string>> = { evt_850_104th_graduation: "r3-ceremonie", evt_850_branch_choice: "r3-discours" };
+/**
+ * Cérémonies de l'œuvre mises en scène en 3D (dette n° 72) : planche, titre propre quand la cérémonie suit l'événement, et
+ * drapeau requis. La remise des médailles par la reine Historia suit le retour de Shiganshina (après E43) ; elle n'a lieu que
+ * si Historia a été couronnée.
+ */
+export const CEREMONIES: Readonly<Record<string, { sheet: string; title?: string; flag?: string }>> = {
+  evt_850_104th_graduation: { sheet: "r3-ceremonie" },
+  evt_850_branch_choice: { sheet: "r3-discours" },
+  evt_850_yeager_basement: { sheet: "r3-medailles", title: "evt.ceremony.medals", flag: "historia_queen" },
+};
+
+/** Cérémonie à montrer dans le dossier d'un événement, si son drapeau est levé (null sinon). */
+export function ceremonyFor(eventId: string, flags: Readonly<Record<string, boolean>> | undefined): { sheet: string; title?: string } | null {
+  const c = CEREMONIES[eventId];
+  if (!c || (c.flag && flags?.[c.flag] !== true)) return null;
+  return c;
+}
 
 /**
  * Scène 3D d'une cérémonie dans une fenêtre : la visionneuse est une page à part (`?proto3d=humain&planche=…`), chargée dans

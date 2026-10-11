@@ -116,7 +116,7 @@ const browser: Browser = await chromium.launch({ executablePath });
 try {
   // ——— 1. Planches (`R3_PLANCHES=0` : sautées, mise au point de la bataille) ———
   // `R3_PLANCHES=0` : aucune planche ; `R3_PLANCHES=r3-fantassins,r3-soldats` : ces planches seulement.
-  const allSheets = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins"];
+  const allSheets = ["r3-titans", "r3-visages", "r3-soldats", "r3-poses", "r3-uniformes", "r3-ceremonie", "r3-discours", "r3-fantassins", "r3-medailles"];
   const pick = process.env["R3_PLANCHES"];
   for (const sheet of pick === "0" ? [] : pick ? allSheets.filter((x) => pick.split(",").includes(x)) : allSheets) {
     const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });

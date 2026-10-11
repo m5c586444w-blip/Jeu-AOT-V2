@@ -46,7 +46,7 @@ export interface SoldierLook {
 }
 
 /** Hauteur demandée par le banc (1,7 m) ou tirée de la graine. */
-export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: Outfit; pluie?: boolean } = {}): HumanSoldier {
+export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierMaterials, opts: { height?: number; eyeMap?: Texture | null; gender?: number; outfit?: Outfit; pluie?: boolean; hair?: string } = {}): HumanSoldier {
   const outfit = opts.outfit ?? null;
   const om = outfit ? outfitMaterials(mats, outfit) : null;
   const odm = outfit ? outfit.odm : true;
@@ -62,8 +62,10 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
   teeth.color.copy(mats.skin.color).lerp(new Color(1, 1, 1), 0.75);
   teeth.metalness = 0;
   teeth.roughness = 0.35;
-  const hair = mats.hair[Math.floor(rand() * mats.hair.length)] ?? mats.hair[0] ?? mats.skin;
-  const owned: Material[] = [skin, eyes, teeth];
+  const drawn = mats.hair[Math.floor(rand() * mats.hair.length)] ?? mats.hair[0] ?? mats.skin;
+  // Couleur de cheveux imposée (figure de cérémonie, dette n° 72) : copie du matériau tiré, teinte remplacée.
+  const hair = opts.hair && drawn instanceof MeshStandardMaterial ? Object.assign(drawn.clone(), { color: new Color(opts.hair) }) : drawn;
+  const owned: Material[] = [skin, eyes, teeth, ...(hair !== drawn ? [hair] : [])];
   const head = skin.clone();
   head.vertexColors = true;
   owned.push(head);

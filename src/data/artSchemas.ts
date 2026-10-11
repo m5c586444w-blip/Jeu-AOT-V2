@@ -354,6 +354,13 @@ export const FiguresR3FileSchema = z
     fantassins_paradis: z
       .object({ defaut: z.enum(SOLDIER_OUTFIT_IDS), par_region: z.record(z.string().min(1), z.enum(SOLDIER_OUTFIT_IDS)), canon: CanonSchema, note: z.string().min(1) })
       .strict(),
+    /** Dette n° 72 : remise des médailles par la reine Historia (planche `r3-medailles`). */
+    ceremonie_medailles: z
+      .object({
+        reine: z.object({ taille: z.number().min(1.3).max(1.8), cheveux: Hex, robe: Hex, cape: Hex, souliers: Hex, canon: CanonSchema, note: z.string().min(1) }).strict(),
+        decor: z.object({ canon: CanonSchema, note: z.string().min(1) }).strict(),
+      })
+      .strict(),
     /** Dette n° 62 : officier de Paradis (tenue de ses hommes, sans fusil) ; fantassins d'autres nations (base recolorée). */
     variantes: z.array(OutfitVariant).min(1),
   })

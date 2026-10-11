@@ -508,6 +508,21 @@
     "canon": "A",
     "note": "Fantassins de Paradis en bataille (dette n° 62) : la Brigade Militaire tient l'intérieur du mur Sina (C) ; une bataille dans une province de Sina la montre (choix de rendu A) ; ailleurs, la Garnison."
   },
+  "ceremonie_medailles": {
+    "reine": {
+      "taille": 1.45,
+      "cheveux": "#D8B868",
+      "robe": "#ECE6D8",
+      "cape": "#2E3F6E",
+      "souliers": "#B8AE9C",
+      "canon": "?",
+      "note": "Reine Historia (C : remise des médailles aux survivants du Corps, cheveux blonds, petite taille) ; taille exacte, robe et cape de cérémonie : ? (redessinées par le projet, aucune image de l'œuvre)."
+    },
+    "decor": {
+      "canon": "A",
+      "note": "Salle d'audience du palais, tapis, trône, colonnes, bannières sans armoiries, chandeliers ; nombre et place des figures, médaille ronde à ruban : mise en scène du projet (A)."
+    }
+  },
   "variantes": [
     {
       "id": "officier_paradis",

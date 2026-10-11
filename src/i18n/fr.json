@@ -1911,6 +1911,7 @@
   "evt.later": "Différer",
   "evt.see_ceremony": "Voir la cérémonie (3D)",
   "evt.ceremony_close": "Fermer",
+  "evt.ceremony.medals": "Remise des médailles par la reine Historia",
   "evt.ceremony_note": "Scène en trois dimensions : quelques secondes de chargement ; glisser pour tourner autour.",
   "evt.pending_line": "décision due sous {n} jours",
   "evt.pending_line_today": "décision due aujourd'hui",
