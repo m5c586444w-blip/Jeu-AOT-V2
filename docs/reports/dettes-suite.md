@@ -82,3 +82,14 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
   bout arrondi de face ; plus d'orteils lisibles.
   - Défauts : bout de botte un peu gonflé (forme de sabot) ; semelle plate sans cambrure ; jointure nette entre la
     semelle avant et la semelle arrière quand le pied plie ; quelques points de peau qui percent encore sur un pied.
+
+## Dette n° 72 (suite) : équipement anti-personnel de 854
+- Tenue de 854 : deux canons courts accolés sur chaque poignée de l'équipement de manœuvre, toujours portés (présence C,
+  forme `?`, Q18) ; les lames restent pour la coupe que joue la simulation (A). Planche `r3-uniformes` : la dernière
+  colonne montre la tenue de 854 avec lances de foudre et canons.
+- `npm run verify` (`dette72ap-verify.log`) : « Tests  780 passed (780) », `canon:check` conforme, `EXIT=0` ; planche
+  (`dette72ap-planche.log`) : « OK  r3-uniformes », `EXIT=0`.
+- **`r3-uniformes.png`** (colonne 854, recadrée) : deux soldats en tenue sombre, Ailes de la liberté aux manches et à la
+  poitrine, lances le long des avant-bras, petits canons noirs aux poignées.
+  - Défauts : canons très petits à cette distance ; pointes des lances qui pendent sous les mains ; lames peu lisibles
+    sur le fond clair ; bouteilles de gaz qui dépassent des hanches.

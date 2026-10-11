@@ -214,6 +214,15 @@ export function buildHumanSoldier(t: HumanTemplate, seed: number, mats: SoldierM
     attach(`hand_${side}`, holder, hand.clone().addScaledVector(dir, 0.07 * k));
     holder.add(piece(gear("lame"), mats.steel, "lame"));
     blades.push(holder);
+    // Dette n° 72 : équipement anti-personnel de 854 (présence : C ; forme : ?) : deux canons courts sur la poignée, toujours
+    // portés (ils font partie de la poignée), dans l'axe de l'avant-bras.
+    if (outfit?.anti_personnel) {
+      const ap = new Object3D();
+      ap.name = "canons-ap";
+      ap.quaternion.copy(holder.quaternion);
+      attach(`hand_${side}`, ap, hand.clone().addScaledVector(dir, 0.04 * k));
+      ap.add(piece(gear("canons_ap"), mats.steel, "canons-ap"));
+    }
     // Dette n° 72 : lance de foudre le long de l'avant-bras (cachée tant que le soldat n'en porte pas : `setSpears`).
     const elbow = J(`lowerarm_${side}`);
     const spear = new Object3D();
@@ -592,7 +601,7 @@ export function buildHairCap(body: HumanBody, mat: Material, thickness: number, 
 
 // ——— Équipement du projet (formes de R1, refaites plus fines) ———
 
-type Gear = "reservoir" | "lanceur" | "fourreau" | "lame" | "bonbonne" | "lance";
+type Gear = "reservoir" | "lanceur" | "fourreau" | "lame" | "bonbonne" | "lance" | "canons_ap";
 const gearCache = new Map<Gear, BufferGeometry>();
 const at = (g: BufferGeometry, x: number, y: number, z: number, rx = 0, ry = 0, rz = 0): BufferGeometry =>
   g.applyMatrix4(new Matrix4().compose(new Vector3(x, y, z), new Quaternion().setFromEuler(new Euler(rx, ry, rz)), new Vector3(1, 1, 1)));
@@ -642,6 +651,16 @@ export function gear(k: Gear): BufferGeometry {
         at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, 0.02),
         at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, -0.02, 0, (2 * Math.PI) / 3, 0),
         at(new BoxGeometry(0.004, 0.07, 0.04), 0, 0.04, -0.02, 0, (-2 * Math.PI) / 3, 0),
+      ]);
+      break;
+    case "canons_ap":
+      // Canons de l'équipement anti-personnel (dette n° 72 ; forme redessinée par le projet : ?) : deux tubes courts accolés
+      // au-dessus de la poignée, une culasse et un pontet.
+      g = merge([
+        at(new CylinderGeometry(0.011, 0.011, 0.2, 10), 0.012, 0.1, 0.03),
+        at(new CylinderGeometry(0.011, 0.011, 0.2, 10), -0.012, 0.1, 0.03),
+        at(new BoxGeometry(0.05, 0.05, 0.035), 0, 0.0, 0.03),
+        at(new BoxGeometry(0.008, 0.035, 0.03), 0, -0.01, -0.005),
       ]);
       break;
     case "lame": {

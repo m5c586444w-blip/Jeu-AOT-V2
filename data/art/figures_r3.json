@@ -438,8 +438,9 @@
       "embleme": "ailes",
       "odm": true,
       "lames": "mains",
+      "anti_personnel": true,
       "canon": "?",
-      "note": "Tenues sombres du Corps en 854, opération de Liberio comprise (présence : C ; coupe et teintes : ?, Q18) ; sans cape (?) ; Ailes de la liberté redessinées par le projet (D-163). Choisie pour les soldats de manœuvre des batailles à partir de 854 (A).",
+      "note": "Tenues sombres du Corps en 854, opération de Liberio comprise (présence : C ; coupe et teintes : ?, Q18) ; sans cape (?) ; Ailes de la liberté redessinées par le projet (D-163). Choisie pour les soldats de manœuvre des batailles à partir de 854 (A). Équipement anti-personnel à armes à feu (présence : C ; forme : ?, Q18) : deux canons courts sur chaque poignée, redessinés par le projet ; les lames restent pour la coupe que joue la simulation (A).",
       "corpulence": {
         "age": [0.5, 0.62],
         "muscle": [0.55, 0.85],

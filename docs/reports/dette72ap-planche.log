@@ -1,0 +1,9 @@
+
+> murs-et-sang@0.0.1 smoke:r3
+> tsx src/tools/smoke-r3.ts --captures
+
+Captures : docs/screenshots/
+  OK  r3-uniformes : planche prête en 34.1 s, 6 étiquettes
+(bataille non jouée : R3_BATAILLE=0)
+smoke:r3 : tout est conforme.
+EXIT=0

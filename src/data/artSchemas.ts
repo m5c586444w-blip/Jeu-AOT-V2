@@ -304,6 +304,8 @@ const Outfit = z
     coiffe: Headgear.optional(),
     odm: z.boolean(),
     lames: z.enum(["mains", "fourreau"]).optional(),
+    /** Équipement anti-personnel de 854 (dette n° 72) : canons courts sur les poignées de l'équipement de manœuvre. */
+    anti_personnel: z.boolean().optional(),
     fusil: z.enum(["dos", "mains"]).optional(),
     sac: Hex.optional(),
     /** Emblème du corps (dette n° 72) : dos, haut des manches, poche de poitrine ; sur la cape au dos si elle en a une. */

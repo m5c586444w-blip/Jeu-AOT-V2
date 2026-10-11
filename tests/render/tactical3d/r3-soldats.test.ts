@@ -231,6 +231,19 @@ describe("soldats de R3 : sept tenues (R3.2, dette n° 72)", () => {
     expect(named(soldiers.get("marley_infanterie") as HumanSoldier, "lance-foudre")).toHaveLength(0);
   });
 
+  it("équipement anti-personnel de 854 (dette n° 72) : deux canons sur chaque poignée, pour la tenue de 854 seulement", () => {
+    const s = soldiers.get("exploration_854") as HumanSoldier;
+    const list = named(s, "canons-ap").filter((o) => (o as unknown as { type: string }).type !== "Mesh");
+    expect(list.map(carrier).sort()).toEqual(["hand_l", "hand_r"]);
+    expect(outfit("exploration_854").anti_personnel).toBe(true);
+    for (const id of OUTFIT_IDS) if (id !== "exploration_854") expect(named(soldiers.get(id) as HumanSoldier, "canons-ap"), id).toHaveLength(0);
+    // Toujours portés (partie de la poignée), au repos comme au combat.
+    for (const pose of ["attente", "frappe", "vol"] as const) {
+      s.setPose(pose, 0.3);
+      expect(list.every((o) => (o as unknown as { visible: boolean }).visible), pose).toBe(true);
+    }
+  });
+
   it("au tir, le fusil est dans les mains (crosse à la main droite, canon vers la main gauche) ; pieds au sol", () => {
     // Fantassins de Paradis (Garnison, dette n° 72) : le fusil passe du dos aux mains pour tirer.
     const g = soldiers.get("garnison") as HumanSoldier;
