@@ -486,6 +486,10 @@ export async function bootGame(): Promise<void> {
     },
     keyOf: (id) => (id === "temps" ? keyOf("speed_1") : keyOf(id)),
     finish: (how) => {
+      // Dette n° 45 : à la fin du guide (terminé ou quitté), le registre et le dossier ouverts par ses étapes sont refermés ;
+      // le temps reste en pause (le joueur reprend à son rythme, Espace ou boutons de vitesse).
+      registers?.close();
+      dossier.close();
       const p = loadSettings(safeStorage()).tutorial;
       // Première fin du guide : aides activées (D-137) ; un guide rejoué garde le choix fait dans les options.
       savePrefs({ ...p, done: how === "done" ? true : p.done, disabled: how === "quit", hints: p.done || p.disabled ? p.hints : true });

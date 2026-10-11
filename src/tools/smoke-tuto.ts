@@ -217,6 +217,9 @@ try {
   await page.waitForFunction(() => !document.querySelector(".tuto:not([hidden])"), null, { timeout: 5000 });
   const p3 = await prefs(page);
   expect(!!p3 && p3.disabled && p3.hints, `guide quitté à l'étape 2 : désactivé, aides activées (${JSON.stringify(p3)})`);
+  // Dette n° 45 : ni registre ni dossier de province laissés ouverts par le guide.
+  const leftOpen = await page.evaluate(() => [".registre-panneau:not([hidden])", ".dossier:not([hidden])"].filter((q) => document.querySelector(q)).join(", "));
+  expect(leftOpen === "", `guide quitté : registre et dossier refermés (${leftOpen || "rien d'ouvert"})`);
   await page.close();
 
   // ——— 5. 1920×1080 et 3840×2160 ———
