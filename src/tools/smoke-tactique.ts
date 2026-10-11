@@ -273,11 +273,16 @@ try {
     await registry(page);
     expect((await page.locator(".exp-bataille[data-pending]").count()) === 1 && (await page.locator(".exp-carte .exp-phase").innerText()) === before, "la campagne reste en pause tant que la bataille n'est pas résolue");
     await page.locator('.exp-bataille [data-action="jouer"]').click();
-    await page.waitForSelector(".bataille canvas", { timeout: 30000 });
+    // Dette n° 46 : écran temps réel (vue 3D), comme les rencontres d'armées.
+    await page.waitForSelector(".bataille--rt canvas", { timeout: 60000 });
     const title = await page.locator(".bataille-titre").innerText();
-    expect(title.startsWith("Expédition n°"), `écran de bataille lié : « ${title} »`);
-    await page.locator(".carte-escouade button[data-order='couvrir'] >> nth=0").click();
-    await speed(page, "2");
+    const vue = await page.getAttribute(".bataille", "data-vue");
+    expect(title.startsWith("Expédition n°") && vue === "3d", `écran de bataille lié (temps réel, vue ${vue ?? "?"}) : « ${title} »`);
+    await page.locator(".rt-unite >> nth=0").click();
+    await page.keyboard.press("KeyC");
+    const ordered = await page.waitForFunction(() => Number(document.querySelector<HTMLElement>(".bataille")?.dataset["ordres"] ?? "0") >= 1, undefined, { timeout: 10000 }).then(() => true).catch(() => false);
+    expect(ordered, "ordre « couvrir » donné à la première escouade (touche C)");
+    await page.locator('.bataille-vitesse[data-speed="2"]').click();
     await page.waitForTimeout(2500);
     await audit(page, "bataille liée");
     await page.screenshot({ path: `${OUT}/p4-bataille-liee.png` });

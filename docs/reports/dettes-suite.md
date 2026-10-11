@@ -335,3 +335,21 @@ Les corrections de la 3D (n° 74, 75, 55) sont décrites dans `CONFORMITE-3D.md`
     alignés, identiques d'une rangée à l'autre ; habitants très petits.
 - **`vue-grand-marche.png`** : la grande halle basse, ouverte, toit de tuiles brun clair, et un grand arbre à droite.
   - Défauts : toit de la halle uniforme, sans tuiles visibles ; poteaux serrés vus de loin ; ciel identique à l'autre vue.
+
+## Dette n° 46 (en partie) : batailles d'expédition en 3D (D-173)
+- « Jouer » une bataille d'expédition ouvre l'écran temps réel (vue 3D par défaut), avec le nom de la province au carnet ;
+  les ordres sont rejoués par la simulation comme avant. Restent sur l'écran de P4 : la bataille d'essai classique et le guide.
+- Cartes d'escouade de l'écran de P4 : gaz et stress arrondis à l'entier (le stress à une décimale réécrivait la carte à
+  chaque image ; poste « interface » du contrôle des 300 unités de 1,8 à 1,4 ms).
+- `smoke:tactique`, premier passage (`dette46-smoke-tactique.log`) : partie expédition conforme, mais KO « 300 unités :
+  temps JS par image p95 8.00 ms < 8 ms » (interface 1,80 ms) ; après l'arrondi, second passage
+  (`dette46-smoke-tactique-2.log`) : « p95 7.60 ms < 8 ms », « écran de bataille lié (temps réel, vue 3d) : « Expédition n° 1
+  — bataille de la Forêt des Arbres Géants » », « ordre « couvrir » donné à la première escouade (touche C) », « bataille
+  validée puis reportée dans la campagne : « J3 — Bataille jouée à la Forêt des Arbres Géants : 1 morts, 1 Titans abattus
+  (victoire). » », « smoke:tactique : tout est conforme. », `EXIT=0`. Marge du contrôle de 300 unités mince (rendu 3,5 ms).
+- `npm run verify` (`dette46-verify.log`) : « Tests  801 passed (801) », `EXIT=0`.
+- **`p4-bataille-liee.png`** : forêt des Arbres Géants en 3D vue de haut, troncs et houppiers, ombres portées ; pastilles des
+  escouades 2 à 17, Titan « T » au nord ; carnet « Début de la bataille — Forêt des Arbres Géants — 12 hommes contre 1 Titan
+  — de jour. ».
+  - Défauts : arbres en sucettes (tronc lisse, boule de feuillage), bien moins hauts que 80 m à l'œil ; sol olive uniforme ;
+    trace rouge isolée à gauche ; « 1 morts » au journal de l'expédition (corrigé ensuite : accord en nombre dans dix textes de pertes).

@@ -199,9 +199,10 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
       const up = members.filter((s) => s.mode !== "mort" && s.mode !== "fui");
       const avg = (f: (s: SoldierUnit) => number): number => (up.length ? up.reduce((a, s) => a + f(s), 0) / up.length : 0);
       setText(refs.men, `${up.length}/${members.length}`);
-      setText(refs.gas, formatNumber(avg((s) => s.gas)));
+      // Valeurs entières : moins d'écritures dans la page (le stress à une décimale changeait à chaque image).
+      setText(refs.gas, formatNumber(Math.round(avg((s) => s.gas))));
       setText(refs.blades, formatNumber(avg((s) => s.pairs)));
-      setText(refs.stress, formatNumber(avg((s) => s.stress)));
+      setText(refs.stress, formatNumber(Math.round(avg((s) => s.stress))));
       // Un ordre donné en pause s'affiche tout de suite (il s'applique au prochain pas).
       const current = orders.filter((x) => x.squad === sq.id && x.tick >= bt.state.tick).at(-1)?.order ?? sq.order;
       setText(refs.order, t(`order.${current}`));

@@ -156,7 +156,9 @@ export class ExpeditionsPanel implements Panel {
     box.append(el("p", "registre-alerte", t("exp.battle_pending", { province: provinceName(this.ctx.world, p.province), titan: cls ? t(cls.name_key) : p.titan, n: p.setup.soldiers.length, group: p.group })));
     const title = t("exp.battle_title", { n: e.number, province: provinceName(this.ctx.world, p.province) });
     const play = button(t("exp.battle_play"), () => {
-      void this.ctx.playBattle(p.setup, title, true).then((orders) => {
+      // Dette n° 46 : la bataille d'une expédition se joue sur l'écran temps réel (vue 3D, ou 2D selon les options), comme les
+      // rencontres d'armées ; les ordres sont rejoués à l'identique par la simulation. La province nomme le lieu au carnet.
+      void this.ctx.playBattle(p.setup, title, true, true, p.province).then((orders) => {
         if (orders) void this.ctx.dispatch({ type: "ResolveBattle", expedition: e.id, mode: "jouer", orders }).then(() => this.redraw());
       });
     }, "registre-bouton principal petit");

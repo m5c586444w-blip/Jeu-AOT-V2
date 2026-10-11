@@ -4,7 +4,7 @@
 
 ## Index
 
-172 décisions, de D-01 (2026-10-02) à D-172 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
+173 décisions, de D-01 (2026-10-02) à D-173 (2026-10-11). Une ligne par décision, dans l'ordre du journal.
 
 - **D-01** (10-02) — Format des identifiants d'événements
 - **D-02** (10-02) — Identifiants de provinces
@@ -178,6 +178,7 @@
 - **D-170** (10-11) — Dette n° 72 (suite) : tenue sombre de 854, lances de foudre, critère de silhouette en bataille
 - **D-171** (10-11) — Dette n° 62 : officiers de Paradis, Brigade Militaire dans Sina, Alliés et Hizuru en bataille
 - **D-172** (10-11) — Dettes n° 70 et 72 : aube, crépuscule et pluie en bataille 3D, capuches levées
+- **D-173** (10-11) — Dette n° 46 : batailles d'expédition sur l'écran temps réel
 
 ## 2026-10-02 — D-01 Format des identifiants d'événements
 - Contexte : formats concurrents (`evt_trost_breach_845` en 05, `evt_850_police_tech_seized` en 13/14, `E37` en 12).
@@ -1708,3 +1709,11 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - Intensités (A) : au crépuscule, l'hémisphère éclaire deux fois plus que l'heure de l'essai 3D ramenée à la bataille, pour
   garder environ 40 % de l'éclairement du jour au sol (lisibilité).
 - **Réversible** : oui.
+
+## 2026-10-11 — D-173 Dette n° 46 : batailles d'expédition sur l'écran temps réel
+- **Choix** : la bataille jouée d'une expédition (« Jouer » dans le registre) ouvre l'écran temps réel (vue 3D, ou 2D selon
+  les options) au lieu de l'écran de P4, comme les rencontres d'armées (révise le partage de D-140). Les ordres de l'écran
+  temps réel sont des `TimedOrder` rejoués par `runBattle` : la résolution (`ResolveBattle`) ne change pas.
+- La « bataille d'essai » classique et le guide restent sur l'écran de P4 (banc d'essai de la vue 2D, `smoke:tactique`,
+  `smoke:tuto`).
+- **Réversible** : oui (un argument de `playBattle`).
