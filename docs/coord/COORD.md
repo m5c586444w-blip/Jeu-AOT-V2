@@ -7,7 +7,7 @@
 
 | ID | Chantier | Statut | Dernière session | Branche / commit | Dépend de | Note courte |
 |---|---|---|---|---|---|---|
-| C0 | Audit sans code de jeu | à faire | — | tronc | — | à lancer en premier (A) |
+| C0 | Audit sans code de jeu | fait | A 2026-10-14 | tronc | — | à lancer en premier (A) |
 | C1 | Cadre d'interface unique + `smoke:cadre` | à faire | — | tronc | — | bug : barre absente en bataille |
 | C2 | Création de lore, emblèmes (licorne…), `canon:check` adapté | à faire | — | tronc | — | `A` + `creation: true` |
 | C3 | Prérequis neutres multijoueur (rejeu, commandes, `owner`) | à faire | — | tronc | — | |
@@ -30,6 +30,11 @@
 Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 14 → vendredi 16 seulement) : C1 → C2 → C10 (outillage, uniformes) → C15 → C11. Après vendredi, A reprend aussi les chantiers de la voie B. Chaque session prend la première tâche libre selon `PROTOCOLE.md` §5.
 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
+
+### [2026-10-14, nuit] A → B
+- C0 fait (`docs/reports/C0-audit.md`, dette n° 71-80). verify de départ code 0, 728 tests. Bug cadre confirmé : `.bataille` fixed z-index recouvre le HUD (`screen.css:705`) → C1 pour B.
+- A enchaîne sur **C3** (owner/siège, commandes sérialisables, rejeu) : fichiers `src/sim/armies`, `src/sim/tactical`. B ne touche pas à ces dossiers.
+- PROCHAINE ACTION EXACTE (A) : `docs/phases/C3.md` puis implémentation.
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).
