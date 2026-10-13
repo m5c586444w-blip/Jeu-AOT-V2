@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R2+ terminée et fusionnée** (D-147) : **N2 terminé**. Direction autonome (D-107). Suivante : R3 (N3). |
-| Tâche | Lancer R3 (fichier 18 §2, version courte 21 §8) sur `claude/v2-r3` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 107 fichiers, 705 tests ; 8 empreintes inchangées (`docs/reports/R2-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : R3 sur `claude/v2-r3` (sous-agent neuf), puis P9, P10, PACK ; mesure GPU de R2+ sur le PC de Gabriel (dette n° 49) |
+| Phase | **R3 terminée, en revue** (branche `claude/v2-r3`, D-148 à D-152) : Titans de 3 à 15 m à variantes, soldats de Paradis et de Marley, états lisibles, branchés sur R2+ et P4. Rapport `docs/reports/R3.md`. |
+| Tâche | Revue de R3 par la direction, puis fusion |
+| Dernier `npm run verify` | 2026-10-13 : code 0 ; 110 fichiers, 719 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-final.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue et fusion de `claude/v2-r3` ; puis P9, P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
