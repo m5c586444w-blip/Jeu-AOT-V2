@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **PACK terminée** (application Windows Electron : `npm run package:win`, `smoke:pack` ; D-164). Feuille de route V2 achevée (N1 à N3). Suite : dette n° 72 (tenues des soldats, demande de l'utilisateur) et contrôle de conformité de la 3D, puis dettes. |
-| Tâche | Dettes n° 74, 75, 55 (décor), 56, 57, 58, 11, 38, 13, 14, 62, 65 corrigées ; 47 (avertissements WebGL du repli 2D) ; 70 (menu contextuel de la carte, surimpressions de débogage), 44 (aides des calques et des notifications) ; anglais complet (E-07) ; cône d'incertitude des expéditions (F-STR-08) ; 12 (halles de Quinta), 15 (noms sur les murs), 46 (expéditions en 3D), Arbres Géants, chevaux (n° 65), lames brisées, jets de gaz, 19 (fond du menu), 21 (libellés, pluriels, signes), 55 (nom du lieu), 70 et 72 (aube, crépuscule, pluie en bataille) en partie ; 31 et 45 en partie (D-166 à D-173) ; dettes suivantes |
-| Dernier `npm run verify` | 2026-10-11 : code 0 ; 137 fichiers, 816 tests (`docs/reports/cone-verify.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : dettes restantes par gravité (hors `src/sim`, figé depuis R2), puis résumé final des 3 jours le 2026-10-12 vers 19:35 UTC, sur `claude/intelligent-feynman-8ekib4` (mandat autonome jusqu'au 2026-10-12 19:33 UTC, D-148). À faire par Gabriel : `npm run package:win` sur Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 49, 64, 71, 73) |
+| Phase | **Mandat de trois jours terminé** (2026-10-09 → 2026-10-12, D-148) : R3, P9, P10, PACK closes, puis dettes ; résumé final `docs/reports/RESUME-3-JOURS.md` et page publiée (https://claude.ai/artifact/81UiqPs9xQk9qHtQFpo9VH). Aucune phase ouverte depuis. |
+| Tâche | Dettes n° 74, 75, 55 (décor), 56, 57, 58, 11, 38, 13, 14, 62, 65 corrigées ; 47 (avertissements WebGL du repli 2D) ; 70 (menu contextuel de la carte, surimpressions de débogage), 44 (aides des calques et des notifications) ; anglais complet (E-07) ; cône d'incertitude des expéditions (F-STR-08) ; 12 (halles de Quinta), 15 (noms sur les murs), 46 (expéditions en 3D), Arbres Géants, chevaux (n° 65), lames brisées, jets de gaz, 19 (fond du menu), 21 (libellés, pluriels, signes), 55 (nom du lieu), 70 et 72 (aube, crépuscule, pluie en bataille) en partie ; 31 et 45 en partie (D-166 à D-173) ; recherche globale (F-UIX-06, 2026-10-13) ; dettes suivantes |
+| Dernier `npm run verify` | 2026-10-13 : code 0 ; 138 fichiers, 819 tests (`docs/reports/recherche-verify.log`) |
+| Prochaine étape | ATTENTE DE L'UTILISATEUR (fin du mandat, D-148) : revue du résumé des trois jours et de P9 ; décision sur la dette n° 60 (Titans et fantassins à travers les bâtiments, touche `src/sim`) ; feu vert ou non pour LC-B à LC-D. À faire sur son PC : `npm run package:win` sous Windows (`docs/LANCER_SUR_WINDOWS.md`) ; mesures GPU (dettes n° 1, 49, 64, 71, 73). Dettes candidates sans toucher à la simulation : F-STR-19 (liste triable des provinces), F-STR-11 (règle des distances). |
 
 ## Mandat autonome de trois jours (2026-10-09 → 2026-10-12, D-148)
 - Consigne de l'utilisateur : continuer sans intervention, d'après les documents et ses décisions ; reprise automatique au
@@ -16,6 +16,7 @@
 - P10 terminée le 2026-10-10 (`docs/reports/P10.md`) : commits `ef2c66a` (P10.1), `7fa8d15` (P10.2), `a309bd0` (P10.4–P10.5), `5f17fb0` (CONFORMITE), `8d8b75e`, `7152b0b`, `e7d14e7` (P10.7).
 - PACK terminée le 2026-10-10 (`docs/reports/PACK.md`) : commits `32e9d3a`, `d03b882` et le commit de fin de phase ; Windows construit depuis Linux, non lancé.
 - Dette n° 72 (uniformes fidèles à l'univers) faite pour l'essentiel le 2026-10-10 (`docs/reports/dette-72.md`, D-165) ; restent les tenues de 854, l'équipement anti-personnel, les cérémonies en jeu.
+- Interruption : du 2026-10-11 vers 14:00 UTC au 2026-10-13 17:30 UTC, la session a été relancée à répétition sans reprendre la tâche ; reprise le 13 pour finir la recherche globale (`ea1d5dd`) et écrire le résumé final (`docs/reports/RESUME-3-JOURS.md`).
 - Contrôle de conformité de la 3D le 2026-10-10 (`docs/reports/CONFORMITE-3D.md`) : conforme pour l'architecture, les licences, les soldats, les environnements et le droit d'auteur ; partiel pour la latence (GPU réel jamais mesuré), les lieux, les Titans et le décor de la bataille.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
