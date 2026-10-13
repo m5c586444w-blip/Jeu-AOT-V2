@@ -269,3 +269,70 @@ export const TitansFileSchema = z
     for (const [id, h] of [["titan_mur", 50], ["rod_reiss", 120], ["colossal", 60]] as const) if (!f.speciaux.some((x) => x.id === id && x.hauteur_m === h)) ctx.addIssue({ code: "custom", message: `${id} (${h} m) manquant` });
   });
 export type TitansFile = z.infer<typeof TitansFileSchema>;
+
+/** Figures de R3 (`data/art/figures.json`) : variantes de proportions et de peau des Titans, seuils d'états, tenues des soldats. */
+export const OUTFIT_IDS = ["bataillon", "garnison", "brigade", "marley_infanterie", "marley_officier"] as const;
+const OutfitId = z.enum(OUTFIT_IDS);
+const NullableHex = Hex.nullable();
+export const FiguresFileSchema = z
+  .object({
+    titans: z
+      .object({
+        classes: z
+          .object({
+            canon: CanonSchema,
+            note: z.string().min(1),
+            traits: z.record(z.string(), z.object({ trait: z.string().min(1), modifs: z.partialRecord(z.enum(TITAN_PROPORTIONS), z.number()).refine((m) => Math.abs((m.legs ?? 0) + (m.torso ?? 0) + (m.neck ?? 0) + (m.head ?? 0)) < 1e-6, "les modifications de jambes, torse, cou et tête s'annulent") }).strict()),
+          })
+          .strict(),
+        proportions: z
+          .array(
+            z
+              .object({
+                id: z.string().regex(/^[a-z0-9_]+$/),
+                canon: CanonSchema,
+                note: z.string().min(1),
+                modifs: z.partialRecord(z.enum(TITAN_PROPORTIONS), z.number()).refine((m) => Math.abs((m.legs ?? 0) + (m.torso ?? 0) + (m.neck ?? 0) + (m.head ?? 0)) < 1e-6, "les modifications de jambes, torse, cou et tête s'annulent"),
+                allure: z.object({ stride: z.number().positive(), walkRate: z.number().positive(), armSwing: z.number().positive(), headTilt: z.number() }).partial().strict(),
+                boiterie: Share,
+                roulis: Share,
+                expression: Expression,
+                cheveux: z.boolean(),
+              })
+              .strict(),
+          )
+          .length(3),
+        peaux: z.array(z.object({ id: z.string().regex(/^[a-z0-9_]+$/), canon: CanonSchema, note: z.string().min(1), teinte: Hex, marbrure: Share, veines: Share, rougeur: Share, rugosite: Share }).strict()).min(2),
+      })
+      .strict(),
+    etats: z
+      .object({ canon: CanonSchema, note: z.string().min(1), devore_dernieres_s: z.number().positive(), chute_s: z.number().positive(), fondu_s: z.number().positive(), course_m_s: z.number().positive(), coupe_s: z.number().positive(), chute_soldat_m_s: z.number().positive() })
+      .strict(),
+    tenues: z
+      .array(
+        z
+          .object({
+            id: OutfitId,
+            camp: z.enum(["paradis", "marley"]),
+            canon: CanonSchema,
+            note: z.string().min(1),
+            veste: Hex,
+            pantalon: Hex,
+            cape: NullableHex,
+            manteau: NullableHex,
+            echarpe: NullableHex,
+            couvre_chef: z.enum(["aucun", "kepi", "casque", "casquette"]),
+            couvre_chef_teinte: NullableHex,
+          })
+          .strict(),
+      )
+      .length(OUTFIT_IDS.length),
+    regle_tenues: z
+      .object({ canon: CanonSchema, note: z.string().min(1), soldat_odm: OutfitId, paradis: z.record(z.string(), OutfitId), adverse: OutfitId, adverse_chef: OutfitId })
+      .strict(),
+  })
+  .strict()
+  .superRefine((f, ctx) => {
+    for (const id of OUTFIT_IDS) if (!f.tenues.some((t) => t.id === id)) ctx.addIssue({ code: "custom", message: `tenue ${id} manquante` });
+  });
+export type FiguresFile = z.infer<typeof FiguresFileSchema>;

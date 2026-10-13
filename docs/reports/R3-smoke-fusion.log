@@ -1,0 +1,30 @@
+
+> murs-et-sang@0.0.1 smoke:r3
+> tsx src/tools/smoke-r3.ts
+
+Captures : docs/screenshots/.smoke/ (hors git)
+[planche titans] 1920×1080
+  OK  planche titans : 15 figures, prête en 9.6 s
+[planche soldats] 1920×1080
+  OK  planche soldats : 15 figures, prête en 5.9 s
+[planche poses] 1920×1080
+  OK  planche poses : 16 figures, prête en 6.3 s
+[compagnie, ville] 1366×768
+  OK  vue 3D prête en 4.7 s (appels 646 · triangles 355058 · détail 0 · foule 0 · repères 335 · chargement)
+  OK  corps de base chargés 1.4 s après « prêt » ; appels 143 · triangles 379474 · détail 0 · foule 20 · repères 315 · corps de base 2.2 s, Titans 5/5, lots 2
+  OK  gros plan (Titan n° 0 (7.3 m), 0 soldats à moins de 30 m) : appels 412 · triangles 1452084 · détail 6 · foule 321 · repères 0 · corps de base 2.2 s, Titans 5/5, lots 12
+[compagnie, ville] 1920×1080
+  OK  vue 3D prête en 6.4 s (appels 646 · triangles 355058 · détail 0 · foule 0 · repères 335 · chargement)
+  OK  corps de base chargés 1.9 s après « prêt » ; appels 146 · triangles 410018 · détail 0 · foule 34 · repères 301 · corps de base 3.2 s, Titans 5/5, lots 3
+  OK  gros plan (Titan n° 0 (7.3 m), 42 soldats à moins de 30 m) : appels 409 · triangles 1315842 · détail 4 · foule 303 · repères 0 · corps de base 3.2 s, Titans 5/5, lots 12
+[compagnie, ville] 3840×2160
+  OK  vue 3D prête en 14.1 s (appels 646 · triangles 355058 · détail 0 · foule 0 · repères 335 · chargement)
+  OK  corps de base chargés 3.7 s après « prêt » ; appels 147 · triangles 488288 · détail 0 · foule 70 · repères 265 · corps de base 7.6 s, Titans 5/5, lots 3
+  OK  gros plan (Titan n° 0 (7.3 m), 0 soldats à moins de 30 m) : appels 288 · triangles 1164516 · détail 2 · foule 292 · repères 0 · corps de base 7.6 s, Titans 5/5, lots 11
+[bataille P4, vue 3D] 1366×768
+  OK  bataille P4 en vue 3D, pas 93 : appels 86 · triangles 197830 · détail 0 · foule 0 · repères 15 · corps de base 2.1 s, Titans 3/3, lots 0
+  ..  1366×768 : prêt 4.7 s · corps détaillés +1.4 s · 342 unités · JS p95 594.90 ms · appels 143 · triangles 379474 · détail 0 · foule 20 · repères 315 · corps de base 2.2 s, Titans 5/5, lots 2
+  ..  1920×1080 : prêt 6.4 s · corps détaillés +1.9 s · 342 unités · JS p95 470.70 ms · appels 146 · triangles 410018 · détail 0 · foule 34 · repères 301 · corps de base 3.2 s, Titans 5/5, lots 3
+  ..  3840×2160 : prêt 14.1 s · corps détaillés +3.7 s · 342 unités · JS p95 493.50 ms · appels 147 · triangles 488288 · détail 0 · foule 70 · repères 265 · corps de base 7.6 s, Titans 5/5, lots 3
+  OK  0 erreur console
+smoke:r3 : tout est conforme.

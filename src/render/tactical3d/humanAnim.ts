@@ -10,7 +10,30 @@ import type { HumanBody } from "./humanBase";
  * - Titans : marche, course, debout, saisie, abattu (face contre terre), allongé (rampe), buste.
  * Les pieds se posent au sol (sauf en vol, à l'accroche, abattu, allongé) : le bassin est descendu ou monté d'autant.
  */
-export type HumanPose = "attente" | "marche" | "course" | "sol" | "vol" | "accroche" | "frappe" | "debout" | "saisie" | "abattu" | "allonge" | "buste";
+export type HumanPose =
+  | "attente"
+  | "marche"
+  | "course"
+  | "sol"
+  | "vol"
+  | "accroche"
+  | "frappe"
+  | "debout"
+  | "saisie"
+  | "abattu"
+  | "allonge"
+  | "buste"
+  // R3 : Titans (main à la bouche, à genoux, rampant) ; soldats et fantassins (tir, mort, chute, saisi).
+  | "devore"
+  | "agenouille"
+  | "rampant"
+  | "tir"
+  | "mort"
+  | "chute"
+  | "saisi";
+/** R3 : poses posées sur le sol par les pieds ; poses couchées (point de peau le plus bas au sol) ; les autres sont en l'air. */
+export const FEET_POSES: ReadonlySet<HumanPose> = new Set(["attente", "marche", "course", "sol", "frappe", "debout", "saisie", "buste", "devore", "tir"]);
+export const LYING_POSES: ReadonlySet<HumanPose> = new Set(["abattu", "allonge", "agenouille", "rampant", "mort"]);
 export const SOLDIER_ANIMS: readonly HumanPose[] = ["attente", "marche", "course", "sol", "vol", "accroche", "frappe"];
 export const TITAN_ANIMS: readonly HumanPose[] = ["marche", "course", "debout", "saisie", "abattu", "allonge", "buste"];
 
@@ -24,6 +47,9 @@ export interface Gait {
   hunch: number;
   /** Bouche ouverte (0–1) : mâchoire. */
   mouth: number;
+  /** R3 : boiterie (0–1 : la jambe droite traîne, le bassin plonge de son côté) et roulis des épaules (rad). */
+  limp?: number;
+  sway?: number;
 }
 
 export const SOLDIER_GAIT: Gait = { stride: 0.42, walkRate: 5.4, armSwing: 0.38, shoulderOut: 0.12, headTilt: 0, hunch: 0, mouth: 0 };
@@ -139,13 +165,13 @@ function fingers(p: PoseBuilder, body: HumanBody, side: "l" | "r", curl: number)
 }
 
 /** Pose une animation à l'instant `t` (s). `phase` décale le cycle d'un individu. */
-export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, phase = 0): void {
+export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, phase = 0, grounded = true): void {
   const p = new PoseBuilder(body);
   const root = body.bones["Root"];
   if (root) root.position.copy(body.joints.get("Root") ?? new Vector3());
   const w = Math.sin(t * 2.2 + phase);
   // Voussure (Titans) : pas pour un corps couché, qu'elle soulèverait du sol.
-  const hunch = pose === "abattu" || pose === "allonge" ? 0 : g.hunch;
+  const hunch = pose === "abattu" || pose === "allonge" || pose === "rampant" || pose === "mort" ? 0 : g.hunch;
   p.turn("spine_01", X, hunch * 0.4).turn("spine_02", X, hunch * 0.35).turn("spine_03", X, hunch * 0.25);
   p.turn("neck_01", X, -hunch * 0.5);
   p.turn("jaw", X, 0.42 * g.mouth);
@@ -170,8 +196,14 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     // un pied pointé soulèverait le corps ; le pied libre pointe un peu.
     const stepL = 0.1 + (run ? 1.3 : 0.9) * Math.max(0, cs) ** 1.4;
     const stepR = 0.1 + (run ? 1.3 : 0.9) * Math.max(0, -cs) ** 1.4;
+    // R3 : boiterie : la jambe droite fait un pas plus court et plie moins ; le bassin plonge quand elle porte.
+    const limp = g.limp ?? 0;
+    const aR = a * (1 - 0.55 * limp);
+    const kR = stepR * (1 - 0.6 * limp);
     legs(p, "l", a * sn, stepL, stepL - a * sn + 0.25 * Math.max(0, cs));
-    legs(p, "r", -a * sn, stepR, stepR + a * sn + 0.25 * Math.max(0, -cs));
+    legs(p, "r", -aR * sn, kR, kR + aR * sn + 0.25 * Math.max(0, -cs));
+    if (limp > 0) p.turn("pelvis", Z, -0.16 * limp * Math.max(0, sn)).turn("spine_02", Z, 0.12 * limp * Math.max(0, sn));
+    if (g.sway) p.turn("spine_03", Z, g.sway * Math.sin(ph)).turn("spine_02", Y, -0.5 * g.sway * Math.cos(ph));
     const swing = g.armSwing * (run ? 1.5 : 1);
     arm(p, body, "l", -swing * sn, g.shoulderOut, run ? 1.9 : 0.45 + 0.25 * Math.max(0, -sn));
     arm(p, body, "r", swing * sn, g.shoulderOut, run ? 1.9 : 0.45 + 0.25 * Math.max(0, sn));
@@ -248,6 +280,76 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
     p.turn("neck_01", Y, 1.0);
     p.turn("jaw", X, 0.25);
     p.lay(qa(X, Math.PI / 2));
+  } else if (pose === "devore") {
+    // R3 : main droite portée à la bouche (la proie y est tenue, rien de plus), bras gauche replié, tête penchée vers la main.
+    const br = 0.03 * Math.sin(t * 2.5);
+    legs(p, "l", 0.22, 0.38, 0.12);
+    legs(p, "r", 0.08, 0.26, 0.06);
+    p.turn("spine_01", X, 0.22 + br).turn("spine_02", X, 0.08);
+    arm(p, body, "r", 1.25, 0.32, 2.45, 0.35);
+    arm(p, body, "l", 0.55, 0.25, 1.7);
+    fingers(p, body, "r", 1.25);
+    fingers(p, body, "l", 0.8);
+    p.turn("neck_01", X, 0.18).turn("head", X, 0.12).turn("head", Y, -0.18);
+    p.turn("jaw", X, 0.45 + 0.12 * Math.max(0, Math.sin(t * 5 + phase)));
+  } else if (pose === "agenouille") {
+    // R3 : à genoux (Titan qui s'effondre) : cuisses à la verticale, jambes repliées en arrière, buste penché, bras ballants.
+    legs(p, "l", 0.12, 1.55, -0.6, 0.06);
+    legs(p, "r", 0.02, 1.62, -0.6, 0.08);
+    p.turn("spine_01", X, 0.42).turn("spine_02", X, 0.14);
+    arm(p, body, "l", 0.45, 0.2, 0.4);
+    arm(p, body, "r", 0.35, 0.25, 0.3);
+    fingers(p, body, "l", 0.6);
+    fingers(p, body, "r", 0.6);
+    p.turn("neck_01", X, 0.2).turn("head", Z, 0.2);
+    p.turn("jaw", X, 0.3);
+  } else if (pose === "rampant") {
+    // R3 : jambes coupées : à plat ventre, il se tire sur les bras (un bras puis l'autre), tête relevée vers la proie.
+    const c = Math.sin(t * g.walkRate * 0.6 + phase);
+    arm(p, body, "l", Math.PI - 0.1 + 0.45 * c, 0.35, 0.35 + 0.5 * Math.max(0, -c));
+    arm(p, body, "r", Math.PI - 0.1 - 0.45 * c, 0.35, 0.35 + 0.5 * Math.max(0, c));
+    fingers(p, body, "l", 0.9);
+    fingers(p, body, "r", 0.9);
+    legs(p, "l", -0.05, 0.2, -1.1, 0.12);
+    legs(p, "r", -0.02, 0.1, -1.2, 0.1);
+    p.turn("spine_02", Y, 0.1 * c);
+    p.turn("neck_01", X, -0.6).turn("head", X, -0.3);
+    p.turn("jaw", X, 0.4);
+    p.lay(qa(X, Math.PI / 2));
+  } else if (pose === "tir") {
+    // R3 : fantassin qui épaule : pied gauche devant, main gauche sous le fût, main droite à la poignée contre l'épaule.
+    legs(p, "l", 0.22, 0.2, 0.05, 0.06);
+    legs(p, "r", -0.18, 0.12, -0.04, 0.1);
+    p.turn("spine_02", Y, 0.35).turn("spine_01", X, 0.06);
+    arm(p, body, "l", 1.3, 0.12, 0.45, 0.2);
+    arm(p, body, "r", 0.95, 0.75, 2.05);
+    fingers(p, body, "l", 0.9);
+    fingers(p, body, "r", 1.0);
+    p.turn("head", Y, -0.3).turn("head", X, 0.12);
+  } else if (pose === "mort") {
+    // R3 : homme tombé, sur le dos, bras en croix, une jambe repliée.
+    arm(p, body, "l", 0, 1.25, 0.2);
+    arm(p, body, "r", 0, 0.7, 0.5);
+    legs(p, "l", 0.25, 0.6, 0.2, 0.15);
+    legs(p, "r", 0.02, 0.05, -0.4, 0.05);
+    p.turn("neck_01", Y, -0.7);
+    p.lay(qa(X, -Math.PI / 2));
+  } else if (pose === "chute") {
+    // R3 : chute (câble lâché) : bras et jambes écartés qui battent.
+    const f = Math.sin(t * 9 + phase);
+    arm(p, body, "l", 0.6 + 0.4 * f, 2.0, 0.6);
+    arm(p, body, "r", 0.6 - 0.4 * f, 2.1, 0.5);
+    legs(p, "l", 0.5 + 0.3 * f, 0.9, 0.2, 0.25);
+    legs(p, "r", 0.2 - 0.3 * f, 0.5, 0.1, 0.3);
+    p.turn("spine_01", X, -0.25).turn("neck_01", X, -0.3);
+  } else if (pose === "saisi") {
+    // R3 : homme saisi par un Titan : bras plaqués au corps, jambes qui battent dans le vide.
+    const f = Math.sin(t * 7 + phase);
+    arm(p, body, "l", 0.1, 0.02, 0.25);
+    arm(p, body, "r", 0.1, 0.02, 0.25);
+    legs(p, "l", 0.25 + 0.3 * f, 0.6 + 0.2 * f, 0.4);
+    legs(p, "r", 0.25 - 0.3 * f, 0.6 - 0.2 * f, 0.4);
+    p.turn("neck_01", X, -0.35);
   } else {
     // Allongé (Titan de Rod Reiss) : à plat ventre, bras tendus vers l'avant pour ramper, tête relevée.
     ground = false;
@@ -262,8 +364,47 @@ export function poseHuman(body: HumanBody, pose: HumanPose, t: number, g: Gait, 
   }
   p.commit();
   body.group.updateMatrixWorld(true);
-  if (ground) groundFeet(body);
-  else if (pose === "abattu" || pose === "allonge") groundLowest(body);
+  if (!grounded) return;
+  if (ground && FEET_POSES.has(pose)) groundFeet(body);
+  else if (LYING_POSES.has(pose)) groundLowest(body);
+}
+
+/**
+ * R3 : fondu entre deux poses (passage d'un état à l'autre) : rotations des os interpolées (sphériques), racine interpolée, puis
+ * le corps est reposé au sol : par les pieds si les deux poses sont debout, par son point le plus bas si l'une est couchée.
+ */
+export function blendHuman(body: HumanBody, from: HumanPose, tFrom: number, to: HumanPose, tTo: number, w: number, g: Gait, phase = 0): void {
+  const k = Math.max(0, Math.min(1, w));
+  if (k >= 1 || from === to) {
+    poseHuman(body, to, tTo, g, phase);
+    return;
+  }
+  if (k <= 0) {
+    poseHuman(body, from, tFrom, g, phase);
+    return;
+  }
+  const bones = body.skeleton.bones;
+  const root = body.bones["Root"];
+  poseHuman(body, from, tFrom, g, phase, false);
+  const qs = bones.map((b) => b.quaternion.clone());
+  const r0 = root ? root.position.clone() : new Vector3();
+  poseHuman(body, to, tTo, g, phase, false);
+  const tmp = new Quaternion();
+  bones.forEach((b, i) => {
+    tmp.copy(b.quaternion);
+    b.quaternion.copy(qs[i] as Quaternion).slerp(tmp, k);
+  });
+  if (root) root.position.lerpVectors(r0, root.position.clone(), k);
+  body.group.updateMatrixWorld(true);
+  if (FEET_POSES.has(from) && FEET_POSES.has(to)) groundFeet(body);
+  else if (LYING_POSES.has(from) || LYING_POSES.has(to)) groundLowest(body);
+}
+
+/** R3 : sol sous un corps quelconque (pieds ou point le plus bas), pour une pose écrite os par os hors de `poseHuman`. */
+export function groundBody(body: HumanBody, byFeet: boolean): void {
+  body.group.updateMatrixWorld(true);
+  if (byFeet) groundFeet(body);
+  else groundLowest(body);
 }
 
 /** Points de semelle : les sommets les plus bas de chaque pied au repos (talon, plante, orteils), échantillonnés une fois. */

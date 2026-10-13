@@ -1292,6 +1292,8 @@
   "battle.end_short.repli": "repli",
   "battle.end_short.temps": "temps écoulé",
   "tac.carnet": "Carnet de combat",
+  "tac.view_3d": "Vue 3D",
+  "tac.view_2d": "Vue 2D",
   "tac.officers": "Officiers",
   "tac.squad_n": "Escouade ",
   "tac.men_why": "Hommes encore debout sur l'effectif engagé (morts et fuyards déduits).",

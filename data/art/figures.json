@@ -1,0 +1,278 @@
+{
+  "titans": {
+    "classes": {
+      "canon": "A",
+      "note": "Trait propre à chaque classe (R3), ajouté aux proportions de R1b (data/art/titans.json, inchangées) pour que deux classes voisines n'aient pas la même silhouette (recouvrement < 85 %). Choix de design.",
+      "traits": {
+        "classe_3": {
+          "trait": "nain ventru : très grosse tête, jambes courtes, panse",
+          "modifs": {
+            "head": 0.035,
+            "legs": -0.035,
+            "belly": 0.05,
+            "chest": 0.02,
+            "shoulder": 0.015,
+            "depth": 0.1
+          }
+        },
+        "classe_5": {
+          "trait": "maigre aux longs bras : taille fine, sans ventre, membres grêles",
+          "modifs": {
+            "waist": -0.035,
+            "chest": -0.02,
+            "belly": -0.08,
+            "armR": -0.008,
+            "thighR": -0.012,
+            "upperArm": 0.025,
+            "foreArm": 0.025,
+            "hand": 0.01
+          }
+        },
+        "classe_8": {
+          "trait": "épaules tombantes, bras longs",
+          "modifs": {
+            "upperArm": 0.025,
+            "foreArm": 0.025,
+            "shoulder": -0.01,
+            "chest": -0.008,
+            "hunch": 0.06
+          }
+        },
+        "classe_12": {
+          "trait": "épaules hautes et larges sur une taille fine, long cou porté en avant",
+          "modifs": {
+            "neck": 0.02,
+            "torso": -0.01,
+            "head": -0.01,
+            "shoulder": 0.025,
+            "waist": -0.012,
+            "hunch": 0.12
+          }
+        },
+        "classe_15": {
+          "trait": "filiforme (classe de R1b telle quelle)",
+          "modifs": {}
+        }
+      }
+    },
+    "proportions": [
+      {
+        "id": "trapu",
+        "canon": "A",
+        "note": "Choix de design (R3) : corps lourd et tassé, jambes courtes, ventre et épaules larges, dos voûté ; démarche courte et rapide, roulis des épaules. Forme inventée d'après la description générale des Titans (11 : corps humains sans organes génitaux, proportions variables), aucun Titan de l'œuvre n'est reproduit.",
+        "modifs": {
+          "legs": -0.04,
+          "torso": 0.02,
+          "head": 0.02,
+          "shoulder": 0.02,
+          "hip": 0.02,
+          "chest": 0.03,
+          "waist": 0.045,
+          "belly": 0.05,
+          "depth": 0.1,
+          "upperArm": -0.02,
+          "foreArm": -0.015,
+          "armR": 0.01,
+          "thighR": 0.016,
+          "neckR": 0.015,
+          "hunch": 0.1
+        },
+        "allure": {
+          "stride": 0.8,
+          "walkRate": 1.15,
+          "armSwing": 0.8
+        },
+        "boiterie": 0.05,
+        "roulis": 0.09,
+        "expression": "rictus",
+        "cheveux": false
+      },
+      {
+        "id": "echalas",
+        "canon": "A",
+        "note": "Choix de design (R3) : corps décharné, jambes et bras longs, petite tête sur un long cou, torse étroit et plat ; grande foulée lente, légère boiterie.",
+        "modifs": {
+          "legs": 0.05,
+          "torso": -0.025,
+          "neck": 0.012,
+          "head": -0.037,
+          "shoulder": -0.012,
+          "hip": -0.018,
+          "chest": -0.035,
+          "waist": -0.05,
+          "belly": -0.2,
+          "depth": -0.12,
+          "upperArm": 0.03,
+          "foreArm": 0.03,
+          "hand": 0.012,
+          "armR": -0.01,
+          "thighR": -0.02,
+          "neckR": -0.012,
+          "hunch": 0.04
+        },
+        "allure": {
+          "stride": 1.3,
+          "walkRate": 0.8,
+          "armSwing": 1.2
+        },
+        "boiterie": 0.18,
+        "roulis": 0.03,
+        "expression": "beant",
+        "cheveux": true
+      },
+      {
+        "id": "difforme",
+        "canon": "A",
+        "note": "Choix de design (R3) : grosse tête large, bras qui pendent jusqu'aux genoux, buste cassé vers l'avant, jambes inégales ; forte boiterie, tête penchée de côté. Silhouette dérangeante voulue (24 §2.3).",
+        "modifs": {
+          "legs": -0.025,
+          "torso": -0.02,
+          "neck": -0.005,
+          "head": 0.05,
+          "headW": 0.12,
+          "shoulder": 0.008,
+          "chest": -0.01,
+          "belly": 0.02,
+          "upperArm": 0.05,
+          "foreArm": 0.045,
+          "hand": 0.025,
+          "armR": 0.004,
+          "hunch": 0.3
+        },
+        "allure": {
+          "stride": 0.9,
+          "walkRate": 0.95,
+          "armSwing": 1.5,
+          "headTilt": 0.2
+        },
+        "boiterie": 0.45,
+        "roulis": 0.06,
+        "expression": "neutre",
+        "cheveux": false
+      }
+    ],
+    "peaux": [
+      {
+        "id": "chair",
+        "canon": "A",
+        "note": "Peau claire rosée, marbrures légères (choix de design R3).",
+        "teinte": "#D9A48C",
+        "marbrure": 0.25,
+        "veines": 0.12,
+        "rougeur": 0.3,
+        "rugosite": 0.55
+      },
+      {
+        "id": "cireuse",
+        "canon": "A",
+        "note": "Peau cireuse, jaune-gris, veines visibles (choix de design R3).",
+        "teinte": "#CBB291",
+        "marbrure": 0.45,
+        "veines": 0.35,
+        "rougeur": 0.05,
+        "rugosite": 0.48
+      },
+      {
+        "id": "tannee",
+        "canon": "A",
+        "note": "Peau tannée, brun rouge, épaisse et marbrée (choix de design R3).",
+        "teinte": "#A97A62",
+        "marbrure": 0.35,
+        "veines": 0.15,
+        "rougeur": 0.2,
+        "rugosite": 0.66
+      }
+    ]
+  },
+  "etats": {
+    "canon": "A",
+    "note": "Seuils de la machine d'états d'affichage (R3) : lus sur l'état de la simulation, sans le modifier. La saisie dure grab_hold_s (data/balance/tactical.json) ; les dernières secondes sont montrées main à la bouche.",
+    "devore_dernieres_s": 1.5,
+    "chute_s": 1.6,
+    "fondu_s": 0.35,
+    "course_m_s": 6,
+    "coupe_s": 0.45,
+    "chute_soldat_m_s": 7
+  },
+  "tenues": [
+    {
+      "id": "bataillon",
+      "camp": "paradis",
+      "canon": "A",
+      "note": "Bataillon d'exploration : veste courte gris pierre, pantalon sombre, cape verte du projet (palette 04 §1.2), sans emblème de l'œuvre.",
+      "veste": "#6D6A60",
+      "pantalon": "#3A3730",
+      "cape": "#4F6B5A",
+      "manteau": null,
+      "echarpe": null,
+      "couvre_chef": "aucun",
+      "couvre_chef_teinte": null
+    },
+    {
+      "id": "garnison",
+      "camp": "paradis",
+      "canon": "A",
+      "note": "Garnison : veste gris-bleu sans cape, écharpe rouge brique (repère de jeu, sans emblème).",
+      "veste": "#5D6672",
+      "pantalon": "#3B3A36",
+      "cape": null,
+      "manteau": null,
+      "echarpe": "#8A3B2E",
+      "couvre_chef": "aucun",
+      "couvre_chef_teinte": null
+    },
+    {
+      "id": "brigade",
+      "camp": "paradis",
+      "canon": "A",
+      "note": "Brigades spéciales : manteau long bleu nuit et képi (choix de design, sans emblème).",
+      "veste": "#2E3648",
+      "pantalon": "#24272E",
+      "cape": null,
+      "manteau": "#2C3446",
+      "echarpe": null,
+      "couvre_chef": "kepi",
+      "couvre_chef_teinte": "#232A38"
+    },
+    {
+      "id": "marley_infanterie",
+      "camp": "marley",
+      "canon": "A",
+      "note": "Infanterie de Marley : tunique kaki olive, bandes molletières, casque d'acier, havresac, fusil (choix de design d'après une armée de 1914-1918 en général, aucun uniforme de l'œuvre).",
+      "veste": "#6B6648",
+      "pantalon": "#5E5A42",
+      "cape": null,
+      "manteau": null,
+      "echarpe": null,
+      "couvre_chef": "casque",
+      "couvre_chef_teinte": "#4B4E44"
+    },
+    {
+      "id": "marley_officier",
+      "camp": "marley",
+      "canon": "A",
+      "note": "Officier de Marley : tunique ajustée, casquette à visière, baudrier, pistolet à la ceinture (choix de design).",
+      "veste": "#5D5A43",
+      "pantalon": "#4E4B39",
+      "cape": null,
+      "manteau": null,
+      "echarpe": null,
+      "couvre_chef": "casquette",
+      "couvre_chef_teinte": "#3F3D30"
+    }
+  ],
+  "regle_tenues": {
+    "canon": "A",
+    "note": "La simulation ne porte pas le corps d'un soldat : règle de rendu. Soldats à équipement tridimensionnel : Bataillon ; sections de Paradis selon leur arme ; sections adverses : infanterie de Marley, le premier homme de chaque section en officier.",
+    "soldat_odm": "bataillon",
+    "paradis": {
+      "fusilier": "garnison",
+      "mitrailleur": "garnison",
+      "antititan": "garnison",
+      "assaut": "brigade",
+      "cavalier": "bataillon"
+    },
+    "adverse": "marley_infanterie",
+    "adverse_chef": "marley_officier"
+  }
+}

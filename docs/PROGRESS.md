@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R2+ terminée et fusionnée** (D-147) : **N2 terminé**. Direction autonome (D-107). Suivante : R3 (N3). |
-| Tâche | Lancer R3 (fichier 18 §2, version courte 21 §8) sur `claude/v2-r3` |
-| Dernier `npm run verify` | 2026-10-09 : code 0 ; 107 fichiers, 705 tests ; 8 empreintes inchangées (`docs/reports/R2-verify-fusion.log`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : R3 sur `claude/v2-r3` (sous-agent neuf), puis P9, P10, PACK ; mesure GPU de R2+ sur le PC de Gabriel (dette n° 49) |
+| Phase | **R3 terminée et fusionnée** (D-153). Direction autonome (D-107). Suivante : P9 (N3). |
+| Tâche | Lancer P9 (fichier 18 §9 : scénarios, IA, équilibrage) sur `claude/v2-p9` |
+| Dernier `npm run verify` | 2026-10-13 : code 0 ; 110 fichiers, 719 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-fusion.log`) ; `smoke:r3` code 0 |
+| Prochaine étape | PROCHAINE ACTION EXACTE : P9 sur `claude/v2-p9` (sous-agent neuf, Opus xhigh), puis P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
