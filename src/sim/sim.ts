@@ -1,6 +1,8 @@
 import { stateHash } from "./core/canonical";
 import { applyCommand, CommandJournal } from "./core/commands";
 import type { Command } from "./core/commands";
+import { applyEnveloped } from "./commands/apply";
+import type { CommandEnvelope } from "./commands/schema";
 import { createInitialState } from "./core/state";
 import type { GameState } from "./core/state";
 import { buildWorld } from "./strategic/world";
@@ -10,6 +12,8 @@ import type { World, WorldSource } from "./strategic/world";
 export interface Sim {
   state(): GameState;
   dispatch(cmd: Command): GameState;
+  /** Commande d'un siège sous enveloppe `{seat, day, command}` : forme, droit de commander, application, journal. */
+  submit(env: CommandEnvelope): GameState;
   reset(seed: number): GameState;
   load(state: GameState): GameState;
   hash(): string;
@@ -24,6 +28,11 @@ export function createSim(seed: number, world?: World): Sim {
     dispatch(cmd) {
       state = applyCommand(state, cmd, undefined, world);
       journal.record(cmd);
+      return state;
+    },
+    submit(env) {
+      state = applyEnveloped(state, env, undefined, world);
+      journal.record(env.command as unknown as Command);
       return state;
     },
     reset(newSeed) {
@@ -45,6 +54,7 @@ export function createSim(seed: number, world?: World): Sim {
 export type SimRequest =
   | { id: number; op: "init"; seed: number; scenario: string | null }
   | { id: number; op: "dispatch"; cmd: Command }
+  | { id: number; op: "submit"; env: CommandEnvelope }
   | { id: number; op: "reset"; seed: number }
   | { id: number; op: "load"; state: GameState }
   | { id: number; op: "state" };
@@ -73,6 +83,9 @@ export function createSimEndpoint(loadSource: () => WorldSource): (req: SimReque
         }
         case "dispatch":
           sim.dispatch(req.cmd);
+          break;
+        case "submit":
+          sim.submit(req.env);
           break;
         case "reset":
           sim.reset(req.seed);

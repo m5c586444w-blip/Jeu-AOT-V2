@@ -2,6 +2,7 @@ import type { Character, Modifier } from "../../data/schemas";
 import { ATTRIBUTES } from "./vocabulary";
 import type { AttributeId } from "./vocabulary";
 import type { GameDate } from "../core/time";
+import type { SeatId } from "../core/seat";
 import type { PoliticsWorld, World } from "../strategic/world";
 
 /** État d'un personnage pendant la partie (les données de départ restent dans le monde statique). */
@@ -33,6 +34,8 @@ export interface DeathRecord {
 }
 
 export interface OrgState {
+  /** Siège qui dirige l'institution (27) ; absent = siège de la faction jouée (solo : siège solo). */
+  owner?: SeatId;
   loyalty: number;
   influence: number;
   /** Part du budget militaire (en %), pour les organisations budgétées. */

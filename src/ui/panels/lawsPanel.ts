@@ -121,7 +121,7 @@ export class LawsPanel implements Panel {
     const msg = t(kind === "enact" ? "laws.confirm_enact" : "laws.confirm_repeal", { law: t(law.name_key) });
     void this.ctx.confirm(msg).then((ok) => {
       if (!ok) return;
-      void this.ctx.dispatch(kind === "enact" ? { type: "EnactLaw", law: law.id } : { type: "RepealLaw", law: law.id }).then(() => {
+      void this.ctx.submit(kind === "enact" ? { type: "EnactLaw", law: law.id } : { type: "RepealLaw", law: law.id }).then(() => {
         root.replaceChildren();
         this.render(root, law.id);
       });

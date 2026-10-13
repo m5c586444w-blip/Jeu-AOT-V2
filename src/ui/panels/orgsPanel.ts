@@ -66,7 +66,7 @@ export class OrgsPanel implements Panel {
       root.append(button(t("orgs.budget_apply"), () => {
         void this.ctx.confirm(t("orgs.budget_confirm")).then((ok) => {
           if (!ok || !this.draft) return;
-          void this.ctx.dispatch({ type: "SetBudget", shares: this.draft }).then(() => {
+          void this.ctx.submit({ type: "SetBudget", shares: this.draft }).then(() => {
             this.draft = null;
             root.replaceChildren();
             this.render(root);

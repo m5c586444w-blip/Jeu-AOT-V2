@@ -42,6 +42,7 @@ import type { TutorialPrefs } from "./settings";
 import { accentOf, moodInput, moodOf, sharedAudio } from "./audio";
 import { loadUserTracks, onUserTracks, syncLibrary, userTracks } from "./audioSetup";
 import { setLocale } from "../i18n";
+import { SOLO_SEAT } from "../sim/core/seat";
 import { toAbsoluteDay } from "../sim/core/time";
 import { Hints } from "./tutorial/hints";
 import { Tutorial } from "./tutorial/controller";
@@ -117,11 +118,12 @@ export async function bootGame(): Promise<void> {
   const screen = document.createElement("div");
   screen.className = "ecran";
   let busy = false;
-  const dispatch = async (cmd: Command): Promise<void> => {
+  // Toute action du joueur passe par la simulation ; `submit` l'enveloppe au nom du siège solo (27 §1, C3).
+  const run = async (apply: () => Promise<{ state: GameState }>): Promise<void> => {
     busy = true;
     const before = state.date;
     try {
-      state = (await sim.dispatch(cmd)).state;
+      state = (await apply()).state;
       clock.observeAlerts(state.strategic?.log ?? []);
       if (crossesAutosave(before, state.date, world.time.autosave_every_days)) void (await storePromise).autosave(state);
     } finally {
@@ -129,6 +131,8 @@ export async function bootGame(): Promise<void> {
     }
     refresh();
   };
+  const dispatch = (cmd: Command): Promise<void> => run(() => sim.dispatch(cmd));
+  const submit = (cmd: Command): Promise<void> => run(() => sim.submit({ seat: SOLO_SEAT, day: toAbsoluteDay(state.date), command: cmd }));
   let registers: Registers | null = null;
   const keymap = new KeyMap(safeStorage());
   // Touche d'un registre (`personnages`) ou d'une action (`pause`, `speed_2`), pour les infobulles (U10).
@@ -209,6 +213,14 @@ export async function bootGame(): Promise<void> {
       notice.show((e as Error).message);
     }
   };
+  const safeSubmit = async (cmd: Command): Promise<void> => {
+    try {
+      await submit(cmd);
+      audio.play("tampon");
+    } catch (e) {
+      notice.show((e as Error).message);
+    }
+  };
   const notice = new Notice(document.body);
   // Écran de bataille (P4) : le temps stratégique est suspendu tant qu'il est ouvert.
   let inBattle = false;
@@ -233,7 +245,7 @@ export async function bootGame(): Promise<void> {
   const autoDossiers = new URLSearchParams(window.location.search).get("dossiers") !== "0";
   const eventDossier = world.chronicle ? new EventDossier(document.body, world, why, safeDispatch, autoDossiers) : null;
   const openEvent = (id: string): void => eventDossier?.open(state, id);
-  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, playBattle, openEvent);
+  if (world.politics) registers = new Registers(document.body, world, why, () => state, safeDispatch, safeSubmit, playBattle, openEvent);
   if (registers) {
     registers.keyOf = keyOf;
     // Un registre ouvert referme le dossier de province (même côté de l'écran) ; son bouton reste enfoncé.

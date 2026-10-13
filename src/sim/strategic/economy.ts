@@ -2,6 +2,7 @@ import { Explainer } from "../core/explain";
 import type { Explained } from "../core/explain";
 import { seasonOf } from "../core/time";
 import type { GameDate } from "../core/time";
+import type { SeatId } from "../core/seat";
 import { emptyResources, RESOURCE_IDS } from "./resources";
 import type { RationingLevel, ResourceId, ResourceMap } from "./resources";
 import type { World } from "./world";
@@ -14,6 +15,8 @@ export type Control = "paradis" | "titans" | "perdu";
 
 export interface ProvinceState {
   control: Control;
+  /** Siège qui dirige la province (27) ; absent = siège de la faction qui la contrôle (solo : siège solo). */
+  owner?: SeatId;
   population: number;
   morale: number;
   stability: number;

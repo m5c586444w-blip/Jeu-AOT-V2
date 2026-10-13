@@ -3,6 +3,7 @@ import { applyCommand, validateCommand } from "../core/commands";
 import type { Command, SimEvents } from "../core/commands";
 import { ownerOf, SOLO_SEAT } from "../core/seat";
 import type { SeatId, SeatsState } from "../core/seat";
+import { factionOfSeat } from "../knowledge/knowledge";
 import { toAbsoluteDay } from "../core/time";
 import type { GameState } from "../core/state";
 import type { World } from "../strategic/world";
@@ -38,10 +39,14 @@ function ownedSubjects(cmd: { type: string } & Record<string, unknown>): { armie
   return { armies, fleets };
 }
 
+/** Commandes qui engagent la faction jouée (succession, lois, budget) : seul le siège qui la dirige peut les donner. */
+export const FACTION_COMMANDS: ReadonlySet<string> = new Set(["ChooseSuccessor", "EnactLaw", "RepealLaw", "SetBudget"]);
+
 /** Un siège ne commande que ses entités (27 §1). Pure : lit l'état, ne le modifie pas. */
 export function authorize(state: GameState, seat: SeatId, cmd: { type: string } & Record<string, unknown>): CommandRefusal | null {
   if (!seatExists(state.seats, seat)) return refuse("seat.err.unknown_seat", seat);
   const player = playerOf(state.nations);
+  if (FACTION_COMMANDS.has(cmd.type) && factionOfSeat(state, seat) !== player) return refuse("seat.err.not_faction", `${seat} -> ${player}`);
   const { armies, fleets } = ownedSubjects(cmd);
   if (state.armies) {
     for (const id of armies) {

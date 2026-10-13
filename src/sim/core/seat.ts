@@ -32,3 +32,17 @@ export function ownerOf(e: { owner?: SeatId; faction?: string }, seats: SeatsSta
   if (e.owner !== undefined) return e.owner;
   return e.faction === undefined ? SOLO_SEAT : seatOfFaction(seats, e.faction, playerFaction);
 }
+
+/**
+ * Propriétaire d'une province : champ `owner`, sinon siège de la faction qui la contrôle (`NationsState.control`),
+ * sinon null (province sans maître : aucun siège ne la commande).
+ */
+export function ownerOfProvince(p: { owner?: SeatId }, controller: string | null | undefined, seats: SeatsState | undefined, playerFaction: string): SeatId | null {
+  if (p.owner !== undefined) return p.owner;
+  return controller ? seatOfFaction(seats, controller, playerFaction) : null;
+}
+
+/** Propriétaire d'une institution (organisation) : champ `owner`, sinon siège de la faction jouée (les institutions de l'état politique sont les siennes). */
+export function ownerOfInstitution(o: { owner?: SeatId }, seats: SeatsState | undefined, playerFaction: string): SeatId | null {
+  return o.owner !== undefined ? o.owner : seatOfFaction(seats, playerFaction, playerFaction);
+}

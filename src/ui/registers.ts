@@ -53,7 +53,7 @@ export class Registers {
 
   private readonly stateOf: () => GameState;
 
-  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean, realtime?: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
+  constructor(parent: HTMLElement, world: World, why: WhyTooltip, state: () => GameState, dispatch: (cmd: Command) => Promise<void>, submit: (cmd: Command) => Promise<void>, playBattle: (setup: BattleSetup, title: string, linked: boolean, realtime?: boolean) => Promise<TimedOrder[] | null>, openEvent?: (id: string) => void) {
     this.stateOf = state;
     this.frame.hidden = true;
     this.frame.setAttribute("role", "dialog");
@@ -67,7 +67,7 @@ export class Registers {
     this.dialog.hidden = true;
     this.dialog.setAttribute("role", "alertdialog");
     parent.append(this.frame, this.dialog);
-    const ctx: PanelContext = { world, why, state, dispatch, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle, ...(openEvent ? { openEvent } : {}) };
+    const ctx: PanelContext = { world, why, state, dispatch, submit, open: (id, arg) => this.open(id, arg), confirm: (m) => this.confirm(m), playBattle, ...(openEvent ? { openEvent } : {}) };
     const list: Panel[] = [new CharactersPanel(ctx), new CabinetPanel(ctx), new LawsPanel(ctx), new OrgsPanel(ctx), new CouncilPanel(ctx), new JournalPanel(ctx), new EconomyPanel(ctx)];
     if (world.military)
       list.push(

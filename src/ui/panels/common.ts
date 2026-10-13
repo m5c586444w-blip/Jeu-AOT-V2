@@ -13,6 +13,8 @@ export interface PanelContext {
   why: WhyTooltip;
   state(): GameState;
   dispatch(cmd: Command): Promise<void>;
+  /** Commande donnée par le siège solo sous enveloppe `{seat, day, command}` (ordres d'armée, rencontres, succession, lois, budget). */
+  submit(cmd: Command): Promise<void>;
   /** Ouvre un autre registre (ex. Décrets → Cabinet avec une motion). */
   open(panel: PanelId, arg?: string): void;
   confirm(message: string): Promise<boolean>;

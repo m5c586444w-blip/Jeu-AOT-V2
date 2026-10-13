@@ -1,3 +1,4 @@
+import type { CommandEnvelope } from "../sim/commands/schema";
 import type { Command } from "../sim/core/commands";
 import type { GameState } from "../sim/core/state";
 import type { SimRequest, SimResponse } from "../sim/sim";
@@ -46,6 +47,10 @@ export class SimClient {
   }
   dispatch(cmd: Command) {
     return this.call({ op: "dispatch", cmd });
+  }
+  /** Commande sous enveloppe `{seat, day, command}` (27 §1) : refus renvoyé comme erreur de la promesse. */
+  submit(env: CommandEnvelope) {
+    return this.call({ op: "submit", env });
   }
   reset(seed: number) {
     return this.call({ op: "reset", seed });

@@ -76,7 +76,7 @@ export class ArmiesPanel implements Panel {
   }
 
   private order(o: ArmyOrder): void {
-    void this.ctx.dispatch(o);
+    void this.ctx.submit(o);
   }
 
   render(root: HTMLElement, arg?: string): void {
@@ -404,7 +404,7 @@ export class ArmiesPanel implements Panel {
       if (e.titans > 0) sides.push(t("armies.titans", { n: formatNumber(e.titans) }));
       box.append(el("p", "registre-note", sides.join(" · ")));
       const row = el("p", "plan-ligne");
-      const auto = button(t("armies.resolve_auto"), () => void this.ctx.dispatch({ type: "ResolveEncounter", encounter: e.id, mode: "auto", orders: [] }), "registre-bouton petit principal");
+      const auto = button(t("armies.resolve_auto"), () => void this.ctx.submit({ type: "ResolveEncounter", encounter: e.id, mode: "auto", orders: [] }), "registre-bouton petit principal");
       auto.dataset["action"] = "auto";
       row.append(auto, " ");
       // R2+ : la rencontre se joue en bataille de compagnies, temps réel (armées contre armées comprises, dette n° 33).
@@ -414,7 +414,7 @@ export class ArmiesPanel implements Panel {
         play.dataset["action"] = "jouer";
         row.append(play, " ");
       }
-      const flee = button(t("armies.resolve_retreat"), () => void this.ctx.dispatch({ type: "ResolveEncounter", encounter: e.id, mode: "retraite", orders: [] }), "registre-bouton petit btn--danger");
+      const flee = button(t("armies.resolve_retreat"), () => void this.ctx.submit({ type: "ResolveEncounter", encounter: e.id, mode: "retraite", orders: [] }), "registre-bouton petit btn--danger");
       flee.dataset["action"] = "repli";
       row.append(flee);
       box.append(row);
@@ -429,7 +429,7 @@ export class ArmiesPanel implements Panel {
     const e = c?.s.encounters.find((x) => x.id === id);
     if (!setup || !e) return;
     const orders = await this.ctx.playBattle(setup, t(`armies.encounter.${e.kind}`, { place: provinceName(this.ctx.world, e.province) }), true, rt);
-    if (orders) await this.ctx.dispatch({ type: "ResolveEncounter", encounter: id, mode: "jouer", orders, ...(rt ? { rt: true } : {}) });
+    if (orders) await this.ctx.submit({ type: "ResolveEncounter", encounter: id, mode: "jouer", orders, ...(rt ? { rt: true } : {}) });
   }
 
   private succession(root: HTMLElement, c: ArmyCtx): void {
@@ -450,7 +450,7 @@ export class ArmiesPanel implements Panel {
       );
       const b = button(t("armies.choose_successor"), () => {
         void this.ctx.confirm(t("armies.choose_confirm", { name: displayName(ch) })).then((ok) => {
-          if (ok) void this.ctx.dispatch({ type: "ChooseSuccessor", candidate: cl.id });
+          if (ok) void this.ctx.submit({ type: "ChooseSuccessor", candidate: cl.id });
         });
       }, "registre-bouton petit principal");
       b.dataset["candidate"] = cl.id;
