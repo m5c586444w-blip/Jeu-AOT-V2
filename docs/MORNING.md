@@ -2,8 +2,9 @@
 
 ## 2026-10-13 — Refonte V3 (décisions de Gabriel) — à lire en premier
 - Installés : `docs/spec/ERRATA_V3.md`, `26` (mécaniques, validé), `27` (multijoueur, à confirmer), `docs/coord/` (protocole, tableau C0–C14, budget, prompts A et B), outil `npm run coord`.
-- **À renseigner par Gabriel** (`docs/coord/BUDGET.md`) : même compte ou deux comptes ; jour et heure de remise à zéro hebdomadaire ; pourcentage relevé après une semaine pour calibrer le plafond de B à 75 %.
-- **À préciser par Gabriel** : Q11 (mode « Simulation de bataille » dans le menu), Q12 (ordre de mise en œuvre), questions du multijoueur (27 §10).
+- **Décidé par Gabriel (soir)** : plan validé avec **tous les lieux jouables** (C15 à C18) ; pas de « Simulation de bataille » ; multijoueur **coopératif** ; deux comptes (A : reset le mardi ; B : jusqu'au vendredi 16).
+- **À faire par Gabriel** : créer la tâche planifiée de B sur le compte B (`docs/coord/PROMPT_SESSION_B.md`) ; ajouter les domaines de Perchance au réseau de l'environnement ; surveiller l'usage de B (75 %).
+- **Encore ouvert** : règle de pause, anti-triche, connexion et PC le plus faible du multijoueur (défauts `[A]` dans 27 §10) ; garder ou non le plafond de 75 % pour B.
 - **Rappel** : les mesures GPU de R2+ et R3 restent à faire sur ton PC (dettes n° 49 et 61).
 
 **Établi (sorties réelles)**

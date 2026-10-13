@@ -1,6 +1,6 @@
-# 27 — MULTIJOUEUR JUSQU'À 9 JOUEURS (proposition à confirmer)
+# 27 — MULTIJOUEUR JUSQU'À 9 JOUEURS (orientation CONFIRMÉE le 2026-10-13 : coopération)
 
-> **Statut : PROPOSÉ le 2026-10-13, en attente de confirmation de Gabriel.** Tant que ce fichier n'est pas marqué VALIDÉ dans `docs/coord/COORD.md`, les sessions ne développent que les **prérequis neutres** listés au §9 (aucun réseau).
+> **Statut : orientation CONFIRMÉE par Gabriel le 2026-10-13 (soir)** : *coopération dans tous les aspects* — un **conseil mixte** (joueurs + conseillers IA) et, en bataille, des joueurs qui dirigent **leurs propres groupes, formations et escouades**. Le versus (§4.2) n'est pas retenu en v1. Les réglages non tranchés par Gabriel sont des **défauts `[A]`** listés au §10. Le chantier C13 (réseau) est débloqué après C3 (prérequis) et C9 (bataille jouable de bout en bout).
 > Contexte donné par Gabriel : jusqu'à **9 amis** doivent pouvoir se connecter à la même partie ; le jeu ne sort pas du cercle privé (garantie des amis). Ligne éditoriale : réalisme, fidélité au lore, jouabilité.
 > Étiquettes : `[A]` choix de conception ; `[?]` à vérifier. Rédigé sans relire le code : l'architecture est déduite de la description du projet (simulation déterministe, journal de commandes, empreinte d'état, Worker) et doit être **confirmée par l'audit A0**.
 
@@ -55,17 +55,19 @@ Le gouvernement de Paradis est déjà modélisé par des conseillers et des inst
 | Culte des Murs | opinion, morale civile |
 | Recherche et ingénierie | arbre technologique, doctrine |
 | Porteurs | roster de porteurs, héritage, secret (P5) |
-- **Tension** : chaque siège a un **objectif secret** (ambition, loyauté, conviction). Les intérêts divergent ; la coopération est nécessaire à la survie, la confiance est limitée. Mode de jeu optionnel : un siège peut avoir un **agenda caché** contraire aux autres (traître possible).
+- **Conseil mixte (décision de Gabriel)** : chaque domaine du tableau est tenu **soit par un joueur, soit par un conseiller IA** (fichier 08). Un domaine sans joueur reste à son conseiller, qui propose, vote et exécute selon son profil. Un joueur peut **prendre** un domaine tenu par l'IA ou le **rendre** à tout moment (entrée et sortie en cours de partie) ; à moins de 9 joueurs, la partie est complète.
+- **Tension** `[A]` : chaque siège a un **objectif personnel visible** (priorités de son domaine) ; les ressources sont rares (gaz, vivres, effectifs), donc les arbitrages sont réels. L'« agenda caché » (traître) **n'est pas retenu** (coopération) ; il reste une option désactivée par défaut.
 - **Décisions collectives** : les grandes décisions (désengorgement, déclaration de guerre, loi majeure) passent par un **vote du Conseil** (majorité pondérée par le poids politique du siège) ; le mode peut aussi déléguer l'autorité à un seul siège.
 
-### 4.2 Versus asymétrique : Paradis, Marley, Alliés, Hizuru (3 à 9 joueurs) `[A]`
+### 4.2 Versus asymétrique : Paradis, Marley, Alliés, Hizuru (3 à 9 joueurs) `[A]` — **NON RETENU en v1** (piste conservée)
 - Les sièges se répartissent entre nations ; les nations non tenues restent à l'IA.
 - Plusieurs joueurs d'une même nation se partagent les domaines comme en 4.1.
 - C'est ici que l'asymétrie du fichier 26 §9 prend tout son sens (Paradis : ODM et murs ; Marley : industrie et porteurs ; Alliés et Hizuru : mer et commerce).
 
 ### 4.3 Bataille à plusieurs (jusqu'à 9 commandants) `[A]`
-- Lancée depuis une rencontre de la campagne ou depuis le mode « Simulation de bataille » (si validé, fichier 26 §12 point 11).
-- Chaque commandant dirige un **détachement** (escouades) ou un **porteur** par ordres généraux ; les unités restantes sont à l'IA.
+- Lancée depuis une rencontre de la campagne (pas de mode « Simulation de bataille » dans le menu : décision de Gabriel).
+- **Chaque joueur dirige ses propres groupes, formations et escouades** : la propriété (`owner`) est portée par l'unité ; un joueur ne donne d'ordres qu'aux unités qu'il possède. Il peut **prêter** ou **céder** une escouade à un autre joueur, et former des groupes et des formations avec les mêmes commandes qu'en solo (sélection, groupes, formations, artillerie sur zone, pause avec file d'ordres). Un porteur est commandé par ordres généraux par son propriétaire.
+- Les unités sans joueur sont tenues par des **officiers IA** subordonnés (même IA qu'en solo) ; un joueur peut leur donner des ordres généraux s'il en a l'autorité (rang, rôle au Conseil).
 - **Brouillard par siège** (P4) : chaque commandant voit ce que **ses** unités voient ; il reçoit le reste par signaux, **y compris des signaux des autres joueurs** : l'échange d'informations devient une vraie mécanique de coopération. Les fusées d'un joueur sont visibles de tous ceux qui les voient.
 
 ## 5. Temps, pause et rythme (rythme hybride choisi par Gabriel)
@@ -118,11 +120,14 @@ Tout élément multijoueur vit dans le **cadre d'interface unique** (ERRATA_V3 �
 
 **Critères d'acceptation (cibles)** : 9 clients headless, 10 minutes de partie simulée, 0 désynchronisation sur 10 graines ; une déconnexion/reconnexion en cours de bataille ne casse pas l'empreinte ; aucune commande perdue ou dupliquée ; le cadre d'interface est identique dans tous les modes.
 
-## 10. Questions à confirmer par Gabriel
-1. Modes retenus : 4.1 Cabinet (coop tendue), 4.2 Versus asymétrique, 4.3 Bataille à plusieurs : tous, ou lesquels ?
-2. Mode « agenda caché » (traître possible) dans le Cabinet : oui ou non ?
-3. Règle de pause (§5) : acceptable, ou préfères-tu l'hôte seul maître du temps ?
-4. Pas d'anti-triche en v1 (confiance entre amis) : confirmé ?
-5. Connexion : réseau privé virtuel ou redirection de port ? (à décider avec tes amis ; les sessions préparent le serveur sans le choisir)
-6. Le PC le plus faible du groupe : quelle machine ? (détermine le budget de performance du lockstep)
-7. Jouer à moins de 9 est-il toujours possible, avec l'IA pour les sièges vides ? (hypothèse : oui)
+## 10. Décisions de Gabriel (2026-10-13, soir) et défauts appliqués
+
+| # | Sujet | Décision de Gabriel / défaut |
+|---|---|---|
+| 1 | Modes | **Coopération dans tous les aspects** : conseil mixte joueurs + conseillers IA ; en bataille, chaque joueur dirige ses groupes, formations et escouades. Versus (4.2) non retenu en v1. |
+| 2 | Agenda caché (traître) | non retenu (coopération) — `[A]` déduit de la réponse, réversible |
+| 3 | Règle de pause (§5) | `[A]` défaut : règle proposée au §5 (non tranché) |
+| 4 | Anti-triche | `[A]` défaut : aucune en v1 (non tranché) |
+| 5 | Connexion | `[A]` non tranché : les sessions préparent le serveur sans choisir entre réseau privé virtuel et redirection de port |
+| 6 | PC le plus faible | inconnu : cible provisoire `[A]` = PC de Gabriel (RTX 3050) ; à mesurer par lui |
+| 7 | Jouer à moins de 9 | oui, par construction (conseil mixte : les domaines sans joueur restent à l'IA) |

@@ -312,9 +312,9 @@ Chaque étape : critères mesurables, captures relues par un sous-agent distinct
 | 8 | P1 : désengorgement systémique | Oui |
 | 9 | P6 : fiabilité A–D et trois actes | Oui |
 | 10 | P7 : troupe nommée + générée | Oui |
-| 11 | Mode « Simulation de bataille » depuis le menu | **À préciser** (une seule réponse « Non » a été donnée pour les points 11 et 12) |
-| 12 | Ordre de mise en œuvre du §11 | **À préciser** (même réponse) |
+| 11 | Mode « Simulation de bataille » depuis le menu | **Non** (précisé le 2026-10-13 soir) : pas d'entrée de menu ; la bataille se joue depuis la campagne |
+| 12 | Ordre de mise en œuvre du §11 | **Oui, à condition que tout réponde à ses attentes**, y compris *toutes les villes et tous les endroits créés et jouables* (chantiers C15 à C18 de `docs/coord/PLAN_FONCTIONNALITES.md`) |
 
-**En attendant la précision** : les sessions n'implémentent pas le mode « Simulation de bataille » depuis le menu (point 11) et suivent l'ordre de `docs/coord/COORD.md` (point 12), qui reprend le §11 en y ajoutant le chantier du cadre d'interface, le multijoueur (spec 27, à confirmer) et les modèles Blender.
+**Précisé le 2026-10-13 (soir)** : pas de mode « Simulation de bataille » dans le menu ; les sessions suivent l'ordre de `docs/coord/COORD.md`, qui reprend le §11 en y ajoutant le cadre d'interface, les lieux (C15 à C18), le multijoueur coopératif (spec 27) et les modèles Blender.
 
 **Conséquence pour le multijoueur** (spec 27) : les piliers P4 (brouillard par siège), P5 et P6 (secrets et connaissance par faction) s'y prêtent directement ; ils doivent être conçus par faction dès maintenant.

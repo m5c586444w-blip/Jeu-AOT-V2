@@ -35,6 +35,9 @@ Répéter jusqu'à `phase = cloture`, `plus-de-nouvelle-tache` (finir seulement 
 ## 3. Lore : tu as le droit de créer (ERRATA_V3 §2)
 Gabriel a l'autorisation de créer des éléments précis de l'univers : enseignes et emblèmes, noms de personnages, lieux, apparences. **Tu ne t'arrêtes jamais pour une ambiguïté de lore.** Tu décides, tu étiquettes `canon: "A"` + `creation: true`, tu consignes dans `docs/lore/creations.md` et `DECISIONS.md`. Tu ne présentes jamais une création comme canon ; tu ne contredis jamais un fait `C` (fichiers 11 puis 01). Époque : début du XXᵉ siècle d'inspiration européenne. **Provenance** : aucun fichier, modèle, texture ou image de l'œuvre ou d'un fan, aucun décalque.
 
+## 3 bis. Lieux : tous jouables
+Gabriel exige que **toutes les villes et tous les endroits** soient créés et jouables (chantiers C15 à C18). Lieux principaux faits à la main, lieux courants générés une fois puis figés ; villes de taille réaliste ; aucun fichier de l'œuvre ou de fans, aucun décalque. Un lieu non fait est une dette bloquante, pas un détail.
+
 ## 4. Blender : modèles 3D créés par le projet (ERRATA_V3 §4)
 - Il n'y a pas de fenêtre Blender en session cloud : « se connecter à Blender » = piloter le module Python **`bpy`** en ligne de commande (`python3 -m venv .venv-blender && .venv-blender/bin/pip install bpy` ; vérifié : bpy 5.2.2, ≈ 23 s ; export `.glb` ≈ 1 s). Le dossier `.venv-blender/` n'est pas versionné.
 - Scripts dans `tools/blender/`, sorties dans `docs/art/assets/projet/`, commande `npm run assets:blender`, manifeste `origine: "creation-projet"` (script + empreinte), budgets de triangles, conventions glTF, tests `tests/art/models.test.ts` : tout est dans ERRATA_V3 §4. Les uniformes et équipements suivent la description du fichier 10 et les emblèmes de `data/emblems/` (licorne de la Police militaire).
@@ -45,7 +48,7 @@ Gabriel a l'autorisation de créer des éléments précis de l'univers : enseign
 - Les illustrations ne servent ni de textures de terrain, ni de modèles.
 
 ## 6. Multijoueur
-Tant que Gabriel n'a pas confirmé `27`, tu ne crées pas `src/net`. Tu conçois **dès maintenant** les nouveaux systèmes sans hypothèse « un seul joueur » : commandes sérialisables, `owner` par siège, connaissance par faction, brouillard par siège.
+Le multijoueur est **confirmé en coopération** (`docs/spec/27`) : conseil mixte joueurs + conseillers IA ; en bataille, chaque joueur dirige ses propres groupes, formations et escouades. `src/net` n'est créé qu'au chantier C13 (après C3 et C9). Dès maintenant, tous les nouveaux systèmes sont conçus **sans hypothèse « un seul joueur »** : commandes sérialisables, `owner` par siège, connaissance par faction, brouillard par siège. Pas de mode « Simulation de bataille » dans le menu (décision définitive).
 
 ## 7. Communication avec l'autre session
 Uniquement par fichiers : boîte de passage de `COORD.md` (écris la **PROCHAINE ACTION EXACTE**, les fichiers touchés, la commande qui échoue s'il y en a une), journaux, `PROGRESS.md`. Jamais de conversation. Tu ne modifies pas ce que l'autre session a laissé « en cours » sans lire sa note.

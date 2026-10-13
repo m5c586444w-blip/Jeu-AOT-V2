@@ -20,12 +20,23 @@
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
-| C13 | Multijoueur réseau (27) | **bloqué** | — | — | confirmation de Gabriel | ne pas commencer |
-| C14 | P9 / P10 / PACK recadrés | à faire | — | tronc | C5–C9 | ancienne feuille de route gelée |
+| C13 | Multijoueur coopératif réseau (27) | à faire | — | tronc | C3, C9 | débloqué : coopération confirmée |
+| C14 | P9 / P10 / PACK recadrés | à faire | — | tronc | C5–C9, C13, C15–C18 | ancienne feuille de route gelée |
+| C15 | Lieux : mur Rose (ex-LC-B) | à faire | — | tronc | C1 | voie B |
+| C16 | Lieux : mur Sina (ex-LC-C) | à faire | — | tronc | C15 | voie B |
+| C17 | Lieux : hors-murs (ex-LC-D) | à faire | — | tronc | C15 | voie B |
+| C18 | Lieux : Marley, Hizuru, Alliés, couverture de l'atlas | à faire | — | tronc | C16, C17 | « tout lieu jouable » |
 
-Ordre conseillé la première semaine : **A** : C0 → C3 → C4 → C6 ; **B** : C1 → C2 → C10 (outillage) → C11 (STYLE, DEMANDES). Chaque session prend la première tâche libre selon `PROTOCOLE.md` §5.
+Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 14 → vendredi 16 seulement) : C1 → C2 → C10 (outillage, uniformes) → C15 → C11. Après vendredi, A reprend aussi les chantiers de la voie B. Chaque session prend la première tâche libre selon `PROTOCOLE.md` §5.
 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
+
+### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
+- **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).
+- **Pour B** : trois fenêtres seulement (mercredi, jeudi, vendredi). Vendredi : clôture complète, note de passage détaillée pour A ; aucun chantier laissé « en cours » sans état exact. Ne pas viser « tout fini jeudi » : le plan n'est pas atteignable en trois jours (voir `PLAN_FONCTIONNALITES.md`).
+- **Pour A** : après vendredi, vous reprenez seule la voie B (interface, assets, lieux, Blender, illustrations).
+- **Réseau** : Gabriel accepte d'ajouter les domaines de Perchance à la liste réseau de l'environnement (action de sa part) ; tant qu'un accès normal n'est pas constaté dans une session, voie 1 (il génère) ou voie 3 (Blender).
+
 
 ### [2026-10-13] Direction (conversation de Gabriel) → A et B — initialisation
 - **État du dépôt** : tronc `claude/attack-on-titan-strategy-game-4ukom6`, R3 fusionnée, `verify` code 0, 719 tests (voir `PROGRESS.md`). P9 était la suite prévue : **elle est recadrée en C14**, ne pas la lancer telle quelle.
@@ -41,8 +52,7 @@ _(vide)_
 ## 4. Décisions en attente de Gabriel (reprises dans `MORNING.md`)
 | # | Sujet | Défaut appliqué en attendant |
 |---|---|---|
-| Q11 | Mode « Simulation de bataille » dans le menu principal | non implémenté |
-| Q12 | Ordre de mise en œuvre (26 §11) | ordre du §1 |
-| MJ | Multijoueur (27 §10 : modes, agenda caché, pause, anti-triche, connexion, PC le plus faible, IA sur sièges vides) | prérequis neutres seulement |
-| ACC | Même compte ou deux comptes ; jour de remise à zéro hebdomadaire | `BUDGET.md` avec valeurs provisoires |
-| NET | Domaines de Perchance à autoriser dans le réseau du cloud (voie 2 des illustrations) | voie 1 (Gabriel génère) puis voie 3 (rendus Blender) |
+| MJ-a | Règle de pause, anti-triche, mode de connexion, PC le plus faible (27 §10 points 3 à 6) | défauts `[A]` du fichier 27 |
+| B75 | B garde-t-elle le plafond de 75 % alors que son compte n'existe que jusqu'à vendredi ? | oui, 75 % |
+| NET | Domaines de Perchance ajoutés au réseau de l'environnement (action de Gabriel) | voie 1 puis voie 3 tant que non fait |
+| TIME | Après vendredi, ajouter une fenêtre à A (08:00–16:00) ? | non : A seule, de nuit |

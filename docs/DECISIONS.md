@@ -1246,3 +1246,10 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Raison** : demande explicite de Gabriel ; les sessions ne peuvent pas lire le pourcentage réel de la limite hebdomadaire, d'où l'interrupteur `B_AUTORISE` et le compteur de tours de `BUDGET.md` (provisoire, à calibrer).
 - **Non vérifié** : pilotage de Perchance (aucune API, Cloudflare, shell sans accès) ; comportement des tâches planifiées sur plusieurs jours.
 - **Réversible** : oui.
+
+## 2026-10-13 (soir) — D-155 Réponses de Gabriel : lieux complets, multijoueur coopératif, deux comptes
+- **Contexte** : Gabriel valide le plan C0–C14 « du moment que tout répond à mes attentes, toutes les villes et endroits créés et jouables » ; refuse le mode « Simulation de bataille » ; choisit la coopération pour le multijoueur ; précise deux comptes (A : reset hebdomadaire le mardi ; B : jusqu'au vendredi 16 octobre) ; autorise la création de la tâche planifiée A et l'ajout des domaines de Perchance au réseau (action de sa part).
+- **Choix** : chantiers C15 à C18 (lieux : mur Rose, mur Sina, hors-murs, Marley/Hizuru/alliés et couverture de l'atlas) ; LC-B/C/D dégelés ; C13 (multijoueur coopératif) débloqué après C3 et C9 ; 27 §4.2 (versus) non retenu, agenda caché désactivé (déduit de « coopération »), défauts `[A]` pour pause, anti-triche, connexion ; `BUDGET.md` : deux comptes, `B_DERNIER_JOUR: 2026-10-16`, compteur de B non calibrable.
+- **Estimation** `[A]` non mesurée : somme des plafonds ≈ 3 250 tours contre ≈ 1 750 tours du 8 au 13 octobre ; « tout fini jeudi » non atteignable (voir `PLAN_FONCTIONNALITES.md`).
+- **Remplace** : la mention « LC-B/C/D gelés » de D-154 ; le statut « bloqué » de C13.
+- **Réversible** : oui.

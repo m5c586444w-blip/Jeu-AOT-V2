@@ -60,14 +60,14 @@ Constat (2026-10-13, 1366 × 768) : la barre supérieure et le menu de gestion e
 7. **Manifeste** : `docs/art/illustrations/manifest.json` (identifiant, prompt, graine si connue, date, source `perchance` ou `blender`, verdict, décision). Les illustrations ne servent **pas** de textures de terrain ni de modèles.
 8. Poids : conversion en WebP ; au plus 1 Mo par illustration ; `assets:check` étendu à ce répertoire.
 
-## 6. Multijoueur (jusqu'à 9 joueurs)
-Demande de Gabriel : jusqu'à 9 amis peuvent rejoindre une partie. La proposition est dans `docs/spec/27_MULTIJOUEUR_9_JOUEURS.md`, **en attente de confirmation**. Jusqu'à confirmation : seuls les **prérequis neutres** du §9 de ce fichier (déterminisme, commandes sérialisables, propriété des entités, connaissance par faction) sont autorisés. Ce changement modifie la règle « jeu en local, jamais en ligne » : le jeu reste **privé** et hors Internet public ; une session réseau n'existe que si l'hôte la lance.
+## 6. Multijoueur (jusqu'à 9 joueurs) — orientation confirmée
+Décision de Gabriel (2026-10-13, soir) : **coopération dans tous les aspects** — un conseil mixte (joueurs + conseillers IA) et, en bataille, des joueurs qui dirigent **leurs propres groupes, formations et escouades**. Le versus n'est pas retenu en v1. Détail et défauts : `docs/spec/27_MULTIJOUEUR_9_JOUEURS.md` §10. `src/net` est créé au chantier C13 (après C3 et C9). Ce changement modifie la règle « jeu en local, jamais en ligne » : le jeu reste **privé** et hors Internet public ; une session réseau n'existe que si l'hôte la lance.
 
 ## 7. Mécaniques
-`docs/spec/26_MECANIQUES_THEORIQUES.md` est **validé** (décisions du 2026-10-13, §12 de ce fichier) : sept piliers, rencontres générales et combat humain contre humain (§3 bis), trois échelles. Points ouverts : mode « Simulation de bataille » depuis le menu et ordre de mise en œuvre.
+`docs/spec/26_MECANIQUES_THEORIQUES.md` est **validé** (décisions du 2026-10-13, §12 de ce fichier) : sept piliers, rencontres générales et combat humain contre humain (§3 bis), trois échelles. Précisé le 2026-10-13 (soir) : **pas** de mode « Simulation de bataille » dans le menu ; l'ordre de mise en œuvre est accepté à condition que **toutes les villes et tous les endroits soient créés et jouables** (chantiers C15 à C18).
 
 ## 8. Organisation du travail
-Deux sessions cloud automatiques coordonnées par fichiers (`docs/coord/PROTOCOLE.md`) : **A** de 00:00 à 08:00 et **B** de 08:00 à 16:00, heure de Paris. B s'arrête à **75 % de la limite hebdomadaire**. Le protocole de verrou remplace la règle « une seule session de code à la fois » par une règle vérifiable. La gouvernance D-107 (une phase = un sous-agent neuf, revue par un autre sous-agent, plafonds de tours) reste en vigueur.
+Deux sessions cloud automatiques coordonnées par fichiers (`docs/coord/PROTOCOLE.md`) : **A** de 00:00 à 08:00 et **B** de 08:00 à 16:00, heure de Paris, sur **deux comptes distincts**. B s'arrête à **75 % de sa limite hebdomadaire** et n'est disponible que **jusqu'au vendredi 16 octobre 2026 inclus**. Le protocole de verrou remplace la règle « une seule session de code à la fois » par une règle vérifiable. La gouvernance D-107 (une phase = un sous-agent neuf, revue par un autre sous-agent, plafonds de tours) reste en vigueur.
 
 ## 9. Arrêts obligatoires (remplace la liste de CLAUDE.md)
 Les sessions sont **autonomes** ; elles n'attendent pas Gabriel. Les seules interruptions :
