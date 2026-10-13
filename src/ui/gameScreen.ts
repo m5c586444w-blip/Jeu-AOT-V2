@@ -31,7 +31,8 @@ import { pendingEncounter } from "./panels/armiesPanel";
 import { computeOverlay } from "./overlays";
 import { applyPaperTextures } from "./paper";
 import { formatNumber, WhyTooltip } from "./why";
-import { Registers } from "./registers";
+import { PANEL_IDS, Registers } from "./registers";
+import { buildSearchIndex, GlobalSearch } from "./globalSearch";
 import { openBattleScreen } from "./tactical/battleScreen";
 import { openRtBattleScreen } from "./tactical/rtBattleScreen";
 import { EventDossier } from "./eventDossier";
@@ -152,6 +153,7 @@ export async function bootGame(): Promise<void> {
     refresh();
   };
   let registers: Registers | null = null;
+  let search: GlobalSearch | null = null;
   const keymap = new KeyMap(safeStorage());
   // Touche d'un registre (`personnages`) ou d'une action (`pause`, `speed_2`), pour les infobulles (U10).
   const keyOf = (id: string): string => {
@@ -164,6 +166,7 @@ export async function bootGame(): Promise<void> {
       refresh();
     },
     keyOf,
+    search: () => search?.toggle(),
     ...(world.politics || world.endings ? { openPanel: (id: string) => registers?.toggle(id as PanelId) } : {}),
   });
   const host = document.createElement("div");
@@ -314,6 +317,22 @@ export async function bootGame(): Promise<void> {
     () => registers?.open("journal"),
     keyOf("journal"),
   );
+  // Recherche globale (F-UIX-06, touche Q ou loupe du bandeau) : une province centre la carte et ouvre son dossier ;
+  // un personnage, un décret ou un registre ouvre le registre correspondant.
+  search = new GlobalSearch(
+    document.body,
+    () => buildSearchIndex(world, state, PANEL_IDS.filter((id) => registers?.has(id) ?? false)),
+    (e) => {
+      if (e.kind === "province") {
+        registers?.close();
+        map.centerOn(e.id);
+        map.setSelected(e.id);
+        dossier.open(e.id, state);
+      } else if (e.kind === "personnage") registers?.open("personnages", e.id);
+      else if (e.kind === "decret") registers?.open("decrets", e.id);
+      else registers?.open(e.id as PanelId);
+    },
+  );
   const drawRoutes = (): void => map.setRoutes(buildMapRoutes(mapData, world, state, registers?.draftRoute() ?? null));
   if (registers) registers.onDraft = drawRoutes;
 
@@ -407,7 +426,9 @@ export async function bootGame(): Promise<void> {
     fit: () => map.fit(),
     overlay_next: () => layers.next(),
     overlay_off: () => layers.select(null),
+    search: () => search?.toggle(),
     close: () => {
+      if (search?.isOpen) return search.close();
       if (manual?.isOpen) return manual.toggle();
       if (eventDossier?.openId) return eventDossier.close();
       if (registers?.openId) return registers.close();
@@ -453,7 +474,7 @@ export async function bootGame(): Promise<void> {
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
   // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre ouverte (registre, dossier, options…) la recouvre ;
   // une fenêtre qui ne la touche pas la laisse utilisable. Masquée par `visibility`, elle garde sa place : on peut mesurer.
-  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .manuel:not([hidden]), .choix-nation";
+  const WINDOWS = ".recherche-globale:not([hidden]), .registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .manuel:not([hidden]), .choix-nation";
   const syncLegend = (): void => {
     const a = layers.el.getBoundingClientRect();
     const covered = [...document.querySelectorAll(WINDOWS)].some((w) => {

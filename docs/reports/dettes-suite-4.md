@@ -89,3 +89,17 @@ Sommaire et méthode : `dettes-suite.md`.
   Maria-Est ; tracé en tirets et cône translucide jusqu'au point d'arrivée, au-delà de l'anneau de Rose.
   - Défauts : cône encore discret sur la forêt sombre ; il passe sous l'anneau du mur ; bulle « Expédition n° 1 partie… »
     qui couvre le coin haut droit ; étiquette « Forêt des Arbres Géants » coupée par le fanion.
+
+## F-UIX-06 (09 §16) : recherche globale (dette n° 69)
+- Touche **Q** (réglable dans les options) ou loupe du bandeau : une fenêtre cherche parmi les provinces, les personnages
+  du pays déjà entrés en scène (sous leur nom connu, jamais leur nom caché), les décrets et les registres, sans accents ni
+  casse ; mot entier, puis début de mot, puis fragment. Flèches pour choisir, Entrée pour ouvrir, Échap pour fermer. Une
+  province centre la carte et ouvre son dossier ; un personnage, un décret ou un registre ouvre le registre voulu.
+- `tests/ui/global-search.test.ts` (normalisation, ordre des résultats, index de 850 sans nom caché). Contrôle dans le jeu
+  (script jetable) : « tro » → `prov_trost`, `prov_rose_sud`, un décret ; Entrée ouvre le dossier « Trost » ; « decrets »
+  ouvre le registre « Décrets » ; Échap ferme la recherche sans fermer le registre ; aucune erreur de page.
+- **`recherche-globale.png`** : carte de 850, fenêtre « Rechercher » centrée en haut, saisie « tro », trois résultats
+  (Trost, Anneau de Rose ; Rose-Sud — porte de Trost, Mur Rose ; décret « Contrôle de la ville souterraine »), loupe à côté
+  du menu dans le bandeau.
+  - Défauts : le décret ne sort que par le fragment « tro » de « contrôle » (bruit) ; la fenêtre couvre le haut de la carte ;
+    la touche Q n'est rappelée que dans l'infobulle de la loupe ; aucun index des événements ni des chroniques.

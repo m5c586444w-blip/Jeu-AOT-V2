@@ -3885,5 +3885,17 @@
   "map.wall.maria": "WALL MARIA",
   "map.wall.rose": "WALL ROSE",
   "map.wall.sina": "WALL SINA",
-  "punct.percent": "%"
+  "punct.percent": "%",
+  "action.search": "Global search",
+  "search.title": "Search",
+  "search.placeholder": "Province, character, decree, register…",
+  "search.hint": "Type a name: province, character, decree or register. Arrows to choose, Enter to open.",
+  "search.count": "{n} {n|result|results}",
+  "search.none": "No result for “{query}”.",
+  "search.dead": "dead",
+  "search.kind.province": "Province",
+  "search.kind.personnage": "Character",
+  "search.kind.decret": "Decree",
+  "search.kind.registre": "Register",
+  "search.open": "Search (province, character, decree)"
 }

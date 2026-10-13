@@ -1017,3 +1017,18 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .menu-carte__titre { margin: 0 0 0.25rem; padding: 0.1rem 0.8rem 0.3rem; font-variant-caps: all-small-caps; letter-spacing: 0.04em; color: var(--accent-clair); border-bottom: var(--filet-l) solid var(--filet-doux); }
 .menu-carte__choix { display: block; width: 100%; padding: 0.3rem 0.8rem; text-align: left; color: inherit; font: inherit; background: none; border: 0; cursor: pointer; }
 .menu-carte__choix:hover, .menu-carte__choix:focus-visible { background: var(--panneau-haut); outline: none; color: var(--accent-clair); }
+
+/* Recherche globale (F-UIX-06) : fenêtre centrée en haut de l'écran, résultats en liste. */
+.recherche-globale { position: fixed; inset: 0; z-index: calc(var(--z-fenetre) + 2); display: flex; justify-content: center; align-items: flex-start; padding-top: 12vh; background: var(--voile-leger); }
+.recherche-globale[hidden] { display: none; }
+.recherche-globale__boite { width: min(34rem, 92vw); padding: 0.8rem 1rem 0.6rem; color: var(--texte); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 2px solid var(--accent); box-shadow: 3px 3px 0 var(--ombre); }
+.recherche-globale__titre { margin: 0 0 0.5rem; font-size: var(--t-m); font-variant-caps: all-small-caps; letter-spacing: 0.04em; color: var(--accent-clair); }
+.recherche-globale__saisie { width: 100%; box-sizing: border-box; padding: 0.45rem 0.6rem; color: var(--texte-fort); font: inherit; background: var(--fond-profond); border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); }
+.recherche-globale__saisie:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.recherche-globale__liste { list-style: none; margin: 0.5rem 0 0; padding: 0; max-height: 50vh; overflow-y: auto; }
+.recherche-globale__resultat { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.3rem 0.5rem; cursor: pointer; border-left: 2px solid transparent; }
+.recherche-globale__resultat[aria-selected="true"], .recherche-globale__resultat:hover { background: var(--panneau-haut); border-left-color: var(--accent); }
+.recherche-globale__genre { flex: 0 0 5.5rem; font-size: var(--t-s); font-variant-caps: all-small-caps; color: var(--texte-second); }
+.recherche-globale__nom { display: flex; flex-direction: column; color: var(--texte-fort); }
+.recherche-globale__detail { font-size: var(--t-s); color: var(--texte-second); }
+.recherche-globale__note { margin: 0.5rem 0 0; font-size: var(--t-s); color: var(--texte-second); }

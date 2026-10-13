@@ -3885,5 +3885,17 @@
   "map.wall.maria": "MUR MARIA",
   "map.wall.rose": "MUR ROSE",
   "map.wall.sina": "MUR SINA",
-  "punct.percent": " %"
+  "punct.percent": " %",
+  "action.search": "Recherche globale",
+  "search.title": "Rechercher",
+  "search.placeholder": "Province, personnage, décret, registre…",
+  "search.hint": "Tapez un nom : province, personnage, décret ou registre. Flèches pour choisir, Entrée pour ouvrir.",
+  "search.count": "{n} {n|résultat|résultats}",
+  "search.none": "Aucun résultat pour « {query} ».",
+  "search.dead": "mort",
+  "search.kind.province": "Province",
+  "search.kind.personnage": "Personnage",
+  "search.kind.decret": "Décret",
+  "search.kind.registre": "Registre",
+  "search.open": "Rechercher (province, personnage, décret)"
 }

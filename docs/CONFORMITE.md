@@ -318,7 +318,7 @@ deux temps (D-93), 3D réaliste (D-81, D-88), interface moderne et carte réalis
 | F-EVT-14 | 09 §15 : éditeur d'événements. | ABSENT | D-161 : report confirmé (dette n° 69). |
 | F-UIX-04 | 09 §16 : alertes et historique. | FAIT | `tests/ui/alerts.test.ts`, `tests/ui/notifications.test.ts`. |
 | F-UIX-05 | 09 §16 : loupe. | ABSENT | J-REP : P2.md §0 ; report confirmé par D-161 (dette n° 69). |
-| F-UIX-06 | 09 §16 : recherche globale. | ABSENT | J-REP : P2.md §0 ; report confirmé par D-161 (dette n° 69). |
+| F-UIX-06 | 09 §16 : recherche globale. | FAIT | `src/ui/globalSearch.ts` (touche Q ou loupe du bandeau : provinces, personnages, décrets, registres, sans accents), `tests/ui/global-search.test.ts` ; fait le 2026-10-13 (dette n° 69). |
 | F-UIX-07 | 09 §16 : favoris, groupes d'unités. | PARTIEL | Groupes Ctrl+1–9 (`src/ui/tactical/rtControls.ts:91`) ; pas de favoris. |
 | F-UIX-08 | 09 §16 : interfaces-objets (E-UX-2). | FAIT | Matière sur les cadres (UI). |
 | F-UIX-09 | 09 §16 : animations physiques. | PARTIEL | Sons de papier et de tampon (D-75) ; aucune animation. |

@@ -26,6 +26,8 @@ export interface HudActions {
   openPanel?(id: string): void;
   /** Libellé de la touche qui ouvre un registre (raccourcis affichés dans les infobulles, U10). */
   keyOf?(id: string): string;
+  /** Recherche globale (F-UIX-06) : loupe du bandeau. */
+  search?(): void;
 }
 
 /** Menu de gestion (U2) : registres regroupés par domaine, dans l'ordre de lecture. */
@@ -107,6 +109,19 @@ export class Hud {
 
     const time = el("div", "bandeau__temps");
     time.append(this.dateBlock(), this.speedBlock());
+    if (actions.search) {
+      // Recherche globale (F-UIX-06) : provinces, personnages, décrets, registres.
+      const search = actions.search;
+      const find = el("button", "bandeau__menu bandeau__recherche");
+      find.type = "button";
+      find.innerHTML = icon("loupe");
+      find.append(el("span", "lecteur-seul", t("search.open")));
+      const key = actions.keyOf?.("search");
+      hint(find, key ? `${t("search.open")} (${key})` : t("search.open"));
+      find.dataset["action"] = "recherche";
+      find.addEventListener("click", () => search());
+      time.append(find);
+    }
     if (world.politics && actions.openPanel) {
       // Retour au menu principal (P8, 04 §5.1) : la partie est sauvegardée automatiquement à intervalles.
       const menu = el("button", "bandeau__menu");
