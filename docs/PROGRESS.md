@@ -2,10 +2,15 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R3 terminée et fusionnée** (D-153). Direction autonome (D-107). Suivante : P9 (N3). |
-| Tâche | Lancer P9 (fichier 18 §9 : scénarios, IA, équilibrage) sur `claude/v2-p9` |
-| Dernier `npm run verify` | 2026-10-13 : code 0 ; 110 fichiers, 719 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-fusion.log`) ; `smoke:r3` code 0 |
-| Prochaine étape | PROCHAINE ACTION EXACTE : P9 sur `claude/v2-p9` (sous-agent neuf, Opus xhigh), puis P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
+| Phase | **P9 terminée — en revue** (branche `claude/v2-p9`, D-154 à D-162). Arrêt de revue (fin de P9) : Gabriel joue une campagne complète. |
+| Tâche | Revue de P9 : `docs/reports/P9.md`, `docs/reports/P9-balance.html` ; correctifs de `src/sim` proposés (`docs/phases/P9-sim-propositions.md`, à valider) |
+| Dernier `npm run verify` | 2026-10-13 : code 0 ; 113 fichiers, 741 tests ; 8 empreintes inchangées ; `canon:check` 4 campagnes ; `src/sim` : 0 ligne de diff (`docs/reports/P9-verify.log`) ; `sim:balance` OK (1000 parties par campagne, `docs/reports/P9-balance.log`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : revue de P9 par Gabriel (campagnes, difficultés, SP-1 et SP-2), puis fusion par la direction, puis P10, PACK ; mesures GPU de R2+ et R3 (dettes n° 49 et 61) |
+
+## P9 terminée — arrêt de revue (2026-10-13)
+- **Raison de l'arrêt** : fin de P9 (arrêt de revue n° 5 : fin de P9).
+- **Résultat** : voir `docs/reports/P9.md` (critères, sorties réelles, réglages, captures).
+- **À trancher par Gabriel** : correctifs SP-1 (IA d'invasion bloquée après une brèche) et SP-2 (fin de partie dans l'état), D-161.
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
