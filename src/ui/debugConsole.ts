@@ -18,7 +18,17 @@ export interface ConsoleResult {
   text: string;
 }
 
-const COMMANDS = ["help", "seed", "date", "advance", "hash", "save", "load", "canon", "mort", "decret"] as const;
+const COMMANDS = ["help", "seed", "date", "advance", "hash", "save", "load", "canon", "mort", "decret", "ia"] as const;
+
+/** Lignes du journal de raisonnement des IA (P9.2) : nations, armées, missions ; filtre de faction facultatif, n dernières. */
+export function aiJournal(s: GameState, faction: string | null, n: number): string[] {
+  const rows: { day: number; text: string }[] = [];
+  const why = (r: readonly { key: string; value: number }[]): string => r.map((x) => `${x.key}=${Math.round(x.value * 100) / 100}`).join(", ");
+  for (const d of s.nations?.ai ?? []) if (!faction || d.faction === faction) rows.push({ day: d.day, text: `monde   ${d.faction} ${d.action} (utilité ${Math.round(d.utility * 100) / 100}) : ${why(d.reasons)}` });
+  for (const d of s.armies?.ai ?? []) if (!faction || d.faction === faction) rows.push({ day: d.day, text: `armées  ${d.faction} ${d.army} ${d.action} : ${why(d.reasons)}` });
+  for (const d of s.missions?.ai ?? []) if (!faction || d.nation === faction) rows.push({ day: d.day, text: `mission ${d.nation} ${d.mission} (utilité ${Math.round(d.utility * 100) / 100}) : ${why(d.reasons)}` });
+  return rows.sort((a, b) => a.day - b.day).slice(-n).map((r) => `j${r.day} ${r.text}`);
+}
 
 /** Interprète une ligne de la console de service (logique pure, testable sans DOM). */
 export async function runConsoleLine(host: ConsoleHost, line: string): Promise<ConsoleResult> {
@@ -72,6 +82,13 @@ export async function runConsoleLine(host: ConsoleHost, line: string): Promise<C
       case "decret": {
         await host.dispatch({ type: "EnactLaw", law: args[0] ?? "", override: args[1] === "force" });
         return ok(t("console.decree", { id: args[0] ?? "" }));
+      }
+      case "ia": {
+        // Journal de raisonnement des IA (P9.2) : « ia », « ia fac_marley », « ia fac_hizuru 40 ».
+        const faction = args[0] && !/^\d+$/.test(args[0]) ? args[0] : null;
+        const n = Number(args.find((a) => /^\d+$/.test(a)) ?? "20");
+        const lines = aiJournal(host.state(), faction, n);
+        return ok(lines.length > 0 ? lines.join("\n") : t("console.ai_none"));
       }
       default:
         return fail(t("console.error.unknown", { name }));
