@@ -1253,7 +1253,7 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 
 ## 2026-10-13 — D-156 P9 : joueur type et sim:balance
 - **Contexte** : P9.4 demande 1000 parties par scénario, sans joueur humain.
-- **Choix** : joueur type tiré par graine (`src/tools/balance/game.ts`) : profils historique, prudent, audacieux et hasardeux (probabilité de signer le choix historique 0,92 / 0,75 / 0,5 / 0,3 ; cadence et taille des expéditions ; rationnement ; interception ; commerce avec Hizuru). Pas de 3 jours. Parties en parallèle (`worker_threads`), un essai mesure la durée d'une partie et fixe le plus grand nombre qui tient dans 30 min par campagne. Déterminisme vérifié sur 3 graines par campagne : partie rejouée, journal de commandes rejoué en direct et par le Worker Node (même `stateHash`). Rapport HTML autonome `docs/reports/P9-balance.html` (aucune ressource externe).
+- **Choix** : joueur type tiré par graine (`src/tools/balance/game.ts`) : profils historique, prudent, audacieux et hasardeux (probabilité de signer le choix historique 0,92 / 0,75 / 0,5 / 0,3 ; cadence, taille et profondeur des expéditions ; rationnement ; interception, défense du segment de mur menacé, rencontres d'armées résolues en combat automatique ou en retraite ; commerce avec Hizuru). Pas de 3 jours. Parties en parallèle (`worker_threads`), un essai mesure la durée d'une partie et fixe le plus grand nombre qui tient dans 30 min par campagne. Déterminisme vérifié sur 3 graines par campagne : partie rejouée, journal de commandes rejoué en direct et par le Worker Node (même `stateHash`). Rapport HTML autonome `docs/reports/P9-balance.html` (aucune ressource externe).
 - **Réversible** : oui.
 
 ## 2026-10-13 — D-157 P9 : campagne du Grondement
@@ -1280,4 +1280,18 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 ## 2026-10-13 — D-161 P9 : correctifs de `src/sim` proposés, à valider par Gabriel
 - **Contexte** : `sim:balance` montre un cycle dégénéré (l'armée de Marley bombarde un segment déjà percé jusqu'à l'échéance) ; la fin de partie vit hors de l'état.
 - **Choix** : aucun changement ; correctifs SP-1 et SP-2 écrits dans `docs/phases/P9-sim-propositions.md` (fichier, diff, raison, effet sur les empreintes) ; dettes n° 71 et 72. **À valider par Gabriel.**
+- **Réversible** : oui.
+
+## 2026-10-13 — D-162 P9.5 : réglages de l'équilibrage (données seulement)
+- **Contexte** : mesure avant réglage (40 parties par campagne, `docs/reports/P9-balance-avant.log`) : Paradis 90 % (845) et 85 %
+  (850), Marley 100 % (854 : brèche au 60ᵉ jour dans toutes les parties), mortalité d'expédition 20,0 %. Les réglages ne
+  touchent que `data/balance/difficulty.json` (section `tuning`), appliquée aux campagnes seulement (les empreintes des scénarios
+  de base, qui lisent `data/balance`, restent identiques).
+- **Options** : modifier les fichiers d'équilibrage eux-mêmes (empreintes changées : refusé) ; régler les campagnes par `tuning`.
+- **Choix** (valeurs [A]) : `expeditions.encounters.per_day_at_density_1` 4 → 7 (rencontres plus fréquentes : mortalité moyenne
+  dans 25–40 % pour le joueur type) ; `armies.siege.wall_per_piece_day` 0,06 → 0,025 (une brèche demande plus de temps : la
+  défense du joueur compte) ; 854 : forces de Marley × 0,8 ; seuil du bilan d'échéance + 0,038 (845, seuil 0,538) et + 0,331
+  (850, seuil 0,831). Le joueur type a aussi changé avant la mesure (expéditions à la profondeur du profil, défense des murs,
+  rencontres d'armées résolues : D-156) ; mesure finale : `docs/reports/P9-balance.log`.
+- **Raison** : aucun changement de règle ; chaque valeur se défait dans un seul fichier.
 - **Réversible** : oui.

@@ -1,6 +1,6 @@
 {
   "canon": "A",
-  "notes_canon": "P9.3 et P9.5 (D-154, D-158) : quatre niveaux de difficulté et réglages des campagnes. Valeurs de jeu A, appliquées au chargement d'une campagne (scn_camp_<campagne>__<niveau>), jamais aux scénarios de base (référence de la simulation et des empreintes). Récit : découverte de l'histoire ; Normal : référence de l'équilibrage (sim:balance) ; Rude et Brèche : ressources plus maigres, ennemis plus nombreux, seuils de fin plus exigeants.",
+  "notes_canon": "P9.3 et P9.5 (D-154, D-158) : quatre niveaux de difficulté et réglages des campagnes. Valeurs de jeu A, appliquées au chargement d'une campagne (scn_camp_<campagne>__<niveau>), jamais aux scénarios de base (référence de la simulation et des empreintes). Récit : découverte de l'histoire ; Normal : référence de l'équilibrage (sim:balance) ; Rude et Brèche : ressources plus maigres, ennemis plus nombreux, seuils de fin plus exigeants. Réglages de P9.5 (`tuning`, D-162) : A, issus de `sim:balance` (joueur type, Normal) ; appliqués aux campagnes seulement (empreintes des scénarios de base inchangées).",
   "default": "normal",
   "levels": [
     {
@@ -62,7 +62,28 @@
     }
   ],
   "tuning": {
-    "balance": {},
-    "campaigns": {}
+    "balance": {
+      "armies": {
+        "siege": {
+          "wall_per_piece_day": 0.025
+        }
+      },
+      "expeditions": {
+        "encounters": {
+          "per_day_at_density_1": 7
+        }
+      }
+    },
+    "campaigns": {
+      "c845": {
+        "score_threshold_delta": 0.038
+      },
+      "c850": {
+        "score_threshold_delta": 0.331
+      },
+      "c854": {
+        "enemy_forces_mult": 0.8
+      }
+    }
   }
 }
