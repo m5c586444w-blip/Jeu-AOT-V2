@@ -1,5 +1,6 @@
 import type { Regiment } from "../../data/armySchemas";
 import type { Explained } from "../core/explain";
+import type { SeatId } from "../core/seat";
 import type { GameDate } from "../core/time";
 import { toAbsoluteDay } from "../core/time";
 import type { ArmiesWorld, World } from "../strategic/world";
@@ -23,6 +24,8 @@ export type ArmyStance = "marche" | "halte" | "retraite";
 export interface ArmyState {
   id: string;
   faction: string;
+  /** Siège qui commande l'armée (27) ; absent = siège de la faction (solo : siège solo). */
+  owner?: SeatId;
   name_key: string;
   /** Numéro affiché (1re armée, 2e armée…) pour les armées levées en cours de partie. */
   number: number;
@@ -66,6 +69,8 @@ export type FleetMission = "patrouille" | "blocus" | "escorte";
 export interface FleetState {
   id: string;
   faction: string;
+  /** Siège qui commande la flotte ; absent = siège de la faction. */
+  owner?: SeatId;
   name_key: string;
   admiral: string | null;
   sea: string;

@@ -1260,3 +1260,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Incertitude** : la date de l'époque charnière (« saison 4 ») est `[?]` : seuil en données, à fixer d'après les fichiers 11 et 12.
 - **Remplace** : la déduction de D-155 « agenda caché non retenu » et « versus non retenu ».
 - **Réversible** : oui.
+
+## 2026-10-14 — D-157 C3 : siège (`owner`) facultatif et enveloppes de commandes
+- **Décision** : `owner?: SeatId` est un champ **facultatif** sur armées, flottes, escouades et sections de bataille. Absent, le propriétaire est calculé : siège qui dirige la faction de l'entité (`GameState.seats?`), sinon `seat_1` pour la faction jouée, sinon personne (IA). Les actions passent par une enveloppe `{seat, day, command}` en JSON pur (Zod pour les ordres d'armée et de bataille) ; refus `seat.err.not_owner` si le siège ne possède pas l'entité. `applyCommand` est inchangé.
+- **Raison** : sauvegardes et empreintes inchangées, pas de migration (`schemaVersion` reste 8). Rejeu prouvé par `tests/sim/replay-commands.test.ts`.
+- **Reste (C3 suite)** : `owner` sur provinces/institutions, UI branchée sur les enveloppes, contrôle par siège des commandes de faction, connaissance par faction branchée au tick.
+- **Réversible** : oui.

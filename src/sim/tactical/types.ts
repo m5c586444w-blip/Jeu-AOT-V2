@@ -1,3 +1,4 @@
+import type { SeatId } from "../core/seat";
 /** Types de la bataille tactique (P4). Tout l'état est de la donnée sérialisable ; la carte se régénère depuis (définition, graine). */
 
 export const TACTICAL_ORDERS = ["tuer", "tenir", "repli", "couvrir"] as const;
@@ -93,6 +94,8 @@ export interface TroopSpec {
 /** Fantassin en bataille (R2+). */
 export interface TroopUnit {
   id: number;
+  /** Siège qui commande la section (absent = siège de l'escouade, sinon solo). */
+  owner?: SeatId;
   section: string;
   side: "allie" | "ennemi";
   kind: TroopKind;
@@ -264,6 +267,8 @@ export interface TitanUnit {
 
 export interface SquadState {
   id: string;
+  /** Siège qui commande l'escouade ou la section (27) ; absent = siège solo. */
+  owner?: SeatId;
   order: SquadOrder;
   /** Titans signalés à l'escouade (fusée vue ou contact). */
   known: number[];

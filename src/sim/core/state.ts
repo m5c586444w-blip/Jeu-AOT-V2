@@ -26,6 +26,7 @@ import { weeklyWar } from "../world/war";
 import { monthlyAi, weeklyAi } from "../world/ai";
 import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
+import type { SeatsState } from "./seat";
 import { createArmiesState } from "../armies/state";
 import type { ArmiesState } from "../armies/state";
 import { tickArmies } from "../armies/layer";
@@ -63,6 +64,10 @@ export interface GameState {
    * créé au départ d'un scénario qui a des armées, ou par la commande `RaiseArmies`.
    */
   armies?: ArmiesState;
+  /**
+   * Sièges (27) : facultatif. Absent = partie solo (un seul siège, `SOLO_SEAT`, qui dirige la faction jouée) ; son hash ne change pas.
+   */
+  seats?: SeatsState;
   /**
    * Missions nationales (MIS) : facultatif. Créé au premier lancement d'une mission (joueur) ou à la première décision de l'IA de
    * Marley ; absent d'une sauvegarde antérieure ou d'une partie où rien n'a été lancé (son hash ne change pas).
