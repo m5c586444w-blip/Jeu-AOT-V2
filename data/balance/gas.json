@@ -1,0 +1,40 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P3 (spec 26 §4). Tous les nombres sont des choix [A] ; réserve de 100 u par soldat et portée du crochet 40-60 m sont [?] dans la spec (hook_range_m est lu dans tactical.json, pas dupliqué ici).",
+  "anchor": {
+    "sector_m": 100,
+    "min_solidity": 0.3,
+    "density_ref_per_ha": 6,
+    "density_classes": { "rare": 2, "moyen": 6 },
+    "chain_hop_min_m": 4
+  },
+  "destruction": {
+    "radius_m": { "titan": 5, "incendie": 12, "demolition": 15, "artillerie": 9 },
+    "solidity_loss": { "titan": 1, "incendie": 0.6, "demolition": 1, "artillerie": 0.8 }
+  },
+  "estimate": { "error_no_intel": 0.5, "error_full_intel": 0.05 },
+  "cut": {
+    "window_s": 0.2,
+    "base": 0.15,
+    "speed_ref": 18,
+    "speed_k": 0.6,
+    "angle_k": 0.5,
+    "skill_k": 0.012,
+    "wear_k": 0.5,
+    "stress_k": 0.3,
+    "min_p": 0.02,
+    "max_p": 0.95,
+    "cone_half_angle_deg": [8, 40]
+  },
+  "cost": {
+    "tank_per_soldier": 100,
+    "burn_fraction_base": 0.45,
+    "burn_fraction_density_k": 0.4,
+    "burn_fraction_max": 1,
+    "steel_per_soldier_engaged": 0.8,
+    "steel_per_cut": 0.15,
+    "refill_efficiency": 0.9
+  },
+  "reserve": { "depot_min_pct": 10 },
+  "lances": { "start_year": 850, "cost_gold": 40, "friendly_fire": 0.06, "range_m": 120, "recruit_floor": 0.7 }
+}

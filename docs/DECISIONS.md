@@ -1266,3 +1266,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Raison** : sauvegardes et empreintes inchangées, pas de migration (`schemaVersion` reste 8). Rejeu prouvé par `tests/sim/replay-commands.test.ts`.
 - **Reste (C3 suite)** : `owner` sur provinces/institutions, UI branchée sur les enveloppes, contrôle par siège des commandes de faction, connaissance par faction branchée au tick.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-158 C4.1 : pilier P3 Gaz et Ancrage en module pur non branché
+- **Décision** : module pur `src/sim/gas/` + `data/balance/gas.json` (valeurs `[A]`, portée du crochet `[?]` lue dans `tactical.json`). Non branché au tick ni à `battle.ts` : aucune empreinte de référence modifiée. Pertes d'ancrage dans un registre `AnchorLedger` séparé de la carte tactique immuable.
+- **Reste** : brancher dans `battle.ts`/`odm.ts` (changement d'empreintes à justifier alors), consommation réelle de gaz/lames, coût affiché au conseil, dépôts-objectifs, réglage par `sim:balance`.
+- **Réversible** : oui.

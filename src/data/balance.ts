@@ -169,6 +169,25 @@ export const LogisticsBalanceSchema = z
   })
   .strict();
 
+/** data/balance/gas.json — pilier P3 (spec 26 §4) : carte d'ancrage, fenêtre de coupe, coût stratégique du gaz (valeurs [A]). */
+export const GasBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    anchor: z.object({ sector_m: pos, min_solidity: prob, density_ref_per_ha: pos, density_classes: z.object({ rare: pos, moyen: pos }).strict(), chain_hop_min_m: z.number().min(0) }).strict(),
+    destruction: z.object({ radius_m: z.record(z.string(), pos), solidity_loss: z.record(z.string(), prob) }).strict(),
+    estimate: z.object({ error_no_intel: prob, error_full_intel: prob }).strict(),
+    cut: z
+      .object({ window_s: pos, base: prob, speed_ref: pos, speed_k: z.number().min(0), angle_k: z.number().min(0), skill_k: z.number().min(0), wear_k: z.number().min(0), stress_k: z.number().min(0), min_p: prob, max_p: prob, cone_half_angle_deg: range })
+      .strict(),
+    cost: z
+      .object({ tank_per_soldier: pos, burn_fraction_base: prob, burn_fraction_density_k: z.number().min(0), burn_fraction_max: prob, steel_per_soldier_engaged: z.number().min(0), steel_per_cut: z.number().min(0), refill_efficiency: prob })
+      .strict(),
+    reserve: z.object({ depot_min_pct: z.number().min(0).max(100) }).strict(),
+    lances: z.object({ start_year: z.number().int(), cost_gold: z.number().min(0), friendly_fire: prob, range_m: pos, recruit_floor: prob }).strict(),
+  })
+  .strict();
+
 /** data/balance/tactical.json — combat tactique (03 : « tout est dans /data/balance/tactical.json »). */
 export const TacticalBalanceSchema = z
   .object({
@@ -408,6 +427,7 @@ export type IntelBalance = z.infer<typeof IntelBalanceSchema>;
 export type TacticalBalance = z.infer<typeof TacticalBalanceSchema>;
 export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
+export type GasBalance = z.infer<typeof GasBalanceSchema>;
 
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
 export type SocietyBalance = z.infer<typeof SocietyBalanceSchema>;
@@ -423,6 +443,7 @@ export const BALANCE_FILES = {
   society: SocietyBalanceSchema,
   expeditions: ExpeditionsBalanceSchema,
   logistics: LogisticsBalanceSchema,
+  gas: GasBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,
