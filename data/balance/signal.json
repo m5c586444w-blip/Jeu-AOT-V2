@@ -1,0 +1,51 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P4 (spec 26 §5). Les codes de couleur par branche sont [C] (03 §7) ; tout le reste (portées, délais, taux d'erreur, niveaux de communication, plafond de règles) est un choix [A]. Les communications modernes de Marley sont [?] (à confirmer en 11).",
+  "codes": {
+    "corps": { "rouge": "titan_repere", "vert": "changement_direction", "noir": "titan_anormal" },
+    "garnison": { "vert": "mission_commencee", "rouge": "echec", "jaune": "reussite" },
+    "cancels": { "jaune": "rouge" }
+  },
+  "visibility": {
+    "base_range_m": 2500,
+    "color_mult": { "rouge": 1, "vert": 1, "jaune": 1, "noir": 0.8 },
+    "rain_k": 0.5,
+    "smoke_k": 0.6,
+    "night_mult": 0.8,
+    "relief_k": 0.7,
+    "min_range_m": 100
+  },
+  "relay": {
+    "see_delay_s": 2,
+    "hop_delay_s": 6,
+    "max_hops": 6
+  },
+  "errors": {
+    "wrong_code_base": 0.03,
+    "wet_flare_base": 0.02,
+    "wet_flare_rain_k": 0.25,
+    "smoke_garble_from": 0.5,
+    "smoke_garble_k": 0.4,
+    "misunderstand_base": 0.04,
+    "misunderstand_morale_k": 0.12,
+    "formation_mult": { "eventail": 0.5, "colonne": 1, "ligne": 0.8, "defaut": 1 },
+    "max_p": 0.9
+  },
+  "comms": {
+    "signal": { "delay_mult": 1, "error_mult": 1 },
+    "moderne": { "delay_mult": 0.15, "error_mult": 0.3 }
+  },
+  "ghost": {
+    "max_age_s": 900,
+    "default_speed_mps": 1.5,
+    "uncertainty_cap_m": 3000
+  },
+  "fog": {
+    "vision_radius_m": 150
+  },
+  "doctrine": {
+    "max_rules": 24,
+    "order_hop_delay_s": 4,
+    "orders": ["tenir", "avancer", "detourner", "escorter", "evacuer", "incendier", "couvrir", "retraite"]
+  }
+}

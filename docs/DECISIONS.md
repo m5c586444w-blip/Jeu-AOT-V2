@@ -1271,3 +1271,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : module pur `src/sim/gas/` + `data/balance/gas.json` (valeurs `[A]`, portée du crochet `[?]` lue dans `tactical.json`). Non branché au tick ni à `battle.ts` : aucune empreinte de référence modifiée. Pertes d'ancrage dans un registre `AnchorLedger` séparé de la carte tactique immuable.
 - **Reste** : brancher dans `battle.ts`/`odm.ts` (changement d'empreintes à justifier alors), consommation réelle de gaz/lames, coût affiché au conseil, dépôts-objectifs, réglage par `sim:balance`.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-159 C4.2 : pilier P4 Signal en module pur non branché
+- **Décision** : `src/sim/signal/` (visibilité monotone, relais et erreurs via fork du `Rng` injecté, fantômes d'information, brouillard Récit/Normal/Rude par faction et par siège, doctrine programmable) ; paramètres `[A]` dans `data/balance/signal.json`, codes de couleur par branche `[C]` (03 §7). Choix `[A]` : plan 2D ; un signal ennemi n'est jamais lisible ; Rude n'expose aucune entité exacte ; communications « moderne » de Marley `[?]`.
+- **Non branché** au tick ni à la bataille : empreintes inchangées. Reste : branchement à `battle.ts` et au conseil, éditeur de doctrine.
+- **Réversible** : oui.

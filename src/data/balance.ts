@@ -188,6 +188,36 @@ export const GasBalanceSchema = z
   })
   .strict();
 
+/** data/balance/signal.json — pilier P4 (spec 26 §5) : visibilité des fusées, relais, erreurs, fantômes, brouillard, doctrine (valeurs [A], codes de couleur [C]). */
+export const SignalBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    codes: z.object({ corps: z.record(z.string(), z.string()), garnison: z.record(z.string(), z.string()), cancels: z.record(z.string(), z.string()) }).strict(),
+    visibility: z
+      .object({ base_range_m: pos, color_mult: z.record(z.string(), pos), rain_k: prob, smoke_k: prob, night_mult: pos, relief_k: prob, min_range_m: z.number().min(0) })
+      .strict(),
+    relay: z.object({ see_delay_s: z.number().min(0), hop_delay_s: z.number().min(0), max_hops: z.number().int().min(0) }).strict(),
+    errors: z
+      .object({
+        wrong_code_base: prob,
+        wet_flare_base: prob,
+        wet_flare_rain_k: z.number().min(0),
+        smoke_garble_from: prob,
+        smoke_garble_k: z.number().min(0),
+        misunderstand_base: prob,
+        misunderstand_morale_k: z.number().min(0),
+        formation_mult: z.record(z.string(), z.number().min(0)),
+        max_p: prob,
+      })
+      .strict(),
+    comms: z.record(z.string(), z.object({ delay_mult: z.number().min(0), error_mult: z.number().min(0) }).strict()),
+    ghost: z.object({ max_age_s: pos, default_speed_mps: z.number().min(0), uncertainty_cap_m: pos }).strict(),
+    fog: z.object({ vision_radius_m: pos }).strict(),
+    doctrine: z.object({ max_rules: z.number().int().min(1), order_hop_delay_s: z.number().min(0), orders: z.array(z.string()).min(1) }).strict(),
+  })
+  .strict();
+
 /** data/balance/tactical.json — combat tactique (03 : « tout est dans /data/balance/tactical.json »). */
 export const TacticalBalanceSchema = z
   .object({
@@ -428,6 +458,7 @@ export type TacticalBalance = z.infer<typeof TacticalBalanceSchema>;
 export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
 export type GasBalance = z.infer<typeof GasBalanceSchema>;
+export type SignalBalance = z.infer<typeof SignalBalanceSchema>;
 
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
 export type SocietyBalance = z.infer<typeof SocietyBalanceSchema>;
@@ -444,6 +475,7 @@ export const BALANCE_FILES = {
   expeditions: ExpeditionsBalanceSchema,
   logistics: LogisticsBalanceSchema,
   gas: GasBalanceSchema,
+  signal: SignalBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,
