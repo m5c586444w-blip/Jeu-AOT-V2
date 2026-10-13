@@ -7,6 +7,7 @@ import { choiceAvailable, daysLeft } from "../sim/events/engine";
 import type { PendingEvent } from "../sim/events/engine";
 import type { World } from "../sim/strategic/world";
 import { archetypeOf, archetypeSvg } from "./eventArt";
+import { divergenceNotice, NOTICE_MAX } from "./divergence";
 import { effectLines, eventBody } from "./eventText";
 import type { EffectLine } from "./eventText";
 import { button, el } from "./panels/common";
@@ -95,10 +96,37 @@ export class EventDossier {
         stamp.dataset["why"] = t(c.historical ? "evt.historical_why" : "evt.diverges_why");
         box.append(stamp);
       }
-      const sign = button(t("evt.sign"), () => {
+      const commit = (): void => {
         // Fermer avant d'envoyer : le rafraîchissement qui suit la commande ouvre le dossier suivant, qui doit rester ouvert.
         this.close();
         void this.dispatch({ type: "ChooseEventOption", event: e.id, choice: c.id });
+      };
+      const sign = button(t("evt.sign"), () => {
+        // Divergence avertie (12 §3, P9.1) : un choix non historique d'un événement canon demande une confirmation.
+        const notice = divergenceNotice(this.world, state, e, c);
+        if (!notice || notice.d <= 0) return commit();
+        if (box.querySelector(".choix__divergence")) return;
+        const warn = el("div", "choix__divergence");
+        warn.setAttribute("role", "alertdialog");
+        warn.append(el("p", "choix__divergence-titre", t("evt.divergence.titre")), el("p", "", t("evt.divergence.corps", { d: formatNumber(notice.d) })));
+        const list = (keys: readonly string[]): string => (keys.length > NOTICE_MAX ? [...keys.slice(0, NOTICE_MAX), "…"] : keys).join(" ; ");
+        if (notice.events.length > 0) warn.append(el("p", "", t("evt.divergence.evenements", { liste: list(notice.events.map((k) => t(k))) })));
+        if (notice.people.length > 0) warn.append(el("p", "", t("evt.divergence.personnes", { liste: list(notice.people) })));
+        if (notice.flips) warn.append(el("p", "choix__divergence-bascule", t("evt.divergence.bascule")));
+        const yes = button(t("evt.divergence.signer"), commit, "registre-bouton principal");
+        yes.dataset["action"] = "signer-divergence";
+        const no = button(t("evt.divergence.revenir"), () => {
+          warn.remove();
+          sign.hidden = false;
+          sign.focus();
+        }, "registre-bouton");
+        no.dataset["action"] = "revenir";
+        const row = el("div", "choix__divergence-boutons");
+        row.append(yes, no);
+        warn.append(row);
+        sign.hidden = true;
+        box.append(warn);
+        yes.focus();
       }, "registre-bouton principal");
       sign.dataset["action"] = "signer";
       box.append(sign);

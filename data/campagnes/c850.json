@@ -1,0 +1,607 @@
+[
+  {
+    "id": "c850",
+    "name_key": "camp.c850",
+    "summary_key": "camp.c850.summary",
+    "year": 850,
+    "emblem": "fac_paradis",
+    "nations": [
+      "fac_paradis"
+    ],
+    "base": "scn_sandbox_850",
+    "scenario": {},
+    "events": [
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_850_yeager_basement",
+        "code": "E43",
+        "year_min": 850,
+        "window": {
+          "after": "evt_850_serum_choice",
+          "within_days": [
+            5,
+            20
+          ]
+        },
+        "location": "prov_shiganshina",
+        "divergence_weight": 0.5,
+        "effects": [
+          {
+            "op": "flag",
+            "key": "basement_opened",
+            "value": true
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 3
+          }
+        ],
+        "choices": [
+          {
+            "id": "lire_tout",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "research",
+                "delta": 120
+              },
+              {
+                "op": "legitimacy",
+                "delta": 2
+              }
+            ]
+          },
+          {
+            "id": "copier",
+            "divergence": 0.2,
+            "effects": [
+              {
+                "op": "research",
+                "delta": 80
+              },
+              {
+                "op": "org_influence",
+                "org": "org_survey_corps",
+                "delta": 4
+              }
+            ]
+          },
+          {
+            "id": "detruire",
+            "divergence": 0.8,
+            "effects": [
+              {
+                "op": "research",
+                "delta": -40
+              },
+              {
+                "op": "legitimacy",
+                "delta": -6
+              },
+              {
+                "op": "org_loyalty",
+                "org": "org_survey_corps",
+                "delta": -10
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.850.yeager_basement",
+        "theme": "famille",
+        "canon": "C",
+        "notes_canon": "Campagne 850 (P9, D-154) : mécanique des squelettes E43–E45 (12 §1 : choix A) ; existence et ordre C ; nettoyage de Maria ≈ 9 mois (texte du jeu) ; Titans éliminés « ? » (12 E44) ; ampleurs et délais A."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_850_wall_maria_cleanup",
+        "code": "E44",
+        "year_min": 850,
+        "year_max": 851,
+        "window": {
+          "after": "evt_850_yeager_basement",
+          "within_days": [
+            20,
+            60
+          ]
+        },
+        "location": "prov_shiganshina",
+        "divergence_weight": 0.4,
+        "effects": [
+          {
+            "op": "control",
+            "province": "prov_shiganshina",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_faubourgs_shiganshina",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_interieures_maria_sud",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_bourg_minier_maria",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_hameaux_ouest_maria",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_foret_arbres_geants",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_cerealieres_sud",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_du_nord",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_collines_minieres",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_haras_maria",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_vallee_du_moulin",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_carrefour_du_sud",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_lac_des_reflets",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_fort_avance_maria",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_hameaux_est",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_monts_brumeux",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_gorge_du_silence",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_vergers_ouest",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_relais_poste_maria",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord_est",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_est",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud_est",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud_ouest",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_ouest",
+            "value": "paradis"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord_ouest",
+            "value": "paradis"
+          },
+          {
+            "op": "titans",
+            "province": "prov_shiganshina",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_faubourgs_shiganshina",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_interieures_maria_sud",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_bourg_minier_maria",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_hameaux_ouest_maria",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_foret_arbres_geants",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_cerealieres_sud",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_du_nord",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_collines_minieres",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_haras_maria",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_vallee_du_moulin",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_carrefour_du_sud",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_lac_des_reflets",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_fort_avance_maria",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_hameaux_est",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_monts_brumeux",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_gorge_du_silence",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_vergers_ouest",
+            "delta": -0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_relais_poste_maria",
+            "delta": -0.5
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 6
+          },
+          {
+            "op": "legitimacy",
+            "delta": 5
+          },
+          {
+            "op": "flag",
+            "key": "maria_reclaimed",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "villes",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_shiganshina",
+                "share": 0.5
+              },
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": -8000
+              }
+            ]
+          },
+          {
+            "id": "routes",
+            "divergence": 0.2,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "steel",
+                "delta": -800
+              },
+              {
+                "op": "stability",
+                "province": "all",
+                "delta": 3
+              }
+            ]
+          },
+          {
+            "id": "ports",
+            "divergence": 0.3,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": -12000
+              },
+              {
+                "op": "research",
+                "delta": 40
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.850.wall_maria_cleanup",
+        "theme": "militaire",
+        "canon": "C",
+        "notes_canon": "Campagne 850 (P9, D-154) : mécanique des squelettes E43–E45 (12 §1 : choix A) ; existence et ordre C ; nettoyage de Maria ≈ 9 mois (texte du jeu) ; Titans éliminés « ? » (12 E44) ; ampleurs et délais A."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_850_ocean",
+        "code": "E45",
+        "year_min": 850,
+        "year_max": 851,
+        "window": {
+          "after": "evt_850_wall_maria_cleanup",
+          "within_days": [
+            240,
+            290
+          ]
+        },
+        "location": "prov_falaises_cote_sud",
+        "divergence_weight": 0.3,
+        "effects": [
+          {
+            "op": "flag",
+            "key": "ocean_seen",
+            "value": true
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": 5
+          }
+        ],
+        "choices": [
+          {
+            "id": "fonder_port",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": -6000
+              },
+              {
+                "op": "legitimacy",
+                "delta": 3
+              }
+            ]
+          },
+          {
+            "id": "explorer",
+            "divergence": 0.3,
+            "effects": [
+              {
+                "op": "research",
+                "delta": 60
+              },
+              {
+                "op": "resource",
+                "resource": "gas",
+                "delta": -1500
+              }
+            ]
+          }
+        ],
+        "form": "lettre",
+        "text_key": "evt.850.ocean",
+        "theme": "monde",
+        "canon": "C",
+        "notes_canon": "Campagne 850 (P9, D-154) : mécanique des squelettes E43–E45 (12 §1 : choix A) ; existence et ordre C ; nettoyage de Maria ≈ 9 mois (texte du jeu) ; Titans éliminés « ? » (12 E44) ; ampleurs et délais A."
+      }
+    ],
+    "end": {
+      "max_days": 660,
+      "factions": [
+        "fac_paradis",
+        "titans",
+        "fac_marley"
+      ],
+      "rules": [
+        {
+          "id": "famine",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.famine",
+          "when": [
+            {
+              "food_empty_days": 45
+            }
+          ]
+        },
+        {
+          "id": "chute_du_regime",
+          "kind": "defaite",
+          "winner": null,
+          "text_key": "issue.chute_du_regime",
+          "when": [
+            {
+              "legitimacy_below": 8
+            }
+          ]
+        },
+        {
+          "id": "depeuplement",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.depeuplement",
+          "when": [
+            {
+              "population_below": 0.55
+            }
+          ]
+        },
+        {
+          "id": "trost_abandonne",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.c850.trost_abandonne",
+          "when": [
+            {
+              "flag": "trost_lost"
+            }
+          ]
+        },
+        {
+          "id": "eren_enleve",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c850.eren_enleve",
+          "when": [
+            {
+              "flag": "eren_kidnapped"
+            },
+            {
+              "days_at_least": 1
+            }
+          ]
+        },
+        {
+          "id": "porteurs_captures",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.c850.porteurs_captures",
+          "when": [
+            {
+              "flag": "warriors_arrested"
+            }
+          ]
+        }
+      ],
+      "deadline": {
+        "score": [
+          {
+            "indicator": "population",
+            "weight": 0.3
+          },
+          {
+            "indicator": "legitimacy",
+            "weight": 0.2
+          },
+          {
+            "indicator": "food",
+            "weight": 0.15
+          },
+          {
+            "indicator": "morale",
+            "weight": 0.15
+          },
+          {
+            "indicator": "stability",
+            "weight": 0.2
+          },
+          {
+            "indicator": "control",
+            "weight": 0.25
+          }
+        ],
+        "threshold": 0.5,
+        "win": {
+          "id": "la_mer",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.c850.la_mer"
+        },
+        "lose": {
+          "id": "recul",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.c850.recul"
+        }
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Campagne 850 (P9) : bac à sable de 850 (A) poursuivi jusqu'à la découverte de l'océan (E45, C). Règles de fin A : Trost abandonné (B2), Eren enlevé (E28 non historique), Guerriers arrêtés (E28 non historique)."
+  }
+]

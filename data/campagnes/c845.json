@@ -1,0 +1,1288 @@
+[
+  {
+    "id": "c845",
+    "name_key": "camp.c845",
+    "summary_key": "camp.c845.summary",
+    "year": 845,
+    "emblem": "fac_paradis",
+    "nations": [
+      "fac_paradis"
+    ],
+    "base": "scn_sandbox_845",
+    "scenario": {
+      "events_mode": "canon_fidele",
+      "politics": {
+        "player": "char_darius_zackly",
+        "legitimacy": 60,
+        "political_capital": 30,
+        "roles": {
+          "role_stratege": "char_dot_pixis",
+          "role_intendant": "char_elise_brandt",
+          "role_renseignement": "char_kaspar_lind",
+          "role_tresorier": "char_conrad_vehl",
+          "role_ordre": "char_nile_dok",
+          "role_religieux": "char_pasteur_nick",
+          "role_scientifique": null,
+          "role_medecin": "char_ilse_kruger_moll",
+          "role_diplomate": null,
+          "role_presse": "char_ottilie_brandauer",
+          "role_juriste": "char_hartmut_kessel",
+          "role_instructeur": "char_anselm_koch",
+          "role_titans": null,
+          "role_murs": "char_wendel_sauer",
+          "role_transports": "char_maren_voss",
+          "role_archiviste": "char_ida_lorenz",
+          "role_confident": "char_theodor_brahm",
+          "role_chef_cabinet": "char_friedrich_amsel"
+        },
+        "org_leaders": {
+          "org_survey_corps": "char_keith_shadis",
+          "org_garrison": "char_dot_pixis",
+          "org_military_police": "char_nile_dok",
+          "org_training_corps": "char_anselm_koch",
+          "org_culte": "char_pasteur_nick",
+          "org_cabinet": "char_darius_zackly",
+          "org_cour": "char_rod_reiss",
+          "org_guildes": "char_conrad_vehl"
+        },
+        "budget": {
+          "org_survey_corps": 12,
+          "org_garrison": 58,
+          "org_military_police": 22,
+          "org_training_corps": 8
+        },
+        "laws": [],
+        "cabinet_extra": [
+          "char_margarethe_von_alt"
+        ],
+        "org_influence": {
+          "org_survey_corps": 30,
+          "org_garrison": 60,
+          "org_military_police": 65,
+          "org_training_corps": 30,
+          "org_culte": 55,
+          "org_cabinet": 70,
+          "org_cour": 65,
+          "org_guildes": 55
+        }
+      },
+      "titan_density": {},
+      "production_mult": {
+        "food": 2.2
+      },
+      "production_note_key": "scn.c845.production"
+    },
+    "events": [
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_845_shiganshina_breach",
+        "code": "E01",
+        "year_min": 845,
+        "window": {
+          "after": null,
+          "within_days": [
+            1,
+            3
+          ]
+        },
+        "location": "prov_shiganshina",
+        "divergence_weight": 1.0,
+        "conditions": [
+          {
+            "control": "prov_shiganshina",
+            "eq": "paradis"
+          }
+        ],
+        "effects": [
+          {
+            "op": "titans",
+            "province": "prov_shiganshina",
+            "delta": 0.6
+          },
+          {
+            "op": "population",
+            "province": "prov_shiganshina",
+            "share": -0.12
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -8
+          },
+          {
+            "op": "flag",
+            "key": "shiganshina_breached",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "evacuer_civils",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_shiganshina",
+                "share": 0.04
+              },
+              {
+                "op": "garrison",
+                "province": "prov_maria_sud",
+                "share": -0.2
+              }
+            ]
+          },
+          {
+            "id": "tenir_porte",
+            "divergence": 0.3,
+            "effects": [
+              {
+                "op": "garrison",
+                "province": "prov_maria_sud",
+                "share": -0.5
+              },
+              {
+                "op": "population",
+                "province": "prov_shiganshina",
+                "share": -0.2
+              },
+              {
+                "op": "org_loyalty",
+                "org": "org_garrison",
+                "delta": 3
+              }
+            ]
+          },
+          {
+            "id": "alerter_rose",
+            "divergence": 0.2,
+            "effects": [
+              {
+                "op": "observe",
+                "province": "prov_rose_sud"
+              },
+              {
+                "op": "population",
+                "province": "prov_shiganshina",
+                "share": -0.06
+              },
+              {
+                "op": "stability",
+                "province": "all",
+                "delta": 2
+              }
+            ]
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.845.shiganshina_breach",
+        "theme": "titans",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »)."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_845_wall_maria_gate",
+        "code": "E02",
+        "year_min": 845,
+        "window": {
+          "after": "evt_845_shiganshina_breach",
+          "within_days": [
+            0,
+            1
+          ]
+        },
+        "location": "prov_maria_sud",
+        "divergence_weight": 1.0,
+        "effects": [
+          {
+            "op": "control",
+            "province": "prov_shiganshina",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_faubourgs_shiganshina",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_interieures_maria_sud",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_bourg_minier_maria",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_hameaux_ouest_maria",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_foret_arbres_geants",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_cerealieres_sud",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_plaines_du_nord",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_collines_minieres",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_haras_maria",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_vallee_du_moulin",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_carrefour_du_sud",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_lac_des_reflets",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_fort_avance_maria",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_hameaux_est",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_monts_brumeux",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_gorge_du_silence",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_vergers_ouest",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_relais_poste_maria",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord_est",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_est",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud_est",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_sud_ouest",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_ouest",
+            "value": "perdu"
+          },
+          {
+            "op": "control",
+            "province": "prov_maria_nord_ouest",
+            "value": "perdu"
+          },
+          {
+            "op": "population",
+            "province": "prov_shiganshina",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_faubourgs_shiganshina",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_plaines_interieures_maria_sud",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_bourg_minier_maria",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_hameaux_ouest_maria",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_foret_arbres_geants",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_plaines_cerealieres_sud",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_plaines_du_nord",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_collines_minieres",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_haras_maria",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_vallee_du_moulin",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_carrefour_du_sud",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_lac_des_reflets",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_fort_avance_maria",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_hameaux_est",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_monts_brumeux",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_gorge_du_silence",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_vergers_ouest",
+            "share": -1
+          },
+          {
+            "op": "population",
+            "province": "prov_relais_poste_maria",
+            "share": -1
+          },
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -10
+          },
+          {
+            "op": "legitimacy",
+            "delta": -6
+          },
+          {
+            "op": "flag",
+            "key": "maria_lost",
+            "value": true
+          },
+          {
+            "op": "titans",
+            "province": "prov_shiganshina",
+            "delta": 0.85
+          },
+          {
+            "op": "titans",
+            "province": "prov_faubourgs_shiganshina",
+            "delta": 0.8
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_interieures_maria_sud",
+            "delta": 0.7
+          },
+          {
+            "op": "titans",
+            "province": "prov_bourg_minier_maria",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_hameaux_ouest_maria",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_foret_arbres_geants",
+            "delta": 0.65
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_cerealieres_sud",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_plaines_du_nord",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_collines_minieres",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_haras_maria",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_vallee_du_moulin",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_carrefour_du_sud",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_lac_des_reflets",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_fort_avance_maria",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_hameaux_est",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_monts_brumeux",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_gorge_du_silence",
+            "delta": 0.6
+          },
+          {
+            "op": "titans",
+            "province": "prov_vergers_ouest",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_relais_poste_maria",
+            "delta": 0.5
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_nord",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_nord_est",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_est",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_sud_est",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_sud",
+            "delta": 0.8
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_sud_ouest",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_ouest",
+            "delta": 0.35
+          },
+          {
+            "op": "titans",
+            "province": "prov_maria_nord_ouest",
+            "delta": 0.35
+          }
+        ],
+        "choices": [
+          {
+            "id": "replier",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -2
+              }
+            ]
+          },
+          {
+            "id": "couvrir",
+            "divergence": 0.3,
+            "effects": [
+              {
+                "op": "garrison",
+                "province": "prov_rose_sud",
+                "share": -0.25
+              },
+              {
+                "op": "population",
+                "province": "prov_trost",
+                "share": 0.08
+              },
+              {
+                "op": "org_loyalty",
+                "org": "org_garrison",
+                "delta": -4
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.845.wall_maria_gate",
+        "theme": "titans",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »). Ville-usine laissée à Paradis comme dans le bac à sable de 850 (A, D-41). Densités de Titans des provinces perdues : celles du scénario 850 [A] (D-51), reprises telles quelles (P9)."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_845_retreat_to_rose",
+        "code": "E04",
+        "year_min": 845,
+        "window": {
+          "after": "evt_845_wall_maria_gate",
+          "within_days": [
+            1,
+            3
+          ]
+        },
+        "location": "prov_rose_sud",
+        "divergence_weight": 0.6,
+        "effects": [
+          {
+            "op": "stratum",
+            "stratum": "str_refugies",
+            "satisfaction": -15,
+            "radicalisation": 10
+          }
+        ],
+        "choices": [
+          {
+            "id": "ouvrir_portes",
+            "historical": true,
+            "canon": "C",
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_trost",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_karanes",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_utopia",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_krolva",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_ragako",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_qg_corps",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_camp_entrainement",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_champs_du_centre",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_dauper",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_forges_rose",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_poudriere_rose",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_jinae",
+                "share": 0.45
+              },
+              {
+                "op": "population",
+                "province": "prov_relais_ferroviaire",
+                "share": 0.45
+              },
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": -60000
+              },
+              {
+                "op": "stability",
+                "province": "all",
+                "delta": -4
+              }
+            ]
+          },
+          {
+            "id": "limiter_entrees",
+            "divergence": 0.5,
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_trost",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_karanes",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_utopia",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_krolva",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_ragako",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_qg_corps",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_camp_entrainement",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_champs_du_centre",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_dauper",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_forges_rose",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_poudriere_rose",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_jinae",
+                "share": 0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_relais_ferroviaire",
+                "share": 0.2
+              },
+              {
+                "op": "legitimacy",
+                "delta": -8
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_refugies",
+                "satisfaction": -20,
+                "radicalisation": 15
+              }
+            ]
+          }
+        ],
+        "form": "proces_verbal",
+        "text_key": "evt.845.retreat_to_rose",
+        "theme": "politique",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »). Part des réfugiés qui atteignent Rose : A."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_845_refugee_crisis",
+        "code": "E05",
+        "year_min": 845,
+        "year_max": 846,
+        "window": {
+          "after": "evt_845_retreat_to_rose",
+          "within_days": [
+            15,
+            40
+          ]
+        },
+        "location": "prov_trost",
+        "divergence_weight": 0.4,
+        "effects": [
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -6
+          },
+          {
+            "op": "legitimacy",
+            "delta": -5
+          },
+          {
+            "op": "stratum",
+            "stratum": "str_refugies",
+            "satisfaction": -10,
+            "radicalisation": 8
+          }
+        ],
+        "choices": [
+          {
+            "id": "rationner",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": 40000
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -4
+              }
+            ]
+          },
+          {
+            "id": "requisitionner",
+            "divergence": 0.3,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": 90000
+              },
+              {
+                "op": "org_influence",
+                "org": "org_guildes",
+                "delta": -6
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_bourgeoisie",
+                "satisfaction": -12,
+                "radicalisation": 6
+              }
+            ]
+          },
+          {
+            "id": "refouler",
+            "divergence": 0.6,
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_trost",
+                "share": -0.12
+              },
+              {
+                "op": "legitimacy",
+                "delta": -10
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_refugies",
+                "satisfaction": -25,
+                "radicalisation": 20
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.845.refugee_crisis",
+        "theme": "politique",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »)."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_846_reclamation",
+        "code": "E06",
+        "year_min": 846,
+        "window": {
+          "after": "evt_845_refugee_crisis",
+          "within_days": [
+            180,
+            300
+          ]
+        },
+        "location": "prov_maria_sud",
+        "divergence_weight": 0.9,
+        "bifurcation": "B1",
+        "conditions": [
+          {
+            "stock_below": "food",
+            "value": 650000
+          }
+        ],
+        "choices": [
+          {
+            "id": "envoyer",
+            "historical": true,
+            "canon": "C",
+            "effects": [
+              {
+                "op": "population",
+                "province": "prov_trost",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_karanes",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_utopia",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_krolva",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_ragako",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_qg_corps",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_camp_entrainement",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_champs_du_centre",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_dauper",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_forges_rose",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_poudriere_rose",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_jinae",
+                "share": -0.2
+              },
+              {
+                "op": "population",
+                "province": "prov_relais_ferroviaire",
+                "share": -0.2
+              },
+              {
+                "op": "legitimacy",
+                "delta": -12
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -8
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_refugies",
+                "satisfaction": -30,
+                "radicalisation": 25
+              }
+            ]
+          },
+          {
+            "id": "refuser",
+            "divergence": 1.0,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": -50000
+              },
+              {
+                "op": "stability",
+                "province": "all",
+                "delta": -5
+              },
+              {
+                "op": "legitimacy",
+                "delta": 4
+              }
+            ]
+          }
+        ],
+        "form": "proces_verbal",
+        "text_key": "evt.846.reclamation",
+        "theme": "politique",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »). Condition « si pénurie de nourriture » (12 §1) : seuil de stock A ; part de la population envoyée A (chiffre canon ≈ 250 000 « ? » au fichier 12)."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_846_famine",
+        "code": "E07",
+        "year_min": 846,
+        "window": {
+          "after": "evt_846_reclamation",
+          "within_days": [
+            20,
+            60
+          ]
+        },
+        "location": "prov_champs_du_centre",
+        "divergence_weight": 0.3,
+        "effects": [
+          {
+            "op": "morale",
+            "province": "all",
+            "delta": -6
+          },
+          {
+            "op": "stability",
+            "province": "all",
+            "delta": -4
+          }
+        ],
+        "choices": [
+          {
+            "id": "rationnement_strict",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": 50000
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -5
+              }
+            ]
+          },
+          {
+            "id": "marche_noir",
+            "divergence": 0.2,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": 8000
+              },
+              {
+                "op": "stability",
+                "province": "all",
+                "delta": -6
+              },
+              {
+                "op": "org_influence",
+                "org": "org_guildes",
+                "delta": 5
+              }
+            ]
+          },
+          {
+            "id": "aide_marchande",
+            "divergence": 0.2,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": -15000
+              },
+              {
+                "op": "resource",
+                "resource": "food",
+                "delta": 80000
+              },
+              {
+                "op": "org_influence",
+                "org": "org_guildes",
+                "delta": 4
+              }
+            ]
+          }
+        ],
+        "form": "lettre",
+        "text_key": "evt.846.famine",
+        "theme": "politique",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »)."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_847_104th_recruitment",
+        "code": "E08",
+        "year_min": 847,
+        "date_approx": true,
+        "window": {
+          "after": null,
+          "within_days": [
+            700,
+            760
+          ]
+        },
+        "location": "prov_camp_entrainement",
+        "divergence_weight": 0.2,
+        "choices": [
+          {
+            "id": "financer",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "gold",
+                "delta": -6000
+              },
+              {
+                "op": "org_influence",
+                "org": "org_training_corps",
+                "delta": 6
+              }
+            ]
+          },
+          {
+            "id": "reduire_duree",
+            "divergence": 0.4,
+            "effects": [
+              {
+                "op": "resource",
+                "resource": "manpower",
+                "delta": 1500
+              },
+              {
+                "op": "org_influence",
+                "org": "org_training_corps",
+                "delta": -5
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.847.104th_recruitment",
+        "theme": "militaire",
+        "canon": "C",
+        "notes_canon": "Campagne 845 (P9, D-154) : mécanique des squelettes E01–E08 (12 §1, choix du 12 §1 et §2 B1) ; existence, ordre et effets qualitatifs C ; ampleurs, délais et choix A ; mois « ? » (12 : mois toujours « ? »). Année ≈ 847 « ? » (12 §1)."
+      }
+    ],
+    "end": {
+      "max_days": 840,
+      "factions": [
+        "fac_paradis",
+        "titans"
+      ],
+      "rules": [
+        {
+          "id": "famine",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.famine",
+          "when": [
+            {
+              "food_empty_days": 45
+            }
+          ]
+        },
+        {
+          "id": "chute_du_regime",
+          "kind": "defaite",
+          "winner": null,
+          "text_key": "issue.chute_du_regime",
+          "when": [
+            {
+              "legitimacy_below": 8
+            }
+          ]
+        },
+        {
+          "id": "depeuplement",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.depeuplement",
+          "when": [
+            {
+              "population_below": 0.55
+            }
+          ]
+        }
+      ],
+      "deadline": {
+        "score": [
+          {
+            "indicator": "population",
+            "weight": 0.3
+          },
+          {
+            "indicator": "legitimacy",
+            "weight": 0.2
+          },
+          {
+            "indicator": "food",
+            "weight": 0.15
+          },
+          {
+            "indicator": "morale",
+            "weight": 0.15
+          },
+          {
+            "indicator": "stability",
+            "weight": 0.2
+          }
+        ],
+        "threshold": 0.5,
+        "win": {
+          "id": "echeance_tenue",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.c845.echeance_tenue"
+        },
+        "lose": {
+          "id": "echeance_recul",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.c845.echeance_recul"
+        }
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Campagne 845 (P9) : départ du bac à sable 845 (A), couche politique ajoutée (rôles et budgets A ; commandant du Bataillon d'exploration en 845 : Keith Shadis, C ; Erwin lui succède plus tard, année « ? ») ; fin : recrutement de la 104e (≈ 847, « ? »). Règles de fin A."
+  }
+]

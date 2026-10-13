@@ -1,0 +1,153 @@
+[
+  {
+    "id": "c854",
+    "name_key": "camp.c854",
+    "summary_key": "camp.c854.summary",
+    "year": 854,
+    "emblem": "fac_marley",
+    "nations": [
+      "fac_paradis",
+      "fac_marley"
+    ],
+    "base": "scn_854",
+    "scenario": {},
+    "events": [],
+    "end": {
+      "max_days": 300,
+      "factions": [
+        "fac_paradis",
+        "fac_marley"
+      ],
+      "rules": [
+        {
+          "id": "chute_du_regime",
+          "kind": "defaite",
+          "winner": null,
+          "text_key": "issue.chute_du_regime",
+          "when": [
+            {
+              "legitimacy_below": 8
+            }
+          ]
+        },
+        {
+          "id": "depeuplement",
+          "kind": "defaite",
+          "winner": "titans",
+          "text_key": "issue.depeuplement",
+          "when": [
+            {
+              "population_below": 0.55
+            }
+          ]
+        },
+        {
+          "id": "fondateur_pris",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c854.fondateur_pris",
+          "when": [
+            {
+              "shifter": "shifter_fondateur",
+              "side": "marley"
+            }
+          ]
+        },
+        {
+          "id": "ile_prise",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c854.ile_prise",
+          "when": [
+            {
+              "world_control": "wprov_paradis",
+              "by": [
+                "fac_marley",
+                "fac_allies"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "murs_perces",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c854.murs_perces",
+          "when": [
+            {
+              "walls_below": 35,
+              "at_least": 1
+            }
+          ]
+        },
+        {
+          "id": "occupation",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c854.occupation",
+          "when": [
+            {
+              "occupied_at_least": 3,
+              "by": [
+                "fac_marley",
+                "fac_allies"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "marley_epuisee",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.c854.marley_epuisee",
+          "when": [
+            {
+              "nation_stat_below": "fac_marley",
+              "stat": "warSupport",
+              "value": 15
+            }
+          ]
+        }
+      ],
+      "deadline": {
+        "score": [
+          {
+            "indicator": "population",
+            "weight": 0.2
+          },
+          {
+            "indicator": "legitimacy",
+            "weight": 0.2
+          },
+          {
+            "indicator": "soldiers",
+            "weight": 0.2
+          },
+          {
+            "indicator": "control",
+            "weight": 0.2
+          },
+          {
+            "indicator": "morale",
+            "weight": 0.2
+          }
+        ],
+        "threshold": 0.6,
+        "win": {
+          "id": "paradis_tient",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.c854.paradis_tient"
+        },
+        "lose": {
+          "id": "marley_l_emporte",
+          "kind": "defaite",
+          "winner": "fac_marley",
+          "text_key": "issue.c854.marley_l_emporte"
+        }
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Campagne 854 (P9) : scénario 854 (P7, A) jusqu'à la contre-attaque de Marley (E58, C) et ses suites. Règles de fin A (la notion de victoire n'est pas canon)."
+  }
+]

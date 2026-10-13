@@ -1238,3 +1238,46 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | R3 (sous-agent) | Opus | xhigh | ≈ 140 | arrêt de 3 h, relancé ; coupé par le redémarrage du conteneur |
 | Reprise R3 + revue + correctifs + fusion | Opus | défaut | ≈ 40 | 1 passe |
+
+## 2026-10-13 — D-154 P9 : campagnes en surcouche de données (scénarios dérivés)
+- **Contexte** : P9.1 demande quatre campagnes jouables de bout en bout (845, 850, 854, Grondement) ; `src/sim` ne doit pas changer (diff vide, 8 empreintes de `sim:selftest` identiques). Ajouter des événements ou modifier les scénarios de base changerait les tirages et donc les empreintes.
+- **Options** : (a) modifier les scénarios et les événements de base ; (b) nouveaux scénarios complets dans `data/scenarios` ; (c) surcouche : `data/campagnes/<id>.json` (correctif du scénario de base, événements propres, règles de fin) transformée au chargement en un scénario dérivé `scn_camp_<campagne>__<difficulté>`.
+- **Choix** : (c). `src/campaign/campaign.ts` (`sourceForScenario`) ajoute le scénario dérivé (fusion profonde, revalidé par Zod), substitue les événements de la campagne par identifiant, reprend armées, flottes et missions du scénario de base, applique les réglages puis la difficulté aux fichiers d'équilibrage (revalidés). Le Worker (navigateur et Node) et `loadWorld` appliquent la campagne quand l'identifiant le demande ; un scénario de base est rendu tel quel (test). `canon:check` vérifie chaque campagne comme un jeu de données à part (R1–R14) et les fenêtres de présence au départ (11 §3).
+- **Raison** : rien ne change pour les scénarios de base ni pour la simulation ; tout est dans les données.
+- **Réversible** : oui (supprimer `data/campagnes` et `src/campaign`).
+
+## 2026-10-13 — D-155 P9 : fins de partie hors de la simulation
+- **Contexte** : la simulation ne connaît ni victoire ni défaite ; P9.1 et P9.4 en ont besoin.
+- **Choix** : règles de fin dans les données (`end.rules`, conditions : événement et choix, drapeau, provinces perdues, segments de mur sous un seuil de structure, provinces occupées, population, légitimité, jours sans vivres, porteur, contrôle d'une province du monde, statistique d'une nation, rapport de forces, durée), puis, à l'échéance (`max_days`), un score pondéré (indicateurs ramenés à 0–1 par rapport au départ) comparé à un seuil. Une seule fonction (`src/campaign/outcome.ts`) sert l'interface (dossier de fin, chargé à la demande) et `sim:balance`. Le suivi (départ, jours sans vivres) est recréé à partir de l'état de départ : une partie reprise repart avec un compteur de famine nul.
+- **Réversible** : oui.
+
+## 2026-10-13 — D-156 P9 : joueur type et sim:balance
+- **Contexte** : P9.4 demande 1000 parties par scénario, sans joueur humain.
+- **Choix** : joueur type tiré par graine (`src/tools/balance/game.ts`) : profils historique, prudent, audacieux et hasardeux (probabilité de signer le choix historique 0,92 / 0,75 / 0,5 / 0,3 ; cadence et taille des expéditions ; rationnement ; interception ; commerce avec Hizuru). Pas de 3 jours. Parties en parallèle (`worker_threads`), un essai mesure la durée d'une partie et fixe le plus grand nombre qui tient dans 30 min par campagne. Déterminisme vérifié sur 3 graines par campagne : partie rejouée, journal de commandes rejoué en direct et par le Worker Node (même `stateHash`). Rapport HTML autonome `docs/reports/P9-balance.html` (aucune ressource externe).
+- **Réversible** : oui.
+
+## 2026-10-13 — D-157 P9 : campagne du Grondement
+- **Contexte** : 12 §1 (E53–E60) ; scénario de base `scn_854`. Le joueur de 854 est Zackly, mort à la fin de 854 (E57).
+- **Choix** : départ en 854, jour 240 [A] (« mois ? » du 12) ; Zackly, Pixis, Nile, Willy et Lara Tybur déclarés morts ; Marteau et Bestial aux mains de Paradis ; joueur Historia Reiss [A] (reine en titre ; autorité réelle pendant le Grondement : `?`, docs/lore/questions-ouvertes.md Q14) ; E53–E58 copiés non jouables (passés) ; E59 jouable (laisser, retarder, empêcher) ; deux étapes d'avancée [A] (pertes de Marley, industrie) ; E60 jouable (Alliance : choix historique ; défendre le Grondement ; négociation), mort de Hange (C). L'« Alliance » d'E60 n'est pas la coalition des nations (`fac_allies`) : son succès est une fin de « paix », sans vainqueur. Défendre le Grondement mène à l'échéance (150 jours), où le bilan de l'île décide entre l'île seule au monde et l'arrêt par les forces coalisées.
+- **Raison** : seules les fins appuyées sur le 12 sont décrites ; tout chiffre est [A] et paramétrable.
+- **Réversible** : oui (données).
+
+## 2026-10-13 — D-158 P9 : difficultés
+- **Contexte** : P9.3 (Récit, Normal, Rude, Brèche).
+- **Choix** : `data/balance/difficulty.json` : par niveau, des modificateurs de scénario (stocks, moral, stabilité, légitimité, capital politique, densité de Titans, garnisons, forces ennemies — armées, flottes et formations du monde hors Paradis —, penchant d'Hizuru, seuil du bilan) et un correctif facultatif des fichiers d'équilibrage ; Normal est neutre et sert de référence à `sim:balance`. Section `tuning` : réglages de P9.5 (fichiers d'équilibrage et modificateurs par campagne), appliqués avant le niveau. Menu : campagne, puis difficulté (Normal par défaut), puis nation pour 854 ; les bacs à sable restent en une ligne.
+- **Réversible** : oui.
+
+## 2026-10-13 — D-159 P9 : divergence avertie
+- **Contexte** : 12 §3 ; le dossier d'événement montrait déjà l'écart d'un choix non historique.
+- **Choix** : « Signer » sur un choix non historique d'un événement canon déplie un avertissement dans le choix : écart ajouté, événements canon à venir qui en dépendent (chaîne `window.after`, 5 au plus), personnages dont l'événement de mort est dans la chaîne, bascule de branche si le seuil est franchi ; « Signer quand même » ou « Revenir au dossier ». Calcul pur (`src/ui/divergence.ts`), testé.
+- **Réversible** : oui.
+
+## 2026-10-13 — D-160 P9.2 : IA des factions sans toucher à la simulation
+- **Contexte** : P9.2 (Marley : invasion amphibie, projection de Titans ; Hizuru : neutralité qui peut basculer ; Alliés : coalition fragile ; journal de raisonnement en mode debug). Ces IA existent dans `src/sim` (flottes et débarquements, sièges, guerre et paix, traités, levées, projection de porteurs, penchant d'Hizuru et bascule, vote de la coalition), chacune avec un journal de raisons ; `src/sim` ne doit pas changer.
+- **Choix** : les campagnes règlent les IA par les données (854 : flotte de Marley, forces du monde ; Grondement : guerres déclarées, penchant d'Hizuru −40) ; journal en mode debug : commande `ia [faction] [n]` de la console de service (nations, armées, missions, raisons chiffrées), en plus des journaux déjà réservés au mode auteur (F10) dans la chancellerie et le registre des armées ; `sim:balance` compte les décisions par faction et par action, et les bascules d'Hizuru.
+- **Réversible** : oui.
+
+## 2026-10-13 — D-161 P9 : correctifs de `src/sim` proposés, à valider par Gabriel
+- **Contexte** : `sim:balance` montre un cycle dégénéré (l'armée de Marley bombarde un segment déjà percé jusqu'à l'échéance) ; la fin de partie vit hors de l'état.
+- **Choix** : aucun changement ; correctifs SP-1 et SP-2 écrits dans `docs/phases/P9-sim-propositions.md` (fichier, diff, raison, effet sur les empreintes) ; dettes n° 71 et 72. **À valider par Gabriel.**
+- **Réversible** : oui.

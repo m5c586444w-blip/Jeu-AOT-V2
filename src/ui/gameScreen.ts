@@ -94,6 +94,9 @@ export async function bootGame(): Promise<void> {
   if (!first.source) throw new Error("Le Worker n'a pas fourni le monde.");
   const world = buildWorld(first.source, scenario);
   let state: GameState = first.state;
+  // Campagne (P9.1, D-155) : règles de fin chargées à la demande, suivies depuis l'état de départ du scénario.
+  const campaignEnd = /^scn_camp_/.test(scenario) ? await import("./campaignEnd") : null;
+  const watch = campaignEnd ? await campaignEnd.watchCampaign(world, scenario, first.state) : null;
   const storePromise = SaveStore.open(indexedDB, () => Date.now());
   // « Continuer » (menu principal, U8) : reprend la sauvegarde automatique la plus récente de ce scénario, s'il y en a une.
   if (new URLSearchParams(window.location.search).get("reprendre") === "1") {
@@ -126,6 +129,16 @@ export async function bootGame(): Promise<void> {
       if (crossesAutosave(before, state.date, world.time.autosave_every_days)) void (await storePromise).autosave(state);
     } finally {
       busy = false;
+    }
+    const outcome = watch?.check(state) ?? null;
+    if (outcome && watch && campaignEnd) {
+      clock.setSpeed(0);
+      campaignEnd.showCampaignEnd(document.body, world, watch, outcome, state, {
+        epilogue: registers ? () => registers?.open("epilogue") : null,
+        menu: () => {
+          window.location.search = "?menu=1";
+        },
+      });
     }
     refresh();
   };
@@ -381,7 +394,7 @@ export async function bootGame(): Promise<void> {
   // Boucle de temps : le temps réel devient des commandes AdvanceDays (la simulation reste déterministe).
   // Légende « Calques » (R0.2c) : masquée tant qu'une fenêtre ouverte (registre, dossier, options…) la recouvre ;
   // une fenêtre qui ne la touche pas la laisse utilisable. Masquée par `visibility`, elle garde sa place : on peut mesurer.
-  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .choix-nation";
+  const WINDOWS = ".registre-panneau:not([hidden]), .dossier:not([hidden]), .dossier-evenement:not([hidden]), .options:not([hidden]), .choix-nation, .fin-campagne";
   const syncLegend = (): void => {
     const a = layers.el.getBoundingClientRect();
     const covered = [...document.querySelectorAll(WINDOWS)].some((w) => {

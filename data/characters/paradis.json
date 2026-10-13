@@ -284,6 +284,7 @@
     "name": "Hange Zoë",
     "active_from": 845,
     "active_until": 854,
+    "death_event": "evt_854_heaven_earth_battle",
     "faction": "paradis",
     "org": "org_survey_corps",
     "rank_key": "rank.chef_section",
@@ -330,7 +331,7 @@
     },
     "bio_key": "bio.hange_zoe",
     "canon": "C",
-    "notes_canon": "14ᵉ commandante après Erwin ; meurt en 854 (11 §3). Graphie « Hanji » [?]. death_event (E60) à relier."
+    "notes_canon": "14ᵉ commandante après Erwin ; meurt en 854 (11 §3). Graphie « Hanji » [?]. death_event = E60 (12 §1 : « mort de Hange C » ; mécanique dans la campagne du Grondement, P9)."
   },
   {
     "id": "char_levi_ackerman",

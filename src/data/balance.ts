@@ -1,3 +1,4 @@
+import { DifficultyFileSchema } from "./campaignSchema";
 import { ArmiesBalanceSchema } from "./armySchemas";
 export type { ArmiesBalance } from "./armySchemas";
 import { MissionsBalanceSchema } from "./missionSchemas";
@@ -429,5 +430,7 @@ export const BALANCE_FILES = {
   intel: IntelBalanceSchema,
   shifters: ShiftersBalanceSchema,
   world: WorldBalanceSchema,
+  /** P9.3 et P9.5 : difficultés et réglages des campagnes (appliqués au chargement d'une campagne, jamais aux scénarios de base). */
+  difficulty: DifficultyFileSchema,
 } as const;
 export type BalanceName = keyof typeof BALANCE_FILES;

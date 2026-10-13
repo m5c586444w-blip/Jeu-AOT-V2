@@ -1,0 +1,1115 @@
+[
+  {
+    "id": "cgrondement",
+    "name_key": "camp.cgrondement",
+    "summary_key": "camp.cgrondement.summary",
+    "year": 854,
+    "emblem": "fac_paradis",
+    "nations": [
+      "fac_paradis"
+    ],
+    "base": "scn_854",
+    "scenario": {
+      "start": {
+        "year": 854,
+        "day": 240
+      },
+      "morale": 45,
+      "stability": 40,
+      "deceased": [
+        "char_bertholdt_hoover",
+        "char_darius_zackly",
+        "char_dot_pixis",
+        "char_eld",
+        "char_erwin_smith",
+        "char_gelgar",
+        "char_gunther",
+        "char_hannes",
+        "char_kenny_ackerman",
+        "char_lara_tybur",
+        "char_mike_zacharias",
+        "char_nanaba",
+        "char_nile_dok",
+        "char_oluo",
+        "char_petra",
+        "char_rod_reiss",
+        "char_willy_tybur",
+        "char_ymir"
+      ],
+      "shifter_holders": {
+        "shifter_marteau": {
+          "character": "char_eren_yeager",
+          "faction": "paradis",
+          "since": 854,
+          "since_canon": "C"
+        },
+        "shifter_bestial": {
+          "character": "char_zeke_yeager",
+          "faction": "paradis",
+          "since": 842,
+          "since_canon": "C"
+        }
+      },
+      "flags": {
+        "fort_slava_won": true,
+        "operation_paradis": true,
+        "liberio_raid": true,
+        "zeke_custody": true,
+        "yeagerist_coup": true,
+        "marley_counterattack": true
+      },
+      "world": {
+        "wars": [
+          [
+            "fac_marley",
+            "fac_paradis"
+          ],
+          [
+            "fac_allies",
+            "fac_paradis"
+          ]
+        ],
+        "hizuru_lean": -40,
+        "playable": [
+          "fac_paradis"
+        ]
+      },
+      "politics": {
+        "player": "char_historia_reiss",
+        "legitimacy": 45,
+        "roles": {
+          "role_stratege": null,
+          "role_ordre": null
+        },
+        "org_leaders": {
+          "org_garrison": "char_kitz_weilman",
+          "org_military_police": "char_aldric_vane",
+          "org_cabinet": "char_friedrich_amsel"
+        }
+      }
+    },
+    "events": [
+      {
+        "id": "evt_854_fort_slava",
+        "code": "E53",
+        "year_min": 854,
+        "window": {
+          "after": "evt_851_middle_east_war",
+          "within_days": [
+            10,
+            30
+          ]
+        },
+        "divergence_weight": 0.5,
+        "effects": [
+          {
+            "op": "world_losses",
+            "province": "wprov_cote_voiliers",
+            "faction": "fac_allies",
+            "share": 0.6
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_forteresse_passage",
+            "faction": "fac_allies",
+            "share": 0.3
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_allies",
+            "to": "fac_marley",
+            "axis": "fear",
+            "delta": 15
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_hizuru",
+            "to": "fac_marley",
+            "axis": "fear",
+            "delta": 10
+          }
+        ],
+        "choices": [
+          {
+            "id": "victoire_marley",
+            "effects": [
+              {
+                "op": "world_war",
+                "a": "fac_marley",
+                "b": "fac_allies",
+                "on": false
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_marley",
+                "delta": 10
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_allies",
+                "delta": -20
+              },
+              {
+                "op": "flag",
+                "key": "fort_slava_won",
+                "value": true
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "resistance_alliee",
+            "effects": [
+              {
+                "op": "world_losses",
+                "province": "wprov_fort_slava",
+                "faction": "fac_marley",
+                "share": 0.4
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_marley",
+                "delta": -10
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_allies",
+                "delta": 10
+              }
+            ],
+            "divergence": 0.6
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.fort_slava",
+        "canon": "C",
+        "notes_canon": "Flotte alliée détruite par le Bestial, victoire de Marley, fin de la guerre du Moyen-Orient : C (12 E53, 11 §5). Effets chiffrés : A. Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "militaire",
+        "playable": false
+      },
+      {
+        "id": "evt_854_operation_paradis",
+        "code": "E54",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_fort_slava",
+          "within_days": [
+            5,
+            20
+          ]
+        },
+        "divergence_weight": 0.6,
+        "effects": [
+          {
+            "op": "world_relation",
+            "from": "fac_marley",
+            "to": "fac_paradis",
+            "axis": "interest",
+            "delta": 10
+          }
+        ],
+        "choices": [
+          {
+            "id": "soutenir",
+            "effects": [
+              {
+                "op": "flag",
+                "key": "operation_paradis",
+                "value": true
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_marley",
+                "delta": 5
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "refuser",
+            "effects": [
+              {
+                "op": "flag",
+                "key": "operation_paradis",
+                "value": false
+              },
+              {
+                "op": "world_support",
+                "faction": "fac_marley",
+                "delta": -5
+              }
+            ],
+            "divergence": 1.0
+          }
+        ],
+        "form": "proces_verbal",
+        "text_key": "evt.854.operation_paradis",
+        "canon": "C",
+        "notes_canon": "Zeke propose de reprendre le Fondateur ; les Tybur soutiennent : C (12 E54). Effets : A. Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "politique",
+        "playable": false
+      },
+      {
+        "id": "evt_854_liberio_raid",
+        "code": "E55",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_operation_paradis",
+          "within_days": [
+            10,
+            30
+          ]
+        },
+        "divergence_weight": 1.0,
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_willy_tybur",
+            "cause": "combat"
+          },
+          {
+            "op": "capture_shifter",
+            "shifter": "shifter_marteau",
+            "value": true
+          },
+          {
+            "op": "inherit",
+            "shifter": "shifter_marteau",
+            "heir": "char_eren_yeager"
+          },
+          {
+            "op": "world_war",
+            "a": "fac_marley",
+            "b": "fac_paradis",
+            "on": true
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_liberio",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_port_liberio",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_allies",
+            "to": "fac_paradis",
+            "axis": "fear",
+            "delta": 20
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_allies",
+            "to": "fac_paradis",
+            "axis": "ideology",
+            "delta": -20
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_hizuru",
+            "to": "fac_paradis",
+            "axis": "fear",
+            "delta": 10
+          },
+          {
+            "op": "flag",
+            "key": "liberio_raid",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "laisser_faire",
+            "effects": [
+              {
+                "op": "world_support",
+                "faction": "fac_marley",
+                "delta": 15
+              },
+              {
+                "op": "legitimacy",
+                "delta": -3
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "se_preparer",
+            "effects": [
+              {
+                "op": "world_losses",
+                "province": "wprov_liberio",
+                "faction": "fac_marley",
+                "share": 0.2
+              },
+              {
+                "op": "legitimacy",
+                "delta": -5
+              }
+            ],
+            "divergence": 0.4
+          }
+        ],
+        "form": "article",
+        "text_key": "evt.854.liberio_raid",
+        "canon": "C",
+        "notes_canon": "Mort de Willy Tybur ; Eren hérite du Marteau de guerre (11 §4 : Lara Tybur → Eren, 854) ; déclaration de guerre : C (12 E55). Alliance anti-Eldia : ? (11 §5), traduite par la peur et l'idéologie (A). Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "militaire",
+        "playable": false
+      },
+      {
+        "id": "evt_854_liberio_escape",
+        "code": "E56",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_liberio_raid",
+          "within_days": [
+            0,
+            3
+          ]
+        },
+        "divergence_weight": 0.6,
+        "effects": [
+          {
+            "op": "shifter_faction",
+            "shifter": "shifter_bestial",
+            "faction": "paradis"
+          },
+          {
+            "op": "flag",
+            "key": "zeke_custody",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "fuite_mer",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -3
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "negociation",
+            "effects": [
+              {
+                "op": "world_relation",
+                "from": "fac_marley",
+                "to": "fac_paradis",
+                "axis": "trust",
+                "delta": 5
+              },
+              {
+                "op": "legitimacy",
+                "delta": -4
+              }
+            ],
+            "divergence": 0.6
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.854.liberio_escape",
+        "canon": "C",
+        "notes_canon": "Zeke assigné à résidence côté Paradis : C (12 E56). Mort de Sasha : non vérifiée (11 §3, ?), non portée ici. Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "militaire",
+        "playable": false
+      },
+      {
+        "id": "evt_854_yeagerist_coup",
+        "code": "E57",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_liberio_escape",
+          "within_days": [
+            10,
+            40
+          ]
+        },
+        "divergence_weight": 0.8,
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_darius_zackly",
+            "cause": "assassinat"
+          },
+          {
+            "op": "legitimacy",
+            "delta": -10
+          },
+          {
+            "op": "flag",
+            "key": "yeagerist_coup",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "laisser",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -5
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "reprimer",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -10
+              },
+              {
+                "op": "legitimacy",
+                "delta": -5
+              }
+            ],
+            "divergence": 0.6
+          },
+          {
+            "id": "negocier",
+            "effects": [
+              {
+                "op": "legitimacy",
+                "delta": -3
+              }
+            ],
+            "divergence": 0.4
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.yeagerist_coup",
+        "canon": "C",
+        "notes_canon": "Zackly assassiné ; Pixis prend brièvement le commandement : C (12 E57, 11 §3). Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "politique",
+        "playable": false
+      },
+      {
+        "id": "evt_854_marley_counterattack",
+        "code": "E58",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_yeagerist_coup",
+          "within_days": [
+            2,
+            10
+          ]
+        },
+        "divergence_weight": 0.8,
+        "location": "prov_shiganshina",
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_dot_pixis",
+            "cause": "combat"
+          },
+          {
+            "op": "kill",
+            "character": "char_nile_dok",
+            "cause": "combat"
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_paradis",
+            "faction": "fac_paradis",
+            "share": 0.2
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_paradis",
+            "delta": -5
+          },
+          {
+            "op": "flag",
+            "key": "marley_counterattack",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "defendre",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "prov_shiganshina",
+                "delta": -10
+              }
+            ],
+            "historical": true,
+            "canon": "C"
+          },
+          {
+            "id": "evacuer",
+            "effects": [
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -8
+              },
+              {
+                "op": "legitimacy",
+                "delta": -4
+              }
+            ],
+            "divergence": 0.5
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.marley_counterattack",
+        "canon": "C",
+        "notes_canon": "Mort de Pixis et Nile lors de la contre-attaque : C (12 E58, 11 §3). Fenêtre en jours : ? (12 : mois inconnus). Campagne du Grondement : déjà survenu au départ (texte seul).",
+        "theme": "militaire",
+        "playable": false
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_854_rumbling",
+        "code": "E59",
+        "year_min": 854,
+        "window": {
+          "after": null,
+          "within_days": [
+            0,
+            2
+          ]
+        },
+        "location": "prov_shiganshina",
+        "divergence_weight": 1.0,
+        "bifurcation": "B9",
+        "effects": [
+          {
+            "op": "flag",
+            "key": "rumbling",
+            "value": true
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_hizuru",
+            "to": "fac_paradis",
+            "axis": "fear",
+            "delta": 30
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_allies",
+            "to": "fac_paradis",
+            "axis": "fear",
+            "delta": 30
+          },
+          {
+            "op": "world_relation",
+            "from": "fac_marley",
+            "to": "fac_paradis",
+            "axis": "fear",
+            "delta": 30
+          }
+        ],
+        "choices": [
+          {
+            "id": "laisser",
+            "historical": true,
+            "canon": "C",
+            "effects": [
+              {
+                "op": "flag",
+                "key": "rumbling_go",
+                "value": true
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": 4
+              },
+              {
+                "op": "world_hizuru",
+                "delta": -20
+              }
+            ]
+          },
+          {
+            "id": "retarder",
+            "divergence": 0.5,
+            "effects": [
+              {
+                "op": "flag",
+                "key": "rumbling_slowed",
+                "value": true
+              },
+              {
+                "op": "legitimacy",
+                "delta": -6
+              },
+              {
+                "op": "world_hizuru",
+                "delta": -5
+              }
+            ]
+          },
+          {
+            "id": "empecher",
+            "divergence": 1.0,
+            "effects": [
+              {
+                "op": "flag",
+                "key": "rumbling_stopped",
+                "value": true
+              },
+              {
+                "op": "legitimacy",
+                "delta": -15
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_militaires",
+                "satisfaction": -25,
+                "radicalisation": 30
+              }
+            ]
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.rumbling",
+        "theme": "titans",
+        "canon": "C",
+        "notes_canon": "Campagne du Grondement (P9, D-154) : E59 et E60 (12 §1, C : Titans des murs libérés ; dénouement ; mort de Hange) ; choix du 12 §1 (A) ; étapes de l'avancée, pertes et délais A ; mois « ? »."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_854_grondement_avance_1",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_rumbling",
+          "within_days": [
+            18,
+            30
+          ]
+        },
+        "location": "?",
+        "divergence_weight": 0.4,
+        "conditions": [
+          {
+            "flag": "rumbling_stopped",
+            "eq": false
+          }
+        ],
+        "effects": [
+          {
+            "op": "world_losses",
+            "province": "wprov_liberio",
+            "faction": "fac_marley",
+            "share": 0.35
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_port_liberio",
+            "faction": "fac_marley",
+            "share": 0.35
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_raffineries_sud",
+            "faction": "fac_marley",
+            "share": 0.35
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_fort_slava",
+            "faction": "fac_marley",
+            "share": 0.35
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_plaines_est",
+            "faction": "fac_marley",
+            "share": 0.35
+          },
+          {
+            "op": "nation",
+            "faction": "fac_marley",
+            "stat": "industry",
+            "delta": -60
+          },
+          {
+            "op": "nation",
+            "faction": "fac_allies",
+            "stat": "industry",
+            "delta": -30
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_allies",
+            "delta": 6
+          }
+        ],
+        "choices": [
+          {
+            "id": "poursuivre",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "nation",
+                "faction": "fac_marley",
+                "stat": "manpower",
+                "delta": -40
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": 2
+              }
+            ]
+          },
+          {
+            "id": "epargner",
+            "divergence": 0.4,
+            "effects": [
+              {
+                "op": "world_relation",
+                "from": "fac_hizuru",
+                "to": "fac_paradis",
+                "axis": "trust",
+                "delta": 10
+              },
+              {
+                "op": "world_hizuru",
+                "delta": 10
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_militaires",
+                "satisfaction": -8,
+                "radicalisation": 6
+              }
+            ]
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.grondement_avance_1",
+        "theme": "titans",
+        "canon": "A",
+        "notes_canon": "Étape de l'avancée du Grondement (A) : le canon montre les Titans des murs qui ravagent le continent ; découpage en étapes, provinces touchées et pertes A."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_854_grondement_avance_2",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_grondement_avance_1",
+          "within_days": [
+            18,
+            30
+          ]
+        },
+        "location": "?",
+        "divergence_weight": 0.4,
+        "conditions": [
+          {
+            "flag": "rumbling_stopped",
+            "eq": false
+          }
+        ],
+        "effects": [
+          {
+            "op": "world_losses",
+            "province": "wprov_capitale_marley",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_rail_sud",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_arsenal_central",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "world_losses",
+            "province": "wprov_acieries_nord",
+            "faction": "fac_marley",
+            "share": 0.3
+          },
+          {
+            "op": "nation",
+            "faction": "fac_marley",
+            "stat": "industry",
+            "delta": -80
+          },
+          {
+            "op": "nation",
+            "faction": "fac_allies",
+            "stat": "industry",
+            "delta": -40
+          },
+          {
+            "op": "world_support",
+            "faction": "fac_allies",
+            "delta": 6
+          }
+        ],
+        "choices": [
+          {
+            "id": "poursuivre",
+            "historical": true,
+            "canon": "A",
+            "effects": [
+              {
+                "op": "nation",
+                "faction": "fac_marley",
+                "stat": "manpower",
+                "delta": -40
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": 2
+              }
+            ]
+          },
+          {
+            "id": "epargner",
+            "divergence": 0.4,
+            "effects": [
+              {
+                "op": "world_relation",
+                "from": "fac_hizuru",
+                "to": "fac_paradis",
+                "axis": "trust",
+                "delta": 10
+              },
+              {
+                "op": "world_hizuru",
+                "delta": 10
+              },
+              {
+                "op": "stratum",
+                "stratum": "str_militaires",
+                "satisfaction": -8,
+                "radicalisation": 6
+              }
+            ]
+          }
+        ],
+        "form": "telegramme",
+        "text_key": "evt.854.grondement_avance_2",
+        "theme": "titans",
+        "canon": "A",
+        "notes_canon": "Étape de l'avancée du Grondement (A) : le canon montre les Titans des murs qui ravagent le continent ; découpage en étapes, provinces touchées et pertes A."
+      },
+      {
+        "kind": "canon",
+        "playable": true,
+        "id": "evt_854_heaven_earth_battle",
+        "code": "E60",
+        "year_min": 854,
+        "window": {
+          "after": "evt_854_grondement_avance_2",
+          "within_days": [
+            10,
+            25
+          ]
+        },
+        "location": "?",
+        "divergence_weight": 1.0,
+        "effects": [
+          {
+            "op": "kill",
+            "character": "char_hange_zoe",
+            "cause": "combat"
+          },
+          {
+            "op": "flag",
+            "key": "heaven_earth_battle",
+            "value": true
+          }
+        ],
+        "choices": [
+          {
+            "id": "alliance",
+            "historical": true,
+            "canon": "C",
+            "effects": [
+              {
+                "op": "flag",
+                "key": "alliance_reached_founder",
+                "value": true
+              },
+              {
+                "op": "morale",
+                "province": "all",
+                "delta": -10
+              }
+            ]
+          },
+          {
+            "id": "defendre",
+            "divergence": 0.8,
+            "effects": [
+              {
+                "op": "flag",
+                "key": "founder_defended",
+                "value": true
+              },
+              {
+                "op": "garrison",
+                "province": "prov_shiganshina",
+                "share": -0.3
+              }
+            ]
+          },
+          {
+            "id": "negociation",
+            "divergence": 0.6,
+            "effects": [
+              {
+                "op": "flag",
+                "key": "rumbling_negotiated",
+                "value": true
+              },
+              {
+                "op": "legitimacy",
+                "delta": -8
+              }
+            ]
+          }
+        ],
+        "form": "rapport",
+        "text_key": "evt.854.heaven_earth_battle",
+        "theme": "titans",
+        "canon": "C",
+        "notes_canon": "Campagne du Grondement (P9, D-154) : E59 et E60 (12 §1, C : Titans des murs libérés ; dénouement ; mort de Hange) ; choix du 12 §1 (A) ; étapes de l'avancée, pertes et délais A ; mois « ? »."
+      }
+    ],
+    "end": {
+      "max_days": 150,
+      "factions": [
+        "fac_paradis",
+        "fac_allies"
+      ],
+      "rules": [
+        {
+          "id": "grondement_empeche",
+          "kind": "paix",
+          "winner": null,
+          "text_key": "issue.cg.grondement_empeche",
+          "when": [
+            {
+              "event": "evt_854_rumbling",
+              "choice": "empecher"
+            }
+          ]
+        },
+        {
+          "id": "negociation",
+          "kind": "paix",
+          "winner": null,
+          "text_key": "issue.cg.negociation",
+          "when": [
+            {
+              "event": "evt_854_heaven_earth_battle",
+              "choice": "negociation"
+            }
+          ]
+        },
+        {
+          "id": "alliance_arrete",
+          "kind": "paix",
+          "winner": null,
+          "text_key": "issue.cg.alliance_arrete",
+          "when": [
+            {
+              "event": "evt_854_heaven_earth_battle",
+              "choice": "alliance"
+            }
+          ]
+        },
+        {
+          "id": "porteur_tombe",
+          "kind": "defaite",
+          "winner": "fac_allies",
+          "text_key": "issue.cg.porteur_tombe",
+          "when": [
+            {
+              "dead": "char_eren_yeager"
+            }
+          ]
+        },
+        {
+          "id": "ile_prise",
+          "kind": "defaite",
+          "winner": "fac_allies",
+          "text_key": "issue.c854.ile_prise",
+          "when": [
+            {
+              "world_control": "wprov_paradis",
+              "by": [
+                "fac_marley",
+                "fac_allies"
+              ]
+            }
+          ]
+        }
+      ],
+      "deadline": {
+        "score": [
+          {
+            "indicator": "population",
+            "weight": 0.3
+          },
+          {
+            "indicator": "legitimacy",
+            "weight": 0.3
+          },
+          {
+            "indicator": "morale",
+            "weight": 0.2
+          },
+          {
+            "indicator": "soldiers",
+            "weight": 0.2
+          }
+        ],
+        "threshold": 0.6,
+        "win": {
+          "id": "echeance_paradis",
+          "kind": "victoire",
+          "winner": "fac_paradis",
+          "text_key": "issue.cg.echeance_paradis"
+        },
+        "lose": {
+          "id": "echeance_alliance",
+          "kind": "defaite",
+          "winner": "fac_allies",
+          "text_key": "issue.cg.echeance_alliance"
+        }
+      }
+    },
+    "canon": "A",
+    "notes_canon": "Campagne du Grondement (P9) : départ après la contre-attaque de Marley (E58, C), date « ? » (A : 854, jour 240) ; morts de 854 déclarés (11 §3) ; Marteau à Eren (11 §4, C) ; Zeke chez Paradis (E56, C) ; guerre du monde contre Paradis et penchant d'Hizuru A ; joueur : la reine Historia (A ; l'autorité réelle après le coup est « ? ») ; rôles et chefs remplaçants A. Fins A (fins multiples, 12 E60)."
+  }
+]

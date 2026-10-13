@@ -243,14 +243,16 @@ try {
       const i = document.querySelector<HTMLImageElement>(".menu-principal__fond");
       return !!i && i.complete && i.naturalWidth > 0;
     }, undefined, { timeout: 20000 });
-    const covers = await menu.locator(".chemise[data-scenario] .chemise__couverture svg").count();
+    const covers = await menu.locator(".chemise[data-campagne] .chemise__couverture svg").count();
     const entries = await menu.locator(".menu-entree").allInnerTexts();
     const stamps = await menu.locator(".menu-principal .tampon").count();
     const full = await menu.$eval(".menu-principal__fond", (i) => { const r = i.getBoundingClientRect(); return r.width >= window.innerWidth - 1 && r.height >= window.innerHeight - 1; });
-    expect(covers === 3 && entries.length === 4 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
+    expect(covers === 4 && entries.length === 4 && stamps === 0 && full, `menu : fond plein écran (rendu des murs au crépuscule), ${entries.length} entrées (${entries.join(", ")}), ${covers} scénarios illustrés, ${stamps} tampon`);
     await review(menu, pass, "menu principal", ".menu-principal");
     await shot(menu, pass, "menu");
-    await menu.locator('.chemise[data-scenario="scn_854"]').click();
+    // P9 : campagne, puis difficulté (Normal), puis nation.
+    await menu.locator('.chemise[data-campagne="c854"]').click();
+    await menu.locator('.difficulte[data-difficulte="normal"]').click();
     await menu.waitForSelector(".choix-nation-menu:not([hidden])");
     const blasons = await menu.locator(".choix-nation-menu .chemise__couverture svg").count();
     expect(blasons === 2, `choix de la nation : ${blasons} nations à blason dessiné (Paradis, Marley)`);

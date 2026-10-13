@@ -952,3 +952,37 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .menu-guide:hover { border-color: var(--accent); }
 .menu-guide__titre { color: var(--texte-fort); }
 .menu-guide__resume { font-size: var(--t-s); color: var(--texte-second); }
+
+/* ——— P9 : campagnes et difficultés (menu), divergence avertie, fin de campagne ——— */
+.chemise[data-campagne="c845"] .chemise__couverture { background-position: 14% 72%; }
+.chemise[data-campagne="c850"] .chemise__couverture { background-position: 50% 60%; }
+.chemise[data-campagne="c854"] .chemise__couverture { background-position: 72% 64%; }
+.chemise[data-campagne="cgrondement"] .chemise__couverture { background-position: 92% 40%; }
+.choix-difficulte { border-top: var(--filet-l) solid var(--filet); margin-top: 0.4rem; }
+.choix-difficulte[hidden] { display: none; }
+.choix-difficulte__liste { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; padding: 0.5rem 0.9rem 0; }
+.difficulte { display: flex; flex-direction: column; gap: 0.1rem; padding: 0.45rem 0.6rem; text-align: left; color: var(--texte); background: var(--panneau-creux); border: var(--filet-l) solid var(--filet-doux); border-left: 3px solid var(--filet); cursor: pointer; }
+.difficulte:hover, .difficulte:focus-visible, .difficulte[aria-pressed="true"] { border-left-color: var(--accent); background: var(--reflet-fort); }
+.difficulte__nom { font-weight: 600; color: var(--texte-fort); }
+.difficulte__desc { font-size: var(--t-xs); color: var(--texte-second); line-height: 1.35; }
+.menu-libre { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.5rem; padding: 0.55rem 0.9rem 0; font-size: var(--t-xs); color: var(--texte-second); }
+.menu-libre__bouton { padding: 0.1rem 0.5rem; font-size: var(--t-xs); color: var(--texte); background: transparent; border: var(--filet-l) solid var(--filet-doux); border-radius: var(--rayon); cursor: pointer; }
+.menu-libre__bouton:hover, .menu-libre__bouton:focus-visible { border-color: var(--accent); }
+@media (max-width: 600px) { .choix-difficulte__liste { grid-template-columns: 1fr; } }
+.choix__divergence { margin: 0.45rem 0 0.1rem; padding: 0.5rem 0.65rem; background: var(--danger-fond); border: var(--filet-l) solid var(--danger-plein); border-left: 3px solid var(--danger-plein); }
+.choix__divergence p { margin: 0 0 0.3rem; font-size: var(--t-s); color: var(--texte); line-height: 1.4; }
+.choix__divergence .choix__divergence-titre { font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--danger-clair); }
+.choix__divergence .choix__divergence-bascule { font-weight: 600; color: var(--texte-fort); }
+.choix__divergence-boutons { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.fin-campagne { position: fixed; inset: 0; z-index: var(--z-modale); display: grid; place-items: center; overflow-y: auto; padding: 1rem; background: var(--voile); }
+.fin-campagne__papier { width: min(36rem, 94vw); padding: 0 1.3rem 1.1rem; color: var(--texte); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 3px solid var(--accent); box-shadow: 6px 6px 0 var(--ombre); }
+.fin-campagne__tete { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; justify-content: space-between; margin: 0 -1.3rem; padding: 0.5rem 1.3rem; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-clair); background: var(--panneau-creux); border-bottom: var(--filet-l) solid var(--filet-doux); }
+.fin-campagne__tampon { display: inline-block; margin: 0.9rem 0 0.4rem; padding: 0.1rem 0.7rem; font-size: var(--t-xxl); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid currentColor; border-radius: var(--rayon); transform: rotate(-2deg); }
+.fin-campagne__tampon--victoire { color: var(--succes-clair); }
+.fin-campagne__tampon--defaite { color: var(--danger-clair); }
+.fin-campagne__tampon--paix { color: var(--accent-clair); }
+.fin-campagne__texte { margin: 0.3rem 0 0.6rem; line-height: 1.5; color: var(--texte-fort); }
+.fin-campagne__faits { margin: 0 0 0.8rem 1.1rem; padding: 0; font-size: var(--t-s); color: var(--texte-second); }
+.fin-campagne__boutons { display: flex; flex-wrap: wrap; gap: 0.45rem; justify-content: flex-end; }
+.choix .registre-bouton[hidden] { display: none; }
+.menu-scenarios { max-height: calc(100vh - 3rem); overflow-y: auto; }
