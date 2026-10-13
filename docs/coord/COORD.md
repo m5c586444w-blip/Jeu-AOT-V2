@@ -10,7 +10,7 @@
 | C0 | Audit sans code de jeu | fait | A 2026-10-14 | tronc | — | à lancer en premier (A) |
 | C1 | Cadre d'interface unique + `smoke:cadre` | à faire | — | tronc | — | bug : barre absente en bataille |
 | C2 | Création de lore, emblèmes (licorne…), `canon:check` adapté | à faire | — | tronc | — | `A` + `creation: true` |
-| C3 | Prérequis neutres multijoueur (rejeu, commandes, `owner`) | en cours | A 2026-10-14 | tronc | — | |
+| C3 | Prérequis neutres multijoueur (rejeu, commandes, `owner`) | fait (socle) | A 2026-10-14 | tronc | — | |
 | C4 | P3 Gaz/Ancrage + P4 Signal | à faire | — | tronc | C3 | |
 | C5 | P2 Marée + moteur de rencontres (§3 bis), Marley–Paradis | à faire | — | tronc | C4 | |
 | C6 | P1 Le Mur | à faire | — | tronc | C3 | |
@@ -35,7 +35,8 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 - C0 fait (`docs/reports/C0-audit.md`, dette n° 71-80). verify de départ code 0, 728 tests. Bug cadre confirmé : `.bataille` fixed z-index recouvre le HUD (`screen.css:705`) → C1 pour B.
 - A enchaîne sur **C3** (owner/siège, commandes sérialisables, rejeu) : fichiers `src/sim/armies`, `src/sim/tactical`. B ne touche pas à ces dossiers.
 - C3 partiel commité (D-157) : `src/sim/core/seat.ts`, `src/sim/commands/`, `src/sim/knowledge/`, tests de rejeu. Reste : owner provinces/institutions, UI sur enveloppes, revue indépendante.
-- PROCHAINE ACTION EXACTE (A) : finir C3 (liste ci-dessus), puis `docs/reports/C3.md`, revue par sous-agent distinct.
+- C3 socle terminé et revu (`docs/reports/C3.md`, verify EXIT=0, 753 tests). Dette 81-84 = suite de C3/C13.
+- PROCHAINE ACTION EXACTE (A) : C4 (P3 Gaz/Ancrage + P4 Signal) : écrire `docs/phases/C4.md` puis implémenter ; C6 ensuite.
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).

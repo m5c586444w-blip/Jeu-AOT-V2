@@ -39,32 +39,60 @@ function ownedSubjects(cmd: { type: string } & Record<string, unknown>): { armie
   return { armies, fleets };
 }
 
-/** Commandes qui engagent la faction jouée (succession, lois, budget) : seul le siège qui la dirige peut les donner. */
-export const FACTION_COMMANDS: ReadonlySet<string> = new Set(["ChooseSuccessor", "EnactLaw", "RepealLaw", "SetBudget"]);
+/**
+ * Commandes qui engagent la faction jouée (succession, lois, budget, nominations, conseil, recherche, diplomatie,
+ * expéditions, agents, Titans, missions, événements) : seul le siège qui dirige la faction jouée peut les donner.
+ */
+export const FACTION_COMMANDS: ReadonlySet<string> = new Set([
+  "AdvanceDays", "SetFlag", "SetRationing", "EnactLaw", "RepealLaw", "Persuade", "SetBudget", "CharacterDies",
+  "Nominate", "AcceptProposal", "RejectProposal", "LaunchExpedition", "RecallExpedition", "SendConvoy", "ResolveBattle",
+  "ChooseEventOption", "SetResearch", "RecruitAgent", "AssignAgent", "RecallAgent", "InheritTitan", "RetireShifter",
+  "SetPlayerFaction", "BuildFormation", "MoveFormation", "ProjectTitan", "RecallTitan", "ProposeTreaty", "DeclareWar",
+  "MakePeace", "Ultimatum", "Embargo", "GuaranteeHizuru", "Noop", "StartMission", "CancelMission", "RaiseArmies",
+  "ChooseSuccessor",
+]);
+
+/** Commandes qui visent une armée, une flotte ou une rencontre : le siège doit la posséder (27 §1). */
+export const ARMY_COMMANDS: ReadonlySet<string> = new Set([
+  "ArmyMove", "ArmyHalt", "ArmyForcedMarch", "ArmyIntercept", "ArmyRetreat", "ArmyMerge", "ArmySplit", "ArmySetGeneral",
+  "ArmyGarrison", "FleetMove", "FleetMission", "FleetEmbark", "FleetLand", "ResolveEncounter",
+]);
 
 /** Un siège ne commande que ses entités (27 §1). Pure : lit l'état, ne le modifie pas. */
 export function authorize(state: GameState, seat: SeatId, cmd: { type: string } & Record<string, unknown>): CommandRefusal | null {
   if (!seatExists(state.seats, seat)) return refuse("seat.err.unknown_seat", seat);
   const player = playerOf(state.nations);
-  if (FACTION_COMMANDS.has(cmd.type) && factionOfSeat(state, seat) !== player) return refuse("seat.err.not_faction", `${seat} -> ${player}`);
+  const isArmy = ARMY_COMMANDS.has(cmd.type);
+  const isFaction = FACTION_COMMANDS.has(cmd.type);
+  // Liste blanche : un type absent des deux ensembles est refusé à tout siège autre que le siège solo.
+  if (!isArmy && !isFaction) return !state.seats && seat === SOLO_SEAT ? null : refuse("seat.err.unclassified_command", `${seat} -> ${cmd.type}`);
+  if (isFaction) {
+    if (factionOfSeat(state, seat) !== player) return refuse("seat.err.not_faction", `${seat} -> ${player}`);
+    return null;
+  }
   const { armies, fleets } = ownedSubjects(cmd);
-  if (state.armies) {
-    for (const id of armies) {
-      const a = state.armies.armies.find((x) => x.id === id);
-      if (a && ownerOf(a, state.seats, player) !== seat) return refuse("seat.err.not_owner", `${seat} -> ${id}`);
-    }
-    for (const id of fleets) {
-      const f = state.armies.fleets.find((x) => x.id === id);
-      if (f && ownerOf(f, state.seats, player) !== seat) return refuse("seat.err.not_owner", `${seat} -> ${id}`);
-    }
-    if (cmd.type === "ResolveEncounter" && typeof cmd["encounter"] === "string") {
-      const enc = state.armies.encounters.find((e) => e.id === cmd["encounter"]);
-      const mine = enc?.sides.some((side) => side.armies.some((id) => {
-        const a = state.armies?.armies.find((x) => x.id === id);
-        return !!a && ownerOf(a, state.seats, player) === seat;
-      }));
-      if (enc && !mine) return refuse("seat.err.not_owner", `${seat} -> ${enc.id}`);
-    }
+  const encId = cmd.type === "ResolveEncounter" && typeof cmd["encounter"] === "string" ? cmd["encounter"] : null;
+  if (encId === null && armies.length === 0 && fleets.length === 0) return null;
+  const arm = state.armies;
+  if (!arm) return refuse("seat.err.unknown_subject", [...armies, ...fleets, encId ?? ""].filter(Boolean).join(","));
+  for (const id of armies) {
+    const a = arm.armies.find((x) => x.id === id);
+    if (!a) return refuse("seat.err.unknown_subject", id);
+    if (ownerOf(a, state.seats, player) !== seat) return refuse("seat.err.not_owner", `${seat} -> ${id}`);
+  }
+  for (const id of fleets) {
+    const f = arm.fleets.find((x) => x.id === id);
+    if (!f) return refuse("seat.err.unknown_subject", id);
+    if (ownerOf(f, state.seats, player) !== seat) return refuse("seat.err.not_owner", `${seat} -> ${id}`);
+  }
+  if (encId !== null) {
+    const enc = arm.encounters.find((e) => e.id === encId);
+    if (!enc) return refuse("seat.err.unknown_subject", encId);
+    const mine = enc.sides.some((side) => side.armies.some((id) => {
+      const a = arm.armies.find((x) => x.id === id);
+      return !!a && ownerOf(a, state.seats, player) === seat;
+    }));
+    if (!mine) return refuse("seat.err.not_owner", `${seat} -> ${enc.id}`);
   }
   return null;
 }

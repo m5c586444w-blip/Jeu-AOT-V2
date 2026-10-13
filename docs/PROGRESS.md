@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
-| Tâche | Lancer **C0** (audit sans code de jeu) par la session A ; **C1** (cadre d'interface unique) par la session B |
+| Tâche | C0 fait, C3 socle fait (A, 2026-10-14) ; suivant : C4 (A), C1 (B) |
 | Dernier `npm run verify` | voir `docs/coord/journal/` (dernier relevé de la direction : 2026-10-13, code 0, 719 tests avant ajout de `coord`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `npm run coord -- verrou prendre A "C0 audit"`, puis `docs/phases/C0.md` et `docs/reports/C0-audit.md` ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `docs/phases/C4.md` puis P3 Gaz/Ancrage + P4 Signal (voir COORD.md) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

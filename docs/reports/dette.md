@@ -90,3 +90,7 @@ Format : **quoi** — où — gravité (faible / moyenne / forte). Tag `LC-repor
 | 78 | C0 : `pressure` des armées homonyme de la pression démographique de P1 | `src/sim/armies/state.ts:157` | faible | C6 |
 | 79 | C0 : densité de Titans statique (écart avec spec 26 §3) | `src/sim/military/routes.ts:150-152` | moyenne | C5 |
 | 80 | C0 : aucun `owner`/siège sur les entités d'armée et de bataille (grep vide) ; bloque C3 et C13 | `src/sim/armies/state.ts`, `src/sim/tactical/types.ts` | forte | C3 |
+| 81 | C3 (revue) : `dispatch` du worker reste un chemin sans siège (registres personnages, cabinet, conseil) ; à fermer ou router par siège avant C13 | `src/sim/sim.ts`, `src/workers/simClient.ts`, `src/ui/gameScreen.ts` | moyenne | C13 |
+| 82 | C3 (revue) : `Sim.submit` journalise la commande nue (siège et jour perdus) ; `EnvelopeJournal` non branché au worker ; `day` de l'enveloppe jamais comparé | `src/sim/sim.ts`, `src/sim/commands/journal.ts` | moyenne | C13 |
+| 83 | C3 (revue) : propriétaire des escouades/batteries de bataille codé en dur sur le siège solo ; ordres de bataille pas branchés sur l'UI de bataille | `src/sim/commands/apply.ts`, `src/ui/tactical/rtBattleScreen.ts` | moyenne | C9/C13 |
+| 84 | C3 : connaissance par faction (`src/sim/knowledge`) non branchée au tick ni à un brouillard par siège | `src/sim/knowledge/knowledge.ts` | moyenne | C13 |
