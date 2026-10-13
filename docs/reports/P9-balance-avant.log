@@ -1,0 +1,66 @@
+sim:balance : 40 parties demandées par campagne, budget 30 min par campagne, 4 fils, difficulté normal.
+[c845] essai : 8 parties en 12.1 s (5.40 s par partie et par fil) → 40 parties
+[c845] 40 parties · durée moyenne 840 jours de jeu · score moyen 0.552
+  victoires : fac_paradis 90.0 % · titans 10.0 % · aucune 0.0 %
+  fins : echeance_tenue 36 · echeance_recul 3 · famine 1
+  score à l'échéance (39 parties, seuil 0.50) : p10 0.518 · p25 0.534 · médiane 0.540 · p75 0.588 · p90 0.626 ; composantes : population 0.72 · legitimacy 0.46 · food 0.34 · morale 0.49 · stability 0.61
+  joueur type (victoires de fac_paradis) : prudent 12/12 · historique 12/12 · hasardeux 3/6 · audacieux 9/10
+  expéditions : 275 · mortalité moyenne 18.2 % · cumulée 16.8 %
+  causes de mort (expéditions) : titan 2275 · anormal 1160 · hemorragie 165 · infection 142 · epuisement 46 ; personnages : combat 169
+  ressources limitantes (parties où elle est la plus longtemps sous 5 % du départ) : food 8
+  cas dégénérés : famine ≥ 30 jours 2 (5.0 %) · spirale de mort 1 (2.5 %)
+  IA : — · bascules d'Hizuru dans 0 parties · branche divergente 21
+  déterminisme : graine 1 (prudent) : partie 56b50f09 · rejouée 56b50f09 · journal direct 56b50f09 · journal Worker 56b50f09 · 337 commandes → identiques
+  déterminisme : graine 2 (historique) : partie b1d803f7 · rejouée b1d803f7 · journal direct b1d803f7 · journal Worker b1d803f7 · 368 commandes → identiques
+  déterminisme : graine 3 (hasardeux) : partie 26c94719 · rejouée 26c94719 · journal direct 26c94719 · journal Worker 26c94719 · 373 commandes → identiques
+[c850] essai : 8 parties en 10.5 s (4.06 s par partie et par fil) → 40 parties
+[c850] 40 parties · durée moyenne 570 jours de jeu · score moyen 0.818
+  victoires : fac_paradis 85.0 % · titans 7.5 % · fac_marley 7.5 % · aucune 0.0 %
+  fins : la_mer 34 · trost_abandonne 3 · eren_enleve 3
+  score à l'échéance (34 parties, seuil 0.50) : p10 0.830 · p25 0.832 · médiane 0.833 · p75 0.833 · p90 0.834 ; composantes : population 0.98 · legitimacy 0.55 · food 0.97 · morale 0.60 · stability 0.66 · control 1.00
+  joueur type (victoires de fac_paradis) : prudent 10/12 · historique 11/12 · hasardeux 5/6 · audacieux 8/10
+  expéditions : 187 · mortalité moyenne 22.6 % · cumulée 20.3 %
+  causes de mort (expéditions) : titan 2031 · anormal 1026 · hemorragie 169 · infection 84 · epuisement 28 ; personnages : combat 272 · devore 19
+  ressources limitantes (parties où elle est la plus longtemps sous 5 % du départ) : aucune
+  cas dégénérés : famine ≥ 30 jours 0 (0.0 %) · spirale de mort 0 (0.0 %)
+  IA : — · bascules d'Hizuru dans 0 parties · branche divergente 17
+  déterminisme : graine 1 (prudent) : partie 473eb0e5 · rejouée 473eb0e5 · journal direct 473eb0e5 · journal Worker 473eb0e5 · 272 commandes → identiques
+  déterminisme : graine 2 (historique) : partie 363da211 · rejouée 363da211 · journal direct 363da211 · journal Worker 363da211 · 287 commandes → identiques
+  déterminisme : graine 3 (hasardeux) : partie a1b637d8 · rejouée a1b637d8 · journal direct a1b637d8 · journal Worker a1b637d8 · 286 commandes → identiques
+[c854] essai : 8 parties en 4.6 s (1.52 s par partie et par fil) → 40 parties
+[c854] 40 parties · durée moyenne 70 jours de jeu · score moyen 0.808
+  victoires : fac_paradis 0.0 % · fac_marley 100.0 % · aucune 0.0 %
+  fins : murs_perces 40
+  score à l'échéance (0 parties, seuil 0.60) : — ; composantes : population 1.00 · legitimacy 0.45 · soldiers 1.00 · control 1.00 · morale 0.59
+  joueur type (victoires de fac_paradis) : prudent 0/12 · historique 0/12 · hasardeux 0/6 · audacieux 0/10
+  expéditions : 0 · mortalité moyenne — · cumulée —
+  causes de mort (expéditions) : — ; personnages : inconnue 520 · combat 50 · devore 31 · assassinat 9
+  ressources limitantes (parties où elle est la plus longtemps sous 5 % du départ) : aucune
+  cas dégénérés : famine ≥ 30 jours 0 (0.0 %) · spirale de mort 0 (0.0 %)
+  IA : armees:fac_marley:bombarder 29.25/partie · monde:fac_marley:attaquer 4.58/partie · monde:fac_marley:titan 3.23/partie · monde:fac_hizuru:lever 2.17/partie · monde:fac_marley:lever 2.17/partie · armees:fac_marley:approche 1.00/partie · armees:fac_marley:debarquer 1.00/partie · monde:fac_marley:guerre 0.72/partie · monde:fac_allies:attaquer 0.53/partie · monde:fac_marley:attendre 0.45/partie · bascules d'Hizuru dans 0 parties · branche divergente 0
+  déterminisme : graine 1 (prudent) : partie 953dbd13 · rejouée 953dbd13 · journal direct 953dbd13 · journal Worker 953dbd13 · 33 commandes → identiques
+  déterminisme : graine 2 (historique) : partie 3944ca31 · rejouée 3944ca31 · journal direct 3944ca31 · journal Worker 3944ca31 · 29 commandes → identiques
+  déterminisme : graine 3 (hasardeux) : partie fa9b4c2d · rejouée fa9b4c2d · journal direct fa9b4c2d · journal Worker fa9b4c2d · 46 commandes → identiques
+[cgrondement] essai : 8 parties en 5.0 s (1.50 s par partie et par fil) → 40 parties
+[cgrondement] 40 parties · durée moyenne 74 jours de jeu · score moyen 0.757
+  victoires : fac_paradis 10.0 % · fac_allies 0.0 % · aucune 90.0 %
+  fins : alliance_arrete 27 · grondement_empeche 6 · echeance_paradis 4 · negociation 3
+  score à l'échéance (4 parties, seuil 0.60) : p10 0.761 · p25 0.765 · médiane 0.771 · p75 0.771 · p90 0.773 ; composantes : population 1.00 · legitimacy 0.49 · morale 0.55 · soldiers 1.00
+  joueur type (victoires de fac_paradis) : prudent 0/12 · historique 0/12 · hasardeux 1/6 · audacieux 3/10
+  expéditions : 0 · mortalité moyenne — · cumulée —
+  causes de mort (expéditions) : — ; personnages : inconnue 720 · combat 36 · malediction 4
+  ressources limitantes (parties où elle est la plus longtemps sous 5 % du départ) : aucune
+  cas dégénérés : famine ≥ 30 jours 0 (0.0 %) · spirale de mort 0 (0.0 %)
+  IA : armees:fac_marley:bombarder 34.63/partie · monde:fac_marley:lever 2.90/partie · monde:fac_hizuru:lever 2.80/partie · armees:fac_marley:intercepter 1.13/partie · armees:fac_marley:approche 1.00/partie · armees:fac_marley:debarquer 1.00/partie · bascules d'Hizuru dans 0 parties · branche divergente 0
+  déterminisme : graine 1 (prudent) : partie 64e38eeb · rejouée 64e38eeb · journal direct 64e38eeb · journal Worker 64e38eeb · 40 commandes → identiques
+  déterminisme : graine 2 (historique) : partie 27542b74 · rejouée 27542b74 · journal direct 27542b74 · journal Worker 27542b74 · 41 commandes → identiques
+  déterminisme : graine 3 (hasardeux) : partie 749e1d1c · rejouée 749e1d1c · journal direct 749e1d1c · journal Worker 749e1d1c · 4 commandes → identiques
+Critères :
+  KO  c845 : faction la plus victorieuse fac_paradis 90.0 % (≤ 70 %)
+  KO  c850 : faction la plus victorieuse fac_paradis 85.0 % (≤ 70 %)
+  KO  c854 : faction la plus victorieuse fac_marley 100.0 % (≤ 70 %)
+  OK  cgrondement : faction la plus victorieuse fac_paradis 10.0 % (≤ 70 %)
+  KO  mortalité d'expédition moyenne 20.0 % sur 462 expéditions (25–40 %)
+  OK  déterminisme : même graine et mêmes commandes = même hash (12 rejeux directs et Worker)
+sim:balance : ÉCHEC (4.3 min).
+exit 1
