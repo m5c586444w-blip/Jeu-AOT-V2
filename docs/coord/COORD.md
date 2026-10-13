@@ -54,5 +54,5 @@ _(vide)_
 | # | Sujet | Défaut appliqué en attendant |
 |---|---|---|
 | MJ-a | Règle de pause, anti-triche, mode de connexion, PC le plus faible (27 §10 points 3 à 6) | défauts `[A]` du fichier 27 |
-| NET | Domaines de Perchance ajoutés au réseau de l'environnement (action de Gabriel) | voie 1 puis voie 3 tant que non fait |
+| NET | Ajouter `perchance.org` et `*.perchance.org` au réseau de l'environnement (action de Gabriel ; l'API d'images est un sous-domaine à identifiant) | voie 1 puis voie 3 tant que non fait |
 | TIME | Après vendredi, ajouter une fenêtre à A (08:00–16:00) ? | non : A seule, de nuit |

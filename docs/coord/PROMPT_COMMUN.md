@@ -44,7 +44,7 @@ Gabriel exige que **toutes les villes et tous les endroits** soient créés et j
 - Si `pip install bpy` est impossible (réseau), le consigner, passer à une autre tâche ; ne pas écrire de maillages à la main hors Blender.
 
 ## 5. Illustrations (ERRATA_V3 §5)
-- Perchance n'a **pas d'API officielle**, est protégé par Cloudflare et n'est pas joignable depuis le shell cloud. **Ne jamais contourner** une protection. Voie 1 : tu rédiges `docs/art/illustrations/DEMANDES.md` (prompts prêts à coller) ; Gabriel génère et dépose dans `assets_user/illustrations/` ; tu évalues à l'arrivée (sous-agent distinct, grille de `docs/art/STYLE.md`). Voie 2 seulement si les domaines sont autorisés **et** accessibles sans défi anti-robot (Playwright, un lot à la fois). Voie 3 : rendus Blender stylisés.
+- Perchance n'a **pas d'API officielle**, est protégé par Cloudflare et n'est pas joignable depuis le shell cloud. **Ne jamais contourner** une protection. Voie 1 : tu rédiges `docs/art/illustrations/DEMANDES.md` (prompts prêts à coller) ; Gabriel génère et dépose dans `assets_user/illustrations/` ; tu évalues à l'arrivée (sous-agent distinct, grille de `docs/art/STYLE.md`). Voie 2 (page « Image API » `perchance.org/perchance-ai-api`, iframe + postMessage, voir ERRATA_V3 §5.3) seulement si les domaines sont autorisés **et** accessibles sans défi anti-robot (Playwright, une image à la fois). Voie 3 : rendus Blender stylisés.
 - Les illustrations ne servent ni de textures de terrain, ni de modèles.
 
 ## 6. Multijoueur
