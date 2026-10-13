@@ -1227,3 +1227,14 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Contexte** : 24 §4 (12 captures au plus par phase) ; D-146 (captures du smoke hors git par défaut).
 - **Choix** : planches `?proto3d=figures&planche=titans|soldats|poses` (5 classes × 3 variantes, 5 tenues, 8 états de Titan et 8 de soldat) ; `npm run smoke:r3` (planches, compagnie en 1366/1920/3840 avec gros plan, P4 en vue 3D ; `R3_PARTIES`, `R3_TAILLES`) ; captures dans `docs/screenshots/.smoke/`, `-- --captures` pour le passage final. Le gros plan place la caméra stratégique par la sonde de développement (`__batailleRt`) sur le Titan vivant le plus entouré, du côté le plus dégagé (les rues de la Ville des Murs masquent les Titans en plongée basse).
 - **Réversible** : oui.
+
+## 2026-10-13 — D-153 R3 : reprise, revue et fusion
+- **Contexte** : le conteneur a redémarré le 2026-10-09 vers 17 h ; le sous-agent de R3 s'est arrêté après R3.6 (`a85a5ee`), pendant l'écriture du rapport. Gabriel a écrit « J'ai validé la dernière phase sur le projet de code, continue » (2026-10-09 16:33Z) ; la direction reprend le 2026-10-13 (le tour précédent a été coupé par une erreur d'API).
+- **Reprise** : la direction a fini le rapport et lancé le verify (code 0, 719/719, 8 empreintes inchangées, `docs/reports/R3-verify-final.log`).
+- **Revue** (sous-agent distinct, 9 captures ouvertes, `smoke:r3` code 0) : aucun défaut bloquant. Corrigés : vue 3D de P4 créée après la fermeture de la bataille (`battleScreen.ts`), corps de base habillé après `destroy()` et texture de détail jamais libérée (`view3d.ts`). Dettes : n° 61 (latence remesurée : « prêt » jusqu'à 18,1 s en rendu logiciel) et 63 corrigées ; n° 69 (Titans pas encore dérangeants, à reprendre en R4) et 70 ajoutées.
+- **Réversible** : oui.
+
+| Phase | Modèle | Effort | Tours (estimés) | Note |
+|---|---|---|---|---|
+| R3 (sous-agent) | Opus | xhigh | ≈ 140 | arrêt de 3 h, relancé ; coupé par le redémarrage du conteneur |
+| Reprise R3 + revue + correctifs + fusion | Opus | défaut | ≈ 40 | 1 passe |

@@ -154,6 +154,9 @@ export class View3D implements BattleView {
   private readonly groundPlane = new Plane(new Vector3(0, 1, 0), 0);
   private time = 0;
   private snapNext = false;
+  /** Vrai après `destroy()` : le corps de base arrivé ensuite n'habille plus rien. */
+  private destroyed = false;
+  private detail: { skin: Texture; cloth: Texture } | null = null;
   /** Bouffées de vapeur (toile procédurale de R1, créée au premier Titan) ; peaux des variantes de R3 dans `skins`. */
   private puff: Texture | null = null;
 
@@ -387,7 +390,9 @@ export class View3D implements BattleView {
     const t0 = performance.now();
     void Promise.all([loadHumanTemplate(), loadEyeTexture()])
       .then(([template, eyeMap]) => {
+        if (this.destroyed) return;
         const detail = bodyDetailNormals(850);
+        this.detail = detail;
         for (const m of this.outfitMats.values()) dressMaterials(m, detail);
         this.kit = { template, eyeMap };
         this.kitState = "corps";
@@ -882,6 +887,7 @@ export class View3D implements BattleView {
   }
 
   destroy(): void {
+    this.destroyed = true;
     this.ro.disconnect();
     this.world?.dispose();
     for (const e of this.figTitans.values()) e.fig.dispose();
@@ -894,6 +900,8 @@ export class View3D implements BattleView {
       for (const x of mat ? (Array.isArray(mat) ? mat : [mat]) : []) x.dispose();
     });
     this.puff?.dispose();
+    this.detail?.skin.dispose();
+    this.detail?.cloth.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.canvas.remove();

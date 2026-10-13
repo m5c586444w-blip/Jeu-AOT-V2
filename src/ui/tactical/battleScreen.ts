@@ -123,6 +123,8 @@ export async function openBattleScreen(o: BattleScreenOptions): Promise<TimedOrd
     root.dataset["vue3d"] = "chargement";
     try {
       const m = await import("../../render/tactical3d/battle/view3d");
+      // Bataille fermée pendant le chargement : aucune vue (ni contexte WebGL) créée dans un hôte détaché.
+      if (done) return;
       const prefs = loadSettings(storage());
       const v = m.createView3d(host, { quality: prefs.battleQuality, violence: prefs.violence }, o.setup.seed, o.setup.night);
       host.prepend(v.canvas);
