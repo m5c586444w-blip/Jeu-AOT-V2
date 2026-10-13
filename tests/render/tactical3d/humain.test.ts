@@ -5,6 +5,15 @@ import { buildHumanBody, fairRelief, jointDistance, macroInfluences, setBoneRota
 import { parseObj } from "../../../src/tools/humanBuild";
 import type { HumanBody, HumanShape, HumanTemplate } from "../../../src/render/tactical3d/humanBase";
 
+function commitPresent(id: string): boolean {
+  try {
+    execFileSync("git", ["cat-file", "-e", `${id}^{commit}`], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Corps de base de R1c (CR1c-05) : le `.glb` dérivé de MakeHuman se reconstruit à l'identique, se charge par `GLTFLoader` ;
  * 56 os, 51 cibles, poids normalisés ; corps façonné à la hauteur exacte, pieds au sol ; cibles et proportions mesurables ;
@@ -166,7 +175,8 @@ describe("aucun détail anatomique (R1d, CR1d-09)", () => {
     }
   });
 
-  it("la mesure voit les détails du corps de R1c (3782acd) : mamelons et entrejambe à plusieurs millimètres de la surface lissée", async () => {
+  // Ce test lit un ancien commit : il est ignoré dans un clone superficiel (sessions cloud) où ce commit est absent.
+  it.skipIf(!commitPresent("3782acd"))("la mesure voit les détails du corps de R1c (3782acd) : mamelons et entrejambe à plusieurs millimètres de la surface lissée", async () => {
     const old = await templateFromBuffer(ab(execFileSync("git", ["show", "3782acd:docs/art/assets/derives/humain.glb"], { maxBuffer: 1 << 30 })));
     expect(Object.keys(old.zones)).toEqual([]);
     const femme = buildHumanBody(old, BODIES[2]?.[1] as HumanShape);

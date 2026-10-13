@@ -2,6 +2,8 @@
 
 Source : `docs/spec/24_DOSSIER_FINAL_1_MOIS.md` §5 et §6 (document maître ; priorité 24 > 23 > 22 > 21 > 20 > 18). Les prompts et plafonds de tours sont dans l'index du fichier 24 §6.
 
+> **2026-10-13 (D-154)** : la feuille de route ci-dessous est **gelée** pour P9, P10 et PACK, recadrés en C14. La refonte V3 est conduite par `docs/coord/COORD.md` et `docs/coord/PLAN_FONCTIONNALITES.md` (chantiers C0 à C14).
+
 | Niveau | Phase | Prompt | Plafond | Arrêt de revue | Statut |
 |---|---|---|---|---|---|
 | N1 | UX0 | 22 §3 | 60 | non | fusionnée (PR n° 1) |

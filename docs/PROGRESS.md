@@ -2,10 +2,10 @@
 
 | Champ | Valeur |
 |---|---|
-| Phase | **R3 terminée et fusionnée** (D-153). Direction autonome (D-107). Suivante : P9 (N3). |
-| Tâche | Lancer P9 (fichier 18 §9 : scénarios, IA, équilibrage) sur `claude/v2-p9` |
-| Dernier `npm run verify` | 2026-10-13 : code 0 ; 110 fichiers, 719 tests ; 8 empreintes inchangées (`docs/reports/R3-verify-fusion.log`) ; `smoke:r3` code 0 |
-| Prochaine étape | PROCHAINE ACTION EXACTE : P9 sur `claude/v2-p9` (sous-agent neuf, Opus xhigh), puis P10, PACK ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
+| Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
+| Tâche | Lancer **C0** (audit sans code de jeu) par la session A ; **C1** (cadre d'interface unique) par la session B |
+| Dernier `npm run verify` | voir `docs/coord/journal/` (dernier relevé de la direction : 2026-10-13, code 0, 719 tests avant ajout de `coord`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `npm run coord -- verrou prendre A "C0 audit"`, puis `docs/phases/C0.md` et `docs/reports/C0-audit.md` ; mesures GPU de R2+ et R3 sur le PC de Gabriel (dettes n° 49 et 61) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

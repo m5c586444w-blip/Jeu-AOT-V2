@@ -1238,3 +1238,11 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 |---|---|---|---|---|
 | R3 (sous-agent) | Opus | xhigh | ≈ 140 | arrêt de 3 h, relancé ; coupé par le redémarrage du conteneur |
 | Reprise R3 + revue + correctifs + fusion | Opus | défaut | ≈ 40 | 1 passe |
+
+## 2026-10-13 — D-154 Refonte (V3) : deux sessions automatiques, lore créable, Blender, illustrations
+- **Contexte** : Gabriel a joué au jeu (très bêta : cadre d'interface perdu en bataille, bataille peu visible, rendu rudimentaire) et demande une refonte quasi totale sur la base des mécaniques validées (26), avec deux sessions cloud automatiques (A 00:00–08:00, B 08:00–16:00, Paris), la création de lore, des modèles Blender, des illustrations générées, et le multijoueur jusqu'à 9 (à confirmer).
+- **Choix** : `docs/spec/ERRATA_V3.md` (prime sur `CLAUDE.md`) ; `CLAUDE.md` réécrit ; `docs/coord/` (protocole, tableau, budget, prompts) ; outil `npm run coord` (fenêtres horaires de Paris, verrou partagé par git, battement poussé toutes les 30 min, péremption 75 min) ; tronc unique, commits verts, drapeaux de fonctionnalité ; ancienne feuille de route (P9, P10, PACK) recadrée en C14 ; LC-B/C/D gelés.
+- **Remplace** : D-130 (« une seule session de code à la fois ») par le verrou ; la liste d'arrêts de `CLAUDE.md` par ERRATA_V3 §9 ; l'exception `map.ts` (R2) par la règle « `src/sim` modifiable par C3–C8 ».
+- **Raison** : demande explicite de Gabriel ; les sessions ne peuvent pas lire le pourcentage réel de la limite hebdomadaire, d'où l'interrupteur `B_AUTORISE` et le compteur de tours de `BUDGET.md` (provisoire, à calibrer).
+- **Non vérifié** : pilotage de Perchance (aucune API, Cloudflare, shell sans accès) ; comportement des tâches planifiées sur plusieurs jours.
+- **Réversible** : oui.
