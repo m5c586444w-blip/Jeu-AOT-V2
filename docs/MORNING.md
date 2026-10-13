@@ -3,8 +3,9 @@
 ## 2026-10-13 — Refonte V3 (décisions de Gabriel) — à lire en premier
 - Installés : `docs/spec/ERRATA_V3.md`, `26` (mécaniques, validé), `27` (multijoueur, à confirmer), `docs/coord/` (protocole, tableau C0–C14, budget, prompts A et B), outil `npm run coord`.
 - **Décidé par Gabriel (soir)** : plan validé avec **tous les lieux jouables** (C15 à C18) ; pas de « Simulation de bataille » ; multijoueur **coopératif** ; deux comptes (A : reset le mardi ; B : jusqu'au vendredi 16).
-- **À faire par Gabriel** : créer la tâche planifiée de B sur le compte B (`docs/coord/PROMPT_SESSION_B.md`) ; ajouter les domaines de Perchance au réseau de l'environnement ; surveiller l'usage de B (75 %).
-- **Encore ouvert** : règle de pause, anti-triche, connexion et PC le plus faible du multijoueur (défauts `[A]` dans 27 §10) ; garder ou non le plafond de 75 % pour B.
+- **À faire par Gabriel** : créer la tâche planifiée de B sur le compte B (`docs/coord/PROMPT_SESSION_B.md`) ; ajouter les domaines de Perchance au réseau de l'environnement ; surveiller l'usage de B (plafond levé : 100 %).
+- **Décidé (2ᵉ message du soir)** : plafond de B à **100 %** ; multijoueur avec **choix du camp**, Titans commandés par leurs joueurs jusqu'à ≈ saison 4, **trahison** possible (27 §4.2 à 4.4). Pause, anti-triche, connexion, PC le plus faible : inchangés (défauts `[A]`).
+- **À vérifier** : date de l'époque charnière (« saison 4 », `[?]`) ; limite assumée : à 100 %, une session peut être coupée avant sa clôture.
 - **Rappel** : les mesures GPU de R2+ et R3 restent à faire sur ton PC (dettes n° 49 et 61).
 
 **Établi (sorties réelles)**

@@ -1253,3 +1253,10 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Estimation** `[A]` non mesurée : somme des plafonds ≈ 3 250 tours contre ≈ 1 750 tours du 8 au 13 octobre ; « tout fini jeudi » non atteignable (voir `PLAN_FONCTIONNALITES.md`).
 - **Remplace** : la mention « LC-B/C/D gelés » de D-154 ; le statut « bloqué » de C13.
 - **Réversible** : oui.
+
+## 2026-10-13 (soir, 2) — D-156 Plafond de B levé ; camps, Titans commandés, trahison au multijoueur
+- **Contexte** : Gabriel demande « plafond à 100 % pour B, utilisation maximum » ; autorise la modification de `docs/MORNING.md` ; confirme que les réglages de pause, d'anti-triche, de connexion et de PC le plus faible ne changent pas ; ajoute au multijoueur le **choix du grand camp** (845 : Paradis ou Marley, plus de camps pour les scénarios postérieurs à la reprise de Shiganshina et à la guerre de l'alliance, limites d'équilibre), le **contrôle direct des Titans** par leurs joueurs jusqu'à ≈ la saison 4, et la **trahison** (« coopération, mais aussi traître »).
+- **Choix** : `B_PLAFOND_PCT: 100` ; note de passage mise à jour à chaque fin de tâche (risque de coupure sans clôture) ; spec 27 : §4.2 (camps et factions par scénario, limites d'équilibre mesurées par `sim:balance`, seuil `[A]` 60 %), §4.3 (contrôle direct des porteurs selon l'époque, règle symétrique pour tous les camps, extension `[A]`), §4.4 (trahison réglable par l'hôte, coffre de secrets de l'hôte pour préserver déterminisme et secret) ; C13 passe à 350 tours.
+- **Incertitude** : la date de l'époque charnière (« saison 4 ») est `[?]` : seuil en données, à fixer d'après les fichiers 11 et 12.
+- **Remplace** : la déduction de D-155 « agenda caché non retenu » et « versus non retenu ».
+- **Réversible** : oui.

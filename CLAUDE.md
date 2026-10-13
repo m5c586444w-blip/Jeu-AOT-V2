@@ -10,7 +10,7 @@
 - Le détail du plan est dans `docs/coord/PLAN_FONCTIONNALITES.md` ; l'état dans `docs/coord/COORD.md` et `docs/PROGRESS.md`.
 
 ## Organisation du travail : deux sessions automatiques (ERRATA_V3 §8)
-- **A** : 00:00 → 08:00, **B** : 08:00 → 16:00 (heure de Paris, `npm run coord -- fenetre`). Deux comptes distincts. B s'arrête à 75 % de sa limite hebdomadaire et **n'existe que jusqu'au vendredi 16 octobre 2026** ; ensuite A seule (`docs/coord/BUDGET.md`).
+- **A** : 00:00 → 08:00, **B** : 08:00 → 16:00 (heure de Paris, `npm run coord -- fenetre`). Deux comptes distincts. B n'a **pas de plafond avant sa limite d'usage** (utilisation maximale voulue par Gabriel) et **n'existe que jusqu'au vendredi 16 octobre 2026** ; ensuite A seule (`docs/coord/BUDGET.md`).
 - Elles ne se parlent **jamais** : uniquement par les fichiers de `docs/coord/` (verrou, tableau, boîte de passage, journaux). Protocole : `docs/coord/PROTOCOLE.md` ; mission : `docs/coord/PROMPT_COMMUN.md`.
 - **Tronc unique** `claude/attack-on-titan-strategy-game-4ukom6` ; un commit par tâche ; `npm run verify` **complet** vert avant le commit de fin de tâche et à la clôture (≈ 11 min en session cloud à 2 cœurs : lancer en arrière-plan avec `nohup … > fichier.log &` et relever la sortie, la commande de l'outil Bash étant limitée à 10 min) ; commits intermédiaires (WIP) : `npm run verify:rapide` (typecheck, lint, données, assets, canon) plus les tests ciblés du module touché ; `git pull --rebase` avant chaque push ; jamais de `--force`, jamais de suppression de branche.
 - Chaque chantier `Cn` commence par `docs/phases/Cn.md` (tâches, critères d'acceptation avec commandes, hors-périmètre) et finit par `docs/reports/Cn.md` (≤ 150 lignes, sorties réelles collées, captures dans `docs/screenshots/`). Une **revue indépendante** (sous-agent distinct, jamais l'auteur) clôt chaque chantier (D-107). `docs/PROGRESS.md` à jour : phase, tâche, dernier verify, **PROCHAINE ACTION EXACTE**.
@@ -19,7 +19,7 @@
 ## Simulation
 - `src/sim` : logique **pure**. **Jamais** de DOM, de Pixi, de `Math.random`, de `Date.now` (temps et aléa injectés). Pas de `any`.
 - `src/sim` **peut être modifié** par les chantiers de la refonte (C3 à C8, puis C13 pour les prérequis réseau), avec des tests de signature par pilier. Les empreintes de référence peuvent changer **délibérément** (raison dans `DECISIONS.md`) ; le test de rejeu doit rester vert. (L'ancienne exception « `map.ts` seulement en R2 » est caduque.)
-- **Multijoueur coopératif** (conseil mixte joueurs + conseillers IA ; en bataille, chaque joueur dirige ses groupes, formations, escouades) : `src/net` seulement au chantier C13. Toute action du joueur est une **commande typée sérialisable** ; chaque entité porte un `owner` (siège) ; connaissance par faction et brouillard par siège : pas d'hypothèse « un seul joueur » (multijoueur).
+- **Multijoueur** (27) : choix du camp selon le scénario, conseil mixte joueurs + conseillers IA dans chaque camp, trahison possible, en bataille chaque joueur dirige ses groupes, formations, escouades (et ses Titans jusqu'à l'époque charnière ≈ saison 4 `[?]`) : `src/net` seulement au chantier C13. Toute action du joueur est une **commande typée sérialisable** ; chaque entité porte un `owner` (siège) ; connaissance par faction et brouillard par siège : pas d'hypothèse « un seul joueur » (multijoueur).
 - Valeurs d'équilibre `[A]` : dans `/data`, jamais en dur.
 
 ## Lore : la création est autorisée (ERRATA_V3 §2)

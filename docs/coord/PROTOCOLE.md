@@ -8,7 +8,7 @@
 | Session | Fenêtre | Pas de nouvelle tâche à partir de | Clôture obligatoire à partir de | Modèle conseillé |
 |---|---|---|---|---|
 | **A** (nuit) | 00:00 → 08:00 | 07:15 (T−45) | 07:40 (T−20) | le plus capable disponible |
-| **B** (jour) | 08:00 → 16:00 | 15:15 (T−45) | 15:40 (T−20) | modèle intermédiaire ; plafond hebdomadaire de 75 % (`BUDGET.md`) |
+| **B** (jour) | 08:00 → 16:00 | 15:15 (T−45) | 15:40 (T−20) | modèle intermédiaire ; jusqu'à la limite d'usage (`BUDGET.md`) |
 | (libre) | 16:00 → 00:00 | — | — | Gabriel travaille ; aucune session automatique n'écrit |
 
 - **Ne jamais deviner l'heure.** Commande unique : `npm run coord -- fenetre` (JSON : `session`, `minutesRestantes`, `phase`). Elle utilise le fuseau de Paris, heure d'été comprise. À relancer **avant chaque nouvelle tâche** et à chaque fin de tâche.
@@ -65,10 +65,12 @@ Dans cet ordre, en moins de 15 minutes :
 4. `npm run coord -- verrou liberer <A|B>`, commit, `git pull --rebase`, `git push`. Vérifier avec `git log origin/<tronc> -1` que le push est arrivé.
 5. Arrêt. **Ne pas** terminer le tour avant cette séquence ; **ne pas** l'ignorer parce que la tâche « est presque finie ».
 
+**Plafond levé = coupure possible sans préavis.** Comme une session peut être coupée par la limite d'usage avant sa clôture, **à chaque fin de tâche** (pas seulement à la clôture) : mettre à jour la boîte de passage de `COORD.md` (PROCHAINE ACTION EXACTE), `docs/PROGRESS.md` et le journal, puis commit et push. Une note de passage plus vieille que la dernière tâche est un défaut.
+
 ## 7. Limite d'usage (A et B)
 
 - Si l'environnement signale une limite d'usage atteinte ou imminente : exécuter la clôture (§6) **tout de suite**, même au milieu d'une tâche.
-- B applique en plus `BUDGET.md` : il lit `B_AUTORISE` au démarrage et à chaque fin de tâche ; s'il vaut `non`, ou si le compteur a atteint 75 % du plafond calibré, B exécute la clôture et s'arrête **sans** démarrer de tâche.
+- B applique en plus `BUDGET.md` : il lit `B_AUTORISE` au démarrage et à chaque fin de tâche ; s'il vaut `non`, B exécute la clôture et s'arrête **sans** démarrer de tâche.
 - Une session qui ne peut pas lire son usage réel le dit dans `BUDGET.md` (« mesure non disponible ») et applique le compteur de tours.
 
 ## 8. Arrêts, coupes, décisions
