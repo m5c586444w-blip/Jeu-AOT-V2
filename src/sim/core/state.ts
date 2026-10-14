@@ -29,6 +29,7 @@ import { pushLog } from "../strategic/economy";
 import { tickWall } from "../wall/tick";
 import { tickRegistry } from "../registry/tick";
 import { tickClock } from "../clock/tick";
+import type { GasState } from "../gas/state";
 import { tickTruth, truthFactions } from "../truth/tick";
 import type { TruthState } from "../truth/types";
 import type { ClockState } from "../clock/types";
@@ -97,6 +98,8 @@ export interface PillarsState {
   clock?: ClockState;
   /** P6 La Vérité (D-170) : créé par la commande `EnableTruth`. */
   truth?: TruthState;
+  /** P3 Le Gaz et l'Ancrage (D-171) : créé par la commande `EnableGas` ; aucun pas de tick (registres modifiés par la bataille). */
+  gas?: GasState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {

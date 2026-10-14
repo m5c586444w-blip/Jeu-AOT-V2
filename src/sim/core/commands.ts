@@ -34,6 +34,7 @@ import { atWar } from "../world/nations";
 import { initWall } from "../wall/tick";
 import { initRegistry } from "../registry/tick";
 import { initClock } from "../clock/tick";
+import { initGas } from "../gas/state";
 import { initTruth, truthFactions } from "../truth/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
@@ -81,6 +82,7 @@ export type Command =
   | { type: "EnableRegistry" }
   | { type: "EnableClock" }
   | { type: "EnableTruth" }
+  | { type: "EnableGas" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -198,6 +200,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
       return { ok: true };
     case "EnableTruth":
       if (ctx && !ctx.world?.truth) return { ok: false, error: "EnableTruth : monde sans données de la Vérité (truth.json)" };
+      return { ok: true };
+    case "EnableGas":
+      if (ctx && !ctx.world?.gas) return { ok: false, error: "EnableGas : monde sans données du Gaz (gas.json)" };
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -324,6 +329,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       if (!next.pillars?.truth) {
         next = { ...next, pillars: { ...next.pillars, truth: initTruth(world.truth, truthFactions(world), next.date.year, toAbsoluteDay(next.date)) } };
       }
+      break;
+    }
+    case "EnableGas": {
+      // P3 Le Gaz et l'Ancrage (D-171) : registres d'ancrage vides ; sans effet s'il existe déjà.
+      if (!world?.gas) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.gas) next = { ...next, pillars: { ...next.pillars, gas: initGas() } };
       break;
     }
     case "EnableWall": {
