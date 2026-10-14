@@ -1,5 +1,13 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-14 — Nuit de la session A (à lire en premier)
+- Fait, commité, poussé : C0 audit (`docs/reports/C0-audit.md`, bug cadre confirmé : `.bataille` fixed recouvre le HUD → C1 pour B) ; C3 socle multijoueur (sièges, enveloppes de commandes, rejeu) ; les **7 piliers de la spec 26 en modules purs testés** (`src/sim/gas, signal, wall, clock, tide, truth, registry`, données `data/balance/*.json`) ; mur (P1) et registre (P7) **branchés au tick, désactivés par défaut** (`EnableWall`, `EnableRegistry`). Chaque lot a eu une revue indépendante.
+- Dernier verify : 149 fichiers, **1259 tests**, EXIT=0 ; les 8 empreintes `sim:selftest` sont **inchangées**.
+- Dette 71 à 95 dans `docs/reports/dette.md`. Décisions D-157 à D-166.
+- **À valider par toi** : D-157 (owner facultatif) ; prénoms de `data/names/paradis.json` empruntés à l'œuvre (« Ilse », « Frieda ») hors module, à trier (dette 94) ; rien n'est visible en jeu tant que les piliers ne sont pas activés/branchés (C9 suite) ; `npm run verify` dure ≈ 20-30 min sur cette machine (pas 11).
+- Aucune capture ni mesure GPU cette nuit (code de simulation pur).
+- **Suite** : A : C9.3 (clock) puis truth, gas, signal, tide, puis morts → registre ; B : C1 (cadre d'interface).
+
 ## 2026-10-13 — Refonte V3 (décisions de Gabriel) — à lire en premier
 - Installés : `docs/spec/ERRATA_V3.md`, `26` (mécaniques, validé), `27` (multijoueur, à confirmer), `docs/coord/` (protocole, tableau C0–C14, budget, prompts A et B), outil `npm run coord`.
 - **Décidé par Gabriel (soir)** : plan validé avec **tous les lieux jouables** (C15 à C18) ; pas de « Simulation de bataille » ; multijoueur **coopératif** ; deux comptes (A : reset le mardi ; B : jusqu'au vendredi 16).

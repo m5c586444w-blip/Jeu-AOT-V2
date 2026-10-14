@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
-| Tâche | C0, C3 (socle), C4-C8 faits (modules purs, A, 2026-10-14) ; suivant : C9 (A), C1 (B) |
-| Dernier `npm run verify` | voir `docs/coord/journal/` (dernier relevé de la direction : 2026-10-13, code 0, 719 tests avant ajout de `coord`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `docs/phases/C9.md` puis branchement des 7 piliers au tick (voir COORD.md) |
+| Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur) et C9.2 (registre) branchés (A, 2026-10-14) ; suivant : C9.3 clock (A), C1 (B) |
+| Dernier `npm run verify` | 2026-10-14, code 0, 149 fichiers, 1259 tests (journal `docs/coord/journal/2026-10-14-A.md`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : session A, C9.3 : brancher `src/sim/clock` (EnableClock, tick.ts, schema.ts, hardening) sur le modèle de `src/sim/wall/tick.ts` ; B : C1 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
