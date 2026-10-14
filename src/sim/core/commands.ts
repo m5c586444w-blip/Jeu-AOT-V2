@@ -90,7 +90,7 @@ export interface SimEvents {
 const FLAG_KEY = /^[a-z0-9_.:-]{1,64}$/;
 
 /** Validation défensive : les commandes peuvent venir de l'UI, d'un Worker ou d'un fichier. */
-export function validateCommand(cmd: unknown): Validation {
+export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: World }): Validation {
   if (typeof cmd !== "object" || cmd === null || !("type" in cmd)) return { ok: false, error: "commande sans type" };
   const c = cmd as Record<string, unknown>;
   switch (c["type"]) {
@@ -182,6 +182,7 @@ export function validateCommand(cmd: unknown): Validation {
     case "GuaranteeHizuru":
       return { ok: true };
     case "EnableWall":
+      if (ctx && (!ctx.world?.wall || !ctx.state.strategic)) return { ok: false, error: "EnableWall : monde sans données du Mur (wall_layout.json) ou sans partie stratégique" };
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -229,7 +230,7 @@ function validPlanShape(x: unknown): boolean {
 
 /** Applique une commande validée ; renvoie un nouvel état (l'état d'entrée n'est pas modifié). */
 export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimEvents>, world?: World): GameState {
-  const v = validateCommand(cmd);
+  const v = validateCommand(cmd, { state, ...(world ? { world } : {}) });
   if (!v.ok) {
     bus?.emit("commandRejected", { command: cmd, error: v.error });
     throw new Error(`Commande rejetée : ${v.error}`);
@@ -292,7 +293,7 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       break;
     case "EnableWall": {
       // P1 Le Mur (D-165) : crée l'état du pilier à partir des provinces ; sans effet s'il existe déjà.
-      if (!world?.wall || !next.strategic) throw new Error("EnableWall : monde sans données du Mur (wall_layout.json) ou sans partie stratégique");
+      if (!world?.wall || !next.strategic) break; // inatteignable : refusé par validateCommand
       if (!next.pillars?.wall) next = { ...next, pillars: { ...next.pillars, wall: initWall(next.strategic.provinces, world.wall.layout) } };
       break;
     }

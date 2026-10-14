@@ -56,7 +56,10 @@ export const ResolveEncounterSchema = z
 /** Ordre de bataille donné par un siège (appliqué à une bataille en cours, hors état de campagne). */
 export const BattleOrderCommandSchema = z.object({ type: z.literal("BattleOrder"), order: TimedOrderSchema }).strict();
 
-export const StrictCommandSchema = z.union([ArmyOrderSchema, ResolveEncounterSchema, BattleOrderCommandSchema]);
+/** Pilier P1 Le Mur (D-165) : activation, sans paramètre. */
+export const EnableWallSchema = z.object({ type: z.literal("EnableWall") }).strict();
+
+export const StrictCommandSchema = z.union([ArmyOrderSchema, ResolveEncounterSchema, BattleOrderCommandSchema, EnableWallSchema]);
 
 export type BattleOrderCommand = z.infer<typeof BattleOrderCommandSchema>;
 
@@ -71,7 +74,7 @@ export const EnvelopeSchema = z
 
 export type CommandEnvelope = { seat: string; day: number; command: { type: string } & Record<string, unknown> };
 
-const STRICT_TYPES: ReadonlySet<string> = new Set([...ArmyOrderSchema.options.map((o) => o.shape.type.value), "ResolveEncounter", "BattleOrder"]);
+const STRICT_TYPES: ReadonlySet<string> = new Set([...ArmyOrderSchema.options.map((o) => o.shape.type.value), "ResolveEncounter", "BattleOrder", "EnableWall"]);
 
 /** Vrai si le type de commande a un schéma Zod strict dans ce module. */
 export const isStrictType = (t: string): boolean => STRICT_TYPES.has(t);

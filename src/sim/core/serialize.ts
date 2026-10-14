@@ -1,4 +1,5 @@
 import { canonicalJson } from "./canonical";
+import { WallStateSchema } from "../wall/schema";
 import { CURRENT_SCHEMA_VERSION } from "./state";
 import type { GameState } from "./state";
 
@@ -153,5 +154,13 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
   if (ar !== undefined && (typeof ar !== "object" || ar === null || !("armies" in ar) || !("fleets" in ar))) problems.push("armies");
   const mi = raw["missions"];
   if (mi !== undefined && (typeof mi !== "object" || mi === null || !("sides" in mi) || !("log" in mi))) problems.push("missions");
+  const pl = raw["pillars"];
+  if (pl !== undefined) {
+    if (typeof pl !== "object" || pl === null || Array.isArray(pl)) problems.push("pillars");
+    else {
+      const wl = (pl as Record<string, unknown>)["wall"];
+      if (wl !== undefined && !WallStateSchema.safeParse(wl).success) problems.push("pillars.wall");
+    }
+  }
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);
 }

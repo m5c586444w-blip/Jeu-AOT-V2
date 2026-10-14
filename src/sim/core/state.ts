@@ -135,6 +135,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let missions = state.missions;
   let pillars = state.pillars;
   const date = advance(state.date, 1);
+  const monthStart = date.day % DAYS_PER_MONTH === 1;
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
     if (!events && world.chronicle) events = createEventsState(world, state.seed, state.date);
@@ -193,7 +194,7 @@ export function tickDay(state: GameState, world?: World): GameState {
         weeklyMoves(world, nations);
         weeklyAi({ world, date, ns: nations, sh: shifters, pol: politics, st: strategic });
       }
-      if (date.day % DAYS_PER_MONTH === 1) {
+      if (monthStart) {
         monthlyNations(world, nations, strategic, date);
         monthlyDiplomacy(world, nations, date);
         monthlyAi({ world, date, ns: nations, sh: shifters, pol: politics, st: strategic });
@@ -222,8 +223,8 @@ export function tickDay(state: GameState, world?: World): GameState {
       }
     }
     // Pilier P1 (D-165) : seulement si la commande EnableWall l'a créé.
-    if (pillars?.wall && world.wall) pillars = { ...pillars, wall: tickWall(pillars.wall, world.wall.balance, date.day % DAYS_PER_MONTH === 1) };
-    if (date.day % DAYS_PER_MONTH === 1) {
+    if (pillars?.wall && world.wall) pillars = { ...pillars, wall: tickWall(pillars.wall, world.wall.balance, monthStart) };
+    if (monthStart) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
       if (research) {
