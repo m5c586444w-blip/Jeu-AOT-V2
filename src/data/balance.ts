@@ -1212,6 +1212,64 @@ export const WorldBalanceSchema = z
   .strict();
 export type WorldBalance = z.infer<typeof WorldBalanceSchema>;
 
+/** data/balance/truth.json — pilier P6 (spec 26 §7) : faits, sources et fiabilité A–D, erreurs, actes, capacités, attracteurs de canon (valeurs [A]). */
+export const TruthBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    facts: z.record(z.string(), z.object({ veracity: z.boolean(), canon: CanonSchema }).strict()),
+    sources: z.record(z.string(), z.object({ weight: pos, mental_cost: z.number().min(0) }).strict()),
+    age: z.object({ half_life_days: pos, floor: prob }).strict(),
+    corroboration: z.object({ bonus: z.number().min(0), max_origins: z.number().int().min(1) }).strict(),
+    contradiction: z.object({ penalty: z.number().min(0), min_margin: z.number().min(0) }).strict(),
+    grades: z.object({ A: pos, B: pos, C: pos, verified: z.enum(["A", "B", "C", "D"]) }).strict(),
+    error: z
+      .object({
+        base: z.number().min(0),
+        cost_by_grade: z.object({ A: z.number().min(0), B: z.number().min(0), C: z.number().min(0), D: z.number().min(0) }).strict(),
+        blind_ratio: prob,
+      })
+      .strict(),
+    acts: z
+      .array(
+        z
+          .object({
+            id: z.string().min(1),
+            order: z.number().int().min(1),
+            requires: z.array(z.string()),
+            min_grade: z.enum(["A", "B", "C", "D"]),
+            pillars: z.array(z.string()).min(1),
+            start_year: z.number().int(),
+          })
+          .strict(),
+      )
+      .min(1),
+    capabilities: z.record(z.string(), z.object({ act: z.string(), factions: z.array(z.string()).nullable() }).strict()),
+    attractors: z
+      .object({
+        pull_base: prob,
+        closeness_exp: pos,
+        weak_at_threshold: prob,
+        divergent_floor: prob,
+        gap_weight: z.number().min(0),
+        min_weight: z.number().min(0),
+        faction: z.record(z.string(), z.object({ fact: z.string().nullable(), pull: prob }).strict()),
+      })
+      .strict(),
+  })
+  .strict()
+  .superRefine((b, ctx) => {
+    const issue = (message: string): void => ctx.addIssue({ code: "custom", message });
+    if (!(b.grades.A > b.grades.B && b.grades.B > b.grades.C)) issue("grades : A > B > C attendu");
+    const ids = new Set(b.acts.map((a) => a.id));
+    if (ids.size !== b.acts.length) issue("acts : identifiants distincts");
+    const orders = b.acts.map((a) => a.order);
+    if (new Set(orders).size !== orders.length) issue("acts : ordres distincts");
+    for (const a of b.acts) for (const f of a.requires) if (!(f in b.facts)) issue(`acts.${a.id} : fait inconnu « ${f} »`);
+    for (const [k, c] of Object.entries(b.capabilities)) if (!ids.has(c.act)) issue(`capabilities.${k} : acte inconnu « ${c.act} »`);
+    for (const [k, a] of Object.entries(b.attractors.faction)) if (a.fact !== null && !(a.fact in b.facts)) issue(`attractors.faction.${k} : fait inconnu « ${a.fact} »`);
+  });
+
 export type ShiftersBalance = z.infer<typeof ShiftersBalanceSchema>;
 export type EventsBalance = z.infer<typeof EventsBalanceSchema>;
 export type ResearchBalance = z.infer<typeof ResearchBalanceSchema>;
@@ -1223,6 +1281,7 @@ export type GasBalance = z.infer<typeof GasBalanceSchema>;
 export type SignalBalance = z.infer<typeof SignalBalanceSchema>;
 export type TideBalance = z.infer<typeof TideBalanceSchema>;
 export type ClockBalance = z.infer<typeof ClockBalanceSchema>;
+export type TruthBalance = z.infer<typeof TruthBalanceSchema>;
 export type WallBalance = z.infer<typeof WallBalanceSchema>;
 
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
@@ -1244,6 +1303,7 @@ export const BALANCE_FILES = {
   tide: TideBalanceSchema,
   wall: WallBalanceSchema,
   clock: ClockBalanceSchema,
+  truth: TruthBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,

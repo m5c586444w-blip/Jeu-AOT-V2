@@ -1291,3 +1291,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/tide/` (grille de densité conservatrice, attention, repeuplement, rencontres avec Titans, moteur de rencontres humaines §3 bis avec détection asymétrique et vues par faction/siège, combat humain, focus tactique) ; paramètres `[A]` dans `data/balance/tide.json`. Non branché à `routes.ts`, au tick ni à `battle.ts` : empreintes inchangées ; branchement reporté à C9. Marley–Paradis sans Titan prouvé par test. Mitrailleuses, communications, dirigeables de Marley `[?]`.
 - **Reste** : éventail contre colonne face aux Titans, calibrage `sim:balance`, grille depuis l'atlas. Dette 79 partiellement soldée.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-163 C8.1 : pilier P6 Vérité en module pur non branché
+- **Décision** : `src/sim/truth/` (fiabilité A–D par faction depuis les seules pièces du dossier, jamais la véracité sauf `reveal` ; actes I/II/III par connaissance vraie ; attracteurs de canon via `ready`/`schedule` de `events/engine.ts`, seul changement : `export`) ; paramètres `[A]` dans `data/balance/truth.json`. Création `A` : rumeur fausse « humanité éteinte hors des murs » (`docs/lore/creations.md`). Non branché au tick : empreintes inchangées.
+- **Reste** : production des pièces (espions, archives, Chemins), consommation des capacités d'acte, proximité des attracteurs grossière, 7 faits seulement.
+- **Réversible** : oui.

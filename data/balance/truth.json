@@ -1,0 +1,79 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P6 (spec 26 §7). Canon C repris : les Titans sont des humains transformés, les Murs contiennent des Titans, l'humanité existe hors des murs, Marley est une puissance moderne, les Chemins donnent des visions non fiables (spec 26 §7), la marine est réservée à Marley, aux Alliés et à Hizuru (26 §9). Toutes les grandeurs (poids des sources, demi-vie, seuils A-D, coûts d'erreur, forces d'attraction) et les faits A (hizuru_garanties_possibles, humanite_eteinte_hors_murs : rumeur doctrinale fausse, création) sont A.",
+  "facts": {
+    "titans_sont_humains": { "veracity": true, "canon": "C" },
+    "murs_contiennent_titans": { "veracity": true, "canon": "C" },
+    "monde_exterieur": { "veracity": true, "canon": "C" },
+    "marley_puissance_moderne": { "veracity": true, "canon": "C" },
+    "chemins_visions": { "veracity": true, "canon": "C" },
+    "humanite_eteinte_hors_murs": { "veracity": false, "canon": "A" },
+    "hizuru_garanties_possibles": { "veracity": true, "canon": "A" }
+  },
+  "sources": {
+    "preuve_materielle": { "weight": 60, "mental_cost": 0 },
+    "archive": { "weight": 45, "mental_cost": 0 },
+    "interrogatoire": { "weight": 35, "mental_cost": 0 },
+    "rapport_espion": { "weight": 28, "mental_cost": 0 },
+    "doctrine": { "weight": 30, "mental_cost": 0 },
+    "temoin": { "weight": 15, "mental_cost": 0 },
+    "vision": { "weight": 12, "mental_cost": 15 }
+  },
+  "age": { "half_life_days": 360, "floor": 0.2 },
+  "corroboration": { "bonus": 0.3, "max_origins": 4 },
+  "contradiction": { "penalty": 0.6, "min_margin": 5 },
+  "grades": { "A": 70, "B": 40, "C": 18, "verified": "A" },
+  "error": { "base": 20, "cost_by_grade": { "A": 1, "B": 0.6, "C": 0.3, "D": 0.1 }, "blind_ratio": 0.4 },
+  "acts": [
+    {
+      "id": "acte_1",
+      "order": 1,
+      "requires": [],
+      "min_grade": "C",
+      "pillars": ["P1", "P2", "P3"],
+      "start_year": 845
+    },
+    {
+      "id": "acte_2",
+      "order": 2,
+      "requires": ["monde_exterieur", "titans_sont_humains"],
+      "min_grade": "B",
+      "pillars": ["P4", "P5", "P6"],
+      "start_year": 850
+    },
+    {
+      "id": "acte_3",
+      "order": 3,
+      "requires": ["marley_puissance_moderne", "hizuru_garanties_possibles"],
+      "min_grade": "B",
+      "pillars": ["P4", "P5", "P6", "P7"],
+      "start_year": 854
+    }
+  ],
+  "capabilities": {
+    "exterieur": { "act": "acte_2", "factions": null },
+    "mer": { "act": "acte_2", "factions": null },
+    "ports": { "act": "acte_2", "factions": null },
+    "geopolitique": { "act": "acte_3", "factions": null },
+    "artillerie_moderne": { "act": "acte_3", "factions": null },
+    "marine": { "act": "acte_3", "factions": ["fac_marley", "fac_allies", "fac_hizuru"] },
+    "aviation": { "act": "acte_3", "factions": ["fac_marley", "fac_allies", "fac_hizuru"] }
+  },
+  "attractors": {
+    "pull_base": 0.35,
+    "closeness_exp": 2,
+    "weak_at_threshold": 0.4,
+    "divergent_floor": 0.1,
+    "gap_weight": 0.05,
+    "min_weight": 0.2,
+    "faction": {
+      "survie": { "fact": null, "pull": 0.8 },
+      "verite": { "fact": "titans_sont_humains", "pull": 0.6 },
+      "fondateur": { "fact": "chemins_visions", "pull": 0.9 },
+      "domination": { "fact": "murs_contiennent_titans", "pull": 0.7 },
+      "garanties": { "fact": "hizuru_garanties_possibles", "pull": 0.5 },
+      "commerce": { "fact": "monde_exterieur", "pull": 0.4 },
+      "revanche": { "fact": "marley_puissance_moderne", "pull": 0.6 }
+    }
+  }
+}

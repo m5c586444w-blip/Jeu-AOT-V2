@@ -175,9 +175,9 @@ function seedBackstory(world: World, s: EventsState, seed: number, date: GameDat
   }
 }
 
-const ready = (s: EventsState, e: EventDef): boolean => !s.history[e.id] && !s.scheduled.some((x) => x.id === e.id) && predecessorsOf(e).every((p) => s.history[p]?.status === "survenu" || s.history[p]?.status === "passe");
+export const ready = (s: EventsState, e: EventDef): boolean => !s.history[e.id] && !s.scheduled.some((x) => x.id === e.id) && predecessorsOf(e).every((p) => s.history[p]?.status === "survenu" || s.history[p]?.status === "passe");
 
-function schedule(s: EventsState, e: EventDef, seed: number, from: number, range?: readonly [number, number]): void {
+export function schedule(s: EventsState, e: EventDef, seed: number, from: number, range?: readonly [number, number]): void {
   const [lo, hi] = range ?? e.window.within_days ?? [0, 0];
   const day = from + new Rng(seed).fork(`echeance:${e.id}:${from}`).int(lo, Math.max(lo, hi));
   s.scheduled.push({ id: e.id, day });
