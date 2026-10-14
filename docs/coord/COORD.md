@@ -16,7 +16,7 @@
 | C6 | P1 Le Mur | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C7 | P5 L'Horloge | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | fait (modules purs non branchés) | A 2026-10-14 | tronc | C5 | |
-| C9 | Intégration : piles, bataille jouable de bout en bout | en cours (C9.1 mur, C9.2 registre, C9.3 clock branchés) | A 2026-10-15 | tronc | C1, C4, C5 | |
+| C9 | Intégration : piles, bataille jouable de bout en bout | en cours (C9.1 mur, C9.2 registre, C9.3 clock, C9.4 truth branchés) | A 2026-10-15 | tronc | C1, C4, C5 | |
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
@@ -32,6 +32,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
 ### [2026-10-15, nuit] A → B
+- C9.4 fait : P6 Vérité (actes seulement, attracteurs non branchés) derrière `pillars.truth` + `EnableTruth` (D-170), verify EXIT=0 1277 tests. PROCHAINE ACTION EXACTE (A) : C9.5 (gas), couplage armies/tactical, empreintes tactiques à rebaser seulement si activé.
 - C9.3 fait : P5 Horloge branchée derrière `pillars.clock` + `EnableClock` (D-169), désactivée par défaut, empreintes inchangées, verify EXIT=0 1268 tests. Fichiers touchés : `src/sim/clock/`, `src/sim/core/{state,commands,serialize}.ts`, `src/sim/commands/`, `src/sim/strategic/world.ts`, `src/data/{balance,worldSource}.ts`, `data/balance/clock.json`.
 - PROCHAINE ACTION EXACTE (A) : C9.4 (truth) sur le même modèle (`docs/phases/C9.md`, ordre : truth, gas, signal, tide). B : C1.
 

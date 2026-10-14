@@ -1333,3 +1333,11 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Tick** (lecture seule sur `shifters`, après `dailyShifters` et les missions) : `stepSuspicionDay` (décroissance au calme) puis `syncBearers` (un suivi sans Titan est retiré avec ses soupçons). Aucune preuve n'est encore créée par le monde : câblage des preuves (témoins, transformations vues, interrogatoires) et du démasquage vers `events`/`intel` = suite de C9.
 - **Reste** : preuves, événements de démasquage vers l'état d'événements, contrôle en bataille (`tactical/shifters.ts`), écran, activation par défaut (décision séparée). Aucune empreinte de référence ne change (120 jours sans activation : `e0a0b63c`).
 - **Réversible** : oui.
+
+## 2026-10-15 — D-170 C9.4 : pilier P6 La Vérité branché au tick (actes seulement), désactivé par défaut
+- **Décision** : même modèle que D-165/D-166/D-169. `GameState.pillars.truth?: TruthState` ; commande typée `EnableTruth` (sans paramètre, schéma Zod strict, classée dans `FACTION_COMMANDS`, idempotente, refus typé si le monde n'a pas `truth.json`) ; `World.truth` chargé depuis `data/balance/truth.json` ; `TruthStateSchema` (Zod) valide la forme à la désérialisation (`pillars.truth`).
+- **Factions suivies** (`truthFactions`) : celles du monde des nations s'il existe (scn_854), sinon la faction du scénario (bacs à sable 845/850, qui n'ont pas de couche `world`). Limite assumée [A] : en bac à sable une seule faction a un dossier ; les factions adverses des bacs à sable ne sont pas suivies.
+- **Initialisation** : vérité du monde de `truth.json`, aucun dossier, acte de départ d'après l'année (845 : I, 850 : II, 854 : III).
+- **Tick** : `advanceActs` par faction (lecture seule sur le reste du monde ; l'acte suivant exige la connaissance vraie de ses faits à `min_grade`). **`stepAttractors` n'est pas appelé** : il programme des canons dans le moteur d'événements et ajoute un `drift` à la divergence, ce qui change les empreintes ; ce sera un commit séparé avec décision d'empreinte.
+- **Reste** : alimenter les dossiers depuis `intel`/`events` (pièces, `reveal`), attracteurs, écran, activation par défaut. Aucune empreinte de référence ne change (120 jours sans activation : `e0a0b63c`).
+- **Réversible** : oui.

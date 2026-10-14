@@ -29,6 +29,8 @@ import { pushLog } from "../strategic/economy";
 import { tickWall } from "../wall/tick";
 import { tickRegistry } from "../registry/tick";
 import { tickClock } from "../clock/tick";
+import { tickTruth, truthFactions } from "../truth/tick";
+import type { TruthState } from "../truth/types";
 import type { ClockState } from "../clock/types";
 import type { RegistryState } from "../registry/types";
 import type { WallState } from "../wall/types";
@@ -93,6 +95,8 @@ export interface PillarsState {
   registry?: RegistryState;
   /** P5 L'Horloge (D-169) : créé par la commande `EnableClock`. */
   clock?: ClockState;
+  /** P6 La Vérité (D-170) : créé par la commande `EnableTruth`. */
+  truth?: TruthState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -236,6 +240,8 @@ export function tickDay(state: GameState, world?: World): GameState {
     if (pillars?.registry && world.registry) pillars = { ...pillars, registry: tickRegistry(pillars.registry, world.registry, state.seed, toAbsoluteDay(date)) };
     // Pilier P5 (D-169) : seulement si la commande EnableClock l'a créé ; après les porteurs (shifters) du jour.
     if (pillars?.clock && world.clock) pillars = { ...pillars, clock: tickClock(pillars.clock, world.clock, shifters, toAbsoluteDay(date)) };
+    // Pilier P6 (D-170) : seulement si la commande EnableTruth l'a créé ; actes seulement (attracteurs non branchés).
+    if (pillars?.truth && world.truth) pillars = { ...pillars, truth: tickTruth(pillars.truth, world.truth, truthFactions(world), toAbsoluteDay(date)) };
     if (monthStart) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);

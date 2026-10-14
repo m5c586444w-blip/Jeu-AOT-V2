@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
-| Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock) branchés (A, 2026-10-15) ; suivant : C9.4 truth (A), C1 (B) |
-| Dernier `npm run verify` | 2026-10-15, code 0, 150 fichiers, 1268 tests (journal `docs/coord/journal/2026-10-15-A.md`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : session A, C9.4 : brancher `src/sim/truth` (EnableTruth, tick.ts, schema.ts, hardening) sur le modèle de `src/sim/clock/tick.ts` ; B : C1 |
+| Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth) branchés (A, 2026-10-15) ; suivant : C9.5 gas (A), C1 (B) |
+| Dernier `npm run verify` | 2026-10-15, code 0, 151 fichiers, 1277 tests (journal `docs/coord/journal/2026-10-15-A.md`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : session A, C9.5 : brancher `src/sim/gas` (EnableGas, tick.ts, schema.ts, hardening) sur le modèle de `src/sim/truth/tick.ts` ; B : C1 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

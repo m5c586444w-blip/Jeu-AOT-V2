@@ -49,7 +49,7 @@ export const FACTION_COMMANDS: ReadonlySet<string> = new Set([
   "ChooseEventOption", "SetResearch", "RecruitAgent", "AssignAgent", "RecallAgent", "InheritTitan", "RetireShifter",
   "SetPlayerFaction", "BuildFormation", "MoveFormation", "ProjectTitan", "RecallTitan", "ProposeTreaty", "DeclareWar",
   "MakePeace", "Ultimatum", "Embargo", "GuaranteeHizuru", "Noop", "StartMission", "CancelMission", "RaiseArmies",
-  "ChooseSuccessor", "EnableWall", "EnableRegistry", "EnableClock",
+  "ChooseSuccessor", "EnableWall", "EnableRegistry", "EnableClock", "EnableTruth",
 ]);
 
 /** Commandes qui visent une armée, une flotte ou une rencontre : le siège doit la posséder (27 §1). */

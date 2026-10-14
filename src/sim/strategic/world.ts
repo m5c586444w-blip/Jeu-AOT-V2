@@ -1,4 +1,4 @@
-import type { ClockBalance, RegistryBalance, WallBalance, WallLayout, EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { TruthBalance, ClockBalance, RegistryBalance, WallBalance, WallLayout, EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
 import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
@@ -38,6 +38,8 @@ export interface World {
   registry?: RegistryBalance | null;
   /** Pilier P5 (D-169) : équilibrage de l'Horloge. */
   clock?: ClockBalance | null;
+  /** Pilier P6 (D-170) : équilibrage de la Vérité. */
+  truth?: TruthBalance | null;
 }
 
 export interface MissionsWorld {
@@ -193,6 +195,8 @@ export interface WorldSource {
   registry?: RegistryBalance;
   /** Pilier P5 (D-169) : équilibrage de l'Horloge. */
   clock?: ClockBalance;
+  /** Pilier P6 (D-170) : équilibrage de la Vérité. */
+  truth?: TruthBalance;
 }
 
 /** Couche MIS : construite si l'équilibrage existe et si au moins une mission est offerte dans le scénario. */
@@ -259,6 +263,7 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     ...(src.wall ? { wall: src.wall } : {}),
     ...(src.registry ? { registry: src.registry } : {}),
     ...(src.clock ? { clock: src.clock } : {}),
+    ...(src.truth ? { truth: src.truth } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),

@@ -34,6 +34,7 @@ import { atWar } from "../world/nations";
 import { initWall } from "../wall/tick";
 import { initRegistry } from "../registry/tick";
 import { initClock } from "../clock/tick";
+import { initTruth, truthFactions } from "../truth/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
 import type { ArmyCommand } from "../armies/layer";
@@ -79,6 +80,7 @@ export type Command =
   | { type: "EnableWall" }
   | { type: "EnableRegistry" }
   | { type: "EnableClock" }
+  | { type: "EnableTruth" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -193,6 +195,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
       return { ok: true };
     case "EnableClock":
       if (ctx && !ctx.world?.clock) return { ok: false, error: "EnableClock : monde sans données de l'Horloge (clock.json)" };
+      return { ok: true };
+    case "EnableTruth":
+      if (ctx && !ctx.world?.truth) return { ok: false, error: "EnableTruth : monde sans données de la Vérité (truth.json)" };
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -311,6 +316,14 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       // P5 L'Horloge (D-169) : enregistre les porteurs nommés de l'état des Titans ; sans effet s'il existe déjà.
       if (!world?.clock) break; // inatteignable : refusé par validateCommand
       if (!next.pillars?.clock) next = { ...next, pillars: { ...next.pillars, clock: initClock(next.shifters, world.clock) } };
+      break;
+    }
+    case "EnableTruth": {
+      // P6 La Vérité (D-170) : vérité du monde et actes de départ des factions ; sans effet s'il existe déjà.
+      if (!world?.truth) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.truth) {
+        next = { ...next, pillars: { ...next.pillars, truth: initTruth(world.truth, truthFactions(world), next.date.year, toAbsoluteDay(next.date)) } };
+      }
       break;
     }
     case "EnableWall": {
