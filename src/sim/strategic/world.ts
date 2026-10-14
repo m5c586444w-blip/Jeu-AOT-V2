@@ -1,4 +1,4 @@
-import type { GasBalance, TruthBalance, ClockBalance, RegistryBalance, WallBalance, WallLayout, EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { SignalBalance, GasBalance, TruthBalance, ClockBalance, RegistryBalance, WallBalance, WallLayout, EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
 import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
@@ -42,6 +42,8 @@ export interface World {
   truth?: TruthBalance | null;
   /** Pilier P3 (D-171) : équilibrage du Gaz et de l'Ancrage. */
   gas?: GasBalance | null;
+  /** Pilier P4 (D-172) : équilibrage du Signal. */
+  signal?: SignalBalance | null;
 }
 
 export interface MissionsWorld {
@@ -201,6 +203,8 @@ export interface WorldSource {
   truth?: TruthBalance;
   /** Pilier P3 (D-171) : équilibrage du Gaz et de l'Ancrage. */
   gas?: GasBalance;
+  /** Pilier P4 (D-172) : équilibrage du Signal. */
+  signal?: SignalBalance;
 }
 
 /** Couche MIS : construite si l'équilibrage existe et si au moins une mission est offerte dans le scénario. */
@@ -269,6 +273,7 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
     ...(src.clock ? { clock: src.clock } : {}),
     ...(src.truth ? { truth: src.truth } : {}),
     ...(src.gas ? { gas: src.gas } : {}),
+    ...(src.signal ? { signal: src.signal } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),

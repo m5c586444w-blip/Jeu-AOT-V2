@@ -30,6 +30,7 @@ import { tickWall } from "../wall/tick";
 import { tickRegistry } from "../registry/tick";
 import { tickClock } from "../clock/tick";
 import type { GasState } from "../gas/state";
+import type { SignalState } from "../signal/state";
 import { tickTruth, truthFactions } from "../truth/tick";
 import type { TruthState } from "../truth/types";
 import type { ClockState } from "../clock/types";
@@ -100,6 +101,8 @@ export interface PillarsState {
   truth?: TruthState;
   /** P3 Le Gaz et l'Ancrage (D-171) : créé par la commande `EnableGas` ; aucun pas de tick (registres modifiés par la bataille). */
   gas?: GasState;
+  /** P4 Le Signal (D-172) : créé par la commande `EnableSignal` ; aucun pas de tick (calculs de bataille). */
+  signal?: SignalState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {

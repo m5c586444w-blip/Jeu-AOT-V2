@@ -1347,3 +1347,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Pas de pas de tick** : le pilier n'a aucune dynamique quotidienne (les ancrages ne changent que par la bataille ; le stock de gaz est déjà dans `strategic`). Rien n'est ajouté à `tickDay`.
 - **Reste (suite de C9, empreintes tactiques à rebaser seulement si activé)** : écrire dans les registres depuis `battle.ts` (destructions par Titan/incendie/démolition/artillerie), lecture des registres par `armies`/`tactical` pour le chemin ODM et le coût de bataille, `settleBattle` sur le stock stratégique, carte d'ancrage estimée par le renseignement, écran. Activation par défaut : décision séparée. Aucune empreinte de référence ne change (120 jours sans activation : `e0a0b63c`).
 - **Réversible** : oui.
+
+## 2026-10-15 — D-172 C9.6 : pilier P4 Le Signal branché (état seulement), désactivé par défaut
+- **Décision** : même modèle que D-171. `GameState.pillars.signal?: SignalState` = `{ ghosts: GhostBook, doctrines: Record<faction, DoctrineRule[]> }` (fantômes d'information par faction observatrice, doctrines programmées par faction) ; commande typée `EnableSignal` (sans paramètre, schéma Zod strict, classée dans `FACTION_COMMANDS`, idempotente, refus typé si le monde n'a pas `signal.json`) ; `World.signal` chargé depuis `data/balance/signal.json` ; `SignalStateSchema` valide la forme (couleurs, ordres connus) à la désérialisation (`pillars.signal`). Helpers purs `initSignal`, `doctrineOf`, `withDoctrine` (copie), `withGhosts`.
+- **Pas de pas de tick** : signaux, relais et brouillard sont des calculs de bataille (temps en secondes).
+- **Reste** : commande typée `SetDoctrine` (validée par `validateDoctrine`, faction du siège), alimentation du carnet depuis la bataille, brouillard de commandement en bataille (après le branchement du Gaz dans `battle.ts`), écran. Aucune empreinte de référence ne change (`e0a0b63c`).
+- **Réversible** : oui.

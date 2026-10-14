@@ -2,6 +2,7 @@ import { canonicalJson } from "./canonical";
 import { WallStateSchema } from "../wall/schema";
 import { RegistryStateSchema } from "../registry/schema";
 import { ClockStateSchema } from "../clock/schema";
+import { SignalStateSchema } from "../signal/schema";
 import { GasStateSchema } from "../gas/schema";
 import { TruthStateSchema } from "../truth/schema";
 import { CURRENT_SCHEMA_VERSION } from "./state";
@@ -172,6 +173,8 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
       if (tr !== undefined && !TruthStateSchema.safeParse(tr).success) problems.push("pillars.truth");
       const gs = (pl as Record<string, unknown>)["gas"];
       if (gs !== undefined && !GasStateSchema.safeParse(gs).success) problems.push("pillars.gas");
+      const sg = (pl as Record<string, unknown>)["signal"];
+      if (sg !== undefined && !SignalStateSchema.safeParse(sg).success) problems.push("pillars.signal");
     }
   }
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);

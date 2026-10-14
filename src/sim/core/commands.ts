@@ -35,6 +35,7 @@ import { initWall } from "../wall/tick";
 import { initRegistry } from "../registry/tick";
 import { initClock } from "../clock/tick";
 import { initGas } from "../gas/state";
+import { initSignal } from "../signal/state";
 import { initTruth, truthFactions } from "../truth/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
@@ -83,6 +84,7 @@ export type Command =
   | { type: "EnableClock" }
   | { type: "EnableTruth" }
   | { type: "EnableGas" }
+  | { type: "EnableSignal" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -203,6 +205,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
       return { ok: true };
     case "EnableGas":
       if (ctx && !ctx.world?.gas) return { ok: false, error: "EnableGas : monde sans données du Gaz (gas.json)" };
+      return { ok: true };
+    case "EnableSignal":
+      if (ctx && !ctx.world?.signal) return { ok: false, error: "EnableSignal : monde sans données du Signal (signal.json)" };
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -335,6 +340,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       // P3 Le Gaz et l'Ancrage (D-171) : registres d'ancrage vides ; sans effet s'il existe déjà.
       if (!world?.gas) break; // inatteignable : refusé par validateCommand
       if (!next.pillars?.gas) next = { ...next, pillars: { ...next.pillars, gas: initGas() } };
+      break;
+    }
+    case "EnableSignal": {
+      // P4 Le Signal (D-172) : carnet de fantômes et doctrines vides ; sans effet s'il existe déjà.
+      if (!world?.signal) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.signal) next = { ...next, pillars: { ...next.pillars, signal: initSignal() } };
       break;
     }
     case "EnableWall": {
