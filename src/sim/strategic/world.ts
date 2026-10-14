@@ -1,4 +1,4 @@
-import type { EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
+import type { WallBalance, WallLayout, EconomyBalance, EventsBalance, ExpeditionsBalance, IntelBalance, LogisticsBalance, ShiftersBalance, WorldBalance, PoliticsBalance, ResearchBalance, SocietyBalance, TacticalBalance, TimeBalance } from "../../data/balance";
 import type { GeoData, GeoZone } from "../../data/geo";
 import type { Mission, MissionsBalance } from "../../data/missionSchemas";
 import type { ArmiesBalance, ArmiesEntry, ArmyStart, ArtilleryEntry, FleetStart, Munition, Piece, Regiment, Sea, Ship } from "../../data/armySchemas";
@@ -32,6 +32,8 @@ export interface World {
   armies?: ArmiesWorld | null;
   /** Missions nationales (MIS) : absentes sans équilibrage ou sans mission pour le scénario. */
   missions?: MissionsWorld | null;
+  /** Pilier P1 Le Mur (D-165) : données d'équilibrage et table des districts ; l'état n'existe que si la commande `EnableWall` l'a créé. */
+  wall?: WallWorld | null;
 }
 
 export interface MissionsWorld {
@@ -136,6 +138,12 @@ export interface PoliticsWorld {
   society: SocietyBalance;
 }
 
+/** Données statiques du pilier P1. */
+export interface WallWorld {
+  balance: WallBalance;
+  layout: WallLayout;
+}
+
 export interface WorldSource {
   provinces: readonly Province[];
   buildings: readonly Building[];
@@ -175,6 +183,8 @@ export interface WorldSource {
   armiesBalance?: ArmiesBalance;
   missions?: readonly Mission[];
   missionsBalance?: MissionsBalance;
+  /** Pilier P1 (D-165) : équilibrage et table de districts du Mur. */
+  wall?: WallWorld;
 }
 
 /** Couche MIS : construite si l'équilibrage existe et si au moins une mission est offerte dans le scénario. */
@@ -238,6 +248,7 @@ export function buildWorld(src: WorldSource, scenarioId: string): World {
   return {
     ...(armies ? { armies } : {}),
     ...(missions ? { missions } : {}),
+    ...(src.wall ? { wall: src.wall } : {}),
     provinces: src.provinces,
     provinceById: new Map(src.provinces.map((p) => [p.id, p])),
     buildings: new Map(src.buildings.map((b) => [b.id, b])),

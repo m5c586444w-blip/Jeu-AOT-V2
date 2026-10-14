@@ -1,0 +1,342 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P1 (D-165). Capacités alimentaires par district [A] déduites du niveau de peuplement (pop_level) ; anneaux de la carte ; voisinage = arêtes du graphe geo entre districts. Chiffres [A], non canon.",
+  "districts": {
+    "prov_bourg_minier_maria": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_carrefour_du_sud",
+        "prov_hameaux_ouest_maria",
+        "prov_shiganshina"
+      ]
+    },
+    "prov_camp_entrainement": {
+      "ring": "rose",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_krolva",
+        "prov_qg_corps",
+        "prov_relais_ferroviaire",
+        "prov_utopia"
+      ]
+    },
+    "prov_carrefour_du_sud": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_bourg_minier_maria",
+        "prov_collines_minieres",
+        "prov_faubourgs_shiganshina"
+      ]
+    },
+    "prov_champs_du_centre": {
+      "ring": "rose",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_forges_rose",
+        "prov_karanes",
+        "prov_qg_corps"
+      ]
+    },
+    "prov_collines_minieres": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_carrefour_du_sud",
+        "prov_hameaux_ouest_maria",
+        "prov_vallee_du_moulin"
+      ]
+    },
+    "prov_dauper": {
+      "ring": "rose",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_forges_rose",
+        "prov_jinae",
+        "prov_karanes",
+        "prov_trost"
+      ]
+    },
+    "prov_ehrmich": {
+      "ring": "sina",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_palais_royal",
+        "prov_stohess",
+        "prov_ville_souterraine",
+        "prov_yarckel"
+      ]
+    },
+    "prov_faubourgs_shiganshina": {
+      "ring": "maria",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_carrefour_du_sud",
+        "prov_plaines_interieures_maria_sud",
+        "prov_shiganshina"
+      ]
+    },
+    "prov_forges_rose": {
+      "ring": "rose",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_champs_du_centre",
+        "prov_dauper",
+        "prov_jinae",
+        "prov_karanes"
+      ]
+    },
+    "prov_fort_avance_maria": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_hameaux_est",
+        "prov_plaines_cerealieres_sud"
+      ]
+    },
+    "prov_hameaux_est": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_fort_avance_maria",
+        "prov_relais_poste_maria",
+        "prov_ville_usine"
+      ]
+    },
+    "prov_hameaux_ouest_maria": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_bourg_minier_maria",
+        "prov_collines_minieres",
+        "prov_vergers_ouest"
+      ]
+    },
+    "prov_haras_maria": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_lac_des_reflets",
+        "prov_plaines_du_nord"
+      ]
+    },
+    "prov_jinae": {
+      "ring": "rose",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_dauper",
+        "prov_forges_rose",
+        "prov_poudriere_rose",
+        "prov_ragako",
+        "prov_trost"
+      ]
+    },
+    "prov_karanes": {
+      "ring": "rose",
+      "capacity": 100000,
+      "neighbors": [
+        "prov_champs_du_centre",
+        "prov_dauper",
+        "prov_forges_rose"
+      ]
+    },
+    "prov_krolva": {
+      "ring": "rose",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_camp_entrainement",
+        "prov_poudriere_rose",
+        "prov_ragako",
+        "prov_relais_ferroviaire"
+      ]
+    },
+    "prov_lac_des_reflets": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_haras_maria",
+        "prov_relais_poste_maria",
+        "prov_ville_usine"
+      ]
+    },
+    "prov_mitras": {
+      "ring": "sina",
+      "capacity": 150000,
+      "neighbors": [
+        "prov_orvud",
+        "prov_palais_royal",
+        "prov_stohess",
+        "prov_ville_souterraine",
+        "prov_yarckel"
+      ]
+    },
+    "prov_orvud": {
+      "ring": "sina",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_mitras",
+        "prov_stohess"
+      ]
+    },
+    "prov_palais_royal": {
+      "ring": "sina",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_ehrmich",
+        "prov_mitras",
+        "prov_ville_souterraine"
+      ]
+    },
+    "prov_plaines_cerealieres_sud": {
+      "ring": "maria",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_fort_avance_maria",
+        "prov_plaines_interieures_maria_sud",
+        "prov_shiganshina"
+      ]
+    },
+    "prov_plaines_du_nord": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_haras_maria",
+        "prov_ville_usine"
+      ]
+    },
+    "prov_plaines_interieures_maria_sud": {
+      "ring": "maria",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_faubourgs_shiganshina",
+        "prov_plaines_cerealieres_sud"
+      ]
+    },
+    "prov_poudriere_rose": {
+      "ring": "rose",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_jinae",
+        "prov_krolva",
+        "prov_ragako",
+        "prov_relais_ferroviaire"
+      ]
+    },
+    "prov_qg_corps": {
+      "ring": "rose",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_camp_entrainement",
+        "prov_champs_du_centre",
+        "prov_relais_ferroviaire",
+        "prov_utopia"
+      ]
+    },
+    "prov_ragako": {
+      "ring": "rose",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_jinae",
+        "prov_krolva",
+        "prov_poudriere_rose",
+        "prov_trost"
+      ]
+    },
+    "prov_relais_ferroviaire": {
+      "ring": "rose",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_camp_entrainement",
+        "prov_krolva",
+        "prov_poudriere_rose",
+        "prov_qg_corps"
+      ]
+    },
+    "prov_relais_poste_maria": {
+      "ring": "maria",
+      "capacity": 15000,
+      "neighbors": [
+        "prov_hameaux_est",
+        "prov_lac_des_reflets"
+      ]
+    },
+    "prov_shiganshina": {
+      "ring": "maria",
+      "capacity": 100000,
+      "neighbors": [
+        "prov_bourg_minier_maria",
+        "prov_faubourgs_shiganshina",
+        "prov_plaines_cerealieres_sud"
+      ]
+    },
+    "prov_stohess": {
+      "ring": "sina",
+      "capacity": 100000,
+      "neighbors": [
+        "prov_ehrmich",
+        "prov_mitras",
+        "prov_orvud"
+      ]
+    },
+    "prov_trost": {
+      "ring": "rose",
+      "capacity": 150000,
+      "neighbors": [
+        "prov_dauper",
+        "prov_jinae",
+        "prov_ragako"
+      ]
+    },
+    "prov_utopia": {
+      "ring": "rose",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_camp_entrainement",
+        "prov_qg_corps"
+      ]
+    },
+    "prov_vallee_du_moulin": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_collines_minieres",
+        "prov_vergers_ouest"
+      ]
+    },
+    "prov_vergers_ouest": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_hameaux_ouest_maria",
+        "prov_vallee_du_moulin"
+      ]
+    },
+    "prov_ville_souterraine": {
+      "ring": "sina",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_ehrmich",
+        "prov_mitras",
+        "prov_palais_royal"
+      ]
+    },
+    "prov_ville_usine": {
+      "ring": "maria",
+      "capacity": 30000,
+      "neighbors": [
+        "prov_hameaux_est",
+        "prov_lac_des_reflets",
+        "prov_plaines_du_nord"
+      ]
+    },
+    "prov_yarckel": {
+      "ring": "sina",
+      "capacity": 60000,
+      "neighbors": [
+        "prov_ehrmich",
+        "prov_mitras"
+      ]
+    }
+  }
+}

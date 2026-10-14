@@ -3,3 +3,4 @@ export * from "./pressure";
 export * from "./breach";
 export * from "./decongest";
 export * from "./strategic";
+export * from "./tick";

@@ -1301,3 +1301,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/registry/` (troupe nommée plafonnée 50–80 par faction / générée à matricule, noms par fork du `Rng`, dossier de mort exigeant cause/lieu/circonstances, deuil par graphe de liens, désertion = « disparu », succession, stèles, `standing`, `registerCharacterDeath` sans double compte) ; paramètres `[A]` dans `data/balance/registry.json`. Créations `A` (tables de noms, stèles) dans `docs/lore/creations.md`. Non branché au tick : empreintes inchangées.
 - **Reste** : branchement (C9), écran Registre, morts générées par la bataille, liens inter-camps, application de `standing` à l'économie/politique.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-165 C9.1 : pilier P1 Le Mur branché au tick, désactivé par défaut
+- **Décision** : `GameState.pillars?: { wall?: WallState }` (absent des mondes existants : aucune empreinte ne change) ; commande typée `EnableWall` (faction, journalisée) qui crée l'état via `wallFromProvinces` et la table `data/balance/wall_layout.json` `[A]` (capacité par `pop_level`, 37 districts, voisinage = arêtes du graphe geo), schéma Zod `WallLayoutSchema` ; `tickDay` appelle `tickWall` (jour, 24 h d'évacuation si en cours, contrôle mensuel) seulement si `pillars.wall` existe. Protocole des autres piliers : `docs/phases/C9.md`.
+- **Reste** : le mur évolue en miroir (pas d'écriture en retour dans `strategic.provinces`, ni famine d'`economy.ts`), alertes, écran « Mur », activation par défaut (décision séparée).
+- **Réversible** : oui.

@@ -16,7 +16,7 @@
 | C6 | P1 Le Mur | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C7 | P5 L'Horloge | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | fait (modules purs non branchés) | A 2026-10-14 | tronc | C5 | |
-| C9 | Intégration : piles, bataille jouable de bout en bout | à faire | — | tronc | C1, C4, C5 | |
+| C9 | Intégration : piles, bataille jouable de bout en bout | en cours (C9.1 mur branché) | A 2026-10-14 | tronc | C1, C4, C5 | |
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
@@ -42,7 +42,8 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 - C5 : `src/sim/tide/` livré (D-162), revue ACCEPTÉ AVEC RÉSERVES, correctifs appliqués, verify EXIT=0 963 tests, dette 93.
 - C8 : `src/sim/truth/` (D-163) et `src/sim/registry/` (D-164) livrés, revue ACCEPTÉ AVEC RÉSERVES, correctifs appliqués, verify EXIT=0 1244 tests, dette 94.
 - Les 7 piliers existent en modules purs NON branchés (gas, signal, wall, clock, tide, truth, registry) : le branchement = C9.
-- PROCHAINE ACTION EXACTE (A) : C9 (intégration) — `docs/phases/C9.md`, d'abord un `GameState.pillars?` optionnel + branchement tick pilier par pilier (un commit par pilier, empreintes changées justifiées en DECISIONS.md, test de rejeu vert). B : C1 (cadre d'interface) indépendant.
+- C9.1 fait : P1 Mur branché derrière `GameState.pillars?.wall` + `EnableWall` (D-165), désactivé par défaut, empreintes inchangées, verify EXIT=0 1248 tests. Ordre suivant (docs/phases/C9.md) : registry, clock, truth, gas, signal, tide. Note : verify peut dépasser 11 min.
+- PROCHAINE ACTION EXACTE (A) : C9.2 (registry) puis suite ; (ancien libellé) C9 (intégration) — `docs/phases/C9.md`, d'abord un `GameState.pillars?` optionnel + branchement tick pilier par pilier (un commit par pilier, empreintes changées justifiées en DECISIONS.md, test de rejeu vert). B : C1 (cadre d'interface) indépendant.
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).

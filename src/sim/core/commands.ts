@@ -31,6 +31,7 @@ import { projectProblem, projectTitan, recallTitan } from "../world/war";
 import { declareWar, embargo, guaranteeHizuru, guaranteeProblem, makePeace, proposeTreaty, TREATY_KINDS, ultimatum } from "../world/diplomacy";
 import type { TreatyKind } from "../world/diplomacy";
 import { atWar } from "../world/nations";
+import { initWall } from "../wall/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
 import type { ArmyCommand } from "../armies/layer";
@@ -73,6 +74,7 @@ export type Command =
   | { type: "GuaranteeHizuru" }
   | ArmyCommand
   | MissionCommand
+  | { type: "EnableWall" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -178,6 +180,8 @@ export function validateCommand(cmd: unknown): Validation {
     case "Embargo":
       return typeof c["to"] === "string" && typeof c["on"] === "boolean" ? { ok: true } : { ok: false, error: "Embargo invalide" };
     case "GuaranteeHizuru":
+      return { ok: true };
+    case "EnableWall":
       return { ok: true };
     case "Noop":
       return { ok: true };
@@ -286,6 +290,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "GuaranteeHizuru":
       next = applyP7(next, cmd, world);
       break;
+    case "EnableWall": {
+      // P1 Le Mur (D-165) : crée l'état du pilier à partir des provinces ; sans effet s'il existe déjà.
+      if (!world?.wall || !next.strategic) throw new Error("EnableWall : monde sans données du Mur (wall_layout.json) ou sans partie stratégique");
+      if (!next.pillars?.wall) next = { ...next, pillars: { ...next.pillars, wall: initWall(next.strategic.provinces, world.wall.layout) } };
+      break;
+    }
     case "Noop":
       break;
     case "StartMission":

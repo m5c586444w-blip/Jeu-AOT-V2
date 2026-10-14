@@ -26,6 +26,8 @@ import { weeklyWar } from "../world/war";
 import { monthlyAi, weeklyAi } from "../world/ai";
 import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
+import { tickWall } from "../wall/tick";
+import type { WallState } from "../wall/types";
 import type { SeatsState } from "./seat";
 import { createArmiesState } from "../armies/state";
 import type { ArmiesState } from "../armies/state";
@@ -73,6 +75,16 @@ export interface GameState {
    * Marley ; absent d'une sauvegarde antérieure ou d'une partie où rien n'a été lancé (son hash ne change pas).
    */
   missions?: MissionsState;
+  /**
+   * Piliers de la refonte (26) branchés au tick, un par un (C9). Facultatif : absent des mondes existants, donc aucune empreinte
+   * ne change ; chaque pilier n'existe que si la commande qui l'active l'a créé.
+   */
+  pillars?: PillarsState;
+}
+
+/** P1 Le Mur (D-165) : créé par la commande `EnableWall`, avancé par le tick seulement s'il existe. */
+export interface PillarsState {
+  wall?: WallState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -121,6 +133,7 @@ export function tickDay(state: GameState, world?: World): GameState {
   let nations = state.nations;
   let armies = state.armies;
   let missions = state.missions;
+  let pillars = state.pillars;
   const date = advance(state.date, 1);
   if (world && strategic) {
     // Sauvegarde migrée (v5) : couches de P5 créées à la date courante.
@@ -208,6 +221,8 @@ export function tickDay(state: GameState, world?: World): GameState {
         missions = c.ms;
       }
     }
+    // Pilier P1 (D-165) : seulement si la commande EnableWall l'a créé.
+    if (pillars?.wall && world.wall) pillars = { ...pillars, wall: tickWall(pillars.wall, world.wall.balance, date.day % DAYS_PER_MONTH === 1) };
     if (date.day % DAYS_PER_MONTH === 1) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);
@@ -220,5 +235,5 @@ export function tickDay(state: GameState, world?: World): GameState {
       if (intel) monthlyCult(world, intel, research);
     }
   }
-  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}), ...(missions ? { missions } : {}) };
+  return { ...state, rng: { state: rng.serialize().state }, date, world: { ...state.world, noise }, strategic, politics, military, events, research, intel, shifters, nations, ...(armies ? { armies } : {}), ...(missions ? { missions } : {}), ...(pillars ? { pillars } : {}) };
 }

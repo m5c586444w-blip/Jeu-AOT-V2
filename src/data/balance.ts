@@ -1375,6 +1375,25 @@ export type SocietyBalance = z.infer<typeof SocietyBalanceSchema>;
 export type EconomyBalance = z.infer<typeof EconomyBalanceSchema>;
 export type TimeBalance = z.infer<typeof TimeBalanceSchema>;
 
+/** data/balance/wall_layout.json — table de capacités alimentaires, anneaux et voisinage des districts du Mur (D-165, valeurs [A]). */
+export const WallLayoutSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    districts: z.record(
+      z.string().regex(/^prov_[a-z0-9_]+$/),
+      z
+        .object({
+          ring: z.enum(["maria", "rose", "sina"]),
+          capacity: z.number().min(0),
+          neighbors: z.array(z.string().regex(/^prov_[a-z0-9_]+$/)),
+        })
+        .strict(),
+    ),
+  })
+  .strict();
+export type WallLayout = z.infer<typeof WallLayoutSchema>;
+
 export const BALANCE_FILES = {
   armies: ArmiesBalanceSchema,
   missions: MissionsBalanceSchema,
@@ -1388,6 +1407,7 @@ export const BALANCE_FILES = {
   signal: SignalBalanceSchema,
   tide: TideBalanceSchema,
   wall: WallBalanceSchema,
+  wall_layout: WallLayoutSchema,
   clock: ClockBalanceSchema,
   truth: TruthBalanceSchema,
   registry: RegistryBalanceSchema,
