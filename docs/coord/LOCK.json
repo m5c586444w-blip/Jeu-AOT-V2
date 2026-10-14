@@ -1,6 +1,6 @@
 {
-  "proprietaire": null,
-  "tache": "",
-  "depuis": "",
-  "battement": ""
+  "proprietaire": "A",
+  "tache": "Demarrage session A, lecture et choix de tache",
+  "depuis": "2026-10-14T22:17:11.993Z",
+  "battement": "2026-10-14T22:17:11.993Z"
 }
