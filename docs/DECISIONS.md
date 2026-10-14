@@ -1296,3 +1296,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/truth/` (fiabilité A–D par faction depuis les seules pièces du dossier, jamais la véracité sauf `reveal` ; actes I/II/III par connaissance vraie ; attracteurs de canon via `ready`/`schedule` de `events/engine.ts`, seul changement : `export`) ; paramètres `[A]` dans `data/balance/truth.json`. Création `A` : rumeur fausse « humanité éteinte hors des murs » (`docs/lore/creations.md`). Non branché au tick : empreintes inchangées.
 - **Reste** : production des pièces (espions, archives, Chemins), consommation des capacités d'acte, proximité des attracteurs grossière, 7 faits seulement.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-164 C8.2 : pilier P7 Registre en module pur non branché
+- **Décision** : `src/sim/registry/` (troupe nommée plafonnée 50–80 par faction / générée à matricule, noms par fork du `Rng`, dossier de mort exigeant cause/lieu/circonstances, deuil par graphe de liens, désertion = « disparu », succession, stèles, `standing`, `registerCharacterDeath` sans double compte) ; paramètres `[A]` dans `data/balance/registry.json`. Créations `A` (tables de noms, stèles) dans `docs/lore/creations.md`. Non branché au tick : empreintes inchangées.
+- **Reste** : branchement (C9), écran Registre, morts générées par la bataille, liens inter-camps, application de `standing` à l'économie/politique.
+- **Réversible** : oui.

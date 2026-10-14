@@ -1,0 +1,92 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P7 (spec 26 §8). Aucune valeur n'est canon : toutes les grandeurs (cap des nommés, délais de promotion, deuil, seuils de refus et de désertion, mémoire publique, stèles) sont A. Les tables de noms sont des créations du projet (début XXe d'inspiration européenne), sans aucun nom de personnage de l'œuvre ; stèles et épitaphes : créations A (docs/lore/creations.md). Fait C respecté : il n'y a pas de mort propre (02 §9.3).",
+  "troop": { "start_morale": 70, "start_stress": 10, "named_cap": 64 },
+  "ranks": {
+    "list": [
+      { "id": "recrue", "order": 1, "leader": false },
+      { "id": "soldat", "order": 2, "leader": false },
+      { "id": "caporal", "order": 3, "leader": false },
+      { "id": "chef_escouade", "order": 4, "leader": true },
+      { "id": "officier", "order": 5, "leader": true }
+    ],
+    "generated_start": "recrue",
+    "promoted": "soldat"
+  },
+  "ids": { "generated_prefix": "mat_", "named_prefix": "nom_", "pad": 4 },
+  "names": {
+    "default_set": "commun",
+    "faction_set": { "fac_paradis": "paradis", "fac_marley": "marley" },
+    "female_ratio": 0.25,
+    "unique_retries": 8,
+    "sets": {
+      "paradis": {
+        "given_m": ["Anton", "Bertram", "Cornelius", "Dieter", "Emil", "Falk", "Gerold", "Henrik", "Ingo", "Jakob", "Lothar", "Norbert", "Oskar", "Ruprecht", "Tobias"],
+        "given_f": ["Adelheid", "Brigitte", "Clara", "Dorothea", "Elke", "Frieda", "Greta", "Hedwig"],
+        "family": ["Albrecht", "Brenner", "Dorfmann", "Eisler", "Fuchsberg", "Grabner", "Hollweg", "Imhoff", "Kellner", "Lindner", "Maurer", "Neumeister", "Ostertag", "Pfeiffer", "Rosenthal", "Sandmann"],
+        "nicknames": ["Lièvre", "Borgne", "Sourcil", "Tonneau", "Grillon", "Meunier", "Pigeon", "Carreau", "Boiteux", "Moineau"]
+      },
+      "marley": {
+        "given_m": ["Aurel", "Bruno", "Casimir", "Detlef", "Florian", "Gustav", "Hartmut", "Konrad", "Leopold", "Maximilian", "Otto", "Reinhard", "Stefan", "Theodor", "Viktor"],
+        "given_f": ["Ilse", "Johanna", "Katharina", "Liesel", "Magda", "Nora", "Renate", "Sabine"],
+        "family": ["Aschenbach", "Bergmann", "Drescher", "Engel", "Falkner", "Gruber", "Hartwig", "Jessen", "Kowalski", "Lorenz", "Morgenstern", "Novak", "Palmer", "Reinhardt", "Sommer", "Vogel"],
+        "nicknames": ["Corbeau", "Mâchoire", "Cadran", "Ferraille", "Pipe", "Sabot", "Faucon", "Bègue", "Laiton", "Orme"]
+      },
+      "commun": {
+        "given_m": ["Adrien", "Basile", "Célestin", "Denis", "Étienne", "Gaspard", "Honoré", "Isidore", "Julien", "Lucien", "Maxime", "Octave", "Pascal", "Quentin", "Rémy"],
+        "given_f": ["Aline", "Berthe", "Colette", "Désirée", "Eugénie", "Fanny", "Gisèle", "Hélène"],
+        "family": ["Armand", "Bastide", "Chevalier", "Dupin", "Estève", "Fontaine", "Guérin", "Hugon", "Imbert", "Joubert", "Lacombe", "Marchand", "Navarre", "Orsini", "Perrin", "Roussel"],
+        "nicknames": ["Rouquin", "Bouchon", "Taupe", "Cigale", "Sapin", "Marteau", "Brume", "Écureuil", "Pivert", "Sel"]
+      }
+    }
+  },
+  "promotion": { "min_days": 120, "min_battles": 2, "chance": 0.5, "max_per_step": 3, "renown": 15 },
+  "renown": { "per_battle": 3, "max": 100 },
+  "bonds": {
+    "kinds": {
+      "ami": { "morale_delta": -10, "stress_delta": 10, "form_weight": 5, "succession_interest": false },
+      "rival": { "morale_delta": 0, "stress_delta": -3, "form_weight": 2, "succession_interest": true },
+      "amour": { "morale_delta": -25, "stress_delta": 22, "form_weight": 1, "succession_interest": false },
+      "dette": { "morale_delta": -6, "stress_delta": 6, "form_weight": 2, "succession_interest": false },
+      "haine": { "morale_delta": 2, "stress_delta": -5, "form_weight": 1, "succession_interest": true }
+    },
+    "form": { "min_shared_days": 30, "chance": 0.08, "strength_min": 20, "strength_max": 70 }
+  },
+  "mourning": { "named_factor": 1.5, "leader_factor": 1.3, "squad_morale": 4, "squad_stress": 3, "witness_morale": 3, "witness_stress": 8 },
+  "breaking": { "refuse_stress": 70, "refusal_days": 5, "desert_morale": 15, "desert_chance": 0.35 },
+  "recovery": { "morale_per_day": 1, "stress_per_day": 2, "max_gap_days": 30 },
+  "memory": { "half_life_days": 120, "window_days": 365 },
+  "opinion": { "per_generated": 0.15, "per_named": 1, "renown_scale": 0.02, "cap": 40 },
+  "legitimacy": { "named_base": 0.2, "per_renown": 0.03, "cap": 20 },
+  "recruitment": { "per_loss": 0.004, "per_named_loss": 0.02, "min_factor": 0.3, "max_factor": 1.15 },
+  "stele": {
+    "capacity": 60,
+    "max_per_faction": 4,
+    "cost": 15,
+    "auto_named": true,
+    "opinion_relief": 0.5,
+    "legitimacy_relief": 0.4,
+    "recruit_bonus": 0.005,
+    "bonus_cap": 40,
+    "titles": ["Stèle de {place}", "Pierre du souvenir de {place}", "Mur des noms de {place}"],
+    "epitaphs": ["Pour ceux qui ne sont pas revenus.", "Ils ont tenu la ligne.", "Leurs noms restent, les murs aussi.", "À ceux qui sont tombés hors des murs."]
+  },
+  "succession": { "max_candidates": 3, "rank_weight": 10, "renown_weight": 0.5, "battles_weight": 2, "interest_bonus": 8, "passed_over_morale": 6, "interest_factor": 1.5 },
+  "causes": {
+    "combat": { "grief": 1, "shock": 1, "opinion": 1 },
+    "frappe": { "grief": 1, "shock": 1, "opinion": 1 },
+    "devore": { "grief": 1.4, "shock": 1.6, "opinion": 1.5 },
+    "chute": { "grief": 1, "shock": 1, "opinion": 1 },
+    "hemorragie": { "grief": 1.2, "shock": 1.2, "opinion": 1 },
+    "eclat": { "grief": 1, "shock": 1, "opinion": 1 },
+    "balle": { "grief": 1, "shock": 1, "opinion": 1 },
+    "lame": { "grief": 1, "shock": 1, "opinion": 1 },
+    "maladie": { "grief": 0.8, "shock": 0.4, "opinion": 0.6 },
+    "assassinat": { "grief": 1.3, "shock": 1.3, "opinion": 1.6 },
+    "accident": { "grief": 0.9, "shock": 0.8, "opinion": 0.9 },
+    "execution": { "grief": 1.1, "shock": 1.2, "opinion": 1.4 },
+    "suicide": { "grief": 1.4, "shock": 1.5, "opinion": 1.2 },
+    "inconnue": { "grief": 0.7, "shock": 0.5, "opinion": 0.8 },
+    "malediction": { "grief": 1.2, "shock": 1.3, "opinion": 1 }
+  }
+}

@@ -1270,6 +1270,90 @@ export const TruthBalanceSchema = z
     for (const [k, a] of Object.entries(b.attractors.faction)) if (a.fact !== null && !(a.fact in b.facts)) issue(`attractors.faction.${k} : fait inconnu « ${a.fact} »`);
   });
 
+/** data/balance/registry.json — pilier P7 (spec 26 §8) : troupe nommée et générée, noms, promotion, liens et deuil, désertion, mémoire publique, stèles, succession (valeurs [A]). */
+const nonneg = z.number().min(0);
+const RegistryNameSetSchema = z
+  .object({
+    given_m: z.array(z.string().min(1)).min(1),
+    given_f: z.array(z.string().min(1)).min(1),
+    family: z.array(z.string().min(1)).min(1),
+    nicknames: z.array(z.string().min(1)).min(1),
+  })
+  .strict();
+export const RegistryBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    troop: z.object({ start_morale: z.number().min(0).max(100), start_stress: z.number().min(0).max(100), named_cap: z.number().int().min(50).max(80) }).strict(),
+    ranks: z
+      .object({
+        list: z.array(z.object({ id: z.string().min(1), order: z.number().int().min(1), leader: z.boolean() }).strict()).min(2),
+        generated_start: z.string(),
+        promoted: z.string(),
+      })
+      .strict(),
+    ids: z.object({ generated_prefix: z.string().min(1), named_prefix: z.string().min(1), pad: z.number().int().min(1).max(8) }).strict(),
+    names: z
+      .object({
+        default_set: z.string(),
+        faction_set: z.record(z.string(), z.string()),
+        female_ratio: prob,
+        unique_retries: z.number().int().min(1),
+        sets: z.record(z.string(), RegistryNameSetSchema),
+      })
+      .strict(),
+    promotion: z.object({ min_days: nonneg, min_battles: z.number().int().min(0), chance: prob, max_per_step: z.number().int().min(1), renown: nonneg }).strict(),
+    renown: z.object({ per_battle: nonneg, max: pos }).strict(),
+    bonds: z
+      .object({
+        kinds: z.record(z.string(), z.object({ morale_delta: num, stress_delta: num, form_weight: nonneg, succession_interest: z.boolean() }).strict()),
+        form: z.object({ min_shared_days: nonneg, chance: prob, strength_min: z.number().int().min(1).max(100), strength_max: z.number().int().min(1).max(100) }).strict(),
+      })
+      .strict(),
+    mourning: z.object({ named_factor: nonneg, leader_factor: nonneg, squad_morale: nonneg, squad_stress: nonneg, witness_morale: nonneg, witness_stress: nonneg }).strict(),
+    breaking: z.object({ refuse_stress: z.number().min(0).max(100), refusal_days: z.number().int().min(1), desert_morale: z.number().min(0).max(100), desert_chance: prob }).strict(),
+    recovery: z.object({ morale_per_day: nonneg, stress_per_day: nonneg, max_gap_days: z.number().int().min(1) }).strict(),
+    memory: z.object({ half_life_days: pos, window_days: pos }).strict(),
+    opinion: z.object({ per_generated: nonneg, per_named: nonneg, renown_scale: nonneg, cap: pos }).strict(),
+    legitimacy: z.object({ named_base: nonneg, per_renown: nonneg, cap: pos }).strict(),
+    recruitment: z.object({ per_loss: nonneg, per_named_loss: nonneg, min_factor: nonneg, max_factor: pos }).strict(),
+    stele: z
+      .object({
+        capacity: z.number().int().min(1),
+        max_per_faction: z.number().int().min(1),
+        cost: nonneg,
+        auto_named: z.boolean(),
+        opinion_relief: prob,
+        legitimacy_relief: prob,
+        recruit_bonus: nonneg,
+        bonus_cap: z.number().int().min(0),
+        titles: z.array(z.string().includes("{place}")).min(1),
+        epitaphs: z.array(z.string().min(1)).min(1),
+      })
+      .strict(),
+    succession: z
+      .object({ max_candidates: z.number().int().min(1), rank_weight: nonneg, renown_weight: nonneg, battles_weight: nonneg, interest_bonus: nonneg, passed_over_morale: nonneg, interest_factor: nonneg })
+      .strict(),
+    causes: z.record(z.string(), z.object({ grief: nonneg, shock: nonneg, opinion: nonneg }).strict()),
+  })
+  .strict()
+  .superRefine((b, ctx) => {
+    const issue = (message: string): void => ctx.addIssue({ code: "custom", message });
+    const ids = b.ranks.list.map((r) => r.id);
+    if (new Set(ids).size !== ids.length) issue("ranks : identifiants distincts");
+    if (new Set(b.ranks.list.map((r) => r.order)).size !== ids.length) issue("ranks : ordres distincts");
+    if (!ids.includes(b.ranks.generated_start)) issue("ranks.generated_start : rang inconnu");
+    if (!ids.includes(b.ranks.promoted)) issue("ranks.promoted : rang inconnu");
+    if (!b.ranks.list.some((r) => r.leader)) issue("ranks : au moins un rang de chef");
+    if (!(b.names.default_set in b.names.sets)) issue("names.default_set : table inconnue");
+    for (const [f, set] of Object.entries(b.names.faction_set)) if (!(set in b.names.sets)) issue(`names.faction_set.${f} : table inconnue « ${set} »`);
+    if (Object.keys(b.bonds.kinds).length === 0) issue("bonds.kinds : au moins un type de lien");
+    if (!(b.bonds.form.strength_min <= b.bonds.form.strength_max)) issue("bonds.form : strength_min <= strength_max");
+    if (!(b.recruitment.min_factor <= b.recruitment.max_factor)) issue("recruitment : min_factor <= max_factor");
+    if (Object.keys(b.causes).length === 0) issue("causes : au moins une cause");
+  });
+export type RegistryBalance = z.infer<typeof RegistryBalanceSchema>;
+
 export type ShiftersBalance = z.infer<typeof ShiftersBalanceSchema>;
 export type EventsBalance = z.infer<typeof EventsBalanceSchema>;
 export type ResearchBalance = z.infer<typeof ResearchBalanceSchema>;
@@ -1304,6 +1388,7 @@ export const BALANCE_FILES = {
   wall: WallBalanceSchema,
   clock: ClockBalanceSchema,
   truth: TruthBalanceSchema,
+  registry: RegistryBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,
