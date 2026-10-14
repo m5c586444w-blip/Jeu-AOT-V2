@@ -21,7 +21,7 @@ describe("P7 pas de fuite entre factions", () => {
     const json = JSON.stringify(viewForFaction(s, FA, D0, rbal));
     for (const secret of [b.named, b.dead, "Konrad Vogel", "Orvaux", "Tranchée", "ste_002"]) expect(json).not.toContain(secret);
     const jb = JSON.stringify(viewForFaction(s, FB, D0, rbal));
-    for (const secret of ["Anton Albrecht", "Bertram Brenner", "Brèche", "Trost", "ste_001"]) expect(jb).not.toContain(secret);
+    for (const secret of ["Anton Albrecht", "Benedikt Brenner", "Brèche", "Trost", "ste_001"]) expect(jb).not.toContain(secret);
   });
 
   it("non-interférence : la vue de A est identique si l'on retire tout ce qui concerne B de l'état", () => {
@@ -46,7 +46,7 @@ describe("P7 pas de fuite entre factions", () => {
     expect(v.counts.living + v.counts.dead + v.counts.missing).toBe(v.counts.enlisted);
     expect(v.roster.some((r) => r.status === "mort")).toBe(false);
     expect(v.deaths).toHaveLength(1);
-    expect(v.deaths[0]).toMatchObject({ label: "Bertram Brenner", cause: "frappe", place: "Trost", inscribed: "ste_001" });
+    expect(v.deaths[0]).toMatchObject({ label: "Benedikt Brenner", cause: "frappe", place: "Trost", inscribed: "ste_001" });
     expect(v.steles).toEqual([{ id: "ste_001", title: expect.stringContaining("Trost") as string, place: "Trost", epitaph: expect.any(String) as string, inscribed: 1, capacity: rbal.stele.capacity }]);
     expect(v.roster.find((r) => r.id === "mat_0009")?.label).toBe("mat_0009");
   });

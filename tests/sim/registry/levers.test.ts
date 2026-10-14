@@ -1,3 +1,8 @@
+/**
+ * PORTÉE DE CE TEST : il ne prouve QU'UN EFFET QUELCONQUE. Pour chaque feuille de registry.json, remplacer la valeur doit changer la sortie sérialisée
+ * d'au moins un scénario associé ; il ne dit rien du SENS de l'effet (un paramètre inversé passerait). Le sens des paramètres clés est vérifié par
+ * `directional.test.ts` (plus de `desert_chance` : plus de désertions, plus de `stele.opinion_relief` : opinion moins négative, plafond de nommés, etc.).
+ */
 import { describe, expect, it } from "vitest";
 import { getPath, leaves, rbal, withPath } from "./helpers";
 import { SCENARIOS } from "./scenarios";

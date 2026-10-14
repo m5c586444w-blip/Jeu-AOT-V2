@@ -1248,6 +1248,8 @@ export const TruthBalanceSchema = z
     attractors: z
       .object({
         pull_base: prob,
+        /** Fiabilité minimale à laquelle un fait est « connu » : un attracteur dont le fait est connu à ce grade (ou mieux) ne pousse plus. */
+        known_grade: z.enum(["A", "B", "C", "D"]),
         closeness_exp: pos,
         weak_at_threshold: prob,
         divergent_floor: prob,

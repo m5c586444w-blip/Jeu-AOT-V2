@@ -21,14 +21,14 @@
     "unique_retries": 8,
     "sets": {
       "paradis": {
-        "given_m": ["Anton", "Bertram", "Cornelius", "Dieter", "Emil", "Falk", "Gerold", "Henrik", "Ingo", "Jakob", "Lothar", "Norbert", "Oskar", "Ruprecht", "Tobias"],
-        "given_f": ["Adelheid", "Brigitte", "Clara", "Dorothea", "Elke", "Frieda", "Greta", "Hedwig"],
+        "given_m": ["Anton", "Benedikt", "Cornelius", "Dominik", "Emil", "Falk", "Gerold", "Henrik", "Ingo", "Jakob", "Lothar", "Norbert", "Oskar", "Ruprecht", "Tobias"],
+        "given_f": ["Adelheid", "Brigitte", "Clara", "Dorothea", "Elke", "Felicitas", "Greta", "Hedwig"],
         "family": ["Albrecht", "Brenner", "Dorfmann", "Eisler", "Fuchsberg", "Grabner", "Hollweg", "Imhoff", "Kellner", "Lindner", "Maurer", "Neumeister", "Ostertag", "Pfeiffer", "Rosenthal", "Sandmann"],
         "nicknames": ["Lièvre", "Borgne", "Sourcil", "Tonneau", "Grillon", "Meunier", "Pigeon", "Carreau", "Boiteux", "Moineau"]
       },
       "marley": {
         "given_m": ["Aurel", "Bruno", "Casimir", "Detlef", "Florian", "Gustav", "Hartmut", "Konrad", "Leopold", "Maximilian", "Otto", "Reinhard", "Stefan", "Theodor", "Viktor"],
-        "given_f": ["Ilse", "Johanna", "Katharina", "Liesel", "Magda", "Nora", "Renate", "Sabine"],
+        "given_f": ["Irmgard", "Johanna", "Katharina", "Liesel", "Magda", "Nora", "Renate", "Sabine"],
         "family": ["Aschenbach", "Bergmann", "Drescher", "Engel", "Falkner", "Gruber", "Hartwig", "Jessen", "Kowalski", "Lorenz", "Morgenstern", "Novak", "Palmer", "Reinhardt", "Sommer", "Vogel"],
         "nicknames": ["Corbeau", "Mâchoire", "Cadran", "Ferraille", "Pipe", "Sabot", "Faucon", "Bègue", "Laiton", "Orme"]
       },

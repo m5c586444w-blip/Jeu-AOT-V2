@@ -17,7 +17,7 @@ function fuzz(seed: number, steps: number): { s: RegistryState; log: string[] } 
     const faction = r.pick([FA, FB]);
     const ids = Object.keys(s.soldiers);
     const pickId = (): string | null => (ids.length ? r.pick(ids) : null);
-    const op = r.int(0, 11);
+    const op = r.int(0, 13);
     const before = s;
     try {
       if (op === 0) s = enlistGenerated(s, { faction, squad: `sq${r.int(1, 3)}`, count: r.int(1, 4), day }, rbal).state;
@@ -43,6 +43,20 @@ function fuzz(seed: number, steps: number): { s: RegistryState; log: string[] } 
         const a = pickId();
         const b = pickId();
         if (a && b) s = addBond(s, a, b, r.pick(Object.keys(rbal.bonds.kinds)), r.int(1, 100), day, rbal);
+      } else if (op === 12) {
+        // crise : une partie des vivants est au bord de la rupture (les morts suivants provoquent refus d'ordres et désertions)
+        s = structuredClone(s);
+        for (const x of Object.values(s.soldiers)) {
+          if (x.status === "vivant" && r.next() < 0.4) {
+            x.stress = r.int(68, 100);
+            x.morale = r.int(5, 40);
+          }
+        }
+      } else if (op === 13) {
+        // disparition ciblée d'un soldat en refus d'ordres s'il y en a un (régression : refus conservé après disparition)
+        const refusing = ids.filter((x) => s.soldiers[x]?.status === "vivant" && s.soldiers[x]?.refusingUntil !== null);
+        const id = refusing.length ? r.pick(refusing) : pickId();
+        if (id) s = markMissing(s, id, day, "patrouille");
       } else {
         day += r.int(1, 40);
         s = stepRegistry(s, day, r, rbal);
@@ -82,7 +96,7 @@ describe("P7 invariants de conservation", () => {
   it("le fuzz passe par toutes les familles d'événements (le test n'est pas vide)", () => {
     const kinds = new Set<string>();
     for (const seed of [1, 2, 3]) for (const e of fuzz(seed, 300).s.events) kinds.add(e.type);
-    for (const k of ["enlisted", "death", "missing", "found", "stele", "inscribed", "bond", "succession_open", "appointed"]) expect([...kinds], k).toContain(k);
+    for (const k of ["enlisted", "death", "missing", "found", "stele", "inscribed", "bond", "succession_open", "appointed", "refusal", "desertion"]) expect([...kinds], k).toContain(k);
   });
 
   it("le même programme donne exactement le même état (déterminisme)", () => {

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { applyCommand } from "../../../src/sim/core/commands";
 import {
-  addBond, appoint, bondBetween, createRegistry, enlistGenerated, enlistNamed, getSoldier, recordBattle, refuses, registerCharacterDeath, registerDeath, RegistryError, registryViolations, standing, stepRegistry, suggestSuccessor,
+  addBond, appoint, bondBetween, createRegistry, enlistGenerated, enlistNamed, getSoldier, markMissing, recordBattle, refuses, registerCharacterDeath, registerDeath, RegistryError, registryViolations, standing, stepRegistry, suggestSuccessor,
 } from "../../../src/sim/registry";
 import type { RegistryState } from "../../../src/sim/registry";
 import { pol, start, world850 } from "../politics-helpers";
@@ -22,7 +22,7 @@ describe("P7 (a) chaque mort produit un dossier complet", () => {
   it("cause, lieu, escouade, circonstances, jour, rang, témoins : tout est renseigné et relié", () => {
     const q = squad();
     const r = kill(q.state, q.ami, { cause: "devore", witnesses: [q.plain] });
-    expect(r.file).toMatchObject({ soldier: q.ami, faction: FA, name: "Bertram Brenner", named: true, rank: "soldat", squad: "sq1", day: D0, cause: "devore", place: "Trost", circumstances: "Tombé en couvrant la retraite.", witnesses: [q.plain] });
+    expect(r.file).toMatchObject({ soldier: q.ami, faction: FA, name: "Benedikt Brenner", named: true, rank: "soldat", squad: "sq1", day: D0, cause: "devore", place: "Trost", circumstances: "Tombé en couvrant la retraite.", witnesses: [q.plain] });
     expect(r.file.mourners.length).toBeGreaterThan(0);
     expect(getSoldier(r.state, q.ami)).toMatchObject({ status: "mort", death: r.file.id });
     expect(r.state.deaths).toEqual([r.file]);
@@ -164,6 +164,25 @@ describe("P7 refus d'ordres et désertion", () => {
     expect(r.state.events.some((e) => e.type === "refusal")).toBe(true);
     // seuil relevé : plus de refus
     expect(refuses(kill(st, q.leader, { b: withPath(rbal, "breaking.refuse_stress", 100) }).state, q.dette, D0)).toBe(false);
+  });
+
+  it("régression : un soldat en refus d'ordres qui disparaît ou déserte perd son refus (aucune violation d'invariant)", () => {
+    const { q, st } = fragile();
+    // refus acquis, puis disparition ordinaire
+    const refused = kill(st, q.leader).state;
+    expect(refuses(refused, q.dette, D0)).toBe(true);
+    const missing = markMissing(refused, q.dette, D0 + 1, "patrouille");
+    expect(getSoldier(missing, q.dette)).toMatchObject({ status: "disparu", refusingUntil: null });
+    expect(refuses(missing, q.dette, D0 + 1)).toBe(false);
+    expect(registryViolations(missing, rbal)).toEqual([]);
+    // refus acquis, puis désertion lors d'un second deuil
+    const second = structuredClone(refused);
+    getSoldier(second, q.dette).morale = 5;
+    const sure = withPath(rbal, "breaking.desert_chance", 1);
+    expect(getSoldier(second, q.dette).refusingUntil).not.toBeNull();
+    const r = kill(second, q.ami, { day: D0 + 1, b: sure });
+    expect(getSoldier(r.state, q.dette)).toMatchObject({ status: "disparu", missingReason: "desertion", refusingUntil: null });
+    expect(registryViolations(r.state, rbal)).toEqual([]);
   });
 
   it("un moral effondré peut mener à la désertion : le soldat devient disparu (ni vivant ni mort), jamais deux statuts", () => {

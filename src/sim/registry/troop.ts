@@ -154,6 +154,7 @@ export function markMissing(s: RegistryState, id: string, day: number, reason: s
   y.status = "disparu";
   y.missingSince = day;
   y.missingReason = reason;
+  y.refusingUntil = null;
   out.events.push({ type: "missing", day, soldier: id, reason });
   return out;
 }

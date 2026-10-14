@@ -61,6 +61,7 @@
   },
   "attractors": {
     "pull_base": 0.35,
+    "known_grade": "B",
     "closeness_exp": 2,
     "weak_at_threshold": 0.4,
     "divergent_floor": 0.1,

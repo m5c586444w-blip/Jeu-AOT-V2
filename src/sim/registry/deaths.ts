@@ -58,6 +58,7 @@ export function registerDeath(s: RegistryState, input: DeathInput, rng: Rng, b: 
       m.status = "disparu";
       m.missingSince = day;
       m.missingReason = "desertion";
+      m.refusingUntil = null;
       outcome = "desertion";
       out.events.push({ type: "desertion", day, soldier: m.id });
     } else if (m.stress >= b.breaking.refuse_stress && !(m.refusingUntil !== null && day < m.refusingUntil)) {

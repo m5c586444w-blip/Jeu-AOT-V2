@@ -58,10 +58,10 @@ export function squad(b: RegistryBalance = rbal, faction = FA, day = D0 - 200): 
     return x.id;
   };
   const leader = named("Anton Albrecht", "chef_escouade", "sq1");
-  const ami = named("Bertram Brenner", "soldat", "sq1");
+  const ami = named("Benedikt Brenner", "soldat", "sq1");
   const rival = named("Cornelius Dorfmann", "caporal", "sq1");
   const amour = named("Greta Eisler", "soldat", "sq1");
-  const dette = named("Dieter Grabner", "soldat", "sq1");
+  const dette = named("Dominik Grabner", "soldat", "sq1");
   const haine = named("Emil Hollweg", "caporal", "sq1");
   const plain = named("Falk Imhoff", "soldat", "sq1");
   const other = named("Gerold Kellner", "soldat", "sq2");

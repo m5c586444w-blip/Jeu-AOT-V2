@@ -88,11 +88,18 @@ describe("registry.json : aucune donnée morte", () => {
       "grisha", "carla", "hannes", "keith", "pixis", "nile", "marlo", "hitch", "floch", "kenny", "rod", "uri", "kruger", "eld", "gunther", "petra", "oluo", "auruo", "moblit", "nanaba", "mike",
       "thomas", "mina", "franz", "marco", "berner", "ral", "magath", "willy", "lara", "kiyomi", "braun", "leonhart", "jaeger", "yeager", "ackerman", "arlert", "springer", "blouse", "kirstein",
       "zacharias", "reiss", "fritz", "tybur", "galliard", "hoover", "finger", "smith", "zoe", "zackly", "braus",
+      // PROVENANCE : prénoms de personnages de l'œuvre (docs/spec 07 et 11 et au-delà), exclus des tables.
+      "dot", "dieter", "ilse", "frieda", "bertram", "hannah", "daz", "samuel", "tom", "nick", "kitz", "darius", "yelena", "sannes", "ramzi", "cart", "mitabi", "rico", "lobov", "henning",
+      "zeke", "kaya", "dina", "ralph", "boris", "colt", "udo", "zofia", "onyankopon", "mikasa", "eren", "levi", "sasha", "pieck", "gross", "kenny", "djel", "theo", "ness", "lauda", "nile", "tom", "miche",
+      "carly", "sasha", "dok", "gelgar", "kuklo", "historia", "bertolt", "berthold", "hitch", "dreyse", "boris", "ymir", "sawney", "bean", "dina", "conny",
     ];
     for (const [id, set] of Object.entries(rbal.names.sets)) {
       for (const [list, items] of Object.entries(set)) {
         expect(new Set(items).size, `${id}.${list}`).toBe(items.length);
-        for (const n of items) expect(banned, `${id}.${list} ${n}`).not.toContain(n.toLowerCase());
+        for (const n of items) {
+          expect(banned, `${id}.${list} ${n}`).not.toContain(n.toLowerCase());
+          expect(banned, `${id}.${list} ${n} (jeton)`).not.toContain(n.toLowerCase().split(/[\s-]+/)[0]);
+        }
       }
     }
     expect(JSON.parse(readFileSync("data/balance/registry.json", "utf8")).canon).toBe("A");

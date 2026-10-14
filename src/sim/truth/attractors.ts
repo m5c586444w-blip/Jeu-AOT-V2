@@ -99,7 +99,7 @@ export interface FactionPull {
 
 /**
  * Attracteurs d'une faction (`factions › attractors`, valeurs de `truth.json`) : force = pull × attraction de canon ; un attracteur dont le fait est déjà
- * connu (à la fiabilité B) ne pousse plus. Triés par force décroissante puis identifiant. Un identifiant inconnu est ignoré.
+ * connu (à la fiabilité `attractors.known_grade`) ne pousse plus. Triés par force décroissante puis identifiant. Un identifiant inconnu est ignoré.
  */
 export function factionPulls(s: TruthState, faction: string, attractorIds: readonly string[], divergence: number, branch: "canon" | "divergente", threshold: number, today: number, b: TruthBalance): FactionPull[] {
   const att = attraction(divergence, branch, threshold, b);
@@ -107,7 +107,7 @@ export function factionPulls(s: TruthState, faction: string, attractorIds: reado
   for (const id of attractorIds) {
     const a = b.attractors.faction[id];
     if (!a) continue;
-    if (a.fact !== null && knows(s, faction, a.fact, "B", today, b)) continue;
+    if (a.fact !== null && knows(s, faction, a.fact, b.attractors.known_grade, today, b)) continue;
     out.push({ attractor: id, fact: a.fact, pull: a.pull * att });
   }
   return out.sort((x, y) => y.pull - x.pull || x.attractor.localeCompare(y.attractor));

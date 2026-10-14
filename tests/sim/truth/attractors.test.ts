@@ -185,6 +185,19 @@ describe("P6 attracteurs de faction (data/factions)", () => {
     // Attracteur sans fait (survie) : jamais satisfait.
     expect(factionPulls(known, "fac_marley", ["survie"], 0, "canon", TH, T0, tbal)).toEqual([{ attractor: "survie", fact: null, pull: tbal.attractors.faction["survie"]?.pull }]);
   });
+
+  it("levier attractors.known_grade : la fiabilité exigée pour qu'un fait « connu » éteigne l'attracteur est lue des données", () => {
+    const goal = tbal.attractors.faction["fondateur"]?.fact ?? "";
+    // Fait découvert, mais seulement à la fiabilité C.
+    const weak = { ...tweak("grades", { verified: "C" }) };
+    const known = reveal(fresh(), "fac_marley", goal, T0, weak);
+    const ids = (g: "A" | "B" | "C" | "D"): string[] =>
+      factionPulls(known, "fac_marley", ["fondateur"], 0, "canon", TH, T0, { ...weak, attractors: { ...weak.attractors, known_grade: g } }).map((p) => p.attractor);
+    expect(ids("B")).toEqual(["fondateur"]); // C n'atteint pas B : l'attracteur pousse encore
+    expect(ids("A")).toEqual(["fondateur"]);
+    expect(ids("C")).toEqual([]); // C suffit : plus d'attraction
+    expect(ids("D")).toEqual([]);
+  });
 });
 
 describe("P6 attracteurs sur le vrai moteur d'événements (scn_sandbox_850)", () => {

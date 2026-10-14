@@ -191,7 +191,7 @@ export function successionByKind(b: RegistryBalance): unknown {
   for (const kind of Object.keys(rbal.bonds.kinds).sort()) {
     let s = createRegistry();
     const l = enlistNamed(s, { faction: FA, squad: "sq", rank: "chef_escouade", day: D0 - 100, name: "Anton Albrecht" }, rng(1), rbal);
-    const c = enlistNamed(l.state, { faction: FA, squad: "sq", rank: "soldat", day: D0 - 100, name: "Bertram Brenner" }, rng(1), rbal);
+    const c = enlistNamed(l.state, { faction: FA, squad: "sq", rank: "soldat", day: D0 - 100, name: "Benedikt Brenner" }, rng(1), rbal);
     s = addBond(c.state, l.id, c.id, kind, 50, D0 - 50, rbal);
     const r = registerDeath(s, { soldier: l.id, day: D0, cause: "frappe", place: "Trost", circumstances: "x" }, rng(3), b);
     out[kind] = r.state.successions;
