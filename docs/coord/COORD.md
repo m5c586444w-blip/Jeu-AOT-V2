@@ -12,7 +12,7 @@
 | C2 | Création de lore, emblèmes (licorne…), `canon:check` adapté | à faire | — | tronc | — | `A` + `creation: true` |
 | C3 | Prérequis neutres multijoueur (rejeu, commandes, `owner`) | fait (socle) | A 2026-10-14 | tronc | — | |
 | C4 | P3 Gaz/Ancrage + P4 Signal | à revoir→fait (modules purs, non branchés) | A 2026-10-14 | tronc | C3 | |
-| C5 | P2 Marée + moteur de rencontres (§3 bis), Marley–Paradis | à faire | — | tronc | C4 | |
+| C5 | P2 Marée + moteur de rencontres (§3 bis), Marley–Paradis | fait (module pur non branché) | A 2026-10-14 | tronc | C4 | |
 | C6 | P1 Le Mur | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C7 | P5 L'Horloge | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | à faire | — | tronc | C5 | |
@@ -39,7 +39,8 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 - C4 : `src/sim/gas/`, `src/sim/signal/` livrés (D-158, D-159), revue ACCEPTÉ AVEC RÉSERVES (dette 85-88), verify EXIT=0 794 tests. Branchement bataille/tick = C9.
 - C6 : `src/sim/wall/` (D-160), revue ACCEPTÉ AVEC RÉSERVES, défauts 1-3,6,7 corrigés, reste dette 89-91 ; verify EXIT=0, 822 tests.
 - C7 : `src/sim/clock/` livré (D-161), revue ACCEPTÉ AVEC RÉSERVES, correctifs appliqués, verify EXIT=0 889 tests, dette 92.
-- PROCHAINE ACTION EXACTE (A) : C5 (P2 Marée + moteur de rencontres, spec 26 P2 et §3 bis) : `docs/phases/C5.md` puis `src/sim/tide/`.
+- C5 : `src/sim/tide/` livré (D-162), revue ACCEPTÉ AVEC RÉSERVES, correctifs appliqués, verify EXIT=0 963 tests, dette 93.
+- PROCHAINE ACTION EXACTE (A) : C8 (P6 Vérité + P7 Registre, spec 26) : `docs/phases/C8.md` puis `src/sim/truth/` et `src/sim/registry/` ; ensuite C9 (intégration : brancher gas/signal/wall/clock/tide).
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).

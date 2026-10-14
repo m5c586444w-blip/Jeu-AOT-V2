@@ -39,7 +39,8 @@ function volley(x: Pile, y: Pile, geo: Geometry, side: "a" | "b", dtMin: number,
   const c = b.combat;
   const d = b.detection;
   const v: Volley = { casualties: 0, pressure: 0, rounds: 0, ammoSpent: {}, gasSpent: 0 };
-  const flank = side === "a" ? geo.flank : 0;
+  const flank = side === "a" ? geo.flankA : geo.flankB;
+  const sight = (c.fire_vis_floor + (1 - c.fire_vis_floor) * clamp01(geo.visibility)) * (geo.night ? c.fire_night_mult : 1);
   const seen = side === "a" ? geo.seen.a : geo.seen.b;
   const mult =
     (c.morale_fire_floor + (1 - c.morale_fire_floor) * clamp01(x.morale)) *
@@ -73,7 +74,7 @@ function volley(x: Pile, y: Pile, geo: Geometry, side: "a" | "b", dtMin: number,
     }
     if (shots <= 0) continue;
     const effective = shots * mult;
-    const accuracy = spec.hit_prob * (1 - geo.distanceM / spec.range_m);
+    const accuracy = spec.hit_prob * (1 - geo.distanceM / spec.range_m) * sight;
     const area = 1 + (spec.area - 1) * Math.min(1, targetSize / c.area_ref_men);
     v.casualties += effective * accuracy * spec.lethality * area * vuln;
     v.pressure += effective * spec.suppression * area;
@@ -116,8 +117,8 @@ export function engage(a: Pile, z: Pile, geo: Geometry, dtS: number, rng: Rng, b
   const nz = 1 + b.combat.noise_pct * (2 * rng.next() - 1);
   const va = volley(a, z, geo, "a", dtMin, na, b);
   const vz = volley(z, a, geo, "b", dtMin, nz, b);
-  const hitZ = apply(z, va, geo.flank, dtS, b);
-  const hitA = apply(a, vz, 0, dtS, b);
+  const hitZ = apply(z, va, geo.flankA, dtS, b);
+  const hitA = apply(a, vz, geo.flankB, dtS, b);
   return { a: spend(hitA.pile, va), b: spend(hitZ.pile, vz), report: { a: hitA.cas, b: hitZ.cas, roundsA: va.rounds, roundsB: vz.rounds } };
 }
 

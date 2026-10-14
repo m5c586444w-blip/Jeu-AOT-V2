@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { Rng } from "../../../src/sim/core/rng";
 import { createInitialState } from "../../../src/sim/core/state";
 import { loadWorld } from "../../../src/data/worldNode";
-import { conditionMult, detectionRange, engage, injectBreach, reachOf, removeTitans, scanHumanEncounters, scanTitanEncounters, stepGrid, titanLambda, viewForFaction, viewForSeat } from "../../../src/sim/tide";
+import { projectEncounterForFaction, conditionMult, detectionRange, engage, injectBreach, reachOf, removeTitans, scanHumanEncounters, scanTitanEncounters, stepGrid, titanLambda, viewForFaction, viewForSeat } from "../../../src/sim/tide";
 import type { Conditions, Geometry, Pile } from "../../../src/sim/tide";
 import { NIGHT_WINTER, NOON, openGrid, pile, tb, tweak, weapon } from "./helpers";
 
@@ -138,7 +138,7 @@ describe("(a)(b) scénario Marley–Paradis à densité de Titans nulle", () => 
       enc += hs.length;
       for (const h of hs) {
         const ia = piles.findIndex((p) => p.id === h.a), ib = piles.findIndex((p) => p.id === h.b);
-        const geo: Geometry = { distanceM: h.distanceM, flank: 0, visibility: 1, night: false, seen: h.seen, ambusher: h.ambusher };
+        const geo: Geometry = { distanceM: h.distanceM, flankA: 0, flankB: 0, visibility: 1, night: false, seen: h.seen, ambusher: h.ambusher };
         const r = engage(piles[ia] as Pile, piles[ib] as Pile, geo, 30, rng, tb);
         piles[ia] = r.a; piles[ib] = r.b;
         fights++;
@@ -181,7 +181,7 @@ describe("(a)(b) scénario Marley–Paradis à densité de Titans nulle", () => 
   });
   it("le paramètre ambush_mult agit sur les pertes de la victime de l'embuscade", () => {
     const a = pile("a", P, 0, 0), z = pile("z", M, 200, 0);
-    const geo: Geometry = { distanceM: 200, flank: 0, visibility: 1, night: false, seen: { a: true, b: false }, ambusher: "a" };
+    const geo: Geometry = { distanceM: 200, flankA: 0, flankB: 0, visibility: 1, night: false, seen: { a: true, b: false }, ambusher: "a" };
     const hi = engage(a, z, geo, 30, new Rng(1), tb).report.b;
     const lo = engage(a, z, geo, 30, new Rng(1), tweak("detection", { ambush_mult: 1 })).report.b;
     expect(hi.killed + hi.wounded).toBeGreaterThan(lo.killed + lo.wounded);
@@ -210,6 +210,35 @@ describe("pas de fuite d'information entre factions", () => {
     const hidden = [pile("p_own", P, 0, 0, { concealment: 1, noise: 0, troops: { fusil: 5 } }), pile("m", M, 2400, 0)];
     expect(viewForFaction(M, hidden, NOON, tb).seen).toEqual([]);
     expect(viewForFaction(P, hidden, NOON, tb).seen.map((s) => s.id)).toEqual(["m"]);
+  });
+  it("coalition : avec un prédicat Hostility, les piles alliées sont toujours visibles ; sans, la détection s'applique", () => {
+    const A2 = "alliee";
+    const ps = [pile("p_own", P, 0, 0), pile("ally_far", A2, 80000, 0, { troops: { mortier: 3 } }), pile("m_far", M, 80000, 0)];
+    const h = (a: string, z: string) => a !== z && a !== A2 && z !== A2 && !(a === P && z === A2);
+    expect(viewForFaction(P, ps, NOON, tb).seen).toEqual([]);
+    const v = viewForFaction(P, ps, NOON, tb, h);
+    expect(v.seen.map((s) => s.id)).toEqual(["ally_far"]);
+    expect(JSON.stringify(v)).not.toContain("mortier");
+    expect(JSON.stringify(v)).not.toContain("m_far");
+  });
+  it("projection de rencontre : une faction ne reçoit jamais seen/ambusher de l'adversaire", () => {
+    const a = pile("a", P, 0, 0, { scouts: 1, intel: 1, concealment: 1, noise: 0, troops: { artillerie: 4 }, ammo: { artillerie: 50 } });
+    const z = pile("z", M, 1800, 0);
+    const [e] = scanHumanEncounters([a, z], hostile, NOON, 3, tb);
+    if (!e) throw new Error("rencontre attendue");
+    expect(e.ambusher).toBe("a");
+    const vp = projectEncounterForFaction(e, P, [a, z]);
+    const vm = projectEncounterForFaction(e, M, [a, z]);
+    expect(vp).toEqual({ id: e.id, own: "a", spotted: true, other: "z", otherFaction: M, distanceM: 1800 });
+    // la victime de l'embuscade ne sait ni qui tire, ni d'où, ni qu'elle n'a pas été vue
+    expect(vm).toEqual({ id: e.id, own: "z", spotted: false, other: null, otherFaction: null, distanceM: null });
+    for (const v of [vp, vm]) {
+      const json = JSON.stringify(v);
+      expect(json).not.toContain("ambusher");
+      expect(Object.keys(v ?? {})).not.toContain("seen");
+    }
+    expect(projectEncounterForFaction(e, "tiers", [a, z])).toBeNull();
+    expect(projectEncounterForFaction(e, P, [])).toBeNull();
   });
   it("la nuit réduit ce qu'on voit", () => {
     expect(viewForFaction(P, piles, { ...NOON, hour: 23, visibility: 0.1 }, tb).seen).toEqual([]);

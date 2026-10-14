@@ -56,7 +56,7 @@ function exercise(b: TideBalance): void {
   for (const w of weapons) reachOf(pile("a", "x", 0, 0, { troops: { [w]: 5 }, ammo: { [w]: 5 }, gas: 5 }), NOON, b);
   // Combat : chaque arme, avec et sans munitions/gaz, couvert, flanquement, embuscade, vue, déroute.
   for (const w of weapons) {
-    const geo = { distanceM: 60, flank: 0.5, visibility: 1, night: false, seen: { a: true, b: false }, ambusher: "a" as const };
+    const geo = { distanceM: 60, flankA: 0.5, flankB: 0, visibility: 1, night: false, seen: { a: true, b: false }, ambusher: "a" as const };
     for (const supplied of [true, false]) {
       const att = pile("a", "x", 0, 0, { troops: { [w]: 40 }, ammo: { [w]: supplied ? 1000 : 0 }, gas: supplied ? 1000 : 0, routed: !supplied, anchors: 0.5 });
       const r = engage(att, pile("z", "y", 60, 0, { cover: 0.5, troops: { fusil: 200, odm: 20 }, anchors: 0.5 }), geo, 20, rng, b);
@@ -64,6 +64,7 @@ function exercise(b: TideBalance): void {
       recover(r.b, 20, b);
     }
   }
+  engage(pile("a", "x", 0, 0), pile("z", "y", 60, 0), { distanceM: 60, flankA: 0, flankB: 0.5, visibility: 0.5, night: true, seen: { a: true, b: true }, ambusher: null }, 20, rng, b);
   // Focus.
   const humans: Human[] = [{ id: "h", x: 50, y: 0, group: 3, noise: 1, moving: true, bait: true }, { id: "k", x: 80, y: 0, group: 1, noise: 0, moving: false }];
   for (const sizeClass of Object.keys(tb.focus.size_classes)) {

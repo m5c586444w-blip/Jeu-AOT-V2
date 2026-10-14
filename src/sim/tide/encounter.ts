@@ -6,7 +6,7 @@ import { factionOfSeat } from "../knowledge/knowledge";
 import { activityOf, isNight, localActivity } from "./activity";
 import { sizeOf, signature } from "./footprint";
 import { attentionField, cellOf, localDensity } from "./grid";
-import type { Conditions, FactionView, Hostility, HumanEncounter, Pile, SeenPile, TideGrid, TitanEncounter, WallPost } from "./types";
+import type { Conditions, EncounterView, FactionView, Hostility, HumanEncounter, Pile, SeenPile, TideGrid, TitanEncounter, WallPost } from "./types";
 
 /** Facteur de visibilité de la météo et de l'heure pour la détection humaine, dans (0, 1]. */
 export function conditionMult(visibility: number, hour: number, b: TideBalance): number {
@@ -94,13 +94,18 @@ export function scanHumanEncounters(piles: readonly Pile[], hostile: Hostility, 
   return out;
 }
 
-/** Vue d'une faction : ses piles exactes, et les autres piles SEULEMENT si l'une des siennes les repère (position, effectif arrondi). */
-export function viewForFaction(faction: string, piles: readonly Pile[], cond: Conditions, b: TideBalance): FactionView {
+/**
+ * Vue d'une faction : ses piles exactes, et les autres piles SEULEMENT si l'une des siennes les repère (position, effectif arrondi).
+ * Si un prédicat `hostile` est fourni, les piles d'une faction NON hostile (coalition) sont toujours visibles (même estimation arrondie) ;
+ * sans prédicat, aucune distinction d'alliance n'est faite (toute autre faction est soumise à la détection).
+ */
+export function viewForFaction(faction: string, piles: readonly Pile[], cond: Conditions, b: TideBalance, hostile?: Hostility): FactionView {
   const own = piles.filter((p) => p.faction === faction).sort((a, z) => (a.id < z.id ? -1 : 1));
   const seen: SeenPile[] = [];
   for (const t of [...piles].sort((a, z) => (a.id < z.id ? -1 : 1))) {
     if (t.faction === faction) continue;
-    if (!own.some((o) => dist(o, t) <= detectionRange(o, t, cond, b))) continue;
+    const ally = hostile !== undefined && !hostile(faction, t.faction);
+    if (!ally && !own.some((o) => dist(o, t) <= detectionRange(o, t, cond, b))) continue;
     const bucket = b.detection.size_bucket;
     seen.push({ id: t.id, faction: t.faction, x: t.x, y: t.y, sizeEstimate: Math.max(bucket, Math.round(sizeOf(t) / bucket) * bucket) });
   }
@@ -108,7 +113,25 @@ export function viewForFaction(faction: string, piles: readonly Pile[], cond: Co
 }
 
 /** Vue par siège (27 §1) : la connaissance reste par faction ; un siège sans faction ne voit rien. */
-export function viewForSeat(state: GameState, seat: SeatId, piles: readonly Pile[], cond: Conditions, b: TideBalance): FactionView {
+export function viewForSeat(state: GameState, seat: SeatId, piles: readonly Pile[], cond: Conditions, b: TideBalance, hostile?: Hostility): FactionView {
   const f = factionOfSeat(state, seat);
-  return f === null ? { faction: "", own: [], seen: [] } : viewForFaction(f, piles, cond, b);
+  return f === null ? { faction: "", own: [], seen: [] } : viewForFaction(f, piles, cond, b, hostile);
+}
+
+/**
+ * Projection d'une rencontre pour une faction : seulement ce qu'elle a vu. Jamais `seen` ni `ambusher` de l'adversaire :
+ * `spotted` est ce que SA pile a repéré ; l'identité et la distance de l'autre pile ne sont révélées que si elle l'a repéré
+ * (sinon elle subit le feu sans savoir d'où : `other` et `distanceM` valent `null`). `null` si la faction n'est pas partie
+ * prenante de la rencontre (ou si les piles sont inconnues).
+ */
+export function projectEncounterForFaction(encounter: HumanEncounter, faction: string, piles: readonly Pile[]): EncounterView | null {
+  const pa = piles.find((p) => p.id === encounter.a);
+  const pb = piles.find((p) => p.id === encounter.b);
+  if (!pa || !pb) return null;
+  const side = pa.faction === faction ? "a" : pb.faction === faction ? "b" : null;
+  if (side === null) return null;
+  const mine = side === "a" ? pa : pb;
+  const spotted = encounter.seen[side];
+  const other = side === "a" ? pb : pa;
+  return { id: encounter.id, own: mine.id, spotted, other: spotted ? other.id : null, otherFaction: spotted ? other.faction : null, distanceM: spotted ? encounter.distanceM : null };
 }

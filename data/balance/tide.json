@@ -66,7 +66,9 @@
     "evac_per_min": 0.05,
     "area_ref_men": 400,
     "airborne_evasion": 0.6,
-    "airborne_exposure": 1.4
+    "airborne_exposure": 1.4,
+    "fire_vis_floor": 0.35,
+    "fire_night_mult": 0.6
   },
   "focus": {
     "range_m": 400,

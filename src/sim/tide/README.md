@@ -9,3 +9,8 @@ Pilier P2 « La Marée » et moteur de rencontres (spec 26 §3 et §3 bis). Para
 - `focus.ts` : attention tactique des Titans (distance, groupe, bruit, mouvement, appât, anormal, immobile, saturation, saisie).
 
 Pur : aucun DOM, aucun `Math.random`, temps et aléa injectés. **Non branché** au tick, à `routes.ts` (`titanDensity` reste statique) ni à `battle.ts` : aucune empreinte de référence modifiée. Les identifiants de faction viennent des piles ; l'hostilité est un prédicat injecté (`Hostility`). Choix `[A]` : plan 2D, effectifs réels (flottants) en équivalents hommes, armes identifiées par clé de `weapons`.
+
+Revue C5 (corrections) :
+- `Geometry.visibility` et `Geometry.night` réduisent la précision de tir des deux camps (`combat.fire_vis_floor`, `combat.fire_night_mult`, `[A]`). Le flanquement est symétrique : `flankA` (a sur b) et `flankB` (b sur a), chacun donnant un bonus de feu à l'attaquant et une pénalité de moral à la victime.
+- `projectEncounterForFaction(encounter, faction, piles)` : projection d'une `HumanEncounter` pour une faction. Elle ne reçoit jamais `seen` ni `ambusher` de l'adversaire ; l'identité et la distance de l'adversaire ne sont fournies que si SA pile l'a repéré (sinon `null`). À utiliser pour tout affichage ou message par siège ; `HumanEncounter` brute est réservée au moteur.
+- Alliances : `viewForFaction`/`viewForSeat` ne distinguent PAS les alliés par défaut (toute autre faction est soumise à la détection). Un prédicat `Hostility` optionnel (dernier paramètre) fait voir en permanence les piles des factions non hostiles (coalition), avec l'effectif arrondi seulement. Décision `[A]` : le prédicat est fourni par l'appelant (diplomatie), jamais déduit ici.

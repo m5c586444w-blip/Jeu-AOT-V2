@@ -735,6 +735,8 @@ export const TideBalanceSchema = z
         area_ref_men: pos,
         airborne_evasion: prob,
         airborne_exposure: pos,
+        fire_vis_floor: prob,
+        fire_night_mult: prob,
       })
       .strict(),
     focus: z

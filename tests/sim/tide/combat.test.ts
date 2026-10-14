@@ -4,7 +4,7 @@ import { engage, evacuate, headcount, recover, vulnerability } from "../../../sr
 import type { Geometry, Pile } from "../../../src/sim/tide";
 import { pile, tb, tweak, weapon } from "./helpers";
 
-const geo = (o: Partial<Geometry> = {}): Geometry => ({ distanceM: 200, flank: 0, visibility: 1, night: false, seen: { a: true, b: true }, ambusher: null, ...o });
+const geo = (o: Partial<Geometry> = {}): Geometry => ({ distanceM: 200, flankA: 0, flankB: 0, visibility: 1, night: false, seen: { a: true, b: true }, ambusher: null, ...o });
 const A = (o: Partial<Pile> = {}) => pile("a", "paradis", 0, 0, o);
 const Z = (o: Partial<Pile> = {}) => pile("z", "marley", 200, 0, o);
 const lost = (r: { killed: number; wounded: number }) => r.killed + r.wounded;
@@ -42,13 +42,34 @@ describe("(c) couvert, suppression et moral", () => {
     expect(lost(engage(A(), Z({ routed: true }), geo(), 30, new Rng(1), tweak("combat", { rout_fire_mult: 1 })).report.a)).toBeGreaterThan(lost(routedFire));
   });
   it("flanquement : plus de pertes et plus de perte de moral pour la victime", () => {
-    const front = engage(A(), Z(), geo({ flank: 0 }), 30, new Rng(1), tb);
-    const side = engage(A(), Z(), geo({ flank: 1 }), 30, new Rng(1), tb);
+    const front = engage(A(), Z(), geo({ flankA: 0 }), 30, new Rng(1), tb);
+    const side = engage(A(), Z(), geo({ flankA: 1 }), 30, new Rng(1), tb);
     expect(lost(side.report.b)).toBeGreaterThan(lost(front.report.b));
     expect(side.b.morale).toBeLessThan(front.b.morale);
-    const noFlankMorale = engage(A(), Z(), geo({ flank: 1 }), 30, new Rng(1), tweak("combat", { flank_morale_k: 0 }));
+    const noFlankMorale = engage(A(), Z(), geo({ flankA: 1 }), 30, new Rng(1), tweak("combat", { flank_morale_k: 0 }));
     expect(noFlankMorale.b.morale).toBeGreaterThan(side.b.morale);
-    expect(lost(engage(A(), Z(), geo({ flank: 1 }), 30, new Rng(1), tweak("combat", { flank_fire_k: 0 })).report.b)).toBeLessThan(lost(side.report.b));
+    expect(lost(engage(A(), Z(), geo({ flankA: 1 }), 30, new Rng(1), tweak("combat", { flank_fire_k: 0 })).report.b)).toBeLessThan(lost(side.report.b));
+  });
+  it("flanquement symétrique : flankB agit sur le feu de b et le moral de a comme flankA sur l'inverse", () => {
+    const calm = tweak("combat", { noise_pct: 0 });
+    const ab = engage(A(), Z(), geo({ flankA: 1 }), 30, new Rng(1), calm);
+    const ba = engage(A(), Z(), geo({ flankB: 1 }), 30, new Rng(1), calm);
+    expect(lost(ba.report.a)).toBeGreaterThan(lost(engage(A(), Z(), geo(), 30, new Rng(1), calm).report.a));
+    expect(lost(ba.report.a)).toBeCloseTo(lost(ab.report.b), 9);
+    expect(ba.a.morale).toBeCloseTo(ab.b.morale, 9);
+    expect(ba.b.morale).toBeCloseTo(ab.a.morale, 9);
+    expect(ba.a.morale).toBeLessThan(engage(A(), Z(), geo(), 30, new Rng(1), calm).a.morale);
+  });
+  it("visibilité et nuit réduisent la précision de tir (leviers fire_vis_floor et fire_night_mult)", () => {
+    const loss = (g: Partial<Geometry>, b = tb) => lost(engage(A(), Z(), geo(g), 30, new Rng(1), b).report.b);
+    const clear = loss({});
+    expect(loss({ visibility: 0 })).toBeLessThan(clear);
+    expect(loss({ visibility: 0.5 })).toBeGreaterThan(loss({ visibility: 0 }));
+    expect(loss({ visibility: 0 })).toBeCloseTo(clear * tb.combat.fire_vis_floor, 9);
+    expect(loss({ night: true })).toBeLessThan(clear);
+    expect(loss({ night: true })).toBeCloseTo(clear * tb.combat.fire_night_mult, 9);
+    expect(loss({ visibility: 0 }, tweak("combat", { fire_vis_floor: 1 }))).toBeCloseTo(clear, 9);
+    expect(loss({ night: true }, tweak("combat", { fire_night_mult: 1 }))).toBeCloseTo(clear, 9);
   });
   it("non vu : tire à peine ; la distance réduit la précision ; hors de portée, aucun tir", () => {
     const blind = engage(A(), Z(), geo({ seen: { a: false, b: true } }), 30, new Rng(1), tb);
@@ -127,7 +148,7 @@ describe("invariants : conservation, monotonie, déterminisme", () => {
     const totalZ = headcount(z);
     const rng = new Rng(9);
     for (let i = 0; i < 40; i++) {
-      const r = engage(a, z, geo({ flank: 0.4, distanceM: 120 }), 20, rng, tb);
+      const r = engage(a, z, geo({ flankA: 0.4, flankB: 0.2, distanceM: 120 }), 20, rng, tb);
       a = evacuate(recover(r.a, 20, tb), 20, tb);
       z = evacuate(recover(r.b, 20, tb), 20, tb);
       expect(headcount(a)).toBeCloseTo(total, 9);

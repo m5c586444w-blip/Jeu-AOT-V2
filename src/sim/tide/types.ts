@@ -107,6 +107,18 @@ export interface SeenPile {
   sizeEstimate: number;
 }
 
+/** Rencontre humaine telle qu'une faction la connaît (voir `projectEncounterForFaction`). */
+export interface EncounterView {
+  id: string;
+  own: string;
+  /** Sa pile a-t-elle repéré l'adversaire ? */
+  spotted: boolean;
+  /** Identité de l'adversaire : seulement si repéré. */
+  other: string | null;
+  otherFaction: string | null;
+  distanceM: number | null;
+}
+
 export interface FactionView {
   faction: string;
   own: Pile[];
@@ -115,9 +127,13 @@ export interface FactionView {
 
 export interface Geometry {
   distanceM: number;
-  /** Part de flanquement de "a" sur "b", 0–1. */
-  flank: number;
+  /** Part de flanquement de "a" sur "b", 0–1 (bonus de feu de "a", pénalité de moral de "b"). */
+  flankA: number;
+  /** Part de flanquement de "b" sur "a", 0–1 (symétrique de `flankA`). */
+  flankB: number;
+  /** Visibilité 0–1 : réduit la précision de tir des deux camps (`combat.fire_vis_floor`). */
   visibility: number;
+  /** Nuit : réduit la précision de tir des deux camps (`combat.fire_night_mult`). */
   night: boolean;
   seen: { a: boolean; b: boolean };
   ambusher: "a" | "b" | null;
