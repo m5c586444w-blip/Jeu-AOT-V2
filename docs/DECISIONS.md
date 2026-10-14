@@ -1312,3 +1312,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Initialisation** : registre vide. Le monde ne fournit pas d'individus (`data.units` sont des types d'unités, pas des soldats) ; la troupe entre par `enlistNamed` / `enlistGenerated`.
 - **Reste** : aucun câblage encore de `CharacterDies` ni des pertes de bataille vers `registerDeath` (le registre évolue en miroir), alertes, écran, activation par défaut (décision séparée). Aucune empreinte de référence ne change (120 jours sans activation : `e0a0b63c`).
 - **Réversible** : oui.
+
+## 2026-10-14 — D-167 Direction : les prénoms « Ilse » et « Frieda » sont autorisés
+- **Décision (Gabriel, 2026-10-14 matin)** : les deux prénoms « Ilse » et « Frieda », signalés par la dette n° 94 (présents dans `data/names/paradis.json` et dans des fichiers de personnages), sont **autorisés** : il n'y a rien à trier ni à remplacer. Raison donnée : la règle de restriction sur le lore est levée (ERRATA_V3 §2, création de lore autorisée).
+- **Portée** : ces deux prénoms seulement. La règle de **provenance des fichiers** (aucun fichier, modèle, texture ou image de l'œuvre ou d'un fan, aucun décalque) reste en vigueur : elle ne concerne pas des prénoms de données.
+- **Conséquence** : la dette n° 94 est soldée sur ce point. Les remplacements déjà faits dans les tables du Registre (Irmgard, Felicitas, Dominik, Benedikt) et la liste d'exclusion de `tests/sim/registry/data.test.ts` restent en place : ils sont inoffensifs et il n'y a rien à défaire. Un prénom de l'œuvre nouveau, hors de ces deux-là, reste à signaler à Gabriel avant usage.
+- **Réversible** : oui.

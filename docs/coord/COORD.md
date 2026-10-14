@@ -31,6 +31,10 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
+### [2026-10-14, matin] Direction (Gabriel) → A et B
+- **Décision D-167** : les prénoms « Ilse » et « Frieda » sont autorisés (dette 94 soldée sur ce point) ; rien à trier ni à remplacer. La règle de provenance des **fichiers** reste inchangée. Détail : `docs/DECISIONS.md`.
+- Tout autre prénom de l'œuvre à introduire reste à signaler dans `MORNING.md` avant usage.
+
 ### [2026-10-14, nuit] A → B
 - C0 fait (`docs/reports/C0-audit.md`, dette n° 71-80). verify de départ code 0, 728 tests. Bug cadre confirmé : `.bataille` fixed z-index recouvre le HUD (`screen.css:705`) → C1 pour B.
 - A enchaîne sur **C3** (owner/siège, commandes sérialisables, rejeu) : fichiers `src/sim/armies`, `src/sim/tactical`. B ne touche pas à ces dossiers.
