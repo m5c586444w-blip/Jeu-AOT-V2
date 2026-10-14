@@ -54,11 +54,22 @@ export function applyDecision(
   if (kind === "rationner") {
     for (const d of ds) {
       d.rations *= c.ration.ration_mult;
+      d.rationPolicy = {
+        mult: c.ration.ration_mult,
+        capacityMult: c.ration.pressure_relief_capacity_mult,
+        daysLeft: c.ration.duration_days,
+      };
       d.order = Math.max(0, d.order + c.ration.order);
     }
     s.effects.legitimacy += c.ration.legitimacy;
     s.monthsOver[ring] = 0;
-    return { state: s, legitimacy: c.ration.legitimacy, note: "rationner" };
+    return {
+      state: s,
+      legitimacy: c.ration.legitimacy,
+      note: "rationner",
+      goldCost: 0,
+      lostOutside: 0,
+    };
   }
   if (kind === "desengorger") {
     // On ramène la pression de l'anneau à la cible ; les envoyés sortent du registre, une part meurt hors des murs.
@@ -71,24 +82,40 @@ export function applyDecision(
       d.order = Math.max(0, d.order + c.send_out.order);
     }
     s.ledger.exported += surplus;
+    const lostOutside = surplus * c.send_out.loss_share;
     s.effects.legitimacy += c.send_out.legitimacy;
     s.monthsOver[ring] = 0;
     return {
       state: s,
       legitimacy: c.send_out.legitimacy,
-      note: `desengorger:${Math.round(surplus)}:pertes_prevues:${Math.round(surplus * c.send_out.loss_share)}`,
+      note: `desengorger:${Math.round(surplus)}:pertes_prevues:${Math.round(lostOutside)}`,
+      goldCost: 0,
+      lostOutside,
     };
   }
   const n = c.new_land;
   if (gold < n.gold_cost || ds.length === 0)
-    return { state: s, legitimacy: 0, note: "nouvelles_terres:refusee" };
+    return {
+      state: s,
+      legitimacy: 0,
+      note: "nouvelles_terres:refusee",
+      goldCost: 0,
+      lostOutside: 0,
+    };
   const target = ds.reduce((a, d) => (pressureOf(d) > pressureOf(a) ? d : a));
   if (roll < n.failure_p) {
     // Échec : expédition décimée, la population du district porteur subit la perte.
     const loss = target.population * n.failure_loss_share;
     target.population -= loss;
     s.ledger.deaths += loss;
-    return { state: s, legitimacy: 0, note: "nouvelles_terres:echec" };
+    s.monthsOver[ring] = 0;
+    return {
+      state: s,
+      legitimacy: 0,
+      note: "nouvelles_terres:echec",
+      goldCost: n.gold_cost,
+      lostOutside: 0,
+    };
   }
   s.projects.push({
     id: `proj_${s.nextId++}`,
@@ -97,7 +124,13 @@ export function applyDecision(
     gain: target.foodCapacity * n.capacity_gain_share,
   });
   s.monthsOver[ring] = 0;
-  return { state: s, legitimacy: 0, note: "nouvelles_terres:lancee" };
+  return {
+    state: s,
+    legitimacy: 0,
+    note: "nouvelles_terres:lancee",
+    goldCost: n.gold_cost,
+    lostOutside: 0,
+  };
 }
 
 /** Remet à zéro les effets politiques cumulés et les rend à l'appelant (légitimité à appliquer côté politique). */

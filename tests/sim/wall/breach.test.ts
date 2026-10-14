@@ -22,7 +22,8 @@ const evac = (s: WallState, hours: number): WallState => {
   for (let i = 0; i < hours; i++) x = stepEvacuationHour(x, wb);
   return x;
 };
-const breached = (): WallState => breachDistrict(world3(), "ma", "ro", 12000);
+const breached = (): WallState =>
+  breachDistrict(world3(), "ma", "ro", 12000, wb);
 
 describe("P1 brèche et évacuation", () => {
   it("seuil de brèche sur l'état du segment", () => {
@@ -139,6 +140,26 @@ describe("P1 désengorgement", () => {
     expect(r.state.ledger.exported).toBeGreaterThan(0);
     expect(Math.abs(conservationGap(r.state))).toBeLessThan(1e-3);
     expect(r.state.monthsOver.rose).toBe(0);
+    expect(r.lostOutside).toBeGreaterThan(0);
+    expect(r.lostOutside).toBeCloseTo(
+      r.state.ledger.exported * wb.decongest.send_out.loss_share,
+      6,
+    );
+    expect(r.lostOutside).toBeLessThanOrEqual(r.state.ledger.exported);
+  });
+  it("nouvelles terres : goldCost renvoyé (lancée et échec), 0 si refusée ; l'échec remet monthsOver à 0", () => {
+    const g = wb.decongest.new_land.gold_cost;
+    expect(
+      applyDecision(hot(), "rose", "nouvelles_terres", 1e9, 0.99, wb).goldCost,
+    ).toBe(g);
+    const fail = applyDecision(hot(), "rose", "nouvelles_terres", 1e9, 0, wb);
+    expect(fail.goldCost).toBe(g);
+    expect(fail.state.monthsOver.rose).toBe(0);
+    const no = applyDecision(hot(), "rose", "nouvelles_terres", 0, 0.9, wb);
+    expect(no.goldCost).toBe(0);
+    expect(applyDecision(hot(), "rose", "rationner", 0, 0.5, wb).goldCost).toBe(
+      0,
+    );
   });
   it("nouvelles terres : refusées sans or ; échec selon l'aléa injecté ; succès => capacité accrue après les mois", () => {
     expect(

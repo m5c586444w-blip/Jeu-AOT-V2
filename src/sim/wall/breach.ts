@@ -18,6 +18,7 @@ export function breachDistrict(
   id: string,
   to: string | null,
   distanceM: number,
+  b: WallBalance,
 ): WallState {
   const s = cloneWall(prev);
   const d = s.districts[id];
@@ -36,7 +37,7 @@ export function breachDistrict(
     done: false,
   });
   d.population = 0;
-  d.order = Math.min(d.order, 15);
+  d.order = Math.min(d.order, b.breach.order_cap_on_breach);
   return s;
 }
 
@@ -148,7 +149,10 @@ export function stepReconquest(
   if (from && (from.status === "intact" || from.status === "reconquered")) {
     const n = Math.min(
       from.population * b.reconquest.repopulate_share_per_day,
-      Math.max(0, d.foodCapacity * 1.2 - d.population),
+      Math.max(
+        0,
+        d.foodCapacity * b.reconquest.repopulate_capacity_mult - d.population,
+      ),
     );
     from.population -= n;
     d.population += n;

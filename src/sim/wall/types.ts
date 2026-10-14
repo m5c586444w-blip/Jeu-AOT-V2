@@ -15,6 +15,8 @@ export interface District {
   foodCapacity: number;
   /** Part des rations distribuées (1 = pleines). */
   rations: number;
+  /** Politique de rationnement en cours (décision « rationner ») : plafonne les rations et étire la capacité, pendant `daysLeft` jours. */
+  rationPolicy?: { mult: number; capacityMult: number; daysLeft: number };
   /** Ordre public 0–100. */
   order: number;
   status: DistrictStatus;
@@ -78,4 +80,8 @@ export interface DecisionResult {
   state: WallState;
   legitimacy: number;
   note: string;
+  /** Or à débiter par l'appelant (nouvelles terres lancées ou échouées ; 0 sinon). */
+  goldCost: number;
+  /** Envoyés hors des murs et morts dehors (désengorgement : surplus × loss_share) ; sortis du registre via `exported`. */
+  lostOutside: number;
 }

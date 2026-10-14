@@ -85,7 +85,11 @@ export function stepDay(prev: WallState, b: WallBalance): WallState {
   for (const id of ids) {
     const d = s.districts[id];
     if (!d || !live(d)) continue;
-    const p = pressureOf(d);
+    const pol = d.rationPolicy;
+    const p = pressureOf({
+      population: d.population,
+      foodCapacity: d.foodCapacity * (pol ? pol.capacityMult : 1),
+    });
     const lvl = levelOf(p, b);
     const births = d.population * b.pressure.birth_per_day;
     const epi =
@@ -107,16 +111,23 @@ export function stepDay(prev: WallState, b: WallBalance): WallState {
       0,
       100,
     );
-    d.rations = clamp(
-      p > 1
+    let rations = clamp(
+      p > b.pressure.ration_pressure_threshold
         ? Math.max(b.pressure.ration_floor * d.rations, 1 / p)
-        : Math.min(1, d.rations + 0.05),
-      b.pressure.ration_floor * 0.5,
+        : Math.min(1, d.rations + b.pressure.ration_recovery_per_day),
+      b.pressure.ration_floor * b.pressure.ration_absolute_floor_mult,
       1,
     );
+    if (pol) {
+      rations = Math.min(rations, pol.mult);
+      pol.daysLeft -= 1;
+      if (pol.daysLeft <= 0) delete d.rationPolicy;
+    }
+    d.rations = rations;
   }
   // Flux de réfugiés : calculés sur la pression d'avant flux, appliqués ensemble (indépendant de l'ordre de parcours).
   const flows: Array<[string, string, number]> = [];
+  const rooms = new Map<string, number>();
   for (const id of ids) {
     const d = s.districts[id];
     if (!d || !live(d)) continue;
@@ -138,12 +149,15 @@ export function stepDay(prev: WallState, b: WallBalance): WallState {
     if (targets.length === 0) continue;
     const out = d.population * b.refugees.flow_share_per_day;
     for (const t of targets) {
-      // Jamais au-delà de la pression maximale d'accueil.
+      // Jamais au-delà de la pression maximale d'accueil : la capacité d'accueil est consommée source après source.
       const room = Math.max(
         0,
-        t.foodCapacity * b.refugees.max_pressure_after - t.population,
+        rooms.get(t.id) ??
+          t.foodCapacity * b.refugees.max_pressure_after - t.population,
       );
-      flows.push([id, t.id, Math.min(out / targets.length, room)]);
+      const n = Math.min(out / targets.length, room);
+      rooms.set(t.id, room - n);
+      flows.push([id, t.id, n]);
     }
   }
   for (const [a, c, n] of flows) {

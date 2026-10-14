@@ -14,7 +14,8 @@ import {
 } from "../../../src/sim/wall";
 import type { ProvinceState } from "../../../src/sim/strategic/economy";
 import type { WallState } from "../../../src/sim/wall";
-import { at, wb, world3 } from "./helpers";
+import { applyDecision } from "../../../src/sim/wall";
+import { at, district, wb, world3 } from "./helpers";
 
 const run = (s: WallState, days: number): WallState => {
   let x = s;
@@ -113,7 +114,7 @@ describe("P1 pression", () => {
       si: [300000, 600000],
     });
     s.gates.sina = false; // l'anneau intérieur ferme sa porte : rien ne soulage Rose
-    s = breachDistrict(s, "ma", "ro", 12000);
+    s = breachDistrict(s, "ma", "ro", 12000, wb);
     for (let h = 0; h < 96; h++) s = stepEvacuationHour(s, wb);
     let month = 0;
     let decided = false;
@@ -145,5 +146,53 @@ describe("P1 pression", () => {
     expect(at(w, "a").population).toBe(1000);
     expect(w.ledger.start).toBe(1000);
     expect(JSON.stringify(prov)).toBe(snap);
+  });
+});
+
+describe("P1 correctifs revue (C6b)", () => {
+  it("max_pressure_after garanti avec plusieurs sources vers une même cible", () => {
+    const base = world3();
+    const s0: WallState = {
+      ...base,
+      districts: {
+        a: district("a", "maria", 200000, 100000, ["t"]),
+        b: district("b", "maria", 200000, 100000, ["t"]),
+        c: district("c", "maria", 200000, 100000, ["t"]),
+        t: district("t", "rose", 90000, 100000, ["a", "b", "c"]),
+      },
+    };
+    s0.ledger.start = 690000;
+    const before = pressureOf(at(s0, "t"));
+    const s = stepDay(s0, wb);
+    expect(pressureOf(at(s, "t"))).toBeLessThanOrEqual(
+      Math.max(before, wb.refugees.max_pressure_after) + 1e-9,
+    );
+    expect(at(s, "t").population).toBeGreaterThan(at(s0, "t").population);
+    expect(Math.abs(conservationGap(s))).toBeLessThan(1e-3);
+    expect(JSON.stringify(stepDay(s0, wb))).toBe(JSON.stringify(s));
+  });
+  it("rationner : rations plafonnées les jours suivants, capacité étirée, puis retour à la normale", () => {
+    let s = world3({ ro: [500000, 700000] });
+    s = applyDecision(s, "rose", "rationner", 0, 0.5, wb).state;
+    const r0 = at(s, "ro").rations;
+    expect(r0).toBeLessThanOrEqual(wb.decongest.ration.ration_mult + 1e-9);
+    s = run(s, 1);
+    expect(at(s, "ro").rations).toBeLessThanOrEqual(
+      wb.decongest.ration.ration_mult + 1e-9,
+    );
+    expect(at(s, "ro").rations).toBeLessThan(1);
+    s = run(s, wb.decongest.ration.duration_days);
+    expect(at(s, "ro").rationPolicy).toBeUndefined();
+    s = run(s, 30);
+    expect(at(s, "ro").rations).toBe(1);
+  });
+  it("pressure_relief_capacity_mult est appliqué : moins de décès en épidémie avec rationnement", () => {
+    const hotW = (): WallState => world3({ ro: [740000, 700000] });
+    const plain = run(hotW(), 20);
+    const rat = run(
+      applyDecision(hotW(), "rose", "rationner", 0, 0.5, wb).state,
+      20,
+    );
+    expect(rat.ledger.deaths).toBeLessThan(plain.ledger.deaths);
   });
 });
