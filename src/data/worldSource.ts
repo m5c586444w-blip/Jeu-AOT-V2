@@ -1,7 +1,7 @@
 import { BALANCE_FILES } from "./balance";
 import { GeoSchema } from "./geo";
 import type { GeoData } from "./geo";
-import type { BalanceName, WallBalance, WallLayout } from "./balance";
+import type { BalanceName, RegistryBalance, WallBalance, WallLayout } from "./balance";
 import { COLLECTION_NAMES } from "./schemas";
 import type { CollectionName } from "./schemas";
 import { checkReferences, emptyData, jsonPath, validateCollectionFile } from "./validate";
@@ -66,6 +66,7 @@ export function worldSourceFromFiles(files: Readonly<Record<string, unknown>>): 
       ...(balance.world ? { worldBalance: balance.world as WorldSource["worldBalance"] } : {}),
       ...(balance.armies ? { armiesBalance: balance.armies as WorldSource["armiesBalance"] } : {}),
       ...(balance.wall && balance.wall_layout ? { wall: { balance: balance.wall as WallBalance, layout: balance.wall_layout as WallLayout } } : {}),
+      ...(balance.registry ? { registry: balance.registry as RegistryBalance } : {}),
       ...(balance.missions ? { missionsBalance: balance.missions as WorldSource["missionsBalance"] } : {}),
       events: data.events,
       techs: data.techs,

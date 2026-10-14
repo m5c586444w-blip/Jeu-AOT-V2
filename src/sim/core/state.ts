@@ -27,6 +27,8 @@ import { monthlyAi, weeklyAi } from "../world/ai";
 import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
 import { tickWall } from "../wall/tick";
+import { tickRegistry } from "../registry/tick";
+import type { RegistryState } from "../registry/types";
 import type { WallState } from "../wall/types";
 import type { SeatsState } from "./seat";
 import { createArmiesState } from "../armies/state";
@@ -85,6 +87,8 @@ export interface GameState {
 /** P1 Le Mur (D-165) : créé par la commande `EnableWall`, avancé par le tick seulement s'il existe. */
 export interface PillarsState {
   wall?: WallState;
+  /** P7 Le Registre de la troupe (D-166) : créé par la commande `EnableRegistry`. */
+  registry?: RegistryState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -224,6 +228,8 @@ export function tickDay(state: GameState, world?: World): GameState {
     }
     // Pilier P1 (D-165) : seulement si la commande EnableWall l'a créé.
     if (pillars?.wall && world.wall) pillars = { ...pillars, wall: tickWall(pillars.wall, world.wall.balance, monthStart) };
+    // Pilier P7 (D-166) : seulement si la commande EnableRegistry l'a créé.
+    if (pillars?.registry && world.registry) pillars = { ...pillars, registry: tickRegistry(pillars.registry, world.registry, state.seed, toAbsoluteDay(date)) };
     if (monthStart) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);

@@ -1,5 +1,6 @@
 import { canonicalJson } from "./canonical";
 import { WallStateSchema } from "../wall/schema";
+import { RegistryStateSchema } from "../registry/schema";
 import { CURRENT_SCHEMA_VERSION } from "./state";
 import type { GameState } from "./state";
 
@@ -160,6 +161,8 @@ function assertGameState(raw: Record<string, unknown>): asserts raw is Record<st
     else {
       const wl = (pl as Record<string, unknown>)["wall"];
       if (wl !== undefined && !WallStateSchema.safeParse(wl).success) problems.push("pillars.wall");
+      const rg = (pl as Record<string, unknown>)["registry"];
+      if (rg !== undefined && !RegistryStateSchema.safeParse(rg).success) problems.push("pillars.registry");
     }
   }
   if (problems.length > 0) throw new SaveFormatError(`Sauvegarde corrompue : champs invalides (${problems.join(", ")})`);

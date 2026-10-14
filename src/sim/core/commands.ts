@@ -32,6 +32,7 @@ import { declareWar, embargo, guaranteeHizuru, guaranteeProblem, makePeace, prop
 import type { TreatyKind } from "../world/diplomacy";
 import { atWar } from "../world/nations";
 import { initWall } from "../wall/tick";
+import { initRegistry } from "../registry/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
 import type { ArmyCommand } from "../armies/layer";
@@ -75,6 +76,7 @@ export type Command =
   | ArmyCommand
   | MissionCommand
   | { type: "EnableWall" }
+  | { type: "EnableRegistry" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -184,6 +186,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
     case "EnableWall":
       if (ctx && (!ctx.world?.wall || !ctx.state.strategic)) return { ok: false, error: "EnableWall : monde sans données du Mur (wall_layout.json) ou sans partie stratégique" };
       return { ok: true };
+    case "EnableRegistry":
+      if (ctx && !ctx.world?.registry) return { ok: false, error: "EnableRegistry : monde sans données du Registre (registry.json)" };
+      return { ok: true };
     case "Noop":
       return { ok: true };
     case "ResolveEncounter": {
@@ -291,6 +296,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
     case "GuaranteeHizuru":
       next = applyP7(next, cmd, world);
       break;
+    case "EnableRegistry": {
+      // P7 Le Registre (D-166) : crée un registre vide ; sans effet s'il existe déjà.
+      if (!world?.registry) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.registry) next = { ...next, pillars: { ...next.pillars, registry: initRegistry() } };
+      break;
+    }
     case "EnableWall": {
       // P1 Le Mur (D-165) : crée l'état du pilier à partir des provinces ; sans effet s'il existe déjà.
       if (!world?.wall || !next.strategic) break; // inatteignable : refusé par validateCommand
