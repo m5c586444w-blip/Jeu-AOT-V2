@@ -1281,3 +1281,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/wall/` (pression population/capacité, brèche, évacuation horaire par portes d'accueil, reconquête, désengorgement à trois branches) ; paramètres `[A]` dans `data/balance/wall.json`. Pure, aléa injecté, non branchée au tick : empreintes inchangées. La pression démographique reste distincte de `armies.pressure` (dette 78). Registre : `total = départ + naissances − décès − exportés` (testé).
 - **Reste** : branchement au tick avec table de capacités par province, alertes, écran « Mur », contrôle `sim:year`, réconciliation avec la famine de `economy.ts`.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-161 C7 : pilier P5 L'Horloge en module pur non branché
+- **Décision** : `src/sim/clock/` (suspicion par faction observatrice, vue sans distinction porteur/innocent, contrôle et autonomie, extraction, roster avec invariant des Neuf) ; paramètres `[A]` dans `data/balance/clock.json`. La malédiction d'Ymir et les 13 ans `[C]` ne sont jamais altérés (`shifters.ts` inchangé) ; l'usure de projection alimente une « horloge utile » séparée `[A]`. Non branchée au tick : empreintes inchangées.
+- **Limites** : perte de contrôle en combat restée dans `tactical/shifters.ts` ; capture par Marley non tracée ; commandes sérialisables, écran, clés i18n `clock.err.*` et branchement au tick reportés.
+- **Réversible** : oui.

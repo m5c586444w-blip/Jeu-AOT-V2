@@ -641,6 +641,79 @@ export const SignalBalanceSchema = z
   })
   .strict();
 
+/** data/balance/clock.json — pilier P5 (spec 26 §6) : suspicion, couverture, contrôle, autonomie, extraction, roster (valeurs [A] ; horloge de 13 ans : shifters.json [C]). */
+export const ClockBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    nine: z.array(z.string()).length(9),
+    suspicion: z
+      .object({
+        evidence: z.record(z.string(), pos),
+        suspect_threshold: pos,
+        strong_threshold: pos,
+        unmask_threshold: pos,
+        cover_k: prob,
+        cover_loss_per_point: z.number().min(0),
+        decay_per_day: z.number().min(0),
+        quiet_days: z.number().int().min(0),
+      })
+      .strict(),
+    cover: z
+      .object({
+        initial: z.record(z.string(), z.number().min(0).max(100)),
+        after_unmask: z.number().min(0).max(100),
+      })
+      .strict(),
+    control: z
+      .object({
+        base: num,
+        will_w: z.number().min(0),
+        bonds_w: z.number().min(0),
+        stress_w: z.number().min(0),
+        contrary_penalty: z.number().min(0),
+        aligned_bonus: z.number().min(0),
+        exhausted_penalty: z.number().min(0),
+      })
+      .strict(),
+    autonomy: z
+      .object({
+        base: z.number().min(0).max(100),
+        per_control: z.number().min(0),
+        predictable_below: z.number().min(0).max(100),
+      })
+      .strict(),
+    ignore: z.object({ below_control: pos, max_p: prob }).strict(),
+    reaction: z.object({ slow_s: pos, fast_s: pos }).strict(),
+    orders: z.array(z.string()).min(1),
+    models: z.record(
+      z.string(),
+      z.array(z.object({ ability: z.string(), weight: pos }).strict()).min(1),
+    ),
+    transform: z.object({ surprised_extra_delay_s: z.number().min(0) }).strict(),
+    extraction: z
+      .object({
+        base: prob,
+        per_attacker: z.number().min(0),
+        max_attackers: z.number().int().min(1),
+        contention_bonus: prob,
+        resist_k: z.number().min(0),
+        kill_base: prob,
+        contention_kill_mult: prob,
+      })
+      .strict(),
+    roster: z
+      .object({
+        use_now_years: z.number().min(0),
+        wear_years_per_day: z.number().min(0),
+        deploy_capital: z.number().min(0),
+        capital_per_day: z.number().min(0),
+        exhausted_below_years: z.number(),
+      })
+      .strict(),
+  })
+  .strict();
+
 /** data/balance/tactical.json — combat tactique (03 : « tout est dans /data/balance/tactical.json »). */
 export const TacticalBalanceSchema = z
   .object({
@@ -1031,6 +1104,7 @@ export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
 export type GasBalance = z.infer<typeof GasBalanceSchema>;
 export type SignalBalance = z.infer<typeof SignalBalanceSchema>;
+export type ClockBalance = z.infer<typeof ClockBalanceSchema>;
 export type WallBalance = z.infer<typeof WallBalanceSchema>;
 
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
@@ -1050,6 +1124,7 @@ export const BALANCE_FILES = {
   gas: GasBalanceSchema,
   signal: SignalBalanceSchema,
   wall: WallBalanceSchema,
+  clock: ClockBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,

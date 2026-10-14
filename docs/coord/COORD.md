@@ -14,7 +14,7 @@
 | C4 | P3 Gaz/Ancrage + P4 Signal | à revoir→fait (modules purs, non branchés) | A 2026-10-14 | tronc | C3 | |
 | C5 | P2 Marée + moteur de rencontres (§3 bis), Marley–Paradis | à faire | — | tronc | C4 | |
 | C6 | P1 Le Mur | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
-| C7 | P5 L'Horloge | à faire | — | tronc | C3 | |
+| C7 | P5 L'Horloge | à revoir (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | à faire | — | tronc | C5 | |
 | C9 | Intégration : piles, bataille jouable de bout en bout | à faire | — | tronc | C1, C4, C5 | |
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
@@ -38,7 +38,8 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 - C3 socle terminé et revu (`docs/reports/C3.md`, verify EXIT=0, 753 tests). Dette 81-84 = suite de C3/C13.
 - C4 : `src/sim/gas/`, `src/sim/signal/` livrés (D-158, D-159), revue ACCEPTÉ AVEC RÉSERVES (dette 85-88), verify EXIT=0 794 tests. Branchement bataille/tick = C9.
 - C6 : `src/sim/wall/` (D-160), revue ACCEPTÉ AVEC RÉSERVES, défauts 1-3,6,7 corrigés, reste dette 89-91 ; verify EXIT=0, 822 tests.
-- PROCHAINE ACTION EXACTE (A) : C7 (P5 L'Horloge) : `docs/phases/C7.md` puis module `src/sim/clock/` (existant : `src/sim/shifters/shifters.ts`) ; ensuite C5.
+- C7 : `src/sim/clock/` livré (D-161), verify EXIT=0 883 tests ; revue indépendante PAS ENCORE faite.
+- PROCHAINE ACTION EXACTE (A) : revue indépendante de C7 (sous-agent distinct, diff `src/sim/clock`, `tests/sim/clock`), corriger, puis C5 (P2 Marée).
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).

@@ -1,0 +1,95 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P5 (spec 26 §6). Canon C : horloge des 13 ans (shifters.json curse_years), porteur dans la nuque, arme de contention de la Police intérieure (03 §3.2, 11), infiltrés de Marley en 845. Tout le reste (seuils, poids, formules) est A.",
+  "nine": [
+    "shifter_fondateur",
+    "shifter_assaillant",
+    "shifter_colossal",
+    "shifter_cuirasse",
+    "shifter_feminin",
+    "shifter_bestial",
+    "shifter_machoire",
+    "shifter_charrette",
+    "shifter_marteau"
+  ],
+  "suspicion": {
+    "evidence": {
+      "temoin": 8,
+      "anomalie": 12,
+      "fuite": 20,
+      "interrogatoire": 25,
+      "transformation_vue": 60
+    },
+    "suspect_threshold": 25,
+    "strong_threshold": 50,
+    "unmask_threshold": 80,
+    "cover_k": 0.7,
+    "cover_loss_per_point": 0.5,
+    "decay_per_day": 1,
+    "quiet_days": 5
+  },
+  "cover": {
+    "initial": { "infiltre": 75, "civil": 40, "connu": 0 },
+    "after_unmask": 0
+  },
+  "control": {
+    "base": 20,
+    "will_w": 0.45,
+    "bonds_w": 0.25,
+    "stress_w": 0.4,
+    "contrary_penalty": 40,
+    "aligned_bonus": 10,
+    "exhausted_penalty": 15
+  },
+  "autonomy": {
+    "base": 10,
+    "per_control": 0.9,
+    "predictable_below": 30
+  },
+  "ignore": {
+    "below_control": 35,
+    "max_p": 0.8
+  },
+  "reaction": {
+    "slow_s": 6,
+    "fast_s": 1
+  },
+  "orders": [
+    "ouvre_breche",
+    "tiens_ligne",
+    "protege_escouade",
+    "couvre_repli",
+    "detruis_tour",
+    "neutralise_titan"
+  ],
+  "models": {
+    "shifter_colossal": [{ "ability": "onde_chaleur", "weight": 1 }],
+    "shifter_cuirasse": [{ "ability": "charge", "weight": 2 }, { "ability": "armure", "weight": 1 }],
+    "shifter_feminin": [{ "ability": "durcissement_local", "weight": 2 }, { "ability": "cri_appel", "weight": 1 }],
+    "shifter_bestial": [{ "ability": "projectiles", "weight": 2 }, { "ability": "controle_purs", "weight": 1 }],
+    "shifter_machoire": [{ "ability": "vitesse", "weight": 1 }, { "ability": "morsure", "weight": 2 }],
+    "shifter_charrette": [{ "ability": "endurance", "weight": 1 }, { "ability": "transport", "weight": 1 }],
+    "shifter_marteau": [{ "ability": "pieux_cristal", "weight": 2 }, { "ability": "corps_distant", "weight": 1 }],
+    "shifter_assaillant": [{ "ability": "combat_rapproche", "weight": 2 }, { "ability": "regeneration", "weight": 1 }],
+    "shifter_fondateur": [{ "ability": "controle_purs_fondateur", "weight": 1 }]
+  },
+  "transform": {
+    "surprised_extra_delay_s": 1.5
+  },
+  "extraction": {
+    "base": 0.35,
+    "per_attacker": 0.08,
+    "max_attackers": 4,
+    "contention_bonus": 0.25,
+    "resist_k": 0.3,
+    "kill_base": 0.15,
+    "contention_kill_mult": 0.4
+  },
+  "roster": {
+    "use_now_years": 3,
+    "wear_years_per_day": 0.01,
+    "deploy_capital": 5,
+    "capital_per_day": 2,
+    "exhausted_below_years": 0
+  }
+}
