@@ -27,7 +27,7 @@
 | C17 | Lieux : hors-murs (ex-LC-D) | à faire | — | tronc | C15 | voie B |
 | C18 | Lieux : Marley, Hizuru, Alliés, couverture de l'atlas | à faire | — | tronc | C16, C17 | « tout lieu jouable » |
 
-Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 14 → vendredi 16 seulement) : C1 → C2 → C10 (outillage, uniformes) → C15 → C11. Après vendredi, A reprend aussi les chantiers de la voie B. Chaque session prend la première tâche libre selon `PROTOCOLE.md` §5.
+Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 → vendredi 16 seulement : la fenêtre de mercredi 14 n'a pas eu lieu) : C1 → C2 → C10 (outillage, uniformes) → C15 → C11. Après vendredi, A reprend aussi les chantiers de la voie B. Chaque session prend la première tâche libre selon `PROTOCOLE.md` §5.
 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
@@ -52,7 +52,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (mercredi 
 
 ### [2026-10-13, soir] Direction (réponses de Gabriel) → A et B
 - **Décisions** : plan **validé** ; **toutes les villes et tous les endroits doivent être créés et jouables** (C15 à C18 ajoutés) ; pas de mode « Simulation de bataille » dans le menu ; multijoueur = **coopération** (conseil mixte joueurs + conseillers IA, chaque joueur dirige ses groupes/formations/escouades en bataille) : voir `docs/spec/27` §10 ; **deux comptes distincts** (A = compte de la direction, limite hebdomadaire remise à zéro le **mardi** ; B = autre compte, disponible **jusqu'au vendredi 16 octobre inclus**).
-- **Pour B** : trois fenêtres seulement (mercredi, jeudi, vendredi). Vendredi : clôture complète, note de passage détaillée pour A ; aucun chantier laissé « en cours » sans état exact. Ne pas viser « tout fini jeudi » : le plan n'est pas atteignable en trois jours (voir `PLAN_FONCTIONNALITES.md`).
+- **Pour B** : deux fenêtres seulement (jeudi 15 et vendredi 16 ; mercredi 14 n'a pas eu lieu, B commence jeudi à 08:00). Vendredi : clôture complète, note de passage détaillée pour A ; aucun chantier laissé « en cours » sans état exact. Ne pas viser « tout fini jeudi » : le plan n'est pas atteignable en trois jours (voir `PLAN_FONCTIONNALITES.md`).
 - **Pour A** : après vendredi, vous reprenez seule la voie B (interface, assets, lieux, Blender, illustrations).
 - **Compléments (2ᵉ message du soir)** : plafond de B levé (**100 %**, utilisation maximale) → mettre la note de passage à jour à **chaque fin de tâche** ; multijoueur : **choix du camp** (845 : Paradis ou Marley, plus de camps pour les scénarios tardifs, limites d'équilibre), **Titans commandés directement par leurs joueurs jusqu'à ≈ saison 4** (`[?]`), puis infanterie, et **trahison** possible (27 §4.2 à 4.4). Les réglages de pause, anti-triche, connexion et PC le plus faible ne changent pas.
 - **Réseau** : Gabriel accepte d'ajouter les domaines de Perchance à la liste réseau de l'environnement (action de sa part) ; tant qu'un accès normal n'est pas constaté dans une session, voie 1 (il génère) ou voie 3 (Blender).

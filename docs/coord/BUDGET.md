@@ -25,7 +25,7 @@ A_PLAFOND_PCT: 100              # A travaille jusqu'à la limite de son compte
 3. **Message de limite** : si l'environnement affiche que la limite est atteinte ou approche, clôture immédiate si elle est encore possible ; sinon l'état laissé par le dernier commit et la dernière note de passage fait foi.
 
 ## Calibrage
-B n'existant que trois jours, **le compteur de B ne pourra pas être calibré** : il reste provisoire. Les garde-fous réels de B sont l'interrupteur `B_AUTORISE` (Gabriel surveille son compte B) et le message de limite. Pour A (compte permanent), le calibrage est possible : voir ci-dessous.
+B n'existant que deux jours (jeudi 15 et vendredi 16), **le compteur de B ne pourra pas être calibré** : il reste provisoire. Les garde-fous réels de B sont l'interrupteur `B_AUTORISE` (Gabriel surveille son compte B) et le message de limite. Pour A (compte permanent), le calibrage est possible : voir ci-dessous.
 
 ### Procédure de calibrage (compte A, à la fin d'une semaine complète)
 Gabriel relève dans son compte le pourcentage hebdomadaire réellement consommé et l'écrit ci-dessous ; une session calcule `B_TOURS_SEMAINE_REFERENCE = tours_B_semaine / (pourcentage_relevé_pour_B / 100)` et le consigne dans `DECISIONS.md`.

@@ -45,7 +45,7 @@
 7. **Coupes** : voir `PROTOCOLE.md` §8.
 
 ## Calendrier réaliste (estimation `[A]`, non mesurée)
-- **B n'existe que mercredi 14, jeudi 15 et vendredi 16 octobre** (compte de Gabriel limité jusqu'au vendredi) : trois fenêtres de 8 h. Voie de B pendant ces trois jours, dans cet ordre : **C1 → C2 → C10 (outillage puis uniformes) → C15 → C11**. Le dernier jour, B termine par une clôture complète et une note de passage détaillée à A.
+- **B n'existe que mercredi 14, jeudi 15 et vendredi 16 octobre** (compte de Gabriel limité jusqu'au vendredi) : trois fenêtres de 8 h prévues, **mais la fenêtre de mercredi 14 n'a pas eu lieu** (B commence jeudi 15, constat de Gabriel) : **deux fenêtres restantes**. Voie de B pendant ces trois jours, dans cet ordre : **C1 → C2 → C10 (outillage puis uniformes) → C15 → C11**. Le dernier jour, B termine par une clôture complète et une note de passage détaillée à A.
 - **A** travaille toutes les nuits (00:00–08:00) ; après vendredi, **seule A** avance (voir `BUDGET.md`).
 - Somme des plafonds : ≈ 3 300 tours. Rythme observé du 8 au 13 octobre : ≈ 1 750 tours (`docs/MORNING.md`). Ordre de grandeur : **plusieurs semaines**, pas quelques jours ; le jalon « tout fini jeudi » n'est **pas atteignable** et n'est pas visé. Jalon réaliste de jeudi soir : C0, C1, C2, C3 faits, outillage Blender et premiers uniformes, début de C4 et de C15.
 
