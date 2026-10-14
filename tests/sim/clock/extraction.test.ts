@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Rng } from "../../../src/sim/core/rng";
-import { addEvidence, applyCapture, createClockState, extractionOdds, extractionOutcome, extractionProblem, registerBearer } from "../../../src/sim/clock";
+import { ClockError, addEvidence, applyCapture, createClockState, extractionOdds, extractionOutcome, extractionProblem, registerBearer } from "../../../src/sim/clock";
 import type { ClockState } from "../../../src/sim/clock";
 import { cb, input, nineState, slot, tweak } from "./helpers";
 
@@ -22,7 +22,7 @@ describe("P5 extraction : conditions", () => {
   });
   it("pas de capture de ses propres porteurs ; pas de seconde capture", () => {
     expect(extractionProblem(exposed(), sh, "char_ymir", "paradis")).toBe("clock.err.own_bearer");
-    const done = applyCapture(sh, "char_reiner", "paradis");
+    const done = applyCapture(exposed(), sh, "char_reiner", "paradis");
     expect(extractionProblem(exposed(), done, "char_reiner", "paradis")).toBe("clock.err.already_captured");
   });
 });
@@ -80,13 +80,28 @@ describe("P5 extraction : chances", () => {
 describe("P5 extraction : effets sur l'horloge des Titans", () => {
   it("capture par Paradis : tous les Titans du porteur sont captured, horloge (since) inchangée, le reste intact, entrée non modifiée", () => {
     const before = JSON.stringify(sh);
-    const out = applyCapture(sh, "char_reiner", "paradis");
+    const out = applyCapture(exposed(), sh, "char_reiner", "paradis");
     expect(JSON.stringify(sh)).toBe(before);
     expect(out.titans["shifter_cuirasse"]).toMatchObject({ captured: true, since: 843, holder: "char_reiner", faction: "marley" });
     expect(out.titans["shifter_colossal"]?.captured).toBe(true);
     expect(out.titans["shifter_machoire"]?.captured).toBe(false);
   });
   it("seul Paradis marque « captured » (le drapeau signifie aux mains de Paradis)", () => {
-    expect(applyCapture(sh, "char_reiner", "marley")).toBe(sh);
+    expect(applyCapture(exposed(), sh, "char_reiner", "paradis")).not.toBe(sh);
+  });
+  it("applyCapture refuse (ClockError typée) si l'identité est inconnue de l'observateur, innocent compris, ou porteur propre/déjà capturé", () => {
+    const hidden = registerBearer(createClockState(), input("char_reiner"), cb);
+    for (const target of ["char_reiner", "char_innocent"]) {
+      expect(() => applyCapture(hidden, sh, target, "paradis")).toThrow(ClockError);
+      try {
+        applyCapture(hidden, sh, target, "paradis");
+      } catch (e) {
+        expect((e as ClockError).code).toBe("clock.err.unknown_identity");
+      }
+    }
+    expect(() => applyCapture(exposed(), sh, "char_reiner", "hizuru")).toThrow(ClockError);
+    expect(() => applyCapture(exposed(), sh, "char_ymir", "paradis")).toThrow(ClockError);
+    const done = applyCapture(exposed(), sh, "char_reiner", "paradis");
+    expect(() => applyCapture(exposed(), done, "char_reiner", "paradis")).toThrow(ClockError);
   });
 });

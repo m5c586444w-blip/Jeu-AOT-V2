@@ -2,6 +2,7 @@ import type { ClockBalance } from "../../data/balance";
 import type { ShiftersState } from "../shifters/shifters";
 import { titansOf } from "../shifters/shifters";
 import { isExposedTo } from "./suspicion";
+import { ClockError, FACTION_PARADIS } from "./types";
 import type { ClockState, ExtractionOdds, ExtractionOutcome } from "./types";
 
 const clamp = (v: number, lo: number, hi: number): number => Math.max(lo, Math.min(hi, v));
@@ -41,10 +42,13 @@ export function extractionOutcome(odds: ExtractionOdds, roll: number): Extractio
 /**
  * Capture : tous les Titans du porteur passent « captured » (héritage préparé possible par Paradis, `inheritProblem`) ; l'horloge des 13 ans
  * n'est pas touchée (`since` inchangé). Seul Paradis peut marquer `captured` (le drapeau de `ShiftersSlot` signifie « aux mains de Paradis »).
+ * Refus typé (`ClockError`, mêmes clés que `extractionProblem`) si l'identité n'est pas connue de l'observateur, si le porteur est le sien ou déjà capturé.
  * La mort du porteur (outcome « mort ») est appliquée par l'appelant via le système de personnages.
  */
-export function applyCapture(sh: ShiftersState, target: string, observer: string): ShiftersState {
-  if (observer !== "paradis") return sh;
+export function applyCapture(s: ClockState, sh: ShiftersState, target: string, observer: string): ShiftersState {
+  const problem = extractionProblem(s, sh, target, observer);
+  if (problem !== null) throw new ClockError(problem);
+  if (observer !== FACTION_PARADIS) return sh;
   const out = structuredClone(sh);
   for (const t of titansOf(out, target)) {
     const slot = out.titans[t];

@@ -89,7 +89,7 @@ describe("P5 accord avec l'héritage et la malédiction", () => {
   it("un suivi qui ne tient plus de Titan est retiré avec ses soupçons ; un nouveau détenteur est signalé", () => {
     let s = createClockState();
     s = registerBearer(s, input("vieux"), cb);
-    s = { ...s, suspects: { vieux: { paradis: { value: 40, lastEvidenceDay: 1, closed: false } } } };
+    s = { ...s, suspects: { vieux: { paradis: { value: 40, shown: 40, lastEvidenceDay: 1, closed: false } } } };
     const sh = nineState({ shifter_cuirasse: slot("jeune", "paradis", 850) });
     const r = syncBearers(s, sh);
     expect(r.removed).toEqual(["vieux"]);

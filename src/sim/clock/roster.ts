@@ -2,6 +2,7 @@ import type { ClockBalance } from "../../data/balance";
 import type { ShiftersState } from "../shifters/shifters";
 import { titansOf } from "../shifters/shifters";
 import { cloneClock, without } from "./suspicion";
+import { FACTION_LOST } from "./types";
 import type { Bearer, ClockState, RosterEntry } from "./types";
 
 /** Années restantes d'un Titan (même formule que `yearsLeft` de shifters.ts : curse − (année − since)). */
@@ -20,8 +21,8 @@ export function nineViolations(sh: ShiftersState, b: ClockBalance, alive?: (char
   for (const id of ids) {
     const slot = sh.titans[id];
     if (!slot) continue;
-    if (slot.faction === "perdu" && slot.holder !== null) out.push(`${id} : perdu mais détenu par ${slot.holder}`);
-    if (slot.holder !== null && slot.faction === "perdu") continue;
+    if (slot.faction === FACTION_LOST && slot.holder !== null) out.push(`${id} : perdu mais détenu par ${slot.holder}`);
+    if (slot.holder !== null && slot.faction === FACTION_LOST) continue;
     if (slot.holder !== null && alive && !alive(slot.holder)) out.push(`${id} : détenteur mort ${slot.holder}`);
   }
   return out;

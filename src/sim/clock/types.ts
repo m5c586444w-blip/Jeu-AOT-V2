@@ -1,3 +1,5 @@
+import type { ShifterFaction } from "../shifters/shifters";
+
 /** Preuve de l'identité d'un porteur : clés de `clock.json › suspicion.evidence`. */
 export type EvidenceKind = string;
 
@@ -27,7 +29,10 @@ export interface Bearer {
 
 /** Suspicion d'un observateur envers un personnage (porteur ou innocent : l'observateur ne le sait pas). */
 export interface SuspectRecord {
+  /** Suspicion interne (pondérée par la couverture du porteur) : seule à déclencher le démasquage. Jamais exposée à la vue. */
   value: number;
+  /** Suspicion affichable : somme des poids bruts, indépendante de la couverture (porteur et innocent y sont indiscernables). */
+  shown: number;
   lastEvidenceDay: number;
   /** Clos : démasquage ou fausse accusation déjà déclenché(e) ; plus aucune preuve n'est retenue. */
   closed: boolean;
@@ -100,4 +105,16 @@ export interface ClockView {
   known: { id: string; titans: string[]; own: boolean; cover: number | null; yearsLeft: number | null }[];
   /** Personnages que la faction soupçonne (porteurs ou non : indiscernable), niveau grossier seulement. */
   suspects: { character: string; level: SuspicionLevel }[];
+}
+
+/** Faction de Paradis et état « pouvoir perdu » : typés sur `ShifterFaction` (shifters.ts), jamais de chaîne en dur ailleurs. */
+export const FACTION_PARADIS: ShifterFaction = "paradis";
+export const FACTION_LOST: ShifterFaction = "perdu";
+
+/** Refus typé d'une commande de l'Horloge : `code` est une clé de message (clock.err.*). */
+export class ClockError extends Error {
+  constructor(readonly code: string) {
+    super(code);
+    this.name = "ClockError";
+  }
 }

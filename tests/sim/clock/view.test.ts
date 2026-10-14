@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addEvidence, createClockState, registerBearer, viewForFaction, viewForSeat } from "../../../src/sim/clock";
+import { addEvidence, createClockState, eventsForFaction, registerBearer, viewForFaction, viewForSeat } from "../../../src/sim/clock";
 import type { ClockState } from "../../../src/sim/clock";
 import { cb, input, nineState, slot } from "./helpers";
 
@@ -76,5 +76,65 @@ describe("P5 (d) un porteur non démasqué n'apparaît jamais", () => {
     expect(g("seat_9")).toEqual({ faction: "", known: [], suspects: [] });
     expect(f("seat_1", undefined).faction).toBe("paradis");
     expect(f("seat_2", undefined).known).toEqual([]);
+  });
+});
+
+describe("P5 biais de couverture : le niveau visible ne trahit pas le porteur", () => {
+  it("porteurs couverts (infiltré, civil) et innocents, mêmes preuves : suite de niveaux identique à chaque pas", () => {
+    for (const role of ["infiltre", "civil"]) {
+      let t = registerBearer(createClockState(), input("char_porteur", { role }), cb);
+      const levels = (id: string) => view(t, "paradis").suspects.find((x) => x.character === id)?.level ?? "aucun";
+      for (const kind of ["temoin", "anomalie", "fuite", "temoin", "interrogatoire"]) {
+        for (const id of ["char_porteur", "char_innocent_a", "char_innocent_b"]) t = addEvidence(t, id, "paradis", kind, 1, cb);
+        if (t.events.length) break;
+        expect(levels("char_porteur"), `${role}/${kind}`).toBe(levels("char_innocent_a"));
+        expect(levels("char_innocent_b")).toBe(levels("char_innocent_a"));
+      }
+      expect(t.suspects["char_porteur"]?.["paradis"]?.shown).toBe(t.suspects["char_innocent_a"]?.["paradis"]?.shown);
+    }
+  });
+  it("la couverture reste utile : à preuves égales le porteur couvert est démasqué après l'innocent n'est accusé", () => {
+    let t = registerBearer(createClockState(), input("char_porteur"), cb);
+    let n = 0;
+    while (!t.events.some((e) => e.type === "false_accusation") && n < 100) {
+      t = addEvidence(t, "char_innocent", "paradis", "temoin", n, cb);
+      t = addEvidence(t, "char_porteur", "paradis", "temoin", n, cb);
+      n++;
+    }
+    expect(t.events.map((e) => e.type)).toEqual(["false_accusation"]);
+    expect(t.bearers["char_porteur"]?.exposedTo).toEqual(["marley"]);
+  });
+});
+
+describe("P5 événements par observateur", () => {
+  it("un autre observateur ne voit ni le porteur ni l'observateur d'autrui", () => {
+    let s = mk();
+    for (let i = 0; i < 12; i++) s = addEvidence(s, "char_bertholdt", "paradis", "interrogatoire", i, cb);
+    for (let i = 0; i < 12; i++) s = addEvidence(s, "char_innocent", "hizuru", "interrogatoire", i, cb);
+    expect(eventsForFaction(s, "paradis")).toEqual([{ type: "unmasked", day: expect.any(Number) as number, bearer: "char_bertholdt", observer: "paradis" }]);
+    expect(eventsForFaction(s, "hizuru").map((e) => e.type)).toEqual(["false_accusation"]);
+    expect(JSON.stringify(eventsForFaction(s, "hizuru"))).not.toMatch(/bertholdt|paradis/);
+    expect(JSON.stringify(eventsForFaction(s, "paradis"))).not.toMatch(/hizuru|innocent/);
+    expect(eventsForFaction(s, "marley")).toEqual([]);
+  });
+});
+
+describe("P5 observateur qui sait déjà : indiscernable d'un innocent côté vue et événements", () => {
+  it("porteur déjà connu et innocent, mêmes preuves : ni suspect affiché ni événement", () => {
+    let t = registerBearer(createClockState(), input("char_connu", { role: "connu" }), cb);
+    for (let i = 0; i < 12; i++) t = addEvidence(t, "char_connu", "paradis", "interrogatoire", i, cb);
+    const evBefore = eventsForFaction(t, "paradis").length;
+    const known = view(t, "paradis").known.map((k) => k.id);
+    for (let i = 0; i < 12; i++) t = addEvidence(t, "char_connu", "paradis", "transformation_vue", i, cb);
+    expect(eventsForFaction(t, "paradis").length).toBe(evBefore);
+    expect(view(t, "paradis").known.map((k) => k.id)).toEqual(known);
+    expect(view(t, "paradis").suspects).toEqual([]);
+  });
+});
+
+describe("P5 années restantes bornées", () => {
+  it("jamais négatives, même après l'échéance", () => {
+    const own = viewForFaction(mk(), sh, "paradis", 900, 13, cb).known[0];
+    expect(own?.yearsLeft).toBe(0);
   });
 });

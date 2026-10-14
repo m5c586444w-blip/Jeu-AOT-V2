@@ -24,7 +24,7 @@ export function viewForFaction(s: ClockState, sh: ShiftersState | null, faction:
     if (!br || !br.exposedTo.includes(faction)) continue;
     const own = br.faction === faction;
     const titans = titansOf(sh, id);
-    const left = own ? Math.min(...titans.map((t) => curseYears - (year - (sh?.titans[t]?.since ?? year))), curseYears) : null;
+    const left = own ? Math.max(0, Math.min(...titans.map((t) => curseYears - (year - (sh?.titans[t]?.since ?? year))), curseYears)) : null;
     known.push({ id, titans, own, cover: own ? br.cover : null, yearsLeft: titans.length > 0 ? left : null });
   }
   const suspects: ClockView["suspects"] = [];
@@ -33,7 +33,7 @@ export function viewForFaction(s: ClockState, sh: ShiftersState | null, faction:
     if (!r || r.closed) continue;
     // Un porteur déjà connu de cette faction n'est plus un « suspect ».
     if (s.bearers[target]?.exposedTo.includes(faction)) continue;
-    const level = levelOf(r.value, b);
+    const level = levelOf(r.shown, b);
     if (level !== "aucun") suspects.push({ character: target, level });
   }
   return { faction, known, suspects };

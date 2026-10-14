@@ -56,7 +56,7 @@ describe("P5 sur le monde réel (scénario 850)", () => {
     expect(extractionProblem(clock, state, "char_reiner_braun", "paradis")).toBeNull();
     expect(viewForFaction(clock, state, "paradis", s0.date.year, 13, cb).known.map((k) => k.id)).toContain("char_reiner_braun");
     // Capture : héritage possible, horloge intacte.
-    const caught = applyCapture(state, "char_reiner_braun", "paradis");
+    const caught = applyCapture(clock, state, "char_reiner_braun", "paradis");
     expect(inheritProblem(quiet, caught, pol, "shifter_cuirasse", "char_mikasa_ackerman", false)).toBeNull();
     const slot = caught.titans["shifter_cuirasse"] as ShiftersState["titans"][string];
     expect(yearsLeft(quiet, slot, s0.date).value).toBe(yearsLeft(quiet, state.titans["shifter_cuirasse"] as typeof slot, s0.date).value);

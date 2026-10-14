@@ -3,9 +3,9 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
-| Tâche | C0, C3 (socle), C4, C6 faits (A, 2026-10-14) ; suivant : C7 (A), C1 (B) |
+| Tâche | C0, C3 (socle), C4, C6, C7 faits (A, 2026-10-14) ; suivant : C5 (A), C1 (B) |
 | Dernier `npm run verify` | voir `docs/coord/journal/` (dernier relevé de la direction : 2026-10-13, code 0, 719 tests avant ajout de `coord`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `docs/phases/C7.md` puis P5 L'Horloge (voir COORD.md) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : session A, `docs/phases/C5.md` puis P2 Marée (voir COORD.md) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

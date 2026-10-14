@@ -63,6 +63,10 @@ export const isExposedTo = (bearer: Bearer, observer: string): boolean => bearer
  * la couverture s'érode de `cover_loss_per_point` par point de gain. Au seuil de démasquage : un porteur est démasqué pour cet
  * observateur (couverture à `after_unmask`) ; un innocent déclenche une fausse accusation. Dans les deux cas le dossier est clos.
  * Sans effet : la propre faction du porteur, un observateur qui sait déjà, un dossier clos.
+ * Biais de couverture évité : le niveau affiché (`shown`) somme les poids bruts, sans couverture ; seul `value` (interne) en dépend et
+ * déclenche le démasquage. Un porteur couvert et un innocent ont donc la même suite de niveaux visibles à preuves égales.
+ * Limite assumée [A] : à l'observateur qui sait déjà, l'état interne reste inchangé (aucun dossier) alors qu'un innocent en reçoit un ;
+ * ni la vue ni les événements de l'observateur ne diffèrent (testé).
  */
 export function addEvidence(s: ClockState, target: string, observer: string, kind: EvidenceKind, day: number, b: ClockBalance): ClockState {
   const weight = b.suspicion.evidence[kind];
@@ -73,7 +77,7 @@ export function addEvidence(s: ClockState, target: string, observer: string, kin
   if (prev?.closed) return s;
   const out = cloneClock(s);
   const gain = bearer ? weight * (1 - (b.suspicion.cover_k * bearer.cover) / 100) : weight;
-  const rec: SuspectRecord = { value: Math.min(100, (prev?.value ?? 0) + gain), lastEvidenceDay: day, closed: false };
+  const rec: SuspectRecord = { value: Math.min(100, (prev?.value ?? 0) + gain), shown: Math.min(100, (prev?.shown ?? 0) + weight), lastEvidenceDay: day, closed: false };
   const row = (out.suspects[target] ??= {});
   row[observer] = rec;
   const ob = out.bearers[target];
@@ -98,9 +102,13 @@ export function stepSuspicionDay(s: ClockState, day: number, b: ClockBalance): C
     const row = out.suspects[target] as Record<string, SuspectRecord>;
     for (const obs of Object.keys(row).sort()) {
       const r = row[obs] as SuspectRecord;
-      if (r.closed || r.value <= 0 || day - r.lastEvidenceDay < b.suspicion.quiet_days) continue;
+      if (r.closed || (r.value <= 0 && r.shown <= 0) || day - r.lastEvidenceDay < b.suspicion.quiet_days) continue;
       r.value = Math.max(0, r.value - b.suspicion.decay_per_day);
+      r.shown = Math.max(0, r.shown - b.suspicion.decay_per_day);
     }
   }
   return out;
 }
+
+/** Événements visibles par une faction : ceux dont elle est l'observatrice. Ni le porteur ni l'observateur d'autrui n'y figurent. */
+export const eventsForFaction = (s: ClockState, faction: string): ClockEvent[] => s.events.filter((e) => e.observer === faction);
