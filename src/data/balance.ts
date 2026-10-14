@@ -782,6 +782,16 @@ export const ClockBalanceSchema = z
         after_unmask: z.number().min(0).max(100),
       })
       .strict(),
+    /** Enregistrement des porteurs à l'activation du pilier (C9.3, D-169) : état d'esprit de départ et rôle de couverture par faction du Titan. */
+    init: z
+      .object({
+        will: z.number().min(0).max(100),
+        stress: z.number().min(0).max(100),
+        bonds: z.number().min(0).max(100),
+        role_by_faction: z.record(z.string(), z.string()),
+      })
+      .strict()
+      .optional(),
     control: z
       .object({
         base: num,

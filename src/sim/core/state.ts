@@ -28,6 +28,8 @@ import { monthlyDiplomacy } from "../world/diplomacy";
 import { pushLog } from "../strategic/economy";
 import { tickWall } from "../wall/tick";
 import { tickRegistry } from "../registry/tick";
+import { tickClock } from "../clock/tick";
+import type { ClockState } from "../clock/types";
 import type { RegistryState } from "../registry/types";
 import type { WallState } from "../wall/types";
 import type { SeatsState } from "./seat";
@@ -89,6 +91,8 @@ export interface PillarsState {
   wall?: WallState;
   /** P7 Le Registre de la troupe (D-166) : créé par la commande `EnableRegistry`. */
   registry?: RegistryState;
+  /** P5 L'Horloge (D-169) : créé par la commande `EnableClock`. */
+  clock?: ClockState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -230,6 +234,8 @@ export function tickDay(state: GameState, world?: World): GameState {
     if (pillars?.wall && world.wall) pillars = { ...pillars, wall: tickWall(pillars.wall, world.wall.balance, monthStart) };
     // Pilier P7 (D-166) : seulement si la commande EnableRegistry l'a créé.
     if (pillars?.registry && world.registry) pillars = { ...pillars, registry: tickRegistry(pillars.registry, world.registry, state.seed, toAbsoluteDay(date)) };
+    // Pilier P5 (D-169) : seulement si la commande EnableClock l'a créé ; après les porteurs (shifters) du jour.
+    if (pillars?.clock && world.clock) pillars = { ...pillars, clock: tickClock(pillars.clock, world.clock, shifters, toAbsoluteDay(date)) };
     if (monthStart) {
       strategic = applyMonth(world, strategic, planMonth(world, strategic, mods), date);
       if (politics && world.politics) monthlyPolitics(world, politics, strategic, date);

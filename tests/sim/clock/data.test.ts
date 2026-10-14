@@ -2,10 +2,10 @@ import { describe, expect, it } from "vitest";
 import { Rng } from "../../../src/sim/core/rng";
 import {
   adviceFor, addEvidence, autonomyOf, controlOf, createClockState, decideAction, deployBearer, extractionOdds, ignoreProbability, isExhausted,
-  isGeneralOrder, levelOf, modelPick, modelTopAbility, nineViolations, projectionCost, reactionDelayS, registerBearer, stepSuspicionDay, transformGate, viewForFaction,
+  initClock, isGeneralOrder, levelOf, modelPick, modelTopAbility, nineViolations, projectionCost, reactionDelayS, registerBearer, stepSuspicionDay, transformGate, viewForFaction,
 } from "../../../src/sim/clock";
 import type { ClockBalance } from "../../../src/data/balance";
-import { cb, input, nineState, shb } from "./helpers";
+import { cb, input, nineState, shb, slot } from "./helpers";
 
 /** Proxy profond : enregistre le chemin de chaque feuille (valeur primitive ou tableau) réellement lue. */
 function spy(root: object, seen: Set<string>): object {
@@ -69,6 +69,8 @@ function exercise(b: ClockBalance): void {
   isExhausted(bearer, 2, b);
   adviceFor(2, b);
   nineViolations(nineState({}), b);
+  // Activation du pilier (C9.3) : enregistrement des porteurs nommés.
+  initClock(nineState({ shifter_assaillant: slot("h1", "paradis", 845), shifter_cuirasse: slot("h2", "marley", 845), shifter_bestial: slot("h3", "inconnu", 845) }), b);
 }
 
 describe("clock.json : aucune donnée morte", () => {

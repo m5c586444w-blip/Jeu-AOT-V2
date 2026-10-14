@@ -1326,3 +1326,10 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Raison** : le calcul par défaut « le siège qui dirige la faction » ne désigne pas de propriétaire unique quand plusieurs joueurs partagent une faction. Constat de la direction à partir de D-157 et du fichier 27 : le code n'a pas été relu sur ce point, **à confirmer à l'audit de C13**.
 - **Portée** : **prérequis de C13**, ajouté à ses critères d'acceptation dans `docs/coord/PLAN_FONCTIONNALITES.md` et à 27 §4.3. **Aucun changement de code maintenant** ; la règle exacte pour les entités tenues par l'IA reste à fixer en C13.
 - **Réversible** : oui.
+
+## 2026-10-15 — D-169 C9.3 : pilier P5 L'Horloge branché au tick, désactivé par défaut
+- **Décision** : même modèle que D-165/D-166. `GameState.pillars.clock?: ClockState` ; commande typée `EnableClock` (sans paramètre, schéma Zod strict, classée dans `FACTION_COMMANDS`, idempotente, refus typé par `validateCommand` si le monde n'a pas `clock.json`) ; `World.clock` chargé depuis `data/balance/clock.json` ; `ClockStateSchema` (Zod) valide la forme à la désérialisation (`pillars.clock`).
+- **Initialisation** : `initClock` enregistre les porteurs nommés de `state.shifters` (rôle de couverture selon la faction du Titan : `clock.json › init.role_by_faction` ; pouvoir perdu non suivi ; état d'esprit de départ `init.will/stress/bonds`, `[A]`). Section `init` ajoutée à `ClockBalanceSchema` (facultative) et à `clock.json`.
+- **Tick** (lecture seule sur `shifters`, après `dailyShifters` et les missions) : `stepSuspicionDay` (décroissance au calme) puis `syncBearers` (un suivi sans Titan est retiré avec ses soupçons). Aucune preuve n'est encore créée par le monde : câblage des preuves (témoins, transformations vues, interrogatoires) et du démasquage vers `events`/`intel` = suite de C9.
+- **Reste** : preuves, événements de démasquage vers l'état d'événements, contrôle en bataille (`tactical/shifters.ts`), écran, activation par défaut (décision séparée). Aucune empreinte de référence ne change (120 jours sans activation : `e0a0b63c`).
+- **Réversible** : oui.

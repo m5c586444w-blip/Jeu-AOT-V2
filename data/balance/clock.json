@@ -32,6 +32,12 @@
     "initial": { "infiltre": 75, "civil": 40, "connu": 0 },
     "after_unmask": 0
   },
+  "init": {
+    "will": 60,
+    "stress": 20,
+    "bonds": 50,
+    "role_by_faction": { "marley": "infiltre", "paradis": "connu", "inconnu": "civil" }
+  },
   "control": {
     "base": 20,
     "will_w": 0.45,

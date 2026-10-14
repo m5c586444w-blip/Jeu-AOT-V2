@@ -33,6 +33,7 @@ import type { TreatyKind } from "../world/diplomacy";
 import { atWar } from "../world/nations";
 import { initWall } from "../wall/tick";
 import { initRegistry } from "../registry/tick";
+import { initClock } from "../clock/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
 import type { ArmyCommand } from "../armies/layer";
@@ -77,6 +78,7 @@ export type Command =
   | MissionCommand
   | { type: "EnableWall" }
   | { type: "EnableRegistry" }
+  | { type: "EnableClock" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -189,6 +191,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
     case "EnableRegistry":
       if (ctx && !ctx.world?.registry) return { ok: false, error: "EnableRegistry : monde sans données du Registre (registry.json)" };
       return { ok: true };
+    case "EnableClock":
+      if (ctx && !ctx.world?.clock) return { ok: false, error: "EnableClock : monde sans données de l'Horloge (clock.json)" };
+      return { ok: true };
     case "Noop":
       return { ok: true };
     case "ResolveEncounter": {
@@ -300,6 +305,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       // P7 Le Registre (D-166) : crée un registre vide ; sans effet s'il existe déjà.
       if (!world?.registry) break; // inatteignable : refusé par validateCommand
       if (!next.pillars?.registry) next = { ...next, pillars: { ...next.pillars, registry: initRegistry() } };
+      break;
+    }
+    case "EnableClock": {
+      // P5 L'Horloge (D-169) : enregistre les porteurs nommés de l'état des Titans ; sans effet s'il existe déjà.
+      if (!world?.clock) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.clock) next = { ...next, pillars: { ...next.pillars, clock: initClock(next.shifters, world.clock) } };
       break;
     }
     case "EnableWall": {
