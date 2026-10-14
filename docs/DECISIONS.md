@@ -1276,3 +1276,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/signal/` (visibilité monotone, relais et erreurs via fork du `Rng` injecté, fantômes d'information, brouillard Récit/Normal/Rude par faction et par siège, doctrine programmable) ; paramètres `[A]` dans `data/balance/signal.json`, codes de couleur par branche `[C]` (03 §7). Choix `[A]` : plan 2D ; un signal ennemi n'est jamais lisible ; Rude n'expose aucune entité exacte ; communications « moderne » de Marley `[?]`.
 - **Non branché** au tick ni à la bataille : empreintes inchangées. Reste : branchement à `battle.ts` et au conseil, éditeur de doctrine.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-160 C6 : pilier P1 Le Mur en module pur non branché
+- **Décision** : `src/sim/wall/` (pression population/capacité, brèche, évacuation horaire par portes d'accueil, reconquête, désengorgement à trois branches) ; paramètres `[A]` dans `data/balance/wall.json`. Pure, aléa injecté, non branchée au tick : empreintes inchangées. La pression démographique reste distincte de `armies.pressure` (dette 78). Registre : `total = départ + naissances − décès − exportés` (testé).
+- **Reste** : branchement au tick avec table de capacités par province, alertes, écran « Mur », contrôle `sim:year`, réconciliation avec la famine de `economy.ts`.
+- **Réversible** : oui.

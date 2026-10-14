@@ -1,0 +1,43 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P1 (spec 26 §2). Tous les nombres sont des choix [A] ; le chiffre de 250 000 envoyés en 846 (E06) est [?] et n'est pas codé en dur : la part désengorgée est un paramètre.",
+  "pressure": {
+    "tendu": 0.85,
+    "critique": 1.0,
+    "rupture": 1.25,
+    "birth_per_day": 0.00005,
+    "death_per_day": 0.00003,
+    "epidemic_per_day": { "critique": 0.0004, "rupture": 0.0012 },
+    "ration_floor": 0.5
+  },
+  "order": {
+    "target_by_level": { "calme": 70, "tendu": 55, "critique": 30, "rupture": 10 },
+    "approach_per_day": 0.05
+  },
+  "refugees": {
+    "flow_share_per_day": 0.02,
+    "min_gap": 0.1,
+    "max_pressure_after": 1.0
+  },
+  "breach": {
+    "structure_below": 20,
+    "hourly_loss_share": 0.004,
+    "walk_m_per_hour": 3000,
+    "gate_throughput_per_hour": 8000,
+    "closed_gate_legitimacy": -4,
+    "open_gate_order": -6
+  },
+  "reconquest": {
+    "cleanup_per_day": 0.02,
+    "repopulate_share_per_day": 0.01,
+    "repopulate_min_cleanup": 1.0
+  },
+  "decongest": {
+    "threshold": 1.0,
+    "months_over": 3,
+    "ration": { "legitimacy": -5, "order": -8, "pressure_relief_capacity_mult": 1.0, "ration_mult": 0.8 },
+    "send_out": { "legitimacy": -20, "order": -4, "target_pressure": 0.9, "loss_share": 0.6 },
+    "new_land": { "gold_cost": 5000, "months": 6, "capacity_gain_share": 0.15, "failure_p": 0.25, "failure_loss_share": 0.1 }
+  },
+  "fog": { "band_width": 0.25 }
+}

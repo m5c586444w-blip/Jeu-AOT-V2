@@ -188,6 +188,48 @@ export const GasBalanceSchema = z
   })
   .strict();
 
+/** data/balance/wall.json — pilier P1 (spec 26 §2) : pression, brèche, évacuation, reconquête, désengorgement (valeurs [A]). */
+export const WallBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    pressure: z
+      .object({
+        tendu: pos,
+        critique: pos,
+        rupture: pos,
+        birth_per_day: prob,
+        death_per_day: prob,
+        epidemic_per_day: z.object({ critique: prob, rupture: prob }).strict(),
+        ration_floor: prob,
+      })
+      .strict(),
+    order: z.object({ target_by_level: z.object({ calme: z.number(), tendu: z.number(), critique: z.number(), rupture: z.number() }).strict(), approach_per_day: prob }).strict(),
+    refugees: z.object({ flow_share_per_day: prob, min_gap: z.number().min(0), max_pressure_after: pos }).strict(),
+    breach: z
+      .object({
+        structure_below: z.number().min(0).max(100),
+        hourly_loss_share: prob,
+        walk_m_per_hour: pos,
+        gate_throughput_per_hour: pos,
+        closed_gate_legitimacy: z.number(),
+        open_gate_order: z.number(),
+      })
+      .strict(),
+    reconquest: z.object({ cleanup_per_day: prob, repopulate_share_per_day: prob, repopulate_min_cleanup: prob }).strict(),
+    decongest: z
+      .object({
+        threshold: pos,
+        months_over: z.number().int().min(1),
+        ration: z.object({ legitimacy: z.number(), order: z.number(), pressure_relief_capacity_mult: pos, ration_mult: prob }).strict(),
+        send_out: z.object({ legitimacy: z.number(), order: z.number(), target_pressure: pos, loss_share: prob }).strict(),
+        new_land: z.object({ gold_cost: z.number().min(0), months: z.number().int().min(1), capacity_gain_share: prob, failure_p: prob, failure_loss_share: prob }).strict(),
+      })
+      .strict(),
+    fog: z.object({ band_width: pos }).strict(),
+  })
+  .strict();
+
 /** data/balance/signal.json — pilier P4 (spec 26 §5) : visibilité des fusées, relais, erreurs, fantômes, brouillard, doctrine (valeurs [A], codes de couleur [C]). */
 export const SignalBalanceSchema = z
   .object({
@@ -459,6 +501,7 @@ export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
 export type GasBalance = z.infer<typeof GasBalanceSchema>;
 export type SignalBalance = z.infer<typeof SignalBalanceSchema>;
+export type WallBalance = z.infer<typeof WallBalanceSchema>;
 
 export type PoliticsBalance = z.infer<typeof PoliticsBalanceSchema>;
 export type SocietyBalance = z.infer<typeof SocietyBalanceSchema>;
@@ -476,6 +519,7 @@ export const BALANCE_FILES = {
   logistics: LogisticsBalanceSchema,
   gas: GasBalanceSchema,
   signal: SignalBalanceSchema,
+  wall: WallBalanceSchema,
   tactical: TacticalBalanceSchema,
   events: EventsBalanceSchema,
   research: ResearchBalanceSchema,
