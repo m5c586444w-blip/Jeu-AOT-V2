@@ -641,6 +641,121 @@ export const SignalBalanceSchema = z
   })
   .strict();
 
+
+const weaponSchema = z
+  .object({
+    range_m: pos,
+    shots_per_min: z.number().min(0),
+    hit_prob: prob,
+    lethality: pos,
+    suppression: z.number().min(0),
+    ammo_per_shot: z.number().min(0),
+    gas_per_min: z.number().min(0),
+    area: z.number().min(1),
+    heavy: z.boolean(),
+    airborne: z.boolean(),
+  })
+  .strict();
+const seasonMult = z.object({ hiver: z.number().min(0), printemps: z.number().min(0), ete: z.number().min(0), automne: z.number().min(0) }).strict();
+
+/** data/balance/tide.json — pilier P2 (spec 26 §3 et §3 bis) : champ de densité de Titans, attention, repeuplement, rencontres, combat humain (valeurs [A]). */
+export const TideBalanceSchema = z
+  .object({
+    canon: CanonSchema,
+    notes_canon: z.string().optional(),
+    grid: z.object({ cell_m: pos, max_density: pos }).strict(),
+    activity: z
+      .object({
+        dawn_hour: z.number().min(0).max(24),
+        dusk_hour: z.number().min(0).max(24),
+        day: z.number().min(0),
+        night: z.number().min(0),
+        season: seasonMult,
+        immobile_below: z.number().min(0),
+        wake_attention: z.number().min(0),
+        wake_activity: z.number().min(0),
+      })
+      .strict(),
+    dynamics: z.object({ diffusion_per_h: z.number().min(0), attraction_per_h: z.number().min(0), attention_half: pos, max_out_fraction: prob }).strict(),
+    footprint: z.object({ noise_k: z.number().min(0), smoke_k: z.number().min(0), artillery_k: z.number().min(0), size_k: z.number().min(0), size_ref: pos }).strict(),
+    attention: z
+      .object({
+        per_man: z.number().min(0),
+        wall_per_man: z.number().min(0),
+        radius_m: pos,
+        spike_half_life_h: pos,
+        spikes: z.record(z.string(), z.number().min(0)),
+      })
+      .strict(),
+    repop: z.object({ rate_per_h: z.number().min(0), half_attention: pos }).strict(),
+    breach: z.object({ inner_m: z.number().min(0), outer_m: pos, amount_per_power: z.number().min(0) }).strict(),
+    encounter: z
+      .object({
+        base_per_h: z.number().min(0),
+        neighbor_weight: prob,
+        immobile_floor: prob,
+        vis_floor: prob,
+        group_k: z.number().min(0),
+      })
+      .strict(),
+    detection: z
+      .object({
+        base_m: pos,
+        scout_k: z.number().min(0),
+        intel_k: z.number().min(0),
+        vis_floor: prob,
+        night_mult: pos,
+        concealment_k: prob,
+        footprint_k: z.number().min(0),
+        unseen_fire_mult: prob,
+        ambush_mult: z.number().min(1),
+        size_bucket: pos,
+      })
+      .strict(),
+    weapons: z.record(z.string(), weaponSchema),
+    combat: z
+      .object({
+        noise_pct: prob,
+        cover_k: prob,
+        suppress_gain: z.number().min(0),
+        suppress_cover_k: prob,
+        suppress_half_life_s: pos,
+        suppress_fire_k: prob,
+        morale_fire_floor: prob,
+        morale_supp_k: z.number().min(0),
+        morale_loss_k: z.number().min(0),
+        morale_cover_k: prob,
+        morale_recovery_per_min: z.number().min(0),
+        rout_threshold: prob,
+        rout_fire_mult: prob,
+        flank_fire_k: z.number().min(0),
+        flank_morale_k: z.number().min(0),
+        wounded_share: prob,
+        evac_per_min: prob,
+        area_ref_men: pos,
+        airborne_evasion: prob,
+        airborne_exposure: pos,
+      })
+      .strict(),
+    focus: z
+      .object({
+        range_m: pos,
+        w_distance: z.number().min(0),
+        w_group: z.number().min(0),
+        w_noise: z.number().min(0),
+        w_motion: z.number().min(0),
+        bait_mult: pos,
+        decay_per_s: z.number().min(0),
+        drop_below: z.number().min(0),
+        switch_margin: z.number().min(0),
+        anomalous_bait_ignore: prob,
+        saturation_ratio: pos,
+        size_classes: z.record(z.string(), z.object({ grab_radius_m: pos, speed_mps: pos, cadence_s: pos }).strict()),
+      })
+      .strict(),
+  })
+  .strict();
+
 /** data/balance/clock.json — pilier P5 (spec 26 §6) : suspicion, couverture, contrôle, autonomie, extraction, roster (valeurs [A] ; horloge de 13 ans : shifters.json [C]). */
 export const ClockBalanceSchema = z
   .object({
@@ -1104,6 +1219,7 @@ export type ExpeditionsBalance = z.infer<typeof ExpeditionsBalanceSchema>;
 export type LogisticsBalance = z.infer<typeof LogisticsBalanceSchema>;
 export type GasBalance = z.infer<typeof GasBalanceSchema>;
 export type SignalBalance = z.infer<typeof SignalBalanceSchema>;
+export type TideBalance = z.infer<typeof TideBalanceSchema>;
 export type ClockBalance = z.infer<typeof ClockBalanceSchema>;
 export type WallBalance = z.infer<typeof WallBalanceSchema>;
 
@@ -1123,6 +1239,7 @@ export const BALANCE_FILES = {
   logistics: LogisticsBalanceSchema,
   gas: GasBalanceSchema,
   signal: SignalBalanceSchema,
+  tide: TideBalanceSchema,
   wall: WallBalanceSchema,
   clock: ClockBalanceSchema,
   tactical: TacticalBalanceSchema,

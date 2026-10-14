@@ -1,0 +1,90 @@
+{
+  "canon": "A",
+  "notes_canon": "Pilier P2 (spec 26 §3 et §3 bis). Canon [C] repris : les Titans purs sont attirés par les humains les plus proches ou nombreux et ignorent animaux et nourriture sauf stimulus ; activité réduite la nuit et l'hiver, plus forte au soleil (03 §5.1-5.2). Tous les chiffres sont des choix [A]. Mitrailleuses, communications et dirigeables armés de Marley restent [?] à confirmer en 11 ; l'ODM anti-personnel de la Police intérieure est [C].",
+  "grid": { "cell_m": 2000, "max_density": 6 },
+  "activity": {
+    "dawn_hour": 6,
+    "dusk_hour": 19,
+    "day": 1,
+    "night": 0.3,
+    "season": { "hiver": 0.5, "printemps": 0.9, "ete": 1, "automne": 0.8 },
+    "immobile_below": 0.2,
+    "wake_attention": 2,
+    "wake_activity": 0.6
+  },
+  "dynamics": { "diffusion_per_h": 0.02, "attraction_per_h": 0.3, "attention_half": 2, "max_out_fraction": 0.8 },
+  "footprint": { "noise_k": 0.8, "smoke_k": 0.5, "artillery_k": 0.3, "size_k": 0.4, "size_ref": 50 },
+  "attention": {
+    "per_man": 0.004,
+    "wall_per_man": 0.01,
+    "radius_m": 6000,
+    "spike_half_life_h": 6,
+    "spikes": { "combat": 3, "cannon": 8, "explosion": 5, "fusee": 1 }
+  },
+  "repop": { "rate_per_h": 0.05, "half_attention": 1.5 },
+  "breach": { "inner_m": 2000, "outer_m": 6000, "amount_per_power": 1.5 },
+  "encounter": { "base_per_h": 0.08, "neighbor_weight": 0.25, "immobile_floor": 0.3, "vis_floor": 0.4, "group_k": 1.5 },
+  "detection": {
+    "base_m": 3000,
+    "scout_k": 0.8,
+    "intel_k": 0.5,
+    "vis_floor": 0.2,
+    "night_mult": 0.5,
+    "concealment_k": 0.6,
+    "footprint_k": 0.25,
+    "unseen_fire_mult": 0.15,
+    "ambush_mult": 1.8,
+    "size_bucket": 50
+  },
+  "weapons": {
+    "fusil": { "range_m": 450, "shots_per_min": 3, "hit_prob": 0.06, "lethality": 0.5, "suppression": 0.1, "ammo_per_shot": 1, "gas_per_min": 0, "area": 1, "heavy": false, "airborne": false },
+    "fusil_repetition": { "range_m": 500, "shots_per_min": 6, "hit_prob": 0.06, "lethality": 0.5, "suppression": 0.12, "ammo_per_shot": 1, "gas_per_min": 0, "area": 1, "heavy": false, "airborne": false },
+    "mitrailleuse": { "range_m": 700, "shots_per_min": 60, "hit_prob": 0.012, "lethality": 0.5, "suppression": 0.1, "ammo_per_shot": 1, "gas_per_min": 0, "area": 1, "heavy": true, "airborne": false },
+    "mortier": { "range_m": 900, "shots_per_min": 4, "hit_prob": 0.3, "lethality": 2, "suppression": 0.8, "ammo_per_shot": 1, "gas_per_min": 0, "area": 3, "heavy": true, "airborne": false },
+    "artillerie": { "range_m": 3000, "shots_per_min": 2, "hit_prob": 0.25, "lethality": 4, "suppression": 1.5, "ammo_per_shot": 1, "gas_per_min": 0, "area": 4, "heavy": true, "airborne": false },
+    "odm": { "range_m": 150, "shots_per_min": 8, "hit_prob": 0.25, "lethality": 0.9, "suppression": 0.05, "ammo_per_shot": 0, "gas_per_min": 25, "area": 1, "heavy": false, "airborne": true },
+    "cavalerie": { "range_m": 120, "shots_per_min": 4, "hit_prob": 0.3, "lethality": 0.7, "suppression": 0.3, "ammo_per_shot": 0, "gas_per_min": 0, "area": 1, "heavy": false, "airborne": false },
+    "dirigeable": { "range_m": 400, "shots_per_min": 1, "hit_prob": 0.4, "lethality": 5, "suppression": 1.2, "ammo_per_shot": 1, "gas_per_min": 0, "area": 5, "heavy": true, "airborne": false }
+  },
+  "combat": {
+    "noise_pct": 0.1,
+    "cover_k": 0.7,
+    "suppress_gain": 0.8,
+    "suppress_cover_k": 0.5,
+    "suppress_half_life_s": 60,
+    "suppress_fire_k": 0.6,
+    "morale_fire_floor": 0.5,
+    "morale_supp_k": 0.25,
+    "morale_loss_k": 1.2,
+    "morale_cover_k": 0.6,
+    "morale_recovery_per_min": 0.02,
+    "rout_threshold": 0.2,
+    "rout_fire_mult": 0.1,
+    "flank_fire_k": 0.5,
+    "flank_morale_k": 0.8,
+    "wounded_share": 0.6,
+    "evac_per_min": 0.05,
+    "area_ref_men": 400,
+    "airborne_evasion": 0.6,
+    "airborne_exposure": 1.4
+  },
+  "focus": {
+    "range_m": 400,
+    "w_distance": 1,
+    "w_group": 0.5,
+    "w_noise": 0.8,
+    "w_motion": 0.4,
+    "bait_mult": 1.5,
+    "decay_per_s": 0.15,
+    "drop_below": 0.05,
+    "switch_margin": 0.25,
+    "anomalous_bait_ignore": 0.7,
+    "saturation_ratio": 2,
+    "size_classes": {
+      "petit": { "grab_radius_m": 2, "speed_mps": 2, "cadence_s": 3 },
+      "moyen": { "grab_radius_m": 4, "speed_mps": 3, "cadence_s": 3 },
+      "grand": { "grab_radius_m": 7, "speed_mps": 4, "cadence_s": 4 },
+      "anormal": { "grab_radius_m": 5, "speed_mps": 9, "cadence_s": 2 }
+    }
+  }
+}

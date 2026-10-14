@@ -1286,3 +1286,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `src/sim/clock/` (suspicion par faction observatrice, vue sans distinction porteur/innocent, contrôle et autonomie, extraction, roster avec invariant des Neuf) ; paramètres `[A]` dans `data/balance/clock.json`. La malédiction d'Ymir et les 13 ans `[C]` ne sont jamais altérés (`shifters.ts` inchangé) ; l'usure de projection alimente une « horloge utile » séparée `[A]`. Non branchée au tick : empreintes inchangées.
 - **Limites** : perte de contrôle en combat restée dans `tactical/shifters.ts` ; capture par Marley non tracée ; commandes sérialisables, écran, clés i18n `clock.err.*` et branchement au tick reportés.
 - **Réversible** : oui.
+
+## 2026-10-14 — D-162 C5 : pilier P2 La Marée et moteur de rencontres en module pur non branché
+- **Décision** : `src/sim/tide/` (grille de densité conservatrice, attention, repeuplement, rencontres avec Titans, moteur de rencontres humaines §3 bis avec détection asymétrique et vues par faction/siège, combat humain, focus tactique) ; paramètres `[A]` dans `data/balance/tide.json`. Non branché à `routes.ts`, au tick ni à `battle.ts` : empreintes inchangées ; branchement reporté à C9. Marley–Paradis sans Titan prouvé par test. Mitrailleuses, communications, dirigeables de Marley `[?]`.
+- **Reste** : éventail contre colonne face aux Titans, calibrage `sim:balance`, grille depuis l'atlas. Dette 79 partiellement soldée.
+- **Réversible** : oui.
