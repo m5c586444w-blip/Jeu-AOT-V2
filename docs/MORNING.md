@@ -4,7 +4,7 @@
 - Fait, commité, poussé : C0 audit (`docs/reports/C0-audit.md`, bug cadre confirmé : `.bataille` fixed recouvre le HUD → C1 pour B) ; C3 socle multijoueur (sièges, enveloppes de commandes, rejeu) ; les **7 piliers de la spec 26 en modules purs testés** (`src/sim/gas, signal, wall, clock, tide, truth, registry`, données `data/balance/*.json`) ; mur (P1) et registre (P7) **branchés au tick, désactivés par défaut** (`EnableWall`, `EnableRegistry`). Chaque lot a eu une revue indépendante.
 - Dernier verify : 149 fichiers, **1259 tests**, EXIT=0 ; les 8 empreintes `sim:selftest` sont **inchangées**.
 - Dette 71 à 95 dans `docs/reports/dette.md`. Décisions D-157 à D-166.
-- **À valider par toi** : D-157 (owner facultatif) ; ~~prénoms « Ilse » et « Frieda »~~ **autorisés par Gabriel** (D-167, dette 94 soldée sur ce point) ; rien n'est visible en jeu tant que les piliers ne sont pas activés/branchés (C9 suite) ; `npm run verify` dure ≈ 20-30 min sur cette machine (pas 11).
+- **À valider par toi** : ~~D-157 (owner facultatif)~~ **validé sous condition par Gabriel** (D-168 : `owner` obligatoire en multijoueur à plusieurs sièges par faction, prérequis de C13) ; ~~prénoms « Ilse » et « Frieda »~~ **autorisés par Gabriel** (D-167, dette 94 soldée sur ce point) ; rien n'est visible en jeu tant que les piliers ne sont pas activés/branchés (C9 suite) ; `npm run verify` dure ≈ 20-30 min sur cette machine (pas 11).
 - Aucune capture ni mesure GPU cette nuit (code de simulation pur).
 - **Suite** : A : C9.3 (clock) puis truth, gas, signal, tide, puis morts → registre ; B : C1 (cadre d'interface).
 

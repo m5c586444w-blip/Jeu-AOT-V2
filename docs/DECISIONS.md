@@ -1266,6 +1266,7 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Raison** : sauvegardes et empreintes inchangées, pas de migration (`schemaVersion` reste 8). Rejeu prouvé par `tests/sim/replay-commands.test.ts`.
 - **Reste (C3 suite)** : `owner` sur provinces/institutions, UI branchée sur les enveloppes, contrôle par siège des commandes de faction, connaissance par faction branchée au tick.
 - **Réversible** : oui.
+- **Validation** : voir D-168 (validé par Gabriel sous condition pour le multijoueur).
 
 ## 2026-10-14 — D-158 C4.1 : pilier P3 Gaz et Ancrage en module pur non branché
 - **Décision** : module pur `src/sim/gas/` + `data/balance/gas.json` (valeurs `[A]`, portée du crochet `[?]` lue dans `tactical.json`). Non branché au tick ni à `battle.ts` : aucune empreinte de référence modifiée. Pertes d'ancrage dans un registre `AnchorLedger` séparé de la carte tactique immuable.
@@ -1317,4 +1318,11 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision (Gabriel, 2026-10-14 matin)** : les deux prénoms « Ilse » et « Frieda », signalés par la dette n° 94 (présents dans `data/names/paradis.json` et dans des fichiers de personnages), sont **autorisés** : il n'y a rien à trier ni à remplacer. Raison donnée : la règle de restriction sur le lore est levée (ERRATA_V3 §2, création de lore autorisée).
 - **Portée** : ces deux prénoms seulement. La règle de **provenance des fichiers** (aucun fichier, modèle, texture ou image de l'œuvre ou d'un fan, aucun décalque) reste en vigueur : elle ne concerne pas des prénoms de données.
 - **Conséquence** : la dette n° 94 est soldée sur ce point. Les remplacements déjà faits dans les tables du Registre (Irmgard, Felicitas, Dominik, Benedikt) et la liste d'exclusion de `tests/sim/registry/data.test.ts` restent en place : ils sont inoffensifs et il n'y a rien à défaire. Un prénom de l'œuvre nouveau, hors de ces deux-là, reste à signaler à Gabriel avant usage.
+- **Réversible** : oui.
+
+## 2026-10-14 — D-168 Direction : D-157 validé sous condition (`owner` obligatoire en multijoueur à plusieurs sièges par faction)
+- **Décision (Gabriel, 2026-10-14 matin)** : D-157 (`owner` facultatif) est **validé**, avec une condition proposée par la direction et acceptée.
+- **Condition `[A]`** : en solo et pour tout l'existant, `owner` reste facultatif (sauvegardes et empreintes inchangées). En **session multijoueur où au moins deux sièges humains dirigent une même faction** (conseil mixte, chaque joueur dirige ses propres groupes, formations et escouades : 27 §4), `owner` devient **obligatoire** sur toute entité commandable (armées, flottes, escouades, sections de bataille) et **vérifié au démarrage de la session** ; une entité sans propriétaire explicite fait **refuser le démarrage** avec un code d'erreur typé (à définir en C13). Création, prêt et cession d'une entité passent par des commandes typées qui fixent ou changent `owner` (27 §4.3).
+- **Raison** : le calcul par défaut « le siège qui dirige la faction » ne désigne pas de propriétaire unique quand plusieurs joueurs partagent une faction. Constat de la direction à partir de D-157 et du fichier 27 : le code n'a pas été relu sur ce point, **à confirmer à l'audit de C13**.
+- **Portée** : **prérequis de C13**, ajouté à ses critères d'acceptation dans `docs/coord/PLAN_FONCTIONNALITES.md` et à 27 §4.3. **Aucun changement de code maintenant** ; la règle exacte pour les entités tenues par l'IA reste à fixer en C13.
 - **Réversible** : oui.
