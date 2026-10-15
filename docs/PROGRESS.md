@@ -3,7 +3,7 @@
 | Champ | Valeur |
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
-| Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; suivant : C9.7 tide (A), C1 (B) |
+| Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; C1 fait (A, D-174) ; suivant : C2 (B) ; A : C9 suite (conception tide, fiche à rédiger), C1 (B) |
 | Dernier `npm run verify` | 2026-10-15, code 0, 153 fichiers, 1294 tests (journal `docs/coord/journal/2026-10-15-A.md`) |
 | Prochaine étape | PROCHAINE ACTION EXACTE : session A, C9.7 : brancher `src/sim/tide` (EnableTide ; grille à initialiser depuis la géométrie du monde) ; lire d'abord `src/sim/tide/grid.ts` et `routes.ts` (titanDensity statique) ; B : C1 |
 

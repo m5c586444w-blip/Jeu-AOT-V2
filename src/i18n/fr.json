@@ -369,6 +369,8 @@
   "hud.population": "Population",
   "hud.morale": "Moral",
   "hud.rationing": "Rationnement",
+  "hud.cadre_reduire": "Réduire le cadre d'interface",
+  "hud.cadre_afficher": "Afficher le cadre d'interface",
   "hud.speed": "Vitesse",
   "hud.pause": "Pause",
   "hud.speed_n": "Vitesse {n}",

@@ -260,7 +260,7 @@ export async function bootGame(): Promise<void> {
   }
   // Fil de notifications (U9) : un clic sur une entrée qui nomme un lieu centre la carte et ouvre son dossier.
   const feed = new NotificationFeed(
-    host,
+    screen,
     world,
     (province) => {
       registers?.close();

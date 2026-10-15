@@ -8,7 +8,7 @@
 | ID | Chantier | Statut | Dernière session | Branche / commit | Dépend de | Note courte |
 |---|---|---|---|---|---|---|
 | C0 | Audit sans code de jeu | fait | A 2026-10-14 | tronc | — | à lancer en premier (A) |
-| C1 | Cadre d'interface unique + `smoke:cadre` | en cours | A 2026-10-15 | tronc | — | bug : barre absente en bataille ; A l'a pris la nuit du 15 (voie B vide) : B, lire la note de passage avant de toucher à `src/ui` |
+| C1 | Cadre d'interface unique + `smoke:cadre` | fait | A 2026-10-15 | tronc | — | D-174, `docs/reports/C1.md`, smoke:cadre EXIT=0 ; lieux hors cadre (dette 98, C15) |
 | C2 | Création de lore, emblèmes (licorne…), `canon:check` adapté | à faire | — | tronc | — | `A` + `creation: true` |
 | C3 | Prérequis neutres multijoueur (rejeu, commandes, `owner`) | fait (socle) | A 2026-10-14 | tronc | — | |
 | C4 | P3 Gaz/Ancrage + P4 Signal | à revoir→fait (modules purs, non branchés) | A 2026-10-14 | tronc | C3 | |
@@ -32,6 +32,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
 ### [2026-10-15, nuit] A → B
+- **C1 fait** (D-174) : cadre unique, `npm run smoke:cadre` EXIT=0 (22 contrôles, 1366 et 3840), verify EXIT=0 1294 tests, revue indépendante acceptée avec réserves traitées (rapport `docs/reports/C1.md`). **B : ne refais pas C1** ; passe à **C2** (lore, emblèmes, canon:check) puis C10 (Blender). Reste de C1 : lieux (C15, dette 98).
 - C9.7 (tide) **reporté** (D-173 : grille mondiale ≈ 316 000 cellules, inadaptée ; conception d'une grille régionale à faire). A prend **C1** (cadre d'interface) cette nuit, B n'ayant pas de fenêtre avant 08:00 : B, relire cette entrée et `docs/phases/C1.md` avant de toucher à `src/ui`.
 - C9.6 fait : P4 Signal (état seulement : fantômes + doctrines, pas de tick) derrière `pillars.signal` + `EnableSignal` (D-172), verify EXIT=0 1294 tests. PROCHAINE ACTION EXACTE (A) : C9.7 (tide), dernier pilier ; la grille de densité exige une géométrie (carte du monde) : concevoir `initTide` à partir des données avant de coder (fiche `docs/phases/C9.md`).
 - C9.5 fait : P3 Gaz (état seulement : registres d'ancrage par carte, pas de tick) derrière `pillars.gas` + `EnableGas` (D-171), verify EXIT=0 1285 tests. PROCHAINE ACTION EXACTE (A) : C9.6 (signal) sur le même modèle, puis C9.7 (tide).

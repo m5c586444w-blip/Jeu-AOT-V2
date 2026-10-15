@@ -105,6 +105,16 @@ export class Hud {
 
     const time = el("div", "bandeau__temps");
     time.append(this.dateBlock(), this.speedBlock());
+    // Cadre réductible (ERRATA_V3 §3) : le bouton reste toujours visible, quel que soit le mode, pour réafficher le cadre.
+    const frame = el("button", "bandeau__cadre");
+    frame.type = "button";
+    frame.dataset["action"] = "cadre";
+    frame.innerHTML = icon("moins");
+    frame.append(el("span", "lecteur-seul", t("hud.cadre_reduire")));
+    hint(frame, t("hud.cadre_reduire"));
+    frame.addEventListener("click", () => this.setReduced(!this.reduced));
+    this.frameButton = frame;
+    time.append(frame);
     if (world.politics && actions.openPanel) {
       // Retour au menu principal (P8, 04 §5.1) : la partie est sauvegardée automatiquement à intervalles.
       const menu = el("button", "bandeau__menu");
@@ -154,6 +164,23 @@ export class Hud {
       ro.observe(this.el);
       ro.observe(this.gestion);
     }
+  }
+
+  private frameButton: HTMLButtonElement | null = null;
+  private reduced = false;
+
+  /** Cadre réduit : ressources, alertes et menu de gestion masqués ; la tête, la date, la vitesse et le bouton de réaffichage restent. */
+  setReduced(on: boolean): void {
+    this.reduced = on;
+    this.el.classList.toggle("bandeau--reduit", on);
+    document.documentElement.dataset["cadre"] = on ? "reduit" : "plein";
+    if (this.world.politics && this.actions.openPanel) this.gestion.hidden = on;
+    if (this.frameButton) {
+      this.frameButton.innerHTML = icon(on ? "plus" : "moins");
+      this.frameButton.append(el("span", "lecteur-seul", on ? t("hud.cadre_afficher") : t("hud.cadre_reduire")));
+      hint(this.frameButton, on ? t("hud.cadre_afficher") : t("hud.cadre_reduire"));
+    }
+    this.scheduleMeasure?.();
   }
 
   /** Largeur sous laquelle les étiquettes ne tiennent plus (mesurée une fois ; la largeur ne dépend pas du mode). */

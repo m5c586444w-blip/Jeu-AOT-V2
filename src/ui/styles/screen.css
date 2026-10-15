@@ -81,6 +81,14 @@ html[data-debug="true"] .bandeau__champ--debug { display: inline-grid; }
 .bandeau__menu { display: inline-flex; align-items: center; justify-content: center; width: 2.1rem; height: 2.1rem; color: var(--texte-second); background: transparent; border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); }
 .bandeau__menu:hover { color: var(--texte-fort); border-color: var(--accent-fonce); }
 .bandeau__menu .ico, .bandeau__menu .icone { width: 1.2rem; height: 1.2rem; }
+/* Cadre réductible (C1, ERRATA_V3 §3) : le bouton reste visible dans tous les modes ; réduit, il ne reste que la tête et le temps. */
+.bandeau__cadre { display: inline-flex; align-items: center; justify-content: center; width: 2.1rem; height: 2.1rem; color: var(--texte-second); background: transparent; border: var(--filet-l) solid var(--filet); border-radius: var(--rayon); }
+.bandeau__cadre:hover { color: var(--texte-fort); border-color: var(--accent-fonce); }
+.bandeau__cadre[aria-pressed="true"] { color: var(--accent-texte); background: var(--accent); }
+.bandeau__cadre .ico, .bandeau__cadre .icone { width: 1.2rem; height: 1.2rem; }
+.bandeau--reduit { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "tete . temps"; }
+.bandeau--reduit .bandeau__registre, .bandeau--reduit .bandeau__pied { display: none; }
+.gestion[hidden] { display: none; }
 
 /* Barre d'alertes (U2) */
 .bandeau__pied { grid-area: pied; display: flex; align-items: center; gap: 1rem; min-height: 1.8rem; padding: 0.1rem 0.9rem; font-size: var(--t-s); background: var(--panneau-creux); border-top: var(--filet-l) solid var(--filet-doux); }
@@ -187,12 +195,13 @@ html:not([data-joueur]) [data-autre="1"], html[data-joueur="fac_paradis"] [data-
 
 /* ——— Fil de notifications (U9), à droite ——— */
 .notifications {
-  position: absolute;
-  top: 0.6rem;
+  /* Cadre unique (C1) : fixé sous la barre supérieure, au-dessus de la bataille et des registres, dans tous les modes. */
+  position: fixed;
+  top: calc(var(--bandeau-h, 5.5rem) + 0.6rem);
   right: 0.6rem;
-  z-index: calc(var(--z-panneau) - 1);
+  z-index: calc(var(--z-fenetre) + 1);
   width: min(16.5rem, 28vw);
-  max-height: calc(100% - 15rem);
+  max-height: calc(100vh - var(--bandeau-h, 5.5rem) - var(--gestion-h, 4rem) - 15rem);
   display: flex;
   flex-direction: column;
   background: var(--voile-fort);
@@ -200,6 +209,10 @@ html:not([data-joueur]) [data-autre="1"], html[data-joueur="fac_paradis"] [data-
   border-top: 2px solid var(--accent);
 }
 .notifications[hidden] { display: none; }
+/* Pendant une bataille, le fil reste à droite (les registres s'ouvrent à gauche, il ne les recouvre jamais), sous l'en-tête de bataille, et compact. */
+body[data-tactique] .notifications { top: calc(var(--bandeau-h, 5.5rem) + 3.6rem); width: auto; }
+/* En bataille le fil est réduit à son en-tête (compteur, historique, repli) : il ne recouvre pas les boutons d'ordre. */
+body[data-tactique] .notifications__liste { display: none; }
 .notifications[data-replie="true"] .notifications__liste { display: none; }
 .notifications__bouton { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; padding: 0; color: var(--texte-second); background: transparent; border: var(--filet-l) solid transparent; border-radius: var(--rayon); }
 .notifications__bouton:hover { color: var(--texte-fort); border-color: var(--filet); background: var(--reflet-fort); }
@@ -298,9 +311,11 @@ button.notification:hover { background: var(--reflet-fort); }
 .bordereau {
   position: fixed;
   z-index: 45;
-  top: 40%;
+  top: calc(var(--bandeau-h, 5.5rem) + (100vh - var(--bandeau-h, 5.5rem) - var(--gestion-h, 4rem)) * 0.4);
   left: 50%;
   transform: translate(-50%, -50%);
+  max-height: calc(100vh - var(--bandeau-h, 5.5rem) - var(--gestion-h, 4rem) - 1rem);
+  overflow: auto;
   width: min(28rem, 90vw);
   padding: 0.9rem 1.1rem 1rem;
   background: var(--panneau);
@@ -323,11 +338,12 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .options {
   position: fixed;
   z-index: 40;
-  top: 50%;
+  /* Cadre unique (C1) : centrée entre les deux barres, jamais par-dessus. */
+  top: calc(var(--bandeau-h, 5.5rem) + 0.5rem);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   width: min(32rem, 92vw);
-  max-height: 86vh;
+  max-height: calc(100vh - var(--bandeau-h, 5.5rem) - var(--gestion-h, 4rem) - 1rem);
   overflow: auto;
   padding: 0 1rem 1rem;
   background: var(--panneau);
@@ -676,7 +692,7 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 .bilan-lettres { margin: 0.5rem 0; }
 
 /* ——— Dossier d'événement (modale) ——— */
-.dossier-evenement { position: fixed; inset: 0; z-index: var(--z-modale); display: grid; place-items: center; overflow-y: auto; padding: 1rem; background: var(--voile); }
+.dossier-evenement { position: fixed; inset: var(--bandeau-h, 0px) 0 var(--gestion-h, 0px) 0; z-index: var(--z-modale); display: grid; place-items: center; overflow-y: auto; padding: 1rem; background: var(--voile); }
 .dossier-evenement[hidden] { display: none; }
 .dossier-evenement__papier { width: min(42rem, 94vw); padding: 0 1.3rem 1.1rem; color: var(--texte); background: var(--panneau); border: var(--filet-l) solid var(--filet); border-top: 3px solid var(--accent); box-shadow: 6px 6px 0 var(--ombre); }
 .dossier-evenement__tete { display: flex; gap: 0.8rem; align-items: center; justify-content: space-between; margin: 0 -1.3rem; padding: 0.5rem 1.3rem; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-clair); background: var(--panneau-creux); border-bottom: var(--filet-l) solid var(--filet-doux); }
@@ -704,9 +720,13 @@ body[data-tactique] .sous-titres { left: var(--sous-titres-x, 1rem); top: var(--
 /* ——— Bataille (P4) ——— */
 .bataille {
   position: fixed;
-  inset: 0;
-  /* Mode plein écran : au-dessus des registres (--z-fenetre), sous les options et les dossiers d'événement. */
-  z-index: calc(var(--z-fenetre) + 2);
+  /* Cadre unique (C1) : la bataille occupe l'espace entre la barre supérieure et le menu de gestion, elle ne les recouvre jamais. */
+  top: var(--bandeau-h, 0px);
+  bottom: var(--gestion-h, 0px);
+  left: 0;
+  right: 0;
+  /* Sous les registres (--z-fenetre) : le menu de gestion reste utilisable pendant la bataille. */
+  z-index: calc(var(--z-fenetre) - 1);
   display: grid;
   grid-template: "tete tete" auto "scene carnet" 1fr "escouades escouades" auto / 1fr minmax(14rem, 22rem);
   background: var(--fond-profond);

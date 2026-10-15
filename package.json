@@ -51,6 +51,7 @@
     "places:captures": "tsx src/tools/places-captures.ts",
     "places:regenerer": "tsx src/tools/places-regenerer.ts",
     "smoke:chr": "tsx src/tools/smoke-chr.ts",
+    "smoke:cadre": "tsx src/tools/smoke-cadre.ts",
     "smoke:ux0": "tsx src/tools/smoke-ux0.ts",
     "smoke:pa": "tsx src/tools/smoke-pa.ts",
     "smoke:r2": "tsx src/tools/smoke-r2.ts",
