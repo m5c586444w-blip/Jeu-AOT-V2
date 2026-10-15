@@ -136,6 +136,7 @@ try {
   // Le registre est fermé pendant la bataille : on le rouvre (touche S) et la rencontre ne doit plus y figurer.
   await panel(page, "KeyS", "armees");
   expect((await page.locator(".armee__rencontre:visible").count()) === 0, "rencontre résolue après la bataille (ordres rejoués par la simulation) : absente du registre rouvert");
+  expect((await page.locator('.registre-panneau [data-army="army_854_sud"]').count()) === 1, "registre rouvert : l'armée du Sud y est listée (l'absence de rencontre n'est pas triviale)");
   await page.keyboard.press("Escape");
   expect((await page.locator("body[data-tactique='1']").count()) === 0 && (await page.locator(".carte__toile").count()) === 1, "retour à la carte (bataille fermée)");
   await frame(page, "retour carte");

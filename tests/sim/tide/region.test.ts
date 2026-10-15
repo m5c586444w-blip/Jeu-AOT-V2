@@ -91,7 +91,7 @@ describe("P2 Marée régionale (D-177) : module pur", () => {
     expect(JSON.parse(JSON.stringify(a))).toEqual(a);
   });
 
-  it("le paramètre region.* a un effet (le doubler change le résultat)", () => {
+  it("region.march_noise a un effet (à 0, le résultat change)", () => {
     const base = run(initTide(), 3, day([army()]));
     const loud = run(initTide(), 3, day([army({ moving: true })]));
     const quiet = tickTide(initTide(), day([army({ moving: true })]), { ...tb, region: { ...tb.region, march_noise: 0 } });
