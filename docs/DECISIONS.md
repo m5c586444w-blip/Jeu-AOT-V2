@@ -1389,3 +1389,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Bataille** : `src/net/battle.ts` applique le même principe au pas de la bataille (tours de 4 pas, `owner` d'escouade, instantané = état JSON). **Pas encore** : branchement dans l'interface, plusieurs factions jouées (la simulation n'a qu'une faction « joueur » : camps rivaux = suite de C13, refonte de `playerOf`), salon, votes.
 - **Limite assumée** : l'hôte lit son coffre (27 §4.4) ; aucune anti-triche en v1 (décision 4 de 27 §10).
 - **Réversible** : oui (module isolé).
+
+## 2026-10-15 — D-179 C13 : camps rivaux humains (`nations.humans`, commandes de nation par siège)
+- **Décision** : une table multijoueur (`withTable`, `src/sim/core/table.ts`) installe `seats` et range les factions autres que la faction « jouée » dans `nations.humans` (champ facultatif : absent en solo, empreintes de référence inchangées). L'IA (`monthlyAi`, `weeklyAi`, `dailyArmyAi`) ne pilote plus une faction humaine ; les rencontres où figure une faction humaine attendent le choix du siège. Un siège d'un camp rival donne les **commandes de nation** (`NATION_COMMANDS` : levées, formations, Titans projetés, diplomatie) et les ordres d'armée/de flotte de SES entités ; la commande s'exécute avec sa faction pour acteur puis la faction jouée est rétablie (`applyEnveloped`). Les commandes politiques de la faction jouée (lois, budget, recherche…) restent à ses sièges : refus `seat.err.not_faction` sinon.
+- **Limites** : la couche politique/recherche/événements n'existe que pour la faction jouée (Paradis) : un camp rival n'a pas encore ses propres conseils ni lois ; bataille de compagnie « jouer » reste centrée sur Paradis ; alertes d'interface pour la faction jouée seulement ; équilibrage par camp (`sim:balance`) à faire.
+- **Preuve** : `tests/net/camps.test.ts` (6, dont 4 sièges en lockstep : usurpation et ordre politique refusés, 0 désynchronisation).
+- **Réversible** : oui.

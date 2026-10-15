@@ -17,6 +17,7 @@ import { runBattle } from "../tactical/battle";
 import { sectionsOf, skirmishSetup } from "../tactical/setup";
 import type { BatterySpec, BattleSetup, TimedOrder, TroopKind } from "../tactical/types";
 import type { NationsState } from "../world/nations";
+import { isHumanFaction } from "../world/nations";
 import { armyBaseSpeed, armyMen, armyPieces, ENCOUNTER_CAP, hostile, isStatic, playerOf, pushArmyLog, regimentOf, requiresMet } from "./state";
 import type { ArmiesState, ArmyState, Encounter, EncounterKind, EncounterResult, EncounterSide, FleetMission, FleetState } from "./state";
 
@@ -531,8 +532,7 @@ export function openEncounter(ctx: ArmyCtx, province: string, kind: EncounterKin
       a.progress = 0;
     }
   }
-  const player = playerOf(ctx.ns);
-  if (sides.some((x) => x.faction === player)) {
+  if (sides.some((x) => isHumanFaction(ctx.ns, x.faction))) {
     pushLog(ctx.st, ctx.date, kind === "titans" ? "alert.army_titans" : kind === "debarquement" ? "alert.army_landing_battle" : "alert.army_contact", { province, n: titans }, true);
   } else resolveEncounter(ctx, enc.id, "auto", []);
   trimEncounters(ctx.s);

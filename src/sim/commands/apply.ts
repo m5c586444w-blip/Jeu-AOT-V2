@@ -8,6 +8,7 @@ import { toAbsoluteDay } from "../core/time";
 import type { GameState } from "../core/state";
 import type { World } from "../strategic/world";
 import { playerOf } from "../armies/state";
+import { isHumanFaction } from "../world/nations";
 import { applyOrder } from "../tactical/battle";
 import type { Battle } from "../tactical/battle";
 import type { TimedOrder } from "../tactical/types";
@@ -52,6 +53,14 @@ export const FACTION_COMMANDS: ReadonlySet<string> = new Set([
   "ChooseSuccessor", "EnableWall", "EnableRegistry", "EnableClock", "EnableTruth", "EnableGas", "EnableSignal", "EnableTide",
 ]);
 
+/**
+ * Commandes de nation (levées, mouvements de formations, Titans projetés, diplomatie) : un siège d'un camp rival (faction tenue par un humain
+ * sans être la faction « jouée ») peut les donner pour SA faction (27 §4.2, D-179) ; elles s'exécutent avec cette faction pour acteur.
+ */
+export const NATION_COMMANDS: ReadonlySet<string> = new Set([
+  "BuildFormation", "MoveFormation", "ProjectTitan", "ProposeTreaty", "DeclareWar", "MakePeace", "Ultimatum", "Embargo", "GuaranteeHizuru",
+]);
+
 /** Commandes qui visent une armée, une flotte ou une rencontre : le siège doit la posséder (27 §1). */
 export const ARMY_COMMANDS: ReadonlySet<string> = new Set([
   "ArmyMove", "ArmyHalt", "ArmyForcedMarch", "ArmyIntercept", "ArmyRetreat", "ArmyMerge", "ArmySplit", "ArmySetGeneral",
@@ -67,8 +76,10 @@ export function authorize(state: GameState, seat: SeatId, cmd: { type: string } 
   // Liste blanche : un type absent des deux ensembles est refusé à tout siège autre que le siège solo.
   if (!isArmy && !isFaction) return !state.seats && seat === SOLO_SEAT ? null : refuse("seat.err.unclassified_command", `${seat} -> ${cmd.type}`);
   if (isFaction) {
-    if (factionOfSeat(state, seat) !== player) return refuse("seat.err.not_faction", `${seat} -> ${player}`);
-    return null;
+    const f = factionOfSeat(state, seat);
+    if (f === player) return null;
+    if (f !== null && NATION_COMMANDS.has(cmd.type) && isHumanFaction(state.nations, f)) return null;
+    return refuse("seat.err.not_faction", `${seat} -> ${player}`);
   }
   const { armies, fleets } = ownedSubjects(cmd);
   const encId = cmd.type === "ResolveEncounter" && typeof cmd["encounter"] === "string" ? cmd["encounter"] : null;
@@ -125,6 +136,12 @@ export function applyEnveloped(state: GameState, raw: unknown, bus?: EventBus<Si
   if (refusal) {
     bus?.emit("commandRejected", { command: raw, error: refusal.code });
     throw new Error(`${refusal.code} : ${refusal.detail}`);
+  }
+  const acting = factionOfSeat(state, env.seat);
+  if (state.nations && acting && acting !== state.nations.player && (NATION_COMMANDS.has(chk.command.type) || ARMY_COMMANDS.has(chk.command.type))) {
+    // Camp rival (D-179) : la commande s'exécute avec la faction du siège pour acteur, puis la faction « jouée » est rétablie.
+    const out = applyCommand({ ...state, nations: { ...state.nations, player: acting } }, chk.command as Command, bus, world);
+    return out.nations ? { ...out, nations: { ...out.nations, player: state.nations.player } } : out;
   }
   return applyCommand(state, chk.command as Command, bus, world);
 }

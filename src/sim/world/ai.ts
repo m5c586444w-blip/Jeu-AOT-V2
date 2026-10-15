@@ -4,7 +4,7 @@ import type { PoliticalState } from "../politics/state";
 import type { ShiftersState } from "../shifters/shifters";
 import type { World } from "../strategic/world";
 import { accepts, declareWar, makePeace, proposeTreaty } from "./diplomacy";
-import { atWar, buildProblem, hasTreaty, moveForces, moveProblem, nationIncome, nationsWorld, nationUpkeep, orderBuild, pushAi } from "./nations";
+import { atWar, buildProblem, isHumanFaction, hasTreaty, moveForces, moveProblem, nationIncome, nationsWorld, nationUpkeep, orderBuild, pushAi } from "./nations";
 import type { StrategicState } from "../strategic/economy";
 import type { NationsState } from "./nations";
 import { projectProblem, projectTitan, SIDE_TO_FACTION } from "./war";
@@ -45,7 +45,7 @@ export function monthlyAi(ctx: AiCtx): void {
   const nw = nationsWorld(ctx.world);
   const day = toAbsoluteDay(ctx.date);
   for (const f of [...nw.factions.values()].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (f.id === ctx.ns.player) continue;
+    if (isHumanFaction(ctx.ns, f.id)) continue;
     const n = ctx.ns.nations[f.id];
     if (!n) continue;
     const w = weights(ctx, f.id);
@@ -113,7 +113,7 @@ export function weeklyAi(ctx: AiCtx): void {
   const nw = nationsWorld(ctx.world);
   const day = toAbsoluteDay(ctx.date);
   for (const f of [...nw.factions.values()].sort((a, b) => a.id.localeCompare(b.id))) {
-    if (f.id === ctx.ns.player) continue;
+    if (isHumanFaction(ctx.ns, f.id)) continue;
     const w = weights(ctx, f.id);
     for (const p of nw.order) {
       if (ctx.ns.control[p.id] !== f.id) continue;

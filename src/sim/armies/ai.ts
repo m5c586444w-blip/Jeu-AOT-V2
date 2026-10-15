@@ -2,7 +2,8 @@ import { toAbsoluteDay } from "../core/time";
 import { shortestRoute } from "../military/routes";
 import type { ArmyCtx } from "./armies";
 import { applyOrder, findArmy, geoOf, orderProblem, visibleProvinces } from "./armies";
-import { armyMen, armyPieces, hostile, playerOf } from "./state";
+import { armyMen, armyPieces, hostile } from "./state";
+import { isHumanFaction } from "../world/nations";
 import type { ArmyAiDecision, ArmyState, FleetState } from "./state";
 
 /**
@@ -65,14 +66,13 @@ function siegeSpot(ctx: ArmyCtx, a: ArmyState): string | null {
 }
 
 export function dailyArmyAi(ctx: ArmyCtx): void {
-  const player = playerOf(ctx.ns);
   // Flottes chargées : approche de la côte la plus faible, puis débarquement.
   for (const f of [...ctx.s.fleets].sort((x, y) => x.id.localeCompare(y.id))) {
-    if (f.faction === player || f.route.length > 0 || f.embarked.length === 0 || !hostile(ctx.ns, f.faction, "fac_paradis")) continue;
+    if (isHumanFaction(ctx.ns, f.faction) || f.route.length > 0 || f.embarked.length === 0 || !hostile(ctx.ns, f.faction, "fac_paradis")) continue;
     fleetAi(ctx, f);
   }
   for (const a of [...ctx.s.armies].sort((x, y) => x.id.localeCompare(y.id))) {
-    if (a.faction === player || a.engaged || a.fleet || !a.province || a.route.length > 0 || a.target) continue;
+    if (isHumanFaction(ctx.ns, a.faction) || a.engaged || a.fleet || !a.province || a.route.length > 0 || a.target) continue;
     if (a.faction === "fac_paradis") paradisAi(ctx, a);
     else if (hostile(ctx.ns, a.faction, "fac_paradis")) invaderAi(ctx, a);
   }

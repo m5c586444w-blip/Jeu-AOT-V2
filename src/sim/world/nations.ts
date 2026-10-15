@@ -86,6 +86,8 @@ export interface AiDecision {
 
 export interface NationsState {
   player: string;
+  /** Autres factions tenues par des sièges humains (camps rivaux, 27 §4.2, D-179) : l'IA ne les pilote pas. Absent = aucune. */
+  humans?: string[];
   nations: Record<string, NationState>;
   /** Contrôle des provinces de terre et de l'île Paradis (les zones maritimes n'ont pas de maître fixe). */
   control: Record<string, string>;
@@ -384,6 +386,11 @@ export function weeklyMoves(world: World, s: NationsState): void {
       st.moves = Math.round(f.speed * (rail && f.domain === "terre" ? nw.balance.war.rail_speed_mult : 1));
     }
   }
+}
+
+/** Faction tenue par un humain : la faction jouée ou l'un des camps rivaux d'une table multijoueur (D-179). */
+export function isHumanFaction(s: { player: string; humans?: string[] } | null, faction: string): boolean {
+  return s ? faction === s.player || (s.humans ?? []).includes(faction) : faction === "fac_paradis";
 }
 
 /** Côté du joueur au monde. */
