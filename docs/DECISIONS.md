@@ -1417,3 +1417,7 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Chiffres** : LOD0 1 866–1 980 tri, LOD1 606–704, 4 matériaux, hauteur 1,57–1,74 m ; 24 modèles, empreintes identiques à deux générations.
 - **Défauts constatés (rendu Workbench)** : cape en cloche rigide, trous aux jointures, semelles massives, étuis flottants ; données d'ailes de l'emblème non découpées. **Dette** : LOD2, skinning, décalques Paradis/Hizuru/alliés, chargeur 3D, `?proto3d`, revue de fin de chantier.
 - **Preuve** : `tests/art` 128 tests avec assets-check ; verify EXIT=0, 1465 tests. `__pycache__` retiré du suivi git.
+
+## 2026-10-16 — D-184 C10 tranche 3 : chargeur, planche, corrections de revue
+- **Décision** : tenues servies au navigateur (`execution: true`, 14 tenues + 5 décalques), chargées à la demande ; planche `?proto3d=tenues` ; `assets:blender:check` (mode contrôle sans écriture) ; script de manifeste confiné à `tools/blender/*.py` et fichier sous `projet/` ; tenues inscrites à `creations.md` (A). Emblème des ailes réduit pour tenir dans l'écu.
+- **Revue** : `docs/reports/C10-revue.md`, ACCEPTÉ AVEC RÉSERVES ; restent : LOD2, skinning, tests du chargeur réel. **Réversible** : oui.

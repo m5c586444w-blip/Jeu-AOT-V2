@@ -166,6 +166,13 @@ describe("assets:check, textures Poly Haven (R1d)", () => {
       expect(ok(projet({ script: "tools/blender/inexistant.py" })).join()).toContain("introuvable");
       expect(ok(projet({ script: undefined })).join()).toContain("sans script");
     });
+    it("confine le script à tools/blender/ et le fichier à projet/", () => {
+      expect(ok(projet({ script: "../x.py" })).join()).toContain("hors de tools/blender/");
+      expect(ok(projet({ script: "/etc/passwd" })).join()).toContain("hors de tools/blender/");
+      expect(ok(projet({ script: "package.json" })).join()).toContain("hors de tools/blender/");
+      const f = fixture([projet({ fichier: "derives/lame.glb" })], { "derives/lame.glb": "glb" });
+      expect(checkAssets(f.root, f.md, ".").errors.join()).toContain("vit sous projet/");
+    });
     it("refuse une autre licence qu'une CC0, une URL, un mauvais usage, une empreinte fausse", () => {
       expect(ok(projet({ licence: "CC-BY-4.0" })).join()).toContain("CC0-1.0 seulement");
       expect(ok(projet({ url: MH_URL })).join()).toContain("pas d'URL");

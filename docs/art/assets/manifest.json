@@ -1161,7 +1161,8 @@
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/emblemes.py",
-      "note": "Tracé de data/emblems (emb_fac_marley) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre."
+      "note": "Tracé de data/emblems (emb_fac_marley) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.",
+      "execution": true
     },
     {
       "fichier": "projet/decalque_emb_org_garrison.glb",
@@ -1173,7 +1174,8 @@
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/emblemes.py",
-      "note": "Tracé de data/emblems (emb_org_garrison) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre."
+      "note": "Tracé de data/emblems (emb_org_garrison) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.",
+      "execution": true
     },
     {
       "fichier": "projet/decalque_emb_org_military_police.glb",
@@ -1185,7 +1187,8 @@
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/emblemes.py",
-      "note": "Tracé de data/emblems (emb_org_military_police) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre."
+      "note": "Tracé de data/emblems (emb_org_military_police) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.",
+      "execution": true
     },
     {
       "fichier": "projet/decalque_emb_org_survey_corps.glb",
@@ -1193,11 +1196,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "07d743ccbfdfd967c42d4746210ef6138df011387d17dcb7bcfe4dc8066122cb",
+      "sha256": "e32c906de4b80ec312a98a7a385850439637c3515675525e7190a6f462279925",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/emblemes.py",
-      "note": "Tracé de data/emblems (emb_org_survey_corps) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre."
+      "note": "Tracé de data/emblems (emb_org_survey_corps) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.",
+      "execution": true
     },
     {
       "fichier": "projet/decalque_emb_org_training_corps.glb",
@@ -1209,7 +1213,8 @@
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/emblemes.py",
-      "note": "Tracé de data/emblems (emb_org_training_corps) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre."
+      "note": "Tracé de data/emblems (emb_org_training_corps) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.",
+      "execution": true
     },
     {
       "fichier": "projet/dispositif_odm.glb",
@@ -1265,11 +1270,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "eae930e4e4c697143193ba80fb205b3e95c1ba0c8805cfa4ef978448aafbb3e8",
+      "sha256": "c8c68b95f4ce67a2296b46b6574df72ee0259ee7fb63e296c6fdd4fbbe716678",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_survey_corps) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_survey_corps) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_bataillon_exploration_lod1.glb",
@@ -1277,11 +1283,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "463c3fd93c37e19fc2af2676addfd324f0e2bbfee42ba6024360a21722e32697",
+      "sha256": "723bc3bdea6f60f7ee33c1945b0b51f34c2b2eb7b11c497964477e9f3b26e840",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_survey_corps) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_survey_corps) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_corps_entrainement_lod0.glb",
@@ -1289,11 +1296,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "7efe77074fd191770a34fee7eb57033289d87788fceca3bdd5048c8d8c079f21",
+      "sha256": "52588658a4e3b17ef1140e5e0926032c2f5c48cd1edeaa710268335c907643eb",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_training_corps) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_training_corps) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_corps_entrainement_lod1.glb",
@@ -1301,11 +1309,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "fca79a8d9d161faed9a795cf9188f54f151529d1cea7c3a09d68e03fbd1de734",
+      "sha256": "d7cc21cbe9f5aec5b58e19b72a7c9f0dadac726ad7b898c66dcbc014168d3321",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_training_corps) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_training_corps) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_garnison_lod0.glb",
@@ -1313,11 +1322,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "27d1152f0824b268874cd7c6246861812c9507586e4ddcbb4c89f88b851b94ae",
+      "sha256": "0707312f7a22297796f37543df4c9eadc92bfaeef37e0428ae596e59446c203d",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_garrison) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_garrison) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_garnison_lod1.glb",
@@ -1325,11 +1335,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "38f3cd617837d5b4da999343fc49a5e2ce2e526825018bb9bba97062cbf96260",
+      "sha256": "ef2358a430c2387786a22cbad66f1b7dcbafc962766098bf23a146181dae31ea",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_garrison) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_garrison) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_marley_officier_lod0.glb",
@@ -1337,11 +1348,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "3e3ff415007dce69d8246dabed9ac1402679dfd42a6c89f2a6afc2d365814d3d",
+      "sha256": "01485f05cd0f2203f810ff62aaab02f25e2a0c9180da9a805d53316b35f44e34",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_marley_officier_lod1.glb",
@@ -1349,11 +1361,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "a7633ed199702a6e99434d44eccf449f3fe6be8f6c21243a5699fc60ff08341d",
+      "sha256": "d7087b30bc206a0944b8d5466e4b77e8b351a6625d20167fa67a7ba9b7589c85",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_marley_soldat_lod0.glb",
@@ -1361,11 +1374,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "d785ddaa4afe0b18eac6f8b98f83d196b012f7c4bec70f390989a8e1536c7bc8",
+      "sha256": "e8291a9461106aab2e6a1272056ca730c97e6eb04b1560608f8e1af50e8a4f3f",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_marley_soldat_lod1.glb",
@@ -1373,11 +1387,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "165a00a1e431353fa38932786b9f77fff7ea28b6464fbebca5cc4bd6283dab7a",
+      "sha256": "052f7081822ee8bf151bbd92fc260ea65e417077361e90ff8a88d8b7ddd96b54",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_fac_marley) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_police_interieure_lod0.glb",
@@ -1385,11 +1400,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "a62274c5806808d44243bd3b056f41d747da8fdfb5c4a19871ce695ad3ec8ba8",
+      "sha256": "f62fd51173b852f0cecc4349388487d25ed2439bdf5fc6b5c465e8c606a1dfca",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_police_interieure_lod1.glb",
@@ -1397,11 +1413,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "acf4ec4ede5d5e4a7750752f161d0064a50906744646ef7fd7213183a5f5dbba",
+      "sha256": "24a20e760be4ab48e5f09ef9ef74c194c19e9655120a3544faedae0ffe8437cd",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_police_militaire_lod0.glb",
@@ -1409,11 +1426,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "e29b86fd25db5cc315af5592d200f2c0d70b72ddbcf41da53d113e329c2fe9f9",
+      "sha256": "52bd34d2fcb9aedd58edd4e40bab31fbc901229ff9993110ab57421a0674c609",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD0 ≤ 8 000 triangles.",
+      "execution": true
     },
     {
       "fichier": "projet/tenue_police_militaire_lod1.glb",
@@ -1421,11 +1439,12 @@
       "licence": "CC0-1.0",
       "date": "2026-10-15",
       "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
-      "sha256": "0ea24a68f9dca53b3fadf1bba3ea47bce1337b87d4cce5b76714f26eba2392c0",
+      "sha256": "452947ae7cae168d6e1681786adc4ee44c735062a8b9059c8df1cec250616263",
       "usage": "modele_projet",
       "origine": "creation-projet",
       "script": "tools/blender/tenues.py",
-      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles."
+      "note": "Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème emb_org_military_police) ; couleurs A (cape verte E-P11 : C) ; LOD1 ≤ 2 000 triangles.",
+      "execution": true
     }
   ]
 }

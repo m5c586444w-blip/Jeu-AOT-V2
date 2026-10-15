@@ -70,4 +70,22 @@ describe("emblèmes (C2)", () => {
     expect(emblem("fac_inconnue")).toBe("");
     expect(emblem("org_military_police")).toContain('data-canon="A"');
   });
+
+  it("les charges tracées en coordonnées absolues tiennent dans la boîte du champ (cadre 48 × 48, rien ne dépasse l'écu)", () => {
+    const boite = { rond: [1, 1, 47, 47], ecu: [6, 3, 42, 47], losange: [2, 1, 46, 47] } as const;
+    for (const e of file.emblems) {
+      const [x0, y0, x1, y1] = boite[e.field];
+      for (const c of e.charges) {
+        if (/[a-df-z]/.test(c.d.replace(/[ZzMm]/g, ""))) continue; // tracés relatifs : non vérifiés ici
+        if (/[hHvV]/.test(c.d)) continue;
+        const n = (c.d.match(/-?\d+\.?\d*/g) ?? []).map(Number);
+        for (let i = 0; i + 1 < n.length; i += 2) {
+          expect(n[i], `${e.id} x`).toBeGreaterThanOrEqual(x0);
+          expect(n[i], `${e.id} x`).toBeLessThanOrEqual(x1);
+          expect(n[i + 1], `${e.id} y`).toBeGreaterThanOrEqual(y0);
+          expect(n[i + 1], `${e.id} y`).toBeLessThanOrEqual(y1);
+        }
+      }
+    }
+  });
 });

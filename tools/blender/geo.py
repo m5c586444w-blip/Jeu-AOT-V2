@@ -102,6 +102,17 @@ def anneau_h(y, cx, cz, rx, rz, n, a0=0.0, a1=2 * math.pi, ferme=True, p=2.0):
     return pts, (cx, y, cz)
 
 
+def anneau_z(z, cx, cy, rx, ry, n, p=2.0):
+    """Anneau dans un plan Z constant (loft le long de Z : pieds de botte), superellipse d'exposant p."""
+    pts = []
+    e = 2.0 / p
+    for i in range(n):
+        t = 2 * math.pi * i / n
+        s, c = math.sin(t), math.cos(t)
+        pts.append((round(cx + rx * math.copysign(abs(c) ** e, c), 6), round(cy + ry * math.copysign(abs(s) ** e, s), 6), z))
+    return pts, (cx, cy, z)
+
+
 def anneau_axe(c, d, ra, rb, n):
     ref = (0.0, 0.0, 1.0) if abs(d[2]) < 0.9 else (1.0, 0.0, 0.0)
     u = _norm(_cross(d, ref))

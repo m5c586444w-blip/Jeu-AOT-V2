@@ -11,7 +11,7 @@ import sys
 import common
 from common import definir_couleur, scene_vide
 from emblemes import EMBLEMES
-from geo import anneau_h, anneaux_chemin, bande, boite_g, groupe, tube
+from geo import anneau_h, anneau_z, anneaux_chemin, bande, boite_g, groupe, tube
 
 BUDGET_TENUE = 8000
 BUDGET_LOD1 = 2000
@@ -143,16 +143,24 @@ def fabriquer(spec, lod):
     # Pantalon et bottes (thigh / calf / foot).
     for s, c in cotes:
         chaine = jambe_chemin(c, 0.012, 0.90, 0.10)
+        chaine.insert(0, ((0.104 * c, 0.87, 0.030), 0.090))  # prolongé sous la veste : aucune jointure ouverte
         rj = anneaux_chemin(chaine, n_limb)
         k_genou = [e[0][1] for e in chaine].index(0.475)
-        ajouter(f"thigh_{s}", tube(f"pantalon_haut_{s}", rj[:k_genou + 1], "pantalon"))
+        ajouter(f"thigh_{s}", tube(f"pantalon_haut_{s}", rj[:k_genou + 1], "pantalon", cap_haut=True))
         ajouter(f"calf_{s}", tube(f"pantalon_bas_{s}", rj[k_genou:], "pantalon"))
-        tige = [((0.152 * c, 0.40, 0.012), 0.080), ((0.165 * c, 0.25, 0.008), 0.068), ((0.175 * c, 0.06, 0.010), 0.064)]
-        ajouter(f"calf_{s}", tube(f"botte_tige_{s}", anneaux_chemin(tige, n_limb), "cuir", cap_haut=False, cap_bas=False))
-        ajouter(f"foot_{s}", boite_g(f"botte_pied_{s}", (0.180 * c, 0.050, 0.090), (0.100, 0.100, 0.255), "cuir"))
-        ajouter(f"foot_{s}", boite_g(f"botte_semelle_{s}", (0.180 * c, 0.010, 0.090), (0.108, 0.020, 0.270), "cuir"))
+        tige = [((0.152 * c, 0.40, 0.012), 0.090), ((0.165 * c, 0.25, 0.008), 0.076), ((0.180 * c, 0.09, 0.008), 0.064)]
+        ajouter(f"calf_{s}", tube(f"botte_tige_{s}", anneaux_chemin(tige, n_limb), "cuir", cap_haut=False, cap_bas=True))
+        # Pied de botte : loft le long de Z (talon -> pointe), arrondi, sans bloc de semelle massif.
+        stations = [(-0.040, 0.054, 0.062, 0.058), (0.010, 0.054, 0.052, 0.052), (0.090, 0.056, 0.046, 0.044), (0.170, 0.050, 0.036, 0.034), (0.232, 0.040, 0.026, 0.024)]
+        rz_ = [anneau_z(z, 0.187 * c, yc, rx_, ry_, n_limb, p=2.6) for (z, rx_, yc, ry_) in stations]
+        ajouter(f"foot_{s}", tube(f"botte_pied_{s}", rz_, "cuir", cap_haut=True, cap_bas=True))
+        ajouter(f"foot_{s}", boite_g(f"botte_semelle_{s}", (0.187 * c, 0.005, 0.096), (0.102, 0.010, 0.262), "cuir"))
         if hi:
             ajouter(f"calf_{s}", tube(f"botte_revers_{s}", anneaux_chemin([((0.152 * c, 0.41, 0.012), 0.086), ((0.154 * c, 0.385, 0.012), 0.086)], n_limb), "cuir"))
+
+    # Entrejambe : fond de pantalon fermé entre les cuisses (aucune jointure ouverte vue de dos ou de dessous).
+    fond = [anneau_h(0.86, 0.0, 0.03, 0.150, 0.100, n, p=2.6), anneau_h(0.78, 0.0, 0.030, 0.112, 0.090, n, p=2.6), anneau_h(0.70, 0.0, 0.035, 0.040, 0.070, n, p=2.6)]
+    ajouter("pelvis", tube("fond_entrejambe", fond, "pantalon", cap_haut=True, cap_bas=True))
 
     # Ceinture et boucle (pelvis).
     cx, cz, rx, rz = interp(prof, 0.94)
@@ -168,10 +176,13 @@ def fabriquer(spec, lod):
                 anneau = [anneau_h(y + 0.02, jx * c, jz, r + 0.020, r + 0.020, n_limb), anneau_h(y - 0.02, jx * c, jz, r + 0.020, r + 0.020, n_limb)]
                 ajouter(f"thigh_{s}", tube(f"sangle_cuisse_{s}{k}", anneau, "cuir"))
     if spec.get("holsters"):
+        # Étuis fixés à la ceinture : attache (patte) passée dans la ceinture, étui plaqué contre le flanc, sans espace.
         for s, c in cotes:
-            ajouter("pelvis", boite_g(f"etui_{s}", (0.215 * c, 0.86, 0.04), (0.060, 0.180, 0.100), "cuir"))
+            xs = interp(prof, 0.88)[2] + ease + 0.012  # flanc au niveau de la ceinture
+            ajouter("pelvis", boite_g(f"etui_attache_{s}", ((xs + 0.004) * c, 0.935, 0.04), (0.038, 0.085, 0.112), "cuir"))
+            ajouter("pelvis", boite_g(f"etui_{s}", ((xs + 0.020) * c, 0.865, 0.04), (0.040, 0.150, 0.100), "cuir"))
             if hi:
-                ajouter("pelvis", boite_g(f"etui_rabat_{s}", (0.215 * c, 0.945, 0.04), (0.066, 0.030, 0.108), "cuir"))
+                ajouter("pelvis", boite_g(f"etui_rabat_{s}", ((xs + 0.022) * c, 0.930, 0.04), (0.046, 0.032, 0.108), "cuir"))
     if spec.get("cartouchieres") and hi:
         for k, x in enumerate((-0.09, -0.03, 0.03, 0.09)):
             ajouter("pelvis", boite_g(f"cartouchiere{k}", (x, 0.935, fz + 0.012), (0.050, 0.070, 0.030), "cuir"))
@@ -221,22 +232,51 @@ def fabriquer(spec, lod):
     z_dos = pt_dos
     if cape:
         mat_cape = "cape"
-        base = [(1.42, 0.0, 0.0, 0.17, 0.12), (1.34, 0.0, -0.01, 0.255, 0.165), (1.15, 0.0, -0.02, 0.285, 0.195)]
         longueur = cape["longueur"]
-        if longueur <= 0.85:
-            base.append((longueur, 0.0, -0.03, 0.30, 0.205))
-        else:
-            base.extend([(0.85, 0.0, -0.03, 0.30, 0.205), (longueur, 0.0, -0.035, 0.32, 0.215)])
-        base.sort(key=lambda e: -e[0])
-        nn = 14 if hi else 7
+        # Profil (y, rx, rz, cz) du drapé, collé aux épaules puis évasé ; les plis (pans) croissent vers l'ourlet.
+        cle = [(1.43, 0.160, 0.110, 0.000), (1.36, 0.235, 0.135, -0.010), (1.20, 0.255, 0.150, -0.015), (0.95, 0.265, 0.165, -0.020), (0.60, 0.280, 0.180, -0.030), (0.40, 0.295, 0.190, -0.030)]
+        amp = [(1.43, 0.0), (1.36, 0.0), (1.20, 0.005), (1.05, 0.010), (0.90, 0.026), (0.60, 0.036), (0.40, 0.040)]
+
+        def lin(tab, y):
+            for e0, e1 in zip(tab, tab[1:]):
+                if e1[0] <= y <= e0[0]:
+                    t = (e0[0] - y) / (e0[0] - e1[0])
+                    return tuple(e0[k] + (e1[k] - e0[k]) * t for k in range(1, len(e0)))
+            return tab[-1][1:]
+
+        ys = [1.43, 1.36, 1.28, 1.16, 1.04]
+        y = 0.92
+        while y > longueur + 0.05:
+            ys.append(round(y, 3))
+            y -= 0.12
+        ys.append(longueur)
+        pans = 5
+        seg = 6 if hi else 3
+        nn = pans * seg
         a0, a1 = math.radians(112), math.radians(248)
-        anneaux = [anneau_h(y, cx, cz, rx, rz, nn, a0, a1, ferme=False) for (y, cx, cz, rx, rz) in base]
+        anneaux = []
+        for yy in ys:
+            rx, rz, cz = lin(cle, yy)
+            a_m = lin(amp, yy)[0]
+            pts = []
+            for i in range(nn + 1):
+                u = i / nn
+                t = a0 + (a1 - a0) * u
+                pli = -a_m * 0.5 * (1.0 - math.cos(2 * math.pi * pans * (u - 0.5)))  # 0 sur une crête (centre du dos), -a_m au creux
+                rr = 1.0 + pli / rz
+                sx, cx_ = math.sin(t), math.cos(t)
+                pts.append((round(rx * rr * math.copysign(abs(sx) ** 0.85, sx) * 1.0, 6), yy, round(cz + rz * rr * math.copysign(abs(cx_) ** 0.85, cx_), 6)))
+            anneaux.append((pts, (0.0, yy, cz)))
         ajouter("spine_03", tube("cape", anneaux, mat_cape, ferme=False))
-        z_dos = base[2][2] - base[2][4] - 0.004
+        rz_c, cz_c = lin(cle, 1.17)[1], lin(cle, 1.17)[2]
+        z_dos = cz_c - rz_c - 0.004
         if cape.get("capuchon"):
-            hood = [(1.57, 0.0, 0.03, 0.085, 0.095), (1.50, 0.0, 0.02, 0.115, 0.12), (1.42, 0.0, 0.01, 0.15, 0.14), (1.36, 0.0, 0.0, 0.18, 0.15)]
-            ann = [anneau_h(y, cx, cz, rx, rz, nn, math.radians(95), math.radians(265), ferme=False) for (y, cx, cz, rx, rz) in hood]
+            # Capuchon replié sur la nuque : col épais ouvert devant, poche retombant sur le haut du dos.
+            col_h = [(1.505, 0.0, 0.020, 0.088, 0.088), (1.462, 0.0, 0.008, 0.130, 0.120), (1.410, 0.0, -0.005, 0.180, 0.140), (1.365, 0.0, -0.020, 0.215, 0.150)]
+            ann = [anneau_h(yy, cx, cz, rx, rz, nn, math.radians(75), math.radians(285), ferme=False) for (yy, cx, cz, rx, rz) in col_h]
             ajouter("spine_03", tube("capuchon", ann, mat_cape, ferme=False))
+            poche = [(1.43, 0.0, -0.110, 0.070, 0.030), (1.38, 0.0, -0.135, 0.120, 0.040), (1.31, 0.0, -0.145, 0.125, 0.036), (1.26, 0.0, -0.145, 0.080, 0.026)]
+            ajouter("spine_03", tube("capuchon_poche", [anneau_h(yy, cx, cz, rx, rz, 12 if hi else 7) for (yy, cx, cz, rx, rz) in poche], mat_cape, cap_haut=True, cap_bas=True))
 
     # Coiffe (head).
     coiffe = spec.get("coiffe")
@@ -267,7 +307,7 @@ def fabriquer(spec, lod):
             extras_par_os["spine_02"].update({"emblem_id": eid, "emblem_face": "poitrine", "emblem_os": "spine_02", "emblem_pos": pos, "emblem_largeur_m": 0.09, "emblem_rot_y_deg": 0.0})
         else:
             cle = "spine_03" if cape else "spine_02"
-            y = 1.12
+            y = 1.17 if cape else 1.12
             if cape:
                 pos = [0.0, y, round(z_dos - 0.002, 4)]
                 largeur = 0.24

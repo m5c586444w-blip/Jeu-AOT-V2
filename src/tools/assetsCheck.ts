@@ -161,6 +161,8 @@ export function checkAssets(root: string, licensesMd: string, repoRoot = "."): C
       if (e.licence !== "CC0-1.0") errors.push(`${e.fichier} : création du projet sous CC0-1.0 seulement (« ${e.licence} » trouvé)`);
       if (e.url) errors.push(`${e.fichier} : une création du projet n'a pas d'URL de source (${e.url})`);
       if (!e.script) errors.push(`${e.fichier} : création du projet sans script générateur`);
+      else if (!/^tools\/blender\/[A-Za-z0-9_]+\.py$/.test(e.script)) errors.push(`${e.fichier} : script « ${e.script} » hors de tools/blender/`);
+      else if (!e.fichier.startsWith("projet/")) errors.push(`${e.fichier} : une création du projet vit sous projet/`);
       else if (!existsSync(join(repoRoot, e.script))) errors.push(`${e.fichier} : script « ${e.script} » introuvable`);
       else if (/(attack[\s_-]?on[\s_-]?titan|shingeki)/i.test(e.nom)) errors.push(`${e.fichier} : nom évoquant l'œuvre originale`);
     } else {

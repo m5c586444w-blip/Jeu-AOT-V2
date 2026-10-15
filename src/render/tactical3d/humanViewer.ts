@@ -20,11 +20,13 @@ import { createPost } from "./post";
 import type { PostChain } from "./post";
 import { soldierMaterials } from "./soldier";
 import { MATERIALS } from "./styles";
+import { TENUES, habillerCorps } from "./tenuesProjet";
 
 /**
  * Page de contrôle du corps de base de R1c (`?proto3d=humain`) : le corps MakeHuman CC0 façonné par paramètres, en rang.
  * `&planche=soldats` : les animations du soldat ; `&planche=titans` : classes, variantes et Titans spéciaux ramenés à la même
- * hauteur (formes comparables, `&pose=`) ; `&planche=poses&id=classe_15` : les animations d'un Titan. `&vue=visage` : de près.
+ * hauteur (formes comparables, `&pose=`) ; `&planche=poses&id=classe_15` : les animations d'un Titan ;
+ * C10 : `&planche=tenues` (ou `?proto3d=tenues`) : les 7 tenues du projet (`tenuesProjet.ts`) sur le corps de base, `&dos` de dos, `&lod=1` niveau 1. `&vue=visage` : de près.
  * R1d : `&vue=anatomie` : torses et bassins de l'homme, de la femme et de la corpulence lourde, de près (contrôle : aucun détail
  * anatomique) ; `&dos` : les mêmes de dos.
  * Sonde `window.__humain3d` : prêt, hauteurs mesurées après pose, temps de chargement et de façonnage.
@@ -79,7 +81,7 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const state: HumanProbe = { ready: false, loadMs, bodies: [] };
   const bodies: HumanBody[] = [];
   const q = new URLSearchParams(window.location.search);
-  const sheet = q.get("planche") ?? "corps";
+  const sheet = q.get("planche") ?? (q.get("proto3d") === "tenues" ? "tenues" : "corps");
   const t = Number(q.get("t") ?? "0.6") || 0.6;
   const soldiers: HumanSoldier[] = [];
   if (sheet === "soldats") {
@@ -96,6 +98,21 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
       state.bodies.push({ id: a, nominal: s.body.height, measured: bb.max.y - bb.min.y, minY: bb.min.y, buildMs: performance.now() - s0 });
       soldiers.push(s);
     });
+  }
+  if (sheet === "tenues") {
+    // C10 : les 7 tenues par institution sur le corps de base (1,66 m, non façonné), côte à côte.
+    const lod = q.get("lod") === "1" ? 1 : 0;
+    for (const [i, def] of TENUES.entries()) {
+      const s0 = performance.now();
+      const b = buildHumanBody(template, { macro: { gender: 0.5, age: 0.5, muscle: 0.5, weight: 0.5 }, height: 1.66 }, mat, (p) => p !== "pantalon");
+      await habillerCorps(b, def.id, lod);
+      b.group.position.set((i - (TENUES.length - 1) / 2) * 1.15, 0, 0);
+      if (q.has("dos")) b.group.rotation.y = Math.PI;
+      scene.add(b.group);
+      const bb = skinnedBounds(b);
+      state.bodies.push({ id: def.id, nominal: 1.66, measured: bb.max.y - bb.min.y, minY: bb.min.y, buildMs: performance.now() - s0 });
+      bodies.push(b);
+    }
   }
   const titans: HumanTitan[] = [];
   if (sheet === "titans" || sheet === "poses") {
@@ -149,9 +166,10 @@ export async function startHumanViewer(root: HTMLElement, probe: WebGLProbe): Pr
   const camera = new PerspectiveCamera(32, 1, 0.1, 4000);
   const close = q.get("vue") === "visage";
   const wide = titans.length > 8;
-  camera.position.set(close ? 0.25 : 0, close ? 1.62 : 1.3, close ? 0.9 : wide ? 26 : 11);
+  const tenues = sheet === "tenues";
+  camera.position.set(close ? 0.25 : 0, close ? 1.62 : tenues ? 0.95 : 1.3, close ? 0.9 : wide ? 26 : tenues ? 5.6 : 11);
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(close ? -0.0 : 0, close ? 1.55 : 1.0, 0);
+  controls.target.set(close ? -0.0 : 0, close ? 1.55 : tenues ? 0.9 : 1.0, 0);
   if (anatomy) {
     // Du haut de la poitrine au haut des cuisses, de face, à hauteur de nombril ; `&recul=`, `&hauteur=`, `&x=` pour s'approcher.
     const num = (k: string, d: number): number => (q.has(k) ? Number(q.get(k)) : d);

@@ -19,6 +19,8 @@ interface Modele {
   nom: string;
   script: string;
   note: string;
+  /** Servi au navigateur (`execution` au manifeste) : tenues et décalques, chargés par `tenuesProjet.ts`. */
+  servi?: boolean;
 }
 const MODELES: Modele[] = [
   { fichier: "projet/lame_odm.glb", nom: "Lame d'ODM (création du projet)", script: "tools/blender/armes.py", note: "Fichier 10 E-P03 ; origine à la poignée, lame vers +Y." },
@@ -45,6 +47,7 @@ for (const t of TENUES) {
       nom: `Tenue ${t.nom}, LOD${lod} (création du projet)`,
       script: "tools/blender/tenues.py",
       note: `Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème ${t.emblem}) ; couleurs A (cape verte E-P11 : C) ; LOD${lod} ${lod === 0 ? "≤ 8 000" : "≤ 2 000"} triangles.`,
+      servi: true,
     });
   }
 }
@@ -54,6 +57,7 @@ for (const e of ["emb_org_survey_corps", "emb_org_garrison", "emb_org_military_p
     nom: `Décalque d'emblème ${e} (création du projet)`,
     script: "tools/blender/emblemes.py",
     note: `Tracé de data/emblems (${e}) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.`,
+    servi: true,
   });
 }
 
@@ -98,6 +102,16 @@ for (const [f, h] of premiere) {
   }
 }
 const manifest = ManifestSchema.parse(JSON.parse(readFileSync(MANIFEST, "utf8")));
+if (process.argv.includes("--check")) {
+  // Mode contrôle : régénère et compare au manifeste, sans rien écrire (le manifeste ne doit pas mentir).
+  const ecarts = MODELES.filter((m) => manifest.fichiers.find((e) => e.fichier === m.fichier)?.sha256 !== premiere.get(m.fichier));
+  if (ecarts.length > 0) {
+    for (const m of ecarts) console.error(`  KO  ${m.fichier} : empreinte du manifeste différente de la régénération`);
+    process.exit(1);
+  }
+  console.log(`assets:blender --check : ${MODELES.length} modèles régénérés, empreintes conformes au manifeste.`);
+  process.exit(0);
+}
 const today = new Date().toISOString().slice(0, 10);
 for (const m of MODELES) {
   const old = manifest.fichiers.find((e) => e.fichier === m.fichier);
@@ -113,6 +127,7 @@ for (const m of MODELES) {
     origine: ORIGINE_PROJET,
     script: m.script,
     note: m.note,
+    ...(m.servi ? { execution: true } : {}),
   };
   manifest.fichiers = [...manifest.fichiers.filter((e) => e.fichier !== m.fichier), entry];
 }

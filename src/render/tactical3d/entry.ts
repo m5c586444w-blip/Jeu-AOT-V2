@@ -105,7 +105,7 @@ export async function openProto3d(root: HTMLElement): Promise<void> {
       // R3 : planches des Titans, des tenues et des poses.
       const m = await import("./figures/planche");
       await m.startPlanche(root, probe);
-    } else if (q.get("proto3d") === "humain") {
+    } else if (q.get("proto3d") === "humain" || q.get("proto3d") === "tenues") {
       // R1c : page de contrôle du corps de base (MakeHuman, CC0).
       const m = await import("./humanViewer");
       await m.startHumanViewer(root, probe);

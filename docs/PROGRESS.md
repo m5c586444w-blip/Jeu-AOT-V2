@@ -4,8 +4,8 @@
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
 | Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; C1 fait (A, D-174) ; suivant : C2 (B) ; A : C9 suite (conception tide, fiche à rédiger), C1 (B) |
-| Dernier `npm run verify` | 2026-10-16, code 0, 162 fichiers, 1382 tests (journal `docs/coord/journal/2026-10-16-A.md`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : C10 tranche 2 (tenues, décalque, `?proto3d`, revue) — C10 tranche 1 faite (D-182). Avant :  C13 : lockstep, bataille, camps rivaux, salon pur et votes purs faits (src/net, D-178 à D-181, dette 104–107). Session A : poursuivre C13 (messages réseau du salon et des votes, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
+| Dernier `npm run verify` | 2026-10-16, code 0, 163 fichiers, 1473 tests (journal `docs/coord/journal/2026-10-16-A.md`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : C10 fait (D-182 à D-184). Suivant : C15 (lieux mur Rose) ou C13 (reste). Avant :  C13 : lockstep, bataille, camps rivaux, salon pur et votes purs faits (src/net, D-178 à D-181, dette 104–107). Session A : poursuivre C13 (messages réseau du salon et des votes, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

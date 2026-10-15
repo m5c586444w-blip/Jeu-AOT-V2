@@ -103,7 +103,7 @@
    "name_key": "emb.name.org_survey_corps",
    "canon": "A",
    "creation": true,
-   "creation_reason": "ailes de la Liberté stylisées : fait de concept C (10 §9), forme redessinée par le projet (paire d'ailes ouvertes, plumes en entailles, non croisées)",
+   "creation_reason": "ailes de la Liberté stylisées : fait de concept C (10 §9), forme redessinée par le projet (paire d'ailes ouvertes, plumes en entailles, non croisées ; réduites pour tenir dans l'écu, marge ≥ 2,8 unités)",
    "field": "ecu",
    "colors": {
     "field": "#25333f",
@@ -112,11 +112,11 @@
    },
    "charges": [
     {
-     "d": "M23 38 C13 36 7 28 5 14 C11 19 16 19 20 16 C16 21 17 26 22 28 C18 30 20 34 23 38Z",
+     "d": "M 23.2 37 C 15.2 35.2 10.4 28 8.8 15.4 C 13.6 19.9 17.6 19.9 20.8 17.2 C 17.6 21.7 18.4 26.2 22.4 28 C 19.2 29.8 20.8 33.4 23.2 37 Z",
      "role": "fill"
     },
     {
-     "d": "M 25 38 C 35 36 41 28 43 14 C 37 19 32 19 28 16 C 32 21 31 26 26 28 C 30 30 28 34 25 38 Z",
+     "d": "M 24.8 37 C 32.8 35.2 37.6 28 39.2 15.4 C 34.4 19.9 30.4 19.9 27.2 17.2 C 30.4 21.7 29.6 26.2 25.6 28 C 28.8 29.8 27.2 33.4 24.8 37 Z",
      "role": "fill"
     },
     {
