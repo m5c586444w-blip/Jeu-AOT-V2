@@ -15,3 +15,6 @@ Défauts : (1) le fil de notifications recouvre encore l'en-tête « Sélection 
 Parcours en rendu logiciel ; débit GPU « à vérifier sur le PC de Gabriel ». Piles sur la carte : déjà présentes (étendards `drawArmyBanner`, chiffres d'effectifs) ; aucune modification.
 
 `npm run verify` : Test Files  154 passed (154), Tests  1300 passed (1300), `EXIT=0`.
+
+## C9.7 — La Marée régionale (D-177)
+Sortie réelle : `npm run verify` : `Test Files 155 passed (155)`, `Tests 1317 passed (1317)`, `✓ built in 1.89s`, `EXIT=0`. Tests : `tests/sim/tide/region.test.ts` (17). Empreinte 120 jours sans activation : `e0a0b63c` inchangée (test). Conception : `docs/phases/C9-maree.md`.

@@ -3,7 +3,7 @@ import { Rng } from "../../../src/sim/core/rng";
 import type { TideBalance } from "../../../src/data/balance";
 import {
   addSpike, detectionRange, engage, evacuate, injectBreach, interest, isSaturated, removeTitans, recover, reachOf, scanHumanEncounters, scanTitanEncounters,
-  sizeClassOf, stepGrid, stepTitan, updateFocus, viewForFaction, createGrid,
+  sizeClassOf, stepGrid, stepTitan, updateFocus, viewForFaction, createGrid, initTide, tickTide, tideDensity, tideFactor,
 } from "../../../src/sim/tide";
 import type { Human, Titan } from "../../../src/sim/tide";
 import { NIGHT_WINTER, NOON, openGrid, pile, tb } from "./helpers";
@@ -78,6 +78,13 @@ function exercise(b: TideBalance): void {
     stepTitan({ ...t, cooldownS: 0 }, [{ ...(humans[0] as Human), x: 1 }], false, 30, b);
   }
   isSaturated(3, 1, b);
+  // Régions à la demande (C9.7) : chaque type de régiment, en marche et à l'arrêt, avec rencontre ; lecture de la densité effective.
+  const kinds = Object.keys(tb.region.kind_weapon);
+  const armies = kinds.map((k, i) => ({ id: `a${i}`, province: "p", faction: "x", xKm: 10, yKm: 10, byKind: { [k]: 20, inconnu: 5 }, moving: i % 2 === 0 }));
+  const tide = tickTide(initTide(), { armies, baseDensity: () => 0.4, clashes: new Set(["p"]), season: "ete" }, b);
+  tickTide(tide, { armies: [], baseDensity: () => 0.4, clashes: new Set<string>(), season: "hiver" }, b);
+  tideDensity(tide, "p", 10, 10, 0.4, b);
+  tideFactor(tide, "p", 10, 10, 0.4, b);
 }
 
 describe("tide.json : aucune donnée morte", () => {

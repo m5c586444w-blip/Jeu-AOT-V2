@@ -30,6 +30,8 @@ interface Parts {
   research: ResearchState | null;
   events: EventsState | null;
   armies: ArmiesState;
+  /** Marée régionale (D-177) : densité effective par province, si le pilier P2 est actif. */
+  tide?: (province: string) => number | null;
 }
 
 function ctxOf(world: World, seed: number, date: GameDate, p: Parts): ArmyCtx {
@@ -44,6 +46,7 @@ function ctxOf(world: World, seed: number, date: GameDate, p: Parts): ArmyCtx {
     ns: p.ns ? structuredClone(p.ns) : null,
     research: p.research,
     events: p.events,
+    ...(p.tide ? { tideDensity: p.tide } : {}),
   };
 }
 

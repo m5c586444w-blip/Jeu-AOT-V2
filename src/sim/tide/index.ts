@@ -5,3 +5,5 @@ export * from "./grid";
 export * from "./encounter";
 export * from "./combat";
 export * from "./focus";
+export * from "./region";
+export * from "./schema";

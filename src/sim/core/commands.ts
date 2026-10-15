@@ -36,6 +36,7 @@ import { initRegistry } from "../registry/tick";
 import { initClock } from "../clock/tick";
 import { initGas } from "../gas/state";
 import { initSignal } from "../signal/state";
+import { initTide } from "../tide/region";
 import { initTruth, truthFactions } from "../truth/tick";
 import { toAbsoluteDay } from "./time";
 import { applyArmyCommand, ARMY_COMMANDS, validArmyCommand } from "../armies/layer";
@@ -85,6 +86,7 @@ export type Command =
   | { type: "EnableTruth" }
   | { type: "EnableGas" }
   | { type: "EnableSignal" }
+  | { type: "EnableTide" }
   | { type: "Noop" };
 
 export type Validation = { ok: true } | { ok: false; error: string };
@@ -205,6 +207,9 @@ export function validateCommand(cmd: unknown, ctx?: { state: GameState; world?: 
       return { ok: true };
     case "EnableGas":
       if (ctx && !ctx.world?.gas) return { ok: false, error: "EnableGas : monde sans données du Gaz (gas.json)" };
+      return { ok: true };
+    case "EnableTide":
+      if (ctx && !ctx.world?.tide) return { ok: false, error: "EnableTide : monde sans données de la Marée (tide.json)" };
       return { ok: true };
     case "EnableSignal":
       if (ctx && !ctx.world?.signal) return { ok: false, error: "EnableSignal : monde sans données du Signal (signal.json)" };
@@ -340,6 +345,12 @@ export function applyCommand(state: GameState, cmd: Command, bus?: EventBus<SimE
       // P3 Le Gaz et l'Ancrage (D-171) : registres d'ancrage vides ; sans effet s'il existe déjà.
       if (!world?.gas) break; // inatteignable : refusé par validateCommand
       if (!next.pillars?.gas) next = { ...next, pillars: { ...next.pillars, gas: initGas() } };
+      break;
+    }
+    case "EnableTide": {
+      // P2 La Marée (D-177) : aucune région au départ ; elles naissent autour des armées exposées. Sans effet s'il existe déjà.
+      if (!world?.tide) break; // inatteignable : refusé par validateCommand
+      if (!next.pillars?.tide) next = { ...next, pillars: { ...next.pillars, tide: initTide() } };
       break;
     }
     case "EnableSignal": {

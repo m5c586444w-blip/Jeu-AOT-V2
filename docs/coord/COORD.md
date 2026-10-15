@@ -16,7 +16,7 @@
 | C6 | P1 Le Mur | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C7 | P5 L'Horloge | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | fait (modules purs non branchés) | A 2026-10-14 | tronc | C5 | |
-| C9 | Intégration : piles, bataille jouable de bout en bout | en cours (C9.1 mur, C9.2 registre, C9.3 clock, C9.4 truth, C9.5 gas, C9.6 signal branchés) | A 2026-10-15 | tronc | C1, C4, C5 | |
+| C9 | Intégration : piles, bataille jouable de bout en bout | fait sauf revue (C9.1 à C9.7 branchés, `smoke:bataille` EXIT=0 ; reste : activation par défaut et écrans des piliers → C14) | A 2026-10-15 | tronc | C1, C4, C5 | |
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |

@@ -36,6 +36,23 @@
     "ambush_mult": 1.8,
     "size_bucket": 50
   },
+  "region": {
+    "half_cells": 12,
+    "max_regions": 6,
+    "per_density": 3,
+    "capacity_per_density": 4,
+    "hours": [3, 9, 15, 21],
+    "idle_days": 3,
+    "amplify_max": 4,
+    "march_noise": 0.5,
+    "halt_noise": 0.2,
+    "spike_on_encounter": "combat",
+    "default_weapon": "fusil",
+    "kind_weapon": {
+      "infanterie": "fusil", "cavalerie": "cavalerie", "odm": "odm", "artillerie": "artillerie", "lances": "fusil", "genie": "fusil",
+      "convoi": "fusil", "milice": "fusil", "police": "fusil", "mitrailleurs": "mitrailleuse", "assaut": "fusil", "anti_titan": "artillerie"
+    }
+  },
   "weapons": {
     "fusil": { "range_m": 450, "shots_per_min": 3, "hit_prob": 0.06, "lethality": 0.5, "suppression": 0.1, "ammo_per_shot": 1, "gas_per_min": 0, "area": 1, "heavy": false, "airborne": false },
     "fusil_repetition": { "range_m": 500, "shots_per_min": 6, "hit_prob": 0.06, "lethality": 0.5, "suppression": 0.12, "ammo_per_shot": 1, "gas_per_min": 0, "area": 1, "heavy": false, "airborne": false },

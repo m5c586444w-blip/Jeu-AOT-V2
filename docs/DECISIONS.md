@@ -1376,3 +1376,10 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 ## 2026-10-15 — D-176 C9 : `smoke:bataille`, le registre se ferme à l'entrée en bataille
 - **Décision** : parcours automatisé carte → rencontre → bataille → bilan → retour avec contrôle du cadre à chaque étape ; `playBattle` ferme le registre ouvert (il masquait la moitié de la scène). Les piles/étendards d'armées existaient déjà sur la carte (PA) : pas de nouveau rendu.
 - **Réversible** : oui.
+
+## 2026-10-15 — D-177 C9.7 : la Marée (P2) branchée par régions à la demande, densité effective bornée
+- **Décision** : `pillars.tide` (commande `EnableTide`, désactivé par défaut) tient des **régions** de grille (25 × 25 cellules de 2 km, au plus 6) créées autour des armées exposées (province non tenue par Paradis, densité > 0), initialisées à l'équilibre de la densité statique, avancées 4 fois par jour (heures 3, 9, 15, 21 : activité jour/nuit et saison), pic d'attention les jours de rencontre, oubliées après 3 jours sans armée. `armies.ts` lit `ctx.tideDensity` pour l'usure et les rencontres de Titans : `eff = min(1, d × min(amplify_max, facteur))`. Remplace l'approche « grille mondiale » écartée en D-173 (316 000 cellules).
+- **Pourquoi borné** : sans plafond, l'attraction fait passer une province à 0,02 de densité à 1 en 6 jours (essai mesuré) ; `region.amplify_max = 4` `[A]` garde l'effet lisible. Tout est dans `tide.json › region` (aucune donnée morte : test).
+- **Limites** : position des piles = nœud de la province (pas de position intra-province) ; les Titans de la grille ne deviennent pas encore des piles tactiques dans la bataille ; aucune mémoire entre deux séjours ; pas d'écran.
+- **Preuve** : `tests/sim/tide/region.test.ts` (17 tests : équilibre, attraction, rencontre, marche, oubli, plafond de régions, saison, déterminisme, activation, rejeu, sauvegarde, refus typé, schéma strict) ; empreinte de 120 jours sans activation inchangée (`e0a0b63c`).
+- **Réversible** : oui (ne pas activer).

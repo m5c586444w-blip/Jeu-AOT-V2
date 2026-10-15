@@ -712,6 +712,23 @@ export const TideBalanceSchema = z
         size_bucket: pos,
       })
       .strict(),
+    /** Régions de Marée à la demande autour des armées exposées (C9.7, D-177). */
+    region: z
+      .object({
+        half_cells: z.number().int().min(1),
+        max_regions: z.number().int().min(1),
+        per_density: pos,
+        capacity_per_density: pos,
+        hours: z.array(z.number().min(0).max(24)).min(1),
+        idle_days: z.number().int().min(1),
+        amplify_max: z.number().min(1),
+        march_noise: prob,
+        halt_noise: prob,
+        spike_on_encounter: z.string(),
+        default_weapon: z.string(),
+        kind_weapon: z.record(z.string(), z.string()),
+      })
+      .strict(),
     weapons: z.record(z.string(), weaponSchema),
     combat: z
       .object({

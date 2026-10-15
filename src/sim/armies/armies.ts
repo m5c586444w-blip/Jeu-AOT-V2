@@ -32,6 +32,8 @@ export interface ArmyCtx {
   ns: NationsState | null;
   research: ResearchState | null;
   events: EventsState | null;
+  /** Densité de Titans ressentie par une armée dans une province (Marée régionale, D-177) ; `null` ou absent : densité statique. */
+  tideDensity?: (province: string) => number | null;
 }
 
 export type ArmyOrder =
@@ -1035,8 +1037,9 @@ export function dailyArmies(ctx: ArmyCtx): void {
   // Titans hors des murs : usure et rencontres (provinces aux Titans).
   for (const a of [...ctx.s.armies].sort((x, y) => x.id.localeCompare(y.id))) {
     if (!a.province || a.engaged || a.fleet) continue;
-    const dens = ctx.st.provinces[a.province]?.control === "paradis" ? 0 : titanDensity(ctx.world, a.province, ctx.st);
-    if (dens <= 0) continue;
+    const staticDens = ctx.st.provinces[a.province]?.control === "paradis" ? 0 : titanDensity(ctx.world, a.province, ctx.st);
+    if (staticDens <= 0) continue;
+    const dens = ctx.tideDensity?.(a.province) ?? staticDens;
     const odmShare = a.regiments.filter((r) => ["odm", "lances"].includes(ctx.aw.regiments.get(r.regiment)?.kind ?? "")).reduce((n, r) => n + r.count, 0) / Math.max(1, a.regiments.reduce((n, r) => n + r.count, 0));
     marchLoss(ctx.aw, a, b.titans.attrition_per_density * dens * (1 - b.titans.odm_protection * odmShare), "titans");
     if (rng.next() < dens * b.titans.encounter_per_density) {

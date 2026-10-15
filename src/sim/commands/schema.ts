@@ -74,7 +74,10 @@ export const EnableGasSchema = z.object({ type: z.literal("EnableGas") }).strict
 /** Pilier P4 Le Signal (D-172) : activation, sans paramètre. */
 export const EnableSignalSchema = z.object({ type: z.literal("EnableSignal") }).strict();
 
-export const StrictCommandSchema = z.union([ArmyOrderSchema, ResolveEncounterSchema, BattleOrderCommandSchema, EnableWallSchema, EnableRegistrySchema, EnableClockSchema, EnableTruthSchema, EnableGasSchema, EnableSignalSchema]);
+/** Pilier P2 La Marée (D-177) : activation, sans paramètre. */
+export const EnableTideSchema = z.object({ type: z.literal("EnableTide") }).strict();
+
+export const StrictCommandSchema = z.union([ArmyOrderSchema, ResolveEncounterSchema, BattleOrderCommandSchema, EnableWallSchema, EnableRegistrySchema, EnableClockSchema, EnableTruthSchema, EnableGasSchema, EnableSignalSchema, EnableTideSchema]);
 
 export type BattleOrderCommand = z.infer<typeof BattleOrderCommandSchema>;
 
@@ -89,7 +92,7 @@ export const EnvelopeSchema = z
 
 export type CommandEnvelope = { seat: string; day: number; command: { type: string } & Record<string, unknown> };
 
-const STRICT_TYPES: ReadonlySet<string> = new Set([...ArmyOrderSchema.options.map((o) => o.shape.type.value), "ResolveEncounter", "BattleOrder", "EnableWall", "EnableRegistry", "EnableClock", "EnableTruth", "EnableGas", "EnableSignal"]);
+const STRICT_TYPES: ReadonlySet<string> = new Set([...ArmyOrderSchema.options.map((o) => o.shape.type.value), "ResolveEncounter", "BattleOrder", "EnableWall", "EnableRegistry", "EnableClock", "EnableTruth", "EnableGas", "EnableSignal", "EnableTide"]);
 
 /** Vrai si le type de commande a un schéma Zod strict dans ce module. */
 export const isStrictType = (t: string): boolean => STRICT_TYPES.has(t);

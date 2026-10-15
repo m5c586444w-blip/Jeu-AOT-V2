@@ -31,6 +31,7 @@ import { tickRegistry } from "../registry/tick";
 import { tickClock } from "../clock/tick";
 import type { GasState } from "../gas/state";
 import type { SignalState } from "../signal/state";
+import type { TideState } from "../tide/region";
 import { tickTruth, truthFactions } from "../truth/tick";
 import type { TruthState } from "../truth/types";
 import type { ClockState } from "../clock/types";
@@ -40,6 +41,7 @@ import type { SeatsState } from "./seat";
 import { createArmiesState } from "../armies/state";
 import type { ArmiesState } from "../armies/state";
 import { tickArmies } from "../armies/layer";
+import { tideLens, tickTideOfArmies } from "../armies/tideLink";
 import { techModsWithMissions, tickMissions, withMissionMods } from "../missions/missions";
 import type { MissionsState } from "../missions/missions";
 
@@ -103,6 +105,8 @@ export interface PillarsState {
   gas?: GasState;
   /** P4 Le Signal (D-172) : créé par la commande `EnableSignal` ; aucun pas de tick (calculs de bataille). */
   signal?: SignalState;
+  /** P2 La Marée (D-177) : régions de grille à la demande, créé par la commande `EnableTide`. */
+  tide?: TideState;
 }
 
 export function createInitialState(seed: number, world?: World): GameState {
@@ -220,11 +224,14 @@ export function tickDay(state: GameState, world?: World): GameState {
     }
     // Armées (PA) : après le monde des nations (guerres de la semaine), avant les flux mensuels.
     if (armies && world.armies) {
-      const r = tickArmies(world, state.seed, date, { st: strategic, pol: politics, ns: nations, research, events, armies });
+      const lens = pillars?.tide ? tideLens(world, pillars.tide, strategic) : undefined;
+      const r = tickArmies(world, state.seed, date, { st: strategic, pol: politics, ns: nations, research, events, armies, ...(lens ? { tide: lens } : {}) });
       strategic = r.st;
       politics = r.pol;
       nations = r.ns;
       armies = r.armies;
+      // Pilier P2 (D-177) : seulement si la commande EnableTide l'a créé ; après les armées (positions et rencontres du jour).
+      if (pillars?.tide && world.tide) pillars = { ...pillars, tide: tickTideOfArmies(world, pillars.tide, armies, strategic, date, toAbsoluteDay(date)) };
     }
     // Missions (MIS) : accomplissements du jour, revue de l'IA des nations non jouées.
     if (world.missions) {
