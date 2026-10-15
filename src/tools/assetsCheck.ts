@@ -11,7 +11,9 @@ import { z } from "zod";
  * fichiers, chacun en WebP de 1024 × 1024.
  */
 export const ASSET_LICENSES = ["CC0-1.0", "CC-BY-4.0", "CC-BY-3.0"] as const;
-export const ASSET_USAGES = ["corps_de_base", "animation", "derive", "texture_environnement"] as const;
+export const ASSET_USAGES = ["corps_de_base", "animation", "derive", "texture_environnement", "modele_projet"] as const;
+/** Origine d'un fichier créé par le projet (ERRATA_V3 §4) : script versionné, licence CC0 (création originale), pas d'URL. */
+export const ORIGINE_PROJET = "creation-projet";
 /** R1d : nombre et taille des textures d'environnement (Poly Haven). */
 export const ENV_TEXTURE_MAX = 12;
 export const ENV_TEXTURE_SIZE = 1024;
@@ -21,7 +23,12 @@ export const ManifestEntrySchema = z
     /** Chemin relatif à `docs/art/assets/`, en barres obliques. */
     fichier: z.string().min(1),
     nom: z.string().min(1),
-    url: z.string().url(),
+    /** URL de la source (obligatoire sauf pour une création du projet). */
+    url: z.string().url().optional(),
+    /** `creation-projet` : fichier produit par un script du dépôt (voir `script`). */
+    origine: z.literal(ORIGINE_PROJET).optional(),
+    /** Création du projet : chemin du script générateur, relatif à la racine du dépôt (ex. `tools/blender/armes.py`). */
+    script: z.string().min(1).optional(),
     licence: z.string().min(1),
     /** Date de récupération (AAAA-MM-JJ). */
     date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -115,7 +122,7 @@ export interface CheckResult {
   files: number;
 }
 
-export function checkAssets(root: string, licensesMd: string): CheckResult {
+export function checkAssets(root: string, licensesMd: string, repoRoot = "."): CheckResult {
   const errors: string[] = [];
   const manifestPath = join(root, "manifest.json");
   if (!existsSync(manifestPath)) return { errors: [`manifeste absent : ${manifestPath}`], entries: 0, files: 0 };
@@ -147,10 +154,26 @@ export function checkAssets(root: string, licensesMd: string): CheckResult {
     if (!(ASSET_LICENSES as readonly string[]).includes(e.licence)) errors.push(`${e.fichier} : licence « ${e.licence} » refusée (CC0 ou CC-BY seulement)`);
     if (e.licence.startsWith("CC-BY") && !attributions.split("\n").some((l) => l.includes(e.nom) && l.includes(e.auteur))) errors.push(`${e.fichier} : licence ${e.licence} sans attribution (nom et auteur) dans ASSETS_LICENSES.md`);
     if (!attributions.includes(e.fichier)) errors.push(`${e.fichier} : absent de ASSETS_LICENSES.md`);
-    const v = classifySource(e.url, e.nom);
-    if (v.kind === "interdite") errors.push(`${e.fichier} : source interdite (${v.raison}) : ${e.url}`);
-    else if (v.kind === "ecartee") errors.push(`${e.fichier} : source écartée (${v.source}, non réaliste) : ${e.url}`);
-    else if (v.kind === "inconnue") errors.push(`${e.fichier} : URL hors des sources retenues (MakeHuman, Poly Haven) : ${e.url}`);
+    const projet = e.origine === ORIGINE_PROJET;
+    let v: SourceVerdict = { kind: "inconnue" };
+    if (projet) {
+      if (e.usage !== "modele_projet") errors.push(`${e.fichier} : une création du projet a l'usage « modele_projet » (« ${e.usage} » trouvé)`);
+      if (e.licence !== "CC0-1.0") errors.push(`${e.fichier} : création du projet sous CC0-1.0 seulement (« ${e.licence} » trouvé)`);
+      if (e.url) errors.push(`${e.fichier} : une création du projet n'a pas d'URL de source (${e.url})`);
+      if (!e.script) errors.push(`${e.fichier} : création du projet sans script générateur`);
+      else if (!existsSync(join(repoRoot, e.script))) errors.push(`${e.fichier} : script « ${e.script} » introuvable`);
+      else if (/(attack[\s_-]?on[\s_-]?titan|shingeki)/i.test(e.nom)) errors.push(`${e.fichier} : nom évoquant l'œuvre originale`);
+    } else {
+      if (e.usage === "modele_projet") errors.push(`${e.fichier} : usage « modele_projet » réservé à l'origine « creation-projet »`);
+      if (e.script) errors.push(`${e.fichier} : script réservé à l'origine « creation-projet »`);
+      if (!e.url) errors.push(`${e.fichier} : URL de source absente`);
+      else {
+        v = classifySource(e.url, e.nom);
+        if (v.kind === "interdite") errors.push(`${e.fichier} : source interdite (${v.raison}) : ${e.url}`);
+        else if (v.kind === "ecartee") errors.push(`${e.fichier} : source écartée (${v.source}, non réaliste) : ${e.url}`);
+        else if (v.kind === "inconnue") errors.push(`${e.fichier} : URL hors des sources retenues (MakeHuman, Poly Haven) : ${e.url}`);
+      }
+    }
     const content = readFileSync(path);
     const sha = createHash("sha256").update(content).digest("hex");
     if (sha !== e.sha256) errors.push(`${e.fichier} : empreinte sha256 différente du manifeste`);
@@ -184,7 +207,7 @@ const ATTR_END = "<!-- R1c : fin de la table générée -->";
 /** Réécrit, dans `ASSETS_LICENSES.md`, la table des fichiers externes de R1c à partir du manifeste (une ligne par fichier). */
 export function writeAttributions(licensesMd: string, manifest: Manifest): void {
   const md = existsSync(licensesMd) ? readFileSync(licensesMd, "utf8") : "";
-  const rows = manifest.fichiers.map((e) => `| \`${e.fichier}\` | ${e.nom} | ${e.licence} | ${e.auteur} | ${e.usage === "derive" ? `dérivé de ${(e.derive_de ?? []).length} fichiers (\`npm run assets:build\`)` : `<${e.url}>`} | ${e.date} |`);
+  const rows = manifest.fichiers.map((e) => `| \`${e.fichier}\` | ${e.nom} | ${e.licence} | ${e.auteur} | ${e.usage === "derive" ? `dérivé de ${(e.derive_de ?? []).length} fichiers (\`npm run assets:build\`)` : e.origine === ORIGINE_PROJET ? `création du projet (\`${e.script ?? ""}\`, \`npm run assets:blender\`)` : `<${e.url ?? ""}>`} | ${e.date} |`);
   const table = [ATTR_START, "| Fichier (`docs/art/assets/`) | Nom | Licence | Auteur | Source | Récupéré le |", "|---|---|---|---|---|---|", ...rows, ATTR_END].join("\n");
   const a = md.indexOf(ATTR_START);
   const b = md.indexOf(ATTR_END);

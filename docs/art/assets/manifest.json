@@ -1138,6 +1138,66 @@
       "usage": "texture_environnement",
       "md5_source": "35e5d9dfc91f8b4571a449be4979d239",
       "execution": true
+    },
+    {
+      "fichier": "projet/canon_chariot.glb",
+      "nom": "Canon sur chariot-canon (création du projet)",
+      "licence": "CC0-1.0",
+      "date": "2026-10-15",
+      "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
+      "sha256": "1b0ef9e5633de2ac249fe3a0d50cdc2781421713380cbc29daa2128b0f4b75ab",
+      "usage": "modele_projet",
+      "origine": "creation-projet",
+      "script": "tools/blender/armes_a_feu.py",
+      "note": "Fichier 10 E-P08 et V-02 ; origine au sol, bouche vers +Z (avant glTF)."
+    },
+    {
+      "fichier": "projet/dispositif_odm.glb",
+      "nom": "Dispositif ODM (création du projet)",
+      "licence": "CC0-1.0",
+      "date": "2026-10-15",
+      "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
+      "sha256": "8c257e17530e6c0d33ac6ff6b4d9dcd7ffd52070e224f4b0d6de83bc9f8aabba",
+      "usage": "modele_projet",
+      "origine": "creation-projet",
+      "script": "tools/blender/odm.py",
+      "note": "Fichier 10 E-P01 et E-P05 ; origine au centre de la ceinture."
+    },
+    {
+      "fichier": "projet/fusil.glb",
+      "nom": "Fusil à poudre (création du projet)",
+      "licence": "CC0-1.0",
+      "date": "2026-10-15",
+      "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
+      "sha256": "7887ee8d8bfda0693ccca3f5cd00221d5c384b007f28bdd12c19414a71d5f9b8",
+      "usage": "modele_projet",
+      "origine": "creation-projet",
+      "script": "tools/blender/armes_a_feu.py",
+      "note": "Fichier 10 E-P07 ; origine à la poignée, canon vers +Z (avant glTF)."
+    },
+    {
+      "fichier": "projet/lame_odm.glb",
+      "nom": "Lame d'ODM (création du projet)",
+      "licence": "CC0-1.0",
+      "date": "2026-10-15",
+      "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
+      "sha256": "1238cae30f93285c0e27fe8652f266b64205c8b6f99baf40be0a2b7faf1aa5d2",
+      "usage": "modele_projet",
+      "origine": "creation-projet",
+      "script": "tools/blender/armes.py",
+      "note": "Fichier 10 E-P03 ; origine à la poignée, lame vers +Y."
+    },
+    {
+      "fichier": "projet/lance_de_foudre.glb",
+      "nom": "Lance de foudre (création du projet)",
+      "licence": "CC0-1.0",
+      "date": "2026-10-15",
+      "auteur": "Projet Murs et Sang (création originale, générée par script Blender bpy)",
+      "sha256": "f95f26a886b96ffdb6e3ff8d57eff3aeeafaf8929253b88d24bb47555aa6cd94",
+      "usage": "modele_projet",
+      "origine": "creation-projet",
+      "script": "tools/blender/armes.py",
+      "note": "Fichier 10 E-P06 ; origine à la poignée, pointe vers +Y."
     }
   ]
 }

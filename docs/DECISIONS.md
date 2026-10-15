@@ -1406,3 +1406,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : pause et vitesse (1 à 3) se décident par vote à la majorité stricte des sièges présents ; le demandeur vote « oui » ; un seul vote ouvert ; le vote est décidé dès qu'un camp est acquis (oui > moitié, ou non ≥ moitié = refus) ; un siège parti sort du décompte (`recount`).
 - **Limites** : pas de délai d'expiration ni de message réseau `vote` ; branchement à l'hôte et à l'interface : suite.
 - **Preuve** : `tests/net/vote.test.ts` (3). **Réversible** : oui.
+
+## 2026-10-16 — D-182 C10 tranche 1 : outillage Blender (bpy) et 5 accessoires
+- **Décision** : A prend C10 (B n'a jamais travaillé). `tools/blender/` (common, armes, armes_a_feu, odm), `npm run assets:blender` (génère deux fois, échoue si les empreintes diffèrent), manifeste `origine: "creation-projet"` + `script` + sha256, usage `modele_projet`, CC0 création originale ; `assets:check` l'accepte sans URL et refuse toujours les sources tierces. Sphère UV bannie (ordre d'indices non déterministe), sommets arrondis à 1e-5 m.
+- **Modèles** : lame_odm 76 tri, lance_de_foudre 208, fusil 144, canon_chariot 964, dispositif_odm 508 (≤ 1 500). Aucun contrôle visuel (pas de rendu) ; matériaux en couleur unie ; non servis au navigateur.
+- **Preuve** : `tests/art/models.test.ts` (31), verify EXIT=0.

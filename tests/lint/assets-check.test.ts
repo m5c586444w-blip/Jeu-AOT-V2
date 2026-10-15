@@ -142,4 +142,43 @@ describe("assets:check, textures Poly Haven (R1d)", () => {
     const mh = fixture([{ fichier: "peau.webp", url: MH_URL, usage: "texture_environnement" }], { "peau.webp": webp(1024, 1024) });
     expect(checkAssets(mh.root, mh.md).errors.join("\n")).toMatch(/texture d'environnement hors de Poly Haven/);
   });
+
+  describe("origine « creation-projet » (C10)", () => {
+    const projet = (extra: Partial<ManifestEntry> = {}): Partial<ManifestEntry> => ({
+      fichier: "projet/lame.glb",
+      nom: "Lame (création du projet)",
+      url: undefined,
+      auteur: "Projet",
+      usage: "modele_projet",
+      origine: "creation-projet",
+      script: "tools/blender/armes.py",
+      ...extra,
+    });
+    const glb = { "projet/lame.glb": "glb" };
+    const ok = (entry: Partial<ManifestEntry>): string[] => {
+      const f = fixture([entry], glb);
+      return checkAssets(f.root, f.md, ".").errors;
+    };
+    it("passe : script existant, empreinte, CC0, sans URL", () => {
+      expect(ok(projet())).toEqual([]);
+    });
+    it("refuse un script introuvable ou absent", () => {
+      expect(ok(projet({ script: "tools/blender/inexistant.py" })).join()).toContain("introuvable");
+      expect(ok(projet({ script: undefined })).join()).toContain("sans script");
+    });
+    it("refuse une autre licence qu'une CC0, une URL, un mauvais usage, une empreinte fausse", () => {
+      expect(ok(projet({ licence: "CC-BY-4.0" })).join()).toContain("CC0-1.0 seulement");
+      expect(ok(projet({ url: MH_URL })).join()).toContain("pas d'URL");
+      expect(ok(projet({ usage: "corps_de_base" })).join()).toContain("modele_projet");
+      expect(ok(projet({ sha256: "0".repeat(64) })).join()).toContain("empreinte");
+    });
+    it("les sources tierces restent refusées et l'usage modele_projet est réservé à cette origine", () => {
+      const f = fixture([{ fichier: "projet/lame.glb", url: "https://sketchfab.com/3d-models/x", usage: "corps_de_base" }], glb);
+      expect(checkAssets(f.root, f.md, ".").errors.join()).toContain("source interdite");
+      const g = fixture([{ fichier: "projet/lame.glb", usage: "modele_projet" }], glb);
+      expect(checkAssets(g.root, g.md, ".").errors.join()).toContain("réservé à l'origine");
+      const h = fixture([{ fichier: "projet/lame.glb", url: undefined }], glb);
+      expect(checkAssets(h.root, h.md, ".").errors.join()).toContain("URL de source absente");
+    });
+  });
 });

@@ -206,6 +206,11 @@ refusait les domaines de musique). Voir « Musique de AUD » plus bas.
 | `polyhaven/roof_slates_02_nor_gl_1k.webp` | Poly Haven, Roof Slates 02 (relief (normales OpenGL)), 1K, converti en WebP | CC0-1.0 | Rob Tuytel (Poly Haven) | <https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_slates_02/roof_slates_02_nor_gl_1k.jpg> | 2026-10-07 |
 | `polyhaven/roof_tiles_14_diff_1k.webp` | Poly Haven, Roof Tiles 14 (couleur), 1K, converti en WebP | CC0-1.0 | Rob Tuytel (Poly Haven) | <https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_tiles_14/roof_tiles_14_diff_1k.jpg> | 2026-10-07 |
 | `polyhaven/roof_tiles_14_nor_gl_1k.webp` | Poly Haven, Roof Tiles 14 (relief (normales OpenGL)), 1K, converti en WebP | CC0-1.0 | Rob Tuytel (Poly Haven) | <https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/roof_tiles_14/roof_tiles_14_nor_gl_1k.jpg> | 2026-10-07 |
+| `projet/canon_chariot.glb` | Canon sur chariot-canon (création du projet) | CC0-1.0 | Projet Murs et Sang (création originale, générée par script Blender bpy) | création du projet (`tools/blender/armes_a_feu.py`, `npm run assets:blender`) | 2026-10-15 |
+| `projet/dispositif_odm.glb` | Dispositif ODM (création du projet) | CC0-1.0 | Projet Murs et Sang (création originale, générée par script Blender bpy) | création du projet (`tools/blender/odm.py`, `npm run assets:blender`) | 2026-10-15 |
+| `projet/fusil.glb` | Fusil à poudre (création du projet) | CC0-1.0 | Projet Murs et Sang (création originale, générée par script Blender bpy) | création du projet (`tools/blender/armes_a_feu.py`, `npm run assets:blender`) | 2026-10-15 |
+| `projet/lame_odm.glb` | Lame d'ODM (création du projet) | CC0-1.0 | Projet Murs et Sang (création originale, générée par script Blender bpy) | création du projet (`tools/blender/armes.py`, `npm run assets:blender`) | 2026-10-15 |
+| `projet/lance_de_foudre.glb` | Lance de foudre (création du projet) | CC0-1.0 | Projet Murs et Sang (création originale, générée par script Blender bpy) | création du projet (`tools/blender/armes.py`, `npm run assets:blender`) | 2026-10-15 |
 <!-- R1c : fin de la table générée -->
 
 ## Musique de AUD (D-114)
@@ -235,3 +240,16 @@ thèmes n'ont pas pu être restitués avec assez de fidélité de mémoire ; les
 
 Pistes de l'utilisateur (AUD.4) : `assets_user/musique/` (mp3, ogg), hors dépôt (`.gitignore`) ; la licence de chaque fichier est de la
 responsabilité de l'utilisateur (notice `assets_user/musique/LISEZ-MOI.md`).
+
+## Créations du projet (C10, ERRATA_V3 §4)
+
+Modèles 3D **construits par code** (primitives assemblées par les scripts `tools/blender/*.py`, module Python `bpy`), d'après les seules descriptions
+du fichier 10 : aucun fichier, modèle, texture ou image de l'œuvre originale ni de fans. Création originale du projet, publiée sous **CC0-1.0**.
+Régénération : `npm run assets:blender` (installe `bpy` dans `.venv-blender/`, ignoré par git ; export déterministe vérifié par deux générations).
+Origine « creation-projet » au manifeste : `script` (existant) + `sha256` ; `npm run assets:check` les contrôle. Pas de fichier `.blend` versionné.
+
+| Fichier (`docs/art/assets/`) | Script générateur |
+|---|---|
+| `projet/lame_odm.glb`, `projet/lance_de_foudre.glb` | `tools/blender/armes.py` |
+| `projet/fusil.glb`, `projet/canon_chariot.glb` | `tools/blender/armes_a_feu.py` |
+| `projet/dispositif_odm.glb` | `tools/blender/odm.py` |
