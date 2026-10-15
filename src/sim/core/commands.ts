@@ -522,6 +522,7 @@ function applyP7(state: GameState, cmd: P7Command, world?: World): GameState {
   if (!world?.nations || !state.nations) throw new Error(`${cmd.type} : aucun monde des nations`);
   const ns = structuredClone(state.nations);
   if (cmd.type === "SetPlayerFaction") {
+    if (state.seats) throw new Error("seat.err.faction_fixed"); // à la table, les sièges fixent la faction (revue C13)
     if (!(world.scenario.world?.playable ?? []).includes(cmd.faction)) throw new Error("world.err.not_playable");
     if (state.date.year !== world.scenario.start.year || state.date.day !== world.scenario.start.day) throw new Error("world.err.too_late");
     ns.player = cmd.faction;

@@ -240,6 +240,45 @@ describe("C13 : accueil, droits, reprise", () => {
   });
 });
 
+describe("C13 : réserves de la revue (siège, nation fixée, trou de tours)", () => {
+  it("un second hello sur un lien déjà assis est ignoré : un refus ne libère pas le siège, aucun siège n'est cumulé", () => {
+    const r = room(11, 0);
+    const c = r.join("seat_1");
+    r.net.drain();
+    const link = (c as unknown as { link: Link }).link;
+    link.send(JSON.stringify({ t: "hello", v: 1, seat: "seat_2", password: "faux" }));
+    link.send(JSON.stringify({ t: "hello", v: 1, seat: "seat_2", password: PASSWORD }));
+    r.net.drain();
+    expect(r.host.seats).toEqual(["seat_1"]);
+  });
+
+  it("SetPlayerFaction est refusé à l'exécution quand la table a des sièges", () => {
+    const r = room(12, 0);
+    const c = r.join("seat_1");
+    r.net.drain();
+    c.submit({ type: "SetPlayerFaction", faction: "fac_marley" });
+    r.net.drain();
+    r.host.step(1);
+    r.net.drain();
+    expect(r.host.executionRejects.length + c.rejected.length).toBeGreaterThan(0);
+    expect(r.host.state.nations?.player).toBe(table(12).nations?.player);
+  });
+
+  it("trou persistant de tours : le client redemande un instantané au lieu de rester bloqué", () => {
+    const r = room(13, 0);
+    r.join("seat_1");
+    r.net.drain();
+    const sent: string[] = [];
+    const quiet: Link = { send: (m) => void sent.push(m), onMessage: () => undefined, onClose: () => undefined, close: () => undefined };
+    const fresh = new Client(quiet, world, "seat_9", PASSWORD, 3);
+    const feed = (m: unknown): void => (fresh as unknown as { receive: (s: string) => void }).receive(JSON.stringify(m));
+    feed({ t: "welcome", seat: "seat_9", tick: r.host.tick, snapshot: serialize(r.host.state) });
+    r.host.step(1); // ce tour-là ne parvient jamais au client
+    for (let i = 0; i < 9; i++) feed({ t: "turn", turn: r.host.step(1).turn });
+    expect(sent.some((m) => m.includes('"resync"'))).toBe(true);
+  });
+});
+
 describe("C13 : trahison, coffre de secrets de l'hôte (27 §4.4)", () => {
   it("assignTraitors : aucune → personne ; garantie → au moins un ; plafond 1 jusqu'à 5 joueurs, 2 au-delà ; déterministe ; seul seul = personne", () => {
     expect(assignTraitors(SEATS, "aucune", 1)).toEqual([]);

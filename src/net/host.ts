@@ -59,6 +59,7 @@ export class Host {
         return;
       }
       if (msg.t === "hello") {
+        if (seat) return; // un lien déjà assis ne peut ni changer ni cumuler de siège
         seat = this.hello(link, msg.seat, msg.password, msg.v);
         return;
       }

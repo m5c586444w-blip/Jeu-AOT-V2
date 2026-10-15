@@ -81,6 +81,7 @@ export class BattleHost {
         return;
       }
       if (msg.t === "hello") {
+        if (seat) return; // un lien déjà assis ne peut ni changer ni cumuler de siège
         const known = this.seats ? msg.seat in this.seats.seats : msg.seat === SOLO_SEAT;
         const code = msg.password !== this.password ? "net.err.password" : !known ? "seat.err.unknown_seat" : this.seated.has(msg.seat) ? "net.err.seat_taken" : null;
         if (code) return send({ t: "refused", code });

@@ -20,7 +20,7 @@
 | C10 | Blender : outillage + lot 1 | à faire | — | tronc | C2 | `assets:blender` |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
-| C13 | Multijoueur réseau (27) : conseil mixte, camps, trahison | à faire | — | tronc | C3, C9 | débloqué ; camps + trahison confirmés |
+| C13 | Multijoueur réseau (27) : conseil mixte, camps, trahison | en cours | A | tronc | C3, C9 | tranches 1–3 faites et revues (lockstep campagne, bataille 20 Hz, camps rivaux ; D-178/179, dette 104–107) ; reste : salon/choix du camp, conseils par camp, interface, votes, trahison (effets), transfert d'hôte |
 | C14 | P9 / P10 / PACK recadrés | à faire | — | tronc | C5–C9, C13, C15–C18 | ancienne feuille de route gelée |
 | C15 | Lieux : mur Rose (ex-LC-B) | à faire | — | tronc | C1 | voie B |
 | C16 | Lieux : mur Sina (ex-LC-C) | à faire | — | tronc | C15 | voie B |

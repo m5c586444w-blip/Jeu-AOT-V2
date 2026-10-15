@@ -13,6 +13,8 @@ import type { Link } from "./transport";
  * et envoie son empreinte à la cadence convenue. Il ne modifie JAMAIS son état autrement : toute action du joueur est une commande
  * envoyée à l'hôte, qui la renvoie dans un tour (même pour le joueur qui l'a émise).
  */
+const GAP_RESYNC = 8;
+
 export class Client {
   state: GameState | null = null;
   tick = 0;
@@ -76,6 +78,11 @@ export class Client {
       case "turn":
         this.buffer.set(msg.turn.tick, msg.turn);
         this.drain();
+        // Trou persistant (plusieurs tours en attente sans le suivant) ou tampon démesuré : instantané, plutôt que blocage.
+        if (this.state && this.buffer.size >= GAP_RESYNC && !this.buffer.has(this.tick + 1)) {
+          this.buffer.clear();
+          this.requestResync();
+        }
         break;
       case "reject":
         this.rejected.push({ id: msg.id, code: msg.code });
