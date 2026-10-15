@@ -1401,3 +1401,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Limites** : pas d'écran ni de transport (message `lobby` du protocole à ajouter avec l'interface) ; pas de choix de scénario ni de réglage de trahison dans le salon.
 - **Preuve** : `tests/net/lobby.test.ts` (4).
 - **Réversible** : oui.
+
+## 2026-10-15 — D-181 C13 : votes de table purs (`src/net/vote.ts`)
+- **Décision** : pause et vitesse (1 à 3) se décident par vote à la majorité stricte des sièges présents ; le demandeur vote « oui » ; un seul vote ouvert ; le vote est décidé dès qu'un camp est acquis (oui > moitié, ou non ≥ moitié = refus) ; un siège parti sort du décompte (`recount`).
+- **Limites** : pas de délai d'expiration ni de message réseau `vote` ; branchement à l'hôte et à l'interface : suite.
+- **Preuve** : `tests/net/vote.test.ts` (3). **Réversible** : oui.

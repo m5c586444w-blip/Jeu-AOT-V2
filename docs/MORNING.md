@@ -1,5 +1,12 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-15 — Nuit de la session A (à lire en premier)
+- Fait, commité, poussé : C2 (emblèmes en données, règle R15), `smoke:bataille` (C9), Marée régionale (C9.7, D-177), **C13 réseau** : lockstep à 9 sièges, bataille à 20 Hz, camps rivaux (Marley, etc.), salon d'attente et votes (logique pure). Revue indépendante : acceptée avec réserves, corrigées en partie (dette 104–107).
+- Dernier verify : 161 fichiers, **1347 tests**, EXIT=0 (clôture, après les votes). Décisions D-175 à D-181.
+- **À valider par toi** : D-179 (un camp rival n'a pas encore ses propres conseils/lois : la politique reste celle de Paradis) ; D-180 (salon : `owner` réparti à tour de rôle entre les sièges d'une même faction) ; D-181 (majorité stricte pour pause/vitesse) ; dette 103 (Marée pas encore activée par défaut ni visible).
+- Rien n'a été vu à l'écran pour le réseau (aucune interface encore) ; aucune mesure GPU.
+- **Suite** : A : fin de C13 (messages du salon et des votes, interface, barre des joueurs) puis C14 ; B : C10 (Blender).
+
 ## 2026-10-14 — Nuit de la session A (à lire en premier)
 - Fait, commité, poussé : C0 audit (`docs/reports/C0-audit.md`, bug cadre confirmé : `.bataille` fixed recouvre le HUD → C1 pour B) ; C3 socle multijoueur (sièges, enveloppes de commandes, rejeu) ; les **7 piliers de la spec 26 en modules purs testés** (`src/sim/gas, signal, wall, clock, tide, truth, registry`, données `data/balance/*.json`) ; mur (P1) et registre (P7) **branchés au tick, désactivés par défaut** (`EnableWall`, `EnableRegistry`). Chaque lot a eu une revue indépendante.
 - Dernier verify : 149 fichiers, **1259 tests**, EXIT=0 ; les 8 empreintes `sim:selftest` sont **inchangées**.

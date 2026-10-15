@@ -5,7 +5,7 @@
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
 | Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; C1 fait (A, D-174) ; suivant : C2 (B) ; A : C9 suite (conception tide, fiche à rédiger), C1 (B) |
 | Dernier `npm run verify` | 2026-10-15, code 0, 153 fichiers, 1294 tests (journal `docs/coord/journal/2026-10-15-A.md`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : C13 tranches 1–3 faites (src/net, camps rivaux, revue corrigée, dette 104–107). Session A : poursuivre C13 (salon d'attente/choix du camp, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : C13 : lockstep, bataille, camps rivaux, salon pur et votes purs faits (src/net, D-178 à D-181, dette 104–107). Session A : poursuivre C13 (messages réseau du salon et des votes, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.
