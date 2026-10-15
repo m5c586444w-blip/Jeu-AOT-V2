@@ -5,7 +5,7 @@
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
 | Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; C1 fait (A, D-174) ; suivant : C2 (B) ; A : C9 suite (conception tide, fiche à rédiger), C1 (B) |
 | Dernier `npm run verify` | 2026-10-15, code 0, 153 fichiers, 1294 tests (journal `docs/coord/journal/2026-10-15-A.md`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : session A, C9.7 : brancher `src/sim/tide` (EnableTide ; grille à initialiser depuis la géométrie du monde) ; lire d'abord `src/sim/tide/grid.ts` et `routes.ts` (titanDensity statique) ; B : C1 |
+| Prochaine étape | PROCHAINE ACTION EXACTE : C2 fait (D-175). Session A : C10 (outillage Blender, `docs/phases/C10.md` à écrire) si libre dans COORD, sinon C9 restant (smoke:bataille, piles sur la carte) ; B : C10 |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

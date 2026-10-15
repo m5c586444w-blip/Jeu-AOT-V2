@@ -3651,5 +3651,17 @@
   "rt.start": "Début de la bataille — {map} — {ours} hommes de Paradis contre {enemy} fantassins adverses et {titans} Titan(s) — {light}.",
   "rt.start_titans_only": "Début de la bataille — {map} — {ours} hommes de Paradis contre {titans} Titan(s) — {light}.",
   "rt.start_no_titans": "Début de la bataille — {map} — {ours} hommes de Paradis contre {enemy} fantassins adverses — {light}.",
-  "rt.squad_retreats": "{squad} a perdu la moitié de ses hommes : fusée verte, repli."
+  "rt.squad_retreats": "{squad} a perdu la moitié de ses hommes : fusée verte, repli.",
+  "emb.name.fac_paradis": "Blason du Royaume de Paradis",
+  "emb.name.fac_marley": "Blason de Marley",
+  "emb.name.fac_hizuru": "Blason de Hizuru",
+  "emb.name.fac_allies": "Blason des Forces Alliées",
+  "emb.name.org_survey_corps": "Enseigne du Bataillon d'exploration",
+  "emb.name.org_garrison": "Enseigne de la Garnison",
+  "emb.name.org_military_police": "Enseigne de la Brigade de la Police militaire",
+  "emb.name.org_training_corps": "Enseigne du Corps d'entraînement",
+  "emb.name.org_culte": "Enseigne du culte des Murs",
+  "emb.name.org_cabinet": "Sceau du cabinet",
+  "emb.name.org_cour": "Sceau de la cour",
+  "emb.name.org_guildes": "Enseigne des guildes"
 }

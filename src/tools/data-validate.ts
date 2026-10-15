@@ -4,6 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { checkMap, MapSchema } from "../data/map";
 import { FiguresFileSchema, MaterialsFileSchema, StylesFileSchema, TitansFileSchema, WallsFileSchema } from "../data/artSchemas";
+import { EmblemsFileSchema } from "../data/emblemSchemas";
 import { formatIssue, jsonPath } from "../data/validate";
 
 const dir = process.argv[2] ?? "data";
@@ -30,6 +31,11 @@ for (const [file, schema] of [
   const parsed = schema.safeParse(JSON.parse(readFileSync(full, "utf8")));
   if (!parsed.success) for (const i of parsed.error.issues) issues.push({ file: full, jsonPath: jsonPath(i.path), message: i.message });
   else if (Array.isArray(parsed.data)) artCount = parsed.data.length;
+}
+const embFile = join(dir, "emblems", "emblems.json");
+if (existsSync(embFile)) {
+  const parsed = EmblemsFileSchema.safeParse(JSON.parse(readFileSync(embFile, "utf8")));
+  if (!parsed.success) for (const i of parsed.error.issues) issues.push({ file: embFile, jsonPath: jsonPath(i.path), message: i.message });
 }
 if (issues.length > 0) {
   for (const i of issues) console.error(`ERREUR ${formatIssue(i)}`);

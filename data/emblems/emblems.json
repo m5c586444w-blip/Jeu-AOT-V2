@@ -1,0 +1,338 @@
+{
+ "canon": "A",
+ "notes_canon": "Emblèmes créés par le projet (ERRATA_V3 §2 et §8 de la liste des décisions) : objets de données rendus en SVG, texture et décalque depuis la même définition. Les faits C (licorne de la Police militaire, ailes, Garnison) sont portés par `fact`, les dessins sont des créations A. Vue 48 × 48.",
+ "emblems": [
+  {
+   "id": "emb_fac_paradis",
+   "subject": {
+    "kind": "faction",
+    "id": "fac_paradis"
+   },
+   "name_key": "emb.name.fac_paradis",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "blason de nation redessiné en trois enceintes concentriques et une porte (04 §8.5)",
+   "field": "rond",
+   "colors": {
+    "field": "#2d3a4a",
+    "line": "#d8c9a3",
+    "accent": "#c9a24b"
+   },
+   "charges": [
+    {
+     "d": "M24 4a20 20 0 1 1 0 40 20 20 0 0 1 0-40Z M24 11a13 13 0 1 1 0 26 13 13 0 0 1 0-26Z M24 18a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z M22 44v-4h4v4",
+     "role": "line"
+    }
+   ]
+  },
+  {
+   "id": "emb_fac_marley",
+   "subject": {
+    "kind": "faction",
+    "id": "fac_marley"
+   },
+   "name_key": "emb.name.fac_marley",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "tour d'acier couronnée d'une étoile à huit branches ; dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#3a2d2d",
+    "line": "#d8c9a3",
+    "accent": "#b0463c"
+   },
+   "charges": [
+    {
+     "d": "M17 44V18h14v26Z M15 18h18v-4H15Z M17 14v-3h3v3 M22.5 14v-3h3v3 M28 14v-3h3v3 M24 3l1.2 3.8L29 5l-1.8 3.8L31 10l-3.8 1.2 M24 3l-1.2 3.8L19 5l1.8 3.8L17 10l3.8 1.2 M21 26h6 M21 33h6",
+     "role": "line"
+    }
+   ]
+  },
+  {
+   "id": "emb_fac_hizuru",
+   "subject": {
+    "kind": "faction",
+    "id": "fac_hizuru"
+   },
+   "name_key": "emb.name.fac_hizuru",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "disque solaire au-dessus de trois vagues ; dessin du projet",
+   "field": "losange",
+   "colors": {
+    "field": "#2d3d3a",
+    "line": "#d8c9a3",
+    "accent": "#c0453b"
+   },
+   "charges": [
+    {
+     "d": "M24 8a10 10 0 1 1 0 20 10 10 0 0 1 0-20Z M5 33c4-3 8-3 12 0s8 3 12 0 8-3 14 0 M5 39c4-3 8-3 12 0s8 3 12 0 8-3 14 0",
+     "role": "line"
+    }
+   ]
+  },
+  {
+   "id": "emb_fac_allies",
+   "subject": {
+    "kind": "faction",
+    "id": "fac_allies"
+   },
+   "name_key": "emb.name.fac_allies",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "deux sabres croisés sous une étoile ; dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#33303f",
+    "line": "#d8c9a3",
+    "accent": "#c9a24b"
+   },
+   "charges": [
+    {
+     "d": "M9 41 36 12 M39 41 12 12 M33 15l3-3 1 4 M15 15l-3-3-1 4 M7 39l4 4 M41 39l-4 4 M24 3l2 5h5l-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3h5Z",
+     "role": "line"
+    }
+   ]
+  },
+  {
+   "id": "emb_org_survey_corps",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_survey_corps"
+   },
+   "name_key": "emb.name.org_survey_corps",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "ailes de la Liberté stylisées : fait de concept C (10 §9), forme redessinée par le projet (paire d'ailes ouvertes, plumes en entailles, non croisées)",
+   "field": "ecu",
+   "colors": {
+    "field": "#25333f",
+    "line": "#e6e0d0",
+    "accent": "#6fa3c9"
+   },
+   "charges": [
+    {
+     "d": "M23 38 C13 36 7 28 5 14 C11 19 16 19 20 16 C16 21 17 26 22 28 C18 30 20 34 23 38Z",
+     "role": "fill"
+    },
+    {
+     "d": "M 25 38 C 35 36 41 28 43 14 C 37 19 32 19 28 16 C 32 21 31 26 26 28 C 30 30 28 34 25 38 Z",
+     "role": "fill"
+    },
+    {
+     "d": "M24 8v34",
+     "role": "accent"
+    }
+   ],
+   "fact": {
+    "canon": "C",
+    "text": "Le Corps de Reconnaissance porte des ailes de la Liberté",
+    "source": "10 §9 (concept C, forme redessinée)"
+   }
+  },
+  {
+   "id": "emb_org_garrison",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_garrison"
+   },
+   "name_key": "emb.name.org_garrison",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "emblème de Garnison : fait de concept C (10 §9), forme redessinée par le projet (rempart crénelé et porte)",
+   "field": "ecu",
+   "colors": {
+    "field": "#2f3a33",
+    "line": "#d8c9a3",
+    "accent": "#b9904a"
+   },
+   "charges": [
+    {
+     "d": "M6 40V18h5v-4h5v4h5v-4h6v4h5v-4h5v4h5V40Z",
+     "role": "line"
+    },
+    {
+     "d": "M19 40v-9a5 5 0 0 1 10 0v9",
+     "role": "accent"
+    }
+   ],
+   "fact": {
+    "canon": "C",
+    "text": "La Garnison porte un emblème propre",
+    "source": "10 §9 (concept C, forme redessinée)"
+   }
+  },
+  {
+   "id": "emb_org_military_police",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_military_police"
+   },
+   "name_key": "emb.name.org_military_police",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "licorne de la Police militaire : fait fourni par Gabriel (ERRATA_V3 §2.8), dessin du projet (tête de licorne de profil, corne et crinière)",
+   "field": "ecu",
+   "colors": {
+    "field": "#2f3140",
+    "line": "#e6e0d0",
+    "accent": "#9fb4d9"
+   },
+   "charges": [
+    {
+     "d": "M18 42 16 29C15 21 20 14 27 12L31 3 33 13C37 15 40 19 38 24L34 27 31 25 28 29V42",
+     "role": "line"
+    },
+    {
+     "d": "M26 14C22 16 20 20 20 27 M23 16C20 19 19 23 19 29",
+     "role": "accent"
+    },
+    {
+     "d": "M30 18h.01",
+     "role": "accent"
+    }
+   ],
+   "notes_canon": "fait C fourni par Gabriel ; la représentation est une création du projet",
+   "fact": {
+    "canon": "C",
+    "text": "La Brigade de la Police militaire porte une licorne",
+    "source": "Gabriel (ERRATA_V3 §2.8) ; source officielle à recouper dans docs/lore/"
+   }
+  },
+  {
+   "id": "emb_org_training_corps",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_training_corps"
+   },
+   "name_key": "emb.name.org_training_corps",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "emblème du Corps d'Entraînement : fait de concept C (10 §9), forme créée : trois chevrons ascendants sur un jeune plant (échelle des grades)",
+   "field": "ecu",
+   "colors": {
+    "field": "#3a3626",
+    "line": "#e6e0d0",
+    "accent": "#8fb06a"
+   },
+   "charges": [
+    {
+     "d": "M10 34l14-10 14 10 M10 26l14-10 14 10 M10 18l14-10 14 10",
+     "role": "line"
+    },
+    {
+     "d": "M24 44v-6",
+     "role": "accent"
+    }
+   ]
+  },
+  {
+   "id": "emb_org_culte",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_culte"
+   },
+   "name_key": "emb.name.org_culte",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "disque au-dessus de trois piliers : religion d'État (01 §5.1), dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#3a3030",
+    "line": "#d8c9a3",
+    "accent": "#c9a24b"
+   },
+   "charges": [
+    {
+     "d": "M10 44V26 M24 44V22 M38 44V26 M6 26h8 M20 22h8 M34 26h8",
+     "role": "line"
+    },
+    {
+     "d": "M24 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z",
+     "role": "accent"
+    }
+   ]
+  },
+  {
+   "id": "emb_org_cabinet",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_cabinet"
+   },
+   "name_key": "emb.name.org_cabinet",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "plume sur deux lignes de registre : dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#2d3640",
+    "line": "#d8c9a3",
+    "accent": "#c9a24b"
+   },
+   "charges": [
+    {
+     "d": "M12 40 36 12 M10 24h14 M10 30h10",
+     "role": "line"
+    },
+    {
+     "d": "M36 12l-6 2 4 4Z M12 40l-2 4 4-2",
+     "role": "accent"
+    }
+   ]
+  },
+  {
+   "id": "emb_org_cour",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_cour"
+   },
+   "name_key": "emb.name.org_cour",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "couronne à trois pointes sur un socle : dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#40302d",
+    "line": "#d8c9a3",
+    "accent": "#c9a24b"
+   },
+   "charges": [
+    {
+     "d": "M8 36V16l8 8 8-12 8 12 8-8v20Z",
+     "role": "line"
+    },
+    {
+     "d": "M8 40h32",
+     "role": "accent"
+    }
+   ]
+  },
+  {
+   "id": "emb_org_guildes",
+   "subject": {
+    "kind": "organisation",
+    "id": "org_guildes"
+   },
+   "name_key": "emb.name.org_guildes",
+   "canon": "A",
+   "creation": true,
+   "creation_reason": "balance à deux plateaux : dessin du projet",
+   "field": "ecu",
+   "colors": {
+    "field": "#35382d",
+    "line": "#d8c9a3",
+    "accent": "#b9904a"
+   },
+   "charges": [
+    {
+     "d": "M24 6v34 M12 40h24 M8 16h32",
+     "role": "line"
+    },
+    {
+     "d": "M8 16 3 28h10Z M40 16l-5 12h10Z",
+     "role": "accent"
+    }
+   ]
+  }
+ ]
+}

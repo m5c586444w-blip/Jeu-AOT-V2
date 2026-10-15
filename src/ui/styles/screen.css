@@ -972,3 +972,6 @@ body > .planche, .planche--specimen { position: fixed; inset: 0; z-index: calc(v
 .menu-guide:hover { border-color: var(--accent); }
 .menu-guide__titre { color: var(--texte-fort); }
 .menu-guide__resume { font-size: var(--t-s); color: var(--texte-second); }
+
+/* Emblèmes (C2) : une création du projet (canon A) est signalée en mode auteur seulement. */
+.mode-auteur .blason[data-canon="A"] { outline: 1px dashed var(--accent); outline-offset: 2px; }

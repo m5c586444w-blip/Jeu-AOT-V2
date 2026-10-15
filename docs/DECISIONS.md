@@ -1365,3 +1365,10 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Lieux** (`?proto3d`, hors partie) : non intégrés ; ils le seront dans la carte par C15 (dette n° 98). Le smoke le consigne sans le compter comme réussite.
 - **Preuve** : `npm run smoke:cadre` (22 contrôles OK, 1366 × 768 et 3840 × 2160, code 0), `docs/reports/C1.md`, revue indépendante (acceptée avec réserves, traitées).
 - **Réversible** : oui.
+
+## 2026-10-15 — D-175 C2 : emblèmes en données, règle R15 sur les créations de lore
+- **Décision** : les emblèmes sont des objets de données (`data/emblems/emblems.json`), tous créations du projet (`A`, `creation: true`, raison) ; le fait canon qu'ils illustrent (`fact`, ex. licorne de la Police militaire, fourni par Gabriel) reste distinct du dessin. Un seul rendu source : trait pour l'interface, couleurs (découpées par le champ) pour texture et décalque. `canon:check` gagne **R15** : `creation: true` exige `canon: "A"`, une raison et une ligne dans `docs/lore/creations.md` ; `canon: "C"` + `creation` est rejeté.
+- **Alternatives écartées** : rendre R15 générique sur toutes les collections (aucune n'a encore de champ `creation` ; à étendre quand C15+ en créera) ; poser les emblèmes en images (provenance et cohérence moins maîtrisées).
+- **À recouper** : la source officielle de la licorne reste à confirmer dans `docs/lore/` (aucune mention trouvée à ce jour).
+- **Réversible** : oui.
+- **Suites de revue (D-175)** : les ailes du Bataillon d'exploration restent monochromes, ouvertes et non croisées, et ne seront jamais colorées en bleu et blanc croisés (distance à l'emblème de l'œuvre) ; la licorne reste à recouper (dette) ; R15 compare désormais la première colonne du tableau (pas une sous-chaîne) ; `data/emblems/**` est exclu du chargement du monde (worker, navigateur de canon).

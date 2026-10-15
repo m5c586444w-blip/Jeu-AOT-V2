@@ -1,4 +1,8 @@
 import type { ResourceId } from "../sim/strategic/resources";
+import emblemsJson from "../../data/emblems/emblems.json";
+import { EmblemsFileSchema } from "../data/emblemSchemas";
+import type { Emblem } from "../data/emblemSchemas";
+import { emblemLineSvg } from "../data/emblemSvg";
 
 /**
  * Jeu d'icônes de l'interface (U6) : dessinées pour le projet sur une grille de 24 px (marge de 2 px), trait unique de
@@ -148,19 +152,14 @@ export function alertIcon(key: string): string {
   return "alerte";
 }
 
-/** Blasons des nations, redessinés dans un style original (04 §8.5) : aucun emblème de l'œuvre n'est repris. */
-const EMBLEMS: Record<string, string> = {
-  // Paradis : trois enceintes concentriques et une porte.
-  fac_paradis: "M24 4a20 20 0 1 1 0 40 20 20 0 0 1 0-40Z M24 11a13 13 0 1 1 0 26 13 13 0 0 1 0-26Z M24 18a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z M22 44v-4h4v4",
-  // Marley : tour d'acier couronnée d'une étoile à huit branches.
-  fac_marley: "M17 44V18h14v26Z M15 18h18v-4H15Z M17 14v-3h3v3 M22.5 14v-3h3v3 M28 14v-3h3v3 M24 3l1.2 3.8L29 5l-1.8 3.8L31 10l-3.8 1.2 M24 3l-1.2 3.8L19 5l1.8 3.8L17 10l3.8 1.2 M21 26h6 M21 33h6",
-  // Hizuru : disque solaire au-dessus de trois vagues.
-  fac_hizuru: "M24 8a10 10 0 1 1 0 20 10 10 0 0 1 0-20Z M5 33c4-3 8-3 12 0s8 3 12 0 8-3 14 0 M5 39c4-3 8-3 12 0s8 3 12 0 8-3 14 0",
-  // Forces Alliées : deux sabres croisés sous une étoile.
-  fac_allies: "M9 41 36 12 M39 41 12 12 M33 15l3-3 1 4 M15 15l-3-3-1 4 M7 39l4 4 M41 39l-4 4 M24 3l2 5h5l-4 3 1.5 5-4.5-3-4.5 3 1.5-5-4-3h5Z",
-};
+/** Blasons : définitions de données `data/emblems/emblems.json` (ERRATA_V3 §2.8), rendues par `emblemLineSvg` ; aucun emblème de l'œuvre n'est repris. */
+const EMBLEMS: ReadonlyMap<string, Emblem> = new Map(EmblemsFileSchema.parse(emblemsJson).emblems.map((e) => [e.subject.id, e]));
+
+export function emblemDef(subject: string): Emblem | undefined {
+  return EMBLEMS.get(subject);
+}
 
 export function emblem(faction: string): string {
-  const d = EMBLEMS[faction];
-  return d ? `<svg class="blason" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : "";
+  const e = EMBLEMS.get(faction);
+  return e ? emblemLineSvg(e) : "";
 }
