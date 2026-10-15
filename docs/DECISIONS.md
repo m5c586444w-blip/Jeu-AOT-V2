@@ -1372,3 +1372,7 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **À recouper** : la source officielle de la licorne reste à confirmer dans `docs/lore/` (aucune mention trouvée à ce jour).
 - **Réversible** : oui.
 - **Suites de revue (D-175)** : les ailes du Bataillon d'exploration restent monochromes, ouvertes et non croisées, et ne seront jamais colorées en bleu et blanc croisés (distance à l'emblème de l'œuvre) ; la licorne reste à recouper (dette) ; R15 compare désormais la première colonne du tableau (pas une sous-chaîne) ; `data/emblems/**` est exclu du chargement du monde (worker, navigateur de canon).
+
+## 2026-10-15 — D-176 C9 : `smoke:bataille`, le registre se ferme à l'entrée en bataille
+- **Décision** : parcours automatisé carte → rencontre → bataille → bilan → retour avec contrôle du cadre à chaque étape ; `playBattle` ferme le registre ouvert (il masquait la moitié de la scène). Les piles/étendards d'armées existaient déjà sur la carte (PA) : pas de nouveau rendu.
+- **Réversible** : oui.

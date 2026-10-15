@@ -229,6 +229,8 @@ export async function bootGame(): Promise<void> {
     bubble.hide();
     // La carte stratégique est masquée : son rendu est suspendu pour laisser l'image à la bataille.
     map.setSuspended(true);
+    // Le registre qui a proposé la bataille ne reste pas ouvert sur la scène (il se rouvre par le menu de gestion).
+    registers?.close();
     try {
       window.setTimeout(() => hints?.show("bataille", null), 700);
       // R2+ : rencontres d'armées et batailles de compagnie sur l'écran temps réel ; expéditions et essais sur l'écran de P4.
