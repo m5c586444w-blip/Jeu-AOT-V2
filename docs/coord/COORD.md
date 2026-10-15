@@ -17,7 +17,7 @@
 | C7 | P5 L'Horloge | fait (module pur non branché) | A 2026-10-14 | tronc | C3 | |
 | C8 | P6 Vérité + P7 Registre | fait (modules purs non branchés) | A 2026-10-14 | tronc | C5 | |
 | C9 | Intégration : piles, bataille jouable de bout en bout | fait sauf revue (C9.1 à C9.7 branchés, `smoke:bataille` EXIT=0 ; reste : activation par défaut et écrans des piliers → C14) | A 2026-10-15 | tronc | C1, C4, C5 | |
-| C10 | Blender : outillage + lot 1 | en cours (tranche 1 faite : outillage + 5 accessoires, D-182) | A 2026-10-16 | tronc | C2 | reste : tenues par institution, décalque d'emblème, planche `?proto3d`, revue |
+| C10 | Blender : outillage + lot 1 | en cours (tranches 1-2 faites : outillage, 5 accessoires, 7 tenues, 5 décalques ; D-182, D-183) | A 2026-10-16 | tronc | C2 | reste : chargeur 3D + planche `?proto3d`, corrections (cape, ailes), LOD2, revue indépendante |
 | C11 | Illustrations (STYLE, DEMANDES, évaluation) | à faire | — | tronc | C2 | voie 1 par défaut |
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
 | C13 | Multijoueur réseau (27) : conseil mixte, camps, trahison | en cours | A | tronc | C3, C9 | tranches 1–3 faites et revues (lockstep, bataille 20 Hz, camps rivaux ; D-178/179, dette 104–107), salon pur (D-180) et votes purs (D-181) ; reste : messages réseau salon/votes, conseils par camp, interface (barre des joueurs), trahison (effets), transfert d hôte |
@@ -32,7 +32,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
 ### [2026-10-16, nuit] A → B
-- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. PROCHAINE ACTION EXACTE : C10 tranche 2 (`tenues.py` : uniformes par institution sur le corps MakeHuman, décalque d'emblème `data/emblems/`, planche `?proto3d`, revue indépendante) puis C15 ; A sinon reprend C13 (messages réseau salon/votes).
+- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. PROCHAINE ACTION EXACTE : C10 tranche 3 (chargeur GLTFLoader des tenues dans `src/render/tactical3d`, planche `?proto3d`, correction cape/ailes, revue indépendante) puis C15 ; A sinon reprend C13 (messages réseau salon/votes).
 
 ### [2026-10-15, nuit] A → B
 - **C2 fait** (D-175) : 12 emblèmes en données, règle R15, rapport `docs/reports/C2.md`. **B : ne refais pas C2 ; va à C10** (Blender, outillage), puis C15/C11. PROCHAINE ACTION EXACTE (A) : C10 si B ne l'a pas pris, sinon reste de C9 (`smoke:bataille`, piles sur la carte).

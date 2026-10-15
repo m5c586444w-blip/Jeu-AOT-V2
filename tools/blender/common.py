@@ -24,6 +24,9 @@ COULEURS = {
 }
 
 
+PROPRIETES = {}
+
+
 def racine_depot():
     return os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 
@@ -41,6 +44,13 @@ def scene_vide():
     bpy.context.scene.unit_settings.scale_length = 1.0
 
 
+def definir_couleur(nom, hexa, metal=0.0, rugosite=0.85):
+    """Enregistre une couleur sRGB hexadécimale (#rrggbb) pour un matériau nommé (conversion en linéaire pour glTF)."""
+    lin = [((int(hexa[i:i + 2], 16) / 255.0) / 12.92 if int(hexa[i:i + 2], 16) / 255.0 <= 0.04045 else (((int(hexa[i:i + 2], 16) / 255.0) + 0.055) / 1.055) ** 2.4) for i in (1, 3, 5)]
+    COULEURS[nom] = (round(lin[0], 5), round(lin[1], 5), round(lin[2], 5), 1.0)
+    PROPRIETES[nom] = (metal, rugosite)
+
+
 def materiau(nom):
     """Matériau nommé (couleur de base uniquement, métallique/rugosité fixes) ; réutilisé s'il existe."""
     m = bpy.data.materials.get(nom)
@@ -50,8 +60,11 @@ def materiau(nom):
     m.use_nodes = True
     bsdf = m.node_tree.nodes.get("Principled BSDF")
     bsdf.inputs["Base Color"].default_value = COULEURS[nom]
-    bsdf.inputs["Metallic"].default_value = 0.9 if nom.startswith(("acier", "bronze")) else 0.0
-    bsdf.inputs["Roughness"].default_value = 0.4 if nom.startswith("acier") else 0.8
+    if nom in PROPRIETES:
+        bsdf.inputs["Metallic"].default_value, bsdf.inputs["Roughness"].default_value = PROPRIETES[nom]
+    else:
+        bsdf.inputs["Metallic"].default_value = 0.9 if nom.startswith(("acier", "bronze")) else 0.0
+        bsdf.inputs["Roughness"].default_value = 0.4 if nom.startswith("acier") else 0.8
     return m
 
 
@@ -156,18 +169,20 @@ def dimensions(obj):
     return (min(xs), max(xs)), (min(ys), max(ys)), (min(zs), max(zs))
 
 
-def exporter(obj, fichier):
-    """Exporte l'objet en .glb (axe Y haut, mètres, sans image, sans animation) dans docs/art/assets/projet/."""
-    n = triangles(obj)
-    nm = len({s.material.name for s in obj.material_slots if s.material})
-    if n > BUDGET_ACCESSOIRE:
-        raise SystemExit(f"{fichier} : {n} triangles > budget {BUDGET_ACCESSOIRE}")
+def exporter(obj, fichier, budget=BUDGET_ACCESSOIRE, objets=None, extras=False):
+    """Exporte l'objet (ou la liste `objets`) en .glb (axe Y haut, mètres, sans image, sans animation) dans docs/art/assets/projet/."""
+    lot = objets if objets is not None else [obj]
+    n = sum(triangles(o) for o in lot)
+    nm = len({s.material.name for o in lot for s in o.material_slots if s.material})
+    if n > budget:
+        raise SystemExit(f"{fichier} : {n} triangles > budget {budget}")
     if nm > MAX_MATERIAUX:
         raise SystemExit(f"{fichier} : {nm} matériaux > {MAX_MATERIAUX}")
     os.makedirs(sortie_dir(), exist_ok=True)
     chemin = os.path.join(sortie_dir(), fichier)
     bpy.ops.object.select_all(action="DESELECT")
-    obj.select_set(True)
+    for o in lot:
+        o.select_set(True)
     bpy.ops.export_scene.gltf(
         filepath=chemin,
         export_format="GLB",
@@ -179,9 +194,12 @@ def exporter(obj, fichier):
         export_animations=False,
         export_skins=False,
         export_image_format="NONE",
-        export_extras=False,
+        export_extras=extras,
     )
-    (x0, x1), (y0, y1), (z0, z1) = dimensions(obj)
+    bornes = [dimensions(o) for o in lot]
+    x0, x1 = min(b[0][0] for b in bornes), max(b[0][1] for b in bornes)
+    y0, y1 = min(b[1][0] for b in bornes), max(b[1][1] for b in bornes)
+    z0, z1 = min(b[2][0] for b in bornes), max(b[2][1] for b in bornes)
     print(f"OK {fichier} : {n} triangles, {nm} matériaux, X[{x0:.3f},{x1:.3f}] Y[{y0:.3f},{y1:.3f}] Z[{z0:.3f},{z1:.3f}] (axes Blender)")
     return chemin
 

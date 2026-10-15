@@ -19,3 +19,4 @@ assets_user/musique/*
 
 # Environnement Blender (ERRATA_V3 §4) : recréé par npm run assets:blender
 .venv-blender/
+__pycache__/

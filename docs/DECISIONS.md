@@ -1411,3 +1411,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : A prend C10 (B n'a jamais travaillé). `tools/blender/` (common, armes, armes_a_feu, odm), `npm run assets:blender` (génère deux fois, échoue si les empreintes diffèrent), manifeste `origine: "creation-projet"` + `script` + sha256, usage `modele_projet`, CC0 création originale ; `assets:check` l'accepte sans URL et refuse toujours les sources tierces. Sphère UV bannie (ordre d'indices non déterministe), sommets arrondis à 1e-5 m.
 - **Modèles** : lame_odm 76 tri, lance_de_foudre 208, fusil 144, canon_chariot 964, dispositif_odm 508 (≤ 1 500). Aucun contrôle visuel (pas de rendu) ; matériaux en couleur unie ; non servis au navigateur.
 - **Preuve** : `tests/art/models.test.ts` (31), verify EXIT=0.
+
+## 2026-10-16 — D-183 C10 tranche 2 : 7 tenues (LOD0/LOD1) et 5 décalques d'emblème
+- **Décision** : tenues en pièces rigides (un nœud glTF par os de `humain.glb`, pas de skinning), `tenues.py`/`geo.py`/`emblemes.py`. Police intérieure porte la licorne `emb_org_military_police` (pas d'emblème propre, `A`) ; Bataillon d'exploration : ailes en décalque sur la cape (dos). Emblème référencé en `extras` ; décalque = fichier séparé (maillage plat à 3 couches).
+- **Chiffres** : LOD0 1 866–1 980 tri, LOD1 606–704, 4 matériaux, hauteur 1,57–1,74 m ; 24 modèles, empreintes identiques à deux générations.
+- **Défauts constatés (rendu Workbench)** : cape en cloche rigide, trous aux jointures, semelles massives, étuis flottants ; données d'ailes de l'emblème non découpées. **Dette** : LOD2, skinning, décalques Paradis/Hizuru/alliés, chargeur 3D, `?proto3d`, revue de fin de chantier.
+- **Preuve** : `tests/art` 128 tests avec assets-check ; verify EXIT=0, 1465 tests. `__pycache__` retiré du suivi git.

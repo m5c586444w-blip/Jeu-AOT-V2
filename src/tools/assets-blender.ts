@@ -28,6 +28,35 @@ const MODELES: Modele[] = [
   { fichier: "projet/dispositif_odm.glb", nom: "Dispositif ODM (création du projet)", script: "tools/blender/odm.py", note: "Fichier 10 E-P01 et E-P05 ; origine au centre de la ceinture." },
 ];
 
+/** Tenues par institution (tools/blender/tenues.py) : identifiant, institution, emblème porté. Deux niveaux de détail chacune. */
+const TENUES: { id: string; nom: string; emblem: string }[] = [
+  { id: "bataillon_exploration", nom: "Bataillon d'exploration", emblem: "emb_org_survey_corps" },
+  { id: "garnison", nom: "Garnison", emblem: "emb_org_garrison" },
+  { id: "police_militaire", nom: "Police militaire", emblem: "emb_org_military_police" },
+  { id: "corps_entrainement", nom: "Corps d'entraînement", emblem: "emb_org_training_corps" },
+  { id: "police_interieure", nom: "Police intérieure (anti-personnel)", emblem: "emb_org_military_police" },
+  { id: "marley_soldat", nom: "Soldat de Marley", emblem: "emb_fac_marley" },
+  { id: "marley_officier", nom: "Officier de Marley", emblem: "emb_fac_marley" },
+];
+for (const t of TENUES) {
+  for (const lod of [0, 1]) {
+    MODELES.push({
+      fichier: `projet/tenue_${t.id}_lod${lod}.glb`,
+      nom: `Tenue ${t.nom}, LOD${lod} (création du projet)`,
+      script: "tools/blender/tenues.py",
+      note: `Fichier 10 §9 ; pièces rigides ajustées au corps humain.glb, un nœud par os (extras : emblème ${t.emblem}) ; couleurs A (cape verte E-P11 : C) ; LOD${lod} ${lod === 0 ? "≤ 8 000" : "≤ 2 000"} triangles.`,
+    });
+  }
+}
+for (const e of ["emb_org_survey_corps", "emb_org_garrison", "emb_org_military_police", "emb_org_training_corps", "emb_fac_marley"]) {
+  MODELES.push({
+    fichier: `projet/decalque_${e}.glb`,
+    nom: `Décalque d'emblème ${e} (création du projet)`,
+    script: "tools/blender/emblemes.py",
+    note: `Tracé de data/emblems (${e}) converti en maillage plat de 0,09 m, trois couches (champ, traits, accents), sans image ; face vers +Z, origine au centre.`,
+  });
+}
+
 const sha = (f: string): string => createHash("sha256").update(readFileSync(f)).digest("hex");
 
 function sh(cmd: string, args: string[]): string {
