@@ -1386,6 +1386,6 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 
 ## 2026-10-15 — D-178 C13 tranche 1 : lockstep par tours de campagne, hôte séquenceur, `ws`
 - **Décision** : `src/net` implémente le lockstep de 27 §1 au niveau de la **campagne** : l'hôte ordonne les enveloppes d'un tour (ordre d'arrivée, numéro global), l'exécute lui-même puis diffuse le tour ; chaque client n'exécute que `applyTurn` (aucune action locale directe, même pour l'émetteur). Autorisation (`authorize`) vérifiée à la réception ET à l'exécution (déterministe : même refus partout). Transport : interface `Link` ; WebSocket `ws` (dépendance ajoutée, boucle locale par défaut) ; réseau en mémoire pour les tests. Empreinte comparée tous les `hashEvery` tours ; instantané renvoyé au fautif. Coffre de secrets : hôte seulement, message privé `secret`.
-- **Pas encore** : bataille à 20 Hz (même principe, tours de pas), plusieurs factions jouées (la simulation n'a qu'une faction « joueur » : camps rivaux = suite de C13, refonte de `playerOf`), salon, votes.
+- **Bataille** : `src/net/battle.ts` applique le même principe au pas de la bataille (tours de 4 pas, `owner` d'escouade, instantané = état JSON). **Pas encore** : branchement dans l'interface, plusieurs factions jouées (la simulation n'a qu'une faction « joueur » : camps rivaux = suite de C13, refonte de `playerOf`), salon, votes.
 - **Limite assumée** : l'hôte lit son coffre (27 §4.4) ; aucune anti-triche en v1 (décision 4 de 27 §10).
 - **Réversible** : oui (module isolé).

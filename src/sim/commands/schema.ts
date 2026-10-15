@@ -13,7 +13,7 @@ export const SeatIdSchema = z.string().regex(SEAT_PATTERN).refine((s) => Number(
 const id = z.string().min(1).max(80);
 const idOrNull = id.nullable();
 
-const TimedOrderSchema = z
+export const TimedOrderSchema = z
   .object({
     tick: z.number().int().min(0),
     squad: id,
