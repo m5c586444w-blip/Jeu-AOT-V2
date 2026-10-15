@@ -6,3 +6,4 @@ export * from "./client";
 export * from "./secrets";
 export * from "./wsTransport";
 export * from "./battle";
+export * from "./lobby";

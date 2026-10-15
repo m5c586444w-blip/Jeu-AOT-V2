@@ -1395,3 +1395,9 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Limites** : la couche politique/recherche/événements n'existe que pour la faction jouée (Paradis) : un camp rival n'a pas encore ses propres conseils ni lois ; bataille de compagnie « jouer » reste centrée sur Paradis ; alertes d'interface pour la faction jouée seulement ; équilibrage par camp (`sim:balance`) à faire.
 - **Preuve** : `tests/net/camps.test.ts` (6, dont 4 sièges en lockstep : usurpation et ordre politique refusés, 0 désynchronisation).
 - **Réversible** : oui.
+
+## 2026-10-15 — D-180 C13 : salon d'attente pur (`src/net/lobby.ts`)
+- **Décision** : le salon est une logique pure (sièges attribués dans l'ordre, camps pris parmi `scenario.world.playable`, « prêt » annulé à chaque changement de camp, lancement refusé tant qu'un joueur n'est pas prêt). Au lancement, `withTable` installe la table et, dès deux sièges sur une même faction, chaque armée sans `owner` reçoit un `owner` explicite à tour de rôle (condition de D-168).
+- **Limites** : pas d'écran ni de transport (message `lobby` du protocole à ajouter avec l'interface) ; pas de choix de scénario ni de réglage de trahison dans le salon.
+- **Preuve** : `tests/net/lobby.test.ts` (4).
+- **Réversible** : oui.
