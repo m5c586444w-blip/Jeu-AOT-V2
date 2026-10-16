@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/chateau-utgard/vue-ensemble.png",
+   "stats": {
+    "calls": 102,
+    "triangles": 743416,
+    "instances": 2471,
+    "chunks": {
+     "total": 98,
+     "visible": 66,
+     "near": 9
+    }
+   },
+   "rgb": [
+    115.90730034722222,
+    123.92563368055555,
+    96.76307291666667
+   ]
+  }
+ },
+ "dE": {}
+}

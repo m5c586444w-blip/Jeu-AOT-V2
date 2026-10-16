@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/ragako/vue-ensemble.png",
+   "stats": {
+    "calls": 91,
+    "triangles": 75582,
+    "instances": 3861,
+    "chunks": {
+     "total": 192,
+     "visible": 192,
+     "near": 0
+    }
+   },
+   "rgb": [
+    144.34312934027778,
+    148.76552083333334,
+    115.42293836805555
+   ]
+  }
+ },
+ "dE": {}
+}

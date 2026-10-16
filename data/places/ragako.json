@@ -1,0 +1,2190 @@
+{
+ "id": "ragako",
+ "nom": "Ragako",
+ "libelle": "Ragako (village du sud de l'intérieur de Rose)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Ragako, village du sud de l'intérieur de Rose, détruit en 850 [C] ; docs/spec/06 S05, T20 ; data/provinces/paradis.json : prov_ragako [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "cause et détail de la destruction : non posés (aucun secret montré) ; étendue des ruines et des incendies de l'état 850 : adaptation",
+   "canon": "A"
+  },
+  {
+   "ref": "tracé, noms, quartiers, bâtiments, part de population : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_ragako",
+ "style": "E11",
+ "population": {
+  "province": "prov_ragako",
+  "part": 0.12,
+  "canon": "A",
+  "note": "12 % de la population de `prov_ragako` au départ de scn_sandbox_845 (8 696 hab.) logés dans le bourg ; le reste de la province vit en hameaux et fermes isolées ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "village",
+  "valeur": 30,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -430,
+   -430
+  ],
+  [
+   430,
+   -430
+  ],
+  [
+   430,
+   430
+  ],
+  [
+   -430,
+   430
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "sud",
+  "canon": "C"
+ },
+ "etendue_m": 1000,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Ruelle des Poules",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     -400
+    ],
+    [
+     -400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-1",
+   "nom": "Chemin de l'Ouest",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     -300
+    ],
+    [
+     -300,
+     300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Ruelle du Lavoir",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -190,
+     -300
+    ],
+    [
+     -190,
+     300
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue du Clos",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -90,
+     -300
+    ],
+    [
+     -90,
+     300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-0",
+   "nom": "Rue des Chaumes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     10,
+     -300
+    ],
+    [
+     10,
+     -105
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-1",
+   "nom": "Rue des Chaumes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     10,
+     -5
+    ],
+    [
+     10,
+     300
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Sentier des Chaumes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     105,
+     -300
+    ],
+    [
+     105,
+     300
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-6",
+   "nom": "Grand-Rue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     210,
+     -300
+    ],
+    [
+     210,
+     300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Tisserands",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     300,
+     -300
+    ],
+    [
+     300,
+     300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Sentier de la Mare",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     400,
+     -400
+    ],
+    [
+     400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Sentier des Granges",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     -400
+    ],
+    [
+     400,
+     -400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-1",
+   "nom": "Chemin du Nord",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     -300
+    ],
+    [
+     400,
+     -300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Laboureurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     -205
+    ],
+    [
+     300,
+     -205
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Sentier du Four",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     -105
+    ],
+    [
+     300,
+     -105
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue de la Mare",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     -5
+    ],
+    [
+     300,
+     -5
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Sentier des Haies",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     95
+    ],
+    [
+     300,
+     95
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue de l'Église",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     200
+    ],
+    [
+     300,
+     200
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue des Charrons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     300
+    ],
+    [
+     400,
+     300
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Sentier du Verger",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     400
+    ],
+    [
+     400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "place-du-village",
+   "nom": "Place du village",
+   "canon": "A",
+   "polygone": [
+    [
+     -85.8,
+     -101.3
+    ],
+    [
+     101.3,
+     -101.3
+    ],
+    [
+     101.3,
+     -10.7
+    ],
+    [
+     -85.8,
+     -10.7
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "bourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "colombage",
+    "bois",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898",
+    "#D9C9AA"
+   ],
+   "parcelles_m": [
+    11,
+    14,
+    9,
+    12
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "ferme": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    36,
+    48
+   ],
+   "couvertures": [
+    "chaume",
+    "tuile_plate",
+    "bardeau"
+   ],
+   "facades": [
+    "pierre_brute",
+    "colombage",
+    "bois"
+   ],
+   "teintes": [
+    "#CDBF9F",
+    "#C2B393",
+    "#D2C6A8"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "bourg",
+   "nom": "Bourg de Ragako",
+   "canon": "A"
+  },
+  {
+   "id": "ecarts-et-fermes",
+   "nom": "Écarts et fermes",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-1-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -295.8
+    ],
+    [
+     -193.7,
+     -295.8
+    ],
+    [
+     -193.7,
+     -209.2
+    ],
+    [
+     -295.8,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -200.8
+    ],
+    [
+     -193.7,
+     -200.8
+    ],
+    [
+     -193.7,
+     -108.7
+    ],
+    [
+     -295.8,
+     -108.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -101.3
+    ],
+    [
+     -193.7,
+     -101.3
+    ],
+    [
+     -193.7,
+     -10.7
+    ],
+    [
+     -295.8,
+     -10.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     0.7
+    ],
+    [
+     -193.7,
+     0.7
+    ],
+    [
+     -193.7,
+     91.3
+    ],
+    [
+     -295.8,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     98.7
+    ],
+    [
+     -193.7,
+     98.7
+    ],
+    [
+     -193.7,
+     195.8
+    ],
+    [
+     -295.8,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     204.2
+    ],
+    [
+     -193.7,
+     204.2
+    ],
+    [
+     -193.7,
+     295.8
+    ],
+    [
+     -295.8,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -186.3,
+     -295.8
+    ],
+    [
+     -94.2,
+     -295.8
+    ],
+    [
+     -94.2,
+     -209.2
+    ],
+    [
+     -186.3,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -186.3,
+     -101.3
+    ],
+    [
+     -94.2,
+     -101.3
+    ],
+    [
+     -94.2,
+     -10.7
+    ],
+    [
+     -186.3,
+     -10.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -186.3,
+     0.7
+    ],
+    [
+     -94.2,
+     0.7
+    ],
+    [
+     -94.2,
+     91.3
+    ],
+    [
+     -186.3,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -186.3,
+     98.7
+    ],
+    [
+     -94.2,
+     98.7
+    ],
+    [
+     -94.2,
+     195.8
+    ],
+    [
+     -186.3,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -186.3,
+     204.2
+    ],
+    [
+     -94.2,
+     204.2
+    ],
+    [
+     -94.2,
+     295.8
+    ],
+    [
+     -186.3,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -85.8,
+     -295.8
+    ],
+    [
+     4.3,
+     -295.8
+    ],
+    [
+     4.3,
+     -209.2
+    ],
+    [
+     -85.8,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -85.8,
+     -200.8
+    ],
+    [
+     4.3,
+     -200.8
+    ],
+    [
+     4.3,
+     -108.7
+    ],
+    [
+     -85.8,
+     -108.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -85.8,
+     0.7
+    ],
+    [
+     4.3,
+     0.7
+    ],
+    [
+     4.3,
+     91.3
+    ],
+    [
+     -85.8,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -85.8,
+     98.7
+    ],
+    [
+     4.3,
+     98.7
+    ],
+    [
+     4.3,
+     195.8
+    ],
+    [
+     -85.8,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -85.8,
+     204.2
+    ],
+    [
+     4.3,
+     204.2
+    ],
+    [
+     4.3,
+     295.8
+    ],
+    [
+     -85.8,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     15.7,
+     -295.8
+    ],
+    [
+     101.3,
+     -295.8
+    ],
+    [
+     101.3,
+     -209.2
+    ],
+    [
+     15.7,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     15.7,
+     -200.8
+    ],
+    [
+     101.3,
+     -200.8
+    ],
+    [
+     101.3,
+     -108.7
+    ],
+    [
+     15.7,
+     -108.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     15.7,
+     0.7
+    ],
+    [
+     101.3,
+     0.7
+    ],
+    [
+     101.3,
+     91.3
+    ],
+    [
+     15.7,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     15.7,
+     98.7
+    ],
+    [
+     101.3,
+     98.7
+    ],
+    [
+     101.3,
+     195.8
+    ],
+    [
+     15.7,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     15.7,
+     204.2
+    ],
+    [
+     101.3,
+     204.2
+    ],
+    [
+     101.3,
+     295.8
+    ],
+    [
+     15.7,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     -295.8
+    ],
+    [
+     205.8,
+     -295.8
+    ],
+    [
+     205.8,
+     -209.2
+    ],
+    [
+     108.7,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     -200.8
+    ],
+    [
+     205.8,
+     -200.8
+    ],
+    [
+     205.8,
+     -108.7
+    ],
+    [
+     108.7,
+     -108.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     -101.3
+    ],
+    [
+     205.8,
+     -101.3
+    ],
+    [
+     205.8,
+     -10.7
+    ],
+    [
+     108.7,
+     -10.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     0.7
+    ],
+    [
+     205.8,
+     0.7
+    ],
+    [
+     205.8,
+     91.3
+    ],
+    [
+     108.7,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "bourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     98.7
+    ],
+    [
+     205.8,
+     98.7
+    ],
+    [
+     205.8,
+     195.8
+    ],
+    [
+     108.7,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "bourg"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     108.7,
+     204.2
+    ],
+    [
+     205.8,
+     204.2
+    ],
+    [
+     205.8,
+     295.8
+    ],
+    [
+     108.7,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -295.8
+    ],
+    [
+     295.8,
+     -295.8
+    ],
+    [
+     295.8,
+     -209.2
+    ],
+    [
+     214.2,
+     -209.2
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -200.8
+    ],
+    [
+     295.8,
+     -200.8
+    ],
+    [
+     295.8,
+     -108.7
+    ],
+    [
+     214.2,
+     -108.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -101.3
+    ],
+    [
+     295.8,
+     -101.3
+    ],
+    [
+     295.8,
+     -10.7
+    ],
+    [
+     214.2,
+     -10.7
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     0.7
+    ],
+    [
+     295.8,
+     0.7
+    ],
+    [
+     295.8,
+     91.3
+    ],
+    [
+     214.2,
+     91.3
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     98.7
+    ],
+    [
+     295.8,
+     98.7
+    ],
+    [
+     295.8,
+     195.8
+    ],
+    [
+     214.2,
+     195.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "ecarts-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     204.2
+    ],
+    [
+     295.8,
+     204.2
+    ],
+    [
+     295.8,
+     295.8
+    ],
+    [
+     214.2,
+     295.8
+    ]
+   ],
+   "densite_bati": 0.6,
+   "gabarit": "ferme"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "eglise",
+   "nom": "Église de Ragako",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -140,
+    -55
+   ],
+   "emprise_m": [
+    16,
+    32
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#DAD2C0",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 30,
+    "clocher_cote": 6,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "presbytere",
+   "nom": "Presbytère",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -245,
+    -55
+   ],
+   "emprise_m": [
+    16,
+    11
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "enduit",
+   "teinte": "#E0D4BB",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "maison-commune",
+   "nom": "Maison commune",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    157.5,
+    -55
+   ],
+   "emprise_m": [
+    22,
+    13
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#DDD2BA",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "ecole-du-village",
+   "nom": "École du village",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    157.5,
+    45
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "enduit",
+   "teinte": "#E2D6BF",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "auberge-du-carrefour",
+   "nom": "Auberge du Carrefour",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -40,
+    45
+   ],
+   "emprise_m": [
+    26,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "chaume",
+   "facade": "colombage",
+   "teinte": "#D6C6A6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "forge",
+   "nom": "Forge de Ragako",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    57.5,
+    45
+   ],
+   "emprise_m": [
+    20,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C3B79F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "lavoir-du-village",
+   "nom": "Lavoir du village",
+   "canon": "A",
+   "archetype": "fontaine",
+   "position": [
+    0,
+    -55
+   ],
+   "emprise_m": [
+    8,
+    5
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 3,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C9C1AE",
+   "reperes_canon": []
+  },
+  {
+   "id": "grange-de-la-dime",
+   "nom": "Grange de la Dîme",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    -245,
+    45
+   ],
+   "emprise_m": [
+    26,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "moulin-du-ruisseau",
+   "nom": "Moulin du Ruisseau",
+   "canon": "A",
+   "archetype": "moulin",
+   "position": [
+    352,
+    -160
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#CDBE9E",
+   "reperes_canon": [],
+   "params": {
+    "roue": true
+   }
+  },
+  {
+   "id": "ferme-du-nord-ouest",
+   "nom": "Ferme du Nord-Ouest",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    -245,
+    -252.5
+   ],
+   "emprise_m": [
+    28,
+    15
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "pierre_brute",
+   "teinte": "#CDBF9F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "ferme-de-la-mare",
+   "nom": "Ferme de la Mare",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    255,
+    147.5
+   ],
+   "emprise_m": [
+    28,
+    15
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "pierre_brute",
+   "teinte": "#C9BB9B",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "ferme-du-sud",
+   "nom": "Ferme du Sud",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    -140,
+    250
+   ],
+   "emprise_m": [
+    30,
+    15
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "demi_croupe",
+   "couverture": "tuile_plate",
+   "facade": "colombage",
+   "teinte": "#D2C6A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "bergerie-communale",
+   "nom": "Bergerie communale",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    255,
+    -155
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "bois",
+   "teinte": "#B8AC92",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [],
+  "isoles": [
+   {
+    "position": [
+     -20,
+     -45
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 20,
+    "nom": "Tilleul de la place"
+   },
+   {
+    "position": [
+     60,
+     -70
+    ],
+    "essence": "chene",
+    "hauteur_m": 22
+   }
+  ],
+  "parcs": [
+   {
+    "id": "pres-du-nord",
+    "nom": "Prés et vergers du Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      -396.3
+     ],
+     [
+      396.3,
+      -396.3
+     ],
+     [
+      396.3,
+      -304.2
+     ],
+     [
+      -396.3,
+      -304.2
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 34
+   },
+   {
+    "id": "pres-de-l-ouest",
+    "nom": "Prés et vergers de l'Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      -295.8
+     ],
+     [
+      -304.2,
+      -295.8
+     ],
+     [
+      -304.2,
+      295.8
+     ],
+     [
+      -396.3,
+      295.8
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 34
+   },
+   {
+    "id": "pres-du-sud",
+    "nom": "Prés et vergers du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      304.2
+     ],
+     [
+      396.3,
+      304.2
+     ],
+     [
+      396.3,
+      396.3
+     ],
+     [
+      -396.3,
+      396.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 34
+   },
+   {
+    "id": "clos-de-l-eglise",
+    "nom": "Clos de l'église",
+    "canon": "A",
+    "polygone": [
+     [
+      -186.3,
+      -200.8
+     ],
+     [
+      -94.2,
+      -200.8
+     ],
+     [
+      -94.2,
+      -108.7
+     ],
+     [
+      -186.3,
+      -108.7
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "pin",
+     "fruitier"
+    ],
+    "arbres_par_ha": 45
+   },
+   {
+    "id": "pres-de-l-est",
+    "nom": "Prés du Ruisseau",
+    "canon": "A",
+    "polygone": [
+     [
+      304.2,
+      -295.8
+     ],
+     [
+      396.3,
+      -295.8
+     ],
+     [
+      396.3,
+      295.8
+     ],
+     [
+      304.2,
+      295.8
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 34
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -380,
+      -380
+     ],
+     [
+      -330,
+      -380
+     ],
+     [
+      -330,
+      -310
+     ],
+     [
+      -380,
+      -310
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -420,
+      420
+     ],
+     [
+      420,
+      420
+     ]
+    ]
+   },
+   {
+    "trace": [
+     [
+      -420,
+      -420
+     ],
+     [
+      420,
+      -420
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -175,
+      40
+     ],
+     [
+      -110,
+      40
+     ],
+     [
+      -110,
+      80
+     ],
+     [
+      -175,
+      80
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "fruitier",
+   "tilleul",
+   "chene"
+  ]
+ },
+ "eau": {
+  "voies": [
+   {
+    "id": "ruisseau-du-moulin",
+    "nom": "Ruisseau du Moulin",
+    "canon": "A",
+    "type": "riviere",
+    "trace": [
+     [
+      322,
+      -400
+     ],
+     [
+      330,
+      -250
+     ],
+     [
+      322,
+      -120
+     ],
+     [
+      330,
+      20
+     ],
+     [
+      322,
+      150
+     ],
+     [
+      330,
+      400
+     ]
+    ],
+    "largeur_m": 4,
+    "quais": false
+   }
+  ],
+  "ponts": [
+   {
+    "id": "pont-du-moulin",
+    "position": [
+     326,
+     20
+    ],
+    "angle_deg": 0,
+    "longueur_m": 8,
+    "largeur_m": 4,
+    "type": "bois"
+   }
+  ],
+  "puits": [
+   [
+    -40,
+    -80
+   ],
+   [
+    150,
+    150
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -720,
+    880,
+    440
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    360,
+    1.8
+   ],
+   "cible": [
+    0,
+    -160,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-village",
+   "nom": "Place du village, église et auberge",
+   "oeil": [
+    40,
+    70,
+    3
+   ],
+   "cible": [
+    -60,
+    -60,
+    8
+   ],
+   "fov": 62
+  },
+  {
+   "id": "moulin-et-ruisseau",
+   "nom": "Moulin sur le ruisseau",
+   "oeil": [
+    250,
+    -60,
+    3
+   ],
+   "cible": [
+    352,
+    -160,
+    6
+   ],
+   "fov": 60
+  },
+  {
+   "id": "grand-rue",
+   "nom": "Grand-Rue vers le nord",
+   "oeil": [
+    10,
+    220,
+    2.2
+   ],
+   "cible": [
+    10,
+    -150,
+    7
+   ],
+   "fov": 58
+  },
+  {
+   "id": "fermes-du-sud",
+   "nom": "Fermes du sud",
+   "oeil": [
+    20,
+    190,
+    3
+   ],
+   "cible": [
+    -150,
+    255,
+    6
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-intact",
+   "nom": "845, le village en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du village (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-detruit",
+   "nom": "850, le village détruit",
+   "date": "850",
+   "canon": "C",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3.1 et docs/spec/11 §2, atlas 06 S05 : Ragako détruit en 850 [C]",
+     "canon": "C"
+    },
+    {
+     "ref": "étendue des ruines, des incendies, abandon, effectif nul : adaptation ; cause non posée",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [
+    {
+     "polygone": [
+      [
+       -320,
+       -320
+      ],
+      [
+       320,
+       -320
+      ],
+      [
+       320,
+       320
+      ],
+      [
+       -320,
+       320
+      ]
+     ],
+     "part": 0.92
+    }
+   ],
+   "incendies": [
+    [
+     -120,
+     -60
+    ],
+    [
+     40,
+     -90
+    ],
+    [
+     -30,
+     120
+    ],
+    [
+     150,
+     40
+    ],
+    [
+     -200,
+     150
+    ],
+    [
+     230,
+     -120
+    ]
+   ],
+   "rochers": [],
+   "abandon": 0.35,
+   "ciel": "enfume",
+   "habitants": 0
+  }
+ ],
+ "etat_defaut": "845-intact"
+}

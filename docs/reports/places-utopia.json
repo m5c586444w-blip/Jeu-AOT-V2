@@ -1,0 +1,464 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/utopia/vue-ensemble.png",
+   "stats": {
+    "calls": 261,
+    "triangles": 587437,
+    "instances": 22977,
+    "chunks": {
+     "total": 625,
+     "visible": 625,
+     "near": 0
+    }
+   },
+   "rgb": [
+    145.5378949652778,
+    147.67276475694445,
+    116.2766579861111
+   ]
+  },
+  "axe-principal": {
+   "file": "docs/places/utopia/vue-axe-principal.png",
+   "stats": {
+    "calls": 220,
+    "triangles": 576400,
+    "instances": 13987,
+    "chunks": {
+     "total": 625,
+     "visible": 315,
+     "near": 6
+    }
+   },
+   "rgb": [
+    130.05140625,
+    122.48879340277777,
+    102.01253472222223
+   ]
+  },
+  "place-de-la-foire": {
+   "file": "docs/places/utopia/vue-place-de-la-foire.png",
+   "stats": {
+    "calls": 288,
+    "triangles": 643808,
+    "instances": 7550,
+    "chunks": {
+     "total": 625,
+     "visible": 191,
+     "near": 7
+    }
+   },
+   "rgb": [
+    115.18590277777778,
+    108.09657118055556,
+    86.26908854166666
+   ]
+  },
+  "bourse-des-grains": {
+   "file": "docs/places/utopia/vue-bourse-des-grains.png",
+   "stats": {
+    "calls": 276,
+    "triangles": 736417,
+    "instances": 12325,
+    "chunks": {
+     "total": 625,
+     "visible": 285,
+     "near": 8
+    }
+   },
+   "rgb": [
+    84.41059027777777,
+    81.102265625,
+    58.750377604166665
+   ]
+  },
+  "quartier-des-grains": {
+   "file": "docs/places/utopia/vue-quartier-des-grains.png",
+   "stats": {
+    "calls": 216,
+    "triangles": 567108,
+    "instances": 3042,
+    "chunks": {
+     "total": 625,
+     "visible": 69,
+     "near": 10
+    }
+   },
+   "rgb": [
+    76.80619357638889,
+    78.0000954861111,
+    55.95928819444445
+   ]
+  },
+  "porte-nord": {
+   "file": "docs/places/utopia/vue-porte-nord.png",
+   "stats": {
+    "calls": 216,
+    "triangles": 639184,
+    "instances": 2803,
+    "chunks": {
+     "total": 625,
+     "visible": 87,
+     "near": 10
+    }
+   },
+   "rgb": [
+    65.46320746527778,
+    68.07110243055556,
+    52.52541232638889
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/utopia/vue-rempart.png",
+   "stats": {
+    "calls": 276,
+    "triangles": 507079,
+    "instances": 5548,
+    "chunks": {
+     "total": 625,
+     "visible": 172,
+     "near": 6
+    }
+   },
+   "rgb": [
+    178.53385416666666,
+    188.00134548611112,
+    186.73117621527777
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/utopia/vue-faubourg.png",
+   "stats": {
+    "calls": 275,
+    "triangles": 882769,
+    "instances": 20246,
+    "chunks": {
+     "total": 625,
+     "visible": 487,
+     "near": 5
+    }
+   },
+   "rgb": [
+    155.9808203125,
+    156.63791666666665,
+    141.7265407986111
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/utopia/vue-porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 111,
+    "triangles": 438775,
+    "instances": 578,
+    "chunks": {
+     "total": 625,
+     "visible": 22,
+     "near": 10
+    }
+   },
+   "rgb": [
+    109.5796484375,
+    106.89499565972223,
+    94.53961805555555
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/utopia/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 282,
+    "triangles": 692045,
+    "instances": 21448,
+    "chunks": {
+     "total": 625,
+     "visible": 482,
+     "near": 4
+    }
+   },
+   "rgb": [
+    163.5840190972222,
+    158.41255208333334,
+    137.19078559027778
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/utopia/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 294,
+    "triangles": 741753,
+    "instances": 19473,
+    "chunks": {
+     "total": 625,
+     "visible": 454,
+     "near": 8
+    }
+   },
+   "rgb": [
+    102.13368055555556,
+    89.91719184027778,
+    75.17251302083334
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/utopia/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 70,
+    "triangles": 233217,
+    "instances": 230,
+    "chunks": {
+     "total": 625,
+     "visible": 13,
+     "near": 3
+    }
+   },
+   "rgb": [
+    102.85161458333333,
+    103.97125,
+    94.04734809027778
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/utopia/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 63,
+    "triangles": 251373,
+    "instances": 190,
+    "chunks": {
+     "total": 625,
+     "visible": 7,
+     "near": 4
+    }
+   },
+   "rgb": [
+    64.00905381944445,
+    70.74693576388889,
+    73.16664496527778
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/utopia/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 63,
+    "triangles": 220521,
+    "instances": 205,
+    "chunks": {
+     "total": 625,
+     "visible": 11,
+     "near": 3
+    }
+   },
+   "rgb": [
+    48.14947048611111,
+    42.151028645833335,
+    34.78920572916667
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/utopia/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 241,
+    "triangles": 363801,
+    "instances": 4528,
+    "chunks": {
+     "total": 625,
+     "visible": 113,
+     "near": 4
+    }
+   },
+   "rgb": [
+    166.7643402777778,
+    174.3183376736111,
+    170.61530815972222
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/utopia/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 495,
+    "triangles": 603759,
+    "instances": 15033,
+    "chunks": {
+     "total": 625,
+     "visible": 392,
+     "near": 2
+    }
+   },
+   "rgb": [
+    159.19069444444443,
+    161.06446180555557,
+    138.6025217013889
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/utopia/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 252,
+    "triangles": 805134,
+    "instances": 10551,
+    "chunks": {
+     "total": 625,
+     "visible": 266,
+     "near": 12
+    }
+   },
+   "rgb": [
+    117.01688368055555,
+    114.92661892361112,
+    101.76013020833334
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/utopia/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 249,
+    "triangles": 739982,
+    "instances": 10082,
+    "chunks": {
+     "total": 625,
+     "visible": 249,
+     "near": 10
+    }
+   },
+   "rgb": [
+    55.98370659722222,
+    54.3642578125,
+    46.99224826388889
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/utopia/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 181,
+    "triangles": 800824,
+    "instances": 7046,
+    "chunks": {
+     "total": 625,
+     "visible": 155,
+     "near": 12
+    }
+   },
+   "rgb": [
+    157.98467881944444,
+    151.02032118055556,
+    135.184609375
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/utopia/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 166,
+    "triangles": 581097,
+    "instances": 1581,
+    "chunks": {
+     "total": 625,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    125.7459765625,
+    120.09733940972222,
+    108.8115060763889
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/utopia/porte-interieure-passage.png",
+   "stats": {
+    "calls": 176,
+    "triangles": 981982,
+    "instances": 7048,
+    "chunks": {
+     "total": 625,
+     "visible": 144,
+     "near": 13
+    }
+   },
+   "rgb": [
+    77.44922309027778,
+    77.09598524305555,
+    70.86428385416667
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/utopia/porte-interieure-haut.png",
+   "stats": {
+    "calls": 223,
+    "triangles": 766818,
+    "instances": 9547,
+    "chunks": {
+     "total": 625,
+     "visible": 182,
+     "near": 10
+    }
+   },
+   "rgb": [
+    183.57891493055556,
+    189.06620659722222,
+    186.30587673611112
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/utopia/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 485,
+    "triangles": 835439,
+    "instances": 10978,
+    "chunks": {
+     "total": 625,
+     "visible": 254,
+     "near": 10
+    }
+   },
+   "rgb": [
+    133.298046875,
+    130.0822873263889,
+    113.74029513888888
+   ]
+  }
+ },
+ "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 35.71700976567669,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 36.77334395175063,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.74713496847594,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 51.392414145782716,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 28.10861430033557,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.391435614664516,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 32.953522143853235,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 31.955152309760667,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.717567878841344,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 42.546029256656745,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.40412820153088,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 29.18429211230388,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 35.73577904904496,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 36.545363615870706,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 39.184477119816904,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.388443178010903,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 45.41913010838429,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 43.541447292781804,
+  "porte-exterieure-passage | porte-exterieure-haut": 56.77338649333523,
+  "porte-exterieure-passage | porte-exterieure-echelle": 52.955532931494844,
+  "porte-exterieure-haut | porte-exterieure-echelle": 26.117264995496836,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 29.179299551731432,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 25.109776800182086,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 32.864432217608346,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 32.625859776662104,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 38.69971573833049,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 19.49950214166486,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 44.074392208950194,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 38.10351431093215,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 26.986445063589926,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 57.785884455181076,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 37.355515259330794,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 27.34825958862464,
+  "porte-interieure-interieure-face | porte-interieure-passage": 42.08665644475039,
+  "porte-interieure-interieure-face | porte-interieure-haut": 28.619842499227943,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 30.630708153400615,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.61224874399033,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 33.198973316489266,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 29.825869985877837,
+  "porte-interieure-passage | porte-interieure-haut": 52.300816605678676,
+  "porte-interieure-passage | porte-interieure-echelle": 41.039795644921675,
+  "porte-interieure-haut | porte-interieure-echelle": 34.410144695875346,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.915902053117534,
+  "etat-845-avant | etat-850-afflux-des-evacues": 3.387282832223619
+ }
+}

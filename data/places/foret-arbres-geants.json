@@ -1,0 +1,1179 @@
+{
+ "id": "foret-arbres-geants",
+ "nom": "Forêt des Arbres Géants",
+ "libelle": "Forêt des Arbres Géants (grande forêt de Wall Maria)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/06 R06, T06, T07 : forêt des Arbres Géants, arbres d'environ 80 m [C] (docs/spec/03 §2) ; data/provinces/paradis.json : prov_foret_arbres_geants, poi_foret_arbres_geants [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "localisation exacte : non établie [?] (docs/spec/01 §10, docs/spec/11 §9) ; data/geo/paradis.json : anneau de Maria [A]",
+   "canon": "?"
+  },
+  {
+   "ref": "plan des futaies, layons, poste forestier, noms, effectif : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_foret_arbres_geants",
+ "style": "E14",
+ "population": {
+  "province": null,
+  "part": 1,
+  "valeur": 27,
+  "canon": "?",
+  "note": "`prov_foret_arbres_geants` existe [C] mais sa population de simulation est nulle (forêt, atlas R06) ; effectif du poste forestier (garde-forestier, bûcherons, charbonniers et familles) : valeur paramétrable `?`."
+ },
+ "densite": {
+  "classe": "ferme",
+  "valeur": 9.5,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -100,
+   -100
+  ],
+  [
+   100,
+   -100
+  ],
+  [
+   100,
+   100
+  ],
+  [
+   -100,
+   100
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "aucune",
+  "canon": "?"
+ },
+ "etendue_m": 2200,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Layon du Corridor",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1000,
+     -1000
+    ],
+    [
+     -1000,
+     1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3",
+   "nom": "Layon de la Cognée",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     -1000
+    ],
+    [
+     -120,
+     1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4",
+   "nom": "Layon de la Sève",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -40,
+     -120
+    ],
+    [
+     -40,
+     120
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-5",
+   "nom": "Layon de la Mousse",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     40,
+     -120
+    ],
+    [
+     40,
+     120
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-6",
+   "nom": "Layon du Corridor",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     120,
+     -1000
+    ],
+    [
+     120,
+     1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-9",
+   "nom": "Layon de la Cognée",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     1000,
+     -1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Layon de la Sève",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1000,
+     -1000
+    ],
+    [
+     1000,
+     -1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-3",
+   "nom": "Layon de l'Écorce",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     -120
+    ],
+    [
+     120,
+     -120
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-4",
+   "nom": "Layon de la Résine",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     -40
+    ],
+    [
+     120,
+     -40
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Layon de la Cognée",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     40
+    ],
+    [
+     120,
+     40
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Layon de la Sève",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     120
+    ],
+    [
+     120,
+     120
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-9",
+   "nom": "Layon de l'Écorce",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1000,
+     1000
+    ],
+    [
+     1000,
+     1000
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "layon-du-corridor",
+   "nom": "Layon du Corridor",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     0,
+     -1000
+    ],
+    [
+     20,
+     -700
+    ],
+    [
+     -10,
+     -400
+    ],
+    [
+     0,
+     -130
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "laie-de-l-est",
+   "nom": "Laie de l'Est",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     130,
+     0
+    ],
+    [
+     450,
+     30
+    ],
+    [
+     700,
+     -20
+    ],
+    [
+     1000,
+     10
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "layon-du-sud",
+   "nom": "Layon du Sud",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     0,
+     130
+    ],
+    [
+     -30,
+     500
+    ],
+    [
+     20,
+     800
+    ],
+    [
+     0,
+     1000
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "clairiere",
+   "nom": "Clairière du poste",
+   "canon": "A",
+   "polygone": [
+    [
+     -36.8,
+     -36.8
+    ],
+    [
+     36.8,
+     -36.8
+    ],
+    [
+     36.8,
+     36.8
+    ],
+    [
+     -36.8,
+     36.8
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "poste": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 2.9,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    40,
+    52
+   ],
+   "couvertures": [
+    "bardeau",
+    "chaume",
+    "bardeau"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#C9B993",
+    "#BEAE88",
+    "#D2C39F",
+    "#B8A682"
+   ],
+   "parcelles_m": [
+    10,
+    13,
+    9
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "poste-forestier",
+   "nom": "Poste forestier des Futaies",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-3-3",
+   "quartier": "poste-forestier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -116.8,
+     -116.8
+    ],
+    [
+     -43.2,
+     -116.8
+    ],
+    [
+     -43.2,
+     -43.2
+    ],
+    [
+     -116.8,
+     -43.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "poste"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "poste-forestier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -116.8,
+     43.2
+    ],
+    [
+     -43.2,
+     43.2
+    ],
+    [
+     -43.2,
+     116.8
+    ],
+    [
+     -116.8,
+     116.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "poste"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "poste-forestier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     43.2,
+     -116.8
+    ],
+    [
+     116.8,
+     -116.8
+    ],
+    [
+     116.8,
+     -43.2
+    ],
+    [
+     43.2,
+     -43.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "poste"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "poste-forestier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     43.2,
+     43.2
+    ],
+    [
+     116.8,
+     43.2
+    ],
+    [
+     116.8,
+     116.8
+    ],
+    [
+     43.2,
+     116.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "poste"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "maison-du-garde-forestier",
+   "nom": "Maison du garde-forestier",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -80,
+    -80
+   ],
+   "emprise_m": [
+    18,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#C9B993",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "scierie-des-futaies",
+   "nom": "Scierie des Futaies",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    80,
+    -94
+   ],
+   "emprise_m": [
+    30,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B4A47E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 32
+   }
+  },
+  {
+   "id": "hangar-a-grumes",
+   "nom": "Hangar à grumes",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    80,
+    -62
+   ],
+   "emprise_m": [
+    26,
+    10
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B8A882",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "logis-des-bucherons",
+   "nom": "Logis des bûcherons",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -80,
+    68
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#BEAE88",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "ecurie-des-attelages",
+   "nom": "Écurie des attelages",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    -80,
+    96
+   ],
+   "emprise_m": [
+    22,
+    10
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#BCAD88",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "chapelle-du-poste",
+   "nom": "Chapelle du poste",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    66,
+    72
+   ],
+   "emprise_m": [
+    10,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#D8CFBA",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 12,
+    "clocher_cote": 3,
+    "abside": false,
+    "pente": 48
+   }
+  },
+  {
+   "id": "magasin-d-outils",
+   "nom": "Magasin d'outils et de cordages",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    84,
+    98
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B7A883",
+   "reperes_canon": [],
+   "params": {
+    "pente": 32
+   }
+  },
+  {
+   "id": "auvent-de-la-clairiere",
+   "nom": "Auvent de la clairière",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    0,
+    0
+   ],
+   "emprise_m": [
+    16,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [],
+  "isoles": [
+   {
+    "position": [
+     -26,
+     -22
+    ],
+    "essence": "geant",
+    "hauteur_m": 82,
+    "nom": "Géant de la clairière"
+   },
+   {
+    "position": [
+     30,
+     24
+    ],
+    "essence": "geant",
+    "hauteur_m": 78
+   }
+  ],
+  "parcs": [
+   {
+    "id": "futaie-de-l-ouest",
+    "nom": "Futaie de l'Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -996.8,
+      -996.8
+     ],
+     [
+      -123.2,
+      -996.8
+     ],
+     [
+      -123.2,
+      996.8
+     ],
+     [
+      -996.8,
+      996.8
+     ]
+    ],
+    "essences": [
+     "geant",
+     "geant",
+     "geant",
+     "chene",
+     "pin"
+    ],
+    "arbres_par_ha": 26
+   },
+   {
+    "id": "futaie-du-nord",
+    "nom": "Futaie du Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -116.8,
+      -996.8
+     ],
+     [
+      116.8,
+      -996.8
+     ],
+     [
+      116.8,
+      -123.2
+     ],
+     [
+      -116.8,
+      -123.2
+     ]
+    ],
+    "essences": [
+     "geant",
+     "geant",
+     "geant",
+     "chene",
+     "pin"
+    ],
+    "arbres_par_ha": 26
+   },
+   {
+    "id": "potager-du-poste",
+    "nom": "Potager du poste",
+    "canon": "A",
+    "polygone": [
+     [
+      -116.8,
+      -36.8
+     ],
+     [
+      -43.2,
+      -36.8
+     ],
+     [
+      -43.2,
+      36.8
+     ],
+     [
+      -116.8,
+      36.8
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau"
+    ],
+    "arbres_par_ha": 40
+   },
+   {
+    "id": "futaie-du-sud",
+    "nom": "Futaie du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -116.8,
+      123.2
+     ],
+     [
+      116.8,
+      123.2
+     ],
+     [
+      116.8,
+      996.8
+     ],
+     [
+      -116.8,
+      996.8
+     ]
+    ],
+    "essences": [
+     "geant",
+     "geant",
+     "geant",
+     "chene",
+     "pin"
+    ],
+    "arbres_par_ha": 26
+   },
+   {
+    "id": "verger-du-poste",
+    "nom": "Verger du poste",
+    "canon": "A",
+    "polygone": [
+     [
+      -36.8,
+      -116.8
+     ],
+     [
+      36.8,
+      -116.8
+     ],
+     [
+      36.8,
+      -43.2
+     ],
+     [
+      -36.8,
+      -43.2
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau"
+    ],
+    "arbres_par_ha": 40
+   },
+   {
+    "id": "parc-a-bois",
+    "nom": "Parc à bois",
+    "canon": "A",
+    "polygone": [
+     [
+      -36.8,
+      43.2
+     ],
+     [
+      36.8,
+      43.2
+     ],
+     [
+      36.8,
+      116.8
+     ],
+     [
+      -36.8,
+      116.8
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau"
+    ],
+    "arbres_par_ha": 40
+   },
+   {
+    "id": "pre-des-attelages",
+    "nom": "Pré des attelages",
+    "canon": "A",
+    "polygone": [
+     [
+      43.2,
+      -36.8
+     ],
+     [
+      116.8,
+      -36.8
+     ],
+     [
+      116.8,
+      36.8
+     ],
+     [
+      43.2,
+      36.8
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau"
+    ],
+    "arbres_par_ha": 40
+   },
+   {
+    "id": "futaie-de-l-est",
+    "nom": "Futaie de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      123.2,
+      -996.8
+     ],
+     [
+      996.8,
+      -996.8
+     ],
+     [
+      996.8,
+      996.8
+     ],
+     [
+      123.2,
+      996.8
+     ]
+    ],
+    "essences": [
+     "geant",
+     "geant",
+     "geant",
+     "chene",
+     "pin"
+    ],
+    "arbres_par_ha": 26
+   }
+  ],
+  "vergers": [],
+  "haies": [],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -36,
+      46
+     ],
+     [
+      -6,
+      46
+     ],
+     [
+      -6,
+      66
+     ],
+     [
+      -36,
+      66
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "fruitier",
+   "bouleau"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -60,
+    -60
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1800,
+    2200,
+    1100
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    960,
+    1.8
+   ],
+   "cible": [
+    0,
+    -400,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "corridor",
+   "nom": "Corridor : le layon entre les géants",
+   "oeil": [
+    0,
+    -140,
+    2.2
+   ],
+   "cible": [
+    0,
+    -900,
+    30
+   ],
+   "fov": 62
+  },
+  {
+   "id": "clairiere",
+   "nom": "Clairière du poste forestier",
+   "oeil": [
+    0,
+    100,
+    2.5
+   ],
+   "cible": [
+    0,
+    -20,
+    25
+   ],
+   "fov": 64
+  },
+  {
+   "id": "sous-les-geants",
+   "nom": "Sous les géants, regard vers la cime",
+   "oeil": [
+    -60,
+    -260,
+    2
+   ],
+   "cible": [
+    -60,
+    -320,
+    80
+   ],
+   "fov": 70
+  },
+  {
+   "id": "scierie",
+   "nom": "Scierie et hangar à grumes",
+   "oeil": [
+    30,
+    -20,
+    3
+   ],
+   "cible": [
+    80,
+    -90,
+    6
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, la forêt en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire de la forêt et du poste (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "845-brume",
+   "nom": "845, la forêt sous la brume",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forêt à visibilité faible [C] (data/tactical_maps/maps.json : « visibilité faible ») : brume sous les cimes, effectif réduit, adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 0.6
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

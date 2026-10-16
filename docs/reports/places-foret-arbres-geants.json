@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/foret-arbres-geants/vue-ensemble.png",
+   "stats": {
+    "calls": 57,
+    "triangles": 219580,
+    "instances": 10516,
+    "chunks": {
+     "total": 1024,
+     "visible": 1024,
+     "near": 0
+    }
+   },
+   "rgb": [
+    140.8354904513889,
+    147.57516493055556,
+    115.53459635416667
+   ]
+  }
+ },
+ "dE": {}
+}

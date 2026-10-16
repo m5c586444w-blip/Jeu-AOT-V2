@@ -4,8 +4,8 @@
 |---|---|
 | Phase | **Refonte V3 installée** (D-154) : deux sessions automatiques A/B, `docs/coord/`. R3 fusionnée (D-153). |
 | Tâche | C0, C3 (socle), C4-C8 faits ; C9.1 (mur), C9.2 (registre), C9.3 (clock), C9.4 (truth), C9.5 (gas), C9.6 (signal) branchés (A, 2026-10-15) ; C1 fait (A, D-174) ; suivant : C2 (B) ; A : C9 suite (conception tide, fiche à rédiger), C1 (B) |
-| Dernier `npm run verify` | 2026-10-16, code 0, 168 fichiers, 1597 tests (journal `docs/coord/journal/2026-10-16-A.md`) |
-| Prochaine étape | PROCHAINE ACTION EXACTE : C10 fait (D-182 à D-184) ; C15 : 6 lieux (D-185, D-186) ; C16 : 7 lieux (D-187, D-188), revue faite. Suivant : C17 (hors-murs), captures complètes (dettes 110-111), C13 (reste). Avant :  C13 : lockstep, bataille, camps rivaux, salon pur et votes purs faits (src/net, D-178 à D-181, dette 104–107). Session A : poursuivre C13 (messages réseau du salon et des votes, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
+| Dernier `npm run verify` | 2026-10-16, code 0, 169 fichiers, 1631 tests (journal `docs/coord/journal/2026-10-16-A.md`) |
+| Prochaine étape | PROCHAINE ACTION EXACTE : C10 fait (D-182 à D-184) ; C15 : 6 lieux (D-185, D-186) ; C16 : 7 lieux (D-187, D-188), revue faite. C17 tranche 1 (5 lieux, D-189). Suivant : C17 tranche 2 (ferme, fort du front, Wall Maria complet), C18, captures complètes (dettes 110-111), C13 (reste). Avant :  C13 : lockstep, bataille, camps rivaux, salon pur et votes purs faits (src/net, D-178 à D-181, dette 104–107). Session A : poursuivre C13 (messages réseau du salon et des votes, conseils propres aux camps rivaux, barre des joueurs dans le cadre unique) ; B : C10 (Blender) |
 
 ## Revue de fin de R1e (2026-10-08) — décision de l'utilisateur
 - R1e terminée et acceptée. Prochaine phase : MAP (PR n° 2). LC-B en attente.

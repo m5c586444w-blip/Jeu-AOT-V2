@@ -1,0 +1,5732 @@
+{
+ "id": "jinae",
+ "nom": "Jinae",
+ "libelle": "Jinae (ville du sud de l'intérieur de Rose)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Jinae, ville du sud de l'intérieur de Rose [C] ; docs/spec/06 S13 (ressource clé : nourriture) ; data/provinces/paradis.json : prov_jinae [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "ville sans enceinte propre (le schéma ne modélise que les murs Maria, Rose et Sina) : adaptation",
+   "canon": "A"
+  },
+  {
+   "ref": "tracé, noms de rues, de places, de quartiers et de bâtiments, états : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_jinae",
+ "style": "E10",
+ "population": {
+  "province": "prov_jinae",
+  "part": 1,
+  "canon": "C",
+  "note": "100 % de la population de `prov_jinae` au départ de scn_sandbox_845 (17 391 hab.) ; la province existe [C], la ville la porte entière (adaptation)."
+ },
+ "densite": {
+  "classe": "faubourg",
+  "valeur": 110,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -730,
+   -630
+  ],
+  [
+   730,
+   -630
+  ],
+  [
+   730,
+   630
+  ],
+  [
+   -730,
+   630
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "sud",
+  "canon": "C"
+ },
+ "etendue_m": 1700,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Rue des Meuniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -600
+    ],
+    [
+     -700,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1-0",
+   "nom": "Ruelle du Pain",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -600,
+     -600
+    ],
+    [
+     -600,
+     200
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-1-1",
+   "nom": "Ruelle du Pain",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -600,
+     400
+    ],
+    [
+     -600,
+     600
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue des Boulangers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     -600
+    ],
+    [
+     -500,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue des Grainetiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     -600
+    ],
+    [
+     -400,
+     600
+    ]
+   ],
+   "largeur_m": 11,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue des Laboureurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     -600
+    ],
+    [
+     -300,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Ruelle des Gerbes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -200,
+     -600
+    ],
+    [
+     -200,
+     600
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-6",
+   "nom": "Avenue des Moissons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -100,
+     -600
+    ],
+    [
+     -100,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Fermiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     -600
+    ],
+    [
+     0,
+     600
+    ]
+   ],
+   "largeur_m": 16,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-0",
+   "nom": "Rue des Vanniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     -600
+    ],
+    [
+     100,
+     -100
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-1",
+   "nom": "Rue des Vanniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     100
+    ],
+    [
+     100,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Ruelle du Grain",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     200,
+     -600
+    ],
+    [
+     200,
+     600
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-10",
+   "nom": "Rue des Charrons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     300,
+     -600
+    ],
+    [
+     300,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11-0",
+   "nom": "Rue des Tonneliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     -600
+    ],
+    [
+     400,
+     -500
+    ]
+   ],
+   "largeur_m": 11,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11-1",
+   "nom": "Rue des Tonneliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     -300
+    ],
+    [
+     400,
+     600
+    ]
+   ],
+   "largeur_m": 11,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12",
+   "nom": "Rue des Bourreliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     500,
+     -600
+    ],
+    [
+     500,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13",
+   "nom": "Ruelle des Vignes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     600,
+     -600
+    ],
+    [
+     600,
+     600
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-14",
+   "nom": "Rue des Sabotiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     700,
+     -600
+    ],
+    [
+     700,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-0",
+   "nom": "Rue du Marché",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -600
+    ],
+    [
+     700,
+     -600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Ruelle du Four",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -700,
+     -500
+    ],
+    [
+     700,
+     -500
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2-0",
+   "nom": "Rue des Messagers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -400
+    ],
+    [
+     300,
+     -400
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2-1",
+   "nom": "Rue des Messagers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     500,
+     -400
+    ],
+    [
+     700,
+     -400
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue de l'Hôtel de ville",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -300
+    ],
+    [
+     700,
+     -300
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Ruelle de la Paille",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -700,
+     -200
+    ],
+    [
+     700,
+     -200
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Rue des Halles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -100
+    ],
+    [
+     700,
+     -100
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6-0",
+   "nom": "Rue des Greniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6-1",
+   "nom": "Rue des Greniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     0
+    ],
+    [
+     700,
+     0
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue des Remises",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     100
+    ],
+    [
+     700,
+     100
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Ruelle des Mesures",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -700,
+     200
+    ],
+    [
+     700,
+     200
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue des Cultures",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     300
+    ],
+    [
+     700,
+     300
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-10",
+   "nom": "Rue du Pressoir",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     400
+    ],
+    [
+     700,
+     400
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11",
+   "nom": "Ruelle du Pain",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -700,
+     500
+    ],
+    [
+     700,
+     500
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-12",
+   "nom": "Rue des Foins",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     600
+    ],
+    [
+     700,
+     600
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "place-de-l-eglise",
+   "nom": "Place de l'Église",
+   "canon": "A",
+   "polygone": [
+    [
+     -294.8,
+     -196.3
+    ],
+    [
+     -203.7,
+     -196.3
+    ],
+    [
+     -203.7,
+     -105.2
+    ],
+    [
+     -294.8,
+     -105.2
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché",
+   "canon": "A",
+   "polygone": [
+    [
+     9.2,
+     -94.8
+    ],
+    [
+     196.3,
+     -94.8
+    ],
+    [
+     196.3,
+     94.8
+    ],
+    [
+     9.2,
+     94.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": true
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 95
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 80
+   }
+  },
+  "negoce": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "croupe",
+    "demi_croupe"
+   ],
+   "pente_deg": [
+    44,
+    56
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "brique"
+   ],
+   "teintes": [
+    "#E2D6BF",
+    "#D9CBAE",
+    "#E8DCC4",
+    "#D4C4A4",
+    "#DDD0B6"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9
+   ],
+   "profondeur_m": 12,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 90
+   }
+  },
+  "entrepots": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 70
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieille-ville",
+   "nom": "Vieille ville",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-grains",
+   "nom": "Quartier des Grains",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-moulins",
+   "nom": "Quartier des Moulins et des Tanneries",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-des-jardins",
+   "nom": "Faubourg des Jardins",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-marche",
+   "nom": "Quartier du Marché",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -594.8
+    ],
+    [
+     -603.7,
+     -594.8
+    ],
+    [
+     -603.7,
+     -503.7
+    ],
+    [
+     -694.8,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -496.3
+    ],
+    [
+     -603.7,
+     -496.3
+    ],
+    [
+     -603.7,
+     -406.2
+    ],
+    [
+     -694.8,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -393.8
+    ],
+    [
+     -603.7,
+     -393.8
+    ],
+    [
+     -603.7,
+     -305.2
+    ],
+    [
+     -694.8,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -294.8
+    ],
+    [
+     -603.7,
+     -294.8
+    ],
+    [
+     -603.7,
+     -203.7
+    ],
+    [
+     -694.8,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -196.3
+    ],
+    [
+     -603.7,
+     -196.3
+    ],
+    [
+     -603.7,
+     -105.2
+    ],
+    [
+     -694.8,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-5",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     -94.8
+    ],
+    [
+     -603.7,
+     -94.8
+    ],
+    [
+     -603.7,
+     -8.2
+    ],
+    [
+     -694.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-6",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     8.2
+    ],
+    [
+     -603.7,
+     8.2
+    ],
+    [
+     -603.7,
+     94.8
+    ],
+    [
+     -694.8,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-7",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     105.2
+    ],
+    [
+     -603.7,
+     105.2
+    ],
+    [
+     -603.7,
+     196.3
+    ],
+    [
+     -694.8,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-10",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     406.2
+    ],
+    [
+     -603.7,
+     406.2
+    ],
+    [
+     -603.7,
+     496.3
+    ],
+    [
+     -694.8,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-0-11",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.8,
+     503.7
+    ],
+    [
+     -603.7,
+     503.7
+    ],
+    [
+     -603.7,
+     594.8
+    ],
+    [
+     -694.8,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -594.8
+    ],
+    [
+     -505.2,
+     -594.8
+    ],
+    [
+     -505.2,
+     -503.7
+    ],
+    [
+     -596.3,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -496.3
+    ],
+    [
+     -505.2,
+     -496.3
+    ],
+    [
+     -505.2,
+     -406.2
+    ],
+    [
+     -596.3,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -393.8
+    ],
+    [
+     -505.2,
+     -393.8
+    ],
+    [
+     -505.2,
+     -305.2
+    ],
+    [
+     -596.3,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -294.8
+    ],
+    [
+     -505.2,
+     -294.8
+    ],
+    [
+     -505.2,
+     -203.7
+    ],
+    [
+     -596.3,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -196.3
+    ],
+    [
+     -505.2,
+     -196.3
+    ],
+    [
+     -505.2,
+     -105.2
+    ],
+    [
+     -596.3,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     -94.8
+    ],
+    [
+     -505.2,
+     -94.8
+    ],
+    [
+     -505.2,
+     -8.2
+    ],
+    [
+     -596.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     8.2
+    ],
+    [
+     -505.2,
+     8.2
+    ],
+    [
+     -505.2,
+     94.8
+    ],
+    [
+     -596.3,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-7",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     105.2
+    ],
+    [
+     -505.2,
+     105.2
+    ],
+    [
+     -505.2,
+     196.3
+    ],
+    [
+     -596.3,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-10",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     406.2
+    ],
+    [
+     -505.2,
+     406.2
+    ],
+    [
+     -505.2,
+     496.3
+    ],
+    [
+     -596.3,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-1-11",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -596.3,
+     503.7
+    ],
+    [
+     -505.2,
+     503.7
+    ],
+    [
+     -505.2,
+     594.8
+    ],
+    [
+     -596.3,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -594.8
+    ],
+    [
+     -406.7,
+     -594.8
+    ],
+    [
+     -406.7,
+     -503.7
+    ],
+    [
+     -494.8,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -496.3
+    ],
+    [
+     -406.7,
+     -496.3
+    ],
+    [
+     -406.7,
+     -406.2
+    ],
+    [
+     -494.8,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -393.8
+    ],
+    [
+     -406.7,
+     -393.8
+    ],
+    [
+     -406.7,
+     -305.2
+    ],
+    [
+     -494.8,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -294.8
+    ],
+    [
+     -406.7,
+     -294.8
+    ],
+    [
+     -406.7,
+     -203.7
+    ],
+    [
+     -494.8,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -196.3
+    ],
+    [
+     -406.7,
+     -196.3
+    ],
+    [
+     -406.7,
+     -105.2
+    ],
+    [
+     -494.8,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     -94.8
+    ],
+    [
+     -406.7,
+     -94.8
+    ],
+    [
+     -406.7,
+     -8.2
+    ],
+    [
+     -494.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     8.2
+    ],
+    [
+     -406.7,
+     8.2
+    ],
+    [
+     -406.7,
+     94.8
+    ],
+    [
+     -494.8,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     105.2
+    ],
+    [
+     -406.7,
+     105.2
+    ],
+    [
+     -406.7,
+     196.3
+    ],
+    [
+     -494.8,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-8",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     203.7
+    ],
+    [
+     -406.7,
+     203.7
+    ],
+    [
+     -406.7,
+     294.8
+    ],
+    [
+     -494.8,
+     294.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-9",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     305.2
+    ],
+    [
+     -406.7,
+     305.2
+    ],
+    [
+     -406.7,
+     393.8
+    ],
+    [
+     -494.8,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-10",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     406.2
+    ],
+    [
+     -406.7,
+     406.2
+    ],
+    [
+     -406.7,
+     496.3
+    ],
+    [
+     -494.8,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-2-11",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.8,
+     503.7
+    ],
+    [
+     -406.7,
+     503.7
+    ],
+    [
+     -406.7,
+     594.8
+    ],
+    [
+     -494.8,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -594.8
+    ],
+    [
+     -305.2,
+     -594.8
+    ],
+    [
+     -305.2,
+     -503.7
+    ],
+    [
+     -393.3,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -496.3
+    ],
+    [
+     -305.2,
+     -496.3
+    ],
+    [
+     -305.2,
+     -406.2
+    ],
+    [
+     -393.3,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -393.8
+    ],
+    [
+     -305.2,
+     -393.8
+    ],
+    [
+     -305.2,
+     -305.2
+    ],
+    [
+     -393.3,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -294.8
+    ],
+    [
+     -305.2,
+     -294.8
+    ],
+    [
+     -305.2,
+     -203.7
+    ],
+    [
+     -393.3,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -196.3
+    ],
+    [
+     -305.2,
+     -196.3
+    ],
+    [
+     -305.2,
+     -105.2
+    ],
+    [
+     -393.3,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     -94.8
+    ],
+    [
+     -305.2,
+     -94.8
+    ],
+    [
+     -305.2,
+     -8.2
+    ],
+    [
+     -393.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     8.2
+    ],
+    [
+     -305.2,
+     8.2
+    ],
+    [
+     -305.2,
+     94.8
+    ],
+    [
+     -393.3,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     105.2
+    ],
+    [
+     -305.2,
+     105.2
+    ],
+    [
+     -305.2,
+     196.3
+    ],
+    [
+     -393.3,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -393.3,
+     203.7
+    ],
+    [
+     -305.2,
+     203.7
+    ],
+    [
+     -305.2,
+     294.8
+    ],
+    [
+     -393.3,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -393.3,
+     305.2
+    ],
+    [
+     -305.2,
+     305.2
+    ],
+    [
+     -305.2,
+     393.8
+    ],
+    [
+     -393.3,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-3-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -393.3,
+     406.2
+    ],
+    [
+     -305.2,
+     406.2
+    ],
+    [
+     -305.2,
+     496.3
+    ],
+    [
+     -393.3,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-3-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -393.3,
+     503.7
+    ],
+    [
+     -305.2,
+     503.7
+    ],
+    [
+     -305.2,
+     594.8
+    ],
+    [
+     -393.3,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     -594.8
+    ],
+    [
+     -203.7,
+     -594.8
+    ],
+    [
+     -203.7,
+     -503.7
+    ],
+    [
+     -294.8,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     -496.3
+    ],
+    [
+     -203.7,
+     -496.3
+    ],
+    [
+     -203.7,
+     -406.2
+    ],
+    [
+     -294.8,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     -393.8
+    ],
+    [
+     -203.7,
+     -393.8
+    ],
+    [
+     -203.7,
+     -305.2
+    ],
+    [
+     -294.8,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     -294.8
+    ],
+    [
+     -203.7,
+     -294.8
+    ],
+    [
+     -203.7,
+     -203.7
+    ],
+    [
+     -294.8,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     -94.8
+    ],
+    [
+     -203.7,
+     -94.8
+    ],
+    [
+     -203.7,
+     -8.2
+    ],
+    [
+     -294.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     8.2
+    ],
+    [
+     -203.7,
+     8.2
+    ],
+    [
+     -203.7,
+     94.8
+    ],
+    [
+     -294.8,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     105.2
+    ],
+    [
+     -203.7,
+     105.2
+    ],
+    [
+     -203.7,
+     196.3
+    ],
+    [
+     -294.8,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.8,
+     203.7
+    ],
+    [
+     -203.7,
+     203.7
+    ],
+    [
+     -203.7,
+     294.8
+    ],
+    [
+     -294.8,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -294.8,
+     305.2
+    ],
+    [
+     -203.7,
+     305.2
+    ],
+    [
+     -203.7,
+     393.8
+    ],
+    [
+     -294.8,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -294.8,
+     406.2
+    ],
+    [
+     -203.7,
+     406.2
+    ],
+    [
+     -203.7,
+     496.3
+    ],
+    [
+     -294.8,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -294.8,
+     503.7
+    ],
+    [
+     -203.7,
+     503.7
+    ],
+    [
+     -203.7,
+     594.8
+    ],
+    [
+     -294.8,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     -594.8
+    ],
+    [
+     -105.2,
+     -594.8
+    ],
+    [
+     -105.2,
+     -503.7
+    ],
+    [
+     -196.3,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     -496.3
+    ],
+    [
+     -105.2,
+     -496.3
+    ],
+    [
+     -105.2,
+     -406.2
+    ],
+    [
+     -196.3,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     -294.8
+    ],
+    [
+     -105.2,
+     -294.8
+    ],
+    [
+     -105.2,
+     -203.7
+    ],
+    [
+     -196.3,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     -196.3
+    ],
+    [
+     -105.2,
+     -196.3
+    ],
+    [
+     -105.2,
+     -105.2
+    ],
+    [
+     -196.3,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     -94.8
+    ],
+    [
+     -105.2,
+     -94.8
+    ],
+    [
+     -105.2,
+     -8.2
+    ],
+    [
+     -196.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     8.2
+    ],
+    [
+     -105.2,
+     8.2
+    ],
+    [
+     -105.2,
+     94.8
+    ],
+    [
+     -196.3,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     105.2
+    ],
+    [
+     -105.2,
+     105.2
+    ],
+    [
+     -105.2,
+     196.3
+    ],
+    [
+     -196.3,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -196.3,
+     203.7
+    ],
+    [
+     -105.2,
+     203.7
+    ],
+    [
+     -105.2,
+     294.8
+    ],
+    [
+     -196.3,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -196.3,
+     305.2
+    ],
+    [
+     -105.2,
+     305.2
+    ],
+    [
+     -105.2,
+     393.8
+    ],
+    [
+     -196.3,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-5-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -196.3,
+     406.2
+    ],
+    [
+     -105.2,
+     406.2
+    ],
+    [
+     -105.2,
+     496.3
+    ],
+    [
+     -196.3,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-5-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -196.3,
+     503.7
+    ],
+    [
+     -105.2,
+     503.7
+    ],
+    [
+     -105.2,
+     594.8
+    ],
+    [
+     -196.3,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     -594.8
+    ],
+    [
+     -9.2,
+     -594.8
+    ],
+    [
+     -9.2,
+     -503.7
+    ],
+    [
+     -94.8,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     -496.3
+    ],
+    [
+     -9.2,
+     -496.3
+    ],
+    [
+     -9.2,
+     -406.2
+    ],
+    [
+     -94.8,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.8,
+     -393.8
+    ],
+    [
+     -9.2,
+     -393.8
+    ],
+    [
+     -9.2,
+     -305.2
+    ],
+    [
+     -94.8,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     -294.8
+    ],
+    [
+     -9.2,
+     -294.8
+    ],
+    [
+     -9.2,
+     -203.7
+    ],
+    [
+     -94.8,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     -196.3
+    ],
+    [
+     -9.2,
+     -196.3
+    ],
+    [
+     -9.2,
+     -105.2
+    ],
+    [
+     -94.8,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     -94.8
+    ],
+    [
+     -9.2,
+     -94.8
+    ],
+    [
+     -9.2,
+     -8.2
+    ],
+    [
+     -94.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     8.2
+    ],
+    [
+     -9.2,
+     8.2
+    ],
+    [
+     -9.2,
+     94.8
+    ],
+    [
+     -94.8,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     105.2
+    ],
+    [
+     -9.2,
+     105.2
+    ],
+    [
+     -9.2,
+     196.3
+    ],
+    [
+     -94.8,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.8,
+     203.7
+    ],
+    [
+     -9.2,
+     203.7
+    ],
+    [
+     -9.2,
+     294.8
+    ],
+    [
+     -94.8,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -94.8,
+     305.2
+    ],
+    [
+     -9.2,
+     305.2
+    ],
+    [
+     -9.2,
+     393.8
+    ],
+    [
+     -94.8,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -94.8,
+     406.2
+    ],
+    [
+     -9.2,
+     406.2
+    ],
+    [
+     -9.2,
+     496.3
+    ],
+    [
+     -94.8,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-6-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -94.8,
+     503.7
+    ],
+    [
+     -9.2,
+     503.7
+    ],
+    [
+     -9.2,
+     594.8
+    ],
+    [
+     -94.8,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     -594.8
+    ],
+    [
+     94.8,
+     -594.8
+    ],
+    [
+     94.8,
+     -503.7
+    ],
+    [
+     9.2,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     -496.3
+    ],
+    [
+     94.8,
+     -496.3
+    ],
+    [
+     94.8,
+     -406.2
+    ],
+    [
+     9.2,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     9.2,
+     -393.8
+    ],
+    [
+     94.8,
+     -393.8
+    ],
+    [
+     94.8,
+     -305.2
+    ],
+    [
+     9.2,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     -294.8
+    ],
+    [
+     94.8,
+     -294.8
+    ],
+    [
+     94.8,
+     -203.7
+    ],
+    [
+     9.2,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     -196.3
+    ],
+    [
+     94.8,
+     -196.3
+    ],
+    [
+     94.8,
+     -105.2
+    ],
+    [
+     9.2,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     105.2
+    ],
+    [
+     94.8,
+     105.2
+    ],
+    [
+     94.8,
+     196.3
+    ],
+    [
+     9.2,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     9.2,
+     203.7
+    ],
+    [
+     94.8,
+     203.7
+    ],
+    [
+     94.8,
+     294.8
+    ],
+    [
+     9.2,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     9.2,
+     305.2
+    ],
+    [
+     94.8,
+     305.2
+    ],
+    [
+     94.8,
+     393.8
+    ],
+    [
+     9.2,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     9.2,
+     406.2
+    ],
+    [
+     94.8,
+     406.2
+    ],
+    [
+     94.8,
+     496.3
+    ],
+    [
+     9.2,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-7-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     9.2,
+     503.7
+    ],
+    [
+     94.8,
+     503.7
+    ],
+    [
+     94.8,
+     594.8
+    ],
+    [
+     9.2,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     -594.8
+    ],
+    [
+     196.3,
+     -594.8
+    ],
+    [
+     196.3,
+     -503.7
+    ],
+    [
+     105.2,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     -496.3
+    ],
+    [
+     196.3,
+     -496.3
+    ],
+    [
+     196.3,
+     -406.2
+    ],
+    [
+     105.2,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.2,
+     -393.8
+    ],
+    [
+     196.3,
+     -393.8
+    ],
+    [
+     196.3,
+     -305.2
+    ],
+    [
+     105.2,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     -294.8
+    ],
+    [
+     196.3,
+     -294.8
+    ],
+    [
+     196.3,
+     -203.7
+    ],
+    [
+     105.2,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     -196.3
+    ],
+    [
+     196.3,
+     -196.3
+    ],
+    [
+     196.3,
+     -105.2
+    ],
+    [
+     105.2,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     105.2
+    ],
+    [
+     196.3,
+     105.2
+    ],
+    [
+     196.3,
+     196.3
+    ],
+    [
+     105.2,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.2,
+     203.7
+    ],
+    [
+     196.3,
+     203.7
+    ],
+    [
+     196.3,
+     294.8
+    ],
+    [
+     105.2,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     105.2,
+     305.2
+    ],
+    [
+     196.3,
+     305.2
+    ],
+    [
+     196.3,
+     393.8
+    ],
+    [
+     105.2,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-8-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     105.2,
+     406.2
+    ],
+    [
+     196.3,
+     406.2
+    ],
+    [
+     196.3,
+     496.3
+    ],
+    [
+     105.2,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-8-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     105.2,
+     503.7
+    ],
+    [
+     196.3,
+     503.7
+    ],
+    [
+     196.3,
+     594.8
+    ],
+    [
+     105.2,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     -594.8
+    ],
+    [
+     294.8,
+     -594.8
+    ],
+    [
+     294.8,
+     -503.7
+    ],
+    [
+     203.7,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     -496.3
+    ],
+    [
+     294.8,
+     -496.3
+    ],
+    [
+     294.8,
+     -406.2
+    ],
+    [
+     203.7,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     203.7,
+     -393.8
+    ],
+    [
+     294.8,
+     -393.8
+    ],
+    [
+     294.8,
+     -305.2
+    ],
+    [
+     203.7,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     -294.8
+    ],
+    [
+     294.8,
+     -294.8
+    ],
+    [
+     294.8,
+     -203.7
+    ],
+    [
+     203.7,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     -196.3
+    ],
+    [
+     294.8,
+     -196.3
+    ],
+    [
+     294.8,
+     -105.2
+    ],
+    [
+     203.7,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     -94.8
+    ],
+    [
+     294.8,
+     -94.8
+    ],
+    [
+     294.8,
+     -8.2
+    ],
+    [
+     203.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     8.2
+    ],
+    [
+     294.8,
+     8.2
+    ],
+    [
+     294.8,
+     94.8
+    ],
+    [
+     203.7,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     105.2
+    ],
+    [
+     294.8,
+     105.2
+    ],
+    [
+     294.8,
+     196.3
+    ],
+    [
+     203.7,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     203.7,
+     203.7
+    ],
+    [
+     294.8,
+     203.7
+    ],
+    [
+     294.8,
+     294.8
+    ],
+    [
+     203.7,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     203.7,
+     305.2
+    ],
+    [
+     294.8,
+     305.2
+    ],
+    [
+     294.8,
+     393.8
+    ],
+    [
+     203.7,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     203.7,
+     406.2
+    ],
+    [
+     294.8,
+     406.2
+    ],
+    [
+     294.8,
+     496.3
+    ],
+    [
+     203.7,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-9-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     203.7,
+     503.7
+    ],
+    [
+     294.8,
+     503.7
+    ],
+    [
+     294.8,
+     594.8
+    ],
+    [
+     203.7,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "faubourg-des-jardins",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     -594.8
+    ],
+    [
+     393.3,
+     -594.8
+    ],
+    [
+     393.3,
+     -503.7
+    ],
+    [
+     305.2,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     -294.8
+    ],
+    [
+     393.3,
+     -294.8
+    ],
+    [
+     393.3,
+     -203.7
+    ],
+    [
+     305.2,
+     -203.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     -196.3
+    ],
+    [
+     393.3,
+     -196.3
+    ],
+    [
+     393.3,
+     -105.2
+    ],
+    [
+     305.2,
+     -105.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     -94.8
+    ],
+    [
+     393.3,
+     -94.8
+    ],
+    [
+     393.3,
+     -8.2
+    ],
+    [
+     305.2,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     8.2
+    ],
+    [
+     393.3,
+     8.2
+    ],
+    [
+     393.3,
+     94.8
+    ],
+    [
+     305.2,
+     94.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     105.2
+    ],
+    [
+     393.3,
+     105.2
+    ],
+    [
+     393.3,
+     196.3
+    ],
+    [
+     305.2,
+     196.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "vieille-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.2,
+     203.7
+    ],
+    [
+     393.3,
+     203.7
+    ],
+    [
+     393.3,
+     294.8
+    ],
+    [
+     305.2,
+     294.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     305.2,
+     305.2
+    ],
+    [
+     393.3,
+     305.2
+    ],
+    [
+     393.3,
+     393.8
+    ],
+    [
+     305.2,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     305.2,
+     406.2
+    ],
+    [
+     393.3,
+     406.2
+    ],
+    [
+     393.3,
+     496.3
+    ],
+    [
+     305.2,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-10-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     305.2,
+     503.7
+    ],
+    [
+     393.3,
+     503.7
+    ],
+    [
+     393.3,
+     594.8
+    ],
+    [
+     305.2,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     -594.8
+    ],
+    [
+     494.8,
+     -594.8
+    ],
+    [
+     494.8,
+     -503.7
+    ],
+    [
+     406.7,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     -294.8
+    ],
+    [
+     494.8,
+     -294.8
+    ],
+    [
+     494.8,
+     -203.7
+    ],
+    [
+     406.7,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     -196.3
+    ],
+    [
+     494.8,
+     -196.3
+    ],
+    [
+     494.8,
+     -105.2
+    ],
+    [
+     406.7,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     -94.8
+    ],
+    [
+     494.8,
+     -94.8
+    ],
+    [
+     494.8,
+     -8.2
+    ],
+    [
+     406.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     8.2
+    ],
+    [
+     494.8,
+     8.2
+    ],
+    [
+     494.8,
+     94.8
+    ],
+    [
+     406.7,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     105.2
+    ],
+    [
+     494.8,
+     105.2
+    ],
+    [
+     494.8,
+     196.3
+    ],
+    [
+     406.7,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     406.7,
+     203.7
+    ],
+    [
+     494.8,
+     203.7
+    ],
+    [
+     494.8,
+     294.8
+    ],
+    [
+     406.7,
+     294.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     406.7,
+     305.2
+    ],
+    [
+     494.8,
+     305.2
+    ],
+    [
+     494.8,
+     393.8
+    ],
+    [
+     406.7,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     406.7,
+     406.2
+    ],
+    [
+     494.8,
+     406.2
+    ],
+    [
+     494.8,
+     496.3
+    ],
+    [
+     406.7,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-11-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     406.7,
+     503.7
+    ],
+    [
+     494.8,
+     503.7
+    ],
+    [
+     494.8,
+     594.8
+    ],
+    [
+     406.7,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -594.8
+    ],
+    [
+     596.3,
+     -594.8
+    ],
+    [
+     596.3,
+     -503.7
+    ],
+    [
+     505.2,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -496.3
+    ],
+    [
+     596.3,
+     -496.3
+    ],
+    [
+     596.3,
+     -406.2
+    ],
+    [
+     505.2,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -393.8
+    ],
+    [
+     596.3,
+     -393.8
+    ],
+    [
+     596.3,
+     -305.2
+    ],
+    [
+     505.2,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -294.8
+    ],
+    [
+     596.3,
+     -294.8
+    ],
+    [
+     596.3,
+     -203.7
+    ],
+    [
+     505.2,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -196.3
+    ],
+    [
+     596.3,
+     -196.3
+    ],
+    [
+     596.3,
+     -105.2
+    ],
+    [
+     505.2,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     -94.8
+    ],
+    [
+     596.3,
+     -94.8
+    ],
+    [
+     596.3,
+     -8.2
+    ],
+    [
+     505.2,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     8.2
+    ],
+    [
+     596.3,
+     8.2
+    ],
+    [
+     596.3,
+     94.8
+    ],
+    [
+     505.2,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     105.2
+    ],
+    [
+     596.3,
+     105.2
+    ],
+    [
+     596.3,
+     196.3
+    ],
+    [
+     505.2,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.2,
+     203.7
+    ],
+    [
+     596.3,
+     203.7
+    ],
+    [
+     596.3,
+     294.8
+    ],
+    [
+     505.2,
+     294.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.2,
+     305.2
+    ],
+    [
+     596.3,
+     305.2
+    ],
+    [
+     596.3,
+     393.8
+    ],
+    [
+     505.2,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.2,
+     406.2
+    ],
+    [
+     596.3,
+     406.2
+    ],
+    [
+     596.3,
+     496.3
+    ],
+    [
+     505.2,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-12-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.2,
+     503.7
+    ],
+    [
+     596.3,
+     503.7
+    ],
+    [
+     596.3,
+     594.8
+    ],
+    [
+     505.2,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -594.8
+    ],
+    [
+     694.8,
+     -594.8
+    ],
+    [
+     694.8,
+     -503.7
+    ],
+    [
+     603.7,
+     -503.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -496.3
+    ],
+    [
+     694.8,
+     -496.3
+    ],
+    [
+     694.8,
+     -406.2
+    ],
+    [
+     603.7,
+     -406.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -393.8
+    ],
+    [
+     694.8,
+     -393.8
+    ],
+    [
+     694.8,
+     -305.2
+    ],
+    [
+     603.7,
+     -305.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -294.8
+    ],
+    [
+     694.8,
+     -294.8
+    ],
+    [
+     694.8,
+     -203.7
+    ],
+    [
+     603.7,
+     -203.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -196.3
+    ],
+    [
+     694.8,
+     -196.3
+    ],
+    [
+     694.8,
+     -105.2
+    ],
+    [
+     603.7,
+     -105.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     -94.8
+    ],
+    [
+     694.8,
+     -94.8
+    ],
+    [
+     694.8,
+     -8.2
+    ],
+    [
+     603.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     8.2
+    ],
+    [
+     694.8,
+     8.2
+    ],
+    [
+     694.8,
+     94.8
+    ],
+    [
+     603.7,
+     94.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     105.2
+    ],
+    [
+     694.8,
+     105.2
+    ],
+    [
+     694.8,
+     196.3
+    ],
+    [
+     603.7,
+     196.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-8",
+   "quartier": "quartier-des-moulins",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     603.7,
+     203.7
+    ],
+    [
+     694.8,
+     203.7
+    ],
+    [
+     694.8,
+     294.8
+    ],
+    [
+     603.7,
+     294.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-9",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     603.7,
+     305.2
+    ],
+    [
+     694.8,
+     305.2
+    ],
+    [
+     694.8,
+     393.8
+    ],
+    [
+     603.7,
+     393.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-13-10",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     603.7,
+     406.2
+    ],
+    [
+     694.8,
+     406.2
+    ],
+    [
+     694.8,
+     496.3
+    ],
+    [
+     603.7,
+     496.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-13-11",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     603.7,
+     503.7
+    ],
+    [
+     694.8,
+     503.7
+    ],
+    [
+     694.8,
+     594.8
+    ],
+    [
+     603.7,
+     594.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "eglise",
+   "nom": "Église de Jinae",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -250,
+    -150
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 46,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "hotel-de-ville",
+   "nom": "Hôtel de ville de Jinae",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -50,
+    -50
+   ],
+   "emprise_m": [
+    36,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "beffroi",
+   "nom": "Beffroi de Jinae",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -150,
+    -50
+   ],
+   "emprise_m": [
+    12,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 30,
+   "etages": 6,
+   "toit": "pavillon",
+   "couverture": "cuivre",
+   "facade": "pierre_taillee",
+   "teinte": "#DCD3C0",
+   "reperes_canon": []
+  },
+  {
+   "id": "halle-du-marche",
+   "nom": "Halle du marché",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    100,
+    0
+   ],
+   "emprise_m": [
+    50,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 8,
+    "pente": 40
+   }
+  },
+  {
+   "id": "halle-aux-grains",
+   "nom": "Halle aux grains",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    50,
+    150
+   ],
+   "emprise_m": [
+    58,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C4AD84",
+   "reperes_canon": [
+    "Jinae, ressource clé : nourriture [C] (atlas 06 S13) : la halle est une adaptation"
+   ],
+   "params": {
+    "piliers": 10,
+    "pente": 40
+   }
+  },
+  {
+   "id": "grenier-communal",
+   "nom": "Grenier communal",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    250,
+    250
+   ],
+   "emprise_m": [
+    50,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 15,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CFC2A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "grenier-de-la-dime",
+   "nom": "Grenier de la Dîme",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    -350,
+    350
+   ],
+   "emprise_m": [
+    46,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C9BCA2",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "entrepot-des-messageries",
+   "nom": "Entrepôt des messageries",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    -150,
+    250
+   ],
+   "emprise_m": [
+    54,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C7B08E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "relais-de-poste",
+   "nom": "Relais de poste",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    -50,
+    150
+   ],
+   "emprise_m": [
+    40,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "enduit",
+   "teinte": "#D8CBAE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "poste-de-la-garnison",
+   "nom": "Poste de la Garnison de Jinae",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    50,
+    -250
+   ],
+   "emprise_m": [
+    44,
+    30
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 40
+   }
+  },
+  {
+   "id": "clinique-de-jinae",
+   "nom": "Clinique de Jinae",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -450,
+    -250
+   ],
+   "emprise_m": [
+    36,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E1DACB",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "ecole-communale",
+   "nom": "École communale de Jinae",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    -350,
+    50
+   ],
+   "emprise_m": [
+    40,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#D9CDB6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "moulin-de-la-butte",
+   "nom": "Moulin de la Butte",
+   "canon": "A",
+   "archetype": "moulin",
+   "position": [
+    450,
+    250
+   ],
+   "emprise_m": [
+    16,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#CDBE9E",
+   "reperes_canon": []
+  },
+  {
+   "id": "moulin-des-pres",
+   "nom": "Moulin des Prés",
+   "canon": "A",
+   "archetype": "moulin",
+   "position": [
+    550,
+    350
+   ],
+   "emprise_m": [
+    16,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#C9BA9A",
+   "reperes_canon": []
+  },
+  {
+   "id": "forge-du-quartier",
+   "nom": "Forge du quartier des Moulins",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    450,
+    50
+   ],
+   "emprise_m": [
+    28,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C3B79F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "brasserie",
+   "nom": "Brasserie de la rue du Pressoir",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    350,
+    -50
+   ],
+   "emprise_m": [
+    32,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C9AE8E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "tannerie",
+   "nom": "Tannerie des Prés",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    550,
+    50
+   ],
+   "emprise_m": [
+    30,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#B9A27E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 28
+   }
+  },
+  {
+   "id": "ferme-du-faubourg",
+   "nom": "Ferme du faubourg des Jardins",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    -550,
+    -350
+   ],
+   "emprise_m": [
+    30,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CDBF9F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "kiosque-du-jardin",
+   "nom": "Kiosque du Jardin de l'Hôtel de ville",
+   "canon": "A",
+   "archetype": "kiosque",
+   "position": [
+    -150,
+    -350
+   ],
+   "emprise_m": [
+    8,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pavillon",
+   "couverture": "cuivre",
+   "facade": "bois",
+   "teinte": "#D9D0BC",
+   "reperes_canon": []
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "s-7",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-4",
+    "essence": "marronnier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-3",
+    "essence": "tilleul",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -250,
+     -110
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 21,
+    "nom": "Tilleul de la place de l'Église"
+   },
+   {
+    "position": [
+     100,
+     -75
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 18
+   },
+   {
+    "position": [
+     160,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 18
+   }
+  ],
+  "parcs": [
+   {
+    "id": "prairie-des-lavoirs",
+    "nom": "Prairie des Lavoirs",
+    "canon": "A",
+    "polygone": [
+     [
+      -694.8,
+      203.7
+     ],
+     [
+      -505.2,
+      203.7
+     ],
+     [
+      -505.2,
+      393.8
+     ],
+     [
+      -694.8,
+      393.8
+     ]
+    ],
+    "essences": [
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "jardin-de-l-hotel-de-ville",
+    "nom": "Jardin de l'Hôtel de ville",
+    "canon": "A",
+    "polygone": [
+     [
+      -196.3,
+      -393.8
+     ],
+     [
+      -105.2,
+      -393.8
+     ],
+     [
+      -105.2,
+      -305.2
+     ],
+     [
+      -196.3,
+      -305.2
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "fruitier",
+     "marronnier"
+    ],
+    "arbres_par_ha": 62
+   },
+   {
+    "id": "mail-des-tilleuls",
+    "nom": "Mail des Tilleuls",
+    "canon": "A",
+    "polygone": [
+     [
+      305.2,
+      -496.3
+     ],
+     [
+      494.8,
+      -496.3
+     ],
+     [
+      494.8,
+      -305.2
+     ],
+     [
+      305.2,
+      -305.2
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "erable"
+    ],
+    "arbres_par_ha": 60
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -880,
+      -500
+     ],
+     [
+      -740,
+      -500
+     ],
+     [
+      -740,
+      400
+     ],
+     [
+      -880,
+      400
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      740,
+      -560
+     ],
+     [
+      880,
+      -560
+     ],
+     [
+      880,
+      300
+     ],
+     [
+      740,
+      300
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -720,
+      640
+     ],
+     [
+      720,
+      640
+     ]
+    ]
+   },
+   {
+    "trace": [
+     [
+      -720,
+      -640
+     ],
+     [
+      720,
+      -640
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -880,
+      420
+     ],
+     [
+      -740,
+      420
+     ],
+     [
+      -740,
+      600
+     ],
+     [
+      -880,
+      600
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -420,
+    -310
+   ],
+   [
+    310,
+    190
+   ],
+   [
+    -170,
+    260
+   ],
+   [
+    480,
+    -150
+   ]
+  ],
+  "fontaines": [
+   [
+    -250,
+    -75
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1260,
+    1540,
+    770
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    560,
+    1.8
+   ],
+   "cible": [
+    0,
+    -240,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché et halle",
+   "oeil": [
+    20,
+    140,
+    3
+   ],
+   "cible": [
+    100,
+    -20,
+    7
+   ],
+   "fov": 60
+  },
+  {
+   "id": "eglise-et-beffroi",
+   "nom": "Église, beffroi et hôtel de ville",
+   "oeil": [
+    -160,
+    20,
+    3
+   ],
+   "cible": [
+    -130,
+    -100,
+    14
+   ],
+   "fov": 62
+  },
+  {
+   "id": "quartier-des-grains",
+   "nom": "Greniers et halle aux grains",
+   "oeil": [
+    -60,
+    300,
+    3.5
+   ],
+   "cible": [
+    150,
+    220,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-moulins",
+   "nom": "Moulins et tanneries",
+   "oeil": [
+    330,
+    150,
+    4
+   ],
+   "cible": [
+    520,
+    250,
+    8
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, un jour de marché",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire de la ville (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-evacuation",
+   "nom": "850, l'évacuation du sud de Rose",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : invasion de Wall Rose) [C] : les villes du sud de l'intérieur de Rose sont touchées ; ce qui arrive à Jinae n'est pas établi : effectif réduit, fumée, adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [
+    [
+     -300,
+     420
+    ],
+    [
+     250,
+     500
+    ]
+   ],
+   "rochers": [],
+   "abandon": 0.1,
+   "ciel": "enfume",
+   "habitants": 0.35
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

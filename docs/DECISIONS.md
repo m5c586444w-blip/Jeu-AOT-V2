@@ -1441,3 +1441,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : `ville-souterraine` (province distincte `prov_ville_souterraine`, 34 783 hab., 260 hab/ha, N1 « enclos » à ciel couvert, fruitiers en bacs pour tenir ≥ 8 arbres/ha malgré la fiche E08 : Q26) et `chapelle-reiss` (N1 d'auteur, effectif `?` de 38, province à population nulle). La chapelle **de surface** est une création `A` (le canon décrit une chapelle souterraine, non modélisée : le schéma n'a pas de sous-sol) — corrigé après revue (elle était étiquetée `C`).
 - **Revue** : `docs/reports/C16-revue.md`, ACCEPTÉ AVEC RÉSERVES ; corrigés : défauts 1, 2, 3 (grue de Stohess), 5. Restent : listes `INTERDIT` de noms incomplètes (4), test « sous Mitras » faible (6), vue sans voûte (7).
 - **Preuve** : verify EXIT=0, 1597 tests. **Réversible** : oui.
+
+## 2026-10-16 — D-189 C17 tranche 1 : Jinae, Ragako, Dauper, château d'Utgard, forêt des Arbres Géants
+- **Décision** : cinq plans d'auteur (kit `horsmurs.ts`). Ragako et Dauper = part `A` (12 % et 8 %) de leur province de 8 696 hab. (un « village » de 8 696 serait irréaliste) ; Utgard et la forêt à population de simulation nulle : effectif `?` (24 et 27), `province: null`. États 845 / 850-détruit pour Ragako et Utgard (fait `C`, étendue `A`). Forêt : essence `geant`, mesure sur le poste forestier seul (déclaré Q32, limite assumée).
+- **Revue** : `docs/reports/C17-revue.md`, ACCEPTÉ AVEC RÉSERVES ; corrigés : regex accents, titre de test, notes du rapport ; restent : dette 112. **Reste de C17** : ferme/campagne, fort du front, Wall Maria complet (mur et portes).
+- **Preuve** : `tests/places/horsmurs.test.ts` (19), verify EXIT=0 1631 tests. **Réversible** : oui.

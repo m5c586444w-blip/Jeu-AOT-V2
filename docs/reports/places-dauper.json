@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/dauper/vue-ensemble.png",
+   "stats": {
+    "calls": 82,
+    "triangles": 74798,
+    "instances": 3992,
+    "chunks": {
+     "total": 194,
+     "visible": 194,
+     "near": 0
+    }
+   },
+   "rgb": [
+    141.90833333333333,
+    147.12491753472221,
+    114.1953515625
+   ]
+  }
+ },
+ "dE": {}
+}

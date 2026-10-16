@@ -14,7 +14,7 @@ const dedans = ([x, y]: Pt, poly: Pt[]): boolean => {
 };
 
 describe("C15 : bâtiments dans l'enceinte", () => {
-  for (const id of ["trost", "karanes", "utopia", "krolva", "camp-entrainement", "qg-garnison", "stohess", "orvud", "ehrmich", "yarckel", "mitras", "ville-souterraine", "chapelle-reiss"]) {
+  for (const id of ["trost", "karanes", "utopia", "krolva", "camp-entrainement", "qg-garnison", "stohess", "orvud", "ehrmich", "yarckel", "mitras", "ville-souterraine", "chapelle-reiss", "jinae", "ragako", "dauper", "chateau-utgard", "foret-arbres-geants"]) {
     it(`${id} : aucun bâtiment hors du périmètre`, () => {
       const d = JSON.parse(readFileSync(`data/places/${id}.json`, "utf8")) as { perimetre: Pt[]; batiments: { id: string; position: Pt }[] };
       expect(d.perimetre.length).toBeGreaterThanOrEqual(4);

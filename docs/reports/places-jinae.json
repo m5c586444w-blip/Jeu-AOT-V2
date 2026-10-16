@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/jinae/vue-ensemble.png",
+   "stats": {
+    "calls": 173,
+    "triangles": 431646,
+    "instances": 24623,
+    "chunks": {
+     "total": 525,
+     "visible": 525,
+     "near": 0
+    }
+   },
+   "rgb": [
+    146.4087326388889,
+    149.90577690972222,
+    117.50412326388889
+   ]
+  }
+ },
+ "dE": {}
+}

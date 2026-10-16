@@ -1,0 +1,1701 @@
+{
+ "id": "dauper",
+ "nom": "Dauper",
+ "libelle": "Dauper (petit village de chasse du sud de l'intérieur de Rose)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Dauper, petit village du sud de l'intérieur de Rose [C] ; docs/spec/06 S10 (ressource clé : chasse) ; data/provinces/paradis.json : prov_dauper [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé, noms, bâtiments, part de population, états : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_dauper",
+ "style": "E11",
+ "population": {
+  "province": "prov_dauper",
+  "part": 0.08,
+  "canon": "A",
+  "note": "8 % de la population de `prov_dauper` au départ de scn_sandbox_845 (8 696 hab.) logés dans le hameau ; le reste de la province vit en cabanes et fermes isolées ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "village",
+  "valeur": 25,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -430,
+   -430
+  ],
+  [
+   430,
+   -430
+  ],
+  [
+   430,
+   430
+  ],
+  [
+   -430,
+   430
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "sud",
+  "canon": "C"
+ },
+ "etendue_m": 1000,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Ruelle des Fumoirs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     -400
+    ],
+    [
+     -400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-1",
+   "nom": "Sentier des Chiens",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -262,
+     -262
+    ],
+    [
+     -262,
+     262
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Sentier de l'Ouest",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -157,
+     -262
+    ],
+    [
+     -157,
+     262
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Ruelle des Cuirs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -52,
+     -262
+    ],
+    [
+     -52,
+     262
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue du Gibier",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     52,
+     -262
+    ],
+    [
+     52,
+     262
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Sentier de la Harde",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     157,
+     -262
+    ],
+    [
+     157,
+     262
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Piqueurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     262,
+     -262
+    ],
+    [
+     262,
+     262
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Ruelle du Bois sec",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     400,
+     -400
+    ],
+    [
+     400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Sentier des Pièces",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     -400
+    ],
+    [
+     400,
+     -400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-1",
+   "nom": "Ruelle des Fumoirs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     -262
+    ],
+    [
+     400,
+     -262
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2",
+   "nom": "Sentier du Nord",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -262,
+     -160
+    ],
+    [
+     262,
+     -160
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Sentier des Chiens",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -262,
+     -52
+    ],
+    [
+     262,
+     -52
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue des Veneurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -262,
+     52
+    ],
+    [
+     262,
+     52
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Ruelle des Cuirs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -262,
+     160
+    ],
+    [
+     262,
+     160
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Traqueurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     262
+    ],
+    [
+     400,
+     262
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Sentier de la Harde",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -400,
+     400
+    ],
+    [
+     400,
+     400
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "place-du-rendez-vous",
+   "nom": "Place du Rendez-vous",
+   "canon": "A",
+   "polygone": [
+    [
+     -48.3,
+     -48.3
+    ],
+    [
+     46.8,
+     -48.3
+    ],
+    [
+     46.8,
+     46.8
+    ],
+    [
+     -48.3,
+     46.8
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": true
+  }
+ ],
+ "gabarits": {
+  "chasse": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 2.9,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    40,
+    52
+   ],
+   "couvertures": [
+    "bardeau",
+    "chaume",
+    "bardeau"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#C9B993",
+    "#BEAE88",
+    "#D2C39F",
+    "#B8A682"
+   ],
+   "parcelles_m": [
+    10,
+    13,
+    9
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "ferme": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    36,
+    48
+   ],
+   "couvertures": [
+    "chaume",
+    "tuile_plate",
+    "bardeau"
+   ],
+   "facades": [
+    "pierre_brute",
+    "colombage",
+    "bois"
+   ],
+   "teintes": [
+    "#CDBF9F",
+    "#C2B393",
+    "#D2C6A8"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "hameau-du-rendez-vous",
+   "nom": "Hameau du Rendez-vous",
+   "canon": "A"
+  },
+  {
+   "id": "lisiere-et-fermes",
+   "nom": "Lisière et fermes",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-1-1",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -258.3,
+     -258.3
+    ],
+    [
+     -161.2,
+     -258.3
+    ],
+    [
+     -161.2,
+     -164.2
+    ],
+    [
+     -258.3,
+     -164.2
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -258.3,
+     -155.8
+    ],
+    [
+     -161.2,
+     -155.8
+    ],
+    [
+     -161.2,
+     -55.7
+    ],
+    [
+     -258.3,
+     -55.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -258.3,
+     -48.3
+    ],
+    [
+     -161.2,
+     -48.3
+    ],
+    [
+     -161.2,
+     46.8
+    ],
+    [
+     -258.3,
+     46.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -258.3,
+     163.7
+    ],
+    [
+     -161.2,
+     163.7
+    ],
+    [
+     -161.2,
+     257.8
+    ],
+    [
+     -258.3,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -152.8,
+     -258.3
+    ],
+    [
+     -55.7,
+     -258.3
+    ],
+    [
+     -55.7,
+     -164.2
+    ],
+    [
+     -152.8,
+     -164.2
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -152.8,
+     -155.8
+    ],
+    [
+     -55.7,
+     -155.8
+    ],
+    [
+     -55.7,
+     -55.7
+    ],
+    [
+     -152.8,
+     -55.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -152.8,
+     -48.3
+    ],
+    [
+     -55.7,
+     -48.3
+    ],
+    [
+     -55.7,
+     46.8
+    ],
+    [
+     -152.8,
+     46.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -152.8,
+     57.2
+    ],
+    [
+     -55.7,
+     57.2
+    ],
+    [
+     -55.7,
+     156.3
+    ],
+    [
+     -152.8,
+     156.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -152.8,
+     163.7
+    ],
+    [
+     -55.7,
+     163.7
+    ],
+    [
+     -55.7,
+     257.8
+    ],
+    [
+     -152.8,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -48.3,
+     -258.3
+    ],
+    [
+     46.8,
+     -258.3
+    ],
+    [
+     46.8,
+     -164.2
+    ],
+    [
+     -48.3,
+     -164.2
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -48.3,
+     -155.8
+    ],
+    [
+     46.8,
+     -155.8
+    ],
+    [
+     46.8,
+     -55.7
+    ],
+    [
+     -48.3,
+     -55.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -48.3,
+     57.2
+    ],
+    [
+     46.8,
+     57.2
+    ],
+    [
+     46.8,
+     156.3
+    ],
+    [
+     -48.3,
+     156.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -48.3,
+     163.7
+    ],
+    [
+     46.8,
+     163.7
+    ],
+    [
+     46.8,
+     257.8
+    ],
+    [
+     -48.3,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     57.2,
+     -258.3
+    ],
+    [
+     153.3,
+     -258.3
+    ],
+    [
+     153.3,
+     -164.2
+    ],
+    [
+     57.2,
+     -164.2
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     57.2,
+     -155.8
+    ],
+    [
+     153.3,
+     -155.8
+    ],
+    [
+     153.3,
+     -55.7
+    ],
+    [
+     57.2,
+     -55.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     57.2,
+     -48.3
+    ],
+    [
+     153.3,
+     -48.3
+    ],
+    [
+     153.3,
+     46.8
+    ],
+    [
+     57.2,
+     46.8
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "hameau-du-rendez-vous",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     57.2,
+     57.2
+    ],
+    [
+     153.3,
+     57.2
+    ],
+    [
+     153.3,
+     156.3
+    ],
+    [
+     57.2,
+     156.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "chasse"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     57.2,
+     163.7
+    ],
+    [
+     153.3,
+     163.7
+    ],
+    [
+     153.3,
+     257.8
+    ],
+    [
+     57.2,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     160.7,
+     -258.3
+    ],
+    [
+     257.8,
+     -258.3
+    ],
+    [
+     257.8,
+     -164.2
+    ],
+    [
+     160.7,
+     -164.2
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     160.7,
+     -155.8
+    ],
+    [
+     257.8,
+     -155.8
+    ],
+    [
+     257.8,
+     -55.7
+    ],
+    [
+     160.7,
+     -55.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     160.7,
+     -48.3
+    ],
+    [
+     257.8,
+     -48.3
+    ],
+    [
+     257.8,
+     46.8
+    ],
+    [
+     160.7,
+     46.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     160.7,
+     57.2
+    ],
+    [
+     257.8,
+     57.2
+    ],
+    [
+     257.8,
+     156.3
+    ],
+    [
+     160.7,
+     156.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "lisiere-et-fermes",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     160.7,
+     163.7
+    ],
+    [
+     257.8,
+     163.7
+    ],
+    [
+     257.8,
+     257.8
+    ],
+    [
+     160.7,
+     257.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "ferme"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "chapelle",
+   "nom": "Chapelle du Rendez-vous",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    -104.5,
+    0
+   ],
+   "emprise_m": [
+    12,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#D8CFBA",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 16,
+    "clocher_cote": 4,
+    "abside": false,
+    "pente": 48
+   }
+  },
+  {
+   "id": "pavillon-de-chasse",
+   "nom": "Pavillon de chasse",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    104.5,
+    -106
+   ],
+   "emprise_m": [
+    24,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "colombage",
+   "teinte": "#D9CCAE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "auberge-des-chasseurs",
+   "nom": "Auberge des Chasseurs",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    104.5,
+    0
+   ],
+   "emprise_m": [
+    26,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#C9B993",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "poste-du-garde-chasse",
+   "nom": "Poste du garde-chasse",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    0,
+    -106
+   ],
+   "emprise_m": [
+    16,
+    11
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#BEAE88",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "etal-des-peaux",
+   "nom": "Étal des peaux",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    0,
+    0
+   ],
+   "emprise_m": [
+    20,
+    9
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "fumoir-et-sechoir",
+   "nom": "Fumoir et séchoir à viande",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -104.5,
+    106
+   ],
+   "emprise_m": [
+    22,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B8A682",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "chenil",
+   "nom": "Chenil du village",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    0,
+    106
+   ],
+   "emprise_m": [
+    28,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#BCAD88",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "forge",
+   "nom": "Forge de Dauper",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    104.5,
+    106
+   ],
+   "emprise_m": [
+    20,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C3B79F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "scierie",
+   "nom": "Scierie de la lisière",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -209.5,
+    -106
+   ],
+   "emprise_m": [
+    30,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B4A47E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 32
+   }
+  },
+  {
+   "id": "ferme-de-la-lisiere",
+   "nom": "Ferme de la lisière",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    209.5,
+    0
+   ],
+   "emprise_m": [
+    26,
+    15
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "pierre_brute",
+   "teinte": "#CDBF9F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "grange-aux-fourrages",
+   "nom": "Grange aux fourrages",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    209.5,
+    211
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "s-3",
+    "essence": "chene",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -30,
+     -30
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne du Rendez-vous"
+   },
+   {
+    "position": [
+     40,
+     35
+    ],
+    "essence": "bouleau",
+    "hauteur_m": 15
+   }
+  ],
+  "parcs": [
+   {
+    "id": "bois-du-nord",
+    "nom": "Bois du Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      -396.3
+     ],
+     [
+      396.3,
+      -396.3
+     ],
+     [
+      396.3,
+      -265.7
+     ],
+     [
+      -396.3,
+      -265.7
+     ]
+    ],
+    "essences": [
+     "chene",
+     "pin",
+     "bouleau"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "bois-de-l-ouest",
+    "nom": "Bois de l'Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      -258.3
+     ],
+     [
+      -265.7,
+      -258.3
+     ],
+     [
+      -265.7,
+      257.8
+     ],
+     [
+      -396.3,
+      257.8
+     ]
+    ],
+    "essences": [
+     "pin",
+     "chene",
+     "pin"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "bois-du-sud",
+    "nom": "Bois du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -396.3,
+      266.2
+     ],
+     [
+      396.3,
+      266.2
+     ],
+     [
+      396.3,
+      396.3
+     ],
+     [
+      -396.3,
+      396.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "bouleau",
+     "pin"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "pre-des-chiens",
+    "nom": "Pré des chiens",
+    "canon": "A",
+    "polygone": [
+     [
+      -258.3,
+      57.2
+     ],
+     [
+      -161.2,
+      57.2
+     ],
+     [
+      -161.2,
+      156.3
+     ],
+     [
+      -258.3,
+      156.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau",
+     "saule"
+    ],
+    "arbres_par_ha": 36
+   },
+   {
+    "id": "bois-de-l-est",
+    "nom": "Bois de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      266.2,
+      -258.3
+     ],
+     [
+      396.3,
+      -258.3
+     ],
+     [
+      396.3,
+      257.8
+     ],
+     [
+      266.2,
+      257.8
+     ]
+    ],
+    "essences": [
+     "chene",
+     "pin",
+     "bouleau"
+    ],
+    "arbres_par_ha": 52
+   }
+  ],
+  "vergers": [],
+  "haies": [
+   {
+    "trace": [
+     [
+      -300,
+      300
+     ],
+     [
+      300,
+      300
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -150,
+      80
+     ],
+     [
+      -100,
+      80
+     ],
+     [
+      -100,
+      120
+     ],
+     [
+      -150,
+      120
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "fruitier",
+   "bouleau",
+   "chene"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -100,
+    -110
+   ],
+   [
+    100,
+    100
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -720,
+    880,
+    440
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    360,
+    1.8
+   ],
+   "cible": [
+    0,
+    -160,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-rendez-vous",
+   "nom": "Place du Rendez-vous, auberge et chapelle",
+   "oeil": [
+    20,
+    100,
+    3
+   ],
+   "cible": [
+    -40,
+    -20,
+    6
+   ],
+   "fov": 62
+  },
+  {
+   "id": "pavillon-de-chasse",
+   "nom": "Pavillon de chasse et lisière",
+   "oeil": [
+    60,
+    -20,
+    3
+   ],
+   "cible": [
+    105,
+    -105,
+    6
+   ],
+   "fov": 60
+  },
+  {
+   "id": "fumoir-et-chenil",
+   "nom": "Fumoir, chenil et forge",
+   "oeil": [
+    -40,
+    100,
+    3
+   ],
+   "cible": [
+    60,
+    105,
+    5
+   ],
+   "fov": 60
+  },
+  {
+   "id": "scierie",
+   "nom": "Scierie de la lisière",
+   "oeil": [
+    -100,
+    -60,
+    4
+   ],
+   "cible": [
+    -210,
+    -110,
+    6
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, le village en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du village (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "845-automne-de-battue",
+   "nom": "845, automne : jour de battue",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "saison de chasse (ressource clé : chasse [C], atlas 06 S10) : brume d'automne, hommes aux bois, adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 0.6
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}
