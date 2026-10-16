@@ -1,0 +1,7171 @@
+{
+ "id": "yarckel",
+ "nom": "Yarckel",
+ "libelle": "Yarckel",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Yarckel (ouest), district du mur Sina ; docs/spec/06 I05 (Yarckel : district ouest de Sina, rang 3, artisanat)",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/20 (LC-C) : Mur Sina, districts [C], détails [A] ; forme en saillie à deux portes étendue de Rose à Sina : adaptation (Q20)",
+   "canon": "A"
+  },
+  {
+   "ref": "tracé de la saillie, noms de rues, de places et de bâtiments, dimensions, quartiers : adaptation (création C16, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_yarckel",
+ "style": "E07",
+ "population": {
+  "province": "prov_yarckel",
+  "part": 0.9,
+  "canon": "C",
+  "note": "90 % de la population de `prov_yarckel` au départ de scn_sandbox_845 (34 783 hab.) logés intra-muros ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 235,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   992.5,
+   7.5
+  ],
+  [
+   991.1,
+   51.9
+  ],
+  [
+   987.1,
+   103.7
+  ],
+  [
+   980.3,
+   155.3
+  ],
+  [
+   970.8,
+   206.4
+  ],
+  [
+   958.7,
+   256.9
+  ],
+  [
+   943.9,
+   306.7
+  ],
+  [
+   926.6,
+   355.7
+  ],
+  [
+   906.7,
+   403.7
+  ],
+  [
+   884.3,
+   450.6
+  ],
+  [
+   859.5,
+   496.2
+  ],
+  [
+   832.4,
+   540.6
+  ],
+  [
+   802.9,
+   583.4
+  ],
+  [
+   771.3,
+   624.6
+  ],
+  [
+   737.6,
+   664.1
+  ],
+  [
+   701.8,
+   701.8
+  ],
+  [
+   664.1,
+   737.6
+  ],
+  [
+   624.6,
+   771.3
+  ],
+  [
+   583.4,
+   802.9
+  ],
+  [
+   540.6,
+   832.4
+  ],
+  [
+   496.3,
+   859.5
+  ],
+  [
+   450.6,
+   884.3
+  ],
+  [
+   403.7,
+   906.7
+  ],
+  [
+   355.7,
+   926.6
+  ],
+  [
+   306.7,
+   943.9
+  ],
+  [
+   256.9,
+   958.7
+  ],
+  [
+   206.4,
+   970.8
+  ],
+  [
+   155.3,
+   980.3
+  ],
+  [
+   103.7,
+   987.1
+  ],
+  [
+   51.9,
+   991.1
+  ],
+  [
+   0,
+   992.5
+  ],
+  [
+   -51.9,
+   991.1
+  ],
+  [
+   -103.7,
+   987.1
+  ],
+  [
+   -155.3,
+   980.3
+  ],
+  [
+   -206.4,
+   970.8
+  ],
+  [
+   -256.9,
+   958.7
+  ],
+  [
+   -306.7,
+   943.9
+  ],
+  [
+   -355.7,
+   926.6
+  ],
+  [
+   -403.7,
+   906.7
+  ],
+  [
+   -450.6,
+   884.3
+  ],
+  [
+   -496.2,
+   859.5
+  ],
+  [
+   -540.6,
+   832.4
+  ],
+  [
+   -583.4,
+   802.9
+  ],
+  [
+   -624.6,
+   771.3
+  ],
+  [
+   -664.1,
+   737.6
+  ],
+  [
+   -701.8,
+   701.8
+  ],
+  [
+   -737.6,
+   664.1
+  ],
+  [
+   -771.3,
+   624.6
+  ],
+  [
+   -802.9,
+   583.4
+  ],
+  [
+   -832.4,
+   540.6
+  ],
+  [
+   -859.5,
+   496.2
+  ],
+  [
+   -884.3,
+   450.6
+  ],
+  [
+   -906.7,
+   403.7
+  ],
+  [
+   -926.6,
+   355.7
+  ],
+  [
+   -943.9,
+   306.7
+  ],
+  [
+   -958.7,
+   256.9
+  ],
+  [
+   -970.8,
+   206.4
+  ],
+  [
+   -980.3,
+   155.3
+  ],
+  [
+   -987.1,
+   103.7
+  ],
+  [
+   -991.1,
+   51.9
+  ],
+  [
+   -992.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A",
+   "polygone": [
+    [
+     -505,
+     -24
+    ],
+    [
+     505,
+     -24
+    ],
+    [
+     505,
+     -520
+    ],
+    [
+     -505,
+     -520
+    ]
+   ],
+   "population": {
+    "province": "prov_yarckel",
+    "part": 0.1,
+    "canon": "A",
+    "note": "10 % de la population de `prov_yarckel` au départ de scn_sandbox_845 (34 783 hab.) logés au pied de la porte intérieure, côté intérieur des terres (adaptation)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 80,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "ouest",
+  "canon": "C"
+ },
+ "etendue_m": 2800,
+ "enceinte": {
+  "mur": "sina",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 1000,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -1000,
+      0
+     ],
+     [
+      1000,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1400,
+      0
+     ],
+     [
+      -1000,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      1000,
+      0
+     ],
+     [
+      1400,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 314.2,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 942.5,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1476.6,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1665,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2199.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2827.4,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 940,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1060,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 30,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte de Yarckel (porte ouest)",
+   "role": "exterieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3.1 : saillie à deux portes pour les districts [C] (étendue à Sina : adaptation) ; nom de la porte et dimensions : aucune source (Q5, Q20)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 1570.8,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure de Yarckel",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 1000,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-1",
+   "nom": "Rue des Ébénistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -900,
+     25
+    ],
+    [
+     -900,
+     375
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Ruelle des Copeaux",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -800,
+     25
+    ],
+    [
+     -800,
+     557.3
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3-0",
+   "nom": "Rue des Tourneurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     25
+    ],
+    [
+     -700,
+     525
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3-1",
+   "nom": "Rue des Tourneurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     625
+    ],
+    [
+     -700,
+     678.7
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue des Charrons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -600,
+     25
+    ],
+    [
+     -600,
+     768.5
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Serruriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     25
+    ],
+    [
+     -500,
+     837
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Ferronniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     25
+    ],
+    [
+     -400,
+     889.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-0",
+   "nom": "Ruelle de l'Étau",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     25
+    ],
+    [
+     -300,
+     225
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-7-1",
+   "nom": "Ruelle de l'Étau",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     325
+    ],
+    [
+     -300,
+     725
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-7-2",
+   "nom": "Ruelle de l'Étau",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     825
+    ],
+    [
+     -300,
+     925
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-8-0",
+   "nom": "Rue des Verriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -200,
+     25
+    ],
+    [
+     -200,
+     225
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-1",
+   "nom": "Rue des Verriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -200,
+     325
+    ],
+    [
+     -200,
+     925
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Rue des Vitriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -100,
+     25
+    ],
+    [
+     -100,
+     925
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Rue des Tailleurs de Pierre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     25
+    ],
+    [
+     100,
+     925
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-0",
+   "nom": "Rue des Sculpteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     25
+    ],
+    [
+     200,
+     425
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-1",
+   "nom": "Rue des Sculpteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     625
+    ],
+    [
+     200,
+     925
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13-0",
+   "nom": "Ruelle des Gabarits",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     300,
+     25
+    ],
+    [
+     300,
+     425
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-13-1",
+   "nom": "Ruelle des Gabarits",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     300,
+     625
+    ],
+    [
+     300,
+     925
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-14-0",
+   "nom": "Rue des Luthiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     25
+    ],
+    [
+     400,
+     225
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-1",
+   "nom": "Rue des Luthiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     325
+    ],
+    [
+     400,
+     889.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15",
+   "nom": "Rue des Horlogers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     500,
+     25
+    ],
+    [
+     500,
+     837
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-0",
+   "nom": "Rue des Potiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     600,
+     25
+    ],
+    [
+     600,
+     625
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-1",
+   "nom": "Rue des Potiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     600,
+     725
+    ],
+    [
+     600,
+     768.5
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Rue des Cordonniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     700,
+     25
+    ],
+    [
+     700,
+     678.7
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-18",
+   "nom": "Ruelle du Burin",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     800,
+     25
+    ],
+    [
+     800,
+     557.3
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue des Selliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     900,
+     25
+    ],
+    [
+     900,
+     375
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue des Métiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -967,
+     125
+    ],
+    [
+     967,
+     125
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Compagnons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -948.7,
+     225
+    ],
+    [
+     948.7,
+     225
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue de la Maîtrise",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -919.2,
+     325
+    ],
+    [
+     919.2,
+     325
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue des Apprentis",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -877.5,
+     425
+    ],
+    [
+     877.5,
+     425
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-0",
+   "nom": "Rue du Chef-d'Œuvre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -821.6,
+     525
+    ],
+    [
+     100,
+     525
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-1",
+   "nom": "Rue du Chef-d'Œuvre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     525
+    ],
+    [
+     821.6,
+     525
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Ateliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -748.3,
+     625
+    ],
+    [
+     748.3,
+     625
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Ruelle des Copeaux",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -651.9,
+     725
+    ],
+    [
+     651.9,
+     725
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-8",
+   "nom": "Rue des Jurandes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -519.6,
+     825
+    ],
+    [
+     519.6,
+     825
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue du Tour de France",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -308.2,
+     925
+    ],
+    [
+     308.2,
+     925
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Grande Rue des Métiers",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     992
+    ]
+   ],
+   "largeur_m": 18,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     974.7,
+     25
+    ],
+    [
+     972.1,
+     75.1
+    ],
+    [
+     966.9,
+     125.1
+    ],
+    [
+     959.2,
+     174.7
+    ],
+    [
+     949,
+     223.9
+    ],
+    [
+     936.2,
+     272.4
+    ],
+    [
+     920.9,
+     320.3
+    ],
+    [
+     903.2,
+     367.2
+    ],
+    [
+     883.1,
+     413.2
+    ],
+    [
+     860.6,
+     458.2
+    ],
+    [
+     835.9,
+     501.9
+    ],
+    [
+     809,
+     544.2
+    ],
+    [
+     779.9,
+     585.2
+    ],
+    [
+     748.7,
+     624.5
+    ],
+    [
+     715.6,
+     662.3
+    ],
+    [
+     680.5,
+     698.2
+    ],
+    [
+     643.7,
+     732.3
+    ],
+    [
+     605.1,
+     764.5
+    ],
+    [
+     565,
+     794.6
+    ],
+    [
+     523.3,
+     822.7
+    ],
+    [
+     480.3,
+     848.5
+    ],
+    [
+     435.9,
+     872.1
+    ],
+    [
+     390.5,
+     893.4
+    ],
+    [
+     344,
+     912.3
+    ],
+    [
+     296.5,
+     928.8
+    ],
+    [
+     248.3,
+     942.8
+    ],
+    [
+     199.5,
+     954.4
+    ],
+    [
+     150.1,
+     963.4
+    ],
+    [
+     100.3,
+     969.8
+    ],
+    [
+     50.2,
+     973.7
+    ],
+    [
+     0,
+     975
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     975
+    ],
+    [
+     -50.2,
+     973.7
+    ],
+    [
+     -100.3,
+     969.8
+    ],
+    [
+     -150.1,
+     963.4
+    ],
+    [
+     -199.5,
+     954.4
+    ],
+    [
+     -248.3,
+     942.8
+    ],
+    [
+     -296.5,
+     928.8
+    ],
+    [
+     -344,
+     912.3
+    ],
+    [
+     -390.5,
+     893.4
+    ],
+    [
+     -435.9,
+     872.1
+    ],
+    [
+     -480.3,
+     848.5
+    ],
+    [
+     -523.3,
+     822.7
+    ],
+    [
+     -565,
+     794.6
+    ],
+    [
+     -605.1,
+     764.5
+    ],
+    [
+     -643.7,
+     732.3
+    ],
+    [
+     -680.5,
+     698.2
+    ],
+    [
+     -715.6,
+     662.3
+    ],
+    [
+     -748.7,
+     624.5
+    ],
+    [
+     -779.9,
+     585.2
+    ],
+    [
+     -809,
+     544.2
+    ],
+    [
+     -835.9,
+     501.9
+    ],
+    [
+     -860.6,
+     458.2
+    ],
+    [
+     -883.1,
+     413.2
+    ],
+    [
+     -903.2,
+     367.2
+    ],
+    [
+     -920.9,
+     320.3
+    ],
+    [
+     -936.2,
+     272.4
+    ],
+    [
+     -949,
+     223.9
+    ],
+    [
+     -959.2,
+     174.7
+    ],
+    [
+     -966.9,
+     125.1
+    ],
+    [
+     -972.1,
+     75.1
+    ],
+    [
+     -974.7,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -975,
+     25
+    ],
+    [
+     975,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1710
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Copeaux",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -30
+    ],
+    [
+     -495,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin des Scieurs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -330,
+     -30
+    ],
+    [
+     -330,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -165,
+     -30
+    ],
+    [
+     -165,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x4",
+   "nom": "Chemin du Gué",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     165,
+     -30
+    ],
+    [
+     165,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin des Vergers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     330,
+     -30
+    ],
+    [
+     330,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     495,
+     -30
+    ],
+    [
+     495,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin des Saules",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -30
+    ],
+    [
+     495,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin des Ormes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -150
+    ],
+    [
+     495,
+     -150
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -270
+    ],
+    [
+     495,
+     -270
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin des Champs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -390
+    ],
+    [
+     495,
+     -390
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y4",
+   "nom": "Chemin des Copeaux",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -510
+    ],
+    [
+     495,
+     -510
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1010
+    ],
+    [
+     0,
+     1420
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place des Tourneurs",
+   "canon": "A",
+   "polygone": [
+    [
+     -894.3,
+     330.7
+    ],
+    [
+     -803.7,
+     330.7
+    ],
+    [
+     -803.7,
+     419.3
+    ],
+    [
+     -872.8,
+     419.3
+    ],
+    [
+     -882.4,
+     399.8
+    ],
+    [
+     -894.3,
+     371.2
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette des Luthiers",
+   "canon": "A",
+   "polygone": [
+    [
+     405.7,
+     830.7
+    ],
+    [
+     494.3,
+     830.7
+    ],
+    [
+     494.3,
+     832.7
+    ],
+    [
+     456.7,
+     854.4
+    ],
+    [
+     405.7,
+     879.6
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    436.9,
+    847.3
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-2",
+   "nom": "Place des Potiers",
+   "canon": "A",
+   "polygone": [
+    [
+     705.7,
+     330.7
+    ],
+    [
+     796.3,
+     330.7
+    ],
+    [
+     796.3,
+     419.3
+    ],
+    [
+     705.7,
+     419.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "parvis-de-l-eglise",
+   "nom": "Parvis de l'église",
+   "canon": "A",
+   "polygone": [
+    [
+     -591.8,
+     330.7
+    ],
+    [
+     -505.7,
+     330.7
+    ],
+    [
+     -505.7,
+     419.3
+    ],
+    [
+     -591.8,
+     419.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-des-compagnons",
+   "nom": "Place des Compagnons",
+   "canon": "A",
+   "polygone": [
+    [
+     -394.3,
+     233.2
+    ],
+    [
+     -105.7,
+     233.2
+    ],
+    [
+     -105.7,
+     319.3
+    ],
+    [
+     -394.3,
+     319.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "cour-des-metiers",
+   "nom": "Cour des Métiers",
+   "canon": "A",
+   "polygone": [
+    [
+     105.7,
+     430.7
+    ],
+    [
+     394.3,
+     430.7
+    ],
+    [
+     394.3,
+     619.3
+    ],
+    [
+     105.7,
+     619.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    250,
+    525
+   ],
+   "marche": true
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "negoce": {
+   "etages": [
+    3,
+    4,
+    3,
+    3
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "mansarde"
+   ],
+   "pente_deg": [
+    42,
+    54
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "enduit",
+    "pierre_taillee",
+    "colombage",
+    "brique"
+   ],
+   "teintes": [
+    "#EBDCC0",
+    "#E2CCA6",
+    "#EDD6BE",
+    "#DDD6BE",
+    "#E6D8B8",
+    "#D9C29C"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9.5
+   ],
+   "profondeur_m": 14,
+   "boutiques": true,
+   "passage_m": 36,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 80
+   }
+  },
+  "hotels": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.5,
+   "toits": [
+    "mansarde",
+    "croupe",
+    "mansarde",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    40,
+    56
+   ],
+   "couvertures": [
+    "ardoise",
+    "ardoise",
+    "cuivre",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_taillee",
+    "enduit",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#E6DFD0",
+    "#DCD3C0",
+    "#EAE2D0",
+    "#D6CCB8",
+    "#E2D8C4"
+   ],
+   "parcelles_m": [
+    16,
+    22,
+    14,
+    20
+   ],
+   "profondeur_m": 20,
+   "boutiques": false,
+   "passage_m": 60,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 90
+   }
+  },
+  "ateliers": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 45
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieux-yarckel",
+   "nom": "Vieux Yarckel",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-metiers",
+   "nom": "Quartier des Métiers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-ateliers",
+   "nom": "Quartier des Ateliers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-compagnons",
+   "nom": "Quartier des Compagnons",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-porte-ouest",
+   "nom": "Quartier de la Porte Ouest",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-apprentis",
+   "nom": "Quartier des Apprentis et des Journaliers",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-de-la-porte-interieure",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -968.3,
+     31.2
+    ],
+    [
+     -905.7,
+     31.2
+    ],
+    [
+     -905.7,
+     119.3
+    ],
+    [
+     -960.9,
+     119.3
+    ],
+    [
+     -964.1,
+     95
+    ],
+    [
+     -968.3,
+     31.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -959.4,
+     130.7
+    ],
+    [
+     -905.7,
+     130.7
+    ],
+    [
+     -905.7,
+     216.8
+    ],
+    [
+     -944.1,
+     216.8
+    ],
+    [
+     -955.9,
+     157.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -940,
+     233.2
+    ],
+    [
+     -905.7,
+     233.2
+    ],
+    [
+     -905.7,
+     319.3
+    ],
+    [
+     -914.2,
+     319.3
+    ],
+    [
+     -927.1,
+     281.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -894.3,
+     31.2
+    ],
+    [
+     -803.7,
+     31.2
+    ],
+    [
+     -803.7,
+     119.3
+    ],
+    [
+     -894.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -894.3,
+     130.7
+    ],
+    [
+     -803.7,
+     130.7
+    ],
+    [
+     -803.7,
+     216.8
+    ],
+    [
+     -894.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -894.3,
+     233.2
+    ],
+    [
+     -803.7,
+     233.2
+    ],
+    [
+     -803.7,
+     319.3
+    ],
+    [
+     -894.3,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -867.2,
+     430.7
+    ],
+    [
+     -803.7,
+     430.7
+    ],
+    [
+     -803.7,
+     516.8
+    ],
+    [
+     -819.2,
+     516.8
+    ],
+    [
+     -822.7,
+     511.6
+    ],
+    [
+     -854.4,
+     456.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -796.3,
+     31.2
+    ],
+    [
+     -705.7,
+     31.2
+    ],
+    [
+     -705.7,
+     119.3
+    ],
+    [
+     -796.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -796.3,
+     130.7
+    ],
+    [
+     -705.7,
+     130.7
+    ],
+    [
+     -705.7,
+     216.8
+    ],
+    [
+     -796.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -796.3,
+     233.2
+    ],
+    [
+     -705.7,
+     233.2
+    ],
+    [
+     -705.7,
+     319.3
+    ],
+    [
+     -796.3,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -796.3,
+     330.7
+    ],
+    [
+     -705.7,
+     330.7
+    ],
+    [
+     -705.7,
+     419.3
+    ],
+    [
+     -796.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -796.3,
+     430.7
+    ],
+    [
+     -705.7,
+     430.7
+    ],
+    [
+     -705.7,
+     516.8
+    ],
+    [
+     -796.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     31.2
+    ],
+    [
+     -608.2,
+     31.2
+    ],
+    [
+     -608.2,
+     119.3
+    ],
+    [
+     -694.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     130.7
+    ],
+    [
+     -608.2,
+     130.7
+    ],
+    [
+     -608.2,
+     216.8
+    ],
+    [
+     -694.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     233.2
+    ],
+    [
+     -608.2,
+     233.2
+    ],
+    [
+     -608.2,
+     319.3
+    ],
+    [
+     -694.3,
+     319.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     330.7
+    ],
+    [
+     -608.2,
+     330.7
+    ],
+    [
+     -608.2,
+     419.3
+    ],
+    [
+     -694.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     430.7
+    ],
+    [
+     -608.2,
+     430.7
+    ],
+    [
+     -608.2,
+     516.8
+    ],
+    [
+     -694.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -694.3,
+     630.7
+    ],
+    [
+     -608.2,
+     630.7
+    ],
+    [
+     -608.2,
+     721.3
+    ],
+    [
+     -646.1,
+     721.3
+    ],
+    [
+     -662.3,
+     707.1
+    ],
+    [
+     -694.3,
+     675.1
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -591.8,
+     31.2
+    ],
+    [
+     -505.7,
+     31.2
+    ],
+    [
+     -505.7,
+     119.3
+    ],
+    [
+     -591.8,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -591.8,
+     130.7
+    ],
+    [
+     -505.7,
+     130.7
+    ],
+    [
+     -505.7,
+     216.8
+    ],
+    [
+     -591.8,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -591.8,
+     233.2
+    ],
+    [
+     -505.7,
+     233.2
+    ],
+    [
+     -505.7,
+     319.3
+    ],
+    [
+     -591.8,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     430.7
+    ],
+    [
+     -505.7,
+     430.7
+    ],
+    [
+     -505.7,
+     516.8
+    ],
+    [
+     -591.8,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -591.8,
+     533.2
+    ],
+    [
+     -505.7,
+     533.2
+    ],
+    [
+     -505.7,
+     619.3
+    ],
+    [
+     -591.8,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -591.8,
+     630.7
+    ],
+    [
+     -505.7,
+     630.7
+    ],
+    [
+     -505.7,
+     721.3
+    ],
+    [
+     -591.8,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -591.8,
+     728.7
+    ],
+    [
+     -505.7,
+     728.7
+    ],
+    [
+     -505.7,
+     819.3
+    ],
+    [
+     -516.7,
+     819.3
+    ],
+    [
+     -564.3,
+     787.5
+    ],
+    [
+     -591.8,
+     766.4
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     31.2
+    ],
+    [
+     -405.7,
+     31.2
+    ],
+    [
+     -405.7,
+     119.3
+    ],
+    [
+     -494.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     130.7
+    ],
+    [
+     -405.7,
+     130.7
+    ],
+    [
+     -405.7,
+     216.8
+    ],
+    [
+     -494.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     233.2
+    ],
+    [
+     -405.7,
+     233.2
+    ],
+    [
+     -405.7,
+     319.3
+    ],
+    [
+     -494.3,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -494.3,
+     330.7
+    ],
+    [
+     -405.7,
+     330.7
+    ],
+    [
+     -405.7,
+     419.3
+    ],
+    [
+     -494.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     430.7
+    ],
+    [
+     -405.7,
+     430.7
+    ],
+    [
+     -405.7,
+     516.8
+    ],
+    [
+     -494.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -494.3,
+     533.2
+    ],
+    [
+     -405.7,
+     533.2
+    ],
+    [
+     -405.7,
+     619.3
+    ],
+    [
+     -494.3,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -494.3,
+     630.7
+    ],
+    [
+     -405.7,
+     630.7
+    ],
+    [
+     -405.7,
+     721.3
+    ],
+    [
+     -494.3,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -494.3,
+     728.7
+    ],
+    [
+     -405.7,
+     728.7
+    ],
+    [
+     -405.7,
+     819.3
+    ],
+    [
+     -494.3,
+     819.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     830.7
+    ],
+    [
+     -405.7,
+     830.7
+    ],
+    [
+     -405.7,
+     879.6
+    ],
+    [
+     -456.7,
+     854.4
+    ],
+    [
+     -494.3,
+     832.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -394.3,
+     31.2
+    ],
+    [
+     -303.7,
+     31.2
+    ],
+    [
+     -303.7,
+     119.3
+    ],
+    [
+     -394.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -394.3,
+     130.7
+    ],
+    [
+     -303.7,
+     130.7
+    ],
+    [
+     -303.7,
+     216.8
+    ],
+    [
+     -394.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     330.7
+    ],
+    [
+     -303.7,
+     330.7
+    ],
+    [
+     -303.7,
+     419.3
+    ],
+    [
+     -394.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     430.7
+    ],
+    [
+     -303.7,
+     430.7
+    ],
+    [
+     -303.7,
+     516.8
+    ],
+    [
+     -394.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -394.3,
+     533.2
+    ],
+    [
+     -303.7,
+     533.2
+    ],
+    [
+     -303.7,
+     619.3
+    ],
+    [
+     -394.3,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -394.3,
+     630.7
+    ],
+    [
+     -303.7,
+     630.7
+    ],
+    [
+     -303.7,
+     721.3
+    ],
+    [
+     -394.3,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -394.3,
+     830.7
+    ],
+    [
+     -303.7,
+     830.7
+    ],
+    [
+     -303.7,
+     919.3
+    ],
+    [
+     -304.2,
+     919.3
+    ],
+    [
+     -341.3,
+     906.7
+    ],
+    [
+     -394.3,
+     884.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -296.3,
+     31.2
+    ],
+    [
+     -205.7,
+     31.2
+    ],
+    [
+     -205.7,
+     119.3
+    ],
+    [
+     -296.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -296.3,
+     130.7
+    ],
+    [
+     -205.7,
+     130.7
+    ],
+    [
+     -205.7,
+     216.8
+    ],
+    [
+     -296.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     330.7
+    ],
+    [
+     -205.7,
+     330.7
+    ],
+    [
+     -205.7,
+     419.3
+    ],
+    [
+     -296.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     430.7
+    ],
+    [
+     -205.7,
+     430.7
+    ],
+    [
+     -205.7,
+     516.8
+    ],
+    [
+     -296.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -296.3,
+     533.2
+    ],
+    [
+     -205.7,
+     533.2
+    ],
+    [
+     -205.7,
+     619.3
+    ],
+    [
+     -296.3,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -296.3,
+     630.7
+    ],
+    [
+     -205.7,
+     630.7
+    ],
+    [
+     -205.7,
+     721.3
+    ],
+    [
+     -296.3,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -296.3,
+     830.7
+    ],
+    [
+     -205.7,
+     830.7
+    ],
+    [
+     -205.7,
+     919.3
+    ],
+    [
+     -296.3,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -194.3,
+     31.2
+    ],
+    [
+     -105.7,
+     31.2
+    ],
+    [
+     -105.7,
+     119.3
+    ],
+    [
+     -194.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -194.3,
+     130.7
+    ],
+    [
+     -105.7,
+     130.7
+    ],
+    [
+     -105.7,
+     216.8
+    ],
+    [
+     -194.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     330.7
+    ],
+    [
+     -105.7,
+     330.7
+    ],
+    [
+     -105.7,
+     419.3
+    ],
+    [
+     -194.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     430.7
+    ],
+    [
+     -105.7,
+     430.7
+    ],
+    [
+     -105.7,
+     516.8
+    ],
+    [
+     -194.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     533.2
+    ],
+    [
+     -105.7,
+     533.2
+    ],
+    [
+     -105.7,
+     619.3
+    ],
+    [
+     -194.3,
+     619.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     630.7
+    ],
+    [
+     -105.7,
+     630.7
+    ],
+    [
+     -105.7,
+     721.3
+    ],
+    [
+     -194.3,
+     721.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     728.7
+    ],
+    [
+     -105.7,
+     728.7
+    ],
+    [
+     -105.7,
+     819.3
+    ],
+    [
+     -194.3,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -194.3,
+     830.7
+    ],
+    [
+     -105.7,
+     830.7
+    ],
+    [
+     -105.7,
+     919.3
+    ],
+    [
+     -194.3,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -94.3,
+     31.2
+    ],
+    [
+     -10.2,
+     31.2
+    ],
+    [
+     -10.2,
+     119.3
+    ],
+    [
+     -94.3,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -94.3,
+     130.7
+    ],
+    [
+     -10.2,
+     130.7
+    ],
+    [
+     -10.2,
+     216.8
+    ],
+    [
+     -94.3,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -94.3,
+     233.2
+    ],
+    [
+     -10.2,
+     233.2
+    ],
+    [
+     -10.2,
+     319.3
+    ],
+    [
+     -94.3,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     330.7
+    ],
+    [
+     -10.2,
+     330.7
+    ],
+    [
+     -10.2,
+     419.3
+    ],
+    [
+     -94.3,
+     419.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     430.7
+    ],
+    [
+     -10.2,
+     430.7
+    ],
+    [
+     -10.2,
+     516.8
+    ],
+    [
+     -94.3,
+     516.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     533.2
+    ],
+    [
+     -10.2,
+     533.2
+    ],
+    [
+     -10.2,
+     619.3
+    ],
+    [
+     -94.3,
+     619.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     630.7
+    ],
+    [
+     -10.2,
+     630.7
+    ],
+    [
+     -10.2,
+     721.3
+    ],
+    [
+     -94.3,
+     721.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     728.7
+    ],
+    [
+     -10.2,
+     728.7
+    ],
+    [
+     -10.2,
+     819.3
+    ],
+    [
+     -94.3,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -94.3,
+     830.7
+    ],
+    [
+     -10.2,
+     830.7
+    ],
+    [
+     -10.2,
+     919.3
+    ],
+    [
+     -94.3,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     31.2
+    ],
+    [
+     94.3,
+     31.2
+    ],
+    [
+     94.3,
+     119.3
+    ],
+    [
+     10.2,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     130.7
+    ],
+    [
+     94.3,
+     130.7
+    ],
+    [
+     94.3,
+     216.8
+    ],
+    [
+     10.2,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     233.2
+    ],
+    [
+     94.3,
+     233.2
+    ],
+    [
+     94.3,
+     319.3
+    ],
+    [
+     10.2,
+     319.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     330.7
+    ],
+    [
+     94.3,
+     330.7
+    ],
+    [
+     94.3,
+     419.3
+    ],
+    [
+     10.2,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     430.7
+    ],
+    [
+     94.3,
+     430.7
+    ],
+    [
+     94.3,
+     516.8
+    ],
+    [
+     10.2,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     533.2
+    ],
+    [
+     94.3,
+     533.2
+    ],
+    [
+     94.3,
+     619.3
+    ],
+    [
+     10.2,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     630.7
+    ],
+    [
+     94.3,
+     630.7
+    ],
+    [
+     94.3,
+     721.3
+    ],
+    [
+     10.2,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     728.7
+    ],
+    [
+     94.3,
+     728.7
+    ],
+    [
+     94.3,
+     819.3
+    ],
+    [
+     10.2,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     10.2,
+     830.7
+    ],
+    [
+     94.3,
+     830.7
+    ],
+    [
+     94.3,
+     919.3
+    ],
+    [
+     10.2,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     31.2
+    ],
+    [
+     194.3,
+     31.2
+    ],
+    [
+     194.3,
+     119.3
+    ],
+    [
+     105.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     130.7
+    ],
+    [
+     194.3,
+     130.7
+    ],
+    [
+     194.3,
+     216.8
+    ],
+    [
+     105.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     233.2
+    ],
+    [
+     194.3,
+     233.2
+    ],
+    [
+     194.3,
+     319.3
+    ],
+    [
+     105.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     330.7
+    ],
+    [
+     194.3,
+     330.7
+    ],
+    [
+     194.3,
+     419.3
+    ],
+    [
+     105.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     630.7
+    ],
+    [
+     194.3,
+     630.7
+    ],
+    [
+     194.3,
+     721.3
+    ],
+    [
+     105.7,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     728.7
+    ],
+    [
+     194.3,
+     728.7
+    ],
+    [
+     194.3,
+     819.3
+    ],
+    [
+     105.7,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     105.7,
+     830.7
+    ],
+    [
+     194.3,
+     830.7
+    ],
+    [
+     194.3,
+     919.3
+    ],
+    [
+     105.7,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     31.2
+    ],
+    [
+     296.3,
+     31.2
+    ],
+    [
+     296.3,
+     119.3
+    ],
+    [
+     205.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     130.7
+    ],
+    [
+     296.3,
+     130.7
+    ],
+    [
+     296.3,
+     216.8
+    ],
+    [
+     205.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     233.2
+    ],
+    [
+     296.3,
+     233.2
+    ],
+    [
+     296.3,
+     319.3
+    ],
+    [
+     205.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     330.7
+    ],
+    [
+     296.3,
+     330.7
+    ],
+    [
+     296.3,
+     419.3
+    ],
+    [
+     205.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     630.7
+    ],
+    [
+     296.3,
+     630.7
+    ],
+    [
+     296.3,
+     721.3
+    ],
+    [
+     205.7,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     728.7
+    ],
+    [
+     296.3,
+     728.7
+    ],
+    [
+     296.3,
+     819.3
+    ],
+    [
+     205.7,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     205.7,
+     830.7
+    ],
+    [
+     296.3,
+     830.7
+    ],
+    [
+     296.3,
+     919.3
+    ],
+    [
+     205.7,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     303.7,
+     31.2
+    ],
+    [
+     394.3,
+     31.2
+    ],
+    [
+     394.3,
+     119.3
+    ],
+    [
+     303.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     303.7,
+     130.7
+    ],
+    [
+     394.3,
+     130.7
+    ],
+    [
+     394.3,
+     216.8
+    ],
+    [
+     303.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     330.7
+    ],
+    [
+     394.3,
+     330.7
+    ],
+    [
+     394.3,
+     419.3
+    ],
+    [
+     303.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     630.7
+    ],
+    [
+     394.3,
+     630.7
+    ],
+    [
+     394.3,
+     721.3
+    ],
+    [
+     303.7,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     303.7,
+     728.7
+    ],
+    [
+     394.3,
+     728.7
+    ],
+    [
+     394.3,
+     819.3
+    ],
+    [
+     303.7,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-8",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     303.7,
+     830.7
+    ],
+    [
+     394.3,
+     830.7
+    ],
+    [
+     394.3,
+     884.7
+    ],
+    [
+     341.3,
+     906.7
+    ],
+    [
+     304.2,
+     919.3
+    ],
+    [
+     303.7,
+     919.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     31.2
+    ],
+    [
+     494.3,
+     31.2
+    ],
+    [
+     494.3,
+     119.3
+    ],
+    [
+     405.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     130.7
+    ],
+    [
+     494.3,
+     130.7
+    ],
+    [
+     494.3,
+     216.8
+    ],
+    [
+     405.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     330.7
+    ],
+    [
+     494.3,
+     330.7
+    ],
+    [
+     494.3,
+     419.3
+    ],
+    [
+     405.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     430.7
+    ],
+    [
+     494.3,
+     430.7
+    ],
+    [
+     494.3,
+     516.8
+    ],
+    [
+     405.7,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     533.2
+    ],
+    [
+     494.3,
+     533.2
+    ],
+    [
+     494.3,
+     619.3
+    ],
+    [
+     405.7,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-6",
+   "quartier": "quartier-des-metiers",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     630.7
+    ],
+    [
+     494.3,
+     630.7
+    ],
+    [
+     494.3,
+     721.3
+    ],
+    [
+     405.7,
+     721.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-7",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     728.7
+    ],
+    [
+     494.3,
+     728.7
+    ],
+    [
+     494.3,
+     819.3
+    ],
+    [
+     405.7,
+     819.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     31.2
+    ],
+    [
+     591.8,
+     31.2
+    ],
+    [
+     591.8,
+     119.3
+    ],
+    [
+     505.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     130.7
+    ],
+    [
+     591.8,
+     130.7
+    ],
+    [
+     591.8,
+     216.8
+    ],
+    [
+     505.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.7,
+     233.2
+    ],
+    [
+     591.8,
+     233.2
+    ],
+    [
+     591.8,
+     319.3
+    ],
+    [
+     505.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.7,
+     330.7
+    ],
+    [
+     591.8,
+     330.7
+    ],
+    [
+     591.8,
+     419.3
+    ],
+    [
+     505.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.7,
+     430.7
+    ],
+    [
+     591.8,
+     430.7
+    ],
+    [
+     591.8,
+     516.8
+    ],
+    [
+     505.7,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.7,
+     533.2
+    ],
+    [
+     591.8,
+     533.2
+    ],
+    [
+     591.8,
+     619.3
+    ],
+    [
+     505.7,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-7",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     505.7,
+     728.7
+    ],
+    [
+     591.8,
+     728.7
+    ],
+    [
+     591.8,
+     766.4
+    ],
+    [
+     564.3,
+     787.5
+    ],
+    [
+     516.7,
+     819.3
+    ],
+    [
+     505.7,
+     819.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     31.2
+    ],
+    [
+     694.3,
+     31.2
+    ],
+    [
+     694.3,
+     119.3
+    ],
+    [
+     608.2,
+     119.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "vieux-yarckel",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     130.7
+    ],
+    [
+     694.3,
+     130.7
+    ],
+    [
+     694.3,
+     216.8
+    ],
+    [
+     608.2,
+     216.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     608.2,
+     233.2
+    ],
+    [
+     694.3,
+     233.2
+    ],
+    [
+     694.3,
+     319.3
+    ],
+    [
+     608.2,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     608.2,
+     330.7
+    ],
+    [
+     694.3,
+     330.7
+    ],
+    [
+     694.3,
+     419.3
+    ],
+    [
+     608.2,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     608.2,
+     430.7
+    ],
+    [
+     694.3,
+     430.7
+    ],
+    [
+     694.3,
+     516.8
+    ],
+    [
+     608.2,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     608.2,
+     533.2
+    ],
+    [
+     694.3,
+     533.2
+    ],
+    [
+     694.3,
+     619.3
+    ],
+    [
+     608.2,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     31.2
+    ],
+    [
+     796.3,
+     31.2
+    ],
+    [
+     796.3,
+     119.3
+    ],
+    [
+     705.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     130.7
+    ],
+    [
+     796.3,
+     130.7
+    ],
+    [
+     796.3,
+     216.8
+    ],
+    [
+     705.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     705.7,
+     233.2
+    ],
+    [
+     796.3,
+     233.2
+    ],
+    [
+     796.3,
+     319.3
+    ],
+    [
+     705.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     705.7,
+     430.7
+    ],
+    [
+     796.3,
+     430.7
+    ],
+    [
+     796.3,
+     516.8
+    ],
+    [
+     705.7,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     705.7,
+     533.2
+    ],
+    [
+     796.3,
+     533.2
+    ],
+    [
+     796.3,
+     551.1
+    ],
+    [
+     787.5,
+     564.3
+    ],
+    [
+     748.9,
+     614.6
+    ],
+    [
+     744.8,
+     619.3
+    ],
+    [
+     705.7,
+     619.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     803.7,
+     31.2
+    ],
+    [
+     894.3,
+     31.2
+    ],
+    [
+     894.3,
+     119.3
+    ],
+    [
+     803.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     803.7,
+     130.7
+    ],
+    [
+     894.3,
+     130.7
+    ],
+    [
+     894.3,
+     216.8
+    ],
+    [
+     803.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     803.7,
+     233.2
+    ],
+    [
+     894.3,
+     233.2
+    ],
+    [
+     894.3,
+     319.3
+    ],
+    [
+     803.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-18-3",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     803.7,
+     330.7
+    ],
+    [
+     894.3,
+     330.7
+    ],
+    [
+     894.3,
+     371.2
+    ],
+    [
+     882.4,
+     399.8
+    ],
+    [
+     872.8,
+     419.3
+    ],
+    [
+     803.7,
+     419.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-18-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     803.7,
+     430.7
+    ],
+    [
+     867.2,
+     430.7
+    ],
+    [
+     854.4,
+     456.7
+    ],
+    [
+     822.7,
+     511.6
+    ],
+    [
+     819.2,
+     516.8
+    ],
+    [
+     803.7,
+     516.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     905.7,
+     31.2
+    ],
+    [
+     968.3,
+     31.2
+    ],
+    [
+     968.3,
+     31.7
+    ],
+    [
+     964.1,
+     95
+    ],
+    [
+     960.9,
+     119.3
+    ],
+    [
+     905.7,
+     119.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "quartier-des-apprentis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     905.7,
+     130.7
+    ],
+    [
+     959.4,
+     130.7
+    ],
+    [
+     955.9,
+     157.8
+    ],
+    [
+     944.1,
+     216.8
+    ],
+    [
+     905.7,
+     216.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     905.7,
+     233.2
+    ],
+    [
+     940,
+     233.2
+    ],
+    [
+     927.1,
+     281.2
+    ],
+    [
+     914.2,
+     319.3
+    ],
+    [
+     905.7,
+     319.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -145.3
+    ],
+    [
+     -334.2,
+     -145.3
+    ],
+    [
+     -334.2,
+     -34.7
+    ],
+    [
+     -490.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -265.3
+    ],
+    [
+     -334.2,
+     -265.3
+    ],
+    [
+     -334.2,
+     -154.7
+    ],
+    [
+     -490.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -385.3
+    ],
+    [
+     -334.2,
+     -385.3
+    ],
+    [
+     -334.2,
+     -274.7
+    ],
+    [
+     -490.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -505.3
+    ],
+    [
+     -334.2,
+     -505.3
+    ],
+    [
+     -334.2,
+     -394.7
+    ],
+    [
+     -490.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -145.3
+    ],
+    [
+     -169.2,
+     -145.3
+    ],
+    [
+     -169.2,
+     -34.7
+    ],
+    [
+     -325.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -265.3
+    ],
+    [
+     -169.2,
+     -265.3
+    ],
+    [
+     -169.2,
+     -154.7
+    ],
+    [
+     -325.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -385.3
+    ],
+    [
+     -169.2,
+     -385.3
+    ],
+    [
+     -169.2,
+     -274.7
+    ],
+    [
+     -325.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -505.3
+    ],
+    [
+     -169.2,
+     -505.3
+    ],
+    [
+     -169.2,
+     -394.7
+    ],
+    [
+     -325.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -145.3
+    ],
+    [
+     -7,
+     -145.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -160.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -265.3
+    ],
+    [
+     -7,
+     -265.3
+    ],
+    [
+     -7,
+     -154.7
+    ],
+    [
+     -160.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -385.3
+    ],
+    [
+     -7,
+     -385.3
+    ],
+    [
+     -7,
+     -274.7
+    ],
+    [
+     -160.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -505.3
+    ],
+    [
+     -7,
+     -505.3
+    ],
+    [
+     -7,
+     -394.7
+    ],
+    [
+     -160.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -145.3
+    ],
+    [
+     160.8,
+     -145.3
+    ],
+    [
+     160.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -265.3
+    ],
+    [
+     160.8,
+     -265.3
+    ],
+    [
+     160.8,
+     -154.7
+    ],
+    [
+     7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -385.3
+    ],
+    [
+     160.8,
+     -385.3
+    ],
+    [
+     160.8,
+     -274.7
+    ],
+    [
+     7,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -505.3
+    ],
+    [
+     160.8,
+     -505.3
+    ],
+    [
+     160.8,
+     -394.7
+    ],
+    [
+     7,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -145.3
+    ],
+    [
+     325.8,
+     -145.3
+    ],
+    [
+     325.8,
+     -34.7
+    ],
+    [
+     169.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -265.3
+    ],
+    [
+     325.8,
+     -265.3
+    ],
+    [
+     325.8,
+     -154.7
+    ],
+    [
+     169.2,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -385.3
+    ],
+    [
+     325.8,
+     -385.3
+    ],
+    [
+     325.8,
+     -274.7
+    ],
+    [
+     169.2,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -505.3
+    ],
+    [
+     325.8,
+     -505.3
+    ],
+    [
+     325.8,
+     -394.7
+    ],
+    [
+     169.2,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -145.3
+    ],
+    [
+     490.8,
+     -145.3
+    ],
+    [
+     490.8,
+     -34.7
+    ],
+    [
+     334.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -265.3
+    ],
+    [
+     490.8,
+     -265.3
+    ],
+    [
+     490.8,
+     -154.7
+    ],
+    [
+     334.2,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -385.3
+    ],
+    [
+     490.8,
+     -385.3
+    ],
+    [
+     490.8,
+     -274.7
+    ],
+    [
+     334.2,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -505.3
+    ],
+    [
+     490.8,
+     -505.3
+    ],
+    [
+     490.8,
+     -394.7
+    ],
+    [
+     334.2,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "halle-des-metiers",
+   "nom": "Halle des métiers",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    525
+   ],
+   "emprise_m": [
+    60,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [
+    "Yarckel, ressource clé : artisanat [C] (atlas 06 I05) : la halle est une adaptation"
+   ],
+   "params": {
+    "piliers": 10,
+    "pente": 40
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal d'artisan 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    160,
+    491
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal d'artisan 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    491
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal d'artisan 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    340,
+    491
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal d'artisan 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    160,
+    559
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal d'artisan 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    559
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal d'artisan 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    340,
+    559
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "maison-des-compagnons",
+   "nom": "Maison des Compagnons",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -250,
+    175
+   ],
+   "emprise_m": [
+    36,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "atelier-de-menuiserie",
+   "nom": "Grand atelier de menuiserie",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    550,
+    475
+   ],
+   "emprise_m": [
+    60,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C4B49C",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "verrerie-d-art",
+   "nom": "Verrerie d'art",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    650,
+    575
+   ],
+   "emprise_m": [
+    50,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#CBBFA5",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "magasin-des-ebenistes",
+   "nom": "Magasin des ébénistes",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    -550,
+    675
+   ],
+   "emprise_m": [
+    56,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C8B8A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église de Yarckel",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -450,
+    375
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 48,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "ecole-des-apprentis",
+   "nom": "École des apprentis",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    450,
+    375
+   ],
+   "emprise_m": [
+    44,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#D9CDB6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "clinique-de-yarckel",
+   "nom": "Clinique de Yarckel",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    250,
+    175
+   ],
+   "emprise_m": [
+    40,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E1DACB",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "caserne-de-la-porte-ouest",
+   "nom": "Caserne de la porte ouest",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -50,
+    875
+   ],
+   "emprise_m": [
+    60,
+    50
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "poste-porte-ouest",
+   "nom": "Poste de garde de la porte ouest",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    50,
+    875
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-4",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-2",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -170,
+     425
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 22,
+    "nom": "Tilleul des Compagnons"
+   },
+   {
+    "position": [
+     150,
+     900
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne de la porte ouest"
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   }
+  ],
+  "parcs": [
+   {
+    "id": "promenade-des-artisans",
+    "nom": "Promenade des Artisans",
+    "canon": "A",
+    "polygone": [
+     [
+      -796.3,
+      533.2
+     ],
+     [
+      -608.2,
+      533.2
+     ],
+     [
+      -608.2,
+      619.3
+     ],
+     [
+      -744.8,
+      619.3
+     ],
+     [
+      -748.9,
+      614.6
+     ],
+     [
+      -787.5,
+      564.3
+     ],
+     [
+      -796.3,
+      551.1
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "peuplier",
+     "erable"
+    ],
+    "arbres_par_ha": 62
+   },
+   {
+    "id": "jardin-de-la-porte-ouest",
+    "nom": "Jardin de la Porte Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -394.3,
+      728.7
+     ],
+     [
+      -205.7,
+      728.7
+     ],
+     [
+      -205.7,
+      819.3
+     ],
+     [
+      -394.3,
+      819.3
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   },
+   {
+    "id": "jardin-des-compagnons",
+    "nom": "Jardin des Compagnons",
+    "canon": "A",
+    "polygone": [
+     [
+      303.7,
+      233.2
+     ],
+     [
+      494.3,
+      233.2
+     ],
+     [
+      494.3,
+      319.3
+     ],
+     [
+      303.7,
+      319.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "parc-des-carrieres",
+    "nom": "Parc des Carrières",
+    "canon": "A",
+    "polygone": [
+     [
+      505.7,
+      630.7
+     ],
+     [
+      694.3,
+      630.7
+     ],
+     [
+      694.3,
+      675.1
+     ],
+     [
+      662.3,
+      707.1
+     ],
+     [
+      646.1,
+      721.3
+     ],
+     [
+      505.7,
+      721.3
+     ]
+    ],
+    "essences": [
+     "pin",
+     "bouleau",
+     "tilleul"
+    ],
+    "arbres_par_ha": 55
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -485,
+      -60
+     ],
+     [
+      -340,
+      -60
+     ],
+     [
+      -340,
+      -480
+     ],
+     [
+      -485,
+      -480
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      340,
+      -60
+     ],
+     [
+      485,
+      -60
+     ],
+     [
+      485,
+      -480
+     ],
+     [
+      340,
+      -480
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -495,
+      -560
+     ],
+     [
+      495,
+      -560
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      20,
+      -330
+     ],
+     [
+      310,
+      -330
+     ],
+     [
+      310,
+      -480
+     ],
+     [
+      20,
+      -480
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -700,
+    300
+   ],
+   [
+    700,
+    300
+   ],
+   [
+    -300,
+    600
+   ],
+   [
+    250,
+    700
+   ],
+   [
+    -800,
+    650
+   ]
+  ],
+  "fontaines": [
+   [
+    250,
+    475
+   ],
+   [
+    -570,
+    150
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1070,
+    1670,
+    730
+   ],
+   "cible": [
+    30,
+    470,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    670,
+    1.8
+   ],
+   "cible": [
+    0,
+    220,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "cour-des-metiers",
+   "nom": "Cour des Métiers et halle",
+   "oeil": [
+    380,
+    445,
+    2.4
+   ],
+   "cible": [
+    250,
+    555,
+    7
+   ],
+   "fov": 62
+  },
+  {
+   "id": "place-des-compagnons",
+   "nom": "Place des Compagnons",
+   "oeil": [
+    -400,
+    365,
+    2.8
+   ],
+   "cible": [
+    -420,
+    165,
+    9
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-ateliers",
+   "nom": "Ateliers de menuiserie et de verrerie",
+   "oeil": [
+    460,
+    325,
+    6
+   ],
+   "cible": [
+    550,
+    525,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "porte-ouest",
+   "nom": "Caserne et poste de la porte ouest",
+   "oeil": [
+    190,
+    800,
+    3.5
+   ],
+   "cible": [
+    -60,
+    930,
+    10
+   ],
+   "fov": 62
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -529.4,
+    847.2,
+    52.5
+   ],
+   "cible": [
+    -173.5,
+    983.8,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    3,
+    840,
+    1.8
+   ],
+   "cible": [
+    0,
+    1000,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Yarckel en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-afflux-des-evacues",
+   "nom": "850, afflux des évacués",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) : l'évacuation vers l'intérieur [C] ; accueil des évacués à Yarckel : adaptation",
+     "canon": "A"
+    },
+    {
+     "ref": "affluence, brume : adaptation (aucune destruction : le district n'est pas touché)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 1
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

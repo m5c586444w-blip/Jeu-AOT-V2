@@ -23,7 +23,7 @@
 | C13 | Multijoueur réseau (27) : conseil mixte, camps, trahison | en cours | A | tronc | C3, C9 | tranches 1–3 faites et revues (lockstep, bataille 20 Hz, camps rivaux ; D-178/179, dette 104–107), salon pur (D-180) et votes purs (D-181) ; reste : messages réseau salon/votes, conseils par camp, interface (barre des joueurs), trahison (effets), transfert d hôte |
 | C14 | P9 / P10 / PACK recadrés | à faire | — | tronc | C5–C9, C13, C15–C18 | ancienne feuille de route gelée |
 | C15 | Lieux : mur Rose (ex-LC-B) | à revoir (6 lieux faits : Trost, Karanes, Utopia, Krolva, camp, QG ; D-185, D-186 ; reste captures complètes dette 110 + revue) | A 2026-10-16 | tronc | C1 | reste : captures complètes (dette 110) ; revue faite (`docs/reports/C15-revue.md`, réserves corrigées) |
-| C16 | Lieux : mur Sina (ex-LC-C) | à faire | — | tronc | C15 | voie B |
+| C16 | Lieux : mur Sina (ex-LC-C) | en cours (Stohess, Orvud, Ehrmich, Yarckel, Mitras faits ; D-187) | A 2026-10-16 | tronc | C15 | reste : ville souterraine, chapelle Reiss, captures complètes, revue |
 | C17 | Lieux : hors-murs (ex-LC-D) | à faire | — | tronc | C15 | voie B |
 | C18 | Lieux : Marley, Hizuru, Alliés, couverture de l'atlas | à faire | — | tronc | C16, C17 | « tout lieu jouable » |
 
@@ -32,7 +32,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
 ### [2026-10-16, nuit] A → B
-- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. C10 fait (rapport `docs/reports/C10.md`). C15 : 6 lieux du mur Rose faits (D-185, D-186). PROCHAINE ACTION EXACTE : `npm run places:captures -- trost karanes utopia krolva camp-entrainement qg-garnison` en arrière-plan (≈ 2 h par lieu, à relancer si l'environnement redémarre) pour lever le KO de `places:valider`, puis C16 (mur Sina) ; sinon C13 (messages réseau salon/votes). Avant C15 ; A sinon reprend C13 (messages réseau salon/votes).
+- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. C10 fait (rapport `docs/reports/C10.md`). C15 : 6 lieux du mur Rose faits (D-185, D-186). PROCHAINE ACTION EXACTE : `npm run places:captures -- trost karanes utopia krolva camp-entrainement qg-garnison` en arrière-plan (≈ 2 h par lieu, à relancer si l'environnement redémarre) pour lever le KO de `places:valider`, puis C16 tranche 2 (ville souterraine, chapelle Reiss : `src/tools/places/auteur/`, même méthode), revue indépendante C16 ; sinon C13 (messages réseau salon/votes). Avant C15 ; A sinon reprend C13 (messages réseau salon/votes).
 
 ### [2026-10-15, nuit] A → B
 - **C2 fait** (D-175) : 12 emblèmes en données, règle R15, rapport `docs/reports/C2.md`. **B : ne refais pas C2 ; va à C10** (Blender, outillage), puis C15/C11. PROCHAINE ACTION EXACTE (A) : C10 si B ne l'a pas pris, sinon reste de C9 (`smoke:bataille`, piles sur la carte).

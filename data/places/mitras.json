@@ -1,0 +1,13305 @@
+{
+ "id": "mitras",
+ "nom": "Mitras",
+ "libelle": "Mitras (capitale)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Mitras, capitale, dans Wall Sina, avec ville souterraine [C] ; docs/spec/06 I01 (rang 5) : cour royale, Cabinet, cathédrale [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "data/provinces/paradis.json : poi_cathedrale_murs et poi_tribunal_militaire dans prov_mitras [C] ; docs/spec/06 I08 : le « quartier des nobles » est un POI de Mitras [C] ; data/scenarios/sandbox_845.json : 1 000 soldats de la Police militaire",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé, noms de rues, de places, de quartiers et de bâtiments, plan du château, dimensions : adaptation (création C16, `docs/lore/creations.md`) ; enceinte propre non modélisée par le schéma (Q20)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_mitras",
+ "style": "E06",
+ "population": {
+  "province": "prov_mitras",
+  "part": 1,
+  "canon": "C",
+  "note": "100 % de la population de `prov_mitras` au départ de scn_sandbox_845 (95 652 hab.) ; la province existe [C]. La ville souterraine est une autre province (`prov_ville_souterraine`) et un autre lieu."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 230,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -1130,
+   -1130
+  ],
+  [
+   1130,
+   -1130
+  ],
+  [
+   1130,
+   1130
+  ],
+  [
+   -1130,
+   1130
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "centre",
+  "canon": "C"
+ },
+ "etendue_m": 3000,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Rue des Courtisans",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -1100
+    ],
+    [
+     -1100,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1",
+   "nom": "Rue des Huissiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1000,
+     -1100
+    ],
+    [
+     -1000,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Ruelle des Carrosses",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -900,
+     -1100
+    ],
+    [
+     -900,
+     1100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue des Secrétaires",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -800,
+     -1100
+    ],
+    [
+     -800,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-0",
+   "nom": "Rue des Chambellans",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -1100
+    ],
+    [
+     -700,
+     -700
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-1",
+   "nom": "Rue des Chambellans",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     -500
+    ],
+    [
+     -700,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5-0",
+   "nom": "Rue des Orfèvres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -600,
+     -1100
+    ],
+    [
+     -600,
+     -700
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5-1",
+   "nom": "Rue des Orfèvres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -600,
+     -500
+    ],
+    [
+     -600,
+     1100
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Joailliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     -1100
+    ],
+    [
+     -500,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Couturières",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     -1100
+    ],
+    [
+     -400,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -300,
+     -800
+    ],
+    [
+     -300,
+     1100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-9-0",
+   "nom": "Rue des Parfumeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -200,
+     -800
+    ],
+    [
+     -200,
+     700
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9-1",
+   "nom": "Rue des Parfumeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -200,
+     900
+    ],
+    [
+     -200,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-10",
+   "nom": "Rue des Libraires",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -100,
+     -700
+    ],
+    [
+     -100,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Grande Avenue",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     -700
+    ],
+    [
+     0,
+     1100
+    ]
+   ],
+   "largeur_m": 24,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12",
+   "nom": "Rue des Carrossiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     -700
+    ],
+    [
+     100,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13-0",
+   "nom": "Rue des Ébénistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     -800
+    ],
+    [
+     200,
+     100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13-1",
+   "nom": "Rue des Ébénistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     300
+    ],
+    [
+     200,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-0",
+   "nom": "Ruelle du Valet",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     300,
+     -800
+    ],
+    [
+     300,
+     100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-14-1",
+   "nom": "Ruelle du Valet",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     300,
+     300
+    ],
+    [
+     300,
+     1100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-15-0",
+   "nom": "Rue des Horlogers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     -1100
+    ],
+    [
+     400,
+     -400
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-1",
+   "nom": "Rue des Horlogers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     -200
+    ],
+    [
+     400,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16",
+   "nom": "Rue des Fleuristes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     500,
+     -1100
+    ],
+    [
+     500,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Rue des Traiteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     600,
+     -1100
+    ],
+    [
+     600,
+     1100
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-18-0",
+   "nom": "Rue des Perruquiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     700,
+     -1100
+    ],
+    [
+     700,
+     -100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-18-1",
+   "nom": "Rue des Perruquiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     700,
+     100
+    ],
+    [
+     700,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue des Armuriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     800,
+     -1100
+    ],
+    [
+     800,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-20",
+   "nom": "Ruelle des Messagers",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     900,
+     -1100
+    ],
+    [
+     900,
+     1100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-21",
+   "nom": "Rue des Chapeliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1000,
+     -1100
+    ],
+    [
+     1000,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-22",
+   "nom": "Rue des Tailleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1100,
+     -1100
+    ],
+    [
+     1100,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-0",
+   "nom": "Rue des Grilles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -1100
+    ],
+    [
+     1100,
+     -1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1-0",
+   "nom": "Rue du Cabinet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -1000
+    ],
+    [
+     -400,
+     -1000
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1-1",
+   "nom": "Rue du Cabinet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     -1000
+    ],
+    [
+     1100,
+     -1000
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2-0",
+   "nom": "Ruelle des Carrosses",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1100,
+     -900
+    ],
+    [
+     -400,
+     -900
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2-1",
+   "nom": "Ruelle des Carrosses",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     400,
+     -900
+    ],
+    [
+     1100,
+     -900
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue de la Cour",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -800
+    ],
+    [
+     1100,
+     -800
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue des Hôtels",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -700
+    ],
+    [
+     1100,
+     -700
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-0",
+   "nom": "Rue de la Cathédrale",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -600
+    ],
+    [
+     -800,
+     -600
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-1",
+   "nom": "Rue de la Cathédrale",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     -600
+    ],
+    [
+     1100,
+     -600
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue du Palais de Justice",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -500
+    ],
+    [
+     1100,
+     -500
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue de l'Hôtel de Ville",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -400
+    ],
+    [
+     1100,
+     -400
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8-0",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1100,
+     -300
+    ],
+    [
+     300,
+     -300
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-8-1",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     500,
+     -300
+    ],
+    [
+     1100,
+     -300
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue du Marché",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -200
+    ],
+    [
+     1100,
+     -200
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-10",
+   "nom": "Rue des Halles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     -100
+    ],
+    [
+     1100,
+     -100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11-0",
+   "nom": "Rue des Remises",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     0
+    ],
+    [
+     600,
+     0
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11-1",
+   "nom": "Rue des Remises",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     800,
+     0
+    ],
+    [
+     1100,
+     0
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-12",
+   "nom": "Rue des Cochers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     100
+    ],
+    [
+     1100,
+     100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-13-0",
+   "nom": "Rue du Guet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     200
+    ],
+    [
+     100,
+     200
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-13-1",
+   "nom": "Rue du Guet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     200
+    ],
+    [
+     1100,
+     200
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-14",
+   "nom": "Ruelle du Valet",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1100,
+     300
+    ],
+    [
+     1100,
+     300
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-15",
+   "nom": "Rue des Messageries",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     400
+    ],
+    [
+     1100,
+     400
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-16",
+   "nom": "Rue des Lanternes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     500
+    ],
+    [
+     1100,
+     500
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-17",
+   "nom": "Rue des Fiacres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     600
+    ],
+    [
+     1100,
+     600
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-18",
+   "nom": "Rue du Sud",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     700
+    ],
+    [
+     1100,
+     700
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-19-0",
+   "nom": "Ruelle des Messagers",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1100,
+     800
+    ],
+    [
+     -300,
+     800
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-19-1",
+   "nom": "Ruelle des Messagers",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -100,
+     800
+    ],
+    [
+     1100,
+     800
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-20",
+   "nom": "Rue des Entrepôts",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     900
+    ],
+    [
+     1100,
+     900
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-21",
+   "nom": "Rue des Magasins",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     1000
+    ],
+    [
+     1100,
+     1000
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-22",
+   "nom": "Rue des Grilles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     1100
+    ],
+    [
+     1100,
+     1100
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "cour-d-honneur",
+   "nom": "Cour d'honneur du château",
+   "canon": "A",
+   "polygone": [
+    [
+     -194.3,
+     -794.3
+    ],
+    [
+     194.3,
+     -794.3
+    ],
+    [
+     194.3,
+     -705.7
+    ],
+    [
+     -194.3,
+     -705.7
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": [
+    0,
+    -750
+   ],
+   "marche": false
+  },
+  {
+   "id": "place-du-grand-marche",
+   "nom": "Place du Grand Marché",
+   "canon": "A",
+   "polygone": [
+    [
+     105.7,
+     105.7
+    ],
+    [
+     394.3,
+     105.7
+    ],
+    [
+     394.3,
+     296.3
+    ],
+    [
+     105.7,
+     296.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    250,
+    201
+   ],
+   "marche": true
+  },
+  {
+   "id": "place-de-la-cathedrale",
+   "nom": "Place de la Cathédrale",
+   "canon": "A",
+   "polygone": [
+    [
+     303.7,
+     -394.3
+    ],
+    [
+     494.3,
+     -394.3
+    ],
+    [
+     494.3,
+     -205.7
+    ],
+    [
+     303.7,
+     -205.7
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": [
+    399,
+    -300
+   ],
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "negoce": {
+   "etages": [
+    3,
+    4,
+    3,
+    3
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "mansarde"
+   ],
+   "pente_deg": [
+    42,
+    54
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "enduit",
+    "pierre_taillee",
+    "colombage",
+    "brique"
+   ],
+   "teintes": [
+    "#EBDCC0",
+    "#E2CCA6",
+    "#EDD6BE",
+    "#DDD6BE",
+    "#E6D8B8",
+    "#D9C29C"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9.5
+   ],
+   "profondeur_m": 14,
+   "boutiques": true,
+   "passage_m": 36,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 80
+   }
+  },
+  "hotels": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.5,
+   "toits": [
+    "mansarde",
+    "croupe",
+    "mansarde",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    40,
+    56
+   ],
+   "couvertures": [
+    "ardoise",
+    "ardoise",
+    "cuivre",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_taillee",
+    "enduit",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#E6DFD0",
+    "#DCD3C0",
+    "#EAE2D0",
+    "#D6CCB8",
+    "#E2D8C4"
+   ],
+   "parcelles_m": [
+    16,
+    22,
+    14,
+    20
+   ],
+   "profondeur_m": 20,
+   "boutiques": false,
+   "passage_m": 60,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 90
+   }
+  },
+  "entrepots": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 45
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieux-mitras",
+   "nom": "Vieux Mitras",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-chateau",
+   "nom": "Quartier du Château et du Cabinet",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-nobles",
+   "nom": "Quartier des Nobles",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-cathedrale",
+   "nom": "Quartier de la Cathédrale",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-grand-marche",
+   "nom": "Quartier du Grand Marché",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-entrepots",
+   "nom": "Quartier des Entrepôts du Sud-Est",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-police-militaire",
+   "nom": "Quartier de la Police militaire",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-faubourgs",
+   "nom": "Quartiers des Artisans et des Journaliers",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -1094.3
+    ],
+    [
+     -1005.7,
+     -1094.3
+    ],
+    [
+     -1005.7,
+     -1005.7
+    ],
+    [
+     -1094.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -994.3
+    ],
+    [
+     -1005.7,
+     -994.3
+    ],
+    [
+     -1005.7,
+     -903.7
+    ],
+    [
+     -1094.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -896.3
+    ],
+    [
+     -1005.7,
+     -896.3
+    ],
+    [
+     -1005.7,
+     -805.7
+    ],
+    [
+     -1094.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -794.3
+    ],
+    [
+     -1005.7,
+     -794.3
+    ],
+    [
+     -1005.7,
+     -705.7
+    ],
+    [
+     -1094.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -694.3
+    ],
+    [
+     -1005.7,
+     -694.3
+    ],
+    [
+     -1005.7,
+     -608.2
+    ],
+    [
+     -1094.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-5",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -591.8
+    ],
+    [
+     -1005.7,
+     -591.8
+    ],
+    [
+     -1005.7,
+     -505.7
+    ],
+    [
+     -1094.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -494.3
+    ],
+    [
+     -1005.7,
+     -494.3
+    ],
+    [
+     -1005.7,
+     -405.7
+    ],
+    [
+     -1094.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -1094.3,
+     -394.3
+    ],
+    [
+     -1005.7,
+     -394.3
+    ],
+    [
+     -1005.7,
+     -303.7
+    ],
+    [
+     -1094.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-0-8",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     -296.3
+    ],
+    [
+     -1005.7,
+     -296.3
+    ],
+    [
+     -1005.7,
+     -205.7
+    ],
+    [
+     -1094.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-9",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     -194.3
+    ],
+    [
+     -1005.7,
+     -194.3
+    ],
+    [
+     -1005.7,
+     -105.7
+    ],
+    [
+     -1094.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     -94.3
+    ],
+    [
+     -1005.7,
+     -94.3
+    ],
+    [
+     -1005.7,
+     -8.2
+    ],
+    [
+     -1094.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     8.2
+    ],
+    [
+     -1005.7,
+     8.2
+    ],
+    [
+     -1005.7,
+     94.3
+    ],
+    [
+     -1094.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     105.7
+    ],
+    [
+     -1005.7,
+     105.7
+    ],
+    [
+     -1005.7,
+     194.3
+    ],
+    [
+     -1094.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     205.7
+    ],
+    [
+     -1005.7,
+     205.7
+    ],
+    [
+     -1005.7,
+     296.3
+    ],
+    [
+     -1094.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     303.7
+    ],
+    [
+     -1005.7,
+     303.7
+    ],
+    [
+     -1005.7,
+     394.3
+    ],
+    [
+     -1094.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     405.7
+    ],
+    [
+     -1005.7,
+     405.7
+    ],
+    [
+     -1005.7,
+     491.8
+    ],
+    [
+     -1094.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     508.2
+    ],
+    [
+     -1005.7,
+     508.2
+    ],
+    [
+     -1005.7,
+     594.3
+    ],
+    [
+     -1094.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     605.7
+    ],
+    [
+     -1005.7,
+     605.7
+    ],
+    [
+     -1005.7,
+     694.3
+    ],
+    [
+     -1094.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     705.7
+    ],
+    [
+     -1005.7,
+     705.7
+    ],
+    [
+     -1005.7,
+     796.3
+    ],
+    [
+     -1094.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -1094.3,
+     803.7
+    ],
+    [
+     -1005.7,
+     803.7
+    ],
+    [
+     -1005.7,
+     894.3
+    ],
+    [
+     -1094.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-0-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     905.7
+    ],
+    [
+     -1005.7,
+     905.7
+    ],
+    [
+     -1005.7,
+     994.3
+    ],
+    [
+     -1094.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     1005.7
+    ],
+    [
+     -1005.7,
+     1005.7
+    ],
+    [
+     -1005.7,
+     1094.3
+    ],
+    [
+     -1094.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -1094.3
+    ],
+    [
+     -903.7,
+     -1094.3
+    ],
+    [
+     -903.7,
+     -1005.7
+    ],
+    [
+     -994.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -994.3
+    ],
+    [
+     -903.7,
+     -994.3
+    ],
+    [
+     -903.7,
+     -903.7
+    ],
+    [
+     -994.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -896.3
+    ],
+    [
+     -903.7,
+     -896.3
+    ],
+    [
+     -903.7,
+     -805.7
+    ],
+    [
+     -994.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -794.3
+    ],
+    [
+     -903.7,
+     -794.3
+    ],
+    [
+     -903.7,
+     -705.7
+    ],
+    [
+     -994.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -694.3
+    ],
+    [
+     -903.7,
+     -694.3
+    ],
+    [
+     -903.7,
+     -608.2
+    ],
+    [
+     -994.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -591.8
+    ],
+    [
+     -903.7,
+     -591.8
+    ],
+    [
+     -903.7,
+     -505.7
+    ],
+    [
+     -994.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -494.3
+    ],
+    [
+     -903.7,
+     -494.3
+    ],
+    [
+     -903.7,
+     -405.7
+    ],
+    [
+     -994.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -994.3,
+     -394.3
+    ],
+    [
+     -903.7,
+     -394.3
+    ],
+    [
+     -903.7,
+     -303.7
+    ],
+    [
+     -994.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-1-8",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     -296.3
+    ],
+    [
+     -903.7,
+     -296.3
+    ],
+    [
+     -903.7,
+     -205.7
+    ],
+    [
+     -994.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-9",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     -194.3
+    ],
+    [
+     -903.7,
+     -194.3
+    ],
+    [
+     -903.7,
+     -105.7
+    ],
+    [
+     -994.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     -94.3
+    ],
+    [
+     -903.7,
+     -94.3
+    ],
+    [
+     -903.7,
+     -8.2
+    ],
+    [
+     -994.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     8.2
+    ],
+    [
+     -903.7,
+     8.2
+    ],
+    [
+     -903.7,
+     94.3
+    ],
+    [
+     -994.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     105.7
+    ],
+    [
+     -903.7,
+     105.7
+    ],
+    [
+     -903.7,
+     194.3
+    ],
+    [
+     -994.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     205.7
+    ],
+    [
+     -903.7,
+     205.7
+    ],
+    [
+     -903.7,
+     296.3
+    ],
+    [
+     -994.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     303.7
+    ],
+    [
+     -903.7,
+     303.7
+    ],
+    [
+     -903.7,
+     394.3
+    ],
+    [
+     -994.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     405.7
+    ],
+    [
+     -903.7,
+     405.7
+    ],
+    [
+     -903.7,
+     491.8
+    ],
+    [
+     -994.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     508.2
+    ],
+    [
+     -903.7,
+     508.2
+    ],
+    [
+     -903.7,
+     594.3
+    ],
+    [
+     -994.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     605.7
+    ],
+    [
+     -903.7,
+     605.7
+    ],
+    [
+     -903.7,
+     694.3
+    ],
+    [
+     -994.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     705.7
+    ],
+    [
+     -903.7,
+     705.7
+    ],
+    [
+     -903.7,
+     796.3
+    ],
+    [
+     -994.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -994.3,
+     803.7
+    ],
+    [
+     -903.7,
+     803.7
+    ],
+    [
+     -903.7,
+     894.3
+    ],
+    [
+     -994.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-1-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     905.7
+    ],
+    [
+     -903.7,
+     905.7
+    ],
+    [
+     -903.7,
+     994.3
+    ],
+    [
+     -994.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     1005.7
+    ],
+    [
+     -903.7,
+     1005.7
+    ],
+    [
+     -903.7,
+     1094.3
+    ],
+    [
+     -994.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -1094.3
+    ],
+    [
+     -805.7,
+     -1094.3
+    ],
+    [
+     -805.7,
+     -1005.7
+    ],
+    [
+     -896.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -994.3
+    ],
+    [
+     -805.7,
+     -994.3
+    ],
+    [
+     -805.7,
+     -903.7
+    ],
+    [
+     -896.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -896.3
+    ],
+    [
+     -805.7,
+     -896.3
+    ],
+    [
+     -805.7,
+     -805.7
+    ],
+    [
+     -896.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -794.3
+    ],
+    [
+     -805.7,
+     -794.3
+    ],
+    [
+     -805.7,
+     -705.7
+    ],
+    [
+     -896.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -694.3
+    ],
+    [
+     -805.7,
+     -694.3
+    ],
+    [
+     -805.7,
+     -608.2
+    ],
+    [
+     -896.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -591.8
+    ],
+    [
+     -805.7,
+     -591.8
+    ],
+    [
+     -805.7,
+     -505.7
+    ],
+    [
+     -896.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -494.3
+    ],
+    [
+     -805.7,
+     -494.3
+    ],
+    [
+     -805.7,
+     -405.7
+    ],
+    [
+     -896.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -896.3,
+     -394.3
+    ],
+    [
+     -805.7,
+     -394.3
+    ],
+    [
+     -805.7,
+     -303.7
+    ],
+    [
+     -896.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-2-8",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     -296.3
+    ],
+    [
+     -805.7,
+     -296.3
+    ],
+    [
+     -805.7,
+     -205.7
+    ],
+    [
+     -896.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-9",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     -194.3
+    ],
+    [
+     -805.7,
+     -194.3
+    ],
+    [
+     -805.7,
+     -105.7
+    ],
+    [
+     -896.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     -94.3
+    ],
+    [
+     -805.7,
+     -94.3
+    ],
+    [
+     -805.7,
+     -8.2
+    ],
+    [
+     -896.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     8.2
+    ],
+    [
+     -805.7,
+     8.2
+    ],
+    [
+     -805.7,
+     94.3
+    ],
+    [
+     -896.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     105.7
+    ],
+    [
+     -805.7,
+     105.7
+    ],
+    [
+     -805.7,
+     194.3
+    ],
+    [
+     -896.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     205.7
+    ],
+    [
+     -805.7,
+     205.7
+    ],
+    [
+     -805.7,
+     296.3
+    ],
+    [
+     -896.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     303.7
+    ],
+    [
+     -805.7,
+     303.7
+    ],
+    [
+     -805.7,
+     394.3
+    ],
+    [
+     -896.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     405.7
+    ],
+    [
+     -805.7,
+     405.7
+    ],
+    [
+     -805.7,
+     491.8
+    ],
+    [
+     -896.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     508.2
+    ],
+    [
+     -805.7,
+     508.2
+    ],
+    [
+     -805.7,
+     594.3
+    ],
+    [
+     -896.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     605.7
+    ],
+    [
+     -805.7,
+     605.7
+    ],
+    [
+     -805.7,
+     694.3
+    ],
+    [
+     -896.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     705.7
+    ],
+    [
+     -805.7,
+     705.7
+    ],
+    [
+     -805.7,
+     796.3
+    ],
+    [
+     -896.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -896.3,
+     803.7
+    ],
+    [
+     -805.7,
+     803.7
+    ],
+    [
+     -805.7,
+     894.3
+    ],
+    [
+     -896.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-2-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     905.7
+    ],
+    [
+     -805.7,
+     905.7
+    ],
+    [
+     -805.7,
+     994.3
+    ],
+    [
+     -896.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -896.3,
+     1005.7
+    ],
+    [
+     -805.7,
+     1005.7
+    ],
+    [
+     -805.7,
+     1094.3
+    ],
+    [
+     -896.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -1094.3
+    ],
+    [
+     -705.7,
+     -1094.3
+    ],
+    [
+     -705.7,
+     -1005.7
+    ],
+    [
+     -794.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -994.3
+    ],
+    [
+     -705.7,
+     -994.3
+    ],
+    [
+     -705.7,
+     -903.7
+    ],
+    [
+     -794.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -896.3
+    ],
+    [
+     -705.7,
+     -896.3
+    ],
+    [
+     -705.7,
+     -805.7
+    ],
+    [
+     -794.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -794.3
+    ],
+    [
+     -705.7,
+     -794.3
+    ],
+    [
+     -705.7,
+     -705.7
+    ],
+    [
+     -794.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -494.3
+    ],
+    [
+     -705.7,
+     -494.3
+    ],
+    [
+     -705.7,
+     -405.7
+    ],
+    [
+     -794.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -794.3,
+     -394.3
+    ],
+    [
+     -705.7,
+     -394.3
+    ],
+    [
+     -705.7,
+     -303.7
+    ],
+    [
+     -794.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-3-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     -296.3
+    ],
+    [
+     -705.7,
+     -296.3
+    ],
+    [
+     -705.7,
+     -205.7
+    ],
+    [
+     -794.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     -194.3
+    ],
+    [
+     -705.7,
+     -194.3
+    ],
+    [
+     -705.7,
+     -105.7
+    ],
+    [
+     -794.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-10",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     -94.3
+    ],
+    [
+     -705.7,
+     -94.3
+    ],
+    [
+     -705.7,
+     -8.2
+    ],
+    [
+     -794.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-11",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     8.2
+    ],
+    [
+     -705.7,
+     8.2
+    ],
+    [
+     -705.7,
+     94.3
+    ],
+    [
+     -794.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     105.7
+    ],
+    [
+     -705.7,
+     105.7
+    ],
+    [
+     -705.7,
+     194.3
+    ],
+    [
+     -794.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     205.7
+    ],
+    [
+     -705.7,
+     205.7
+    ],
+    [
+     -705.7,
+     296.3
+    ],
+    [
+     -794.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     303.7
+    ],
+    [
+     -705.7,
+     303.7
+    ],
+    [
+     -705.7,
+     394.3
+    ],
+    [
+     -794.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     405.7
+    ],
+    [
+     -705.7,
+     405.7
+    ],
+    [
+     -705.7,
+     491.8
+    ],
+    [
+     -794.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     508.2
+    ],
+    [
+     -705.7,
+     508.2
+    ],
+    [
+     -705.7,
+     594.3
+    ],
+    [
+     -794.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     605.7
+    ],
+    [
+     -705.7,
+     605.7
+    ],
+    [
+     -705.7,
+     694.3
+    ],
+    [
+     -794.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     705.7
+    ],
+    [
+     -705.7,
+     705.7
+    ],
+    [
+     -705.7,
+     796.3
+    ],
+    [
+     -794.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -794.3,
+     803.7
+    ],
+    [
+     -705.7,
+     803.7
+    ],
+    [
+     -705.7,
+     894.3
+    ],
+    [
+     -794.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-3-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     905.7
+    ],
+    [
+     -705.7,
+     905.7
+    ],
+    [
+     -705.7,
+     994.3
+    ],
+    [
+     -794.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     1005.7
+    ],
+    [
+     -705.7,
+     1005.7
+    ],
+    [
+     -705.7,
+     1094.3
+    ],
+    [
+     -794.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -1094.3
+    ],
+    [
+     -608.2,
+     -1094.3
+    ],
+    [
+     -608.2,
+     -1005.7
+    ],
+    [
+     -694.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -994.3
+    ],
+    [
+     -608.2,
+     -994.3
+    ],
+    [
+     -608.2,
+     -903.7
+    ],
+    [
+     -694.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -896.3
+    ],
+    [
+     -608.2,
+     -896.3
+    ],
+    [
+     -608.2,
+     -805.7
+    ],
+    [
+     -694.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -794.3
+    ],
+    [
+     -608.2,
+     -794.3
+    ],
+    [
+     -608.2,
+     -705.7
+    ],
+    [
+     -694.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -494.3
+    ],
+    [
+     -608.2,
+     -494.3
+    ],
+    [
+     -608.2,
+     -405.7
+    ],
+    [
+     -694.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -694.3,
+     -394.3
+    ],
+    [
+     -608.2,
+     -394.3
+    ],
+    [
+     -608.2,
+     -303.7
+    ],
+    [
+     -694.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     -296.3
+    ],
+    [
+     -608.2,
+     -296.3
+    ],
+    [
+     -608.2,
+     -205.7
+    ],
+    [
+     -694.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     -194.3
+    ],
+    [
+     -608.2,
+     -194.3
+    ],
+    [
+     -608.2,
+     -105.7
+    ],
+    [
+     -694.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-10",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     -94.3
+    ],
+    [
+     -608.2,
+     -94.3
+    ],
+    [
+     -608.2,
+     -8.2
+    ],
+    [
+     -694.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-11",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     8.2
+    ],
+    [
+     -608.2,
+     8.2
+    ],
+    [
+     -608.2,
+     94.3
+    ],
+    [
+     -694.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     105.7
+    ],
+    [
+     -608.2,
+     105.7
+    ],
+    [
+     -608.2,
+     194.3
+    ],
+    [
+     -694.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     205.7
+    ],
+    [
+     -608.2,
+     205.7
+    ],
+    [
+     -608.2,
+     296.3
+    ],
+    [
+     -694.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     303.7
+    ],
+    [
+     -608.2,
+     303.7
+    ],
+    [
+     -608.2,
+     394.3
+    ],
+    [
+     -694.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     405.7
+    ],
+    [
+     -608.2,
+     405.7
+    ],
+    [
+     -608.2,
+     491.8
+    ],
+    [
+     -694.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     508.2
+    ],
+    [
+     -608.2,
+     508.2
+    ],
+    [
+     -608.2,
+     594.3
+    ],
+    [
+     -694.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     605.7
+    ],
+    [
+     -608.2,
+     605.7
+    ],
+    [
+     -608.2,
+     694.3
+    ],
+    [
+     -694.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     705.7
+    ],
+    [
+     -608.2,
+     705.7
+    ],
+    [
+     -608.2,
+     796.3
+    ],
+    [
+     -694.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     803.7
+    ],
+    [
+     -608.2,
+     803.7
+    ],
+    [
+     -608.2,
+     894.3
+    ],
+    [
+     -694.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-4-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     905.7
+    ],
+    [
+     -608.2,
+     905.7
+    ],
+    [
+     -608.2,
+     994.3
+    ],
+    [
+     -694.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     1005.7
+    ],
+    [
+     -608.2,
+     1005.7
+    ],
+    [
+     -608.2,
+     1094.3
+    ],
+    [
+     -694.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -1094.3
+    ],
+    [
+     -505.7,
+     -1094.3
+    ],
+    [
+     -505.7,
+     -1005.7
+    ],
+    [
+     -591.8,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -994.3
+    ],
+    [
+     -505.7,
+     -994.3
+    ],
+    [
+     -505.7,
+     -903.7
+    ],
+    [
+     -591.8,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -896.3
+    ],
+    [
+     -505.7,
+     -896.3
+    ],
+    [
+     -505.7,
+     -805.7
+    ],
+    [
+     -591.8,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -794.3
+    ],
+    [
+     -505.7,
+     -794.3
+    ],
+    [
+     -505.7,
+     -705.7
+    ],
+    [
+     -591.8,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -494.3
+    ],
+    [
+     -505.7,
+     -494.3
+    ],
+    [
+     -505.7,
+     -405.7
+    ],
+    [
+     -591.8,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -591.8,
+     -394.3
+    ],
+    [
+     -505.7,
+     -394.3
+    ],
+    [
+     -505.7,
+     -303.7
+    ],
+    [
+     -591.8,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     -296.3
+    ],
+    [
+     -505.7,
+     -296.3
+    ],
+    [
+     -505.7,
+     -205.7
+    ],
+    [
+     -591.8,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     -194.3
+    ],
+    [
+     -505.7,
+     -194.3
+    ],
+    [
+     -505.7,
+     -105.7
+    ],
+    [
+     -591.8,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-10",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     -94.3
+    ],
+    [
+     -505.7,
+     -94.3
+    ],
+    [
+     -505.7,
+     -8.2
+    ],
+    [
+     -591.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-11",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     8.2
+    ],
+    [
+     -505.7,
+     8.2
+    ],
+    [
+     -505.7,
+     94.3
+    ],
+    [
+     -591.8,
+     94.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     105.7
+    ],
+    [
+     -505.7,
+     105.7
+    ],
+    [
+     -505.7,
+     194.3
+    ],
+    [
+     -591.8,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     205.7
+    ],
+    [
+     -505.7,
+     205.7
+    ],
+    [
+     -505.7,
+     296.3
+    ],
+    [
+     -591.8,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     303.7
+    ],
+    [
+     -505.7,
+     303.7
+    ],
+    [
+     -505.7,
+     394.3
+    ],
+    [
+     -591.8,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     405.7
+    ],
+    [
+     -505.7,
+     405.7
+    ],
+    [
+     -505.7,
+     491.8
+    ],
+    [
+     -591.8,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     508.2
+    ],
+    [
+     -505.7,
+     508.2
+    ],
+    [
+     -505.7,
+     594.3
+    ],
+    [
+     -591.8,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     605.7
+    ],
+    [
+     -505.7,
+     605.7
+    ],
+    [
+     -505.7,
+     694.3
+    ],
+    [
+     -591.8,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     705.7
+    ],
+    [
+     -505.7,
+     705.7
+    ],
+    [
+     -505.7,
+     796.3
+    ],
+    [
+     -591.8,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -591.8,
+     803.7
+    ],
+    [
+     -505.7,
+     803.7
+    ],
+    [
+     -505.7,
+     894.3
+    ],
+    [
+     -591.8,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     905.7
+    ],
+    [
+     -505.7,
+     905.7
+    ],
+    [
+     -505.7,
+     994.3
+    ],
+    [
+     -591.8,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -591.8,
+     1005.7
+    ],
+    [
+     -505.7,
+     1005.7
+    ],
+    [
+     -505.7,
+     1094.3
+    ],
+    [
+     -591.8,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     -1094.3
+    ],
+    [
+     -405.7,
+     -1094.3
+    ],
+    [
+     -405.7,
+     -1005.7
+    ],
+    [
+     -494.3,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     -994.3
+    ],
+    [
+     -405.7,
+     -994.3
+    ],
+    [
+     -405.7,
+     -903.7
+    ],
+    [
+     -494.3,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     -896.3
+    ],
+    [
+     -405.7,
+     -896.3
+    ],
+    [
+     -405.7,
+     -805.7
+    ],
+    [
+     -494.3,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     -794.3
+    ],
+    [
+     -405.7,
+     -794.3
+    ],
+    [
+     -405.7,
+     -705.7
+    ],
+    [
+     -494.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -494.3,
+     -694.3
+    ],
+    [
+     -405.7,
+     -694.3
+    ],
+    [
+     -405.7,
+     -608.2
+    ],
+    [
+     -494.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -494.3,
+     -591.8
+    ],
+    [
+     -405.7,
+     -591.8
+    ],
+    [
+     -405.7,
+     -505.7
+    ],
+    [
+     -494.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -494.3,
+     -494.3
+    ],
+    [
+     -405.7,
+     -494.3
+    ],
+    [
+     -405.7,
+     -405.7
+    ],
+    [
+     -494.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -494.3,
+     -394.3
+    ],
+    [
+     -405.7,
+     -394.3
+    ],
+    [
+     -405.7,
+     -303.7
+    ],
+    [
+     -494.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     -296.3
+    ],
+    [
+     -405.7,
+     -296.3
+    ],
+    [
+     -405.7,
+     -205.7
+    ],
+    [
+     -494.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     -194.3
+    ],
+    [
+     -405.7,
+     -194.3
+    ],
+    [
+     -405.7,
+     -105.7
+    ],
+    [
+     -494.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     -94.3
+    ],
+    [
+     -405.7,
+     -94.3
+    ],
+    [
+     -405.7,
+     -8.2
+    ],
+    [
+     -494.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     8.2
+    ],
+    [
+     -405.7,
+     8.2
+    ],
+    [
+     -405.7,
+     94.3
+    ],
+    [
+     -494.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-12",
+   "quartier": "vieux-mitras",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -494.3,
+     105.7
+    ],
+    [
+     -405.7,
+     105.7
+    ],
+    [
+     -405.7,
+     194.3
+    ],
+    [
+     -494.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     205.7
+    ],
+    [
+     -405.7,
+     205.7
+    ],
+    [
+     -405.7,
+     296.3
+    ],
+    [
+     -494.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-14",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     303.7
+    ],
+    [
+     -405.7,
+     303.7
+    ],
+    [
+     -405.7,
+     394.3
+    ],
+    [
+     -494.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-15",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     405.7
+    ],
+    [
+     -405.7,
+     405.7
+    ],
+    [
+     -405.7,
+     491.8
+    ],
+    [
+     -494.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-16",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     508.2
+    ],
+    [
+     -405.7,
+     508.2
+    ],
+    [
+     -405.7,
+     594.3
+    ],
+    [
+     -494.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-17",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     605.7
+    ],
+    [
+     -405.7,
+     605.7
+    ],
+    [
+     -405.7,
+     694.3
+    ],
+    [
+     -494.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-18",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     705.7
+    ],
+    [
+     -405.7,
+     705.7
+    ],
+    [
+     -405.7,
+     796.3
+    ],
+    [
+     -494.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-19",
+   "quartier": "quartier-de-la-police-militaire",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     803.7
+    ],
+    [
+     -405.7,
+     803.7
+    ],
+    [
+     -405.7,
+     894.3
+    ],
+    [
+     -494.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     905.7
+    ],
+    [
+     -405.7,
+     905.7
+    ],
+    [
+     -405.7,
+     994.3
+    ],
+    [
+     -494.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     1005.7
+    ],
+    [
+     -405.7,
+     1005.7
+    ],
+    [
+     -405.7,
+     1094.3
+    ],
+    [
+     -494.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -394.3,
+     -794.3
+    ],
+    [
+     -303.7,
+     -794.3
+    ],
+    [
+     -303.7,
+     -705.7
+    ],
+    [
+     -394.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -394.3,
+     -694.3
+    ],
+    [
+     -303.7,
+     -694.3
+    ],
+    [
+     -303.7,
+     -608.2
+    ],
+    [
+     -394.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -394.3,
+     -591.8
+    ],
+    [
+     -303.7,
+     -591.8
+    ],
+    [
+     -303.7,
+     -505.7
+    ],
+    [
+     -394.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -394.3,
+     -494.3
+    ],
+    [
+     -303.7,
+     -494.3
+    ],
+    [
+     -303.7,
+     -405.7
+    ],
+    [
+     -394.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "quartier-des-nobles",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -394.3,
+     -394.3
+    ],
+    [
+     -303.7,
+     -394.3
+    ],
+    [
+     -303.7,
+     -303.7
+    ],
+    [
+     -394.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     -296.3
+    ],
+    [
+     -303.7,
+     -296.3
+    ],
+    [
+     -303.7,
+     -205.7
+    ],
+    [
+     -394.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     -194.3
+    ],
+    [
+     -303.7,
+     -194.3
+    ],
+    [
+     -303.7,
+     -105.7
+    ],
+    [
+     -394.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     -94.3
+    ],
+    [
+     -303.7,
+     -94.3
+    ],
+    [
+     -303.7,
+     -8.2
+    ],
+    [
+     -394.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     8.2
+    ],
+    [
+     -303.7,
+     8.2
+    ],
+    [
+     -303.7,
+     94.3
+    ],
+    [
+     -394.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-12",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     105.7
+    ],
+    [
+     -303.7,
+     105.7
+    ],
+    [
+     -303.7,
+     194.3
+    ],
+    [
+     -394.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-13",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     205.7
+    ],
+    [
+     -303.7,
+     205.7
+    ],
+    [
+     -303.7,
+     296.3
+    ],
+    [
+     -394.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     303.7
+    ],
+    [
+     -303.7,
+     303.7
+    ],
+    [
+     -303.7,
+     394.3
+    ],
+    [
+     -394.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     405.7
+    ],
+    [
+     -303.7,
+     405.7
+    ],
+    [
+     -303.7,
+     491.8
+    ],
+    [
+     -394.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -394.3,
+     508.2
+    ],
+    [
+     -303.7,
+     508.2
+    ],
+    [
+     -303.7,
+     594.3
+    ],
+    [
+     -394.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     605.7
+    ],
+    [
+     -303.7,
+     605.7
+    ],
+    [
+     -303.7,
+     694.3
+    ],
+    [
+     -394.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-18",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     705.7
+    ],
+    [
+     -303.7,
+     705.7
+    ],
+    [
+     -303.7,
+     796.3
+    ],
+    [
+     -394.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-19",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     803.7
+    ],
+    [
+     -303.7,
+     803.7
+    ],
+    [
+     -303.7,
+     894.3
+    ],
+    [
+     -394.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     905.7
+    ],
+    [
+     -303.7,
+     905.7
+    ],
+    [
+     -303.7,
+     994.3
+    ],
+    [
+     -394.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -394.3,
+     1005.7
+    ],
+    [
+     -303.7,
+     1005.7
+    ],
+    [
+     -303.7,
+     1094.3
+    ],
+    [
+     -394.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -296.3,
+     -794.3
+    ],
+    [
+     -205.7,
+     -794.3
+    ],
+    [
+     -205.7,
+     -705.7
+    ],
+    [
+     -296.3,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -296.3,
+     -694.3
+    ],
+    [
+     -205.7,
+     -694.3
+    ],
+    [
+     -205.7,
+     -608.2
+    ],
+    [
+     -296.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     -591.8
+    ],
+    [
+     -205.7,
+     -591.8
+    ],
+    [
+     -205.7,
+     -505.7
+    ],
+    [
+     -296.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     -494.3
+    ],
+    [
+     -205.7,
+     -494.3
+    ],
+    [
+     -205.7,
+     -405.7
+    ],
+    [
+     -296.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     -394.3
+    ],
+    [
+     -205.7,
+     -394.3
+    ],
+    [
+     -205.7,
+     -303.7
+    ],
+    [
+     -296.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     -296.3
+    ],
+    [
+     -205.7,
+     -296.3
+    ],
+    [
+     -205.7,
+     -205.7
+    ],
+    [
+     -296.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     -194.3
+    ],
+    [
+     -205.7,
+     -194.3
+    ],
+    [
+     -205.7,
+     -105.7
+    ],
+    [
+     -296.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     -94.3
+    ],
+    [
+     -205.7,
+     -94.3
+    ],
+    [
+     -205.7,
+     -8.2
+    ],
+    [
+     -296.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     8.2
+    ],
+    [
+     -205.7,
+     8.2
+    ],
+    [
+     -205.7,
+     94.3
+    ],
+    [
+     -296.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-12",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     105.7
+    ],
+    [
+     -205.7,
+     105.7
+    ],
+    [
+     -205.7,
+     194.3
+    ],
+    [
+     -296.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-13",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     205.7
+    ],
+    [
+     -205.7,
+     205.7
+    ],
+    [
+     -205.7,
+     296.3
+    ],
+    [
+     -296.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     303.7
+    ],
+    [
+     -205.7,
+     303.7
+    ],
+    [
+     -205.7,
+     394.3
+    ],
+    [
+     -296.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     405.7
+    ],
+    [
+     -205.7,
+     405.7
+    ],
+    [
+     -205.7,
+     491.8
+    ],
+    [
+     -296.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -296.3,
+     508.2
+    ],
+    [
+     -205.7,
+     508.2
+    ],
+    [
+     -205.7,
+     594.3
+    ],
+    [
+     -296.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     605.7
+    ],
+    [
+     -205.7,
+     605.7
+    ],
+    [
+     -205.7,
+     694.3
+    ],
+    [
+     -296.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     905.7
+    ],
+    [
+     -205.7,
+     905.7
+    ],
+    [
+     -205.7,
+     994.3
+    ],
+    [
+     -296.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-8-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -296.3,
+     1005.7
+    ],
+    [
+     -205.7,
+     1005.7
+    ],
+    [
+     -205.7,
+     1094.3
+    ],
+    [
+     -296.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -194.3,
+     -694.3
+    ],
+    [
+     -105.7,
+     -694.3
+    ],
+    [
+     -105.7,
+     -608.2
+    ],
+    [
+     -194.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     -591.8
+    ],
+    [
+     -105.7,
+     -591.8
+    ],
+    [
+     -105.7,
+     -505.7
+    ],
+    [
+     -194.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     -494.3
+    ],
+    [
+     -105.7,
+     -494.3
+    ],
+    [
+     -105.7,
+     -405.7
+    ],
+    [
+     -194.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     -394.3
+    ],
+    [
+     -105.7,
+     -394.3
+    ],
+    [
+     -105.7,
+     -303.7
+    ],
+    [
+     -194.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     -296.3
+    ],
+    [
+     -105.7,
+     -296.3
+    ],
+    [
+     -105.7,
+     -205.7
+    ],
+    [
+     -194.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     -194.3
+    ],
+    [
+     -105.7,
+     -194.3
+    ],
+    [
+     -105.7,
+     -105.7
+    ],
+    [
+     -194.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     -94.3
+    ],
+    [
+     -105.7,
+     -94.3
+    ],
+    [
+     -105.7,
+     -8.2
+    ],
+    [
+     -194.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     8.2
+    ],
+    [
+     -105.7,
+     8.2
+    ],
+    [
+     -105.7,
+     94.3
+    ],
+    [
+     -194.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-12",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     105.7
+    ],
+    [
+     -105.7,
+     105.7
+    ],
+    [
+     -105.7,
+     194.3
+    ],
+    [
+     -194.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-13",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     205.7
+    ],
+    [
+     -105.7,
+     205.7
+    ],
+    [
+     -105.7,
+     296.3
+    ],
+    [
+     -194.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     303.7
+    ],
+    [
+     -105.7,
+     303.7
+    ],
+    [
+     -105.7,
+     394.3
+    ],
+    [
+     -194.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     405.7
+    ],
+    [
+     -105.7,
+     405.7
+    ],
+    [
+     -105.7,
+     491.8
+    ],
+    [
+     -194.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     508.2
+    ],
+    [
+     -105.7,
+     508.2
+    ],
+    [
+     -105.7,
+     594.3
+    ],
+    [
+     -194.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-17",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     605.7
+    ],
+    [
+     -105.7,
+     605.7
+    ],
+    [
+     -105.7,
+     694.3
+    ],
+    [
+     -194.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     905.7
+    ],
+    [
+     -105.7,
+     905.7
+    ],
+    [
+     -105.7,
+     994.3
+    ],
+    [
+     -194.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-9-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     1005.7
+    ],
+    [
+     -105.7,
+     1005.7
+    ],
+    [
+     -105.7,
+     1094.3
+    ],
+    [
+     -194.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -94.3,
+     -694.3
+    ],
+    [
+     -13.2,
+     -694.3
+    ],
+    [
+     -13.2,
+     -608.2
+    ],
+    [
+     -94.3,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     -591.8
+    ],
+    [
+     -13.2,
+     -591.8
+    ],
+    [
+     -13.2,
+     -505.7
+    ],
+    [
+     -94.3,
+     -505.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     -494.3
+    ],
+    [
+     -13.2,
+     -494.3
+    ],
+    [
+     -13.2,
+     -405.7
+    ],
+    [
+     -94.3,
+     -405.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     -394.3
+    ],
+    [
+     -13.2,
+     -394.3
+    ],
+    [
+     -13.2,
+     -303.7
+    ],
+    [
+     -94.3,
+     -303.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     -296.3
+    ],
+    [
+     -13.2,
+     -296.3
+    ],
+    [
+     -13.2,
+     -205.7
+    ],
+    [
+     -94.3,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     -194.3
+    ],
+    [
+     -13.2,
+     -194.3
+    ],
+    [
+     -13.2,
+     -105.7
+    ],
+    [
+     -94.3,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     -94.3
+    ],
+    [
+     -13.2,
+     -94.3
+    ],
+    [
+     -13.2,
+     -8.2
+    ],
+    [
+     -94.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     8.2
+    ],
+    [
+     -13.2,
+     8.2
+    ],
+    [
+     -13.2,
+     94.3
+    ],
+    [
+     -94.3,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-12",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     105.7
+    ],
+    [
+     -13.2,
+     105.7
+    ],
+    [
+     -13.2,
+     194.3
+    ],
+    [
+     -94.3,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-13",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     205.7
+    ],
+    [
+     -13.2,
+     205.7
+    ],
+    [
+     -13.2,
+     296.3
+    ],
+    [
+     -94.3,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     303.7
+    ],
+    [
+     -13.2,
+     303.7
+    ],
+    [
+     -13.2,
+     394.3
+    ],
+    [
+     -94.3,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     405.7
+    ],
+    [
+     -13.2,
+     405.7
+    ],
+    [
+     -13.2,
+     491.8
+    ],
+    [
+     -94.3,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     508.2
+    ],
+    [
+     -13.2,
+     508.2
+    ],
+    [
+     -13.2,
+     594.3
+    ],
+    [
+     -94.3,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-10-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     605.7
+    ],
+    [
+     -13.2,
+     605.7
+    ],
+    [
+     -13.2,
+     694.3
+    ],
+    [
+     -94.3,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-18",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     705.7
+    ],
+    [
+     -13.2,
+     705.7
+    ],
+    [
+     -13.2,
+     796.3
+    ],
+    [
+     -94.3,
+     796.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-19",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     803.7
+    ],
+    [
+     -13.2,
+     803.7
+    ],
+    [
+     -13.2,
+     894.3
+    ],
+    [
+     -94.3,
+     894.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     905.7
+    ],
+    [
+     -13.2,
+     905.7
+    ],
+    [
+     -13.2,
+     994.3
+    ],
+    [
+     -94.3,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-10-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     1005.7
+    ],
+    [
+     -13.2,
+     1005.7
+    ],
+    [
+     -13.2,
+     1094.3
+    ],
+    [
+     -94.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     13.2,
+     -694.3
+    ],
+    [
+     94.3,
+     -694.3
+    ],
+    [
+     94.3,
+     -608.2
+    ],
+    [
+     13.2,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     -591.8
+    ],
+    [
+     94.3,
+     -591.8
+    ],
+    [
+     94.3,
+     -505.7
+    ],
+    [
+     13.2,
+     -505.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     -494.3
+    ],
+    [
+     94.3,
+     -494.3
+    ],
+    [
+     94.3,
+     -405.7
+    ],
+    [
+     13.2,
+     -405.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     -394.3
+    ],
+    [
+     94.3,
+     -394.3
+    ],
+    [
+     94.3,
+     -303.7
+    ],
+    [
+     13.2,
+     -303.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     -296.3
+    ],
+    [
+     94.3,
+     -296.3
+    ],
+    [
+     94.3,
+     -205.7
+    ],
+    [
+     13.2,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     -194.3
+    ],
+    [
+     94.3,
+     -194.3
+    ],
+    [
+     94.3,
+     -105.7
+    ],
+    [
+     13.2,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     -94.3
+    ],
+    [
+     94.3,
+     -94.3
+    ],
+    [
+     94.3,
+     -8.2
+    ],
+    [
+     13.2,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     8.2
+    ],
+    [
+     94.3,
+     8.2
+    ],
+    [
+     94.3,
+     94.3
+    ],
+    [
+     13.2,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-12",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     105.7
+    ],
+    [
+     94.3,
+     105.7
+    ],
+    [
+     94.3,
+     194.3
+    ],
+    [
+     13.2,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-13",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     205.7
+    ],
+    [
+     94.3,
+     205.7
+    ],
+    [
+     94.3,
+     296.3
+    ],
+    [
+     13.2,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     303.7
+    ],
+    [
+     94.3,
+     303.7
+    ],
+    [
+     94.3,
+     394.3
+    ],
+    [
+     13.2,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     405.7
+    ],
+    [
+     94.3,
+     405.7
+    ],
+    [
+     94.3,
+     491.8
+    ],
+    [
+     13.2,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     13.2,
+     508.2
+    ],
+    [
+     94.3,
+     508.2
+    ],
+    [
+     94.3,
+     594.3
+    ],
+    [
+     13.2,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-11-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     605.7
+    ],
+    [
+     94.3,
+     605.7
+    ],
+    [
+     94.3,
+     694.3
+    ],
+    [
+     13.2,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-18",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     705.7
+    ],
+    [
+     94.3,
+     705.7
+    ],
+    [
+     94.3,
+     796.3
+    ],
+    [
+     13.2,
+     796.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-19",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     803.7
+    ],
+    [
+     94.3,
+     803.7
+    ],
+    [
+     94.3,
+     894.3
+    ],
+    [
+     13.2,
+     894.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     905.7
+    ],
+    [
+     94.3,
+     905.7
+    ],
+    [
+     94.3,
+     994.3
+    ],
+    [
+     13.2,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-11-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.2,
+     1005.7
+    ],
+    [
+     94.3,
+     1005.7
+    ],
+    [
+     94.3,
+     1094.3
+    ],
+    [
+     13.2,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     105.7,
+     -694.3
+    ],
+    [
+     194.3,
+     -694.3
+    ],
+    [
+     194.3,
+     -608.2
+    ],
+    [
+     105.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     -591.8
+    ],
+    [
+     194.3,
+     -591.8
+    ],
+    [
+     194.3,
+     -505.7
+    ],
+    [
+     105.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     -494.3
+    ],
+    [
+     194.3,
+     -494.3
+    ],
+    [
+     194.3,
+     -405.7
+    ],
+    [
+     105.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     -394.3
+    ],
+    [
+     194.3,
+     -394.3
+    ],
+    [
+     194.3,
+     -303.7
+    ],
+    [
+     105.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     -296.3
+    ],
+    [
+     194.3,
+     -296.3
+    ],
+    [
+     194.3,
+     -205.7
+    ],
+    [
+     105.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     -194.3
+    ],
+    [
+     194.3,
+     -194.3
+    ],
+    [
+     194.3,
+     -105.7
+    ],
+    [
+     105.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     -94.3
+    ],
+    [
+     194.3,
+     -94.3
+    ],
+    [
+     194.3,
+     -8.2
+    ],
+    [
+     105.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     8.2
+    ],
+    [
+     194.3,
+     8.2
+    ],
+    [
+     194.3,
+     94.3
+    ],
+    [
+     105.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     303.7
+    ],
+    [
+     194.3,
+     303.7
+    ],
+    [
+     194.3,
+     394.3
+    ],
+    [
+     105.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     405.7
+    ],
+    [
+     194.3,
+     405.7
+    ],
+    [
+     194.3,
+     491.8
+    ],
+    [
+     105.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     508.2
+    ],
+    [
+     194.3,
+     508.2
+    ],
+    [
+     194.3,
+     594.3
+    ],
+    [
+     105.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-12-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     605.7
+    ],
+    [
+     194.3,
+     605.7
+    ],
+    [
+     194.3,
+     694.3
+    ],
+    [
+     105.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-18",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     705.7
+    ],
+    [
+     194.3,
+     705.7
+    ],
+    [
+     194.3,
+     796.3
+    ],
+    [
+     105.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-19",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     803.7
+    ],
+    [
+     194.3,
+     803.7
+    ],
+    [
+     194.3,
+     894.3
+    ],
+    [
+     105.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     905.7
+    ],
+    [
+     194.3,
+     905.7
+    ],
+    [
+     194.3,
+     994.3
+    ],
+    [
+     105.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-12-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     1005.7
+    ],
+    [
+     194.3,
+     1005.7
+    ],
+    [
+     194.3,
+     1094.3
+    ],
+    [
+     105.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     205.7,
+     -794.3
+    ],
+    [
+     296.3,
+     -794.3
+    ],
+    [
+     296.3,
+     -705.7
+    ],
+    [
+     205.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     205.7,
+     -694.3
+    ],
+    [
+     296.3,
+     -694.3
+    ],
+    [
+     296.3,
+     -608.2
+    ],
+    [
+     205.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     205.7,
+     -591.8
+    ],
+    [
+     296.3,
+     -591.8
+    ],
+    [
+     296.3,
+     -505.7
+    ],
+    [
+     205.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     205.7,
+     -494.3
+    ],
+    [
+     296.3,
+     -494.3
+    ],
+    [
+     296.3,
+     -405.7
+    ],
+    [
+     205.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     205.7,
+     -394.3
+    ],
+    [
+     296.3,
+     -394.3
+    ],
+    [
+     296.3,
+     -303.7
+    ],
+    [
+     205.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     205.7,
+     -296.3
+    ],
+    [
+     296.3,
+     -296.3
+    ],
+    [
+     296.3,
+     -205.7
+    ],
+    [
+     205.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     205.7,
+     -194.3
+    ],
+    [
+     296.3,
+     -194.3
+    ],
+    [
+     296.3,
+     -105.7
+    ],
+    [
+     205.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     -94.3
+    ],
+    [
+     296.3,
+     -94.3
+    ],
+    [
+     296.3,
+     -8.2
+    ],
+    [
+     205.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     8.2
+    ],
+    [
+     296.3,
+     8.2
+    ],
+    [
+     296.3,
+     94.3
+    ],
+    [
+     205.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     303.7
+    ],
+    [
+     296.3,
+     303.7
+    ],
+    [
+     296.3,
+     394.3
+    ],
+    [
+     205.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     405.7
+    ],
+    [
+     296.3,
+     405.7
+    ],
+    [
+     296.3,
+     491.8
+    ],
+    [
+     205.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     508.2
+    ],
+    [
+     296.3,
+     508.2
+    ],
+    [
+     296.3,
+     594.3
+    ],
+    [
+     205.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-13-17",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     605.7
+    ],
+    [
+     296.3,
+     605.7
+    ],
+    [
+     296.3,
+     694.3
+    ],
+    [
+     205.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-18",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     705.7
+    ],
+    [
+     296.3,
+     705.7
+    ],
+    [
+     296.3,
+     796.3
+    ],
+    [
+     205.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-19",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     803.7
+    ],
+    [
+     296.3,
+     803.7
+    ],
+    [
+     296.3,
+     894.3
+    ],
+    [
+     205.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-20",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     905.7
+    ],
+    [
+     296.3,
+     905.7
+    ],
+    [
+     296.3,
+     994.3
+    ],
+    [
+     205.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-13-21",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     1005.7
+    ],
+    [
+     296.3,
+     1005.7
+    ],
+    [
+     296.3,
+     1094.3
+    ],
+    [
+     205.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     303.7,
+     -794.3
+    ],
+    [
+     394.3,
+     -794.3
+    ],
+    [
+     394.3,
+     -705.7
+    ],
+    [
+     303.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     303.7,
+     -694.3
+    ],
+    [
+     394.3,
+     -694.3
+    ],
+    [
+     394.3,
+     -608.2
+    ],
+    [
+     303.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     303.7,
+     -591.8
+    ],
+    [
+     394.3,
+     -591.8
+    ],
+    [
+     394.3,
+     -505.7
+    ],
+    [
+     303.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     303.7,
+     -494.3
+    ],
+    [
+     394.3,
+     -494.3
+    ],
+    [
+     394.3,
+     -405.7
+    ],
+    [
+     303.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     303.7,
+     -194.3
+    ],
+    [
+     394.3,
+     -194.3
+    ],
+    [
+     394.3,
+     -105.7
+    ],
+    [
+     303.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     -94.3
+    ],
+    [
+     394.3,
+     -94.3
+    ],
+    [
+     394.3,
+     -8.2
+    ],
+    [
+     303.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     8.2
+    ],
+    [
+     394.3,
+     8.2
+    ],
+    [
+     394.3,
+     94.3
+    ],
+    [
+     303.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-14",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     303.7
+    ],
+    [
+     394.3,
+     303.7
+    ],
+    [
+     394.3,
+     394.3
+    ],
+    [
+     303.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-15",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     405.7
+    ],
+    [
+     394.3,
+     405.7
+    ],
+    [
+     394.3,
+     491.8
+    ],
+    [
+     303.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-16",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     303.7,
+     508.2
+    ],
+    [
+     394.3,
+     508.2
+    ],
+    [
+     394.3,
+     594.3
+    ],
+    [
+     303.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-14-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     303.7,
+     605.7
+    ],
+    [
+     394.3,
+     605.7
+    ],
+    [
+     394.3,
+     694.3
+    ],
+    [
+     303.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-14-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     303.7,
+     705.7
+    ],
+    [
+     394.3,
+     705.7
+    ],
+    [
+     394.3,
+     796.3
+    ],
+    [
+     303.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-14-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     303.7,
+     803.7
+    ],
+    [
+     394.3,
+     803.7
+    ],
+    [
+     394.3,
+     894.3
+    ],
+    [
+     303.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-14-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     303.7,
+     905.7
+    ],
+    [
+     394.3,
+     905.7
+    ],
+    [
+     394.3,
+     994.3
+    ],
+    [
+     303.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-14-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     303.7,
+     1005.7
+    ],
+    [
+     394.3,
+     1005.7
+    ],
+    [
+     394.3,
+     1094.3
+    ],
+    [
+     303.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     405.7,
+     -1094.3
+    ],
+    [
+     494.3,
+     -1094.3
+    ],
+    [
+     494.3,
+     -1005.7
+    ],
+    [
+     405.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     405.7,
+     -994.3
+    ],
+    [
+     494.3,
+     -994.3
+    ],
+    [
+     494.3,
+     -903.7
+    ],
+    [
+     405.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-2",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     405.7,
+     -896.3
+    ],
+    [
+     494.3,
+     -896.3
+    ],
+    [
+     494.3,
+     -805.7
+    ],
+    [
+     405.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     405.7,
+     -794.3
+    ],
+    [
+     494.3,
+     -794.3
+    ],
+    [
+     494.3,
+     -705.7
+    ],
+    [
+     405.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "quartier-du-chateau",
+   "fonction": "administration",
+   "polygone": [
+    [
+     405.7,
+     -694.3
+    ],
+    [
+     494.3,
+     -694.3
+    ],
+    [
+     494.3,
+     -608.2
+    ],
+    [
+     405.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     405.7,
+     -591.8
+    ],
+    [
+     494.3,
+     -591.8
+    ],
+    [
+     494.3,
+     -505.7
+    ],
+    [
+     405.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     405.7,
+     -494.3
+    ],
+    [
+     494.3,
+     -494.3
+    ],
+    [
+     494.3,
+     -405.7
+    ],
+    [
+     405.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     405.7,
+     -194.3
+    ],
+    [
+     494.3,
+     -194.3
+    ],
+    [
+     494.3,
+     -105.7
+    ],
+    [
+     405.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-10",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     -94.3
+    ],
+    [
+     494.3,
+     -94.3
+    ],
+    [
+     494.3,
+     -8.2
+    ],
+    [
+     405.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-15-11",
+   "quartier": "quartier-du-grand-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     405.7,
+     8.2
+    ],
+    [
+     494.3,
+     8.2
+    ],
+    [
+     494.3,
+     94.3
+    ],
+    [
+     405.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-15-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     105.7
+    ],
+    [
+     494.3,
+     105.7
+    ],
+    [
+     494.3,
+     194.3
+    ],
+    [
+     405.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     205.7
+    ],
+    [
+     494.3,
+     205.7
+    ],
+    [
+     494.3,
+     296.3
+    ],
+    [
+     405.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-14",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     303.7
+    ],
+    [
+     494.3,
+     303.7
+    ],
+    [
+     494.3,
+     394.3
+    ],
+    [
+     405.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-15",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     405.7
+    ],
+    [
+     494.3,
+     405.7
+    ],
+    [
+     494.3,
+     491.8
+    ],
+    [
+     405.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-16",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     405.7,
+     508.2
+    ],
+    [
+     494.3,
+     508.2
+    ],
+    [
+     494.3,
+     594.3
+    ],
+    [
+     405.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     405.7,
+     605.7
+    ],
+    [
+     494.3,
+     605.7
+    ],
+    [
+     494.3,
+     694.3
+    ],
+    [
+     405.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-15-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     405.7,
+     705.7
+    ],
+    [
+     494.3,
+     705.7
+    ],
+    [
+     494.3,
+     796.3
+    ],
+    [
+     405.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-15-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     405.7,
+     803.7
+    ],
+    [
+     494.3,
+     803.7
+    ],
+    [
+     494.3,
+     894.3
+    ],
+    [
+     405.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-15-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     405.7,
+     905.7
+    ],
+    [
+     494.3,
+     905.7
+    ],
+    [
+     494.3,
+     994.3
+    ],
+    [
+     405.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-15-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     405.7,
+     1005.7
+    ],
+    [
+     494.3,
+     1005.7
+    ],
+    [
+     494.3,
+     1094.3
+    ],
+    [
+     405.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -1094.3
+    ],
+    [
+     591.8,
+     -1094.3
+    ],
+    [
+     591.8,
+     -1005.7
+    ],
+    [
+     505.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -994.3
+    ],
+    [
+     591.8,
+     -994.3
+    ],
+    [
+     591.8,
+     -903.7
+    ],
+    [
+     505.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -896.3
+    ],
+    [
+     591.8,
+     -896.3
+    ],
+    [
+     591.8,
+     -805.7
+    ],
+    [
+     505.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -794.3
+    ],
+    [
+     591.8,
+     -794.3
+    ],
+    [
+     591.8,
+     -705.7
+    ],
+    [
+     505.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -694.3
+    ],
+    [
+     591.8,
+     -694.3
+    ],
+    [
+     591.8,
+     -608.2
+    ],
+    [
+     505.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     505.7,
+     -591.8
+    ],
+    [
+     591.8,
+     -591.8
+    ],
+    [
+     591.8,
+     -505.7
+    ],
+    [
+     505.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     505.7,
+     -494.3
+    ],
+    [
+     591.8,
+     -494.3
+    ],
+    [
+     591.8,
+     -405.7
+    ],
+    [
+     505.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     505.7,
+     -394.3
+    ],
+    [
+     591.8,
+     -394.3
+    ],
+    [
+     591.8,
+     -303.7
+    ],
+    [
+     505.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     505.7,
+     -296.3
+    ],
+    [
+     591.8,
+     -296.3
+    ],
+    [
+     591.8,
+     -205.7
+    ],
+    [
+     505.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-9",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -194.3
+    ],
+    [
+     591.8,
+     -194.3
+    ],
+    [
+     591.8,
+     -105.7
+    ],
+    [
+     505.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-10",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     -94.3
+    ],
+    [
+     591.8,
+     -94.3
+    ],
+    [
+     591.8,
+     -8.2
+    ],
+    [
+     505.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-11",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     8.2
+    ],
+    [
+     591.8,
+     8.2
+    ],
+    [
+     591.8,
+     94.3
+    ],
+    [
+     505.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     105.7
+    ],
+    [
+     591.8,
+     105.7
+    ],
+    [
+     591.8,
+     194.3
+    ],
+    [
+     505.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     205.7
+    ],
+    [
+     591.8,
+     205.7
+    ],
+    [
+     591.8,
+     296.3
+    ],
+    [
+     505.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-14",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     303.7
+    ],
+    [
+     591.8,
+     303.7
+    ],
+    [
+     591.8,
+     394.3
+    ],
+    [
+     505.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-15",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     405.7
+    ],
+    [
+     591.8,
+     405.7
+    ],
+    [
+     591.8,
+     491.8
+    ],
+    [
+     505.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-16",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     508.2
+    ],
+    [
+     591.8,
+     508.2
+    ],
+    [
+     591.8,
+     594.3
+    ],
+    [
+     505.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     605.7
+    ],
+    [
+     591.8,
+     605.7
+    ],
+    [
+     591.8,
+     694.3
+    ],
+    [
+     505.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-16-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     705.7
+    ],
+    [
+     591.8,
+     705.7
+    ],
+    [
+     591.8,
+     796.3
+    ],
+    [
+     505.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-16-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     803.7
+    ],
+    [
+     591.8,
+     803.7
+    ],
+    [
+     591.8,
+     894.3
+    ],
+    [
+     505.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-16-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     905.7
+    ],
+    [
+     591.8,
+     905.7
+    ],
+    [
+     591.8,
+     994.3
+    ],
+    [
+     505.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-16-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     1005.7
+    ],
+    [
+     591.8,
+     1005.7
+    ],
+    [
+     591.8,
+     1094.3
+    ],
+    [
+     505.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     -1094.3
+    ],
+    [
+     694.3,
+     -1094.3
+    ],
+    [
+     694.3,
+     -1005.7
+    ],
+    [
+     608.2,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     -994.3
+    ],
+    [
+     694.3,
+     -994.3
+    ],
+    [
+     694.3,
+     -903.7
+    ],
+    [
+     608.2,
+     -903.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     -896.3
+    ],
+    [
+     694.3,
+     -896.3
+    ],
+    [
+     694.3,
+     -805.7
+    ],
+    [
+     608.2,
+     -805.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-3",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     -794.3
+    ],
+    [
+     694.3,
+     -794.3
+    ],
+    [
+     694.3,
+     -705.7
+    ],
+    [
+     608.2,
+     -705.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     -694.3
+    ],
+    [
+     694.3,
+     -694.3
+    ],
+    [
+     694.3,
+     -608.2
+    ],
+    [
+     608.2,
+     -608.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     608.2,
+     -591.8
+    ],
+    [
+     694.3,
+     -591.8
+    ],
+    [
+     694.3,
+     -505.7
+    ],
+    [
+     608.2,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     608.2,
+     -494.3
+    ],
+    [
+     694.3,
+     -494.3
+    ],
+    [
+     694.3,
+     -405.7
+    ],
+    [
+     608.2,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     608.2,
+     -394.3
+    ],
+    [
+     694.3,
+     -394.3
+    ],
+    [
+     694.3,
+     -303.7
+    ],
+    [
+     608.2,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     608.2,
+     -296.3
+    ],
+    [
+     694.3,
+     -296.3
+    ],
+    [
+     694.3,
+     -205.7
+    ],
+    [
+     608.2,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     608.2,
+     -194.3
+    ],
+    [
+     694.3,
+     -194.3
+    ],
+    [
+     694.3,
+     -105.7
+    ],
+    [
+     608.2,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     105.7
+    ],
+    [
+     694.3,
+     105.7
+    ],
+    [
+     694.3,
+     194.3
+    ],
+    [
+     608.2,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     205.7
+    ],
+    [
+     694.3,
+     205.7
+    ],
+    [
+     694.3,
+     296.3
+    ],
+    [
+     608.2,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-14",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     303.7
+    ],
+    [
+     694.3,
+     303.7
+    ],
+    [
+     694.3,
+     394.3
+    ],
+    [
+     608.2,
+     394.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-15",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     405.7
+    ],
+    [
+     694.3,
+     405.7
+    ],
+    [
+     694.3,
+     491.8
+    ],
+    [
+     608.2,
+     491.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-16",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     608.2,
+     508.2
+    ],
+    [
+     694.3,
+     508.2
+    ],
+    [
+     694.3,
+     594.3
+    ],
+    [
+     608.2,
+     594.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     608.2,
+     605.7
+    ],
+    [
+     694.3,
+     605.7
+    ],
+    [
+     694.3,
+     694.3
+    ],
+    [
+     608.2,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-17-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     608.2,
+     705.7
+    ],
+    [
+     694.3,
+     705.7
+    ],
+    [
+     694.3,
+     796.3
+    ],
+    [
+     608.2,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-17-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     608.2,
+     803.7
+    ],
+    [
+     694.3,
+     803.7
+    ],
+    [
+     694.3,
+     894.3
+    ],
+    [
+     608.2,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-17-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     608.2,
+     905.7
+    ],
+    [
+     694.3,
+     905.7
+    ],
+    [
+     694.3,
+     994.3
+    ],
+    [
+     608.2,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-17-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     608.2,
+     1005.7
+    ],
+    [
+     694.3,
+     1005.7
+    ],
+    [
+     694.3,
+     1094.3
+    ],
+    [
+     608.2,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     -1094.3
+    ],
+    [
+     794.3,
+     -1094.3
+    ],
+    [
+     794.3,
+     -1005.7
+    ],
+    [
+     705.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     -994.3
+    ],
+    [
+     794.3,
+     -994.3
+    ],
+    [
+     794.3,
+     -903.7
+    ],
+    [
+     705.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     -896.3
+    ],
+    [
+     794.3,
+     -896.3
+    ],
+    [
+     794.3,
+     -805.7
+    ],
+    [
+     705.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-3",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     -794.3
+    ],
+    [
+     794.3,
+     -794.3
+    ],
+    [
+     794.3,
+     -705.7
+    ],
+    [
+     705.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-4",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     -694.3
+    ],
+    [
+     794.3,
+     -694.3
+    ],
+    [
+     794.3,
+     -608.2
+    ],
+    [
+     705.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     705.7,
+     -591.8
+    ],
+    [
+     794.3,
+     -591.8
+    ],
+    [
+     794.3,
+     -505.7
+    ],
+    [
+     705.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     705.7,
+     -494.3
+    ],
+    [
+     794.3,
+     -494.3
+    ],
+    [
+     794.3,
+     -405.7
+    ],
+    [
+     705.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     705.7,
+     -394.3
+    ],
+    [
+     794.3,
+     -394.3
+    ],
+    [
+     794.3,
+     -303.7
+    ],
+    [
+     705.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     705.7,
+     -296.3
+    ],
+    [
+     794.3,
+     -296.3
+    ],
+    [
+     794.3,
+     -205.7
+    ],
+    [
+     705.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     705.7,
+     -194.3
+    ],
+    [
+     794.3,
+     -194.3
+    ],
+    [
+     794.3,
+     -105.7
+    ],
+    [
+     705.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-12",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     105.7
+    ],
+    [
+     794.3,
+     105.7
+    ],
+    [
+     794.3,
+     194.3
+    ],
+    [
+     705.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-13",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     205.7
+    ],
+    [
+     794.3,
+     205.7
+    ],
+    [
+     794.3,
+     296.3
+    ],
+    [
+     705.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-14",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     303.7
+    ],
+    [
+     794.3,
+     303.7
+    ],
+    [
+     794.3,
+     394.3
+    ],
+    [
+     705.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-15",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     405.7
+    ],
+    [
+     794.3,
+     405.7
+    ],
+    [
+     794.3,
+     491.8
+    ],
+    [
+     705.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-16",
+   "quartier": "vieux-mitras",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     508.2
+    ],
+    [
+     794.3,
+     508.2
+    ],
+    [
+     794.3,
+     594.3
+    ],
+    [
+     705.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     605.7
+    ],
+    [
+     794.3,
+     605.7
+    ],
+    [
+     794.3,
+     694.3
+    ],
+    [
+     705.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-18-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     705.7
+    ],
+    [
+     794.3,
+     705.7
+    ],
+    [
+     794.3,
+     796.3
+    ],
+    [
+     705.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-18-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     803.7
+    ],
+    [
+     794.3,
+     803.7
+    ],
+    [
+     794.3,
+     894.3
+    ],
+    [
+     705.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-18-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     905.7
+    ],
+    [
+     794.3,
+     905.7
+    ],
+    [
+     794.3,
+     994.3
+    ],
+    [
+     705.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-18-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     1005.7
+    ],
+    [
+     794.3,
+     1005.7
+    ],
+    [
+     794.3,
+     1094.3
+    ],
+    [
+     705.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -1094.3
+    ],
+    [
+     896.3,
+     -1094.3
+    ],
+    [
+     896.3,
+     -1005.7
+    ],
+    [
+     805.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -994.3
+    ],
+    [
+     896.3,
+     -994.3
+    ],
+    [
+     896.3,
+     -903.7
+    ],
+    [
+     805.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -896.3
+    ],
+    [
+     896.3,
+     -896.3
+    ],
+    [
+     896.3,
+     -805.7
+    ],
+    [
+     805.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-3",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -794.3
+    ],
+    [
+     896.3,
+     -794.3
+    ],
+    [
+     896.3,
+     -705.7
+    ],
+    [
+     805.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-4",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -694.3
+    ],
+    [
+     896.3,
+     -694.3
+    ],
+    [
+     896.3,
+     -608.2
+    ],
+    [
+     805.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     805.7,
+     -591.8
+    ],
+    [
+     896.3,
+     -591.8
+    ],
+    [
+     896.3,
+     -505.7
+    ],
+    [
+     805.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     805.7,
+     -494.3
+    ],
+    [
+     896.3,
+     -494.3
+    ],
+    [
+     896.3,
+     -405.7
+    ],
+    [
+     805.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     805.7,
+     -394.3
+    ],
+    [
+     896.3,
+     -394.3
+    ],
+    [
+     896.3,
+     -303.7
+    ],
+    [
+     805.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     805.7,
+     -296.3
+    ],
+    [
+     896.3,
+     -296.3
+    ],
+    [
+     896.3,
+     -205.7
+    ],
+    [
+     805.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     805.7,
+     -194.3
+    ],
+    [
+     896.3,
+     -194.3
+    ],
+    [
+     896.3,
+     -105.7
+    ],
+    [
+     805.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     -94.3
+    ],
+    [
+     896.3,
+     -94.3
+    ],
+    [
+     896.3,
+     -8.2
+    ],
+    [
+     805.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     8.2
+    ],
+    [
+     896.3,
+     8.2
+    ],
+    [
+     896.3,
+     94.3
+    ],
+    [
+     805.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     105.7
+    ],
+    [
+     896.3,
+     105.7
+    ],
+    [
+     896.3,
+     194.3
+    ],
+    [
+     805.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     205.7
+    ],
+    [
+     896.3,
+     205.7
+    ],
+    [
+     896.3,
+     296.3
+    ],
+    [
+     805.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-14",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     303.7
+    ],
+    [
+     896.3,
+     303.7
+    ],
+    [
+     896.3,
+     394.3
+    ],
+    [
+     805.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-15",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     405.7
+    ],
+    [
+     896.3,
+     405.7
+    ],
+    [
+     896.3,
+     491.8
+    ],
+    [
+     805.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-16",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     508.2
+    ],
+    [
+     896.3,
+     508.2
+    ],
+    [
+     896.3,
+     594.3
+    ],
+    [
+     805.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     605.7
+    ],
+    [
+     896.3,
+     605.7
+    ],
+    [
+     896.3,
+     694.3
+    ],
+    [
+     805.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-19-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     705.7
+    ],
+    [
+     896.3,
+     705.7
+    ],
+    [
+     896.3,
+     796.3
+    ],
+    [
+     805.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-19-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     803.7
+    ],
+    [
+     896.3,
+     803.7
+    ],
+    [
+     896.3,
+     894.3
+    ],
+    [
+     805.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-19-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     905.7
+    ],
+    [
+     896.3,
+     905.7
+    ],
+    [
+     896.3,
+     994.3
+    ],
+    [
+     805.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-19-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     1005.7
+    ],
+    [
+     896.3,
+     1005.7
+    ],
+    [
+     896.3,
+     1094.3
+    ],
+    [
+     805.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-0",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -1094.3
+    ],
+    [
+     994.3,
+     -1094.3
+    ],
+    [
+     994.3,
+     -1005.7
+    ],
+    [
+     903.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-1",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -994.3
+    ],
+    [
+     994.3,
+     -994.3
+    ],
+    [
+     994.3,
+     -903.7
+    ],
+    [
+     903.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-2",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -896.3
+    ],
+    [
+     994.3,
+     -896.3
+    ],
+    [
+     994.3,
+     -805.7
+    ],
+    [
+     903.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-3",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -794.3
+    ],
+    [
+     994.3,
+     -794.3
+    ],
+    [
+     994.3,
+     -705.7
+    ],
+    [
+     903.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-4",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -694.3
+    ],
+    [
+     994.3,
+     -694.3
+    ],
+    [
+     994.3,
+     -608.2
+    ],
+    [
+     903.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     903.7,
+     -591.8
+    ],
+    [
+     994.3,
+     -591.8
+    ],
+    [
+     994.3,
+     -505.7
+    ],
+    [
+     903.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     903.7,
+     -494.3
+    ],
+    [
+     994.3,
+     -494.3
+    ],
+    [
+     994.3,
+     -405.7
+    ],
+    [
+     903.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     903.7,
+     -394.3
+    ],
+    [
+     994.3,
+     -394.3
+    ],
+    [
+     994.3,
+     -303.7
+    ],
+    [
+     903.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     903.7,
+     -296.3
+    ],
+    [
+     994.3,
+     -296.3
+    ],
+    [
+     994.3,
+     -205.7
+    ],
+    [
+     903.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-9",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     903.7,
+     -194.3
+    ],
+    [
+     994.3,
+     -194.3
+    ],
+    [
+     994.3,
+     -105.7
+    ],
+    [
+     903.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     -94.3
+    ],
+    [
+     994.3,
+     -94.3
+    ],
+    [
+     994.3,
+     -8.2
+    ],
+    [
+     903.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     8.2
+    ],
+    [
+     994.3,
+     8.2
+    ],
+    [
+     994.3,
+     94.3
+    ],
+    [
+     903.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     105.7
+    ],
+    [
+     994.3,
+     105.7
+    ],
+    [
+     994.3,
+     194.3
+    ],
+    [
+     903.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     205.7
+    ],
+    [
+     994.3,
+     205.7
+    ],
+    [
+     994.3,
+     296.3
+    ],
+    [
+     903.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-14",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     303.7
+    ],
+    [
+     994.3,
+     303.7
+    ],
+    [
+     994.3,
+     394.3
+    ],
+    [
+     903.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-15",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     405.7
+    ],
+    [
+     994.3,
+     405.7
+    ],
+    [
+     994.3,
+     491.8
+    ],
+    [
+     903.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-16",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     903.7,
+     508.2
+    ],
+    [
+     994.3,
+     508.2
+    ],
+    [
+     994.3,
+     594.3
+    ],
+    [
+     903.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-20-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     903.7,
+     605.7
+    ],
+    [
+     994.3,
+     605.7
+    ],
+    [
+     994.3,
+     694.3
+    ],
+    [
+     903.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     903.7,
+     705.7
+    ],
+    [
+     994.3,
+     705.7
+    ],
+    [
+     994.3,
+     796.3
+    ],
+    [
+     903.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     903.7,
+     803.7
+    ],
+    [
+     994.3,
+     803.7
+    ],
+    [
+     994.3,
+     894.3
+    ],
+    [
+     903.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     903.7,
+     905.7
+    ],
+    [
+     994.3,
+     905.7
+    ],
+    [
+     994.3,
+     994.3
+    ],
+    [
+     903.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     903.7,
+     1005.7
+    ],
+    [
+     994.3,
+     1005.7
+    ],
+    [
+     994.3,
+     1094.3
+    ],
+    [
+     903.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-0",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -1094.3
+    ],
+    [
+     1094.3,
+     -1094.3
+    ],
+    [
+     1094.3,
+     -1005.7
+    ],
+    [
+     1005.7,
+     -1005.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-1",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -994.3
+    ],
+    [
+     1094.3,
+     -994.3
+    ],
+    [
+     1094.3,
+     -903.7
+    ],
+    [
+     1005.7,
+     -903.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-2",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -896.3
+    ],
+    [
+     1094.3,
+     -896.3
+    ],
+    [
+     1094.3,
+     -805.7
+    ],
+    [
+     1005.7,
+     -805.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-3",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -794.3
+    ],
+    [
+     1094.3,
+     -794.3
+    ],
+    [
+     1094.3,
+     -705.7
+    ],
+    [
+     1005.7,
+     -705.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-4",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -694.3
+    ],
+    [
+     1094.3,
+     -694.3
+    ],
+    [
+     1094.3,
+     -608.2
+    ],
+    [
+     1005.7,
+     -608.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-5",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     1005.7,
+     -591.8
+    ],
+    [
+     1094.3,
+     -591.8
+    ],
+    [
+     1094.3,
+     -505.7
+    ],
+    [
+     1005.7,
+     -505.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-6",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     1005.7,
+     -494.3
+    ],
+    [
+     1094.3,
+     -494.3
+    ],
+    [
+     1094.3,
+     -405.7
+    ],
+    [
+     1005.7,
+     -405.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-7",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     1005.7,
+     -394.3
+    ],
+    [
+     1094.3,
+     -394.3
+    ],
+    [
+     1094.3,
+     -303.7
+    ],
+    [
+     1005.7,
+     -303.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-8",
+   "quartier": "quartier-de-la-cathedrale",
+   "fonction": "culte",
+   "polygone": [
+    [
+     1005.7,
+     -296.3
+    ],
+    [
+     1094.3,
+     -296.3
+    ],
+    [
+     1094.3,
+     -205.7
+    ],
+    [
+     1005.7,
+     -205.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-9",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -194.3
+    ],
+    [
+     1094.3,
+     -194.3
+    ],
+    [
+     1094.3,
+     -105.7
+    ],
+    [
+     1005.7,
+     -105.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-10",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     -94.3
+    ],
+    [
+     1094.3,
+     -94.3
+    ],
+    [
+     1094.3,
+     -8.2
+    ],
+    [
+     1005.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-11",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     8.2
+    ],
+    [
+     1094.3,
+     8.2
+    ],
+    [
+     1094.3,
+     94.3
+    ],
+    [
+     1005.7,
+     94.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-12",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     105.7
+    ],
+    [
+     1094.3,
+     105.7
+    ],
+    [
+     1094.3,
+     194.3
+    ],
+    [
+     1005.7,
+     194.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-13",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     205.7
+    ],
+    [
+     1094.3,
+     205.7
+    ],
+    [
+     1094.3,
+     296.3
+    ],
+    [
+     1005.7,
+     296.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-14",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     303.7
+    ],
+    [
+     1094.3,
+     303.7
+    ],
+    [
+     1094.3,
+     394.3
+    ],
+    [
+     1005.7,
+     394.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-15",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     405.7
+    ],
+    [
+     1094.3,
+     405.7
+    ],
+    [
+     1094.3,
+     491.8
+    ],
+    [
+     1005.7,
+     491.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-16",
+   "quartier": "quartier-des-faubourgs",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     508.2
+    ],
+    [
+     1094.3,
+     508.2
+    ],
+    [
+     1094.3,
+     594.3
+    ],
+    [
+     1005.7,
+     594.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-21-17",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     605.7
+    ],
+    [
+     1094.3,
+     605.7
+    ],
+    [
+     1094.3,
+     694.3
+    ],
+    [
+     1005.7,
+     694.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-18",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     705.7
+    ],
+    [
+     1094.3,
+     705.7
+    ],
+    [
+     1094.3,
+     796.3
+    ],
+    [
+     1005.7,
+     796.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-19",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     803.7
+    ],
+    [
+     1094.3,
+     803.7
+    ],
+    [
+     1094.3,
+     894.3
+    ],
+    [
+     1005.7,
+     894.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-20",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     905.7
+    ],
+    [
+     1094.3,
+     905.7
+    ],
+    [
+     1094.3,
+     994.3
+    ],
+    [
+     1005.7,
+     994.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-21",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     1005.7
+    ],
+    [
+     1094.3,
+     1005.7
+    ],
+    [
+     1094.3,
+     1094.3
+    ],
+    [
+     1005.7,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "chateau-royal",
+   "nom": "Château royal",
+   "canon": "A",
+   "archetype": "chateau",
+   "position": [
+    0,
+    -750
+   ],
+   "emprise_m": [
+    180,
+    60
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 30,
+   "etages": 4,
+   "toit": "mansarde",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E4DCCB",
+   "reperes_canon": [
+    "Cour royale de Mitras [C] (atlas 06 I01) ; château royal, salle d'audience et jardins (docs/spec/20) : plan du château adapté"
+   ],
+   "params": {
+    "pente": 52
+   }
+  },
+  {
+   "id": "hotel-du-cabinet",
+   "nom": "Hôtel du Cabinet",
+   "canon": "A",
+   "archetype": "palais",
+   "position": [
+    250,
+    -750
+   ],
+   "emprise_m": [
+    56,
+    36
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 3,
+   "toit": "mansarde",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#DCD3C0",
+   "reperes_canon": [
+    "Cabinet (atlas 06 I01) [C] : l'hôtel est une adaptation"
+   ],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "ecuries-royales",
+   "nom": "Écuries royales",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    -250,
+    -750
+   ],
+   "emprise_m": [
+    64,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D9D0BD",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "cathedrale",
+   "nom": "Cathédrale des Murs",
+   "canon": "A",
+   "archetype": "cathedrale",
+   "position": [
+    400,
+    -300
+   ],
+   "emprise_m": [
+    36,
+    84
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 38,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [
+    "poi_cathedrale_murs dans prov_mitras [C] (data/provinces/paradis.json) ; religion d'État (01 §5.1) : plan adapté"
+   ],
+   "params": {
+    "clocher_m": 78,
+    "clocher_cote": 10,
+    "abside": true,
+    "pente": 54
+   }
+  },
+  {
+   "id": "tribunal-militaire",
+   "nom": "Tribunal militaire",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -50,
+    -450
+   ],
+   "emprise_m": [
+    46,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [
+    "poi_tribunal_militaire dans prov_mitras [C] : emplacement adapté"
+   ],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "hotel-de-ville",
+   "nom": "Hôtel de ville de Mitras",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -50,
+    350
+   ],
+   "emprise_m": [
+    40,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "hotel-de-la-police-militaire",
+   "nom": "Hôtel de la Police militaire",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -650,
+    450
+   ],
+   "emprise_m": [
+    70,
+    50
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 3,
+   "toit": "mansarde",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#DDD6C6",
+   "reperes_canon": [
+    "Police militaire à Mitras [C] (1 000 soldats au scénario 845) : l'hôtel est une adaptation"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 44
+   }
+  },
+  {
+   "id": "halle-du-grand-marche",
+   "nom": "Halle du Grand Marché",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    200
+   ],
+   "emprise_m": [
+    60,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 10,
+    "pente": 40
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal du grand marché 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    160,
+    150
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal du grand marché 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    150
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal du grand marché 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    340,
+    150
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal du grand marché 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    160,
+    250
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal du grand marché 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    250,
+    250
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal du grand marché 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    340,
+    250
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "eglise-de-la-grande-avenue",
+   "nom": "Église de la Grande Avenue",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -450,
+    150
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 48,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "hopital-royal",
+   "nom": "Hôpital royal",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -750,
+    50
+   ],
+   "emprise_m": [
+    56,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E1DACB",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "college-de-mitras",
+   "nom": "Collège de Mitras",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    450,
+    550
+   ],
+   "emprise_m": [
+    50,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D9CDB6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "entrepots-du-sud-est",
+   "nom": "Grands entrepôts du Sud-Est",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    650,
+    850
+   ],
+   "emprise_m": [
+    64,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C8B8A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "grenier-de-la-capitale",
+   "nom": "Grenier de la capitale",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    450,
+    850
+   ],
+   "emprise_m": [
+    54,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 15,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CFC2A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "hotel-d-un-grand-seigneur",
+   "nom": "Hôtel du Parc des Nobles",
+   "canon": "A",
+   "archetype": "palais",
+   "position": [
+    -850,
+    -550
+   ],
+   "emprise_m": [
+    60,
+    40
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 17,
+   "etages": 3,
+   "toit": "mansarde",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [
+    "quartier des nobles de Mitras [C] (atlas 06 I08) : l'hôtel est une adaptation"
+   ],
+   "params": {
+    "pente": 46
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "s-11",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-17",
+    "essence": "marronnier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-16",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -170,
+     150
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 23,
+    "nom": "Tilleul du Grand Marché"
+   },
+   {
+    "position": [
+     0,
+     -640
+    ],
+    "essence": "chene",
+    "hauteur_m": 25,
+    "nom": "Chêne de la cour d'honneur"
+   }
+  ],
+  "parcs": [
+   {
+    "id": "parc-des-nobles",
+    "nom": "Parc des Nobles",
+    "canon": "A",
+    "polygone": [
+     [
+      -794.3,
+      -694.3
+     ],
+     [
+      -505.7,
+      -694.3
+     ],
+     [
+      -505.7,
+      -505.7
+     ],
+     [
+      -794.3,
+      -505.7
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "chene"
+    ],
+    "arbres_par_ha": 66
+   },
+   {
+    "id": "jardins-du-chateau",
+    "nom": "Jardins du château",
+    "canon": "A",
+    "polygone": [
+     [
+      -394.3,
+      -1094.3
+     ],
+     [
+      394.3,
+      -1094.3
+     ],
+     [
+      394.3,
+      -805.7
+     ],
+     [
+      -394.3,
+      -805.7
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "erable",
+     "fruitier"
+    ],
+    "arbres_par_ha": 62
+   },
+   {
+    "id": "jardin-du-sud",
+    "nom": "Jardin du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -296.3,
+      705.7
+     ],
+     [
+      -105.7,
+      705.7
+     ],
+     [
+      -105.7,
+      894.3
+     ],
+     [
+      -296.3,
+      894.3
+     ]
+    ],
+    "essences": [
+     "peuplier",
+     "tilleul",
+     "erable"
+    ],
+    "arbres_par_ha": 58
+   },
+   {
+    "id": "promenade-de-l-est",
+    "nom": "Promenade de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      608.2,
+      -94.3
+     ],
+     [
+      794.3,
+      -94.3
+     ],
+     [
+      794.3,
+      94.3
+     ],
+     [
+      608.2,
+      94.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "peuplier",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   }
+  ],
+  "vergers": [],
+  "haies": [],
+  "potagers": [],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -700,
+    100
+   ],
+   [
+    700,
+    -500
+   ],
+   [
+    -300,
+    500
+   ],
+   [
+    800,
+    800
+   ],
+   [
+    -800,
+    800
+   ]
+  ],
+  "fontaines": [
+   [
+    0,
+    -750
+   ],
+   [
+    400,
+    -300
+   ],
+   [
+    250,
+    200
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1980,
+    2420,
+    1210
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    1060,
+    1.8
+   ],
+   "cible": [
+    0,
+    -440,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "chateau-royal",
+   "nom": "Château royal et cour d'honneur",
+   "oeil": [
+    0,
+    -560,
+    4
+   ],
+   "cible": [
+    0,
+    -750,
+    18
+   ],
+   "fov": 62
+  },
+  {
+   "id": "cathedrale",
+   "nom": "Cathédrale et sa place",
+   "oeil": [
+    400,
+    -190,
+    3
+   ],
+   "cible": [
+    400,
+    -300,
+    18
+   ],
+   "fov": 60
+  },
+  {
+   "id": "grande-avenue",
+   "nom": "Grande Avenue vers le château",
+   "oeil": [
+    0,
+    600,
+    2
+   ],
+   "cible": [
+    0,
+    -300,
+    12
+   ],
+   "fov": 58
+  },
+  {
+   "id": "grand-marche",
+   "nom": "Grand Marché et halle",
+   "oeil": [
+    400,
+    280,
+    2.4
+   ],
+   "cible": [
+    250,
+    200,
+    7
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Mitras en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire de la capitale (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-coup-d-etat",
+   "nom": "850, journée du coup d'État",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : coup d'État mené par le Corps de Reconnaissance) [C], ordre des faits [?] ; atteintes à la ville : adaptation",
+     "canon": "C"
+    },
+    {
+     "ref": "affluence, brume, rues désertées près du château : adaptation (aucune destruction)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 0.6
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

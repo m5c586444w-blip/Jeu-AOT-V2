@@ -1,0 +1,8063 @@
+{
+ "id": "ehrmich",
+ "nom": "Ehrmich",
+ "libelle": "Ehrmich",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Ehrmich (sud), district du mur Sina ; docs/spec/06 I08 (Ehrmich : district sud de Sina, rang 3 ; le « quartier des nobles » devient un POI de Mitras)",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/20 (LC-C) : Mur Sina, districts [C], détails [A] ; forme en saillie à deux portes étendue de Rose à Sina : adaptation (Q20)",
+   "canon": "A"
+  },
+  {
+   "ref": "tracé de la saillie, noms de rues, de places et de bâtiments, dimensions, quartiers : adaptation (création C16, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_ehrmich",
+ "style": "E07",
+ "population": {
+  "province": "prov_ehrmich",
+  "part": 0.92,
+  "canon": "C",
+  "note": "92 % de la population de `prov_ehrmich` au départ de scn_sandbox_845 (34 783 hab.) logés intra-muros ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 175,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   1172.5,
+   7.5
+  ],
+  [
+   1170.9,
+   61.4
+  ],
+  [
+   1166.1,
+   122.6
+  ],
+  [
+   1158.1,
+   183.4
+  ],
+  [
+   1146.9,
+   243.8
+  ],
+  [
+   1132.5,
+   303.5
+  ],
+  [
+   1115.1,
+   362.3
+  ],
+  [
+   1094.6,
+   420.2
+  ],
+  [
+   1071.1,
+   476.9
+  ],
+  [
+   1044.7,
+   532.3
+  ],
+  [
+   1015.4,
+   586.2
+  ],
+  [
+   983.3,
+   638.6
+  ],
+  [
+   948.6,
+   689.2
+  ],
+  [
+   911.2,
+   737.9
+  ],
+  [
+   871.3,
+   784.6
+  ],
+  [
+   829.1,
+   829.1
+  ],
+  [
+   784.6,
+   871.3
+  ],
+  [
+   737.9,
+   911.2
+  ],
+  [
+   689.2,
+   948.6
+  ],
+  [
+   638.6,
+   983.3
+  ],
+  [
+   586.3,
+   1015.4
+  ],
+  [
+   532.3,
+   1044.7
+  ],
+  [
+   476.9,
+   1071.1
+  ],
+  [
+   420.2,
+   1094.6
+  ],
+  [
+   362.3,
+   1115.1
+  ],
+  [
+   303.5,
+   1132.5
+  ],
+  [
+   243.8,
+   1146.9
+  ],
+  [
+   183.4,
+   1158.1
+  ],
+  [
+   122.6,
+   1166.1
+  ],
+  [
+   61.4,
+   1170.9
+  ],
+  [
+   0,
+   1172.5
+  ],
+  [
+   -61.4,
+   1170.9
+  ],
+  [
+   -122.6,
+   1166.1
+  ],
+  [
+   -183.4,
+   1158.1
+  ],
+  [
+   -243.8,
+   1146.9
+  ],
+  [
+   -303.5,
+   1132.5
+  ],
+  [
+   -362.3,
+   1115.1
+  ],
+  [
+   -420.2,
+   1094.6
+  ],
+  [
+   -476.9,
+   1071.1
+  ],
+  [
+   -532.3,
+   1044.7
+  ],
+  [
+   -586.2,
+   1015.4
+  ],
+  [
+   -638.6,
+   983.3
+  ],
+  [
+   -689.2,
+   948.6
+  ],
+  [
+   -737.9,
+   911.2
+  ],
+  [
+   -784.6,
+   871.3
+  ],
+  [
+   -829.1,
+   829.1
+  ],
+  [
+   -871.3,
+   784.6
+  ],
+  [
+   -911.2,
+   737.9
+  ],
+  [
+   -948.6,
+   689.2
+  ],
+  [
+   -983.3,
+   638.6
+  ],
+  [
+   -1015.4,
+   586.2
+  ],
+  [
+   -1044.7,
+   532.3
+  ],
+  [
+   -1071.1,
+   476.9
+  ],
+  [
+   -1094.6,
+   420.2
+  ],
+  [
+   -1115.1,
+   362.3
+  ],
+  [
+   -1132.5,
+   303.5
+  ],
+  [
+   -1146.9,
+   243.8
+  ],
+  [
+   -1158.1,
+   183.4
+  ],
+  [
+   -1166.1,
+   122.6
+  ],
+  [
+   -1170.9,
+   61.4
+  ],
+  [
+   -1172.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A",
+   "polygone": [
+    [
+     -460,
+     -24
+    ],
+    [
+     460,
+     -24
+    ],
+    [
+     460,
+     -540
+    ],
+    [
+     -460,
+     -540
+    ]
+   ],
+   "population": {
+    "province": "prov_ehrmich",
+    "part": 0.08,
+    "canon": "A",
+    "note": "8 % de la population de `prov_ehrmich` au départ de scn_sandbox_845 (34 783 hab.) logés au pied de la porte intérieure, côté intérieur des terres (adaptation)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 62,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "sud",
+  "canon": "C"
+ },
+ "etendue_m": 3160,
+ "enceinte": {
+  "mur": "sina",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 1180,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -1180,
+      0
+     ],
+     [
+      1180,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1580,
+      0
+     ],
+     [
+      -1180,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      1180,
+      0
+     ],
+     [
+      1580,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 370.7,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1112.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1742.3,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1964.8,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2595,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 3336.4,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1120,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1240,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 30,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte d'Ehrmich (porte sud)",
+   "role": "exterieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3.1 : saillie à deux portes pour les districts [C] (étendue à Sina : adaptation) ; nom de la porte et dimensions : aucune source (Q5, Q20)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 1853.5,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure d'Ehrmich",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 1180,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-1",
+   "nom": "Rue des Armateurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1062,
+     25
+    ],
+    [
+     -1062,
+     454.1
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue des Assureurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -944,
+     25
+    ],
+    [
+     -944,
+     665.5
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3-0",
+   "nom": "Ruelle des Fiacres",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -826,
+     25
+    ],
+    [
+     -826,
+     221
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3-1",
+   "nom": "Ruelle des Fiacres",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -826,
+     417
+    ],
+    [
+     -826,
+     807.3
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue des Banquiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -708,
+     25
+    ],
+    [
+     -708,
+     907
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Orfèvres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -590,
+     25
+    ],
+    [
+     -590,
+     992.9
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Joailliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -472,
+     25
+    ],
+    [
+     -472,
+     1054.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-0",
+   "nom": "Rue des Modistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -354,
+     25
+    ],
+    [
+     -354,
+     613
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-1",
+   "nom": "Rue des Modistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -354,
+     809
+    ],
+    [
+     -354,
+     1099.4
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-0",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -236,
+     25
+    ],
+    [
+     -236,
+     613
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-8-1",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -236,
+     809
+    ],
+    [
+     -236,
+     907
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-8-2",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -236,
+     1005
+    ],
+    [
+     -236,
+     1103
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-9",
+   "nom": "Rue des Couturiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -118,
+     25
+    ],
+    [
+     -118,
+     1103
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Rue des Parfumeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     118,
+     25
+    ],
+    [
+     118,
+     1103
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-0",
+   "nom": "Ruelle des Partitions",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     236,
+     25
+    ],
+    [
+     236,
+     417
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-12-1",
+   "nom": "Ruelle des Partitions",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     236,
+     613
+    ],
+    [
+     236,
+     1103
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-13",
+   "nom": "Rue des Libraires",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     354,
+     25
+    ],
+    [
+     354,
+     1099.4
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14",
+   "nom": "Rue des Musiciens",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     472,
+     25
+    ],
+    [
+     472,
+     1054.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-0",
+   "nom": "Rue des Comédiens",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     590,
+     25
+    ],
+    [
+     590,
+     417
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-1",
+   "nom": "Rue des Comédiens",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     590,
+     515
+    ],
+    [
+     590,
+     992.9
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16",
+   "nom": "Rue des Peintres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     708,
+     25
+    ],
+    [
+     708,
+     907
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Ruelle du Gantier",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     826,
+     25
+    ],
+    [
+     826,
+     711
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-18",
+   "nom": "Rue des Facteurs d'Orgues",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     944,
+     25
+    ],
+    [
+     944,
+     665.5
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue des Fleuristes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1062,
+     25
+    ],
+    [
+     1062,
+     454.1
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue du Midi",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1148.4,
+     123
+    ],
+    [
+     1148.4,
+     123
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue du Théâtre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1133.7,
+     221
+    ],
+    [
+     1133.7,
+     221
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3-0",
+   "nom": "Rue de la Bourse",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1110.1,
+     319
+    ],
+    [
+     -944,
+     319
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3-1",
+   "nom": "Rue de la Bourse",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -708,
+     319
+    ],
+    [
+     1110.1,
+     319
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue des Galeries",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1077.1,
+     417
+    ],
+    [
+     1077.1,
+     417
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5-0",
+   "nom": "Ruelle des Fiacres",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -1033.8,
+     515
+    ],
+    [
+     118,
+     515
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5-1",
+   "nom": "Ruelle des Fiacres",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     354,
+     515
+    ],
+    [
+     1033.8,
+     515
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Jardins",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -978.9,
+     613
+    ],
+    [
+     978.9,
+     613
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-0",
+   "nom": "Rue des Halles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -910.2,
+     711
+    ],
+    [
+     -472,
+     711
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-1",
+   "nom": "Rue des Halles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -118,
+     711
+    ],
+    [
+     910.2,
+     711
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Rue des Magasins",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -824.3,
+     809
+    ],
+    [
+     824.3,
+     809
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-9",
+   "nom": "Ruelle des Lanternes",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -715.1,
+     907
+    ],
+    [
+     715.1,
+     907
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-10",
+   "nom": "Rue des Remises",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -569.2,
+     1005
+    ],
+    [
+     569.2,
+     1005
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11",
+   "nom": "Rue des Cochers de Place",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -342.7,
+     1103
+    ],
+    [
+     342.7,
+     1103
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Avenue du Midi",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     1172
+    ]
+   ],
+   "largeur_m": 20,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1154.7,
+     25
+    ],
+    [
+     1151.9,
+     84.6
+    ],
+    [
+     1146,
+     143.9
+    ],
+    [
+     1137,
+     202.9
+    ],
+    [
+     1125.1,
+     261.3
+    ],
+    [
+     1110.1,
+     319
+    ],
+    [
+     1092.1,
+     375.9
+    ],
+    [
+     1071.3,
+     431.8
+    ],
+    [
+     1047.6,
+     486.5
+    ],
+    [
+     1021,
+     539.9
+    ],
+    [
+     991.8,
+     591.9
+    ],
+    [
+     959.9,
+     642.3
+    ],
+    [
+     925.5,
+     691
+    ],
+    [
+     888.6,
+     737.8
+    ],
+    [
+     849.4,
+     782.7
+    ],
+    [
+     807.8,
+     825.5
+    ],
+    [
+     764.1,
+     866.1
+    ],
+    [
+     718.4,
+     904.4
+    ],
+    [
+     670.8,
+     940.3
+    ],
+    [
+     621.3,
+     973.6
+    ],
+    [
+     570.3,
+     1004.4
+    ],
+    [
+     517.7,
+     1032.5
+    ],
+    [
+     463.7,
+     1057.8
+    ],
+    [
+     408.5,
+     1080.4
+    ],
+    [
+     352.2,
+     1100
+    ],
+    [
+     294.9,
+     1116.7
+    ],
+    [
+     236.9,
+     1130.4
+    ],
+    [
+     178.2,
+     1141.2
+    ],
+    [
+     119.1,
+     1148.8
+    ],
+    [
+     59.6,
+     1153.5
+    ],
+    [
+     0,
+     1155
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     1155
+    ],
+    [
+     -59.6,
+     1153.5
+    ],
+    [
+     -119.1,
+     1148.8
+    ],
+    [
+     -178.2,
+     1141.2
+    ],
+    [
+     -236.9,
+     1130.4
+    ],
+    [
+     -294.9,
+     1116.7
+    ],
+    [
+     -352.2,
+     1100
+    ],
+    [
+     -408.5,
+     1080.4
+    ],
+    [
+     -463.7,
+     1057.8
+    ],
+    [
+     -517.7,
+     1032.5
+    ],
+    [
+     -570.3,
+     1004.4
+    ],
+    [
+     -621.3,
+     973.6
+    ],
+    [
+     -670.8,
+     940.3
+    ],
+    [
+     -718.4,
+     904.4
+    ],
+    [
+     -764.1,
+     866.1
+    ],
+    [
+     -807.8,
+     825.5
+    ],
+    [
+     -849.4,
+     782.7
+    ],
+    [
+     -888.6,
+     737.8
+    ],
+    [
+     -925.5,
+     691
+    ],
+    [
+     -959.9,
+     642.3
+    ],
+    [
+     -991.8,
+     591.9
+    ],
+    [
+     -1021,
+     539.9
+    ],
+    [
+     -1047.6,
+     486.5
+    ],
+    [
+     -1071.3,
+     431.8
+    ],
+    [
+     -1092.1,
+     375.9
+    ],
+    [
+     -1110.1,
+     319
+    ],
+    [
+     -1125.1,
+     261.3
+    ],
+    [
+     -1137,
+     202.9
+    ],
+    [
+     -1146,
+     143.9
+    ],
+    [
+     -1151.9,
+     84.6
+    ],
+    [
+     -1154.7,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1155,
+     25
+    ],
+    [
+     1155,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1730
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -30
+    ],
+    [
+     -450,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -300,
+     -30
+    ],
+    [
+     -300,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin des Ruches",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -150,
+     -30
+    ],
+    [
+     -150,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x4",
+   "nom": "Chemin des Vergers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     150,
+     -30
+    ],
+    [
+     150,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     300,
+     -30
+    ],
+    [
+     300,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin des Saules",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     450,
+     -30
+    ],
+    [
+     450,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin des Ormes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -30
+    ],
+    [
+     450,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -155
+    ],
+    [
+     450,
+     -155
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin des Champs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -280
+    ],
+    [
+     450,
+     -280
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin des Lavoirs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -405
+    ],
+    [
+     450,
+     -405
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y4",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -450,
+     -530
+    ],
+    [
+     450,
+     -530
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1190
+    ],
+    [
+     0,
+     1600
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place des Fleuristes",
+   "canon": "A",
+   "polygone": [
+    [
+     -1056.3,
+     422.7
+    ],
+    [
+     -949.7,
+     422.7
+    ],
+    [
+     -949.7,
+     511.3
+    ],
+    [
+     -1028.1,
+     511.3
+    ],
+    [
+     -1046.4,
+     474.1
+    ],
+    [
+     -1056.3,
+     450.2
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette des Musiciens",
+   "canon": "A",
+   "polygone": [
+    [
+     -809.1,
+     814.7
+    ],
+    [
+     -713.7,
+     814.7
+    ],
+    [
+     -713.7,
+     899.6
+    ],
+    [
+     -728.8,
+     888
+    ],
+    [
+     -785.3,
+     838.5
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    -746.2,
+    843.6
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-2",
+   "nom": "Place des Cochers",
+   "canon": "A",
+   "polygone": [
+    [
+     949.7,
+     327.2
+    ],
+    [
+     1056.3,
+     327.2
+    ],
+    [
+     1056.3,
+     411.3
+    ],
+    [
+     949.7,
+     411.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-des-halles",
+   "nom": "Place des Halles centrales",
+   "canon": "A",
+   "polygone": [
+    [
+     -466.3,
+     618.7
+    ],
+    [
+     -123.7,
+     618.7
+    ],
+    [
+     -123.7,
+     803.3
+    ],
+    [
+     -466.3,
+     803.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    -295,
+    711
+   ],
+   "marche": true
+  },
+  {
+   "id": "parvis-de-l-eglise",
+   "nom": "Parvis de l'église",
+   "canon": "A",
+   "polygone": [
+    [
+     123.7,
+     128.7
+    ],
+    [
+     232.3,
+     128.7
+    ],
+    [
+     232.3,
+     215.3
+    ],
+    [
+     123.7,
+     215.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-du-theatre",
+   "nom": "Place du Théâtre",
+   "canon": "A",
+   "polygone": [
+    [
+     123.7,
+     422.7
+    ],
+    [
+     348.3,
+     422.7
+    ],
+    [
+     348.3,
+     607.3
+    ],
+    [
+     123.7,
+     607.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": [
+    236,
+    515
+   ],
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "negoce": {
+   "etages": [
+    3,
+    4,
+    3,
+    3
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "mansarde"
+   ],
+   "pente_deg": [
+    42,
+    54
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "enduit",
+    "pierre_taillee",
+    "colombage",
+    "brique"
+   ],
+   "teintes": [
+    "#EBDCC0",
+    "#E2CCA6",
+    "#EDD6BE",
+    "#DDD6BE",
+    "#E6D8B8",
+    "#D9C29C"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9.5
+   ],
+   "profondeur_m": 14,
+   "boutiques": true,
+   "passage_m": 36,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 80
+   }
+  },
+  "hotels": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.5,
+   "toits": [
+    "mansarde",
+    "croupe",
+    "mansarde",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    40,
+    56
+   ],
+   "couvertures": [
+    "ardoise",
+    "ardoise",
+    "cuivre",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_taillee",
+    "enduit",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#E6DFD0",
+    "#DCD3C0",
+    "#EAE2D0",
+    "#D6CCB8",
+    "#E2D8C4"
+   ],
+   "parcelles_m": [
+    16,
+    22,
+    14,
+    20
+   ],
+   "profondeur_m": 20,
+   "boutiques": false,
+   "passage_m": 60,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 90
+   }
+  },
+  "entrepots": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 45
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieil-ehrmich",
+   "nom": "Vieil Ehrmich",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-negociants",
+   "nom": "Quartier des Négociants",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-halles",
+   "nom": "Quartier des Halles",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-magasins",
+   "nom": "Quartier des Magasins",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-porte-sud",
+   "nom": "Quartier de la Porte Sud",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-commis",
+   "nom": "Quartier des Commis et des Colporteurs",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-de-la-porte-interieure",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1148.2,
+     31.2
+    ],
+    [
+     -1067.7,
+     31.2
+    ],
+    [
+     -1067.7,
+     117.3
+    ],
+    [
+     -1142.6,
+     117.3
+    ],
+    [
+     -1143.3,
+     112.6
+    ],
+    [
+     -1148.2,
+     37.6
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1141.1,
+     128.7
+    ],
+    [
+     -1067.7,
+     128.7
+    ],
+    [
+     -1067.7,
+     215.3
+    ],
+    [
+     -1127.9,
+     215.3
+    ],
+    [
+     -1133.5,
+     187.1
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1125.6,
+     226.7
+    ],
+    [
+     -1067.7,
+     226.7
+    ],
+    [
+     -1067.7,
+     310.8
+    ],
+    [
+     -1105.4,
+     310.8
+    ],
+    [
+     -1118.8,
+     260.9
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1101,
+     327.2
+    ],
+    [
+     -1067.7,
+     327.2
+    ],
+    [
+     -1067.7,
+     411.3
+    ],
+    [
+     -1072.4,
+     411.3
+    ],
+    [
+     -1075.2,
+     404.7
+    ],
+    [
+     -1099.3,
+     333.5
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1056.3,
+     31.2
+    ],
+    [
+     -949.7,
+     31.2
+    ],
+    [
+     -949.7,
+     117.3
+    ],
+    [
+     -1056.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1056.3,
+     128.7
+    ],
+    [
+     -949.7,
+     128.7
+    ],
+    [
+     -949.7,
+     215.3
+    ],
+    [
+     -1056.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1056.3,
+     226.7
+    ],
+    [
+     -949.7,
+     226.7
+    ],
+    [
+     -949.7,
+     310.8
+    ],
+    [
+     -1056.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1056.3,
+     327.2
+    ],
+    [
+     -949.7,
+     327.2
+    ],
+    [
+     -949.7,
+     411.3
+    ],
+    [
+     -1056.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -1024.4,
+     518.7
+    ],
+    [
+     -949.7,
+     518.7
+    ],
+    [
+     -949.7,
+     607.3
+    ],
+    [
+     -975.1,
+     607.3
+    ],
+    [
+     -975.6,
+     606.6
+    ],
+    [
+     -1013.2,
+     541.5
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -938.3,
+     31.2
+    ],
+    [
+     -829.7,
+     31.2
+    ],
+    [
+     -829.7,
+     117.3
+    ],
+    [
+     -938.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -938.3,
+     128.7
+    ],
+    [
+     -829.7,
+     128.7
+    ],
+    [
+     -829.7,
+     215.3
+    ],
+    [
+     -938.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -938.3,
+     422.7
+    ],
+    [
+     -829.7,
+     422.7
+    ],
+    [
+     -829.7,
+     511.3
+    ],
+    [
+     -938.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -938.3,
+     518.7
+    ],
+    [
+     -829.7,
+     518.7
+    ],
+    [
+     -829.7,
+     607.3
+    ],
+    [
+     -938.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -938.3,
+     618.7
+    ],
+    [
+     -829.7,
+     618.7
+    ],
+    [
+     -829.7,
+     702.8
+    ],
+    [
+     -908,
+     702.8
+    ],
+    [
+     -933.8,
+     669.2
+    ],
+    [
+     -938.3,
+     662.4
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -895.4,
+     719.2
+    ],
+    [
+     -829.7,
+     719.2
+    ],
+    [
+     -829.7,
+     794.1
+    ],
+    [
+     -838.5,
+     785.3
+    ],
+    [
+     -888,
+     728.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -822.3,
+     31.2
+    ],
+    [
+     -713.7,
+     31.2
+    ],
+    [
+     -713.7,
+     117.3
+    ],
+    [
+     -822.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -822.3,
+     128.7
+    ],
+    [
+     -713.7,
+     128.7
+    ],
+    [
+     -713.7,
+     215.3
+    ],
+    [
+     -822.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -822.3,
+     422.7
+    ],
+    [
+     -713.7,
+     422.7
+    ],
+    [
+     -713.7,
+     511.3
+    ],
+    [
+     -822.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -822.3,
+     518.7
+    ],
+    [
+     -713.7,
+     518.7
+    ],
+    [
+     -713.7,
+     607.3
+    ],
+    [
+     -822.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -822.3,
+     618.7
+    ],
+    [
+     -713.7,
+     618.7
+    ],
+    [
+     -713.7,
+     702.8
+    ],
+    [
+     -822.3,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -822.3,
+     719.2
+    ],
+    [
+     -713.7,
+     719.2
+    ],
+    [
+     -713.7,
+     803.3
+    ],
+    [
+     -820.5,
+     803.3
+    ],
+    [
+     -822.3,
+     801.5
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -702.3,
+     31.2
+    ],
+    [
+     -598.2,
+     31.2
+    ],
+    [
+     -598.2,
+     117.3
+    ],
+    [
+     -702.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -702.3,
+     128.7
+    ],
+    [
+     -598.2,
+     128.7
+    ],
+    [
+     -598.2,
+     215.3
+    ],
+    [
+     -702.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -702.3,
+     226.7
+    ],
+    [
+     -598.2,
+     226.7
+    ],
+    [
+     -598.2,
+     310.8
+    ],
+    [
+     -702.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -702.3,
+     327.2
+    ],
+    [
+     -598.2,
+     327.2
+    ],
+    [
+     -598.2,
+     411.3
+    ],
+    [
+     -702.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -702.3,
+     422.7
+    ],
+    [
+     -598.2,
+     422.7
+    ],
+    [
+     -598.2,
+     511.3
+    ],
+    [
+     -702.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -702.3,
+     518.7
+    ],
+    [
+     -598.2,
+     518.7
+    ],
+    [
+     -598.2,
+     607.3
+    ],
+    [
+     -702.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -702.3,
+     618.7
+    ],
+    [
+     -598.2,
+     618.7
+    ],
+    [
+     -598.2,
+     702.8
+    ],
+    [
+     -702.3,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -702.3,
+     719.2
+    ],
+    [
+     -598.2,
+     719.2
+    ],
+    [
+     -598.2,
+     803.3
+    ],
+    [
+     -702.3,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "quartier-des-magasins",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -702.3,
+     814.7
+    ],
+    [
+     -598.2,
+     814.7
+    ],
+    [
+     -598.2,
+     903.3
+    ],
+    [
+     -702.3,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-4-9",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -699.3,
+     910.7
+    ],
+    [
+     -598.2,
+     910.7
+    ],
+    [
+     -598.2,
+     980.4
+    ],
+    [
+     -606.6,
+     975.6
+    ],
+    [
+     -669.2,
+     933.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -581.8,
+     31.2
+    ],
+    [
+     -477.7,
+     31.2
+    ],
+    [
+     -477.7,
+     117.3
+    ],
+    [
+     -581.8,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -581.8,
+     128.7
+    ],
+    [
+     -477.7,
+     128.7
+    ],
+    [
+     -477.7,
+     215.3
+    ],
+    [
+     -581.8,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -581.8,
+     226.7
+    ],
+    [
+     -477.7,
+     226.7
+    ],
+    [
+     -477.7,
+     310.8
+    ],
+    [
+     -581.8,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -581.8,
+     327.2
+    ],
+    [
+     -477.7,
+     327.2
+    ],
+    [
+     -477.7,
+     411.3
+    ],
+    [
+     -581.8,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -581.8,
+     422.7
+    ],
+    [
+     -477.7,
+     422.7
+    ],
+    [
+     -477.7,
+     511.3
+    ],
+    [
+     -581.8,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -581.8,
+     518.7
+    ],
+    [
+     -477.7,
+     518.7
+    ],
+    [
+     -477.7,
+     607.3
+    ],
+    [
+     -581.8,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -581.8,
+     618.7
+    ],
+    [
+     -477.7,
+     618.7
+    ],
+    [
+     -477.7,
+     702.8
+    ],
+    [
+     -581.8,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -581.8,
+     719.2
+    ],
+    [
+     -477.7,
+     719.2
+    ],
+    [
+     -477.7,
+     803.3
+    ],
+    [
+     -581.8,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -581.8,
+     814.7
+    ],
+    [
+     -477.7,
+     814.7
+    ],
+    [
+     -477.7,
+     903.3
+    ],
+    [
+     -581.8,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -581.8,
+     910.7
+    ],
+    [
+     -477.7,
+     910.7
+    ],
+    [
+     -477.7,
+     999.3
+    ],
+    [
+     -565.5,
+     999.3
+    ],
+    [
+     -581.8,
+     989.9
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -545.8,
+     1010.7
+    ],
+    [
+     -477.7,
+     1010.7
+    ],
+    [
+     -477.7,
+     1044.6
+    ],
+    [
+     -541.5,
+     1013.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -466.3,
+     31.2
+    ],
+    [
+     -359.7,
+     31.2
+    ],
+    [
+     -359.7,
+     117.3
+    ],
+    [
+     -466.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -466.3,
+     128.7
+    ],
+    [
+     -359.7,
+     128.7
+    ],
+    [
+     -359.7,
+     215.3
+    ],
+    [
+     -466.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -466.3,
+     226.7
+    ],
+    [
+     -359.7,
+     226.7
+    ],
+    [
+     -359.7,
+     310.8
+    ],
+    [
+     -466.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -466.3,
+     327.2
+    ],
+    [
+     -359.7,
+     327.2
+    ],
+    [
+     -359.7,
+     411.3
+    ],
+    [
+     -466.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -466.3,
+     422.7
+    ],
+    [
+     -359.7,
+     422.7
+    ],
+    [
+     -359.7,
+     511.3
+    ],
+    [
+     -466.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -466.3,
+     518.7
+    ],
+    [
+     -359.7,
+     518.7
+    ],
+    [
+     -359.7,
+     607.3
+    ],
+    [
+     -466.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -466.3,
+     814.7
+    ],
+    [
+     -359.7,
+     814.7
+    ],
+    [
+     -359.7,
+     903.3
+    ],
+    [
+     -466.3,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -466.3,
+     910.7
+    ],
+    [
+     -359.7,
+     910.7
+    ],
+    [
+     -359.7,
+     999.3
+    ],
+    [
+     -466.3,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -466.3,
+     1010.7
+    ],
+    [
+     -359.7,
+     1010.7
+    ],
+    [
+     -359.7,
+     1090.4
+    ],
+    [
+     -404.7,
+     1075.2
+    ],
+    [
+     -466.3,
+     1049.6
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -348.3,
+     31.2
+    ],
+    [
+     -239.7,
+     31.2
+    ],
+    [
+     -239.7,
+     117.3
+    ],
+    [
+     -348.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -348.3,
+     128.7
+    ],
+    [
+     -239.7,
+     128.7
+    ],
+    [
+     -239.7,
+     215.3
+    ],
+    [
+     -348.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -348.3,
+     226.7
+    ],
+    [
+     -239.7,
+     226.7
+    ],
+    [
+     -239.7,
+     310.8
+    ],
+    [
+     -348.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -348.3,
+     327.2
+    ],
+    [
+     -239.7,
+     327.2
+    ],
+    [
+     -239.7,
+     411.3
+    ],
+    [
+     -348.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -348.3,
+     422.7
+    ],
+    [
+     -239.7,
+     422.7
+    ],
+    [
+     -239.7,
+     511.3
+    ],
+    [
+     -348.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -348.3,
+     518.7
+    ],
+    [
+     -239.7,
+     518.7
+    ],
+    [
+     -239.7,
+     607.3
+    ],
+    [
+     -348.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -348.3,
+     814.7
+    ],
+    [
+     -239.7,
+     814.7
+    ],
+    [
+     -239.7,
+     903.3
+    ],
+    [
+     -348.3,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -348.3,
+     1010.7
+    ],
+    [
+     -239.7,
+     1010.7
+    ],
+    [
+     -239.7,
+     1097.3
+    ],
+    [
+     -339.5,
+     1097.3
+    ],
+    [
+     -348.3,
+     1094.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -232.3,
+     31.2
+    ],
+    [
+     -123.7,
+     31.2
+    ],
+    [
+     -123.7,
+     117.3
+    ],
+    [
+     -232.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -232.3,
+     128.7
+    ],
+    [
+     -123.7,
+     128.7
+    ],
+    [
+     -123.7,
+     215.3
+    ],
+    [
+     -232.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -232.3,
+     226.7
+    ],
+    [
+     -123.7,
+     226.7
+    ],
+    [
+     -123.7,
+     310.8
+    ],
+    [
+     -232.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -232.3,
+     327.2
+    ],
+    [
+     -123.7,
+     327.2
+    ],
+    [
+     -123.7,
+     411.3
+    ],
+    [
+     -232.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -232.3,
+     422.7
+    ],
+    [
+     -123.7,
+     422.7
+    ],
+    [
+     -123.7,
+     511.3
+    ],
+    [
+     -232.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -232.3,
+     518.7
+    ],
+    [
+     -123.7,
+     518.7
+    ],
+    [
+     -123.7,
+     607.3
+    ],
+    [
+     -232.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -232.3,
+     814.7
+    ],
+    [
+     -123.7,
+     814.7
+    ],
+    [
+     -123.7,
+     903.3
+    ],
+    [
+     -232.3,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -232.3,
+     1010.7
+    ],
+    [
+     -123.7,
+     1010.7
+    ],
+    [
+     -123.7,
+     1097.3
+    ],
+    [
+     -232.3,
+     1097.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -112.3,
+     31.2
+    ],
+    [
+     -11.2,
+     31.2
+    ],
+    [
+     -11.2,
+     117.3
+    ],
+    [
+     -112.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -112.3,
+     128.7
+    ],
+    [
+     -11.2,
+     128.7
+    ],
+    [
+     -11.2,
+     215.3
+    ],
+    [
+     -112.3,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -112.3,
+     226.7
+    ],
+    [
+     -11.2,
+     226.7
+    ],
+    [
+     -11.2,
+     310.8
+    ],
+    [
+     -112.3,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     -112.3,
+     327.2
+    ],
+    [
+     -11.2,
+     327.2
+    ],
+    [
+     -11.2,
+     411.3
+    ],
+    [
+     -112.3,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -112.3,
+     422.7
+    ],
+    [
+     -11.2,
+     422.7
+    ],
+    [
+     -11.2,
+     511.3
+    ],
+    [
+     -112.3,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -112.3,
+     518.7
+    ],
+    [
+     -11.2,
+     518.7
+    ],
+    [
+     -11.2,
+     607.3
+    ],
+    [
+     -112.3,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -112.3,
+     618.7
+    ],
+    [
+     -11.2,
+     618.7
+    ],
+    [
+     -11.2,
+     702.8
+    ],
+    [
+     -112.3,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -112.3,
+     719.2
+    ],
+    [
+     -11.2,
+     719.2
+    ],
+    [
+     -11.2,
+     803.3
+    ],
+    [
+     -112.3,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "quartier-des-halles",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -112.3,
+     814.7
+    ],
+    [
+     -11.2,
+     814.7
+    ],
+    [
+     -11.2,
+     903.3
+    ],
+    [
+     -112.3,
+     903.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -112.3,
+     910.7
+    ],
+    [
+     -11.2,
+     910.7
+    ],
+    [
+     -11.2,
+     999.3
+    ],
+    [
+     -112.3,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -112.3,
+     1010.7
+    ],
+    [
+     -11.2,
+     1010.7
+    ],
+    [
+     -11.2,
+     1097.3
+    ],
+    [
+     -112.3,
+     1097.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     31.2
+    ],
+    [
+     112.3,
+     31.2
+    ],
+    [
+     112.3,
+     117.3
+    ],
+    [
+     11.2,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     128.7
+    ],
+    [
+     112.3,
+     128.7
+    ],
+    [
+     112.3,
+     215.3
+    ],
+    [
+     11.2,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     226.7
+    ],
+    [
+     112.3,
+     226.7
+    ],
+    [
+     112.3,
+     310.8
+    ],
+    [
+     11.2,
+     310.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     327.2
+    ],
+    [
+     112.3,
+     327.2
+    ],
+    [
+     112.3,
+     411.3
+    ],
+    [
+     11.2,
+     411.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     422.7
+    ],
+    [
+     112.3,
+     422.7
+    ],
+    [
+     112.3,
+     511.3
+    ],
+    [
+     11.2,
+     511.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     518.7
+    ],
+    [
+     112.3,
+     518.7
+    ],
+    [
+     112.3,
+     607.3
+    ],
+    [
+     11.2,
+     607.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     618.7
+    ],
+    [
+     112.3,
+     618.7
+    ],
+    [
+     112.3,
+     702.8
+    ],
+    [
+     11.2,
+     702.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     719.2
+    ],
+    [
+     112.3,
+     719.2
+    ],
+    [
+     112.3,
+     803.3
+    ],
+    [
+     11.2,
+     803.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     814.7
+    ],
+    [
+     112.3,
+     814.7
+    ],
+    [
+     112.3,
+     903.3
+    ],
+    [
+     11.2,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     910.7
+    ],
+    [
+     112.3,
+     910.7
+    ],
+    [
+     112.3,
+     999.3
+    ],
+    [
+     11.2,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     1010.7
+    ],
+    [
+     112.3,
+     1010.7
+    ],
+    [
+     112.3,
+     1097.3
+    ],
+    [
+     11.2,
+     1097.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     123.7,
+     31.2
+    ],
+    [
+     232.3,
+     31.2
+    ],
+    [
+     232.3,
+     117.3
+    ],
+    [
+     123.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     123.7,
+     226.7
+    ],
+    [
+     232.3,
+     226.7
+    ],
+    [
+     232.3,
+     310.8
+    ],
+    [
+     123.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     123.7,
+     327.2
+    ],
+    [
+     232.3,
+     327.2
+    ],
+    [
+     232.3,
+     411.3
+    ],
+    [
+     123.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     123.7,
+     618.7
+    ],
+    [
+     232.3,
+     618.7
+    ],
+    [
+     232.3,
+     702.8
+    ],
+    [
+     123.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     123.7,
+     719.2
+    ],
+    [
+     232.3,
+     719.2
+    ],
+    [
+     232.3,
+     803.3
+    ],
+    [
+     123.7,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     123.7,
+     814.7
+    ],
+    [
+     232.3,
+     814.7
+    ],
+    [
+     232.3,
+     903.3
+    ],
+    [
+     123.7,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     123.7,
+     910.7
+    ],
+    [
+     232.3,
+     910.7
+    ],
+    [
+     232.3,
+     999.3
+    ],
+    [
+     123.7,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     123.7,
+     1010.7
+    ],
+    [
+     232.3,
+     1010.7
+    ],
+    [
+     232.3,
+     1097.3
+    ],
+    [
+     123.7,
+     1097.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     239.7,
+     31.2
+    ],
+    [
+     348.3,
+     31.2
+    ],
+    [
+     348.3,
+     117.3
+    ],
+    [
+     239.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "culte",
+   "polygone": [
+    [
+     239.7,
+     128.7
+    ],
+    [
+     348.3,
+     128.7
+    ],
+    [
+     348.3,
+     215.3
+    ],
+    [
+     239.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     239.7,
+     226.7
+    ],
+    [
+     348.3,
+     226.7
+    ],
+    [
+     348.3,
+     310.8
+    ],
+    [
+     239.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     239.7,
+     327.2
+    ],
+    [
+     348.3,
+     327.2
+    ],
+    [
+     348.3,
+     411.3
+    ],
+    [
+     239.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     239.7,
+     618.7
+    ],
+    [
+     348.3,
+     618.7
+    ],
+    [
+     348.3,
+     702.8
+    ],
+    [
+     239.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     239.7,
+     719.2
+    ],
+    [
+     348.3,
+     719.2
+    ],
+    [
+     348.3,
+     803.3
+    ],
+    [
+     239.7,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     239.7,
+     814.7
+    ],
+    [
+     348.3,
+     814.7
+    ],
+    [
+     348.3,
+     903.3
+    ],
+    [
+     239.7,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     239.7,
+     910.7
+    ],
+    [
+     348.3,
+     910.7
+    ],
+    [
+     348.3,
+     999.3
+    ],
+    [
+     239.7,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     239.7,
+     1010.7
+    ],
+    [
+     348.3,
+     1010.7
+    ],
+    [
+     348.3,
+     1094.3
+    ],
+    [
+     339.5,
+     1097.3
+    ],
+    [
+     239.7,
+     1097.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     359.7,
+     31.2
+    ],
+    [
+     466.3,
+     31.2
+    ],
+    [
+     466.3,
+     117.3
+    ],
+    [
+     359.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     359.7,
+     128.7
+    ],
+    [
+     466.3,
+     128.7
+    ],
+    [
+     466.3,
+     215.3
+    ],
+    [
+     359.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     226.7
+    ],
+    [
+     466.3,
+     226.7
+    ],
+    [
+     466.3,
+     310.8
+    ],
+    [
+     359.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     327.2
+    ],
+    [
+     466.3,
+     327.2
+    ],
+    [
+     466.3,
+     411.3
+    ],
+    [
+     359.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     422.7
+    ],
+    [
+     466.3,
+     422.7
+    ],
+    [
+     466.3,
+     511.3
+    ],
+    [
+     359.7,
+     511.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     518.7
+    ],
+    [
+     466.3,
+     518.7
+    ],
+    [
+     466.3,
+     607.3
+    ],
+    [
+     359.7,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     618.7
+    ],
+    [
+     466.3,
+     618.7
+    ],
+    [
+     466.3,
+     702.8
+    ],
+    [
+     359.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     359.7,
+     719.2
+    ],
+    [
+     466.3,
+     719.2
+    ],
+    [
+     466.3,
+     803.3
+    ],
+    [
+     359.7,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-13-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     359.7,
+     814.7
+    ],
+    [
+     466.3,
+     814.7
+    ],
+    [
+     466.3,
+     903.3
+    ],
+    [
+     359.7,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-9",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     359.7,
+     910.7
+    ],
+    [
+     466.3,
+     910.7
+    ],
+    [
+     466.3,
+     999.3
+    ],
+    [
+     359.7,
+     999.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     359.7,
+     1010.7
+    ],
+    [
+     466.3,
+     1010.7
+    ],
+    [
+     466.3,
+     1049.6
+    ],
+    [
+     404.7,
+     1075.2
+    ],
+    [
+     359.7,
+     1090.4
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     477.7,
+     31.2
+    ],
+    [
+     581.8,
+     31.2
+    ],
+    [
+     581.8,
+     117.3
+    ],
+    [
+     477.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     477.7,
+     128.7
+    ],
+    [
+     581.8,
+     128.7
+    ],
+    [
+     581.8,
+     215.3
+    ],
+    [
+     477.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     477.7,
+     226.7
+    ],
+    [
+     581.8,
+     226.7
+    ],
+    [
+     581.8,
+     310.8
+    ],
+    [
+     477.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     477.7,
+     327.2
+    ],
+    [
+     581.8,
+     327.2
+    ],
+    [
+     581.8,
+     411.3
+    ],
+    [
+     477.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     477.7,
+     518.7
+    ],
+    [
+     581.8,
+     518.7
+    ],
+    [
+     581.8,
+     607.3
+    ],
+    [
+     477.7,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     477.7,
+     618.7
+    ],
+    [
+     581.8,
+     618.7
+    ],
+    [
+     581.8,
+     702.8
+    ],
+    [
+     477.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-7",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     477.7,
+     719.2
+    ],
+    [
+     581.8,
+     719.2
+    ],
+    [
+     581.8,
+     803.3
+    ],
+    [
+     477.7,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-14-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     477.7,
+     814.7
+    ],
+    [
+     581.8,
+     814.7
+    ],
+    [
+     581.8,
+     903.3
+    ],
+    [
+     477.7,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-9",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     477.7,
+     910.7
+    ],
+    [
+     581.8,
+     910.7
+    ],
+    [
+     581.8,
+     989.9
+    ],
+    [
+     565.5,
+     999.3
+    ],
+    [
+     477.7,
+     999.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-10",
+   "quartier": "quartier-de-la-porte-sud",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     477.7,
+     1010.7
+    ],
+    [
+     545.8,
+     1010.7
+    ],
+    [
+     541.5,
+     1013.2
+    ],
+    [
+     477.7,
+     1044.6
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     598.2,
+     31.2
+    ],
+    [
+     702.3,
+     31.2
+    ],
+    [
+     702.3,
+     117.3
+    ],
+    [
+     598.2,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     598.2,
+     128.7
+    ],
+    [
+     702.3,
+     128.7
+    ],
+    [
+     702.3,
+     215.3
+    ],
+    [
+     598.2,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     598.2,
+     226.7
+    ],
+    [
+     702.3,
+     226.7
+    ],
+    [
+     702.3,
+     310.8
+    ],
+    [
+     598.2,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     598.2,
+     327.2
+    ],
+    [
+     702.3,
+     327.2
+    ],
+    [
+     702.3,
+     411.3
+    ],
+    [
+     598.2,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     598.2,
+     518.7
+    ],
+    [
+     702.3,
+     518.7
+    ],
+    [
+     702.3,
+     607.3
+    ],
+    [
+     598.2,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     598.2,
+     618.7
+    ],
+    [
+     702.3,
+     618.7
+    ],
+    [
+     702.3,
+     702.8
+    ],
+    [
+     598.2,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-7",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     598.2,
+     719.2
+    ],
+    [
+     702.3,
+     719.2
+    ],
+    [
+     702.3,
+     803.3
+    ],
+    [
+     598.2,
+     803.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-15-8",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     598.2,
+     814.7
+    ],
+    [
+     702.3,
+     814.7
+    ],
+    [
+     702.3,
+     903.3
+    ],
+    [
+     598.2,
+     903.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-9",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     598.2,
+     910.7
+    ],
+    [
+     699.3,
+     910.7
+    ],
+    [
+     669.2,
+     933.8
+    ],
+    [
+     606.6,
+     975.6
+    ],
+    [
+     598.2,
+     980.4
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     713.7,
+     31.2
+    ],
+    [
+     822.3,
+     31.2
+    ],
+    [
+     822.3,
+     117.3
+    ],
+    [
+     713.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "vieil-ehrmich",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     713.7,
+     128.7
+    ],
+    [
+     822.3,
+     128.7
+    ],
+    [
+     822.3,
+     215.3
+    ],
+    [
+     713.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     226.7
+    ],
+    [
+     822.3,
+     226.7
+    ],
+    [
+     822.3,
+     310.8
+    ],
+    [
+     713.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     327.2
+    ],
+    [
+     822.3,
+     327.2
+    ],
+    [
+     822.3,
+     411.3
+    ],
+    [
+     713.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     422.7
+    ],
+    [
+     822.3,
+     422.7
+    ],
+    [
+     822.3,
+     511.3
+    ],
+    [
+     713.7,
+     511.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     518.7
+    ],
+    [
+     822.3,
+     518.7
+    ],
+    [
+     822.3,
+     607.3
+    ],
+    [
+     713.7,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-16-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     618.7
+    ],
+    [
+     822.3,
+     618.7
+    ],
+    [
+     822.3,
+     702.8
+    ],
+    [
+     713.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-16-8",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     713.7,
+     814.7
+    ],
+    [
+     809.1,
+     814.7
+    ],
+    [
+     785.3,
+     838.5
+    ],
+    [
+     728.8,
+     888
+    ],
+    [
+     713.7,
+     899.6
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     829.7,
+     31.2
+    ],
+    [
+     938.3,
+     31.2
+    ],
+    [
+     938.3,
+     117.3
+    ],
+    [
+     829.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     829.7,
+     128.7
+    ],
+    [
+     938.3,
+     128.7
+    ],
+    [
+     938.3,
+     215.3
+    ],
+    [
+     829.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     829.7,
+     226.7
+    ],
+    [
+     938.3,
+     226.7
+    ],
+    [
+     938.3,
+     310.8
+    ],
+    [
+     829.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-17-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     829.7,
+     327.2
+    ],
+    [
+     938.3,
+     327.2
+    ],
+    [
+     938.3,
+     411.3
+    ],
+    [
+     829.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     829.7,
+     422.7
+    ],
+    [
+     938.3,
+     422.7
+    ],
+    [
+     938.3,
+     511.3
+    ],
+    [
+     829.7,
+     511.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     829.7,
+     518.7
+    ],
+    [
+     938.3,
+     518.7
+    ],
+    [
+     938.3,
+     607.3
+    ],
+    [
+     829.7,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-17-6",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     829.7,
+     618.7
+    ],
+    [
+     938.3,
+     618.7
+    ],
+    [
+     938.3,
+     662.4
+    ],
+    [
+     933.8,
+     669.2
+    ],
+    [
+     908,
+     702.8
+    ],
+    [
+     829.7,
+     702.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     949.7,
+     31.2
+    ],
+    [
+     1056.3,
+     31.2
+    ],
+    [
+     1056.3,
+     117.3
+    ],
+    [
+     949.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     949.7,
+     128.7
+    ],
+    [
+     1056.3,
+     128.7
+    ],
+    [
+     1056.3,
+     215.3
+    ],
+    [
+     949.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     949.7,
+     226.7
+    ],
+    [
+     1056.3,
+     226.7
+    ],
+    [
+     1056.3,
+     310.8
+    ],
+    [
+     949.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-18-4",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     949.7,
+     422.7
+    ],
+    [
+     1056.3,
+     422.7
+    ],
+    [
+     1056.3,
+     450.2
+    ],
+    [
+     1046.4,
+     474.1
+    ],
+    [
+     1028.1,
+     511.3
+    ],
+    [
+     949.7,
+     511.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-18-5",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     949.7,
+     518.7
+    ],
+    [
+     1024.4,
+     518.7
+    ],
+    [
+     1013.2,
+     541.5
+    ],
+    [
+     975.6,
+     606.6
+    ],
+    [
+     975.1,
+     607.3
+    ],
+    [
+     949.7,
+     607.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1067.7,
+     31.2
+    ],
+    [
+     1148.2,
+     31.2
+    ],
+    [
+     1148.2,
+     37.6
+    ],
+    [
+     1143.3,
+     112.6
+    ],
+    [
+     1142.6,
+     117.3
+    ],
+    [
+     1067.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "quartier-des-commis",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1067.7,
+     128.7
+    ],
+    [
+     1141.1,
+     128.7
+    ],
+    [
+     1133.5,
+     187.1
+    ],
+    [
+     1127.9,
+     215.3
+    ],
+    [
+     1067.7,
+     215.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     1067.7,
+     226.7
+    ],
+    [
+     1125.6,
+     226.7
+    ],
+    [
+     1118.8,
+     260.9
+    ],
+    [
+     1105.4,
+     310.8
+    ],
+    [
+     1067.7,
+     310.8
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "i-19-3",
+   "quartier": "quartier-des-negociants",
+   "fonction": "noble",
+   "polygone": [
+    [
+     1067.7,
+     327.2
+    ],
+    [
+     1101,
+     327.2
+    ],
+    [
+     1099.3,
+     333.5
+    ],
+    [
+     1075.2,
+     404.7
+    ],
+    [
+     1072.4,
+     411.3
+    ],
+    [
+     1067.7,
+     411.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "hotels"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.8,
+     -150.3
+    ],
+    [
+     -304.2,
+     -150.3
+    ],
+    [
+     -304.2,
+     -34.7
+    ],
+    [
+     -445.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.8,
+     -275.3
+    ],
+    [
+     -304.2,
+     -275.3
+    ],
+    [
+     -304.2,
+     -159.7
+    ],
+    [
+     -445.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.8,
+     -400.3
+    ],
+    [
+     -304.2,
+     -400.3
+    ],
+    [
+     -304.2,
+     -284.7
+    ],
+    [
+     -445.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.8,
+     -525.3
+    ],
+    [
+     -304.2,
+     -525.3
+    ],
+    [
+     -304.2,
+     -409.7
+    ],
+    [
+     -445.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -150.3
+    ],
+    [
+     -154.2,
+     -150.3
+    ],
+    [
+     -154.2,
+     -34.7
+    ],
+    [
+     -295.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -275.3
+    ],
+    [
+     -154.2,
+     -275.3
+    ],
+    [
+     -154.2,
+     -159.7
+    ],
+    [
+     -295.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -400.3
+    ],
+    [
+     -154.2,
+     -400.3
+    ],
+    [
+     -154.2,
+     -284.7
+    ],
+    [
+     -295.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -295.8,
+     -525.3
+    ],
+    [
+     -154.2,
+     -525.3
+    ],
+    [
+     -154.2,
+     -409.7
+    ],
+    [
+     -295.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.8,
+     -150.3
+    ],
+    [
+     -7,
+     -150.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -145.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.8,
+     -275.3
+    ],
+    [
+     -7,
+     -275.3
+    ],
+    [
+     -7,
+     -159.7
+    ],
+    [
+     -145.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.8,
+     -400.3
+    ],
+    [
+     -7,
+     -400.3
+    ],
+    [
+     -7,
+     -284.7
+    ],
+    [
+     -145.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.8,
+     -525.3
+    ],
+    [
+     -7,
+     -525.3
+    ],
+    [
+     -7,
+     -409.7
+    ],
+    [
+     -145.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -150.3
+    ],
+    [
+     145.8,
+     -150.3
+    ],
+    [
+     145.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -275.3
+    ],
+    [
+     145.8,
+     -275.3
+    ],
+    [
+     145.8,
+     -159.7
+    ],
+    [
+     7,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -400.3
+    ],
+    [
+     145.8,
+     -400.3
+    ],
+    [
+     145.8,
+     -284.7
+    ],
+    [
+     7,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -525.3
+    ],
+    [
+     145.8,
+     -525.3
+    ],
+    [
+     145.8,
+     -409.7
+    ],
+    [
+     7,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     154.2,
+     -150.3
+    ],
+    [
+     295.8,
+     -150.3
+    ],
+    [
+     295.8,
+     -34.7
+    ],
+    [
+     154.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     154.2,
+     -275.3
+    ],
+    [
+     295.8,
+     -275.3
+    ],
+    [
+     295.8,
+     -159.7
+    ],
+    [
+     154.2,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     154.2,
+     -400.3
+    ],
+    [
+     295.8,
+     -400.3
+    ],
+    [
+     295.8,
+     -284.7
+    ],
+    [
+     154.2,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     154.2,
+     -525.3
+    ],
+    [
+     295.8,
+     -525.3
+    ],
+    [
+     295.8,
+     -409.7
+    ],
+    [
+     154.2,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     304.2,
+     -150.3
+    ],
+    [
+     445.8,
+     -150.3
+    ],
+    [
+     445.8,
+     -34.7
+    ],
+    [
+     304.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     304.2,
+     -275.3
+    ],
+    [
+     445.8,
+     -275.3
+    ],
+    [
+     445.8,
+     -159.7
+    ],
+    [
+     304.2,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     304.2,
+     -400.3
+    ],
+    [
+     445.8,
+     -400.3
+    ],
+    [
+     445.8,
+     -284.7
+    ],
+    [
+     304.2,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     304.2,
+     -525.3
+    ],
+    [
+     445.8,
+     -525.3
+    ],
+    [
+     445.8,
+     -409.7
+    ],
+    [
+     304.2,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "halles-centrales",
+   "nom": "Halles centrales",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -295,
+    711
+   ],
+   "emprise_m": [
+    62,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#CDBE9E",
+   "reperes_canon": [
+    "Ehrmich, ressource clé : commerce [C] (atlas 06 I08) : les halles sont une adaptation"
+   ],
+   "params": {
+    "piliers": 12,
+    "pente": 40
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal des halles 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -405,
+    675
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal des halles 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -295,
+    675
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal des halles 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -185,
+    675
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal des halles 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -405,
+    749
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal des halles 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -295,
+    749
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal des halles 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -185,
+    749
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "theatre-d-ehrmich",
+   "nom": "Théâtre d'Ehrmich",
+   "canon": "A",
+   "archetype": "palais",
+   "position": [
+    413,
+    564
+   ],
+   "emprise_m": [
+    58,
+    42
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 20,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "cuivre",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "bourse-d-ehrmich",
+   "nom": "Bourse d'Ehrmich",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    531,
+    368
+   ],
+   "emprise_m": [
+    38,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 15,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "hotel-de-ville",
+   "nom": "Hôtel de ville d'Ehrmich",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -177,
+    172
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église d'Ehrmich",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    295,
+    172
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 48,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "galerie-des-negociants",
+   "nom": "Galerie des Négociants",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    295,
+    760
+   ],
+   "emprise_m": [
+    60,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "cuivre",
+   "facade": "pierre_taillee",
+   "teinte": "#DCD3C0",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 10,
+    "pente": 36
+   }
+  },
+  {
+   "id": "magasins-des-negociants",
+   "nom": "Magasins des négociants",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    -649,
+    760
+   ],
+   "emprise_m": [
+    60,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C8B8A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "clinique-d-ehrmich",
+   "nom": "Clinique d'Ehrmich",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -767,
+    564
+   ],
+   "emprise_m": [
+    40,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E1DACB",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "ecole-des-commis",
+   "nom": "École des commis",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    767,
+    270
+   ],
+   "emprise_m": [
+    44,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#D9CDB6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "caserne-de-la-porte-sud",
+   "nom": "Caserne de la porte sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -59,
+    956
+   ],
+   "emprise_m": [
+    60,
+    50
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "poste-porte-sud",
+   "nom": "Poste de garde de la porte sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -59,
+    1054
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-5",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     150,
+     555
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 23,
+    "nom": "Tilleul du Théâtre"
+   },
+   {
+    "position": [
+     -170,
+     1040
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne de la porte sud"
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   }
+  ],
+  "parcs": [
+   {
+    "id": "parc-des-negociants",
+    "nom": "Parc des Négociants",
+    "canon": "A",
+    "polygone": [
+     [
+      -938.3,
+      226.7
+     ],
+     [
+      -713.7,
+      226.7
+     ],
+     [
+      -713.7,
+      411.3
+     ],
+     [
+      -938.3,
+      411.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "erable",
+     "marronnier"
+    ],
+    "arbres_par_ha": 68
+   },
+   {
+    "id": "jardin-de-la-porte-sud",
+    "nom": "Jardin de la Porte Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -348.3,
+      910.7
+     ],
+     [
+      -123.7,
+      910.7
+     ],
+     [
+      -123.7,
+      999.3
+     ],
+     [
+      -348.3,
+      999.3
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   },
+   {
+    "id": "jardin-du-theatre",
+    "nom": "Jardin du Théâtre",
+    "canon": "A",
+    "polygone": [
+     [
+      477.7,
+      422.7
+     ],
+     [
+      702.3,
+      422.7
+     ],
+     [
+      702.3,
+      511.3
+     ],
+     [
+      477.7,
+      511.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 75
+   },
+   {
+    "id": "promenade-du-midi",
+    "nom": "Promenade du Midi",
+    "canon": "A",
+    "polygone": [
+     [
+      713.7,
+      719.2
+     ],
+     [
+      895.4,
+      719.2
+     ],
+     [
+      888,
+      728.8
+     ],
+     [
+      838.5,
+      785.3
+     ],
+     [
+      820.5,
+      803.3
+     ],
+     [
+      713.7,
+      803.3
+     ]
+    ],
+    "essences": [
+     "peuplier",
+     "tilleul",
+     "erable"
+    ],
+    "arbres_par_ha": 62
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -440,
+      -60
+     ],
+     [
+      -310,
+      -60
+     ],
+     [
+      -310,
+      -500
+     ],
+     [
+      -440,
+      -500
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      310,
+      -60
+     ],
+     [
+      440,
+      -60
+     ],
+     [
+      440,
+      -500
+     ],
+     [
+      310,
+      -500
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -450,
+      -580
+     ],
+     [
+      450,
+      -580
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      20,
+      -330
+     ],
+     [
+      280,
+      -330
+     ],
+     [
+      280,
+      -500
+     ],
+     [
+      20,
+      -500
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -800,
+    300
+   ],
+   [
+    800,
+    300
+   ],
+   [
+    -420,
+    880
+   ],
+   [
+    420,
+    880
+   ],
+   [
+    -950,
+    700
+   ]
+  ],
+  "fontaines": [
+   [
+    -295,
+    711
+   ],
+   [
+    236,
+    515
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1262.6,
+    1970.6,
+    861.4
+   ],
+   "cible": [
+    30,
+    554.6,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    790.6,
+    1.8
+   ],
+   "cible": [
+    0,
+    259.6,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-theatre",
+   "nom": "Place du Théâtre",
+   "oeil": [
+    324,
+    437,
+    2.6
+   ],
+   "cible": [
+    394,
+    525,
+    10
+   ],
+   "fov": 62
+  },
+  {
+   "id": "halles-centrales",
+   "nom": "Place et halles centrales",
+   "oeil": [
+    -138,
+    633,
+    2.4
+   ],
+   "cible": [
+    -295,
+    741,
+    7
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-negociants",
+   "nom": "Rue des Négociants",
+   "oeil": [
+    -590,
+    515,
+    1.7
+   ],
+   "cible": [
+    -590,
+    907,
+    6
+   ],
+   "fov": 62
+  },
+  {
+   "id": "porte-sud",
+   "nom": "Caserne et poste de la porte sud",
+   "oeil": [
+    190,
+    1000,
+    3.5
+   ],
+   "cible": [
+    -60,
+    1120,
+    10
+   ],
+   "fov": 62
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -624.8,
+    999.8,
+    52.5
+   ],
+   "cible": [
+    -204.7,
+    1161.1,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    3,
+    1020,
+    1.8
+   ],
+   "cible": [
+    0,
+    1180,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Ehrmich en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-afflux-des-evacues",
+   "nom": "850, afflux des évacués du sud",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) : l'évacuation du sud vers l'intérieur [C] ; accueil des évacués à Ehrmich : adaptation",
+     "canon": "A"
+    },
+    {
+     "ref": "affluence, brume : adaptation (aucune destruction : le district n'est pas touché)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 1
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

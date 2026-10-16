@@ -1431,3 +1431,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : quatre plans d'auteur (kit commun `enclos.ts`), populations lues de `scn_sandbox_845` (34 783 hab. pour Utopia et Krolva ; camp 9 % de `prov_trost`… sans civils ; QG 1,2 % de `prov_trost`), surface bâtie à ±15 % de population ÷ densité, ≥ 10 arbres/ha bâti ; noms `A` + creation (`creations.md`, Q16-Q19). Le QG reprend le repère de `trost.json`.
 - **Limites** : intérieur des bâtiments et enceinte non modélisés (schéma inchangé) ; captures complètes (portes, états, places) à produire pour les six lieux de C15 (dette 110) ; revue indépendante de fin de chantier à faire.
 - **Preuve** : `tests/places/rose2.test.ts`, `places:valider -- --sans-docs` OK (10 lieux N1), verify EXIT=0 1523 tests. **Réversible** : oui.
+
+## 2026-10-16 — D-187 C16 tranche 1 : Stohess, Orvud, Ehrmich, Yarckel, Mitras (mur Sina)
+- **Décision** : cinq plans d'auteur (kit `sina.ts`, Mitras par `enclos.ts`, carré de 2 200 m sans enceinte faute de schéma) ; populations lues de `scn_sandbox_845`, surface bâtie à ≤ 7 % de population ÷ densité, ≥ 30 arbres/ha bâti ; districts à saillie à deux portes (extension de Rose, `A`) ; Ehrmich bourgeois (le « quartier des nobles » est un POI de Mitras) ; noms `A` + creation (`creations.md`, Q20-Q25).
+- **Limites** : ville souterraine et chapelle Reiss non commencées ; captures complètes à produire (dette 110, étendue aux lieux C16) ; revue indépendante de fin de chantier à faire.
+- **Preuve** : `tests/places/sina.test.ts`, `rose-enceinte.test.ts` (11 lieux), `places:valider -- --sans-docs` OK (15 lieux N1), verify EXIT=0 1579 tests. **Réversible** : oui.
