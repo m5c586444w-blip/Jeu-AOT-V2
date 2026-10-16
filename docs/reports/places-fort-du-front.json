@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/fort-du-front/vue-ensemble.png",
+   "stats": {
+    "calls": 67,
+    "triangles": 12635,
+    "instances": 253,
+    "chunks": {
+     "total": 30,
+     "visible": 30,
+     "near": 0
+    }
+   },
+   "rgb": [
+    141.87927517361112,
+    146.30348524305555,
+    114.68876302083333
+   ]
+  }
+ },
+ "dE": {}
+}

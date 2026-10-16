@@ -4,20 +4,461 @@
    "file": "docs/places/krolva/vue-ensemble.png",
    "stats": {
     "calls": 252,
-    "triangles": 568801,
-    "instances": 22549,
+    "triangles": 568661,
+    "instances": 22542,
     "chunks": {
-     "total": 567,
-     "visible": 567,
+     "total": 565,
+     "visible": 565,
      "near": 0
     }
    },
    "rgb": [
-    145.1344140625,
-    147.64073350694446,
-    116.37446180555555
+    145.11591145833333,
+    147.63384114583334,
+    116.35616319444445
+   ]
+  },
+  "axe-principal": {
+   "file": "docs/places/krolva/vue-axe-principal.png",
+   "stats": {
+    "calls": 249,
+    "triangles": 885184,
+    "instances": 14202,
+    "chunks": {
+     "total": 565,
+     "visible": 291,
+     "near": 10
+    }
+   },
+   "rgb": [
+    115.66435763888889,
+    113.23904947916667,
+    98.27037326388889
+   ]
+  },
+  "place-des-corporations": {
+   "file": "docs/places/krolva/vue-place-des-corporations.png",
+   "stats": {
+    "calls": 271,
+    "triangles": 848321,
+    "instances": 13083,
+    "chunks": {
+     "total": 565,
+     "visible": 249,
+     "near": 10
+    }
+   },
+   "rgb": [
+    81.32726996527778,
+    83.45398871527777,
+    53.09996527777778
+   ]
+  },
+  "quartier-des-forges": {
+   "file": "docs/places/krolva/vue-quartier-des-forges.png",
+   "stats": {
+    "calls": 195,
+    "triangles": 654213,
+    "instances": 4086,
+    "chunks": {
+     "total": 565,
+     "visible": 75,
+     "near": 8
+    }
+   },
+   "rgb": [
+    94.52529947916666,
+    86.27737847222222,
+    64.09220920138888
+   ]
+  },
+  "quartier-des-tanneurs": {
+   "file": "docs/places/krolva/vue-quartier-des-tanneurs.png",
+   "stats": {
+    "calls": 219,
+    "triangles": 677390,
+    "instances": 5710,
+    "chunks": {
+     "total": 565,
+     "visible": 97,
+     "near": 8
+    }
+   },
+   "rgb": [
+    64.008359375,
+    64.31656684027777,
+    46.86852864583334
+   ]
+  },
+  "porte-ouest": {
+   "file": "docs/places/krolva/vue-porte-ouest.png",
+   "stats": {
+    "calls": 217,
+    "triangles": 490080,
+    "instances": 3129,
+    "chunks": {
+     "total": 565,
+     "visible": 83,
+     "near": 9
+    }
+   },
+   "rgb": [
+    130.94203993055555,
+    132.4857421875,
+    124.2775998263889
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/krolva/vue-rempart.png",
+   "stats": {
+    "calls": 244,
+    "triangles": 444211,
+    "instances": 5926,
+    "chunks": {
+     "total": 565,
+     "visible": 159,
+     "near": 4
+    }
+   },
+   "rgb": [
+    182.76802083333334,
+    191.5373046875,
+    190.27305989583334
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/krolva/vue-faubourg.png",
+   "stats": {
+    "calls": 279,
+    "triangles": 801889,
+    "instances": 20685,
+    "chunks": {
+     "total": 565,
+     "visible": 454,
+     "near": 2
+    }
+   },
+   "rgb": [
+    158.55027777777778,
+    158.31157118055555,
+    142.81740885416667
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/krolva/vue-porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 153,
+    "triangles": 476065,
+    "instances": 704,
+    "chunks": {
+     "total": 565,
+     "visible": 25,
+     "near": 11
+    }
+   },
+   "rgb": [
+    109.05938368055556,
+    105.91963975694445,
+    94.7355859375
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/krolva/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 280,
+    "triangles": 711356,
+    "instances": 21129,
+    "chunks": {
+     "total": 565,
+     "visible": 443,
+     "near": 7
+    }
+   },
+   "rgb": [
+    163.8380251736111,
+    158.72360677083333,
+    137.59018663194445
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/krolva/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 299,
+    "triangles": 790933,
+    "instances": 19078,
+    "chunks": {
+     "total": 565,
+     "visible": 410,
+     "near": 9
+    }
+   },
+   "rgb": [
+    102.21382378472222,
+    89.99525607638888,
+    75.33621527777778
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/krolva/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 69,
+    "triangles": 231168,
+    "instances": 229,
+    "chunks": {
+     "total": 565,
+     "visible": 15,
+     "near": 5
+    }
+   },
+   "rgb": [
+    103.58435763888889,
+    104.53262586805556,
+    94.87931423611111
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/krolva/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 63,
+    "triangles": 254896,
+    "instances": 201,
+    "chunks": {
+     "total": 565,
+     "visible": 11,
+     "near": 7
+    }
+   },
+   "rgb": [
+    64.19868055555555,
+    70.86976128472222,
+    73.1875
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/krolva/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 69,
+    "triangles": 241992,
+    "instances": 230,
+    "chunks": {
+     "total": 565,
+     "visible": 14,
+     "near": 6
+    }
+   },
+   "rgb": [
+    47.68146267361111,
+    41.66344184027778,
+    34.30289496527778
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/krolva/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 232,
+    "triangles": 399544,
+    "instances": 4237,
+    "chunks": {
+     "total": 565,
+     "visible": 103,
+     "near": 7
+    }
+   },
+   "rgb": [
+    164.69258680555555,
+    172.49807725694444,
+    168.98940538194444
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/krolva/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 496,
+    "triangles": 641011,
+    "instances": 15611,
+    "chunks": {
+     "total": 565,
+     "visible": 361,
+     "near": 5
+    }
+   },
+   "rgb": [
+    159.52316840277777,
+    161.4531467013889,
+    139.10049913194445
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/krolva/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 261,
+    "triangles": 847869,
+    "instances": 11347,
+    "chunks": {
+     "total": 565,
+     "visible": 250,
+     "near": 12
+    }
+   },
+   "rgb": [
+    118.45262152777778,
+    116.10207465277777,
+    103.27605902777778
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/krolva/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 263,
+    "triangles": 805432,
+    "instances": 10763,
+    "chunks": {
+     "total": 565,
+     "visible": 233,
+     "near": 10
+    }
+   },
+   "rgb": [
+    56.00947482638889,
+    54.467556423611114,
+    46.882282986111115
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/krolva/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 182,
+    "triangles": 814890,
+    "instances": 6902,
+    "chunks": {
+     "total": 565,
+     "visible": 143,
+     "near": 12
+    }
+   },
+   "rgb": [
+    159.97260416666666,
+    154.01258246527777,
+    138.31014322916667
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/krolva/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 169,
+    "triangles": 565634,
+    "instances": 1585,
+    "chunks": {
+     "total": 565,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    126.1390060763889,
+    120.48573784722223,
+    109.11554253472222
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/krolva/porte-interieure-passage.png",
+   "stats": {
+    "calls": 181,
+    "triangles": 953875,
+    "instances": 6808,
+    "chunks": {
+     "total": 565,
+     "visible": 132,
+     "near": 13
+    }
+   },
+   "rgb": [
+    77.74302517361112,
+    77.39782552083334,
+    71.23857638888889
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/krolva/porte-interieure-haut.png",
+   "stats": {
+    "calls": 232,
+    "triangles": 790492,
+    "instances": 9847,
+    "chunks": {
+     "total": 565,
+     "visible": 161,
+     "near": 10
+    }
+   },
+   "rgb": [
+    184.37216579861112,
+    190.17645399305556,
+    187.534453125
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/krolva/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 486,
+    "triangles": 816809,
+    "instances": 10762,
+    "chunks": {
+     "total": 565,
+     "visible": 240,
+     "near": 10
+    }
+   },
+   "rgb": [
+    133.62735243055556,
+    130.4309722222222,
+    114.04502604166667
    ]
   }
  },
- "dE": {}
+ "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 35.75399885928326,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 36.63355929579173,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.66868164871935,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 51.64736418118669,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 27.927919590881867,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.352378394464203,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 32.69749761785752,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 31.82359135220237,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.92940117594582,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 42.56343974766647,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.429505391404476,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 29.07422353351791,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 35.46171019079605,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 35.94726524078276,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 39.073812615484876,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.282027808271856,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 44.69051833846086,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 43.57294814724018,
+  "porte-exterieure-passage | porte-exterieure-haut": 56.2820722325991,
+  "porte-exterieure-passage | porte-exterieure-echelle": 53.22477022238078,
+  "porte-exterieure-haut | porte-exterieure-echelle": 26.020296103673346,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 28.71132297311204,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 24.59068576461251,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 32.61920573249259,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 32.715881326625194,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 38.17461368212195,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 18.911886692994866,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 43.90269248395934,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 38.27512319764032,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 27.089315681292973,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 58.13971041612662,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 37.281478620725416,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 27.70213189365703,
+  "porte-interieure-interieure-face | porte-interieure-passage": 42.623452419637196,
+  "porte-interieure-interieure-face | porte-interieure-haut": 27.740620655287145,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 30.666423935480502,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.55518098407628,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 33.716308258143876,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 29.939457385097935,
+  "porte-interieure-passage | porte-interieure-haut": 52.45223611944447,
+  "porte-interieure-passage | porte-interieure-echelle": 41.020259092615134,
+  "porte-interieure-haut | porte-interieure-echelle": 34.81819020878905,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.46940536851354,
+  "etat-845-avant | etat-850-afflux-des-evacues": 3.372505846575182
+ }
 }

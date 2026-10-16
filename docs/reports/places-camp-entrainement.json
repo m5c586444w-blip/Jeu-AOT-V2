@@ -17,7 +17,99 @@
     149.09560763888888,
     116.8058984375
    ]
+  },
+  "axe-principal": {
+   "file": "docs/places/camp-entrainement/vue-axe-principal.png",
+   "stats": {
+    "calls": 114,
+    "triangles": 335610,
+    "instances": 2349,
+    "chunks": {
+     "total": 133,
+     "visible": 72,
+     "near": 8
+    }
+   },
+   "rgb": [
+    143.02603298611112,
+    142.5213454861111,
+    126.80533854166667
+   ]
+  },
+  "champ-de-manoeuvre": {
+   "file": "docs/places/camp-entrainement/vue-champ-de-manoeuvre.png",
+   "stats": {
+    "calls": 114,
+    "triangles": 301210,
+    "instances": 2459,
+    "chunks": {
+     "total": 133,
+     "visible": 70,
+     "near": 8
+    }
+   },
+   "rgb": [
+    129.71460069444444,
+    133.35078993055555,
+    120.19147135416667
+   ]
+  },
+  "dortoirs": {
+   "file": "docs/places/camp-entrainement/vue-dortoirs.png",
+   "stats": {
+    "calls": 112,
+    "triangles": 201874,
+    "instances": 1476,
+    "chunks": {
+     "total": 133,
+     "visible": 46,
+     "near": 8
+    }
+   },
+   "rgb": [
+    126.3741189236111,
+    119.82531684027778,
+    97.12435329861111
+   ]
+  },
+  "ecuries-et-manege": {
+   "file": "docs/places/camp-entrainement/vue-ecuries-et-manege.png",
+   "stats": {
+    "calls": 116,
+    "triangles": 212830,
+    "instances": 1325,
+    "chunks": {
+     "total": 133,
+     "visible": 34,
+     "near": 9
+    }
+   },
+   "rgb": [
+    111.91798177083334,
+    118.64357638888889,
+    82.26894097222223
+   ]
+  },
+  "entree-du-camp": {
+   "file": "docs/places/camp-entrainement/vue-entree-du-camp.png",
+   "stats": {
+    "calls": 109,
+    "triangles": 291242,
+    "instances": 2086,
+    "chunks": {
+     "total": 133,
+     "visible": 75,
+     "near": 7
+    }
+   },
+   "rgb": [
+    144.47990885416667,
+    154.41815538194444,
+    134.52062934027776
+   ]
   }
  },
- "dE": {}
+ "dE": {
+  "etat-845-ordinaire | etat-850-apres-la-promotion": 3.1298546819026227
+ }
 }

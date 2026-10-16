@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/ferme-campagne/vue-ensemble.png",
+   "stats": {
+    "calls": 81,
+    "triangles": 34648,
+    "instances": 545,
+    "chunks": {
+     "total": 25,
+     "visible": 25,
+     "near": 0
+    }
+   },
+   "rgb": [
+    142.2787673611111,
+    147.27208333333334,
+    113.83480902777778
+   ]
+  }
+ },
+ "dE": {}
+}

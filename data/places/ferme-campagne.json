@@ -1,0 +1,1062 @@
+{
+ "id": "ferme-campagne",
+ "nom": "Ferme de campagne",
+ "libelle": "Ferme de campagne (plaines intérieures de Wall Maria)",
+ "canon": "A",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/06 R03 et R07 : plaines agricoles de l'anneau de Maria, population évacuée après la chute de Maria en 845 (note « scénario 845+ ») ; data/provinces/paradis.json : prov_plaines_interieures_maria_sud [A]",
+   "canon": "A"
+  },
+  {
+   "ref": "plan, noms, dimensions, effectif, états : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_plaines_interieures_maria_sud",
+ "style": "E11",
+ "population": {
+  "province": "prov_plaines_interieures_maria_sud",
+  "part": 0.000632,
+  "canon": "A",
+  "note": "22 habitants (famille de métayers et valets) : part de `prov_plaines_interieures_maria_sud` (34 783 au départ de scn_sandbox_845), province agricole ; la part est adaptée [A], le reste de la province vit en fermes et hameaux hors de ce lieu."
+ },
+ "densite": {
+  "classe": "ferme",
+  "valeur": 9.5,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -170,
+   -150
+  ],
+  [
+   170,
+   -150
+  ],
+  [
+   170,
+   150
+  ],
+  [
+   -170,
+   150
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "aucune",
+  "canon": "?"
+ },
+ "etendue_m": 600,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Chemin du Verger",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -150,
+     -130
+    ],
+    [
+     -150,
+     130
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Chemin de l'Étable",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -50,
+     -90
+    ],
+    [
+     -50,
+     90
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3-0",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     10,
+     -90
+    ],
+    [
+     10,
+     -30
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3-1",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     10,
+     30
+    ],
+    [
+     10,
+     90
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4",
+   "nom": "Chemin de la Grange",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     70,
+     -90
+    ],
+    [
+     70,
+     90
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Chemin de l'Aire",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     150,
+     -130
+    ],
+    [
+     150,
+     130
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Chemin des Bœufs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -150,
+     -130
+    ],
+    [
+     150,
+     -130
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-1",
+   "nom": "Chemin du Fournil",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -150,
+     -90
+    ],
+    [
+     150,
+     -90
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2",
+   "nom": "Sentier des Haies",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -50,
+     -30
+    ],
+    [
+     70,
+     -30
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-3",
+   "nom": "Sentier du Puits",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -50,
+     30
+    ],
+    [
+     70,
+     30
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-4",
+   "nom": "Chemin des Labours",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -150,
+     90
+    ],
+    [
+     150,
+     90
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Sentier de la Meule",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -150,
+     130
+    ],
+    [
+     150,
+     130
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-de-la-ferme",
+   "nom": "Chemin de la ferme",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     40,
+     148
+    ],
+    [
+     40,
+     120
+    ],
+    [
+     40,
+     92
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "gravier"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "cour-de-la-ferme",
+   "nom": "Cour de la ferme",
+   "canon": "A",
+   "polygone": [
+    [
+     -44.8,
+     -26.3
+    ],
+    [
+     64.8,
+     -26.3
+    ],
+    [
+     64.8,
+     26.3
+    ],
+    [
+     -44.8,
+     26.3
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "ferme": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    36,
+    48
+   ],
+   "couvertures": [
+    "chaume",
+    "tuile_plate",
+    "bardeau"
+   ],
+   "facades": [
+    "pierre_brute",
+    "colombage",
+    "bois"
+   ],
+   "teintes": [
+    "#CDBF9F",
+    "#C2B393",
+    "#D2C6A8"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "cour-de-la-ferme",
+   "nom": "Cour de la ferme",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-2-1",
+   "quartier": "cour-de-la-ferme",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -44.8,
+     -86.3
+    ],
+    [
+     6.3,
+     -86.3
+    ],
+    [
+     6.3,
+     -33.7
+    ],
+    [
+     -44.8,
+     -33.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "cour-de-la-ferme",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -44.8,
+     33.7
+    ],
+    [
+     6.3,
+     33.7
+    ],
+    [
+     6.3,
+     86.3
+    ],
+    [
+     -44.8,
+     86.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "cour-de-la-ferme",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.7,
+     -86.3
+    ],
+    [
+     64.8,
+     -86.3
+    ],
+    [
+     64.8,
+     -33.7
+    ],
+    [
+     13.7,
+     -33.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ferme"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "cour-de-la-ferme",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     13.7,
+     33.7
+    ],
+    [
+     64.8,
+     33.7
+    ],
+    [
+     64.8,
+     86.3
+    ],
+    [
+     13.7,
+     86.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ferme"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "corps-de-ferme",
+   "nom": "Corps de ferme",
+   "canon": "A",
+   "archetype": "ferme",
+   "position": [
+    -24,
+    66
+   ],
+   "emprise_m": [
+    32,
+    13
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CDBF9F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "maison-du-metayer",
+   "nom": "Maison du métayer",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    34,
+    68
+   ],
+   "emprise_m": [
+    14,
+    10
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "colombage",
+   "teinte": "#D2C6A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "fournil",
+   "nom": "Fournil et four à pain",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    52,
+    54
+   ],
+   "emprise_m": [
+    10,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C2B393",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "etable",
+   "nom": "Étable et écurie",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    -20,
+    -68
+   ],
+   "emprise_m": [
+    34,
+    13
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C2B393",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "porcherie",
+   "nom": "Porcherie et poulailler",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -20,
+    -50
+   ],
+   "emprise_m": [
+    18,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 3,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": [],
+   "params": {
+    "pente": 26
+   }
+  },
+  {
+   "id": "pigeonnier",
+   "nom": "Pigeonnier",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -42,
+    -50
+   ],
+   "emprise_m": [
+    5,
+    5
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pavillon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CDBF9F",
+   "reperes_canon": []
+  },
+  {
+   "id": "grange",
+   "nom": "Grange aux grains",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    40,
+    -66
+   ],
+   "emprise_m": [
+    30,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "chaume",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "remise-aux-chariots",
+   "nom": "Remise aux chariots",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    40,
+    -48
+   ],
+   "emprise_m": [
+    22,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#B4A47E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 28
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "chemin-de-la-ferme",
+    "essence": "chene",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-2",
+    "essence": "fruitier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-4",
+    "essence": "saule",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     20,
+     0
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 18,
+    "nom": "Tilleul de la cour"
+   }
+  ],
+  "parcs": [
+   {
+    "id": "champs-du-nord",
+    "nom": "Champs du Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -146.3,
+      -126.3
+     ],
+     [
+      146.3,
+      -126.3
+     ],
+     [
+      146.3,
+      -93.7
+     ],
+     [
+      -146.3,
+      -93.7
+     ]
+    ],
+    "essences": [
+     "chene",
+     "saule",
+     "fruitier"
+    ],
+    "arbres_par_ha": 24
+   },
+   {
+    "id": "verger-de-la-ferme",
+    "nom": "Verger de la ferme",
+    "canon": "A",
+    "polygone": [
+     [
+      -146.3,
+      -86.3
+     ],
+     [
+      -55.2,
+      -86.3
+     ],
+     [
+      -55.2,
+      86.3
+     ],
+     [
+      -146.3,
+      86.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "fruitier",
+     "tilleul"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "champs-du-sud",
+    "nom": "Champs du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      -146.3,
+      93.7
+     ],
+     [
+      146.3,
+      93.7
+     ],
+     [
+      146.3,
+      126.3
+     ],
+     [
+      -146.3,
+      126.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "saule",
+     "fruitier"
+    ],
+    "arbres_par_ha": 24
+   },
+   {
+    "id": "champs-de-l-est",
+    "nom": "Champs de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      75.2,
+      -86.3
+     ],
+     [
+      146.3,
+      -86.3
+     ],
+     [
+      146.3,
+      86.3
+     ],
+     [
+      75.2,
+      86.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "saule",
+     "fruitier"
+    ],
+    "arbres_par_ha": 24
+   }
+  ],
+  "vergers": [],
+  "haies": [
+   {
+    "trace": [
+     [
+      -150,
+      125
+     ],
+     [
+      150,
+      125
+     ]
+    ]
+   },
+   {
+    "trace": [
+     [
+      -150,
+      -125
+     ],
+     [
+      150,
+      -125
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      80,
+      -25
+     ],
+     [
+      120,
+      -25
+     ],
+     [
+      120,
+      25
+     ],
+     [
+      80,
+      25
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "fruitier",
+   "tilleul",
+   "chene"
+  ]
+ },
+ "eau": {
+  "voies": [
+   {
+    "id": "mare",
+    "nom": "Mare de la ferme",
+    "canon": "A",
+    "type": "canal",
+    "trace": [
+     [
+      100,
+      -110
+     ],
+     [
+      125,
+      -105
+     ],
+     [
+      130,
+      -90
+     ],
+     [
+      115,
+      -80
+     ],
+     [
+      98,
+      -88
+     ],
+     [
+      100,
+      -110
+     ]
+    ],
+    "largeur_m": 5,
+    "quais": false
+   }
+  ],
+  "ponts": [],
+  "puits": [
+   [
+    10,
+    0
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -270,
+    330,
+    165
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    90,
+    1.8
+   ],
+   "cible": [
+    0,
+    -52,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "cour-et-corps-de-ferme",
+   "nom": "Cour et corps de ferme",
+   "oeil": [
+    20,
+    20,
+    2.5
+   ],
+   "cible": [
+    6,
+    66,
+    5
+   ],
+   "fov": 62
+  },
+  {
+   "id": "grange-et-mare",
+   "nom": "Grange et mare",
+   "oeil": [
+    30,
+    15,
+    2.5
+   ],
+   "cible": [
+    40,
+    -60,
+    6
+   ],
+   "fov": 60
+  },
+  {
+   "id": "verger",
+   "nom": "Verger de la ferme",
+   "oeil": [
+    -60,
+    0,
+    2.5
+   ],
+   "cible": [
+    -110,
+    0,
+    5
+   ],
+   "fov": 60
+  },
+  {
+   "id": "chemin-d-acces",
+   "nom": "Chemin d'accès et champs du Sud",
+   "oeil": [
+    40,
+    215,
+    2.5
+   ],
+   "cible": [
+    30,
+    70,
+    6
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, la ferme en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire d'une ferme de l'anneau de Maria avant la chute (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "845-evacuee",
+   "nom": "845, la ferme évacuée",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "anneau de Maria évacué après la chute de Maria (atlas 06, note « scénario 845+ ») ; degré d'abandon : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.6,
+   "ciel": "brumeux",
+   "habitants": 0
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

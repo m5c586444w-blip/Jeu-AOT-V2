@@ -1,0 +1,1384 @@
+{
+ "id": "fort-du-front",
+ "nom": "Fort du Front",
+ "libelle": "Fort du Front (Fort Avancé de Maria, dépôt de gaz avancé)",
+ "canon": "A",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/06 R15 : Fort Avancé de Maria, fort, dépôt de gaz avancé [A] ; data/provinces/paradis.json : prov_fort_avance_maria [A]",
+   "canon": "A"
+  },
+  {
+   "ref": "position exacte sur la carte : non établie [?]",
+   "canon": "?"
+  },
+  {
+   "ref": "nom « Fort du Front », plan, noms, dimensions, garnison, états : adaptation (création C17, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_fort_avance_maria",
+ "style": "E24",
+ "population": {
+  "province": "prov_fort_avance_maria",
+  "part": 0.0345,
+  "canon": "A",
+  "note": "300 soldats de la garnison : part de `prov_fort_avance_maria` (8 696 au départ de scn_sandbox_845) ; la province existe [A] (atlas R15), l'effectif est adapté [A]."
+ },
+ "densite": {
+  "classe": "village",
+  "valeur": 50,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -165,
+   -165
+  ],
+  [
+   165,
+   -165
+  ],
+  [
+   165,
+   165
+  ],
+  [
+   -165,
+   165
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "aucune",
+  "canon": "?"
+ },
+ "etendue_m": 700,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Ruelle de la Courtine",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -140,
+     -140
+    ],
+    [
+     -140,
+     140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-1",
+   "nom": "Ruelle du Guet",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -100,
+     -140
+    ],
+    [
+     -100,
+     140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue du Rempart ouest",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -50,
+     -140
+    ],
+    [
+     -50,
+     140
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue du Rempart est",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     50,
+     -140
+    ],
+    [
+     50,
+     140
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Ruelle des Écuries",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     100,
+     -140
+    ],
+    [
+     100,
+     140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-5",
+   "nom": "Ruelle de la Citerne",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     140,
+     -140
+    ],
+    [
+     140,
+     140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Ruelle des Palefreniers",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -140,
+     -140
+    ],
+    [
+     140,
+     -140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-1",
+   "nom": "Ruelle du Chemin de ronde",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -140,
+     -100
+    ],
+    [
+     140,
+     -100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Gardes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -140,
+     -50
+    ],
+    [
+     140,
+     -50
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue du Dépôt",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -140,
+     50
+    ],
+    [
+     140,
+     50
+    ]
+   ],
+   "largeur_m": 8,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Ruelle du Puits",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -140,
+     100
+    ],
+    [
+     140,
+     100
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Ruelle des Magasins",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -140,
+     140
+    ],
+    [
+     140,
+     140
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-de-ravitaillement",
+   "nom": "Route de ravitaillement",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     164
+    ],
+    [
+     0,
+     150
+    ],
+    [
+     0,
+     142
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "gravier"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "cour-d-armes",
+   "nom": "Cour d'armes",
+   "canon": "A",
+   "polygone": [
+    [
+     -44.8,
+     -44.8
+    ],
+    [
+     44.8,
+     -44.8
+    ],
+    [
+     44.8,
+     44.8
+    ],
+    [
+     -44.8,
+     44.8
+    ]
+   ],
+   "revetement": "gravier",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "fort": {
+   "etages": [
+    2,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.3,
+   "toits": [
+    "pignon",
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    44
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_brute",
+    "pierre_taillee",
+    "enduit"
+   ],
+   "teintes": [
+    "#BDB4A0",
+    "#B2A994",
+    "#C6BDA8"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 50
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "enceinte-du-fort",
+   "nom": "Enceinte du fort",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -136.3,
+     -136.3
+    ],
+    [
+     -103.7,
+     -136.3
+    ],
+    [
+     -103.7,
+     -103.7
+    ],
+    [
+     -136.3,
+     -103.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -136.3,
+     -44.8
+    ],
+    [
+     -103.7,
+     -44.8
+    ],
+    [
+     -103.7,
+     44.8
+    ],
+    [
+     -136.3,
+     44.8
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -136.3,
+     103.7
+    ],
+    [
+     -103.7,
+     103.7
+    ],
+    [
+     -103.7,
+     136.3
+    ],
+    [
+     -136.3,
+     136.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -96.3,
+     -96.3
+    ],
+    [
+     -55.2,
+     -96.3
+    ],
+    [
+     -55.2,
+     -55.2
+    ],
+    [
+     -96.3,
+     -55.2
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -96.3,
+     -44.8
+    ],
+    [
+     -55.2,
+     -44.8
+    ],
+    [
+     -55.2,
+     44.8
+    ],
+    [
+     -96.3,
+     44.8
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -96.3,
+     55.2
+    ],
+    [
+     -55.2,
+     55.2
+    ],
+    [
+     -55.2,
+     96.3
+    ],
+    [
+     -96.3,
+     96.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -44.8,
+     -136.3
+    ],
+    [
+     44.8,
+     -136.3
+    ],
+    [
+     44.8,
+     -103.7
+    ],
+    [
+     -44.8,
+     -103.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -44.8,
+     -96.3
+    ],
+    [
+     44.8,
+     -96.3
+    ],
+    [
+     44.8,
+     -55.2
+    ],
+    [
+     -44.8,
+     -55.2
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -44.8,
+     55.2
+    ],
+    [
+     44.8,
+     55.2
+    ],
+    [
+     44.8,
+     96.3
+    ],
+    [
+     -44.8,
+     96.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -44.8,
+     103.7
+    ],
+    [
+     44.8,
+     103.7
+    ],
+    [
+     44.8,
+     136.3
+    ],
+    [
+     -44.8,
+     136.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     55.2,
+     -96.3
+    ],
+    [
+     96.3,
+     -96.3
+    ],
+    [
+     96.3,
+     -55.2
+    ],
+    [
+     55.2,
+     -55.2
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     55.2,
+     -44.8
+    ],
+    [
+     96.3,
+     -44.8
+    ],
+    [
+     96.3,
+     44.8
+    ],
+    [
+     55.2,
+     44.8
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     55.2,
+     55.2
+    ],
+    [
+     96.3,
+     55.2
+    ],
+    [
+     96.3,
+     96.3
+    ],
+    [
+     55.2,
+     96.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     103.7,
+     -136.3
+    ],
+    [
+     136.3,
+     -136.3
+    ],
+    [
+     136.3,
+     -103.7
+    ],
+    [
+     103.7,
+     -103.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     103.7,
+     -44.8
+    ],
+    [
+     136.3,
+     -44.8
+    ],
+    [
+     136.3,
+     44.8
+    ],
+    [
+     103.7,
+     44.8
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "enceinte-du-fort",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     103.7,
+     103.7
+    ],
+    [
+     136.3,
+     103.7
+    ],
+    [
+     136.3,
+     136.3
+    ],
+    [
+     103.7,
+     136.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "fort"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "donjon-caserne",
+   "nom": "Donjon-caserne",
+   "canon": "A",
+   "archetype": "donjon",
+   "position": [
+    -25,
+    -75
+   ],
+   "emprise_m": [
+    26,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 26,
+   "etages": 5,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#B6AD99",
+   "reperes_canon": [
+    "fort avancé de Maria (atlas 06 R15) : donjon-caserne [A], plan et volumes adaptés"
+   ]
+  },
+  {
+   "id": "logement-des-officiers",
+   "nom": "Logement des officiers",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    26,
+    -75
+   ],
+   "emprise_m": [
+    32,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#C6BDA8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "casernement-de-l-ouest",
+   "nom": "Casernement de l'ouest",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -75,
+    0
+   ],
+   "emprise_m": [
+    30,
+    76
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BDB4A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "casernement-de-l-est",
+   "nom": "Casernement de l'est",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    75,
+    0
+   ],
+   "emprise_m": [
+    30,
+    76
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BAB19D",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "magasin-d-armes",
+   "nom": "Magasin d'armes",
+   "canon": "A",
+   "archetype": "arsenal",
+   "position": [
+    -75,
+    -75
+   ],
+   "emprise_m": [
+    32,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#B9B09B",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "infirmerie-du-fort",
+   "nom": "Infirmerie du fort",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    75,
+    -75
+   ],
+   "emprise_m": [
+    32,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "enduit",
+   "teinte": "#CFC6B0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "ecuries-du-fort",
+   "nom": "Écuries du fort",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    -75,
+    75
+   ],
+   "emprise_m": [
+    34,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#B9B09B",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "depot-de-gaz-avance",
+   "nom": "Dépôt de gaz avancé",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    75,
+    75
+   ],
+   "emprise_m": [
+    34,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#B2A994",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "cuisines-et-refectoire",
+   "nom": "Cuisines et réfectoire",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -26,
+    75
+   ],
+   "emprise_m": [
+    36,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#B8AF9B",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "corps-de-garde",
+   "nom": "Corps de garde",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    26,
+    75
+   ],
+   "emprise_m": [
+    28,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BDB4A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "tour-du-nord-ouest",
+   "nom": "Tour du nord-ouest",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -120,
+    -120
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 20,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BAB19D",
+   "reperes_canon": []
+  },
+  {
+   "id": "tour-du-nord-est",
+   "nom": "Tour du nord-est",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    120,
+    -120
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 20,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BAB19D",
+   "reperes_canon": []
+  },
+  {
+   "id": "tour-du-sud-ouest",
+   "nom": "Tour du sud-ouest",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -120,
+    120
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 20,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#B7AE9A",
+   "reperes_canon": []
+  },
+  {
+   "id": "tour-du-sud-est",
+   "nom": "Tour du sud-est",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    120,
+    120
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 20,
+   "etages": 4,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BAB19D",
+   "reperes_canon": []
+  },
+  {
+   "id": "bastion-du-nord",
+   "nom": "Bastion du nord",
+   "canon": "A",
+   "archetype": "fort",
+   "position": [
+    0,
+    -120
+   ],
+   "emprise_m": [
+    64,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#B4AB97",
+   "reperes_canon": []
+  },
+  {
+   "id": "bastion-du-sud",
+   "nom": "Bastion du sud et poterne",
+   "canon": "A",
+   "archetype": "fort",
+   "position": [
+    0,
+    120
+   ],
+   "emprise_m": [
+    64,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#B4AB97",
+   "reperes_canon": []
+  },
+  {
+   "id": "bastion-de-l-ouest",
+   "nom": "Bastion de l'ouest",
+   "canon": "A",
+   "archetype": "fort",
+   "position": [
+    -120,
+    0
+   ],
+   "emprise_m": [
+    22,
+    64
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#B4AB97",
+   "reperes_canon": []
+  },
+  {
+   "id": "bastion-de-l-est",
+   "nom": "Bastion de l'est",
+   "canon": "A",
+   "archetype": "fort",
+   "position": [
+    120,
+    0
+   ],
+   "emprise_m": [
+    22,
+    64
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#B4AB97",
+   "reperes_canon": []
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "route-de-ravitaillement",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -30,
+     30
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 18,
+    "nom": "Tilleul de la cour d'armes"
+   }
+  ],
+  "parcs": [],
+  "vergers": [],
+  "haies": [],
+  "potagers": [],
+  "essences_cours": [
+   "tilleul",
+   "erable",
+   "bouleau"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -20,
+    -20
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -252,
+    308,
+    154
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    100,
+    1.8
+   ],
+   "cible": [
+    0,
+    -56,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "cour-d-armes-et-donjon",
+   "nom": "Cour d'armes et donjon-caserne",
+   "oeil": [
+    20,
+    40,
+    3
+   ],
+   "cible": [
+    -25,
+    -75,
+    14
+   ],
+   "fov": 62
+  },
+  {
+   "id": "depot-de-gaz",
+   "nom": "Dépôt de gaz avancé et corps de garde",
+   "oeil": [
+    0,
+    20,
+    3
+   ],
+   "cible": [
+    75,
+    75,
+    5
+   ],
+   "fov": 60
+  },
+  {
+   "id": "porte-et-route",
+   "nom": "Poterne et route de ravitaillement",
+   "oeil": [
+    10,
+    260,
+    3
+   ],
+   "cible": [
+    0,
+    125,
+    8
+   ],
+   "fov": 58
+  },
+  {
+   "id": "casernements",
+   "nom": "Casernements de l'ouest",
+   "oeil": [
+    20,
+    0,
+    3
+   ],
+   "cible": [
+    -75,
+    0,
+    6
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, le fort en service",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du fort avant la chute de Maria (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "845-evacue",
+   "nom": "845, le fort évacué après la brèche",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "anneau de Maria évacué après la chute de Maria (atlas 06, note « scénario 845+ ») ; degré d'abandon : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.35,
+   "ciel": "brumeux",
+   "habitants": 0.15
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}
