@@ -1,5 +1,12 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-16 — Nuit de la session A (à lire en premier)
+- B n'a jamais travaillé le 15 (aucun journal B) : A a pris sa voie. Fait, commité, poussé : **C10** (outillage Blender `bpy`, `npm run assets:blender` et `assets:blender:check`, 24 modèles .glb : 5 accessoires, 7 tenues LOD0/LOD1, 5 décalques d'emblème, planche `?proto3d=tenues`) ; **C15** (mur Rose : Trost, Karanes, Utopia, Krolva, camp d'entraînement, QG de la Garnison) ; **C16** (mur Sina : Stohess, Orvud, Ehrmich, Yarckel, Mitras, ville souterraine, chapelle Reiss) ; **C17** (Jinae, Ragako, Dauper, château d'Utgard, forêt des Arbres Géants, ferme, fort du front, couverture du mur Maria) ; **C18 tranche 1** (`npm run places:couverture` : 45 provinces couvertes sur 126, Liberio fait). Revues indépendantes par tranche : ACCEPTÉ AVEC RÉSERVES, correctifs appliqués.
+- Dernier verify : 173 fichiers, **1678 tests**, EXIT=0. Décisions D-182 à D-191.
+- **À valider par toi** : tenues sans skinning (pièces rigides, têtes chauves, écussons de 9 cm) ; populations `A`/`?` pour Ragako, Dauper, Utgard, forêt, Liberio (la simulation n'a pas de population pour les provinces du monde) ; Ehrmich « bourgeois » ; tous les noms de rues/lieux créés sont `A` (`docs/lore/creations.md`, Q14–Q35).
+- **Dette principale** : `npm run places:valider` complet est KO (≈ 170 PNG de captures absents pour les lieux C16/C17/C18 ; `npm run places:captures -- <ids>` ≈ 2 h par lieu en rendu logiciel ; `verify` n'en dépend pas). Rien n'a été vu sur ton PC (aucune mesure GPU, à vérifier sur la RTX 3050) ; les captures montrent sol plat, ciel blanc, caméras lointaines.
+- **Suite** : A : C18 (81 provinces sans lieu, voir `docs/reports/C18-couverture.md`), captures, C13 (reste), C14.
+
 ## 2026-10-15 — Nuit de la session A (à lire en premier)
 - Fait, commité, poussé : C2 (emblèmes en données, règle R15), `smoke:bataille` (C9), Marée régionale (C9.7, D-177), **C13 réseau** : lockstep à 9 sièges, bataille à 20 Hz, camps rivaux (Marley, etc.), salon d'attente et votes (logique pure). Revue indépendante : acceptée avec réserves, corrigées en partie (dette 104–107).
 - Dernier verify : 161 fichiers, **1347 tests**, EXIT=0 (clôture, après les votes). Décisions D-175 à D-181.

@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/liberio/vue-ensemble.png",
+   "stats": {
+    "calls": 152,
+    "triangles": 146676,
+    "instances": 8463,
+    "chunks": {
+     "total": 163,
+     "visible": 163,
+     "near": 0
+    }
+   },
+   "rgb": [
+    144.89410590277777,
+    148.90416666666667,
+    116.49541232638889
+   ]
+  }
+ },
+ "dE": {}
+}

@@ -1,0 +1,2767 @@
+{
+ "id": "liberio",
+ "nom": "Zone d'internement de Liberio",
+ "libelle": "Zone d'internement de Liberio (Marley)",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3 et docs/spec/11 : zone d'internement de Liberio, quartier clos où sont internés les Eldiens du continent [C] ; docs/spec/06 MA03 et T23 ; data/world_provinces/world.json : wprov_liberio_internement [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "clôture non modélisable par le schéma (lieu sans enceinte) ; étendue exacte de la zone `?` ; population : le monde n'a pas de population de simulation par province",
+   "canon": "A"
+  },
+  {
+   "ref": "tracé, noms de rues, de places, de quartiers et de bâtiments, états : adaptation (création C18, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": null,
+ "style": "E07",
+ "population": {
+  "province": null,
+  "part": 1,
+  "valeur": 12000,
+  "canon": "?",
+  "note": "`wprov_liberio_internement` (atlas MA03) n'a pas de population dans la simulation (les provinces du monde portent industrie, vivres, effectifs) ; valeur paramétrable `?` pour un quartier clos de ville de début de XXe siècle (ordre de grandeur adapté, à relire quand la simulation du monde portera des habitants)."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 200,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -480,
+   -380
+  ],
+  [
+   480,
+   -380
+  ],
+  [
+   480,
+   380
+  ],
+  [
+   -480,
+   380
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "nord",
+  "canon": "?"
+ },
+ "etendue_m": 1200,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Rue de la Clôture ouest",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     -350
+    ],
+    [
+     -450,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1",
+   "nom": "Ruelle du Puits",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -350,
+     -350
+    ],
+    [
+     -350,
+     350
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue des Tisserands",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -250,
+     -350
+    ],
+    [
+     -250,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue des Savetiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -150,
+     -350
+    ],
+    [
+     -150,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Grande Rue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -50,
+     -350
+    ],
+    [
+     -50,
+     350
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Rémouleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     50,
+     -350
+    ],
+    [
+     50,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-0",
+   "nom": "Rue des Cordiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     150,
+     -350
+    ],
+    [
+     150,
+     -50
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-1",
+   "nom": "Rue des Cordiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     150,
+     150
+    ],
+    [
+     150,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Ruelle des Chiffonniers",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     250,
+     -350
+    ],
+    [
+     250,
+     350
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-8",
+   "nom": "Rue des Chaudronniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     350,
+     -350
+    ],
+    [
+     350,
+     150
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Rue de la Clôture est",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     450,
+     -350
+    ],
+    [
+     450,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-0",
+   "nom": "Rue du Portail nord",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     -350
+    ],
+    [
+     450,
+     -350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Ruelle du Four",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -450,
+     -250
+    ],
+    [
+     450,
+     -250
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Lavandières",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     -150
+    ],
+    [
+     450,
+     -150
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue du Marché",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     -50
+    ],
+    [
+     450,
+     -50
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-0",
+   "nom": "Rue des Ateliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     50
+    ],
+    [
+     50,
+     50
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-1",
+   "nom": "Rue des Ateliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     250,
+     50
+    ],
+    [
+     450,
+     50
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Ruelle des Rapiéceurs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -450,
+     150
+    ],
+    [
+     450,
+     150
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Fumistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     250
+    ],
+    [
+     250,
+     250
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue du Portail sud",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -450,
+     350
+    ],
+    [
+     450,
+     350
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché",
+   "canon": "A",
+   "polygone": [
+    [
+     54.7,
+     -43.8
+    ],
+    [
+     246.3,
+     -43.8
+    ],
+    [
+     246.3,
+     146.3
+    ],
+    [
+     54.7,
+     146.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    150.5,
+    51.3
+   ],
+   "marche": true
+  }
+ ],
+ "gabarits": {
+  "habitat": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 90
+   }
+  },
+  "marche": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "croupe",
+    "demi_croupe"
+   ],
+   "pente_deg": [
+    44,
+    56
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "brique"
+   ],
+   "teintes": [
+    "#E2D6BF",
+    "#D9CBAE",
+    "#E8DCC4",
+    "#D4C4A4",
+    "#DDD0B6"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9
+   ],
+   "profondeur_m": 12,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 90
+   }
+  },
+  "ateliers": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 80
+   }
+  },
+  "garde": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 40
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieux-quartier",
+   "nom": "Vieux quartier",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-marche",
+   "nom": "Quartier du Marché",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-ateliers",
+   "nom": "Quartier des Ateliers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-portails",
+   "nom": "Quartier des Portails",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     -345.3
+    ],
+    [
+     -353.7,
+     -345.3
+    ],
+    [
+     -353.7,
+     -253.7
+    ],
+    [
+     -445.3,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     -246.3
+    ],
+    [
+     -353.7,
+     -246.3
+    ],
+    [
+     -353.7,
+     -154.7
+    ],
+    [
+     -445.3,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     -43.8
+    ],
+    [
+     -353.7,
+     -43.8
+    ],
+    [
+     -353.7,
+     45.3
+    ],
+    [
+     -445.3,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     54.7
+    ],
+    [
+     -353.7,
+     54.7
+    ],
+    [
+     -353.7,
+     146.3
+    ],
+    [
+     -445.3,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-0-5",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     153.7
+    ],
+    [
+     -353.7,
+     153.7
+    ],
+    [
+     -353.7,
+     245.3
+    ],
+    [
+     -445.3,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-0-6",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -445.3,
+     254.7
+    ],
+    [
+     -353.7,
+     254.7
+    ],
+    [
+     -353.7,
+     345.3
+    ],
+    [
+     -445.3,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     -345.3
+    ],
+    [
+     -254.7,
+     -345.3
+    ],
+    [
+     -254.7,
+     -253.7
+    ],
+    [
+     -346.3,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     -246.3
+    ],
+    [
+     -254.7,
+     -246.3
+    ],
+    [
+     -254.7,
+     -154.7
+    ],
+    [
+     -346.3,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     -145.3
+    ],
+    [
+     -254.7,
+     -145.3
+    ],
+    [
+     -254.7,
+     -56.2
+    ],
+    [
+     -346.3,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     -43.8
+    ],
+    [
+     -254.7,
+     -43.8
+    ],
+    [
+     -254.7,
+     45.3
+    ],
+    [
+     -346.3,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     54.7
+    ],
+    [
+     -254.7,
+     54.7
+    ],
+    [
+     -254.7,
+     146.3
+    ],
+    [
+     -346.3,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     153.7
+    ],
+    [
+     -254.7,
+     153.7
+    ],
+    [
+     -254.7,
+     245.3
+    ],
+    [
+     -346.3,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -346.3,
+     254.7
+    ],
+    [
+     -254.7,
+     254.7
+    ],
+    [
+     -254.7,
+     345.3
+    ],
+    [
+     -346.3,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -245.3,
+     -345.3
+    ],
+    [
+     -154.7,
+     -345.3
+    ],
+    [
+     -154.7,
+     -253.7
+    ],
+    [
+     -245.3,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -245.3,
+     -246.3
+    ],
+    [
+     -154.7,
+     -246.3
+    ],
+    [
+     -154.7,
+     -154.7
+    ],
+    [
+     -245.3,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -245.3,
+     -145.3
+    ],
+    [
+     -154.7,
+     -145.3
+    ],
+    [
+     -154.7,
+     -56.2
+    ],
+    [
+     -245.3,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -245.3,
+     -43.8
+    ],
+    [
+     -154.7,
+     -43.8
+    ],
+    [
+     -154.7,
+     45.3
+    ],
+    [
+     -245.3,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -245.3,
+     153.7
+    ],
+    [
+     -154.7,
+     153.7
+    ],
+    [
+     -154.7,
+     245.3
+    ],
+    [
+     -245.3,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -245.3,
+     254.7
+    ],
+    [
+     -154.7,
+     254.7
+    ],
+    [
+     -154.7,
+     345.3
+    ],
+    [
+     -245.3,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -145.3,
+     -345.3
+    ],
+    [
+     -56.2,
+     -345.3
+    ],
+    [
+     -56.2,
+     -253.7
+    ],
+    [
+     -145.3,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.3,
+     -246.3
+    ],
+    [
+     -56.2,
+     -246.3
+    ],
+    [
+     -56.2,
+     -154.7
+    ],
+    [
+     -145.3,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.3,
+     -145.3
+    ],
+    [
+     -56.2,
+     -145.3
+    ],
+    [
+     -56.2,
+     -56.2
+    ],
+    [
+     -145.3,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.3,
+     -43.8
+    ],
+    [
+     -56.2,
+     -43.8
+    ],
+    [
+     -56.2,
+     45.3
+    ],
+    [
+     -145.3,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.3,
+     54.7
+    ],
+    [
+     -56.2,
+     54.7
+    ],
+    [
+     -56.2,
+     146.3
+    ],
+    [
+     -145.3,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -145.3,
+     153.7
+    ],
+    [
+     -56.2,
+     153.7
+    ],
+    [
+     -56.2,
+     245.3
+    ],
+    [
+     -145.3,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -145.3,
+     254.7
+    ],
+    [
+     -56.2,
+     254.7
+    ],
+    [
+     -56.2,
+     345.3
+    ],
+    [
+     -145.3,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -43.8,
+     -345.3
+    ],
+    [
+     45.3,
+     -345.3
+    ],
+    [
+     45.3,
+     -253.7
+    ],
+    [
+     -43.8,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -43.8,
+     -246.3
+    ],
+    [
+     45.3,
+     -246.3
+    ],
+    [
+     45.3,
+     -154.7
+    ],
+    [
+     -43.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -43.8,
+     -145.3
+    ],
+    [
+     45.3,
+     -145.3
+    ],
+    [
+     45.3,
+     -56.2
+    ],
+    [
+     -43.8,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -43.8,
+     -43.8
+    ],
+    [
+     45.3,
+     -43.8
+    ],
+    [
+     45.3,
+     45.3
+    ],
+    [
+     -43.8,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -43.8,
+     54.7
+    ],
+    [
+     45.3,
+     54.7
+    ],
+    [
+     45.3,
+     146.3
+    ],
+    [
+     -43.8,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -43.8,
+     153.7
+    ],
+    [
+     45.3,
+     153.7
+    ],
+    [
+     45.3,
+     245.3
+    ],
+    [
+     -43.8,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -43.8,
+     254.7
+    ],
+    [
+     45.3,
+     254.7
+    ],
+    [
+     45.3,
+     345.3
+    ],
+    [
+     -43.8,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     54.7,
+     -345.3
+    ],
+    [
+     145.3,
+     -345.3
+    ],
+    [
+     145.3,
+     -253.7
+    ],
+    [
+     54.7,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     54.7,
+     -246.3
+    ],
+    [
+     145.3,
+     -246.3
+    ],
+    [
+     145.3,
+     -154.7
+    ],
+    [
+     54.7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     54.7,
+     -145.3
+    ],
+    [
+     145.3,
+     -145.3
+    ],
+    [
+     145.3,
+     -56.2
+    ],
+    [
+     54.7,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     54.7,
+     153.7
+    ],
+    [
+     145.3,
+     153.7
+    ],
+    [
+     145.3,
+     245.3
+    ],
+    [
+     54.7,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-portails",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     54.7,
+     254.7
+    ],
+    [
+     145.3,
+     254.7
+    ],
+    [
+     145.3,
+     345.3
+    ],
+    [
+     54.7,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garde"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "vieux-quartier",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     154.7,
+     -345.3
+    ],
+    [
+     246.3,
+     -345.3
+    ],
+    [
+     246.3,
+     -253.7
+    ],
+    [
+     154.7,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "habitat"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     154.7,
+     -246.3
+    ],
+    [
+     246.3,
+     -246.3
+    ],
+    [
+     246.3,
+     -154.7
+    ],
+    [
+     154.7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     154.7,
+     -145.3
+    ],
+    [
+     246.3,
+     -145.3
+    ],
+    [
+     246.3,
+     -56.2
+    ],
+    [
+     154.7,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     154.7,
+     153.7
+    ],
+    [
+     246.3,
+     153.7
+    ],
+    [
+     246.3,
+     245.3
+    ],
+    [
+     154.7,
+     245.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     154.7,
+     254.7
+    ],
+    [
+     246.3,
+     254.7
+    ],
+    [
+     246.3,
+     345.3
+    ],
+    [
+     154.7,
+     345.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marche"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     253.7,
+     -345.3
+    ],
+    [
+     345.3,
+     -345.3
+    ],
+    [
+     345.3,
+     -253.7
+    ],
+    [
+     253.7,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     253.7,
+     -246.3
+    ],
+    [
+     345.3,
+     -246.3
+    ],
+    [
+     345.3,
+     -154.7
+    ],
+    [
+     253.7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     253.7,
+     -145.3
+    ],
+    [
+     345.3,
+     -145.3
+    ],
+    [
+     345.3,
+     -56.2
+    ],
+    [
+     253.7,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     253.7,
+     -43.8
+    ],
+    [
+     345.3,
+     -43.8
+    ],
+    [
+     345.3,
+     45.3
+    ],
+    [
+     253.7,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     253.7,
+     54.7
+    ],
+    [
+     345.3,
+     54.7
+    ],
+    [
+     345.3,
+     146.3
+    ],
+    [
+     253.7,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     354.7,
+     -345.3
+    ],
+    [
+     445.3,
+     -345.3
+    ],
+    [
+     445.3,
+     -253.7
+    ],
+    [
+     354.7,
+     -253.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     354.7,
+     -246.3
+    ],
+    [
+     445.3,
+     -246.3
+    ],
+    [
+     445.3,
+     -154.7
+    ],
+    [
+     354.7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     354.7,
+     -145.3
+    ],
+    [
+     445.3,
+     -145.3
+    ],
+    [
+     445.3,
+     -56.2
+    ],
+    [
+     354.7,
+     -56.2
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     354.7,
+     -43.8
+    ],
+    [
+     445.3,
+     -43.8
+    ],
+    [
+     445.3,
+     45.3
+    ],
+    [
+     354.7,
+     45.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "quartier-des-ateliers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     354.7,
+     54.7
+    ],
+    [
+     445.3,
+     54.7
+    ],
+    [
+     445.3,
+     146.3
+    ],
+    [
+     354.7,
+     146.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "halle-du-marche",
+   "nom": "Halle du marché",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    150,
+    50
+   ],
+   "emprise_m": [
+    50,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 8,
+    "pente": 40
+   }
+  },
+  {
+   "id": "chapelle-du-quartier",
+   "nom": "Chapelle du quartier",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    -100,
+    -100
+   ],
+   "emprise_m": [
+    18,
+    34
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D9D0BE",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 22,
+    "clocher_cote": 5,
+    "pente": 50
+   }
+  },
+  {
+   "id": "dispensaire",
+   "nom": "Dispensaire du quartier",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -300,
+    0
+   ],
+   "emprise_m": [
+    34,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#D6CDB8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "ecole-communale",
+   "nom": "École du quartier",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    -200,
+    200
+   ],
+   "emprise_m": [
+    38,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#D8CCB4",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "maison-du-conseil",
+   "nom": "Maison du Conseil du quartier",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    0,
+    -100
+   ],
+   "emprise_m": [
+    28,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "enduit",
+   "teinte": "#DDD3BC",
+   "reperes_canon": [],
+   "params": {
+    "pente": 42
+   }
+  },
+  {
+   "id": "bains-douches",
+   "nom": "Bains-douches",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -400,
+    -300
+   ],
+   "emprise_m": [
+    30,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#CFC2A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "chateau-d-eau",
+   "nom": "Château d'eau",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -100,
+    100
+   ],
+   "emprise_m": [
+    9,
+    9
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 24,
+   "etages": 6,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#CFC6B2",
+   "reperes_canon": []
+  },
+  {
+   "id": "atelier-de-tricotage",
+   "nom": "Atelier de tricotage",
+   "canon": "A",
+   "archetype": "usine",
+   "position": [
+    300,
+    -100
+   ],
+   "emprise_m": [
+    44,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C9B596",
+   "reperes_canon": [],
+   "params": {
+    "pente": 32
+   }
+  },
+  {
+   "id": "atelier-de-cordonnerie",
+   "nom": "Atelier de cordonnerie",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    300,
+    0
+   ],
+   "emprise_m": [
+    34,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C7B393",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "atelier-du-chiffon",
+   "nom": "Atelier du chiffon",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    400,
+    -200
+   ],
+   "emprise_m": [
+    32,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#B9A27E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 26
+   }
+  },
+  {
+   "id": "entrepot-de-la-cooperative",
+   "nom": "Entrepôt de la coopérative",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    400,
+    100
+   ],
+   "emprise_m": [
+    50,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C6B190",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "cuisine-communale",
+   "nom": "Cuisine communale",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    200,
+    300
+   ],
+   "emprise_m": [
+    38,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CDBE9F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "poste-du-portail-nord",
+   "nom": "Poste de garde du portail nord",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    0,
+    -300
+   ],
+   "emprise_m": [
+    42,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D2CCBD",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 40
+   }
+  },
+  {
+   "id": "poste-du-portail-sud",
+   "nom": "Poste de garde du portail sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    0,
+    300
+   ],
+   "emprise_m": [
+    42,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D2CCBD",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 40
+   }
+  },
+  {
+   "id": "mirador-nord-ouest",
+   "nom": "Mirador nord-ouest",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -300,
+    -300
+   ],
+   "emprise_m": [
+    8,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "bois",
+   "teinte": "#BDB29A",
+   "reperes_canon": []
+  },
+  {
+   "id": "mirador-nord-est",
+   "nom": "Mirador nord-est",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    400,
+    -300
+   ],
+   "emprise_m": [
+    8,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "bois",
+   "teinte": "#BDB29A",
+   "reperes_canon": []
+  },
+  {
+   "id": "mirador-sud-ouest",
+   "nom": "Mirador sud-ouest",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -400,
+    300
+   ],
+   "emprise_m": [
+    8,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "bois",
+   "teinte": "#BDB29A",
+   "reperes_canon": []
+  },
+  {
+   "id": "mirador-sud-est",
+   "nom": "Mirador sud-est",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    300,
+    300
+   ],
+   "emprise_m": [
+    8,
+    8
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "bois",
+   "teinte": "#BDB29A",
+   "reperes_canon": []
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "s-4",
+    "essence": "tilleul",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-3",
+    "essence": "marronnier",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     150,
+     -90
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 19,
+    "nom": "Tilleul de la place du Marché"
+   }
+  ],
+  "parcs": [
+   {
+    "id": "cour-des-lavoirs",
+    "nom": "Cour des Lavoirs",
+    "canon": "A",
+    "polygone": [
+     [
+      -445.3,
+      -145.3
+     ],
+     [
+      -353.7,
+      -145.3
+     ],
+     [
+      -353.7,
+      -56.2
+     ],
+     [
+      -445.3,
+      -56.2
+     ]
+    ],
+    "essences": [
+     "saule",
+     "peuplier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "square-des-tilleuls",
+    "nom": "Square des Tilleuls",
+    "canon": "A",
+    "polygone": [
+     [
+      -245.3,
+      54.7
+     ],
+     [
+      -154.7,
+      54.7
+     ],
+     [
+      -154.7,
+      146.3
+     ],
+     [
+      -245.3,
+      146.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "erable"
+    ],
+    "arbres_par_ha": 60
+   },
+   {
+    "id": "jardins-ouvriers",
+    "nom": "Jardins ouvriers",
+    "canon": "A",
+    "polygone": [
+     [
+      253.7,
+      153.7
+     ],
+     [
+      445.3,
+      153.7
+     ],
+     [
+      445.3,
+      345.3
+     ],
+     [
+      253.7,
+      345.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "peuplier"
+    ],
+    "arbres_par_ha": 50
+   }
+  ],
+  "vergers": [],
+  "haies": [],
+  "potagers": [],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -300,
+    -190
+   ],
+   [
+    -110,
+    160
+   ],
+   [
+    330,
+    20
+   ],
+   [
+    -390,
+    250
+   ]
+  ],
+  "fontaines": [
+   [
+    150,
+    50
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -810,
+    990,
+    495
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    310,
+    1.8
+   ],
+   "cible": [
+    0,
+    -140,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "grande-rue",
+   "nom": "Grande Rue et portail sud",
+   "oeil": [
+    -50,
+    -240,
+    3
+   ],
+   "cible": [
+    -50,
+    200,
+    8
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché et halle",
+   "oeil": [
+    20,
+    200,
+    3
+   ],
+   "cible": [
+    150,
+    40,
+    7
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-ateliers",
+   "nom": "Ateliers et entrepôt",
+   "oeil": [
+    300,
+    230,
+    4
+   ],
+   "cible": [
+    380,
+    20,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "portail-nord",
+   "nom": "Portail nord et miradors",
+   "oeil": [
+    -50,
+    -180,
+    3.5
+   ],
+   "cible": [
+    -50,
+    -320,
+    10
+   ],
+   "fov": 62
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, un jour ordinaire dans la zone",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du quartier (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "854-nuit-du-raid",
+   "nom": "854, le quartier de Liberio frappé",
+   "date": "854",
+   "canon": "C",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3 (854 : frappe sur Liberio) ; data/events/canon_854.json : evt_854_liberio_raid [C] ; la zone d'internement est dans la ville de Liberio",
+     "canon": "C"
+    },
+    {
+     "ref": "étendue des ruines et des incendies dans la zone, effectif réduit, fumée : adaptation ; déroulement non posé",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [
+    {
+     "polygone": [
+      [
+       -300,
+       -250
+      ],
+      [
+       150,
+       -250
+      ],
+      [
+       150,
+       100
+      ],
+      [
+       -300,
+       100
+      ]
+     ],
+     "part": 0.4
+    }
+   ],
+   "incendies": [
+    [
+     -200,
+     -120
+    ],
+    [
+     -60,
+     40
+    ],
+    [
+     90,
+     -60
+    ],
+    [
+     -250,
+     60
+    ]
+   ],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "enfume",
+   "habitants": 0.4
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

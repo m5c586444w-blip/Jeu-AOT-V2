@@ -1,6 +1,7 @@
 // npm run places:valider [-- <id>…] [-- --sans-docs] — lieux de data/places (R1e, CR1e-02 à CR1e-05) ; code 1 en cas d'erreur.
 import { checkPlace, frozenIds, placeIds, readFrozen, readWalls } from "./places/check";
 import { simPopulations } from "./places/population";
+import { analyserCouverture, manquantes } from "./places/couverture";
 import { fr } from "../render/tactical3d/places/svg";
 
 const args = process.argv.slice(2);
@@ -28,6 +29,13 @@ for (const id of only.length > 0 ? only.filter((i) => frozenIds().includes(i)) :
   console.log(`${fe.length === 0 ? "OK" : "KO"} ${id} (N2, figé) : ${plan ? `${fr(plan.b.length)} bâtiments, ${fr(plan.t.length)} arbres, population ${fr(plan.population)}, capacité ${fr(plan.capacite)}, générateur ${plan.generateur.nom} v${plan.generateur.version}, graine ${plan.generateur.graine}` : ""}`);
   for (const e of fe) console.error(`   ERREUR ${e}`);
   errors += fe.length;
+}
+if (args.includes("--couverture")) {
+  // Option non utilisée par défaut (C18) : échoue si une province de l'atlas ou du monde n'a pas de lieu jouable.
+  const m = manquantes(analyserCouverture());
+  for (const x of m) console.error(`   COUVERTURE ${x.code} ${x.id} (${x.region}) : aucun lieu`);
+  if (m.length > 0) console.error(`places:valider --couverture : ${m.length} province(s) sans lieu (npm run places:couverture).`);
+  errors += m.length;
 }
 if (errors > 0) {
   console.error(`places:valider : ${errors} erreur(s).`);

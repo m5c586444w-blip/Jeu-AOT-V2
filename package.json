@@ -51,6 +51,7 @@
     "mesure:r1d": "tsx src/tools/mesure-r1d.ts",
     "places:valider": "tsx src/tools/places-valider.ts",
     "places:captures": "tsx src/tools/places-captures.ts",
+    "places:couverture": "tsx src/tools/places-couverture.ts",
     "places:regenerer": "tsx src/tools/places-regenerer.ts",
     "smoke:chr": "tsx src/tools/smoke-chr.ts",
     "smoke:cadre": "tsx src/tools/smoke-cadre.ts",

@@ -17,7 +17,99 @@
     146.35862413194445,
     115.01260850694445
    ]
+  },
+  "axe-principal": {
+   "file": "docs/places/qg-garnison/vue-axe-principal.png",
+   "stats": {
+    "calls": 81,
+    "triangles": 194698,
+    "instances": 428,
+    "chunks": {
+     "total": 17,
+     "visible": 14,
+     "near": 10
+    }
+   },
+   "rgb": [
+    150.0625,
+    141.48659288194443,
+    116.42331597222223
+   ]
+  },
+  "cour-d-honneur": {
+   "file": "docs/places/qg-garnison/vue-cour-d-honneur.png",
+   "stats": {
+    "calls": 90,
+    "triangles": 173768,
+    "instances": 458,
+    "chunks": {
+     "total": 17,
+     "visible": 15,
+     "near": 10
+    }
+   },
+   "rgb": [
+    50.41584201388889,
+    33.87450954861111,
+    22.2658984375
+   ]
+  },
+  "facade-sud": {
+   "file": "docs/places/qg-garnison/vue-facade-sud.png",
+   "stats": {
+    "calls": 90,
+    "triangles": 93928,
+    "instances": 482,
+    "chunks": {
+     "total": 17,
+     "visible": 17,
+     "near": 2
+    }
+   },
+   "rgb": [
+    152.95612413194445,
+    162.7012717013889,
+    144.04324652777777
+   ]
+  },
+  "ecuries-et-remises": {
+   "file": "docs/places/qg-garnison/vue-ecuries-et-remises.png",
+   "stats": {
+    "calls": 53,
+    "triangles": 94660,
+    "instances": 196,
+    "chunks": {
+     "total": 17,
+     "visible": 6,
+     "near": 6
+    }
+   },
+   "rgb": [
+    164.41064670138888,
+    171.964296875,
+    170.81100694444444
+   ]
+  },
+  "casernement": {
+   "file": "docs/places/qg-garnison/vue-casernement.png",
+   "stats": {
+    "calls": 71,
+    "triangles": 224114,
+    "instances": 385,
+    "chunks": {
+     "total": 17,
+     "visible": 11,
+     "near": 10
+    }
+   },
+   "rgb": [
+    155.39220052083334,
+    165.58229166666666,
+    162.8052560763889
+   ]
   }
  },
- "dE": {}
+ "dE": {
+  "etat-845-avant | etat-850-alerte": 20.01367379439924
+ }
 }
