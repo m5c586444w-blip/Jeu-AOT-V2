@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/ville-souterraine/vue-ensemble.png",
+   "stats": {
+    "calls": 125,
+    "triangles": 552548,
+    "instances": 21431,
+    "chunks": {
+     "total": 398,
+     "visible": 398,
+     "near": 0
+    }
+   },
+   "rgb": [
+    150.66049913194445,
+    152.2943576388889,
+    127.61544704861112
+   ]
+  }
+ },
+ "dE": {}
+}

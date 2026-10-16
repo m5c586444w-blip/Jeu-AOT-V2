@@ -1436,3 +1436,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : cinq plans d'auteur (kit `sina.ts`, Mitras par `enclos.ts`, carré de 2 200 m sans enceinte faute de schéma) ; populations lues de `scn_sandbox_845`, surface bâtie à ≤ 7 % de population ÷ densité, ≥ 30 arbres/ha bâti ; districts à saillie à deux portes (extension de Rose, `A`) ; Ehrmich bourgeois (le « quartier des nobles » est un POI de Mitras) ; noms `A` + creation (`creations.md`, Q20-Q25).
 - **Limites** : ville souterraine et chapelle Reiss non commencées ; captures complètes à produire (dette 110, étendue aux lieux C16) ; revue indépendante de fin de chantier à faire.
 - **Preuve** : `tests/places/sina.test.ts`, `rose-enceinte.test.ts` (11 lieux), `places:valider -- --sans-docs` OK (15 lieux N1), verify EXIT=0 1579 tests. **Réversible** : oui.
+
+## 2026-10-16 — D-188 C16 tranche 2 : ville souterraine et chapelle Reiss
+- **Décision** : `ville-souterraine` (province distincte `prov_ville_souterraine`, 34 783 hab., 260 hab/ha, N1 « enclos » à ciel couvert, fruitiers en bacs pour tenir ≥ 8 arbres/ha malgré la fiche E08 : Q26) et `chapelle-reiss` (N1 d'auteur, effectif `?` de 38, province à population nulle). La chapelle **de surface** est une création `A` (le canon décrit une chapelle souterraine, non modélisée : le schéma n'a pas de sous-sol) — corrigé après revue (elle était étiquetée `C`).
+- **Revue** : `docs/reports/C16-revue.md`, ACCEPTÉ AVEC RÉSERVES ; corrigés : défauts 1, 2, 3 (grue de Stohess), 5. Restent : listes `INTERDIT` de noms incomplètes (4), test « sous Mitras » faible (6), vue sans voûte (7).
+- **Preuve** : verify EXIT=0, 1597 tests. **Réversible** : oui.

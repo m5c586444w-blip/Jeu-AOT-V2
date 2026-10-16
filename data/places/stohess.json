@@ -10117,11 +10117,11 @@
    "archetype": "quai_grue",
    "position": [
     -420,
-    301
+    287
    ],
    "emprise_m": [
-    10,
-    10
+    8,
+    8
    ],
    "angle_deg": 0,
    "hauteur_m": 14,

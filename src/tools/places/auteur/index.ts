@@ -1,5 +1,6 @@
 import type { Place } from "../../../data/placeSchema";
 import { campEntrainement } from "./camp-entrainement";
+import { chapelleReiss } from "./chapelle-reiss";
 import { ehrmich } from "./ehrmich";
 import { karanes } from "./karanes";
 import { krolva } from "./krolva";
@@ -13,10 +14,11 @@ import { shiganshina } from "./shiganshina";
 import { stohess } from "./stohess";
 import { trost } from "./trost";
 import { utopia } from "./utopia";
+import { villeSouterraine } from "./ville-souterraine";
 import { yarckel } from "./yarckel";
 
 /**
  * Plans d'auteur des lieux N1 (R1e) : un module par lieu, qui décrit à la main rues nommées, îlots, gabarits, repères, portes,
  * eau et végétation, et rend l'objet `Place` écrit dans `data/places/<id>.json` par `npm run places:regenerer -- <id>`.
  */
-export const AUTHORS: Record<string, () => Place> = { shiganshina, "maria-district-2": mariaDistrict2, "maria-district-3": mariaDistrict3, "maria-district-4": mariaDistrict4, trost, karanes, utopia, krolva, "camp-entrainement": campEntrainement, "qg-garnison": qgGarnison, stohess, orvud, ehrmich, yarckel, mitras };
+export const AUTHORS: Record<string, () => Place> = { shiganshina, "maria-district-2": mariaDistrict2, "maria-district-3": mariaDistrict3, "maria-district-4": mariaDistrict4, trost, karanes, utopia, krolva, "camp-entrainement": campEntrainement, "qg-garnison": qgGarnison, stohess, orvud, ehrmich, yarckel, mitras, "ville-souterraine": villeSouterraine, "chapelle-reiss": chapelleReiss };

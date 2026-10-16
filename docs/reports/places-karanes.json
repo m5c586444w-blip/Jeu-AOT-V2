@@ -18,6 +18,24 @@
     116.2652734375
    ]
   },
+  "axe-principal": {
+   "file": "docs/places/karanes/vue-axe-principal.png",
+   "stats": {
+    "calls": 217,
+    "triangles": 1223866,
+    "instances": 25720,
+    "chunks": {
+     "total": 996,
+     "visible": 506,
+     "near": 10
+    }
+   },
+   "rgb": [
+    138.4158420138889,
+    136.98677951388888,
+    121.91239583333333
+   ]
+  },
   "place-des-departs": {
    "file": "docs/places/karanes/vue-place-des-departs.png",
    "stats": {
@@ -53,9 +71,394 @@
     197.57865017361112,
     197.84749565972223
    ]
+  },
+  "depot-des-expeditions": {
+   "file": "docs/places/karanes/vue-depot-des-expeditions.png",
+   "stats": {
+    "calls": 161,
+    "triangles": 634957,
+    "instances": 2600,
+    "chunks": {
+     "total": 996,
+     "visible": 64,
+     "near": 11
+    }
+   },
+   "rgb": [
+    69.434609375,
+    68.83010416666667,
+    45.494539930555554
+   ]
+  },
+  "quartier-du-negoce": {
+   "file": "docs/places/karanes/vue-quartier-du-negoce.png",
+   "stats": {
+    "calls": 217,
+    "triangles": 1103411,
+    "instances": 9263,
+    "chunks": {
+     "total": 996,
+     "visible": 176,
+     "near": 10
+    }
+   },
+   "rgb": [
+    110.76163628472223,
+    101.32072048611111,
+    77.11768229166667
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/karanes/vue-rempart.png",
+   "stats": {
+    "calls": 252,
+    "triangles": 620670,
+    "instances": 12887,
+    "chunks": {
+     "total": 996,
+     "visible": 274,
+     "near": 6
+    }
+   },
+   "rgb": [
+    182.34006076388889,
+    190.7424826388889,
+    189.60622829861111
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/karanes/vue-faubourg.png",
+   "stats": {
+    "calls": 259,
+    "triangles": 1300389,
+    "instances": 35916,
+    "chunks": {
+     "total": 996,
+     "visible": 717,
+     "near": 8
+    }
+   },
+   "rgb": [
+    143.58361545138888,
+    145.61665364583334,
+    135.4669878472222
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/karanes/vue-porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 104,
+    "triangles": 504611,
+    "instances": 741,
+    "chunks": {
+     "total": 996,
+     "visible": 26,
+     "near": 12
+    }
+   },
+   "rgb": [
+    104.52749131944445,
+    97.24975260416667,
+    78.23675347222222
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/karanes/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 261,
+    "triangles": 1099453,
+    "instances": 38717,
+    "chunks": {
+     "total": 996,
+     "visible": 714,
+     "near": 8
+    }
+   },
+   "rgb": [
+    163.7376953125,
+    158.5260590277778,
+    137.20987413194445
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/karanes/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 267,
+    "triangles": 1143842,
+    "instances": 36572,
+    "chunks": {
+     "total": 996,
+     "visible": 684,
+     "near": 10
+    }
+   },
+   "rgb": [
+    102.203046875,
+    89.97083767361111,
+    75.3065625
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/karanes/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 78,
+    "triangles": 308565,
+    "instances": 330,
+    "chunks": {
+     "total": 996,
+     "visible": 16,
+     "near": 6
+    }
+   },
+   "rgb": [
+    106.94909288194444,
+    107.14835503472223,
+    98.95775607638889
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/karanes/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 82,
+    "triangles": 328845,
+    "instances": 320,
+    "chunks": {
+     "total": 996,
+     "visible": 10,
+     "near": 7
+    }
+   },
+   "rgb": [
+    64.049453125,
+    70.95528211805555,
+    73.43370659722223
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/karanes/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 39,
+    "triangles": 263533,
+    "instances": 260,
+    "chunks": {
+     "total": 996,
+     "visible": 14,
+     "near": 6
+    }
+   },
+   "rgb": [
+    47.80448350694444,
+    41.795078125,
+    34.43590277777778
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/karanes/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 220,
+    "triangles": 553757,
+    "instances": 9810,
+    "chunks": {
+     "total": 996,
+     "visible": 176,
+     "near": 7
+    }
+   },
+   "rgb": [
+    166.3011762152778,
+    173.88743489583334,
+    169.7731640625
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/karanes/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 439,
+    "triangles": 851637,
+    "instances": 29039,
+    "chunks": {
+     "total": 996,
+     "visible": 568,
+     "near": 4
+    }
+   },
+   "rgb": [
+    159.13068142361112,
+    160.84328993055556,
+    138.2226215277778
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/karanes/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 245,
+    "triangles": 1038099,
+    "instances": 20697,
+    "chunks": {
+     "total": 996,
+     "visible": 427,
+     "near": 12
+    }
+   },
+   "rgb": [
+    118.0059548611111,
+    115.63671440972222,
+    102.78973090277778
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/karanes/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 237,
+    "triangles": 1001302,
+    "instances": 20692,
+    "chunks": {
+     "total": 996,
+     "visible": 409,
+     "near": 10
+    }
+   },
+   "rgb": [
+    55.78935329861111,
+    54.2528515625,
+    46.71259548611111
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/karanes/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 164,
+    "triangles": 849043,
+    "instances": 7353,
+    "chunks": {
+     "total": 996,
+     "visible": 184,
+     "near": 12
+    }
+   },
+   "rgb": [
+    157.8237890625,
+    151.40283420138888,
+    135.51262586805555
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/karanes/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 157,
+    "triangles": 613724,
+    "instances": 1636,
+    "chunks": {
+     "total": 996,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    126.0548828125,
+    120.42137586805555,
+    109.02711371527778
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/karanes/porte-interieure-passage.png",
+   "stats": {
+    "calls": 167,
+    "triangles": 978979,
+    "instances": 7103,
+    "chunks": {
+     "total": 996,
+     "visible": 166,
+     "near": 13
+    }
+   },
+   "rgb": [
+    77.89298611111111,
+    77.52507378472222,
+    71.38132378472223
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/karanes/porte-interieure-haut.png",
+   "stats": {
+    "calls": 195,
+    "triangles": 920161,
+    "instances": 18238,
+    "chunks": {
+     "total": 996,
+     "visible": 281,
+     "near": 10
+    }
+   },
+   "rgb": [
+    183.9979123263889,
+    189.7307595486111,
+    186.7939626736111
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/karanes/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 473,
+    "triangles": 1049756,
+    "instances": 21891,
+    "chunks": {
+     "total": 996,
+     "visible": 404,
+     "near": 10
+    }
+   },
+   "rgb": [
+    133.6852387152778,
+    130.46322916666668,
+    114.03665364583334
+   ]
   }
  },
  "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 35.71957464079966,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 37.912205112544285,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.75441032146094,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 51.52735848912582,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 27.32338850379169,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.082610848437431,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 31.81443334052677,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 31.969108247541733,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.87631994398076,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 42.33657185901393,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.240082848560476,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 30.086294867588535,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 35.978448718343664,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 36.282429879164674,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 39.9416508405279,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.332432443061624,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 45.25694949703026,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 43.54526308765876,
+  "porte-exterieure-passage | porte-exterieure-haut": 56.476185139213534,
+  "porte-exterieure-passage | porte-exterieure-echelle": 52.92620872958147,
+  "porte-exterieure-haut | porte-exterieure-echelle": 25.791131306892012,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 28.648459694387245,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 24.699792609533397,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 32.56278089837291,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 32.70014112933073,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 38.33689185282639,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 18.85525090720294,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 43.81553022620137,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 38.15993097108925,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 27.056146539322032,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 57.92095268381193,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 37.24967973157959,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 27.140462024363032,
+  "porte-interieure-interieure-face | porte-interieure-passage": 42.055059688896954,
+  "porte-interieure-interieure-face | porte-interieure-haut": 28.212767568683514,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 30.22384554242156,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.67503034072317,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 33.48528829930555,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 29.871322127894377,
+  "porte-interieure-passage | porte-interieure-haut": 52.448558683737524,
+  "porte-interieure-passage | porte-interieure-echelle": 41.17714014886192,
+  "porte-interieure-haut | porte-interieure-echelle": 34.503484155160564,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.54877387784374,
   "etat-845-avant | etat-850-depart-expedition": 3.4212549422688343
  }
 }

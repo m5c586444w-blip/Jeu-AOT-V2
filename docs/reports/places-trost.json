@@ -1,6 +1,464 @@
 {
- "shots": {},
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/trost/vue-ensemble.png",
+   "stats": {
+    "calls": 237,
+    "triangles": 1182041,
+    "instances": 57326,
+    "chunks": {
+     "total": 1227,
+     "visible": 1227,
+     "near": 0
+    }
+   },
+   "rgb": [
+    146.80461371527778,
+    149.03918402777776,
+    117.58011284722222
+   ]
+  },
+  "axe-principal": {
+   "file": "docs/places/trost/vue-axe-principal.png",
+   "stats": {
+    "calls": 253,
+    "triangles": 947363,
+    "instances": 27740,
+    "chunks": {
+     "total": 1227,
+     "visible": 591,
+     "near": 9
+    }
+   },
+   "rgb": [
+    112.37229166666667,
+    109.67003472222223,
+    96.53461371527777
+   ]
+  },
+  "place-du-marche": {
+   "file": "docs/places/trost/vue-place-du-marche.png",
+   "stats": {
+    "calls": 236,
+    "triangles": 794732,
+    "instances": 19050,
+    "chunks": {
+     "total": 1227,
+     "visible": 304,
+     "near": 10
+    }
+   },
+   "rgb": [
+    164.61567274305557,
+    168.1783376736111,
+    164.7150824652778
+   ]
+  },
+  "porte-sud": {
+   "file": "docs/places/trost/vue-porte-sud.png",
+   "stats": {
+    "calls": 213,
+    "triangles": 849656,
+    "instances": 27573,
+    "chunks": {
+     "total": 1227,
+     "visible": 436,
+     "near": 6
+    }
+   },
+   "rgb": [
+    192.06787760416665,
+    195.8919314236111,
+    196.3466970486111
+   ]
+  },
+  "rue-de-l-evacuation": {
+   "file": "docs/places/trost/vue-rue-de-l-evacuation.png",
+   "stats": {
+    "calls": 220,
+    "triangles": 1058739,
+    "instances": 31745,
+    "chunks": {
+     "total": 1227,
+     "visible": 606,
+     "near": 8
+    }
+   },
+   "rgb": [
+    129.7803298611111,
+    123.23941840277777,
+    109.68471354166667
+   ]
+  },
+  "entrepots": {
+   "file": "docs/places/trost/vue-entrepots.png",
+   "stats": {
+    "calls": 197,
+    "triangles": 785039,
+    "instances": 16028,
+    "chunks": {
+     "total": 1227,
+     "visible": 318,
+     "near": 10
+    }
+   },
+   "rgb": [
+    135.35947048611112,
+    117.61361111111111,
+    95.36985243055555
+   ]
+  },
+  "rempart": {
+   "file": "docs/places/trost/vue-rempart.png",
+   "stats": {
+    "calls": 215,
+    "triangles": 677492,
+    "instances": 11409,
+    "chunks": {
+     "total": 1227,
+     "visible": 346,
+     "near": 6
+    }
+   },
+   "rgb": [
+    182.2317404513889,
+    191.05390625,
+    190.32177083333335
+   ]
+  },
+  "faubourg": {
+   "file": "docs/places/trost/vue-faubourg.png",
+   "stats": {
+    "calls": 262,
+    "triangles": 1406859,
+    "instances": 43554,
+    "chunks": {
+     "total": 1227,
+     "visible": 864,
+     "near": 8
+    }
+   },
+   "rgb": [
+    147.32946180555555,
+    148.54842447916667,
+    137.2238237847222
+   ]
+  },
+  "porte-depuis-la-ville": {
+   "file": "docs/places/trost/vue-porte-depuis-la-ville.png",
+   "stats": {
+    "calls": 58,
+    "triangles": 409462,
+    "instances": 433,
+    "chunks": {
+     "total": 1227,
+     "visible": 24,
+     "near": 8
+    }
+   },
+   "rgb": [
+    127.22400607638889,
+    130.42337673611112,
+    123.20654513888888
+   ]
+  },
+  "porte-exterieure-exterieure-face": {
+   "file": "docs/places/trost/porte-exterieure-exterieure-face.png",
+   "stats": {
+    "calls": 243,
+    "triangles": 1022849,
+    "instances": 39355,
+    "chunks": {
+     "total": 1227,
+     "visible": 771,
+     "near": 8
+    }
+   },
+   "rgb": [
+    163.94686197916667,
+    158.7159765625,
+    137.37232204861112
+   ]
+  },
+  "porte-exterieure-exterieure-detail": {
+   "file": "docs/places/trost/porte-exterieure-exterieure-detail.png",
+   "stats": {
+    "calls": 241,
+    "triangles": 995094,
+    "instances": 34686,
+    "chunks": {
+     "total": 1227,
+     "visible": 744,
+     "near": 9
+    }
+   },
+   "rgb": [
+    102.13229166666666,
+    89.9378515625,
+    75.09879774305556
+   ]
+  },
+  "porte-exterieure-interieure-face": {
+   "file": "docs/places/trost/porte-exterieure-interieure-face.png",
+   "stats": {
+    "calls": 46,
+    "triangles": 292850,
+    "instances": 312,
+    "chunks": {
+     "total": 1227,
+     "visible": 16,
+     "near": 6
+    }
+   },
+   "rgb": [
+    105.04095486111112,
+    106.05250434027778,
+    96.55457899305556
+   ]
+  },
+  "porte-exterieure-interieure-detail": {
+   "file": "docs/places/trost/porte-exterieure-interieure-detail.png",
+   "stats": {
+    "calls": 51,
+    "triangles": 318954,
+    "instances": 284,
+    "chunks": {
+     "total": 1227,
+     "visible": 10,
+     "near": 7
+    }
+   },
+   "rgb": [
+    64.00092881944444,
+    70.96854166666667,
+    73.56030815972223
+   ]
+  },
+  "porte-exterieure-passage": {
+   "file": "docs/places/trost/porte-exterieure-passage.png",
+   "stats": {
+    "calls": 50,
+    "triangles": 292112,
+    "instances": 304,
+    "chunks": {
+     "total": 1227,
+     "visible": 14,
+     "near": 6
+    }
+   },
+   "rgb": [
+    48.415355902777776,
+    42.42923611111111,
+    35.06232204861111
+   ]
+  },
+  "porte-exterieure-haut": {
+   "file": "docs/places/trost/porte-exterieure-haut.png",
+   "stats": {
+    "calls": 187,
+    "triangles": 474204,
+    "instances": 7689,
+    "chunks": {
+     "total": 1227,
+     "visible": 216,
+     "near": 7
+    }
+   },
+   "rgb": [
+    169.02803385416667,
+    177.41958333333332,
+    174.49414496527777
+   ]
+  },
+  "porte-exterieure-echelle": {
+   "file": "docs/places/trost/porte-exterieure-echelle.png",
+   "stats": {
+    "calls": 453,
+    "triangles": 928092,
+    "instances": 32791,
+    "chunks": {
+     "total": 1227,
+     "visible": 610,
+     "near": 4
+    }
+   },
+   "rgb": [
+    158.9880425347222,
+    160.6620746527778,
+    137.98861979166668
+   ]
+  },
+  "porte-interieure-exterieure-face": {
+   "file": "docs/places/trost/porte-interieure-exterieure-face.png",
+   "stats": {
+    "calls": 256,
+    "triangles": 1099099,
+    "instances": 24804,
+    "chunks": {
+     "total": 1227,
+     "visible": 526,
+     "near": 12
+    }
+   },
+   "rgb": [
+    118.41105034722223,
+    116.06944878472223,
+    103.29805121527778
+   ]
+  },
+  "porte-interieure-exterieure-detail": {
+   "file": "docs/places/trost/porte-interieure-exterieure-detail.png",
+   "stats": {
+    "calls": 250,
+    "triangles": 1079794,
+    "instances": 25964,
+    "chunks": {
+     "total": 1227,
+     "visible": 506,
+     "near": 10
+    }
+   },
+   "rgb": [
+    55.51939236111111,
+    54.00385850694445,
+    46.52204861111111
+   ]
+  },
+  "porte-interieure-interieure-face": {
+   "file": "docs/places/trost/porte-interieure-interieure-face.png",
+   "stats": {
+    "calls": 169,
+    "triangles": 822624,
+    "instances": 6477,
+    "chunks": {
+     "total": 1227,
+     "visible": 184,
+     "near": 12
+    }
+   },
+   "rgb": [
+    159.19434027777777,
+    154.07220052083332,
+    139.39296875
+   ]
+  },
+  "porte-interieure-interieure-detail": {
+   "file": "docs/places/trost/porte-interieure-interieure-detail.png",
+   "stats": {
+    "calls": 155,
+    "triangles": 610204,
+    "instances": 1570,
+    "chunks": {
+     "total": 1227,
+     "visible": 24,
+     "near": 11
+    }
+   },
+   "rgb": [
+    125.8896310763889,
+    120.22645399305556,
+    108.84566840277778
+   ]
+  },
+  "porte-interieure-passage": {
+   "file": "docs/places/trost/porte-interieure-passage.png",
+   "stats": {
+    "calls": 164,
+    "triangles": 955161,
+    "instances": 6757,
+    "chunks": {
+     "total": 1227,
+     "visible": 176,
+     "near": 13
+    }
+   },
+   "rgb": [
+    78.47942708333333,
+    78.03059461805556,
+    71.96674045138889
+   ]
+  },
+  "porte-interieure-haut": {
+   "file": "docs/places/trost/porte-interieure-haut.png",
+   "stats": {
+    "calls": 194,
+    "triangles": 1006786,
+    "instances": 24337,
+    "chunks": {
+     "total": 1227,
+     "visible": 366,
+     "near": 10
+    }
+   },
+   "rgb": [
+    184.50961371527777,
+    190.10203125,
+    187.5402734375
+   ]
+  },
+  "porte-interieure-echelle": {
+   "file": "docs/places/trost/porte-interieure-echelle.png",
+   "stats": {
+    "calls": 468,
+    "triangles": 1016598,
+    "instances": 21510,
+    "chunks": {
+     "total": 1227,
+     "visible": 499,
+     "near": 10
+    }
+   },
+   "rgb": [
+    133.73230902777777,
+    130.55383680555556,
+    114.233515625
+   ]
+  }
+ },
  "dE": {
+  "porte-exterieure-exterieure-face | porte-exterieure-exterieure-detail": 35.69818435974586,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-face": 36.83156617276909,
+  "porte-exterieure-exterieure-face | porte-exterieure-interieure-detail": 45.79628302855444,
+  "porte-exterieure-exterieure-face | porte-exterieure-passage": 51.383553408531846,
+  "porte-exterieure-exterieure-face | porte-exterieure-haut": 27.941068241401087,
+  "porte-exterieure-exterieure-face | porte-exterieure-echelle": 14.060279397427053,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-face": 32.334057566842034,
+  "porte-exterieure-exterieure-detail | porte-exterieure-interieure-detail": 32.00992423506051,
+  "porte-exterieure-exterieure-detail | porte-exterieure-passage": 22.63398134515623,
+  "porte-exterieure-exterieure-detail | porte-exterieure-haut": 41.55793406333407,
+  "porte-exterieure-exterieure-detail | porte-exterieure-echelle": 38.14774246581083,
+  "porte-exterieure-interieure-face | porte-exterieure-interieure-detail": 29.883340371925254,
+  "porte-exterieure-interieure-face | porte-exterieure-passage": 35.45363373213749,
+  "porte-exterieure-interieure-face | porte-exterieure-haut": 36.61722286501587,
+  "porte-exterieure-interieure-face | porte-exterieure-echelle": 38.98104647239909,
+  "porte-exterieure-interieure-detail | porte-exterieure-passage": 25.546653388893347,
+  "porte-exterieure-interieure-detail | porte-exterieure-haut": 46.03326017793327,
+  "porte-exterieure-interieure-detail | porte-exterieure-echelle": 43.546204402270426,
+  "porte-exterieure-passage | porte-exterieure-haut": 57.20081430081958,
+  "porte-exterieure-passage | porte-exterieure-echelle": 52.66122266649066,
+  "porte-exterieure-haut | porte-exterieure-echelle": 26.81952827756847,
+  "porte-interieure-exterieure-face | porte-interieure-exterieure-detail": 28.751547489641112,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-face": 24.78419134927758,
+  "porte-interieure-exterieure-face | porte-interieure-interieure-detail": 32.60857842327988,
+  "porte-interieure-exterieure-face | porte-interieure-passage": 32.63996960921632,
+  "porte-interieure-exterieure-face | porte-interieure-haut": 38.054902863287445,
+  "porte-interieure-exterieure-face | porte-interieure-echelle": 18.800494191981116,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-face": 44.12881897702307,
+  "porte-interieure-exterieure-detail | porte-interieure-interieure-detail": 37.90512878271966,
+  "porte-interieure-exterieure-detail | porte-interieure-passage": 27.170562454336885,
+  "porte-interieure-exterieure-detail | porte-interieure-haut": 57.783393636328725,
+  "porte-interieure-exterieure-detail | porte-interieure-echelle": 37.32609648038253,
+  "porte-interieure-interieure-face | porte-interieure-interieure-detail": 27.59204219402209,
+  "porte-interieure-interieure-face | porte-interieure-passage": 42.20234765796489,
+  "porte-interieure-interieure-face | porte-interieure-haut": 27.916566952112085,
+  "porte-interieure-interieure-face | porte-interieure-echelle": 30.344595055069743,
+  "porte-interieure-interieure-detail | porte-interieure-passage": 36.679592187828334,
+  "porte-interieure-interieure-detail | porte-interieure-haut": 33.67215936805907,
+  "porte-interieure-interieure-detail | porte-interieure-echelle": 29.88510701108595,
+  "porte-interieure-passage | porte-interieure-haut": 52.13025621602091,
+  "porte-interieure-passage | porte-interieure-echelle": 41.156079115693075,
+  "porte-interieure-haut | porte-interieure-echelle": 34.62908717572412,
+  "porte-exterieure-exterieure-face | porte-interieure-exterieure-face": 33.455549759428884,
   "etat-845-avant | etat-850-breche": 20.071038664186005,
   "etat-845-avant | etat-850-bouchee": 3.450742442063348,
   "etat-850-breche | etat-850-bouchee": 18.329517412719447

@@ -1,0 +1,1295 @@
+{
+ "id": "chapelle-reiss",
+ "nom": "Chapelle Reiss",
+ "libelle": "Chapelle de la famille Reiss",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 (850 : chapelle de la famille Reiss) et docs/spec/06 I07, T13 : Domaine Reiss, chapelle souterraine [C] ; data/provinces/paradis.json : prov_domaine_reiss, poi_chapelle_reiss [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/01 §10 et docs/spec/11 §9 : localisation exacte non établie [?] ; data/geo/paradis.json : position au nord-ouest de Mitras dans Sina [A]",
+   "canon": "?"
+  },
+  {
+   "ref": "plan du site de surface, noms, dépendances, effectif : adaptation (création C16, `docs/lore/creations.md`) ; crypte non modélisée par le schéma (Q27)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_domaine_reiss",
+ "style": "E23",
+ "population": {
+  "province": null,
+  "part": 1,
+  "valeur": 38,
+  "canon": "?",
+  "note": "`prov_domaine_reiss` existe [C] mais sa population de simulation est nulle (pop 0, atlas I07) ; effectif du site de surface : valeur paramétrable `?` (chapelain, sacristain, gardien et famille, domestiques, jardinier, palefrenier et leurs familles)."
+ },
+ "densite": {
+  "classe": "ferme",
+  "valeur": 9.5,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -260,
+   -260
+  ],
+  [
+   260,
+   -260
+  ],
+  [
+   260,
+   260
+  ],
+  [
+   -260,
+   260
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "aucune",
+  "canon": "?"
+ },
+ "etendue_m": 900,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Sentier du Bois",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -240,
+     -240
+    ],
+    [
+     -240,
+     240
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-2",
+   "nom": "Sentier du Parvis",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     -120
+    ],
+    [
+     -120,
+     120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3",
+   "nom": "Sentier des Communs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -60,
+     -60
+    ],
+    [
+     -60,
+     120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4-0",
+   "nom": "Allée du Domaine",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     -60
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-1",
+   "nom": "Allée du Domaine",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     60
+    ],
+    [
+     0,
+     240
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Sentier du Bois",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     60,
+     -120
+    ],
+    [
+     60,
+     120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-6",
+   "nom": "Sentier de la Source",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     120,
+     -120
+    ],
+    [
+     120,
+     120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-8",
+   "nom": "Sentier des Communs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     240,
+     -240
+    ],
+    [
+     240,
+     240
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-0",
+   "nom": "Sentier du Bois",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -240,
+     -240
+    ],
+    [
+     240,
+     -240
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-2",
+   "nom": "Sentier du Parvis",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -240,
+     -120
+    ],
+    [
+     240,
+     -120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-3",
+   "nom": "Sentier des Communs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     -60
+    ],
+    [
+     120,
+     -60
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-4",
+   "nom": "Sentier du Bois",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     0
+    ],
+    [
+     120,
+     0
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Sentier de la Source",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -120,
+     60
+    ],
+    [
+     120,
+     60
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-6",
+   "nom": "Sentier du Parvis",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -240,
+     120
+    ],
+    [
+     240,
+     120
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-8",
+   "nom": "Sentier du Bois",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -240,
+     240
+    ],
+    [
+     240,
+     240
+    ]
+   ],
+   "largeur_m": 3,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "parvis-de-la-chapelle",
+   "nom": "Parvis de la chapelle",
+   "canon": "A",
+   "polygone": [
+    [
+     -57.3,
+     2.7
+    ],
+    [
+     57.3,
+     2.7
+    ],
+    [
+     57.3,
+     57.3
+    ],
+    [
+     -57.3,
+     57.3
+    ]
+   ],
+   "revetement": "gravier",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "domaine": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon",
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute",
+    "enduit"
+   ],
+   "teintes": [
+    "#D2C9B4",
+    "#C9BFA8",
+    "#D8CFBA"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  },
+  "communs": {
+   "etages": [
+    1,
+    2
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "pignon",
+    "demi_croupe"
+   ],
+   "pente_deg": [
+    34,
+    44
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise"
+   ],
+   "facades": [
+    "pierre_brute",
+    "bois",
+    "enduit"
+   ],
+   "teintes": [
+    "#C6BBA2",
+    "#BDB197",
+    "#CCC1A8"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 50
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "enclos-de-la-chapelle",
+   "nom": "Enclos de la chapelle",
+   "canon": "A"
+  },
+  {
+   "id": "communs-du-domaine",
+   "nom": "Communs et logis du domaine",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-2-3",
+   "quartier": "enclos-de-la-chapelle",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -117.3,
+     -57.3
+    ],
+    [
+     -62.7,
+     -57.3
+    ],
+    [
+     -62.7,
+     -2.7
+    ],
+    [
+     -117.3,
+     -2.7
+    ]
+   ],
+   "densite_bati": 0.45,
+   "gabarit": "domaine"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "enclos-de-la-chapelle",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -117.3,
+     2.7
+    ],
+    [
+     -62.7,
+     2.7
+    ],
+    [
+     -62.7,
+     57.3
+    ],
+    [
+     -117.3,
+     57.3
+    ]
+   ],
+   "densite_bati": 0.45,
+   "gabarit": "domaine"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "enclos-de-la-chapelle",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -57.3,
+     -57.3
+    ],
+    [
+     -4.7,
+     -57.3
+    ],
+    [
+     -4.7,
+     -2.7
+    ],
+    [
+     -57.3,
+     -2.7
+    ]
+   ],
+   "densite_bati": 0.45,
+   "gabarit": "domaine"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "communs-du-domaine",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -57.3,
+     62.7
+    ],
+    [
+     -4.7,
+     62.7
+    ],
+    [
+     -4.7,
+     117.3
+    ],
+    [
+     -57.3,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "communs"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "enclos-de-la-chapelle",
+   "fonction": "culte",
+   "polygone": [
+    [
+     4.7,
+     -57.3
+    ],
+    [
+     57.3,
+     -57.3
+    ],
+    [
+     57.3,
+     -2.7
+    ],
+    [
+     4.7,
+     -2.7
+    ]
+   ],
+   "densite_bati": 0.45,
+   "gabarit": "domaine"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "communs-du-domaine",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     62.7,
+     -117.3
+    ],
+    [
+     117.3,
+     -117.3
+    ],
+    [
+     117.3,
+     -62.7
+    ],
+    [
+     62.7,
+     -62.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "communs"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "communs-du-domaine",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     62.7,
+     -57.3
+    ],
+    [
+     117.3,
+     -57.3
+    ],
+    [
+     117.3,
+     -2.7
+    ],
+    [
+     62.7,
+     -2.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "communs"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "communs-du-domaine",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     62.7,
+     2.7
+    ],
+    [
+     117.3,
+     2.7
+    ],
+    [
+     117.3,
+     57.3
+    ],
+    [
+     62.7,
+     57.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "communs"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "communs-du-domaine",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     62.7,
+     62.7
+    ],
+    [
+     117.3,
+     62.7
+    ],
+    [
+     117.3,
+     117.3
+    ],
+    [
+     62.7,
+     117.3
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "communs"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "chapelle",
+   "nom": "Chapelle de la famille Reiss",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    -30,
+    -30
+   ],
+   "emprise_m": [
+    14,
+    30
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D4CAB4",
+   "reperes_canon": [
+    "chapelle de la famille Reiss [C] (fichier 01, 850 ; poi_chapelle_reiss) : édifice de surface, plan adapté ; la chapelle souterraine [C] n'est pas modélisée"
+   ],
+   "params": {
+    "clocher_m": 22,
+    "clocher_cote": 5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "logis-du-chapelain",
+   "nom": "Logis du chapelain",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -90,
+    -30
+   ],
+   "emprise_m": [
+    20,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D2C9B4",
+   "reperes_canon": []
+  },
+  {
+   "id": "sacristie",
+   "nom": "Sacristie et charnier",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    30,
+    -30
+   ],
+   "emprise_m": [
+    16,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#C9BFA8",
+   "reperes_canon": []
+  },
+  {
+   "id": "grange-du-domaine",
+   "nom": "Grange du domaine",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    90,
+    -30
+   ],
+   "emprise_m": [
+    28,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": []
+  },
+  {
+   "id": "ecurie-du-domaine",
+   "nom": "Écurie du domaine",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    90,
+    -90
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C6BBA2",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "loge-du-gardien",
+   "nom": "Loge du gardien",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -30,
+    90
+   ],
+   "emprise_m": [
+    14,
+    10
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6.5,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#C9BFA8",
+   "reperes_canon": []
+  },
+  {
+   "id": "buanderie",
+   "nom": "Buanderie et fournil",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    90,
+    30
+   ],
+   "emprise_m": [
+    20,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#C6BBA2",
+   "reperes_canon": [],
+   "params": {
+    "pente": 30
+   }
+  },
+  {
+   "id": "remise",
+   "nom": "Remise des voitures",
+   "canon": "A",
+   "archetype": "grange",
+   "position": [
+    90,
+    90
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BDB197",
+   "reperes_canon": []
+  },
+  {
+   "id": "pavillon-du-jardinier",
+   "nom": "Pavillon du jardinier",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    -90,
+    30
+   ],
+   "emprise_m": [
+    14,
+    10
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 6,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "enduit",
+   "teinte": "#D8CFBA",
+   "reperes_canon": []
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "s-4-1",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -60,
+     20
+    ],
+    "essence": "chene",
+    "hauteur_m": 22,
+    "nom": "Chêne du parvis"
+   },
+   {
+    "position": [
+     30,
+     90
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 18
+   }
+  ],
+  "parcs": [
+   {
+    "id": "bois-du-nord",
+    "nom": "Bois du Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -237.3,
+      -237.3
+     ],
+     [
+      237.3,
+      -237.3
+     ],
+     [
+      237.3,
+      -122.7
+     ],
+     [
+      -237.3,
+      -122.7
+     ]
+    ],
+    "essences": [
+     "chene",
+     "bouleau",
+     "pin"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "bois-de-l-ouest",
+    "nom": "Bois de l'Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -237.3,
+      -117.3
+     ],
+     [
+      -122.7,
+      -117.3
+     ],
+     [
+      -122.7,
+      117.3
+     ],
+     [
+      -237.3,
+      117.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "pin",
+     "bouleau"
+    ],
+    "arbres_par_ha": 66
+   },
+   {
+    "id": "bois-du-sud-ouest",
+    "nom": "Bois du Sud-Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -237.3,
+      122.7
+     ],
+     [
+      -4.7,
+      122.7
+     ],
+     [
+      -4.7,
+      237.3
+     ],
+     [
+      -237.3,
+      237.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "pin",
+     "peuplier"
+    ],
+    "arbres_par_ha": 64
+   },
+   {
+    "id": "jardin-clos",
+    "nom": "Jardin clos",
+    "canon": "A",
+    "polygone": [
+     [
+      -117.3,
+      -117.3
+     ],
+     [
+      57.3,
+      -117.3
+     ],
+     [
+      57.3,
+      -62.7
+     ],
+     [
+      -117.3,
+      -62.7
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "tilleul",
+     "marronnier"
+    ],
+    "arbres_par_ha": 52
+   },
+   {
+    "id": "bois-du-sud-est",
+    "nom": "Bois du Sud-Est",
+    "canon": "A",
+    "polygone": [
+     [
+      4.7,
+      122.7
+     ],
+     [
+      237.3,
+      122.7
+     ],
+     [
+      237.3,
+      237.3
+     ],
+     [
+      4.7,
+      237.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "bouleau",
+     "peuplier"
+    ],
+    "arbres_par_ha": 64
+   },
+   {
+    "id": "bois-de-l-est",
+    "nom": "Bois de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      122.7,
+      -117.3
+     ],
+     [
+      237.3,
+      -117.3
+     ],
+     [
+      237.3,
+      117.3
+     ],
+     [
+      122.7,
+      117.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "bouleau",
+     "pin"
+    ],
+    "arbres_par_ha": 66
+   }
+  ],
+  "vergers": [],
+  "haies": [
+   {
+    "trace": [
+     [
+      -120,
+      -120
+     ],
+     [
+      120,
+      -120
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -110,
+      -112
+     ],
+     [
+      -50,
+      -112
+     ],
+     [
+      -50,
+      -70
+     ],
+     [
+      -110,
+      -70
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "fruitier",
+   "tilleul"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -100,
+    40
+   ],
+   [
+    90,
+    0
+   ]
+  ],
+  "fontaines": []
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -432,
+    528,
+    264
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    200,
+    1.8
+   ],
+   "cible": [
+    0,
+    -96,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "facade-de-la-chapelle",
+   "nom": "Chapelle et parvis",
+   "oeil": [
+    0,
+    110,
+    2.2
+   ],
+   "cible": [
+    -30,
+    -30,
+    8
+   ],
+   "fov": 58
+  },
+  {
+   "id": "allee-du-domaine",
+   "nom": "Allée du domaine vers la chapelle",
+   "oeil": [
+    0,
+    235,
+    2
+   ],
+   "cible": [
+    0,
+    0,
+    7
+   ],
+   "fov": 56
+  },
+  {
+   "id": "communs",
+   "nom": "Grange, écurie et buanderie",
+   "oeil": [
+    20,
+    120,
+    3
+   ],
+   "cible": [
+    120,
+    20,
+    5
+   ],
+   "fov": 60
+  },
+  {
+   "id": "jardin-clos",
+   "nom": "Jardin clos et logis du chapelain",
+   "oeil": [
+    -30,
+    -30,
+    3
+   ],
+   "cible": [
+    -100,
+    -90,
+    3
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, le domaine en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du site (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-domaine-retire",
+   "nom": "850, le domaine retiré",
+   "date": "850",
+   "canon": "?",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : chapelle de la famille Reiss) [C] : le lieu intervient en 850, ce qui s'y passe n'est pas posé ici ; effectif réduit, brume : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.1,
+   "ciel": "brumeux",
+   "habitants": 0.4
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

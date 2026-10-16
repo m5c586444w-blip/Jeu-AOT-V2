@@ -1,0 +1,5460 @@
+{
+ "id": "ville-souterraine",
+ "nom": "Ville souterraine",
+ "libelle": "Ville souterraine de Mitras",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Mitras, capitale de Wall Sina, avec ville souterraine [C] ; docs/spec/06 I06 : ville souterraine, marché noir et contrebande [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "data/provinces/paradis.json : prov_ville_souterraine, poi_marche_noir [C] ; data/art/styles.json E08 : galeries, puits de jour, lanternes, escaliers, aucun horizon [C/A]",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé, noms de galeries, de places, de quartiers et de bâtiments, accès, dimensions : adaptation (création C16, `docs/lore/creations.md`) ; voûte et plafond non modélisés par le schéma (Q26)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_ville_souterraine",
+ "style": "E08",
+ "population": {
+  "province": "prov_ville_souterraine",
+  "part": 1,
+  "canon": "C",
+  "note": "100 % de la population de `prov_ville_souterraine` au départ de scn_sandbox_845 (34 783 hab.) ; la province existe [C], elle est distincte de `prov_mitras` (pas de double compte)."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 260,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -670,
+   -630
+  ],
+  [
+   670,
+   -630
+  ],
+  [
+   670,
+   630
+  ],
+  [
+   -670,
+   630
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "centre",
+  "canon": "C"
+ },
+ "etendue_m": 1900,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Galerie des Mineurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     -600
+    ],
+    [
+     -640,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1",
+   "nom": "Galerie des Lampistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -540,
+     -600
+    ],
+    [
+     -540,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Boyau des Rats",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -450,
+     -600
+    ],
+    [
+     -450,
+     600
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-3",
+   "nom": "Galerie du Cordage",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -350,
+     -600
+    ],
+    [
+     -350,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Boyau de la Corde",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -250,
+     -600
+    ],
+    [
+     -250,
+     600
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-5",
+   "nom": "Galerie des Porteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -140,
+     -600
+    ],
+    [
+     -140,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Galerie des Tonneliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -50,
+     -600
+    ],
+    [
+     -50,
+     600
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Galerie des Passeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     50,
+     -600
+    ],
+    [
+     50,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-0",
+   "nom": "Grande Galerie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     140,
+     -600
+    ],
+    [
+     140,
+     0
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8-1",
+   "nom": "Grande Galerie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     140,
+     190
+    ],
+    [
+     140,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Boyau du Sel",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     250,
+     -600
+    ],
+    [
+     250,
+     600
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-10",
+   "nom": "Galerie du Troc",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     350,
+     -600
+    ],
+    [
+     350,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Boyau des Fumeurs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     450,
+     -600
+    ],
+    [
+     450,
+     600
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-12",
+   "nom": "Galerie des Rats",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     540,
+     -600
+    ],
+    [
+     540,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13",
+   "nom": "Galerie des Marchands de nuit",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     640,
+     -600
+    ],
+    [
+     640,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-0",
+   "nom": "Galerie du Puits",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     -600
+    ],
+    [
+     640,
+     -600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Galerie de l'Escalier",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     -500
+    ],
+    [
+     640,
+     -500
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Boyau des Porteurs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -640,
+     -410
+    ],
+    [
+     640,
+     -410
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-3",
+   "nom": "Galerie des Chaînes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     -310
+    ],
+    [
+     640,
+     -310
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Boyau des Rats",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -640,
+     -210
+    ],
+    [
+     640,
+     -210
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-5",
+   "nom": "Galerie des Poulies",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     -110
+    ],
+    [
+     640,
+     -110
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Galerie des Chandelles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     0
+    ],
+    [
+     640,
+     0
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-0",
+   "nom": "Galerie du Marché noir",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     100
+    ],
+    [
+     50,
+     100
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-1",
+   "nom": "Galerie du Marché noir",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     250,
+     100
+    ],
+    [
+     640,
+     100
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Boyau de la Corde",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -640,
+     190
+    ],
+    [
+     640,
+     190
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-9",
+   "nom": "Galerie des Lanternes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     290
+    ],
+    [
+     640,
+     290
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-10",
+   "nom": "Boyau du Sel",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -640,
+     390
+    ],
+    [
+     640,
+     390
+    ]
+   ],
+   "largeur_m": 4,
+   "revetement": "terre"
+  },
+  {
+   "id": "t-11",
+   "nom": "Galerie des Eaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     490
+    ],
+    [
+     640,
+     490
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-12",
+   "nom": "Galerie des Contrebandiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -640,
+     600
+    ],
+    [
+     640,
+     600
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "paves"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "parvis-du-grand-escalier",
+   "nom": "Parvis du Grand Escalier",
+   "canon": "A",
+   "polygone": [
+    [
+     -41.8,
+     -495.3
+    ],
+    [
+     45.3,
+     -495.3
+    ],
+    [
+     45.3,
+     -413.2
+    ],
+    [
+     -41.8,
+     -413.2
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-du-marche-noir",
+   "nom": "Place du Marché noir",
+   "canon": "A",
+   "polygone": [
+    [
+     54.7,
+     8.2
+    ],
+    [
+     246.8,
+     8.2
+    ],
+    [
+     246.8,
+     186.8
+    ],
+    [
+     54.7,
+     186.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    150.8,
+    97.5
+   ],
+   "marche": true
+  }
+ ],
+ "gabarits": {
+  "souterrain": {
+   "etages": [
+    2,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 2.9,
+   "toits": [
+    "plat",
+    "appentis",
+    "plat",
+    "pignon"
+   ],
+   "pente_deg": [
+    20,
+    36
+   ],
+   "couvertures": [
+    "terrasse",
+    "bardeau",
+    "terrasse",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_brute",
+    "bois",
+    "pierre_brute",
+    "brique"
+   ],
+   "teintes": [
+    "#7A6A52",
+    "#6E5A44",
+    "#85735A",
+    "#645240",
+    "#7E6C54"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7.5
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 32,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 22
+   }
+  },
+  "atelier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "plat",
+    "appentis",
+    "plat"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "terrasse",
+    "bardeau",
+    "terrasse"
+   ],
+   "facades": [
+    "pierre_brute",
+    "bois",
+    "brique"
+   ],
+   "teintes": [
+    "#6A5C48",
+    "#5C4E3C",
+    "#74644E"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 20
+   }
+  },
+  "negoce": {
+   "etages": [
+    2,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "plat",
+    "appentis",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    22,
+    34
+   ],
+   "couvertures": [
+    "terrasse",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "bois",
+    "pierre_brute",
+    "enduit"
+   ],
+   "teintes": [
+    "#8A7458",
+    "#7C6648",
+    "#92805F",
+    "#6E5A44"
+   ],
+   "parcelles_m": [
+    6,
+    7.5,
+    5.5
+   ],
+   "profondeur_m": 11,
+   "boutiques": true,
+   "passage_m": 30,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 20
+   }
+  },
+  "entrepot": {
+   "etages": [
+    2,
+    3,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "plat",
+    "croupe",
+    "plat"
+   ],
+   "pente_deg": [
+    24,
+    36
+   ],
+   "couvertures": [
+    "terrasse",
+    "tuile_plate",
+    "terrasse"
+   ],
+   "facades": [
+    "pierre_brute",
+    "bois",
+    "brique"
+   ],
+   "teintes": [
+    "#6E6048",
+    "#625540",
+    "#7A6A50"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 16,
+   "boutiques": false,
+   "passage_m": 40,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 18
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "basse-ville",
+   "nom": "Basse Ville",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-marche-noir",
+   "nom": "Quartier du Marché noir",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-escaliers",
+   "nom": "Quartier des Escaliers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-lampistes",
+   "nom": "Quartier des Lampistes et des Forgerons",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-entrepots-de-la-remonte",
+   "nom": "Quartier des Entrepôts de la Remonte",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-reservoir",
+   "nom": "Quartier du Réservoir",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -635.3,
+     -595.3
+    ],
+    [
+     -544.7,
+     -595.3
+    ],
+    [
+     -544.7,
+     -504.7
+    ],
+    [
+     -635.3,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -635.3,
+     -495.3
+    ],
+    [
+     -544.7,
+     -495.3
+    ],
+    [
+     -544.7,
+     -413.2
+    ],
+    [
+     -635.3,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -635.3,
+     -406.8
+    ],
+    [
+     -544.7,
+     -406.8
+    ],
+    [
+     -544.7,
+     -314.7
+    ],
+    [
+     -635.3,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -635.3,
+     -305.3
+    ],
+    [
+     -544.7,
+     -305.3
+    ],
+    [
+     -544.7,
+     -213.2
+    ],
+    [
+     -635.3,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     -206.8
+    ],
+    [
+     -544.7,
+     -206.8
+    ],
+    [
+     -544.7,
+     -114.7
+    ],
+    [
+     -635.3,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-5",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     -105.3
+    ],
+    [
+     -544.7,
+     -105.3
+    ],
+    [
+     -544.7,
+     -8.2
+    ],
+    [
+     -635.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-6",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     8.2
+    ],
+    [
+     -544.7,
+     8.2
+    ],
+    [
+     -544.7,
+     95.3
+    ],
+    [
+     -635.3,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-7",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     104.7
+    ],
+    [
+     -544.7,
+     104.7
+    ],
+    [
+     -544.7,
+     186.8
+    ],
+    [
+     -635.3,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-8",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     193.2
+    ],
+    [
+     -544.7,
+     193.2
+    ],
+    [
+     -544.7,
+     285.3
+    ],
+    [
+     -635.3,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-9",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -635.3,
+     294.7
+    ],
+    [
+     -544.7,
+     294.7
+    ],
+    [
+     -544.7,
+     386.8
+    ],
+    [
+     -635.3,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-0-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -635.3,
+     393.2
+    ],
+    [
+     -544.7,
+     393.2
+    ],
+    [
+     -544.7,
+     485.3
+    ],
+    [
+     -635.3,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-0-11",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -635.3,
+     494.7
+    ],
+    [
+     -544.7,
+     494.7
+    ],
+    [
+     -544.7,
+     595.3
+    ],
+    [
+     -635.3,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -535.3,
+     -595.3
+    ],
+    [
+     -453.2,
+     -595.3
+    ],
+    [
+     -453.2,
+     -504.7
+    ],
+    [
+     -535.3,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -535.3,
+     -495.3
+    ],
+    [
+     -453.2,
+     -495.3
+    ],
+    [
+     -453.2,
+     -413.2
+    ],
+    [
+     -535.3,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -535.3,
+     -406.8
+    ],
+    [
+     -453.2,
+     -406.8
+    ],
+    [
+     -453.2,
+     -314.7
+    ],
+    [
+     -535.3,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -535.3,
+     -305.3
+    ],
+    [
+     -453.2,
+     -305.3
+    ],
+    [
+     -453.2,
+     -213.2
+    ],
+    [
+     -535.3,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     -206.8
+    ],
+    [
+     -453.2,
+     -206.8
+    ],
+    [
+     -453.2,
+     -114.7
+    ],
+    [
+     -535.3,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     -105.3
+    ],
+    [
+     -453.2,
+     -105.3
+    ],
+    [
+     -453.2,
+     -8.2
+    ],
+    [
+     -535.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     8.2
+    ],
+    [
+     -453.2,
+     8.2
+    ],
+    [
+     -453.2,
+     95.3
+    ],
+    [
+     -535.3,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-7",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     104.7
+    ],
+    [
+     -453.2,
+     104.7
+    ],
+    [
+     -453.2,
+     186.8
+    ],
+    [
+     -535.3,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-8",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     193.2
+    ],
+    [
+     -453.2,
+     193.2
+    ],
+    [
+     -453.2,
+     285.3
+    ],
+    [
+     -535.3,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-9",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -535.3,
+     294.7
+    ],
+    [
+     -453.2,
+     294.7
+    ],
+    [
+     -453.2,
+     386.8
+    ],
+    [
+     -535.3,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-1-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -535.3,
+     393.2
+    ],
+    [
+     -453.2,
+     393.2
+    ],
+    [
+     -453.2,
+     485.3
+    ],
+    [
+     -535.3,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-1-11",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -535.3,
+     494.7
+    ],
+    [
+     -453.2,
+     494.7
+    ],
+    [
+     -453.2,
+     595.3
+    ],
+    [
+     -535.3,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -446.8,
+     -595.3
+    ],
+    [
+     -354.7,
+     -595.3
+    ],
+    [
+     -354.7,
+     -504.7
+    ],
+    [
+     -446.8,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -446.8,
+     -495.3
+    ],
+    [
+     -354.7,
+     -495.3
+    ],
+    [
+     -354.7,
+     -413.2
+    ],
+    [
+     -446.8,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -446.8,
+     -305.3
+    ],
+    [
+     -354.7,
+     -305.3
+    ],
+    [
+     -354.7,
+     -213.2
+    ],
+    [
+     -446.8,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     -206.8
+    ],
+    [
+     -354.7,
+     -206.8
+    ],
+    [
+     -354.7,
+     -114.7
+    ],
+    [
+     -446.8,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     -105.3
+    ],
+    [
+     -354.7,
+     -105.3
+    ],
+    [
+     -354.7,
+     -8.2
+    ],
+    [
+     -446.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     8.2
+    ],
+    [
+     -354.7,
+     8.2
+    ],
+    [
+     -354.7,
+     95.3
+    ],
+    [
+     -446.8,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     104.7
+    ],
+    [
+     -354.7,
+     104.7
+    ],
+    [
+     -354.7,
+     186.8
+    ],
+    [
+     -446.8,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-8",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     193.2
+    ],
+    [
+     -354.7,
+     193.2
+    ],
+    [
+     -354.7,
+     285.3
+    ],
+    [
+     -446.8,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-9",
+   "quartier": "quartier-des-lampistes",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -446.8,
+     294.7
+    ],
+    [
+     -354.7,
+     294.7
+    ],
+    [
+     -354.7,
+     386.8
+    ],
+    [
+     -446.8,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "atelier"
+  },
+  {
+   "id": "i-2-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -446.8,
+     393.2
+    ],
+    [
+     -354.7,
+     393.2
+    ],
+    [
+     -354.7,
+     485.3
+    ],
+    [
+     -446.8,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-2-11",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -446.8,
+     494.7
+    ],
+    [
+     -354.7,
+     494.7
+    ],
+    [
+     -354.7,
+     595.3
+    ],
+    [
+     -446.8,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -345.3,
+     -595.3
+    ],
+    [
+     -253.2,
+     -595.3
+    ],
+    [
+     -253.2,
+     -504.7
+    ],
+    [
+     -345.3,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -345.3,
+     -495.3
+    ],
+    [
+     -253.2,
+     -495.3
+    ],
+    [
+     -253.2,
+     -413.2
+    ],
+    [
+     -345.3,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     -406.8
+    ],
+    [
+     -253.2,
+     -406.8
+    ],
+    [
+     -253.2,
+     -314.7
+    ],
+    [
+     -345.3,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     -305.3
+    ],
+    [
+     -253.2,
+     -305.3
+    ],
+    [
+     -253.2,
+     -213.2
+    ],
+    [
+     -345.3,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     -206.8
+    ],
+    [
+     -253.2,
+     -206.8
+    ],
+    [
+     -253.2,
+     -114.7
+    ],
+    [
+     -345.3,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     -105.3
+    ],
+    [
+     -253.2,
+     -105.3
+    ],
+    [
+     -253.2,
+     -8.2
+    ],
+    [
+     -345.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     8.2
+    ],
+    [
+     -253.2,
+     8.2
+    ],
+    [
+     -253.2,
+     95.3
+    ],
+    [
+     -345.3,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     104.7
+    ],
+    [
+     -253.2,
+     104.7
+    ],
+    [
+     -253.2,
+     186.8
+    ],
+    [
+     -345.3,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-8",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     193.2
+    ],
+    [
+     -253.2,
+     193.2
+    ],
+    [
+     -253.2,
+     285.3
+    ],
+    [
+     -345.3,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-9",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     294.7
+    ],
+    [
+     -253.2,
+     294.7
+    ],
+    [
+     -253.2,
+     386.8
+    ],
+    [
+     -345.3,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     393.2
+    ],
+    [
+     -253.2,
+     393.2
+    ],
+    [
+     -253.2,
+     485.3
+    ],
+    [
+     -345.3,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-3-11",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.3,
+     494.7
+    ],
+    [
+     -253.2,
+     494.7
+    ],
+    [
+     -253.2,
+     595.3
+    ],
+    [
+     -345.3,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -246.8,
+     -595.3
+    ],
+    [
+     -144.7,
+     -595.3
+    ],
+    [
+     -144.7,
+     -504.7
+    ],
+    [
+     -246.8,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -246.8,
+     -495.3
+    ],
+    [
+     -144.7,
+     -495.3
+    ],
+    [
+     -144.7,
+     -413.2
+    ],
+    [
+     -246.8,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     -406.8
+    ],
+    [
+     -144.7,
+     -406.8
+    ],
+    [
+     -144.7,
+     -314.7
+    ],
+    [
+     -246.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     -305.3
+    ],
+    [
+     -144.7,
+     -305.3
+    ],
+    [
+     -144.7,
+     -213.2
+    ],
+    [
+     -246.8,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     -206.8
+    ],
+    [
+     -144.7,
+     -206.8
+    ],
+    [
+     -144.7,
+     -114.7
+    ],
+    [
+     -246.8,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     -105.3
+    ],
+    [
+     -144.7,
+     -105.3
+    ],
+    [
+     -144.7,
+     -8.2
+    ],
+    [
+     -246.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     8.2
+    ],
+    [
+     -144.7,
+     8.2
+    ],
+    [
+     -144.7,
+     95.3
+    ],
+    [
+     -246.8,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     104.7
+    ],
+    [
+     -144.7,
+     104.7
+    ],
+    [
+     -144.7,
+     186.8
+    ],
+    [
+     -246.8,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     193.2
+    ],
+    [
+     -144.7,
+     193.2
+    ],
+    [
+     -144.7,
+     285.3
+    ],
+    [
+     -246.8,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-9",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     294.7
+    ],
+    [
+     -144.7,
+     294.7
+    ],
+    [
+     -144.7,
+     386.8
+    ],
+    [
+     -246.8,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     393.2
+    ],
+    [
+     -144.7,
+     393.2
+    ],
+    [
+     -144.7,
+     485.3
+    ],
+    [
+     -246.8,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-4-11",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -246.8,
+     494.7
+    ],
+    [
+     -144.7,
+     494.7
+    ],
+    [
+     -144.7,
+     595.3
+    ],
+    [
+     -246.8,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -135.3,
+     -595.3
+    ],
+    [
+     -58.2,
+     -595.3
+    ],
+    [
+     -58.2,
+     -504.7
+    ],
+    [
+     -135.3,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -135.3,
+     -495.3
+    ],
+    [
+     -58.2,
+     -495.3
+    ],
+    [
+     -58.2,
+     -413.2
+    ],
+    [
+     -135.3,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     -406.8
+    ],
+    [
+     -58.2,
+     -406.8
+    ],
+    [
+     -58.2,
+     -314.7
+    ],
+    [
+     -135.3,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     -305.3
+    ],
+    [
+     -58.2,
+     -305.3
+    ],
+    [
+     -58.2,
+     -213.2
+    ],
+    [
+     -135.3,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     -206.8
+    ],
+    [
+     -58.2,
+     -206.8
+    ],
+    [
+     -58.2,
+     -114.7
+    ],
+    [
+     -135.3,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     -105.3
+    ],
+    [
+     -58.2,
+     -105.3
+    ],
+    [
+     -58.2,
+     -8.2
+    ],
+    [
+     -135.3,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     8.2
+    ],
+    [
+     -58.2,
+     8.2
+    ],
+    [
+     -58.2,
+     95.3
+    ],
+    [
+     -135.3,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     104.7
+    ],
+    [
+     -58.2,
+     104.7
+    ],
+    [
+     -58.2,
+     186.8
+    ],
+    [
+     -135.3,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     193.2
+    ],
+    [
+     -58.2,
+     193.2
+    ],
+    [
+     -58.2,
+     285.3
+    ],
+    [
+     -135.3,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     294.7
+    ],
+    [
+     -58.2,
+     294.7
+    ],
+    [
+     -58.2,
+     386.8
+    ],
+    [
+     -135.3,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -135.3,
+     393.2
+    ],
+    [
+     -58.2,
+     393.2
+    ],
+    [
+     -58.2,
+     485.3
+    ],
+    [
+     -135.3,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-5-11",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -135.3,
+     494.7
+    ],
+    [
+     -58.2,
+     494.7
+    ],
+    [
+     -58.2,
+     595.3
+    ],
+    [
+     -135.3,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -41.8,
+     -595.3
+    ],
+    [
+     45.3,
+     -595.3
+    ],
+    [
+     45.3,
+     -504.7
+    ],
+    [
+     -41.8,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -41.8,
+     -406.8
+    ],
+    [
+     45.3,
+     -406.8
+    ],
+    [
+     45.3,
+     -314.7
+    ],
+    [
+     -41.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -41.8,
+     -305.3
+    ],
+    [
+     45.3,
+     -305.3
+    ],
+    [
+     45.3,
+     -213.2
+    ],
+    [
+     -41.8,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -41.8,
+     -206.8
+    ],
+    [
+     45.3,
+     -206.8
+    ],
+    [
+     45.3,
+     -114.7
+    ],
+    [
+     -41.8,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -41.8,
+     -105.3
+    ],
+    [
+     45.3,
+     -105.3
+    ],
+    [
+     45.3,
+     -8.2
+    ],
+    [
+     -41.8,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -41.8,
+     8.2
+    ],
+    [
+     45.3,
+     8.2
+    ],
+    [
+     45.3,
+     95.3
+    ],
+    [
+     -41.8,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -41.8,
+     104.7
+    ],
+    [
+     45.3,
+     104.7
+    ],
+    [
+     45.3,
+     186.8
+    ],
+    [
+     -41.8,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -41.8,
+     193.2
+    ],
+    [
+     45.3,
+     193.2
+    ],
+    [
+     45.3,
+     285.3
+    ],
+    [
+     -41.8,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -41.8,
+     294.7
+    ],
+    [
+     45.3,
+     294.7
+    ],
+    [
+     45.3,
+     386.8
+    ],
+    [
+     -41.8,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -41.8,
+     393.2
+    ],
+    [
+     45.3,
+     393.2
+    ],
+    [
+     45.3,
+     485.3
+    ],
+    [
+     -41.8,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-6-11",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -41.8,
+     494.7
+    ],
+    [
+     45.3,
+     494.7
+    ],
+    [
+     45.3,
+     595.3
+    ],
+    [
+     -41.8,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     54.7,
+     -595.3
+    ],
+    [
+     135.3,
+     -595.3
+    ],
+    [
+     135.3,
+     -504.7
+    ],
+    [
+     54.7,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     54.7,
+     -495.3
+    ],
+    [
+     135.3,
+     -495.3
+    ],
+    [
+     135.3,
+     -413.2
+    ],
+    [
+     54.7,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     54.7,
+     -406.8
+    ],
+    [
+     135.3,
+     -406.8
+    ],
+    [
+     135.3,
+     -314.7
+    ],
+    [
+     54.7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     54.7,
+     -305.3
+    ],
+    [
+     135.3,
+     -305.3
+    ],
+    [
+     135.3,
+     -213.2
+    ],
+    [
+     54.7,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     54.7,
+     -206.8
+    ],
+    [
+     135.3,
+     -206.8
+    ],
+    [
+     135.3,
+     -114.7
+    ],
+    [
+     54.7,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     54.7,
+     -105.3
+    ],
+    [
+     135.3,
+     -105.3
+    ],
+    [
+     135.3,
+     -8.2
+    ],
+    [
+     54.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     54.7,
+     193.2
+    ],
+    [
+     135.3,
+     193.2
+    ],
+    [
+     135.3,
+     285.3
+    ],
+    [
+     54.7,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-7-9",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     54.7,
+     294.7
+    ],
+    [
+     135.3,
+     294.7
+    ],
+    [
+     135.3,
+     386.8
+    ],
+    [
+     54.7,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     54.7,
+     393.2
+    ],
+    [
+     135.3,
+     393.2
+    ],
+    [
+     135.3,
+     485.3
+    ],
+    [
+     54.7,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-7-11",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     54.7,
+     494.7
+    ],
+    [
+     135.3,
+     494.7
+    ],
+    [
+     135.3,
+     595.3
+    ],
+    [
+     54.7,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     144.7,
+     -595.3
+    ],
+    [
+     246.8,
+     -595.3
+    ],
+    [
+     246.8,
+     -504.7
+    ],
+    [
+     144.7,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     144.7,
+     -495.3
+    ],
+    [
+     246.8,
+     -495.3
+    ],
+    [
+     246.8,
+     -413.2
+    ],
+    [
+     144.7,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     144.7,
+     -406.8
+    ],
+    [
+     246.8,
+     -406.8
+    ],
+    [
+     246.8,
+     -314.7
+    ],
+    [
+     144.7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     144.7,
+     -305.3
+    ],
+    [
+     246.8,
+     -305.3
+    ],
+    [
+     246.8,
+     -213.2
+    ],
+    [
+     144.7,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     144.7,
+     -206.8
+    ],
+    [
+     246.8,
+     -206.8
+    ],
+    [
+     246.8,
+     -114.7
+    ],
+    [
+     144.7,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     144.7,
+     -105.3
+    ],
+    [
+     246.8,
+     -105.3
+    ],
+    [
+     246.8,
+     -8.2
+    ],
+    [
+     144.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     144.7,
+     193.2
+    ],
+    [
+     246.8,
+     193.2
+    ],
+    [
+     246.8,
+     285.3
+    ],
+    [
+     144.7,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-8-9",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     144.7,
+     294.7
+    ],
+    [
+     246.8,
+     294.7
+    ],
+    [
+     246.8,
+     386.8
+    ],
+    [
+     144.7,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-8-11",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     144.7,
+     494.7
+    ],
+    [
+     246.8,
+     494.7
+    ],
+    [
+     246.8,
+     595.3
+    ],
+    [
+     144.7,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     253.2,
+     -595.3
+    ],
+    [
+     345.3,
+     -595.3
+    ],
+    [
+     345.3,
+     -504.7
+    ],
+    [
+     253.2,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     253.2,
+     -495.3
+    ],
+    [
+     345.3,
+     -495.3
+    ],
+    [
+     345.3,
+     -413.2
+    ],
+    [
+     253.2,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     253.2,
+     -406.8
+    ],
+    [
+     345.3,
+     -406.8
+    ],
+    [
+     345.3,
+     -314.7
+    ],
+    [
+     253.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     253.2,
+     -305.3
+    ],
+    [
+     345.3,
+     -305.3
+    ],
+    [
+     345.3,
+     -213.2
+    ],
+    [
+     253.2,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "basse-ville",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     253.2,
+     -206.8
+    ],
+    [
+     345.3,
+     -206.8
+    ],
+    [
+     345.3,
+     -114.7
+    ],
+    [
+     253.2,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     253.2,
+     -105.3
+    ],
+    [
+     345.3,
+     -105.3
+    ],
+    [
+     345.3,
+     -8.2
+    ],
+    [
+     253.2,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     253.2,
+     8.2
+    ],
+    [
+     345.3,
+     8.2
+    ],
+    [
+     345.3,
+     95.3
+    ],
+    [
+     253.2,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     253.2,
+     104.7
+    ],
+    [
+     345.3,
+     104.7
+    ],
+    [
+     345.3,
+     186.8
+    ],
+    [
+     253.2,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "quartier-du-marche-noir",
+   "fonction": "marche",
+   "polygone": [
+    [
+     253.2,
+     193.2
+    ],
+    [
+     345.3,
+     193.2
+    ],
+    [
+     345.3,
+     285.3
+    ],
+    [
+     253.2,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "negoce"
+  },
+  {
+   "id": "i-9-9",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     253.2,
+     294.7
+    ],
+    [
+     345.3,
+     294.7
+    ],
+    [
+     345.3,
+     386.8
+    ],
+    [
+     253.2,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     253.2,
+     393.2
+    ],
+    [
+     345.3,
+     393.2
+    ],
+    [
+     345.3,
+     485.3
+    ],
+    [
+     253.2,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-9-11",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     253.2,
+     494.7
+    ],
+    [
+     345.3,
+     494.7
+    ],
+    [
+     345.3,
+     595.3
+    ],
+    [
+     253.2,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     354.7,
+     -595.3
+    ],
+    [
+     446.8,
+     -595.3
+    ],
+    [
+     446.8,
+     -504.7
+    ],
+    [
+     354.7,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     354.7,
+     -495.3
+    ],
+    [
+     446.8,
+     -495.3
+    ],
+    [
+     446.8,
+     -413.2
+    ],
+    [
+     354.7,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     -406.8
+    ],
+    [
+     446.8,
+     -406.8
+    ],
+    [
+     446.8,
+     -314.7
+    ],
+    [
+     354.7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     -206.8
+    ],
+    [
+     446.8,
+     -206.8
+    ],
+    [
+     446.8,
+     -114.7
+    ],
+    [
+     354.7,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     -105.3
+    ],
+    [
+     446.8,
+     -105.3
+    ],
+    [
+     446.8,
+     -8.2
+    ],
+    [
+     354.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     8.2
+    ],
+    [
+     446.8,
+     8.2
+    ],
+    [
+     446.8,
+     95.3
+    ],
+    [
+     354.7,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     104.7
+    ],
+    [
+     446.8,
+     104.7
+    ],
+    [
+     446.8,
+     186.8
+    ],
+    [
+     354.7,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.7,
+     193.2
+    ],
+    [
+     446.8,
+     193.2
+    ],
+    [
+     446.8,
+     285.3
+    ],
+    [
+     354.7,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     354.7,
+     294.7
+    ],
+    [
+     446.8,
+     294.7
+    ],
+    [
+     446.8,
+     386.8
+    ],
+    [
+     354.7,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     354.7,
+     393.2
+    ],
+    [
+     446.8,
+     393.2
+    ],
+    [
+     446.8,
+     485.3
+    ],
+    [
+     354.7,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-10-11",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     354.7,
+     494.7
+    ],
+    [
+     446.8,
+     494.7
+    ],
+    [
+     446.8,
+     595.3
+    ],
+    [
+     354.7,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     453.2,
+     -595.3
+    ],
+    [
+     535.3,
+     -595.3
+    ],
+    [
+     535.3,
+     -504.7
+    ],
+    [
+     453.2,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     453.2,
+     -495.3
+    ],
+    [
+     535.3,
+     -495.3
+    ],
+    [
+     535.3,
+     -413.2
+    ],
+    [
+     453.2,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     -406.8
+    ],
+    [
+     535.3,
+     -406.8
+    ],
+    [
+     535.3,
+     -314.7
+    ],
+    [
+     453.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     -305.3
+    ],
+    [
+     535.3,
+     -305.3
+    ],
+    [
+     535.3,
+     -213.2
+    ],
+    [
+     453.2,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     -206.8
+    ],
+    [
+     535.3,
+     -206.8
+    ],
+    [
+     535.3,
+     -114.7
+    ],
+    [
+     453.2,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     -105.3
+    ],
+    [
+     535.3,
+     -105.3
+    ],
+    [
+     535.3,
+     -8.2
+    ],
+    [
+     453.2,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     8.2
+    ],
+    [
+     535.3,
+     8.2
+    ],
+    [
+     535.3,
+     95.3
+    ],
+    [
+     453.2,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     104.7
+    ],
+    [
+     535.3,
+     104.7
+    ],
+    [
+     535.3,
+     186.8
+    ],
+    [
+     453.2,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     453.2,
+     193.2
+    ],
+    [
+     535.3,
+     193.2
+    ],
+    [
+     535.3,
+     285.3
+    ],
+    [
+     453.2,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     453.2,
+     294.7
+    ],
+    [
+     535.3,
+     294.7
+    ],
+    [
+     535.3,
+     386.8
+    ],
+    [
+     453.2,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     453.2,
+     393.2
+    ],
+    [
+     535.3,
+     393.2
+    ],
+    [
+     535.3,
+     485.3
+    ],
+    [
+     453.2,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-11-11",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     453.2,
+     494.7
+    ],
+    [
+     535.3,
+     494.7
+    ],
+    [
+     535.3,
+     595.3
+    ],
+    [
+     453.2,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     544.7,
+     -595.3
+    ],
+    [
+     635.3,
+     -595.3
+    ],
+    [
+     635.3,
+     -504.7
+    ],
+    [
+     544.7,
+     -504.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "quartier-des-escaliers",
+   "fonction": "administration",
+   "polygone": [
+    [
+     544.7,
+     -495.3
+    ],
+    [
+     635.3,
+     -495.3
+    ],
+    [
+     635.3,
+     -413.2
+    ],
+    [
+     544.7,
+     -413.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     -406.8
+    ],
+    [
+     635.3,
+     -406.8
+    ],
+    [
+     635.3,
+     -314.7
+    ],
+    [
+     544.7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     -305.3
+    ],
+    [
+     635.3,
+     -305.3
+    ],
+    [
+     635.3,
+     -213.2
+    ],
+    [
+     544.7,
+     -213.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     -206.8
+    ],
+    [
+     635.3,
+     -206.8
+    ],
+    [
+     635.3,
+     -114.7
+    ],
+    [
+     544.7,
+     -114.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     -105.3
+    ],
+    [
+     635.3,
+     -105.3
+    ],
+    [
+     635.3,
+     -8.2
+    ],
+    [
+     544.7,
+     -8.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     8.2
+    ],
+    [
+     635.3,
+     8.2
+    ],
+    [
+     635.3,
+     95.3
+    ],
+    [
+     544.7,
+     95.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     104.7
+    ],
+    [
+     635.3,
+     104.7
+    ],
+    [
+     635.3,
+     186.8
+    ],
+    [
+     544.7,
+     186.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "quartier-du-reservoir",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     544.7,
+     193.2
+    ],
+    [
+     635.3,
+     193.2
+    ],
+    [
+     635.3,
+     285.3
+    ],
+    [
+     544.7,
+     285.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "souterrain"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     544.7,
+     294.7
+    ],
+    [
+     635.3,
+     294.7
+    ],
+    [
+     635.3,
+     386.8
+    ],
+    [
+     544.7,
+     386.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     544.7,
+     393.2
+    ],
+    [
+     635.3,
+     393.2
+    ],
+    [
+     635.3,
+     485.3
+    ],
+    [
+     544.7,
+     485.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  },
+  {
+   "id": "i-12-11",
+   "quartier": "quartier-des-entrepots-de-la-remonte",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     544.7,
+     494.7
+    ],
+    [
+     635.3,
+     494.7
+    ],
+    [
+     635.3,
+     595.3
+    ],
+    [
+     544.7,
+     595.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepot"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "halle-du-marche-noir",
+   "nom": "Halle du Marché noir",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    150,
+    95
+   ],
+   "emprise_m": [
+    60,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 1,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "bois",
+   "teinte": "#8A7458",
+   "reperes_canon": [
+    "poi_marche_noir dans prov_ville_souterraine [C] (data/provinces/paradis.json) : la halle est une adaptation"
+   ],
+   "params": {
+    "piliers": 10,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal du Marché noir 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    65,
+    50
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal du Marché noir 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    150,
+    50
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal du Marché noir 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    235,
+    50
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal du Marché noir 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    65,
+    140
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal du Marché noir 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    150,
+    140
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal du Marché noir 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    235,
+    140
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 4.5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7C6648",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 24
+   }
+  },
+  {
+   "id": "grand-escalier",
+   "nom": "Grand Escalier de Mitras",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    0,
+    -470
+   ],
+   "emprise_m": [
+    20,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#8A7C66",
+   "reperes_canon": [
+    "Mitras a une ville souterraine [C] (fichier 01 §3.1) : l'accès par escalier est une adaptation"
+   ]
+  },
+  {
+   "id": "corps-de-garde-du-grand-escalier",
+   "nom": "Corps de garde du Grand Escalier",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -95,
+    -455
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#8A7C66",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 28
+   }
+  },
+  {
+   "id": "escalier-du-sud",
+   "nom": "Escalier du Sud",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    0,
+    545
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#85775F",
+   "reperes_canon": []
+  },
+  {
+   "id": "puits-escalier-de-l-ouest",
+   "nom": "Puits-escalier de l'Ouest",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    -495,
+    50
+   ],
+   "emprise_m": [
+    11,
+    11
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#85775F",
+   "reperes_canon": []
+  },
+  {
+   "id": "puits-escalier-de-l-est",
+   "nom": "Puits-escalier de l'Est",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    495,
+    50
+   ],
+   "emprise_m": [
+    11,
+    11
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#85775F",
+   "reperes_canon": []
+  },
+  {
+   "id": "chapelle-des-remontees",
+   "nom": "Chapelle des Remontées",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    -195,
+    -160
+   ],
+   "emprise_m": [
+    12,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#8E8068",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "dispensaire-des-lampistes",
+   "nom": "Dispensaire des Lampistes",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -300,
+    145
+   ],
+   "emprise_m": [
+    36,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "enduit",
+   "teinte": "#9A8A6E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "fabrique-de-lampes",
+   "nom": "Fabrique de lampes",
+   "canon": "A",
+   "archetype": "usine",
+   "position": [
+    -400,
+    -55
+   ],
+   "emprise_m": [
+    42,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "brique",
+   "teinte": "#74644E",
+   "reperes_canon": [],
+   "params": {
+    "cheminees": 1,
+    "pente": 22
+   }
+  },
+  {
+   "id": "forges-du-boyau",
+   "nom": "Forges du Boyau",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -495,
+    -160
+   ],
+   "emprise_m": [
+    30,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#6A5C48",
+   "reperes_canon": [],
+   "params": {
+    "pente": 24
+   }
+  },
+  {
+   "id": "maison-des-anciens",
+   "nom": "Maison des Anciens",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    95,
+    -260
+   ],
+   "emprise_m": [
+    36,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#948568",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "ecole-des-remontees",
+   "nom": "École des Remontées",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    -195,
+    240
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "enduit",
+   "teinte": "#92826A",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "auberge-du-puits",
+   "nom": "Auberge du Puits",
+   "canon": "A",
+   "archetype": "maison",
+   "position": [
+    300,
+    50
+   ],
+   "emprise_m": [
+    22,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 3,
+   "toit": "pignon_rue",
+   "couverture": "bardeau",
+   "facade": "bois",
+   "teinte": "#7E6C54",
+   "reperes_canon": []
+  },
+  {
+   "id": "entrepots-de-la-remonte-1",
+   "nom": "Entrepôts de la Remonte",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    300,
+    440
+   ],
+   "emprise_m": [
+    60,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#6E6048",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "entrepots-de-la-remonte-2",
+   "nom": "Entrepôts du Sel",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    400,
+    440
+   ],
+   "emprise_m": [
+    54,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "brique",
+   "teinte": "#625540",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "grenier-souterrain",
+   "nom": "Grenier souterrain",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    95,
+    340
+   ],
+   "emprise_m": [
+    46,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#7A6A50",
+   "reperes_canon": [],
+   "params": {
+    "pente": 22
+   }
+  },
+  {
+   "id": "reservoir-des-eaux",
+   "nom": "Réservoir des Eaux",
+   "canon": "A",
+   "archetype": "fontaine",
+   "position": [
+    495,
+    -260
+   ],
+   "emprise_m": [
+    14,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "plat",
+   "couverture": "terrasse",
+   "facade": "pierre_brute",
+   "teinte": "#8A7C66",
+   "reperes_canon": []
+  },
+  {
+   "id": "poste-de-garde-de-l-escalier-du-sud",
+   "nom": "Poste de garde de l'Escalier du Sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -95,
+    545
+   ],
+   "emprise_m": [
+    26,
+    14
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#8A7C66",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 28
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [],
+  "isoles": [
+   {
+    "position": [
+     0,
+     -420
+    ],
+    "essence": "fruitier",
+    "hauteur_m": 7,
+    "nom": "Poirier du Parvis"
+   },
+   {
+    "position": [
+     150,
+     235
+    ],
+    "essence": "fruitier",
+    "hauteur_m": 6,
+    "nom": "Figuier du Marché"
+   }
+  ],
+  "parcs": [
+   {
+    "id": "jardin-du-puits-nord-ouest",
+    "nom": "Jardin du Puits de lumière du Nord-Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -446.8,
+      -406.8
+     ],
+     [
+      -354.7,
+      -406.8
+     ],
+     [
+      -354.7,
+      -314.7
+     ],
+     [
+      -446.8,
+      -314.7
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule",
+     "bouleau"
+    ],
+    "arbres_par_ha": 40
+   },
+   {
+    "id": "jardin-du-puits-sud",
+    "nom": "Jardin du Puits de lumière du Sud",
+    "canon": "A",
+    "polygone": [
+     [
+      144.7,
+      393.2
+     ],
+     [
+      246.8,
+      393.2
+     ],
+     [
+      246.8,
+      485.3
+     ],
+     [
+      144.7,
+      485.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "saule"
+    ],
+    "arbres_par_ha": 36
+   },
+   {
+    "id": "jardin-du-puits-est",
+    "nom": "Jardin du Puits de lumière de l'Est",
+    "canon": "A",
+    "polygone": [
+     [
+      354.7,
+      -305.3
+     ],
+     [
+      446.8,
+      -305.3
+     ],
+     [
+      446.8,
+      -213.2
+     ],
+     [
+      354.7,
+      -213.2
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "bouleau",
+     "saule"
+    ],
+    "arbres_par_ha": 38
+   }
+  ],
+  "vergers": [],
+  "haies": [],
+  "potagers": [],
+  "essences_cours": [
+   "fruitier",
+   "saule"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -500,
+    250
+   ],
+   [
+    -200,
+    -160
+   ],
+   [
+    300,
+    -100
+   ],
+   [
+    200,
+    340
+   ],
+   [
+    -100,
+    400
+   ],
+   [
+    500,
+    250
+   ]
+  ],
+  "fontaines": [
+   [
+    150,
+    95
+   ],
+   [
+    0,
+    -440
+   ],
+   [
+    -495,
+    -55
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -720,
+    940,
+    520
+   ],
+   "cible": [
+    0,
+    40,
+    0
+   ],
+   "fov": 60
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    560,
+    1.8
+   ],
+   "cible": [
+    0,
+    -240,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "marche-noir",
+   "nom": "Place et halle du Marché noir",
+   "oeil": [
+    150,
+    195,
+    2.4
+   ],
+   "cible": [
+    150,
+    95,
+    6
+   ],
+   "fov": 62
+  },
+  {
+   "id": "grand-escalier",
+   "nom": "Grand Escalier et son parvis",
+   "oeil": [
+    0,
+    -380,
+    2.4
+   ],
+   "cible": [
+    0,
+    -470,
+    9
+   ],
+   "fov": 60
+  },
+  {
+   "id": "grande-galerie",
+   "nom": "Grande Galerie vers le nord",
+   "oeil": [
+    -50,
+    420,
+    2
+   ],
+   "cible": [
+    -50,
+    -200,
+    6
+   ],
+   "fov": 58
+  },
+  {
+   "id": "puits-de-lumiere",
+   "nom": "Jardin sous un puits de lumière",
+   "oeil": [
+    -300,
+    -220,
+    2.4
+   ],
+   "cible": [
+    -400,
+    -360,
+    5
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, la ville souterraine en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire (adaptation) ; marché noir et contrebande [C] (atlas 06 I06)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 1
+  },
+  {
+   "id": "850-coup-d-etat",
+   "nom": "850, journée du coup d'État",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : coup d'État mené par le Corps de Reconnaissance) [C], ordre des faits [?] ; effets sous terre : adaptation (aucune destruction)",
+     "canon": "C"
+    },
+    {
+     "ref": "galeries désertées, marché fermé : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.05,
+   "ciel": "enfume",
+   "habitants": 0.5
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

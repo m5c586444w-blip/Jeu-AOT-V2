@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/chapelle-reiss/vue-ensemble.png",
+   "stats": {
+    "calls": 76,
+    "triangles": 33136,
+    "instances": 1412,
+    "chunks": {
+     "total": 63,
+     "visible": 63,
+     "near": 0
+    }
+   },
+   "rgb": [
+    139.93625,
+    145.92095052083334,
+    113.118359375
+   ]
+  }
+ },
+ "dE": {}
+}
