@@ -1,5 +1,10 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-16 (soir) — Refonte V4 sous Godot (D-192) — à lire en premier
+- Gabriel a décidé de **reconstruire le jeu de zéro sous Godot** (C#, RTX 3050 minimale, réaliste sombre début XXᵉ, bataille commandant + combattant avec ordres à la voix). La **tâche automatique A est en pause** ; l'ancien dépôt reste la référence.
+- Documentation complète : `docs/v4/00_INDEX.md` (9 fichiers). **À faire par Gabriel** : relire `docs/v4/01_CAHIER_DES_CHARGES.md` et `docs/v4/04_REGISTRE_DES_DECISIONS.md` (revue R-D1, 5 questions avec défauts), puis dire si le nouveau dépôt privé `Murs-et-Sang-V4` est créé.
+- Aucun code modifié ; `verify` non relancé (documents seulement, dernier verify : 1678 tests, EXIT=0).
+
 ## 2026-10-16 — Nuit de la session A (à lire en premier)
 - B n'a jamais travaillé le 15 (aucun journal B) : A a pris sa voie. Fait, commité, poussé : **C10** (outillage Blender `bpy`, `npm run assets:blender` et `assets:blender:check`, 24 modèles .glb : 5 accessoires, 7 tenues LOD0/LOD1, 5 décalques d'emblème, planche `?proto3d=tenues`) ; **C15** (mur Rose : Trost, Karanes, Utopia, Krolva, camp d'entraînement, QG de la Garnison) ; **C16** (mur Sina : Stohess, Orvud, Ehrmich, Yarckel, Mitras, ville souterraine, chapelle Reiss) ; **C17** (Jinae, Ragako, Dauper, château d'Utgard, forêt des Arbres Géants, ferme, fort du front, couverture du mur Maria) ; **C18 tranche 1** (`npm run places:couverture` : 45 provinces couvertes sur 126, Liberio fait). Revues indépendantes par tranche : ACCEPTÉ AVEC RÉSERVES, correctifs appliqués.
 - Dernier verify : 173 fichiers, **1678 tests**, EXIT=0. Décisions D-182 à D-191.
