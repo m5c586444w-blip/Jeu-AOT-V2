@@ -1426,3 +1426,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 - **Décision** : plans d'auteur `src/tools/places/auteur/{trost,karanes}.ts` (les JSON sont régénérés par `places:regenerer`) ; population lue de `scn_sandbox_845` (95 652 et 60 870), surface bâtie à −6,6 % et −4,8 % de population ÷ densité, ≥ 34 arbres/ha bâti ; noms `A` + `creation: true` (`creations.md`, Q14-Q15) ; états de porte réutilisés pour la brèche de 850 (schéma inchangé).
 - **Limites** : `places:valider` complet KO tant que les PNG de captures ne sont pas générés (`npm run places:captures -- trost karanes`, ≈ 2 h, à lancer en arrière-plan) ; ΔE entre états < 6 ; QG de la Garnison posé comme emplacement seulement.
 - **Preuve** : `tests/places/rose.test.ts` (15), verify EXIT=0 1492 tests. **Réversible** : oui.
+
+## 2026-10-16 — D-186 C15 tranche 2 : Utopia, Krolva, camp d'entraînement, QG de la Garnison
+- **Décision** : quatre plans d'auteur (kit commun `enclos.ts`), populations lues de `scn_sandbox_845` (34 783 hab. pour Utopia et Krolva ; camp 9 % de `prov_trost`… sans civils ; QG 1,2 % de `prov_trost`), surface bâtie à ±15 % de population ÷ densité, ≥ 10 arbres/ha bâti ; noms `A` + creation (`creations.md`, Q16-Q19). Le QG reprend le repère de `trost.json`.
+- **Limites** : intérieur des bâtiments et enceinte non modélisés (schéma inchangé) ; captures complètes (portes, états, places) à produire pour les six lieux de C15 (dette 110) ; revue indépendante de fin de chantier à faire.
+- **Preuve** : `tests/places/rose2.test.ts`, `places:valider -- --sans-docs` OK (10 lieux N1), verify EXIT=0 1523 tests. **Réversible** : oui.

@@ -1,0 +1,3118 @@
+{
+ "id": "camp-entrainement",
+ "nom": "Camp d'entraînement",
+ "libelle": "Camp d'entraînement du Corps d'entraînement",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §5 et docs/spec/06 S08 : Corps d'Entraînement, camp d'entraînement (recrues, rang 2), promotions annuelles [C] ; 104e promotion formée avant 850 [C]",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/01 §10 et docs/spec/11 : localisation exacte du camp d'entraînement non établie [?] ; data/scenarios/sandbox_845.json : garnison de 400 soldats du Corps d'entraînement à `prov_camp_entrainement`",
+   "canon": "?"
+  },
+  {
+   "ref": "tracé, noms de rues et de bâtiments, dimensions, quartiers : adaptation (création C15, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_camp_entrainement",
+ "style": "E24",
+ "population": {
+  "province": "prov_camp_entrainement",
+  "part": 0.09,
+  "canon": "A",
+  "note": "9 % de la population de `prov_camp_entrainement` au départ de scn_sandbox_845 (17 391 hab.) : recrues de la promotion en cours, instructeurs et personnel, dont les 400 soldats de la garnison du camp ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "village",
+  "valeur": 45,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   -465,
+   -325
+  ],
+  [
+   465,
+   -325
+  ],
+  [
+   465,
+   325
+  ],
+  [
+   -465,
+   325
+  ]
+ ],
+ "zones": [],
+ "orientation": {
+  "valeur": "aucune",
+  "canon": "?"
+ },
+ "etendue_m": 1400,
+ "enceinte": null,
+ "portes": [],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Allée des Recrues",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     -280
+    ],
+    [
+     -420,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1",
+   "nom": "Allée de la Revue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -350,
+     -280
+    ],
+    [
+     -350,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Allée des Instructeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -280,
+     -280
+    ],
+    [
+     -280,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Allée du Clairon",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -210,
+     -280
+    ],
+    [
+     -210,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Allée des Sergents",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -140,
+     -280
+    ],
+    [
+     -140,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5-0",
+   "nom": "Allée du Rassemblement",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -70,
+     -280
+    ],
+    [
+     -70,
+     -140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5-1",
+   "nom": "Allée du Rassemblement",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -70,
+     70
+    ],
+    [
+     -70,
+     140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-0",
+   "nom": "Allée de la Promotion",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     -280
+    ],
+    [
+     0,
+     -140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-1",
+   "nom": "Allée de la Promotion",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     70
+    ],
+    [
+     0,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-0",
+   "nom": "Allée du Serment",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     70,
+     -280
+    ],
+    [
+     70,
+     -140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-1",
+   "nom": "Allée du Serment",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     70,
+     70
+    ],
+    [
+     70,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Allée des Gardes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     140,
+     -280
+    ],
+    [
+     140,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9",
+   "nom": "Allée des Sentinelles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     210,
+     -140
+    ],
+    [
+     210,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-10",
+   "nom": "Allée du Manège",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     280,
+     -140
+    ],
+    [
+     280,
+     140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Allée des Chevaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     350,
+     -140
+    ],
+    [
+     350,
+     140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12",
+   "nom": "Allée de la Remise",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     420,
+     -280
+    ],
+    [
+     420,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-0",
+   "nom": "Rue du Réveil",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     -280
+    ],
+    [
+     420,
+     -280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue des Dortoirs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     -210
+    ],
+    [
+     140,
+     -210
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue du Champ",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     -140
+    ],
+    [
+     420,
+     -140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3-0",
+   "nom": "Rue de la Revue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     -70
+    ],
+    [
+     -140,
+     -70
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3-1",
+   "nom": "Rue de la Revue",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     140,
+     -70
+    ],
+    [
+     420,
+     -70
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-0",
+   "nom": "Rue de l'Exercice",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     0
+    ],
+    [
+     -140,
+     0
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-1",
+   "nom": "Rue de l'Exercice",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     140,
+     0
+    ],
+    [
+     420,
+     0
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Rue du Réfectoire",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     70
+    ],
+    [
+     420,
+     70
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue de l'Infirmerie",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     140
+    ],
+    [
+     420,
+     140
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-0",
+   "nom": "Rue de l'Entrée",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     210
+    ],
+    [
+     -140,
+     210
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7-1",
+   "nom": "Rue de l'Entrée",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     210
+    ],
+    [
+     210,
+     210
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Rue de la Garde",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     280
+    ],
+    [
+     420,
+     280
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "cour-du-refectoire",
+   "nom": "Cour du réfectoire",
+   "canon": "A",
+   "polygone": [
+    [
+     -344.3,
+     75.7
+    ],
+    [
+     -285.7,
+     75.7
+    ],
+    [
+     -285.7,
+     134.3
+    ],
+    [
+     -344.3,
+     134.3
+    ]
+   ],
+   "revetement": "gravier",
+   "fontaine": [
+    -315,
+    105
+   ],
+   "marche": false
+  },
+  {
+   "id": "champ-de-manoeuvre",
+   "nom": "Champ de manœuvre",
+   "canon": "A",
+   "polygone": [
+    [
+     -134.3,
+     -134.3
+    ],
+    [
+     134.3,
+     -134.3
+    ],
+    [
+     134.3,
+     64.3
+    ],
+    [
+     -134.3,
+     64.3
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "dortoirs": {
+   "etages": [
+    2,
+    2
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    16,
+    20,
+    14
+   ],
+   "profondeur_m": 11,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 45
+   }
+  },
+  "commandement": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#DDD6C6",
+    "#D2CBB9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 60
+   }
+  },
+  "magasins": {
+   "etages": [
+    1,
+    2,
+    1
+   ],
+   "hauteur_etage_m": 3.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    32,
+    42
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "brique",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#C9BDA3",
+    "#BFB399",
+    "#CFC3AB",
+    "#C3B79D"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16
+   ],
+   "profondeur_m": 14,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 40
+   }
+  },
+  "logements": {
+   "etages": [
+    1,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon",
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    48
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "bardeau"
+   ],
+   "facades": [
+    "enduit",
+    "colombage",
+    "brique"
+   ],
+   "teintes": [
+    "#E2D6BF",
+    "#D9CCB2",
+    "#E6DAC4",
+    "#D2C5AB"
+   ],
+   "parcelles_m": [
+    9,
+    11,
+    8
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 90
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "casernements-des-recrues",
+   "nom": "Casernements des recrues",
+   "canon": "A"
+  },
+  {
+   "id": "commandement-et-instructeurs",
+   "nom": "Commandement et logements des instructeurs",
+   "canon": "A"
+  },
+  {
+   "id": "logements-des-instructeurs",
+   "nom": "Logements des instructeurs",
+   "canon": "A"
+  },
+  {
+   "id": "ecuries-et-manege",
+   "nom": "Écuries et manège",
+   "canon": "A"
+  },
+  {
+   "id": "services-du-camp",
+   "nom": "Réfectoire, infirmerie et magasins",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -414.3,
+     -274.3
+    ],
+    [
+     -355.7,
+     -274.3
+    ],
+    [
+     -355.7,
+     -215.7
+    ],
+    [
+     -414.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -414.3,
+     -204.3
+    ],
+    [
+     -355.7,
+     -204.3
+    ],
+    [
+     -355.7,
+     -145.7
+    ],
+    [
+     -414.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -414.3,
+     -134.3
+    ],
+    [
+     -355.7,
+     -134.3
+    ],
+    [
+     -355.7,
+     -75.7
+    ],
+    [
+     -414.3,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.5,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -414.3,
+     -64.3
+    ],
+    [
+     -355.7,
+     -64.3
+    ],
+    [
+     -355.7,
+     -5.7
+    ],
+    [
+     -414.3,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -414.3,
+     5.7
+    ],
+    [
+     -355.7,
+     5.7
+    ],
+    [
+     -355.7,
+     64.3
+    ],
+    [
+     -414.3,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-0-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -414.3,
+     75.7
+    ],
+    [
+     -355.7,
+     75.7
+    ],
+    [
+     -355.7,
+     134.3
+    ],
+    [
+     -414.3,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-0-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -414.3,
+     145.7
+    ],
+    [
+     -355.7,
+     145.7
+    ],
+    [
+     -355.7,
+     204.3
+    ],
+    [
+     -414.3,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-0-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -414.3,
+     215.7
+    ],
+    [
+     -355.7,
+     215.7
+    ],
+    [
+     -355.7,
+     274.3
+    ],
+    [
+     -414.3,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -344.3,
+     -274.3
+    ],
+    [
+     -285.7,
+     -274.3
+    ],
+    [
+     -285.7,
+     -215.7
+    ],
+    [
+     -344.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -344.3,
+     -204.3
+    ],
+    [
+     -285.7,
+     -204.3
+    ],
+    [
+     -285.7,
+     -145.7
+    ],
+    [
+     -344.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -344.3,
+     -134.3
+    ],
+    [
+     -285.7,
+     -134.3
+    ],
+    [
+     -285.7,
+     -75.7
+    ],
+    [
+     -344.3,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -344.3,
+     -64.3
+    ],
+    [
+     -285.7,
+     -64.3
+    ],
+    [
+     -285.7,
+     -5.7
+    ],
+    [
+     -344.3,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -344.3,
+     5.7
+    ],
+    [
+     -285.7,
+     5.7
+    ],
+    [
+     -285.7,
+     64.3
+    ],
+    [
+     -344.3,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -344.3,
+     145.7
+    ],
+    [
+     -285.7,
+     145.7
+    ],
+    [
+     -285.7,
+     204.3
+    ],
+    [
+     -344.3,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-1-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -344.3,
+     215.7
+    ],
+    [
+     -285.7,
+     215.7
+    ],
+    [
+     -285.7,
+     274.3
+    ],
+    [
+     -344.3,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -274.3,
+     -274.3
+    ],
+    [
+     -215.7,
+     -274.3
+    ],
+    [
+     -215.7,
+     -215.7
+    ],
+    [
+     -274.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -274.3,
+     -204.3
+    ],
+    [
+     -215.7,
+     -204.3
+    ],
+    [
+     -215.7,
+     -145.7
+    ],
+    [
+     -274.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -274.3,
+     -134.3
+    ],
+    [
+     -215.7,
+     -134.3
+    ],
+    [
+     -215.7,
+     -75.7
+    ],
+    [
+     -274.3,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -274.3,
+     -64.3
+    ],
+    [
+     -215.7,
+     -64.3
+    ],
+    [
+     -215.7,
+     -5.7
+    ],
+    [
+     -274.3,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -274.3,
+     5.7
+    ],
+    [
+     -215.7,
+     5.7
+    ],
+    [
+     -215.7,
+     64.3
+    ],
+    [
+     -274.3,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -274.3,
+     75.7
+    ],
+    [
+     -215.7,
+     75.7
+    ],
+    [
+     -215.7,
+     134.3
+    ],
+    [
+     -274.3,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -274.3,
+     145.7
+    ],
+    [
+     -215.7,
+     145.7
+    ],
+    [
+     -215.7,
+     204.3
+    ],
+    [
+     -274.3,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -274.3,
+     215.7
+    ],
+    [
+     -215.7,
+     215.7
+    ],
+    [
+     -215.7,
+     274.3
+    ],
+    [
+     -274.3,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -204.3,
+     -274.3
+    ],
+    [
+     -145.7,
+     -274.3
+    ],
+    [
+     -145.7,
+     -215.7
+    ],
+    [
+     -204.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -204.3,
+     -204.3
+    ],
+    [
+     -145.7,
+     -204.3
+    ],
+    [
+     -145.7,
+     -145.7
+    ],
+    [
+     -204.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -204.3,
+     -134.3
+    ],
+    [
+     -145.7,
+     -134.3
+    ],
+    [
+     -145.7,
+     -75.7
+    ],
+    [
+     -204.3,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -204.3,
+     -64.3
+    ],
+    [
+     -145.7,
+     -64.3
+    ],
+    [
+     -145.7,
+     -5.7
+    ],
+    [
+     -204.3,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "commandement-et-instructeurs",
+   "fonction": "administration",
+   "polygone": [
+    [
+     -204.3,
+     5.7
+    ],
+    [
+     -145.7,
+     5.7
+    ],
+    [
+     -145.7,
+     64.3
+    ],
+    [
+     -204.3,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "commandement"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -204.3,
+     75.7
+    ],
+    [
+     -145.7,
+     75.7
+    ],
+    [
+     -145.7,
+     134.3
+    ],
+    [
+     -204.3,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -204.3,
+     145.7
+    ],
+    [
+     -145.7,
+     145.7
+    ],
+    [
+     -145.7,
+     204.3
+    ],
+    [
+     -204.3,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -204.3,
+     215.7
+    ],
+    [
+     -145.7,
+     215.7
+    ],
+    [
+     -145.7,
+     274.3
+    ],
+    [
+     -204.3,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -134.3,
+     -274.3
+    ],
+    [
+     -75.7,
+     -274.3
+    ],
+    [
+     -75.7,
+     -215.7
+    ],
+    [
+     -134.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -134.3,
+     -204.3
+    ],
+    [
+     -75.7,
+     -204.3
+    ],
+    [
+     -75.7,
+     -145.7
+    ],
+    [
+     -134.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -134.3,
+     75.7
+    ],
+    [
+     -75.7,
+     75.7
+    ],
+    [
+     -75.7,
+     134.3
+    ],
+    [
+     -134.3,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -64.3,
+     -274.3
+    ],
+    [
+     -5.7,
+     -274.3
+    ],
+    [
+     -5.7,
+     -215.7
+    ],
+    [
+     -64.3,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -64.3,
+     -204.3
+    ],
+    [
+     -5.7,
+     -204.3
+    ],
+    [
+     -5.7,
+     -145.7
+    ],
+    [
+     -64.3,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -64.3,
+     75.7
+    ],
+    [
+     -5.7,
+     75.7
+    ],
+    [
+     -5.7,
+     134.3
+    ],
+    [
+     -64.3,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     5.7,
+     -274.3
+    ],
+    [
+     64.3,
+     -274.3
+    ],
+    [
+     64.3,
+     -215.7
+    ],
+    [
+     5.7,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     5.7,
+     -204.3
+    ],
+    [
+     64.3,
+     -204.3
+    ],
+    [
+     64.3,
+     -145.7
+    ],
+    [
+     5.7,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     5.7,
+     75.7
+    ],
+    [
+     64.3,
+     75.7
+    ],
+    [
+     64.3,
+     134.3
+    ],
+    [
+     5.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     5.7,
+     145.7
+    ],
+    [
+     64.3,
+     145.7
+    ],
+    [
+     64.3,
+     204.3
+    ],
+    [
+     5.7,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     5.7,
+     215.7
+    ],
+    [
+     64.3,
+     215.7
+    ],
+    [
+     64.3,
+     274.3
+    ],
+    [
+     5.7,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     75.7,
+     -274.3
+    ],
+    [
+     134.3,
+     -274.3
+    ],
+    [
+     134.3,
+     -215.7
+    ],
+    [
+     75.7,
+     -215.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "casernements-des-recrues",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     75.7,
+     -204.3
+    ],
+    [
+     134.3,
+     -204.3
+    ],
+    [
+     134.3,
+     -145.7
+    ],
+    [
+     75.7,
+     -145.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "dortoirs"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     75.7,
+     75.7
+    ],
+    [
+     134.3,
+     75.7
+    ],
+    [
+     134.3,
+     134.3
+    ],
+    [
+     75.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     75.7,
+     145.7
+    ],
+    [
+     134.3,
+     145.7
+    ],
+    [
+     134.3,
+     204.3
+    ],
+    [
+     75.7,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "services-du-camp",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     75.7,
+     215.7
+    ],
+    [
+     134.3,
+     215.7
+    ],
+    [
+     134.3,
+     274.3
+    ],
+    [
+     75.7,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     -134.3
+    ],
+    [
+     204.3,
+     -134.3
+    ],
+    [
+     204.3,
+     -75.7
+    ],
+    [
+     145.7,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     -64.3
+    ],
+    [
+     204.3,
+     -64.3
+    ],
+    [
+     204.3,
+     -5.7
+    ],
+    [
+     145.7,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     5.7
+    ],
+    [
+     204.3,
+     5.7
+    ],
+    [
+     204.3,
+     64.3
+    ],
+    [
+     145.7,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     75.7
+    ],
+    [
+     204.3,
+     75.7
+    ],
+    [
+     204.3,
+     134.3
+    ],
+    [
+     145.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     145.7
+    ],
+    [
+     204.3,
+     145.7
+    ],
+    [
+     204.3,
+     204.3
+    ],
+    [
+     145.7,
+     204.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     145.7,
+     215.7
+    ],
+    [
+     204.3,
+     215.7
+    ],
+    [
+     204.3,
+     274.3
+    ],
+    [
+     145.7,
+     274.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     215.7,
+     -134.3
+    ],
+    [
+     274.3,
+     -134.3
+    ],
+    [
+     274.3,
+     -75.7
+    ],
+    [
+     215.7,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     215.7,
+     -64.3
+    ],
+    [
+     274.3,
+     -64.3
+    ],
+    [
+     274.3,
+     -5.7
+    ],
+    [
+     215.7,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     215.7,
+     5.7
+    ],
+    [
+     274.3,
+     5.7
+    ],
+    [
+     274.3,
+     64.3
+    ],
+    [
+     215.7,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     215.7,
+     75.7
+    ],
+    [
+     274.3,
+     75.7
+    ],
+    [
+     274.3,
+     134.3
+    ],
+    [
+     215.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     285.7,
+     -134.3
+    ],
+    [
+     344.3,
+     -134.3
+    ],
+    [
+     344.3,
+     -75.7
+    ],
+    [
+     285.7,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     285.7,
+     -64.3
+    ],
+    [
+     344.3,
+     -64.3
+    ],
+    [
+     344.3,
+     -5.7
+    ],
+    [
+     285.7,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     285.7,
+     5.7
+    ],
+    [
+     344.3,
+     5.7
+    ],
+    [
+     344.3,
+     64.3
+    ],
+    [
+     285.7,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     285.7,
+     75.7
+    ],
+    [
+     344.3,
+     75.7
+    ],
+    [
+     344.3,
+     134.3
+    ],
+    [
+     285.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     355.7,
+     -134.3
+    ],
+    [
+     414.3,
+     -134.3
+    ],
+    [
+     414.3,
+     -75.7
+    ],
+    [
+     355.7,
+     -75.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     355.7,
+     -64.3
+    ],
+    [
+     414.3,
+     -64.3
+    ],
+    [
+     414.3,
+     -5.7
+    ],
+    [
+     355.7,
+     -5.7
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     355.7,
+     5.7
+    ],
+    [
+     414.3,
+     5.7
+    ],
+    [
+     414.3,
+     64.3
+    ],
+    [
+     355.7,
+     64.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "ecuries-et-manege",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     355.7,
+     75.7
+    ],
+    [
+     414.3,
+     75.7
+    ],
+    [
+     414.3,
+     134.3
+    ],
+    [
+     355.7,
+     134.3
+    ]
+   ],
+   "densite_bati": 0.8,
+   "gabarit": "magasins"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "dortoir-1",
+   "nom": "Dortoir 1 des recrues",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -315,
+    -245
+   ],
+   "emprise_m": [
+    56,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 36
+   }
+  },
+  {
+   "id": "dortoir-2",
+   "nom": "Dortoir 2 des recrues",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -175,
+    -245
+   ],
+   "emprise_m": [
+    56,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 36
+   }
+  },
+  {
+   "id": "dortoir-3",
+   "nom": "Dortoir 3 des recrues",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -35,
+    -245
+   ],
+   "emprise_m": [
+    56,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 36
+   }
+  },
+  {
+   "id": "dortoir-4",
+   "nom": "Dortoir 4 des recrues",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    105,
+    -245
+   ],
+   "emprise_m": [
+    56,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "cour": false,
+    "pente": 36
+   }
+  },
+  {
+   "id": "etat-major-du-camp",
+   "nom": "Commandement du camp",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -245,
+    -35
+   ],
+   "emprise_m": [
+    32,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E0D9C8",
+   "reperes_canon": [
+    "Corps d'entraînement : camp existant [C] (atlas 06 S08) ; le bâtiment du commandement est une adaptation"
+   ],
+   "params": {
+    "pente": 44
+   }
+  },
+  {
+   "id": "chapelle-du-camp",
+   "nom": "Chapelle du camp",
+   "canon": "A",
+   "archetype": "chapelle",
+   "position": [
+    -385,
+    -105
+   ],
+   "emprise_m": [
+    12,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#DDD6C6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "refectoire",
+   "nom": "Réfectoire et cuisines",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -245,
+    175
+   ],
+   "emprise_m": [
+    54,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "brique",
+   "teinte": "#C9B79A",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 8,
+    "pente": 38
+   }
+  },
+  {
+   "id": "infirmerie",
+   "nom": "Infirmerie du camp",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -175,
+    175
+   ],
+   "emprise_m": [
+    36,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "enduit",
+   "teinte": "#EDE6D6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "magasin-des-equipements",
+   "nom": "Magasin des équipements de manœuvre",
+   "canon": "A",
+   "archetype": "arsenal",
+   "position": [
+    35,
+    175
+   ],
+   "emprise_m": [
+    46,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BFB6A4",
+   "reperes_canon": [
+    "équipement de manœuvre tridimensionnelle [C] (fichier 01) : le magasin est une adaptation"
+   ],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "manege",
+   "nom": "Manège couvert",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    315,
+    -35
+   ],
+   "emprise_m": [
+    60,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BCA682",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "ecuries-du-camp",
+   "nom": "Écuries du camp",
+   "canon": "A",
+   "archetype": "ecurie",
+   "position": [
+    315,
+    105
+   ],
+   "emprise_m": [
+    56,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 8,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#B9A37F",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "tour-d-exercice",
+   "nom": "Tour d'exercice",
+   "canon": "A",
+   "archetype": "tour",
+   "position": [
+    180,
+    -100
+   ],
+   "emprise_m": [
+    9,
+    9
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 22,
+   "etages": 5,
+   "toit": "pavillon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#CDC6B6",
+   "reperes_canon": []
+  },
+  {
+   "id": "corps-de-garde-de-l-entree",
+   "nom": "Corps de garde de l'entrée",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -60,
+    246
+   ],
+   "emprise_m": [
+    24,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [],
+  "isoles": [
+   {
+    "position": [
+     -150,
+     60
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne du serment"
+   },
+   {
+    "position": [
+     0,
+     215
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 20,
+    "nom": "Tilleul de l'entrée"
+   }
+  ],
+  "parcs": [
+   {
+    "id": "jardin-du-camp",
+    "nom": "Jardin du camp",
+    "canon": "A",
+    "polygone": [
+     [
+      -134.3,
+      145.7
+     ],
+     [
+      -5.7,
+      145.7
+     ],
+     [
+      -5.7,
+      274.3
+     ],
+     [
+      -134.3,
+      274.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 60
+   },
+   {
+    "id": "bois-d-entrainement",
+    "nom": "Bois d'entraînement",
+    "canon": "A",
+    "polygone": [
+     [
+      145.7,
+      -274.3
+     ],
+     [
+      414.3,
+      -274.3
+     ],
+     [
+      414.3,
+      -145.7
+     ],
+     [
+      145.7,
+      -145.7
+     ]
+    ],
+    "essences": [
+     "pin",
+     "chene",
+     "bouleau"
+    ],
+    "arbres_par_ha": 95
+   },
+   {
+    "id": "pre-des-chevaux",
+    "nom": "Pré des chevaux",
+    "canon": "A",
+    "polygone": [
+     [
+      215.7,
+      145.7
+     ],
+     [
+      414.3,
+      145.7
+     ],
+     [
+      414.3,
+      274.3
+     ],
+     [
+      215.7,
+      274.3
+     ]
+    ],
+    "essences": [
+     "chene",
+     "peuplier",
+     "saule"
+    ],
+    "arbres_par_ha": 40
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -470,
+      300
+     ],
+     [
+      -300,
+      300
+     ],
+     [
+      -300,
+      380
+     ],
+     [
+      -470,
+      380
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -470,
+      390
+     ],
+     [
+      470,
+      390
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      -300,
+      300
+     ],
+     [
+      -150,
+      300
+     ],
+     [
+      -150,
+      380
+     ],
+     [
+      -300,
+      380
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -250,
+    120
+   ],
+   [
+    250,
+    80
+   ],
+   [
+    -60,
+    -230
+   ]
+  ],
+  "fontaines": [
+   [
+    -315,
+    245
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -756,
+    924,
+    462
+   ],
+   "cible": [
+    0,
+    0,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Rue principale",
+   "oeil": [
+    0,
+    240,
+    1.8
+   ],
+   "cible": [
+    0,
+    -112,
+    9
+   ],
+   "fov": 58
+  },
+  {
+   "id": "champ-de-manoeuvre",
+   "nom": "Champ de manœuvre et dortoirs",
+   "oeil": [
+    0,
+    190,
+    3
+   ],
+   "cible": [
+    0,
+    -190,
+    8
+   ],
+   "fov": 62
+  },
+  {
+   "id": "dortoirs",
+   "nom": "Dortoirs des recrues",
+   "oeil": [
+    -250,
+    -150,
+    2.5
+   ],
+   "cible": [
+    -100,
+    -245,
+    6
+   ],
+   "fov": 60
+  },
+  {
+   "id": "ecuries-et-manege",
+   "nom": "Manège et écuries",
+   "oeil": [
+    290,
+    130,
+    4
+   ],
+   "cible": [
+    330,
+    20,
+    6
+   ],
+   "fov": 60
+  },
+  {
+   "id": "entree-du-camp",
+   "nom": "Entrée du camp et réfectoire",
+   "oeil": [
+    0,
+    340,
+    3
+   ],
+   "cible": [
+    -100,
+    200,
+    7
+   ],
+   "fov": 60
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-ordinaire",
+   "nom": "845, le camp en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du camp ; garnison de 400 soldats du Corps d'entraînement (data/scenarios/sandbox_845.json)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-apres-la-promotion",
+   "nom": "850, après le départ de la 104e promotion",
+   "date": "850",
+   "canon": "?",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) : la promotion quitte le camp avant la bataille de Trost [C] ; effectifs restants et état du camp : non établis [?]",
+     "canon": "?"
+    },
+    {
+     "ref": "effectifs réduits, brume : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0.1,
+   "ciel": "brumeux",
+   "habitants": 0.45
+  }
+ ],
+ "etat_defaut": "845-ordinaire"
+}

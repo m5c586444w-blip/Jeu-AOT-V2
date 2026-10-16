@@ -1,0 +1,6488 @@
+{
+ "id": "krolva",
+ "nom": "Krolva",
+ "libelle": "Krolva",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Krolva (ouest), district du mur Rose ; docs/spec/06 S04 : district ouest, ressource clé « artisanat » (rang 3)",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/20 (LC-B) : districts du mur Rose [C], détails [A] ; la base des expéditions est Karanes (atlas 06 S02), pas Krolva",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé de la saillie, noms de rues, de places et de bâtiments, dimensions, quartiers : adaptation (création C15, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_krolva",
+ "style": "E04",
+ "population": {
+  "province": "prov_krolva",
+  "part": 0.9,
+  "canon": "C",
+  "note": "90 % de la population de `prov_krolva` au départ de scn_sandbox_845 (34 783 hab.) logés intra-muros ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 240,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   982.5,
+   7.5
+  ],
+  [
+   981.2,
+   51.4
+  ],
+  [
+   977.1,
+   102.7
+  ],
+  [
+   970.4,
+   153.7
+  ],
+  [
+   961,
+   204.3
+  ],
+  [
+   949,
+   254.3
+  ],
+  [
+   934.4,
+   303.6
+  ],
+  [
+   917.2,
+   352.1
+  ],
+  [
+   897.6,
+   399.6
+  ],
+  [
+   875.4,
+   446
+  ],
+  [
+   850.9,
+   491.2
+  ],
+  [
+   824,
+   535.1
+  ],
+  [
+   794.9,
+   577.5
+  ],
+  [
+   763.5,
+   618.3
+  ],
+  [
+   730.1,
+   657.4
+  ],
+  [
+   694.7,
+   694.7
+  ],
+  [
+   657.4,
+   730.1
+  ],
+  [
+   618.3,
+   763.5
+  ],
+  [
+   577.5,
+   794.9
+  ],
+  [
+   535.1,
+   824
+  ],
+  [
+   491.3,
+   850.9
+  ],
+  [
+   446,
+   875.4
+  ],
+  [
+   399.6,
+   897.6
+  ],
+  [
+   352.1,
+   917.2
+  ],
+  [
+   303.6,
+   934.4
+  ],
+  [
+   254.3,
+   949
+  ],
+  [
+   204.3,
+   961
+  ],
+  [
+   153.7,
+   970.4
+  ],
+  [
+   102.7,
+   977.1
+  ],
+  [
+   51.4,
+   981.2
+  ],
+  [
+   0,
+   982.5
+  ],
+  [
+   -51.4,
+   981.2
+  ],
+  [
+   -102.7,
+   977.1
+  ],
+  [
+   -153.7,
+   970.4
+  ],
+  [
+   -204.3,
+   961
+  ],
+  [
+   -254.3,
+   949
+  ],
+  [
+   -303.6,
+   934.4
+  ],
+  [
+   -352.1,
+   917.2
+  ],
+  [
+   -399.6,
+   897.6
+  ],
+  [
+   -446,
+   875.4
+  ],
+  [
+   -491.2,
+   850.9
+  ],
+  [
+   -535.1,
+   824
+  ],
+  [
+   -577.5,
+   794.9
+  ],
+  [
+   -618.3,
+   763.5
+  ],
+  [
+   -657.4,
+   730.1
+  ],
+  [
+   -694.7,
+   694.7
+  ],
+  [
+   -730.1,
+   657.4
+  ],
+  [
+   -763.5,
+   618.3
+  ],
+  [
+   -794.9,
+   577.5
+  ],
+  [
+   -824,
+   535.1
+  ],
+  [
+   -850.9,
+   491.2
+  ],
+  [
+   -875.4,
+   446
+  ],
+  [
+   -897.6,
+   399.6
+  ],
+  [
+   -917.2,
+   352.1
+  ],
+  [
+   -934.4,
+   303.6
+  ],
+  [
+   -949,
+   254.3
+  ],
+  [
+   -961,
+   204.3
+  ],
+  [
+   -970.4,
+   153.7
+  ],
+  [
+   -977.1,
+   102.7
+  ],
+  [
+   -981.2,
+   51.4
+  ],
+  [
+   -982.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A",
+   "polygone": [
+    [
+     -505,
+     -24
+    ],
+    [
+     505,
+     -24
+    ],
+    [
+     505,
+     -520
+    ],
+    [
+     -505,
+     -520
+    ]
+   ],
+   "population": {
+    "province": "prov_krolva",
+    "part": 0.1,
+    "canon": "A",
+    "note": "10 % de la population de `prov_krolva` au départ de scn_sandbox_845 logés au pied de la porte intérieure, côté intérieur des terres (adaptation)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 80,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "ouest",
+  "canon": "C"
+ },
+ "etendue_m": 2780,
+ "enceinte": {
+  "mur": "rose",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 990,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -990,
+      0
+     ],
+     [
+      990,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1390,
+      0
+     ],
+     [
+      -990,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      990,
+      0
+     ],
+     [
+      1390,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 311,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 933.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1461.8,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1648.4,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2177.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2799.2,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 930,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1050,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 30,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte de Krolva (porte ouest)",
+   "role": "exterieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3.1 : saillie à deux portes pour les districts [C] ; nom de la porte et dimensions : aucune source (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 1555.1,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure de Krolva",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 990,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-1",
+   "nom": "Rue des Taillandiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -880,
+     25
+    ],
+    [
+     -880,
+     396
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue des Cloutiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -770,
+     25
+    ],
+    [
+     -770,
+     581.7
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3-0",
+   "nom": "Rue des Serruriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -660,
+     25
+    ],
+    [
+     -660,
+     465
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3-1",
+   "nom": "Rue des Serruriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -660,
+     575
+    ],
+    [
+     -660,
+     704
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Ruelle des Forges",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -550,
+     25
+    ],
+    [
+     -550,
+     792.9
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Couteliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -440,
+     25
+    ],
+    [
+     -440,
+     858.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Fondeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -330,
+     25
+    ],
+    [
+     -330,
+     905
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Chaudronniers du Roi",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -220,
+     25
+    ],
+    [
+     -220,
+     795
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Rue des Ferblantiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -110,
+     25
+    ],
+    [
+     -110,
+     905
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-10",
+   "nom": "Rue des Tanneurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     110,
+     25
+    ],
+    [
+     110,
+     905
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Rue des Corroyeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     220,
+     25
+    ],
+    [
+     220,
+     905
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12",
+   "nom": "Rue des Mégissiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     330,
+     25
+    ],
+    [
+     330,
+     905
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13",
+   "nom": "Rue des Cordonniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     440,
+     25
+    ],
+    [
+     440,
+     858.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14",
+   "nom": "Ruelle du Cuir",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     550,
+     25
+    ],
+    [
+     550,
+     685
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-15-0",
+   "nom": "Rue des Gantiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     660,
+     25
+    ],
+    [
+     660,
+     245
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15-1",
+   "nom": "Rue des Gantiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     660,
+     355
+    ],
+    [
+     660,
+     704
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16",
+   "nom": "Rue des Verriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     770,
+     25
+    ],
+    [
+     770,
+     581.7
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Rue des Vitriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     880,
+     25
+    ],
+    [
+     880,
+     396
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue des Corporations",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -955.5,
+     135
+    ],
+    [
+     955.5,
+     135
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Maîtrises",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -933.4,
+     245
+    ],
+    [
+     933.4,
+     245
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue des Apprentis",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -897.3,
+     355
+    ],
+    [
+     897.3,
+     355
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-0",
+   "nom": "Rue des Compagnons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -845.6,
+     465
+    ],
+    [
+     -110,
+     465
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4-1",
+   "nom": "Rue des Compagnons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     110,
+     465
+    ],
+    [
+     845.6,
+     465
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Rue des Jurés",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -770,
+     575
+    ],
+    [
+     770,
+     575
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Chefs-d'œuvre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -679.7,
+     685
+    ],
+    [
+     679.7,
+     685
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue des Enclumes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -547,
+     795
+    ],
+    [
+     547,
+     795
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Rue des Soufflets",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -330,
+     905
+    ],
+    [
+     330,
+     905
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Grande Rue des Corporations",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     982
+    ]
+   ],
+   "largeur_m": 18,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     964.7,
+     25
+    ],
+    [
+     962.1,
+     74.6
+    ],
+    [
+     957,
+     124
+    ],
+    [
+     949.3,
+     173.1
+    ],
+    [
+     939.2,
+     221.8
+    ],
+    [
+     926.5,
+     269.8
+    ],
+    [
+     911.4,
+     317.2
+    ],
+    [
+     893.9,
+     363.7
+    ],
+    [
+     874,
+     409.2
+    ],
+    [
+     851.7,
+     453.6
+    ],
+    [
+     827.3,
+     496.9
+    ],
+    [
+     800.6,
+     538.8
+    ],
+    [
+     771.8,
+     579.3
+    ],
+    [
+     740.9,
+     618.2
+    ],
+    [
+     708.1,
+     655.6
+    ],
+    [
+     673.5,
+     691.1
+    ],
+    [
+     637,
+     724.9
+    ],
+    [
+     598.8,
+     756.7
+    ],
+    [
+     559.1,
+     786.5
+    ],
+    [
+     517.9,
+     814.3
+    ],
+    [
+     475.3,
+     839.9
+    ],
+    [
+     431.4,
+     863.2
+    ],
+    [
+     386.4,
+     884.3
+    ],
+    [
+     340.4,
+     903
+    ],
+    [
+     293.4,
+     919.3
+    ],
+    [
+     245.7,
+     933.2
+    ],
+    [
+     197.4,
+     944.6
+    ],
+    [
+     148.5,
+     953.5
+    ],
+    [
+     99.2,
+     959.9
+    ],
+    [
+     49.7,
+     963.7
+    ],
+    [
+     0,
+     965
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     965
+    ],
+    [
+     -49.7,
+     963.7
+    ],
+    [
+     -99.2,
+     959.9
+    ],
+    [
+     -148.5,
+     953.5
+    ],
+    [
+     -197.4,
+     944.6
+    ],
+    [
+     -245.7,
+     933.2
+    ],
+    [
+     -293.4,
+     919.3
+    ],
+    [
+     -340.4,
+     903
+    ],
+    [
+     -386.4,
+     884.3
+    ],
+    [
+     -431.4,
+     863.2
+    ],
+    [
+     -475.3,
+     839.9
+    ],
+    [
+     -517.9,
+     814.3
+    ],
+    [
+     -559.1,
+     786.5
+    ],
+    [
+     -598.8,
+     756.7
+    ],
+    [
+     -637,
+     724.9
+    ],
+    [
+     -673.5,
+     691.1
+    ],
+    [
+     -708.1,
+     655.6
+    ],
+    [
+     -740.9,
+     618.2
+    ],
+    [
+     -771.8,
+     579.3
+    ],
+    [
+     -800.6,
+     538.8
+    ],
+    [
+     -827.3,
+     496.9
+    ],
+    [
+     -851.7,
+     453.6
+    ],
+    [
+     -874,
+     409.2
+    ],
+    [
+     -893.9,
+     363.7
+    ],
+    [
+     -911.4,
+     317.2
+    ],
+    [
+     -926.5,
+     269.8
+    ],
+    [
+     -939.2,
+     221.8
+    ],
+    [
+     -949.3,
+     173.1
+    ],
+    [
+     -957,
+     124
+    ],
+    [
+     -962.1,
+     74.6
+    ],
+    [
+     -964.7,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -965,
+     25
+    ],
+    [
+     965,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1710
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -30
+    ],
+    [
+     -495,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin des Carrières",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -330,
+     -30
+    ],
+    [
+     -330,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -165,
+     -30
+    ],
+    [
+     -165,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x4",
+   "nom": "Chemin du Gué",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     165,
+     -30
+    ],
+    [
+     165,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin des Vergers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     330,
+     -30
+    ],
+    [
+     330,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     495,
+     -30
+    ],
+    [
+     495,
+     -510
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin des Saules",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -30
+    ],
+    [
+     495,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin des Ormes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -150
+    ],
+    [
+     495,
+     -150
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -270
+    ],
+    [
+     495,
+     -270
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin des Champs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -390
+    ],
+    [
+     495,
+     -390
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y4",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -495,
+     -510
+    ],
+    [
+     495,
+     -510
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1000
+    ],
+    [
+     0,
+     1410
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place des Cloutiers",
+   "canon": "A",
+   "polygone": [
+    [
+     -874.3,
+     360.7
+    ],
+    [
+     -775.7,
+     360.7
+    ],
+    [
+     -775.7,
+     459.3
+    ],
+    [
+     -841.4,
+     459.3
+    ],
+    [
+     -845.6,
+     452
+    ],
+    [
+     -873.3,
+     395.7
+    ],
+    [
+     -874.3,
+     393.4
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette du Charbon",
+   "canon": "A",
+   "polygone": [
+    [
+     885.7,
+     252.2
+    ],
+    [
+     924.5,
+     252.2
+    ],
+    [
+     917.5,
+     278.3
+    ],
+    [
+     897.3,
+     337.7
+    ],
+    [
+     892.6,
+     349.3
+    ],
+    [
+     885.7,
+     349.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    899.4,
+    289.9
+   ],
+   "marche": false
+  },
+  {
+   "id": "parvis-de-l-eglise",
+   "nom": "Parvis de l'église",
+   "canon": "A",
+   "polygone": [
+    [
+     -434.3,
+     252.2
+    ],
+    [
+     -337.2,
+     252.2
+    ],
+    [
+     -337.2,
+     349.3
+    ],
+    [
+     -434.3,
+     349.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-des-corporations",
+   "nom": "Place des Corporations",
+   "canon": "A",
+   "polygone": [
+    [
+     -104.3,
+     360.7
+    ],
+    [
+     104.3,
+     360.7
+    ],
+    [
+     104.3,
+     567.8
+    ],
+    [
+     -104.3,
+     567.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    0,
+    464.2
+   ],
+   "marche": true
+  },
+  {
+   "id": "place-des-forges",
+   "nom": "Place des Forges",
+   "canon": "A",
+   "polygone": [
+    [
+     445.7,
+     690.7
+    ],
+    [
+     654.3,
+     690.7
+    ],
+    [
+     654.3,
+     700.8
+    ],
+    [
+     608.3,
+     741.2
+    ],
+    [
+     558.5,
+     779.4
+    ],
+    [
+     543.6,
+     789.3
+    ],
+    [
+     445.7,
+     789.3
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "ateliers": {
+   "etages": [
+    2,
+    3,
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.5,
+   "toits": [
+    "pignon",
+    "croupe",
+    "appentis",
+    "pignon_rue"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_canal",
+    "tuile_plate"
+   ],
+   "facades": [
+    "brique",
+    "pierre_brute",
+    "enduit",
+    "bois"
+   ],
+   "teintes": [
+    "#D3C5AA",
+    "#C9BBA0",
+    "#D9CCB2",
+    "#C4B698",
+    "#CFC0A4"
+   ],
+   "parcelles_m": [
+    10,
+    14,
+    9,
+    12
+   ],
+   "profondeur_m": 15,
+   "boutiques": true,
+   "passage_m": 40,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 55
+   }
+  },
+  "corporations": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "mansarde"
+   ],
+   "pente_deg": [
+    44,
+    56
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "colombage",
+    "enduit",
+    "brique"
+   ],
+   "teintes": [
+    "#E8DAC0",
+    "#E0CCA8",
+    "#ECD8C2",
+    "#DCD6C2",
+    "#E4D6BA",
+    "#D8C4A0"
+   ],
+   "parcelles_m": [
+    8,
+    10,
+    7,
+    9
+   ],
+   "profondeur_m": 14,
+   "boutiques": true,
+   "passage_m": 38,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 75
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieux-krolva",
+   "nom": "Vieux Krolva",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-corporations",
+   "nom": "Quartier des Corporations",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-forges",
+   "nom": "Quartier des Forges",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-tanneurs-et-des-verriers",
+   "nom": "Quartier des Tanneurs et des Verriers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-porte-ouest",
+   "nom": "Quartier de la Porte Ouest",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-compagnons",
+   "nom": "Quartier des Compagnons",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-de-la-porte-interieure",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -958.3,
+     31.2
+    ],
+    [
+     -885.7,
+     31.2
+    ],
+    [
+     -885.7,
+     129.3
+    ],
+    [
+     -949.5,
+     129.3
+    ],
+    [
+     -954.2,
+     94
+    ],
+    [
+     -958.3,
+     31.4
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -948,
+     140.7
+    ],
+    [
+     -885.7,
+     140.7
+    ],
+    [
+     -885.7,
+     237.8
+    ],
+    [
+     -928.4,
+     237.8
+    ],
+    [
+     -933.8,
+     217.7
+    ],
+    [
+     -946,
+     156.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -924.5,
+     252.2
+    ],
+    [
+     -885.7,
+     252.2
+    ],
+    [
+     -885.7,
+     349.3
+    ],
+    [
+     -892.6,
+     349.3
+    ],
+    [
+     -897.3,
+     337.7
+    ],
+    [
+     -917.5,
+     278.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.3,
+     31.2
+    ],
+    [
+     -775.7,
+     31.2
+    ],
+    [
+     -775.7,
+     129.3
+    ],
+    [
+     -874.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -874.3,
+     140.7
+    ],
+    [
+     -775.7,
+     140.7
+    ],
+    [
+     -775.7,
+     237.8
+    ],
+    [
+     -874.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -874.3,
+     252.2
+    ],
+    [
+     -775.7,
+     252.2
+    ],
+    [
+     -775.7,
+     349.3
+    ],
+    [
+     -874.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -834.8,
+     470.7
+    ],
+    [
+     -775.7,
+     470.7
+    ],
+    [
+     -775.7,
+     563.2
+    ],
+    [
+     -779.4,
+     558.5
+    ],
+    [
+     -814.2,
+     506.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -764.3,
+     31.2
+    ],
+    [
+     -665.7,
+     31.2
+    ],
+    [
+     -665.7,
+     129.3
+    ],
+    [
+     -764.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -764.3,
+     140.7
+    ],
+    [
+     -665.7,
+     140.7
+    ],
+    [
+     -665.7,
+     237.8
+    ],
+    [
+     -764.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -764.3,
+     252.2
+    ],
+    [
+     -665.7,
+     252.2
+    ],
+    [
+     -665.7,
+     349.3
+    ],
+    [
+     -764.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -764.3,
+     360.7
+    ],
+    [
+     -665.7,
+     360.7
+    ],
+    [
+     -665.7,
+     459.3
+    ],
+    [
+     -764.3,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -761.2,
+     582.2
+    ],
+    [
+     -665.7,
+     582.2
+    ],
+    [
+     -665.7,
+     679.3
+    ],
+    [
+     -675.9,
+     679.3
+    ],
+    [
+     -699.8,
+     655.4
+    ],
+    [
+     -741.2,
+     608.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -654.3,
+     31.2
+    ],
+    [
+     -553.7,
+     31.2
+    ],
+    [
+     -553.7,
+     129.3
+    ],
+    [
+     -654.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -654.3,
+     140.7
+    ],
+    [
+     -553.7,
+     140.7
+    ],
+    [
+     -553.7,
+     237.8
+    ],
+    [
+     -654.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -654.3,
+     252.2
+    ],
+    [
+     -553.7,
+     252.2
+    ],
+    [
+     -553.7,
+     349.3
+    ],
+    [
+     -654.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -654.3,
+     360.7
+    ],
+    [
+     -553.7,
+     360.7
+    ],
+    [
+     -553.7,
+     459.3
+    ],
+    [
+     -654.3,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -654.3,
+     582.2
+    ],
+    [
+     -553.7,
+     582.2
+    ],
+    [
+     -553.7,
+     679.3
+    ],
+    [
+     -654.3,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -654.3,
+     690.7
+    ],
+    [
+     -553.7,
+     690.7
+    ],
+    [
+     -553.7,
+     782.6
+    ],
+    [
+     -558.5,
+     779.4
+    ],
+    [
+     -608.3,
+     741.2
+    ],
+    [
+     -654.3,
+     700.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -546.3,
+     31.2
+    ],
+    [
+     -445.7,
+     31.2
+    ],
+    [
+     -445.7,
+     129.3
+    ],
+    [
+     -546.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -546.3,
+     140.7
+    ],
+    [
+     -445.7,
+     140.7
+    ],
+    [
+     -445.7,
+     237.8
+    ],
+    [
+     -546.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "vieux-krolva",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -546.3,
+     252.2
+    ],
+    [
+     -445.7,
+     252.2
+    ],
+    [
+     -445.7,
+     349.3
+    ],
+    [
+     -546.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -546.3,
+     360.7
+    ],
+    [
+     -445.7,
+     360.7
+    ],
+    [
+     -445.7,
+     459.3
+    ],
+    [
+     -546.3,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -546.3,
+     470.7
+    ],
+    [
+     -445.7,
+     470.7
+    ],
+    [
+     -445.7,
+     567.8
+    ],
+    [
+     -546.3,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -546.3,
+     582.2
+    ],
+    [
+     -445.7,
+     582.2
+    ],
+    [
+     -445.7,
+     679.3
+    ],
+    [
+     -546.3,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -546.3,
+     690.7
+    ],
+    [
+     -445.7,
+     690.7
+    ],
+    [
+     -445.7,
+     789.3
+    ],
+    [
+     -543.6,
+     789.3
+    ],
+    [
+     -546.3,
+     787.5
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -526.5,
+     800.7
+    ],
+    [
+     -445.7,
+     800.7
+    ],
+    [
+     -445.7,
+     848.7
+    ],
+    [
+     -452,
+     845.6
+    ],
+    [
+     -506.3,
+     814.2
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -434.3,
+     31.2
+    ],
+    [
+     -337.2,
+     31.2
+    ],
+    [
+     -337.2,
+     129.3
+    ],
+    [
+     -434.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -434.3,
+     140.7
+    ],
+    [
+     -337.2,
+     140.7
+    ],
+    [
+     -337.2,
+     237.8
+    ],
+    [
+     -434.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -434.3,
+     360.7
+    ],
+    [
+     -337.2,
+     360.7
+    ],
+    [
+     -337.2,
+     459.3
+    ],
+    [
+     -434.3,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -434.3,
+     470.7
+    ],
+    [
+     -337.2,
+     470.7
+    ],
+    [
+     -337.2,
+     567.8
+    ],
+    [
+     -434.3,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -434.3,
+     582.2
+    ],
+    [
+     -337.2,
+     582.2
+    ],
+    [
+     -337.2,
+     679.3
+    ],
+    [
+     -434.3,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-tanneurs-et-des-verriers",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     -434.3,
+     690.7
+    ],
+    [
+     -337.2,
+     690.7
+    ],
+    [
+     -337.2,
+     789.3
+    ],
+    [
+     -434.3,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -434.3,
+     800.7
+    ],
+    [
+     -337.2,
+     800.7
+    ],
+    [
+     -337.2,
+     897.5
+    ],
+    [
+     -337.7,
+     897.3
+    ],
+    [
+     -395.7,
+     873.3
+    ],
+    [
+     -434.3,
+     854.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -322.8,
+     31.2
+    ],
+    [
+     -225.7,
+     31.2
+    ],
+    [
+     -225.7,
+     129.3
+    ],
+    [
+     -322.8,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -322.8,
+     140.7
+    ],
+    [
+     -225.7,
+     140.7
+    ],
+    [
+     -225.7,
+     237.8
+    ],
+    [
+     -322.8,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -322.8,
+     252.2
+    ],
+    [
+     -225.7,
+     252.2
+    ],
+    [
+     -225.7,
+     349.3
+    ],
+    [
+     -322.8,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -322.8,
+     360.7
+    ],
+    [
+     -225.7,
+     360.7
+    ],
+    [
+     -225.7,
+     459.3
+    ],
+    [
+     -322.8,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -322.8,
+     470.7
+    ],
+    [
+     -225.7,
+     470.7
+    ],
+    [
+     -225.7,
+     567.8
+    ],
+    [
+     -322.8,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -322.8,
+     582.2
+    ],
+    [
+     -225.7,
+     582.2
+    ],
+    [
+     -225.7,
+     679.3
+    ],
+    [
+     -322.8,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -322.8,
+     690.7
+    ],
+    [
+     -225.7,
+     690.7
+    ],
+    [
+     -225.7,
+     789.3
+    ],
+    [
+     -322.8,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -214.3,
+     31.2
+    ],
+    [
+     -115.7,
+     31.2
+    ],
+    [
+     -115.7,
+     129.3
+    ],
+    [
+     -214.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -214.3,
+     140.7
+    ],
+    [
+     -115.7,
+     140.7
+    ],
+    [
+     -115.7,
+     237.8
+    ],
+    [
+     -214.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -214.3,
+     252.2
+    ],
+    [
+     -115.7,
+     252.2
+    ],
+    [
+     -115.7,
+     349.3
+    ],
+    [
+     -214.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-7-3",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -214.3,
+     360.7
+    ],
+    [
+     -115.7,
+     360.7
+    ],
+    [
+     -115.7,
+     459.3
+    ],
+    [
+     -214.3,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -214.3,
+     470.7
+    ],
+    [
+     -115.7,
+     470.7
+    ],
+    [
+     -115.7,
+     567.8
+    ],
+    [
+     -214.3,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -214.3,
+     582.2
+    ],
+    [
+     -115.7,
+     582.2
+    ],
+    [
+     -115.7,
+     679.3
+    ],
+    [
+     -214.3,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -214.3,
+     690.7
+    ],
+    [
+     -115.7,
+     690.7
+    ],
+    [
+     -115.7,
+     789.3
+    ],
+    [
+     -214.3,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -104.3,
+     31.2
+    ],
+    [
+     -10.2,
+     31.2
+    ],
+    [
+     -10.2,
+     129.3
+    ],
+    [
+     -104.3,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -104.3,
+     140.7
+    ],
+    [
+     -10.2,
+     140.7
+    ],
+    [
+     -10.2,
+     237.8
+    ],
+    [
+     -104.3,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -104.3,
+     252.2
+    ],
+    [
+     -10.2,
+     252.2
+    ],
+    [
+     -10.2,
+     349.3
+    ],
+    [
+     -104.3,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-8-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -104.3,
+     582.2
+    ],
+    [
+     -10.2,
+     582.2
+    ],
+    [
+     -10.2,
+     679.3
+    ],
+    [
+     -104.3,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -104.3,
+     690.7
+    ],
+    [
+     -10.2,
+     690.7
+    ],
+    [
+     -10.2,
+     789.3
+    ],
+    [
+     -104.3,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -104.3,
+     800.7
+    ],
+    [
+     -10.2,
+     800.7
+    ],
+    [
+     -10.2,
+     899.3
+    ],
+    [
+     -104.3,
+     899.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     31.2
+    ],
+    [
+     104.3,
+     31.2
+    ],
+    [
+     104.3,
+     129.3
+    ],
+    [
+     10.2,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     140.7
+    ],
+    [
+     104.3,
+     140.7
+    ],
+    [
+     104.3,
+     237.8
+    ],
+    [
+     10.2,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     252.2
+    ],
+    [
+     104.3,
+     252.2
+    ],
+    [
+     104.3,
+     349.3
+    ],
+    [
+     10.2,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-9-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     582.2
+    ],
+    [
+     104.3,
+     582.2
+    ],
+    [
+     104.3,
+     679.3
+    ],
+    [
+     10.2,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     690.7
+    ],
+    [
+     104.3,
+     690.7
+    ],
+    [
+     104.3,
+     789.3
+    ],
+    [
+     10.2,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     10.2,
+     800.7
+    ],
+    [
+     104.3,
+     800.7
+    ],
+    [
+     104.3,
+     899.3
+    ],
+    [
+     10.2,
+     899.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     115.7,
+     31.2
+    ],
+    [
+     214.3,
+     31.2
+    ],
+    [
+     214.3,
+     129.3
+    ],
+    [
+     115.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     115.7,
+     140.7
+    ],
+    [
+     214.3,
+     140.7
+    ],
+    [
+     214.3,
+     237.8
+    ],
+    [
+     115.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     115.7,
+     252.2
+    ],
+    [
+     214.3,
+     252.2
+    ],
+    [
+     214.3,
+     349.3
+    ],
+    [
+     115.7,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     115.7,
+     360.7
+    ],
+    [
+     214.3,
+     360.7
+    ],
+    [
+     214.3,
+     459.3
+    ],
+    [
+     115.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     115.7,
+     470.7
+    ],
+    [
+     214.3,
+     470.7
+    ],
+    [
+     214.3,
+     567.8
+    ],
+    [
+     115.7,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     115.7,
+     582.2
+    ],
+    [
+     214.3,
+     582.2
+    ],
+    [
+     214.3,
+     679.3
+    ],
+    [
+     115.7,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     115.7,
+     690.7
+    ],
+    [
+     214.3,
+     690.7
+    ],
+    [
+     214.3,
+     789.3
+    ],
+    [
+     115.7,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     115.7,
+     800.7
+    ],
+    [
+     214.3,
+     800.7
+    ],
+    [
+     214.3,
+     899.3
+    ],
+    [
+     115.7,
+     899.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     225.7,
+     31.2
+    ],
+    [
+     322.8,
+     31.2
+    ],
+    [
+     322.8,
+     129.3
+    ],
+    [
+     225.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     225.7,
+     140.7
+    ],
+    [
+     322.8,
+     140.7
+    ],
+    [
+     322.8,
+     237.8
+    ],
+    [
+     225.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     225.7,
+     252.2
+    ],
+    [
+     322.8,
+     252.2
+    ],
+    [
+     322.8,
+     349.3
+    ],
+    [
+     225.7,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     225.7,
+     360.7
+    ],
+    [
+     322.8,
+     360.7
+    ],
+    [
+     322.8,
+     459.3
+    ],
+    [
+     225.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     225.7,
+     470.7
+    ],
+    [
+     322.8,
+     470.7
+    ],
+    [
+     322.8,
+     567.8
+    ],
+    [
+     225.7,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     225.7,
+     582.2
+    ],
+    [
+     322.8,
+     582.2
+    ],
+    [
+     322.8,
+     679.3
+    ],
+    [
+     225.7,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-des-corporations",
+   "fonction": "marche",
+   "polygone": [
+    [
+     225.7,
+     690.7
+    ],
+    [
+     322.8,
+     690.7
+    ],
+    [
+     322.8,
+     789.3
+    ],
+    [
+     225.7,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "corporations"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     225.7,
+     800.7
+    ],
+    [
+     322.8,
+     800.7
+    ],
+    [
+     322.8,
+     899.3
+    ],
+    [
+     225.7,
+     899.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     337.2,
+     31.2
+    ],
+    [
+     434.3,
+     31.2
+    ],
+    [
+     434.3,
+     129.3
+    ],
+    [
+     337.2,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     337.2,
+     140.7
+    ],
+    [
+     434.3,
+     140.7
+    ],
+    [
+     434.3,
+     237.8
+    ],
+    [
+     337.2,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-2",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     337.2,
+     252.2
+    ],
+    [
+     434.3,
+     252.2
+    ],
+    [
+     434.3,
+     349.3
+    ],
+    [
+     337.2,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     337.2,
+     360.7
+    ],
+    [
+     434.3,
+     360.7
+    ],
+    [
+     434.3,
+     459.3
+    ],
+    [
+     337.2,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     337.2,
+     470.7
+    ],
+    [
+     434.3,
+     470.7
+    ],
+    [
+     434.3,
+     567.8
+    ],
+    [
+     337.2,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     337.2,
+     582.2
+    ],
+    [
+     434.3,
+     582.2
+    ],
+    [
+     434.3,
+     679.3
+    ],
+    [
+     337.2,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     337.2,
+     690.7
+    ],
+    [
+     434.3,
+     690.7
+    ],
+    [
+     434.3,
+     789.3
+    ],
+    [
+     337.2,
+     789.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     337.2,
+     800.7
+    ],
+    [
+     434.3,
+     800.7
+    ],
+    [
+     434.3,
+     854.3
+    ],
+    [
+     395.7,
+     873.3
+    ],
+    [
+     337.7,
+     897.3
+    ],
+    [
+     337.2,
+     897.5
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     445.7,
+     31.2
+    ],
+    [
+     546.3,
+     31.2
+    ],
+    [
+     546.3,
+     129.3
+    ],
+    [
+     445.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     445.7,
+     140.7
+    ],
+    [
+     546.3,
+     140.7
+    ],
+    [
+     546.3,
+     237.8
+    ],
+    [
+     445.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     445.7,
+     252.2
+    ],
+    [
+     546.3,
+     252.2
+    ],
+    [
+     546.3,
+     349.3
+    ],
+    [
+     445.7,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     445.7,
+     360.7
+    ],
+    [
+     546.3,
+     360.7
+    ],
+    [
+     546.3,
+     459.3
+    ],
+    [
+     445.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     445.7,
+     470.7
+    ],
+    [
+     546.3,
+     470.7
+    ],
+    [
+     546.3,
+     567.8
+    ],
+    [
+     445.7,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     445.7,
+     582.2
+    ],
+    [
+     546.3,
+     582.2
+    ],
+    [
+     546.3,
+     679.3
+    ],
+    [
+     445.7,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "quartier-de-la-porte-ouest",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     445.7,
+     800.7
+    ],
+    [
+     526.5,
+     800.7
+    ],
+    [
+     506.3,
+     814.2
+    ],
+    [
+     452,
+     845.6
+    ],
+    [
+     445.7,
+     848.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     553.7,
+     31.2
+    ],
+    [
+     654.3,
+     31.2
+    ],
+    [
+     654.3,
+     129.3
+    ],
+    [
+     553.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "vieux-krolva",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     553.7,
+     140.7
+    ],
+    [
+     654.3,
+     140.7
+    ],
+    [
+     654.3,
+     237.8
+    ],
+    [
+     553.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     553.7,
+     360.7
+    ],
+    [
+     654.3,
+     360.7
+    ],
+    [
+     654.3,
+     459.3
+    ],
+    [
+     553.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     553.7,
+     470.7
+    ],
+    [
+     654.3,
+     470.7
+    ],
+    [
+     654.3,
+     567.8
+    ],
+    [
+     553.7,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     553.7,
+     582.2
+    ],
+    [
+     654.3,
+     582.2
+    ],
+    [
+     654.3,
+     679.3
+    ],
+    [
+     553.7,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     665.7,
+     31.2
+    ],
+    [
+     764.3,
+     31.2
+    ],
+    [
+     764.3,
+     129.3
+    ],
+    [
+     665.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     665.7,
+     140.7
+    ],
+    [
+     764.3,
+     140.7
+    ],
+    [
+     764.3,
+     237.8
+    ],
+    [
+     665.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     665.7,
+     360.7
+    ],
+    [
+     764.3,
+     360.7
+    ],
+    [
+     764.3,
+     459.3
+    ],
+    [
+     665.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     665.7,
+     470.7
+    ],
+    [
+     764.3,
+     470.7
+    ],
+    [
+     764.3,
+     567.8
+    ],
+    [
+     665.7,
+     567.8
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     665.7,
+     582.2
+    ],
+    [
+     761.2,
+     582.2
+    ],
+    [
+     741.2,
+     608.3
+    ],
+    [
+     699.8,
+     655.4
+    ],
+    [
+     675.9,
+     679.3
+    ],
+    [
+     665.7,
+     679.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     775.7,
+     31.2
+    ],
+    [
+     874.3,
+     31.2
+    ],
+    [
+     874.3,
+     129.3
+    ],
+    [
+     775.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     775.7,
+     140.7
+    ],
+    [
+     874.3,
+     140.7
+    ],
+    [
+     874.3,
+     237.8
+    ],
+    [
+     775.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     775.7,
+     252.2
+    ],
+    [
+     874.3,
+     252.2
+    ],
+    [
+     874.3,
+     349.3
+    ],
+    [
+     775.7,
+     349.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "quartier-des-forges",
+   "fonction": "atelier",
+   "polygone": [
+    [
+     775.7,
+     360.7
+    ],
+    [
+     874.3,
+     360.7
+    ],
+    [
+     874.3,
+     393.4
+    ],
+    [
+     873.3,
+     395.7
+    ],
+    [
+     845.6,
+     452
+    ],
+    [
+     841.4,
+     459.3
+    ],
+    [
+     775.7,
+     459.3
+    ]
+   ],
+   "densite_bati": 0.9,
+   "gabarit": "ateliers"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     885.7,
+     31.2
+    ],
+    [
+     958.3,
+     31.2
+    ],
+    [
+     958.3,
+     31.4
+    ],
+    [
+     954.2,
+     94
+    ],
+    [
+     949.5,
+     129.3
+    ],
+    [
+     885.7,
+     129.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "quartier-des-compagnons",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     885.7,
+     140.7
+    ],
+    [
+     948,
+     140.7
+    ],
+    [
+     946,
+     156.2
+    ],
+    [
+     933.8,
+     217.7
+    ],
+    [
+     928.4,
+     237.8
+    ],
+    [
+     885.7,
+     237.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -145.3
+    ],
+    [
+     -334.2,
+     -145.3
+    ],
+    [
+     -334.2,
+     -34.7
+    ],
+    [
+     -490.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -265.3
+    ],
+    [
+     -334.2,
+     -265.3
+    ],
+    [
+     -334.2,
+     -154.7
+    ],
+    [
+     -490.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -385.3
+    ],
+    [
+     -334.2,
+     -385.3
+    ],
+    [
+     -334.2,
+     -274.7
+    ],
+    [
+     -490.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -490.8,
+     -505.3
+    ],
+    [
+     -334.2,
+     -505.3
+    ],
+    [
+     -334.2,
+     -394.7
+    ],
+    [
+     -490.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -145.3
+    ],
+    [
+     -169.2,
+     -145.3
+    ],
+    [
+     -169.2,
+     -34.7
+    ],
+    [
+     -325.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -265.3
+    ],
+    [
+     -169.2,
+     -265.3
+    ],
+    [
+     -169.2,
+     -154.7
+    ],
+    [
+     -325.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -385.3
+    ],
+    [
+     -169.2,
+     -385.3
+    ],
+    [
+     -169.2,
+     -274.7
+    ],
+    [
+     -325.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -325.8,
+     -505.3
+    ],
+    [
+     -169.2,
+     -505.3
+    ],
+    [
+     -169.2,
+     -394.7
+    ],
+    [
+     -325.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -145.3
+    ],
+    [
+     -7,
+     -145.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -160.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -265.3
+    ],
+    [
+     -7,
+     -265.3
+    ],
+    [
+     -7,
+     -154.7
+    ],
+    [
+     -160.8,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -385.3
+    ],
+    [
+     -7,
+     -385.3
+    ],
+    [
+     -7,
+     -274.7
+    ],
+    [
+     -160.8,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -160.8,
+     -505.3
+    ],
+    [
+     -7,
+     -505.3
+    ],
+    [
+     -7,
+     -394.7
+    ],
+    [
+     -160.8,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -145.3
+    ],
+    [
+     160.8,
+     -145.3
+    ],
+    [
+     160.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -265.3
+    ],
+    [
+     160.8,
+     -265.3
+    ],
+    [
+     160.8,
+     -154.7
+    ],
+    [
+     7,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -385.3
+    ],
+    [
+     160.8,
+     -385.3
+    ],
+    [
+     160.8,
+     -274.7
+    ],
+    [
+     7,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -505.3
+    ],
+    [
+     160.8,
+     -505.3
+    ],
+    [
+     160.8,
+     -394.7
+    ],
+    [
+     7,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -145.3
+    ],
+    [
+     325.8,
+     -145.3
+    ],
+    [
+     325.8,
+     -34.7
+    ],
+    [
+     169.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -265.3
+    ],
+    [
+     325.8,
+     -265.3
+    ],
+    [
+     325.8,
+     -154.7
+    ],
+    [
+     169.2,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -385.3
+    ],
+    [
+     325.8,
+     -385.3
+    ],
+    [
+     325.8,
+     -274.7
+    ],
+    [
+     169.2,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     169.2,
+     -505.3
+    ],
+    [
+     325.8,
+     -505.3
+    ],
+    [
+     325.8,
+     -394.7
+    ],
+    [
+     169.2,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -145.3
+    ],
+    [
+     490.8,
+     -145.3
+    ],
+    [
+     490.8,
+     -34.7
+    ],
+    [
+     334.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -265.3
+    ],
+    [
+     490.8,
+     -265.3
+    ],
+    [
+     490.8,
+     -154.7
+    ],
+    [
+     334.2,
+     -154.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -385.3
+    ],
+    [
+     490.8,
+     -385.3
+    ],
+    [
+     490.8,
+     -274.7
+    ],
+    [
+     334.2,
+     -274.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     334.2,
+     -505.3
+    ],
+    [
+     490.8,
+     -505.3
+    ],
+    [
+     490.8,
+     -394.7
+    ],
+    [
+     334.2,
+     -394.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "maison-des-corporations",
+   "nom": "Maison des Corporations",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    55,
+    300
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [
+    "Krolva, ressource clé : artisanat [C] (atlas 06 S04) : la maison est une adaptation"
+   ],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "grande-forge",
+   "nom": "Grande Forge de Krolva",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    495,
+    630
+   ],
+   "emprise_m": [
+    40,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 10,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BDB3A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 38
+   }
+  },
+  {
+   "id": "fonderie",
+   "nom": "Fonderie du Levant",
+   "canon": "A",
+   "archetype": "usine",
+   "position": [
+    715,
+    520
+   ],
+   "emprise_m": [
+    44,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#B8A793",
+   "reperes_canon": [],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "moulin-des-forges",
+   "nom": "Moulin à vent des Forges",
+   "canon": "A",
+   "archetype": "moulin",
+   "position": [
+    935,
+    850
+   ],
+   "emprise_m": [
+    12,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#D2C6AE",
+   "reperes_canon": []
+  },
+  {
+   "id": "tannerie-du-couchant",
+   "nom": "Tannerie du Couchant",
+   "canon": "A",
+   "archetype": "atelier",
+   "position": [
+    -715,
+    740
+   ],
+   "emprise_m": [
+    38,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 9,
+   "etages": 2,
+   "toit": "pignon",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#B9A27E",
+   "reperes_canon": [],
+   "params": {
+    "pente": 36
+   }
+  },
+  {
+   "id": "halle-des-verriers",
+   "nom": "Halle des Verriers",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -605,
+    410
+   ],
+   "emprise_m": [
+    46,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 9,
+    "pente": 40
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal d'atelier 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    480
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal d'atelier 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    480
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal d'atelier 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    480
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal d'atelier 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    480
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal d'atelier 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    650
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal d'atelier 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    650
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-7",
+   "nom": "Étal d'atelier 7",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    650
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-8",
+   "nom": "Étal d'atelier 8",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    650
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "ecole-d-apprentissage",
+   "nom": "École d'apprentissage",
+   "canon": "A",
+   "archetype": "ecole",
+   "position": [
+    -275,
+    300
+   ],
+   "emprise_m": [
+    32,
+    16
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#D9CDB6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "entrepot-des-materiaux",
+   "nom": "Entrepôt des matériaux",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    385,
+    850
+   ],
+   "emprise_m": [
+    54,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#C8B8A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "caserne-de-la-porte-ouest",
+   "nom": "Caserne de la porte ouest",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    165,
+    850
+   ],
+   "emprise_m": [
+    60,
+    50
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église de Krolva",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -495,
+    300
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 46,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "poste-porte-ouest",
+   "nom": "Poste de garde de la porte ouest",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -66,
+    960
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-6",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-12",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-5",
+    "essence": "marronnier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -170,
+     560
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 22,
+    "nom": "Tilleul des Corporations"
+   },
+   {
+    "position": [
+     150,
+     840
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne de la porte ouest"
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   }
+  ],
+  "parcs": [
+   {
+    "id": "jardin-des-verriers",
+    "nom": "Jardin des Verriers",
+    "canon": "A",
+    "polygone": [
+     [
+      -764.3,
+      470.7
+     ],
+     [
+      -553.7,
+      470.7
+     ],
+     [
+      -553.7,
+      567.8
+     ],
+     [
+      -764.3,
+      567.8
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "jardin-de-la-porte-ouest",
+    "nom": "Jardin de la Porte Ouest",
+    "canon": "A",
+    "polygone": [
+     [
+      -322.8,
+      800.7
+     ],
+     [
+      -115.7,
+      800.7
+     ],
+     [
+      -115.7,
+      899.3
+     ],
+     [
+      -322.8,
+      899.3
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   },
+   {
+    "id": "promenade-des-tisserands",
+    "nom": "Promenade des Tisserands",
+    "canon": "A",
+    "polygone": [
+     [
+      553.7,
+      252.2
+     ],
+     [
+      764.3,
+      252.2
+     ],
+     [
+      764.3,
+      349.3
+     ],
+     [
+      553.7,
+      349.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "peuplier",
+     "erable"
+    ],
+    "arbres_par_ha": 62
+   },
+   {
+    "id": "pre-des-compagnons",
+    "nom": "Pré des Compagnons",
+    "canon": "A",
+    "polygone": [
+     [
+      775.7,
+      470.7
+     ],
+     [
+      834.8,
+      470.7
+     ],
+     [
+      814.2,
+      506.3
+     ],
+     [
+      779.4,
+      558.5
+     ],
+     [
+      775.7,
+      563.2
+     ]
+    ],
+    "essences": [
+     "saule",
+     "peuplier",
+     "tilleul"
+    ],
+    "arbres_par_ha": 50
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -460,
+      -60
+     ],
+     [
+      -320,
+      -60
+     ],
+     [
+      -320,
+      -560
+     ],
+     [
+      -460,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      320,
+      -60
+     ],
+     [
+      460,
+      -60
+     ],
+     [
+      460,
+      -560
+     ],
+     [
+      320,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -540,
+      -610
+     ],
+     [
+      540,
+      -610
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      20,
+      -330
+     ],
+     [
+      300,
+      -330
+     ],
+     [
+      300,
+      -560
+     ],
+     [
+      20,
+      -560
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -700,
+    300
+   ],
+   [
+    700,
+    300
+   ],
+   [
+    -300,
+    600
+   ],
+   [
+    250,
+    760
+   ],
+   [
+    -800,
+    700
+   ]
+  ],
+  "fontaines": [
+   [
+    0,
+    465
+   ],
+   [
+    -380,
+    330
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1059.3,
+    1653.3,
+    722.7
+   ],
+   "cible": [
+    30,
+    465.3,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    663.3,
+    1.8
+   ],
+   "cible": [
+    0,
+    217.8,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-des-corporations",
+   "nom": "Place des Corporations et maison des corporations",
+   "oeil": [
+    190,
+    520,
+    2.4
+   ],
+   "cible": [
+    -60,
+    420,
+    7
+   ],
+   "fov": 62
+  },
+  {
+   "id": "quartier-des-forges",
+   "nom": "Grande forge et fonderie",
+   "oeil": [
+    330,
+    310,
+    5
+   ],
+   "cible": [
+    500,
+    430,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-tanneurs",
+   "nom": "Tannerie et halle des verriers",
+   "oeil": [
+    -250,
+    300,
+    5
+   ],
+   "cible": [
+    -420,
+    400,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "porte-ouest",
+   "nom": "Caserne et poste de la porte ouest",
+   "oeil": [
+    190,
+    800,
+    3.5
+   ],
+   "cible": [
+    -60,
+    950,
+    10
+   ],
+   "fov": 62
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -524.1,
+    838.7,
+    52.5
+   ],
+   "cible": [
+    -171.7,
+    974,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    3,
+    830,
+    1.8
+   ],
+   "cible": [
+    0,
+    990,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Krolva en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-afflux-des-evacues",
+   "nom": "850, afflux des évacués de Trost",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) : le sud du mur Rose est évacué vers l'intérieur [C] ; destination des évacués dans ce district : adaptation",
+     "canon": "A"
+    },
+    {
+     "ref": "affluence, brume : adaptation (aucune destruction : le district n'est pas touché)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 1
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

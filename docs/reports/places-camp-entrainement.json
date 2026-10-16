@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/camp-entrainement/vue-ensemble.png",
+   "stats": {
+    "calls": 72,
+    "triangles": 51656,
+    "instances": 2650,
+    "chunks": {
+     "total": 133,
+     "visible": 133,
+     "near": 0
+    }
+   },
+   "rgb": [
+    144.83276475694444,
+    149.09560763888888,
+    116.8058984375
+   ]
+  }
+ },
+ "dE": {}
+}

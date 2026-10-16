@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/krolva/vue-ensemble.png",
+   "stats": {
+    "calls": 252,
+    "triangles": 568801,
+    "instances": 22549,
+    "chunks": {
+     "total": 567,
+     "visible": 567,
+     "near": 0
+    }
+   },
+   "rgb": [
+    145.1344140625,
+    147.64073350694446,
+    116.37446180555555
+   ]
+  }
+ },
+ "dE": {}
+}

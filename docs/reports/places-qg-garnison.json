@@ -1,0 +1,23 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/qg-garnison/vue-ensemble.png",
+   "stats": {
+    "calls": 72,
+    "triangles": 33870,
+    "instances": 421,
+    "chunks": {
+     "total": 17,
+     "visible": 17,
+     "near": 0
+    }
+   },
+   "rgb": [
+    141.71869791666666,
+    146.35862413194445,
+    115.01260850694445
+   ]
+  }
+ },
+ "dE": {}
+}

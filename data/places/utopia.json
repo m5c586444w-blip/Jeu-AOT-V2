@@ -1,0 +1,7158 @@
+{
+ "id": "utopia",
+ "nom": "Utopia",
+ "libelle": "Utopia",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Utopia (nord), district du mur Rose ; docs/spec/06 S03 : district nord, ressource clé « commerce » (rang 3)",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/20 (LC-B) : districts du mur Rose [C], détails [A]",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé de la saillie, noms de rues, de places et de bâtiments, dimensions, quartiers : adaptation (création C15, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_utopia",
+ "style": "E04",
+ "population": {
+  "province": "prov_utopia",
+  "part": 0.92,
+  "canon": "C",
+  "note": "92 % de la population de `prov_utopia` au départ de scn_sandbox_845 (34 783 hab.) logés intra-muros ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 220,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   1032.5,
+   7.5
+  ],
+  [
+   1031.1,
+   54
+  ],
+  [
+   1026.8,
+   107.9
+  ],
+  [
+   1019.8,
+   161.5
+  ],
+  [
+   1009.9,
+   214.7
+  ],
+  [
+   997.3,
+   267.2
+  ],
+  [
+   982,
+   319.1
+  ],
+  [
+   963.9,
+   370
+  ],
+  [
+   943.2,
+   420
+  ],
+  [
+   920,
+   468.7
+  ],
+  [
+   894.2,
+   516.2
+  ],
+  [
+   865.9,
+   562.3
+  ],
+  [
+   835.3,
+   606.9
+  ],
+  [
+   802.4,
+   649.8
+  ],
+  [
+   767.3,
+   690.9
+  ],
+  [
+   730.1,
+   730.1
+  ],
+  [
+   690.9,
+   767.3
+  ],
+  [
+   649.8,
+   802.4
+  ],
+  [
+   606.9,
+   835.3
+  ],
+  [
+   562.3,
+   865.9
+  ],
+  [
+   516.3,
+   894.2
+  ],
+  [
+   468.7,
+   920
+  ],
+  [
+   420,
+   943.2
+  ],
+  [
+   370,
+   963.9
+  ],
+  [
+   319.1,
+   982
+  ],
+  [
+   267.2,
+   997.3
+  ],
+  [
+   214.7,
+   1009.9
+  ],
+  [
+   161.5,
+   1019.8
+  ],
+  [
+   107.9,
+   1026.8
+  ],
+  [
+   54,
+   1031.1
+  ],
+  [
+   0,
+   1032.5
+  ],
+  [
+   -54,
+   1031.1
+  ],
+  [
+   -107.9,
+   1026.8
+  ],
+  [
+   -161.5,
+   1019.8
+  ],
+  [
+   -214.7,
+   1009.9
+  ],
+  [
+   -267.2,
+   997.3
+  ],
+  [
+   -319.1,
+   982
+  ],
+  [
+   -370,
+   963.9
+  ],
+  [
+   -420,
+   943.2
+  ],
+  [
+   -468.7,
+   920
+  ],
+  [
+   -516.2,
+   894.2
+  ],
+  [
+   -562.3,
+   865.9
+  ],
+  [
+   -606.9,
+   835.3
+  ],
+  [
+   -649.8,
+   802.4
+  ],
+  [
+   -690.9,
+   767.3
+  ],
+  [
+   -730.1,
+   730.1
+  ],
+  [
+   -767.3,
+   690.9
+  ],
+  [
+   -802.4,
+   649.8
+  ],
+  [
+   -835.3,
+   606.9
+  ],
+  [
+   -865.9,
+   562.3
+  ],
+  [
+   -894.2,
+   516.2
+  ],
+  [
+   -920,
+   468.7
+  ],
+  [
+   -943.2,
+   420
+  ],
+  [
+   -963.9,
+   370
+  ],
+  [
+   -982,
+   319.1
+  ],
+  [
+   -997.3,
+   267.2
+  ],
+  [
+   -1009.9,
+   214.7
+  ],
+  [
+   -1019.8,
+   161.5
+  ],
+  [
+   -1026.8,
+   107.9
+  ],
+  [
+   -1031.1,
+   54
+  ],
+  [
+   -1032.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A",
+   "polygone": [
+    [
+     -535,
+     -24
+    ],
+    [
+     535,
+     -24
+    ],
+    [
+     535,
+     -540
+    ],
+    [
+     -535,
+     -540
+    ]
+   ],
+   "population": {
+    "province": "prov_utopia",
+    "part": 0.08,
+    "canon": "A",
+    "note": "8 % de la population de `prov_utopia` au départ de scn_sandbox_845 logés au pied de la porte intérieure, côté intérieur des terres (adaptation)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 62,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "nord",
+  "canon": "C"
+ },
+ "etendue_m": 2880,
+ "enceinte": {
+  "mur": "rose",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 1040,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -1040,
+      0
+     ],
+     [
+      1040,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1440,
+      0
+     ],
+     [
+      -1040,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      1040,
+      0
+     ],
+     [
+      1440,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 326.7,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 980.2,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1535.6,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1731.7,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2287.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2940.6,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 980,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1100,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 30,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte d'Utopia (porte nord)",
+   "role": "exterieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 §3.1 : saillie à deux portes pour les districts [C] ; nom de la porte et dimensions : aucune source (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 1633.6,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure d'Utopia",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 1040,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-1",
+   "nom": "Rue des Minotiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -945,
+     25
+    ],
+    [
+     -945,
+     370.4
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue des Boisseaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -840,
+     25
+    ],
+    [
+     -840,
+     535
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Ruelle des Veaux",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     -735,
+     25
+    ],
+    [
+     -735,
+     700
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-4-0",
+   "nom": "Rue des Mesureurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -630,
+     25
+    ],
+    [
+     -630,
+     331
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4-1",
+   "nom": "Rue des Mesureurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -630,
+     433
+    ],
+    [
+     -630,
+     795.8
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Fariniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -525,
+     25
+    ],
+    [
+     -525,
+     868.7
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-0",
+   "nom": "Rue des Bouviers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     25
+    ],
+    [
+     -420,
+     739
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6-1",
+   "nom": "Rue des Bouviers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -420,
+     841
+    ],
+    [
+     -420,
+     924
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7",
+   "nom": "Rue des Laitiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -315,
+     25
+    ],
+    [
+     -315,
+     943
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Rue des Fromagers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -210,
+     25
+    ],
+    [
+     -210,
+     943
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9-0",
+   "nom": "Rue des Beurriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -105,
+     25
+    ],
+    [
+     -105,
+     535
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9-1",
+   "nom": "Rue des Beurriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -105,
+     739
+    ],
+    [
+     -105,
+     943
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11-0",
+   "nom": "Rue des Lainiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     105,
+     25
+    ],
+    [
+     105,
+     535
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11-1",
+   "nom": "Rue des Lainiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     105,
+     739
+    ],
+    [
+     105,
+     943
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-0",
+   "nom": "Rue des Cardeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     210,
+     25
+    ],
+    [
+     210,
+     229
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12-1",
+   "nom": "Rue des Cardeurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     210,
+     331
+    ],
+    [
+     210,
+     943
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13",
+   "nom": "Rue des Fileuses",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     315,
+     25
+    ],
+    [
+     315,
+     943
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14",
+   "nom": "Rue des Palefreniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     420,
+     25
+    ],
+    [
+     420,
+     924
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-15",
+   "nom": "Rue des Maquignons",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     525,
+     25
+    ],
+    [
+     525,
+     868.7
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-0",
+   "nom": "Rue des Colporteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     630,
+     25
+    ],
+    [
+     630,
+     637
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-1",
+   "nom": "Rue des Colporteurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     630,
+     739
+    ],
+    [
+     630,
+     795.8
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Ruelle des Sacs",
+   "canon": "A",
+   "type": "ruelle",
+   "trace": [
+    [
+     735,
+     25
+    ],
+    [
+     735,
+     700
+    ]
+   ],
+   "largeur_m": 5,
+   "revetement": "terre"
+  },
+  {
+   "id": "s-18",
+   "nom": "Rue des Banquiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     840,
+     25
+    ],
+    [
+     840,
+     569.8
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue des Hôteliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     945,
+     25
+    ],
+    [
+     945,
+     370.4
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue de la Bourse",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1007,
+     127
+    ],
+    [
+     1007,
+     127
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Courtiers en Grains",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -988.8,
+     229
+    ],
+    [
+     988.8,
+     229
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue de la Foire",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -959.5,
+     331
+    ],
+    [
+     959.5,
+     331
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue des Forains",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -918,
+     433
+    ],
+    [
+     918,
+     433
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Rue des Halles Neuves",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -862.6,
+     535
+    ],
+    [
+     862.6,
+     535
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6-0",
+   "nom": "Rue des Étaleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -790.2,
+     637
+    ],
+    [
+     -210,
+     637
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6-1",
+   "nom": "Rue des Étaleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     210,
+     637
+    ],
+    [
+     790.2,
+     637
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue des Crieurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -695.8,
+     739
+    ],
+    [
+     695.8,
+     739
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8",
+   "nom": "Rue des Bateleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -568.3,
+     841
+    ],
+    [
+     568.3,
+     841
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue des Comptoirs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -375.5,
+     943
+    ],
+    [
+     375.5,
+     943
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Grande Avenue du Nord",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     1032
+    ]
+   ],
+   "largeur_m": 18,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1014.7,
+     25
+    ],
+    [
+     1012.1,
+     77.2
+    ],
+    [
+     1006.7,
+     129.3
+    ],
+    [
+     998.7,
+     181
+    ],
+    [
+     988.1,
+     232.2
+    ],
+    [
+     974.8,
+     282.8
+    ],
+    [
+     959,
+     332.6
+    ],
+    [
+     940.5,
+     381.6
+    ],
+    [
+     919.6,
+     429.5
+    ],
+    [
+     896.3,
+     476.3
+    ],
+    [
+     870.6,
+     521.9
+    ],
+    [
+     842.5,
+     566
+    ],
+    [
+     812.2,
+     608.7
+    ],
+    [
+     779.8,
+     649.7
+    ],
+    [
+     745.3,
+     689
+    ],
+    [
+     708.8,
+     726.5
+    ],
+    [
+     670.5,
+     762
+    ],
+    [
+     630.3,
+     795.6
+    ],
+    [
+     588.5,
+     827
+    ],
+    [
+     545.1,
+     856.2
+    ],
+    [
+     500.3,
+     883.2
+    ],
+    [
+     454.1,
+     907.8
+    ],
+    [
+     406.7,
+     929.9
+    ],
+    [
+     358.3,
+     949.7
+    ],
+    [
+     308.9,
+     966.9
+    ],
+    [
+     258.7,
+     981.5
+    ],
+    [
+     207.8,
+     993.5
+    ],
+    [
+     156.3,
+     1002.9
+    ],
+    [
+     104.4,
+     1009.6
+    ],
+    [
+     52.3,
+     1013.7
+    ],
+    [
+     0,
+     1015
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     1015
+    ],
+    [
+     -52.3,
+     1013.7
+    ],
+    [
+     -104.4,
+     1009.6
+    ],
+    [
+     -156.3,
+     1002.9
+    ],
+    [
+     -207.8,
+     993.5
+    ],
+    [
+     -258.7,
+     981.5
+    ],
+    [
+     -308.9,
+     966.9
+    ],
+    [
+     -358.3,
+     949.7
+    ],
+    [
+     -406.7,
+     929.9
+    ],
+    [
+     -454.1,
+     907.8
+    ],
+    [
+     -500.3,
+     883.2
+    ],
+    [
+     -545.1,
+     856.2
+    ],
+    [
+     -588.5,
+     827
+    ],
+    [
+     -630.3,
+     795.6
+    ],
+    [
+     -670.5,
+     762
+    ],
+    [
+     -708.8,
+     726.5
+    ],
+    [
+     -745.3,
+     689
+    ],
+    [
+     -779.8,
+     649.7
+    ],
+    [
+     -812.2,
+     608.7
+    ],
+    [
+     -842.5,
+     566
+    ],
+    [
+     -870.6,
+     521.9
+    ],
+    [
+     -896.3,
+     476.3
+    ],
+    [
+     -919.6,
+     429.5
+    ],
+    [
+     -940.5,
+     381.6
+    ],
+    [
+     -959,
+     332.6
+    ],
+    [
+     -974.8,
+     282.8
+    ],
+    [
+     -988.1,
+     232.2
+    ],
+    [
+     -998.7,
+     181
+    ],
+    [
+     -1006.7,
+     129.3
+    ],
+    [
+     -1012.1,
+     77.2
+    ],
+    [
+     -1014.7,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1015,
+     25
+    ],
+    [
+     1015,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1730
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -30
+    ],
+    [
+     -525,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin des Bœufs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -350,
+     -30
+    ],
+    [
+     -350,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -175,
+     -30
+    ],
+    [
+     -175,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x4",
+   "nom": "Chemin du Gué",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     175,
+     -30
+    ],
+    [
+     175,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin des Vergers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     350,
+     -30
+    ],
+    [
+     350,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     525,
+     -30
+    ],
+    [
+     525,
+     -530
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin des Saules",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -30
+    ],
+    [
+     525,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin des Ormes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -155
+    ],
+    [
+     525,
+     -155
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -280
+    ],
+    [
+     525,
+     -280
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin des Champs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -405
+    ],
+    [
+     525,
+     -405
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y4",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -525,
+     -530
+    ],
+    [
+     525,
+     -530
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1050
+    ],
+    [
+     0,
+     1460
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place des Bouviers",
+   "canon": "A",
+   "polygone": [
+    [
+     -939.3,
+     336.7
+    ],
+    [
+     -845.7,
+     336.7
+    ],
+    [
+     -845.7,
+     427.3
+    ],
+    [
+     -913.5,
+     427.3
+    ],
+    [
+     -918.9,
+     416.3
+    ],
+    [
+     -939.3,
+     367
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette des Mesures",
+   "canon": "A",
+   "polygone": [
+    [
+     845.7,
+     438.7
+    ],
+    [
+     907.9,
+     438.7
+    ],
+    [
+     889.7,
+     475.5
+    ],
+    [
+     858.6,
+     529.3
+    ],
+    [
+     845.7,
+     529.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    867.6,
+    474.3
+   ],
+   "marche": false
+  },
+  {
+   "id": "parvis-de-l-eglise",
+   "nom": "Parvis de l'église",
+   "canon": "A",
+   "polygone": [
+    [
+     -307.8,
+     336.7
+    ],
+    [
+     -215.7,
+     336.7
+    ],
+    [
+     -215.7,
+     427.3
+    ],
+    [
+     -307.8,
+     427.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-de-la-foire",
+   "nom": "Place de la Foire",
+   "canon": "A",
+   "polygone": [
+    [
+     -204.3,
+     540.7
+    ],
+    [
+     204.3,
+     540.7
+    ],
+    [
+     204.3,
+     733.3
+    ],
+    [
+     -204.3,
+     733.3
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": true
+  },
+  {
+   "id": "place-de-la-bourse",
+   "nom": "Place de la Bourse des grains",
+   "canon": "A",
+   "polygone": [
+    [
+     110.7,
+     236.2
+    ],
+    [
+     307.8,
+     236.2
+    ],
+    [
+     307.8,
+     325.3
+    ],
+    [
+     110.7,
+     325.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    209.3,
+    280.8
+   ],
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 70
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "foires": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.2,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "mansarde"
+   ],
+   "pente_deg": [
+    42,
+    54
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "pierre_taillee",
+    "brique"
+   ],
+   "teintes": [
+    "#EBDCC0",
+    "#E2CCA6",
+    "#EDD6BE",
+    "#DDD6BE",
+    "#E6D8B8",
+    "#D9C29C"
+   ],
+   "parcelles_m": [
+    8,
+    9.5,
+    7,
+    10
+   ],
+   "profondeur_m": 14,
+   "boutiques": true,
+   "passage_m": 36,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 80
+   }
+  },
+  "grains": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.7,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_canal"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "bois",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#CFC3AA",
+    "#C6BA9F",
+    "#D4C8B0",
+    "#C1B59A"
+   ],
+   "parcelles_m": [
+    18,
+    24,
+    16,
+    22
+   ],
+   "profondeur_m": 18,
+   "boutiques": false,
+   "passage_m": 48,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 45
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieil-utopia",
+   "nom": "Vieil Utopia",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-foires",
+   "nom": "Quartier des Foires",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-grains",
+   "nom": "Quartier des Grains et des Minotiers",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-porte-nord",
+   "nom": "Quartier de la Porte Nord",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-bouviers",
+   "nom": "Quartier des Bouviers et des Colporteurs",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-de-la-porte-interieure",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1008.3,
+     31.2
+    ],
+    [
+     -950.7,
+     31.2
+    ],
+    [
+     -950.7,
+     121.3
+    ],
+    [
+     -1001,
+     121.3
+    ],
+    [
+     -1003.9,
+     98.9
+    ],
+    [
+     -1008.3,
+     33
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -999.5,
+     132.7
+    ],
+    [
+     -950.7,
+     132.7
+    ],
+    [
+     -950.7,
+     221.8
+    ],
+    [
+     -983.9,
+     221.8
+    ],
+    [
+     -995.3,
+     164.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -980.5,
+     236.2
+    ],
+    [
+     -950.7,
+     236.2
+    ],
+    [
+     -950.7,
+     325.3
+    ],
+    [
+     -954.3,
+     325.3
+    ],
+    [
+     -965.4,
+     292.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -939.3,
+     31.2
+    ],
+    [
+     -845.7,
+     31.2
+    ],
+    [
+     -845.7,
+     121.3
+    ],
+    [
+     -939.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -939.3,
+     132.7
+    ],
+    [
+     -845.7,
+     132.7
+    ],
+    [
+     -845.7,
+     221.8
+    ],
+    [
+     -939.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -939.3,
+     236.2
+    ],
+    [
+     -845.7,
+     236.2
+    ],
+    [
+     -845.7,
+     325.3
+    ],
+    [
+     -939.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -907.9,
+     438.7
+    ],
+    [
+     -845.7,
+     438.7
+    ],
+    [
+     -845.7,
+     529.3
+    ],
+    [
+     -858.6,
+     529.3
+    ],
+    [
+     -889.7,
+     475.5
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -834.3,
+     31.2
+    ],
+    [
+     -738.7,
+     31.2
+    ],
+    [
+     -738.7,
+     121.3
+    ],
+    [
+     -834.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -834.3,
+     132.7
+    ],
+    [
+     -738.7,
+     132.7
+    ],
+    [
+     -738.7,
+     221.8
+    ],
+    [
+     -834.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -834.3,
+     236.2
+    ],
+    [
+     -738.7,
+     236.2
+    ],
+    [
+     -738.7,
+     325.3
+    ],
+    [
+     -834.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -834.3,
+     336.7
+    ],
+    [
+     -738.7,
+     336.7
+    ],
+    [
+     -738.7,
+     427.3
+    ],
+    [
+     -834.3,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -834.3,
+     438.7
+    ],
+    [
+     -738.7,
+     438.7
+    ],
+    [
+     -738.7,
+     529.3
+    ],
+    [
+     -834.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -776.1,
+     644.2
+    ],
+    [
+     -738.7,
+     644.2
+    ],
+    [
+     -738.7,
+     686.9
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -731.3,
+     31.2
+    ],
+    [
+     -635.7,
+     31.2
+    ],
+    [
+     -635.7,
+     121.3
+    ],
+    [
+     -731.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -731.3,
+     132.7
+    ],
+    [
+     -635.7,
+     132.7
+    ],
+    [
+     -635.7,
+     221.8
+    ],
+    [
+     -731.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -731.3,
+     236.2
+    ],
+    [
+     -635.7,
+     236.2
+    ],
+    [
+     -635.7,
+     325.3
+    ],
+    [
+     -731.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -731.3,
+     438.7
+    ],
+    [
+     -635.7,
+     438.7
+    ],
+    [
+     -635.7,
+     529.3
+    ],
+    [
+     -731.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -731.3,
+     540.7
+    ],
+    [
+     -635.7,
+     540.7
+    ],
+    [
+     -635.7,
+     629.8
+    ],
+    [
+     -731.3,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -731.3,
+     644.2
+    ],
+    [
+     -635.7,
+     644.2
+    ],
+    [
+     -635.7,
+     733.3
+    ],
+    [
+     -692.6,
+     733.3
+    ],
+    [
+     -731.3,
+     694.6
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-3-7",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -680,
+     744.7
+    ],
+    [
+     -635.7,
+     744.7
+    ],
+    [
+     -635.7,
+     783.1
+    ],
+    [
+     -640,
+     779.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -624.3,
+     31.2
+    ],
+    [
+     -532.2,
+     31.2
+    ],
+    [
+     -532.2,
+     121.3
+    ],
+    [
+     -624.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -624.3,
+     132.7
+    ],
+    [
+     -532.2,
+     132.7
+    ],
+    [
+     -532.2,
+     221.8
+    ],
+    [
+     -624.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -624.3,
+     236.2
+    ],
+    [
+     -532.2,
+     236.2
+    ],
+    [
+     -532.2,
+     325.3
+    ],
+    [
+     -624.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -624.3,
+     438.7
+    ],
+    [
+     -532.2,
+     438.7
+    ],
+    [
+     -532.2,
+     529.3
+    ],
+    [
+     -624.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -624.3,
+     540.7
+    ],
+    [
+     -532.2,
+     540.7
+    ],
+    [
+     -532.2,
+     629.8
+    ],
+    [
+     -624.3,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -624.3,
+     644.2
+    ],
+    [
+     -532.2,
+     644.2
+    ],
+    [
+     -532.2,
+     733.3
+    ],
+    [
+     -624.3,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -624.3,
+     744.7
+    ],
+    [
+     -532.2,
+     744.7
+    ],
+    [
+     -532.2,
+     835.3
+    ],
+    [
+     -564.7,
+     835.3
+    ],
+    [
+     -587.6,
+     820
+    ],
+    [
+     -624.3,
+     791.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -517.8,
+     31.2
+    ],
+    [
+     -425.7,
+     31.2
+    ],
+    [
+     -425.7,
+     121.3
+    ],
+    [
+     -517.8,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -517.8,
+     132.7
+    ],
+    [
+     -425.7,
+     132.7
+    ],
+    [
+     -425.7,
+     221.8
+    ],
+    [
+     -517.8,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -517.8,
+     236.2
+    ],
+    [
+     -425.7,
+     236.2
+    ],
+    [
+     -425.7,
+     325.3
+    ],
+    [
+     -517.8,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -517.8,
+     336.7
+    ],
+    [
+     -425.7,
+     336.7
+    ],
+    [
+     -425.7,
+     427.3
+    ],
+    [
+     -517.8,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -517.8,
+     438.7
+    ],
+    [
+     -425.7,
+     438.7
+    ],
+    [
+     -425.7,
+     529.3
+    ],
+    [
+     -517.8,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -517.8,
+     540.7
+    ],
+    [
+     -425.7,
+     540.7
+    ],
+    [
+     -425.7,
+     629.8
+    ],
+    [
+     -517.8,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -517.8,
+     644.2
+    ],
+    [
+     -425.7,
+     644.2
+    ],
+    [
+     -425.7,
+     733.3
+    ],
+    [
+     -517.8,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -517.8,
+     846.7
+    ],
+    [
+     -425.7,
+     846.7
+    ],
+    [
+     -425.7,
+     914.3
+    ],
+    [
+     -475.5,
+     889.7
+    ],
+    [
+     -517.8,
+     865.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -414.3,
+     31.2
+    ],
+    [
+     -322.2,
+     31.2
+    ],
+    [
+     -322.2,
+     121.3
+    ],
+    [
+     -414.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -414.3,
+     132.7
+    ],
+    [
+     -322.2,
+     132.7
+    ],
+    [
+     -322.2,
+     221.8
+    ],
+    [
+     -414.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -414.3,
+     236.2
+    ],
+    [
+     -322.2,
+     236.2
+    ],
+    [
+     -322.2,
+     325.3
+    ],
+    [
+     -414.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-6-3",
+   "quartier": "vieil-utopia",
+   "fonction": "culte",
+   "polygone": [
+    [
+     -414.3,
+     336.7
+    ],
+    [
+     -322.2,
+     336.7
+    ],
+    [
+     -322.2,
+     427.3
+    ],
+    [
+     -414.3,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -414.3,
+     438.7
+    ],
+    [
+     -322.2,
+     438.7
+    ],
+    [
+     -322.2,
+     529.3
+    ],
+    [
+     -414.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -414.3,
+     540.7
+    ],
+    [
+     -322.2,
+     540.7
+    ],
+    [
+     -322.2,
+     629.8
+    ],
+    [
+     -414.3,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -414.3,
+     644.2
+    ],
+    [
+     -322.2,
+     644.2
+    ],
+    [
+     -322.2,
+     733.3
+    ],
+    [
+     -414.3,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -414.3,
+     846.7
+    ],
+    [
+     -322.2,
+     846.7
+    ],
+    [
+     -322.2,
+     937.3
+    ],
+    [
+     -371.9,
+     937.3
+    ],
+    [
+     -414.3,
+     919.7
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -307.8,
+     31.2
+    ],
+    [
+     -215.7,
+     31.2
+    ],
+    [
+     -215.7,
+     121.3
+    ],
+    [
+     -307.8,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -307.8,
+     132.7
+    ],
+    [
+     -215.7,
+     132.7
+    ],
+    [
+     -215.7,
+     221.8
+    ],
+    [
+     -307.8,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     -307.8,
+     236.2
+    ],
+    [
+     -215.7,
+     236.2
+    ],
+    [
+     -215.7,
+     325.3
+    ],
+    [
+     -307.8,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -307.8,
+     438.7
+    ],
+    [
+     -215.7,
+     438.7
+    ],
+    [
+     -215.7,
+     529.3
+    ],
+    [
+     -307.8,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -307.8,
+     540.7
+    ],
+    [
+     -215.7,
+     540.7
+    ],
+    [
+     -215.7,
+     629.8
+    ],
+    [
+     -307.8,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -307.8,
+     644.2
+    ],
+    [
+     -215.7,
+     644.2
+    ],
+    [
+     -215.7,
+     733.3
+    ],
+    [
+     -307.8,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -307.8,
+     744.7
+    ],
+    [
+     -215.7,
+     744.7
+    ],
+    [
+     -215.7,
+     835.3
+    ],
+    [
+     -307.8,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -307.8,
+     846.7
+    ],
+    [
+     -215.7,
+     846.7
+    ],
+    [
+     -215.7,
+     937.3
+    ],
+    [
+     -307.8,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -204.3,
+     31.2
+    ],
+    [
+     -110.7,
+     31.2
+    ],
+    [
+     -110.7,
+     121.3
+    ],
+    [
+     -204.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -204.3,
+     132.7
+    ],
+    [
+     -110.7,
+     132.7
+    ],
+    [
+     -110.7,
+     221.8
+    ],
+    [
+     -204.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -204.3,
+     236.2
+    ],
+    [
+     -110.7,
+     236.2
+    ],
+    [
+     -110.7,
+     325.3
+    ],
+    [
+     -204.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -204.3,
+     336.7
+    ],
+    [
+     -110.7,
+     336.7
+    ],
+    [
+     -110.7,
+     427.3
+    ],
+    [
+     -204.3,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -204.3,
+     438.7
+    ],
+    [
+     -110.7,
+     438.7
+    ],
+    [
+     -110.7,
+     529.3
+    ],
+    [
+     -204.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -204.3,
+     744.7
+    ],
+    [
+     -110.7,
+     744.7
+    ],
+    [
+     -110.7,
+     835.3
+    ],
+    [
+     -204.3,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -204.3,
+     846.7
+    ],
+    [
+     -110.7,
+     846.7
+    ],
+    [
+     -110.7,
+     937.3
+    ],
+    [
+     -204.3,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -99.3,
+     31.2
+    ],
+    [
+     -10.2,
+     31.2
+    ],
+    [
+     -10.2,
+     121.3
+    ],
+    [
+     -99.3,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -99.3,
+     132.7
+    ],
+    [
+     -10.2,
+     132.7
+    ],
+    [
+     -10.2,
+     221.8
+    ],
+    [
+     -99.3,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -99.3,
+     236.2
+    ],
+    [
+     -10.2,
+     236.2
+    ],
+    [
+     -10.2,
+     325.3
+    ],
+    [
+     -99.3,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -99.3,
+     336.7
+    ],
+    [
+     -10.2,
+     336.7
+    ],
+    [
+     -10.2,
+     427.3
+    ],
+    [
+     -99.3,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -99.3,
+     438.7
+    ],
+    [
+     -10.2,
+     438.7
+    ],
+    [
+     -10.2,
+     529.3
+    ],
+    [
+     -99.3,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -99.3,
+     744.7
+    ],
+    [
+     -10.2,
+     744.7
+    ],
+    [
+     -10.2,
+     835.3
+    ],
+    [
+     -99.3,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -99.3,
+     846.7
+    ],
+    [
+     -10.2,
+     846.7
+    ],
+    [
+     -10.2,
+     937.3
+    ],
+    [
+     -99.3,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     31.2
+    ],
+    [
+     99.3,
+     31.2
+    ],
+    [
+     99.3,
+     121.3
+    ],
+    [
+     10.2,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     132.7
+    ],
+    [
+     99.3,
+     132.7
+    ],
+    [
+     99.3,
+     221.8
+    ],
+    [
+     10.2,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     10.2,
+     236.2
+    ],
+    [
+     99.3,
+     236.2
+    ],
+    [
+     99.3,
+     325.3
+    ],
+    [
+     10.2,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     336.7
+    ],
+    [
+     99.3,
+     336.7
+    ],
+    [
+     99.3,
+     427.3
+    ],
+    [
+     10.2,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     438.7
+    ],
+    [
+     99.3,
+     438.7
+    ],
+    [
+     99.3,
+     529.3
+    ],
+    [
+     10.2,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     10.2,
+     744.7
+    ],
+    [
+     99.3,
+     744.7
+    ],
+    [
+     99.3,
+     835.3
+    ],
+    [
+     10.2,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     10.2,
+     846.7
+    ],
+    [
+     99.3,
+     846.7
+    ],
+    [
+     99.3,
+     937.3
+    ],
+    [
+     10.2,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     110.7,
+     31.2
+    ],
+    [
+     204.3,
+     31.2
+    ],
+    [
+     204.3,
+     121.3
+    ],
+    [
+     110.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     110.7,
+     132.7
+    ],
+    [
+     204.3,
+     132.7
+    ],
+    [
+     204.3,
+     221.8
+    ],
+    [
+     110.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     110.7,
+     336.7
+    ],
+    [
+     204.3,
+     336.7
+    ],
+    [
+     204.3,
+     427.3
+    ],
+    [
+     110.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     110.7,
+     438.7
+    ],
+    [
+     204.3,
+     438.7
+    ],
+    [
+     204.3,
+     529.3
+    ],
+    [
+     110.7,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     110.7,
+     744.7
+    ],
+    [
+     204.3,
+     744.7
+    ],
+    [
+     204.3,
+     835.3
+    ],
+    [
+     110.7,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     110.7,
+     846.7
+    ],
+    [
+     204.3,
+     846.7
+    ],
+    [
+     204.3,
+     937.3
+    ],
+    [
+     110.7,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     215.7,
+     31.2
+    ],
+    [
+     307.8,
+     31.2
+    ],
+    [
+     307.8,
+     121.3
+    ],
+    [
+     215.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     215.7,
+     132.7
+    ],
+    [
+     307.8,
+     132.7
+    ],
+    [
+     307.8,
+     221.8
+    ],
+    [
+     215.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     215.7,
+     336.7
+    ],
+    [
+     307.8,
+     336.7
+    ],
+    [
+     307.8,
+     427.3
+    ],
+    [
+     215.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     215.7,
+     438.7
+    ],
+    [
+     307.8,
+     438.7
+    ],
+    [
+     307.8,
+     529.3
+    ],
+    [
+     215.7,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     215.7,
+     540.7
+    ],
+    [
+     307.8,
+     540.7
+    ],
+    [
+     307.8,
+     629.8
+    ],
+    [
+     215.7,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     215.7,
+     644.2
+    ],
+    [
+     307.8,
+     644.2
+    ],
+    [
+     307.8,
+     733.3
+    ],
+    [
+     215.7,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     215.7,
+     744.7
+    ],
+    [
+     307.8,
+     744.7
+    ],
+    [
+     307.8,
+     835.3
+    ],
+    [
+     215.7,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     215.7,
+     846.7
+    ],
+    [
+     307.8,
+     846.7
+    ],
+    [
+     307.8,
+     937.3
+    ],
+    [
+     215.7,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     322.2,
+     31.2
+    ],
+    [
+     414.3,
+     31.2
+    ],
+    [
+     414.3,
+     121.3
+    ],
+    [
+     322.2,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     322.2,
+     132.7
+    ],
+    [
+     414.3,
+     132.7
+    ],
+    [
+     414.3,
+     221.8
+    ],
+    [
+     322.2,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     322.2,
+     236.2
+    ],
+    [
+     414.3,
+     236.2
+    ],
+    [
+     414.3,
+     325.3
+    ],
+    [
+     322.2,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     322.2,
+     336.7
+    ],
+    [
+     414.3,
+     336.7
+    ],
+    [
+     414.3,
+     427.3
+    ],
+    [
+     322.2,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     322.2,
+     438.7
+    ],
+    [
+     414.3,
+     438.7
+    ],
+    [
+     414.3,
+     529.3
+    ],
+    [
+     322.2,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     322.2,
+     540.7
+    ],
+    [
+     414.3,
+     540.7
+    ],
+    [
+     414.3,
+     629.8
+    ],
+    [
+     322.2,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     322.2,
+     644.2
+    ],
+    [
+     414.3,
+     644.2
+    ],
+    [
+     414.3,
+     733.3
+    ],
+    [
+     322.2,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-13-7",
+   "quartier": "quartier-des-foires",
+   "fonction": "marche",
+   "polygone": [
+    [
+     322.2,
+     744.7
+    ],
+    [
+     414.3,
+     744.7
+    ],
+    [
+     414.3,
+     835.3
+    ],
+    [
+     322.2,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "foires"
+  },
+  {
+   "id": "i-13-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     322.2,
+     846.7
+    ],
+    [
+     414.3,
+     846.7
+    ],
+    [
+     414.3,
+     919.7
+    ],
+    [
+     371.9,
+     937.3
+    ],
+    [
+     322.2,
+     937.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     425.7,
+     31.2
+    ],
+    [
+     517.8,
+     31.2
+    ],
+    [
+     517.8,
+     121.3
+    ],
+    [
+     425.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     425.7,
+     132.7
+    ],
+    [
+     517.8,
+     132.7
+    ],
+    [
+     517.8,
+     221.8
+    ],
+    [
+     425.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     425.7,
+     236.2
+    ],
+    [
+     517.8,
+     236.2
+    ],
+    [
+     517.8,
+     325.3
+    ],
+    [
+     425.7,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     425.7,
+     336.7
+    ],
+    [
+     517.8,
+     336.7
+    ],
+    [
+     517.8,
+     427.3
+    ],
+    [
+     425.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     425.7,
+     438.7
+    ],
+    [
+     517.8,
+     438.7
+    ],
+    [
+     517.8,
+     529.3
+    ],
+    [
+     425.7,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     425.7,
+     540.7
+    ],
+    [
+     517.8,
+     540.7
+    ],
+    [
+     517.8,
+     629.8
+    ],
+    [
+     425.7,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-14-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     425.7,
+     644.2
+    ],
+    [
+     517.8,
+     644.2
+    ],
+    [
+     517.8,
+     733.3
+    ],
+    [
+     425.7,
+     733.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-14-7",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     425.7,
+     744.7
+    ],
+    [
+     517.8,
+     744.7
+    ],
+    [
+     517.8,
+     835.3
+    ],
+    [
+     425.7,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-14-8",
+   "quartier": "quartier-de-la-porte-nord",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     425.7,
+     846.7
+    ],
+    [
+     517.8,
+     846.7
+    ],
+    [
+     517.8,
+     865.3
+    ],
+    [
+     475.5,
+     889.7
+    ],
+    [
+     425.7,
+     914.3
+    ]
+   ],
+   "densite_bati": 0.7,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     532.2,
+     31.2
+    ],
+    [
+     624.3,
+     31.2
+    ],
+    [
+     624.3,
+     121.3
+    ],
+    [
+     532.2,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     532.2,
+     132.7
+    ],
+    [
+     624.3,
+     132.7
+    ],
+    [
+     624.3,
+     221.8
+    ],
+    [
+     532.2,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     532.2,
+     236.2
+    ],
+    [
+     624.3,
+     236.2
+    ],
+    [
+     624.3,
+     325.3
+    ],
+    [
+     532.2,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     532.2,
+     336.7
+    ],
+    [
+     624.3,
+     336.7
+    ],
+    [
+     624.3,
+     427.3
+    ],
+    [
+     532.2,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     532.2,
+     438.7
+    ],
+    [
+     624.3,
+     438.7
+    ],
+    [
+     624.3,
+     529.3
+    ],
+    [
+     532.2,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     532.2,
+     540.7
+    ],
+    [
+     624.3,
+     540.7
+    ],
+    [
+     624.3,
+     629.8
+    ],
+    [
+     532.2,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-15-7",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     532.2,
+     744.7
+    ],
+    [
+     624.3,
+     744.7
+    ],
+    [
+     624.3,
+     791.8
+    ],
+    [
+     587.6,
+     820
+    ],
+    [
+     564.7,
+     835.3
+    ],
+    [
+     532.2,
+     835.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     635.7,
+     31.2
+    ],
+    [
+     731.3,
+     31.2
+    ],
+    [
+     731.3,
+     121.3
+    ],
+    [
+     635.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     635.7,
+     132.7
+    ],
+    [
+     731.3,
+     132.7
+    ],
+    [
+     731.3,
+     221.8
+    ],
+    [
+     635.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "vieil-utopia",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     635.7,
+     236.2
+    ],
+    [
+     731.3,
+     236.2
+    ],
+    [
+     731.3,
+     325.3
+    ],
+    [
+     635.7,
+     325.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     635.7,
+     336.7
+    ],
+    [
+     731.3,
+     336.7
+    ],
+    [
+     731.3,
+     427.3
+    ],
+    [
+     635.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     635.7,
+     438.7
+    ],
+    [
+     731.3,
+     438.7
+    ],
+    [
+     731.3,
+     529.3
+    ],
+    [
+     635.7,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     635.7,
+     540.7
+    ],
+    [
+     731.3,
+     540.7
+    ],
+    [
+     731.3,
+     629.8
+    ],
+    [
+     635.7,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-16-7",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     635.7,
+     744.7
+    ],
+    [
+     680,
+     744.7
+    ],
+    [
+     640,
+     779.8
+    ],
+    [
+     635.7,
+     783.1
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     738.7,
+     31.2
+    ],
+    [
+     834.3,
+     31.2
+    ],
+    [
+     834.3,
+     121.3
+    ],
+    [
+     738.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     738.7,
+     132.7
+    ],
+    [
+     834.3,
+     132.7
+    ],
+    [
+     834.3,
+     221.8
+    ],
+    [
+     738.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     738.7,
+     236.2
+    ],
+    [
+     834.3,
+     236.2
+    ],
+    [
+     834.3,
+     325.3
+    ],
+    [
+     738.7,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-17-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     738.7,
+     336.7
+    ],
+    [
+     834.3,
+     336.7
+    ],
+    [
+     834.3,
+     427.3
+    ],
+    [
+     738.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     738.7,
+     438.7
+    ],
+    [
+     834.3,
+     438.7
+    ],
+    [
+     834.3,
+     529.3
+    ],
+    [
+     738.7,
+     529.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     738.7,
+     540.7
+    ],
+    [
+     834.3,
+     540.7
+    ],
+    [
+     834.3,
+     566.2
+    ],
+    [
+     820,
+     587.6
+    ],
+    [
+     787.6,
+     629.8
+    ],
+    [
+     738.7,
+     629.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-17-6",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     738.7,
+     644.2
+    ],
+    [
+     776.1,
+     644.2
+    ],
+    [
+     738.7,
+     686.9
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     845.7,
+     31.2
+    ],
+    [
+     939.3,
+     31.2
+    ],
+    [
+     939.3,
+     121.3
+    ],
+    [
+     845.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     845.7,
+     132.7
+    ],
+    [
+     939.3,
+     132.7
+    ],
+    [
+     939.3,
+     221.8
+    ],
+    [
+     845.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     845.7,
+     236.2
+    ],
+    [
+     939.3,
+     236.2
+    ],
+    [
+     939.3,
+     325.3
+    ],
+    [
+     845.7,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-18-3",
+   "quartier": "quartier-des-grains",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     845.7,
+     336.7
+    ],
+    [
+     939.3,
+     336.7
+    ],
+    [
+     939.3,
+     367
+    ],
+    [
+     918.9,
+     416.3
+    ],
+    [
+     913.5,
+     427.3
+    ],
+    [
+     845.7,
+     427.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "grains"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     950.7,
+     31.2
+    ],
+    [
+     1008.3,
+     31.2
+    ],
+    [
+     1008.3,
+     33
+    ],
+    [
+     1003.9,
+     98.9
+    ],
+    [
+     1001,
+     121.3
+    ],
+    [
+     950.7,
+     121.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     950.7,
+     132.7
+    ],
+    [
+     999.5,
+     132.7
+    ],
+    [
+     995.3,
+     164.3
+    ],
+    [
+     983.9,
+     221.8
+    ],
+    [
+     950.7,
+     221.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "quartier-des-bouviers",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     950.7,
+     236.2
+    ],
+    [
+     980.5,
+     236.2
+    ],
+    [
+     965.4,
+     292.8
+    ],
+    [
+     954.3,
+     325.3
+    ],
+    [
+     950.7,
+     325.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -520.8,
+     -150.3
+    ],
+    [
+     -354.2,
+     -150.3
+    ],
+    [
+     -354.2,
+     -34.7
+    ],
+    [
+     -520.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -520.8,
+     -275.3
+    ],
+    [
+     -354.2,
+     -275.3
+    ],
+    [
+     -354.2,
+     -159.7
+    ],
+    [
+     -520.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -520.8,
+     -400.3
+    ],
+    [
+     -354.2,
+     -400.3
+    ],
+    [
+     -354.2,
+     -284.7
+    ],
+    [
+     -520.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -520.8,
+     -525.3
+    ],
+    [
+     -354.2,
+     -525.3
+    ],
+    [
+     -354.2,
+     -409.7
+    ],
+    [
+     -520.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.8,
+     -150.3
+    ],
+    [
+     -179.2,
+     -150.3
+    ],
+    [
+     -179.2,
+     -34.7
+    ],
+    [
+     -345.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.8,
+     -275.3
+    ],
+    [
+     -179.2,
+     -275.3
+    ],
+    [
+     -179.2,
+     -159.7
+    ],
+    [
+     -345.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.8,
+     -400.3
+    ],
+    [
+     -179.2,
+     -400.3
+    ],
+    [
+     -179.2,
+     -284.7
+    ],
+    [
+     -345.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -345.8,
+     -525.3
+    ],
+    [
+     -179.2,
+     -525.3
+    ],
+    [
+     -179.2,
+     -409.7
+    ],
+    [
+     -345.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -170.8,
+     -150.3
+    ],
+    [
+     -7,
+     -150.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -170.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -170.8,
+     -275.3
+    ],
+    [
+     -7,
+     -275.3
+    ],
+    [
+     -7,
+     -159.7
+    ],
+    [
+     -170.8,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -170.8,
+     -400.3
+    ],
+    [
+     -7,
+     -400.3
+    ],
+    [
+     -7,
+     -284.7
+    ],
+    [
+     -170.8,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -170.8,
+     -525.3
+    ],
+    [
+     -7,
+     -525.3
+    ],
+    [
+     -7,
+     -409.7
+    ],
+    [
+     -170.8,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -150.3
+    ],
+    [
+     170.8,
+     -150.3
+    ],
+    [
+     170.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -275.3
+    ],
+    [
+     170.8,
+     -275.3
+    ],
+    [
+     170.8,
+     -159.7
+    ],
+    [
+     7,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -400.3
+    ],
+    [
+     170.8,
+     -400.3
+    ],
+    [
+     170.8,
+     -284.7
+    ],
+    [
+     7,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -525.3
+    ],
+    [
+     170.8,
+     -525.3
+    ],
+    [
+     170.8,
+     -409.7
+    ],
+    [
+     7,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     179.2,
+     -150.3
+    ],
+    [
+     345.8,
+     -150.3
+    ],
+    [
+     345.8,
+     -34.7
+    ],
+    [
+     179.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     179.2,
+     -275.3
+    ],
+    [
+     345.8,
+     -275.3
+    ],
+    [
+     345.8,
+     -159.7
+    ],
+    [
+     179.2,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     179.2,
+     -400.3
+    ],
+    [
+     345.8,
+     -400.3
+    ],
+    [
+     345.8,
+     -284.7
+    ],
+    [
+     179.2,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     179.2,
+     -525.3
+    ],
+    [
+     345.8,
+     -525.3
+    ],
+    [
+     345.8,
+     -409.7
+    ],
+    [
+     179.2,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.2,
+     -150.3
+    ],
+    [
+     520.8,
+     -150.3
+    ],
+    [
+     520.8,
+     -34.7
+    ],
+    [
+     354.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.2,
+     -275.3
+    ],
+    [
+     520.8,
+     -275.3
+    ],
+    [
+     520.8,
+     -159.7
+    ],
+    [
+     354.2,
+     -159.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.2,
+     -400.3
+    ],
+    [
+     520.8,
+     -400.3
+    ],
+    [
+     520.8,
+     -284.7
+    ],
+    [
+     354.2,
+     -284.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     354.2,
+     -525.3
+    ],
+    [
+     520.8,
+     -525.3
+    ],
+    [
+     520.8,
+     -409.7
+    ],
+    [
+     354.2,
+     -409.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "halle-aux-grains",
+   "nom": "Halle aux grains",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -367.5,
+    586
+   ],
+   "emprise_m": [
+    56,
+    26
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 13,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8B088",
+   "reperes_canon": [
+    "Utopia, ressource clé : commerce [C] (atlas 06 S03) : la halle est une adaptation"
+   ],
+   "params": {
+    "piliers": 10,
+    "pente": 40
+   }
+  },
+  {
+   "id": "bourse-des-grains",
+   "nom": "Bourse des grains",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    262.5,
+    280
+   ],
+   "emprise_m": [
+    34,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal de foire 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    540
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal de foire 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    540
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal de foire 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    540
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal de foire 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    540
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal de foire 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    700
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal de foire 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    700
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-7",
+   "nom": "Étal de foire 7",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    700
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-8",
+   "nom": "Étal de foire 8",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    700
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_canal",
+   "facade": "bois",
+   "teinte": "#C2A57E",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "grenier-d-utopia",
+   "nom": "Grenier d'Utopia",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    -577.5,
+    586
+   ],
+   "emprise_m": [
+    46,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 15,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CFC2A8",
+   "reperes_canon": [],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "moulin-des-minotiers",
+   "nom": "Moulin des Minotiers",
+   "canon": "A",
+   "archetype": "moulin",
+   "position": [
+    787.5,
+    484
+   ],
+   "emprise_m": [
+    12,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 16,
+   "etages": 3,
+   "toit": "pavillon",
+   "couverture": "bardeau",
+   "facade": "pierre_brute",
+   "teinte": "#D2C6AE",
+   "reperes_canon": []
+  },
+  {
+   "id": "entrepot-des-farines",
+   "nom": "Entrepôt des farines",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    682.5,
+    586
+   ],
+   "emprise_m": [
+    52,
+    24
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#C8B8A0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "caserne-de-la-porte-nord",
+   "nom": "Caserne de la porte nord",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -157.5,
+    892
+   ],
+   "emprise_m": [
+    60,
+    50
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "hotel-de-ville",
+   "nom": "Hôtel de ville d'Utopia",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    52.5,
+    178
+   ],
+   "emprise_m": [
+    30,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église d'Utopia",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    -367.5,
+    382
+   ],
+   "emprise_m": [
+    22,
+    44
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 18,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 48,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "poste-porte-nord",
+   "nom": "Poste de garde de la porte nord",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -66,
+    1010
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-5",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-15",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -170,
+     640
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 22,
+    "nom": "Tilleul de la Foire"
+   },
+   {
+    "position": [
+     150,
+     880
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne de la porte nord"
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   }
+  ],
+  "parcs": [
+   {
+    "id": "prairie-des-bouviers",
+    "nom": "Prairie des Bouviers",
+    "canon": "A",
+    "polygone": [
+     [
+      -851.3,
+      540.7
+     ],
+     [
+      -738.7,
+      540.7
+     ],
+     [
+      -738.7,
+      629.8
+     ],
+     [
+      -787.6,
+      629.8
+     ],
+     [
+      -820,
+      587.6
+     ]
+    ],
+    "essences": [
+     "saule",
+     "peuplier",
+     "tilleul"
+    ],
+    "arbres_par_ha": 50
+   },
+   {
+    "id": "jardin-des-halles",
+    "nom": "Jardin des Halles",
+    "canon": "A",
+    "polygone": [
+     [
+      -731.3,
+      336.7
+     ],
+     [
+      -532.2,
+      336.7
+     ],
+     [
+      -532.2,
+      427.3
+     ],
+     [
+      -731.3,
+      427.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "fruitier"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "jardin-de-la-porte-nord",
+    "nom": "Jardin de la Porte Nord",
+    "canon": "A",
+    "polygone": [
+     [
+      -517.8,
+      744.7
+     ],
+     [
+      -322.2,
+      744.7
+     ],
+     [
+      -322.2,
+      835.3
+     ],
+     [
+      -517.8,
+      835.3
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   },
+   {
+    "id": "promenade-des-foires",
+    "nom": "Promenade des Foires",
+    "canon": "A",
+    "polygone": [
+     [
+      532.2,
+      644.2
+     ],
+     [
+      731.3,
+      644.2
+     ],
+     [
+      731.3,
+      694.6
+     ],
+     [
+      692.6,
+      733.3
+     ],
+     [
+      532.2,
+      733.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "peuplier",
+     "erable"
+    ],
+    "arbres_par_ha": 62
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -480,
+      -60
+     ],
+     [
+      -330,
+      -60
+     ],
+     [
+      -330,
+      -560
+     ],
+     [
+      -480,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      330,
+      -60
+     ],
+     [
+      480,
+      -60
+     ],
+     [
+      480,
+      -560
+     ],
+     [
+      330,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -560,
+      -610
+     ],
+     [
+      560,
+      -610
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      20,
+      -330
+     ],
+     [
+      300,
+      -330
+     ],
+     [
+      300,
+      -560
+     ],
+     [
+      20,
+      -560
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -700,
+    300
+   ],
+   [
+    700,
+    300
+   ],
+   [
+    -300,
+    600
+   ],
+   [
+    250,
+    800
+   ],
+   [
+    -800,
+    700
+   ]
+  ],
+  "fontaines": [
+   [
+    -100,
+    585
+   ],
+   [
+    420,
+    150
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1112.8,
+    1736.8,
+    759.2
+   ],
+   "cible": [
+    30,
+    488.8,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    696.8,
+    1.8
+   ],
+   "cible": [
+    0,
+    228.8,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-de-la-foire",
+   "nom": "Place de la Foire et étals",
+   "oeil": [
+    190,
+    520,
+    2.4
+   ],
+   "cible": [
+    -60,
+    620,
+    6
+   ],
+   "fov": 62
+  },
+  {
+   "id": "bourse-des-grains",
+   "nom": "Place de la Bourse des grains",
+   "oeil": [
+    350,
+    170,
+    3
+   ],
+   "cible": [
+    210,
+    280,
+    10
+   ],
+   "fov": 60
+  },
+  {
+   "id": "quartier-des-grains",
+   "nom": "Halle aux grains et entrepôts",
+   "oeil": [
+    -350,
+    460,
+    6
+   ],
+   "cible": [
+    -420,
+    600,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "porte-nord",
+   "nom": "Caserne et poste de la porte nord",
+   "oeil": [
+    190,
+    850,
+    3.5
+   ],
+   "cible": [
+    -60,
+    1000,
+    10
+   ],
+   "fov": 62
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -550.6,
+    881.1,
+    52.5
+   ],
+   "cible": [
+    -180.4,
+    1023.2,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    3,
+    880,
+    1.8
+   ],
+   "cible": [
+    0,
+    1040,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Utopia en temps ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district (adaptation)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-afflux-des-evacues",
+   "nom": "850, afflux des évacués de Trost",
+   "date": "850",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) : le sud du mur Rose est évacué vers l'intérieur [C] ; destination des évacués dans ce district : adaptation",
+     "canon": "A"
+    },
+    {
+     "ref": "affluence, brume : adaptation (aucune destruction : le district n'est pas touché)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "brumeux",
+   "habitants": 1
+  }
+ ],
+ "etat_defaut": "845-avant"
+}
