@@ -1421,3 +1421,8 @@ L'auto-résolution n'a **pas** été dérivée ni calibrée à partir des batail
 ## 2026-10-16 — D-184 C10 tranche 3 : chargeur, planche, corrections de revue
 - **Décision** : tenues servies au navigateur (`execution: true`, 14 tenues + 5 décalques), chargées à la demande ; planche `?proto3d=tenues` ; `assets:blender:check` (mode contrôle sans écriture) ; script de manifeste confiné à `tools/blender/*.py` et fichier sous `projet/` ; tenues inscrites à `creations.md` (A). Emblème des ailes réduit pour tenir dans l'écu.
 - **Revue** : `docs/reports/C10-revue.md`, ACCEPTÉ AVEC RÉSERVES ; restent : LOD2, skinning, tests du chargeur réel. **Réversible** : oui.
+
+## 2026-10-16 — D-185 C15 tranche 1 : Trost et Karanes (mur Rose)
+- **Décision** : plans d'auteur `src/tools/places/auteur/{trost,karanes}.ts` (les JSON sont régénérés par `places:regenerer`) ; population lue de `scn_sandbox_845` (95 652 et 60 870), surface bâtie à −6,6 % et −4,8 % de population ÷ densité, ≥ 34 arbres/ha bâti ; noms `A` + `creation: true` (`creations.md`, Q14-Q15) ; états de porte réutilisés pour la brèche de 850 (schéma inchangé).
+- **Limites** : `places:valider` complet KO tant que les PNG de captures ne sont pas générés (`npm run places:captures -- trost karanes`, ≈ 2 h, à lancer en arrière-plan) ; ΔE entre états < 6 ; QG de la Garnison posé comme emplacement seulement.
+- **Preuve** : `tests/places/rose.test.ts` (15), verify EXIT=0 1492 tests. **Réversible** : oui.

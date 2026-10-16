@@ -1,0 +1,12812 @@
+{
+ "id": "trost",
+ "nom": "Trost",
+ "libelle": "Trost",
+ "canon": "C",
+ "niveau": "N1",
+ "sources": [
+  {
+   "ref": "docs/spec/01 §3.1 et docs/spec/11 §2 : Trost, district sud du mur Rose ; docs/spec/06 (S01, W05) : quartier général de la Garnison, brèche de 850, porte de Trost, zone de bouchage ; manga, 850 : bataille de Trost (104e promotion)",
+   "canon": "C"
+  },
+  {
+   "ref": "docs/spec/20 (LC-B) : porte sud, quartier général, rue des évacuations de 845 et de 850, canons de rempart sur rails, place du marché, rocher de 850 comme état",
+   "canon": "C"
+  },
+  {
+   "ref": "tracé de la saillie, noms de rues, de places et de bâtiments, dimensions, quartiers : adaptation (création C15, `docs/lore/creations.md`)",
+   "canon": "A"
+  }
+ ],
+ "province": "prov_trost",
+ "style": "E01",
+ "population": {
+  "province": "prov_trost",
+  "part": 0.9,
+  "canon": "C",
+  "note": "90 % de la population de `prov_trost` au départ de scn_sandbox_845 (95 652 hab.) logés intra-muros ; la province existe [C], la part est adaptée [A]."
+ },
+ "densite": {
+  "classe": "coeur",
+  "valeur": 250,
+  "canon": "A"
+ },
+ "perimetre": [
+  [
+   1552.5,
+   7.5
+  ],
+  [
+   1550.4,
+   81.3
+  ],
+  [
+   1544,
+   162.3
+  ],
+  [
+   1533.4,
+   242.9
+  ],
+  [
+   1518.6,
+   322.8
+  ],
+  [
+   1499.6,
+   401.8
+  ],
+  [
+   1476.5,
+   479.7
+  ],
+  [
+   1449.4,
+   556.4
+  ],
+  [
+   1418.3,
+   631.5
+  ],
+  [
+   1383.3,
+   704.8
+  ],
+  [
+   1344.5,
+   776.2
+  ],
+  [
+   1302,
+   845.6
+  ],
+  [
+   1256,
+   912.5
+  ],
+  [
+   1206.5,
+   977
+  ],
+  [
+   1153.7,
+   1038.8
+  ],
+  [
+   1097.8,
+   1097.8
+  ],
+  [
+   1038.8,
+   1153.7
+  ],
+  [
+   977,
+   1206.5
+  ],
+  [
+   912.5,
+   1256
+  ],
+  [
+   845.6,
+   1302
+  ],
+  [
+   776.3,
+   1344.5
+  ],
+  [
+   704.8,
+   1383.3
+  ],
+  [
+   631.5,
+   1418.3
+  ],
+  [
+   556.4,
+   1449.4
+  ],
+  [
+   479.7,
+   1476.5
+  ],
+  [
+   401.8,
+   1499.6
+  ],
+  [
+   322.8,
+   1518.6
+  ],
+  [
+   242.9,
+   1533.4
+  ],
+  [
+   162.3,
+   1544
+  ],
+  [
+   81.3,
+   1550.4
+  ],
+  [
+   0,
+   1552.5
+  ],
+  [
+   -81.3,
+   1550.4
+  ],
+  [
+   -162.3,
+   1544
+  ],
+  [
+   -242.9,
+   1533.4
+  ],
+  [
+   -322.8,
+   1518.6
+  ],
+  [
+   -401.8,
+   1499.6
+  ],
+  [
+   -479.7,
+   1476.5
+  ],
+  [
+   -556.4,
+   1449.4
+  ],
+  [
+   -631.5,
+   1418.3
+  ],
+  [
+   -704.8,
+   1383.3
+  ],
+  [
+   -776.2,
+   1344.5
+  ],
+  [
+   -845.6,
+   1302
+  ],
+  [
+   -912.5,
+   1256
+  ],
+  [
+   -977,
+   1206.5
+  ],
+  [
+   -1038.8,
+   1153.7
+  ],
+  [
+   -1097.8,
+   1097.8
+  ],
+  [
+   -1153.7,
+   1038.8
+  ],
+  [
+   -1206.5,
+   977
+  ],
+  [
+   -1256,
+   912.5
+  ],
+  [
+   -1302,
+   845.6
+  ],
+  [
+   -1344.5,
+   776.2
+  ],
+  [
+   -1383.3,
+   704.8
+  ],
+  [
+   -1418.3,
+   631.5
+  ],
+  [
+   -1449.4,
+   556.4
+  ],
+  [
+   -1476.5,
+   479.7
+  ],
+  [
+   -1499.6,
+   401.8
+  ],
+  [
+   -1518.6,
+   322.8
+  ],
+  [
+   -1533.4,
+   242.9
+  ],
+  [
+   -1544,
+   162.3
+  ],
+  [
+   -1550.4,
+   81.3
+  ],
+  [
+   -1552.5,
+   7.5
+  ]
+ ],
+ "zones": [
+  {
+   "id": "faubourg",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A",
+   "polygone": [
+    [
+     -850,
+     -24
+    ],
+    [
+     850,
+     -24
+    ],
+    [
+     850,
+     -600
+    ],
+    [
+     -850,
+     -600
+    ]
+   ],
+   "population": {
+    "province": "prov_trost",
+    "part": 0.1,
+    "canon": "A",
+    "note": "10 % de la population de `prov_trost` au départ de scn_sandbox_845 logés au pied de la porte intérieure, côté intérieur des terres (adaptation)."
+   },
+   "densite": {
+    "classe": "faubourg",
+    "valeur": 100,
+    "canon": "A"
+   }
+  }
+ ],
+ "orientation": {
+  "valeur": "sud",
+  "canon": "C"
+ },
+ "etendue_m": 3920,
+ "enceinte": {
+  "mur": "rose",
+  "canon": "C",
+  "traces": [
+   {
+    "id": "saillie",
+    "type": "arc",
+    "centre": [
+     0,
+     0
+    ],
+    "rayon_m": 1560,
+    "debut_deg": 0,
+    "fin_deg": 180,
+    "exterieur": "dehors",
+    "canon": "A"
+   },
+   {
+    "id": "mur-centre",
+    "type": "ligne",
+    "points": [
+     [
+      -1560,
+      0
+     ],
+     [
+      1560,
+      0
+     ]
+    ],
+    "exterieur": "gauche",
+    "canon": "A"
+   },
+   {
+    "id": "mur-ouest",
+    "type": "ligne",
+    "points": [
+     [
+      -1960,
+      0
+     ],
+     [
+      -1560,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   },
+   {
+    "id": "mur-est",
+    "type": "ligne",
+    "points": [
+     [
+      1560,
+      0
+     ],
+     [
+      1960,
+      0
+     ]
+    ],
+    "exterieur": "droite",
+    "canon": "A"
+   }
+  ],
+  "escaliers": [
+   {
+    "trace": "saillie",
+    "s_m": 490.1,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 1470.3,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2303.4,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 2597.5,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 3430.6,
+    "canon": "A"
+   },
+   {
+    "trace": "saillie",
+    "s_m": 4410.8,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1500,
+    "canon": "A"
+   },
+   {
+    "trace": "mur-centre",
+    "s_m": 1620,
+    "canon": "A"
+   }
+  ],
+  "canons": {
+   "espacement_m": 24,
+   "canon": "A",
+   "traces": [
+    "saillie"
+   ]
+  },
+  "glacis_m": 12,
+  "pied_vegetal": true
+ },
+ "portes": [
+  {
+   "id": "exterieure",
+   "nom": "Porte sud de Trost",
+   "role": "exterieure",
+   "canon": "C",
+   "sources": [
+    {
+     "ref": "docs/spec/06 W05 : porte de Trost [C], brèche de 850 [C]",
+     "canon": "C"
+    },
+    {
+     "ref": "dimensions et mécanisme : aucune source (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "saillie",
+   "s_m": 2450.4,
+   "passage": {
+    "largeur_m": 14,
+    "hauteur_m": 20,
+    "voute": "plein_cintre",
+    "trous_assassin": 8,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "levant",
+    "largeur_m": 15,
+    "hauteur_m": 20,
+    "epaisseur_m": 1.2,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 0,
+    "treuils": 2,
+    "contrepoids": 2,
+    "herse": false,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "maison_du_treuil",
+     "cote": "dessus",
+     "hauteur_m": 7,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "gauche",
+     "hauteur_m": 10,
+     "canon": "A"
+    },
+    {
+     "type": "tourelle",
+     "cote": "droite",
+     "hauteur_m": 10,
+     "canon": "A"
+    }
+   ],
+   "portail": "bossage",
+   "etat": "intacte"
+  },
+  {
+   "id": "interieure",
+   "nom": "Porte intérieure de Trost",
+   "role": "interieure",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "forme des districts : saillie à deux portes (établie pour Shiganshina et Trost) ; dimensions : aucune (Q5)",
+     "canon": "A"
+    }
+   ],
+   "trace": "mur-centre",
+   "s_m": 1560,
+   "passage": {
+    "largeur_m": 12,
+    "hauteur_m": 17,
+    "voute": "plein_cintre",
+    "trous_assassin": 4,
+    "rainures": true,
+    "canon": "A"
+   },
+   "vantail": {
+    "type": "battants",
+    "largeur_m": 12.4,
+    "hauteur_m": 16,
+    "epaisseur_m": 0.8,
+    "materiau": "chene_ferre",
+    "canon": "A"
+   },
+   "structure": {
+    "huisserie": true,
+    "gonds": 4,
+    "treuils": 1,
+    "contrepoids": 0,
+    "herse": true,
+    "canon": "A"
+   },
+   "tours": [
+    {
+     "type": "poste_de_garde",
+     "cote": "gauche",
+     "hauteur_m": 6,
+     "canon": "A"
+    },
+    {
+     "type": "poste_de_garde",
+     "cote": "droite",
+     "hauteur_m": 6,
+     "canon": "A"
+    }
+   ],
+   "portail": "pilastres",
+   "etat": "intacte"
+  }
+ ],
+ "rues": [
+  {
+   "id": "s-0",
+   "nom": "Rue des Fourriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1500,
+     25
+    ],
+    [
+     -1500,
+     325.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-1",
+   "nom": "Rue des Vivandiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1400,
+     25
+    ],
+    [
+     -1400,
+     629.5
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-2",
+   "nom": "Rue du Train",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1300,
+     25
+    ],
+    [
+     -1300,
+     816.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-3",
+   "nom": "Rue des Remontes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1200,
+     25
+    ],
+    [
+     -1200,
+     957.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-4",
+   "nom": "Rue des Mulets",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1100,
+     25
+    ],
+    [
+     -1100,
+     1070.6
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-5",
+   "nom": "Rue des Charretiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1000,
+     25
+    ],
+    [
+     -1000,
+     1075
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-6",
+   "nom": "Rue des Selliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -900,
+     25
+    ],
+    [
+     -900,
+     1243.5
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-0",
+   "nom": "Rue des Bourreliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -800,
+     25
+    ],
+    [
+     -800,
+     340
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-7-1",
+   "nom": "Rue des Bourreliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -800,
+     445
+    ],
+    [
+     -800,
+     1310
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-8",
+   "nom": "Rue des Maréchaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -700,
+     25
+    ],
+    [
+     -700,
+     1366.1
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9-0",
+   "nom": "Rue des Armuriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -600,
+     25
+    ],
+    [
+     -600,
+     550
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-9-1",
+   "nom": "Rue des Armuriers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -600,
+     655
+    ],
+    [
+     -600,
+     1412.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-10",
+   "nom": "Rue de la Poudre",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -500,
+     25
+    ],
+    [
+     -500,
+     1451.3
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-11",
+   "nom": "Rue de l'Évacuation",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -400,
+     25
+    ],
+    [
+     -400,
+     1482
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-12",
+   "nom": "Rue des Lampistes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -300,
+     25
+    ],
+    [
+     -300,
+     1495
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-13",
+   "nom": "Rue des Gabelous",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -200,
+     25
+    ],
+    [
+     -200,
+     1495
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-0",
+   "nom": "Rue des Fours",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -100,
+     25
+    ],
+    [
+     -100,
+     760
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-14-1",
+   "nom": "Rue des Fours",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -100,
+     970
+    ],
+    [
+     -100,
+     1285
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-0",
+   "nom": "Rue des Boulangers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     25
+    ],
+    [
+     100,
+     760
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-16-1",
+   "nom": "Rue des Boulangers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     100,
+     970
+    ],
+    [
+     100,
+     1285
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-17",
+   "nom": "Rue des Meuniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     25
+    ],
+    [
+     200,
+     1495
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-18",
+   "nom": "Rue des Tonneliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     300,
+     25
+    ],
+    [
+     300,
+     1495
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-19",
+   "nom": "Rue des Cordiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     400,
+     25
+    ],
+    [
+     400,
+     1482
+    ]
+   ],
+   "largeur_m": 14,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-20",
+   "nom": "Rue des Brasseurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     500,
+     25
+    ],
+    [
+     500,
+     1451.3
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-21",
+   "nom": "Rue des Hallebardiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     600,
+     25
+    ],
+    [
+     600,
+     1412.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-22",
+   "nom": "Rue du Guet",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     700,
+     25
+    ],
+    [
+     700,
+     1366.1
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-23-0",
+   "nom": "Rue de la Relève",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     800,
+     25
+    ],
+    [
+     800,
+     235
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-23-1",
+   "nom": "Rue de la Relève",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     800,
+     340
+    ],
+    [
+     800,
+     1310
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-24",
+   "nom": "Rue des Sentinelles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     900,
+     25
+    ],
+    [
+     900,
+     1243.5
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-25-0",
+   "nom": "Rue du Pont-Levis",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1000,
+     25
+    ],
+    [
+     1000,
+     865
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-25-1",
+   "nom": "Rue du Pont-Levis",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1000,
+     970
+    ],
+    [
+     1000,
+     1164.6
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-26",
+   "nom": "Rue des Herses",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1100,
+     25
+    ],
+    [
+     1100,
+     1070.6
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-27",
+   "nom": "Rue des Créneaux",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1200,
+     25
+    ],
+    [
+     1200,
+     957.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-28",
+   "nom": "Rue des Veilleurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1300,
+     25
+    ],
+    [
+     1300,
+     816.2
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-29",
+   "nom": "Rue des Tambours",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1400,
+     25
+    ],
+    [
+     1400,
+     629.5
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "s-30",
+   "nom": "Rue des Fifres",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1500,
+     25
+    ],
+    [
+     1500,
+     325.9
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-1",
+   "nom": "Rue du Corps de garde",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1500,
+     130
+    ],
+    [
+     1500,
+     130
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-2",
+   "nom": "Rue des Casernes",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1500,
+     235
+    ],
+    [
+     1500,
+     235
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-3",
+   "nom": "Rue de la Caserne Neuve",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1496.9,
+     340
+    ],
+    [
+     1496.9,
+     340
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-4",
+   "nom": "Rue du Marché",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1469.1,
+     445
+    ],
+    [
+     1469.1,
+     445
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-5",
+   "nom": "Rue des Étals",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1433.1,
+     550
+    ],
+    [
+     1433.1,
+     550
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-6",
+   "nom": "Rue des Halles",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1388.2,
+     655
+    ],
+    [
+     1388.2,
+     655
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-7",
+   "nom": "Rue des Drapiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1333.7,
+     760
+    ],
+    [
+     1333.7,
+     760
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8-0",
+   "nom": "Rue des Merciers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1268.1,
+     865
+    ],
+    [
+     -200,
+     865
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-8-1",
+   "nom": "Rue des Merciers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     865
+    ],
+    [
+     1268.1,
+     865
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-9",
+   "nom": "Rue de l'Église",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1189.7,
+     970
+    ],
+    [
+     1189.7,
+     970
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-10",
+   "nom": "Rue des Chaudronniers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1095.7,
+     1075
+    ],
+    [
+     1095.7,
+     1075
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-11",
+   "nom": "Rue des Potiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -981.7,
+     1180
+    ],
+    [
+     981.7,
+     1180
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-12",
+   "nom": "Rue des Tuiliers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -839.6,
+     1285
+    ],
+    [
+     839.6,
+     1285
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-13-0",
+   "nom": "Rue des Couvreurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -651.2,
+     1390
+    ],
+    [
+     -200,
+     1390
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-13-1",
+   "nom": "Rue des Couvreurs",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     200,
+     1390
+    ],
+    [
+     651.2,
+     1390
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "t-14",
+   "nom": "Rue des Charpentiers",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -348.1,
+     1495
+    ],
+    [
+     348.1,
+     1495
+    ]
+   ],
+   "largeur_m": 9,
+   "revetement": "paves"
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Grand-Rue du Sud",
+   "canon": "A",
+   "type": "principale",
+   "trace": [
+    [
+     0,
+     12
+    ],
+    [
+     0,
+     1552
+    ]
+   ],
+   "largeur_m": 20,
+   "revetement": "paves"
+  },
+  {
+   "id": "chemin-du-rempart-est",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     1534.8,
+     25
+    ],
+    [
+     1531.4,
+     104.5
+    ],
+    [
+     1524,
+     183.6
+    ],
+    [
+     1512.4,
+     262.3
+    ],
+    [
+     1496.8,
+     340.3
+    ],
+    [
+     1477.2,
+     417.4
+    ],
+    [
+     1453.6,
+     493.3
+    ],
+    [
+     1426.1,
+     567.9
+    ],
+    [
+     1394.7,
+     641
+    ],
+    [
+     1359.7,
+     712.4
+    ],
+    [
+     1320.9,
+     781.9
+    ],
+    [
+     1278.7,
+     849.3
+    ],
+    [
+     1233,
+     914.3
+    ],
+    [
+     1184,
+     977
+    ],
+    [
+     1131.8,
+     1037
+    ],
+    [
+     1076.5,
+     1094.2
+    ],
+    [
+     1018.4,
+     1148.5
+    ],
+    [
+     957.6,
+     1199.7
+    ],
+    [
+     894.1,
+     1247.7
+    ],
+    [
+     828.3,
+     1292.3
+    ],
+    [
+     760.3,
+     1333.5
+    ],
+    [
+     690.2,
+     1371.1
+    ],
+    [
+     618.2,
+     1405
+    ],
+    [
+     544.6,
+     1435.1
+    ],
+    [
+     469.6,
+     1461.4
+    ],
+    [
+     393.3,
+     1483.8
+    ],
+    [
+     315.9,
+     1502.1
+    ],
+    [
+     237.7,
+     1516.5
+    ],
+    [
+     158.8,
+     1526.8
+    ],
+    [
+     79.5,
+     1532.9
+    ],
+    [
+     0,
+     1535
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-du-rempart-ouest",
+   "nom": "Chemin du Rempart",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     0,
+     1535
+    ],
+    [
+     -79.5,
+     1532.9
+    ],
+    [
+     -158.8,
+     1526.8
+    ],
+    [
+     -237.7,
+     1516.5
+    ],
+    [
+     -315.9,
+     1502.1
+    ],
+    [
+     -393.3,
+     1483.8
+    ],
+    [
+     -469.6,
+     1461.4
+    ],
+    [
+     -544.6,
+     1435.1
+    ],
+    [
+     -618.2,
+     1405
+    ],
+    [
+     -690.2,
+     1371.1
+    ],
+    [
+     -760.3,
+     1333.5
+    ],
+    [
+     -828.3,
+     1292.3
+    ],
+    [
+     -894.1,
+     1247.7
+    ],
+    [
+     -957.6,
+     1199.7
+    ],
+    [
+     -1018.4,
+     1148.5
+    ],
+    [
+     -1076.5,
+     1094.2
+    ],
+    [
+     -1131.8,
+     1037
+    ],
+    [
+     -1184,
+     977
+    ],
+    [
+     -1233,
+     914.3
+    ],
+    [
+     -1278.7,
+     849.3
+    ],
+    [
+     -1320.9,
+     781.9
+    ],
+    [
+     -1359.7,
+     712.4
+    ],
+    [
+     -1394.7,
+     641
+    ],
+    [
+     -1426.1,
+     567.9
+    ],
+    [
+     -1453.6,
+     493.3
+    ],
+    [
+     -1477.2,
+     417.4
+    ],
+    [
+     -1496.8,
+     340.3
+    ],
+    [
+     -1512.4,
+     262.3
+    ],
+    [
+     -1524,
+     183.6
+    ],
+    [
+     -1531.4,
+     104.5
+    ],
+    [
+     -1534.8,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "gravier"
+  },
+  {
+   "id": "rue-du-mur",
+   "nom": "Rue du Mur",
+   "canon": "A",
+   "type": "rue",
+   "trace": [
+    [
+     -1535,
+     25
+    ],
+    [
+     1535,
+     25
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "paves"
+  },
+  {
+   "id": "route-interieure",
+   "nom": "Route de l'intérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     -14
+    ],
+    [
+     0,
+     -1790
+    ]
+   ],
+   "largeur_m": 12,
+   "revetement": "gravier"
+  },
+  {
+   "id": "chemin-faubourg-x0",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -30
+    ],
+    [
+     -840,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x1",
+   "nom": "Chemin du Lavoir",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -630,
+     -30
+    ],
+    [
+     -630,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x2",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -420,
+     -30
+    ],
+    [
+     -420,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x3",
+   "nom": "Chemin des Ruches",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -210,
+     -30
+    ],
+    [
+     -210,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x5",
+   "nom": "Chemin des Vergers",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     210,
+     -30
+    ],
+    [
+     210,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x6",
+   "nom": "Chemin de la Mare",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     420,
+     -30
+    ],
+    [
+     420,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x7",
+   "nom": "Chemin des Saules",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     630,
+     -30
+    ],
+    [
+     630,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-x8",
+   "nom": "Chemin des Ormes",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     840,
+     -30
+    ],
+    [
+     840,
+     -590
+    ]
+   ],
+   "largeur_m": 6,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y0",
+   "nom": "Chemin du Glacis",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -30
+    ],
+    [
+     840,
+     -30
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y1",
+   "nom": "Chemin des Champs",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -170
+    ],
+    [
+     840,
+     -170
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y2",
+   "nom": "Chemin des Prés",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -310
+    ],
+    [
+     840,
+     -310
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y3",
+   "nom": "Chemin du Lavoir",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -450
+    ],
+    [
+     840,
+     -450
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "chemin-faubourg-y4",
+   "nom": "Chemin des Haies",
+   "canon": "A",
+   "type": "chemin",
+   "trace": [
+    [
+     -840,
+     -590
+    ],
+    [
+     840,
+     -590
+    ]
+   ],
+   "largeur_m": 7,
+   "revetement": "terre"
+  },
+  {
+   "id": "route-exterieure",
+   "nom": "Route de l'extérieur",
+   "canon": "A",
+   "type": "route",
+   "trace": [
+    [
+     0,
+     1570
+    ],
+    [
+     0,
+     1980
+    ]
+   ],
+   "largeur_m": 10,
+   "revetement": "terre"
+  }
+ ],
+ "places_publiques": [
+  {
+   "id": "placette-0",
+   "nom": "Place du Corps de garde",
+   "canon": "A",
+   "polygone": [
+    [
+     -1194.3,
+     765.7
+    ],
+    [
+     -1105.7,
+     765.7
+    ],
+    [
+     -1105.7,
+     857.8
+    ],
+    [
+     -1194.3,
+     857.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-1",
+   "nom": "Placette des Fourriers",
+   "canon": "A",
+   "polygone": [
+    [
+     -594.3,
+     975.7
+    ],
+    [
+     -505.7,
+     975.7
+    ],
+    [
+     -505.7,
+     1069.3
+    ],
+    [
+     -594.3,
+     1069.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    -550,
+    1022.5
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-2",
+   "nom": "Place de la Relève",
+   "canon": "A",
+   "polygone": [
+    [
+     -294.3,
+     242.2
+    ],
+    [
+     -205.7,
+     242.2
+    ],
+    [
+     -205.7,
+     334.3
+    ],
+    [
+     -294.3,
+     334.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-3",
+   "nom": "Placette du Puits",
+   "canon": "A",
+   "polygone": [
+    [
+     305.7,
+     1187.2
+    ],
+    [
+     391.8,
+     1187.2
+    ],
+    [
+     391.8,
+     1279.3
+    ],
+    [
+     305.7,
+     1279.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    348.7,
+    1233.2
+   ],
+   "marche": false
+  },
+  {
+   "id": "placette-4",
+   "nom": "Place des Charrois",
+   "canon": "A",
+   "polygone": [
+    [
+     605.7,
+     450.7
+    ],
+    [
+     694.3,
+     450.7
+    ],
+    [
+     694.3,
+     542.8
+    ],
+    [
+     605.7,
+     542.8
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "placette-5",
+   "nom": "Placette des Tonneliers",
+   "canon": "A",
+   "polygone": [
+    [
+     1205.7,
+     557.2
+    ],
+    [
+     1294.3,
+     557.2
+    ],
+    [
+     1294.3,
+     649.3
+    ],
+    [
+     1205.7,
+     649.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    1250,
+    603.3
+   ],
+   "marche": false
+  },
+  {
+   "id": "place-des-casernes",
+   "nom": "Place des Casernes",
+   "canon": "A",
+   "polygone": [
+    [
+     -694.3,
+     557.2
+    ],
+    [
+     -505.7,
+     557.2
+    ],
+    [
+     -505.7,
+     649.3
+    ],
+    [
+     -694.3,
+     649.3
+    ]
+   ],
+   "revetement": "terre",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché",
+   "canon": "A",
+   "polygone": [
+    [
+     -194.3,
+     765.7
+    ],
+    [
+     194.3,
+     765.7
+    ],
+    [
+     194.3,
+     964.3
+    ],
+    [
+     -194.3,
+     964.3
+    ]
+   ],
+   "revetement": "paves",
+   "fontaine": [
+    0,
+    865
+   ],
+   "marche": true
+  },
+  {
+   "id": "place-de-la-porte-sud",
+   "nom": "Place de la Porte Sud",
+   "canon": "A",
+   "polygone": [
+    [
+     -194.3,
+     1290.7
+    ],
+    [
+     194.3,
+     1290.7
+    ],
+    [
+     194.3,
+     1489.3
+    ],
+    [
+     -194.3,
+     1489.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  },
+  {
+   "id": "parvis-de-l-eglise",
+   "nom": "Parvis de l'église",
+   "canon": "A",
+   "polygone": [
+    [
+     105.7,
+     345.7
+    ],
+    [
+     194.3,
+     345.7
+    ],
+    [
+     194.3,
+     439.3
+    ],
+    [
+     105.7,
+     439.3
+    ]
+   ],
+   "revetement": "dalles",
+   "fontaine": null,
+   "marche": false
+  }
+ ],
+ "gabarits": {
+  "centre": {
+   "etages": [
+    3,
+    4,
+    3,
+    2,
+    4
+   ],
+   "hauteur_etage_m": 3,
+   "toits": [
+    "pignon_rue",
+    "pignon",
+    "pignon_rue",
+    "demi_croupe",
+    "croupe"
+   ],
+   "pente_deg": [
+    48,
+    58
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "bardeau",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "enduit",
+    "colombage",
+    "pierre_taillee"
+   ],
+   "teintes": [
+    "#EFE4CC",
+    "#E9D3B0",
+    "#F1DCCB",
+    "#E2E0CF",
+    "#EADFC2",
+    "#D9C6A2",
+    "#F2E8D6",
+    "#E7CDB8",
+    "#DCD8C4"
+   ],
+   "parcelles_m": [
+    7,
+    8.5,
+    6.5,
+    9,
+    7.5
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 45,
+   "cour": {
+    "type": "plantee",
+    "arbres_par_ha": 85
+   }
+  },
+  "ouvrier": {
+   "etages": [
+    2,
+    3,
+    2,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "appentis",
+    "pignon_rue",
+    "pignon"
+   ],
+   "pente_deg": [
+    38,
+    50
+   ],
+   "couvertures": [
+    "tuile_canal",
+    "bardeau",
+    "tuile_plate",
+    "chaume"
+   ],
+   "facades": [
+    "enduit",
+    "bois",
+    "pierre_brute",
+    "colombage"
+   ],
+   "teintes": [
+    "#D9CCB2",
+    "#CFC2A6",
+    "#E0D4BC",
+    "#C9BBA0",
+    "#D4C7AE"
+   ],
+   "parcelles_m": [
+    5.5,
+    6.5,
+    5,
+    7
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 30,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 110
+   }
+  },
+  "faubourg": {
+   "etages": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "hauteur_etage_m": 2.8,
+   "toits": [
+    "pignon",
+    "croupe",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    42,
+    55
+   ],
+   "couvertures": [
+    "chaume",
+    "bardeau",
+    "chaume",
+    "tuile_canal"
+   ],
+   "facades": [
+    "bois",
+    "colombage",
+    "enduit",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D8CCB4",
+    "#CDBF9F",
+    "#E2D6BF",
+    "#C7B898"
+   ],
+   "parcelles_m": [
+    11,
+    15,
+    9,
+    13
+   ],
+   "profondeur_m": 10,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "jardin",
+    "arbres_par_ha": 60
+   }
+  },
+  "garnison": {
+   "etages": [
+    2,
+    3
+   ],
+   "hauteur_etage_m": 3.4,
+   "toits": [
+    "croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    35,
+    45
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_taillee",
+    "pierre_brute"
+   ],
+   "teintes": [
+    "#D9D3C6",
+    "#CFC8B9"
+   ],
+   "parcelles_m": [
+    14,
+    18,
+    12
+   ],
+   "profondeur_m": 12,
+   "boutiques": false,
+   "passage_m": 0,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 25
+   }
+  },
+  "marchand": {
+   "etages": [
+    3,
+    3,
+    4,
+    3
+   ],
+   "hauteur_etage_m": 3.1,
+   "toits": [
+    "pignon_rue",
+    "croupe",
+    "pignon_rue",
+    "demi_croupe"
+   ],
+   "pente_deg": [
+    44,
+    56
+   ],
+   "couvertures": [
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate",
+    "tuile_plate"
+   ],
+   "facades": [
+    "colombage",
+    "enduit",
+    "pierre_taillee",
+    "enduit"
+   ],
+   "teintes": [
+    "#EBDDC2",
+    "#E4D0AC",
+    "#EFD9C4",
+    "#DFDBC8",
+    "#E8DCBE"
+   ],
+   "parcelles_m": [
+    7.5,
+    9,
+    6.5,
+    10
+   ],
+   "profondeur_m": 13,
+   "boutiques": true,
+   "passage_m": 40,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 40
+   }
+  },
+  "entrepots": {
+   "etages": [
+    2,
+    3,
+    3,
+    2
+   ],
+   "hauteur_etage_m": 3.8,
+   "toits": [
+    "croupe",
+    "pignon",
+    "demi_croupe",
+    "pignon"
+   ],
+   "pente_deg": [
+    34,
+    46
+   ],
+   "couvertures": [
+    "ardoise",
+    "tuile_plate",
+    "ardoise",
+    "tuile_plate"
+   ],
+   "facades": [
+    "pierre_brute",
+    "brique",
+    "pierre_brute",
+    "bois"
+   ],
+   "teintes": [
+    "#CCC0A8",
+    "#C3B79F",
+    "#D2C6AE",
+    "#BEB29A"
+   ],
+   "parcelles_m": [
+    20,
+    26,
+    18,
+    24
+   ],
+   "profondeur_m": 20,
+   "boutiques": false,
+   "passage_m": 50,
+   "cour": {
+    "type": "pavee",
+    "arbres_par_ha": 30
+   }
+  }
+ },
+ "quartiers": [
+  {
+   "id": "vieux-trost",
+   "nom": "Vieux Trost",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-du-marche",
+   "nom": "Quartier du Marché",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-de-la-garnison",
+   "nom": "Quartier de la Garnison",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-entrepots",
+   "nom": "Quartier des Entrepôts",
+   "canon": "A"
+  },
+  {
+   "id": "quartier-des-rives",
+   "nom": "Quartier des Rives (ouvriers et familles de soldats)",
+   "canon": "A"
+  },
+  {
+   "id": "faubourg-de-la-porte-interieure",
+   "nom": "Faubourg de la porte intérieure",
+   "canon": "A"
+  }
+ ],
+ "ilots": [
+  {
+   "id": "i-0-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1494.3,
+     31.2
+    ],
+    [
+     -1405.7,
+     31.2
+    ],
+    [
+     -1405.7,
+     124.3
+    ],
+    [
+     -1494.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1494.3,
+     135.7
+    ],
+    [
+     -1405.7,
+     135.7
+    ],
+    [
+     -1405.7,
+     227.8
+    ],
+    [
+     -1494.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1494.3,
+     242.2
+    ],
+    [
+     -1405.7,
+     242.2
+    ],
+    [
+     -1405.7,
+     334.3
+    ],
+    [
+     -1491.4,
+     334.3
+    ],
+    [
+     -1494.3,
+     319.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1489.2,
+     345.7
+    ],
+    [
+     -1405.7,
+     345.7
+    ],
+    [
+     -1405.7,
+     439.3
+    ],
+    [
+     -1464.2,
+     439.3
+    ],
+    [
+     -1488.9,
+     347.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-0-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1460.6,
+     450.7
+    ],
+    [
+     -1405.7,
+     450.7
+    ],
+    [
+     -1405.7,
+     542.8
+    ],
+    [
+     -1429,
+     542.8
+    ],
+    [
+     -1430.8,
+     538.5
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     31.2
+    ],
+    [
+     -1305.7,
+     31.2
+    ],
+    [
+     -1305.7,
+     124.3
+    ],
+    [
+     -1394.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     135.7
+    ],
+    [
+     -1305.7,
+     135.7
+    ],
+    [
+     -1305.7,
+     227.8
+    ],
+    [
+     -1394.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     242.2
+    ],
+    [
+     -1305.7,
+     242.2
+    ],
+    [
+     -1305.7,
+     334.3
+    ],
+    [
+     -1394.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     345.7
+    ],
+    [
+     -1305.7,
+     345.7
+    ],
+    [
+     -1305.7,
+     439.3
+    ],
+    [
+     -1394.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     450.7
+    ],
+    [
+     -1305.7,
+     450.7
+    ],
+    [
+     -1305.7,
+     542.8
+    ],
+    [
+     -1394.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1394.3,
+     557.2
+    ],
+    [
+     -1305.7,
+     557.2
+    ],
+    [
+     -1305.7,
+     649.3
+    ],
+    [
+     -1383.5,
+     649.3
+    ],
+    [
+     -1392.5,
+     630.9
+    ],
+    [
+     -1394.3,
+     626.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-1-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1377.9,
+     660.7
+    ],
+    [
+     -1305.7,
+     660.7
+    ],
+    [
+     -1305.7,
+     754.3
+    ],
+    [
+     -1328.9,
+     754.3
+    ],
+    [
+     -1348.3,
+     720.7
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     31.2
+    ],
+    [
+     -1205.7,
+     31.2
+    ],
+    [
+     -1205.7,
+     124.3
+    ],
+    [
+     -1294.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     135.7
+    ],
+    [
+     -1205.7,
+     135.7
+    ],
+    [
+     -1205.7,
+     227.8
+    ],
+    [
+     -1294.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     242.2
+    ],
+    [
+     -1205.7,
+     242.2
+    ],
+    [
+     -1205.7,
+     334.3
+    ],
+    [
+     -1294.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     345.7
+    ],
+    [
+     -1205.7,
+     345.7
+    ],
+    [
+     -1205.7,
+     439.3
+    ],
+    [
+     -1294.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     450.7
+    ],
+    [
+     -1205.7,
+     450.7
+    ],
+    [
+     -1205.7,
+     542.8
+    ],
+    [
+     -1294.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     557.2
+    ],
+    [
+     -1205.7,
+     557.2
+    ],
+    [
+     -1205.7,
+     649.3
+    ],
+    [
+     -1294.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     660.7
+    ],
+    [
+     -1205.7,
+     660.7
+    ],
+    [
+     -1205.7,
+     754.3
+    ],
+    [
+     -1294.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-7",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1294.3,
+     765.7
+    ],
+    [
+     -1205.7,
+     765.7
+    ],
+    [
+     -1205.7,
+     857.8
+    ],
+    [
+     -1264.5,
+     857.8
+    ],
+    [
+     -1294.3,
+     813.2
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-2-8",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1254.9,
+     872.2
+    ],
+    [
+     -1205.7,
+     872.2
+    ],
+    [
+     -1205.7,
+     938.7
+    ],
+    [
+     -1242.7,
+     890.5
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     31.2
+    ],
+    [
+     -1105.7,
+     31.2
+    ],
+    [
+     -1105.7,
+     124.3
+    ],
+    [
+     -1194.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     135.7
+    ],
+    [
+     -1105.7,
+     135.7
+    ],
+    [
+     -1105.7,
+     227.8
+    ],
+    [
+     -1194.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     242.2
+    ],
+    [
+     -1105.7,
+     242.2
+    ],
+    [
+     -1105.7,
+     334.3
+    ],
+    [
+     -1194.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     345.7
+    ],
+    [
+     -1105.7,
+     345.7
+    ],
+    [
+     -1105.7,
+     439.3
+    ],
+    [
+     -1194.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     450.7
+    ],
+    [
+     -1105.7,
+     450.7
+    ],
+    [
+     -1105.7,
+     542.8
+    ],
+    [
+     -1194.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     557.2
+    ],
+    [
+     -1105.7,
+     557.2
+    ],
+    [
+     -1105.7,
+     649.3
+    ],
+    [
+     -1194.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     660.7
+    ],
+    [
+     -1105.7,
+     660.7
+    ],
+    [
+     -1105.7,
+     754.3
+    ],
+    [
+     -1194.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-8",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1194.3,
+     872.2
+    ],
+    [
+     -1105.7,
+     872.2
+    ],
+    [
+     -1105.7,
+     964.3
+    ],
+    [
+     -1186,
+     964.3
+    ],
+    [
+     -1194.3,
+     953.5
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-3-9",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1176.7,
+     975.7
+    ],
+    [
+     -1105.7,
+     975.7
+    ],
+    [
+     -1105.7,
+     1055.2
+    ],
+    [
+     -1115.8,
+     1045.1
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     31.2
+    ],
+    [
+     -1005.7,
+     31.2
+    ],
+    [
+     -1005.7,
+     124.3
+    ],
+    [
+     -1094.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     135.7
+    ],
+    [
+     -1005.7,
+     135.7
+    ],
+    [
+     -1005.7,
+     227.8
+    ],
+    [
+     -1094.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     242.2
+    ],
+    [
+     -1005.7,
+     242.2
+    ],
+    [
+     -1005.7,
+     334.3
+    ],
+    [
+     -1094.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     345.7
+    ],
+    [
+     -1005.7,
+     345.7
+    ],
+    [
+     -1005.7,
+     439.3
+    ],
+    [
+     -1094.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     450.7
+    ],
+    [
+     -1005.7,
+     450.7
+    ],
+    [
+     -1005.7,
+     542.8
+    ],
+    [
+     -1094.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     557.2
+    ],
+    [
+     -1005.7,
+     557.2
+    ],
+    [
+     -1005.7,
+     649.3
+    ],
+    [
+     -1094.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     660.7
+    ],
+    [
+     -1005.7,
+     660.7
+    ],
+    [
+     -1005.7,
+     754.3
+    ],
+    [
+     -1094.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-7",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     765.7
+    ],
+    [
+     -1005.7,
+     765.7
+    ],
+    [
+     -1005.7,
+     857.8
+    ],
+    [
+     -1094.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-8",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     872.2
+    ],
+    [
+     -1005.7,
+     872.2
+    ],
+    [
+     -1005.7,
+     964.3
+    ],
+    [
+     -1094.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-4-9",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -1094.3,
+     975.7
+    ],
+    [
+     -1005.7,
+     975.7
+    ],
+    [
+     -1005.7,
+     1069.3
+    ],
+    [
+     -1091.6,
+     1069.3
+    ],
+    [
+     -1094.3,
+     1066.6
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     31.2
+    ],
+    [
+     -907.2,
+     31.2
+    ],
+    [
+     -907.2,
+     124.3
+    ],
+    [
+     -994.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     135.7
+    ],
+    [
+     -907.2,
+     135.7
+    ],
+    [
+     -907.2,
+     227.8
+    ],
+    [
+     -994.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     242.2
+    ],
+    [
+     -907.2,
+     242.2
+    ],
+    [
+     -907.2,
+     334.3
+    ],
+    [
+     -994.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     345.7
+    ],
+    [
+     -907.2,
+     345.7
+    ],
+    [
+     -907.2,
+     439.3
+    ],
+    [
+     -994.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     450.7
+    ],
+    [
+     -907.2,
+     450.7
+    ],
+    [
+     -907.2,
+     542.8
+    ],
+    [
+     -994.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     557.2
+    ],
+    [
+     -907.2,
+     557.2
+    ],
+    [
+     -907.2,
+     649.3
+    ],
+    [
+     -994.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     660.7
+    ],
+    [
+     -907.2,
+     660.7
+    ],
+    [
+     -907.2,
+     754.3
+    ],
+    [
+     -994.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-7",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     765.7
+    ],
+    [
+     -907.2,
+     765.7
+    ],
+    [
+     -907.2,
+     857.8
+    ],
+    [
+     -994.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-8",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     872.2
+    ],
+    [
+     -907.2,
+     872.2
+    ],
+    [
+     -907.2,
+     964.3
+    ],
+    [
+     -994.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-9",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -994.3,
+     975.7
+    ],
+    [
+     -907.2,
+     975.7
+    ],
+    [
+     -907.2,
+     1069.3
+    ],
+    [
+     -994.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-5-11",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -962.8,
+     1187.2
+    ],
+    [
+     -907.2,
+     1187.2
+    ],
+    [
+     -907.2,
+     1229.9
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     31.2
+    ],
+    [
+     -805.7,
+     31.2
+    ],
+    [
+     -805.7,
+     124.3
+    ],
+    [
+     -892.8,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     135.7
+    ],
+    [
+     -805.7,
+     135.7
+    ],
+    [
+     -805.7,
+     227.8
+    ],
+    [
+     -892.8,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     242.2
+    ],
+    [
+     -805.7,
+     242.2
+    ],
+    [
+     -805.7,
+     334.3
+    ],
+    [
+     -892.8,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     450.7
+    ],
+    [
+     -805.7,
+     450.7
+    ],
+    [
+     -805.7,
+     542.8
+    ],
+    [
+     -892.8,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-5",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     557.2
+    ],
+    [
+     -805.7,
+     557.2
+    ],
+    [
+     -805.7,
+     649.3
+    ],
+    [
+     -892.8,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-6",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     660.7
+    ],
+    [
+     -805.7,
+     660.7
+    ],
+    [
+     -805.7,
+     754.3
+    ],
+    [
+     -892.8,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-7",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     765.7
+    ],
+    [
+     -805.7,
+     765.7
+    ],
+    [
+     -805.7,
+     857.8
+    ],
+    [
+     -892.8,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-8",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     872.2
+    ],
+    [
+     -805.7,
+     872.2
+    ],
+    [
+     -805.7,
+     964.3
+    ],
+    [
+     -892.8,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-9",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     975.7
+    ],
+    [
+     -805.7,
+     975.7
+    ],
+    [
+     -805.7,
+     1069.3
+    ],
+    [
+     -892.8,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-10",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     1080.7
+    ],
+    [
+     -805.7,
+     1080.7
+    ],
+    [
+     -805.7,
+     1172.8
+    ],
+    [
+     -892.8,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-6-11",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -892.8,
+     1187.2
+    ],
+    [
+     -805.7,
+     1187.2
+    ],
+    [
+     -805.7,
+     1279.3
+    ],
+    [
+     -835.7,
+     1279.3
+    ],
+    [
+     -890.5,
+     1242.7
+    ],
+    [
+     -892.8,
+     1240.9
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-7-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     31.2
+    ],
+    [
+     -705.7,
+     31.2
+    ],
+    [
+     -705.7,
+     124.3
+    ],
+    [
+     -794.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     135.7
+    ],
+    [
+     -705.7,
+     135.7
+    ],
+    [
+     -705.7,
+     227.8
+    ],
+    [
+     -794.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     242.2
+    ],
+    [
+     -705.7,
+     242.2
+    ],
+    [
+     -705.7,
+     334.3
+    ],
+    [
+     -794.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     450.7
+    ],
+    [
+     -705.7,
+     450.7
+    ],
+    [
+     -705.7,
+     542.8
+    ],
+    [
+     -794.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     557.2
+    ],
+    [
+     -705.7,
+     557.2
+    ],
+    [
+     -705.7,
+     649.3
+    ],
+    [
+     -794.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-6",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     660.7
+    ],
+    [
+     -705.7,
+     660.7
+    ],
+    [
+     -705.7,
+     754.3
+    ],
+    [
+     -794.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-7",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     765.7
+    ],
+    [
+     -705.7,
+     765.7
+    ],
+    [
+     -705.7,
+     857.8
+    ],
+    [
+     -794.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-8",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     872.2
+    ],
+    [
+     -705.7,
+     872.2
+    ],
+    [
+     -705.7,
+     964.3
+    ],
+    [
+     -794.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-9",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     975.7
+    ],
+    [
+     -705.7,
+     975.7
+    ],
+    [
+     -705.7,
+     1069.3
+    ],
+    [
+     -794.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-10",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     1080.7
+    ],
+    [
+     -705.7,
+     1080.7
+    ],
+    [
+     -705.7,
+     1172.8
+    ],
+    [
+     -794.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-11",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     1187.2
+    ],
+    [
+     -705.7,
+     1187.2
+    ],
+    [
+     -705.7,
+     1279.3
+    ],
+    [
+     -794.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-7-12",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -794.3,
+     1290.7
+    ],
+    [
+     -705.7,
+     1290.7
+    ],
+    [
+     -705.7,
+     1355.7
+    ],
+    [
+     -720.7,
+     1348.3
+    ],
+    [
+     -794.3,
+     1305.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     31.2
+    ],
+    [
+     -605.7,
+     31.2
+    ],
+    [
+     -605.7,
+     124.3
+    ],
+    [
+     -694.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     135.7
+    ],
+    [
+     -605.7,
+     135.7
+    ],
+    [
+     -605.7,
+     227.8
+    ],
+    [
+     -694.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     242.2
+    ],
+    [
+     -605.7,
+     242.2
+    ],
+    [
+     -605.7,
+     334.3
+    ],
+    [
+     -694.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     345.7
+    ],
+    [
+     -605.7,
+     345.7
+    ],
+    [
+     -605.7,
+     439.3
+    ],
+    [
+     -694.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     450.7
+    ],
+    [
+     -605.7,
+     450.7
+    ],
+    [
+     -605.7,
+     542.8
+    ],
+    [
+     -694.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-6",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     660.7
+    ],
+    [
+     -605.7,
+     660.7
+    ],
+    [
+     -605.7,
+     754.3
+    ],
+    [
+     -694.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-7",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     765.7
+    ],
+    [
+     -605.7,
+     765.7
+    ],
+    [
+     -605.7,
+     857.8
+    ],
+    [
+     -694.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-8",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     872.2
+    ],
+    [
+     -605.7,
+     872.2
+    ],
+    [
+     -605.7,
+     964.3
+    ],
+    [
+     -694.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-9",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     975.7
+    ],
+    [
+     -605.7,
+     975.7
+    ],
+    [
+     -605.7,
+     1069.3
+    ],
+    [
+     -694.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-10",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -694.3,
+     1080.7
+    ],
+    [
+     -605.7,
+     1080.7
+    ],
+    [
+     -605.7,
+     1172.8
+    ],
+    [
+     -694.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-8-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     1187.2
+    ],
+    [
+     -605.7,
+     1187.2
+    ],
+    [
+     -605.7,
+     1279.3
+    ],
+    [
+     -694.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-8-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -694.3,
+     1290.7
+    ],
+    [
+     -605.7,
+     1290.7
+    ],
+    [
+     -605.7,
+     1384.3
+    ],
+    [
+     -647.6,
+     1384.3
+    ],
+    [
+     -694.3,
+     1361.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     31.2
+    ],
+    [
+     -505.7,
+     31.2
+    ],
+    [
+     -505.7,
+     124.3
+    ],
+    [
+     -594.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     135.7
+    ],
+    [
+     -505.7,
+     135.7
+    ],
+    [
+     -505.7,
+     227.8
+    ],
+    [
+     -594.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     242.2
+    ],
+    [
+     -505.7,
+     242.2
+    ],
+    [
+     -505.7,
+     334.3
+    ],
+    [
+     -594.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     345.7
+    ],
+    [
+     -505.7,
+     345.7
+    ],
+    [
+     -505.7,
+     439.3
+    ],
+    [
+     -594.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     450.7
+    ],
+    [
+     -505.7,
+     450.7
+    ],
+    [
+     -505.7,
+     542.8
+    ],
+    [
+     -594.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-6",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     660.7
+    ],
+    [
+     -505.7,
+     660.7
+    ],
+    [
+     -505.7,
+     754.3
+    ],
+    [
+     -594.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-7",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     765.7
+    ],
+    [
+     -505.7,
+     765.7
+    ],
+    [
+     -505.7,
+     857.8
+    ],
+    [
+     -594.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-8",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     872.2
+    ],
+    [
+     -505.7,
+     872.2
+    ],
+    [
+     -505.7,
+     964.3
+    ],
+    [
+     -594.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-10",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -594.3,
+     1080.7
+    ],
+    [
+     -505.7,
+     1080.7
+    ],
+    [
+     -505.7,
+     1172.8
+    ],
+    [
+     -594.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-9-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -594.3,
+     1187.2
+    ],
+    [
+     -505.7,
+     1187.2
+    ],
+    [
+     -505.7,
+     1279.3
+    ],
+    [
+     -594.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -594.3,
+     1290.7
+    ],
+    [
+     -505.7,
+     1290.7
+    ],
+    [
+     -505.7,
+     1384.3
+    ],
+    [
+     -594.3,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-9-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -594.3,
+     1395.7
+    ],
+    [
+     -505.7,
+     1395.7
+    ],
+    [
+     -505.7,
+     1442
+    ],
+    [
+     -538.5,
+     1430.8
+    ],
+    [
+     -594.3,
+     1407.7
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     31.2
+    ],
+    [
+     -408.2,
+     31.2
+    ],
+    [
+     -408.2,
+     124.3
+    ],
+    [
+     -494.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     135.7
+    ],
+    [
+     -408.2,
+     135.7
+    ],
+    [
+     -408.2,
+     227.8
+    ],
+    [
+     -494.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     242.2
+    ],
+    [
+     -408.2,
+     242.2
+    ],
+    [
+     -408.2,
+     334.3
+    ],
+    [
+     -494.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     345.7
+    ],
+    [
+     -408.2,
+     345.7
+    ],
+    [
+     -408.2,
+     439.3
+    ],
+    [
+     -494.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     450.7
+    ],
+    [
+     -408.2,
+     450.7
+    ],
+    [
+     -408.2,
+     542.8
+    ],
+    [
+     -494.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -494.3,
+     557.2
+    ],
+    [
+     -408.2,
+     557.2
+    ],
+    [
+     -408.2,
+     649.3
+    ],
+    [
+     -494.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-10-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     660.7
+    ],
+    [
+     -408.2,
+     660.7
+    ],
+    [
+     -408.2,
+     754.3
+    ],
+    [
+     -494.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-10-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     765.7
+    ],
+    [
+     -408.2,
+     765.7
+    ],
+    [
+     -408.2,
+     857.8
+    ],
+    [
+     -494.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-10-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     872.2
+    ],
+    [
+     -408.2,
+     872.2
+    ],
+    [
+     -408.2,
+     964.3
+    ],
+    [
+     -494.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-10-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     975.7
+    ],
+    [
+     -408.2,
+     975.7
+    ],
+    [
+     -408.2,
+     1069.3
+    ],
+    [
+     -494.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-10-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -494.3,
+     1080.7
+    ],
+    [
+     -408.2,
+     1080.7
+    ],
+    [
+     -408.2,
+     1172.8
+    ],
+    [
+     -494.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-10-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     1187.2
+    ],
+    [
+     -408.2,
+     1187.2
+    ],
+    [
+     -408.2,
+     1279.3
+    ],
+    [
+     -494.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     1290.7
+    ],
+    [
+     -408.2,
+     1290.7
+    ],
+    [
+     -408.2,
+     1384.3
+    ],
+    [
+     -494.3,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-10-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -494.3,
+     1395.7
+    ],
+    [
+     -408.2,
+     1395.7
+    ],
+    [
+     -408.2,
+     1472.5
+    ],
+    [
+     -443.8,
+     1463
+    ],
+    [
+     -494.3,
+     1445.8
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     31.2
+    ],
+    [
+     -305.7,
+     31.2
+    ],
+    [
+     -305.7,
+     124.3
+    ],
+    [
+     -391.8,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     135.7
+    ],
+    [
+     -305.7,
+     135.7
+    ],
+    [
+     -305.7,
+     227.8
+    ],
+    [
+     -391.8,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     242.2
+    ],
+    [
+     -305.7,
+     242.2
+    ],
+    [
+     -305.7,
+     334.3
+    ],
+    [
+     -391.8,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     345.7
+    ],
+    [
+     -305.7,
+     345.7
+    ],
+    [
+     -305.7,
+     439.3
+    ],
+    [
+     -391.8,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     450.7
+    ],
+    [
+     -305.7,
+     450.7
+    ],
+    [
+     -305.7,
+     542.8
+    ],
+    [
+     -391.8,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -391.8,
+     557.2
+    ],
+    [
+     -305.7,
+     557.2
+    ],
+    [
+     -305.7,
+     649.3
+    ],
+    [
+     -391.8,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-11-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -391.8,
+     660.7
+    ],
+    [
+     -305.7,
+     660.7
+    ],
+    [
+     -305.7,
+     754.3
+    ],
+    [
+     -391.8,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-11-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -391.8,
+     765.7
+    ],
+    [
+     -305.7,
+     765.7
+    ],
+    [
+     -305.7,
+     857.8
+    ],
+    [
+     -391.8,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-11-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -391.8,
+     872.2
+    ],
+    [
+     -305.7,
+     872.2
+    ],
+    [
+     -305.7,
+     964.3
+    ],
+    [
+     -391.8,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-11-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -391.8,
+     975.7
+    ],
+    [
+     -305.7,
+     975.7
+    ],
+    [
+     -305.7,
+     1069.3
+    ],
+    [
+     -391.8,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-11-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -391.8,
+     1080.7
+    ],
+    [
+     -305.7,
+     1080.7
+    ],
+    [
+     -305.7,
+     1172.8
+    ],
+    [
+     -391.8,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-11-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -391.8,
+     1187.2
+    ],
+    [
+     -305.7,
+     1187.2
+    ],
+    [
+     -305.7,
+     1279.3
+    ],
+    [
+     -391.8,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -391.8,
+     1290.7
+    ],
+    [
+     -305.7,
+     1290.7
+    ],
+    [
+     -305.7,
+     1384.3
+    ],
+    [
+     -391.8,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-11-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -391.8,
+     1395.7
+    ],
+    [
+     -305.7,
+     1395.7
+    ],
+    [
+     -305.7,
+     1489.3
+    ],
+    [
+     -345,
+     1489.3
+    ],
+    [
+     -347.2,
+     1488.9
+    ],
+    [
+     -391.8,
+     1476.9
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.3,
+     31.2
+    ],
+    [
+     -205.7,
+     31.2
+    ],
+    [
+     -205.7,
+     124.3
+    ],
+    [
+     -294.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.3,
+     135.7
+    ],
+    [
+     -205.7,
+     135.7
+    ],
+    [
+     -205.7,
+     227.8
+    ],
+    [
+     -294.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.3,
+     345.7
+    ],
+    [
+     -205.7,
+     345.7
+    ],
+    [
+     -205.7,
+     439.3
+    ],
+    [
+     -294.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.3,
+     450.7
+    ],
+    [
+     -205.7,
+     450.7
+    ],
+    [
+     -205.7,
+     542.8
+    ],
+    [
+     -294.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -294.3,
+     557.2
+    ],
+    [
+     -205.7,
+     557.2
+    ],
+    [
+     -205.7,
+     649.3
+    ],
+    [
+     -294.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-12-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -294.3,
+     660.7
+    ],
+    [
+     -205.7,
+     660.7
+    ],
+    [
+     -205.7,
+     754.3
+    ],
+    [
+     -294.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-12-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -294.3,
+     765.7
+    ],
+    [
+     -205.7,
+     765.7
+    ],
+    [
+     -205.7,
+     857.8
+    ],
+    [
+     -294.3,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-12-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -294.3,
+     872.2
+    ],
+    [
+     -205.7,
+     872.2
+    ],
+    [
+     -205.7,
+     964.3
+    ],
+    [
+     -294.3,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-12-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -294.3,
+     975.7
+    ],
+    [
+     -205.7,
+     975.7
+    ],
+    [
+     -205.7,
+     1069.3
+    ],
+    [
+     -294.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-12-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -294.3,
+     1080.7
+    ],
+    [
+     -205.7,
+     1080.7
+    ],
+    [
+     -205.7,
+     1172.8
+    ],
+    [
+     -294.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-12-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -294.3,
+     1187.2
+    ],
+    [
+     -205.7,
+     1187.2
+    ],
+    [
+     -205.7,
+     1279.3
+    ],
+    [
+     -294.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -294.3,
+     1290.7
+    ],
+    [
+     -205.7,
+     1290.7
+    ],
+    [
+     -205.7,
+     1384.3
+    ],
+    [
+     -294.3,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-12-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -294.3,
+     1395.7
+    ],
+    [
+     -205.7,
+     1395.7
+    ],
+    [
+     -205.7,
+     1489.3
+    ],
+    [
+     -294.3,
+     1489.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-13-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     31.2
+    ],
+    [
+     -105.7,
+     31.2
+    ],
+    [
+     -105.7,
+     124.3
+    ],
+    [
+     -194.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     135.7
+    ],
+    [
+     -105.7,
+     135.7
+    ],
+    [
+     -105.7,
+     227.8
+    ],
+    [
+     -194.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     242.2
+    ],
+    [
+     -105.7,
+     242.2
+    ],
+    [
+     -105.7,
+     334.3
+    ],
+    [
+     -194.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     345.7
+    ],
+    [
+     -105.7,
+     345.7
+    ],
+    [
+     -105.7,
+     439.3
+    ],
+    [
+     -194.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     450.7
+    ],
+    [
+     -105.7,
+     450.7
+    ],
+    [
+     -105.7,
+     542.8
+    ],
+    [
+     -194.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -194.3,
+     557.2
+    ],
+    [
+     -105.7,
+     557.2
+    ],
+    [
+     -105.7,
+     649.3
+    ],
+    [
+     -194.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-13-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     660.7
+    ],
+    [
+     -105.7,
+     660.7
+    ],
+    [
+     -105.7,
+     754.3
+    ],
+    [
+     -194.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-13-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     975.7
+    ],
+    [
+     -105.7,
+     975.7
+    ],
+    [
+     -105.7,
+     1069.3
+    ],
+    [
+     -194.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-13-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -194.3,
+     1080.7
+    ],
+    [
+     -105.7,
+     1080.7
+    ],
+    [
+     -105.7,
+     1172.8
+    ],
+    [
+     -194.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-13-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -194.3,
+     1187.2
+    ],
+    [
+     -105.7,
+     1187.2
+    ],
+    [
+     -105.7,
+     1279.3
+    ],
+    [
+     -194.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-14-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     31.2
+    ],
+    [
+     -11.2,
+     31.2
+    ],
+    [
+     -11.2,
+     124.3
+    ],
+    [
+     -94.3,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     135.7
+    ],
+    [
+     -11.2,
+     135.7
+    ],
+    [
+     -11.2,
+     227.8
+    ],
+    [
+     -94.3,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     242.2
+    ],
+    [
+     -11.2,
+     242.2
+    ],
+    [
+     -11.2,
+     334.3
+    ],
+    [
+     -94.3,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     345.7
+    ],
+    [
+     -11.2,
+     345.7
+    ],
+    [
+     -11.2,
+     439.3
+    ],
+    [
+     -94.3,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     450.7
+    ],
+    [
+     -11.2,
+     450.7
+    ],
+    [
+     -11.2,
+     542.8
+    ],
+    [
+     -94.3,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -94.3,
+     557.2
+    ],
+    [
+     -11.2,
+     557.2
+    ],
+    [
+     -11.2,
+     649.3
+    ],
+    [
+     -94.3,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-14-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     660.7
+    ],
+    [
+     -11.2,
+     660.7
+    ],
+    [
+     -11.2,
+     754.3
+    ],
+    [
+     -94.3,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-14-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     975.7
+    ],
+    [
+     -11.2,
+     975.7
+    ],
+    [
+     -11.2,
+     1069.3
+    ],
+    [
+     -94.3,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-14-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     -94.3,
+     1080.7
+    ],
+    [
+     -11.2,
+     1080.7
+    ],
+    [
+     -11.2,
+     1172.8
+    ],
+    [
+     -94.3,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-14-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     -94.3,
+     1187.2
+    ],
+    [
+     -11.2,
+     1187.2
+    ],
+    [
+     -11.2,
+     1279.3
+    ],
+    [
+     -94.3,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-15-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     31.2
+    ],
+    [
+     94.3,
+     31.2
+    ],
+    [
+     94.3,
+     124.3
+    ],
+    [
+     11.2,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     135.7
+    ],
+    [
+     94.3,
+     135.7
+    ],
+    [
+     94.3,
+     227.8
+    ],
+    [
+     11.2,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     242.2
+    ],
+    [
+     94.3,
+     242.2
+    ],
+    [
+     94.3,
+     334.3
+    ],
+    [
+     11.2,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     345.7
+    ],
+    [
+     94.3,
+     345.7
+    ],
+    [
+     94.3,
+     439.3
+    ],
+    [
+     11.2,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     450.7
+    ],
+    [
+     94.3,
+     450.7
+    ],
+    [
+     94.3,
+     542.8
+    ],
+    [
+     11.2,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     11.2,
+     557.2
+    ],
+    [
+     94.3,
+     557.2
+    ],
+    [
+     94.3,
+     649.3
+    ],
+    [
+     11.2,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-15-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     11.2,
+     660.7
+    ],
+    [
+     94.3,
+     660.7
+    ],
+    [
+     94.3,
+     754.3
+    ],
+    [
+     11.2,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-15-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     11.2,
+     975.7
+    ],
+    [
+     94.3,
+     975.7
+    ],
+    [
+     94.3,
+     1069.3
+    ],
+    [
+     11.2,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-15-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     11.2,
+     1080.7
+    ],
+    [
+     94.3,
+     1080.7
+    ],
+    [
+     94.3,
+     1172.8
+    ],
+    [
+     11.2,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-15-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     11.2,
+     1187.2
+    ],
+    [
+     94.3,
+     1187.2
+    ],
+    [
+     94.3,
+     1279.3
+    ],
+    [
+     11.2,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-16-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     31.2
+    ],
+    [
+     194.3,
+     31.2
+    ],
+    [
+     194.3,
+     124.3
+    ],
+    [
+     105.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     135.7
+    ],
+    [
+     194.3,
+     135.7
+    ],
+    [
+     194.3,
+     227.8
+    ],
+    [
+     105.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     242.2
+    ],
+    [
+     194.3,
+     242.2
+    ],
+    [
+     194.3,
+     334.3
+    ],
+    [
+     105.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-4",
+   "quartier": "vieux-trost",
+   "fonction": "culte",
+   "polygone": [
+    [
+     105.7,
+     450.7
+    ],
+    [
+     194.3,
+     450.7
+    ],
+    [
+     194.3,
+     542.8
+    ],
+    [
+     105.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     105.7,
+     557.2
+    ],
+    [
+     194.3,
+     557.2
+    ],
+    [
+     194.3,
+     649.3
+    ],
+    [
+     105.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-16-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     660.7
+    ],
+    [
+     194.3,
+     660.7
+    ],
+    [
+     194.3,
+     754.3
+    ],
+    [
+     105.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-16-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     975.7
+    ],
+    [
+     194.3,
+     975.7
+    ],
+    [
+     194.3,
+     1069.3
+    ],
+    [
+     105.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-16-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     105.7,
+     1080.7
+    ],
+    [
+     194.3,
+     1080.7
+    ],
+    [
+     194.3,
+     1172.8
+    ],
+    [
+     105.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-16-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     105.7,
+     1187.2
+    ],
+    [
+     194.3,
+     1187.2
+    ],
+    [
+     194.3,
+     1279.3
+    ],
+    [
+     105.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-17-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     31.2
+    ],
+    [
+     294.3,
+     31.2
+    ],
+    [
+     294.3,
+     124.3
+    ],
+    [
+     205.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     135.7
+    ],
+    [
+     294.3,
+     135.7
+    ],
+    [
+     294.3,
+     227.8
+    ],
+    [
+     205.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     242.2
+    ],
+    [
+     294.3,
+     242.2
+    ],
+    [
+     294.3,
+     334.3
+    ],
+    [
+     205.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     345.7
+    ],
+    [
+     294.3,
+     345.7
+    ],
+    [
+     294.3,
+     439.3
+    ],
+    [
+     205.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     450.7
+    ],
+    [
+     294.3,
+     450.7
+    ],
+    [
+     294.3,
+     542.8
+    ],
+    [
+     205.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     205.7,
+     557.2
+    ],
+    [
+     294.3,
+     557.2
+    ],
+    [
+     294.3,
+     649.3
+    ],
+    [
+     205.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-17-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     660.7
+    ],
+    [
+     294.3,
+     660.7
+    ],
+    [
+     294.3,
+     754.3
+    ],
+    [
+     205.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-17-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     765.7
+    ],
+    [
+     294.3,
+     765.7
+    ],
+    [
+     294.3,
+     857.8
+    ],
+    [
+     205.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-17-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     872.2
+    ],
+    [
+     294.3,
+     872.2
+    ],
+    [
+     294.3,
+     964.3
+    ],
+    [
+     205.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-17-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     975.7
+    ],
+    [
+     294.3,
+     975.7
+    ],
+    [
+     294.3,
+     1069.3
+    ],
+    [
+     205.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-17-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     205.7,
+     1080.7
+    ],
+    [
+     294.3,
+     1080.7
+    ],
+    [
+     294.3,
+     1172.8
+    ],
+    [
+     205.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-17-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     205.7,
+     1187.2
+    ],
+    [
+     294.3,
+     1187.2
+    ],
+    [
+     294.3,
+     1279.3
+    ],
+    [
+     205.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-17-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     205.7,
+     1290.7
+    ],
+    [
+     294.3,
+     1290.7
+    ],
+    [
+     294.3,
+     1384.3
+    ],
+    [
+     205.7,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-17-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     205.7,
+     1395.7
+    ],
+    [
+     294.3,
+     1395.7
+    ],
+    [
+     294.3,
+     1489.3
+    ],
+    [
+     205.7,
+     1489.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-18-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     31.2
+    ],
+    [
+     391.8,
+     31.2
+    ],
+    [
+     391.8,
+     124.3
+    ],
+    [
+     305.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     135.7
+    ],
+    [
+     391.8,
+     135.7
+    ],
+    [
+     391.8,
+     227.8
+    ],
+    [
+     305.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     242.2
+    ],
+    [
+     391.8,
+     242.2
+    ],
+    [
+     391.8,
+     334.3
+    ],
+    [
+     305.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     345.7
+    ],
+    [
+     391.8,
+     345.7
+    ],
+    [
+     391.8,
+     439.3
+    ],
+    [
+     305.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     450.7
+    ],
+    [
+     391.8,
+     450.7
+    ],
+    [
+     391.8,
+     542.8
+    ],
+    [
+     305.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     305.7,
+     557.2
+    ],
+    [
+     391.8,
+     557.2
+    ],
+    [
+     391.8,
+     649.3
+    ],
+    [
+     305.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-18-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     305.7,
+     660.7
+    ],
+    [
+     391.8,
+     660.7
+    ],
+    [
+     391.8,
+     754.3
+    ],
+    [
+     305.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-18-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     305.7,
+     765.7
+    ],
+    [
+     391.8,
+     765.7
+    ],
+    [
+     391.8,
+     857.8
+    ],
+    [
+     305.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-18-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     305.7,
+     872.2
+    ],
+    [
+     391.8,
+     872.2
+    ],
+    [
+     391.8,
+     964.3
+    ],
+    [
+     305.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-18-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     305.7,
+     975.7
+    ],
+    [
+     391.8,
+     975.7
+    ],
+    [
+     391.8,
+     1069.3
+    ],
+    [
+     305.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-18-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     305.7,
+     1080.7
+    ],
+    [
+     391.8,
+     1080.7
+    ],
+    [
+     391.8,
+     1172.8
+    ],
+    [
+     305.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-18-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     305.7,
+     1290.7
+    ],
+    [
+     391.8,
+     1290.7
+    ],
+    [
+     391.8,
+     1384.3
+    ],
+    [
+     305.7,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-18-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     305.7,
+     1395.7
+    ],
+    [
+     391.8,
+     1395.7
+    ],
+    [
+     391.8,
+     1476.9
+    ],
+    [
+     347.2,
+     1488.9
+    ],
+    [
+     345,
+     1489.3
+    ],
+    [
+     305.7,
+     1489.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-19-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     31.2
+    ],
+    [
+     494.3,
+     31.2
+    ],
+    [
+     494.3,
+     124.3
+    ],
+    [
+     408.2,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     135.7
+    ],
+    [
+     494.3,
+     135.7
+    ],
+    [
+     494.3,
+     227.8
+    ],
+    [
+     408.2,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     242.2
+    ],
+    [
+     494.3,
+     242.2
+    ],
+    [
+     494.3,
+     334.3
+    ],
+    [
+     408.2,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     345.7
+    ],
+    [
+     494.3,
+     345.7
+    ],
+    [
+     494.3,
+     439.3
+    ],
+    [
+     408.2,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     450.7
+    ],
+    [
+     494.3,
+     450.7
+    ],
+    [
+     494.3,
+     542.8
+    ],
+    [
+     408.2,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-5",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     408.2,
+     557.2
+    ],
+    [
+     494.3,
+     557.2
+    ],
+    [
+     494.3,
+     649.3
+    ],
+    [
+     408.2,
+     649.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-19-6",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     408.2,
+     660.7
+    ],
+    [
+     494.3,
+     660.7
+    ],
+    [
+     494.3,
+     754.3
+    ],
+    [
+     408.2,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-19-7",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     408.2,
+     765.7
+    ],
+    [
+     494.3,
+     765.7
+    ],
+    [
+     494.3,
+     857.8
+    ],
+    [
+     408.2,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-19-8",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     408.2,
+     872.2
+    ],
+    [
+     494.3,
+     872.2
+    ],
+    [
+     494.3,
+     964.3
+    ],
+    [
+     408.2,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-19-9",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     408.2,
+     975.7
+    ],
+    [
+     494.3,
+     975.7
+    ],
+    [
+     494.3,
+     1069.3
+    ],
+    [
+     408.2,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-19-10",
+   "quartier": "quartier-du-marche",
+   "fonction": "marche",
+   "polygone": [
+    [
+     408.2,
+     1080.7
+    ],
+    [
+     494.3,
+     1080.7
+    ],
+    [
+     494.3,
+     1172.8
+    ],
+    [
+     408.2,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "marchand"
+  },
+  {
+   "id": "i-19-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     408.2,
+     1187.2
+    ],
+    [
+     494.3,
+     1187.2
+    ],
+    [
+     494.3,
+     1279.3
+    ],
+    [
+     408.2,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-19-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     408.2,
+     1290.7
+    ],
+    [
+     494.3,
+     1290.7
+    ],
+    [
+     494.3,
+     1384.3
+    ],
+    [
+     408.2,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-19-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     408.2,
+     1395.7
+    ],
+    [
+     494.3,
+     1395.7
+    ],
+    [
+     494.3,
+     1445.8
+    ],
+    [
+     443.8,
+     1463
+    ],
+    [
+     408.2,
+     1472.5
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-20-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     31.2
+    ],
+    [
+     594.3,
+     31.2
+    ],
+    [
+     594.3,
+     124.3
+    ],
+    [
+     505.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     135.7
+    ],
+    [
+     594.3,
+     135.7
+    ],
+    [
+     594.3,
+     227.8
+    ],
+    [
+     505.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     242.2
+    ],
+    [
+     594.3,
+     242.2
+    ],
+    [
+     594.3,
+     334.3
+    ],
+    [
+     505.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     345.7
+    ],
+    [
+     594.3,
+     345.7
+    ],
+    [
+     594.3,
+     439.3
+    ],
+    [
+     505.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     505.7,
+     450.7
+    ],
+    [
+     594.3,
+     450.7
+    ],
+    [
+     594.3,
+     542.8
+    ],
+    [
+     505.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-20-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     557.2
+    ],
+    [
+     594.3,
+     557.2
+    ],
+    [
+     594.3,
+     649.3
+    ],
+    [
+     505.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     660.7
+    ],
+    [
+     594.3,
+     660.7
+    ],
+    [
+     594.3,
+     754.3
+    ],
+    [
+     505.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     765.7
+    ],
+    [
+     594.3,
+     765.7
+    ],
+    [
+     594.3,
+     857.8
+    ],
+    [
+     505.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     872.2
+    ],
+    [
+     594.3,
+     872.2
+    ],
+    [
+     594.3,
+     964.3
+    ],
+    [
+     505.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     975.7
+    ],
+    [
+     594.3,
+     975.7
+    ],
+    [
+     594.3,
+     1069.3
+    ],
+    [
+     505.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     505.7,
+     1080.7
+    ],
+    [
+     594.3,
+     1080.7
+    ],
+    [
+     594.3,
+     1172.8
+    ],
+    [
+     505.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-20-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     505.7,
+     1187.2
+    ],
+    [
+     594.3,
+     1187.2
+    ],
+    [
+     594.3,
+     1279.3
+    ],
+    [
+     505.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-20-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     505.7,
+     1290.7
+    ],
+    [
+     594.3,
+     1290.7
+    ],
+    [
+     594.3,
+     1384.3
+    ],
+    [
+     505.7,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-20-13",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     505.7,
+     1395.7
+    ],
+    [
+     594.3,
+     1395.7
+    ],
+    [
+     594.3,
+     1407.7
+    ],
+    [
+     538.5,
+     1430.8
+    ],
+    [
+     505.7,
+     1442
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-21-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     605.7,
+     31.2
+    ],
+    [
+     694.3,
+     31.2
+    ],
+    [
+     694.3,
+     124.3
+    ],
+    [
+     605.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     605.7,
+     135.7
+    ],
+    [
+     694.3,
+     135.7
+    ],
+    [
+     694.3,
+     227.8
+    ],
+    [
+     605.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-2",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     605.7,
+     242.2
+    ],
+    [
+     694.3,
+     242.2
+    ],
+    [
+     694.3,
+     334.3
+    ],
+    [
+     605.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     605.7,
+     345.7
+    ],
+    [
+     694.3,
+     345.7
+    ],
+    [
+     694.3,
+     439.3
+    ],
+    [
+     605.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-21-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     557.2
+    ],
+    [
+     694.3,
+     557.2
+    ],
+    [
+     694.3,
+     649.3
+    ],
+    [
+     605.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     660.7
+    ],
+    [
+     694.3,
+     660.7
+    ],
+    [
+     694.3,
+     754.3
+    ],
+    [
+     605.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     765.7
+    ],
+    [
+     694.3,
+     765.7
+    ],
+    [
+     694.3,
+     857.8
+    ],
+    [
+     605.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     872.2
+    ],
+    [
+     694.3,
+     872.2
+    ],
+    [
+     694.3,
+     964.3
+    ],
+    [
+     605.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     975.7
+    ],
+    [
+     694.3,
+     975.7
+    ],
+    [
+     694.3,
+     1069.3
+    ],
+    [
+     605.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     605.7,
+     1080.7
+    ],
+    [
+     694.3,
+     1080.7
+    ],
+    [
+     694.3,
+     1172.8
+    ],
+    [
+     605.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-21-11",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     605.7,
+     1187.2
+    ],
+    [
+     694.3,
+     1187.2
+    ],
+    [
+     694.3,
+     1279.3
+    ],
+    [
+     605.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-21-12",
+   "quartier": "quartier-de-la-garnison",
+   "fonction": "caserne",
+   "polygone": [
+    [
+     605.7,
+     1290.7
+    ],
+    [
+     694.3,
+     1290.7
+    ],
+    [
+     694.3,
+     1361.3
+    ],
+    [
+     647.6,
+     1384.3
+    ],
+    [
+     605.7,
+     1384.3
+    ]
+   ],
+   "densite_bati": 0.75,
+   "gabarit": "garnison"
+  },
+  {
+   "id": "i-22-0",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     31.2
+    ],
+    [
+     794.3,
+     31.2
+    ],
+    [
+     794.3,
+     124.3
+    ],
+    [
+     705.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-22-1",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     135.7
+    ],
+    [
+     794.3,
+     135.7
+    ],
+    [
+     794.3,
+     227.8
+    ],
+    [
+     705.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-22-3",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     345.7
+    ],
+    [
+     794.3,
+     345.7
+    ],
+    [
+     794.3,
+     439.3
+    ],
+    [
+     705.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-22-4",
+   "quartier": "vieux-trost",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     705.7,
+     450.7
+    ],
+    [
+     794.3,
+     450.7
+    ],
+    [
+     794.3,
+     542.8
+    ],
+    [
+     705.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 1,
+   "gabarit": "centre"
+  },
+  {
+   "id": "i-22-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     557.2
+    ],
+    [
+     794.3,
+     557.2
+    ],
+    [
+     794.3,
+     649.3
+    ],
+    [
+     705.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     660.7
+    ],
+    [
+     794.3,
+     660.7
+    ],
+    [
+     794.3,
+     754.3
+    ],
+    [
+     705.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     765.7
+    ],
+    [
+     794.3,
+     765.7
+    ],
+    [
+     794.3,
+     857.8
+    ],
+    [
+     705.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     872.2
+    ],
+    [
+     794.3,
+     872.2
+    ],
+    [
+     794.3,
+     964.3
+    ],
+    [
+     705.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     975.7
+    ],
+    [
+     794.3,
+     975.7
+    ],
+    [
+     794.3,
+     1069.3
+    ],
+    [
+     705.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     1080.7
+    ],
+    [
+     794.3,
+     1080.7
+    ],
+    [
+     794.3,
+     1172.8
+    ],
+    [
+     705.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-11",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     1187.2
+    ],
+    [
+     794.3,
+     1187.2
+    ],
+    [
+     794.3,
+     1279.3
+    ],
+    [
+     705.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-22-12",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     705.7,
+     1290.7
+    ],
+    [
+     794.3,
+     1290.7
+    ],
+    [
+     794.3,
+     1305.8
+    ],
+    [
+     720.7,
+     1348.3
+    ],
+    [
+     705.7,
+     1355.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     31.2
+    ],
+    [
+     892.8,
+     31.2
+    ],
+    [
+     892.8,
+     124.3
+    ],
+    [
+     805.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     135.7
+    ],
+    [
+     892.8,
+     135.7
+    ],
+    [
+     892.8,
+     227.8
+    ],
+    [
+     805.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     345.7
+    ],
+    [
+     892.8,
+     345.7
+    ],
+    [
+     892.8,
+     439.3
+    ],
+    [
+     805.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     805.7,
+     450.7
+    ],
+    [
+     892.8,
+     450.7
+    ],
+    [
+     892.8,
+     542.8
+    ],
+    [
+     805.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-23-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     557.2
+    ],
+    [
+     892.8,
+     557.2
+    ],
+    [
+     892.8,
+     649.3
+    ],
+    [
+     805.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     660.7
+    ],
+    [
+     892.8,
+     660.7
+    ],
+    [
+     892.8,
+     754.3
+    ],
+    [
+     805.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     765.7
+    ],
+    [
+     892.8,
+     765.7
+    ],
+    [
+     892.8,
+     857.8
+    ],
+    [
+     805.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     872.2
+    ],
+    [
+     892.8,
+     872.2
+    ],
+    [
+     892.8,
+     964.3
+    ],
+    [
+     805.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     975.7
+    ],
+    [
+     892.8,
+     975.7
+    ],
+    [
+     892.8,
+     1069.3
+    ],
+    [
+     805.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     1080.7
+    ],
+    [
+     892.8,
+     1080.7
+    ],
+    [
+     892.8,
+     1172.8
+    ],
+    [
+     805.7,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-23-11",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     805.7,
+     1187.2
+    ],
+    [
+     892.8,
+     1187.2
+    ],
+    [
+     892.8,
+     1240.9
+    ],
+    [
+     890.5,
+     1242.7
+    ],
+    [
+     835.7,
+     1279.3
+    ],
+    [
+     805.7,
+     1279.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     907.2,
+     31.2
+    ],
+    [
+     994.3,
+     31.2
+    ],
+    [
+     994.3,
+     124.3
+    ],
+    [
+     907.2,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     907.2,
+     135.7
+    ],
+    [
+     994.3,
+     135.7
+    ],
+    [
+     994.3,
+     227.8
+    ],
+    [
+     907.2,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     907.2,
+     242.2
+    ],
+    [
+     994.3,
+     242.2
+    ],
+    [
+     994.3,
+     334.3
+    ],
+    [
+     907.2,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     907.2,
+     345.7
+    ],
+    [
+     994.3,
+     345.7
+    ],
+    [
+     994.3,
+     439.3
+    ],
+    [
+     907.2,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     907.2,
+     450.7
+    ],
+    [
+     994.3,
+     450.7
+    ],
+    [
+     994.3,
+     542.8
+    ],
+    [
+     907.2,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-24-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     557.2
+    ],
+    [
+     994.3,
+     557.2
+    ],
+    [
+     994.3,
+     649.3
+    ],
+    [
+     907.2,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     660.7
+    ],
+    [
+     994.3,
+     660.7
+    ],
+    [
+     994.3,
+     754.3
+    ],
+    [
+     907.2,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     765.7
+    ],
+    [
+     994.3,
+     765.7
+    ],
+    [
+     994.3,
+     857.8
+    ],
+    [
+     907.2,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     975.7
+    ],
+    [
+     994.3,
+     975.7
+    ],
+    [
+     994.3,
+     1069.3
+    ],
+    [
+     907.2,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     1080.7
+    ],
+    [
+     994.3,
+     1080.7
+    ],
+    [
+     994.3,
+     1160.3
+    ],
+    [
+     980.1,
+     1172.8
+    ],
+    [
+     907.2,
+     1172.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-24-11",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     907.2,
+     1187.2
+    ],
+    [
+     962.8,
+     1187.2
+    ],
+    [
+     907.2,
+     1229.9
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-25-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     31.2
+    ],
+    [
+     1094.3,
+     31.2
+    ],
+    [
+     1094.3,
+     124.3
+    ],
+    [
+     1005.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     135.7
+    ],
+    [
+     1094.3,
+     135.7
+    ],
+    [
+     1094.3,
+     227.8
+    ],
+    [
+     1005.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     242.2
+    ],
+    [
+     1094.3,
+     242.2
+    ],
+    [
+     1094.3,
+     334.3
+    ],
+    [
+     1005.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     345.7
+    ],
+    [
+     1094.3,
+     345.7
+    ],
+    [
+     1094.3,
+     439.3
+    ],
+    [
+     1005.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1005.7,
+     450.7
+    ],
+    [
+     1094.3,
+     450.7
+    ],
+    [
+     1094.3,
+     542.8
+    ],
+    [
+     1005.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-25-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     557.2
+    ],
+    [
+     1094.3,
+     557.2
+    ],
+    [
+     1094.3,
+     649.3
+    ],
+    [
+     1005.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-25-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     660.7
+    ],
+    [
+     1094.3,
+     660.7
+    ],
+    [
+     1094.3,
+     754.3
+    ],
+    [
+     1005.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-25-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     765.7
+    ],
+    [
+     1094.3,
+     765.7
+    ],
+    [
+     1094.3,
+     857.8
+    ],
+    [
+     1005.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-25-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     975.7
+    ],
+    [
+     1094.3,
+     975.7
+    ],
+    [
+     1094.3,
+     1066.6
+    ],
+    [
+     1091.6,
+     1069.3
+    ],
+    [
+     1005.7,
+     1069.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-25-10",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1005.7,
+     1080.7
+    ],
+    [
+     1080.2,
+     1080.7
+    ],
+    [
+     1045.1,
+     1115.8
+    ],
+    [
+     1005.7,
+     1150.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-26-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1105.7,
+     31.2
+    ],
+    [
+     1194.3,
+     31.2
+    ],
+    [
+     1194.3,
+     124.3
+    ],
+    [
+     1105.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1105.7,
+     135.7
+    ],
+    [
+     1194.3,
+     135.7
+    ],
+    [
+     1194.3,
+     227.8
+    ],
+    [
+     1105.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1105.7,
+     242.2
+    ],
+    [
+     1194.3,
+     242.2
+    ],
+    [
+     1194.3,
+     334.3
+    ],
+    [
+     1105.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1105.7,
+     345.7
+    ],
+    [
+     1194.3,
+     345.7
+    ],
+    [
+     1194.3,
+     439.3
+    ],
+    [
+     1105.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1105.7,
+     450.7
+    ],
+    [
+     1194.3,
+     450.7
+    ],
+    [
+     1194.3,
+     542.8
+    ],
+    [
+     1105.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-26-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1105.7,
+     557.2
+    ],
+    [
+     1194.3,
+     557.2
+    ],
+    [
+     1194.3,
+     649.3
+    ],
+    [
+     1105.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-26-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1105.7,
+     660.7
+    ],
+    [
+     1194.3,
+     660.7
+    ],
+    [
+     1194.3,
+     754.3
+    ],
+    [
+     1105.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-26-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1105.7,
+     765.7
+    ],
+    [
+     1194.3,
+     765.7
+    ],
+    [
+     1194.3,
+     857.8
+    ],
+    [
+     1105.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-26-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1105.7,
+     872.2
+    ],
+    [
+     1194.3,
+     872.2
+    ],
+    [
+     1194.3,
+     953.5
+    ],
+    [
+     1186,
+     964.3
+    ],
+    [
+     1105.7,
+     964.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-26-9",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1105.7,
+     975.7
+    ],
+    [
+     1176.7,
+     975.7
+    ],
+    [
+     1115.8,
+     1045.1
+    ],
+    [
+     1105.7,
+     1055.2
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-27-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1205.7,
+     31.2
+    ],
+    [
+     1294.3,
+     31.2
+    ],
+    [
+     1294.3,
+     124.3
+    ],
+    [
+     1205.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-27-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1205.7,
+     135.7
+    ],
+    [
+     1294.3,
+     135.7
+    ],
+    [
+     1294.3,
+     227.8
+    ],
+    [
+     1205.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-27-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1205.7,
+     242.2
+    ],
+    [
+     1294.3,
+     242.2
+    ],
+    [
+     1294.3,
+     334.3
+    ],
+    [
+     1205.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-27-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1205.7,
+     345.7
+    ],
+    [
+     1294.3,
+     345.7
+    ],
+    [
+     1294.3,
+     439.3
+    ],
+    [
+     1205.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-27-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1205.7,
+     450.7
+    ],
+    [
+     1294.3,
+     450.7
+    ],
+    [
+     1294.3,
+     542.8
+    ],
+    [
+     1205.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-27-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1205.7,
+     660.7
+    ],
+    [
+     1294.3,
+     660.7
+    ],
+    [
+     1294.3,
+     754.3
+    ],
+    [
+     1205.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-27-7",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1205.7,
+     765.7
+    ],
+    [
+     1294.3,
+     765.7
+    ],
+    [
+     1294.3,
+     813.2
+    ],
+    [
+     1264.5,
+     857.8
+    ],
+    [
+     1205.7,
+     857.8
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-27-8",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1205.7,
+     872.2
+    ],
+    [
+     1254.9,
+     872.2
+    ],
+    [
+     1242.7,
+     890.5
+    ],
+    [
+     1205.7,
+     938.7
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-28-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1305.7,
+     31.2
+    ],
+    [
+     1394.3,
+     31.2
+    ],
+    [
+     1394.3,
+     124.3
+    ],
+    [
+     1305.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-28-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1305.7,
+     135.7
+    ],
+    [
+     1394.3,
+     135.7
+    ],
+    [
+     1394.3,
+     227.8
+    ],
+    [
+     1305.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-28-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1305.7,
+     242.2
+    ],
+    [
+     1394.3,
+     242.2
+    ],
+    [
+     1394.3,
+     334.3
+    ],
+    [
+     1305.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-28-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1305.7,
+     345.7
+    ],
+    [
+     1394.3,
+     345.7
+    ],
+    [
+     1394.3,
+     439.3
+    ],
+    [
+     1305.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-28-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1305.7,
+     450.7
+    ],
+    [
+     1394.3,
+     450.7
+    ],
+    [
+     1394.3,
+     542.8
+    ],
+    [
+     1305.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-28-5",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1305.7,
+     557.2
+    ],
+    [
+     1394.3,
+     557.2
+    ],
+    [
+     1394.3,
+     626.7
+    ],
+    [
+     1392.5,
+     630.9
+    ],
+    [
+     1383.5,
+     649.3
+    ],
+    [
+     1305.7,
+     649.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-28-6",
+   "quartier": "quartier-des-entrepots",
+   "fonction": "entrepot",
+   "polygone": [
+    [
+     1305.7,
+     660.7
+    ],
+    [
+     1377.9,
+     660.7
+    ],
+    [
+     1348.3,
+     720.7
+    ],
+    [
+     1328.9,
+     754.3
+    ],
+    [
+     1305.7,
+     754.3
+    ]
+   ],
+   "densite_bati": 0.85,
+   "gabarit": "entrepots"
+  },
+  {
+   "id": "i-29-0",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1405.7,
+     31.2
+    ],
+    [
+     1494.3,
+     31.2
+    ],
+    [
+     1494.3,
+     124.3
+    ],
+    [
+     1405.7,
+     124.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-29-1",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1405.7,
+     135.7
+    ],
+    [
+     1494.3,
+     135.7
+    ],
+    [
+     1494.3,
+     227.8
+    ],
+    [
+     1405.7,
+     227.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-29-2",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1405.7,
+     242.2
+    ],
+    [
+     1494.3,
+     242.2
+    ],
+    [
+     1494.3,
+     319.8
+    ],
+    [
+     1491.4,
+     334.3
+    ],
+    [
+     1405.7,
+     334.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-29-3",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1405.7,
+     345.7
+    ],
+    [
+     1489.2,
+     345.7
+    ],
+    [
+     1488.9,
+     347.2
+    ],
+    [
+     1464.2,
+     439.3
+    ],
+    [
+     1405.7,
+     439.3
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "i-29-4",
+   "quartier": "quartier-des-rives",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     1405.7,
+     450.7
+    ],
+    [
+     1460.6,
+     450.7
+    ],
+    [
+     1430.8,
+     538.5
+    ],
+    [
+     1429,
+     542.8
+    ],
+    [
+     1405.7,
+     542.8
+    ]
+   ],
+   "densite_bati": 0.95,
+   "gabarit": "ouvrier"
+  },
+  {
+   "id": "f-0-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -835.8,
+     -165.3
+    ],
+    [
+     -634.2,
+     -165.3
+    ],
+    [
+     -634.2,
+     -34.7
+    ],
+    [
+     -835.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -835.8,
+     -305.3
+    ],
+    [
+     -634.2,
+     -305.3
+    ],
+    [
+     -634.2,
+     -174.7
+    ],
+    [
+     -835.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -835.8,
+     -445.3
+    ],
+    [
+     -634.2,
+     -445.3
+    ],
+    [
+     -634.2,
+     -314.7
+    ],
+    [
+     -835.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-0-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -835.8,
+     -585.3
+    ],
+    [
+     -634.2,
+     -585.3
+    ],
+    [
+     -634.2,
+     -454.7
+    ],
+    [
+     -835.8,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -625.8,
+     -165.3
+    ],
+    [
+     -424.2,
+     -165.3
+    ],
+    [
+     -424.2,
+     -34.7
+    ],
+    [
+     -625.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -625.8,
+     -305.3
+    ],
+    [
+     -424.2,
+     -305.3
+    ],
+    [
+     -424.2,
+     -174.7
+    ],
+    [
+     -625.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -625.8,
+     -445.3
+    ],
+    [
+     -424.2,
+     -445.3
+    ],
+    [
+     -424.2,
+     -314.7
+    ],
+    [
+     -625.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-1-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -625.8,
+     -585.3
+    ],
+    [
+     -424.2,
+     -585.3
+    ],
+    [
+     -424.2,
+     -454.7
+    ],
+    [
+     -625.8,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -415.8,
+     -165.3
+    ],
+    [
+     -214.2,
+     -165.3
+    ],
+    [
+     -214.2,
+     -34.7
+    ],
+    [
+     -415.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -415.8,
+     -305.3
+    ],
+    [
+     -214.2,
+     -305.3
+    ],
+    [
+     -214.2,
+     -174.7
+    ],
+    [
+     -415.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -415.8,
+     -445.3
+    ],
+    [
+     -214.2,
+     -445.3
+    ],
+    [
+     -214.2,
+     -314.7
+    ],
+    [
+     -415.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-2-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -415.8,
+     -585.3
+    ],
+    [
+     -214.2,
+     -585.3
+    ],
+    [
+     -214.2,
+     -454.7
+    ],
+    [
+     -415.8,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -205.8,
+     -165.3
+    ],
+    [
+     -7,
+     -165.3
+    ],
+    [
+     -7,
+     -34.7
+    ],
+    [
+     -205.8,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -205.8,
+     -305.3
+    ],
+    [
+     -7,
+     -305.3
+    ],
+    [
+     -7,
+     -174.7
+    ],
+    [
+     -205.8,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -205.8,
+     -445.3
+    ],
+    [
+     -7,
+     -445.3
+    ],
+    [
+     -7,
+     -314.7
+    ],
+    [
+     -205.8,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-3-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     -205.8,
+     -585.3
+    ],
+    [
+     -7,
+     -585.3
+    ],
+    [
+     -7,
+     -454.7
+    ],
+    [
+     -205.8,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -165.3
+    ],
+    [
+     205.8,
+     -165.3
+    ],
+    [
+     205.8,
+     -34.7
+    ],
+    [
+     7,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -305.3
+    ],
+    [
+     205.8,
+     -305.3
+    ],
+    [
+     205.8,
+     -174.7
+    ],
+    [
+     7,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -445.3
+    ],
+    [
+     205.8,
+     -445.3
+    ],
+    [
+     205.8,
+     -314.7
+    ],
+    [
+     7,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-4-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     7,
+     -585.3
+    ],
+    [
+     205.8,
+     -585.3
+    ],
+    [
+     205.8,
+     -454.7
+    ],
+    [
+     7,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -165.3
+    ],
+    [
+     415.8,
+     -165.3
+    ],
+    [
+     415.8,
+     -34.7
+    ],
+    [
+     214.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -305.3
+    ],
+    [
+     415.8,
+     -305.3
+    ],
+    [
+     415.8,
+     -174.7
+    ],
+    [
+     214.2,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -445.3
+    ],
+    [
+     415.8,
+     -445.3
+    ],
+    [
+     415.8,
+     -314.7
+    ],
+    [
+     214.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-5-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     214.2,
+     -585.3
+    ],
+    [
+     415.8,
+     -585.3
+    ],
+    [
+     415.8,
+     -454.7
+    ],
+    [
+     214.2,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-6-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     424.2,
+     -165.3
+    ],
+    [
+     625.8,
+     -165.3
+    ],
+    [
+     625.8,
+     -34.7
+    ],
+    [
+     424.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-6-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     424.2,
+     -305.3
+    ],
+    [
+     625.8,
+     -305.3
+    ],
+    [
+     625.8,
+     -174.7
+    ],
+    [
+     424.2,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-6-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     424.2,
+     -445.3
+    ],
+    [
+     625.8,
+     -445.3
+    ],
+    [
+     625.8,
+     -314.7
+    ],
+    [
+     424.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-6-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     424.2,
+     -585.3
+    ],
+    [
+     625.8,
+     -585.3
+    ],
+    [
+     625.8,
+     -454.7
+    ],
+    [
+     424.2,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-7-0",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     634.2,
+     -165.3
+    ],
+    [
+     835.8,
+     -165.3
+    ],
+    [
+     835.8,
+     -34.7
+    ],
+    [
+     634.2,
+     -34.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-7-1",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     634.2,
+     -305.3
+    ],
+    [
+     835.8,
+     -305.3
+    ],
+    [
+     835.8,
+     -174.7
+    ],
+    [
+     634.2,
+     -174.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-7-2",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     634.2,
+     -445.3
+    ],
+    [
+     835.8,
+     -445.3
+    ],
+    [
+     835.8,
+     -314.7
+    ],
+    [
+     634.2,
+     -314.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  },
+  {
+   "id": "f-7-3",
+   "quartier": "faubourg-de-la-porte-interieure",
+   "zone": "faubourg",
+   "fonction": "habitation",
+   "polygone": [
+    [
+     634.2,
+     -585.3
+    ],
+    [
+     835.8,
+     -585.3
+    ],
+    [
+     835.8,
+     -454.7
+    ],
+    [
+     634.2,
+     -454.7
+    ]
+   ],
+   "densite_bati": 0.55,
+   "gabarit": "faubourg"
+  }
+ ],
+ "batiments": [
+  {
+   "id": "quartier-general-garnison",
+   "nom": "Quartier général de la Garnison (emplacement)",
+   "canon": "C",
+   "archetype": "caserne",
+   "position": [
+    -350,
+    1232.5
+   ],
+   "emprise_m": [
+    64,
+    48
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#DAD4C6",
+   "reperes_canon": [
+    "poi_qg_garnison_trost [C] (atlas 06 S01) : existence et ville établies, emplacement [A] ; plan intérieur : tranche C15 ultérieure"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 38
+   },
+   "sources": [
+    {
+     "ref": "docs/spec/06 : QG de la Garnison (Trost) [C] ; data/geo/paradis.json : poi_qg_garnison_trost",
+     "canon": "C"
+    },
+    {
+     "ref": "emplacement et volumes : adaptation",
+     "canon": "A"
+    }
+   ]
+  },
+  {
+   "id": "caserne-de-la-porte-sud",
+   "nom": "Caserne de la Porte Sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    450,
+    1232.5
+   ],
+   "emprise_m": [
+    62,
+    54
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#D6D0C2",
+   "reperes_canon": [
+    "Garnison aux portes (fichiers 01 et 11) : bâtiment adapté"
+   ],
+   "params": {
+    "cour": true,
+    "pente": 36
+   }
+  },
+  {
+   "id": "caserne-des-rives",
+   "nom": "Caserne des Rives",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -750,
+    917.5
+   ],
+   "emprise_m": [
+    62,
+    54
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "brique",
+   "teinte": "#CBB9A4",
+   "reperes_canon": [],
+   "params": {
+    "cour": true,
+    "pente": 38
+   }
+  },
+  {
+   "id": "entrepot-de-gaz",
+   "nom": "Entrepôt de gaz de Trost",
+   "canon": "A",
+   "archetype": "entrepot",
+   "position": [
+    750,
+    1022.5
+   ],
+   "emprise_m": [
+    58,
+    28
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#BFB6A4",
+   "reperes_canon": [
+    "poi_entrepot_gaz_trost [A] (data/geo/paradis.json) : cible de sabotage (atlas 06)"
+   ],
+   "params": {
+    "pente": 34
+   }
+  },
+  {
+   "id": "grenier-de-trost",
+   "nom": "Grenier de Trost",
+   "canon": "A",
+   "archetype": "grenier",
+   "position": [
+    550,
+    812.5
+   ],
+   "emprise_m": [
+    44,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 4,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "pierre_brute",
+   "teinte": "#CFC2A8",
+   "reperes_canon": [
+    "bld_grenier dans prov_trost (data/scenarios/sandbox_845.json)"
+   ],
+   "params": {
+    "pente": 46
+   }
+  },
+  {
+   "id": "halle-du-marche",
+   "nom": "Halle du Marché",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -100,
+    865
+   ],
+   "emprise_m": [
+    44,
+    22
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 12,
+   "etages": 1,
+   "toit": "croupe",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#C8AE88",
+   "reperes_canon": [
+    "bld_marche dans prov_trost (data/scenarios/sandbox_845.json)"
+   ],
+   "params": {
+    "piliers": 9,
+    "pente": 42
+   }
+  },
+  {
+   "id": "etal-1",
+   "nom": "Étal couvert 1",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    800
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-2",
+   "nom": "Étal couvert 2",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    800
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-3",
+   "nom": "Étal couvert 3",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    800
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-4",
+   "nom": "Étal couvert 4",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    800
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-5",
+   "nom": "Étal couvert 5",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -150,
+    930
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-6",
+   "nom": "Étal couvert 6",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    -60,
+    930
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-7",
+   "nom": "Étal couvert 7",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    30,
+    930
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "etal-8",
+   "nom": "Étal couvert 8",
+   "canon": "A",
+   "archetype": "halle",
+   "position": [
+    120,
+    930
+   ],
+   "emprise_m": [
+    14,
+    7
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 5,
+   "etages": 1,
+   "toit": "appentis",
+   "couverture": "tuile_plate",
+   "facade": "bois",
+   "teinte": "#BFA37C",
+   "reperes_canon": [],
+   "params": {
+    "piliers": 4,
+    "pente": 30
+   }
+  },
+  {
+   "id": "eglise",
+   "nom": "Église de Trost",
+   "canon": "A",
+   "archetype": "eglise",
+   "position": [
+    150,
+    497.5
+   ],
+   "emprise_m": [
+    22,
+    46
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 19,
+   "etages": 1,
+   "toit": "pignon",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E2DACB",
+   "reperes_canon": [],
+   "params": {
+    "clocher_m": 50,
+    "clocher_cote": 8.5,
+    "abside": true,
+    "pente": 50
+   }
+  },
+  {
+   "id": "hotel-de-ville",
+   "nom": "Hôtel de ville de Trost",
+   "canon": "A",
+   "archetype": "hotel_de_ville",
+   "position": [
+    -50,
+    392.5
+   ],
+   "emprise_m": [
+    30,
+    18
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 14,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_taillee",
+   "teinte": "#E6DFD0",
+   "reperes_canon": [],
+   "params": {
+    "pente": 48
+   }
+  },
+  {
+   "id": "clinique-de-la-garnison",
+   "nom": "Infirmerie de la Garnison",
+   "canon": "A",
+   "archetype": "clinique",
+   "position": [
+    -550,
+    1232.5
+   ],
+   "emprise_m": [
+    40,
+    20
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 11,
+   "etages": 3,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "enduit",
+   "teinte": "#EDE6D6",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  },
+  {
+   "id": "poste-porte-sud",
+   "nom": "Poste de garde de la porte sud",
+   "canon": "A",
+   "archetype": "caserne",
+   "position": [
+    -70,
+    1500
+   ],
+   "emprise_m": [
+    26,
+    12
+   ],
+   "angle_deg": 0,
+   "hauteur_m": 7,
+   "etages": 2,
+   "toit": "croupe",
+   "couverture": "ardoise",
+   "facade": "pierre_brute",
+   "teinte": "#D2CBBE",
+   "reperes_canon": [],
+   "params": {
+    "pente": 40
+   }
+  }
+ ],
+ "vegetation": {
+  "alignements": [
+   {
+    "rue": "axe-principal",
+    "essence": "tilleul",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "rue-du-mur",
+    "essence": "marronnier",
+    "intervalle_m": 15,
+    "cotes": "droite"
+   },
+   {
+    "rue": "chemin-du-rempart-est",
+    "essence": "tilleul",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   },
+   {
+    "rue": "chemin-du-rempart-ouest",
+    "essence": "tilleul",
+    "intervalle_m": 16,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-interieure",
+    "essence": "peuplier",
+    "intervalle_m": 12,
+    "cotes": "deux"
+   },
+   {
+    "rue": "route-exterieure",
+    "essence": "peuplier",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-11",
+    "essence": "marronnier",
+    "intervalle_m": 13,
+    "cotes": "deux"
+   },
+   {
+    "rue": "s-19",
+    "essence": "marronnier",
+    "intervalle_m": 13,
+    "cotes": "deux"
+   },
+   {
+    "rue": "t-5",
+    "essence": "erable",
+    "intervalle_m": 14,
+    "cotes": "deux"
+   }
+  ],
+  "isoles": [
+   {
+    "position": [
+     -170,
+     940
+    ],
+    "essence": "tilleul",
+    "hauteur_m": 22,
+    "nom": "Tilleul de la place du Marché"
+   },
+   {
+    "position": [
+     160,
+     1330
+    ],
+    "essence": "chene",
+    "hauteur_m": 24,
+    "nom": "Chêne de la porte sud"
+   },
+   {
+    "position": [
+     -60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   },
+   {
+    "position": [
+     60,
+     60
+    ],
+    "essence": "marronnier",
+    "hauteur_m": 17
+   }
+  ],
+  "parcs": [
+   {
+    "id": "enclos-du-souvenir",
+    "nom": "Enclos du souvenir",
+    "canon": "A",
+    "polygone": [
+     [
+      -1080.2,
+      1080.7
+     ],
+     [
+      -907.2,
+      1080.7
+     ],
+     [
+      -907.2,
+      1172.8
+     ],
+     [
+      -980.1,
+      1172.8
+     ],
+     [
+      -1045.1,
+      1115.8
+     ]
+    ],
+    "essences": [
+     "pin",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 55
+   },
+   {
+    "id": "jardin-des-tilleuls",
+    "nom": "Jardin des Tilleuls",
+    "canon": "A",
+    "polygone": [
+     [
+      -892.8,
+      345.7
+     ],
+     [
+      -705.7,
+      345.7
+     ],
+     [
+      -705.7,
+      439.3
+     ],
+     [
+      -892.8,
+      439.3
+     ]
+    ],
+    "essences": [
+     "tilleul",
+     "marronnier",
+     "erable"
+    ],
+    "arbres_par_ha": 70
+   },
+   {
+    "id": "promenade-des-rives",
+    "nom": "Promenade des Rives",
+    "canon": "A",
+    "polygone": [
+     [
+      705.7,
+      242.2
+     ],
+     [
+      892.8,
+      242.2
+     ],
+     [
+      892.8,
+      334.3
+     ],
+     [
+      705.7,
+      334.3
+     ]
+    ],
+    "essences": [
+     "peuplier",
+     "saule",
+     "tilleul"
+    ],
+    "arbres_par_ha": 65
+   },
+   {
+    "id": "jardin-des-entrepots",
+    "nom": "Jardin des Entrepôts",
+    "canon": "A",
+    "polygone": [
+     [
+      907.2,
+      872.2
+     ],
+     [
+      1094.3,
+      872.2
+     ],
+     [
+      1094.3,
+      964.3
+     ],
+     [
+      907.2,
+      964.3
+     ]
+    ],
+    "essences": [
+     "fruitier",
+     "tilleul",
+     "bouleau"
+    ],
+    "arbres_par_ha": 60
+   }
+  ],
+  "vergers": [
+   {
+    "polygone": [
+     [
+      -820,
+      -60
+     ],
+     [
+      -640,
+      -60
+     ],
+     [
+      -640,
+      -560
+     ],
+     [
+      -820,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   },
+   {
+    "polygone": [
+     [
+      640,
+      -60
+     ],
+     [
+      820,
+      -60
+     ],
+     [
+      820,
+      -560
+     ],
+     [
+      640,
+      -560
+     ]
+    ],
+    "espacement_m": 8
+   }
+  ],
+  "haies": [
+   {
+    "trace": [
+     [
+      -850,
+      -610
+     ],
+     [
+      850,
+      -610
+     ]
+    ]
+   }
+  ],
+  "potagers": [
+   {
+    "polygone": [
+     [
+      220,
+      -330
+     ],
+     [
+      620,
+      -330
+     ],
+     [
+      620,
+      -560
+     ],
+     [
+      220,
+      -560
+     ]
+    ]
+   }
+  ],
+  "essences_cours": [
+   "tilleul",
+   "marronnier",
+   "erable",
+   "fruitier"
+  ]
+ },
+ "eau": {
+  "voies": [],
+  "ponts": [],
+  "puits": [
+   [
+    -1000,
+    300
+   ],
+   [
+    900,
+    520
+   ],
+   [
+    -250,
+    640
+   ],
+   [
+    250,
+    1060
+   ],
+   [
+    -1100,
+    1000
+   ]
+  ],
+  "fontaines": [
+   [
+    0,
+    865
+   ],
+   [
+    150,
+    400
+   ]
+  ]
+ },
+ "points_de_vue": [
+  {
+   "id": "ensemble",
+   "nom": "Vue d'ensemble",
+   "oeil": [
+    -1669.2,
+    2605.2,
+    1138.8
+   ],
+   "cible": [
+    30,
+    733.2,
+    0
+   ],
+   "fov": 50
+  },
+  {
+   "id": "axe-principal",
+   "nom": "Axe principal vers la porte intérieure",
+   "oeil": [
+    5,
+    1045.2,
+    1.8
+   ],
+   "cible": [
+    0,
+    343.2,
+    16
+   ],
+   "fov": 58
+  },
+  {
+   "id": "place-du-marche",
+   "nom": "Place du Marché et halle",
+   "oeil": [
+    60,
+    790,
+    2.4
+   ],
+   "cible": [
+    -100,
+    865,
+    6
+   ],
+   "fov": 62
+  },
+  {
+   "id": "porte-sud",
+   "nom": "Place de la Porte Sud et quartier de la Garnison",
+   "oeil": [
+    -120,
+    1380,
+    4
+   ],
+   "cible": [
+    -350,
+    1232,
+    10
+   ],
+   "fov": 60
+  },
+  {
+   "id": "rue-de-l-evacuation",
+   "nom": "Rue de l'Évacuation vers la porte intérieure",
+   "oeil": [
+    -400,
+    1100,
+    2
+   ],
+   "cible": [
+    -400,
+    600,
+    7
+   ],
+   "fov": 60
+  },
+  {
+   "id": "entrepots",
+   "nom": "Entrepôts et dépôt de gaz",
+   "oeil": [
+    440,
+    1090,
+    6
+   ],
+   "cible": [
+    700,
+    880,
+    8
+   ],
+   "fov": 60
+  },
+  {
+   "id": "rempart",
+   "nom": "Chemin de ronde de la saillie",
+   "oeil": [
+    -826.1,
+    1322.1,
+    52.5
+   ],
+   "cible": [
+    -270.7,
+    1535.3,
+    50
+   ],
+   "fov": 60
+  },
+  {
+   "id": "faubourg",
+   "nom": "Faubourg et porte intérieure",
+   "oeil": [
+    260,
+    -620,
+    28
+   ],
+   "cible": [
+    0,
+    -40,
+    18
+   ],
+   "fov": 55
+  },
+  {
+   "id": "porte-depuis-la-ville",
+   "nom": "Porte extérieure depuis la ville",
+   "oeil": [
+    3,
+    1400,
+    1.8
+   ],
+   "cible": [
+    0,
+    1560,
+    22
+   ],
+   "fov": 58
+  }
+ ],
+ "etats": [
+  {
+   "id": "845-avant",
+   "nom": "845, Trost en garnison ordinaire",
+   "date": "845",
+   "canon": "A",
+   "sources": [
+    {
+     "ref": "état ordinaire du district ; garnison de 2 500 soldats (data/scenarios/sandbox_845.json)",
+     "canon": "A"
+    }
+   ],
+   "portes": {},
+   "ruines": [],
+   "incendies": [],
+   "rochers": [],
+   "abandon": 0,
+   "ciel": "clair",
+   "habitants": 1
+  },
+  {
+   "id": "850-breche",
+   "nom": "850, la brèche de la porte sud",
+   "date": "850",
+   "canon": "C",
+   "sources": [
+    {
+     "ref": "docs/spec/01 (850 : Trost, 104e promotion) ; docs/spec/06 W05 et S01 : brèche 850 à la porte de Trost [C]",
+     "canon": "C"
+    },
+    {
+     "ref": "étendue des ruines, incendies, débris : adaptation ; l'identifiant d'état de porte « brisee_845 » est historique (schéma de R1e) et vaut ici « brisée par la brèche de 850 »",
+     "canon": "A"
+    }
+   ],
+   "portes": {
+    "exterieure": "brisee_845"
+   },
+   "ruines": [
+    {
+     "polygone": [
+      [
+       -420,
+       1285
+      ],
+      [
+       420,
+       1285
+      ],
+      [
+       520,
+       1500
+      ],
+      [
+       -520,
+       1500
+      ]
+     ],
+     "part": 0.5
+    },
+    {
+     "polygone": [
+      [
+       -300,
+       970
+      ],
+      [
+       300,
+       970
+      ],
+      [
+       300,
+       1285
+      ],
+      [
+       -300,
+       1285
+      ]
+     ],
+     "part": 0.2
+    }
+   ],
+   "incendies": [
+    [
+     -120,
+     1400
+    ],
+    [
+     90,
+     1330
+    ],
+    [
+     -260,
+     1240
+    ],
+    [
+     230,
+     1210
+    ],
+    [
+     -40,
+     1100
+    ]
+   ],
+   "rochers": [
+    {
+     "position": [
+      35,
+      1470
+     ],
+     "rayon_m": 4.5,
+     "canon": "A"
+    },
+    {
+     "position": [
+      -90,
+      1390
+     ],
+     "rayon_m": 3.2,
+     "canon": "A"
+    },
+    {
+     "position": [
+      180,
+      1330
+     ],
+     "rayon_m": 2.8,
+     "canon": "A"
+    }
+   ],
+   "abandon": 0,
+   "ciel": "enfume",
+   "habitants": 0.35
+  },
+  {
+   "id": "850-bouchee",
+   "nom": "850, brèche bouchée par un rocher",
+   "date": "850",
+   "canon": "C",
+   "sources": [
+    {
+     "ref": "docs/spec/06 W05 : porte de Trost, zone de bouchage [C] ; docs/spec/03 §Trost 850 : bouchage de brèche",
+     "canon": "C"
+    },
+    {
+     "ref": "taille et position du rocher, ruines restantes : adaptation",
+     "canon": "A"
+    }
+   ],
+   "portes": {
+    "exterieure": "bouchee"
+   },
+   "ruines": [
+    {
+     "polygone": [
+      [
+       -900,
+       900
+      ],
+      [
+       900,
+       900
+      ],
+      [
+       1000,
+       1500
+      ],
+      [
+       -1000,
+       1500
+      ]
+     ],
+     "part": 0.6
+    },
+    {
+     "polygone": [
+      [
+       -700,
+       380
+      ],
+      [
+       700,
+       380
+      ],
+      [
+       700,
+       900
+      ],
+      [
+       -700,
+       900
+      ]
+     ],
+     "part": 0.25
+    }
+   ],
+   "incendies": [],
+   "rochers": [
+    {
+     "position": [
+      0,
+      1512
+     ],
+     "rayon_m": 11,
+     "canon": "A"
+    },
+    {
+     "position": [
+      -90,
+      1390
+     ],
+     "rayon_m": 3.2,
+     "canon": "A"
+    },
+    {
+     "position": [
+      150,
+      1350
+     ],
+     "rayon_m": 2.4,
+     "canon": "A"
+    }
+   ],
+   "abandon": 0.35,
+   "ciel": "brumeux",
+   "habitants": 0.2
+  }
+ ],
+ "etat_defaut": "845-avant"
+}

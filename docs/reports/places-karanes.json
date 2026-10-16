@@ -1,0 +1,61 @@
+{
+ "shots": {
+  "ensemble": {
+   "file": "docs/places/karanes/vue-ensemble.png",
+   "stats": {
+    "calls": 220,
+    "triangles": 993295,
+    "instances": 47754,
+    "chunks": {
+     "total": 996,
+     "visible": 996,
+     "near": 0
+    }
+   },
+   "rgb": [
+    145.92680555555555,
+    148.0930295138889,
+    116.2652734375
+   ]
+  },
+  "place-des-departs": {
+   "file": "docs/places/karanes/vue-place-des-departs.png",
+   "stats": {
+    "calls": 204,
+    "triangles": 519417,
+    "instances": 3789,
+    "chunks": {
+     "total": 996,
+     "visible": 118,
+     "near": 8
+    }
+   },
+   "rgb": [
+    172.22076388888888,
+    162.44006944444445,
+    143.45610677083334
+   ]
+  },
+  "marche-aux-caravanes": {
+   "file": "docs/places/karanes/vue-marche-aux-caravanes.png",
+   "stats": {
+    "calls": 260,
+    "triangles": 782337,
+    "instances": 26938,
+    "chunks": {
+     "total": 996,
+     "visible": 504,
+     "near": 3
+    }
+   },
+   "rgb": [
+    192.65970486111112,
+    197.57865017361112,
+    197.84749565972223
+   ]
+  }
+ },
+ "dE": {
+  "etat-845-avant | etat-850-depart-expedition": 3.4212549422688343
+ }
+}

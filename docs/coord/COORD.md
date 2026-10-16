@@ -22,7 +22,7 @@
 | C12 | Blender : lot 2 (Titans, bateaux, dirigeables) | à faire | — | tronc | C10 | coupable en premier |
 | C13 | Multijoueur réseau (27) : conseil mixte, camps, trahison | en cours | A | tronc | C3, C9 | tranches 1–3 faites et revues (lockstep, bataille 20 Hz, camps rivaux ; D-178/179, dette 104–107), salon pur (D-180) et votes purs (D-181) ; reste : messages réseau salon/votes, conseils par camp, interface (barre des joueurs), trahison (effets), transfert d hôte |
 | C14 | P9 / P10 / PACK recadrés | à faire | — | tronc | C5–C9, C13, C15–C18 | ancienne feuille de route gelée |
-| C15 | Lieux : mur Rose (ex-LC-B) | à faire | — | tronc | C1 | voie B |
+| C15 | Lieux : mur Rose (ex-LC-B) | en cours (Trost, Karanes faits ; D-185) | A 2026-10-16 | tronc | C1 | reste : Utopia, Krolva, camp d'entraînement, QG de la Garnison, captures complètes (dette 110), revue |
 | C16 | Lieux : mur Sina (ex-LC-C) | à faire | — | tronc | C15 | voie B |
 | C17 | Lieux : hors-murs (ex-LC-D) | à faire | — | tronc | C15 | voie B |
 | C18 | Lieux : Marley, Hizuru, Alliés, couverture de l'atlas | à faire | — | tronc | C16, C17 | « tout lieu jouable » |
@@ -32,7 +32,7 @@ Ordre conseillé : **A** : C0 → C3 → C4 → C6 → C5 … ; **B** (jeudi 15 
 ## 2. Boîte de passage (la plus récente en haut ; une entrée par clôture)
 
 ### [2026-10-16, nuit] A → B
-- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. C10 fait (rapport `docs/reports/C10.md`). PROCHAINE ACTION EXACTE : C15 (lieux mur Rose : Trost, Karanes, Utopia, Krolva, camp d'entraînement, QG ; `docs/phases/C15.md` à rédiger) ; sinon C13 (messages réseau salon/votes). Avant C15 ; A sinon reprend C13 (messages réseau salon/votes).
+- B n'a pas travaillé le 15 (aucun journal B). **C10 tranche 1 faite** (D-182) : `npm run assets:blender`, 5 glb dans `docs/art/assets/projet/`, verify EXIT=0 1382 tests. C10 fait (rapport `docs/reports/C10.md`). C15 tranche 1 faite (Trost, Karanes ; D-185). PROCHAINE ACTION EXACTE : C15 tranche 2 (Utopia, Krolva, camp d'entraînement, QG : `src/tools/places/auteur/`, même méthode que `trost.ts`), lancer `npm run places:captures -- trost karanes` en arrière-plan pour lever le KO de `places:valider` ; sinon C13 (messages réseau salon/votes). Avant C15 ; A sinon reprend C13 (messages réseau salon/votes).
 
 ### [2026-10-15, nuit] A → B
 - **C2 fait** (D-175) : 12 emblèmes en données, règle R15, rapport `docs/reports/C2.md`. **B : ne refais pas C2 ; va à C10** (Blender, outillage), puis C15/C11. PROCHAINE ACTION EXACTE (A) : C10 si B ne l'a pas pris, sinon reste de C9 (`smoke:bataille`, piles sur la carte).
