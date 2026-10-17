@@ -14,8 +14,9 @@
 | S4 | Le lockstep ENet tient-il à 9 clients avec latence et pertes ? | V4-D07 | nuage (Linux) | aucune | 2 j |
 | S5 | Le combattant à la 3ᵉ personne est-il agréable à 20 Hz avec retard d'entrée ? | N01, forme du mode combattant | **PC de Gabriel** | jouer 15 minutes et noter | 2 j |
 | S6 | Un soldat passe-t-il de Blender à Godot avec squelette, animations et niveaux de détail ? | V4-D16 | nuage (Blender) + PC de Gabriel (vérification visuelle) | regarder la planche | 2 j |
+| S7 *(proposé)* | Une carte voxel fournie par Gabriel peut-elle devenir un décor jouable (budgets, aspect, navigation) ? | V4-D23 | nuage + PC de Gabriel (mesure) | fournir le fichier, lancer la mesure, regarder la planche | 3 j |
 
-Ordre conseillé : S0, S1, S4 (dans le nuage, sans Gabriel) ; puis S6, S2, S5, S3 (qui demandent son PC).
+Ordre conseillé : S0, S1, S4 (dans le nuage, sans Gabriel) ; puis S6, S2, S5, S3 (qui demandent son PC) ; S7 dès que le fichier de carte est fourni **et** que la provenance (V4-D11) est tranchée.
 
 ## 2. Fiches
 
@@ -62,6 +63,12 @@ Ordre conseillé : S0, S1, S4 (dans le nuage, sans Gabriel) ; puis S6, S2, S5, S
 - **FAIL → repli** : animation par pièces rigides pour L2/L3 ; réduire le nombre de familles de squelettes ; aucune ressource payante.
 - **Livrable** : `S6.md` + planche.
 
+### S7 — Décors depuis une carte voxel *(proposé, V4-D23)*
+- **Protocole, chaîne E0–E10, modes et seuils** : `organisation/03_PIPELINE_ASSETS_3D.md` §4. Entrée : le **fichier** de monde, jamais une photo.
+- **PASS `[A]`** : un quartier de 256 × 256 blocs au préréglage Bas ≤ 33 ms au 95ᵉ centile avec 400 unités, mémoire avec marge, navigation valide, aspect jugé acceptable par Gabriel ; seuils définitifs ceux de S2.
+- **FAIL → repli** : niveaux de détail plus agressifs ; sinon mode « plan masse » seul ; sinon kits du projet seuls (voie A).
+- **Livrable** : `S7.md` + planche + tableau des deux modes. Tâches : S7-a à S7-j (`organisation/02_TABLEAU_DES_TACHES.md` §4.8).
+
 ## 3. Actions de Gabriel pendant M0 (récapitulatif)
 
 1. R-D1 : relire `01` et `04`, corriger en une passe.
@@ -69,3 +76,4 @@ Ordre conseillé : S0, S1, S4 (dans le nuage, sans Gabriel) ; puis S6, S2, S5, S
 3. Donner le nom exact de sa carte graphique et sa mémoire vidéo (pour S2).
 4. S0, S1 : lancer deux petits exécutables et renvoyer un fichier chacun.
 5. S2, S3, S5, S6 : séances de test sur son PC (environ 1 à 2 heures cumulées par spike `[A]`).
+6. S7 (si la carte est utilisée) : fournir le fichier, son format, son origine et l'accord de l'auteur ; lancer une mesure. La liste complète et regroupée est dans `organisation/08_ACTIONS_ET_DECISIONS_DE_GABRIEL.md`.

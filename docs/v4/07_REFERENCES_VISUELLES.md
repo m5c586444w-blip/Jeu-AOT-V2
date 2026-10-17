@@ -5,7 +5,7 @@
 
 ## 1. Pourquoi des descriptions écrites et pas des captures
 
-1. **Règle du projet** : aucune image, capture ou texture de l'œuvre ou de fans dans le dépôt (V4-D11, `CLAUDE.md`, D-167). La règle vise le dépôt, pas ton usage personnel.
+1. **Règle du projet (héritée)** : aucune image, capture ou texture de l'œuvre ou de fans dans le dépôt (V4-D11, `CLAUDE.md`, D-167). La règle vise le dépôt, pas ton usage personnel. **V4-D11 est EN ATTENTE** de ta décision (`organisation/04_POLITIQUE_DE_PROVENANCE.md`) ; la méthode ci-dessous reste valable quelle que soit l'option, car les références restent hors dépôt.
 2. **Je ne vois pas l'animé** : je ne peux pas décrire de mémoire, plan par plan, ce qui n'est pas dans les spécifications sans risquer d'inventer. Une fiche dont le contenu vient de mon seul souvenir serait étiquetée `?`, pas `C`.
 3. **Une description est plus utile qu'une image pour construire** : elle fixe les proportions, matières, couleurs et silhouettes utiles, et pas le reste.
 

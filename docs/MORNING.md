@@ -1,5 +1,12 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-17 (après-midi) — Organisation du travail V4 (D-194) — à lire en premier
+- Fait sur ta demande : `docs/v4/organisation/` (point d'entrée `00_LISEZ_MOI.md`) : protocole de session, **tableau de 195 tâches** (contrôlé par script), pipeline des assets 3D, politique de provenance, définition de « fini » et revues, prompts de session, modèles, liste de tes actions. Le dossier d'univers ne sert pas à s'organiser : c'est une référence de lore.
+- **À décider par toi (par ordre d'importance)** : (1) **provenance** A / B / C (`organisation/04` §4 ; je recommande B ; défaut provisoire A pour ce qui entre dans le dépôt) ; (2) **dérogation** pour démarrer le lot P et les spikes S0, S1, S4 avant la revue R-D1 ; (3) R-D1 elle-même (`docs/v4/01`, `04`). Détail et défauts : `organisation/08`.
+- **À me donner pour la carte Minecraft** : le fichier du monde, son format (Java ou Bedrock, version), son origine et l'accord de son auteur, le pack de ressources éventuel. **Jamais à partir de la photo.** Essai fait sur une scène synthétique seulement ; rien sur ta carte.
+- **Correction de mon fait précédent** : V4-D11 (provenance) était écrite FIGÉ par erreur ; elle est maintenant EN ATTENTE. Le prompt `docs/spec/20_…` §0 la présente comme une décision de l'utilisateur ; je ne retrouve pas ton message. Ta réponse prime.
+- `npm run typecheck` échoue dans `src/net/wsTransport.ts` (module `ws` absent des dépendances installées) : constaté, sans rapport avec ces documents, non corrigé.
+
 ## 2026-10-17 — Dossier d'univers V4 (D-193) — à lire en premier
 - Fait sur ta demande : un dossier de **15 fichiers** sur l'univers dans `docs/v4/univers/` (point d'entrée `U00_LISEZ_MOI.md`). Chaque affirmation porte sa source et une étiquette (`[C]` rapporté, `[I]` interprété, `[?]` non confirmé).
 - **Limite principale** : toutes les sources sont des pages de wiki communautaire et de Wikipédia (**non officielles**), lues via des extraits condensés ; le manga et les livres officiels n'ont pas été lus. `[C]` ne veut donc pas dire « canon du projet » (`U00` §1, `U14` R-1).

@@ -28,7 +28,7 @@
 
 ## Lore et provenance
 - La création est autorisée (enseignes, noms, lieux, apparences) : étiquette `A`, `creation: true`, raison consignée dans `docs/lore/creations.md`. Les faits canon `C` ne sont pas contredits (fichier 11 puis 01 des spécifications reprises).
-- **Aucun** fichier, modèle, texture, image, capture ou décalque de l'œuvre originale ou de fans dans le dépôt. Les formes sont construites d'après des descriptions écrites. Les références visuelles de Gabriel restent **hors dépôt** ; ce qui entre dans le dépôt, ce sont des **descriptions écrites** (`docs/v4/07_REFERENCES_VISUELLES.md`).
+- **Provenance : [texte de l'option choisie par Gabriel — `docs/v4/organisation/04_POLITIQUE_DE_PROVENANCE.md` §4 ; décision EN ATTENTE au 2026-10-17].** Tant qu'elle n'est pas écrite ici, la règle héritée s'applique à ce qui entre dans le dépôt : aucun fichier, modèle, texture, image, capture ou décalque de l'œuvre originale ou de fans ; formes construites d'après des descriptions écrites. Les références visuelles de Gabriel restent **hors dépôt** (`docs/v4/07_REFERENCES_VISUELLES.md`). Tout asset a une entrée au registre (`organisation/04` §5).
 - Aucun CDN, aucune ressource payante, licences dans `docs/ASSETS_LICENSES.md`, provenance dans le manifeste d'assets.
 
 ## Travail
@@ -40,7 +40,7 @@
 - Un risque non mesuré ne se code pas : il passe par un spike (`05`).
 
 ## Qualité
-- **N'affirme jamais qu'un test est vert, ni qu'un critère passe, sans avoir collé la sortie réelle de la commande.** Un critère qui échoue deux fois : l'écrire dans le rapport et `docs/rapports/dette.md`, puis passer à la suite.
+- **N'affirme jamais qu'un test est vert, ni qu'un critère passe, sans avoir collé la sortie réelle de la commande.** Un critère qui échoue deux fois : l'écrire dans le rapport et `docs/reports/dette.md`, puis passer à la suite.
 - Critère visuel : ouvrir chaque capture, la décrire en 3 lignes et lister au moins 3 défauts possibles. Capture vide ou sans l'élément testé : critère KO.
 - Un écran dont une valeur n'est pas branchée est un défaut, pas un « 0 ».
 - Jamais de jugement de fluidité en rendu logiciel : fluidité = mesure sur GPU réel (PC de Gabriel). Interdit : optimiser pour le rendu logiciel.

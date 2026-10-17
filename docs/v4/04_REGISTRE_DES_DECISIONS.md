@@ -3,7 +3,7 @@
 > Statut : **PROPOSÉ** (relu et gelé à la sortie de M0, voir `03_PLAN_DE_PRODUCTION.md`).
 > Dépend de : `01_CAHIER_DES_CHARGES.md`. Utilisé par : tous les autres documents V4.
 > Étiquettes : `[C]` fait canon du lore · `[A]` choix de la direction, modifiable · `[?]` inconnu, à lever par un spike (`05_SPIKES_RISQUES.md`).
-> Statuts : **FIGÉ** (décidé par Gabriel ou repris d'une règle déjà en vigueur) · **PROPOSÉ** (défaut de la direction, Gabriel peut le refuser jusqu'à la revue R-D1) · **PAR SPIKE** (tranché par une mesure, pas par une opinion).
+> Statuts : **FIGÉ** (décidé par Gabriel ou repris d'une règle déjà en vigueur) · **PROPOSÉ** (défaut de la direction, Gabriel peut le refuser jusqu'à la revue R-D1) · **PAR SPIKE** (tranché par une mesure, pas par une opinion) · **EN ATTENTE** (contesté par Gabriel, à trancher par lui ; un défaut provisoire est écrit).
 
 ## 0. Règle anti-retour (la raison d'être de ce registre)
 
@@ -26,7 +26,7 @@
 
 | ID | Décision | Statut | Source |
 |---|---|---|---|
-| V4-D11 | **Provenance** : aucun fichier, modèle, texture, image ou capture de l'œuvre ou d'un fan dans le dépôt, aucun décalque. Les formes sont construites d'après des descriptions écrites. Les références visuelles personnelles de Gabriel restent **hors dépôt**. | FIGÉ | `CLAUDE.md`, D-167 |
+| V4-D11 | **Provenance** : règle héritée = aucun fichier, modèle, texture, image ou capture de l'œuvre ou d'un fan dans le dépôt, aucun décalque ; formes construites d'après des descriptions écrites ; références visuelles personnelles de Gabriel **hors dépôt**. **Contestée par Gabriel le 2026-10-17** (« je n'ai jamais demandé ça ») : trois options A / B / C dans `organisation/04_POLITIQUE_DE_PROVENANCE.md`. Défaut provisoire : A pour ce qui entre dans le dépôt. | **EN ATTENTE** (je l'avais écrite FIGÉ par erreur : reprise sans la redemander) | `docs/spec/00_BRIEF_MAITRE.md` règle 6 ; `CLAUDE.md` ; `docs/spec/20_…` §0 ; `ERRATA_V3.md` §2.7 ; D-167 |
 | V4-D12 | **Lore** : la création est autorisée (enseignes, noms, lieux, apparences) ; une création est `A` avec `creation: true` et une raison ; les faits canon `C` (fichier 11, puis 01) ne sont jamais contredits. Les prénoms « Ilse » et « Frieda » sont autorisés. | FIGÉ | `ERRATA_V3.md` §2, D-167 |
 | V4-D13 | **Règles de jeu** : `docs/spec/26_MECANIQUES_THEORIQUES.md` (sept piliers) et `27_MULTIJOUEUR_9_JOUEURS.md` (coopération, camps, trahison, `owner` obligatoire à plusieurs sièges par faction, D-168) restent la source des règles. Toute règle de ces fichiers que V4 modifie est notée dans `03` (colonne « Écart »). | FIGÉ | D-157, D-168 |
 | V4-D19 | Toute action du joueur est une **commande typée et sérialisable** portant un siège (`owner`) ; connaissance par faction, brouillard par siège ; pas d'hypothèse « un seul joueur ». | FIGÉ | `CLAUDE.md`, D-168 |
@@ -46,7 +46,10 @@
 | V4-D17 | **Budgets de départ** (triangles, appels de dessin, nombre d'unités visibles) : valeurs `[?]` données dans `02` section 7, **mesurées puis remplacées** en S2 sur RTX 3050. Aucun objectif d'images par seconde avant cette mesure. | Règle actuelle (R1c) : pas d'objectif sans mesure sur GPU réel. | PAR SPIKE (S2) |
 | V4-D20 | **Sauvegarde et rejeu** : journal de commandes + instantané périodique + empreinte d'état ; une partie se rejoue à l'identique à partir de sa graine et de son journal. | Prérequis du lockstep et de la reconnexion (27). | PROPOSÉ |
 | V4-D21 | **Commande vocale** : fonctionnement **hors ligne**, grammaire fermée, appui-pour-parler, repli obligatoire au clavier et au menu radial, l'audio ne quitte jamais le PC (détail : `06`). | Latence, coût, vie privée, accessibilité. | PROPOSÉ · faisabilité PAR SPIKE (S3) |
+| V4-D23 | **Décors depuis une carte voxel (voie B)** : une carte (monde Minecraft) **fournie par Gabriel** peut être convertie en décors (`.glb` par morceaux de 64 × 64 + grille de navigation pour `Sim`) ; entrée = le **fichier de monde**, jamais une photo ; matériaux créés par le projet ; deux modes comparés sur un même quartier (conversion directe, plan masse). Dépend de V4-D11 (option B ou C) et de l'accord de l'auteur de la carte, déclaré par Gabriel. Détail : `organisation/03_PIPELINE_ASSETS_3D.md`. | Faisabilité mesurée seulement sur une scène synthétique ; vraie carte non encore vue | PROPOSÉ · PAR SPIKE (S7) |
 | V4-D22 | **`owner` toujours présent** sur toute entité commandable (armées, flottes, escouades, sections, provinces, institutions). Plus de champ facultatif, plus de migration de sauvegardes. Vérifié au chargement de la partie. | Il n'y a pas de sauvegarde à conserver en V4 ; cela satisfait D-168 sans condition de « plusieurs sièges par faction ». | PROPOSÉ |
+
+Autres décisions en attente de Gabriel (provenance, carte voxel, dérogation pour démarrer le lot P et les spikes S0/S1/S4, jalons sans lui) : `organisation/08_ACTIONS_ET_DECISIONS_DE_GABRIEL.md`.
 
 ## 4. Demande de changement (modèle)
 

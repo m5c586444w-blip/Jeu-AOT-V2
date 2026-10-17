@@ -38,7 +38,7 @@
 | Accessibilité | tout ce qui se fait à la voix se fait au clavier/menu radial ; sous-titres des retours vocaux | `[A]` |
 | Vie privée | aucune donnée collectée ; audio traité localement, jamais envoyé ni conservé par défaut | `[A]` |
 | Réseau | jeu privé, aucune exposition publique ; connexion par réseau privé virtuel ou redirection de port, au choix de l'hôte | `[A]`, `27` §10 point 5 non tranché |
-| Provenance | aucune ressource de l'œuvre ou de fans dans le dépôt (V4-D11) | FIGÉ |
+| Provenance | règle héritée : aucune ressource de l'œuvre ou de fans dans le dépôt (V4-D11) | **EN ATTENTE** de la décision de Gabriel (`organisation/04_POLITIQUE_DE_PROVENANCE.md`) |
 
 ## 5. Hors périmètre de la V1 jouable
 
@@ -60,6 +60,7 @@ Taille : S = quelques jours de travail, M = une à deux semaines, L = plusieurs 
 | N08 | Replay de bataille avec caméra cinématique | partage entre amis | M | Could | V4-D20, M7 |
 | N09 | Mode photo | confort | S | Could | M7 |
 | N10 | Manette | confort | M | Could | M7 |
+| N13 | Décors issus d'une carte voxel fournie par Gabriel (voie B, V4-D23) | atteindre le niveau de détail des lieux visé par Gabriel sans tout modéliser | L | Should (selon S7) | S7, V4-D11, M8 |
 | N11 | Chat vocal entre joueurs | hors périmètre | M | Won't (V1) | — |
 | N12 | Éditeur de scénarios / mods | hors périmètre | XL | Won't (V1) | — |
 
@@ -72,7 +73,7 @@ Chaque critère est une **commande** ou une **mesure** (détail dans `03`) :
 4. Bataille de 400 unités simulées jouable sur RTX 3050 au préréglage Bas (seuil de jouabilité fixé en S2, mesuré par Gabriel).
 5. Commande vocale : au moins 90 % de commandes correctes sur un jeu de 60 commandes françaises, 100 énoncés dits par Gabriel (S3) `[A]`.
 6. `canon:check` équivalent vert : aucune donnée ne contredit un fait `C` ; toute création est étiquetée `A`.
-7. Aucune ressource de provenance interdite : contrôle d'assets équivalent à `assets:check`.
+7. Aucune ressource de provenance non admise : contrôle d'assets équivalent à `assets:check` et registre d'assets complet (`organisation/04_POLITIQUE_DE_PROVENANCE.md` §5), selon la politique choisie par Gabriel.
 
 ## 8. Ce que ce document ne contient pas
 
