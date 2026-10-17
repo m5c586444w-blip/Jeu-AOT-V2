@@ -1,6 +1,6 @@
 # 00 — Index de la documentation V4 (Godot)
 
-> Point d'entrée. Mis à jour le 2026-10-16. Rédigé par la direction (Claude) à la demande de Gabriel : refonte intégrale du jeu, moteur Godot, modèles 3D détaillés, bataille « commandant + combattant » avec ordres à la voix.
+> Point d'entrée. Mis à jour le 2026-10-17 (ajout du dossier d'univers, D-193). Rédigé par la direction (Claude) à la demande de Gabriel : refonte intégrale du jeu, moteur Godot, modèles 3D détaillés, bataille « commandant + combattant » avec ordres à la voix.
 
 ## 1. Ordre de lecture
 
@@ -14,8 +14,9 @@
 | 6 | `06_COMMANDE_VOCALE.md` | voix : contrat, chaîne, grammaire de 60 énoncés, protocole d'essai | PROPOSÉ (faisabilité par S3) | S3 |
 | 7 | `07_REFERENCES_VISUELLES.md` | art : méthode de la bible d'images **écrite**, fiche modèle, catalogue des sujets | PROPOSÉ | première séance de référence |
 | 8 | `08_MODELE_CLAUDE_MD.md` | sessions : modèle du `CLAUDE.md` du nouveau dépôt | PROPOSÉ | fin de S0 |
+| 9 | `univers/U00_LISEZ_MOI.md` | **dossier d'univers** (15 fichiers `U00`–`U15`, sans `U13`) : lore détaillé et sourcé, sources **non officielles**, contradictions et lacunes consignées ; `U14` = implications pour le jeu (`A`) | SOURCES NON OFFICIELLES (D-193) | `U14` §8 par Gabriel |
 
-Gabriel n'a **que deux documents à relire** pour la première revue (R-D1) : `01` et `04`. Le reste est de la mise en œuvre.
+Gabriel n'a **que deux documents à relire** pour la première revue (R-D1) : `01` et `04`. Le reste est de la mise en œuvre. Le dossier d'univers (`univers/`) ne se relit pas en entier : `U14` §8 pose sept questions, chacune avec un défaut, et `U15` §6 liste ce qu'il vaut la peine de vérifier dans l'œuvre.
 
 ## 2. Règle anti-retour (résumé)
 

@@ -1,5 +1,12 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-17 — Dossier d'univers V4 (D-193) — à lire en premier
+- Fait sur ta demande : un dossier de **15 fichiers** sur l'univers dans `docs/v4/univers/` (point d'entrée `U00_LISEZ_MOI.md`). Chaque affirmation porte sa source et une étiquette (`[C]` rapporté, `[I]` interprété, `[?]` non confirmé).
+- **Limite principale** : toutes les sources sont des pages de wiki communautaire et de Wikipédia (**non officielles**), lues via des extraits condensés ; le manga et les livres officiels n'ont pas été lus. `[C]` ne veut donc pas dire « canon du projet » (`U00` §1, `U14` R-1).
+- **À décider par toi** : `U14` §8 (7 questions, chacune avec un défaut) : genre de Hange laissé ouvert par l'auteur, seuil de l'« époque charnière » (défaut 854), scénario 857 (défaut non), application en une passe des corrections K-01 à K-18.
+- **À vérifier dans l'œuvre si tu veux verrouiller des faits** : les 12 points de `U15` §6 (années des héritages 843/844, début de la guerre du Moyen-Orient 850/851, bilan de 846…). 74 contradictions entre sources sont consignées en `U15` §3.
+- Rien dans `src/`, `data/` ni `docs/spec/` n'a été modifié.
+
 ## 2026-10-16 (soir) — Refonte V4 sous Godot (D-192) — à lire en premier
 - Gabriel a décidé de **reconstruire le jeu de zéro sous Godot** (C#, RTX 3050 minimale, réaliste sombre début XXᵉ, bataille commandant + combattant avec ordres à la voix). La **tâche automatique A est en pause** ; l'ancien dépôt reste la référence.
 - Documentation complète : `docs/v4/00_INDEX.md` (9 fichiers). **À faire par Gabriel** : relire `docs/v4/01_CAHIER_DES_CHARGES.md` et `docs/v4/04_REGISTRE_DES_DECISIONS.md` (revue R-D1, 5 questions avec défauts), puis dire si le nouveau dépôt privé `Murs-et-Sang-V4` est créé.
