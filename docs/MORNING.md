@@ -1,5 +1,10 @@
 # Matin (direction autonome, mis à jour après chaque phase)
 
+## 2026-10-20 — Ta carte Minecraft convertie en 3D (spike S7, D-195) — à lire en premier
+- Fait sur ta demande : ton monde (fichier, pas la photo) est converti en **1 832 tuiles `.glb`** en trois niveaux de détail. **Où les trouver : `C:\Users\gbest\Murs-et-Sang\decor_shiganshina\`** (`LISEZ-MOI.txt` dedans ; `lod2\` = vue lointaine, la plus légère). Vérifié sur ton disque par noms et tailles ; tes originaux n'ont pas été modifiés. Rapport : `docs/v4/spikes/S7.md` (chiffres et sorties réelles, revue des 11 captures avec défauts).
+- **À décider par toi** : (1) **n° 10** : le mur fait plus de 200 blocs contre des maisons de 10 à 30 : conversion directe à une échelle ou « plan masse » (source non officielle : 50 m, https://attackontitan.fandom.com/wiki/Walls) ; (2) **n° 9** : qui est l'auteur de la carte et est-il d'accord ? (je n'en sais rien) ; (3) **n° 2** provenance et **n° 5** dérogation, toujours sans réponse. Défaut appliqué : rien de dérivé dans le dépôt, usage privé.
+- **Limites** : pas de portes ni de vitres (trous noirs), maisons non visitables, échelle non uniforme, aucune mesure sur ta RTX 3050 ni import dans Godot. L'anneau extérieur lointain n'est pas converti : dis-le-moi si tu le veux. Deux captures (rue vue d'en bas, mur) sont mauvaises, à refaire.
+
 ## 2026-10-17 (après-midi) — Organisation du travail V4 (D-194) — à lire en premier
 - Fait sur ta demande : `docs/v4/organisation/` (point d'entrée `00_LISEZ_MOI.md`) : protocole de session, **tableau de 195 tâches** (contrôlé par script), pipeline des assets 3D, politique de provenance, définition de « fini » et revues, prompts de session, modèles, liste de tes actions. Le dossier d'univers ne sert pas à s'organiser : c'est une référence de lore.
 - **À décider par toi (par ordre d'importance)** : (1) **provenance** A / B / C (`organisation/04` §4 ; je recommande B ; défaut provisoire A pour ce qui entre dans le dépôt) ; (2) **dérogation** pour démarrer le lot P et les spikes S0, S1, S4 avant la revue R-D1 ; (3) R-D1 elle-même (`docs/v4/01`, `04`). Détail et défauts : `organisation/08`.

@@ -1,0 +1,6 @@
+__pycache__/
+etats.json
+mats.json
+mats.json.lock
+mats.json.tmp*
+survol/
